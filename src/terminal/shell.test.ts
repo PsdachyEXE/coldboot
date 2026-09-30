@@ -17,6 +17,8 @@ import { fakeGame, mockEnv, numberItem, printed, resetStores } from './testing';
 import { useTerminal } from './useTerminal';
 
 const NOW = new Date('2026-10-01T10:00:00+10:00').getTime();
+/** The registered games; tests push fakes after them and remove them again. */
+const REGISTERED = GAMES.length;
 
 beforeEach(() => {
   resetStores();
@@ -26,7 +28,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.useRealTimers();
-  GAMES.splice(2);
+  GAMES.splice(REGISTERED);
 });
 
 const term = () => useTerminalSession.getState();

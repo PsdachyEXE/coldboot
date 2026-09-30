@@ -6,16 +6,27 @@
  * P1: dfd, usecase, reqs, gantt, threat, law, naming, types, oop, psm
  * P2: boss, ux
  *
- * Shipped here: sort, search. Track B2 adds deskcheck, triage, validate, blitz and daily by
- * appending entries to GAMES (daily sets needsContent; generator games set generator: true).
- * The terminal's `daily` command runs `play daily` once a game with the id 'daily' is registered.
+ * GAMES lists the P0 games in the brief's order, which is the order `ls` prints. Games that
+ * need study content set needsContent; games with Game.generate set generator: true. The
+ * terminal's `daily` command runs `play daily`.
  */
+import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
 import type { GameMeta } from './types';
 
 export const GAMES: GameMeta[] = [
+  {
+    id: DESKCHECK_ID,
+    title: DESKCHECK_TITLE,
+    priority: 'P0',
+    kk: DESKCHECK_KK,
+    summary: DESKCHECK_SUMMARY,
+    man: DESKCHECK_MAN,
+    generator: true,
+    load: () => import('./deskcheck').then((m) => m.default),
+  },
   {
     id: SORT_ID,
     title: SORT_TITLE,

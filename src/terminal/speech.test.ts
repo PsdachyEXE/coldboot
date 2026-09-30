@@ -21,6 +21,11 @@ describe('terminal speech digest', () => {
     expect(blockToSpeech({ kind: 'pre', text: '[4, 2]\n[1]', label: 'Starting array' })).toBe('Starting array. [4, 2]. [1].');
   });
 
+  it('says how long a listing is and where its array indexes start', () => {
+    expect(blockToSpeech({ kind: 'pseudo', code: 'BEGIN\n    DISPLAY 1\nEND' })).toBe('Pseudocode listing, 3 lines, shown in the terminal.');
+    expect(blockToSpeech({ kind: 'pseudo', code: 'BEGIN\n    DISPLAY a[1]\nEND', indexBase: 1 })).toBe('Pseudocode listing, 3 lines, shown in the terminal. Array indexes start at 1.');
+  });
+
   it('caps long digests on a word boundary', () => {
     const long = blocksToSpeech([{ kind: 'text', text: 'word '.repeat(500) }], 100);
     expect(long.length).toBeLessThan(160);

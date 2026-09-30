@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { PSEUDO_KEYWORDS } from '../content/markdown';
 import { DAILY_GENERATOR_GAMES } from './daily';
 import { DRILL_GAME, GAMES, findGame } from './registry';
 
@@ -36,8 +37,9 @@ describe('game registry', () => {
   it('writes man pages in sentence case without all-caps words', () => {
     for (const meta of [...GAMES, DRILL_GAME]) {
       const words = meta.man.match(/\b[A-Z]{2,}\b/g) ?? [];
-      // Only KK and area ids, DIV (the pseudocode operator) and TERMS/PSM may be capitalised.
-      expect(words.filter((w) => !/^(DIV|TERMS|PSM|KK\d*|U\dO\d)$/.test(w))).toEqual([]);
+      // Only KK and area ids, TERMS and PSM, and pseudocode keywords quoted as code may be capitalised.
+      const code = new Set<string>([...PSEUDO_KEYWORDS, 'LENGTH']);
+      expect(words.filter((w) => !code.has(w) && !/^(TERMS|PSM|KK\d*|U\dO\d)$/.test(w))).toEqual([]);
     }
   });
 });

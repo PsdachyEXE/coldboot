@@ -34,8 +34,10 @@ export function blockToSpeech(b: TerminalBlock): string {
       return sentence(b.text);
     case 'markdown':
       return sentence(stripMarkdown(b.text));
-    case 'pseudo':
-      return sentence(`${b.title ? `${b.title}. ` : ''}Pseudocode listing, ${b.code.replace(/\s+$/, '').split('\n').length} lines, shown in the terminal`);
+    case 'pseudo': {
+      const base = b.indexBase === undefined ? '' : ` Array indexes start at ${b.indexBase}.`;
+      return `${sentence(`${b.title ? `${b.title}. ` : ''}Pseudocode listing, ${b.code.replace(/\s+$/, '').split('\n').length} lines, shown in the terminal`)}${base}`;
+    }
     case 'table': {
       const rows = [b.columns, ...b.rows].map((r) => sentence(r.join(', ')));
       return [b.caption ? sentence(b.caption) : '', ...rows].filter(Boolean).join(' ');
