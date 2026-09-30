@@ -60,7 +60,7 @@ describe('daily set in the game', () => {
   it('loads a generator for every listed game, P1 included, and rebuilds its items from a stored record', () => {
     expect(Object.keys(generators).sort()).toEqual([...DAILY_GENERATOR_GAMES].sort());
     for (const gameId of DAILY_GENERATOR_GAMES) {
-      const refs: DailyItemRef[] = [11, 222, 3333].map((seed) => ({ kind: 'generated', id: `gen-daily-${gameId}:${seed}`, gameId, seed }));
+      const refs = [11, 222, 3333].map((seed) => ({ kind: 'generated', id: `gen-daily-${gameId}:${seed}`, gameId, seed }) satisfies DailyItemRef);
       // A stored record keeps generated ids; they read back as the same generated items.
       const record: DailyRecord = { itemIds: refs.map((r) => r.id), results: [], completedAt: null };
       expect(dailyRefs(TODAY, fixtureContent(), record)).toEqual({ refs, replaced: 0 });
@@ -71,8 +71,8 @@ describe('daily set in the game', () => {
         expect(item.kk.length, gameId).toBeGreaterThan(0);
         expect(item.prompt.length, gameId).toBeGreaterThan(0);
         expect(dailyItem(ref, fixtureContent(), generators).prompt, gameId).toEqual(item.prompt);
-        expect(item.check(typedAnswer(item)).correct, `${gameId} ${ref.seed}`).toBe(true);
-        expect(item.check(wrongAnswer(item)).correct, `${gameId} ${ref.seed}`).toBe(false);
+        expect(item.check(typedAnswer(item)).correct, ref.id).toBe(true);
+        expect(item.check(wrongAnswer(item)).correct, ref.id).toBe(false);
       }
     }
   });
