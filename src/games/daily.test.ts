@@ -82,7 +82,7 @@ describe('daily challenge set', () => {
     expect(set.filter((i) => i.kind === 'mcq')).toHaveLength(8);
   });
 
-  it('draws two different generator games a day, spread evenly over the P0 and P1 games', () => {
+  it('draws two different generator games a day, spread evenly over every generator game', () => {
     const counts = new Map<string, number>();
     const days = dates(730);
     for (const date of days) {
