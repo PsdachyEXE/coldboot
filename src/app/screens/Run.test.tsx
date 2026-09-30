@@ -81,8 +81,10 @@ describe("Today's run", () => {
     expect(steps()[1]).toHaveTextContent('Done: 1 of 1 correct.');
     expect(useAttempts.getState().log.map((t) => t[0])).toEqual(['c-u3o1-kk04-001', 'm-u3o1-kk04-001']);
 
-    // Step 3: the terminal runs `daily`; its game end completes the run.
+    // Step 3: the terminal runs `daily`, with the Daily screen offered instead; its game end completes the run.
+    expect(screen.getByRole('link', { name: 'Do it on screen instead' })).toHaveAttribute('href', '/daily');
     fireEvent.click(screen.getByRole('button', { name: 'Start the daily challenge' }));
+    expect(screen.getByRole('link', { name: 'Do it on screen instead' })).toHaveAttribute('href', '/daily');
     expect(useTerminal.getState()).toMatchObject({ open: true, pending: 'daily' });
     act(() => useTerminal.getState().reportGameEnd({ gameId: 'sort', score: 3, total: 10, at: Date.now() }));
     expect(screen.queryByRole('heading', { name: 'Run complete' })).toBeNull();

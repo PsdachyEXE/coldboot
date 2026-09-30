@@ -3,7 +3,8 @@
  * challenge in the terminal, ending at "Run complete". Review and Drill run embedded here so the
  * run isn't lost by navigating away. A step with nothing to do is skipped with a note.
  *
- * The daily challenge starts with `useTerminal.run('daily')`; the step completes when the terminal
+ * The daily challenge starts with `useTerminal.run('daily')`, with a secondary link to the Daily
+ * screen for students who would rather answer on screen; the step completes when the terminal
  * reports a finished `daily` game, or when today's daily record (Melbourne date) is complete.
  */
 import { Fragment, useState } from 'react';
@@ -260,6 +261,7 @@ function DailyStep({ date, onSkip }: { date: string; onSkip(): void }) {
             Open the terminal
           </Button>
         ) : null}
+        <ButtonLink to={paths.daily}>Do it on screen instead</ButtonLink>
         <Button variant="quiet" onClick={onSkip}>
           Skip the daily challenge
         </Button>
