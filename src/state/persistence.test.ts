@@ -141,6 +141,55 @@ describe('persistence', () => {
     expect(io.parseImport(JSON.stringify(tooNew))).toEqual({ ok: false, error: expect.stringMatching(/newer version/) });
   });
 
+  it('rejects dates outside the range the app can show, on import, on load and when recording', async () => {
+    const { io, record, attempts } = await freshState();
+    record.recordAttempt({ itemId: 'gen-sort', kk: ['U3O1-KK12'], score: 1, timestamp: 2_000_000_000_000, ms: 10 });
+    const file = io.buildExport(2_000_000_000_000);
+    const summary = (at: number) => ({
+      id: 'p-abc-1',
+      mode: 'mini',
+      caseStudyId: null,
+      startedAt: at,
+      submittedAt: at + 60_000,
+      markedAt: at + 120_000,
+      usedMs: 60_000,
+      allowedMs: 60 * 60_000,
+      autoSubmitted: false,
+      sections: { a: [1, 2], b: [0, 0], c: [0, 0] },
+      kk: [['U3O1-KK04', 1, 2]],
+    });
+    const withExam = (at: number) => {
+      const f = structuredClone(file);
+      f.stores.exam = { v: f.stores.exam.v, data: { paper: null, history: [summary(at)] } };
+      return JSON.stringify(f);
+    };
+    const withAttemptAt = (seconds: number) => {
+      const f = structuredClone(file);
+      (f.stores.attempts.data as { log: unknown[] }).log.push(['gen-x', ['U3O1-KK04'], 1, seconds, 10]);
+      return JSON.stringify(f);
+    };
+    const withDue = (due: number) => {
+      const f = structuredClone(file);
+      (f.stores.srs.data as { cards: Record<string, unknown> }).cards['c-u3o1-kk04-001'] = card(due);
+      return JSON.stringify(f);
+    };
+    const damaged = (name: string) => ({ ok: false, error: `That file's ${name} data is damaged or has been edited, so nothing was imported.` });
+    // A paper marked in the year 287,000; an attempt stamped in milliseconds where seconds belong; a card due in the year 10000.
+    expect(io.parseImport(withExam(9e15))).toEqual(damaged('exam'));
+    expect(io.parseImport(withAttemptAt(9e12))).toEqual(damaged('attempts'));
+    expect(io.parseImport(withDue(Date.UTC(10000, 0, 5)))).toEqual(damaged('srs'));
+    // The furthest a real schedule reaches (36,500 days from now) still loads.
+    expect(io.parseImport(withExam(2_000_000_000_000)).ok).toBe(true);
+    expect(io.parseImport(withDue(Date.UTC(2126, 0, 1))).ok).toBe(true);
+
+    // At the write boundary, and when the same values are already in storage.
+    expect(record.recordAttempt({ itemId: 'gen-x', kk: ['U3O1-KK04'], score: 1, timestamp: 9e15, ms: 1 })).toBe(false);
+    expect(attempts.useAttempts.getState().log).toHaveLength(1);
+    seed('srs', { v: 1, data: { cards: { 'c-good-001': card(1000), 'c-far-002': card(Date.UTC(10000, 0, 5)) }, introduced: { day: '', count: 0 } } });
+    const again = await freshState();
+    expect(Object.keys(again.srs.useSrs.getState().cards)).toEqual(['c-good-001']);
+  });
+
   it("names the export file by the device's local date, not the UTC date", async () => {
     const { io } = await freshState();
     // Tests run in Australia/Melbourne: 8 am on 1 October is still 30 September in UTC.

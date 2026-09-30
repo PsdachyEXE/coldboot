@@ -7,6 +7,7 @@
  * when the map is renumbered, hydration rewrites old ids through `studyDesign.renames`.
  */
 import { create } from 'zustand';
+import { MAX_EPOCH_MS } from '../lib/time';
 import { z } from '../lib/zodConfig';
 import { isKkId, type KkId } from '../content/schema';
 import { studyDesign } from '../content/studyDesign';
@@ -60,13 +61,14 @@ const HALF_LIFE_S = HALF_LIFE_DAYS * 86_400;
 
 /**
  * The write-boundary gate: returns a clean attempt, or null when it can't be recorded (bad id,
- * no valid KK, non-finite score or timestamp). Duplicate and unknown-format KKs are removed.
+ * no valid KK, non-finite score, or a timestamp that isn't finite or is outside 1970 to
+ * MAX_EPOCH_MS). Duplicate and unknown-format KKs are removed.
  */
 export function sanitiseAttempt(a: Attempt): Attempt | null {
   if (typeof a.itemId !== 'string' || !ATTEMPT_ITEM_ID.test(a.itemId)) return null;
   const kk = [...new Set((a.kk ?? []).filter(isKkId))].slice(0, MAX_KKS_PER_ATTEMPT);
   if (!kk.length) return null;
-  if (!Number.isFinite(a.score) || !Number.isFinite(a.timestamp) || a.timestamp <= 0) return null;
+  if (!Number.isFinite(a.score) || !Number.isFinite(a.timestamp) || a.timestamp <= 0 || a.timestamp > MAX_EPOCH_MS) return null;
   const ms = Number.isFinite(a.ms) ? Math.min(MAX_ATTEMPT_MS, Math.max(0, a.ms)) : 0;
   return { itemId: a.itemId, kk, score: Math.min(1, Math.max(0, a.score)), timestamp: a.timestamp, ms };
 }
@@ -131,7 +133,7 @@ export const AttemptTupleSchema = z.tuple([
     .max(MAX_KKS_PER_ATTEMPT)
     .refine((kks) => new Set(kks).size === kks.length, 'Duplicate KK'),
   z.number().min(0).max(1),
-  z.number().int().nonnegative(),
+  z.number().int().nonnegative().max(Math.floor(MAX_EPOCH_MS / 1000)),
   z.number().int().min(0).max(MAX_ATTEMPT_MS),
 ]);
 

@@ -13,7 +13,7 @@
 import { create } from 'zustand';
 import { z } from '../lib/zodConfig';
 import { isKkId, type KkId } from '../content/schema';
-import { EXAM_READING_MS, EXAM_WRITING_MS } from '../lib/time';
+import { EXAM_READING_MS, EXAM_WRITING_MS, MAX_EPOCH_MS } from '../lib/time';
 import { persistStore } from '../state/persist';
 import type { TimerConfig } from './timer';
 
@@ -118,7 +118,7 @@ export function isAnswered(value: ExamAnswer | undefined): boolean {
 // ---------------------------------------------------------------------------
 
 const ItemId = z.string().regex(/^[a-z0-9][a-z0-9-]{1,79}$/);
-const Epoch = z.number().int().positive();
+const Epoch = z.number().int().positive().max(MAX_EPOCH_MS);
 const Mode = z.enum(['full', 'mini']);
 const Section = z.enum(['a', 'b', 'c']);
 const CaseId = z.string().regex(/^cs-\d{2}$/);
