@@ -38,6 +38,28 @@ function cspPlugin(): Plugin {
   };
 }
 
+/**
+ * Preloads the Latin subsets of the two variable fonts. The entry chunk is small enough that the
+ * first render can beat the fonts, and the swap from the fallback font then moves the page (CLS).
+ */
+function fontPreloadPlugin(base: string): Plugin {
+  return {
+    name: 'coldboot-font-preload',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler(_html, ctx) {
+        const fonts = Object.keys(ctx.bundle ?? {}).filter((f) => /(atkinson-hyperlegible-next|martian-mono)-latin-wght-normal-[\w-]+\.woff2$/.test(f));
+        return fonts.map((f) => ({
+          tag: 'link',
+          attrs: { rel: 'preload', href: `${base}${f}`, as: 'font', type: 'font/woff2', crossorigin: '' },
+          injectTo: 'head' as const,
+        }));
+      },
+    },
+  };
+}
+
 const base = resolveBase();
 
 export default defineConfig({
@@ -51,6 +73,7 @@ export default defineConfig({
   plugins: [
     react(),
     cspPlugin(),
+    fontPreloadPlugin(base),
     VitePWA({
       registerType: 'prompt',
       injectRegister: null,
