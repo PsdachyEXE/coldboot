@@ -125,11 +125,14 @@ export function QuestionList({
 
 /** Confirms "Stop and discard this paper". */
 export function DiscardDialog({ open, onClose, onDiscard }: { open: boolean; onClose(): void; onDiscard?(): void }) {
+  // Open on the safe button, so a second Enter (or a held key) can't discard by accident.
+  const keepRef = useRef<HTMLButtonElement>(null);
   return (
     <Dialog
       open={open}
       onClose={onClose}
       title="Stop and discard this paper?"
+      initialFocus={keepRef}
       actions={
         <>
           <Button
@@ -143,7 +146,9 @@ export function DiscardDialog({ open, onClose, onDiscard }: { open: boolean; onC
           >
             Discard paper
           </Button>
-          <Button onClick={onClose}>Keep this paper</Button>
+          <Button ref={keepRef} onClick={onClose}>
+            Keep this paper
+          </Button>
         </>
       }
     >
