@@ -69,6 +69,12 @@
   height: 0;
 }
 
+.scrollHint {
+  margin: var(--space-1) 0 0;
+  font-size: var(--step-0);
+  color: var(--ice);
+}
+
 /* SVG marks. */
 .line {
   fill: none;
@@ -276,6 +282,10 @@
   font-weight: 400;
 }
 
+.table th[scope='col'] {
+  font-weight: 700;
+}
+
 .table tbody th.section {
   font-weight: 700;
   background: var(--trench);
@@ -330,6 +340,14 @@
   max-width: none;
   overflow: visible;
   background: var(--void);
+}
+
+/*
+ * renderPseudo joins its block-level line spans with newlines, which a <pre> would otherwise
+ * render as a blank line between every line of code. Each line keeps white-space: pre.
+ */
+.pseudo :global(pre.pseudo code) {
+  white-space: normal;
 }
 
 .pseudo :global(.ps-mark) {

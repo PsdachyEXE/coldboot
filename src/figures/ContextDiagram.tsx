@@ -30,10 +30,10 @@ function layout(f: ContextDiagram) {
     head: 'filled',
   }));
   return {
-    system: { shape: shapes.get('system')!, lines: wrapText(f.system.label, r * 1.5, { bold: true }) },
+    system: { shape: shapes.get('system')!, lines: wrapText(f.system.label, r * 1.65, { bold: true }) },
     entities,
     shapes,
-    routed: routeConnectors(connectors, shapes),
+    routed: routeConnectors(connectors, shapes, f),
   };
 }
 

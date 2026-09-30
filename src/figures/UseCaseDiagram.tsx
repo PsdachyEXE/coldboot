@@ -53,7 +53,7 @@ function layout(f: UseCaseDiagram) {
     const w = Math.max(ACTOR_BOX.w, linesWidth(lines) + INSET);
     rings.set(actor.id, { kind: 'rect', cx: actor.x, cy: (top + bottom) / 2, w, h: bottom - top });
   }
-  return { shapes, rings, cases, actors, routed: routeConnectors(connectors, shapes) };
+  return { shapes, rings, cases, actors, routed: routeConnectors(connectors, shapes, f) };
 }
 
 export function UseCaseDiagramView({ figure: f, markers, title, desc }: BodyProps<UseCaseDiagram>) {

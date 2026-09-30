@@ -136,6 +136,30 @@ describe('routeConnectors', () => {
     expect(ab.points[0].x).toBeCloseTo(164, 6);
   });
 
+  it('moves a label beside a line too short to show it and the arrowhead', () => {
+    const near = (y: number, x2 = 260) =>
+      new Map<string, Shape>([
+        ['a', { kind: 'rect', cx: 100, cy: y, w: 100, h: 30 }],
+        ['b', { kind: 'rect', cx: x2, cy: y, w: 100, h: 30 }],
+      ]);
+    // The line runs from x 150 to 210: 60 units, shorter than the label.
+    const [above] = routeConnectors([flow('a', 'b', 'booking_record')], near(100), { width: 400, height: 200 });
+    expect(above.label!.box.y + above.label!.box.h).toBeLessThanOrEqual(100);
+    expect(above.label!.centre.x).toBeCloseTo(180, 6);
+    // No room above the line inside the canvas: the label goes below it.
+    const [below] = routeConnectors([flow('a', 'b', 'booking_record')], near(16), { width: 400, height: 200 });
+    expect(below.label!.box.y).toBeGreaterThanOrEqual(16);
+    // A long enough line keeps its label on the line.
+    const [onLine] = routeConnectors([flow('a', 'b', 'booking_record')], near(100, 420), { width: 600, height: 200 });
+    close(onLine.label!.centre, 260, 100);
+  });
+
+  it('keeps labels on the canvas', () => {
+    const [r] = routeConnectors([flow('a', 'b', 'x', { labelAt: { x: 1, y: 1 } })], shapes, { width: 600, height: 400 });
+    expect(r.label!.box.x).toBeGreaterThanOrEqual(2);
+    expect(r.label!.box.y).toBeGreaterThanOrEqual(2);
+  });
+
   it('keeps unlabelled flows, gives them an anchor and skips unknown nodes', () => {
     const routed = routeConnectors([flow('a', 'b', ''), flow('a', 'zzz')], shapes);
     expect(routed).toHaveLength(1);

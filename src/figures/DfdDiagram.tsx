@@ -71,7 +71,7 @@ function layout(f: Dfd) {
     labelAt: fl.labelAt,
     head: 'filled',
   }));
-  return { shapes, routed: routeConnectors(connectors, shapes) };
+  return { shapes, routed: routeConnectors(connectors, shapes, f) };
 }
 
 export function DfdDiagramView({ figure: f, markers, title, desc }: BodyProps<Dfd>) {

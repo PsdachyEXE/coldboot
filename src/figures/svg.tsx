@@ -31,30 +31,33 @@ export function Canvas({ width, height, title, desc, children }: CanvasProps) {
   const [ref, scrollable] = useScrollable<HTMLDivElement>();
   const minWidth = Math.ceil((width * MIN_LABEL_PX) / LABEL_SIZE);
   return (
-    <div
-      ref={ref}
-      className={styles.scroll}
-      tabIndex={scrollable ? 0 : undefined}
-      role={scrollable ? 'group' : undefined}
-      aria-label={scrollable ? `${title} (scrolls sideways)` : undefined}
-    >
-      <div className={styles.stage}>
-        <svg
-          className={styles.svg}
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-labelledby={`${id}-title ${id}-desc`}
-          viewBox={`0 0 ${r1(width)} ${r1(height)}`}
-          width={r1(width)}
-          height={r1(height)}
-        >
-          <title id={`${id}-title`}>{title}</title>
-          <desc id={`${id}-desc`}>{desc}</desc>
-          {children}
-        </svg>
-        <svg className={styles.sizer} width={minWidth} height={0} aria-hidden="true" />
+    <>
+      <div
+        ref={ref}
+        className={styles.scroll}
+        tabIndex={scrollable ? 0 : undefined}
+        role={scrollable ? 'group' : undefined}
+        aria-label={scrollable ? `${title} (scrolls sideways)` : undefined}
+      >
+        <div className={styles.stage}>
+          <svg
+            className={styles.svg}
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby={`${id}-title ${id}-desc`}
+            viewBox={`0 0 ${r1(width)} ${r1(height)}`}
+            width={r1(width)}
+            height={r1(height)}
+          >
+            <title id={`${id}-title`}>{title}</title>
+            <desc id={`${id}-desc`}>{desc}</desc>
+            {children}
+          </svg>
+          <svg className={styles.sizer} width={minWidth} height={0} aria-hidden="true" />
+        </div>
       </div>
-    </div>
+      {scrollable && <p className={styles.scrollHint}>Scroll sideways to see the whole figure.</p>}
+    </>
   );
 }
 

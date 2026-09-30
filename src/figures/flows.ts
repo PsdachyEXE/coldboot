@@ -8,7 +8,9 @@
  * - Two or more straight connectors between the same pair of nodes would sit on top of each
  *   other, so they are spread sideways (PARALLEL_GAP apart) and their labels move to the outer
  *   side of their own line. This is a drawing convention, not layout: nodes never move.
- * - A label sits at the midpoint of its line on a --void backing, unless `labelAt` pins it.
+ * - A label sits at the midpoint of its line on a --void backing, unless `labelAt` pins it. On a
+ *   line too short to show both the label and the arrowhead, it moves beside the line instead.
+ *   Labels are kept on the canvas.
  */
 import {
   add,
@@ -17,6 +19,7 @@ import {
   exitPoint,
   perp,
   pointAlong,
+  polylineLength,
   scale,
   sub,
   trimEnd,
@@ -50,6 +53,12 @@ export interface LabelBox {
   y: number;
   w: number;
   h: number;
+}
+
+/** The canvas; labels are kept inside it. */
+export interface Bounds {
+  width: number;
+  height: number;
 }
 
 export interface RoutedConnector {
@@ -94,7 +103,7 @@ export function labelBoxAt(centre: Pt, lines: readonly string[]): LabelBox {
  * Routes every connector. Connectors naming an unknown node are skipped (the content checker
  * rejects them; a game-built figure should never crash the page).
  */
-export function routeConnectors(connectors: readonly Connector[], shapes: ReadonlyMap<string, Shape>): RoutedConnector[] {
+export function routeConnectors(connectors: readonly Connector[], shapes: ReadonlyMap<string, Shape>, bounds?: Bounds): RoutedConnector[] {
   // Group straight connectors by the unordered pair of nodes they join.
   const groups = new Map<string, number[]>();
   connectors.forEach((c, i) => {
@@ -143,20 +152,57 @@ export function routeConnectors(connectors: readonly Connector[], shapes: Readon
       head = [left, tip, right];
     }
 
-    const mid = pointAlong(points, 0.5).point;
+    const { point: mid, dir } = pointAlong(points, 0.5);
     let label: RoutedConnector['label'] = null;
     if (c.label.trim()) {
       const lines = wrapText(c.label, FLOW_LABEL_MAX, { breakUnderscores: true });
-      const probe = labelBoxAt({ x: 0, y: 0 }, lines);
-      let centre = c.labelAt ?? mid;
-      if (!c.labelAt && offset !== 0) {
+      const { w, h } = labelBoxAt({ x: 0, y: 0 }, lines);
+      const beside = (n: Pt, side: number) => add(mid, scale(n, side * (Math.abs(n.x) * (w / 2) + Math.abs(n.y) * (h / 2) + 3)));
+      let centre: Pt;
+      if (c.labelAt) {
+        centre = c.labelAt;
+      } else if (offset !== 0) {
         // Beside its own line, on the outer side of the group.
-        const extent = Math.abs(normal.x) * (probe.w / 2) + Math.abs(normal.y) * (probe.h / 2);
-        centre = add(mid, scale(normal, Math.sign(offset) * (extent + 3)));
+        centre = beside(normal, Math.sign(offset));
+      } else {
+        // On the line, unless the label would hide the arrowhead or either end of the line: then
+        // beside the line, above a flatter line or right of a steeper one, switching sides if
+        // that side leaves the canvas.
+        const length = polylineLength(points);
+        const endClear = c.head === 'none' ? 4 : ARROW_LENGTH + 2;
+        const guard = [
+          pointAlong(points, Math.min(0.5, 4 / length)).point,
+          pointAlong(points, Math.max(0.5, 1 - endClear / length)).point,
+          ...(head ?? []),
+        ];
+        const onLine = labelBoxAt(mid, lines);
+        const covered = (p: Pt) => p.x >= onLine.x - 2 && p.x <= onLine.x + onLine.w + 2 && p.y >= onLine.y - 2 && p.y <= onLine.y + onLine.h + 2;
+        if (!guard.some(covered)) {
+          centre = mid;
+        } else {
+          const n = perp(dir);
+          const side = Math.abs(dir.x) >= Math.abs(dir.y) ? (n.y <= 0 ? 1 : -1) : n.x >= 0 ? 1 : -1;
+          centre = beside(n, side);
+          if (bounds && !fits(labelBoxAt(centre, lines), bounds) && fits(labelBoxAt(beside(n, -side), lines), bounds)) centre = beside(n, -side);
+        }
       }
+      if (bounds) centre = clampInto(centre, w, h, bounds);
       label = { lines, centre, box: labelBoxAt(centre, lines) };
     }
     out.push({ connector: c, points, line, head, label, anchor: label?.centre ?? mid });
   });
   return out;
+}
+
+const EDGE = 2;
+
+function fits(box: LabelBox, bounds: Bounds): boolean {
+  return box.x >= EDGE && box.y >= EDGE && box.x + box.w <= bounds.width - EDGE && box.y + box.h <= bounds.height - EDGE;
+}
+
+/** Moves a label's centre so its box stays on the canvas. */
+function clampInto(centre: Pt, w: number, h: number, bounds: Bounds): Pt {
+  const x = Math.min(Math.max(centre.x, EDGE + w / 2), bounds.width - EDGE - w / 2);
+  const y = Math.min(Math.max(centre.y, EDGE + h / 2), bounds.height - EDGE - h / 2);
+  return { x, y };
 }
