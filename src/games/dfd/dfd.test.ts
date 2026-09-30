@@ -9,7 +9,7 @@ import { FigureSchema, type ContextDiagram, type Dfd } from '../../content/schem
 import { textWidth, wrapText } from '../../figures/text';
 import type { TerminalBlock } from '../../terminal/blocks';
 import type { Difficulty, QuizItem } from '../types';
-import { buildContext, buildDfd, faultyKey, injectionsFor, ruleOf, RULES, type DiagramKind, type Rule } from './diagrams';
+import { buildContext, buildDfd, faultyKey, injectionsFor, ruleOf, RULES, VIEWS, type DiagramKind, type Rule, type View } from './diagrams';
 import game from './index';
 import { dfdItem, fromDfdInstance, generateDfdItem, parseRule, planDfdRound, RULE_CHIPS, wordBank, type DfdSpec } from './items';
 import { CONTEXT_FLOWS, ENTITY_W, FLOW_SLOTS, PROCESS_SLOTS, SYSTEMS } from './systems';
@@ -57,10 +57,10 @@ function choices(item: QuizItem): string[] {
 }
 
 describe('dfd diagrams', () => {
-  it('draws every business correctly, mirrored or not, on both kinds of diagram', () => {
+  it('draws every business correctly, in every view, on both kinds of diagram', () => {
     for (const sys of SYSTEMS) {
-      for (const mirror of [false, true]) {
-        for (const fig of [buildDfd(sys, { mirror }), buildContext(sys, { mirror })]) {
+      for (const view of VIEWS) {
+        for (const fig of [buildDfd(sys, { view }), buildContext(sys, { view })]) {
           expect(FigureSchema.safeParse(fig).success, `${sys.id} ${fig.kind}`).toBe(true);
           expect(conventionErrors(fig), `${sys.id} ${fig.kind}`).toEqual([]);
         }
@@ -75,8 +75,8 @@ describe('dfd diagrams', () => {
         const rules = new Set(injections.map(ruleOf));
         expect([...rules].sort(), `${sys.id} ${kind}`).toEqual(kind === 'dfd' ? [...RULES].sort() : ['entity-entity', 'unlabelled']);
         for (const injection of injections) {
-          for (const mirror of [false, true]) {
-            const fig = kind === 'dfd' ? buildDfd(sys, { injection, mirror }) : buildContext(sys, { injection, mirror });
+          for (const view of VIEWS) {
+            const fig = kind === 'dfd' ? buildDfd(sys, { injection, view }) : buildContext(sys, { injection, view });
             expect(FigureSchema.safeParse(fig).success).toBe(true);
             expect(conventionErrors(fig), `${sys.id} ${kind} ${injection}`).toEqual([{ key: faultyKey(injection), rule: ruleOf(injection) }]);
             // Nothing is left unconnected.
@@ -135,9 +135,10 @@ function answers(item: QuizItem): { right: string; wrong: string[] } {
     return { right, wrong: Object.values(markers).filter((l) => l !== right) };
   }
   if (item.id === 'gen-dfd-rule') {
-    const m = /^dfd:(?:rule|follow-up):([a-z]+):(context|dfd):([a-z0-9-]+):m([01])/.exec(item.instance!)!;
+    const m = /^dfd:(?:rule|follow-up):([a-z]+):(context|dfd):([a-z0-9-]+):v([0-3])/.exec(item.instance!)!;
     const sys = SYSTEMS.find((s) => s.id === m[1])!;
-    const fig = m[2] === 'dfd' ? buildDfd(sys, { injection: m[3], mirror: m[4] === '1' }) : buildContext(sys, { injection: m[3], mirror: m[4] === '1' });
+    const view = Number(m[4]) as View;
+    const fig = m[2] === 'dfd' ? buildDfd(sys, { injection: m[3], view }) : buildContext(sys, { injection: m[3], view });
     const broken = conventionErrors(fig);
     expect(broken).toHaveLength(1);
     if (figs.length) expect(conventionErrors(figs[0].figure as Dfd | ContextDiagram)).toEqual(broken);
@@ -145,11 +146,11 @@ function answers(item: QuizItem): { right: string; wrong: string[] } {
     return { right: String(n), wrong: [1, 2, 3, 4, 5, 6].filter((k) => k !== n).map(String) };
   }
   // Labelling: read the blank's label off the complete diagram.
-  const m = /^dfd:label(?:-next)?:([a-z]+):([a-z0-9-]+):(\d):m([01])/.exec(item.instance!)!;
+  const m = /^dfd:label(?:-next)?:([a-z]+):([a-z0-9-]+):(\d):v([0-3])/.exec(item.instance!)!;
   const sys = SYSTEMS.find((s) => s.id === m[1])!;
   const blanks = m[2].split('-');
   const slot = blanks[Number(m[3])];
-  const full = buildDfd(sys, { mirror: m[4] === '1' });
+  const full = buildDfd(sys, { view: Number(m[4]) as View });
   const right = full.nodes.find((n) => n.id === slot)!.label;
   const shown = figures(item).at(-1)!.figure as Dfd;
   expect(shown.nodes.find((n) => n.id === slot)!.label).toBe('?');
@@ -207,7 +208,7 @@ describe('dfd items', () => {
 
   it('accepts a word bank label by number or by name, ignoring case', () => {
     const sys = SYSTEMS[0];
-    const spec: DfdSpec = { kind: 'label', scenario: { system: sys.id, blanks: ['p2', 'd2', 'p3', 'd3'], index: 1, mirror: false, seed: 4 } };
+    const spec: DfdSpec = { kind: 'label', scenario: { system: sys.id, blanks: ['p2', 'd2', 'p3', 'd3'], index: 1, view: 0, seed: 4 } };
     const item = dfdItem(spec, 'normal');
     const bank = wordBank(sys, ['p2', 'd2', 'p3', 'd3']);
     expect(choices(item)).toEqual(bank);
@@ -240,6 +241,13 @@ describe('dfd rounds', () => {
     }
   });
 
+  it('uses all four views of the layout, which place elements differently', () => {
+    const views = new Set(SEEDS.slice(0, 100).flatMap((seed) => planDfdRound(seed, 'normal').map((p) => p.scenario.view)));
+    expect([...views].sort()).toEqual([...VIEWS]);
+    const at = (view: View) => buildDfd(SYSTEMS[0], { view }).nodes.map((n) => `${n.x},${n.y}`).join(' ');
+    expect(new Set(VIEWS.map(at)).size).toBe(4);
+  });
+
   it('shows the context diagram with the first blank only, in a round', () => {
     const plan = planDfdRound(5, 'normal').filter((p) => p.kind === 'label');
     const counts = plan.map((p) => figures(dfdItem(p, 'normal')).length);
@@ -259,8 +267,8 @@ describe('dfd rounds', () => {
       expect(item.check(right).correct).toBe(true);
     }
     expect([...ids].sort()).toEqual(['gen-dfd-element', 'gen-dfd-label', 'gen-dfd-rule']);
-    expect(fromDfdInstance('dfd:element:cafe:context:noun-p2:m0:seed=1:easy')).toBeNull();
-    expect(fromDfdInstance('dfd:label:cafe:p2-p2:0:m0:seed=1:easy')).toBeNull();
+    expect(fromDfdInstance('dfd:element:cafe:context:noun-p2:v0:seed=1:easy')).toBeNull();
+    expect(fromDfdInstance('dfd:label:cafe:p2-p2:0:v0:seed=1:easy')).toBeNull();
   });
 
   it.each(LEVELS)('plays a full %s round, scoring 10 when every expected answer is typed back', (level) => {

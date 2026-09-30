@@ -9,8 +9,8 @@
  * Every business follows the same story: a customer (e1) makes a request that process 1 checks
  * against reference data (d1) and records (d2); process 2 fulfils it with a staff member (e2);
  * process 3 settles it with an outside organisation (e3) and records the result (d3). Labels,
- * flow names and the injected convention errors vary by business; a seed can also mirror the
- * layout left to right.
+ * flow names and the injected convention errors vary by business; a seed also picks one of four
+ * views of the layout (mirrored left to right, flipped top to bottom, both, or neither).
  *
  * Process labels are verb phrases. Each business also has noun labels for its processes (for the
  * "process named with a noun" error), chosen so their first word can't be read as a verb, and
@@ -132,7 +132,7 @@ export const SYSTEMS: readonly DfdSystem[] = [
     stores: { d1: 'Classes', d2: 'Enrolments', d3: 'Fee payments' },
     flows: {
       f1: 'enrolment_form',
-      f2: 'enrolment_confirmed',
+      f2: 'confirmation',
       f3: 'class_details',
       f4: 'new_enrolment',
       f5: 'enrolment_details',
@@ -154,7 +154,7 @@ export const SYSTEMS: readonly DfdSystem[] = [
     nouns: { p1: 'Appointment bookings', p2: 'Consultation notes', p3: 'Insurance claims' },
     stores: { d1: 'Vet rosters', d2: 'Appointments', d3: 'Claims' },
     flows: {
-      f1: 'appointment_request',
+      f1: 'booking_request',
       f2: 'appointment_time',
       f3: 'vet_availability',
       f4: 'new_appointment',
@@ -166,7 +166,7 @@ export const SYSTEMS: readonly DfdSystem[] = [
       f10: 'claim_outcome',
       f11: 'claim_record',
     },
-    wrong: { entityEntity: { from: 'e2', label: 'consultation_notes' }, storeToCustomer: 'appointment_details', storeToStaff: 'vet_roster', storeToStore: 'consultation_fee' },
+    wrong: { entityEntity: { from: 'e2', label: 'consultation_notes' }, storeToCustomer: 'visit_details', storeToStaff: 'vet_roster', storeToStore: 'consultation_fee' },
   },
   {
     id: 'mechanic',
@@ -206,7 +206,7 @@ export const NODE_AT: Record<NodeSlot, { x: number; y: number }> = {
   e1: { x: 100, y: 70 },
   p1: { x: 390, y: 80 },
   d1: { x: 670, y: 70 },
-  d2: { x: 100, y: 232 },
+  d2: { x: 100, y: 262 },
   p2: { x: 390, y: 235 },
   e2: { x: 670, y: 235 },
   d3: { x: 100, y: 400 },
@@ -229,13 +229,17 @@ export const FLOW_ENDS: Record<FlowSlot, { from: NodeSlot; to: NodeSlot }> = {
   f11: { from: 'p3', to: 'd3' },
 };
 
-export const CONTEXT_WIDTH = 700;
+export const CONTEXT_WIDTH = 780;
 export const CONTEXT_HEIGHT = 400;
-export const CONTEXT_SYSTEM_AT = { x: 380, y: 200 };
+export const CONTEXT_SYSTEM_AT = { x: 390, y: 200 };
+/**
+ * e2 and e3 sit 174 units in from the edge, so a label pinned beside the line between them (the
+ * entity-to-entity error) fits on the canvas in every view.
+ */
 export const CONTEXT_ENTITY_AT: Record<EntitySlot, { x: number; y: number }> = {
-  e1: { x: 96, y: 200 },
-  e2: { x: 600, y: 80 },
-  e3: { x: 600, y: 320 },
+  e1: { x: 100, y: 200 },
+  e2: { x: CONTEXT_WIDTH - 174, y: 80 },
+  e3: { x: CONTEXT_WIDTH - 174, y: 320 },
 };
 
 /** The flows a context diagram shows: every DFD flow with an external entity at one end. */

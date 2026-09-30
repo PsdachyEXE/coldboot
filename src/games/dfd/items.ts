@@ -9,7 +9,7 @@
  *     the next question.
  *
  * Each item stands alone, so the daily challenge or a report can regenerate it from its instance
- * ("dfd:element:cafe:dfd:noun-p2:m1:seed=12:normal").
+ * ("dfd:element:cafe:dfd:noun-p2:v1:seed=12:normal").
  */
 import type { ContextDiagram, Dfd, KkId } from '../../content/schema';
 import { normaliseAnswer } from '../../lib/text';
@@ -17,7 +17,7 @@ import type { TerminalBlock } from '../../terminal/blocks';
 import { formatAnd, LETTERS, matchOption, parseChoice } from '../answers';
 import { childSeed, mulberry32, pick, sample, shuffle } from '../prng';
 import type { Difficulty, QuizItem } from '../types';
-import { buildContext, buildDfd, describeElement, elementKeys, faultyKey, injectionsFor, isFlowKey, ruleOf, RULES, type DiagramKind, type Injection, type Rule } from './diagrams';
+import { buildContext, buildDfd, describeElement, elementKeys, faultyKey, injectionsFor, isFlowKey, ruleOf, RULES, VIEWS, type DiagramKind, type Injection, type Rule, type View } from './diagrams';
 import { PROCESS_SLOTS, STORE_SLOTS, SYSTEMS, type DfdSystem, type NodeSlot } from './systems';
 
 export const DFD_KK: KkId[] = ['U3O2-KK08'];
@@ -105,7 +105,7 @@ export interface ErrorScenario {
   system: string;
   diagram: DiagramKind;
   injection: Injection;
-  mirror: boolean;
+  view: View;
   seed: number;
 }
 
@@ -119,8 +119,8 @@ function scenarioFigure(sc: ErrorScenario): Dfd | ContextDiagram {
   const sys = systemById(sc.system);
   const id = `dfd-${sc.system}-${sc.injection}`;
   return sc.diagram === 'context'
-    ? buildContext(sys, { mirror: sc.mirror, injection: sc.injection, id })
-    : buildDfd(sys, { mirror: sc.mirror, injection: sc.injection, id, caption: "Only part of the diagram is shown." });
+    ? buildContext(sys, { view: sc.view, injection: sc.injection, id })
+    : buildDfd(sys, { view: sc.view, injection: sc.injection, id, caption: 'Only part of the diagram is shown.' });
 }
 
 /** The marked elements of an error scenario, in letter order; one is the faulty element. */
@@ -142,7 +142,7 @@ export function markedElements(sc: ErrorScenario, difficulty: Difficulty): strin
 }
 
 function scenarioInstance(kind: 'element' | 'rule', sc: ErrorScenario, difficulty: Difficulty, followUp = false): string {
-  return `dfd:${followUp ? 'follow-up' : kind}:${sc.system}:${sc.diagram}:${sc.injection}:m${sc.mirror ? 1 : 0}:seed=${sc.seed}:${difficulty}`;
+  return `dfd:${followUp ? 'follow-up' : kind}:${sc.system}:${sc.diagram}:${sc.injection}:v${sc.view}:seed=${sc.seed}:${difficulty}`;
 }
 
 function kindWord(sc: ErrorScenario): string {
@@ -229,7 +229,7 @@ export interface LabelScenario {
   blanks: NodeSlot[];
   /** Which blank this item asks about (0-based). */
   index: number;
-  mirror: boolean;
+  view: View;
   seed: number;
   /** In a round, questions after the first don't repeat the context diagram. */
   followUp?: boolean;
@@ -252,7 +252,7 @@ export function labelItem(sc: LabelScenario, difficulty: Difficulty): QuizItem {
   const letter = LETTERS[sc.index];
   const bank = wordBank(sys, sc.blanks);
   const answer = labelOf(sys, slot);
-  const dfd = buildDfd(sys, { mirror: sc.mirror, blanks: open, id: `dfd-${sys.id}-blanks-${sc.index}` });
+  const dfd = buildDfd(sys, { view: sc.view, blanks: open, id: `dfd-${sys.id}-blanks-${sc.index}` });
   const what = slot.startsWith('p') ? `process ${slot.slice(1)}` : `data store D${slot.slice(1)}`;
   const flowsIn = dfd.flows.filter((f) => f.to === slot).map((f) => f.label);
   const flowsOut = dfd.flows.filter((f) => f.from === slot).map((f) => f.label);
@@ -267,12 +267,12 @@ export function labelItem(sc: LabelScenario, difficulty: Difficulty): QuizItem {
       ? [{ kind: 'text', text: `The same system: the Level 1 data flow diagram, with the blanks answered so far filled in.`, tone: 'muted' }]
       : [
           { kind: 'text', text: `${sys.org} has a context diagram for its ${sys.system.toLowerCase()}. Its Level 1 data flow diagram has some process and data store labels missing.`, tone: 'muted' },
-          { kind: 'figure', figure: buildContext(sys, { mirror: sc.mirror, id: `context-${sys.id}` }), compact: true },
+          { kind: 'figure', figure: buildContext(sys, { view: sc.view, id: `context-${sys.id}` }), compact: true },
         ];
   return {
     id: 'gen-dfd-label',
     kk: DFD_KK,
-    instance: `dfd:${sc.followUp && sc.index > 0 ? 'label-next' : 'label'}:${sys.id}:${sc.blanks.join('-')}:${sc.index}:m${sc.mirror ? 1 : 0}:seed=${sc.seed}:${difficulty}`,
+    instance: `dfd:${sc.followUp && sc.index > 0 ? 'label-next' : 'label'}:${sys.id}:${sc.blanks.join('-')}:${sc.index}:v${sc.view}:seed=${sc.seed}:${difficulty}`,
     chips: bank,
     prompt: [
       ...intro,
@@ -314,21 +314,21 @@ export function dfdItem(spec: DfdSpec, difficulty: Difficulty): QuizItem {
 
 /** Regenerates an item from its instance string, or returns null when the string isn't one. */
 export function fromDfdInstance(instance: string): QuizItem | null {
-  const err = /^dfd:(element|rule|follow-up):([a-z]+):(context|dfd):([a-z0-9-]+):m([01]):seed=(\d+):(easy|normal|hard)$/.exec(instance);
+  const err = /^dfd:(element|rule|follow-up):([a-z]+):(context|dfd):([a-z0-9-]+):v([0-3]):seed=(\d+):(easy|normal|hard)$/.exec(instance);
   if (err) {
-    const [, kind, system, diagram, injection, mirror, seed, difficulty] = err;
+    const [, kind, system, diagram, injection, view, seed, difficulty] = err;
     if (!SYSTEMS.some((s) => s.id === system) || !DIFFICULTIES.includes(difficulty as Difficulty)) return null;
     if (!injectionsFor(systemById(system), diagram as DiagramKind).includes(injection)) return null;
-    const scenario: ErrorScenario = { system, diagram: diagram as DiagramKind, injection, mirror: mirror === '1', seed: Number(seed) };
+    const scenario: ErrorScenario = { system, diagram: diagram as DiagramKind, injection, view: Number(view) as View, seed: Number(seed) };
     const spec: DfdSpec = kind === 'element' ? { kind: 'element', scenario } : { kind: 'rule', scenario, followUp: kind === 'follow-up' };
     return dfdItem(spec, difficulty as Difficulty);
   }
-  const lab = /^dfd:(label|label-next):([a-z]+):((?:[pd][1-3]-)*[pd][1-3]):(\d):m([01]):seed=(\d+):(easy|normal|hard)$/.exec(instance);
+  const lab = /^dfd:(label|label-next):([a-z]+):((?:[pd][1-3]-)*[pd][1-3]):(\d):v([0-3]):seed=(\d+):(easy|normal|hard)$/.exec(instance);
   if (lab) {
-    const [, kind, system, blanks, index, mirror, seed, difficulty] = lab;
+    const [, kind, system, blanks, index, view, seed, difficulty] = lab;
     const slots = blanks.split('-') as NodeSlot[];
     if (!SYSTEMS.some((s) => s.id === system) || Number(index) >= slots.length || new Set(slots).size !== slots.length) return null;
-    return labelItem({ system, blanks: slots, index: Number(index), mirror: mirror === '1', seed: Number(seed), followUp: kind === 'label-next' }, difficulty as Difficulty);
+    return labelItem({ system, blanks: slots, index: Number(index), view: Number(view) as View, seed: Number(seed), followUp: kind === 'label-next' }, difficulty as Difficulty);
   }
   return null;
 }
@@ -344,13 +344,13 @@ function errorScenario(system: DfdSystem, rule: Rule, seed: number, difficulty: 
     rng,
     injectionsFor(system, diagram).filter((i) => ruleOf(i) === rule),
   );
-  return { system: system.id, diagram, injection, mirror: rng() < 0.5, seed };
+  return { system: system.id, diagram, injection, view: pick(rng, VIEWS), seed };
 }
 
 function labelScenario(system: DfdSystem, seed: number): Omit<LabelScenario, 'index'> {
   const rng = mulberry32(childSeed(seed, 'blanks'));
   const blanks = shuffle(rng, [...sample(rng, [...PROCESS_SLOTS], 2), ...sample(rng, [...STORE_SLOTS], 2)]);
-  return { system: system.id, blanks, mirror: rng() < 0.5, seed };
+  return { system: system.id, blanks, view: pick(rng, VIEWS), seed };
 }
 
 export const ERROR_SCENARIOS = 3;

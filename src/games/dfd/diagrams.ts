@@ -1,6 +1,7 @@
 /**
  * Builds the `dfd` game's figures from a business in ./systems.ts: a Level 1 DFD or a context
- * diagram, optionally mirrored left to right, with one convention error injected, or with some
+ * diagram in one of four views (as laid out, mirrored left to right, flipped top to bottom, or
+ * both), with one convention error injected, or with some
  * process and store labels blanked out for the labelling questions.
  *
  * The six conventions the game teaches, numbered as the game lists them:
@@ -12,6 +13,7 @@
  *   6 store-store: a flow between two data stores.
  */
 import type { ContextDiagram, Dfd, DfdNode, Flow } from '../../content/schema';
+import { textWidth } from '../../figures/text';
 import {
   CONTEXT_ENTITY_AT,
   CONTEXT_FLOWS,
@@ -28,6 +30,7 @@ import {
   PROCESS_SLOTS,
   STORE_SLOTS,
   type DfdSystem,
+  type EntitySlot,
   type NodeSlot,
   type ProcessSlot,
 } from './systems';
@@ -64,8 +67,15 @@ export function faultyKey(injection: Injection): string {
   return ADDED_FLOW;
 }
 
-function mirrorX(x: number, width: number, mirror: boolean): number {
-  return mirror ? width - x : x;
+/**
+ * The four views of a hand-laid layout: 0 as laid out, 1 mirrored left to right, 2 flipped top to
+ * bottom, 3 both. Every view keeps the same elements and flows; only the positions change.
+ */
+export type View = 0 | 1 | 2 | 3;
+export const VIEWS: readonly View[] = [0, 1, 2, 3];
+
+function place(at: { x: number; y: number }, width: number, height: number, view: View): { x: number; y: number } {
+  return { x: view & 1 ? width - at.x : at.x, y: view & 2 ? height - at.y : at.y };
 }
 
 function nodeLabel(sys: DfdSystem, slot: NodeSlot): string {
@@ -103,7 +113,7 @@ function addedFlow(sys: DfdSystem, injection: Injection | null): Flow | null {
 }
 
 export interface DfdOptions {
-  mirror?: boolean;
+  view?: View;
   injection?: Injection | null;
   /** Process and store slots shown as "?" (the labelling questions). */
   blanks?: readonly NodeSlot[];
@@ -113,7 +123,7 @@ export interface DfdOptions {
 
 /** The business's Level 1 DFD. */
 export function buildDfd(sys: DfdSystem, opts: DfdOptions = {}): Dfd {
-  const mirror = opts.mirror ?? false;
+  const view = opts.view ?? 0;
   const injection = opts.injection ?? null;
   const blanks = new Set(opts.blanks ?? []);
   const rule = injection ? ruleOf(injection) : null;
@@ -126,7 +136,7 @@ export function buildDfd(sys: DfdSystem, opts: DfdOptions = {}): Dfd {
       const number = nodeNumber(slot);
       const type = nodeType(slot);
       const size = type === 'entity' ? { w: ENTITY_W } : {};
-      return { id: slot, type, label, ...(number ? { number } : {}), x: mirrorX(NODE_AT[slot].x, DFD_WIDTH, mirror), y: NODE_AT[slot].y, ...size };
+      return { id: slot, type, label, ...(number ? { number } : {}), ...place(NODE_AT[slot], DFD_WIDTH, DFD_HEIGHT, view), ...size };
     });
   let flows: Flow[] = FLOW_SLOTS.map((slot) => ({ id: slot, ...FLOW_ENDS[slot], label: sys.flows[slot] }));
   if (rule === 'unlabelled') flows = flows.map((f) => (f.id === faultyKey(injection!) ? { ...f, label: '' } : f));
@@ -151,24 +161,32 @@ export function buildDfd(sys: DfdSystem, opts: DfdOptions = {}): Dfd {
 }
 
 /** The business's context diagram: the system as one process, with every flow to or from an entity. */
-export function buildContext(sys: DfdSystem, opts: Pick<DfdOptions, 'mirror' | 'injection' | 'id'> = {}): ContextDiagram {
-  const mirror = opts.mirror ?? false;
+export function buildContext(sys: DfdSystem, opts: Pick<DfdOptions, 'view' | 'injection' | 'id'> = {}): ContextDiagram {
+  const view = opts.view ?? 0;
   const injection = opts.injection ?? null;
   const rule = injection ? ruleOf(injection) : null;
   if (rule && rule !== 'entity-entity' && rule !== 'unlabelled') throw new Error(`a context diagram can't show a ${rule} error`);
   const toSystem = (slot: NodeSlot) => (slot.startsWith('p') ? 'system' : slot);
   let flows: Flow[] = CONTEXT_FLOWS.map((slot) => ({ id: slot, from: toSystem(FLOW_ENDS[slot].from), to: toSystem(FLOW_ENDS[slot].to), label: sys.flows[slot] }));
   if (rule === 'unlabelled') flows = flows.map((f) => (f.id === faultyKey(injection!) ? { ...f, label: '' } : f));
+  const system = place(CONTEXT_SYSTEM_AT, CONTEXT_WIDTH, CONTEXT_HEIGHT, view);
+  const entityAt = (slot: EntitySlot) => place(CONTEXT_ENTITY_AT[slot], CONTEXT_WIDTH, CONTEXT_HEIGHT, view);
   const added = addedFlow(sys, injection);
-  if (added) flows.push(added);
+  if (added) {
+    // The line between e2 and e3 runs down the outer column: pin its label on the side away from
+    // the system, clear of the labels on the flows between those entities and the system.
+    const [a, b] = [entityAt('e2'), entityAt('e3')];
+    const side = a.x > system.x ? 1 : -1;
+    flows.push({ ...added, labelAt: { x: a.x + side * (10 + (textWidth(added.label) + 8) / 2), y: (a.y + b.y) / 2 } });
+  }
   return {
     id: opts.id ?? `context-${sys.id}`,
     kind: 'context',
     title: `Context diagram: ${sys.system}`,
     width: CONTEXT_WIDTH,
     height: CONTEXT_HEIGHT,
-    system: { label: sys.system, x: mirrorX(CONTEXT_SYSTEM_AT.x, CONTEXT_WIDTH, mirror), y: CONTEXT_SYSTEM_AT.y },
-    entities: ENTITY_SLOTS.map((slot) => ({ id: slot, label: sys.entities[slot], x: mirrorX(CONTEXT_ENTITY_AT[slot].x, CONTEXT_WIDTH, mirror), y: CONTEXT_ENTITY_AT[slot].y, w: ENTITY_W })),
+    system: { label: sys.system, ...system },
+    entities: ENTITY_SLOTS.map((slot) => ({ id: slot, label: sys.entities[slot], ...entityAt(slot), w: ENTITY_W })),
     flows,
   };
 }

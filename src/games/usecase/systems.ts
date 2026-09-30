@@ -180,24 +180,24 @@ export const BOUNDARY = { x: 430, y: 230, w: 380, h: 420 };
 
 export const ACTOR_AT: Record<ActorSlot, { x: number; y: number }> = {
   a1: { x: 100, y: 110 },
-  a2: { x: 100, y: 330 },
-  a3: { x: 725, y: 200 },
+  a2: { x: 100, y: 340 },
+  a3: { x: 725, y: 220 },
 };
 
 /** Where the staff actor stands when the error puts it inside the boundary. */
-export const A2_INSIDE = { x: 300, y: 350 };
+export const A2_INSIDE = { x: 300, y: 372 };
 
 export const USE_CASE_AT: Record<UseCaseSlot, { x: number; y: number; rx?: number }> = {
-  u1: { x: 400, y: 90 },
-  u2: { x: 510, y: 200, rx: 90 },
-  u3: { x: 340, y: 240, rx: 90 },
-  u4: { x: 480, y: 360 },
+  u1: { x: 430, y: 80 },
+  u2: { x: 520, y: 220, rx: 90 },
+  u3: { x: 340, y: 290, rx: 88 },
+  u4: { x: 470, y: 385 },
 };
 
 /** The actor-to-actor error's line runs down the left edge, clear of the actors' labels. */
 export const ACTOR_LINK_VIA = [
   { x: 28, y: 110 },
-  { x: 28, y: 330 },
+  { x: 28, y: 340 },
 ];
 
 export type UseCaseError = 'actor-inside' | 'actor-actor' | 'includes-optional' | 'extends-always';
