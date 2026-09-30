@@ -112,11 +112,12 @@
   gap: var(--space-6);
 }
 
+/* A page with its own sticky bar (the exam) sets --case-insert-top so the panel sticks below it. */
 .insert {
   position: sticky;
-  top: var(--space-4);
-  max-height: calc(100vh - var(--status-h) - var(--space-6));
-  max-height: calc(100dvh - var(--status-h) - var(--space-6));
+  top: var(--case-insert-top, var(--space-4));
+  max-height: calc(100vh - var(--status-h) - var(--space-4) - var(--case-insert-top, var(--space-4)));
+  max-height: calc(100dvh - var(--status-h) - var(--space-4) - var(--case-insert-top, var(--space-4)));
   overflow-y: auto;
   padding: var(--space-4);
   background: var(--trench);

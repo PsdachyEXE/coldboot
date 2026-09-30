@@ -10,12 +10,13 @@ import type { ShortAnswer } from '../../content/schema';
 import { recordAttempt } from '../../state/record';
 import { announce } from '../../ui/announce';
 import { Button } from '../../ui/Button';
-import { Checkbox, TextArea } from '../../ui/Field';
+import { TextArea } from '../../ui/Field';
 import { Markdown } from '../../ui/Markdown';
 import { openReport } from '../../ui/report';
 import { clearDraft, readDraft, writeDraft } from './drafts';
 import { plural } from './format';
 import { ItemFigures } from './ItemFigures';
+import { MarkingPoints, ModelAnswer } from './MarkingPoints';
 import { KkTagList, MistakeNote } from './parts';
 import styles from './Written.module.css';
 import study from './study.module.css';
@@ -121,28 +122,8 @@ export function WrittenQuestion({ item, position, where, onScored, next, autoFoc
         </div>
       ) : (
         <>
-          <section className={styles.model} aria-labelledby={`${promptId}-model`}>
-            <h3 id={`${promptId}-model`} ref={modelRef} tabIndex={-1} className={study.focusTarget}>
-              Model answer
-            </h3>
-            <Markdown text={item.model} />
-          </section>
-
-          <fieldset className={styles.points} disabled={phase === 'scored'}>
-            <legend className={styles.pointsLegend}>Tick the marking points your answer earned</legend>
-            {item.points.map((p, i) => (
-              <Checkbox
-                key={i}
-                label={
-                  <>
-                    <Markdown inline text={p.text} /> <span className={styles.pointMarks}>({plural(p.marks, 'mark')})</span>
-                  </>
-                }
-                checked={ticked.has(i)}
-                onChange={(e) => toggle(i, e.target.checked)}
-              />
-            ))}
-          </fieldset>
+          <ModelAnswer model={item.model} headingId={`${promptId}-model`} headingRef={modelRef} />
+          <MarkingPoints points={item.points} ticked={ticked} onToggle={toggle} disabled={phase === 'scored'} />
 
           {phase === 'marking' ? (
             <>

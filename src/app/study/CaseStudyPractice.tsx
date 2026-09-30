@@ -2,17 +2,17 @@
  * Section C practice on a case study (`/written?cs=cs-01&q=cs-01-q03`). On wide screens the insert
  * and its figures sit in a side panel beside the question; on narrow screens the insert folds into
  * a section above it, and the figures the question refers to show with the question. Figures a
- * question refers to are framed and labelled "Referred to in this question".
+ * question refers to are framed and labelled "Referred to in this question". The panel itself lives
+ * in CaseInsert.tsx, which the exam simulator shares.
  */
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
-import type { CaseQuestion, CaseStudy, Figure } from '../../content/schema';
+import type { CaseQuestion, CaseStudy } from '../../content/schema';
 import { isMcq } from '../../content/schema';
-import { FigureView } from '../../figures';
-import { Markdown } from '../../ui/Markdown';
 import { useMediaQuery } from '../../ui/useMediaQuery';
 import { VisuallyHidden } from '../../ui/VisuallyHidden';
 import { writtenPath } from '../paths';
+import { CASE_WIDE_QUERY, CaseStudyLayout, QuestionFigureRefs } from './CaseInsert';
 import { plural } from './format';
 import { McqQuestion } from './McqQuestion';
 import { WrittenQuestion } from './WrittenQuestion';
@@ -20,17 +20,10 @@ import type { WrittenResult } from './written';
 import styles from './Written.module.css';
 import study from './study.module.css';
 
-/** Wide enough for the insert to sit beside the question. */
-const CASE_WIDE_QUERY = '(min-width: 1100px)';
-
 type Answer = { kind: 'mcq'; chosen: number; correct: boolean } | { kind: 'short'; result: WrittenResult };
 
 function marksOf(q: CaseQuestion): number {
   return isMcq(q) ? 1 : q.marks;
-}
-
-function figureName(cs: CaseStudy, f: Figure): string {
-  return f.title ?? `Figure ${cs.figures.indexOf(f) + 1}`;
 }
 
 export interface CaseStudyPracticeProps {
@@ -46,7 +39,6 @@ export function CaseStudyPractice({ cs, questionId, onSelect }: CaseStudyPractic
   const index = found === -1 ? 0 : found;
   const question = cs.questions[index];
   const refs = new Set(question.figureRefs ?? []);
-  const referenced = cs.figures.filter((f) => refs.has(f.id));
 
   // Move focus to the question when the student moves between questions (not on first load).
   const questionRef = useRef<HTMLDivElement>(null);
@@ -67,34 +59,6 @@ export function CaseStudyPractice({ cs, questionId, onSelect }: CaseStudyPractic
     return sum + (a.kind === 'mcq' ? (a.correct ? 1 : 0) : a.result.earned);
   }, 0);
   const attempted = done.reduce((sum, q) => sum + marksOf(q), 0);
-
-  const scrollToFigure = (id: string) => {
-    const el = document.getElementById(`insert-${cs.id}-${id}`);
-    el?.scrollIntoView({ block: 'nearest' });
-    el?.focus();
-  };
-
-  const insert = (
-    <>
-      <div className={styles.insertBody}>
-        <Markdown text={cs.insert} />
-      </div>
-      <div className={styles.insertFigures}>
-        {cs.figures.map((f) => (
-          <div
-            key={f.id}
-            id={`insert-${cs.id}-${f.id}`}
-            tabIndex={-1}
-            className={styles.insertFigure}
-            data-referenced={refs.has(f.id) ? 'true' : 'false'}
-          >
-            {refs.has(f.id) ? <p className={styles.refLabel}>Referred to in this question</p> : null}
-            <FigureView figure={f} />
-          </div>
-        ))}
-      </div>
-    </>
-  );
 
   const body = (
     <div ref={questionRef} className={styles.caseQuestion}>
@@ -124,31 +88,7 @@ export function CaseStudyPractice({ cs, questionId, onSelect }: CaseStudyPractic
           ? `${plural(cs.questions.length, 'question')}, ${plural(cs.totalMarks, 'mark')} in all.`
           : `Answered ${done.length} of ${cs.questions.length}: ${earned} of ${plural(attempted, 'mark')} so far.`}
       </p>
-      {referenced.length ? (
-        wide ? (
-          <p className={styles.refs}>
-            This question refers to{' '}
-            {referenced.map((f, i) => (
-              <span key={f.id}>
-                {i > 0 ? (i === referenced.length - 1 ? ' and ' : ', ') : null}
-                <button type="button" className={styles.refButton} onClick={() => scrollToFigure(f.id)}>
-                  {figureName(cs, f)}
-                </button>
-              </span>
-            ))}{' '}
-            in the insert.
-          </p>
-        ) : (
-          <div className={study.figures}>
-            {referenced.map((f) => (
-              <div key={f.id} className={study.figure}>
-                <p className={styles.refLabel}>Referred to in this question</p>
-                <FigureView figure={f} />
-              </div>
-            ))}
-          </div>
-        )
-      ) : null}
+      <QuestionFigureRefs cs={cs} figureRefs={question.figureRefs} wide={wide} />
       {isMcq(question) ? (
         <McqQuestion
           key={question.id}
@@ -185,24 +125,9 @@ export function CaseStudyPractice({ cs, questionId, onSelect }: CaseStudyPractic
     </div>
   );
 
-  if (wide) {
-    return (
-      <div className={[styles.caseLayout, styles.caseLayoutWide].join(' ')}>
-        <aside className={styles.insert} aria-label={`Case study insert: ${cs.title}`}>
-          <h2>Insert</h2>
-          {insert}
-        </aside>
-        {body}
-      </div>
-    );
-  }
   return (
-    <div className={styles.caseLayout}>
-      <details className={styles.details}>
-        <summary>Case study insert</summary>
-        <div className={styles.detailsBody}>{insert}</div>
-      </details>
+    <CaseStudyLayout cs={cs} refs={refs} wide={wide}>
       {body}
-    </div>
+    </CaseStudyLayout>
   );
 }
