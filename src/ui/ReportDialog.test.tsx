@@ -54,6 +54,7 @@ describe('ReportDialog', () => {
     setClipboard(writeText);
     render(<ReportDialog />);
     act(() => openReport({ itemId: 'm-u3o1-kk12-002' }));
+    fireEvent.click(screen.getByLabelText('Wrong answer'));
 
     await act(async () => {
       fireEvent.click(screen.getByRole('button', { name: 'Copy report' }));
@@ -68,6 +69,7 @@ describe('ReportDialog', () => {
     setClipboard(() => Promise.reject(new Error('NotAllowedError')));
     render(<ReportDialog />);
     act(() => openReport({ itemId: 'm-u3o1-kk12-002' }));
+    fireEvent.click(screen.getByLabelText('Unclear'));
 
     await act(async () => {
       fireEvent.click(screen.getByRole('button', { name: 'Copy report' }));
@@ -82,10 +84,38 @@ describe('ReportDialog', () => {
     setClipboard(undefined);
     render(<ReportDialog />);
     act(() => openReport({ itemId: 'c-u3o1-kk04-003' }));
+    fireEvent.click(screen.getByLabelText('Other'));
     await act(async () => {
       fireEvent.click(screen.getByRole('button', { name: 'Copy report' }));
     });
     expect(screen.getByLabelText('Report text')).toBeInTheDocument();
+  });
+
+  it('starts with no reason and asks for one before sending or copying', async () => {
+    const writeText = vi.fn(() => Promise.resolve());
+    setClipboard(writeText);
+    render(<ReportDialog />);
+    act(() => openReport({ itemId: 'm-u3o1-kk12-002' }));
+    const dialog = screen.getByRole('dialog', { name: 'Report a content problem' });
+    expect(within(dialog).getAllByRole('radio').some((r) => (r as HTMLInputElement).checked)).toBe(false);
+
+    const link = within(dialog).getByRole('link', { name: /Open GitHub issue/ });
+    const click = new MouseEvent('click', { bubbles: true, cancelable: true });
+    act(() => {
+      link.dispatchEvent(click);
+    });
+    expect(click.defaultPrevented).toBe(true);
+    const group = within(dialog).getByRole('group', { name: "What's the problem?" });
+    expect(group).toHaveAccessibleDescription(/Choose what's wrong/);
+
+    await act(async () => {
+      fireEvent.click(within(dialog).getByRole('button', { name: 'Copy report' }));
+    });
+    expect(writeText).not.toHaveBeenCalled();
+
+    fireEvent.click(within(dialog).getByLabelText('Typo'));
+    expect(within(dialog).queryByText(/Choose what's wrong/)).toBeNull();
+    expect(link.getAttribute('href')).toContain('typo');
   });
 
   it('closes with Esc and returns focus to the opener', () => {

@@ -3,7 +3,7 @@
  * with `openReport({ itemId })` (src/ui/report.ts).
  */
 import { useEffect, useRef, useState } from 'react';
-import { REPORT_REASONS, issueUrl, reportClipboardText, type ContentReport, type ReportReason } from '../lib/report';
+import { ISSUE_URL, REPORT_REASONS, issueUrl, reportClipboardText, type ContentReport, type ReportReason } from '../lib/report';
 import { Button, ExternalButtonLink } from './Button';
 import { Dialog, DialogActions } from './Dialog';
 import { RadioGroup, TextArea } from './Field';
@@ -27,21 +27,36 @@ export function ReportDialog() {
 
 type CopyState = 'idle' | 'copied' | 'failed';
 
+const NO_REASON = "Choose what's wrong, then open the issue or copy the report.";
+
 function ReportForm({ request, onClose }: { request: ReportRequest; onClose(): void }) {
-  const [reason, setReason] = useState<ReportReason>('wrong-answer');
+  // No reason is chosen at first, so a note about a typo is never filed as a wrong answer.
+  const [reason, setReason] = useState<ReportReason | ''>('');
+  const [reasonError, setReasonError] = useState(false);
   const [note, setNote] = useState('');
   const [copy, setCopy] = useState<CopyState>('idle');
   const fallbackRef = useRef<HTMLTextAreaElement>(null);
+  const reasonRef = useRef<HTMLFieldSetElement>(null);
 
-  const report: ContentReport = {
-    itemId: request.itemId,
-    reason,
-    note,
-    appVersion: REPORT_APP_VERSION,
-    instance: request.instance,
-    where: request.where,
+  const report: ContentReport | null = reason
+    ? {
+        itemId: request.itemId,
+        reason,
+        note,
+        appVersion: REPORT_APP_VERSION,
+        instance: request.instance,
+        where: request.where,
+      }
+    : null;
+  const text = report ? reportClipboardText(report) : '';
+
+  /** True when a reason is chosen; otherwise shows the error and moves focus to the choices. */
+  const ready = (): boolean => {
+    if (report) return true;
+    setReasonError(true);
+    requestAnimationFrame(() => reasonRef.current?.focus());
+    return false;
   };
-  const text = reportClipboardText(report);
 
   useEffect(() => {
     if (copy === 'failed' && fallbackRef.current) {
@@ -51,6 +66,7 @@ function ReportForm({ request, onClose }: { request: ReportRequest; onClose(): v
   }, [copy]);
 
   async function copyReport() {
+    if (!ready()) return;
     try {
       if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(text);
@@ -87,12 +103,15 @@ function ReportForm({ request, onClose }: { request: ReportRequest; onClose(): v
         ) : null}
       </dl>
 
-      <RadioGroup<ReportReason>
+      <RadioGroup<ReportReason | ''>
+        ref={reasonRef}
         legend="What's the problem?"
         name="report-reason"
         value={reason}
+        error={reasonError && !reason ? NO_REASON : null}
         onChange={(r) => {
           setReason(r);
+          setReasonError(false);
           edited();
         }}
         options={REPORT_REASONS.map((r) => ({ value: r.id, label: r.label }))}
@@ -130,8 +149,14 @@ function ReportForm({ request, onClose }: { request: ReportRequest; onClose(): v
         </div>
       ) : null}
 
-      <DialogActions>
-        <ExternalButtonLink href={issueUrl(report)} variant="primary">
+      <DialogActions className={styles.actions}>
+        <ExternalButtonLink
+          href={report ? issueUrl(report) : ISSUE_URL}
+          variant="primary"
+          onClick={(e) => {
+            if (!ready()) e.preventDefault();
+          }}
+        >
           Open GitHub issue
         </ExternalButtonLink>
         <Button onClick={() => void copyReport()}>Copy report</Button>

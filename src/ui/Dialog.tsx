@@ -20,8 +20,8 @@ export interface DialogProps {
 }
 
 /** A dialog's button row, for content that manages its own buttons instead of passing `actions`. */
-export function DialogActions({ children }: { children: ReactNode }) {
-  return <div className={styles.actions}>{children}</div>;
+export function DialogActions({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={[styles.actions, className].filter(Boolean).join(' ')}>{children}</div>;
 }
 
 /**
