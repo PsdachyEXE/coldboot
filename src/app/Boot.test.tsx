@@ -54,8 +54,48 @@ describe('bootLines', () => {
   });
 
   it('follows the exam phases', () => {
-    expect(bootText(bootLines({ ...data, now: EXAM + 60_000 }, 'full'))).toContain('exam     underway');
-    expect(bootText(bootLines({ ...data, now: EXAM + 3 * 3_600_000 }, 'full'))).toContain('exam     finished');
+    expect(bootText(bootLines({ ...data, now: EXAM + 60_000 }, 'full'))).toContain('exam     underway, good luck');
+    expect(bootText(bootLines({ ...data, now: EXAM + 3 * 3_600_000 }, 'full'))).toContain('exam     over, well done');
+  });
+
+  describe('on exam day', () => {
+    const at = (iso: string) => ({ ...data, now: parseInstant(iso) });
+    const exam = (d: BootData, mode: 'full' | 'condensed' = 'full', narrow = false) => bootLines(d, mode, { narrow }).find((l) => l.key === 'exam')!.detail;
+    const reviews = (d: BootData, mode: 'full' | 'condensed' = 'full', narrow = false) => bootLines(d, mode, { narrow }).find((l) => l.key === 'reviews')?.detail;
+
+    it('counts down in days until midnight in Melbourne, then in hours and minutes', () => {
+      expect(exam(at('2026-11-12T23:59:59+11:00'))).toBe('T-0d 15h to go');
+      expect(exam(at('2026-11-13T00:00:00+11:00'))).toBe('today, 15h 00m to go');
+      expect(exam(at('2026-11-13T10:48:00+11:00'))).toBe('today, 4h 12m to go');
+      expect(exam(at('2026-11-13T14:15:30+11:00'), 'condensed')).toBe('today, 45m to go');
+      expect(exam(at('2026-11-13T14:59:59+11:00'))).toBe('today, 1m to go');
+      expect(reviews(at('2026-11-13T14:59:59+11:00'))).toBe('37 due');
+    });
+
+    it('wishes luck and drops the reviews line while the exam is on', () => {
+      for (const iso of ['2026-11-13T15:00:00+11:00', '2026-11-13T15:14:59+11:00', '2026-11-13T17:14:59+11:00']) {
+        expect(exam(at(iso)), iso).toBe('underway, good luck');
+        expect(reviews(at(iso)), iso).toBeUndefined();
+        expect(reviews(at(iso), 'condensed'), iso).toBeUndefined();
+      }
+      expect(bootLines(at('2026-11-13T15:00:00+11:00'), 'condensed').map((l) => l.key)).toEqual(['build', 'exam', 'ready']);
+    });
+
+    it('says the exam is over and the exam caps have lifted', () => {
+      const after = at('2026-11-13T17:15:00+11:00');
+      expect(exam(after)).toBe('over, well done');
+      expect(reviews(after)).toBe('37 due, exam caps lifted');
+      expect(reviews({ ...after, due: 0 }, 'condensed')).toBe('none due, exam caps lifted');
+      expect(reviews(after, 'full', true)).toBe('37 due, caps lifted');
+    });
+
+    it('keeps every exam-day line short enough for one row on a phone', () => {
+      for (const iso of ['2026-11-13T00:00:00+11:00', '2026-11-13T15:00:00+11:00', '2026-11-13T17:15:00+11:00']) {
+        for (const l of bootLines({ ...at(iso), due: 1234 }, 'full', { narrow: true })) {
+          expect(`${l.detail}${l.result ? `  ${l.result}` : ''}`.length, `${iso} ${l.key}`).toBeLessThanOrEqual(23);
+        }
+      }
+    });
   });
 
   it('formats the exam in Melbourne time', () => {

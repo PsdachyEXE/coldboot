@@ -3,6 +3,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { kkLabel } from '../../content/studyDesign';
 import { melbourneDate } from '../../lib/time';
+import { exportFilename } from '../../state/exportImport';
 import { recordAttempt } from '../../state/record';
 import { useSession } from '../../state/session';
 import { useSettings } from '../../state/settings';
@@ -123,5 +124,105 @@ describe('Home', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Terms used in this study, unseen' }));
     expect(router.state.location.pathname).toBe('/review');
     expect(router.state.location.search).toBe('?kk=TERMS');
+  });
+});
+
+describe('Home on exam day', () => {
+  // The default exam: Friday 13 November 2026, 3:00 pm in Melbourne (AEDT).
+  beforeEach(() => {
+    resetStudyStores();
+    vi.useFakeTimers({ toFake: ['Date'] });
+    useSettings.setState({ onboarded: true, motion: 'reduce' });
+    provideContent(fixtureIndex({ cards: [fxCard('c-u3o1-kk04-001', ['U3O1-KK04'])], mcq: [fxMcq('m-u3o2-kk08-001', ['U3O2-KK08'])] }));
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+    resetStudyStores();
+  });
+
+  function renderAt(iso: string) {
+    vi.setSystemTime(new Date(iso).getTime());
+    const router = createMemoryRouter(
+      [
+        { path: '/', element: <Home /> },
+        { path: '*', element: <h1>Elsewhere</h1> },
+      ],
+      { initialEntries: ['/'] },
+    );
+    render(<RouterProvider router={router} />);
+    return router;
+  }
+
+  it('keeps the usual run until midnight in Melbourne on the exam date', () => {
+    renderAt('2026-11-12T23:59:59+11:00');
+    expect(screen.getByRole('link', { name: "Start today's run" })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Exam today/ })).toBeNull();
+  });
+
+  it('on the exam date, gives the Melbourne time, the time left and a calm suggestion instead of the run', () => {
+    renderAt('2026-11-13T00:00:00+11:00');
+    const notice = screen.getByRole('region', { name: 'Exam today at 3:00 pm (Melbourne time)' });
+    expect(within(notice).getByText('15 hours to go.')).toBeInTheDocument();
+    expect(within(notice).getByRole('link', { name: 'Review a few cards' })).toHaveAttribute('href', '/review');
+    expect(within(notice).getByRole('link', { name: 'Sit the mini paper' })).toHaveAttribute('href', '/exam?mini=1');
+    expect(within(notice).getByText(/light warm-up, not new work/)).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: "Start today's run" })).toBeNull();
+    expect(screen.queryByText('Reviews due')).toBeNull();
+    // The coverage grid is still there to look at.
+    expect(screen.getByRole('region', { name: 'Coverage' })).toBeInTheDocument();
+  });
+
+  it('counts down in hours and minutes through the morning', () => {
+    renderAt('2026-11-13T10:48:00+11:00');
+    expect(screen.getByText('4 hours and 12 minutes to go.')).toBeInTheDocument();
+  });
+
+  it('says less than a minute just before the start', () => {
+    renderAt('2026-11-13T14:59:30+11:00');
+    expect(screen.getByText('Less than a minute to go.')).toBeInTheDocument();
+  });
+
+  it.each(['2026-11-13T15:00:00+11:00', '2026-11-13T15:14:59+11:00', '2026-11-13T15:15:00+11:00', '2026-11-13T17:14:59+11:00'])(
+    'wishes luck with no study nags during reading and writing time (%s)',
+    (iso) => {
+      renderAt(iso);
+      expect(screen.getByRole('heading', { level: 1, name: 'Today' })).toBeInTheDocument();
+      const notice = screen.getByRole('region', { name: 'The exam is underway. Good luck.' });
+      expect(notice).toHaveTextContent('Reading time ends at 3:15 pm and writing time at 5:15 pm (Melbourne time).');
+      expect(screen.queryAllByRole('link')).toHaveLength(0);
+      expect(screen.queryAllByRole('button')).toHaveLength(0);
+      expect(screen.queryByText(/due|streak|daily|drill|review/i)).toBeNull();
+      expect(screen.queryByRole('region', { name: 'Coverage' })).toBeNull();
+    },
+  );
+
+  it('after the exam, says well done, keeps export and progress, and notes the caps have lifted', () => {
+    URL.createObjectURL = vi.fn(() => 'blob:coldboot-export');
+    URL.revokeObjectURL = vi.fn();
+    const clicks: HTMLAnchorElement[] = [];
+    vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function (this: HTMLAnchorElement) {
+      clicks.push(this);
+    });
+    renderAt('2026-11-13T17:15:00+11:00');
+    const notice = screen.getByRole('region', { name: 'The exam is over. Well done.' });
+    expect(notice).toHaveTextContent('the exam caps, which brought every card back at least two days before the exam, have lifted');
+    expect(within(notice).getByRole('link', { name: 'See your stats' })).toHaveAttribute('href', '/stats');
+    expect(within(notice).getByRole('link', { name: 'Open the syllabus map' })).toHaveAttribute('href', '/map');
+    expect(within(notice).getByRole('link', { name: 'Change it in Settings' })).toHaveAttribute('href', '/settings');
+    expect(screen.queryByRole('link', { name: "Start today's run" })).toBeNull();
+    expect(screen.getByRole('region', { name: 'Coverage' })).toBeInTheDocument();
+    fireEvent.click(within(notice).getByRole('button', { name: 'Export progress' }));
+    expect(clicks).toHaveLength(1);
+    const name = exportFilename(Date.now());
+    expect(clicks[0].download).toBe(name);
+    expect(within(notice).getByText(`Progress exported as ${name}. Keep it somewhere safe, such as your school drive.`)).toBeInTheDocument();
+  });
+
+  it('follows an exam time changed in Settings', () => {
+    useSettings.setState({ examAt: '2026-11-13T09:00:00+11:00' });
+    renderAt('2026-11-13T08:30:00+11:00');
+    expect(screen.getByRole('heading', { name: 'Exam today at 9:00 am (Melbourne time)' })).toBeInTheDocument();
+    expect(screen.getByText('30 minutes to go.')).toBeInTheDocument();
   });
 });
