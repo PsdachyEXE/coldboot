@@ -11,7 +11,7 @@ import type { ContentIndex } from '../content/loader';
 import type { KkId } from '../content/schema';
 import { useContent } from '../content/store';
 import { freshSeed } from '../games/prng';
-import type { AnswerResult, Difficulty, GameContext, GameMeta, GameSession } from '../games/types';
+import type { AnswerResult, Difficulty, Game, GameContext, GameMeta, GameSession } from '../games/types';
 import { melbourneDate } from '../lib/time';
 import { computeMastery, masteryValue } from '../srs/mastery';
 import { useAttempts } from '../state/attempts';
@@ -93,7 +93,13 @@ export async function startGame(meta: GameMeta, opts: StartOptions): Promise<boo
         return false;
       }
     }
-    const game = await meta.load();
+    let game: Game;
+    try {
+      game = await meta.load();
+    } catch {
+      if (token === startToken) term().print(say(`The ${meta.id} game couldn't load. Check your connection, then type the command again.`, 'warning'));
+      return false;
+    }
     if (token !== startToken) return false;
     const now = () => Date.now();
     const t = now();
@@ -132,7 +138,10 @@ export async function startGame(meta: GameMeta, opts: StartOptions): Promise<boo
     scheduleDeadline(session);
     return true;
   } catch {
-    if (token === startToken) term().print(say(`The ${meta.id} game couldn't load. Check your connection, then type the command again.`, 'warning'));
+    if (token === startToken) {
+      term().setGame(null);
+      term().print(say(`The ${meta.id} game couldn't start because of a fault in this build. Reload the app and try again, or play another game.`, 'warning'));
+    }
     return false;
   } finally {
     if (token === startToken) term().setBusy(false);

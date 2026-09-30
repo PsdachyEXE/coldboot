@@ -307,6 +307,19 @@ describe('games in the terminal', () => {
     expect(useTerminal.getState().lastGameEnd).toMatchObject({ gameId: 'sort', score: 10, total: 10 });
   });
 
+  it('says what happened when a game fails to load or start', async () => {
+    const offline = fakeGame({ id: 'offline' });
+    offline.load = () => Promise.reject(new Error('chunk failed'));
+    expect(await startGame(offline, { difficulty: 'normal', where: 'test' })).toBe(false);
+    expect(printed()).toContain("The offline game couldn't load. Check your connection, then type the command again.");
+    const broken = fakeGame({ id: 'broken' });
+    broken.load = async () => ({ id: 'broken', title: 'Broken', kk: [], man: '', start: () => { throw new Error('bug'); } });
+    expect(await startGame(broken, { difficulty: 'normal', where: 'test' })).toBe(false);
+    expect(printed()).toContain("The broken game couldn't start because of a fault in this build.");
+    expect(term().game).toBeNull();
+    expect(term().busy).toBe(false);
+  });
+
   it('ignores input while a game is loading and can abort the load', async () => {
     let release: () => void = () => {};
     const slow = fakeGame({ id: 'slow' });
