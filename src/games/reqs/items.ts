@@ -125,10 +125,43 @@ export function classifyItem(statementId: string, seed: number, difficulty: Diff
     check(input) {
       const chosen = parseCategory(input);
       if (!chosen) return { correct: false, expected, reason: CATEGORY_HINT, counted: false };
-      return { correct: chosen === s.category, expected, reason: s.why };
+      const note = chosen === s.category ? '' : ` ${WHY_NOT[s.category][chosen]}`;
+      return { correct: chosen === s.category, expected, reason: `${s.why}${note}` };
     },
   };
 }
+
+/**
+ * Why the category a student chose doesn't fit, by the right category then the chosen one. These
+ * teach the classic confusions, above all constraint versus non-functional requirement.
+ */
+export const WHY_NOT: Record<Category, Record<Category, string>> = {
+  functional: {
+    functional: '',
+    'non-functional': "It isn't non-functional: it names something the solution does, not a quality such as speed or ease of use.",
+    constraint: "It isn't a constraint: it names something the solution does, not a limit on the project.",
+    scope: "It isn't scope: scope sets the boundary of the whole solution, while this names one thing it must do.",
+  },
+  'non-functional': {
+    functional: "It isn't functional: it doesn't add something the solution does; it says how well it must work.",
+    'non-functional': '',
+    constraint:
+      "It isn't a constraint: a constraint limits the project from outside, such as a budget, a deadline, a law or equipment it must use. This is a quality of the solution itself.",
+    scope: "It isn't scope: it doesn't say what the solution will or won't cover; it says how well it must work.",
+  },
+  constraint: {
+    functional: "It isn't functional: it doesn't describe anything the solution does.",
+    'non-functional': "It isn't non-functional: that would be a quality of the finished solution that testing can measure. This limits the project instead.",
+    constraint: '',
+    scope: "It isn't scope: it doesn't say which features are in or out; it limits how the project can be done.",
+  },
+  scope: {
+    functional: "It isn't a functional requirement: it sets a boundary on what the whole solution covers rather than naming one thing it must do.",
+    'non-functional': "It isn't non-functional: it doesn't describe a quality; it says what the solution will or won't cover.",
+    constraint: "It isn't a constraint: nothing outside the project forces it; the organisation has chosen what the solution will cover.",
+    scope: '',
+  },
+};
 
 export function typeItem(statementId: string, seed: number, difficulty: Difficulty, followUp = false): QuizItem {
   const s = statementById(statementId);

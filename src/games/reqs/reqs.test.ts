@@ -113,6 +113,21 @@ describe('reqs items', () => {
     expect(followUp.prompt[0]).toMatchObject({ kind: 'text', text: expect.stringMatching(/^Follow-up on the same statement: /) });
   });
 
+  it('adds a line on why the chosen category does not fit', () => {
+    const nfr = classifyItem('physio-n1', 1, 'normal');
+    expect(nfr.check('constraint').reason).toMatch(/It isn't a constraint: a constraint limits the project from outside/);
+    expect(nfr.check('non-functional').reason).not.toMatch(/It isn't/);
+    const constraint = classifyItem('physio-c2', 1, 'normal');
+    expect(constraint.check('non-functional').reason).toMatch(/It isn't non-functional/);
+    for (const s of STATEMENTS) {
+      for (const c of CATEGORY_CHIPS) {
+        const r = classifyItem(s.id, 1, 'normal').check(c);
+        expect(r.reason.startsWith(s.why)).toBe(true);
+        if (!r.correct) expect(r.reason.length).toBeGreaterThan(s.why.length + 20);
+      }
+    }
+  });
+
   it('tags each classification with the KK of its answer', () => {
     expect(classifyItem('library-c1', 1, 'normal').kk).toEqual(['U3O2-KK06', 'U3O1-KK02']);
     expect(classifyItem('library-s1', 1, 'normal').kk).toEqual(['U3O2-KK07', 'U3O1-KK02']);
