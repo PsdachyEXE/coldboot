@@ -505,3 +505,27 @@ After the units were merged, four finders read all content across units: duplica
 ### shared
 
 - `t-*` / `psm-*` / `cs-01-*` (all): none dropped. No id was removed from terms.json, psm.json or cs-01.json. The docs/CONTENT_NOTES.md lines that need updating (docs/ is off-limits to me) are listed under `added`.
+
+## Case study 2: Neilborough Trade College, SignOff (part cs-02)
+
+- Invented organisation: Neilborough Trade College, a private registered training organisation in Bendigo with campuses in Echuca and Swan Hill. SignOff replaces paper apprentice logbooks with an apprentice phone app (built by an external firm, Kilnworth Apps), a supervisor web page, a trainer dashboard that flags apprentices at risk, and a nightly CSV or XML export to a state records system. The insert runs to about 697 words and ends with a line saying the organisation and everyone named are fictional.
+- 13 questions worth 60 marks: 1 MCQ and 12 short answers of 3 to 8 marks, covering all four areas. Four figures, none of a kind cs-01 uses: a draft use case diagram, the project plan as a task table (weeks), a draft phone mock-up of the Log a task screen, and pseudocode for `isAtRisk` (arrays indexed from 0) with a deliberate index-out-of-range error.
+- Held back as in cs-01: no Act, framework, threat modelling step, trace table, slack, float or constraint type is named, and only the house data type names appear. q13 is the first case study question on U4O2-KK06 (criteria for evaluating security); it builds its criteria from the insert's own weaknesses.
+
+### Review pass (cs-02)
+
+All 13 questions, the 4 figures and every computed answer were checked again. The plan was scheduled with the repo's `computeSchedule` and with a separate Python critical path script. Both give 19 weeks and one critical path, A B D G H K, with G's earliest start at 14. With F at 9 weeks the plan takes 20 weeks and the critical path is A C F G H K. F at 9 weeks plus H at 2 weeks, G at 1 week, or F at 8 weeks each brings the plan back to 19 weeks. `isAtRisk` was traced with the repo's deskcheck interpreter and a separate Python copy. As written, all three tests stop at line 6 with an index out of range error: index 5 in test 1 and index 6 in tests 2 and 3. With line 5 changed to `numWeeks - 1`, the results are TRUE, FALSE and TRUE. Marks total 60. `content-parts.ts check` prints ok.
+
+Drops (the replacements keep the same id, KK, type and marks, because cs-02 has not shipped):
+- `cs-02-q01` (U4O2-KK01): dropped and replaced. The MCQ asked which option was one of the objectives, and the insert labels the objectives outright, so reading the insert was enough to answer it. The replacement asks which SignOff feature most directly supports the completion-rate objective. The answer is the at-risk flag, because the insert says trainers don't notice that apprentices have stopped logging tasks until they drop out.
+- `cs-02-q04` (U3O2-KK03, U4O1-KK10, U4O1-KK11): dropped and replaced. Parts 1 and 3 copied cs-01-q04 sentence for sentence ("Identify the tasks on the critical path...", "Identify the factor affecting the project plan that this represents... describe how ... should record the change"), and part 2 repeated cs-01's delay to a task off the critical path. The new question has four parts: the earliest start of G, found from the dependencies; the critical path and the planned length; the effect of F growing to 9 weeks on go-live (+1 week) and on the critical path (A C F G H K); and an adjustment that keeps go-live at week 19, with one drawback. Slack and float are still never named.
+
+Fixes:
+- Organisation renamed. Greystone College is a real Australian vocational college (ILSC-Greystone College, with a Melbourne campus). A public TAFE in Bendigo with campuses in Castlemaine and Echuca mirrors the real Bendigo TAFE. Quillon is a real app and software company name. The organisation is now Neilborough Trade College, a private registered training organisation in Bendigo with smaller campuses in Echuca and Swan Hill, 420 staff and about 7,000 students (still 3,200 apprentices). The developer is now Kilnworth Apps. Web searches found no business trading under either new name. The title, insert, Figure 2 and every question were updated.
+- `cs-02-q02` (U3O2-KK07): statement 4 repeated the insert's scope sentence word for word. It is now "An apprentice can pay their course fees in the apprentice app", which students must recognise from the scope statement as outside the scope even though it is worded like a functional requirement.
+- `cs-02-q09`: kk reordered to U4O1-KK09 then U3O2-KK13. Evaluating the solution after go-live and collecting data for it is U4O1 work, and before this change no question had a U4O1 primary KK.
+- `cs-02-q11` (U4O2-KK08): the model and marking point said the apprentices weren't asked about the use of their data, but the insert never said so. The insert now says the spreadsheet was emailed "without telling the apprentices", and the answer matches that.
+
+Held back (confirmed): no Act, framework, threat modelling step, trace table, slack or float or constraint type is named. Only house data type names are used. q13 (U4O2-KK06) asks for criteria built from the insert's own weaknesses. KK06 has no verify note, and no listed set of criteria is assumed.
+
+Noted, not changed: the mock-up renderer's `window` element always draws desktop minimise, maximise and close controls, so the phone screen in Figure 3 has them. No question refers to them.

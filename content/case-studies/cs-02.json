@@ -1,0 +1,816 @@
+{
+  "id": "cs-02",
+  "title": "Neilborough Trade College: SignOff",
+  "insert": "**Neilborough Trade College**\n\nNeilborough Trade College is a private registered training organisation based in Bendigo, with smaller campuses in Echuca and Swan Hill. It employs 420 staff and trains about 7,000 students a year, including 3,200 apprentices in trades such as carpentry, plumbing and cookery. Apprentices work for an employer four days a week and attend a campus one day a week.\n\nNeilborough's goal is to be the first choice for trade training in central and northern Victoria. To support this goal, it has set two objectives:\n\n- raise the apprenticeship completion rate from 54 per cent to 65 per cent by the end of 2029\n- within 12 months of a new system going live, record every completed unit within one week of its assessment (it can now take six weeks).\n\n**Current situation**\n\nApprentices record each task they do at work, with the date and hours, in a paper logbook that their workplace supervisor signs. Trainers check logbooks on campus days and type completed units into the student management system, taking each trainer about three hours a week. Trainers often don't notice an apprentice has stopped logging tasks until they drop out.\n\n**The proposed solution: SignOff**\n\n- An **apprentice app** for apprentices' own Android phones and iPhones. An apprentice logs a task by choosing the unit and the task from lists and entering the date and the hours (0.5 to 12, in half hours), and can attach a photo of the work. Apprentices often log tasks on building sites or in kitchens, sometimes wearing gloves, and some find reading and writing difficult. An apprentice must be able to log a task in under one minute. Apprentices can also see their progress in each unit.\n- A **supervisor web page**. Each Friday, workplace supervisors receive an emailed link to approve or query each task logged that week.\n- A **trainer dashboard** showing each apprentice's progress. A trainer can mark a unit competent only after SignOff has checked that the apprentice has enough approved hours for it. It flags an apprentice as *at risk* when they have had no approved hours in each of the three most recent weeks.\n- Each night, SignOff sends the day's completed units to the state government's apprenticeship records system, which accepts files in CSV or XML.\n\nEnrolments and fee payments stay in the student management system and are outside SignOff's scope. SignOff must be ready for the start of the 2027 training year in February. The budget is $480,000.\n\nNeilborough's IT team of seven has never built a phone app, so it has contracted Kilnworth Apps, a Bendigo app developer, to build the apprentice app for $150,000 and support it for two years. The IT team will build the supervisor page and trainer dashboard in-house.\n\n**The project team**\n\n- **Daniel Okafor**, project manager (project plan, Figure 2)\n- **Sione Taufa**, systems analyst (draft use case diagram, Figure 1)\n- **Hannah Brooks**, user experience designer (draft mock-up, Figure 3)\n- **Arjun Pillai**, Neilborough developer (trainer dashboard; pseudocode, Figure 4)\n- **Yasmin Farah**, tester\n- **Nadia Petrovic**, IT security officer\n- **Fiona McKenzie**, head of apprenticeships and project sponsor\n\n**The development environment**\n\nNadia has noted these practices.\n\n- Neilborough's development server is on the same network as the live student management system and uses the same administrator password.\n- Kilnworth's four developers share one remote access account to the development server, without multi-factor authentication.\n- Kilnworth keeps SignOff's code in a public online repository, including the API key that lets SignOff read apprentice records from the student management system.\n- For testing, a Neilborough staff member emailed Kilnworth a spreadsheet of all 3,200 apprentices' names, dates of birth, phone numbers and employers, without telling the apprentices. Many apprentices are under 18.\n- Kilnworth's developers copied photo upload code from a developer forum and an open-source library, without recording its source or checking its licence.\n- Neilborough's developers use version control, but anyone can change the main branch and code isn't reviewed before release.\n- Operating system updates on the development server have been off since an update broke the test version in March.\n\n*Neilborough Trade College, Kilnworth Apps and everyone named here are fictional.*",
+  "figures": [
+    {
+      "id": "signoff-usecase",
+      "kind": "usecase",
+      "title": "Figure 1: Draft use case diagram for SignOff",
+      "caption": "Drawn by Sione Taufa, systems analyst.",
+      "width": 760,
+      "height": 500,
+      "system": {
+        "label": "SignOff",
+        "x": 380,
+        "y": 250,
+        "w": 400,
+        "h": 452
+      },
+      "actors": [
+        {
+          "id": "apprentice",
+          "label": "Apprentice",
+          "x": 80,
+          "y": 104
+        },
+        {
+          "id": "supervisor",
+          "label": "Workplace supervisor",
+          "x": 80,
+          "y": 316
+        },
+        {
+          "id": "trainer",
+          "label": "Trainer",
+          "x": 680,
+          "y": 150
+        },
+        {
+          "id": "records",
+          "label": "Apprenticeship records system",
+          "x": 680,
+          "y": 390
+        }
+      ],
+      "useCases": [
+        {
+          "id": "log",
+          "label": "Log workplace task",
+          "x": 288,
+          "y": 104
+        },
+        {
+          "id": "photo",
+          "label": "Attach photo of work",
+          "x": 288,
+          "y": 206
+        },
+        {
+          "id": "review",
+          "label": "Review logged tasks",
+          "x": 288,
+          "y": 316
+        },
+        {
+          "id": "query",
+          "label": "Query a logged task",
+          "x": 288,
+          "y": 418
+        },
+        {
+          "id": "progress",
+          "label": "View apprentice progress",
+          "x": 472,
+          "y": 96
+        },
+        {
+          "id": "mark",
+          "label": "Mark unit competent",
+          "x": 472,
+          "y": 204
+        },
+        {
+          "id": "check",
+          "label": "Check approved hours",
+          "x": 472,
+          "y": 306
+        },
+        {
+          "id": "send",
+          "label": "Send daily results",
+          "x": 472,
+          "y": 410
+        }
+      ],
+      "links": [
+        {
+          "from": "apprentice",
+          "to": "log",
+          "type": "association"
+        },
+        {
+          "from": "photo",
+          "to": "log",
+          "type": "extends"
+        },
+        {
+          "from": "supervisor",
+          "to": "review",
+          "type": "association"
+        },
+        {
+          "from": "query",
+          "to": "review",
+          "type": "extends"
+        },
+        {
+          "from": "trainer",
+          "to": "progress",
+          "type": "association"
+        },
+        {
+          "from": "trainer",
+          "to": "mark",
+          "type": "association"
+        },
+        {
+          "from": "mark",
+          "to": "check",
+          "type": "includes",
+          "labelAt": {
+            "x": 412,
+            "y": 256
+          }
+        },
+        {
+          "from": "records",
+          "to": "send",
+          "type": "association"
+        }
+      ]
+    },
+    {
+      "id": "signoff-plan",
+      "kind": "table",
+      "title": "Figure 2: Project plan for SignOff",
+      "caption": "Prepared by Daniel Okafor, project manager. Durations are in weeks. A task starts as soon as every task it depends on has finished.",
+      "columns": [
+        "Task",
+        "Task name",
+        "Duration (weeks)",
+        "Depends on"
+      ],
+      "rows": [
+        [
+          "A",
+          "Analyse requirements and write SRS",
+          "4",
+          "None"
+        ],
+        [
+          "B",
+          "Design app screens",
+          "3",
+          "A"
+        ],
+        [
+          "C",
+          "Design database and dashboard",
+          "2",
+          "A"
+        ],
+        [
+          "D",
+          "Build apprentice app (Kilnworth Apps)",
+          "7",
+          "B"
+        ],
+        [
+          "E",
+          "Build supervisor page and trainer dashboard",
+          "6",
+          "C"
+        ],
+        [
+          "F",
+          "Connect to apprenticeship records system",
+          "3",
+          "C"
+        ],
+        [
+          "G",
+          "Alpha testing",
+          "2",
+          "D, E, F"
+        ],
+        [
+          "H",
+          "Beta testing at the Echuca campus",
+          "3",
+          "G"
+        ],
+        [
+          "I",
+          "Security review",
+          "1",
+          "G"
+        ],
+        [
+          "J",
+          "Train trainers and supervisors",
+          "2",
+          "G"
+        ],
+        [
+          "K",
+          "Go-live (milestone)",
+          "0",
+          "H, I, J"
+        ]
+      ]
+    },
+    {
+      "id": "log-task-mockup",
+      "kind": "mockup",
+      "title": "Figure 3: Draft mock-up of the Log a task screen",
+      "caption": "Drawn by Hannah Brooks, user experience designer. The numbered notes are Hannah's.",
+      "width": 400,
+      "height": 600,
+      "elements": [
+        {
+          "type": "window",
+          "x": 200,
+          "y": 300,
+          "w": 352,
+          "h": 552,
+          "text": "SignOff"
+        },
+        {
+          "type": "heading",
+          "x": 140,
+          "y": 80,
+          "w": 200,
+          "h": 28,
+          "text": "Log a task"
+        },
+        {
+          "type": "label",
+          "x": 100,
+          "y": 118,
+          "w": 120,
+          "h": 20,
+          "text": "Unit"
+        },
+        {
+          "type": "dropdown",
+          "x": 200,
+          "y": 148,
+          "w": 320,
+          "h": 36,
+          "text": "Select a unit"
+        },
+        {
+          "type": "label",
+          "x": 100,
+          "y": 190,
+          "w": 120,
+          "h": 20,
+          "text": "Task"
+        },
+        {
+          "type": "dropdown",
+          "x": 200,
+          "y": 220,
+          "w": 320,
+          "h": 36,
+          "text": "Select a task"
+        },
+        {
+          "type": "label",
+          "x": 100,
+          "y": 262,
+          "w": 120,
+          "h": 20,
+          "text": "Date"
+        },
+        {
+          "type": "textbox",
+          "x": 140,
+          "y": 292,
+          "w": 200,
+          "h": 36,
+          "text": "dd/mm/yyyy",
+          "note": "The apprentice types the date."
+        },
+        {
+          "type": "label",
+          "x": 100,
+          "y": 334,
+          "w": 120,
+          "h": 20,
+          "text": "Hours"
+        },
+        {
+          "type": "textbox",
+          "x": 100,
+          "y": 364,
+          "w": 120,
+          "h": 36,
+          "text": "e.g. 7.5",
+          "note": "The apprentice types the hours worked."
+        },
+        {
+          "type": "image",
+          "x": 200,
+          "y": 448,
+          "w": 320,
+          "h": 88,
+          "text": "Tap to add a photo (optional)",
+          "note": "The photo area is kept large, so Save and Delete are small and side by side."
+        },
+        {
+          "type": "button",
+          "x": 268,
+          "y": 534,
+          "w": 64,
+          "h": 28,
+          "text": "Save"
+        },
+        {
+          "type": "button",
+          "x": 336,
+          "y": 534,
+          "w": 64,
+          "h": 28,
+          "text": "Delete",
+          "note": "Delete removes the task straight away."
+        }
+      ]
+    },
+    {
+      "id": "at-risk-pseudocode",
+      "kind": "pseudocode",
+      "title": "Figure 4: Pseudocode for the isAtRisk function",
+      "caption": "Written by Arjun Pillai, developer. weeklyHours holds an apprentice's approved hours for each week, oldest first, so its last element is the most recent week. numWeeks is the number of weeks recorded.",
+      "code": "FUNCTION isAtRisk(weeklyHours, numWeeks)\n    // Returns TRUE if the three most recent weeks have no approved hours\n    // emptyStreak counts the weeks in a row with no approved hours\n    emptyStreak ← 0\n    FOR week ← 0 TO numWeeks\n        IF weeklyHours[week] = 0 THEN\n            emptyStreak ← emptyStreak + 1\n        ELSE\n            emptyStreak ← 0\n        ENDIF\n    ENDFOR\n    IF emptyStreak ≥ 3 THEN\n        RETURN TRUE\n    ELSE\n        RETURN FALSE\n    ENDIF\nENDFUNCTION",
+      "indexBase": 0
+    }
+  ],
+  "questions": [
+    {
+      "id": "cs-02-q01",
+      "kk": [
+        "U4O2-KK01"
+      ],
+      "stem": "Which feature of SignOff most directly supports Neilborough's objective of raising the apprenticeship completion rate?",
+      "options": [
+        "The nightly file that sends completed units to the state government's records system",
+        "The trainer dashboard flagging apprentices with no approved hours for three weeks",
+        "The weekly emailed link that lets supervisors approve or query logged tasks",
+        "The option for an apprentice to attach a photo of their work to a logged task"
+      ],
+      "answer": 1,
+      "explanation": "The completion rate rises when fewer apprentices drop out. At present, trainers often don't notice that an apprentice has stopped logging tasks until they drop out. The at-risk flag shows a trainer within three weeks which apprentices have stopped building approved hours, so the trainer can contact them while there is still time to keep them in training.",
+      "whyWrong": [
+        "The nightly file gets completed units into the state's records quickly. That helps with recording units on time, not with keeping apprentices in training.",
+        "",
+        "Weekly approval makes logged hours reliable and timely, but on its own it doesn't alert anyone that an apprentice has stopped working towards their units.",
+        "A photo is optional evidence that a task was done. It doesn't identify or help apprentices who are falling behind."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "cs-02-q02",
+      "kk": [
+        "U3O2-KK05",
+        "U3O2-KK06",
+        "U3O2-KK07"
+      ],
+      "commandTerm": "classify",
+      "marks": 4,
+      "prompt": "Classify each of the following statements about SignOff as a functional requirement, a non-functional requirement, a constraint, or outside the scope of SignOff.\n\n1. A supervisor can approve or query each task an apprentice logs.\n2. An apprentice must be able to log a task in under one minute.\n3. SignOff must be ready for the start of the 2027 training year in February.\n4. An apprentice can pay their course fees in the apprentice app.",
+      "points": [
+        {
+          "text": "Statement 1: functional requirement. Approving or querying a task is something SignOff must do.",
+          "marks": 1
+        },
+        {
+          "text": "Statement 2: non-functional requirement. It describes a quality of the app (how quickly and easily a task can be logged), not a task it performs.",
+          "marks": 1
+        },
+        {
+          "text": "Statement 3: constraint. The February deadline limits the project; it is neither something SignOff does nor a quality it has.",
+          "marks": 1
+        },
+        {
+          "text": "Statement 4: outside the scope of SignOff. Fee payments stay in the student management system, so the apprentice app won't take them, even though the statement is worded like a functional requirement.",
+          "marks": 1
+        }
+      ],
+      "model": "1. Functional requirement: approving or querying a logged task is something SignOff must do.\n2. Non-functional requirement: it describes a quality of the apprentice app, how quickly and easily a task can be logged, rather than a task the app performs.\n3. Constraint: the February deadline limits how the project can be carried out. It isn't something SignOff does or a quality it has.\n4. Outside the scope: the insert says fee payments stay in the student management system, so paying fees isn't something SignOff will do, even though the statement is worded like a functional requirement.",
+      "mistake": "A deadline or a budget is a constraint on the project, not a non-functional requirement. A non-functional requirement describes a quality of the finished solution, such as how quickly an apprentice can log a task.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-02-q03",
+      "kk": [
+        "U3O2-KK08"
+      ],
+      "commandTerm": "explain",
+      "marks": 5,
+      "prompt": "Sione's draft use case diagram (Figure 1) uses both <<includes>> and <<extends>> relationships.\n\n1. Explain the difference between an <<includes>> relationship and an <<extends>> relationship, using one example of each from Figure 1.\n2. The insert says apprentices can see their progress in each unit, but Figure 1 doesn't show this. Describe how Sione should change Figure 1 to show it.",
+      "points": [
+        {
+          "text": "Explains that an <<includes>> relationship shows a use case that is always carried out as part of another (base) use case.",
+          "marks": 1
+        },
+        {
+          "text": "Applies it to Figure 1: every time a trainer uses *Mark unit competent*, SignOff always carries out *Check approved hours*.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that an <<extends>> relationship shows optional behaviour that is added to a base use case only under a condition, not every time.",
+          "marks": 1
+        },
+        {
+          "text": "Applies it to Figure 1: *Attach photo of work* happens only when the apprentice chooses to add a photo while logging a task, or *Query a logged task* happens only when a supervisor has a question about a task they are reviewing.",
+          "marks": 1
+        },
+        {
+          "text": "Describes the change: draw an association line between the Apprentice actor and *View apprentice progress*, or add a new use case such as *View my progress* inside the SignOff boundary and join it to Apprentice with an association.",
+          "marks": 1
+        }
+      ],
+      "model": "1. An <<includes>> relationship shows a use case that is always carried out as part of another. Whenever a trainer marks a unit competent, SignOff always checks that the apprentice has enough approved hours, so *Mark unit competent* includes *Check approved hours*. An <<extends>> relationship shows optional behaviour that is added to a use case only in some cases. An apprentice logging a workplace task attaches a photo only when they choose to, so *Attach photo of work* extends *Log workplace task*.\n\n2. Sione should draw an association line from the Apprentice actor to the *View apprentice progress* use case, so the diagram shows both trainers and apprentices using it. He could instead add a separate *View my progress* use case inside the SignOff boundary and join it to Apprentice with an association.",
+      "mistake": "The difference isn't how important a step is. It is whether the step happens every time the base use case runs (includes) or only under a condition (extends).",
+      "source": "exam-convention",
+      "figureRefs": [
+        "signoff-usecase"
+      ]
+    },
+    {
+      "id": "cs-02-q04",
+      "kk": [
+        "U3O2-KK03",
+        "U4O1-KK10",
+        "U4O1-KK11"
+      ],
+      "commandTerm": "explain",
+      "marks": 8,
+      "prompt": "Figure 2 lists the tasks in Daniel's project plan. Durations are in weeks, and the project starts at the beginning of week 1.\n\n1. State the earliest week in which *Alpha testing* (G) can start, and explain why it can't start any sooner.\n2. Identify the tasks on the critical path, and state the planned length of the project.\n3. In week 8, the state government changes the way other systems must connect to the apprenticeship records system. Arjun now expects *Connect to apprenticeship records system* (F) to take 9 weeks instead of 3. Explain the effect of this change on the go-live date and on the critical path.\n4. Fiona tells Daniel that go-live can't be later than planned. Recommend one adjustment Daniel could make to the plan so that go-live stays at the end of week 19, and describe one drawback of your adjustment.",
+      "points": [
+        {
+          "text": "Alpha testing can start in week 15 at the earliest.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that G depends on D, E and F, so it can't start until all three have finished. D finishes last, at the end of week 14 (A 4 weeks, B 3 weeks, D 7 weeks), while E finishes at the end of week 12 and F at the end of week 9.",
+          "marks": 1
+        },
+        {
+          "text": "Critical path: A Analyse requirements and write SRS, B Design app screens, D Build apprentice app, G Alpha testing, H Beta testing at the Echuca campus, then K Go-live.",
+          "marks": 1
+        },
+        {
+          "text": "The planned length is 19 weeks.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that F was planned to finish at the end of week 9, five weeks before Alpha testing needs it. Six extra weeks is one more than that, so F now finishes at the end of week 15 and Alpha testing can't start until week 16.",
+          "marks": 1
+        },
+        {
+          "text": "States that go-live moves one week later, from the end of week 19 to the end of week 20, and that the critical path becomes A, C, F, G, H, K (B and D are no longer on it).",
+          "marks": 1
+        },
+        {
+          "text": "Recommends an adjustment that brings every chain of tasks leading to go-live back to 19 weeks or less, using only tasks not yet finished in week 8. For example: add a developer to F so it finishes by the end of week 14; shorten Alpha testing (G) to one week; or shorten Beta testing at the Echuca campus (H) to two weeks.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a drawback of that adjustment in this case. For example: an extra developer costs money from the $480,000 budget and needs time to learn the new connection rules, so F may not finish sooner; or less alpha or beta testing makes it more likely that errors reach apprentices, supervisors and trainers when SignOff goes live at the start of the training year.",
+          "marks": 1
+        }
+      ],
+      "model": "1. Alpha testing can start in week 15 at the earliest. It depends on D, E and F, so it can't start until all three have finished. D finishes last, at the end of week 14 (A takes 4 weeks, B 3 weeks and D 7 weeks), while E finishes at the end of week 12 and F at the end of week 9.\n\n2. The critical path is A Analyse requirements and write SRS (4), B Design app screens (3), D Build apprentice app (7), G Alpha testing (2) and H Beta testing at the Echuca campus (3), ending at the K Go-live milestone. The project is planned to take 19 weeks.\n\n3. F was planned to run from week 7 to the end of week 9, five weeks before Alpha testing needed it. It is now six weeks longer, one week more than it had to spare, so it finishes at the end of week 15, one week after D. Alpha testing now starts in week 16, so go-live moves from the end of week 19 to the end of week 20. The critical path becomes A, C, F, G, H and K, and B and D are no longer on it.\n\n4. Daniel could shorten Beta testing at the Echuca campus (H) from three weeks to two. Alpha testing would finish at the end of week 17 and Beta testing at the end of week 19, so go-live stays at the end of week 19. The drawback is that apprentices, supervisors and trainers at Echuca have one week less to use SignOff, so problems they would have found could instead reach every apprentice when the training year starts in February.",
+      "mistake": "A delay to a task that isn't on the critical path moves go-live only by the amount that it is longer than the time the task had to spare. F had five weeks to spare and grew by six, so go-live moves by one week, not six.",
+      "source": "textbook",
+      "figureRefs": [
+        "signoff-plan"
+      ]
+    },
+    {
+      "id": "cs-02-q05",
+      "kk": [
+        "U3O1-KK10",
+        "U4O1-KK05"
+      ],
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "Hannah's draft mock-up (Figure 3) shows the screen apprentices will use to log a task. Using the requirements in the insert, describe two different types of validation check that SignOff should apply to data entered on this screen. For each check, name its type and the field it applies to, and give an example of an input it would reject.",
+      "points": [
+        {
+          "text": "Names a first type of check (existence, type or range) and a field on the screen that it suits.",
+          "marks": 1
+        },
+        {
+          "text": "Describes what the first check tests and gives an input it rejects. For example, a range check on Hours rejects 0 or 14, because hours must be from 0.5 to 12; a type check on Hours rejects \"seven\", because hours must be a number; an existence check on Task (or Unit, Date or Hours) rejects an entry saved with that field left empty; or a range check on Date rejects a date in the future.",
+          "marks": 1
+        },
+        {
+          "text": "Names a second, different type of check and a field that it suits.",
+          "marks": 1
+        },
+        {
+          "text": "Describes what the second check tests and gives an input it rejects (as in the examples above).",
+          "marks": 1
+        }
+      ],
+      "model": "A range check on Hours would make sure the value entered is from 0.5 to 12, as the insert requires. An entry of 14 would be rejected with a message such as \"Enter between 0.5 and 12 hours\".\n\nAn existence check on Task would make sure the apprentice has chosen a task before the entry is saved. If the Task list is still showing \"Select a task\" when Save is tapped, the entry would be rejected and the apprentice asked to choose a task.",
+      "mistake": "Validation checks that data is reasonable, not that it is correct. A range check accepts 7.5 hours even if the apprentice really worked 6.5.",
+      "source": "textbook",
+      "figureRefs": [
+        "log-task-mockup"
+      ]
+    },
+    {
+      "id": "cs-02-q06",
+      "kk": [
+        "U3O2-KK15",
+        "U3O2-KK14"
+      ],
+      "commandTerm": "recommend",
+      "marks": 6,
+      "prompt": "Refer to Hannah's draft mock-up (Figure 3) and the description of the apprentice app in the insert.\n\n1. Explain what affordance means, using one element of Figure 3 as an example.\n2. Recommend two changes to the design that would make the app more usable for Neilborough's apprentices. Justify each change.",
+      "points": [
+        {
+          "text": "Explains affordance: the look of an element suggests how it is used, so users know what to do with it without instructions.",
+          "marks": 1
+        },
+        {
+          "text": "Applies it to an element of Figure 3: for example, the downward arrow on the Unit and Task lists suggests they can be tapped to open a list of choices, or the outlined Save button looks like something that can be pressed.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a first change. For example: set Date to today by default and let apprentices pick another date from a calendar instead of typing it; replace the Hours text box with a list of half-hour values or large plus and minus buttons; make Save and Delete larger and move them apart; ask for confirmation before a task is deleted; or add icons beside the labels.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies the first change using the apprentices' situation: for example, typing on a phone is slow and error-prone on a building site or while wearing gloves; some apprentices find reading and writing difficult; fewer taps and less typing help meet the one-minute requirement; or small buttons side by side make it easy to tap Delete by mistake and lose a task.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a second, different change.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies the second change using the apprentices' situation.",
+          "marks": 1
+        }
+      ],
+      "model": "1. Affordance is how the look of an element suggests the way it is used, so users know what to do with it without being told. In Figure 3, the Unit and Task lists each have a downward arrow at the right-hand end, which suggests that tapping them opens a list to choose from.\n\n2. First, Hours should be chosen from a list of half-hour values (0.5, 1, 1.5 and so on up to 12), or set with large plus and minus buttons, instead of being typed. Apprentices often log tasks on building sites or in kitchens, sometimes wearing gloves, where typing on a phone is slow and easy to get wrong. Choosing a value is quicker, which helps meet the one-minute requirement, and it can't produce an entry such as 75 when the apprentice meant 7.5.\n\nSecond, Save and Delete should be made much larger and moved apart, and Delete should ask \"Delete this task?\" before it acts. At the moment they are small and side by side, and Delete removes a task straight away, so an apprentice wearing gloves could easily tap Delete instead of Save and lose the task they have just entered.",
+      "mistake": "Justify a design change with the users in the case study (apprentices on work sites, sometimes in gloves, some of whom find reading and writing difficult), not with a general claim that it looks better.",
+      "source": "textbook",
+      "figureRefs": [
+        "log-task-mockup"
+      ]
+    },
+    {
+      "id": "cs-02-q07",
+      "kk": [
+        "U3O1-KK14",
+        "U3O1-KK13",
+        "U4O1-KK06"
+      ],
+      "commandTerm": "complete",
+      "marks": 7,
+      "prompt": "Arjun wrote the isAtRisk function (Figure 4) for the trainer dashboard. Yasmin is testing it against the requirement in the insert. Arrays are indexed from 0. Part of her test table is shown below.\n\n| Test number | Inputs (weeklyHours, numWeeks) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | [30, 24, 0, 0, 0], 5 | TRUE | Error at line 6 |\n| 2 | [0, 0, 0, 16, 0, 0], 6 | | |\n| 3 | [38, 0, 0, 0, 0, 0], 6 | | |\n\n1. Test 1 stopped with an error at line 6. State the type of error, and explain why it happened.\n2. Identify the line that must be changed to fix the error, and write the corrected line.\n3. Complete the expected output and the actual output for tests 2 and 3, using Figure 4 as it is written.",
+      "points": [
+        {
+          "text": "States that it is a runtime error: an index out of range error.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that the loop runs until week equals numWeeks (5 in test 1), but weeklyHours holds five values with indexes 0 to 4, so line 6 tries to read weeklyHours[5], which doesn't exist.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies line 5.",
+          "marks": 1
+        },
+        {
+          "text": "Corrected line: FOR week ← 0 TO numWeeks - 1 (also accept LENGTH(weeklyHours) - 1 as the upper bound).",
+          "marks": 1
+        },
+        {
+          "text": "Test 2 expected output: FALSE. The 16 approved hours in the fourth week mean only the two most recent weeks have none.",
+          "marks": 1
+        },
+        {
+          "text": "Test 3 expected output: TRUE. The five most recent weeks have no approved hours.",
+          "marks": 1
+        },
+        {
+          "text": "Actual output for tests 2 and 3: an error at line 6 (index out of range), because as written every call reads one element past the end of the array.",
+          "marks": 1
+        }
+      ],
+      "model": "1. It is a runtime error: index out of range. The loop on line 5 runs from week 0 up to and including numWeeks, which is 5 in test 1. weeklyHours holds five values, at indexes 0 to 4, so on the last pass line 6 tries to read weeklyHours[5], which doesn't exist, and the program stops.\n\n2. Line 5 must be changed to `FOR week ← 0 TO numWeeks - 1`.\n\n3. Test 2: expected output FALSE; actual output error at line 6. Test 3: expected output TRUE; actual output error at line 6.\n\nIn test 2, the apprentice had 16 approved hours in the fourth week, so only the two most recent weeks have none and the apprentice isn't at risk. In test 3, the five most recent weeks have no approved hours, so the apprentice is at risk. As Figure 4 is written, every test stops at line 6, because the loop always reads one element past the end of the array.",
+      "mistake": "The program stops at line 6, but the cause is the loop's upper bound on line 5. Expected output comes from the requirement, so it is filled in even when the actual output is an error.",
+      "source": "textbook",
+      "figureRefs": [
+        "at-risk-pseudocode"
+      ]
+    },
+    {
+      "id": "cs-02-q08",
+      "kk": [
+        "U3O1-KK06",
+        "U4O1-KK02"
+      ],
+      "commandTerm": "justify",
+      "marks": 3,
+      "prompt": "Each night, SignOff will send the day's completed units to the state government's apprenticeship records system. A night's file can cover many apprentices, and an apprentice may have completed more than one unit that day. For each unit, the file must give the unit code, the date it was completed and the trainer who assessed it. Justify sending these files as XML rather than CSV.",
+      "points": [
+        {
+          "text": "Explains that XML can nest data: each apprentice element can hold as many unit elements as that apprentice completed, whereas CSV is a flat table, so the apprentice's details would be repeated on a separate row for every unit.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that XML is self-describing: each value sits between tags that name it (for example `<unitCode>`), so the records system can identify every field by name rather than by its position in a row, which reduces errors when two organisations' systems exchange data.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that XML is extensible: if the records system later needs another field, such as the employer, a new tag can be added without changing the structure of the existing elements.",
+          "marks": 1
+        }
+      ],
+      "model": "XML suits these files better than CSV. First, the data is nested: each `<apprentice>` element can hold as many `<unit>` elements as that apprentice completed that day, each with its own `<unitCode>`, `<dateCompleted>` and `<trainer>`. CSV is a flat table, so an apprentice's details would have to be repeated on a new row for every unit. Second, XML is self-describing: every value is labelled by its tag, so the state government's system can read each field by name instead of relying on its position in a row, which matters when two organisations' systems exchange data. Third, XML is extensible: if the records system later needs another field, such as the employer's name, a new tag can be added without changing the structure of the existing elements.",
+      "mistake": "XML isn't always the better choice. CSV files are smaller and simpler, and suit flat data where every row has the same fields. XML is justified here because the data is nested and goes to another organisation's system.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-02-q09",
+      "kk": [
+        "U4O1-KK09",
+        "U3O2-KK13"
+      ],
+      "commandTerm": "propose",
+      "marks": 4,
+      "prompt": "Twelve months after go-live, Fiona will evaluate SignOff. Propose one criterion for evaluating the efficiency of SignOff and one criterion for evaluating its effectiveness. For each criterion, describe how data could be collected to apply it.",
+      "points": [
+        {
+          "text": "Proposes a measurable efficiency criterion about the time, effort or cost of using SignOff. For example: an apprentice can log a task in under one minute; or trainers spend less than 30 minutes a week recording completed units, down from about three hours.",
+          "marks": 1
+        },
+        {
+          "text": "Describes how the efficiency data is collected. For example: SignOff records the time between opening the Log a task screen and saving the task, and reports the average; or trainers are surveyed (or keep a time log for two weeks) on how long they spend recording units each week.",
+          "marks": 1
+        },
+        {
+          "text": "Proposes a measurable effectiveness criterion about how well SignOff does its job. For example: every unit marked competent appears correctly in the apprenticeship records system within one week; at least 90 per cent of apprentices log tasks every week; or most apprentices and supervisors find SignOff easy to use.",
+          "marks": 1
+        },
+        {
+          "text": "Describes how the effectiveness data is collected. For example: compare a sample of units marked competent in SignOff with the records system, checking each unit code and date; report from SignOff the percentage of apprentices who logged tasks each week; or survey apprentices and supervisors about ease of use.",
+          "marks": 1
+        }
+      ],
+      "model": "Efficiency criterion: an apprentice can log a task in under one minute on average. SignOff could record the time between an apprentice opening the Log a task screen and saving the task. Fiona could then report the average time and the percentage of tasks logged in under a minute over the year.\n\nEffectiveness criterion: every unit a trainer marks competent is recorded correctly in the state government's apprenticeship records system within one week. Fiona could take a sample of units marked competent in SignOff during the year and look each one up in the records system, counting how many appear with the correct unit code and date and how many took longer than a week.",
+      "mistake": "Efficiency is about the time, cost and effort of using a solution; effectiveness is about how well it does its job, such as accuracy, completeness and ease of use. \"SignOff works well\" isn't a criterion, because it can't be measured.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-02-q10",
+      "kk": [
+        "U4O2-KK02"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Neilborough has contracted Kilnworth Apps to build the apprentice app, while its own IT team builds the supervisor page and the trainer dashboard. Explain one advantage and one disadvantage for Neilborough of having the apprentice app developed externally rather than in-house.",
+      "points": [
+        {
+          "text": "Identifies an advantage of external development, such as access to specialist skills, faster development, or less load on the in-house team.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the advantage using the insert. For example: no one in Neilborough's IT team of seven has built a phone app, while Kilnworth builds phone apps, so the Android and iPhone app is more likely to be built well and ready for February; or Neilborough's team can concentrate on the supervisor page and trainer dashboard.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a disadvantage, such as less control over how the code is written and secured, dependence on the firm for support and changes, or sharing apprentices' data with an outside organisation.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the disadvantage using the insert. For example: Kilnworth keeps SignOff's code in a public repository with the API key in it, and its developers share one remote access account without multi-factor authentication, so the security of apprentices' records depends on practices Neilborough doesn't control; or once the two years of support end, Neilborough must pay Kilnworth or learn Kilnworth's code itself to fix or change the app.",
+          "marks": 1
+        }
+      ],
+      "model": "Advantage: Neilborough gains skills it doesn't have. No one in its IT team of seven has built a phone app, while Kilnworth builds phone apps for a living, so an app that works on both Android phones and iPhones is more likely to be built well and be ready for the start of the 2027 training year. Neilborough's own team can concentrate on the supervisor page and trainer dashboard.\n\nDisadvantage: Neilborough has less control over how the app is built and secured. Kilnworth keeps SignOff's code in a public repository with the API key for the student management system written into it, and its developers share one remote access account without multi-factor authentication. Apprentices' personal records could be exposed through practices that Neilborough didn't choose and can't directly manage, and Neilborough remains responsible for that data.",
+      "mistake": "Answer from the insert, not from general claims such as \"external development always costs more\". Here the deciding facts are that Neilborough's team has never built a phone app and that Kilnworth's practices put Neilborough's data at risk.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-02-q11",
+      "kk": [
+        "U4O2-KK08"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Explain two ethical issues raised by the way SignOff is being developed. Refer to Nadia's notes in the insert.",
+      "points": [
+        {
+          "text": "Identifies that apprentices' names, dates of birth, phone numbers and employers (many of them under 18) were emailed to an outside firm as test data without the apprentices being told.",
+          "marks": 1
+        },
+        {
+          "text": "Explains why this is wrong: the apprentices gave their details to Neilborough for their training, not for software testing; once emailed, Neilborough can't control who keeps or forwards the spreadsheet, so the apprentices could be contacted or impersonated and their trust in Neilborough is broken.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies that Kilnworth's developers copied photo upload code from a forum and an open-source library without acknowledging where it came from or checking its licence.",
+          "marks": 1
+        },
+        {
+          "text": "Explains why this is wrong: it presents other people's work without credit, and may break the conditions the authors set in the licence (such as acknowledging them), which is unfair to them and could leave Neilborough relying on code it has no right to use.",
+          "marks": 1
+        },
+        {
+          "text": "Alternative issue: publishing the API key in a public repository exposes the student management system, failing to take reasonable care of apprentices' personal records.",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: explains that the apprentices trusted Neilborough with their records and could be harmed if anyone who finds the key reads or changes them.",
+          "marks": 1
+        }
+      ],
+      "model": "First, a Neilborough staff member emailed Kilnworth a spreadsheet of all 3,200 apprentices' names, dates of birth, phone numbers and employers to use as test data. The apprentices gave these details to Neilborough for their training, not so an outside firm could test software, and they weren't told. Many of them are under 18. Once the spreadsheet has been emailed, Neilborough can't control who keeps or forwards it, so the apprentices could be contacted or impersonated, and their trust in Neilborough is broken. Made-up test data would have done the job without putting anyone at risk.\n\nSecond, Kilnworth's developers copied the photo upload code from a developer forum and an open-source library without recording where it came from or checking its licence. Using other people's code without acknowledging it presents their work as Kilnworth's own. Open-source licences often set conditions, such as acknowledging the author, so Kilnworth may be breaking the terms the authors set, and Neilborough could end up relying on code it has no right to use.",
+      "mistake": "An ethical issue is about treating people fairly. Say who is harmed (the apprentices, the code's authors) and why, rather than only naming a security weakness.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-02-q12",
+      "kk": [
+        "U4O2-KK03",
+        "U4O2-KK04",
+        "U4O2-KK09"
+      ],
+      "commandTerm": "complete",
+      "marks": 6,
+      "prompt": "Nadia's notes in the insert describe weaknesses in SignOff's development environment. Complete the table for the three weaknesses shown. For each, explain the risk it poses to Neilborough and recommend a control that would reduce that risk.\n\n| Weakness | Risk to Neilborough | Recommended control |\n|:--|:--|:--|\n| Kilnworth's four developers share one remote access account without multi-factor authentication | | |\n| The API key for the student management system is written into code kept in a public repository | | |\n| Operating system updates on the development server are turned off | | |",
+      "points": [
+        {
+          "text": "Shared account, risk: if the one password is guessed, phished or leaked, an attacker can reach the development server, which is on the same network as the live student management system; and because the account is shared, Neilborough can't tell who did what or remove one person's access.",
+          "marks": 1
+        },
+        {
+          "text": "Shared account, control: give each Kilnworth developer an individual account with multi-factor authentication and only the access they need, and disable it when they leave the project. A stolen password alone is then not enough to log in, and every action can be traced to one person.",
+          "marks": 1
+        },
+        {
+          "text": "API key, risk: anyone can read a public repository, so anyone could find the key and use it to read apprentices' personal records from the student management system.",
+          "marks": 1
+        },
+        {
+          "text": "API key, control: replace (revoke) the exposed key at once, keep the new key out of the code in protected configuration or a secrets store that isn't in the repository, and make the repository private.",
+          "marks": 1
+        },
+        {
+          "text": "Updates off, risk: known vulnerabilities in the server's operating system stay unfixed, so an attacker could use a published exploit to take over the development server and, from it, change SignOff's code or reach the live student management system.",
+          "marks": 1
+        },
+        {
+          "text": "Updates off, control: turn patching back on, testing each update first on a copy of the server (or applying updates on a set schedule after testing), so that updates are applied promptly without breaking the test version.",
+          "marks": 1
+        }
+      ],
+      "model": "Shared remote access account. Risk: if the one shared password is guessed, phished or leaked, an attacker can log in to the development server, which is on the same network as the live student management system. Because four people use the same account, Neilborough can't tell who made a change, and can't remove one person's access without affecting the others. Control: give each Kilnworth developer their own account, with multi-factor authentication and access only to what they need, and disable it when they leave the project. A stolen password is then not enough to log in, and every action can be traced to one person.\n\nAPI key in a public repository. Risk: anyone on the internet can read a public repository, so anyone could copy the key and use it to read apprentices' names, dates of birth and contact details from the student management system. Control: revoke the exposed key and issue a new one immediately, store the new key in a protected configuration file or secrets store that is never committed to the repository, and make the repository private.\n\nOperating system updates turned off. Risk: every vulnerability found in the operating system since March remains open, so an attacker could use a published exploit to take over the development server, change SignOff's code or move from it to the live student management system. Control: turn updates back on and test each update first on a copy of the server, so updates are applied within days of release without breaking the test version.",
+      "mistake": "Making the repository private doesn't make the key safe. Anyone who copied it while the repository was public can still use it, so the key must be replaced.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-02-q13",
+      "kk": [
+        "U4O2-KK06",
+        "U4O2-KK10"
+      ],
+      "commandTerm": "propose",
+      "marks": 4,
+      "prompt": "Nadia will recommend changes to SignOff's development practices. Six months later, she will evaluate whether the practices are now secure. Propose two criteria she could use for that evaluation, each based on a different weakness in her notes, and describe the evidence she could collect to apply each criterion.",
+      "points": [
+        {
+          "text": "Proposes a first specific, checkable criterion based on a weakness in the notes. For example: every developer, including Kilnworth's, logs in with an individual account that uses multi-factor authentication; no real personal information is used outside the live system; every change to the main branch is reviewed by another developer before release; operating system updates are applied to the development server within two weeks of release; no passwords or keys are stored in any code repository; or the development server is separated from the live network and uses different passwords.",
+          "marks": 1
+        },
+        {
+          "text": "Describes evidence that would show whether the first criterion is met. For example: the development server's list of accounts and their authentication settings; the test databases and shared folders, checked for real apprentice records; the version control history, showing who reviewed and approved each change; the server's update history; or a scan of the repositories for keys and passwords.",
+          "marks": 1
+        },
+        {
+          "text": "Proposes a second, different criterion based on another weakness.",
+          "marks": 1
+        },
+        {
+          "text": "Describes evidence that would show whether the second criterion is met.",
+          "marks": 1
+        }
+      ],
+      "model": "Criterion 1: every person who can reach the development server logs in with their own account, protected by multi-factor authentication. Nadia could export the server's list of remote access accounts, match each account to one named person at Neilborough or Kilnworth, check that multi-factor authentication is switched on for every account, and confirm that the old shared account has been disabled.\n\nCriterion 2: every change to SignOff's main branch is reviewed by another developer before it is released. Nadia could check the version control history for the six months, confirming that each change was approved by a reviewer other than its author before it was merged, and that the main branch settings no longer let anyone change it directly.",
+      "mistake": "A criterion is a standard that can be checked, not an action. \"Use multi-factor authentication\" is a recommendation; \"every account uses multi-factor authentication\" is a criterion Nadia can test with evidence.",
+      "source": "textbook"
+    }
+  ],
+  "totalMarks": 60
+}
