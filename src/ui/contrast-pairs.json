@@ -12,6 +12,15 @@
     { "fg": "--flare", "bg": "--trench", "level": "text", "use": "correct feedback on panels" },
     { "fg": "--cobalt", "bg": "--void", "level": "ui", "use": "focus ring, selection outline" },
     { "fg": "--cobalt", "bg": "--trench", "level": "ui", "use": "focus ring on panels" },
-    { "fg": "--steel", "bg": "--void", "level": "ui", "use": "hairline rules and control borders" }
+    { "fg": "--steel", "bg": "--void", "level": "ui", "use": "hairline rules and control borders" },
+    { "fg": "--cobalt", "bg": "--ice", "level": "ui", "use": "focus ring against its inner ice halo" },
+    { "fg": "--ice", "bg": "--void", "level": "ui", "use": "focus ring halo against the page" },
+    { "fg": "--ice", "bg": "--trench", "level": "ui", "use": "focus ring halo on panels and inputs; checked radio ring; invalid input border" },
+    { "fg": "--ice", "bg": "--cobalt", "level": "ui", "use": "focus ring halo on primary buttons; checkbox tick on its cobalt fill" },
+    { "fg": "--cobalt", "bg": "--void", "level": "ui", "use": "checked checkbox fill against the page" },
+    { "fg": "--steel", "bg": "--trench", "level": "ui", "use": "control borders and the meter track border on panels" },
+    { "fg": "--phosphor", "bg": "--trench", "level": "ui", "use": "meter fill against its track; warning banner rule" },
+    { "fg": "--phosphor", "bg": "--void", "level": "ui", "use": "active navigation bar; field error rule" },
+    { "fg": "--steel", "bg": "--trench", "level": "large", "use": "incorrect verdict (20 px bold) on its trench block" }
   ]
 }

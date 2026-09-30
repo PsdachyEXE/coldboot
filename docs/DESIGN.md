@@ -10,7 +10,7 @@ The users are Year 12 students revising for one exam, often late at night and un
 
 ### Colour
 
-The palette is fixed by the brief. No other colours exist in the product, and no token is ever used at reduced opacity to make a new one.
+The palette is fixed by the brief. No other colours exist in the product and no token is tinted or mixed to make a new one. The only translucency is the dialog backdrop, a `--void` scrim at 85% that dims the page behind a modal.
 
 | Token | Hex | Use |
 |---|---|---|

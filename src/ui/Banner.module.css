@@ -1,0 +1,28 @@
+.banner {
+  background: var(--trench);
+  color: var(--ice);
+  border-left: 4px solid var(--phosphor);
+  padding: var(--space-3) var(--space-4);
+  margin: 0 0 var(--space-5);
+  max-width: calc(var(--measure) + 2 * var(--space-4));
+}
+.title {
+  margin: 0;
+  font-weight: 700;
+}
+.body {
+  margin-top: var(--space-1);
+}
+.body > :last-child {
+  margin-bottom: 0;
+}
+.body ul {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
