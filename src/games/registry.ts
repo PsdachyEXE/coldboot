@@ -12,6 +12,7 @@
  */
 import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './blitz/meta';
 import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './daily-game/meta';
+import { DFD_GAME_KK, DFD_ID, DFD_MAN, DFD_SUMMARY, DFD_TITLE } from './dfd/meta';
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { GANTT_GAME_KK, GANTT_ID, GANTT_MAN, GANTT_SUMMARY, GANTT_TITLE } from './gantt/meta';
@@ -97,6 +98,16 @@ export const GAMES: GameMeta[] = [
     fixedDifficulty: true,
     // Loads the generator games the set draws on (daily-game/index.ts), then the game.
     load: () => import('./daily-game').then((m) => m.loadDailyGame()),
+  },
+  {
+    id: DFD_ID,
+    title: DFD_TITLE,
+    priority: 'P1',
+    kk: DFD_GAME_KK,
+    summary: DFD_SUMMARY,
+    man: DFD_MAN,
+    generator: true,
+    load: () => import('./dfd').then((m) => m.default),
   },
   {
     id: USECASE_ID,

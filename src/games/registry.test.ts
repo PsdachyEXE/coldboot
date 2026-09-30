@@ -29,7 +29,7 @@ describe('game registry', () => {
       const m = findGame(id)!;
       return [Boolean(m.generator), Boolean(m.needsContent), Boolean(m.fixedDifficulty)];
     };
-    for (const id of ['deskcheck', 'sort', 'search', 'triage', 'validate', 'usecase', 'reqs', 'gantt']) expect(flags(id)).toEqual([true, false, false]);
+    for (const id of ['deskcheck', 'sort', 'search', 'triage', 'validate', 'dfd', 'usecase', 'reqs', 'gantt']) expect(flags(id)).toEqual([true, false, false]);
     expect(flags('blitz')).toEqual([false, true, true]);
     expect(flags('daily')).toEqual([false, true, true]);
     expect(flags('psm')).toEqual([false, true, false]);
