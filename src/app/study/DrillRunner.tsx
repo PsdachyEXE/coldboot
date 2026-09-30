@@ -23,15 +23,37 @@ export interface DrillRunnerProps {
   onFinish(result: DrillResult): void;
   /** Focus the first question when the runner mounts. */
   autoFocus?: boolean;
+  /**
+   * Answers from an earlier sitting of the same untimed round (Today's run keeps its place): they
+   * count in the result, and the round carries on at the first question they don't cover.
+   */
+  initialAnswers?: readonly DrillAnswer[];
+  /** Called after each answer with every answer so far, including `initialAnswers`. */
+  onProgress?(answers: DrillAnswer[]): void;
 }
 
-export function DrillRunner({ questions, timed = false, where, onFinish, autoFocus = true }: DrillRunnerProps) {
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<DrillAnswer[]>([]);
+export function DrillRunner({ questions, timed = false, where, onFinish, autoFocus = true, initialAnswers, onProgress }: DrillRunnerProps) {
+  const [index, setIndex] = useState(() => {
+    const done = new Set(initialAnswers?.map((a) => a.itemId));
+    const next = questions.findIndex((q) => !done.has(q.id));
+    return next === -1 ? questions.length : next;
+  });
+  const [answers, setAnswers] = useState<DrillAnswer[]>(() => [...(initialAnswers ?? [])]);
   const [deadline] = useState(() => (timed ? Date.now() + timedAllowance(questions.length) : 0));
   const finished = useRef(false);
   const current = questions[index];
   const last = index === questions.length - 1;
+
+  const onProgressRef = useRef(onProgress);
+  useEffect(() => {
+    onProgressRef.current = onProgress;
+  });
+  const reported = useRef(answers);
+  useEffect(() => {
+    if (answers === reported.current) return;
+    reported.current = answers;
+    onProgressRef.current?.(answers);
+  }, [answers]);
 
   const finish = (list: DrillAnswer[], timedOut: boolean) => {
     if (finished.current) return;
@@ -56,6 +78,11 @@ export function DrillRunner({ questions, timed = false, where, onFinish, autoFoc
     if (last) finish(answers, false);
     else setIndex((i) => i + 1);
   };
+
+  // A round resumed with every question already answered has nothing left to ask.
+  useEffect(() => {
+    if (!questions[index]) finish(answers, false);
+  });
 
   if (!current) return null;
   const answeredThis = answers.some((a) => a.itemId === current.id);

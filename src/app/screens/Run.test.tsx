@@ -4,7 +4,9 @@ import { RouterProvider, createMemoryRouter } from 'react-router';
 import { melbourneDate } from '../../lib/time';
 import { useAttempts } from '../../state/attempts';
 import { useSession } from '../../state/session';
+import { clearTabState } from '../../state/persist';
 import { useSettings } from '../../state/settings';
+import { useSrs } from '../../state/srs';
 import { useTerminal } from '../../terminal/useTerminal';
 import { fixtureIndex, fxCard, fxMcq, provideContent, resetStudyStores } from '../study/testing';
 import Run from './Run';
@@ -166,5 +168,189 @@ describe("Today's run", () => {
     renderRun();
     expect(screen.getByRole('heading', { name: 'Run complete' })).toBeInTheDocument();
     expect(summary()[2]).toBe("Skipped: The daily challenge isn't in this version of COLDBOOT yet.");
+  });
+});
+
+describe("Today's run keeps its place", () => {
+  const RUN_KEY = 'coldboot:v1:run';
+
+  beforeEach(() => {
+    resetStudyStores();
+    registry.dailyInstalled = true;
+    useTerminal.setState({ open: false, pending: null, lastGameEnd: null });
+    useSettings.setState({ onboarded: true, motion: 'reduce' });
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+    resetStudyStores();
+    useTerminal.setState({ open: false, pending: null, lastGameEnd: null });
+  });
+
+  /** Run, the Daily screen and somewhere else, in one router, so the run can be left and come back to. */
+  function renderApp() {
+    const router = createMemoryRouter(
+      [
+        { path: '/run', element: <Run /> },
+        { path: '/daily', element: <h1>Daily screen</h1> },
+        { path: '/map', element: <h1>Syllabus map</h1> },
+      ],
+      { initialEntries: ['/run'] },
+    );
+    render(<RouterProvider router={router} />);
+    return router;
+  }
+
+  async function go(router: ReturnType<typeof renderApp>, path: string) {
+    await act(() => router.navigate(path));
+  }
+
+  const oneOfEach = () =>
+    provideContent(fixtureIndex({ cards: [fxCard('c-u3o1-kk04-001', ['U3O1-KK04'])], mcq: [fxMcq('m-u3o1-kk04-001', ['U3O1-KK04'])] }));
+
+  /** Rates the card and answers the one drill question, reaching the daily step. */
+  function reachDaily() {
+    press(' ');
+    press('3');
+    press('c');
+    press('Enter');
+    fireEvent.click(screen.getByRole('button', { name: 'Finish drill' }));
+    expect(screen.getByRole('heading', { name: 'Step 3 of 3: Daily challenge' })).toBeInTheDocument();
+  }
+
+  it('comes back from "Do it on screen instead" to the daily step, not a new run', async () => {
+    oneOfEach();
+    const router = renderApp();
+    reachDaily();
+    fireEvent.click(screen.getByRole('link', { name: 'Do it on screen instead' }));
+    expect(screen.getByRole('heading', { name: 'Daily screen' })).toBeInTheDocument();
+    expect(JSON.parse(window.sessionStorage.getItem(RUN_KEY)!)).toMatchObject({ v: 1, step: 'daily' });
+
+    await go(router, '/run');
+    expect(screen.getByRole('heading', { name: 'Step 3 of 3: Daily challenge' })).toBeInTheDocument();
+    expect(steps()[0]).toHaveTextContent('Done: 1 card reviewed, 1 of them new.');
+    expect(steps()[1]).toHaveTextContent('Done: 1 of 1 correct.');
+    expect(useAttempts.getState().log).toHaveLength(2);
+
+    // Finishing the daily on the Daily screen completes the run when the student comes back.
+    await go(router, '/daily');
+    const today = melbourneDate(Date.now());
+    useSession.getState().beginDaily(today, Array.from({ length: 10 }, (_, i) => `m-x-${i}`));
+    for (let i = 0; i < 10; i++) useSession.getState().recordDaily(today, i, i < 7, Date.now());
+    await go(router, '/run');
+    expect(screen.getByRole('heading', { name: 'Run complete' })).toBeInTheDocument();
+    expect(summary()).toEqual(['Done: 1 card reviewed, 1 of them new.', 'Done: 1 of 1 correct.', 'Done: 7 of 10 correct.']);
+    // A finished run isn't kept: the next visit starts a new one.
+    expect(window.sessionStorage.getItem(RUN_KEY)).toBeNull();
+  });
+
+  it('carries a drill on at the first unanswered question, with the same questions and answers', async () => {
+    provideContent(
+      fixtureIndex({
+        mcq: [fxMcq('m-u3o1-kk04-001', ['U3O1-KK04']), fxMcq('m-u3o1-kk05-001', ['U3O1-KK05']), fxMcq('m-u3o1-kk06-001', ['U3O1-KK06'])],
+      }),
+    );
+    const router = renderApp();
+    expect(screen.getByText('Question 1 of 3')).toBeInTheDocument();
+    const first = screen.getByText(/^Which option is right for /).textContent;
+    press('c');
+    press('Enter');
+    fireEvent.click(screen.getByRole('button', { name: 'Next question' }));
+    const second = screen.getByText(/^Which option is right for /).textContent;
+    // Answered, but left before moving on.
+    press('a');
+    press('Enter');
+    await go(router, '/map');
+    await go(router, '/run');
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
+    expect(screen.getByText('Question 3 of 3')).toBeInTheDocument();
+    expect([first, second]).not.toContain(screen.getByText(/^Which option is right for /).textContent);
+    expect(useAttempts.getState().log).toHaveLength(2);
+    press('c');
+    press('Enter');
+    fireEvent.click(screen.getByRole('button', { name: 'Finish drill' }));
+    expect(steps()[1]).toHaveTextContent('Done: 2 of 3 correct.');
+    expect(useAttempts.getState().log).toHaveLength(3);
+  });
+
+  it('carries a review on with the ratings so far', async () => {
+    provideContent(fixtureIndex({ cards: [fxCard('c-u3o1-kk04-001', ['U3O1-KK04']), fxCard('c-u3o1-kk05-001', ['U3O1-KK05'])] }));
+    const router = renderApp();
+    expect(screen.getByText('Card 1 of 2')).toBeInTheDocument();
+    press(' ');
+    press('3');
+    expect(screen.getByText('Card 2 of 2')).toBeInTheDocument();
+    await go(router, '/map');
+    await go(router, '/run');
+    expect(screen.getByRole('heading', { name: 'Step 1 of 3: Review cards' })).toBeInTheDocument();
+    expect(screen.getByText('Card 2 of 2')).toBeInTheDocument();
+    press(' ');
+    press('4');
+    expect(steps()[0]).toHaveTextContent('Done: 2 cards reviewed, 2 of them new.');
+  });
+
+  it('moves on from a review finished elsewhere while the run was left', async () => {
+    oneOfEach();
+    const router = renderApp();
+    await go(router, '/map');
+    // The card is rated on the Review screen meanwhile.
+    useSrs.getState().setCard('c-u3o1-kk04-001', { reps: 1, interval: 1, ease: 2.5, due: Date.now() + 86_400_000, lapses: 0, last: Date.now() });
+    await go(router, '/run');
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
+    expect(steps()[0]).toHaveTextContent('Skipped: Nothing was left to review.');
+  });
+
+  it('starts afresh after a reset or an import clears the tab', async () => {
+    oneOfEach();
+    const router = renderApp();
+    reachDaily();
+    await go(router, '/map');
+    clearTabState();
+    expect(window.sessionStorage.getItem(RUN_KEY)).toBeNull();
+    await go(router, '/run');
+    // Nothing is due now, so a new run starts at the drill.
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
+    expect(steps()[0]).toHaveTextContent('Skipped: Nothing was due.');
+  });
+
+  it('never writes the old run back after a reset in another window', () => {
+    provideContent(fixtureIndex({ cards: [fxCard('c-u3o1-kk04-001', ['U3O1-KK04']), fxCard('c-u3o1-kk05-001', ['U3O1-KK05'])] }));
+    renderApp();
+    press(' ');
+    press('3');
+    expect(window.sessionStorage.getItem(RUN_KEY)).not.toBeNull();
+    act(() => clearTabState());
+    press(' ');
+    press('3');
+    expect(screen.getByRole('heading', { name: 'Step 3 of 3: Daily challenge' })).toBeInTheDocument();
+    expect(window.sessionStorage.getItem(RUN_KEY)).toBeNull();
+  });
+
+  it("ignores a saved run from another study day, or one it can't read", async () => {
+    oneOfEach();
+    const router = renderApp();
+    reachDaily();
+    const saved = JSON.parse(window.sessionStorage.getItem(RUN_KEY)!);
+    for (const bad of [JSON.stringify({ ...saved, day: '2026-01-01' }), JSON.stringify({ ...saved, step: 'nap' }), JSON.stringify({ ...saved, v: 99 }), '{not json']) {
+      await go(router, '/map');
+      window.sessionStorage.setItem(RUN_KEY, bad);
+      await go(router, '/run');
+      expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
+    }
+  });
+
+  it('still runs when this tab refuses to store anything', async () => {
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new DOMException('denied', 'SecurityError');
+    });
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new DOMException('denied', 'SecurityError');
+    });
+    oneOfEach();
+    const router = renderApp();
+    reachDaily();
+    await go(router, '/map');
+    await go(router, '/run');
+    // Without storage the place can't be kept, so a new run starts; nothing breaks.
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
   });
 });
