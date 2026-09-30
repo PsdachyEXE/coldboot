@@ -75,4 +75,18 @@ describe('exam focus', () => {
     const finish = screen.getByRole('dialog', { name: 'Finish marking?' });
     expect(within(finish).getByRole('button', { name: 'Keep marking' })).toHaveFocus();
   });
+
+  it('puts focus on the first option after Clear answer, which removes itself', () => {
+    seedWriting();
+    renderExam();
+    const radios = () => screen.getAllByRole('radio');
+    fireEvent.click(radios()[2]);
+    const clear = screen.getByRole('button', { name: 'Clear answer' });
+    clear.focus();
+    fireEvent.click(clear);
+    expect(screen.queryByRole('button', { name: 'Clear answer' })).toBeNull();
+    expect(useExam.getState().paper!.answers[mcqA.id]).toBeUndefined();
+    expect(radios()[0]).toHaveFocus();
+    expect(radios()[0]).not.toBeChecked();
+  });
 });

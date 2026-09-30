@@ -4,7 +4,7 @@
  * explanation and why each distractor is wrong; written answers beside the model answer with the
  * marking points to tick (the same pieces Written uses).
  */
-import { useId } from 'react';
+import { useId, useRef } from 'react';
 import { ItemFigures } from '../app/study/ItemFigures';
 import { MarkingPoints, ModelAnswer } from '../app/study/MarkingPoints';
 import { KkTagList, MistakeNote } from '../app/study/parts';
@@ -39,6 +39,8 @@ export interface ExamMcqProps {
 /** An MCQ while sitting the paper: choose an option (no feedback until the paper is marked). */
 export function ExamMcq({ mcq, chosen, locked, onChoose, onClear }: ExamMcqProps) {
   const name = useId();
+  // Clear answer removes itself, so focus moves to the first option instead of dropping to the page.
+  const firstRef = useRef<HTMLInputElement>(null);
   return (
     <>
       <ItemFigures figures={mcq.figures} />
@@ -51,7 +53,15 @@ export function ExamMcq({ mcq, chosen, locked, onChoose, onClear }: ExamMcqProps
         </legend>
         {mcq.options.map((option, i) => (
           <label key={i} className={drill.option} data-state={chosen === i ? 'selected' : 'idle'}>
-            <input type="radio" name={name} value={i} checked={chosen === i} onChange={() => onChoose(i)} className={drill.radio} />
+            <input
+              ref={i === 0 ? firstRef : undefined}
+              type="radio"
+              name={name}
+              value={i}
+              checked={chosen === i}
+              onChange={() => onChoose(i)}
+              className={drill.radio}
+            />
             <span className={drill.letter} aria-hidden="true">
               {LETTERS[i]}
             </span>
@@ -64,7 +74,14 @@ export function ExamMcq({ mcq, chosen, locked, onChoose, onClear }: ExamMcqProps
       </fieldset>
       {chosen !== undefined && !locked ? (
         <p className={styles.clear}>
-          <Button variant="quiet" size="small" onClick={onClear}>
+          <Button
+            variant="quiet"
+            size="small"
+            onClick={() => {
+              onClear();
+              firstRef.current?.focus();
+            }}
+          >
             Clear answer
           </Button>
         </p>
