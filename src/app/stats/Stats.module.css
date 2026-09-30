@@ -1,0 +1,281 @@
+/*
+ * Stats: plain SVG charts on the page background. Marks are --phosphor, grid and axes are --steel
+ * hairlines, text is --ice or --steel at 14 px. Pairs are listed in src/ui/contrast-pairs.json.
+ */
+
+.page {
+  max-width: var(--content-max);
+  min-width: 0;
+}
+
+.lead {
+  max-width: var(--measure);
+}
+
+.section {
+  min-width: 0;
+  margin: 0 0 var(--space-6);
+  padding-top: var(--space-2);
+}
+.section > h2 {
+  margin-top: var(--space-5);
+}
+
+.muted {
+  color: var(--steel);
+}
+
+/* Headline facts above a chart: "Today 12", "Last 21 days 240". */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  margin: 0 0 var(--space-4);
+}
+.facts div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.facts dt {
+  font-size: var(--step-0);
+  color: var(--steel);
+}
+.facts dd {
+  margin: 0;
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: var(--lh-head);
+}
+
+/* The chart box fills the column; the SVG inside is drawn at its measured width. */
+.chartBox {
+  width: 100%;
+  max-width: 760px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.chart {
+  display: block;
+  overflow: visible;
+  font-family: var(--font-read);
+  font-size: var(--step-0);
+}
+
+.axisName {
+  fill: var(--steel);
+}
+.tick {
+  fill: var(--steel);
+  font-variant-numeric: tabular-nums;
+}
+.value {
+  fill: var(--ice);
+  font-weight: 700;
+}
+
+.grid {
+  /* Recessive: trench is one step off the page, so gridlines never compete with the data. */
+  stroke: var(--trench);
+  stroke-width: 2;
+}
+.baseline {
+  stroke: var(--steel);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.mark {
+  fill: var(--phosphor);
+}
+.hatchBg {
+  fill: var(--void);
+}
+.hatchInk {
+  fill: var(--phosphor);
+}
+
+.line {
+  fill: none;
+  stroke: var(--phosphor);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+/* Dots carry a 2 px ring in the page colour so they stay distinct where they sit on the line. */
+.dot {
+  fill: var(--phosphor);
+  stroke: var(--void);
+  stroke-width: 2;
+}
+
+/* Hover targets: the whole slot, invisible. */
+.hit {
+  fill: transparent;
+}
+
+/* Legend: a swatch and words for each fill. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: var(--space-2) 0 var(--space-3);
+  padding: 0;
+  list-style: none;
+  font-size: var(--step-0);
+}
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: none;
+}
+.swatch {
+  flex: none;
+}
+
+/* Small multiples: one panel per area of study. */
+.multiples {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--space-5) var(--space-6);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+  max-width: 1040px;
+}
+.multiples > li {
+  min-width: 0;
+  max-width: none;
+  padding-top: var(--space-3);
+  border-top: var(--hairline);
+}
+.panelTitle {
+  font-size: var(--step-1);
+  margin: 0 0 var(--space-1);
+}
+.panelFigure {
+  margin: 0 0 var(--space-2);
+  font-size: var(--step-0);
+}
+.panelEmpty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 150px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px dashed var(--steel);
+}
+.panelEmpty p {
+  margin: 0;
+  font-size: var(--step-0);
+}
+
+/* Weakest KKs: a ranked list of bars on one shared scale. */
+.weakList {
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+  max-width: 760px;
+}
+.weakList > li {
+  max-width: none;
+  padding: var(--space-3) 0;
+  border-bottom: var(--hairline);
+}
+.weakHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+  margin: 0 0 var(--space-2);
+}
+.weakName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.weakId {
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  margin-right: var(--space-2);
+}
+.weakValue {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.weakMeta {
+  margin: var(--space-2) 0 0;
+  font-size: var(--step-0);
+  color: var(--steel);
+}
+.scaleRow {
+  max-width: 760px;
+}
+.bar {
+  display: block;
+}
+.track {
+  fill: var(--trench);
+}
+.trackGrid {
+  stroke: var(--void);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+/* "Show data": the numbers behind a chart. */
+.data {
+  margin: var(--space-3) 0 0;
+  max-width: 760px;
+}
+.summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-h);
+  color: var(--phosphor);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+.summary:hover {
+  text-decoration-thickness: 2px;
+}
+
+.tableWrap {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: var(--space-2) 0 0;
+}
+.table {
+  border-collapse: collapse;
+  font-size: var(--step-0);
+  font-variant-numeric: tabular-nums;
+}
+.caption {
+  text-align: left;
+  color: var(--steel);
+  padding-bottom: var(--space-2);
+}
+.table th,
+.table td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--space-1) var(--space-4) var(--space-1) 0;
+  border-bottom: var(--hairline);
+  white-space: nowrap;
+}
+.table thead th {
+  color: var(--steel);
+  font-weight: 400;
+}
+.table tbody th {
+  font-weight: 400;
+}
+
+.note {
+  max-width: var(--measure);
+}
