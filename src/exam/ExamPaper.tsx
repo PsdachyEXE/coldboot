@@ -189,7 +189,7 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
         </div>
       </div>
       {locked ? (
-        <div className={styles.notice} role="status">
+        <div className={styles.notice}>
           <p className={styles.noticeTitle}>Reading time</p>
           <p>Read the questions and the insert, and plan your answers. You can't answer yet: the answer boxes unlock when writing time starts.</p>
         </div>
