@@ -6,14 +6,19 @@
  * P1: dfd, usecase, reqs, gantt, threat, law, naming, types, oop, psm
  * P2: boss, ux
  *
- * GAMES lists the P0 games in the brief's order, which is the order `ls` prints. Games that
- * need study content set needsContent; games with Game.generate set generator: true. The
- * terminal's `daily` command runs `play daily`.
+ * GAMES lists the P0 games in the brief's order, then the P1 games in the brief's order; that is
+ * the order `ls` prints. Games that need study content set needsContent; games with
+ * Game.generate set generator: true. The terminal's `daily` command runs `play daily`.
  */
 import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './blitz/meta';
 import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './daily-game/meta';
+import { DFD_GAME_KK, DFD_ID, DFD_MAN, DFD_SUMMARY, DFD_TITLE } from './dfd/meta';
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
+import { GANTT_GAME_KK, GANTT_ID, GANTT_MAN, GANTT_SUMMARY, GANTT_TITLE } from './gantt/meta';
+import { PSM_ID, PSM_KK, PSM_MAN, PSM_SUMMARY, PSM_TITLE } from './psm/meta';
+import { REQS_ID, REQS_KK, REQS_MAN, REQS_SUMMARY, REQS_TITLE } from './reqs/meta';
+import { USECASE_GAME_KK, USECASE_ID, USECASE_MAN, USECASE_SUMMARY, USECASE_TITLE } from './usecase/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
@@ -93,6 +98,56 @@ export const GAMES: GameMeta[] = [
     fixedDifficulty: true,
     // Loads the generator games the set draws on (daily-game/index.ts), then the game.
     load: () => import('./daily-game').then((m) => m.loadDailyGame()),
+  },
+  {
+    id: DFD_ID,
+    title: DFD_TITLE,
+    priority: 'P1',
+    kk: DFD_GAME_KK,
+    summary: DFD_SUMMARY,
+    man: DFD_MAN,
+    generator: true,
+    load: () => import('./dfd').then((m) => m.default),
+  },
+  {
+    id: USECASE_ID,
+    title: USECASE_TITLE,
+    priority: 'P1',
+    kk: USECASE_GAME_KK,
+    summary: USECASE_SUMMARY,
+    man: USECASE_MAN,
+    generator: true,
+    load: () => import('./usecase').then((m) => m.default),
+  },
+  {
+    id: REQS_ID,
+    title: REQS_TITLE,
+    priority: 'P1',
+    kk: REQS_KK,
+    summary: REQS_SUMMARY,
+    man: REQS_MAN,
+    generator: true,
+    load: () => import('./reqs').then((m) => m.default),
+  },
+  {
+    id: GANTT_ID,
+    title: GANTT_TITLE,
+    priority: 'P1',
+    kk: GANTT_GAME_KK,
+    summary: GANTT_SUMMARY,
+    man: GANTT_MAN,
+    generator: true,
+    load: () => import('./gantt').then((m) => m.default),
+  },
+  {
+    id: PSM_ID,
+    title: PSM_TITLE,
+    priority: 'P1',
+    kk: PSM_KK,
+    summary: PSM_SUMMARY,
+    man: PSM_MAN,
+    needsContent: true,
+    load: () => import('./psm').then((m) => m.default),
   },
 ];
 

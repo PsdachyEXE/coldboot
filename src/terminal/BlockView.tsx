@@ -143,7 +143,7 @@ export const BlockView = memo(function BlockView({ block, animate = false, onNav
     case 'figure':
       return (
         <div className={styles.figure}>
-          <FigureView figure={block.figure} />
+          <FigureView figure={block.figure} highlight={block.highlight} compact={block.compact} />
         </div>
       );
 

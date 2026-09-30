@@ -6,17 +6,17 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 
 | Contract | File | Notes |
 |---|---|---|
-| Content schemas (Zod) and types | `src/content/schema.ts` | `Card`, `Mcq`, `ShortAnswer`, `Figure`, `CaseStudy`, `StudyDesign`, `PsmFile`, floors |
+| Content schemas (Zod) and types | `src/content/schema.ts` | `Card`, `Mcq`, `ShortAnswer`, `Figure`, `CaseStudy`, `StudyDesign`, `PsmFile`, floors. Figure schemas check structure, not conventions: an unlabelled DFD flow and a use case association between two actors both validate, so games can teach those errors |
 | KK map | `content/study-design.json`, `src/content/studyDesign.ts` | ids `U3O1-KK01`…, plus `TERMS` and `PSM`; `status` is `provisional` until checked against the study design |
 | Content loading and index | `src/content/loader.ts` | per-outcome dynamic imports; `loadAllContent()` returns a `ContentIndex` (with `caseByKk` and `cardIds`); failed loads are retried, never cached |
 | Shared content store | `src/content/store.ts` | `useContentIndex()` loads once for every screen; prunes SRS records for cards that left the content |
 | Markdown | `src/content/markdown.ts`, `src/ui/Markdown.tsx` | markdown-it, HTML off; ```` ```pseudo ```` fences get numbered, highlighted listings |
 | Content checker | `src/content/check.ts`, `scripts/content-check.ts`, `tests/content.test.ts` | |
 | Command terms | `src/content/commandTerms.ts` | |
-| Terminal output blocks | `src/terminal/blocks.ts` | `TerminalBlock` union; plain data |
+| Terminal output blocks | `src/terminal/blocks.ts` | `TerminalBlock` union; plain data. A `figure` block may carry `highlight` and `compact`, passed to `FigureView`; the speech digest reads out marked elements |
 | Games | `src/games/types.ts` | `Game`, `GameSession`, `GameContext`, `AnswerResult`, `GameSummary`, `GameMeta`, `QuizItem`, `CheckResult`; `markdown` on `AnswerResult`/`CheckResult` marks feedback from bundled content; `GameSession.unavailable` holds blocks explaining why a game can't run (the host prints them and starts nothing); `GameMeta.fixedDifficulty` marks a one-level game (blitz, daily) |
 | Quiz engine | `src/games/engine.ts`, `src/games/answers.ts`, `src/games/mcq.ts` | `createQuizSession` over a `QuizItem` list or a seeded generator (round of 10, timed rounds, `exposeItemIds`, `resumeScores` to resume a list after items answered in an earlier sitting, `intro` blocks shown once above the first prompt); `unavailableSession(gameId, blocks)`; lenient answer parsers; `mcqItem` for content MCQs |
-| Game registry | `src/games/registry.ts` | `GAMES` (what `ls`, `man`, `play` and completion see; the seven P0 games in the brief's order: deskcheck, sort, search, triage, validate, blitz, daily), `findGame`, `DRILL_GAME` |
+| Game registry | `src/games/registry.ts` | `GAMES` (what `ls`, `man`, `play` and completion see; the seven P0 games in the brief's order: deskcheck, sort, search, triage, validate, blitz, daily; then the P1 games in the brief's order, whichever are built: dfd, usecase, reqs, gantt, threat, law, naming, types, oop, psm), `findGame`, `DRILL_GAME` |
 | Terminal session and host | `src/terminal/session.ts`, `src/terminal/host.ts` | `useTerminalSession`: one session for the drawer and the route; the host starts games, records answers, runs the daily protocol and ends timed games. It prints an unavailable session's blocks under the title instead of starting it, and `play` refuses `--easy` and `--hard` for a fixed-difficulty game |
 | Daily challenge set | `src/games/daily.ts`, `src/games/daily-game/` | `buildDailySet(date, mcqPool)` (8 MCQs by rendezvous hash + 2 generated), `dailyShareText`; the `daily` game (`loadDailyGame`) plays the set, with generated items as `gen-daily-<game>:<seed>` at normal difficulty |
 | PRNG | `src/games/prng.ts` | `mulberry32`, `hashString`, `dailySeed`, `pick`, `shuffle`, `sample` |
