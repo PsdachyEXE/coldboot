@@ -520,3 +520,251 @@ Bar characters: '#' for critical tasks, '=' for other tasks, '.' for slack up to
 **Reason.** The study design couldn't be downloaded (D-001), so the README must not claim it has been checked. The wording matches the About screen.
 
 **Rejected.** Stating outright that the 2025 study design excludes development models.
+
+## D-062 Study: The interval uses the updated ease
+
+**Decision.** From the third review on, the interval is round(previous interval × the ease after this rating's update), and at least 1 day.
+
+**Reason.** Hard, Good and Easy then give different intervals, so the times on the rating buttons differ and the rating affects this review. This matches the original SuperMemo order, where the ease is updated after the response and then used for the next interval.
+
+**Rejected.** Multiplying by the ease from before the update, as common library ports do. From the third review on, Hard, Good and Easy would then give identical intervals.
+
+## D-063 Study: Ease updates on every rating, between 1.3 and 10
+
+**Decision.** The standard SM-2 ease update runs on every rating, Again included, and never goes below 1.3. It is also capped at 10, the most the SRS store's schema accepts; no real schedule gets near it.
+
+**Reason.** The brief asks for the standard formula on every rating. The cap stops `setCard` from ever rejecting a state.
+
+**Rejected.** The reading of the original SM-2 that leaves the ease unchanged after a failed recall (quality below 3).
+
+## D-064 Study: The stored interval is the one actually scheduled
+
+**Decision.** `next.interval` is the number of study days from today to the due day after both exam caps, not the uncapped interval.
+
+**Reason.** The next multiplication then grows from what really happened. A card the cap cut from 50 days to 22 grows to 55 next time, not to 125.
+
+**Rejected.** Storing the uncapped interval, which makes the first review after the exam jump.
+
+## D-065 Study: A lapsed card is due at the next 4 am
+
+**Decision.** Again sets `due` to the start of tomorrow's study day. The 10-minute return (`requeueAfterMs`) exists only inside the session that asked for it.
+
+**Reason.** `due` stays at the start of a study day, as specified, which matches SM-2's 1-day interval. If the student leaves, the card comes back tomorrow.
+
+**Rejected.** Storing `due` as now plus 10 minutes, which would count in the status bar and bring the card back outside the session.
+
+## D-066 Study: When the final-week cap applies
+
+**Decision.** Before the exam starts, intervals are capped at 2 days when the current study day is 7 or fewer days before the exam's study day, including the exam day itself. Separately, due dates are clamped to no later than exam day minus 2, and never earlier than tomorrow.
+
+**Reason.** This is the most literal reading of "the final 7 days before the exam's study day".
+
+**Rejected.** Measuring the 7 days in milliseconds from the exam's start time.
+
+## D-067 Study: How Drill and Written choose the weakest KKs
+
+**Decision.** KKs that have items are ranked with seen ones first (lowest mastery first), then unseen ones in study design order. KKs are taken from the top until there are at least 3 KKs and enough items for the round, and the questions are drawn from them round-robin.
+
+**Reason.** This follows the brief's definition: the lowest-mastery seen KKs, topped up with unseen ones when fewer than 3 have been seen.
+
+**Rejected.** Reusing the terminal drill's ranking from D-038 (seen below 65, then unseen, then the rest).
+
+## D-068 Study: The run's drill tops up from the next weakest KKs
+
+**Decision.** Step 2 of Today's run takes every question from the single weakest KK first, then fills to 10 from the next weakest KKs in the same ranking.
+
+**Reason.** Most KKs will have only 3 to 5 MCQs, so a drill on one KK alone could rarely reach 10.
+
+**Rejected.** A round limited to the one weakest KK, which would usually be 3 to 5 questions.
+
+## D-069 Study: The run's review step includes new cards
+
+**Decision.** Step 1 of Today's run uses the normal review queue (due cards, then new cards up to the daily limit) and is skipped with a note only when that queue is empty.
+
+**Reason.** New cards are how coverage grows each day, and Home's preview says how many are in the step.
+
+**Rejected.** Due cards only, which would leave the run introducing no new cards.
+
+## D-070 Study: Timed rounds and unanswered questions
+
+**Decision.** A timed drill allows 72 seconds per question (20 questions in 24 minutes), so a round with fewer questions available gets proportionally less time. At time-out, unanswered questions count as wrong in the round's score but aren't written to the attempt log. Feedback still shows after each answer while the clock keeps running.
+
+**Reason.** An unanswered question says nothing about what the student knows, so it shouldn't lower mastery (the same reasoning as D-034). Showing feedback keeps both modes consistent with Section 6.4.
+
+**Rejected.** Logging unanswered questions with a score of 0, and holding all feedback until the end of the round.
+
+## D-071 Study: How the coverage grid shows unseen KKs and mastery bands
+
+**Decision.** A seen cell is a solid box with a four-segment gauge, with 1 to 4 segments lit for weak, shaky, solid and strong. An unseen cell is a dashed outline on the page background with no gauge. A legend explains both. Each cell is a button whose accessible name gives the KK id, the title and "62% mastery" or "unseen".
+
+**Reason.** The number of lit segments and the dashed or solid frame carry the meaning without colour, using only the seven palette tokens.
+
+**Rejected.** A colour-only heatmap, and making new shades by mixing tokens.
+
+## D-072 Study: Screen widths for the map and case study
+
+**Decision.** The syllabus map shows four columns from a 1280 px viewport, two from 900 px and one below that. The case study insert sits beside the question from 1100 px; below that it folds into a collapsible section and the referenced figures show with the question.
+
+**Reason.** Below these widths the columns become too narrow for a KK row or for figures.
+
+**Rejected.** Four fixed columns at every desktop width.
+
+## D-073 Study: Written marking flow
+
+**Decision.** Rounds are 5 short answers. The score is recorded only when the student presses "Save score", the mistake note appears after that, and the draft is cleared then. Case study answers are kept in memory, so going back to a question shows the answer, the ticked points and the saved score.
+
+**Reason.** Recording once, on an explicit action, avoids double logging while points are being ticked, and follows the spec's order: record, then show the mistake.
+
+**Rejected.** Recording automatically on every tick.
+
+## D-074 Study: Keyboard shortcuts
+
+**Decision.** Single-key shortcuts listen on the document. They're ignored when focus is in a text field, when any dialog (the report dialog included) is open, when the terminal drawer is open, or when a modifier key is held. Space and Enter on a focused button use the button's own activation.
+
+**Reason.** This gives full keyboard use without taking keys from the terminal, fields or dialogs.
+
+**Rejected.** Handling keys only on the focused card or question, which fails whenever focus moves elsewhere.
+
+## D-075 Study: Detecting that the daily challenge is done
+
+**Decision.** Today's run treats the daily as done when `useTerminal.lastGameEnd` reports gameId `daily` after the step began, or when today's session record has `completedAt`. This is worked out while rendering rather than set in an effect. If `findGame('daily')` is undefined, the step is skipped with a note.
+
+**Reason.** Both completion paths are covered, and the run never waits for a game the build doesn't have.
+
+**Rejected.** Waiting only on `lastGameEnd`, which misses a daily finished before the run started.
+
+## D-076 Games: Answers come from interpreters and validators, checked a second way
+
+**Decision.** deskcheck and triage answers come from the pseudocode interpreter, validate answers from `firstFailedCheck`, and test-table coverage from interpreter runs. The tests check each game a second way: deskcheck re-parses the printed listing and question and runs them, and validate uses a reference validator that reads only the printed specification.
+
+**Reason.** Section 12 says answers are never hand-computed, and checking the printed text catches mistakes in how items are rendered.
+
+**Rejected.** Comparing each item with the spec objects that built it, which would share the generator's own mistakes.
+
+## D-077 Games: The pseudocode interpreter is deliberately strict
+
+**Decision.** AND and OR evaluate both sides. A FOR loop's variable can't be reused or changed, and it stops existing when the loop ends. Blank lines, tabs, trailing spaces, wrong indentation, ASCII operators (`<-`, `<=`) and unknown all-caps words are syntax errors. Numbers are either whole or floating point (Real).
+
+**Reason.** A generator that relied on short-circuiting or on a loop variable's value after the loop would teach something that depends on the language. The strictness makes the 500-seed tests catch that, and keeps listings in the house style.
+
+**Rejected.** Short-circuit evaluation and loose parsing.
+
+## D-078 Games: Whole-number and floating point answers
+
+**Decision.** A whole-number answer must be typed without a decimal point, and a floating point answer with one; the question says which. Templates that use `/` always give a result that isn't whole and has a terminating decimal, and a test asserts it.
+
+**Reason.** The brief says 7 is not 7.0 unless the question asks for floating point.
+
+**Rejected.** Accepting any numerically equal value.
+
+## D-079 Games: The index base is stated wherever arrays appear
+
+**Decision.** A listing states its index base (through `pseudo.indexBase` and the grid table caption) whenever the listing, its data or a call uses an array. Both bases are used. The spoken digest in `src/terminal/speech.ts` reads the base aloud too.
+
+**Reason.** `docs/PSEUDOCODE.md` says questions involving arrays state the base, and the tests check array questions for it. Stating a base on a listing with no arrays would confuse students.
+
+**Rejected.** Stating the base on every question, even ones without arrays.
+
+## D-080 Games: What counts as a boundary in a test table
+
+**Decision.** For each band, the student tests its lowest value and the value just below it. Hard items also require the lowest and highest valid inputs and the invalid values just outside them. Inputs are compared as a set, in any order. On easy and normal, inputs outside the stated domain re-prompt without counting.
+
+**Reason.** This is the "exact boundary and its neighbour" rule, and each item explains it.
+
+**Rejected.** Requiring a fixed order, or accepting inputs the requirements don't define.
+
+## D-081 Games: deskcheck rounds mix trace and test-table questions
+
+**Decision.** A deskcheck round has 9 trace questions and 1 test table on easy, and 8 and 2 otherwise. A test table is never first.
+
+**Reason.** The terminal has no flag for choosing a round type, and mixing gives practice at both.
+
+**Rejected.** A separate test-table-only mode.
+
+## D-082 Games: triage runtime answers
+
+**Decision.** The student types syntax, logic, or the kind of runtime error directly. Typing "runtime" on its own re-prompts for the kind without counting as an attempt.
+
+**Reason.** One question per case fits the quiz engine, and nothing leaks, because the re-prompt happens whatever the right answer is.
+
+**Rejected.** A separate question for the kind of runtime error.
+
+## D-083 Games: triage technique follow-ups
+
+**Decision.** Each follow-up states what the programmer wants to find out, so exactly one technique fits (for example, pausing at line N means a breakpoint). Syntax cases always get commenting out code, the only one of the three that works before a program can run. In a round the follow-up doesn't reprint the listing, and its instance is `triage:follow-up:...` so it regenerates exactly.
+
+**Reason.** Asking which technique is "most useful" is otherwise open to argument, and the brief asks for defensible answers.
+
+**Rejected.** Open judgement questions.
+
+## D-084 Games: validate asks one question per input
+
+**Decision.** The batch of four inputs is shown as a table that fills in as the student answers, one question per input, followed by a boundary question on the same field. A round covers two fields of different kinds.
+
+**Reason.** Chips submit as soon as they're tapped, so they can't build a multi-word answer. One question per input also gives per-input feedback and scoring.
+
+**Rejected.** One question for the whole batch.
+
+## D-085 Games: Every validate input has one reading
+
+**Decision.** Inputs never use negative numbers in whole-number fields, extra decimal places or plain whole numbers in decimal fields, impossible dates, or whitespace-only values. Length limits on text are checked by the range check, and the question says so.
+
+**Reason.** The brief asks that every item be unambiguous about which single check fires first, and the study design names only three checks.
+
+**Rejected.** Format or length checks as a fourth type.
+
+## D-086 Games: blitz tolerance
+
+**Decision.** Distance is optimal string alignment, so swapping two neighbouring letters counts as 1 edit. Allowed: 1 edit for 4 characters or fewer, 2 for 5 to 14, and floor(n / 5) from 15. An exact match with a different glossary term is always wrong. Input is normalised for case, punctuation, hyphens and a leading article. The rule is written out in `src/games/blitz/match.ts`.
+
+**Reason.** Two edits turn one short acronym into another (XML and HTML), and a real but different term should never count.
+
+**Rejected.** A flat 2 edits for every length, as the brief states literally.
+
+## D-087 Games: blitz attempts are recorded against the glossary card
+
+**Decision.** A blitz attempt is logged with the glossary card's id and KKs, with no instance.
+
+**Reason.** A report then opens the right content item, and mastery is credited to that card's KKs.
+
+**Rejected.** A generated id such as `gen-blitz`.
+
+## D-088 Games: daily keeps the stored set
+
+**Decision.** Once a day has started, the daily game rebuilds its set from the stored record's item ids. A stored MCQ that has since left the content is replaced in place by a generated item, and the student is told. Generated items use normal difficulty for everyone.
+
+**Reason.** The host records results by position, so the set must not shift mid-day.
+
+**Rejected.** Rebuilding from `buildDailySet` on every start.
+
+## D-089 Games: daily loads its generators through the registry
+
+**Decision.** `loadDailyGame` loads the five generator games with `findGame(id).load()` and then builds the game.
+
+**Reason.** `Game.start` is synchronous, so generation can't wait for game modules inside it. This follows track B1's note without statically importing every game.
+
+**Rejected.** Static imports of each game's generate function.
+
+## D-090 Games: Games with one difficulty
+
+**Decision.** blitz and daily set `fixedDifficulty`. The terminal refuses `--easy` and `--hard` for them with a plain message, doesn't print a difficulty line, and no longer offers those flags for `daily` in completion.
+
+**Reason.** The daily set must be the same for everyone, and blitz has one level.
+
+**Rejected.** Ignoring the flags and printing "Hard difficulty" anyway.
+
+## D-091 Games: The daily game's folder is daily-game
+
+**Decision.** The daily game lives in `src/games/daily-game/`, beside the shared `src/games/daily.ts`.
+
+**Reason.** Importing `./daily` resolves to the existing `daily.ts`, so a `daily/` folder would be ambiguous.
+
+**Rejected.** Moving `daily.ts`, which other tracks already import.
+
+## D-092 Games: Registry order
+
+**Decision.** `GAMES` follows the brief's order: deskcheck, sort, search, triage, validate, blitz, daily. `shell.test.ts` now removes only the fake games it adds.
+
+**Reason.** `ls` prints this order, and deskcheck is the flagship.
+
+**Rejected.** Appending the new games after sort and search.

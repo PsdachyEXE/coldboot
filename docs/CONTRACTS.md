@@ -14,11 +14,11 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Content checker | `src/content/check.ts`, `scripts/content-check.ts`, `tests/content.test.ts` | |
 | Command terms | `src/content/commandTerms.ts` | |
 | Terminal output blocks | `src/terminal/blocks.ts` | `TerminalBlock` union; plain data |
-| Games | `src/games/types.ts` | `Game`, `GameSession`, `GameContext`, `AnswerResult`, `GameSummary`, `GameMeta`, `QuizItem`, `CheckResult`; `markdown` on `AnswerResult`/`CheckResult` marks feedback from bundled content |
-| Quiz engine | `src/games/engine.ts`, `src/games/answers.ts`, `src/games/mcq.ts` | `createQuizSession` over a `QuizItem` list or a seeded generator (round of 10, timed rounds, `exposeItemIds`); lenient answer parsers; `mcqItem` for content MCQs |
-| Game registry | `src/games/registry.ts` | `GAMES` (what `ls`, `man`, `play` and completion see), `findGame`, `DRILL_GAME` |
-| Terminal session and host | `src/terminal/session.ts`, `src/terminal/host.ts` | `useTerminalSession`: one session for the drawer and the route; the host starts games, records answers, runs the daily protocol and ends timed games |
-| Daily challenge set | `src/games/daily.ts` | `buildDailySet(date, mcqPool)` (8 MCQs by rendezvous hash + 2 generated), `dailyShareText` |
+| Games | `src/games/types.ts` | `Game`, `GameSession`, `GameContext`, `AnswerResult`, `GameSummary`, `GameMeta`, `QuizItem`, `CheckResult`; `markdown` on `AnswerResult`/`CheckResult` marks feedback from bundled content; `GameSession.unavailable` holds blocks explaining why a game can't run (the host prints them and starts nothing); `GameMeta.fixedDifficulty` marks a one-level game (blitz, daily) |
+| Quiz engine | `src/games/engine.ts`, `src/games/answers.ts`, `src/games/mcq.ts` | `createQuizSession` over a `QuizItem` list or a seeded generator (round of 10, timed rounds, `exposeItemIds`, `resumeScores` to resume a list after items answered in an earlier sitting, `intro` blocks shown once above the first prompt); `unavailableSession(gameId, blocks)`; lenient answer parsers; `mcqItem` for content MCQs |
+| Game registry | `src/games/registry.ts` | `GAMES` (what `ls`, `man`, `play` and completion see; the seven P0 games in the brief's order: deskcheck, sort, search, triage, validate, blitz, daily), `findGame`, `DRILL_GAME` |
+| Terminal session and host | `src/terminal/session.ts`, `src/terminal/host.ts` | `useTerminalSession`: one session for the drawer and the route; the host starts games, records answers, runs the daily protocol and ends timed games. It prints an unavailable session's blocks under the title instead of starting it, and `play` refuses `--easy` and `--hard` for a fixed-difficulty game |
+| Daily challenge set | `src/games/daily.ts`, `src/games/daily-game/` | `buildDailySet(date, mcqPool)` (8 MCQs by rendezvous hash + 2 generated), `dailyShareText`; the `daily` game (`loadDailyGame`) plays the set, with generated items as `gen-daily-<game>:<seed>` at normal difficulty |
 | PRNG | `src/games/prng.ts` | `mulberry32`, `hashString`, `dailySeed`, `pick`, `shuffle`, `sample` |
 | Time | `src/lib/time.ts` | study day (4 am rollover), Melbourne date, countdown, exam phases |
 | Clock hook | `src/lib/useNow.ts` | `useNow(intervalMs)` returns epoch ms, refreshed every interval and when the page becomes visible again; the status bar uses 15 s |
@@ -29,7 +29,8 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Recording answers | `src/state/record.ts` | `recordAttempt(attempt, { review })` is the only way to log an answer |
 | Export and import | `src/state/exportImport.ts` | format 1: one `{ v, data }` envelope per store (older store versions migrate on import); 5 MB cap; Zod-validated; all-or-nothing |
 | Mastery | `src/srs/mastery.ts` | `computeMastery(attempts, now)`; unseen KKs are absent, never 0 |
-| SM-2 and queue | `src/srs/sm2.ts`, `src/srs/queue.ts` | signatures locked; implemented by track E |
+| SM-2 and queue | `src/srs/sm2.ts`, `src/srs/queue.ts` | `schedule`, `buildQueue` and `orderNewCards` signatures locked. `schedule` applies the final-week cap (`FINAL_WEEK_DAYS`, `FINAL_WEEK_MAX_INTERVAL`) and the exam-day clamp (`EXAM_CAP_DAYS_BEFORE`), keeps `due` at the start of a study day and stores the interval actually scheduled; also `RATINGS`, `nextEase`, `newCardState`, `capDueDay`, `MAX_EASE`, `MAX_INTERVAL_DAYS`, `directionFor(card, reps)` and `nextDueAfter(srs, now, known?)` |
+| Study hooks | `src/srs/hooks.ts` | `useMastery()` (memoised on the attempt log, roll-up and KK map, refreshed every `MASTERY_TICK_MS`), `masteryNow()`, `useExamAt()`, `useDueSummary(now)` |
 | Routes | `src/app/paths.ts`, `src/app/routes.tsx` | hash router; `drillPath`, `writtenPath` (including `cs` for Section C practice), `reviewPath`, `examPath` |
 | Announcements | `src/ui/announce.ts` | `announce(message, priority)` feeds the ARIA live regions that `<LiveRegions>` renders in the shell; `politeSeq` and `assertiveSeq` let a repeated message speak again in its own region. A native modal makes those regions inert, so a dialog that announces needs its own live region |
 | Motion | `src/ui/motion.ts` | `useReducedMotion()`, `prefersReducedMotion()` |
@@ -50,7 +51,7 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | B. Terminal and games | `src/terminal/**`, `src/games/**` (engine, registry, one folder per game), tests for `prng` and `text` |
 | C. Unit 3 content, Terms, PSM | `content/u3o1/**`, `content/u3o2/**`, `content/terms.json`, `content/psm.json`, and the `glossary` array in `content/study-design.json` |
 | D. Unit 4 content, case study, figures | `content/u4o1/**`, `content/u4o2/**`, `content/case-studies/**`, `src/figures/**` |
-| E. SRS and study screens | `src/srs/**`, `src/app/screens/{Home,Run,Review,Drill,Written,SyllabusMap}.tsx` and their parts, tests for `time` and `mastery` |
+| E. SRS and study screens | `src/srs/**`, `src/app/screens/{Home,Run,Review,Drill,Written,SyllabusMap}.tsx` and their parts in `src/app/study/`, tests for `time` and `mastery` |
 | F. Distribution | `install.ps1`, `uninstall.ps1`, installer CI job in `.github/workflows/deploy.yml`, `README.md` |
 
 Shared files (`package.json`, `src/app/routes.tsx`, `src/app/paths.ts`, contract files): change only when the task needs it, keep the change minimal, and say so in the commit message.
@@ -62,7 +63,7 @@ Shared files (`package.json`, `src/app/routes.tsx`, `src/app/paths.ts`, contract
 - **Ids are permanent once shipped.** Dropped items are logged in `docs/CONTENT_NOTES.md`, never reused. Prefixes: `c-` cards, `m-` MCQs, `s-` short answers, `t-` glossary cards, `psm-c-`/`psm-m-`/`psm-s-` PSM items, `cs-NN-qNN` case study questions. Pattern: `c-u3o1-kk04-003`.
 - **Held KKs.** A KK whose items depend on an unconfirmed "verify" entry can be marked `held` in `study-design.json` (with a reason, mirrored in `CONTENT_NOTES.md`); its floor shortfall then warns instead of failing.
 - **Glossary.** `study-design.json` lists the glossary terms (labels only); `terms.json` has exactly one reverse card per entry.
-- **Daily challenge.** The set comes only from `buildDailySet`. The host calls `beginDaily(date, session.itemIds)` once, then `recordDaily(date, index, correct, now)` per answer; only the first attempt at each index counts, and the share line is built from the stored record.
+- **Daily challenge.** The set comes only from `buildDailySet`. The host calls `beginDaily(date, session.itemIds)` once, then `recordDaily(date, index, correct, now)` per answer; only the first attempt at each index counts, and the share line is built from the stored record. Once a day has begun, the game rebuilds its set from the stored item ids, resumes at the first unanswered question, and replaces an MCQ that has left the content with a generated item in the same place.
 - **Generated items** set `instance` (e.g. `deskcheck:seed=1234:i=4:hard`) so a report can regenerate them. Content reports carry `__BUILD_ID__`.
 - **Markdown flags.** `choices` and `feedback` blocks may set `markdown: true` only for strings from bundled content.
 
