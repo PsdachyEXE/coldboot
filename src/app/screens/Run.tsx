@@ -231,7 +231,6 @@ function StepHeading({ index, focus }: { index: number; focus: boolean }) {
 }
 
 function DailyStep({ date, onSkip }: { date: string; onSkip(): void }) {
-  const open = useTerminal((s) => s.open);
   const record = useSession((s) => (date ? s.daily[date] : undefined));
   const [started, setStarted] = useState(false);
   // A day already begun carries on from the next unanswered question.
@@ -252,15 +251,13 @@ function DailyStep({ date, onSkip }: { date: string; onSkip(): void }) {
       )}
       {started ? <p>This step finishes when you answer the tenth question. If you close the terminal, open it again to carry on.</p> : null}
       <div className={study.actions}>
-        {!started ? (
-          <Button variant="primary" onClick={start}>
-            {answered > 0 ? 'Continue the daily challenge' : 'Start the daily challenge'}
-          </Button>
-        ) : !open ? (
-          <Button variant="primary" onClick={() => useTerminal.getState().setOpen(true)}>
-            Open the terminal
-          </Button>
-        ) : null}
+        {/*
+          One button that stays put while the terminal is open, relabelled once started, so the
+          drawer has somewhere to return focus when it closes.
+        */}
+        <Button variant="primary" onClick={started ? () => useTerminal.getState().setOpen(true) : start}>
+          {started ? 'Open the terminal' : answered > 0 ? 'Continue the daily challenge' : 'Start the daily challenge'}
+        </Button>
         <ButtonLink to={paths.daily}>Do it on screen instead</ButtonLink>
         <Button variant="quiet" onClick={onSkip}>
           Skip the daily challenge

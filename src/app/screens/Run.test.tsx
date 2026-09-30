@@ -136,6 +136,22 @@ describe("Today's run", () => {
     expect(useTerminal.getState()).toMatchObject({ open: true, pending: 'daily' });
   });
 
+  it('keeps the daily challenge button in place while the terminal is open, for focus to come back to', () => {
+    provideContent(fixtureIndex());
+    renderRun();
+    const start = screen.getByRole('button', { name: 'Start the daily challenge' });
+    start.focus();
+    fireEvent.click(start);
+    expect(useTerminal.getState()).toMatchObject({ open: true, pending: 'daily' });
+    // The same button, relabelled: the drawer returns focus to it when it closes.
+    expect(start).toBeInTheDocument();
+    expect(start).toHaveAccessibleName('Open the terminal');
+    expect(start).toHaveFocus();
+    act(() => useTerminal.getState().setOpen(false));
+    fireEvent.click(start);
+    expect(useTerminal.getState().open).toBe(true);
+  });
+
   it('lets the student skip the daily challenge', () => {
     provideContent(fixtureIndex());
     renderRun();
