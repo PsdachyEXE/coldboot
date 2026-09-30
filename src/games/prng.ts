@@ -27,6 +27,21 @@ export function hashString(input: string): number {
   return h >>> 0;
 }
 
+/**
+ * murmur3's 32-bit finaliser (fmix32). FNV-1a leaves strings that differ only in their last
+ * character with nearly adjacent hashes; this avalanche step spreads them across the whole range,
+ * so ranking sibling ids ("m-u3o1-kk04-001", "-002") by hash no longer keeps them together.
+ */
+export function mix32(h: number): number {
+  let x = h >>> 0;
+  x ^= x >>> 16;
+  x = Math.imul(x, 0x85ebca6b);
+  x ^= x >>> 13;
+  x = Math.imul(x, 0xc2b2ae35);
+  x ^= x >>> 16;
+  return x >>> 0;
+}
+
 /** Integer in [min, max], inclusive. */
 export function randInt(rng: Rng, min: number, max: number): number {
   return min + Math.floor(rng() * (max - min + 1));
