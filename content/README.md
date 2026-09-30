@@ -66,3 +66,19 @@ The KK part of an id is the item's primary KK (`kk[0]`), and the item lives in t
 ## Floors
 
 Every KK needs at least 6 cards, 3 MCQs and 1 short answer. `TERMS` needs one card per glossary entry. `PSM` needs at least 12 cards and 6 MCQs. Each case study runs to about 60 marks over 10 to 13 questions and touches all four areas of study. Generated game items don't count toward floors.
+
+## Figure coordinates
+
+Figures have no auto-layout. Coordinates are in SVG user units on a canvas of `width` by `height` (about 640 by 400 suits most; keep 24 units of margin). Every `x, y` is the **centre** of its element. When `w`, `h`, `r`, `rx` or `ry` are omitted, the renderer uses these defaults:
+
+| Element | Shape | Default size |
+|---|---|---|
+| Context diagram system | circle | `r` 64 |
+| External entity (context diagram and DFD) | rectangle | `w` 128, `h` 48 |
+| DFD process | circle, number above the label | `r` 48 (from `w`/2 when given) |
+| DFD data store | open-ended rectangle, id (`D1`) at the left | `w` 160, `h` 36 |
+| Use case | ellipse | `rx` 84, `ry` 28 |
+| Actor | stick figure about 64 tall, label below | fixed |
+| Use case system boundary | rectangle, name at top-left | `w`, `h` required |
+
+Flows are straight arrows from the edge of one element to the edge of the other. `via` points add bends, and `labelAt` pins the label (by default it sits at the midpoint). Leave at least 40 units between elements so labels fit, and keep labels short: DFD and context diagram flow labels are snake_case (`booking_details`). Gantt figures need no coordinates: give tasks, durations and dependencies, and the renderer computes start times and the critical path.
