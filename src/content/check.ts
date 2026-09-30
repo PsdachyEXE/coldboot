@@ -59,6 +59,9 @@ export function containsRawHtml(text: string): boolean {
   return /<\/?[a-zA-Z][^>]*>/.test(stripped) || /<!--/.test(stripped);
 }
 
+/** `u3o1-kk04`: the KK part of a card, MCQ or short-answer id. */
+const KK_ID_SEGMENT = /^u[34]o[12]-kk\d{2}$/;
+
 export function normaliseStem(stem: string): string {
   return stem.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 }
@@ -134,6 +137,30 @@ export function checkContent(raw: RawContent): CheckReport {
   mcqs.forEach(({ file, item }) => claim(item.id, file));
   shorts.forEach(({ file, item }) => claim(item.id, file));
   caseStudies.forEach((cs) => cs.questions.forEach((q) => claim(q.id, `content/case-studies/${cs.id}.json`)));
+
+  // Id conventions: the prefix names the kind, and the KK segment names the item's primary KK.
+  const expectId = (id: string, kind: 'card' | 'mcq' | 'short', primary: string, file: string) => {
+    const letter = { card: 'c', mcq: 'm', short: 's' }[kind];
+    const kkSeg = primary.toLowerCase();
+    const ok =
+      (file === 'content/terms.json' && kind === 'card' && /^t-[a-z0-9-]+$/.test(id)) ||
+      (file === 'content/psm.json' && new RegExp(`^psm-${letter}-\\d{3}$`).test(id)) ||
+      (KK_ID_SEGMENT.test(kkSeg) && id.startsWith(`${letter}-${kkSeg}-`) && /-\d{3}$/.test(id));
+    if (!ok) errors.push(`${file}: id ${id} should look like ${file === 'content/terms.json' ? 't-<term-slug>' : file === 'content/psm.json' ? `psm-${letter}-001` : `${letter}-${kkSeg || 'u3o1-kk01'}-001`} (see docs/CONTRACTS.md)`);
+  };
+  cards.forEach(({ file, item }) => expectId(item.id, 'card', item.kk[0], file));
+  mcqs.forEach(({ file, item }) => expectId(item.id, 'mcq', item.kk[0], file));
+  shorts.forEach(({ file, item }) => expectId(item.id, 'short', item.kk[0], file));
+  for (const cs of caseStudies) {
+    cs.questions.forEach((q) => {
+      if (!new RegExp(`^${cs.id}-q\\d{2}$`).test(q.id)) errors.push(`content/case-studies/${cs.id}.json: question id ${q.id} should look like ${cs.id}-q01`);
+    });
+  }
+  // Items must sit in their primary KK's area file.
+  for (const { file, item } of [...cards, ...mcqs, ...shorts]) {
+    const m = /^content\/(u[34]o[12])\//.exec(file);
+    if (m && item.kk[0].slice(0, 4).toLowerCase() !== m[1]) errors.push(`${file}: ${item.id} has primary KK ${item.kk[0]}, so it belongs in content/${item.kk[0].slice(0, 4).toLowerCase()}/`);
+  }
 
   // KK references, raw HTML, command terms.
   const all: { file: string; item: Card | Mcq | ShortAnswer }[] = [...cards, ...mcqs, ...shorts];
