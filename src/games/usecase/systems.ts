@@ -50,13 +50,13 @@ export const SYSTEMS: readonly UseCaseSystem[] = [
     actors: { a1: 'Customer', a2: 'Warehouse staff', a3: 'Payment gateway' },
     useCases: { u1: 'Place order', u2: 'Take payment', u3: 'Apply gift voucher', u4: 'Update stock' },
     scenario:
-      'Harbourside Books in Williamstown wants an online ordering system. Customers place orders for books. Every order is paid for by card, through a payment gateway, as it is placed. A customer who has a gift voucher can apply it to an order. Warehouse staff update the stock levels when deliveries arrive.',
+      'Harbourside Books in Williamstown wants an online ordering system. Customers place orders for books. Every order is paid for by card, through a payment gateway, as it is placed. A customer who has a gift voucher can apply it to an order. Warehouse staff update the stock levels when deliveries arrive. The shop still orders its books from publishers by phone.',
     always: 'Every order is paid for as it is placed.',
     sometimes: 'A gift voucher is applied only when the customer has one.',
     notActors: [
       { label: 'Online ordering system', why: 'it is the system itself, drawn as the boundary' },
       { label: 'Order details', why: 'it is data that moves through the system, not someone or something using it' },
-      { label: 'Book publishers', why: 'the shop orders from publishers by phone, so they never interact with the system' },
+      { label: 'Book publishers', why: 'the shop orders from them by phone, so they never interact with the system' },
     ],
     actorWhy: {
       a1: 'customers place orders',
@@ -75,13 +75,13 @@ export const SYSTEMS: readonly UseCaseSystem[] = [
     actors: { a1: 'Parent', a2: 'Swim instructor', a3: 'Payment gateway' },
     useCases: { u1: 'Enrol child', u2: 'Pay term fees', u3: 'Claim sibling discount', u4: 'Record attendance' },
     scenario:
-      'Seaview Swim School in Warrnambool wants an enrolment system. Parents enrol their children in classes online, and every enrolment includes paying the term fees through a payment gateway. A parent who already has another child enrolled can claim a sibling discount. Swim instructors record attendance at each class.',
+      'Seaview Swim School in Warrnambool wants an enrolment system. Parents enrol their children in classes online, and every enrolment includes paying the term fees through a payment gateway. A parent who already has another child enrolled can claim a sibling discount. Parents choose a class from the timetable. Swim instructors record attendance at each class. The pool belongs to the local council, which has no part in enrolments.',
     always: 'Every enrolment includes paying the term fees.',
     sometimes: 'The sibling discount is claimed only when another child is already enrolled.',
     notActors: [
       { label: 'Enrolment system', why: 'it is the system itself, drawn as the boundary' },
       { label: 'Class timetable', why: 'it is data the system stores and shows, not a user of it' },
-      { label: 'The council that owns the pool', why: 'the scenario never has the council using the system' },
+      { label: 'The council that owns the pool', why: 'the council has no part in enrolments, so it never interacts with the system' },
     ],
     actorWhy: {
       a1: 'parents enrol their children',
@@ -150,13 +150,13 @@ export const SYSTEMS: readonly UseCaseSystem[] = [
     actors: { a1: 'Camper', a2: 'Ranger', a3: 'Payment gateway' },
     useCases: { u1: 'Book campsite', u2: 'Pay deposit', u3: 'Book powered site', u4: 'Record site check' },
     scenario:
-      'Wombat Ridge Camping Ground in Halls Gap wants a campsite booking system. Campers book sites online, and every booking includes paying a deposit through a payment gateway. Campers with caravans can choose a powered site when they book. Rangers record a check of each site after campers leave.',
+      'Wombat Ridge Camping Ground in Halls Gap wants a campsite booking system. Campers book sites online, and every booking includes paying a deposit through a payment gateway. Campers with caravans can choose a powered site when they book. The system shows campers a map of the sites. Rangers record a check of each site after campers leave. The regional tourism office promotes the camping ground but has no access to bookings.',
     always: 'Every booking includes paying a deposit.',
     sometimes: 'A powered site is booked only by campers who need power.',
     notActors: [
       { label: 'Campsite booking system', why: 'it is the system itself, drawn as the boundary' },
       { label: 'Campsite map', why: 'it is information the system shows, not a user of it' },
-      { label: 'The regional tourism office', why: 'the scenario never has the tourism office using the system' },
+      { label: 'The regional tourism office', why: 'it has no access to bookings, so it never interacts with the system' },
     ],
     actorWhy: {
       a1: 'campers book sites',
