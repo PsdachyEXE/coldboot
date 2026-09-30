@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatGroups, formatList, matchOption, parseChoice, parseCount, parseIntGroups, parseIntList, sameList } from './answers';
+import { formatAnd, formatGroups, formatList, matchOption, parseChoice, parseCount, parseIntGroups, parseIntList, sameList } from './answers';
 
 describe('answer parsers', () => {
   it('reads lettered and numbered choices leniently', () => {
@@ -67,6 +67,13 @@ describe('answer parsers', () => {
     expect(matchOption('SELECTION', opts)).toBe('selection');
     expect(matchOption('bubble sort', opts)).toBeNull();
     expect(matchOption('   ', opts)).toBeNull();
+  });
+
+  it('joins values for prose', () => {
+    expect(formatAnd([])).toBe('');
+    expect(formatAnd([3])).toBe('3');
+    expect(formatAnd([3, 5])).toBe('3 and 5');
+    expect(formatAnd([3, 5, 8])).toBe('3, 5 and 8');
   });
 
   it('formats lists and groups for display', () => {

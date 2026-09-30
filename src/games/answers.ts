@@ -77,6 +77,12 @@ export function formatGroups(groups: readonly (readonly number[])[]): string {
   return groups.map((g) => `[${g.join(', ')}]`).join(' ');
 }
 
+/** "3", "3 and 5", "3, 5 and 8" for prose. */
+export function formatAnd(values: readonly (number | string)[]): string {
+  if (values.length <= 1) return values.join('');
+  return `${values.slice(0, -1).join(', ')} and ${values[values.length - 1]}`;
+}
+
 export function sameList(a: readonly number[], b: readonly number[]): boolean {
   return a.length === b.length && a.every((v, i) => v === b[i]);
 }
