@@ -241,7 +241,7 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox({ label, hint, id, className, ...rest }, ref) {
   const ids = useFieldIds(id, hint, null);
   return (
-    <div className={[styles.choice, className].filter(Boolean).join(' ')}>
+    <div className={[styles.choice, styles.checkboxField, className].filter(Boolean).join(' ')}>
       <input
         ref={ref}
         id={ids.controlId}

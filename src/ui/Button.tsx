@@ -58,7 +58,8 @@ export const ExternalButtonLink = forwardRef<HTMLAnchorElement, ExternalButtonLi
 ) {
   return (
     <a ref={ref} target="_blank" rel="noopener noreferrer" className={buttonClass({ variant, size }, className)} {...rest}>
-      {children} <VisuallyHidden>(opens in a new tab)</VisuallyHidden>
+      {children}
+      <VisuallyHidden>{' (opens in a new tab)'}</VisuallyHidden>
     </a>
   );
 });

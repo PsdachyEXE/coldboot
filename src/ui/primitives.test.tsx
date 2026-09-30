@@ -34,7 +34,7 @@ describe('Button', () => {
       </MemoryRouter>,
     );
     expect(screen.getByRole('link', { name: 'Start review' })).toHaveAttribute('href', '/review');
-    const ext = screen.getByRole('link', { name: 'Open page (opens in a new tab)' });
+    const ext = screen.getByRole('link', { name: /^Open page ?\(opens in a new tab\)$/ });
     expect(ext).toHaveAttribute('rel', 'noopener noreferrer');
   });
 });

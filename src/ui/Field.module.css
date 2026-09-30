@@ -49,9 +49,8 @@
   border-style: dashed;
 }
 
-/* Native date and time pickers: keep the icon visible on the dark field. */
+/* Native date and time pickers draw their icon for the dark colour scheme. */
 .input::-webkit-calendar-picker-indicator {
-  filter: invert(0.9);
   cursor: pointer;
 }
 
@@ -116,6 +115,10 @@
 }
 .choiceLabel {
   cursor: pointer;
+}
+/* A checkbox on its own gets space below it like any other field. */
+.checkboxField {
+  margin-bottom: var(--space-4);
 }
 
 .checkbox,

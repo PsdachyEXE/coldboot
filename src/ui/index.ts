@@ -44,3 +44,6 @@ export { useReducedMotion, prefersReducedMotion } from './motion';
 export { playCue } from './sound';
 export type { Cue } from './sound';
 export { useMediaQuery, useNarrow, NARROW_QUERY } from './useMediaQuery';
+export { ExternalLink } from './ExternalLink';
+export type { ExternalLinkProps } from './ExternalLink';
+export { downloadJson } from './download';
