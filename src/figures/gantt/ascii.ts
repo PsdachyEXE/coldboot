@@ -87,10 +87,8 @@ export function asciiGantt(tasks: readonly AsciiGanttTask[], schedule: Schedule,
     const startCol = Math.floor(timing.earliestStart / per);
     const endCol = Math.ceil(timing.earliestFinish / per);
     for (let c = startCol; c < endCol && c < columns; c++) cells[c] = critical ? BAR_CRITICAL : BAR_OTHER;
-    if (timing.duration > 0) {
-      if (critical) anyCritical = true;
-      else anyOther = true;
-    }
+    if (critical) anyCritical = true;
+    else if (timing.duration > 0) anyOther = true;
     if (showSlack && timing.slack > 0) {
       const slackEnd = Math.ceil(timing.latestFinish / per);
       for (let c = endCol; c < slackEnd && c < columns; c++) cells[c] = SLACK;
