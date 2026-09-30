@@ -23,6 +23,11 @@ export interface KkItems {
   short: string[];
 }
 
+export interface CaseQuestionRef {
+  caseStudyId: string;
+  questionId: string;
+}
+
 export interface ContentIndex {
   /** Every card, including glossary (TERMS) and PSM cards. */
   cards: Card[];
@@ -37,6 +42,10 @@ export interface ContentIndex {
   byId: Map<string, IndexedItem>;
   /** Standalone item ids per KK (an item tagged with two KKs appears under both). */
   byKk: Map<KkId, KkItems>;
+  /** Case study questions per KK, for Section C practice in Written and the exam's mini mode. */
+  caseByKk: Map<KkId, CaseQuestionRef[]>;
+  /** Every card id, for pruning SRS records whose card has left the content. */
+  cardIds: ReadonlySet<string>;
 }
 
 const outcomeFiles = import.meta.glob<unknown>('../../content/u[34]o[12]/*.json', { import: 'default' });
@@ -61,6 +70,8 @@ export function loadArea(area: AreaId): Promise<AreaContent> {
       loadJson<Mcq[]>(outcomeFiles, `${dir}/mcq.json`, []),
       loadJson<ShortAnswer[]>(outcomeFiles, `${dir}/short.json`, []),
     ]).then(([cards, mcq, short]) => ({ cards, mcq, short }));
+    // A failed chunk fetch (offline, stale deploy) must not be cached: the next call retries.
+    pending.catch(() => areaCache.delete(area));
     areaCache.set(area, pending);
   }
   return pending;
@@ -113,12 +124,19 @@ export function buildIndex(parts: { areas: AreaContent[]; terms: Card[]; psm: Ps
     byId.set(s.id, { kind: 'short', item: s });
     for (const kk of s.kk) slot(kk).short.push(s.id);
   }
+  const caseByKk = new Map<KkId, CaseQuestionRef[]>();
   for (const cs of parts.caseStudies) {
     for (const q of cs.questions) {
       byId.set(q.id, isMcq(q) ? { kind: 'mcq', item: q, caseStudyId: cs.id } : { kind: 'short', item: q, caseStudyId: cs.id });
+      for (const kk of q.kk) {
+        const list = caseByKk.get(kk) ?? [];
+        list.push({ caseStudyId: cs.id, questionId: q.id });
+        caseByKk.set(kk, list);
+      }
     }
   }
-  return { cards, mcq, short, terms: parts.terms, psm: parts.psm, caseStudies: parts.caseStudies, byId, byKk };
+  const cardIds = new Set(cards.map((c) => c.id));
+  return { cards, mcq, short, terms: parts.terms, psm: parts.psm, caseStudies: parts.caseStudies, byId, byKk, caseByKk, cardIds };
 }
 
 let allPending: Promise<ContentIndex> | null = null;
@@ -126,9 +144,13 @@ let allPending: Promise<ContentIndex> | null = null;
 /** Loads every outcome, the glossary, the PSM and the case studies, then indexes them. Cached. */
 export function loadAllContent(): Promise<ContentIndex> {
   if (!allPending) {
-    allPending = Promise.all([Promise.all(AREA_IDS.map(loadArea)), loadTerms(), loadPsm(), loadCaseStudies()]).then(
+    const pending = Promise.all([Promise.all(AREA_IDS.map(loadArea)), loadTerms(), loadPsm(), loadCaseStudies()]).then(
       ([areas, terms, psm, caseStudies]) => buildIndex({ areas, terms, psm, caseStudies }),
     );
+    pending.catch(() => {
+      if (allPending === pending) allPending = null;
+    });
+    allPending = pending;
   }
   return allPending;
 }

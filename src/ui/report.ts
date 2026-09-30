@@ -3,7 +3,10 @@ import { create } from 'zustand';
 
 export interface ReportRequest {
   itemId: string;
+  /** Context line, e.g. "Review" or "terminal: play sort --hard". */
   where?: string;
+  /** Generated items only (see AnswerResult.instance). */
+  instance?: string;
 }
 
 export interface ReportUiState {

@@ -18,7 +18,10 @@ export interface ContentReport {
   itemId: string;
   reason: ReportReason;
   note: string;
+  /** Build id (`1.0.0+abc1234`) so a report names the exact deploy. */
   appVersion: string;
+  /** Generated items only: the instance string that regenerates the item (see AnswerResult.instance). */
+  instance?: string;
   /** Optional context line, e.g. "Review" or "terminal: play sort". */
   where?: string;
 }
@@ -35,6 +38,7 @@ export function reportBody(r: ContentReport): string {
   const note = r.note.trim().slice(0, NOTE_MAX) || '(no note)';
   return [
     `Item: ${r.itemId}`,
+    r.instance ? `Instance: ${r.instance}` : null,
     `Reason: ${label}`,
     r.where ? `Where: ${r.where}` : null,
     `App version: ${r.appVersion}`,

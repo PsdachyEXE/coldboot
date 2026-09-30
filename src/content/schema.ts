@@ -54,132 +54,48 @@ export type ItemDifficulty = z.infer<typeof DifficultySchema>;
 const Text = z.string().trim().min(1);
 
 // ---------------------------------------------------------------------------
-// Items
-// ---------------------------------------------------------------------------
-
-export const CARD_TYPES = ['basic', 'reverse', 'cloze', 'compare'] as const;
-
-/** Cloze gaps are written `{{hidden text}}` inside `front`. */
-export const CLOZE_GAP = /\{\{([^{}]+)\}\}/g;
-
-export const CardSchema = z
-  .object({
-    id: ItemIdSchema,
-    kk: z.array(KkIdSchema).min(1),
-    type: z.enum(CARD_TYPES),
-    /** basic: question; reverse: the term; cloze: sentence with {{gaps}}; compare: "A versus B" prompt. */
-    front: Text,
-    /** basic: answer; reverse: the definition; cloze: explanation shown after the reveal; compare: the contrast. */
-    back: Text,
-    /** The misconception students commonly hold, shown after the flip. */
-    mistake: Text.optional(),
-    difficulty: DifficultySchema,
-    source: SourceSchema,
-    /** Accepted alternative spellings of `front` for reverse (glossary) cards; used by `blitz`. */
-    aliases: z.array(Text).optional(),
-  })
-  .strict()
-  .superRefine((card, ctx) => {
-    if (card.type === 'cloze' && !card.front.match(CLOZE_GAP)) {
-      ctx.addIssue({ code: 'custom', message: 'Cloze cards need at least one {{gap}} in front', path: ['front'] });
-    }
-    if (card.type !== 'cloze' && card.front.match(CLOZE_GAP)) {
-      ctx.addIssue({ code: 'custom', message: 'Only cloze cards may contain {{gaps}}', path: ['front'] });
-    }
-    if (card.aliases && card.type !== 'reverse') {
-      ctx.addIssue({ code: 'custom', message: 'aliases only apply to reverse cards', path: ['aliases'] });
-    }
-  });
-export type Card = z.infer<typeof CardSchema>;
-
-const BANNED_OPTIONS = /\b(all|none|both|neither) of the (above|options|answers)\b/i;
-
-export const McqSchema = z
-  .object({
-    id: ItemIdSchema,
-    kk: z.array(KkIdSchema).min(1),
-    stem: Text,
-    options: z.tuple([Text, Text, Text, Text]),
-    answer: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]),
-    explanation: Text,
-    /** One line per option on why it is wrong; the entry at `answer` is ''. */
-    whyWrong: z.tuple([z.string(), z.string(), z.string(), z.string()]),
-    difficulty: DifficultySchema,
-    source: SourceSchema,
-  })
-  .strict()
-  .superRefine((mcq, ctx) => {
-    mcq.whyWrong.forEach((why, i) => {
-      if (i === mcq.answer && why !== '') {
-        ctx.addIssue({ code: 'custom', message: 'whyWrong at the answer index must be empty', path: ['whyWrong', i] });
-      }
-      if (i !== mcq.answer && why.trim() === '') {
-        ctx.addIssue({ code: 'custom', message: 'Every distractor needs a whyWrong line', path: ['whyWrong', i] });
-      }
-    });
-    const normalised = mcq.options.map((o) => o.trim().toLowerCase());
-    if (new Set(normalised).size !== 4) {
-      ctx.addIssue({ code: 'custom', message: 'Options must be distinct', path: ['options'] });
-    }
-    mcq.options.forEach((o, i) => {
-      if (BANNED_OPTIONS.test(o)) {
-        ctx.addIssue({ code: 'custom', message: 'No "all/none of the above" options', path: ['options', i] });
-      }
-    });
-  });
-export type Mcq = z.infer<typeof McqSchema>;
-
-export const MarkingPointSchema = z
-  .object({
-    text: Text,
-    marks: z.number().int().min(1).max(6),
-  })
-  .strict();
-export type MarkingPoint = z.infer<typeof MarkingPointSchema>;
-
-export const ShortAnswerSchema = z
-  .object({
-    id: ItemIdSchema,
-    kk: z.array(KkIdSchema).min(1),
-    /** Lowercase VCAA command term, e.g. "describe". See src/content/commandTerms.ts. */
-    commandTerm: z.string().regex(/^[a-z]+( [a-z]+)?$/),
-    marks: z.number().int().min(1).max(12),
-    prompt: Text,
-    /** Discrete, checkable marking points. Their marks may exceed `marks` when alternatives are accepted. */
-    points: z.array(MarkingPointSchema).min(1),
-    model: Text,
-    mistake: Text.optional(),
-    source: SourceSchema,
-  })
-  .strict()
-  .superRefine((sa, ctx) => {
-    const available = sa.points.reduce((sum, p) => sum + p.marks, 0);
-    if (available < sa.marks) {
-      ctx.addIssue({ code: 'custom', message: `Marking points total ${available}, below the ${sa.marks} marks available`, path: ['points'] });
-    }
-  });
-export type ShortAnswer = z.infer<typeof ShortAnswerSchema>;
-
-export type ContentItem = Card | Mcq | ShortAnswer;
-export type ItemKind = 'card' | 'mcq' | 'short';
-
-export function isMcq(item: Mcq | ShortAnswer | Card): item is Mcq {
-  return 'options' in item;
-}
-export function isShortAnswer(item: Mcq | ShortAnswer | Card): item is ShortAnswer {
-  return 'points' in item;
-}
-export function isCard(item: Mcq | ShortAnswer | Card): item is Card {
-  return 'front' in item;
-}
-
-// ---------------------------------------------------------------------------
 // Figures (rendered by src/figures from explicit coordinates; no auto-layout)
 // ---------------------------------------------------------------------------
 
 const Coord = z.number().finite();
 const PointSchema = z.object({ x: Coord, y: Coord }).strict();
 export type Point = z.infer<typeof PointSchema>;
+
+function uniqueIds(ids: readonly string[], ctx: z.RefinementCtx, path: string): void {
+  const seen = new Set<string>();
+  for (const id of ids) {
+    if (seen.has(id)) ctx.addIssue({ code: 'custom', message: `Duplicate id ${id}`, path: [path] });
+    seen.add(id);
+  }
+}
+
+function flowEndpoints(flows: readonly { from: string; to: string }[], known: ReadonlySet<string>, ctx: z.RefinementCtx): void {
+  flows.forEach((f, i) => {
+    if (!known.has(f.from) || !known.has(f.to)) {
+      ctx.addIssue({ code: 'custom', message: `Flow ${f.from} to ${f.to} names an unknown node`, path: ['flows', i] });
+    }
+  });
+}
+
+/** True when dependsOn links contain a cycle (Kahn's algorithm). Unknown ids are ignored. */
+export function hasCycle(tasks: readonly { id: string; dependsOn: readonly string[] }[]): boolean {
+  const ids = new Set(tasks.map((t) => t.id));
+  const indegree = new Map(tasks.map((t) => [t.id, t.dependsOn.filter((d) => ids.has(d)).length]));
+  const queue = tasks.filter((t) => indegree.get(t.id) === 0).map((t) => t.id);
+  let visited = 0;
+  while (queue.length) {
+    const id = queue.shift()!;
+    visited++;
+    for (const t of tasks) {
+      if (t.dependsOn.includes(id)) {
+        const n = indegree.get(t.id)! - 1;
+        indegree.set(t.id, n);
+        if (n === 0) queue.push(t.id);
+      }
+    }
+  }
+  return visited !== tasks.length;
+}
 
 const FigureBase = {
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
@@ -220,7 +136,13 @@ export const ContextDiagramSchema = z
     entities: z.array(BoxNode).min(1),
     flows: z.array(FlowSchema).min(1),
   })
-  .strict();
+  .strict()
+  .superRefine((fig, ctx) => {
+    const ids = fig.entities.map((e) => e.id);
+    uniqueIds(ids, ctx, 'entities');
+    if (ids.includes('system')) ctx.addIssue({ code: 'custom', message: 'The id "system" is reserved for the system process', path: ['entities'] });
+    flowEndpoints(fig.flows, new Set([...ids, 'system']), ctx);
+  });
 
 export const DfdNodeSchema = z
   .object({
@@ -246,7 +168,12 @@ export const DfdSchema = z
     nodes: z.array(DfdNodeSchema).min(1),
     flows: z.array(FlowSchema),
   })
-  .strict();
+  .strict()
+  .superRefine((fig, ctx) => {
+    const ids = fig.nodes.map((n) => n.id);
+    uniqueIds(ids, ctx, 'nodes');
+    flowEndpoints(fig.flows, new Set(ids), ctx);
+  });
 
 export const UseCaseDiagramSchema = z
   .object({
@@ -273,7 +200,25 @@ export const UseCaseDiagramSchema = z
       )
       .min(1),
   })
-  .strict();
+  .strict()
+  .superRefine((fig, ctx) => {
+    const actors = new Set(fig.actors.map((a) => a.id));
+    const cases = new Set(fig.useCases.map((u) => u.id));
+    uniqueIds([...fig.actors.map((a) => a.id), ...fig.useCases.map((u) => u.id)], ctx, 'useCases');
+    fig.links.forEach((l, i) => {
+      const known = (id: string) => actors.has(id) || cases.has(id);
+      if (!known(l.from) || !known(l.to)) {
+        ctx.addIssue({ code: 'custom', message: `Link ${l.from} to ${l.to} names an unknown actor or use case`, path: ['links', i] });
+        return;
+      }
+      if (l.type === 'association' && !(actors.has(l.from) !== actors.has(l.to))) {
+        ctx.addIssue({ code: 'custom', message: 'An association joins one actor and one use case', path: ['links', i] });
+      }
+      if (l.type !== 'association' && !(cases.has(l.from) && cases.has(l.to))) {
+        ctx.addIssue({ code: 'custom', message: `<<${l.type}>> joins two use cases`, path: ['links', i] });
+      }
+    });
+  });
 
 export const GanttTaskSchema = z
   .object({
@@ -296,7 +241,18 @@ export const GanttSchema = z
     tasks: z.array(GanttTaskSchema).min(1),
     showCriticalPath: z.boolean().optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((fig, ctx) => {
+    const ids = fig.tasks.map((t) => t.id);
+    uniqueIds(ids, ctx, 'tasks');
+    const known = new Set(ids);
+    fig.tasks.forEach((t, i) => {
+      for (const dep of t.dependsOn) {
+        if (!known.has(dep) || dep === t.id) ctx.addIssue({ code: 'custom', message: `Task ${t.id} depends on unknown or self task ${dep}`, path: ['tasks', i, 'dependsOn'] });
+      }
+    });
+    if (hasCycle(fig.tasks)) ctx.addIssue({ code: 'custom', message: 'Task dependencies form a cycle', path: ['tasks'] });
+  });
 
 export const ObjectDescriptionSchema = z
   .object({
@@ -382,6 +338,130 @@ export type TableFigure = z.infer<typeof TableFigureSchema>;
 export type Mockup = z.infer<typeof MockupSchema>;
 
 // ---------------------------------------------------------------------------
+// Items
+// ---------------------------------------------------------------------------
+
+export const CARD_TYPES = ['basic', 'reverse', 'cloze', 'compare'] as const;
+
+/** Cloze gaps are written `{{hidden text}}` inside `front`. */
+export const CLOZE_GAP = /\{\{([^{}]+)\}\}/g;
+
+export const CardSchema = z
+  .object({
+    id: ItemIdSchema,
+    kk: z.array(KkIdSchema).min(1),
+    type: z.enum(CARD_TYPES),
+    /** basic: question; reverse: the term; cloze: sentence with {{gaps}}; compare: "A versus B" prompt. */
+    front: Text,
+    /** basic: answer; reverse: the definition; cloze: explanation shown after the reveal; compare: the contrast. */
+    back: Text,
+    /** The misconception students commonly hold, shown after the flip. */
+    mistake: Text.optional(),
+    difficulty: DifficultySchema,
+    source: SourceSchema,
+    /** Accepted alternative spellings of `front` for reverse (glossary) cards; used by `blitz`. */
+    aliases: z.array(Text).optional(),
+  })
+  .strict()
+  .superRefine((card, ctx) => {
+    if (card.type === 'cloze' && !card.front.match(CLOZE_GAP)) {
+      ctx.addIssue({ code: 'custom', message: 'Cloze cards need at least one {{gap}} in front', path: ['front'] });
+    }
+    if (card.type !== 'cloze' && card.front.match(CLOZE_GAP)) {
+      ctx.addIssue({ code: 'custom', message: 'Only cloze cards may contain {{gaps}}', path: ['front'] });
+    }
+    if (card.aliases && card.type !== 'reverse') {
+      ctx.addIssue({ code: 'custom', message: 'aliases only apply to reverse cards', path: ['aliases'] });
+    }
+  });
+export type Card = z.infer<typeof CardSchema>;
+
+const BANNED_OPTIONS = /\b(all|none|both|neither) of the (above|options|answers)\b/i;
+
+export const McqSchema = z
+  .object({
+    id: ItemIdSchema,
+    kk: z.array(KkIdSchema).min(1),
+    stem: Text,
+    options: z.tuple([Text, Text, Text, Text]),
+    answer: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]),
+    explanation: Text,
+    /** One line per option on why it is wrong; the entry at `answer` is ''. */
+    whyWrong: z.tuple([z.string(), z.string(), z.string(), z.string()]),
+    difficulty: DifficultySchema,
+    source: SourceSchema,
+    /** Figures shown above the stem (e.g. a DFD with one convention error, a Gantt chart). */
+    figures: z.array(FigureSchema).min(1).max(2).optional(),
+  })
+  .strict()
+  .superRefine((mcq, ctx) => {
+    mcq.whyWrong.forEach((why, i) => {
+      if (i === mcq.answer && why !== '') {
+        ctx.addIssue({ code: 'custom', message: 'whyWrong at the answer index must be empty', path: ['whyWrong', i] });
+      }
+      if (i !== mcq.answer && why.trim() === '') {
+        ctx.addIssue({ code: 'custom', message: 'Every distractor needs a whyWrong line', path: ['whyWrong', i] });
+      }
+    });
+    const normalised = mcq.options.map((o) => o.trim().toLowerCase());
+    if (new Set(normalised).size !== 4) {
+      ctx.addIssue({ code: 'custom', message: 'Options must be distinct', path: ['options'] });
+    }
+    mcq.options.forEach((o, i) => {
+      if (BANNED_OPTIONS.test(o)) {
+        ctx.addIssue({ code: 'custom', message: 'No "all/none of the above" options', path: ['options', i] });
+      }
+    });
+  });
+export type Mcq = z.infer<typeof McqSchema>;
+
+export const MarkingPointSchema = z
+  .object({
+    text: Text,
+    marks: z.number().int().min(1).max(6),
+  })
+  .strict();
+export type MarkingPoint = z.infer<typeof MarkingPointSchema>;
+
+export const ShortAnswerSchema = z
+  .object({
+    id: ItemIdSchema,
+    kk: z.array(KkIdSchema).min(1),
+    /** Lowercase VCAA command term, e.g. "describe". See src/content/commandTerms.ts. */
+    commandTerm: z.string().regex(/^[a-z]+( [a-z]+)?$/),
+    marks: z.number().int().min(1).max(12),
+    prompt: Text,
+    /** Discrete, checkable marking points. Their marks may exceed `marks` when alternatives are accepted. */
+    points: z.array(MarkingPointSchema).min(1),
+    model: Text,
+    mistake: Text.optional(),
+    source: SourceSchema,
+    /** Figures shown above the prompt. */
+    figures: z.array(FigureSchema).min(1).max(2).optional(),
+  })
+  .strict()
+  .superRefine((sa, ctx) => {
+    const available = sa.points.reduce((sum, p) => sum + p.marks, 0);
+    if (available < sa.marks) {
+      ctx.addIssue({ code: 'custom', message: `Marking points total ${available}, below the ${sa.marks} marks available`, path: ['points'] });
+    }
+  });
+export type ShortAnswer = z.infer<typeof ShortAnswerSchema>;
+
+export type ContentItem = Card | Mcq | ShortAnswer;
+export type ItemKind = 'card' | 'mcq' | 'short';
+
+export function isMcq(item: Mcq | ShortAnswer | Card): item is Mcq {
+  return 'options' in item;
+}
+export function isShortAnswer(item: Mcq | ShortAnswer | Card): item is ShortAnswer {
+  return 'points' in item;
+}
+export function isCard(item: Mcq | ShortAnswer | Card): item is Card {
+  return 'front' in item;
+}
+
+// ---------------------------------------------------------------------------
 // Case studies
 // ---------------------------------------------------------------------------
 
@@ -399,7 +479,7 @@ export const CaseStudySchema = z
     title: Text,
     /** The detachable insert: organisation, team, current situation, project. Markdown. */
     insert: Text,
-    figures: z.array(FigureSchema),
+    figures: z.array(FigureSchema).min(1),
     questions: z.array(z.union([CaseMcqSchema, CaseShortSchema])).min(1),
     totalMarks: z.number().int().positive(),
   })
@@ -409,6 +489,7 @@ export const CaseStudySchema = z
     if (marks !== cs.totalMarks) {
       ctx.addIssue({ code: 'custom', message: `Questions total ${marks} marks but totalMarks is ${cs.totalMarks}`, path: ['totalMarks'] });
     }
+    uniqueIds(cs.figures.map((f) => f.id), ctx, 'figures');
     const figureIds = new Set(cs.figures.map((f) => f.id));
     cs.questions.forEach((q, i) => {
       for (const ref of q.figureRefs ?? []) {
@@ -437,9 +518,24 @@ export const KkEntrySchema = z
     status: z.enum(['confirmed', 'provisional']),
     /** What still needs confirming, for provisional entries that the brief marked "verify". */
     verify: Text.optional(),
+    /**
+     * Set when items for this KK are held back until the source confirms it. Floor shortfalls then
+     * become warnings, and docs/CONTENT_NOTES.md must say why.
+     */
+    held: Text.optional(),
   })
   .strict();
 export type KkEntry = z.infer<typeof KkEntrySchema>;
+
+export const GlossaryEntrySchema = z
+  .object({
+    term: Text,
+    /** Other accepted spellings or forms. */
+    aliases: z.array(Text).optional(),
+    status: z.enum(['confirmed', 'provisional']),
+  })
+  .strict();
+export type GlossaryEntry = z.infer<typeof GlossaryEntrySchema>;
 
 export const AreaEntrySchema = z
   .object({
@@ -460,6 +556,12 @@ export const StudyDesignSchema = z
     areas: z.array(AreaEntrySchema).length(4),
     groups: z.array(z.object({ id: z.enum(GROUP_IDS), title: Text, summary: Text }).strict()).length(2),
     kks: z.array(KkEntrySchema).min(1),
+    /** Bumped whenever KK ids are renumbered; stored attempts migrate through `renames`. */
+    kkMapVersion: z.number().int().min(1),
+    /** KK id changes, applied in order to attempts recorded under an older map version. */
+    renames: z.array(z.object({ from: z.string().regex(KK_PATTERN), to: z.string().regex(KK_PATTERN), since: z.number().int().min(2) }).strict()),
+    /** The glossary ("Terms used in this study"): one TERMS card per entry. Terms are labels, not quotations. */
+    glossary: z.array(GlossaryEntrySchema),
   })
   .strict()
   .superRefine((sd, ctx) => {

@@ -73,3 +73,28 @@ Every call made without asking the operator, with the reason and the alternative
 **Reason.** Content is authored after the app code, and a permanently red branch CI would hide real regressions in the meantime.
 
 **Rejected.** Enforcing floors everywhere from day one.
+
+## D-010 Contract review fixes before Phase 1
+
+**Decision.** An adversarial two-agent review of the Phase 0 contracts found two blockers and a set of gaps, all fixed before any track started:
+
+- Persistence no longer drops a whole store when one record is bad. Hydration salvages valid records, copies the damaged original to `coldboot:v1:<name>:quarantine`, and raises the storage warning. Data saved by a newer build is never loaded or overwritten, and the warning asks for a reload. A `storage` listener merges writes from another window (the installed app window and a normal tab share one profile) instead of letting the last writer win. Every store action and `recordAttempt` validate at the write boundary.
+- Export writes one `{ v, data }` envelope per store, so backups made now still import after a store's shape changes.
+- The study day uses wall-clock hours, so the rollover stays at 4 am on daylight-saving days; the test suite runs in `Australia/Melbourne`.
+- MCQs and short answers can carry figures; figure data is checked for dangling ids and dependency cycles.
+- The daily challenge has a pure set builder (rendezvous hashing, so new content doesn't reshuffle a day) and a record protocol that keeps only first attempts.
+- Written can open a case study (`/written?cs=cs-01`), so Section C content is reachable in P0.
+- The glossary list lives in `study-design.json` and drives the TERMS floor; KKs can be marked `held`.
+- Reverse cards alternate direction within one SRS record.
+
+**Reason.** Six tracks build on these contracts in parallel. Changing them afterwards means rework in every track.
+
+**Rejected.** Fixing these inside the tracks as they came up.
+
+## D-011 Deploy keeps the floors strict
+
+**Decision.** `deploy.yml` enforces content floors. The branch CI reports them as warnings (D-009).
+
+**Reason.** The deploy is the release gate. This branch reaches `main` only once Phase 1 content is in, so a strict deploy costs nothing and guards against a half-filled release.
+
+**Rejected.** Enforcing floors only on tag builds. A reviewer suggested it so that a placeholder could deploy early, but this session can't deploy anyway (D-002).

@@ -10,6 +10,9 @@ import {
   parseInstant,
   studyDay,
   studyDayStart,
+  melbourneWallTimeToIso,
+  toMelbourneWallTime,
+  melbourneOffsetMinutes,
 } from './time';
 
 const EXAM = parseInstant(DEFAULT_EXAM_AT);
@@ -66,5 +69,32 @@ describe('time', () => {
     expect(Number.isNaN(parseInstant('2026-11-13T15:00:00'))).toBe(true);
     expect(Number.isNaN(parseInstant('not a date'))).toBe(true);
     expect(parseInstant('2026-11-13T15:00+11:00')).toBe(EXAM);
+  });
+});
+
+describe('time in Melbourne across daylight saving', () => {
+  it('runs these tests in Australia/Melbourne', () => {
+    expect(Intl.DateTimeFormat().resolvedOptions().timeZone).toBe('Australia/Melbourne');
+  });
+
+  it('keeps the rollover at 4 am wall-clock on the day DST starts and ends', () => {
+    for (const day of ['2026-10-03', '2026-10-04', '2026-10-05', '2027-04-03', '2027-04-04', '2027-04-05']) {
+      expect(studyDay(studyDayStart(day))).toBe(day);
+      expect(studyDay(studyDayStart(day) - 1)).toBe(addDays(day, -1));
+    }
+    // 4:30 am on 4 Oct 2026 (AEDT, just after the clocks went forward at 2 am) is already 4 Oct.
+    expect(studyDay(new Date(2026, 9, 4, 4, 30).getTime())).toBe('2026-10-04');
+  });
+
+  it('converts Melbourne wall-clock times to ISO instants with the right offset', () => {
+    expect(melbourneWallTimeToIso('2026-11-13', '15:00')).toBe('2026-11-13T15:00:00+11:00');
+    expect(melbourneWallTimeToIso('2026-07-01', '09:30')).toBe('2026-07-01T09:30:00+10:00');
+    expect(melbourneWallTimeToIso('2026-10-03', '23:00')).toBe('2026-10-03T23:00:00+10:00');
+    expect(melbourneWallTimeToIso('2026-10-04', '12:00')).toBe('2026-10-04T12:00:00+11:00');
+    expect(melbourneWallTimeToIso('2026-13-01', '12:00')).toBeNull();
+    expect(melbourneWallTimeToIso('2026-11-13', '3pm')).toBeNull();
+    expect(toMelbourneWallTime(DEFAULT_EXAM_AT)).toEqual({ day: '2026-11-13', time: '15:00' });
+    expect(toMelbourneWallTime('2026-11-13T04:00:00Z')).toEqual({ day: '2026-11-13', time: '15:00' });
+    expect(melbourneOffsetMinutes(EXAM)).toBe(660);
   });
 });

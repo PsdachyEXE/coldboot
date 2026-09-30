@@ -39,3 +39,6 @@ pre.pseudo code { display: block; }
 .ps-str { color: var(--ice); font-style: italic; }
 .ps-num { color: var(--ice); }
 .ps-cm { color: var(--steel); font-style: italic; }
+.md-align-left { text-align: left; }
+.md-align-right { text-align: right; }
+.md-align-center { text-align: center; }

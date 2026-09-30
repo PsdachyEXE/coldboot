@@ -46,8 +46,12 @@ export function drillPath(opts: { kk?: KkId; area?: AreaId; mode?: 'weak' | 'ran
   return withQuery(paths.drill, { kk: opts.kk, area: opts.area, mode: opts.mode, timed: opts.timed ? '1' : undefined });
 }
 
-export function writtenPath(opts: { kk?: KkId; area?: AreaId } = {}): string {
-  return withQuery(paths.written, { kk: opts.kk, area: opts.area });
+/**
+ * `/written?kk=...`, `/written?area=...`, or Section C practice on a case study:
+ * `/written?cs=cs-01` (optionally `&q=cs-01-q03`), which shows the insert and figures beside the question.
+ */
+export function writtenPath(opts: { kk?: KkId; area?: AreaId; cs?: string; q?: string; mode?: 'weak' | 'random' } = {}): string {
+  return withQuery(paths.written, { kk: opts.kk, area: opts.area, cs: opts.cs, q: opts.q, mode: opts.mode });
 }
 
 export function reviewPath(opts: { kk?: KkId } = {}): string {

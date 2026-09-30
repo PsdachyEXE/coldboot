@@ -32,6 +32,10 @@ export interface RawContent {
   terms?: unknown;
   psm?: unknown;
   caseStudies: { file: string; data: unknown }[];
+  /** JSON syntax errors, reported as-is rather than as misleading schema errors. */
+  parseErrors?: string[];
+  /** Files under content/ that nothing loads (e.g. a misnamed `mcqs.json`). */
+  unknownFiles?: string[];
 }
 
 export interface CheckReport {
@@ -69,6 +73,9 @@ export function checkContent(raw: RawContent): CheckReport {
   const errors: string[] = [];
   const floorErrors: string[] = [];
   const warnings: string[] = [];
+
+  for (const e of raw.parseErrors ?? []) errors.push(e);
+  for (const f of raw.unknownFiles ?? []) errors.push(`${f}: not a recognised content file (nothing loads it). Expected cards.json, mcq.json, short.json, terms.json, psm.json or case-studies/cs-NN.json`);
 
   const sdParsed = StudyDesignSchema.safeParse(raw.studyDesign);
   if (!sdParsed.success) {
@@ -111,7 +118,9 @@ export function checkContent(raw: RawContent): CheckReport {
   const caseStudies: CaseStudy[] = [];
   for (const { file, data } of raw.caseStudies) {
     const cs = parse(file, CaseStudySchema, data, true);
-    if (cs) caseStudies.push(cs);
+    if (!cs) continue;
+    if (!file.endsWith(`/${cs.id}.json`)) errors.push(`${file}: file name must match the id (${cs.id}.json)`);
+    caseStudies.push(cs);
   }
 
   // Unique ids across everything, including case study questions and figures within a case study.
@@ -152,13 +161,26 @@ export function checkContent(raw: RawContent): CheckReport {
     else stems.set(key, item.id);
   }
 
-  // Glossary: one card per entry, so fronts must be unique.
+  // Glossary: exactly one TERMS card per glossary entry in study-design.json, and no extras.
+  const norm = (t: string) => t.trim().toLowerCase();
   const fronts = new Map<string, string>();
   for (const t of terms) {
-    const key = t.front.trim().toLowerCase();
+    const key = norm(t.front);
     if (fronts.has(key)) errors.push(`content/terms.json: ${t.id} repeats the term "${t.front}" (also ${fronts.get(key)})`);
     fronts.set(key, t.id);
-    if (t.type !== 'reverse') warnings.push(`content/terms.json: ${t.id} is not a reverse card`);
+    if (t.type !== 'reverse') errors.push(`content/terms.json: ${t.id} must be a reverse card`);
+  }
+  const glossary = sd?.glossary ?? [];
+  const glossaryKeys = new Set<string>();
+  for (const entry of glossary) {
+    const keys = [entry.term, ...(entry.aliases ?? [])].map(norm);
+    keys.forEach((k) => glossaryKeys.add(k));
+    const matches = terms.filter((t) => keys.includes(norm(t.front)));
+    if (matches.length === 0) floorErrors.push(`TERMS: no card for glossary entry "${entry.term}"`);
+    if (matches.length > 1) errors.push(`content/terms.json: ${matches.length} cards for glossary entry "${entry.term}"`);
+  }
+  for (const t of terms) {
+    if (glossary.length && !glossaryKeys.has(norm(t.front))) errors.push(`content/terms.json: ${t.id} ("${t.front}") is not in the glossary list in study-design.json`);
   }
 
   // Counts per KK (standalone items only; generated items never count).
@@ -168,19 +190,21 @@ export function checkContent(raw: RawContent): CheckReport {
   mcqs.forEach(({ item }) => item.kk.forEach((kk) => counts.get(kk) && counts.get(kk)!.mcq++));
   shorts.forEach(({ item }) => item.kk.forEach((kk) => counts.get(kk) && counts.get(kk)!.short++));
 
-  // Floors (Section 8.2).
+  // Floors (Section 8.2). A KK marked `held` (items held back pending the source) only warns.
   for (const kk of sd?.kks ?? []) {
     const c = counts.get(kk.id as KkId)!;
     const { cards: fc, mcq: fm, short: fs } = FLOORS.perKk;
     if (c.cards < fc || c.mcq < fm || c.short < fs) {
-      floorErrors.push(`${kk.id}: ${c.cards}/${fc} cards, ${c.mcq}/${fm} MCQs, ${c.short}/${fs} short answers`);
+      const line = `${kk.id}: ${c.cards}/${fc} cards, ${c.mcq}/${fm} MCQs, ${c.short}/${fs} short answers`;
+      if (kk.held) warnings.push(`floor (held: ${kk.held}): ${line}`);
+      else floorErrors.push(line);
     }
   }
   const psmCount = counts.get('PSM')!;
   if (psmCount.cards < FLOORS.psm.cards || psmCount.mcq < FLOORS.psm.mcq) {
     floorErrors.push(`PSM: ${psmCount.cards}/${FLOORS.psm.cards} cards, ${psmCount.mcq}/${FLOORS.psm.mcq} MCQs`);
   }
-  if (terms.length === 0) floorErrors.push('TERMS: no glossary cards');
+  if (glossary.length === 0) floorErrors.push('TERMS: the glossary list in study-design.json is empty');
   if (caseStudies.length < FLOORS.caseStudies.P0) {
     floorErrors.push(`Case studies: ${caseStudies.length}/${FLOORS.caseStudies.P0}`);
   }

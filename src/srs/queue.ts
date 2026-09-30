@@ -21,9 +21,16 @@ export interface QueueInput {
   kkOrder: readonly KkId[];
 }
 
+/**
+ * Reverse cards keep one SRS record and alternate direction: `forward` (term to definition) when
+ * reps is even, `reverse` (definition to term) when odd. Every other card type is always `forward`.
+ */
+export type ReviewDirection = 'forward' | 'reverse';
+
 export interface QueueEntry {
   cardId: string;
   isNew: boolean;
+  direction: ReviewDirection;
 }
 
 export function buildQueue(_input: QueueInput): QueueEntry[] {

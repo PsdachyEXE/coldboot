@@ -21,8 +21,16 @@ export type TerminalBlock =
   | { kind: 'list'; items: string[]; ordered?: boolean }
   /** Preformatted monospace text: ASCII Gantt charts, share lines, arrays. */
   | { kind: 'pre'; text: string; label?: string }
-  /** Answer feedback: ✓ Correct / ✗ Incorrect with the expected answer and a one-line reason. */
-  | { kind: 'feedback'; correct: boolean; expected?: string; reason?: string }
+  /**
+   * Lettered options (A to D) for an MCQ, or numbered choices. `markdown` may be true only when the
+   * options come from bundled content; user-typed text never sets it.
+   */
+  | { kind: 'choices'; options: string[]; labels?: 'letters' | 'numbers'; markdown?: boolean }
+  /**
+   * Answer feedback: ✓ Correct / ✗ Incorrect with the expected answer and a reason. `markdown`
+   * may be true only when expected/reason come from bundled content (e.g. an MCQ explanation).
+   */
+  | { kind: 'feedback'; correct: boolean; expected?: string; reason?: string; markdown?: boolean }
   | { kind: 'progress'; current: number; total: number; label?: string }
   /** Echo of a submitted command line. */
   | { kind: 'command'; prompt: string; input: string }

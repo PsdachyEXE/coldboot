@@ -13,20 +13,32 @@ export function storageKey(name: string): string {
 }
 
 export interface StorageHealth {
+  /** False once any storage problem has been seen this session. */
   ok: boolean;
-  /** Human-readable reason for the last failure, shown in the warning banner. */
+  /** Human-readable reason for the most recent problem, shown in the persistent warning banner. */
   reason: string | null;
+  /** Every distinct problem seen this session, oldest first. */
+  messages: string[];
 }
 
-export const useStorageHealth = create<StorageHealth>(() => ({ ok: true, reason: null }));
+export const useStorageHealth = create<StorageHealth>(() => ({ ok: true, reason: null, messages: [] }));
+
+/** Raises the persistent storage warning (deduplicated). */
+export function warnStorage(reason: string): void {
+  useStorageHealth.setState((s) => ({
+    ok: false,
+    reason,
+    messages: s.messages.includes(reason) ? s.messages : [...s.messages, reason],
+  }));
+}
 
 function fail(error: unknown, action: string): void {
   const detail = error instanceof Error ? error.name : 'unknown error';
-  const reason =
+  warnStorage(
     detail === 'QuotaExceededError'
       ? 'Browser storage is full, so progress is not being saved. Export your progress from Settings, then free some space.'
-      : `Browser storage is unavailable (${action} failed), so progress will not be saved after you close this tab.`;
-  useStorageHealth.setState({ ok: false, reason });
+      : `Browser storage is unavailable (${action} failed), so progress will not be saved after you close this tab.`,
+  );
 }
 
 function storage(): Storage | null {
@@ -38,7 +50,7 @@ function storage(): Storage | null {
   }
 }
 
-/** Reads and parses a key. Returns undefined when absent, unreadable or not valid JSON. */
+/** Reads and parses a key. Returns undefined when absent or unreadable, `{ unparseable }` when not JSON. */
 export function readJson(name: string): unknown {
   const s = storage();
   if (!s) return undefined;
@@ -53,7 +65,24 @@ export function readJson(name: string): unknown {
   try {
     return JSON.parse(raw) as unknown;
   } catch {
-    return undefined;
+    // Not JSON: hand back a marker so the caller quarantines it instead of silently overwriting it.
+    return { unparseable: raw.slice(0, 1_000_000) };
+  }
+}
+
+/**
+ * Reads only the envelope version of a stored key (`{"v":N,...}`), without parsing the data.
+ * Returns null when absent or not an envelope.
+ */
+export function peekVersion(name: string): number | null {
+  const s = storage();
+  if (!s) return null;
+  try {
+    const raw = s.getItem(storageKey(name));
+    const m = raw ? /^\{"v":(\d+),/.exec(raw) : null;
+    return m ? Number(m[1]) : null;
+  } catch {
+    return null;
   }
 }
 

@@ -44,6 +44,8 @@ export default defineConfig({
   base,
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? '1.0.0'),
+    // Identifies the exact deploy in content reports: version plus the commit CI built from.
+    __BUILD_ID__: JSON.stringify(`${process.env.npm_package_version ?? '1.0.0'}+${(process.env.GITHUB_SHA ?? 'local').slice(0, 7)}`),
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
   },
   plugins: [
@@ -89,5 +91,7 @@ export default defineConfig({
     include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.{ts,tsx}', 'scripts/**/*.test.ts'],
     exclude: ['e2e/**', 'node_modules/**', 'dist/**'],
     testTimeout: 20000,
+    // The audience is in Melbourne; running tests there exercises AEST/AEDT changes around the 4 am rollover.
+    env: { TZ: 'Australia/Melbourne' },
   },
 });

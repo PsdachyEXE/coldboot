@@ -1,73 +1,54 @@
 /**
  * Progress export and import. Imported files are hostile until proven otherwise: capped at 5 MB,
- * parsed inside try/catch, validated with Zod, and rejected with a clear message when the schema
- * version is unknown. Imported strings are only ever rendered as plain text.
+ * parsed inside try/catch, validated with Zod, and rejected with a clear message when a version is
+ * unknown. Imported strings are only ever rendered as plain text.
+ *
+ * Each persisted store is exported as its own `{ v, data }` envelope, so a backup made today still
+ * imports after a store's shape changes (its data runs through that store's migration first).
  */
 import { z } from 'zod';
-import { AttemptsDataSchema, useAttempts, type AttemptsData } from './attempts';
-import { flushAllPersisted } from './persist';
-import { SessionDataSchema, useSession, type SessionData } from './session';
-import { SettingsDataSchema, selectSettingsData, useSettings, type SettingsData } from './settings';
-import { SrsDataSchema, useSrs, type SrsData } from './srs';
+import './attempts';
+import './session';
+import './settings';
+import './srs';
+import { flushAllPersisted, persistedStores } from './persist';
 import { removeAllKeys } from './storage';
 
 export const EXPORT_SCHEMA = 1;
 export const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
+/** Stores every progress file must contain. Others (e.g. the exam autosave) are optional. */
+export const REQUIRED_STORES = ['settings', 'srs', 'attempts', 'session'] as const;
 
 export interface ExportFile {
   app: 'coldboot';
   schema: typeof EXPORT_SCHEMA;
   exportedAt: string;
   appVersion: string;
-  data: {
-    settings: SettingsData;
-    srs: SrsData;
-    attempts: AttemptsData;
-    session: SessionData;
-    /** Exam simulator autosave (P1). Validated by the exam module when present. */
-    exam?: Record<string, unknown>;
-  };
+  stores: Record<string, { v: number; data: unknown }>;
 }
 
-export const ExportFileSchema = z
+export const ExportEnvelopeSchema = z
   .object({
     app: z.literal('coldboot'),
     schema: z.literal(EXPORT_SCHEMA),
     exportedAt: z.string().max(64),
-    appVersion: z.string().max(32),
-    data: z
-      .object({
-        settings: SettingsDataSchema,
-        srs: SrsDataSchema,
-        attempts: AttemptsDataSchema,
-        session: SessionDataSchema,
-        exam: z.record(z.string(), z.unknown()).optional(),
-      })
-      .strict(),
+    appVersion: z.string().max(64),
+    stores: z
+      .record(z.string().regex(/^[a-z][a-z0-9-]{0,31}$/), z.object({ v: z.number().int().min(1), data: z.unknown() }).strict())
+      .refine((s) => Object.keys(s).length <= 16, 'Too many stores'),
   })
   .strict();
 
 export function buildExport(now = Date.now()): ExportFile {
   flushAllPersisted();
-  const srs = useSrs.getState();
-  const attempts = useAttempts.getState();
-  const session = useSession.getState();
+  const stores: ExportFile['stores'] = {};
+  for (const reg of persistedStores.values()) stores[reg.name] = { v: reg.version, data: reg.exportData() };
   return {
     app: 'coldboot',
     schema: EXPORT_SCHEMA,
     exportedAt: new Date(now).toISOString(),
     appVersion: typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : '0.0.0',
-    data: {
-      settings: selectSettingsData(useSettings.getState()),
-      srs: { cards: srs.cards, introduced: srs.introduced },
-      attempts: { log: attempts.log, rollup: attempts.rollup },
-      session: {
-        terminalHistory: session.terminalHistory,
-        daily: session.daily,
-        activity: session.activity,
-        lastBootDay: session.lastBootDay,
-      },
-    },
+    stores,
   };
 }
 
@@ -75,13 +56,19 @@ export function exportFilename(now = Date.now()): string {
   return `coldboot-progress-${new Date(now).toISOString().slice(0, 10)}.json`;
 }
 
-export type ImportResult = { ok: true; file: ExportFile; summary: string } | { ok: false; error: string };
+export interface ValidatedImport {
+  exportedAt: string;
+  /** Validated (and migrated) data per known store. */
+  data: Record<string, unknown>;
+}
+
+export type ImportResult = { ok: true; file: ValidatedImport; summary: string } | { ok: false; error: string };
+
+const TOO_BIG = 'That file is larger than 5 MB, so it is not a COLDBOOT progress file. Choose the file you exported from Settings.';
 
 /** Validates import text. Never throws. */
 export function parseImport(text: string): ImportResult {
-  if (text.length > MAX_IMPORT_BYTES) {
-    return { ok: false, error: 'That file is larger than 5 MB, so it is not a COLDBOOT progress file. Choose the file you exported from Settings.' };
-  }
+  if (text.length > MAX_IMPORT_BYTES) return { ok: false, error: TOO_BIG };
   let raw: unknown;
   try {
     raw = JSON.parse(text);
@@ -97,27 +84,42 @@ export function parseImport(text: string): ImportResult {
     return {
       ok: false,
       error: newer
-        ? `That file came from a newer version of COLDBOOT (schema ${schema}). Reload to update the app, then import again.`
-        : `That file uses an unknown schema version (${String(schema)}), so it can't be imported.`,
+        ? `That file came from a newer version of COLDBOOT (format ${schema}). Reload to update the app, then import again.`
+        : `That file uses an unknown format version (${String(schema).slice(0, 20)}), so it can't be imported.`,
     };
   }
-  const parsed = ExportFileSchema.safeParse(raw);
-  if (!parsed.success) {
-    const first = parsed.error.issues[0];
-    const where = first?.path.length ? ` at ${first.path.join('.')}` : '';
-    return { ok: false, error: `That file is damaged or has been edited${where}, so nothing was imported.` };
+  const envelope = ExportEnvelopeSchema.safeParse(raw);
+  if (!envelope.success) return { ok: false, error: 'That file is damaged or has been edited, so nothing was imported.' };
+
+  const data: Record<string, unknown> = {};
+  for (const name of REQUIRED_STORES) {
+    if (!envelope.data.stores[name]) return { ok: false, error: `That file has no ${name} data, so nothing was imported.` };
   }
-  const file = parsed.data as ExportFile;
-  const reviewed = Object.keys(file.data.srs.cards).length;
-  const attempts = file.data.attempts.log.length;
-  return { ok: true, file, summary: `${reviewed} cards scheduled, ${attempts} attempts, exported ${file.exportedAt.slice(0, 10)}.` };
+  for (const [name, { v, data: storeData }] of Object.entries(envelope.data.stores)) {
+    const reg = persistedStores.get(name);
+    if (!reg) continue; // a store this build doesn't know: ignore it
+    if (v > reg.version) {
+      return { ok: false, error: `That file came from a newer version of COLDBOOT (${name} v${v}). Reload to update the app, then import again.` };
+    }
+    const result = reg.validateImport(v, storeData);
+    if (!result.ok || result.dropped > 0) {
+      return { ok: false, error: `That file's ${name} data is damaged or has been edited, so nothing was imported.` };
+    }
+    data[name] = result.data;
+  }
+  const srs = data.srs as { cards: Record<string, unknown> };
+  const attempts = data.attempts as { log: unknown[] };
+  const exportedAt = envelope.data.exportedAt;
+  return {
+    ok: true,
+    file: { exportedAt, data },
+    summary: `${Object.keys(srs.cards).length} cards scheduled and ${attempts.log.length} attempts, exported ${exportedAt.slice(0, 10)}.`,
+  };
 }
 
 /** Reads a user-chosen file with the size cap applied before reading. Never throws. */
 export async function readImportFile(file: Blob): Promise<ImportResult> {
-  if (file.size > MAX_IMPORT_BYTES) {
-    return { ok: false, error: 'That file is larger than 5 MB, so it is not a COLDBOOT progress file. Choose the file you exported from Settings.' };
-  }
+  if (file.size > MAX_IMPORT_BYTES) return { ok: false, error: TOO_BIG };
   try {
     return parseImport(await file.text());
   } catch {
@@ -125,21 +127,14 @@ export async function readImportFile(file: Blob): Promise<ImportResult> {
   }
 }
 
-/** Replaces all progress with an imported file, then writes it to storage immediately. */
-export function applyImport(file: ExportFile): void {
-  useSettings.getState().replace(file.data.settings);
-  useSrs.getState().replace(file.data.srs);
-  useAttempts.getState().replace(file.data.attempts);
-  useSession.getState().replace(file.data.session);
+/** Replaces all progress with a validated import and writes it to storage immediately. */
+export function applyImport(file: ValidatedImport): void {
+  for (const [name, data] of Object.entries(file.data)) persistedStores.get(name)?.apply(data);
   flushAllPersisted();
 }
 
-/** Deletes every COLDBOOT key and resets every store to first-run state. */
+/** Deletes every COLDBOOT key and resets every persisted store to first-run state. */
 export function resetAllProgress(): void {
-  useSettings.getState().reset();
-  useSrs.getState().reset();
-  useAttempts.getState().reset();
-  useSession.getState().reset();
-  flushAllPersisted();
+  for (const reg of persistedStores.values()) reg.resetSilently();
   removeAllKeys();
 }

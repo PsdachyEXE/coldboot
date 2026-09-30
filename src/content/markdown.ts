@@ -87,6 +87,18 @@ function createRenderer(): MarkdownRenderer {
     return `<pre class="code"><code>${escapeHtml(token.content.replace(/\n$/, ''))}</code></pre>\n`;
   };
 
+  // Column alignment would render as style attributes, which the production CSP blocks; use classes.
+  for (const rule of ['th_open', 'td_open'] as const) {
+    md.renderer.rules[rule] = (tokens, idx, options, _env, self) => {
+      const token = tokens[idx];
+      const style = String(token.attrGet('style') ?? '');
+      const align = /text-align:(left|right|center)/.exec(style)?.[1];
+      if (token.attrs) token.attrs = token.attrs.filter(([name]) => name !== 'style');
+      if (align) token.attrJoin('class', `md-align-${align}`);
+      return self.renderToken(tokens, idx, options);
+    };
+  }
+
   // Tables scroll horizontally on narrow screens instead of widening the page.
   md.renderer.rules.table_open = () => '<div class="md-table"><table>\n';
   md.renderer.rules.table_close = () => '</table></div>\n';

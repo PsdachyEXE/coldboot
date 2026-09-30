@@ -2,7 +2,7 @@
 import { create } from 'zustand';
 import { z } from 'zod';
 import { DEFAULT_EXAM_AT, parseInstant } from '../lib/time';
-import { cleanPlainText } from '../lib/text';
+import { cleanPlainText, isCleanPlainText } from '../lib/text';
 import { persistStore } from './persist';
 
 export const NAME_MAX = 24;
@@ -37,7 +37,7 @@ export interface SettingsState extends SettingsData {
 
 export const SettingsDataSchema = z
   .object({
-    name: z.string().max(NAME_MAX),
+    name: z.string().refine((n) => isCleanPlainText(n, NAME_MAX), 'Name must be plain text of at most 24 characters'),
     examAt: z.string().refine((s) => Number.isFinite(parseInstant(s)), 'Invalid exam date'),
     newCardLimit: z.number().int().min(1).max(NEW_CARD_LIMIT_MAX),
     sound: z.boolean(),
@@ -110,10 +110,27 @@ export function examAtMs(s: Pick<SettingsData, 'examAt'>): number {
   return Number.isFinite(t) ? t : parseInstant(DEFAULT_EXAM_AT);
 }
 
+/** Keeps each valid field of damaged settings and defaults the rest. */
+export function salvageSettings(raw: unknown): { data: SettingsData; dropped: number } | undefined {
+  if (typeof raw !== 'object' || raw === null) return undefined;
+  const base = defaultSettings(0);
+  const shape = SettingsDataSchema.shape;
+  const out: Record<string, unknown> = { ...base };
+  let dropped = 0;
+  for (const key of Object.keys(shape) as (keyof SettingsData)[]) {
+    const value = (raw as Record<string, unknown>)[key];
+    if (shape[key].safeParse(value).success) out[key] = value;
+    else dropped++;
+  }
+  return { data: out as unknown as SettingsData, dropped };
+}
+
 export const settingsPersistence = persistStore(useSettings, {
   name: 'settings',
   version: 1,
+  schema: SettingsDataSchema,
   select: selectSettingsData,
   hydrate: (data) => data,
-  validate: (data): data is SettingsData => SettingsDataSchema.safeParse(data).success,
+  defaults: () => defaultSettings(),
+  salvage: salvageSettings,
 });

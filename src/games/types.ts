@@ -7,6 +7,7 @@
  */
 import type { ContentIndex } from '../content/loader';
 import type { KkId } from '../content/schema';
+import type { DailyRecord } from '../state/session';
 import type { TerminalBlock } from '../terminal/blocks';
 
 export type Difficulty = 'easy' | 'normal' | 'hard';
@@ -22,6 +23,11 @@ export interface GameContext {
   readonly mastery: (kk: KkId) => number | null;
   /** Melbourne calendar date (YYYY-MM-DD) for the daily challenge. */
   readonly today: string;
+  /**
+   * Today's daily challenge record, if one exists (the `daily` game resumes from it and builds the
+   * share line from its stored first attempts). Null for every other game.
+   */
+  readonly daily: DailyRecord | null;
 }
 
 export interface GameStartOptions {
@@ -46,6 +52,11 @@ export interface AnswerResult {
   score: number;
   /** Extra blocks shown after the feedback line (e.g. an ASCII Gantt chart). */
   followUp?: TerminalBlock[];
+  /**
+   * Reproduces a generated item exactly, e.g. "deskcheck:seed=1234:i=4:hard". Shown in content
+   * reports so a wrong generated answer can be regenerated and debugged.
+   */
+  instance?: string;
   /**
    * False when the input was not an attempt at all (e.g. an unparseable array); the host shows
    * `reason` and re-prompts without recording an attempt.
@@ -85,6 +96,37 @@ export interface GameSession {
   readonly deadline?: number;
   /** 1-based index of the current item and the round length, for the progress line. */
   readonly progress?: { current: number; total: number };
+  /**
+   * Item ids of the whole round in order, known at start. The daily challenge exposes them so the
+   * host can call beginDaily(date, itemIds) and then recordDaily(date, progress.current - 1, ...).
+   */
+  readonly itemIds?: readonly string[];
+  /** The item currently awaiting an answer (for the Report action). */
+  current?(): { itemId: string; kk: KkId[]; instance?: string } | null;
+}
+
+/** Result of checking one answer against one item. */
+export interface CheckResult {
+  correct: boolean;
+  expected: string;
+  reason: string;
+  /** 0 to 1; defaults to 1 when correct and 0 otherwise. */
+  score?: number;
+  followUp?: TerminalBlock[];
+  /** False when the input wasn't an attempt (unparseable); the host re-prompts without recording. */
+  counted?: boolean;
+}
+
+/** One question: the unit the shared quiz-loop engine (./engine.ts) runs. */
+export interface QuizItem {
+  /** Attempt item id, e.g. "gen-sort-selection" or a content MCQ id. */
+  id: string;
+  kk: KkId[];
+  prompt: TerminalBlock[];
+  chips?: string[];
+  /** See AnswerResult.instance. */
+  instance?: string;
+  check(input: string): CheckResult;
 }
 
 export interface Game {
@@ -94,6 +136,11 @@ export interface Game {
   /** Shown by `man <game>`. Plain text with blank-line paragraphs. */
   man: string;
   start(ctx: GameContext, opts: GameStartOptions): GameSession;
+  /**
+   * One self-contained generated item for a seed, used by the daily challenge (and later `boss`).
+   * Deterministic: the same seed and difficulty always give the same item.
+   */
+  generate?(seed: number, difficulty: Difficulty): QuizItem;
 }
 
 /**
@@ -110,5 +157,7 @@ export interface GameMeta {
   man: string;
   /** True when the game needs loaded study content (GameContext.content). */
   needsContent?: boolean;
+  /** True when the game implements Game.generate (eligible for the daily challenge's generated items). */
+  generator?: boolean;
   load: () => Promise<Game>;
 }

@@ -31,10 +31,14 @@ function parseDay(day: string): [number, number, number] {
   return [Number(m[1]), Number(m[2]), Number(m[3])];
 }
 
-/** Local study day for an instant: the local date of (ts - 4 h). */
+/**
+ * Local study day for an instant: the local calendar date, or the previous date before 4:00 am
+ * wall-clock time. Uses wall-clock hours, so the rollover stays at 4 am on daylight-saving days.
+ */
 export function studyDay(ts: number): string {
-  const d = new Date(ts - STUDY_DAY_ROLLOVER_HOUR * HOUR_MS);
-  return isoDay(d.getFullYear(), d.getMonth() + 1, d.getDate());
+  const d = new Date(ts);
+  const day = isoDay(d.getFullYear(), d.getMonth() + 1, d.getDate());
+  return d.getHours() < STUDY_DAY_ROLLOVER_HOUR ? addDays(day, -1) : day;
 }
 
 /** The instant a study day begins: 4:00 am local time on that date. */
@@ -57,6 +61,8 @@ export function daysBetween(a: string, b: string): number {
   return Math.round((Date.UTC(yb, mb - 1, db) - Date.UTC(ya, ma - 1, da)) / DAY_MS);
 }
 
+export const MELBOURNE_TZ = 'Australia/Melbourne';
+
 const melbourneFormatter = new Intl.DateTimeFormat('en-AU', {
   timeZone: 'Australia/Melbourne',
   year: 'numeric',
@@ -69,6 +75,58 @@ export function melbourneDate(ts: number): string {
   const parts = melbourneFormatter.formatToParts(new Date(ts));
   const get = (type: string) => Number(parts.find((p) => p.type === type)?.value);
   return isoDay(get('year'), get('month'), get('day'));
+}
+
+const melbourneWallFormatter = new Intl.DateTimeFormat('en-AU', {
+  timeZone: 'Australia/Melbourne',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hourCycle: 'h23',
+});
+
+/** Melbourne's UTC offset in minutes at an instant (600 for AEST, 660 for AEDT). */
+export function melbourneOffsetMinutes(ts: number): number {
+  const parts = melbourneWallFormatter.formatToParts(new Date(ts));
+  const get = (type: string) => Number(parts.find((p) => p.type === type)?.value);
+  const asUtc = Date.UTC(get('year'), get('month') - 1, get('day'), get('hour'), get('minute'), get('second'));
+  return Math.round((asUtc - Math.floor(ts / 1000) * 1000) / 60_000);
+}
+
+function formatOffset(minutes: number): string {
+  const sign = minutes >= 0 ? '+' : '-';
+  const abs = Math.abs(minutes);
+  return `${sign}${pad(Math.floor(abs / 60))}:${pad(abs % 60)}`;
+}
+
+/**
+ * Converts a Melbourne wall-clock date and time (as picked in first run or Settings) into an ISO
+ * instant with the correct AEST/AEDT offset, e.g. ('2026-11-13', '15:00') gives
+ * '2026-11-13T15:00:00+11:00'. Returns null for malformed input.
+ */
+export function melbourneWallTimeToIso(day: string, hhmm: string): string | null {
+  const dm = /^(\d{4})-(\d{2})-(\d{2})$/.exec(day);
+  const tm = /^(\d{2}):(\d{2})$/.exec(hhmm);
+  if (!dm || !tm) return null;
+  const [y, m, d, h, mi] = [Number(dm[1]), Number(dm[2]), Number(dm[3]), Number(tm[1]), Number(tm[2])];
+  if (m < 1 || m > 12 || d < 1 || d > 31 || h > 23 || mi > 59) return null;
+  const wallAsUtc = Date.UTC(y, m - 1, d, h, mi);
+  let offset = melbourneOffsetMinutes(wallAsUtc - 600 * 60_000);
+  const second = melbourneOffsetMinutes(wallAsUtc - offset * 60_000);
+  if (second !== offset) offset = second;
+  return `${day}T${pad(h)}:${pad(mi)}:00${formatOffset(offset)}`;
+}
+
+/** The Melbourne wall-clock date and time of an ISO instant, for prefilling date and time inputs. */
+export function toMelbourneWallTime(iso: string): { day: string; time: string } | null {
+  const ts = parseInstant(iso);
+  if (!Number.isFinite(ts)) return null;
+  const parts = melbourneWallFormatter.formatToParts(new Date(ts));
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '00';
+  return { day: `${get('year')}-${get('month')}-${get('day')}`, time: `${get('hour')}:${get('minute')}` };
 }
 
 /** Parses an ISO 8601 instant with an explicit offset. Returns NaN when invalid. */
