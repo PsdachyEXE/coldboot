@@ -31,8 +31,7 @@ pre.pseudo, pre.code {
   max-width: 100%;
   tab-size: 4;
 }
-/* Each line is its own block, so the newlines between them must collapse, or every line gains a blank one. */
-pre.pseudo code { display: block; white-space: normal; }
+pre.pseudo code { display: block; }
 .ps-line { display: block; white-space: pre; }
 .ps-ln { color: var(--steel); display: inline-block; min-width: 2.5ch; margin-right: 1.5ch; text-align: right; user-select: none; }
 .ps-mark { outline: 1px solid var(--cobalt); }
