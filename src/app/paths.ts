@@ -58,6 +58,14 @@ export function reviewPath(opts: { kk?: KkId } = {}): string {
   return withQuery(paths.review, { kk: opts.kk });
 }
 
+/**
+ * Where a KK link goes to practise it: a focused drill, except the glossary (TERMS), which has
+ * flashcards and blitz but no multiple-choice questions, so it opens Review on its cards.
+ */
+export function practisePath(kk: KkId): string {
+  return kk === 'TERMS' ? reviewPath({ kk }) : drillPath({ kk });
+}
+
 export function examPath(opts: { mini?: boolean } = {}): string {
   return withQuery(paths.exam, { mini: opts.mini ? '1' : undefined });
 }

@@ -411,6 +411,14 @@ describe('drill', () => {
     expect(term().game).toBeNull();
   });
 
+  it('points drill TERMS to the glossary flashcards and blitz', async () => {
+    useContent.setState({ index: fixtureContent(), status: 'ready' });
+    await submitLine('drill TERMS', mockEnv());
+    expect(printed()).toContain('The glossary has no multiple-choice questions. Type play blitz to practise its terms, or review to revise your flashcards.');
+    expect(printed()).not.toContain('Try drill');
+    expect(term().game).toBeNull();
+  });
+
   it('suggests the nearest id for a typo and explains the format otherwise', async () => {
     await submitLine('drill U3O1-KK1', mockEnv());
     expect(printed()).toContain('Did you mean U3O1-KK01?');

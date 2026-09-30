@@ -48,7 +48,8 @@ describe('Syllabus map', () => {
       expect(screen.getByRole('region', { name: new RegExp(`^${area}`) })).toBeInTheDocument();
     }
     const groups = screen.getByRole('region', { name: 'Across the course' });
-    expect(within(groups).getByRole('link', { name: 'Drill Terms used in this study' })).toBeInTheDocument();
+    // The glossary has flashcards and blitz but no questions, so its row opens Review.
+    expect(within(groups).getByRole('link', { name: 'Review Terms used in this study' })).toHaveAttribute('href', '/review?kk=TERMS');
     expect(within(groups).getByRole('link', { name: 'Drill Problem-solving methodology' })).toBeInTheDocument();
   });
 

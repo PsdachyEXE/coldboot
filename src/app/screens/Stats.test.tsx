@@ -128,6 +128,13 @@ describe('Stats', () => {
       expect(within(weakest).getByRole('link', { name: 'Find unseen key knowledge on the syllabus map' })).toHaveAttribute('href', '/map');
     });
 
+    it('links the glossary in the weakest list to its flashcards', () => {
+      recordAttempt({ itemId: 't-algorithm', kk: ['TERMS'], score: 0, timestamp: NOW - 200_000, ms: 5_000 }, { review: true });
+      renderStats();
+      const weakest = screen.getByRole('region', { name: 'Weakest key knowledge' });
+      expect(within(weakest).getByRole('link', { name: /Terms used in this study/ })).toHaveAttribute('href', '/review?kk=TERMS');
+    });
+
     it('shows time studied today, in the window and in total', () => {
       renderStats();
       const time = screen.getByRole('region', { name: 'Time studied' });

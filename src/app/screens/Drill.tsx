@@ -147,6 +147,24 @@ function DrillRound({ content, scope, timed }: { content: ContentIndex; scope: S
 function NoQuestions({ content, scope }: { content: ContentIndex; scope: StudyScope }) {
   const kk = scope.mode === 'kk' ? scope.kk : null;
   const hasCards = kk ? (content.byKk.get(kk)?.cards.length ?? 0) > 0 : content.cards.length > 0;
+  if (kk === 'TERMS' && hasCards) {
+    // The glossary has no multiple-choice questions by design, so none are coming.
+    return (
+      <>
+        <h1>Drill</h1>
+        <EmptyState
+          title="The glossary is practised with flashcards"
+          action={
+            <ButtonLink variant="primary" to={reviewPath({ kk })}>
+              Review the glossary
+            </ButtonLink>
+          }
+        >
+          <p>The glossary has no multiple-choice questions. Review its flashcards, or type play blitz in the terminal.</p>
+        </EmptyState>
+      </>
+    );
+  }
   return (
     <>
       <h1>Drill</h1>

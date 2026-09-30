@@ -166,6 +166,10 @@ async function drill(cmd: ParsedCommand): Promise<void> {
     intro = `Drilling your weakest key knowledge: ${kks.map(kkLabel).join('; ')}.`;
   }
   if (!kks.some(has)) {
+    if (target === 'TERMS') {
+      out(say('The glossary has no multiple-choice questions. Type play blitz to practise its terms, or review to revise your flashcards.', 'muted'));
+      return;
+    }
     const suggestion = suggestKk(kks[0], has);
     const label = kks.length === 1 ? kks[0] : target;
     out(
