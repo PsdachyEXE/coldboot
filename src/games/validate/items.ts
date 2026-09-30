@@ -74,7 +74,7 @@ function rules(spec: FieldSpec): string {
     spec.required ? '' : 'An optional field left blank is valid.',
     spec.kind === 'text' ? 'For text, the range check tests the number of characters.' : '',
   ].filter(Boolean);
-  return ['Checks run in this order: existence, then type, then range. The first check that fails rejects the input.', ...extra].join(' ');
+  return ['Checks run in this order: existence, then type, then range. The first check that fails rejects the input.', ...extra, 'Entered text is shown in quotes.'].join(' ');
 }
 
 export function checkItem(seed: number, index: number, difficulty: Difficulty): QuizItem {
@@ -93,7 +93,7 @@ export function checkItem(seed: number, index: number, difficulty: Difficulty): 
     prompt: [
       specBlock(spec),
       { kind: 'text', text: rules(spec), tone: 'muted' },
-      { kind: 'table', caption: 'Test inputs (entered text is shown in quotes)', columns: ['Input', 'Entered', 'Result'], rows },
+      { kind: 'table', caption: 'Test inputs', columns: ['Input', 'Entered', 'Result'], rows },
       { kind: 'text', text: `Which check rejects input ${at + 1}, ${shown(input)}?`, tone: 'accent' },
       { kind: 'text', text: unparsed, tone: 'muted' },
     ],

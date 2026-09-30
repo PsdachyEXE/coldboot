@@ -194,13 +194,13 @@ export function fieldFor(rng: Rng, difficulty: Difficulty, kind?: FieldKind): Fi
 const NOT_WHOLE = ['sixteen', 'ten', 'twelve', 'n/a', 'lots'];
 const NOT_NUMBER = ['heavy', 'twelve', 'n/a', 'a few'];
 const NOT_DATE = ['next Friday', 'TBA', 'March', 'soon', 'tomorrow', 'the 5th'];
-const LETTERS = 'abcdefghjkmnpqrstuvwxyz';
-const CHARS = `${LETTERS}23456789`;
+const TEXT_PARTS = ['wattle', 'creek', 'koala', 'reef', 'emu', 'gum', 'tram', 'swift', 'harbour', 'comet', 'river', 'quokka', 'banksia', 'dune', 'kiri', 'sam'];
 
+/** Plausible text of exactly n characters: words run together, sometimes ending in a digit. */
 function textOfLength(rng: Rng, n: number): string {
-  let s = LETTERS[randInt(rng, 0, LETTERS.length - 1)];
-  while (s.length < n) s += CHARS[randInt(rng, 0, CHARS.length - 1)];
-  return s;
+  let s = pick(rng, TEXT_PARTS);
+  while (s.length < n) s += rng() < 0.3 ? String(randInt(rng, 1, 9)) : pick(rng, TEXT_PARTS);
+  return s.slice(0, n);
 }
 
 function between(rng: Rng, spec: FieldSpec, lo: number, hi: number): number {

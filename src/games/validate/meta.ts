@@ -4,7 +4,7 @@ import type { KkId } from '../../content/schema';
 export const VALIDATE_ID = 'validate';
 export const VALIDATE_TITLE = 'Validation checks and boundary values';
 export const VALIDATE_KK: KkId[] = ['U3O1-KK10', 'U4O1-KK05', 'U3O1-KK14'];
-export const VALIDATE_SUMMARY = 'Name the existence, type or range check that rejects an input, and pick boundary values';
+export const VALIDATE_SUMMARY = 'Name the check that rejects an input, and choose boundary values';
 
 export const VALIDATE_MAN = `validate drills the three validation checks: existence, type and range.
 

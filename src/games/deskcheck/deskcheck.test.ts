@@ -43,7 +43,7 @@ function questionOf(item: QuizItem): string {
 
 /** Rebuilds the grid from the printed table, so the check uses what the student sees. */
 function gridFromTable(item: QuizItem): Record<string, Value> | undefined {
-  const table = item.prompt.find((b): b is Table => b.kind === 'table' && (b.caption ?? '').startsWith('The array grid'));
+  const table = item.prompt.find((b): b is Table => b.kind === 'table' && (b.caption ?? '').startsWith('grid (indexes start at'));
   if (!table) return undefined;
   return { grid: table.rows.map((r) => r.slice(1).map(Number)) };
 }

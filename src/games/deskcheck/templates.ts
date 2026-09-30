@@ -524,7 +524,7 @@ function loop(rng: Rng, d: Difficulty): TraceCase {
 function gridTable(grid: number[][], base: Base): TerminalBlock {
   return {
     kind: 'table',
-    caption: `The array grid (row and column indexes start at ${base})`,
+    caption: `grid (indexes start at ${base})`,
     columns: ['Row', ...grid[0].map((_, c) => `Column ${c + base}`)],
     rows: grid.map((row, r) => [String(r + base), ...row.map(String)]),
   };

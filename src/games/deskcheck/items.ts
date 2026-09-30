@@ -146,8 +146,7 @@ export function traceTable(built: Pick<BuiltTrace, 'tc' | 'program' | 'run' | 'a
   // Rows with nothing to show (such as setting up an array the table leaves out) are dropped.
   const useful = all.filter((r) => r.slice(1).some(Boolean));
   const rows = useful.slice(0, TRACE_ROWS_MAX);
-  const caption =
-    useful.length > TRACE_ROWS_MAX ? `Trace table: the first ${TRACE_ROWS_MAX} of ${useful.length} steps, with values after each line runs` : 'Trace table: values after each line runs';
+  const caption = useful.length > TRACE_ROWS_MAX ? `Trace table (first ${TRACE_ROWS_MAX} of ${useful.length} steps)` : 'Trace table';
   return { kind: 'table', caption, columns: ['Line', ...names, 'Output'], rows };
 }
 
