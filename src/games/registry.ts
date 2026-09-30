@@ -14,6 +14,7 @@ import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
+import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
 import type { GameMeta } from './types';
 
 export const GAMES: GameMeta[] = [
@@ -46,6 +47,16 @@ export const GAMES: GameMeta[] = [
     man: SEARCH_MAN,
     generator: true,
     load: () => import('./search').then((m) => m.default),
+  },
+  {
+    id: TRIAGE_ID,
+    title: TRIAGE_TITLE,
+    priority: 'P0',
+    kk: TRIAGE_KK,
+    summary: TRIAGE_SUMMARY,
+    man: TRIAGE_MAN,
+    generator: true,
+    load: () => import('./triage').then((m) => m.default),
   },
 ];
 
