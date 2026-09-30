@@ -15,6 +15,7 @@ import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './dai
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { GANTT_GAME_KK, GANTT_ID, GANTT_MAN, GANTT_SUMMARY, GANTT_TITLE } from './gantt/meta';
+import { PSM_ID, PSM_KK, PSM_MAN, PSM_SUMMARY, PSM_TITLE } from './psm/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
@@ -104,6 +105,16 @@ export const GAMES: GameMeta[] = [
     man: GANTT_MAN,
     generator: true,
     load: () => import('./gantt').then((m) => m.default),
+  },
+  {
+    id: PSM_ID,
+    title: PSM_TITLE,
+    priority: 'P1',
+    kk: PSM_KK,
+    summary: PSM_SUMMARY,
+    man: PSM_MAN,
+    needsContent: true,
+    load: () => import('./psm').then((m) => m.default),
   },
 ];
 

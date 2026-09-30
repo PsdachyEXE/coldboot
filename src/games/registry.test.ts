@@ -32,6 +32,7 @@ describe('game registry', () => {
     for (const id of ['deskcheck', 'sort', 'search', 'triage', 'validate', 'gantt']) expect(flags(id)).toEqual([true, false, false]);
     expect(flags('blitz')).toEqual([false, true, true]);
     expect(flags('daily')).toEqual([false, true, true]);
+    expect(flags('psm')).toEqual([false, true, false]);
   });
 
   it('loads games whose ids, titles and generators match their metadata', async () => {
