@@ -58,7 +58,7 @@ export function renderPseudo(code: string, opts: PseudoOptions = {}): string {
       const cls = marks.has(n) ? 'ps-line ps-mark' : 'ps-line';
       return `<span class="${cls}">${ln}<span class="ps-src">${highlightPseudoLine(line)}</span></span>`;
     })
-    .join('\n');
+    .join(''); // each .ps-line is display:block; a newline between them would render as a blank line inside <pre>
   return `<pre class="pseudo"><code>${body}</code></pre>`;
 }
 

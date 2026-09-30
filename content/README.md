@@ -82,3 +82,11 @@ Figures have no auto-layout. Coordinates are in SVG user units on a canvas of `w
 | Use case system boundary | rectangle, name at top-left | `w`, `h` required |
 
 Flows are straight arrows from the edge of one element to the edge of the other. `via` points add bends, and `labelAt` pins the label (by default it sits at the midpoint). Leave at least 40 units between elements so labels fit, and keep labels short: DFD and context diagram flow labels are snake_case (`booking_details`). Gantt figures need no coordinates: give tasks, durations and dependencies, and the renderer computes start times and the critical path.
+
+Renderer behaviour worth knowing when you lay out a figure:
+
+- Two straight flows between the same pair of elements (a request and its reply) are spread apart automatically, with their labels on the outer sides. You don't need `via` points for them.
+- A label on a line too short to hold it moves beside the line, and every label is kept on the canvas. `labelAt` always wins.
+- Gantt task ids appear in the chart and in its "Depends on" column, so use short ids (`A`, `B`, `C`). A milestone is a task with duration 0, or `milestone: true` to add a diamond at its finish. Plans longer than about 30 days read better in weeks.
+- Mock-up `list` items are separated by newlines in `text`.
+- Questions can mark elements on a figure (the renderer's `highlight`): use context diagram entity ids or `system`, DFD node ids, use case actor and use case ids, and Gantt task ids.

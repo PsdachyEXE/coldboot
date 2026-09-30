@@ -330,3 +330,193 @@ Every call made without asking the operator, with the reason and the alternative
 **Reason.** At 360 px the route's 160 px default left the page 36 px taller than the screen. Track B1 was built without `global.css` and the new tokens, so the other two fixes bring it into line with track A.
 
 **Rejected.** Changing `global.css` or the tokens to suit one component.
+
+## D-041 Figures: Object description as a semantic HTML table
+
+**Decision.** ObjectDescription renders a <table>: the object name in <thead>, then a Properties <tbody> (Name, Data type, and Description when any member has one), then a Methods <tbody>. Member names are in Martian Mono.
+
+**Reason.** The text wraps and stays selectable, screen readers can move cell by cell, and it needs no scaling or scroll box at 360 px.
+
+**Rejected.** An SVG box diagram, which would need manual text wrapping and a sideways scroll on phones, and would be less accessible.
+
+## D-042 Figures: Scroll container with a label-size floor
+
+**Decision.** Each canvas sits in an overflow-x:auto box (width: fit-content, max-width: 100%, --void background). Inside it, a stage has min-width: min-content, and a hidden zero-height sizer SVG is width x 12/14 wide. The SVG shows at its natural size where there is room and scales down to fit, but never below the sizer width, so 14-unit labels stay at 12 px or more. The box becomes a focusable role=group tab stop, with a 'Scroll sideways to see the whole figure.' hint, only while it actually overflows (checked with a ResizeObserver).
+
+**Reason.** This keeps the page from scrolling sideways and keeps labels legible without per-figure style attributes, which the no-inline-style rule forbids. Measured in Chromium, labels are exactly 12.0 px at 360 px, and the page width is 360.
+
+**Rejected.** Setting min-width or max-width per figure through the style prop (writes style attributes); letting SVGs shrink to fit (labels at about 7 px on phones); always making the box a tab stop.
+
+## D-043 Figures: Label widths from measured font metrics
+
+**Decision.** text.ts holds advance widths for printable ASCII in Atkinson Hyperlegible Next, at regular and bold weights, measured once in Chromium. It adds a 4% safety margin and assumes 0.7 em for other characters. These widths drive wrapping inside shapes and the --void backing rectangles.
+
+**Reason.** Layout stays deterministic and testable in jsdom, with no layout pass or font-load race. In Chromium every flow-label backing was at least 6 units wider than its rendered text, and no label overflowed its shape.
+
+**Rejected.** Measuring each label with getBBox after render, which doesn't work in jsdom and would need re-measuring after fonts load.
+
+## D-044 Figures: Parallel flows and short-line labels
+
+**Decision.** Straight flows between the same pair of nodes are spread 22 units apart along a normal shared by both directions, and their labels move to the outer side. A label that would cover the arrowhead or either end of the line moves beside the line: above a flatter line, right of a steeper one, switching sides if that side leaves the canvas. All labels are kept on the canvas. labelAt always wins.
+
+**Reason.** Request and reply flows are the norm in context diagrams, and forcing authors to add via points to every pair would be error-prone. Nodes never move, so this is still layout from coordinates, not auto-layout.
+
+**Rejected.** Drawing both flows on the same line (they overlap) and requiring via points for every pair.
+
+## D-045 Figures: Highlight API
+
+**Decision.** highlight is either string[] (markers A, B, C, ... in order) or Record<id, markerText>. A highlighted element gets a dashed --cobalt ring plus a small marker box, and the text description gains a 'Marked on the figure' section, which also goes into the SVG <desc>. Ids by kind:
+- Context: 'system' and entity ids.
+- DFD: node ids.
+- Context and DFD flows, and use case links: flow.id, or 'from->to'.
+- Use case: actor and use case ids.
+- Gantt: task ids.
+- Object: member names.
+- Pseudocode: line numbers, drawn through renderPseudo's highlightLines with a dashed override.
+- Table: 1-based row numbers.
+- Mock-up: e1, e2, ... in data order.
+Unknown ids are ignored.
+
+**Reason.** Letter markers let a question say 'the flow marked A', and the dfd game can mark candidate elements. The marker means colour or dash never carries the highlight alone.
+
+**Rejected.** A single fixed marker such as '*' (can't tell several highlights apart) and ring-only highlighting.
+
+## D-046 Figures: Gantt slack in the text description only with showCriticalPath
+
+**Decision.** The description always lists each task's duration, dependencies, explicit start and the days or weeks it runs in. It adds slack, critical status and the critical path only when showCriticalPath is set; otherwise the summary says 'Slack and the critical path are not marked.'
+
+**Reason.** The description mirrors what the chart shows, so opening it never gives away an answer that a question on an unmarked chart asks the student to work out.
+
+**Rejected.** Always listing slack, as the brief's list suggests, which would reveal the critical path on charts that deliberately hide it.
+
+## D-047 Figures: Schedule semantics
+
+**Decision.** An explicit start means 'starts no earlier than', so earliest start = max(start, latest dependency finish). Slack is total float, LS - ES. critical is slack == 0. criticalPaths returns every maximal chain of critical tasks joined by tight links (each dependant starts exactly when its predecessor finishes), from a task whose start isn't set by a dependency to a task that finishes at the project duration, sorted by input position. Zero-duration milestones stay on the path. Cycles, unknown or self dependencies, duplicate ids and negative durations throw a ScheduleError that names the problem, e.g. 'Gantt tasks form a dependency cycle: B → C → A → B.'
+
+**Reason.** This matches the textbook critical path method and is what the gantt game needs. The brute-force reference checks the same definition independently, as the heaviest paths through a network with a source and a sink, excluding chains that are a contiguous piece of another.
+
+**Rejected.** Treating start as a fixed start that could break a dependency, and returning only one critical path when chains tie.
+
+## D-048 Figures: Gantt chart layout
+
+**Decision.** Rows follow task order. Table columns come first (Task: id and name; Days or Weeks; Depends on), then one column per unit numbered from 1, so ES 2 with duration 3 fills columns 3 to 5. Milestones (duration 0, or milestone: true) are diamonds on the boundary where they happen. Normal bars are solid --phosphor; critical bars are hatched --ice with an outline and the word 'critical' after them; slack is a dashed --steel line with an end tick at the latest finish. Unit width is 18 to 48; tick labels thin out for long projects. The legend is HTML so it wraps at 360 px.
+
+**Reason.** Exam-style Gantt charts number their columns from 1, and a 'Depends on' column shows dependencies without cluttering the chart with connector arrows.
+
+**Rejected.** A 0..T boundary axis and dependency connector arrows (busy, and they collided with the 'critical' labels).
+
+## D-049 Figures: ASCII Gantt format
+
+**Decision.** The columns are:
+- a two-character mark ('* ' on critical rows);
+- the task, as 'id name' truncated with '...';
+- Days or Weeks;
+- Slack;
+- the bars, one column per unit.
+Bar characters: '#' for critical tasks, '=' for other tasks, '.' for slack up to the latest finish, 'M' for a milestone at the end of its unit. Plans longer than 60 columns fit several units per column and say so ('Scale: 1 column = 2 days.'). A key line explains only the symbols present. showCritical: false (for while a game asks for the critical path) hides the marks, the Slack column and the dots. Non-ASCII in names is folded to ASCII.
+
+**Reason.** Critical tasks are marked by a symbol as well as the bar character, so nothing depends on colour, and the output copies cleanly anywhere.
+
+**Rejected.** Unicode block characters and diamonds, which break the ASCII-only rule for pre blocks copied into editors.
+
+## D-050 Figures: Pseudocode double spacing fixed locally
+
+**Decision.** Figure.module.css sets white-space: normal on the figure's pre.pseudo code (each .ps-line keeps white-space: pre). The figure's listing box scrolls instead of the pre.
+
+**Reason.** renderPseudo joins its display:block line spans with '\n', and inside a <pre> each newline renders as a blank line, so every listing was double-spaced. src/ui/markdown.css and src/content/markdown.ts belong to other tracks or contracts, so I scoped the fix to figures and report the global bug.
+
+**Rejected.** Editing markdown.css (track A) or renderPseudo (contract file) from this track.
+
+## D-051 Figures: Other drawing conventions
+
+**Decision.** - Default sizes follow content/README.md, and a process radius comes from w/2 when w is given.
+- Actors route links to a 40x72 box, and their highlight ring takes in the label.
+- The use-case boundary is a 1.5 ice rectangle drawn first.
+- Figures sit on a --void canvas even on --trench surfaces, so label backings match.
+- Mock-up list items are split on newlines, and notes are numbered in data order.
+- Decorative SVGs (the scroll sizer, legend swatches) are aria-hidden instead of role=img.
+- Title and caption are plain text; only table cells and pseudocode go through Markdown.
+
+**Reason.** These keep the notation consistent and accessible, stay within the tokens, and never render figure strings as HTML outside the content pipeline.
+
+**Rejected.** Transparent canvases, which would need a per-surface backing colour, and naming decorative SVGs as images.
+
+## D-052 Distribution: A test-only switch to cover the no-Chromium path in CI
+
+**Decision.** install.ps1 honours COLDBOOT_NO_CHROMIUM=1, which skips the Edge and Chrome search. CI uses it after an Edge install to check that .url shortcuts replace the .lnk files and that uninstall removes .url files. It is documented in the script header next to COLDBOOT_NO_LAUNCH.
+
+**Reason.** Every runner has Edge, so without the switch the fallback path and uninstall's .url handling would never be run anywhere before a student hits them.
+
+**Rejected.** Keeping strictly to the brief's knobs and leaving the fallback untested, or hiding Edge on the runner, which is fragile.
+
+## D-053 Distribution: Constrained Language Mode stops early with advice
+
+**Decision.** If $ExecutionContext.SessionState.LanguageMode isn't FullLanguage, the installer says PowerShell runs in a restricted mode, points to the Pages URL and the browser's own install option, and returns.
+
+**Reason.** Managed school laptops often enforce this mode, which blocks WScript.Shell COM and .NET calls, and the student would otherwise see a confusing partial failure.
+
+**Rejected.** Letting the first blocked call fail into the generic catch.
+
+## D-054 Distribution: Setbacks in one step don't stop the whole install
+
+**Decision.** A failed icon download keeps the previous icon, or falls back to the browser's icon, and the install carries on. The icon downloads to a temp file first and is moved into place. Each shortcut location has its own try/catch, so a blocked Desktop (for example by Controlled Folder Access, or a redirect to a missing drive) still leaves the Start menu shortcut. The launch has its own try/catch too.
+
+**Reason.** A student should end up with a working shortcut whenever that's possible, and every failure is reported in plain words.
+
+**Rejected.** Aborting on the first failure.
+
+## D-055 Distribution: Wider browser and folder search
+
+**Decision.** Besides the briefed locations, the search checks the HKLM WOW6432Node App Paths view and %ProgramW6432%. If GetFolderPath returns empty, it retries with SpecialFolderOption.Create. Re-running removes a shortcut of the other kind (.lnk or .url) in the same place.
+
+**Reason.** This covers 32-bit PowerShell hosts and missing special folders, and makes a re-run a true repair when the browser situation has changed.
+
+**Rejected.** Only the exact paths in the brief.
+
+## D-056 Distribution: .url files are ASCII, with the icon dropped for non-ASCII paths
+
+**Decision.** Internet shortcuts are written with Set-Content -Encoding ASCII. IconFile is left out when the icon path contains non-printable-ASCII characters, such as an accented user name.
+
+**Reason.** The .url format is an ANSI INI file, and 5.1 and 7 disagree about what 'Default' encoding means. A missing icon is better than a corrupted path.
+
+**Rejected.** UTF-16 .url files (not sure Explorer reads them) and code-page juggling.
+
+## D-057 Distribution: COLDBOOT_NO_LAUNCH applies to both paths
+
+**Decision.** The variable also stops the no-Chromium path from opening the default browser.
+
+**Reason.** It gives CI and testers the same behaviour on both paths.
+
+**Rejected.** Honouring it only when a Chromium browser is found.
+
+## D-058 Distribution: How the lint works and what it checks
+
+**Decision.** A small scanner blanks out strings, here-strings, comments and braced variables, and tracks brace depth before the code checks run. The preferences count only when set on their own line at the top level of the & { } block and before the first download. The progress rule applies to install.ps1 and to any script that downloads. The tests run the lint the way CI does, over fixture scripts in a temp dir, and the lint stays a CLI with no exports.
+
+**Reason.** Line regexes alone would pass a preference set inside a nested function or a comment, and would fail a message that merely mentions Invoke-WebRequest. Running the lint as CI does tests exit codes and output, and avoids declaration files for an .mjs import.
+
+**Rejected.** Plain regexes over raw lines, and exporting functions with a .d.mts.
+
+## D-059 Distribution: How the Windows CI job is built
+
+**Decision.** One matrix leg per shell (defaults.run.shell from the matrix), with fail-fast off. A parse step uses each version's own parser, which catches 7-only syntax under 5.1. PSScriptAnalyzer fails on Error, ParseError and Warning; Information findings are printed but don't fail the job. The student-style run also checks a repair, a second uninstall, the fallback path, and that the installer writes nothing to the pipeline. The job gets permissions contents: read and a 15-minute timeout. Icon paths are compared after ExpandEnvironmentVariables.
+
+**Reason.** The brief's assertions plus cheap extra coverage of re-runs. Windows may store shortcut icon paths with variables such as %USERPROFILE%, so a direct comparison could fail for no real reason.
+
+**Rejected.** Two steps in one job sharing state, a checked-in helper .ps1 for the assertions, and filtering with -Severity (which may drop parse errors).
+
+## D-060 Distribution: Console colours
+
+**Decision.** Cyan only, for the banner and the success headline. Failures use the default colour and say plainly what happened.
+
+**Reason.** Section 9: no green or red, and colour never carries meaning alone.
+
+**Rejected.** Red errors and green success lines.
+
+## D-061 Distribution: README scope wording
+
+**Decision.** The README says development models 'weren't found in the 2025 key knowledge' and points to the About screen for anything still being checked against the study design.
+
+**Reason.** The study design couldn't be downloaded (D-001), so the README must not claim it has been checked. The wording matches the About screen.
+
+**Rejected.** Stating outright that the 2025 study design excludes development models.
