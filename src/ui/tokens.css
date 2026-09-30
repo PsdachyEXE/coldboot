@@ -1,0 +1,33 @@
+/*
+ * COLDBOOT design tokens. The palette is fixed by the brief (Section 9).
+ * scripts/contrast-check.ts parses this block, so keep one token per line as `--name: #RRGGBB;`.
+ */
+:root {
+  --void: #000000;
+  --trench: #06122B;
+  --steel: #6B80A8;
+  --cobalt: #2450E8;
+  --phosphor: #7FC7FF;
+  --ice: #DCEAFF;
+  --flare: #22D3FF;
+
+  --font-mono: 'Martian Mono Variable', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --font-read: 'Atkinson Hyperlegible Next Variable', system-ui, 'Segoe UI', sans-serif;
+
+  --step-0: 14px;
+  --step-1: 16px;
+  --step-2: 20px;
+  --step-3: 25px;
+  --step-4: 31px;
+
+  --lh-body: 1.5;
+  --lh-head: 1.3;
+  --measure: 72ch;
+
+  --radius-control: 2px;
+  --hairline: 1px solid var(--steel);
+
+  --dur-flip: 150ms;
+  --dur-drawer: 180ms;
+  --dur-nudge: 120ms;
+}

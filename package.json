@@ -1,0 +1,63 @@
+{
+  "name": "coldboot",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Revision app for VCE Applied Computing: Software Development, Units 3 and 4.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "content:check": "tsx scripts/content-check.ts",
+    "contrast:check": "tsx scripts/contrast-check.ts",
+    "installer:lint": "node scripts/installer-lint.mjs",
+    "icons": "tsx scripts/icons.ts",
+    "e2e": "playwright test",
+    "check": "npm run typecheck && npm run lint && npm test && npm run content:check && npm run contrast:check && npm run installer:lint"
+  },
+  "dependencies": {
+    "@fontsource-variable/atkinson-hyperlegible-next": "5.3.0",
+    "@fontsource-variable/martian-mono": "5.3.0",
+    "markdown-it": "15.0.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-router": "8.4.0",
+    "workbox-window": "7.4.1",
+    "zod": "4.6.5",
+    "zustand": "5.0.15"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.56.1",
+    "@resvg/resvg-js": "2.6.2",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.7",
+    "@types/markdown-it": "14.2.0",
+    "@types/node": "22.20.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "eslint": "10.11.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.7",
+    "globals": "17.12.0",
+    "jsdom": "30.1.1",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0",
+    "vite": "8.3.1",
+    "vite-plugin-pwa": "1.3.0",
+    "vitest": "5.0.2",
+    "workbox-build": "7.4.1"
+  }
+}

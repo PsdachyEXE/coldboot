@@ -1,0 +1,14 @@
+# Source material: VCAA documents are copyright and must never be committed.
+reference/
+
+node_modules/
+dist/
+dev-dist/
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+*.log
+.DS_Store
+.vite/
+.tmp/

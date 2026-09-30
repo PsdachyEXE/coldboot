@@ -1,0 +1,17 @@
+{
+  "$comment": "Every foreground/background token pair the UI uses. level: text = 4.5:1 (WCAG AA body text), large = 3:1 (AA large text, 24px+ or 18.66px+ bold), ui = 3:1 (AA non-text contrast for focus rings, borders and icons that carry meaning). Add a row whenever a component introduces a new pairing.",
+  "pairs": [
+    { "fg": "--ice", "bg": "--void", "level": "text", "use": "primary text" },
+    { "fg": "--ice", "bg": "--trench", "level": "text", "use": "primary text on panels, drawer, inputs" },
+    { "fg": "--phosphor", "bg": "--void", "level": "text", "use": "terminal text, links" },
+    { "fg": "--phosphor", "bg": "--trench", "level": "text", "use": "terminal drawer text, links on panels" },
+    { "fg": "--steel", "bg": "--void", "level": "text", "use": "muted text" },
+    { "fg": "--steel", "bg": "--trench", "level": "text", "use": "incorrect feedback, muted text on panels" },
+    { "fg": "--ice", "bg": "--cobalt", "level": "text", "use": "primary button label" },
+    { "fg": "--flare", "bg": "--void", "level": "text", "use": "correct feedback" },
+    { "fg": "--flare", "bg": "--trench", "level": "text", "use": "correct feedback on panels" },
+    { "fg": "--cobalt", "bg": "--void", "level": "ui", "use": "focus ring, selection outline" },
+    { "fg": "--cobalt", "bg": "--trench", "level": "ui", "use": "focus ring on panels" },
+    { "fg": "--steel", "bg": "--void", "level": "ui", "use": "hairline rules and control borders" }
+  ]
+}
