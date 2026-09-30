@@ -22,9 +22,9 @@ interface CanvasProps {
 
 /**
  * An SVG canvas in a sideways scroll box. The SVG is `role="img"`, named by its <title> and
- * <desc>. It shows at its natural size where it fits and scales down on narrower screens, but
- * never below MIN_LABEL_PX / LABEL_SIZE of its width, so labels stay at least 12 px; below that
- * the box scrolls instead of the page.
+ * <desc>. It never scales below MIN_LABEL_PX / LABEL_SIZE of its natural width, so labels stay at
+ * least 14 px (the bottom of the type scale); where it doesn't fit, the box scrolls instead of the
+ * page and a hint says so.
  */
 export function Canvas({ width, height, title, desc, children }: CanvasProps) {
   const id = useFigureId();

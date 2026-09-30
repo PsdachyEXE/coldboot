@@ -3,12 +3,13 @@
  * legend. With `showCriticalPath`, critical tasks are hatched and labelled "critical", and slack
  * shows as a dashed line to the latest finish, so neither relies on colour.
  */
-import { useMemo } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import type { Gantt } from '../../content/schema';
 import { r1, type Shape } from '../geometry';
 import { Canvas, HighlightRing, TextLines } from '../svg';
 import { LINE_HEIGHT, textWidth } from '../text';
 import type { BodyProps } from '../types';
+import { cx } from '../cx';
 import { useFigureId } from '../useScrollable';
 import { BAR_HEIGHT, DIAMOND, HEADER_BOTTOM, HEADER_UNIT_Y, HEADER_Y, layoutGantt, PAD, unitHeader, type GanttRow } from './layout';
 import { trySchedule } from './schedule';
@@ -34,9 +35,13 @@ function Row({ row, hatch, layout }: { row: GanttRow; hatch: string; layout: Ret
   return (
     <g data-task={task.id} data-critical={critical ? 'true' : undefined}>
       <TextLines lines={[task.id]} x={layout.idX} y={cy} anchor="start" className={styles.bold} />
-      <TextLines lines={row.nameLines} x={layout.nameX} y={cy} anchor="start" />
-      <TextLines lines={[String(task.duration)]} x={layout.durationX} y={cy} />
-      {row.depsLines[0] && <TextLines lines={row.depsLines} x={layout.depsX} y={cy} anchor="start" />}
+      {!layout.compact && (
+        <>
+          <TextLines lines={row.nameLines} x={layout.nameX} y={cy} anchor="start" />
+          <TextLines lines={[String(task.duration)]} x={layout.durationX} y={cy} />
+          {row.depsLines[0] && <TextLines lines={row.depsLines} x={layout.depsX} y={cy} anchor="start" />}
+        </>
+      )}
       {slackTo !== null && (
         <>
           <path className={styles.slack} d={`M${r1(bar ? bar.x + bar.w : (diamondX ?? 0))} ${r1(cy)} H${r1(slackTo)}`} />
@@ -101,10 +106,65 @@ function Legend({ id, critical, slack, milestone }: { id: string; critical: bool
   );
 }
 
+/**
+ * The width of the box the chart sits in, measured before paint and kept up to date, or 0 where it
+ * can't be measured (tests), which keeps the full layout.
+ */
+function useBoxWidth<T extends HTMLElement>(): [RefObject<T | null>, number] {
+  const ref = useRef<T>(null);
+  const [width, setWidth] = useState(0);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    setWidth(el.clientWidth);
+    if (typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(() => setWidth(el.clientWidth));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return [ref, width];
+}
+
+/** The compact layout's task table: names, durations and dependencies, under the bars. */
+function TaskTable({ figure: f, title }: { figure: Gantt; title: string }) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={cx(styles.table, styles.ganttTasks)} aria-label={`${title}: tasks`}>
+        <thead>
+          <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Name</th>
+            <th scope="col">{unitHeader(f.unit)}</th>
+            <th scope="col">Depends on</th>
+          </tr>
+        </thead>
+        <tbody>
+          {f.tasks.map((t) => (
+            <tr key={t.id}>
+              <th scope="row">{t.id}</th>
+              <td>{t.name}</td>
+              <td className={styles.numeric}>{t.duration}</td>
+              <td>{t.dependsOn.length ? t.dependsOn.join(', ') : 'None'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function GanttChartView({ figure: f, markers, title, desc }: BodyProps<Gantt>) {
   const id = useFigureId();
+  const [boxRef, boxWidth] = useBoxWidth<HTMLDivElement>();
   const result = useMemo(() => trySchedule(f.tasks), [f.tasks]);
-  const layout = useMemo(() => (result.schedule ? layoutGantt(f, result.schedule) : null), [f, result]);
+  const full = useMemo(() => (result.schedule ? layoutGantt(f, result.schedule) : null), [f, result]);
+  // Too narrow for the task columns beside the bars: keep the bars in view and move the columns
+  // into a table underneath.
+  const compact = full !== null && boxWidth > 0 && boxWidth < full.width;
+  const layout = useMemo(
+    () => (compact && result.schedule ? layoutGantt(f, result.schedule, { compact: true, fitWidth: boxWidth }) : full),
+    [compact, f, result, boxWidth, full],
+  );
   if (!layout) {
     return <p className={styles.error}>This Gantt chart can&rsquo;t be drawn. {result.error}</p>;
   }
@@ -114,15 +174,19 @@ export function GanttChartView({ figure: f, markers, title, desc }: BodyProps<Ga
   for (let k = 0; k <= layout.columns; k++) grid.push(layout.plotX + k * layout.unitW);
   const unit = f.unit === 'day' ? 'Day' : 'Week';
   return (
-    <>
+    <div ref={boxRef} className={styles.ganttBox}>
       <Canvas width={layout.width} height={layout.height} title={title} desc={desc}>
         <defs>
           <Hatch id={hatch} />
         </defs>
         <TextLines lines={[unit]} x={layout.plotX} y={HEADER_UNIT_Y} anchor="start" />
         <TextLines lines={['Task']} x={layout.idX} y={HEADER_Y} anchor="start" className={styles.bold} />
-        <TextLines lines={[unitHeader(f.unit)]} x={layout.durationX} y={HEADER_Y} className={styles.bold} />
-        <TextLines lines={['Depends on']} x={layout.depsX} y={HEADER_Y} anchor="start" className={styles.bold} />
+        {!layout.compact && (
+          <>
+            <TextLines lines={[unitHeader(f.unit)]} x={layout.durationX} y={HEADER_Y} className={styles.bold} />
+            <TextLines lines={['Depends on']} x={layout.depsX} y={HEADER_Y} anchor="start" className={styles.bold} />
+          </>
+        )}
         {layout.ticks.map((t) => (
           <TextLines key={t.label} lines={[t.label]} x={t.x} y={HEADER_Y} />
         ))}
@@ -146,6 +210,7 @@ export function GanttChartView({ figure: f, markers, title, desc }: BodyProps<Ga
         })}
       </Canvas>
       <Legend id={id} critical={layout.anyCritical} slack={layout.anySlack} milestone={layout.anyMilestone} />
-    </>
+      {layout.compact && <TaskTable figure={f} title={title} />}
+    </div>
   );
 }

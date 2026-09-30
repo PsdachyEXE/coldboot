@@ -107,8 +107,11 @@ samp {
   font-family: var(--font-mono);
 }
 code {
-  font-size: 0.9em;
+  font-size: max(0.9em, var(--step-0));
   color: var(--phosphor);
+}
+pre code {
+  font-size: inherit;
 }
 
 a {
