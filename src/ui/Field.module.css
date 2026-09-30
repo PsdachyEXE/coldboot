@@ -55,6 +55,17 @@
 .input::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
+/*
+ * The picker button inside a date or time field takes focus as its own Tab stop, but the input then
+ * matches neither :focus nor :focus-visible, and global.css removes the browser's own ring. Draw the
+ * same ring on the field while anything inside it has focus.
+ */
+.input[type='date']:focus-within,
+.input[type='time']:focus-within {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--ice);
+}
 
 .medium {
   max-width: 16rem;

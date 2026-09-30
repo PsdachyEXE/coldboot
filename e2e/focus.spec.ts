@@ -1,6 +1,7 @@
 /**
- * Keyboard focus that only a real browser's layout shows, against the production build: Shift+Tab
- * upwards through a paper never leaves the focused control under the sticky exam bar (WCAG 2.4.11).
+ * Keyboard focus that only a real browser's layout shows, against the production build: a date or
+ * time field keeps its ring while the picker button inside it has focus, and Shift+Tab upwards
+ * through a paper never leaves the focused control under the sticky exam bar (WCAG 2.4.11).
  */
 import { expect, test, type Page } from '@playwright/test';
 
@@ -18,6 +19,29 @@ async function onboard(page: Page): Promise<void> {
     localStorage.setItem('coldboot:v1:settings', JSON.stringify(value));
   }, settings);
 }
+
+test('a date or time field shows the focus ring while its picker button has focus', async ({ page }) => {
+  await page.clock.setFixedTime(FIXED_NOW);
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1, name: 'Welcome to COLDBOOT' })).toBeVisible();
+  await page.getByLabel('Display name').focus();
+  const stops: { type: string; focusVisible: boolean; outline: string }[] = [];
+  for (let i = 0; i < 10; i++) {
+    await page.keyboard.press('Tab');
+    const stop = await page.evaluate(() => {
+      const el = document.activeElement as HTMLInputElement | null;
+      return { type: el?.type ?? '', focusVisible: !!el?.matches(':focus-visible'), outline: el ? getComputedStyle(el).outlineStyle : '' };
+    });
+    if (stop.type !== 'date' && stop.type !== 'time') {
+      if (stops.length) break;
+      continue;
+    }
+    stops.push(stop);
+  }
+  // The picker buttons are stops where the input itself isn't :focus-visible.
+  expect(stops.filter((s) => !s.focusVisible).length).toBeGreaterThanOrEqual(2);
+  for (const s of stops) expect(s, `${s.type} field stop`).toMatchObject({ outline: 'solid' });
+});
 
 for (const [width, height] of [
   [1280, 900],
