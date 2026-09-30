@@ -1,7 +1,8 @@
 /**
  * Keyboard focus that only a real browser's layout shows, against the production build: a date or
- * time field keeps its ring while the picker button inside it has focus, and Shift+Tab upwards
- * through a paper never leaves the focused control under the sticky exam bar (WCAG 2.4.11).
+ * time field keeps its ring while the picker button inside it has focus; Shift+Tab upwards through
+ * a paper never leaves the focused control under the sticky exam bar (WCAG 2.4.11); and at phone
+ * width a terminal chip that takes focus scrolls into view in its row.
  */
 import { expect, test, type Page } from '@playwright/test';
 
@@ -95,3 +96,29 @@ for (const [width, height] of [
     expect(hidden).toEqual([]);
   });
 }
+
+test('at phone width a focused terminal chip scrolls into view in its row', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.clock.setFixedTime(FIXED_NOW);
+  await onboard(page);
+  await page.goto('/#/terminal');
+  const chips = page.getByRole('group', { name: 'Suggested commands' });
+  await expect(chips).toBeVisible();
+  await page.getByRole('textbox', { name: 'Terminal command' }).focus();
+  const count = await chips.getByRole('button').count();
+  const cut: string[] = [];
+  for (let i = 0; i < count; i++) {
+    await page.keyboard.press('Tab');
+    const f = await page.evaluate(() => {
+      const el = document.activeElement as HTMLElement;
+      const row = el.closest('[role="group"]');
+      if (!row) return null;
+      const r = el.getBoundingClientRect();
+      const g = row.getBoundingClientRect();
+      return { name: el.textContent ?? '', left: r.left, right: r.right, rowLeft: g.left, rowRight: g.right };
+    });
+    if (!f) break;
+    if (f.left < f.rowLeft - 1 || f.right > f.rowRight + 1) cut.push(`${f.name} at ${Math.round(f.left)} to ${Math.round(f.right)} in a row ${Math.round(f.rowLeft)} to ${Math.round(f.rowRight)}`);
+  }
+  expect(cut).toEqual([]);
+});
