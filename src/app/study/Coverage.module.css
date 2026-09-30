@@ -1,0 +1,160 @@
+/* Home: the run preview, today's facts and the coverage grid. */
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-5);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: var(--space-2) var(--space-4);
+  align-items: start;
+}
+@media (max-width: 899.98px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.rowLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--step-0);
+  line-height: 1.4;
+}
+@media (max-width: 899.98px) {
+  .rowLabel {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+}
+.rowTitle {
+  color: var(--ice);
+}
+
+.cells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cells li {
+  max-width: none;
+}
+
+/* A cell: the KK number over a four-segment gauge. */
+.cell {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--space-1);
+  width: 44px;
+  height: 52px;
+  padding: 5px 5px 6px;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  line-height: 1.3;
+  color: var(--ice);
+  background: var(--trench);
+  border: 1px solid var(--steel);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+.cell:hover {
+  border-color: var(--ice);
+}
+button.cell:hover .cellId {
+  text-decoration: underline;
+}
+.wide {
+  width: auto;
+  min-width: 64px;
+}
+
+.cellId {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Unseen: a dashed outline on the page background, no gauge at all. */
+.cell[data-band='unseen'] {
+  background: var(--void);
+  border-style: dashed;
+  justify-content: center;
+}
+
+.gauge {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+  height: 8px;
+}
+.seg {
+  border: 1px solid var(--steel);
+}
+.seg[data-on='true'] {
+  background: var(--phosphor);
+  border-color: var(--phosphor);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+  font-size: var(--step-0);
+}
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: none;
+}
+.swatch {
+  cursor: default;
+}
+
+/* Today's facts: three figures in a row, separated by hairlines. */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-6);
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4) 0;
+  border-top: var(--hairline);
+  border-bottom: var(--hairline);
+}
+.facts div {
+  min-width: 0;
+}
+.facts dt {
+  font-size: var(--step-0);
+  color: var(--steel);
+}
+.facts dd {
+  margin: 0;
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: var(--lh-head);
+}
+
+.steps {
+  margin: 0 0 var(--space-5);
+  padding-left: var(--space-5);
+}
+.steps li + li {
+  margin-top: var(--space-1);
+}

@@ -1,0 +1,58 @@
+/* Today's run: the step list. */
+
+.steps {
+  list-style: none;
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  border-top: var(--hairline);
+  max-width: calc(var(--measure) + var(--space-7));
+}
+
+.step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-3) 0;
+  border-bottom: var(--hairline);
+  max-width: none;
+}
+
+.stepNumber {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--ice);
+  border: 1px dashed var(--steel);
+  border-radius: var(--radius-control);
+}
+.step[data-status='current'] .stepNumber {
+  background: var(--cobalt);
+  border: 1px solid var(--cobalt);
+  font-weight: 700;
+}
+.step[data-status='done'] .stepNumber,
+.step[data-status='skipped'] .stepNumber {
+  border-style: solid;
+}
+
+.stepBody {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.stepTitle {
+  font-weight: 700;
+}
+.step[data-status='current'] .stepTitle {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+}
+.stepStatus {
+  font-size: var(--step-0);
+  color: var(--ice);
+}

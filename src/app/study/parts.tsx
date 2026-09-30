@@ -32,14 +32,14 @@ export function MistakeNote({ text }: { text: string }) {
  * A heading for a phase of a study screen ("Review complete"). With `focus`, it takes focus when it
  * mounts, so keyboard and screen reader users start at the new phase.
  */
-export function PhaseHeading({ level = 1, focus = false, children }: { level?: 1 | 2; focus?: boolean; children: ReactNode }) {
+export function PhaseHeading({ level = 1, focus = false, id, children }: { level?: 1 | 2; focus?: boolean; id?: string; children: ReactNode }) {
   const ref = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (focus) ref.current?.focus();
   }, [focus]);
   const Tag = level === 1 ? 'h1' : 'h2';
   return (
-    <Tag ref={ref} tabIndex={-1} className={styles.focusTarget}>
+    <Tag ref={ref} id={id} tabIndex={-1} className={styles.focusTarget}>
       {children}
     </Tag>
   );
