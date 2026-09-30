@@ -79,9 +79,10 @@ export function DrillRunner({ questions, timed = false, where, onFinish, autoFoc
     else setIndex((i) => i + 1);
   };
 
-  // A round resumed with every question already answered has nothing left to ask.
+  // A round resumed with every question already answered has nothing left to ask. (An empty
+  // round that wasn't resumed renders nothing, as before.)
   useEffect(() => {
-    if (!questions[index]) finish(answers, false);
+    if (initialAnswers?.length && !questions[index]) finish(answers, false);
   });
 
   if (!current) return null;
