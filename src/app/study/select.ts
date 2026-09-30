@@ -19,6 +19,11 @@ export const TIMED_ROUND = 20;
 /** Section A pace: 20 questions in 24 minutes (1.2 minutes a mark). */
 export const TIMED_MS = 24 * 60_000;
 export const WRITTEN_ROUND = 5;
+
+/** Time allowed for a timed round of `n` questions at Section A pace (24 minutes for 20). */
+export function timedAllowance(n: number): number {
+  return Math.round((TIMED_MS / TIMED_ROUND) * n);
+}
 /** At least this many KKs make up a "weakest" set when enough have items. */
 export const WEAKEST_MIN_KKS = 3;
 

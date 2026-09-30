@@ -131,3 +131,7 @@
 .notice > :last-child {
   margin-bottom: 0;
 }
+
+.form {
+  margin: 0 0 var(--space-6);
+}
