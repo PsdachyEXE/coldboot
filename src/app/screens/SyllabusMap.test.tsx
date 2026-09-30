@@ -59,8 +59,7 @@ describe('Syllabus map', () => {
     const title = kkById.get('U3O1-KK04')!.title;
     expect(within(kk04).getByRole('link', { name: `Drill U3O1-KK04 ${title}` })).toBeInTheDocument();
     expect(within(kk04).getByText(kkById.get('U3O1-KK04')!.summary)).toBeInTheDocument();
-    expect(within(kk04).getByText('2 cards, 1 question, 1 short answer')).toBeInTheDocument();
-    expect(within(kk04).getByText('Last practised: 3 days ago')).toBeInTheDocument();
+    expect(within(kk04).getByText('2 cards, 1 MCQ, 1 short answer. Practised 3 days ago.')).toBeInTheDocument();
     const weak = within(kk04).getByRole('meter', { name: 'Mastery of U3O1-KK04' });
     expect(weak).toHaveAttribute('aria-valuetext', '0%');
 
@@ -71,9 +70,28 @@ describe('Syllabus map', () => {
     expect(unseen.className).not.toBe(weak.className);
     expect(unseen.children).toHaveLength(0);
     expect(weak.children).toHaveLength(1);
-    expect(within(kk05).getByText('Last practised: Never')).toBeInTheDocument();
-    expect(within(kk05).getByText('0 cards, 0 questions, 0 short answers')).toBeInTheDocument();
+    expect(within(kk05).getByText('0 cards, 0 MCQs, 0 short answers. Never practised.')).toBeInTheDocument();
     expect(screen.getByText(/You've practised 1 of/)).toBeInTheDocument();
+  });
+
+  it('folds each area behind a button on phones, with the weakest area open', () => {
+    vi.stubGlobal('matchMedia', (query: string) => ({ matches: query.includes('max-width'), media: query, addEventListener() {}, removeEventListener() {} }));
+    try {
+      recordAttempt({ itemId: 'm-u3o2-kk08-001', kk: ['U3O2-KK08'], score: 0, timestamp: NOW - 86_400_000, ms: 1000 });
+      recordAttempt({ itemId: 'm-u3o1-kk04-001', kk: ['U3O1-KK04'], score: 1, timestamp: NOW - 86_400_000, ms: 1000 });
+      renderMap();
+      const u3o2 = screen.getByRole('button', { name: /^U3O2/ });
+      const u3o1 = screen.getByRole('button', { name: /^U3O1/ });
+      expect(u3o2).toHaveAttribute('aria-expanded', 'true');
+      expect(u3o1).toHaveAttribute('aria-expanded', 'false');
+      expect(row('U3O2-KK08')).not.toBeNull();
+      expect(row('U3O1-KK04')).toBeNull();
+      fireEvent.click(u3o1);
+      expect(u3o1).toHaveAttribute('aria-expanded', 'true');
+      expect(row('U3O1-KK04')).not.toBeNull();
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 
   it('starts a focused drill from a row, by keyboard or pointer', () => {

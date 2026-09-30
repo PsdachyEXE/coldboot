@@ -16,6 +16,7 @@ import { useSession } from '../state/session';
 import { examAtMs, useSettings } from '../state/settings';
 import { countDue, useSrs } from '../state/srs';
 import { prefersReducedMotion } from '../ui/motion';
+import { useNarrow } from '../ui/useMediaQuery';
 import { bootLines, type BootMode } from './BootLines';
 import styles from './Boot.module.css';
 
@@ -38,6 +39,7 @@ function chooseMode(now: number): BootMode | 'none' {
 export function Boot() {
   const [startedAt] = useState(() => Date.now());
   const [mode] = useState(() => chooseMode(startedAt));
+  const narrow = useNarrow();
   const [shown, setShown] = useState(0);
   const [done, setDone] = useState(mode === 'none');
 
@@ -69,6 +71,7 @@ export function Boot() {
             examAt,
           },
           mode,
+          { narrow },
         );
   const total = lines.length;
 

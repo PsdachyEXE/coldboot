@@ -36,12 +36,39 @@
 .area {
   min-width: 0;
 }
+/* The area id sits inline at the start of the heading, not above it as an eyebrow. */
 .areaHead {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
   margin: 0 0 var(--space-2);
   font-size: var(--step-2);
+}
+
+/* Phones: the heading is a disclosure button with a triangle that turns when open. */
+.areaToggle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: var(--control-h);
+  padding: var(--space-2) 0;
+  background: none;
+  border: 0;
+  color: var(--ice);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.areaToggle::before {
+  content: '';
+  flex: none;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 0 6px 9px;
+  border-color: transparent transparent transparent var(--ice);
+  transform: translateY(-1px);
+}
+.areaToggle[aria-expanded='true']::before {
+  transform: translateY(-1px) rotate(90deg);
 }
 .areaMeta {
   font-size: var(--step-0);
@@ -77,11 +104,12 @@
   box-shadow: 0 0 0 2px var(--ice);
 }
 
+/* The id on its own line and the title under it, so every title starts at the same x. */
 .rowLink {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-1) var(--space-2);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
   color: var(--ice);
   font-weight: 700;
   text-decoration: none;
@@ -120,8 +148,6 @@
 }
 
 .facts {
-  display: flex;
-  flex-direction: column;
   margin: 0;
   font-size: var(--step-0);
   color: var(--steel);

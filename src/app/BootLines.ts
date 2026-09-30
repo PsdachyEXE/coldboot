@@ -41,47 +41,68 @@ const examTimeFormatter = new Intl.DateTimeFormat('en-AU', {
   timeZoneName: 'short',
 });
 
-/** "Fri 13 Nov 2026, 3:00 pm AEDT": the exam's Melbourne time, short enough for a phone. */
+const shortExamTimeFormatter = new Intl.DateTimeFormat('en-AU', {
+  timeZone: 'Australia/Melbourne',
+  day: 'numeric',
+  month: 'short',
+  hour: 'numeric',
+  minute: '2-digit',
+  timeZoneName: 'short',
+});
+
+/** "Fri 13 Nov 2026, 3:00 pm AEDT": the exam's Melbourne time. */
 export function formatExamTime(examAt: number): string {
   return examTimeFormatter.format(new Date(examAt)).replace(/^(\w{3}),/, '$1');
+}
+
+/** "13 Nov, 3:00 pm AEDT": the same, short enough for one line on a 360 px phone. */
+export function formatExamTimeShort(examAt: number): string {
+  return shortExamTimeFormatter.format(new Date(examAt));
+}
+
+export interface BootOptions {
+  /** Phones: shorter wording so every line fits one row at 360 px. */
+  narrow?: boolean;
 }
 
 function plural(n: number, one: string, many: string): string {
   return `${n.toLocaleString('en-AU')} ${n === 1 ? one : many}`;
 }
 
-function contentLine(c: BootData['content']): BootLine {
+function contentLine(c: BootData['content'], narrow: boolean): BootLine {
   if (c.status === 'ready') {
-    return { key: 'content', label: 'content', detail: `${plural(c.cards, 'card', 'cards')}, ${plural(c.questions, 'question', 'questions')}`, result: 'ok' };
+    const questions = narrow ? plural(c.questions, 'Q', 'Qs') : plural(c.questions, 'question', 'questions');
+    return { key: 'content', label: 'content', detail: `${plural(c.cards, 'card', 'cards')}, ${questions}`, result: 'ok' };
   }
   if (c.status === 'error') return { key: 'content', label: 'content', detail: 'not loaded, check your connection' };
   return { key: 'content', label: 'content', detail: 'loading' };
 }
 
-function examLines(d: BootData): BootLine[] {
+function examLines(d: BootData, narrow: boolean): BootLine[] {
   const phase = examPhase(d.now, d.examAt);
-  const when = { key: 'exam-at', label: '', detail: formatExamTime(d.examAt) };
+  const when = { key: 'exam-at', label: '', detail: narrow ? formatExamTimeShort(d.examAt) : formatExamTime(d.examAt) };
   if (phase === 'before') return [{ key: 'exam', label: 'exam', detail: `${formatCountdown(countdown(d.now, d.examAt))} to go` }, when];
   if (phase === 'finished') return [{ key: 'exam', label: 'exam', detail: 'finished' }, when];
   return [{ key: 'exam', label: 'exam', detail: 'underway' }, when];
 }
 
-export function bootLines(d: BootData, mode: BootMode): BootLine[] {
+export function bootLines(d: BootData, mode: BootMode, opts: BootOptions = {}): BootLine[] {
+  const narrow = opts.narrow ?? false;
   const build: BootLine = { key: 'build', label: 'COLDBOOT', detail: `build ${d.buildId}` };
   const reviews: BootLine = { key: 'reviews', label: 'reviews', detail: d.due === 0 ? 'none due' : `${d.due.toLocaleString('en-AU')} due` };
   const ready: BootLine = { key: 'ready', label: 'ready', detail: '' };
-  if (mode === 'condensed') return [build, reviews, examLines(d)[0], ready];
+  if (mode === 'condensed') return [build, reviews, examLines(d, narrow)[0], ready];
   const areas = AREA_IDS.map<BootLine>((area) => ({
     key: area,
     label: area,
-    detail: plural(d.kkCounts[area] ?? 0, 'key knowledge point', 'key knowledge points'),
+    detail: narrow ? plural(d.kkCounts[area] ?? 0, 'KK point', 'KK points') : plural(d.kkCounts[area] ?? 0, 'key knowledge point', 'key knowledge points'),
     result: (d.kkCounts[area] ?? 0) > 0 ? 'ok' : 'missing',
   }));
   const map: BootLine =
     d.provisional > 0
       ? { key: 'map', label: 'kk map', detail: 'provisional, see About' }
       : { key: 'map', label: 'kk map', detail: 'checked', result: 'ok' };
-  return [build, ...areas, map, contentLine(d.content), reviews, ...examLines(d), ready];
+  return [build, ...areas, map, contentLine(d.content, narrow), reviews, ...examLines(d, narrow), ready];
 }
 
 /** The same lines as plain text, one per line (used by tests and for copying). */
