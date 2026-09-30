@@ -11,7 +11,7 @@ import type { TerminalBlock } from '../../terminal/blocks';
 import type { Difficulty, QuizItem } from '../types';
 import { buildContext, buildDfd, faultyKey, injectionsFor, ruleOf, RULES, VIEWS, type DiagramKind, type Rule, type View } from './diagrams';
 import game from './index';
-import { dfdItem, fromDfdInstance, generateDfdItem, parseRule, planDfdRound, RULE_CHIPS, wordBank, type DfdSpec } from './items';
+import { dfdItem, fromDfdInstance, generateDfdItem, parseRule, planDfdRound, RULE_PHRASES, wordBank, type DfdSpec } from './items';
 import { CONTEXT_FLOWS, ENTITY_W, FLOW_SLOTS, PROCESS_SLOTS, SYSTEMS } from './systems';
 
 const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 17);
@@ -186,7 +186,7 @@ describe('dfd items', () => {
   it('accepts rule numbers, chips and short phrases', () => {
     for (const rule of RULES) {
       expect(parseRule(String(RULES.indexOf(rule) + 1))).toBe(rule);
-      expect(parseRule(RULE_CHIPS[rule])).toBe(rule);
+      expect(parseRule(RULE_PHRASES[rule])).toBe(rule);
     }
     expect(parseRule('a flow between two data stores')).toBe('store-store');
     expect(parseRule('Entity -> store')).toBe('store-entity');

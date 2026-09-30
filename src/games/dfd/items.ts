@@ -33,7 +33,8 @@ export const RULE_TEXT: Record<Rule, string> = {
   'store-store': 'A flow between two data stores',
 };
 
-export const RULE_CHIPS: Record<Rule, string> = {
+/** A short phrase for each rule, as the man page lists them; parseRule accepts each. */
+export const RULE_PHRASES: Record<Rule, string> = {
   'entity-entity': 'entity to entity',
   'store-entity': 'store to entity',
   'no-io': 'no inputs or outputs',
@@ -204,7 +205,8 @@ export function ruleItem(sc: ErrorScenario, difficulty: Difficulty, followUp = f
     id: 'gen-dfd-rule',
     kk: DFD_KK,
     instance: scenarioInstance('rule', sc, difficulty, followUp),
-    chips: RULES.map((r) => RULE_CHIPS[r]),
+    // Numbers keep the chips to one row on a phone; the numbered rules are printed just above.
+    chips: RULES.map((_, i) => String(i + 1)),
     prompt: [
       ...context,
       { kind: 'text', text: `Which rule does ${letter} break?`, tone: 'accent' },
