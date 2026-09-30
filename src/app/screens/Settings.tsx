@@ -174,7 +174,7 @@ function YourProgress({ onImported }: { onImported(): void }) {
         <p>Saves a file with your settings, review schedule, attempts and streak.</p>
         <Button onClick={exportProgress}>Export progress</Button>
         {exported ? (
-          <p role="status" className={styles.status}>
+          <p className={styles.status}>
             Progress exported as {exported}. Keep it somewhere safe, such as your school drive.
           </p>
         ) : null}

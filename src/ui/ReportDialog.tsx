@@ -114,11 +114,9 @@ function ReportForm({ request, onClose }: { request: ReportRequest; onClose(): v
         No GitHub account? Copy the report and send it to whoever shared COLDBOOT with you.
       </p>
 
-      {copy === 'copied' ? (
-        <p role="status" className={styles.status}>
-          Report copied to the clipboard.
-        </p>
-      ) : null}
+      <p role="status" className={styles.status}>
+        {copy === 'copied' ? 'Report copied to the clipboard.' : ''}
+      </p>
       {copy === 'failed' ? (
         <div className={styles.fallback}>
           <TextArea

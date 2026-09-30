@@ -119,7 +119,7 @@ export const usePwa = create<PwaState>()((set, get) => ({
 export function startPwa(registerSW: RegisterSW): void {
   try {
     updateSW = registerSW({
-      immediate: true,
+      // Registration waits for the page's load event, so precaching never competes with first paint.
       onNeedRefresh: () => usePwa.setState({ needRefresh: true, updateWaiting: true }),
       onOfflineReady: () => usePwa.setState({ offlineReady: true }),
       onRegisteredSW: (_url, reg) => {

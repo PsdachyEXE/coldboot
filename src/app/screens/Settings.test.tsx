@@ -84,7 +84,7 @@ describe('Settings', () => {
     expect(clicks).toHaveLength(1);
     expect(clicks[0].download).toBe(exportFilename(NOW));
     expect(clicks[0].href).toBe('blob:coldboot-export');
-    expect(screen.getByRole('status')).toHaveTextContent(`Progress exported as ${exportFilename(NOW)}.`);
+    expect(screen.getByText(`Progress exported as ${exportFilename(NOW)}. Keep it somewhere safe, such as your school drive.`)).toBeInTheDocument();
   });
 
   it('surfaces import errors verbatim and changes nothing', async () => {
@@ -114,6 +114,22 @@ describe('Settings', () => {
     });
     expect(useSettings.getState().name).toBe('Imported');
     expect(screen.getByLabelText('Display name')).toHaveValue('Imported');
+    expect(screen.getByRole('button', { name: 'Import progress' })).toHaveFocus();
+  });
+
+  it('cancels an import without changing anything and returns focus to the chooser', async () => {
+    renderSettings();
+    const { buildExport } = await import('../../state/exportImport');
+    const file = new File([JSON.stringify(buildExport())], 'p.json', { type: 'application/json' });
+    await act(async () => {
+      fireEvent.change(screen.getByLabelText('Progress file'), { target: { files: [file] } });
+    });
+    const confirm = await screen.findByRole('button', { name: 'Replace my progress' });
+    expect(confirm).toHaveFocus();
+    expect(confirm).toHaveAccessibleDescription(/Ready to import\. This file has 0 cards scheduled and 0 attempts/);
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    expect(screen.queryByText(/Ready to import/)).toBeNull();
+    expect(screen.getByRole('button', { name: 'Import progress' })).toHaveFocus();
   });
 
   it('saves study settings and confirms in words', async () => {

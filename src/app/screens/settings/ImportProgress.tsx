@@ -2,7 +2,7 @@
  * "Import progress": choose a file, see what's in it, then confirm. The file is validated before
  * anything changes, and nothing from it is ever rendered as HTML.
  */
-import { useRef, useState, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { applyImport, readImportFile, type ValidatedImport } from '../../../state/exportImport';
 import { announce } from '../../../ui/announce';
 import { Button } from '../../../ui/Button';
@@ -24,10 +24,21 @@ export function ImportProgress({ confirmLabel, warning, onImported }: ImportProg
   const inputRef = useRef<HTMLInputElement>(null);
   const chooseRef = useRef<HTMLButtonElement>(null);
   const [phase, setPhase] = useState<Phase>({ kind: 'idle' });
+  const summaryId = useId();
+  const warningId = useId();
+  // After Cancel or a finished import the chooser button comes back; put focus on it once it has.
+  const refocus = useRef(false);
+  useEffect(() => {
+    if (refocus.current && chooseRef.current) {
+      refocus.current = false;
+      chooseRef.current.focus();
+    }
+  });
 
   async function onFile(file: File | undefined) {
     if (!file) return;
     setPhase({ kind: 'reading' });
+    announce('Checking the file.');
     const result = await readImportFile(file);
     if (inputRef.current) inputRef.current.value = '';
     setPhase(result.ok ? { kind: 'confirm', file: result.file, summary: result.summary } : { kind: 'error', message: result.error });
@@ -36,14 +47,15 @@ export function ImportProgress({ confirmLabel, warning, onImported }: ImportProg
   function confirm() {
     if (phase.kind !== 'confirm') return;
     applyImport(phase.file);
+    refocus.current = true;
     setPhase({ kind: 'idle' });
     announce('Progress imported.');
     onImported();
   }
 
   function cancel() {
+    refocus.current = true;
     setPhase({ kind: 'idle' });
-    chooseRef.current?.focus();
   }
 
   return (
@@ -58,14 +70,12 @@ export function ImportProgress({ confirmLabel, warning, onImported }: ImportProg
         onChange={(e) => void onFile(e.target.files?.[0])}
       />
       {phase.kind !== 'confirm' ? (
-        <Button ref={chooseRef} onClick={() => inputRef.current?.click()} disabled={phase.kind === 'reading'}>
+        <Button ref={chooseRef} onClick={() => inputRef.current?.click()}>
           Import progress
         </Button>
       ) : null}
       {phase.kind === 'reading' ? (
-        <p role="status" className={styles.note}>
-          Checking the file
-        </p>
+        <p className={styles.note}>Checking the file</p>
       ) : null}
       {phase.kind === 'error' ? (
         <div role="alert">
@@ -74,12 +84,14 @@ export function ImportProgress({ confirmLabel, warning, onImported }: ImportProg
       ) : null}
       {phase.kind === 'confirm' ? (
         <div className={styles.confirm} role="group" aria-label="Confirm import">
-          <p className={styles.summary}>
+          <p className={styles.summary} id={summaryId}>
             <strong>Ready to import.</strong> This file has {phase.summary}
           </p>
-          <div className={styles.note}>{warning}</div>
+          <div className={styles.note} id={warningId}>
+            {warning}
+          </div>
           <div className={styles.actions}>
-            <Button variant="primary" onClick={confirm} autoFocus>
+            <Button variant="primary" onClick={confirm} autoFocus aria-describedby={`${summaryId} ${warningId}`}>
               {confirmLabel}
             </Button>
             <Button onClick={cancel}>Cancel</Button>

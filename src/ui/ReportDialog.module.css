@@ -31,6 +31,9 @@
   margin: var(--space-3) 0 0;
   font-weight: 700;
 }
+.status:empty {
+  display: none;
+}
 
 .fallback {
   margin-top: var(--space-4);

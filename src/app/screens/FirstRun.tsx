@@ -59,6 +59,7 @@ export default function FirstRun() {
     setForm(initialForm());
     setErrors({});
     setImportNote(true);
+    announce('Progress imported. Check your details, then select Start.');
   }
 
   return (
@@ -70,7 +71,7 @@ export default function FirstRun() {
       </p>
 
       {importNote ? (
-        <p role="status" className={styles.notice}>
+        <p className={styles.notice}>
           Progress imported. Check your details, then select Start.
         </p>
       ) : null}
