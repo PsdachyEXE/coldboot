@@ -15,6 +15,7 @@ import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './dai
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { NAMING_GAME_KK, NAMING_ID, NAMING_MAN, NAMING_SUMMARY, NAMING_TITLE } from './naming/meta';
+import { OOP_GAME_KK, OOP_ID, OOP_MAN, OOP_SUMMARY, OOP_TITLE } from './oop/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
@@ -116,6 +117,16 @@ export const GAMES: GameMeta[] = [
     generator: true,
     // types-game, because ./types is the game contract (src/games/types.ts).
     load: () => import('./types-game').then((m) => m.default),
+  },
+  {
+    id: OOP_ID,
+    title: OOP_TITLE,
+    priority: 'P1',
+    kk: OOP_GAME_KK,
+    summary: OOP_SUMMARY,
+    man: OOP_MAN,
+    generator: true,
+    load: () => import('./oop').then((m) => m.default),
   },
 ];
 
