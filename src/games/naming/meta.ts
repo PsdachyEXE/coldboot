@@ -20,7 +20,7 @@ Name the convention. Type camel case, snake case or Hungarian notation. An ident
 
 Rewrite an identifier. Type it exactly in the convention asked for. Capitals count, so totalcost and TotalCost are both wrong when totalCost is wanted, and the feedback says what is different.
 
-Example: "Name a check box that the user ticks to accept the terms in Hungarian notation, using the words accept terms." The prefix for a check box is chk, and each word after it starts with a capital letter: chkAcceptTerms.
+Example: "A check box that the user ticks to accept the terms. Name it in Hungarian notation, using the words accept terms." The prefix for a check box is chk, and each word after it starts with a capital letter: chkAcceptTerms.
 
 A round has 10 questions: four identifiers to name and six rewrites, two of them Hungarian variables and two Hungarian controls. On a phone, tap a convention below the prompt.
 

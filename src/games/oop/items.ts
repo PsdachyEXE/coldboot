@@ -235,7 +235,7 @@ function typeGapItem(obj: ObjectEntry, gap: string, seed: number, difficulty: Di
     chips: TYPE_OPTIONS.map((o) => o.label),
     prompt: [
       { kind: 'figure', figure: blankedFigure(obj, gap) },
-      { kind: 'text', text: `Complete the blank in the object description: which data type should ${property.name} have?`, tone: 'accent' },
+      { kind: 'text', text: `The data type of ${property.name} is missing, marked with a question mark. Which data type should it have?`, tone: 'accent' },
       { kind: 'text', text: TYPE_HINT, tone: 'muted' },
     ],
     check(input) {
@@ -270,7 +270,7 @@ function memberGapItem(obj: ObjectEntry, gap: string, seed: number, difficulty: 
     chips: [...letters],
     prompt: [
       { kind: 'figure', figure: blankedFigure(obj, gap) },
-      { kind: 'text', text: `The ${obj.name} object needs ${need}. Which belongs in the blank row?`, tone: 'accent' },
+      { kind: 'text', text: `The ${obj.name} object needs ${need}. Which belongs in the blank row, marked with a question mark?`, tone: 'accent' },
       { kind: 'choices', options, labels: 'letters' },
       { kind: 'text', text: hint, tone: 'muted' },
     ],

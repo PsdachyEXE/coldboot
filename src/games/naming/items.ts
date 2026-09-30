@@ -270,7 +270,8 @@ export function rewriteItem(task: RewriteTask, seed: number, difficulty: Difficu
   if (c.target === 'hungarian') {
     const words = c.words.length === 1 ? `the word ${c.words[0]}` : `the words ${c.words.join(' ')}`;
     prompt.push(
-      { kind: 'text', text: `Name ${c.description} in Hungarian notation, using ${words}.`, tone: 'accent' },
+      { kind: 'text', text: `${capitalise(c.description!)}.` },
+      { kind: 'text', text: `Name it in Hungarian notation, using ${words}.`, tone: 'accent' },
       prefixTable(c.task === 'hungarian-variable' ? 'variables' : 'controls'),
     );
   } else if (c.source) {

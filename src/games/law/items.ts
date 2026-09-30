@@ -115,7 +115,7 @@ export function whyReasons(s: LawScenario, seed: number, difficulty: Difficulty)
 export function whyItem(scenarioId: string, seed: number, difficulty: Difficulty, followUp = false): QuizItem {
   const s = scenarioById(scenarioId);
   const keys = whyReasons(s, seed, difficulty);
-  const options = keys.map((k) => REASONS[k].text(s.subject));
+  const options = keys.map((k) => REASONS[k].text);
   const answer = keys.indexOf(trueReason(s));
   const letters = OPTION_LETTERS.slice(0, options.length);
   const expected = `${letters[answer]}. ${options[answer]}`;

@@ -165,7 +165,7 @@ describe('naming rewrite items', () => {
         if (c.target === 'hungarian') {
           expect(item.prompt.some((b) => b.kind === 'table' && b.rows.length === 1)).toBe(true);
           // Hard describes a variable by its data only; the other levels name the data type.
-          if (task === 'hungarian-variable' && level === 'hard') expect(text).toMatch(/Name a variable that holds/);
+          if (task === 'hungarian-variable' && level === 'hard') expect(text).toMatch(/^A variable that holds /);
         } else {
           expect(text).toContain(c.source ? c.source.identifier : c.words.join(' '));
         }
