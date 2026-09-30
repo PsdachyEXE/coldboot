@@ -14,6 +14,7 @@ import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './bli
 import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './daily-game/meta';
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
+import { LAW_GAME_KK, LAW_ID, LAW_MAN, LAW_SUMMARY, LAW_TITLE } from './law/meta';
 import { NAMING_GAME_KK, NAMING_ID, NAMING_MAN, NAMING_SUMMARY, NAMING_TITLE } from './naming/meta';
 import { OOP_GAME_KK, OOP_ID, OOP_MAN, OOP_SUMMARY, OOP_TITLE } from './oop/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
@@ -107,6 +108,16 @@ export const GAMES: GameMeta[] = [
     man: THREAT_MAN,
     generator: true,
     load: () => import('./threat').then((m) => m.default),
+  },
+  {
+    id: LAW_ID,
+    title: LAW_TITLE,
+    priority: 'P1',
+    kk: LAW_GAME_KK,
+    summary: LAW_SUMMARY,
+    man: LAW_MAN,
+    generator: true,
+    load: () => import('./law').then((m) => m.default),
   },
   {
     id: NAMING_ID,
