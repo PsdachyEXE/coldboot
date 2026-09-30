@@ -4,7 +4,7 @@ import type { KkId } from '../../content/schema';
 export const NAMING_ID = 'naming';
 export const NAMING_TITLE = 'Naming conventions';
 export const NAMING_GAME_KK: KkId[] = ['U3O1-KK09'];
-export const NAMING_SUMMARY = 'Name the convention an identifier uses, and rewrite identifiers in camel case, snake case or Hungarian notation';
+export const NAMING_SUMMARY = 'Name conventions and rewrite identifiers, including Hungarian notation';
 
 export const NAMING_MAN = `naming drills the three naming conventions: camel case, snake case and Hungarian notation.
 

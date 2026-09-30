@@ -4,7 +4,7 @@ import type { KkId } from '../../content/schema';
 export const THREAT_ID = 'threat';
 export const THREAT_TITLE = 'Security weaknesses and controls';
 export const THREAT_GAME_KK: KkId[] = ['U4O2-KK03', 'U4O2-KK04', 'U4O2-KK07'];
-export const THREAT_SUMMARY = 'Match a weakness in a development environment to the best control, and pick out the Essential Eight';
+export const THREAT_SUMMARY = 'Match weaknesses to security controls, and pick out the Essential Eight';
 
 export const THREAT_MAN = `threat drills the security side of software development: spotting a weakness in how a team works, and choosing the control that fixes it. Everything here is about recognising weaknesses and defending against them.
 

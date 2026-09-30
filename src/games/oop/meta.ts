@@ -4,7 +4,7 @@ import type { KkId } from '../../content/schema';
 export const OOP_ID = 'oop';
 export const OOP_TITLE = 'Classes, objects and access';
 export const OOP_GAME_KK: KkId[] = ['U3O1-KK07', 'U3O1-KK03'];
-export const OOP_SUMMARY = 'Name the OOP principle, complete an object description, and choose an access modifier';
+export const OOP_SUMMARY = 'Name OOP principles, complete object descriptions, choose access modifiers';
 
 export const OOP_MAN = `oop drills object-oriented programming: the four principles, object descriptions and access modifiers.
 

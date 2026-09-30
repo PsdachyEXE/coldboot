@@ -4,7 +4,7 @@ import type { KkId } from '../../content/schema';
 export const TYPES_ID = 'types';
 export const TYPES_TITLE = 'Data types, structures and sources';
 export const TYPES_GAME_KK: KkId[] = ['U3O1-KK04', 'U3O1-KK05', 'U3O1-KK06', 'U4O1-KK02'];
-export const TYPES_SUMMARY = 'Choose the data type, data structure and data source a scenario needs, and see why';
+export const TYPES_SUMMARY = 'Choose a data type, data structure and data source for a scenario';
 
 export const TYPES_MAN = `types drills the choices a design makes for its data: a data type, a data structure and a data source. Each scenario has one best answer, and the feedback gives the one-line justification an exam answer needs.
 

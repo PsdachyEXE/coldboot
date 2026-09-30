@@ -4,7 +4,7 @@ import type { KkId } from '../../content/schema';
 export const LAW_ID = 'law';
 export const LAW_TITLE = 'Privacy, health records and copyright law';
 export const LAW_GAME_KK: KkId[] = ['U4O2-KK07', 'U3O2-KK10'];
-export const LAW_SUMMARY = 'Decide which Act applies to a scenario, and why: who it binds, where, and what kind of data';
+export const LAW_SUMMARY = 'Decide which Act applies to a scenario, and why';
 
 export const LAW_MAN = `law drills which Act applies to a scenario, and why. Three things decide it: the jurisdiction (Commonwealth or Victoria), who the Act binds, and the kind of data involved.
 
