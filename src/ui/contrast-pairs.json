@@ -22,6 +22,18 @@
     { "fg": "--steel", "bg": "--trench", "level": "ui", "use": "control borders and the meter track border on panels" },
     { "fg": "--phosphor", "bg": "--trench", "level": "ui", "use": "meter fill against its track; warning banner rule" },
     { "fg": "--phosphor", "bg": "--void", "level": "ui", "use": "active navigation bar; field error rule" },
-    { "fg": "--steel", "bg": "--trench", "level": "large", "use": "incorrect verdict (20 px bold) on its trench block" }
+    { "fg": "--steel", "bg": "--trench", "level": "large", "use": "incorrect verdict (20 px bold) on its trench block" },
+    { "fg": "--ice", "bg": "--void", "level": "text", "use": "figure labels on the void canvas and on their void backings; highlight marker text" },
+    { "fg": "--ice", "bg": "--void", "level": "ui", "use": "figure lines, shape outlines, arrowheads, milestone diamonds, critical-bar hatching" },
+    { "fg": "--steel", "bg": "--void", "level": "ui", "use": "figure secondary lines: Gantt grid and row rules, slack lines, mock-up hairlines" },
+    { "fg": "--steel", "bg": "--void", "level": "text", "use": "mock-up placeholder text inside a text box" },
+    { "fg": "--cobalt", "bg": "--void", "level": "ui", "use": "figure highlight ring and marker box; marked pseudocode line and table row" },
+    { "fg": "--cobalt", "bg": "--trench", "level": "ui", "use": "marked table row on a panel or in the terminal drawer" },
+    { "fg": "--phosphor", "bg": "--void", "level": "ui", "use": "Gantt task bars; mock-up note callout rings" },
+    { "fg": "--phosphor", "bg": "--void", "level": "text", "use": "mock-up note callout numbers; Text description disclosure on the page" },
+    { "fg": "--phosphor", "bg": "--trench", "level": "text", "use": "Text description disclosure on panels and in the terminal drawer" },
+    { "fg": "--ice", "bg": "--trench", "level": "text", "use": "figure captions, text descriptions and object description section headers on trench" },
+    { "fg": "--steel", "bg": "--trench", "level": "ui", "use": "figure table hairlines on panels and in the terminal drawer" },
+    { "fg": "--phosphor", "bg": "--trench", "level": "ui", "use": "rule of the Gantt chart's cannot-draw message" }
   ]
 }
