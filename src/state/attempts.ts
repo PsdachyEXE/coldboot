@@ -4,12 +4,14 @@
  * aggregates that decay exactly like individual attempts (see src/srs/mastery.ts).
  *
  * KK ids are stored as recorded. `kkMap` records the study-design map version they belong to;
- * when the map is renumbered, hydration rewrites old ids through `studyDesign.renames`.
+ * when the map is renumbered, hydration and the cross-window merge rewrite old ids through
+ * `studyDesign.renames`. A renumbering also bumps this store's version (docs/CONTRACTS.md), so a
+ * build on the old map open in another window blocks instead of saving old ids under the new map.
  */
 import { create } from 'zustand';
 import { MAX_EPOCH_MS } from '../lib/time';
 import { z } from '../lib/zodConfig';
-import { isKkId, type KkId } from '../content/schema';
+import { isKkId, kkRenamer, type KkId, type KkRename } from '../content/schema';
 import { studyDesign } from '../content/studyDesign';
 import { persistStore } from './persist';
 
@@ -109,12 +111,11 @@ export function rollUp(data: AttemptsData): AttemptsData {
   return { log: data.log.slice(cut), rollup, kkMap: data.kkMap };
 }
 
-/** Rewrites KK ids recorded under an older map version. Pure. */
-export function applyKkRenames(data: AttemptsData, renames = studyDesign.renames, current = studyDesign.kkMapVersion): AttemptsData {
+/** Rewrites KK ids recorded under an older map version (each version's renames at once, see kkRenamer). Pure. */
+export function applyKkRenames(data: AttemptsData, renames: readonly KkRename[] = studyDesign.renames, current = studyDesign.kkMapVersion): AttemptsData {
   if (data.kkMap >= current) return data;
-  const steps = renames.filter((r) => r.since > data.kkMap && r.since <= current);
-  if (!steps.length) return { ...data, kkMap: current };
-  const map = (kk: KkId): KkId => steps.reduce<KkId>((id, r) => (id === r.from ? (r.to as KkId) : id), kk);
+  if (!renames.some((r) => r.since > data.kkMap && r.since <= current)) return { ...data, kkMap: current };
+  const map = kkRenamer(renames, data.kkMap, current);
   const log = data.log.map(([id, kks, s, ts, ms]): AttemptTuple => [id, [...new Set(kks.map(map))], s, ts, ms]);
   const rollup: Partial<Record<KkId, KkRollup>> = {};
   for (const [kk, r] of Object.entries(data.rollup) as [KkId, KkRollup][]) {
@@ -197,8 +198,18 @@ export function salvageAttempts(raw: unknown): { data: AttemptsData; dropped: nu
   return { data: { log, rollup, kkMap }, dropped };
 }
 
-/** Cross-window merge: the union of both logs (deduplicated, time-ordered). */
-export function mergeAttempts(local: AttemptsData, incoming: AttemptsData): AttemptsData {
+/**
+ * Cross-window merge: the union of both logs (deduplicated, time-ordered). Both sides move to the
+ * current KK map first, so the merged kkMap never labels ids recorded under an older one.
+ */
+export function mergeAttempts(
+  localData: AttemptsData,
+  incomingData: AttemptsData,
+  renames: readonly KkRename[] = studyDesign.renames,
+  current = studyDesign.kkMapVersion,
+): AttemptsData {
+  const local = applyKkRenames(localData, renames, current);
+  const incoming = applyKkRenames(incomingData, renames, current);
   const key = (t: AttemptTuple) => `${t[0]}|${t[3]}|${t[2]}|${t[4]}`;
   const seen = new Set(incoming.log.map(key));
   const extra = local.log.filter((t) => !seen.has(key(t)));

@@ -117,7 +117,7 @@ describe('exam screen', () => {
     expect(screen.getByText('Saving')).toBeInTheDocument();
     await waitFor(() => expect(screen.getByText('Saved')).toBeInTheDocument(), { timeout: 2000 });
     const saved = JSON.parse(window.localStorage.getItem('coldboot:v1:exam')!);
-    expect(saved).toMatchObject({ v: 1, data: { paper: { answers: { [mcqA.id]: 2, [short.id]: 'It keeps the <b>leading</b> zero.' }, flags: [mcqA.id] } } });
+    expect(saved).toMatchObject({ v: 2, data: { paper: { answers: { [mcqA.id]: 2, [short.id]: 'It keeps the <b>leading</b> zero.' }, flags: [mcqA.id] } } });
     // The student's text is plain text, never markup.
     expect(screen.getByLabelText('Your answer')).toHaveValue('It keeps the <b>leading</b> zero.');
     expect(document.querySelector('b')).toBeNull();

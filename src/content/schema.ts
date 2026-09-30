@@ -553,6 +553,26 @@ export const AreaEntrySchema = z
   .strict();
 export type AreaEntry = z.infer<typeof AreaEntrySchema>;
 
+export const KkRenameSchema = z.object({ from: z.string().regex(KK_PATTERN), to: z.string().regex(KK_PATTERN), since: z.number().int().min(2) }).strict();
+export type KkRename = z.infer<typeof KkRenameSchema>;
+
+/**
+ * Maps a KK id recorded under map version `from` to map version `to`. Each version's renames apply
+ * at once, as one map, so a shift (KK03 to KK04 and KK04 to KK05) or a swap works whatever order it
+ * is listed in; versions apply in ascending order.
+ */
+export function kkRenamer(renames: readonly KkRename[], from: number, to: number): <T extends string>(kk: T) => T {
+  const byVersion = new Map<number, Map<string, string>>();
+  for (const r of renames) {
+    if (r.since <= from || r.since > to) continue;
+    const map = byVersion.get(r.since) ?? new Map<string, string>();
+    if (!map.has(r.from)) map.set(r.from, r.to);
+    byVersion.set(r.since, map);
+  }
+  const maps = [...byVersion].sort(([a], [b]) => a - b).map(([, map]) => map);
+  return <T extends string>(kk: T): T => maps.reduce<string>((id, map) => map.get(id) ?? id, kk) as T;
+}
+
 export const StudyDesignSchema = z
   .object({
     title: Text,
@@ -560,10 +580,16 @@ export const StudyDesignSchema = z
     areas: z.array(AreaEntrySchema).length(4),
     groups: z.array(z.object({ id: z.enum(GROUP_IDS), title: Text, summary: Text }).strict()).length(2),
     kks: z.array(KkEntrySchema).min(1),
-    /** Bumped whenever KK ids are renumbered; stored attempts migrate through `renames`. */
+    /**
+     * Bumped whenever KK ids are renumbered; stored attempts and exam history migrate through
+     * `renames`. A bump also bumps the attempts and exam store versions (docs/CONTRACTS.md).
+     */
     kkMapVersion: z.number().int().min(1),
-    /** KK id changes, applied in order to attempts recorded under an older map version. */
-    renames: z.array(z.object({ from: z.string().regex(KK_PATTERN), to: z.string().regex(KK_PATTERN), since: z.number().int().min(2) }).strict()),
+    /**
+     * KK id changes. `since` is the map version that made the change; all the renames of one
+     * version apply at once (see kkRenamer), and versions apply in order.
+     */
+    renames: z.array(KkRenameSchema),
     /** The glossary ("Terms used in this study"): one TERMS card per entry. Terms are labels, not quotations. */
     glossary: z.array(GlossaryEntrySchema),
   })
@@ -574,6 +600,22 @@ export const StudyDesignSchema = z
       if (ids.has(kk.id)) ctx.addIssue({ code: 'custom', message: `Duplicate KK ${kk.id}`, path: ['kks', i] });
       ids.add(kk.id);
       if (!kk.id.startsWith(kk.area)) ctx.addIssue({ code: 'custom', message: `${kk.id} is not in area ${kk.area}`, path: ['kks', i] });
+    });
+    const renamed = new Map<number, Set<string>>();
+    sd.renames.forEach((r, i) => {
+      if (r.since > sd.kkMapVersion) {
+        ctx.addIssue({ code: 'custom', message: `Rename ${r.from} to ${r.to} is for version ${r.since}, after kkMapVersion ${sd.kkMapVersion}`, path: ['renames', i] });
+      }
+      const froms = renamed.get(r.since) ?? new Set<string>();
+      if (froms.has(r.from)) ctx.addIssue({ code: 'custom', message: `${r.from} is renamed twice in version ${r.since}`, path: ['renames', i] });
+      froms.add(r.from);
+      renamed.set(r.since, froms);
+    });
+    // Every id a rename starts from must end up, through any later versions, on the current map.
+    sd.renames.forEach((r, i) => {
+      if (r.since > sd.kkMapVersion) return;
+      const end = kkRenamer(sd.renames, r.since - 1, sd.kkMapVersion)(r.from);
+      if (!ids.has(end)) ctx.addIssue({ code: 'custom', message: `${r.from} (map ${r.since - 1}) becomes ${end}, which is not in the KK map`, path: ['renames', i] });
     });
   });
 export type StudyDesign = z.infer<typeof StudyDesignSchema>;

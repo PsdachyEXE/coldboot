@@ -1,8 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { KkRename } from '../content/schema';
 import {
   ExamDataSchema,
   HISTORY_MAX,
   mergeExam,
+  renameSummaryKks,
   salvageExam,
   useExam,
   type ExamData,
@@ -201,6 +203,21 @@ describe('exam schema, salvage and merge', () => {
     expect(mergeExam(mine, submitted).paper?.submittedAt).toBe(WRITING);
   });
 
+  it('renames the KKs of a paper marked under an older KK map', () => {
+    const renames: KkRename[] = [
+      { from: 'U3O1-KK04', to: 'U3O1-KK05', since: 2 },
+      { from: 'U3O1-KK05', to: 'U3O1-KK04', since: 2 },
+      { from: 'U3O1-KK06', to: 'U3O1-KK04', since: 2 },
+    ];
+    // No kkMap: marked before the field existed, so under map 1. The swap applies at once, and two KKs that become one add up.
+    const old = summary('p-old-1', T0, { kk: [['U3O1-KK04', 2, 5], ['U3O1-KK05', 1, 1], ['U3O1-KK06', 0, 2]] });
+    expect(renameSummaryKks(old, renames, 2)).toEqual({ ...old, kk: [['U3O1-KK05', 2, 5], ['U3O1-KK04', 1, 3]], kkMap: 2 });
+    const current = summary('p-new-1', T0, { kkMap: 2 });
+    expect(renameSummaryKks(current, renames, 2)).toBe(current);
+    expect(ExamDataSchema.safeParse({ paper: null, history: [current] }).success).toBe(true);
+    expect(ExamDataSchema.safeParse({ paper: null, history: [{ ...current, kkMap: 0 }] }).success).toBe(false);
+  });
+
   it('stores the mini timing with the paper', () => {
     useExam.getState().reset();
     examActions.start({ ...NEW, mode: 'mini', timing: MINI_TIMING }, T0);
@@ -233,7 +250,7 @@ describe('exam data in progress files', () => {
     actions.answer('s-u3o1-kk04-001', 'Kept through export', WRITING);
     actions.finish(summary('p-past-1', T0 - 60 * MIN));
     const file = io.buildExport(T0 + 30 * MIN);
-    expect(file.stores.exam.v).toBe(1);
+    expect(file.stores.exam.v).toBe(2);
     const text = JSON.stringify(file);
 
     io.resetAllProgress();
@@ -245,7 +262,7 @@ describe('exam data in progress files', () => {
     if (parsed.ok) io.applyImport(parsed.file);
     expect(exam.useExam.getState().paper?.answers).toEqual({ 's-u3o1-kk04-001': 'Kept through export' });
     expect(exam.useExam.getState().history.map((h) => h.id)).toEqual(['p-past-1']);
-    expect(JSON.parse(window.localStorage.getItem('coldboot:v1:exam')!)).toMatchObject({ v: 1, data: { history: [{ id: 'p-past-1' }] } });
+    expect(JSON.parse(window.localStorage.getItem('coldboot:v1:exam')!)).toMatchObject({ v: 2, data: { history: [{ id: 'p-past-1' }] } });
 
     // Hostile exam data rejects the whole file; a file from before the exam store still imports.
     const hostile = structuredClone(file);
@@ -254,5 +271,17 @@ describe('exam data in progress files', () => {
     const older = structuredClone(file);
     delete (older.stores as Record<string, unknown>).exam;
     expect(io.parseImport(JSON.stringify(older)).ok).toBe(true);
+    // Version 1 exam data, from before history carried its KK map version, still imports.
+    const v1 = structuredClone(file);
+    v1.stores.exam.v = 1;
+    const fromV1 = io.parseImport(JSON.stringify(v1));
+    expect(fromV1.ok && (fromV1.file.data.exam as ExamData).history.map((h) => h.id)).toEqual(['p-past-1']);
+  });
+
+  it('loads version 1 exam data saved before the KK map version was stored', async () => {
+    window.localStorage.setItem('coldboot:v1:exam', JSON.stringify({ v: 1, data: { paper: null, history: [summary('p-past-1', T0)] } }));
+    const { exam } = await fresh();
+    expect(exam.useExam.getState().history.map((h) => h.id)).toEqual(['p-past-1']);
+    expect(window.localStorage.getItem('coldboot:v1:exam:quarantine')).toBeNull();
   });
 });
