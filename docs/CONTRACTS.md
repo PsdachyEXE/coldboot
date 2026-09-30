@@ -25,7 +25,7 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Time | `src/lib/time.ts` | study day (4 am rollover), `localDate` (the device's calendar date, no rollover), Melbourne date, countdown, exam phases |
 | Clock hook | `src/lib/useNow.ts` | `useNow(intervalMs)` returns epoch ms, refreshed every interval and when the page becomes visible again; the status bar uses 15 s |
 | Text matching | `src/lib/text.ts` | `normaliseAnswer`, `editDistance`, `nearest`, `parseList`, `parseNumberList` |
-| Report links | `src/lib/report.ts`, `src/ui/report.ts` | prefilled GitHub issue URL; `openReport({ itemId })` opens the shared dialog |
+| Report links | `src/lib/report.ts`, `src/ui/report.ts` | prefilled GitHub issue URL, at most `ISSUE_URL_MAX` characters (a note too long for the link is shortened there; the copied report keeps it whole); `openReport({ itemId })` opens the shared dialog |
 | Stores | `src/state/settings.ts`, `srs.ts`, `attempts.ts`, `session.ts` | Zustand; persisted as `coldboot:v1:<name>` envelopes |
 | Persistence | `src/state/storage.ts`, `src/state/persist.ts` | guarded localStorage, debounced writes, migrations, per-record salvage with quarantine, newer-build blocking, cross-window merge, `useStorageHealth`, and the `persistedStores` registry that export, import and reset iterate. A new persisted store (e.g. the exam autosave) only needs `persistStore(...)` |
 | Recording answers | `src/state/record.ts` | `recordAttempt(attempt, { review })` is the only way to log an answer |
