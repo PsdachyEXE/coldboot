@@ -57,6 +57,14 @@
   margin: 0;
   min-width: 0;
 }
+@media (max-width: 559.98px) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .facts dd + dt {
+    margin-top: var(--space-2);
+  }
+}
 
 /* Keyboard hints under a control row. */
 .keys {
