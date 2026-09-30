@@ -9,13 +9,16 @@ import { useTerminal } from '../../terminal/useTerminal';
 import { fixtureIndex, fxCard, fxMcq, provideContent, resetStudyStores } from '../study/testing';
 import Run from './Run';
 
-// The daily game is registered by another track; the run only needs to know it exists.
+// The run only needs to know whether the daily game exists; a test can hide it.
 const registry = vi.hoisted(() => ({ dailyInstalled: true }));
 vi.mock('../../games/registry', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../../games/registry')>();
   return {
     ...actual,
-    findGame: (id: string) => (id === 'daily' && registry.dailyInstalled ? { id: 'daily' } : actual.findGame(id)),
+    findGame: (id: string) => {
+      if (id !== 'daily') return actual.findGame(id);
+      return registry.dailyInstalled ? { id: 'daily' } : undefined;
+    },
   };
 });
 
