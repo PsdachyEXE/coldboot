@@ -5,21 +5,27 @@
  * series, and the only split (cards due now) is a hatched pattern with a legend in words.
  *
  * The SVGs are images (`role="img"` with a one-line summary). The numbers behind every chart are in
- * a "Show data" table beside it, and each mark has a hover title as well.
+ * a "Show data" table beside it (the disclosure reads "Hide data" while open), and each mark has a
+ * hover title as well.
  */
-import { useId, type ReactNode } from 'react';
+import { useId, useState, type ReactNode } from 'react';
 import { VisuallyHidden } from '../../ui/VisuallyHidden';
 import { niceTicks } from './aggregate';
 import styles from './Stats.module.css';
 import { useWidth } from './useWidth';
 
-/** Approximate advance of a 14 px character, for keeping labels inside the chart. */
-const CHAR_W = 7.6;
 /** Columns are never thicker than this (they don't fill their slot). */
 const MAX_COLUMN = 24;
 
+/**
+ * A slightly generous width for a 14 px label in the reading font, so labels can be kept inside
+ * the chart without measuring the DOM: digits are 9 px (tabular), "%" about 13 px, a space 4 px,
+ * and letters average under 8 px.
+ */
 function textWidth(text: string): number {
-  return text.length * CHAR_W;
+  let w = 0;
+  for (const ch of text) w += /\d/.test(ch) ? 9 : ch === '%' ? 13 : ch === ' ' ? 4 : 8;
+  return w;
 }
 
 function clamp(v: number, lo: number, hi: number): number {
@@ -325,10 +331,12 @@ export interface DataTableProps {
 
 /** The numbers behind a chart, in a "Show data" disclosure. */
 export function DataTable({ about, caption, columns, rows }: DataTableProps) {
+  const [open, setOpen] = useState(false);
   return (
-    <details className={styles.data}>
+    <details className={styles.data} onToggle={(e) => setOpen(e.currentTarget.open)}>
       <summary className={styles.summary}>
-        Show data<VisuallyHidden> for {about}</VisuallyHidden>
+        {open ? 'Hide data' : 'Show data'}
+        <VisuallyHidden> for {about}</VisuallyHidden>
       </summary>
       <div className={styles.tableWrap} role="region" aria-label={caption} tabIndex={0}>
         <table className={styles.table}>

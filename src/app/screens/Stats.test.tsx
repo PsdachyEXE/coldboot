@@ -85,7 +85,7 @@ describe('Stats', () => {
       expect(within(panels).getByRole('link', { name: 'Drill U4O2' })).toHaveAttribute('href', '/drill?area=U4O2');
     });
 
-    it('puts the numbers behind each chart in a Show data table', () => {
+    it('puts the numbers behind each chart in a Show data table', async () => {
       renderStats();
       const reviews = screen.getByRole('region', { name: 'Reviews per day' });
       fireEvent.click(within(reviews).getByText('Show data'));
@@ -100,7 +100,8 @@ describe('Stats', () => {
       const twoDaysAgo = within(accuracy).getByRole('rowheader', { name: 'Tuesday 29 September' }).closest('tr')!;
       expect(within(twoDaysAgo).getAllByRole('cell')[0]).toHaveTextContent('75% of 4 answers');
       expect(within(twoDaysAgo).getAllByRole('cell')[5]).toHaveTextContent('No answers');
-      expect(screen.getAllByText('Show data')).toHaveLength(5);
+      expect(await within(reviews).findByText('Hide data')).toBeInTheDocument();
+      expect(screen.getAllByText('Show data')).toHaveLength(4);
     });
 
     it('forecasts the cards due, with the ones due now told apart in words', () => {

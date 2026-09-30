@@ -30,6 +30,11 @@
 .terminal > :last-child {
   margin-bottom: 0;
 }
+@media (max-width: 719.98px) {
+  .terminal {
+    padding: var(--space-3);
+  }
+}
 
 .answerForm {
   margin: 0;
@@ -98,8 +103,8 @@
 
 .results {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-  gap: var(--space-1) var(--space-5);
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: var(--space-1) var(--space-4);
   margin: 0 0 var(--space-5);
   padding: 0;
   list-style: none;
@@ -111,6 +116,10 @@
   border-bottom: var(--hairline);
 }
 .resultNumber {
+  display: inline-block;
+  min-width: 2.5ch;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
   color: var(--ice);
 }
 .resultCorrect {
@@ -141,8 +150,14 @@
   color: var(--ice);
   font-size: var(--step-0);
   line-height: 1.6;
-  white-space: pre;
+  /* Wraps at a space on narrow screens; the copied text is always the exact share line. */
+  white-space: pre-wrap;
   user-select: all;
+}
+@media (max-width: 719.98px) {
+  .sharePre {
+    padding: var(--space-3);
+  }
 }
 
 .copied {

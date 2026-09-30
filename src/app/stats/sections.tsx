@@ -251,7 +251,7 @@ export function ForecastSection({ forecast, newCardLimit }: { forecast: Forecast
             </li>
             <li>
               <Swatch kind="solid" />
-              Due later that day
+              Due later
             </li>
           </ul>
           <ColumnChart

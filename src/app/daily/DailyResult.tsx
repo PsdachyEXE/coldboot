@@ -10,6 +10,7 @@ import { useNow } from '../../lib/useNow';
 import { announce } from '../../ui/announce';
 import { Button, ButtonLink } from '../../ui/Button';
 import { TextArea } from '../../ui/Field';
+import { VisuallyHidden } from '../../ui/VisuallyHidden';
 import { paths } from '../paths';
 import { PhaseHeading } from '../study/parts';
 import study from '../study/study.module.css';
@@ -71,7 +72,10 @@ export function DailyResult({ date, results, total, justFinished, today, onNewSe
           const r = results[i];
           return (
             <li key={i} data-result={r === 1 ? 'correct' : 'incorrect'}>
-              <span className={styles.resultNumber}>Question {i + 1}</span>{' '}
+              <span className={styles.resultNumber}>
+                <VisuallyHidden>Question </VisuallyHidden>
+                {i + 1}
+              </span>{' '}
               <span className={r === 1 ? styles.resultCorrect : styles.resultIncorrect}>
                 <span aria-hidden="true">{r === 1 ? '✓' : '✗'}</span> {r === 1 ? 'Correct' : 'Incorrect'}
               </span>
