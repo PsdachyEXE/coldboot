@@ -13,7 +13,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: var(--space-3);
   align-items: start;
-  padding: var(--space-3) 0;
+  padding: var(--space-2) 0;
   border-bottom: var(--hairline);
   max-width: none;
 }
@@ -55,4 +55,19 @@
 .stepStatus {
   font-size: var(--step-0);
   color: var(--ice);
+}
+
+/* Phones: the step list folds into one line under the step heading, with the native disclosure marker. */
+.stepSummary {
+  margin: calc(-1 * var(--space-3)) 0 var(--space-4);
+  font-size: var(--step-0);
+}
+.stepSummary > summary {
+  display: list-item;
+  padding: var(--space-3) 0;
+  cursor: pointer;
+  width: fit-content;
+}
+.stepSummary .steps {
+  margin: var(--space-2) 0 0;
 }

@@ -114,6 +114,26 @@ describe("Today's run", () => {
     expect(summary()[2]).toBe('Done: 10 of 10 correct.');
   });
 
+  it('counts a drill ended before any answer as skipped', () => {
+    provideContent(fixtureIndex({ mcq: [fxMcq('m-u3o1-kk04-001', ['U3O1-KK04'])] }));
+    renderRun();
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'End drill now' }));
+    expect(screen.getByRole('heading', { name: 'Step 3 of 3: Daily challenge' })).toBeInTheDocument();
+    expect(steps()[1]).toHaveTextContent('Skipped: You ended the drill before answering.');
+  });
+
+  it('carries on a daily challenge already begun today', () => {
+    provideContent(fixtureIndex());
+    const today = melbourneDate(Date.now());
+    useSession.getState().beginDaily(today, Array.from({ length: 10 }, (_, i) => `m-x-${i}`));
+    for (let i = 0; i < 5; i++) useSession.getState().recordDaily(today, i, true, Date.now());
+    renderRun();
+    expect(screen.getByText(/You've answered 5 of 10\. Carry on from question 6\./)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Continue the daily challenge' }));
+    expect(useTerminal.getState()).toMatchObject({ open: true, pending: 'daily' });
+  });
+
   it('lets the student skip the daily challenge', () => {
     provideContent(fixtureIndex());
     renderRun();

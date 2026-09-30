@@ -19,6 +19,7 @@
 }
 .marks {
   font-size: var(--step-1);
+  font-weight: 400;
   color: var(--ice);
 }
 
@@ -162,11 +163,10 @@
   background: var(--trench);
   min-width: 0;
 }
+/* The native disclosure marker shows whether the insert is open, as on a figure's text description. */
 .details > summary {
-  display: flex;
-  align-items: center;
-  min-height: var(--control-h);
-  padding: 0 var(--space-4);
+  display: list-item;
+  padding: var(--space-3) var(--space-4);
   font-weight: 700;
   cursor: pointer;
 }
