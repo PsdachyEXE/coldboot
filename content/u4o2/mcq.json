@@ -1,0 +1,1138 @@
+[
+  {
+    "id": "m-u4o2-kk01-001",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "stem": "Tallowood Freight, a Geelong transport company with 400 staff, is setting its priorities for next year. Which statement is an objective rather than a goal?",
+    "options": [
+      "Become the most trusted and reliable freight company in regional Victoria",
+      "Improve the security of the customer data held in company systems",
+      "Cut the average time to confirm a booking to under three minutes by 30 June",
+      "Give customers a better and simpler online experience when booking deliveries"
+    ],
+    "answer": 2,
+    "explanation": "Only this statement sets a measurable target (under three minutes) and a deadline (30 June), so Tallowood Freight can check whether it has been met. The others are broad aims.",
+    "whyWrong": [
+      "A broad aim with no measure or deadline, so it is a goal.",
+      "It names an area to improve but gives no measure or deadline, so it is a goal.",
+      "",
+      "'Better' and 'simpler' can't be measured as written, and there is no deadline, so it is a goal."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk01-002",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "stem": "Sallygum Health, a network of Bendigo medical clinics with 600 staff, has the goal of improving patients' access to care. Which proposed software project most directly supports this goal?",
+    "options": [
+      "An online booking app that lets patients book and change appointments at any hour",
+      "A payroll module that calculates staff overtime and leave balances automatically",
+      "An internal wiki where the clinics' developers record their coding standards",
+      "A stock control program that reorders medical supplies when levels run low"
+    ],
+    "answer": 0,
+    "explanation": "Letting patients book and change appointments at any time removes a barrier to seeing a clinician, so this project serves the access goal directly.",
+    "whyWrong": [
+      "",
+      "It makes administration more efficient but doesn't change how patients reach care.",
+      "It supports the development team's consistency, not patients' access to care.",
+      "It keeps the clinics supplied, but it doesn't make appointments easier to get."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk01-003",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "stem": "Tallowood Freight has the goal of reducing its environmental impact. Which objective best supports this goal?",
+    "options": [
+      "Use the new route-planning software to make every delivery more environmentally friendly",
+      "Increase revenue from interstate deliveries by 15% within the next 18 months",
+      "Move the booking system to a cloud-based platform by the end of the financial year",
+      "Reduce the fuel used per delivery by 10% within 18 months using route-planning software"
+    ],
+    "answer": 3,
+    "explanation": "It is measurable (10% less fuel per delivery), has a time frame (18 months) and relates directly to environmental impact, so progress towards the goal can be checked.",
+    "whyWrong": [
+      "It relates to the goal but has no measure or time frame, so it reads as another goal.",
+      "It is measurable, but it serves a financial goal, and more interstate trips could increase the company's impact.",
+      "It has a deadline, but nothing in it measures environmental impact.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk01-004",
+    "kk": [
+      "U4O2-KK01",
+      "U4O2-KK03"
+    ],
+    "stem": "Yellowbox Credit Union, a Ballarat lender with 250 staff, has the goal of keeping its members' trust. One objective is that no member data is exposed through its software over the next two years. Its developers currently test new features using a copy of real member records. Which change best serves this objective?",
+    "options": [
+      "Rewrite the objective as 'improve data security' so that it covers every department",
+      "Test new features with realistic invented records instead of copies of real member data",
+      "Require internal documentation in every module that reads or writes member records",
+      "Give all staff access to the test environment so that faults are reported sooner"
+    ],
+    "answer": 1,
+    "explanation": "Real member records in a test environment can be seen by anyone with test access, or leaked in a breach of that environment. Invented records remove this exposure while still allowing thorough testing.",
+    "whyWrong": [
+      "This turns a measurable objective into a vague goal and does nothing to reduce exposure.",
+      "",
+      "Documentation helps maintenance but doesn't stop real records being exposed during testing.",
+      "Wider access to a test environment holding real data increases the chance of exposure."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk02-001",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "stem": "Which is an advantage of in-house software development over external development?",
+    "options": [
+      "The organisation gains specialist skills that its own staff do not have",
+      "The organisation keeps direct control over the code and who can see its data",
+      "The organisation pays a fixed contract price that covers the whole project",
+      "The organisation does not need to employ or train any programming staff"
+    ],
+    "answer": 1,
+    "explanation": "In-house, the organisation's own staff write the code under its own policies, so it decides the priorities, keeps the work and controls who has access to its data.",
+    "whyWrong": [
+      "Gaining skills the organisation lacks is an advantage of external development.",
+      "",
+      "A contract price applies when an external developer is engaged, not when the organisation's own staff build the software.",
+      "In-house development requires the organisation to employ and train developers."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk02-002",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "stem": "The Shire of Redgum Plains, a regional Victorian council with 500 staff, needs a one-off program to analyse drone images of its roads. None of its IT staff has image-processing experience, and the program is needed within four months. Which recommendation is best justified?",
+    "options": [
+      "In-house, because staff know the council's processes and can learn image processing as they build",
+      "In-house, because an external developer would become the owner of the council's road data",
+      "External, because an external developer is not bound by the council's security requirements",
+      "External, because a specialist developer has the skills the council lacks and can meet the deadline"
+    ],
+    "answer": 3,
+    "explanation": "The council lacks the specialist skills, the program is a one-off and the deadline is short. A specialist external developer suits all three, provided the contract covers security and ownership.",
+    "whyWrong": [
+      "Learning a specialist skill during the project puts the four-month deadline at risk.",
+      "Sharing data with a developer doesn't make the developer its owner; the contract sets how it may be used.",
+      "The contract should bind the developer to the council's security requirements; ignoring them is no advantage.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk02-003",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "stem": "Which is the most significant security risk of having software developed externally?",
+    "options": [
+      "The developer's staff may access confidential data under practices the organisation can't control",
+      "The organisation's own developers may lack the skills needed to write secure code for the project",
+      "The developer may use naming conventions that differ from those in the organisation's other programs",
+      "Code written by the developer cannot be checked by the organisation's own code reviews"
+    ],
+    "answer": 0,
+    "explanation": "External development gives a third party access to the organisation's data and code. The organisation can set contract terms but can't directly control the developer's staff, systems or security practices.",
+    "whyWrong": [
+      "",
+      "A lack of in-house skills is a risk of in-house development, not external development.",
+      "Inconsistent naming makes maintenance harder but isn't a security risk.",
+      "The organisation can and should review delivered code; outsourcing doesn't prevent code review."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk02-004",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "stem": "Quandong Grocers, a Shepparton supermarket chain with 1200 staff, has contracted Peppercress Software to build a loyalty app. The app will store customers' names, email addresses and purchase histories. Which contract term best protects Quandong Grocers' customer data during development?",
+    "options": [
+      "Peppercress Software pays a penalty for each day the app is delivered after the agreed date",
+      "Peppercress Software writes the app in a language that Quandong Grocers' developers know",
+      "Peppercress Software tests with invented data and limits real customer data to named staff",
+      "Peppercress Software hands over the source code and its documentation when the project ends"
+    ],
+    "answer": 2,
+    "explanation": "Invented test data means real customer details aren't needed for most development, and naming the staff who may access real data limits who could expose it.",
+    "whyWrong": [
+      "A late-delivery penalty protects the schedule, not the customer data.",
+      "This helps later maintenance but does nothing to protect data during development.",
+      "",
+      "Handing over the code secures ownership and maintenance after the project, not the data during it."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-001",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "stem": "Which of the following is a vulnerability rather than a threat?",
+    "options": [
+      "A criminal group that sells stolen customer records online",
+      "A disgruntled developer who plans to copy the source code",
+      "A storm that cuts power to the building holding the servers",
+      "A test server still using the manufacturer's default password"
+    ],
+    "answer": 3,
+    "explanation": "A vulnerability is a weakness that could be exploited. Default passwords are widely known, so the test server is open to anyone who tries one.",
+    "whyWrong": [
+      "The criminal group is a threat: people who could exploit a weakness.",
+      "The disgruntled developer is an insider threat, not a weakness in the system.",
+      "The storm is a threat: an event that could cause harm.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-002",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "stem": "Quollstack Games, a Melbourne studio with 90 staff, builds and tests new features directly on the server that runs its live online game. Which risk does this practice create most directly?",
+    "options": [
+      "Developers will be unable to use version control to record their changes",
+      "An untested change could crash the live game or expose players' account data",
+      "Players' passwords could be intercepted as they travel to the game server",
+      "The studio's source code will become the property of the server's hosting company"
+    ],
+    "answer": 1,
+    "explanation": "Without separate development and testing environments, untested code runs on the live server. A faulty change can take the game down for every player, and developers work alongside real player data.",
+    "whyWrong": [
+      "Version control works wherever the code runs; the problem is where untested code runs.",
+      "",
+      "Interception in transit is a risk of unencrypted connections, not of where developers build and test.",
+      "Hosting code on a server doesn't transfer its ownership."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-003",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "stem": "A developer at Mudbrick Logistics accidentally pushed code containing the company's database password to a public online repository. The next day she deleted the password from the code and pushed the change. Why is the database still at risk?",
+    "options": [
+      "The deletion must pass a code review before the repository hides the earlier version",
+      "Public repositories are read-only, so the push that removed the password was rejected",
+      "Earlier versions still contain the password, and someone may already have copied it",
+      "The password was encrypted in the repository, and anyone who copies it can decrypt it"
+    ],
+    "answer": 2,
+    "explanation": "Version control keeps every earlier version, so the password can still be read from the history, and anyone may have copied it while it was public. The password must be changed, not just deleted from the code.",
+    "whyWrong": [
+      "Code review checks changes before they are merged; it can't hide versions already published.",
+      "The owner can push changes to a public repository, so the deletion was recorded.",
+      "",
+      "A password written into code is plain text, not encrypted; the risk is that anyone can read it."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-004",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "stem": "At Tawny Frogmouth Analytics, a Geelong data company with 300 staff, a developer made a cloud storage folder public so that a client could download a test build. The folder also held a database export containing customer records. Which statement best describes this incident?",
+    "options": [
+      "An insider's configuration mistake created a vulnerability that exposed personal data",
+      "An external threat exploited an unpatched vulnerability in the cloud storage service",
+      "A malicious insider deliberately stole customer records and passed them to the client",
+      "A logic error in the test build revealed customer records to the client who ran it"
+    ],
+    "answer": 0,
+    "explanation": "The developer had legitimate access and made a configuration mistake. The public folder is the vulnerability, and it exposed the customer records, as well as the test build, to anyone who found it.",
+    "whyWrong": [
+      "",
+      "No outside attacker or unpatched flaw was involved; a staff member made the folder public.",
+      "Nothing suggests intent; the developer was trying to share a test build.",
+      "The records were exposed by the folder's settings, not by an error in the program's logic."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk04-001",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "stem": "Which of these is a physical security control?",
+    "options": [
+      "A swipe-card lock on the room that holds the development servers",
+      "An authenticator app that gives a code each time a developer logs in",
+      "Encryption of the database backups that are copied to cloud storage",
+      "A rule that a second developer reviews every change before merging"
+    ],
+    "answer": 0,
+    "explanation": "A swipe-card lock restricts who can physically enter the server room, protecting the hardware itself.",
+    "whyWrong": [
+      "",
+      "The authenticator app is part of software authentication, even though it runs on a phone.",
+      "Encryption is a software control that protects the stored data.",
+      "Code review is a check on the code, not a physical barrier."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk04-002",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "stem": "Which login process uses multi-factor authentication?",
+    "options": [
+      "A password, then an answer to a security question about the user's first school",
+      "A password, then a four-digit PIN that the user chose when the account was set up",
+      "A fingerprint scan followed by a face scan, both checked against stored biometrics",
+      "A password, then a one-time code from an authenticator app on the user's phone"
+    ],
+    "answer": 3,
+    "explanation": "The password is something the user knows, and the phone running the authenticator app is something they have. Factors from two different categories make it multi-factor.",
+    "whyWrong": [
+      "The password and the security answer are both something you know.",
+      "The password and the PIN are both something you know.",
+      "A fingerprint and a face are both something you are, so only one category is used.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk04-003",
+    "kk": [
+      "U4O2-KK04",
+      "U3O1-KK14"
+    ],
+    "stem": "A developer at Greenhood Software is testing the login function shown, which should lock an account after three failed attempts. Arrays are indexed from 0. What does `checkLogin([\"Wombat1\", \"Kanga!8\", \"kanga7\", \"Kanga!7\"], \"Kanga!7\")` return?",
+    "options": [
+      "`\"Access granted\"`, because the fourth attempt matches the correct password",
+      "`\"Account locked\"`, because the loop stops once `failures` reaches 3",
+      "`\"Account locked\"`, because `failures` reaches 4 before the loop stops",
+      "Nothing, because `i` goes past the last index and causes a runtime error"
+    ],
+    "answer": 1,
+    "explanation": "Attempts 0, 1 and 2 don't match, so `failures` becomes 3 and `i` becomes 3. The condition `failures < 3` is now false, so the loop ends before the fourth attempt is compared and the function returns `\"Account locked\"`. The lockout works as intended: after three failures even the correct password is refused, which stops an attacker guessing passwords indefinitely.",
+    "whyWrong": [
+      "The fourth attempt is never compared: the loop has already stopped after three failures.",
+      "",
+      "`failures` stops at 3, because the loop condition is checked before each further comparison.",
+      "`i` only reaches 3, and `attempts[3]` is never read, so no index goes out of range."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "greenhood-check-login",
+        "kind": "pseudocode",
+        "title": "Login function",
+        "indexBase": 0,
+        "code": "FUNCTION checkLogin(attempts, correct)\n    failures ← 0\n    i ← 0\n    granted ← FALSE\n    WHILE granted = FALSE AND failures < 3 DO\n        IF attempts[i] = correct THEN\n            granted ← TRUE\n        ELSE\n            failures ← failures + 1\n        ENDIF\n        i ← i + 1\n    ENDWHILE\n    IF granted = TRUE THEN\n        RETURN \"Access granted\"\n    ELSE\n        RETURN \"Account locked\"\n    ENDIF\nENDFUNCTION"
+      }
+    ]
+  },
+  {
+    "id": "m-u4o2-kk04-004",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "stem": "Saltbush Energy, a Mildura solar company with 200 staff, kept the only backup of its source code repository on a drive in the same server rack as the repository. Ransomware encrypted both the server and the backup drive. Which control would most likely have allowed the company to recover its code?",
+    "options": [
+      "Multi-factor authentication for every developer who logs in to the repository",
+      "Encryption at rest for the source code stored on the server's drives",
+      "Regular, tested backups kept offline or off-site, separate from the server",
+      "A code review of every change before it is merged into the repository"
+    ],
+    "answer": 2,
+    "explanation": "A backup kept offline or off-site can't be reached by ransomware on the server, and testing restores confirms the copy works, so the code can be recovered.",
+    "whyWrong": [
+      "MFA makes unauthorised logins harder but doesn't recover data once it has been encrypted.",
+      "Ransomware can encrypt files that are already encrypted, so access would still be lost.",
+      "",
+      "Code review checks changes for flaws; it provides no copy of the code to restore."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk05-001",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "stem": "What is the main purpose of threat modelling in software development?",
+    "options": [
+      "To test the finished program with real users and record usability problems",
+      "To record every change to the source code so that it can be rolled back",
+      "To identify threats to a system early and plan controls that mitigate them",
+      "To show the project's tasks, their durations and the dependencies between them"
+    ],
+    "answer": 2,
+    "explanation": "Threat modelling finds what could go wrong with a system's security, ideally during design, so that controls can be planned and built in.",
+    "whyWrong": [
+      "This describes beta testing, which checks a working solution with users rather than its security.",
+      "This describes version control.",
+      "",
+      "This describes a Gantt chart, a project management tool."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk05-002",
+    "kk": [
+      "U4O2-KK05",
+      "U4O2-KK04"
+    ],
+    "stem": "Tidewater Pharmacy, a Warrnambool pharmacy group with 180 staff, is threat modelling the online ordering system shown in the DFD. The team identifies the threat that an attacker could intercept `payment_details` as they travel over the internet. Which control best mitigates this threat?",
+    "options": [
+      "Encrypt the payment details while they travel to the payment provider",
+      "Require customers to use multi-factor authentication when they log in",
+      "Back up the Orders data store to an off-site location every night",
+      "Have a second developer review the code for the Place order process"
+    ],
+    "answer": 0,
+    "explanation": "Interception targets data while it moves across a network. Encrypting the flow in transit means that intercepted payment details can't be read.",
+    "whyWrong": [
+      "",
+      "MFA protects against someone logging in as a customer, not against data being intercepted in transit.",
+      "Off-site backups protect the stored orders, not data travelling to the payment provider.",
+      "Code review may find flaws in the process, but it doesn't protect data crossing the network."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "tidewater-dfd",
+        "kind": "dfd",
+        "title": "DFD (part): Tidewater Pharmacy online ordering",
+        "width": 640,
+        "height": 400,
+        "nodes": [
+          {
+            "id": "customer",
+            "type": "entity",
+            "label": "Customer",
+            "x": 104,
+            "y": 90
+          },
+          {
+            "id": "provider",
+            "type": "entity",
+            "label": "Payment provider",
+            "x": 536,
+            "y": 90
+          },
+          {
+            "id": "p1",
+            "type": "process",
+            "label": "Log in",
+            "number": "1",
+            "x": 200,
+            "y": 220
+          },
+          {
+            "id": "p2",
+            "type": "process",
+            "label": "Place order",
+            "number": "2",
+            "x": 440,
+            "y": 220
+          },
+          {
+            "id": "d1",
+            "type": "store",
+            "label": "Customers",
+            "number": "D1",
+            "x": 200,
+            "y": 344
+          },
+          {
+            "id": "d2",
+            "type": "store",
+            "label": "Orders",
+            "number": "D2",
+            "x": 440,
+            "y": 344
+          }
+        ],
+        "flows": [
+          {
+            "from": "customer",
+            "to": "p1",
+            "label": "login_details"
+          },
+          {
+            "from": "d1",
+            "to": "p1",
+            "label": "account_details",
+            "labelAt": {
+              "x": 272,
+              "y": 297
+            }
+          },
+          {
+            "from": "p1",
+            "to": "p2",
+            "label": "customer_id",
+            "labelAt": {
+              "x": 320,
+              "y": 206
+            }
+          },
+          {
+            "from": "customer",
+            "to": "p2",
+            "label": "order_details",
+            "labelAt": {
+              "x": 300,
+              "y": 130
+            }
+          },
+          {
+            "from": "p2",
+            "to": "provider",
+            "label": "payment_details",
+            "labelAt": {
+              "x": 560,
+              "y": 160
+            }
+          },
+          {
+            "from": "p2",
+            "to": "d2",
+            "label": "order_record",
+            "labelAt": {
+              "x": 512,
+              "y": 297
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o2-kk05-003",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "stem": "Candlebark Mutual, a Geelong customer-owned bank, has rated four threats to its new banking app during threat modelling. Based on the ratings in the table, which threat should be mitigated first?",
+    "options": [
+      "T4, because it would cause the most severe harm if it occurred",
+      "T2, because it is the threat most likely to occur",
+      "T1, because it is the quickest and cheapest to mitigate",
+      "T3, because it is both likely to occur and severely harmful"
+    ],
+    "answer": 3,
+    "explanation": "Risk combines likelihood and impact. T3 is rated high on both, so it carries the greatest risk and should be mitigated first.",
+    "whyWrong": [
+      "T4's impact is high, but its low likelihood gives it a lower risk than T3.",
+      "T2 is no more likely than T3, and its impact is lower.",
+      "The table rates risk, not the cost of a fix, and T1 is rated low on both likelihood and impact.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "candlebark-threats",
+        "kind": "table",
+        "title": "Threat ratings: Candlebark Mutual banking app",
+        "columns": [
+          "Threat",
+          "Likelihood",
+          "Impact"
+        ],
+        "rows": [
+          [
+            "T1: a staff member reads a colleague's screen in the office",
+            "Low",
+            "Low"
+          ],
+          [
+            "T2: attackers guess weak customer passwords",
+            "High",
+            "Medium"
+          ],
+          [
+            "T3: real customer records are copied from an unsecured test server",
+            "High",
+            "High"
+          ],
+          [
+            "T4: a flood destroys the data centre",
+            "Low",
+            "High"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o2-kk05-004",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "stem": "Stringybark Ticketing's threat model lists the threat that a logged-in customer could change the booking number in a web address to view another customer's booking. The planned mitigation is a check that each requested booking belongs to the logged-in customer. Which activity best confirms that the threat has been mitigated?",
+    "options": [
+      "Confirm that the Gantt chart shows the check was finished before the release milestone",
+      "As one test customer, request another test customer's booking and confirm it is refused",
+      "Survey customers on whether they feel confident that their bookings are kept private",
+      "Check that the code for the check has internal documentation explaining its purpose"
+    ],
+    "answer": 1,
+    "explanation": "Only a test that attempts the attack shows the mitigation works. If the check was built correctly, a request for another customer's booking is refused.",
+    "whyWrong": [
+      "The Gantt chart shows the task was scheduled or finished, not that the check blocks the threat.",
+      "",
+      "Customers' confidence doesn't show whether the check refuses unauthorised requests.",
+      "Documentation explains the code but doesn't prove it blocks the threat."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk06-001",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "stem": "Which of the following is the most suitable criterion for evaluating the security of an organisation's software development practices?",
+    "options": [
+      "The development team says it feels confident about its security",
+      "The finished program responds to every request within two seconds",
+      "All code repository accounts require multi-factor authentication",
+      "The project is completed on time and within its approved budget"
+    ],
+    "answer": 2,
+    "explanation": "A criterion must be specific and checkable, and it must concern how securely software is developed. Whether every repository account requires multi-factor authentication can be checked against the account settings.",
+    "whyWrong": [
+      "Confidence is an opinion, not evidence, so it can't show whether practices are secure.",
+      "Response time measures the solution's performance, not how securely it is developed.",
+      "",
+      "Time and budget judge the project plan, not the security of development practices."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk06-002",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "stem": "An evaluator reviewed the development practices of Paperbark Insurance, a Geelong insurer, and recorded the findings below. Which criterion does the evidence show is **not** met?",
+    "options": [
+      "Repository accounts are protected by multi-factor authentication",
+      "Every change is approved by a second developer before merging",
+      "Third-party libraries are patched soon after updates are released",
+      "Test environments contain no identifiable customer information"
+    ],
+    "answer": 3,
+    "explanation": "A nightly full copy of the live customer database puts identifiable personal information in the test environment, so this criterion is not met. The evidence shows that the other three criteria are met.",
+    "whyWrong": [
+      "The evidence shows all 12 developers use multi-factor authentication.",
+      "The merge log shows a second developer approved every change.",
+      "Patches were applied within a week of release, so this criterion is met.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "paperbark-findings",
+        "kind": "table",
+        "title": "Evaluation findings",
+        "columns": [
+          "Practice",
+          "Evidence"
+        ],
+        "rows": [
+          [
+            "Logging in",
+            "All 12 developers use multi-factor authentication to reach the repository"
+          ],
+          [
+            "Code changes",
+            "The merge log shows a second developer approved every change in the last six months"
+          ],
+          [
+            "Libraries",
+            "Patches for third-party libraries were applied within a week of release"
+          ],
+          [
+            "Testing",
+            "The test database is refreshed each night with a full copy of the live customer database"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o2-kk06-003",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "stem": "Which evidence would best show whether the criterion 'former staff lose access to the code repository on their last day' is met?",
+    "options": [
+      "Departure dates in staff records compared with account closure dates",
+      "A survey asking current developers how secure they believe access is",
+      "A code review of recent changes checking for hard-coded passwords",
+      "A test table comparing expected and actual outputs of the login module"
+    ],
+    "answer": 0,
+    "explanation": "The criterion is about timing. Comparing when each person left with when their account was closed shows directly whether access was removed on their last day.",
+    "whyWrong": [
+      "",
+      "A survey collects opinions, which can't show when accounts were actually closed.",
+      "A code review checks changes for flaws and secrets, not whether leavers' accounts were closed.",
+      "A test table checks that the login module works, not when accounts were closed."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk06-004",
+    "kk": [
+      "U4O2-KK06",
+      "U4O2-KK03"
+    ],
+    "stem": "Tern Bay Software in Warrnambool is concerned that an authorised developer could change its live system without approval. Which criterion would best evaluate whether its development practices address this risk?",
+    "options": [
+      "Production databases are encrypted using a strong, managed key",
+      "Changes reach production only through an approved, logged release",
+      "A full backup of production is taken and stored off-site each day",
+      "All developer accounts use multi-factor authentication to log in"
+    ],
+    "answer": 1,
+    "explanation": "The threat is an authorised insider making unapproved changes. A criterion that every change reaches production only through an approved, logged release checks both that approval happens and that each change can be traced.",
+    "whyWrong": [
+      "Encryption protects stored data from outsiders; an authorised developer can still make changes.",
+      "",
+      "Backups help recovery after a bad change but don't stop unapproved changes being made.",
+      "Multi-factor authentication confirms who logs in, but the risk comes from a legitimate, logged-in developer."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk07-001",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "stem": "Which statement best describes the Essential Eight?",
+    "options": [
+      "Eight privacy principles that Australian Government agencies must follow",
+      "Eight mitigation strategies published by the Australian Cyber Security Centre",
+      "A Victorian Act setting data security standards for state public sector bodies",
+      "An eight-step threat modelling process for designing secure software"
+    ],
+    "answer": 1,
+    "explanation": "The Essential Eight is a set of eight prioritised strategies from the Australian Cyber Security Centre, such as patching, multi-factor authentication and regular backups, that reduce cyber security risk.",
+    "whyWrong": [
+      "Privacy principles for Australian Government agencies are the Australian Privacy Principles in the Privacy Act 1988 (Cth).",
+      "",
+      "Standards for the Victorian public sector come from the Privacy and Data Protection Act 2014 (Vic), not the Essential Eight.",
+      "The Essential Eight lists mitigation strategies; it isn't a threat modelling process."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk07-002",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "stem": "Wattleglen Physiotherapy, a private clinic in Bendigo, is having an app built that stores each patient's injury history and treatment notes. Which statement about the law that applies to this information is correct?",
+    "options": [
+      "The Privacy and Data Protection Act 2014 (Vic) applies, because the clinic is in Victoria",
+      "No privacy law applies, because the clinic is a private business, not a government body",
+      "Only the Essential Eight applies, because the information is stored electronically",
+      "The Health Records Act 2001 (Vic) applies, because the clinic holds health information"
+    ],
+    "answer": 3,
+    "explanation": "Injury histories and treatment notes are health information. The Health Records Act 2001 (Vic) regulates how public and private organisations in Victoria handle health information, so the clinic and its app must follow its Health Privacy Principles.",
+    "whyWrong": [
+      "That Act binds Victorian public sector bodies and their contractors, not a private clinic.",
+      "Private organisations that hold health information in Victoria are bound by privacy law.",
+      "The Essential Eight is guidance, not law, and it doesn't regulate how health information is handled.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk07-003",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "stem": "Mount Corella Shire Council in regional Victoria is replacing its rates system. The new system will store ratepayers' names, addresses and payment histories. Which Act most directly governs how the council handles this personal information, and why?",
+    "options": [
+      "The Privacy and Data Protection Act 2014 (Vic), as councils are Victorian public sector bodies",
+      "The Privacy Act 1988 (Cth), as it covers every organisation that holds personal information",
+      "The Health Records Act 2001 (Vic), as payment histories are sensitive personal records",
+      "The Copyright Act 1968 (Cth), as the council owns the records stored in its system"
+    ],
+    "answer": 0,
+    "explanation": "A local council is part of the Victorian public sector, so its handling of personal information is governed by the Privacy and Data Protection Act 2014 (Vic) and its Information Privacy Principles.",
+    "whyWrong": [
+      "",
+      "The Privacy Act doesn't cover every organisation; it excludes state public sector bodies such as Victorian councils.",
+      "Names, addresses and payment histories aren't health information, so the Health Records Act doesn't apply.",
+      "Copyright protects works such as program code; it doesn't govern how personal information is handled."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk07-004",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK08"
+    ],
+    "stem": "A developer at Saltbush Outdoor Supplies, a Mildura retailer covered by the Privacy Act 1988 (Cth), leaves a customer database publicly accessible. An unknown party downloads customers' names, dates of birth and driver licence numbers, and serious harm to those customers is likely. What does the Act require the retailer to do?",
+    "options": [
+      "Notify the Victorian Information Commissioner, as the retailer is in Victoria",
+      "Restore the database from a backup, which ends any duty to notify anyone",
+      "Notify the affected customers and the Australian Information Commissioner",
+      "Record the breach in its risk register, since notification is optional"
+    ],
+    "answer": 2,
+    "explanation": "Under the Notifiable Data Breaches scheme, an organisation covered by the Privacy Act must notify the affected individuals and the Australian Information Commissioner (through the Office of the Australian Information Commissioner) of a breach that is likely to cause serious harm, so that people can protect themselves, for example by replacing their driver licence.",
+    "whyWrong": [
+      "The Victorian commissioner oversees the Victorian public sector; a private retailer covered by the Privacy Act notifies the Australian commissioner.",
+      "Restoring the data doesn't undo the download; the customers remain at risk and must be told.",
+      "",
+      "Notification isn't optional when a breach is likely to cause serious harm."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk08-001",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "stem": "Which situation raises the ethical issue of failing to acknowledge reused code?",
+    "options": [
+      "A developer writes her own sort function after reading how the algorithm works",
+      "A developer calls a library's functions and lists the library in the documentation",
+      "A developer reuses a function he wrote last year for the same employer's app",
+      "A developer pastes a function from an online forum and comments it as her own work"
+    ],
+    "answer": 3,
+    "explanation": "Copying a function from a forum and labelling it as her own presents someone else's work as hers and hides where the code came from.",
+    "whyWrong": [
+      "Writing her own code from a description of an algorithm is original work, so there is nothing to acknowledge.",
+      "Listing the library in the documentation acknowledges it.",
+      "The function is his own work for the same employer, so there is no one else to credit.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk08-002",
+    "kk": [
+      "U4O2-KK08",
+      "U3O1-KK01"
+    ],
+    "stem": "Priya, a junior developer at Quellwood Energy in Ballarat, uses an AI assistant to generate the login module for the customer portal. She commits the code without reading or testing it, because it compiles without errors. Which ethical issue does this most directly raise?",
+    "options": [
+      "Over-reliance on AI-generated code without checking it for flaws",
+      "Scope creep from adding features that the client didn't request",
+      "Exposure of personal data through an unsecured test environment",
+      "Failure to acknowledge a licensed library used in the portal code"
+    ],
+    "answer": 0,
+    "explanation": "Priya is trusting AI output she hasn't read or tested. Compiling only shows there are no syntax errors; the module could still contain logic errors or security flaws that expose customers' accounts.",
+    "whyWrong": [
+      "",
+      "Scope creep is a project management issue, and no extra features are described.",
+      "Nothing in the scenario involves a test environment or copied data.",
+      "No library is mentioned; the issue is unchecked AI output."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk08-003",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "stem": "Two days before release, Tomas, a developer at Orchard Lane Payroll in Shepparton, finds a vulnerability that could expose employees' bank details. Which action is the most ethical?",
+    "options": [
+      "Fix it quietly after release, so the client isn't worried by a delay",
+      "Report it and its likely impact so a fix or delay can be decided",
+      "Add a clause to the terms of use so that users accept the risk",
+      "Post details of it online so users can protect themselves now"
+    ],
+    "answer": 1,
+    "explanation": "Reporting the vulnerability with its likely impact lets the organisation decide, with full information, to fix it or delay the release, which protects the employees whose bank details are at risk.",
+    "whyWrong": [
+      "Releasing with a known flaw and hiding it leaves employees exposed without their knowledge.",
+      "",
+      "Users can't judge a hidden technical risk, so a clause shifts the harm to them rather than preventing it.",
+      "Publishing the details before a fix is ready shows attackers how to exploit the flaw, putting employees' bank details at greater risk."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk08-004",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "stem": "Developers at Tallis Street Insurance in Wodonga copy the live customer database, including names, addresses and bank details, into the test environment because it is quicker than creating test data. Contractors can also reach the test environment. Which statement best explains why this is an ethical issue?",
+    "options": [
+      "Live data lacks the boundary and invalid values that test data needs",
+      "The Copyright Act gives each customer ownership of their own records",
+      "Customers' data is exposed to more people without their knowledge",
+      "Live data makes test results unreliable, so defects reach production"
+    ],
+    "answer": 2,
+    "explanation": "Customers gave their details to be insured, not to test software. Copying them into a less protected environment that contractors can reach exposes them to more people and more risk, without the customers knowing or agreeing.",
+    "whyWrong": [
+      "Choosing boundary and invalid values is a test data design question, not an ethical one.",
+      "Copyright protects works such as code; it doesn't give customers ownership of records about them.",
+      "",
+      "Real data doesn't make results unreliable; the concern is the harm to customers."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk09-001",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "stem": "Which measure is an example of applying the principle of least privilege?",
+    "options": [
+      "Requiring a password and a code from an authenticator app",
+      "Encrypting the customer database with a strong, managed key",
+      "Giving software testers read-only access to the test database",
+      "Storing a daily copy of the code repository at an off-site location"
+    ],
+    "answer": 2,
+    "explanation": "Testers need to read test data but not change it, so read-only access gives them only what their role requires.",
+    "whyWrong": [
+      "Requiring two factors is multi-factor authentication, which confirms identity rather than limiting access.",
+      "Encryption stops stolen data being read; it doesn't limit each user's access.",
+      "",
+      "An off-site copy is a backup, which supports recovery rather than limiting access."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk09-002",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "stem": "Developers at Coolabah Ticketing, a Melbourne events company, upload changes straight to the live booking server. Last month a faulty update took online bookings offline for a day. Which measure would most directly prevent this from happening again?",
+    "options": [
+      "Require multi-factor authentication for all developer accounts",
+      "Test changes in a separate environment before releasing them",
+      "Encrypt the booking database stored on the live server",
+      "Keep a full backup of the booking server at an off-site location"
+    ],
+    "answer": 1,
+    "explanation": "The problem was untested code reaching the live system. A separate testing environment lets faulty changes be found before release, so changes reach production only after they have been tested.",
+    "whyWrong": [
+      "Multi-factor authentication stops unauthorised logins, but the faulty update came from an authorised developer.",
+      "",
+      "Encryption stops stored data being read; it doesn't stop a faulty update.",
+      "A backup could speed recovery after an outage, but it doesn't prevent the faulty update."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk09-003",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "stem": "Karri Lane Pet Supplies stores customers' credit card numbers in its order database. Which measure eliminates, rather than reduces, the risk of those card numbers being exposed if the order database is breached?",
+    "options": [
+      "Encrypting the card numbers with a key stored on a separate server",
+      "Requiring multi-factor authentication for database administrators",
+      "Reviewing the database access logs for unusual activity each day",
+      "Having a payment provider process cards, so none are stored"
+    ],
+    "answer": 3,
+    "explanation": "If card numbers are never stored in the order database, a breach of that database can't expose them, so the risk is removed rather than lowered.",
+    "whyWrong": [
+      "Encryption reduces the risk, but the numbers are still stored and could be exposed if the key is stolen.",
+      "Multi-factor authentication makes unauthorised logins less likely, but the numbers stay in the database.",
+      "Monitoring logs helps detect a breach; it doesn't remove the stored numbers.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk09-004",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "stem": "A consultant proposed the measures below for Lantern Moth Games, a Melbourne game developer. Which pairing of threat and measure is the least effective?",
+    "options": [
+      "Player data copied to USB, met by encrypting data in transit",
+      "Phishing of a password, met by multi-factor authentication",
+      "A former contractor's login, met by disabling accounts",
+      "Ransomware on the file server, met by offline backups"
+    ],
+    "answer": 0,
+    "explanation": "Encrypting data sent between servers protects it while it travels over a network, but the employee is authorised to see the data and copies it from inside. Least-privilege access to player data and blocking USB storage devices would address this threat.",
+    "whyWrong": [
+      "",
+      "Multi-factor authentication means a phished password alone isn't enough to log in, so it directly reduces this threat.",
+      "Disabling accounts on the last day removes the access the former contractor would use.",
+      "Offline backups can't be reached by the ransomware and let the code be restored."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "lanternmoth-measures",
+        "kind": "table",
+        "title": "Proposed measures",
+        "columns": [
+          "Threat",
+          "Proposed measure"
+        ],
+        "rows": [
+          [
+            "A developer's password is stolen through a phishing email",
+            "Require multi-factor authentication for all accounts"
+          ],
+          [
+            "A former contractor logs in to the code repository",
+            "Disable accounts on each contractor's last day"
+          ],
+          [
+            "Ransomware encrypts the source code on the file server",
+            "Keep tested backups in an offline location"
+          ],
+          [
+            "An employee copies player data to a personal USB drive",
+            "Encrypt data sent between the game servers"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o2-kk10-001",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "stem": "Which of the following is a recommendation rather than a finding?",
+    "options": [
+      "Require a second developer to approve each change before it is merged",
+      "Three developers hold administrator rights they don't need for their work",
+      "The repository contains a database password written into the source code",
+      "The test server's operating system hasn't been updated since March"
+    ],
+    "answer": 0,
+    "explanation": "A recommendation states an action to take. Requiring approval before merging is an action; the other options describe weaknesses that have been found.",
+    "whyWrong": [
+      "",
+      "This describes a weakness that was found (unneeded privileges); it doesn't say what to do.",
+      "This describes a weakness that was found (a hard-coded password), not an action to take.",
+      "This is a finding about missing updates, not a recommended action."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk10-002",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "stem": "At Numbat Park Studios, a Geelong app developer, the four developers email zipped copies of the source code to each other. Changes are often overwritten, and no one can tell who changed what. Which recommendation best addresses this?",
+    "options": [
+      "Encrypt every email that contains a copy of the source code",
+      "Back up each developer's laptop to an external drive every week",
+      "Adopt version control, with each developer using their own account",
+      "Require comments that state the purpose of every module in the code"
+    ],
+    "answer": 2,
+    "explanation": "Version control keeps one shared copy of the code with a history of every change, recorded against the account that made it, so overwritten work can be recovered and changes can be traced.",
+    "whyWrong": [
+      "Encryption protects the code in transit, but changes would still be overwritten and untraceable.",
+      "Weekly backups keep old copies, but they don't show who changed what or stop overwriting.",
+      "",
+      "Internal documentation explains the code; it doesn't track changes or stop overwriting."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk10-003",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "stem": "Corvid Lane Media, a three-person Castlemaine web studio with a small budget, found that an attacker had logged in to its cloud code repository using a developer's password leaked from another website. The repository offers multi-factor authentication at no extra cost, but it is switched off. Which recommendation is best justified?",
+    "options": [
+      "Hire a security firm to monitor the repository around the clock",
+      "Turn on multi-factor authentication for every repository account",
+      "Move the repository to a server in a locked room at the studio",
+      "Require developers to change their passwords every two weeks"
+    ],
+    "answer": 1,
+    "explanation": "The attacker used a valid stolen password. With multi-factor authentication a password alone is no longer enough to log in, so it directly addresses the weakness, and it costs the small studio nothing to turn on.",
+    "whyWrong": [
+      "Round-the-clock monitoring may detect attacks, but it is costly for a three-person studio and doesn't stop a stolen password working.",
+      "",
+      "Moving the server costs money and adds new risks, and a stolen password could still be used to log in.",
+      "A password leaked today still works until the next change, and frequent changes encourage weak passwords."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk10-004",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "stem": "A consultant's report on a development team's practices ends with the recommendation 'Improve security.' Why is this a weak recommendation?",
+    "options": [
+      "It should be written as a non-functional requirement in the SRS",
+      "It should name the Act that requires the organisation to improve",
+      "It should be phrased as an evaluation criterion, not as an action",
+      "It doesn't state a specific action or the risk that it would reduce"
+    ],
+    "answer": 3,
+    "explanation": "A recommendation must say what to do and why. 'Improve security' names no action, no practice and no risk, so the organisation can't act on it or check whether it worked.",
+    "whyWrong": [
+      "Non-functional requirements describe qualities of a planned solution; this is advice about existing practices.",
+      "Not every recommendation needs to cite legislation; the problem is that no action is stated.",
+      "Criteria are used to judge practices; a recommendation should be an action.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  }
+]

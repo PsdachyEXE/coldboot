@@ -1,0 +1,825 @@
+{
+  "id": "cs-01",
+  "title": "Kestrel Bay Freight: ParcelTrack",
+  "insert": "**Kestrel Bay Freight**\n\nKestrel Bay Freight is a freight company based in Geelong. It employs 480 staff, runs 11 depots across western Victoria and operates 160 trucks and vans. It delivers about 9,000 consignments a day. Every consignment has a number, such as `KBF-0042817`, printed on its label.\n\nThe board's goal is for Kestrel Bay to be known as the most dependable regional carrier in western Victoria. To support this goal, it has set two objectives:\n\n- cut calls to customer service asking where a consignment is by 40 per cent within 12 months of a new tracking system going live\n- hold an electronic proof of delivery for every consignment within 18 months of go-live, ending paper consignment notes.\n\n**Current situation**\n\nDrivers carry printed run sheets. The receiver signs a paper consignment note, which the driver brings back to the depot at the end of the day. Administration staff scan the notes the next morning, so the tracking page on Kestrel Bay's website can show a consignment as delivered up to a day late. The customer service team of 14 takes about 1,100 calls a day, most of them asking where a consignment is. About 150 signed notes are lost or damaged each month. When a customer disputes a delivery, Kestrel Bay often cannot prove it took place and has to pay for the goods.\n\nDepot staff calculate each consignment's charge in a spreadsheet.\n\n**The proposed solution: ParcelTrack**\n\n- A **driver app** on company-issued Android phones. Drivers see their run for the day, and the receiver signs on the screen. Many rural runs pass through areas with no mobile coverage, so the app stores deliveries on the phone and uploads them when coverage returns. A driver must be able to record a delivery in 30 seconds or less.\n- A **customer portal** where anyone can enter a consignment number to see its status and an estimated delivery time, which an external mapping service calculates. Customers receive an SMS when their consignment is out for delivery. The portal must be available at least 99.5 per cent of the time.\n- A **charging module** for depot staff. A charge is a $15.00 base fee plus a rate per kilogram for the delivery zone (zone 1 $1.20, zone 2 $1.80, zone 3 $2.50). Consignments of 30 kg or more attract a $25.00 heavy-item surcharge. Express service costs 1.5 times the standard charge, including any surcharge.\n\nTaking payments and booking pick-ups are outside the scope of ParcelTrack. The budget is $620,000. Kestrel Bay will build ParcelTrack in-house with its IT team of six. A Melbourne software firm quoted $870,000 and could not start for five months.\n\n**The project team**\n\n- **Anjali Mehta**, project manager (project plan, Figure 2)\n- **Leila Haddad**, systems analyst (draft context diagram, Figure 1; draft object description, Figure 3)\n- **Priya Raman**, developer (driver app)\n- **Tomas Kovac**, developer (customer portal and charging module; pseudocode, Figure 4)\n- **Ben Nguyen**, tester\n- **Grace O'Connell**, IT security lead\n- **Rhys Walker**, operations manager and project sponsor\n\n**The development environment**\n\nGrace has recorded how the IT team currently works.\n\n- One server, in an unlocked storeroom at head office, runs the development, testing and live versions of the current website. Developers copy changed files straight into the live folder.\n- The test database is a full copy of the live customer database, including the names, addresses and phone numbers of about 60,000 customers.\n- The database password is written into the source code. Code is kept in a shared network folder with no version control, in files named like `portal_final_v3_FIXED.zip`.\n- The developers share one administrator account, and no account uses multi-factor authentication.\n- A contractor who left in March can still log in remotely.\n- The server's web framework has not been updated for 14 months.\n- Priya uses a free online AI assistant to generate code. To fix a slow database query, she pasted real customer records into it. No one reviews code before it goes live.\n- Each night a backup is copied to an external drive that stays plugged into the server.\n\n*Kestrel Bay Freight and everyone named here are fictional.*",
+  "figures": [
+    {
+      "id": "parceltrack-context",
+      "kind": "context",
+      "title": "Figure 1: Draft context diagram for ParcelTrack",
+      "caption": "Drawn by Leila Haddad, systems analyst.",
+      "width": 680,
+      "height": 420,
+      "system": {
+        "label": "ParcelTrack",
+        "x": 340,
+        "y": 210
+      },
+      "entities": [
+        {
+          "id": "depot",
+          "label": "Depot staff",
+          "x": 104,
+          "y": 64
+        },
+        {
+          "id": "mapping",
+          "label": "Mapping service",
+          "x": 104,
+          "y": 356
+        },
+        {
+          "id": "customer",
+          "label": "Customer",
+          "x": 576,
+          "y": 64
+        },
+        {
+          "id": "driver",
+          "label": "Driver",
+          "x": 576,
+          "y": 356
+        }
+      ],
+      "flows": [
+        {
+          "from": "depot",
+          "to": "system",
+          "label": "consignment_details",
+          "via": [
+            {
+              "x": 238,
+              "y": 110
+            }
+          ],
+          "labelAt": {
+            "x": 262,
+            "y": 84
+          }
+        },
+        {
+          "from": "system",
+          "to": "depot",
+          "label": "consignment_charge",
+          "via": [
+            {
+              "x": 206,
+              "y": 150
+            }
+          ],
+          "labelAt": {
+            "x": 150,
+            "y": 170
+          }
+        },
+        {
+          "from": "customer",
+          "to": "system",
+          "label": "consignment_number",
+          "via": [
+            {
+              "x": 442,
+              "y": 110
+            }
+          ],
+          "labelAt": {
+            "x": 418,
+            "y": 84
+          }
+        },
+        {
+          "from": "system",
+          "to": "customer",
+          "label": "delivery_status",
+          "via": [
+            {
+              "x": 474,
+              "y": 150
+            }
+          ],
+          "labelAt": {
+            "x": 486,
+            "y": 170
+          }
+        },
+        {
+          "from": "system",
+          "to": "driver",
+          "label": "run_sheet",
+          "via": [
+            {
+              "x": 442,
+              "y": 310
+            }
+          ],
+          "labelAt": {
+            "x": 426,
+            "y": 332
+          }
+        },
+        {
+          "from": "driver",
+          "to": "system",
+          "label": "proof_of_delivery",
+          "via": [
+            {
+              "x": 474,
+              "y": 270
+            }
+          ],
+          "labelAt": {
+            "x": 486,
+            "y": 250
+          }
+        },
+        {
+          "from": "system",
+          "to": "mapping",
+          "label": "delivery_addresses",
+          "via": [
+            {
+              "x": 206,
+              "y": 270
+            }
+          ],
+          "labelAt": {
+            "x": 150,
+            "y": 250
+          }
+        },
+        {
+          "from": "mapping",
+          "to": "system",
+          "label": "estimated_times",
+          "via": [
+            {
+              "x": 238,
+              "y": 310
+            }
+          ],
+          "labelAt": {
+            "x": 272,
+            "y": 338
+          }
+        },
+        {
+          "from": "customer",
+          "to": "driver",
+          "label": "delivery_instructions",
+          "labelAt": {
+            "x": 580,
+            "y": 210
+          }
+        }
+      ]
+    },
+    {
+      "id": "parceltrack-gantt",
+      "kind": "gantt",
+      "title": "Figure 2: Project plan for ParcelTrack",
+      "caption": "Durations are in weeks. Develop driver app starts when both design tasks have finished. Alpha testing starts when Connect mapping service and Develop portal and charging module have both finished. Go-live follows Security review and Train drivers and depot staff.",
+      "unit": "week",
+      "tasks": [
+        {
+          "id": "t1",
+          "name": "Analyse requirements and write SRS",
+          "duration": 3,
+          "dependsOn": []
+        },
+        {
+          "id": "t2",
+          "name": "Design driver app screens",
+          "duration": 3,
+          "dependsOn": [
+            "t1"
+          ]
+        },
+        {
+          "id": "t3",
+          "name": "Design database and classes",
+          "duration": 2,
+          "dependsOn": [
+            "t1"
+          ]
+        },
+        {
+          "id": "t4",
+          "name": "Develop driver app",
+          "duration": 5,
+          "dependsOn": [
+            "t2",
+            "t3"
+          ]
+        },
+        {
+          "id": "t5",
+          "name": "Develop portal and charging module",
+          "duration": 4,
+          "dependsOn": [
+            "t3"
+          ]
+        },
+        {
+          "id": "t6",
+          "name": "Connect mapping service",
+          "duration": 2,
+          "dependsOn": [
+            "t4"
+          ]
+        },
+        {
+          "id": "t7",
+          "name": "Alpha testing",
+          "duration": 2,
+          "dependsOn": [
+            "t5",
+            "t6"
+          ]
+        },
+        {
+          "id": "t8",
+          "name": "Beta testing at Ballarat depot",
+          "duration": 2,
+          "dependsOn": [
+            "t7"
+          ]
+        },
+        {
+          "id": "t9",
+          "name": "Security review",
+          "duration": 1,
+          "dependsOn": [
+            "t7"
+          ]
+        },
+        {
+          "id": "t10",
+          "name": "Train drivers and depot staff",
+          "duration": 2,
+          "dependsOn": [
+            "t8"
+          ]
+        },
+        {
+          "id": "m1",
+          "name": "Go-live",
+          "duration": 0,
+          "dependsOn": [
+            "t9",
+            "t10"
+          ],
+          "milestone": true
+        }
+      ],
+      "showCriticalPath": false
+    },
+    {
+      "id": "consignment-object",
+      "kind": "object",
+      "title": "Figure 3: Draft object description for the Consignment class",
+      "caption": "Drawn by Leila Haddad, systems analyst.",
+      "name": "Consignment",
+      "properties": [
+        {
+          "name": "consignmentId",
+          "type": "Integer",
+          "description": "Number printed on the label, e.g. KBF-0042817"
+        },
+        {
+          "name": "recipientName",
+          "type": "String"
+        },
+        {
+          "name": "deliveryAddress",
+          "type": "String"
+        },
+        {
+          "name": "weightKg",
+          "type": "Floating point",
+          "description": "Weight in kilograms"
+        },
+        {
+          "name": "zone",
+          "type": "Integer",
+          "description": "Delivery zone: 1, 2 or 3"
+        },
+        {
+          "name": "isExpress",
+          "type": "Boolean"
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "description": "Booked, In transit, Out for delivery or Delivered"
+        },
+        {
+          "name": "signedBy",
+          "type": "String",
+          "description": "Name of the person who signed for the consignment"
+        }
+      ],
+      "methods": [
+        {
+          "name": "calculateCharge()",
+          "description": "Returns the charge in dollars by calling deliveryCharge (Figure 4)"
+        },
+        {
+          "name": "updateStatus(newStatus)",
+          "description": "Changes status only if newStatus is one of the four allowed values"
+        },
+        {
+          "name": "recordDelivery(signerName)",
+          "description": "Sets signedBy to signerName and status to Delivered"
+        },
+        {
+          "name": "getStatus()",
+          "description": "Returns status"
+        }
+      ]
+    },
+    {
+      "id": "delivery-charge-pseudocode",
+      "kind": "pseudocode",
+      "title": "Figure 4: Pseudocode for the deliveryCharge function",
+      "caption": "Written by Tomas Kovac, developer.",
+      "code": "FUNCTION deliveryCharge(weightKg, zone, isExpress)\n    // Returns the charge in dollars for one consignment\n    IF zone = 1 THEN\n        rate ← 1.20\n    ELSEIF zone = 2 THEN\n        rate ← 1.80\n    ELSE\n        rate ← 2.50\n    ENDIF\n    charge ← 15.00 + weightKg * rate\n    IF weightKg > 30 THEN\n        charge ← charge + 25.00\n    ENDIF\n    IF isExpress = TRUE THEN\n        charge ← charge * 1.5\n    ENDIF\n    RETURN charge\nENDFUNCTION"
+    }
+  ],
+  "questions": [
+    {
+      "id": "cs-01-q01",
+      "kk": [
+        "U4O2-KK01"
+      ],
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Using Kestrel Bay's own examples from the insert, explain the difference between an organisational goal and an objective. Then explain how ParcelTrack will help Kestrel Bay meet one of its objectives.",
+      "points": [
+        {
+          "text": "Describes a goal as a broad, long-term aim, using Kestrel Bay's goal of being known as the most dependable regional carrier in western Victoria.",
+          "marks": 1
+        },
+        {
+          "text": "Describes an objective as a specific, measurable target with a time frame that works towards the goal, using one of Kestrel Bay's objectives (for example, cutting calls asking where a consignment is by 40 per cent within 12 months of go-live).",
+          "marks": 1
+        },
+        {
+          "text": "Explains how a named ParcelTrack feature helps meet a named objective. For example, the portal and SMS alerts let customers check a consignment's status themselves, so fewer of them phone customer service; or on-screen signatures in the driver app give an electronic proof of delivery for every consignment.",
+          "marks": 1
+        }
+      ],
+      "model": "A goal is a broad, long-term aim that describes what an organisation wants to achieve, such as Kestrel Bay's goal of being known as the most dependable regional carrier in western Victoria. An objective is a specific, measurable target with a time frame that moves the organisation towards its goal, such as cutting calls to customer service asking where a consignment is by 40 per cent within 12 months of go-live. ParcelTrack's customer portal shows each consignment's status and estimated delivery time, and customers receive an SMS when their consignment is out for delivery. Customers can find this out for themselves instead of phoning, so the number of where-is-my-consignment calls should fall.",
+      "mistake": "Generic definitions score poorly in Section C. Quote Kestrel Bay's actual goal and objective, and link a specific ParcelTrack feature to the objective it serves.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-01-q02",
+      "kk": [
+        "U3O2-KK05"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Explain the difference between a functional requirement and a non-functional requirement. Support your answer with one functional requirement and one non-functional requirement of ParcelTrack taken from the insert.",
+      "points": [
+        {
+          "text": "States that a functional requirement describes what the solution must do: a task, calculation or output it performs.",
+          "marks": 1
+        },
+        {
+          "text": "Gives a functional requirement from the insert. For example, the driver app captures the receiver's signature on screen; the portal shows a consignment's status when its number is entered; an SMS is sent when a consignment is out for delivery; or the charging module calculates each consignment's charge.",
+          "marks": 1
+        },
+        {
+          "text": "States that a non-functional requirement describes a quality the solution must have, such as how reliable or how easy to use it is, rather than a task it performs.",
+          "marks": 1
+        },
+        {
+          "text": "Gives a non-functional requirement from the insert. For example, the portal must be available at least 99.5 per cent of the time, or a driver must be able to record a delivery in 30 seconds or less.",
+          "marks": 1
+        }
+      ],
+      "model": "A functional requirement describes what ParcelTrack must do: a task, calculation or output it performs. For example, the charging module must calculate each consignment's charge from its weight, zone and service type. A non-functional requirement describes a quality ParcelTrack must have, not a task it performs. For example, the customer portal must be available at least 99.5 per cent of the time, which is a measure of how reliable it is rather than something it does.",
+      "mistake": "A non-functional requirement is still a requirement of the solution. The $620,000 budget limits the project, so it is a constraint, not a non-functional requirement.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-01-q03",
+      "kk": [
+        "U3O2-KK08"
+      ],
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Leila's draft context diagram (Figure 1) breaks one convention for context diagrams. Identify the error, explain why it is an error, and describe how Leila should correct it.",
+      "points": [
+        {
+          "text": "Identifies the delivery_instructions flow drawn directly from Customer to Driver.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that a context diagram shows only data flowing into or out of the system. Data passing between two external entities doesn't pass through ParcelTrack, so it is outside the system and isn't shown.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a correction: remove the flow, or, if ParcelTrack is to handle delivery instructions, route them through the system (Customer to ParcelTrack, then ParcelTrack to Driver, for example as part of run_sheet).",
+          "marks": 1
+        }
+      ],
+      "model": "The error is the delivery_instructions flow drawn straight from Customer to Driver. A context diagram shows only the data that flows into and out of the system, so every flow must start or end at ParcelTrack. Data passed directly between two external entities never passes through ParcelTrack, so it is outside the system and shouldn't appear. Leila should delete the flow. If Kestrel Bay wants ParcelTrack to handle delivery instructions, she should draw delivery_instructions from Customer into ParcelTrack and include the instructions in the run_sheet flow from ParcelTrack to Driver.",
+      "mistake": "Don't correct a context diagram by adding data stores or numbered processes. Those belong on a data flow diagram: a context diagram shows the whole system as a single process.",
+      "source": "exam-convention",
+      "figureRefs": [
+        "parceltrack-context"
+      ]
+    },
+    {
+      "id": "cs-01-q04",
+      "kk": [
+        "U3O2-KK03",
+        "U4O1-KK10",
+        "U4O1-KK11"
+      ],
+      "commandTerm": "explain",
+      "marks": 6,
+      "prompt": "Figure 2 shows Anjali's project plan. Durations are in weeks.\n\n1. Identify the tasks on the critical path, and state the planned length of the project.\n2. Tomas will be on leave for two weeks while *Develop portal and charging module* is under way, so that task will take six weeks instead of four. Explain whether this changes the go-live date.\n3. In week 7, Rhys asks for the driver app to also photograph each delivered consignment. Priya estimates this will add two weeks to *Develop driver app*. Identify the factor affecting the project plan that this represents, explain its effect on the go-live date, and describe how Anjali should record the change.",
+      "points": [
+        {
+          "text": "Critical path: Analyse requirements and write SRS, Design driver app screens, Develop driver app, Connect mapping service, Alpha testing, Beta testing at Ballarat depot, Train drivers and depot staff (then Go-live).",
+          "marks": 1
+        },
+        {
+          "text": "The planned length is 19 weeks.",
+          "marks": 1
+        },
+        {
+          "text": "Tomas's leave doesn't change the go-live date. The portal task isn't on the critical path: it would finish at the end of week 11, and Alpha testing can't start until the end of week 13 anyway, because it also waits for Connect mapping service.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies the photo request as scope creep: a feature added after the scope was agreed.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that Develop driver app is on the critical path, so every later critical task moves two weeks and go-live moves from the end of week 19 to the end of week 21.",
+          "marks": 1
+        },
+        {
+          "text": "Describes recording the change: annotate the Gantt chart (or the project management software) with the new duration, the reason and the date of the change, and adjust the dates of the later tasks and go-live.",
+          "marks": 1
+        }
+      ],
+      "model": "1. The critical path is Analyse requirements and write SRS (3), Design driver app screens (3), Develop driver app (5), Connect mapping service (2), Alpha testing (2), Beta testing at Ballarat depot (2) and Train drivers and depot staff (2), ending at the Go-live milestone. The project is planned to take 19 weeks.\n\n2. The go-live date doesn't change. Develop portal and charging module starts after week 5, so at six weeks it finishes at the end of week 11. Alpha testing can't start until Connect mapping service finishes at the end of week 13, so the portal task still finishes two weeks before it is needed.\n\n3. Rhys's request is scope creep, because it adds a feature after the scope was agreed. Develop driver app is on the critical path, so the extra two weeks push back Connect mapping service, Alpha testing, Beta testing and training, and go-live moves from the end of week 19 to the end of week 21. Anjali should annotate the Gantt chart with the new duration of Develop driver app, the reason (the photo feature requested by Rhys) and the date it was agreed, then update the start dates of the later tasks and the new go-live date.",
+      "mistake": "The critical path is the longest chain of dependent tasks, not simply the tasks with the longest durations. A delay to a task off the critical path moves the finish date only if the delay is longer than the time that task had to spare.",
+      "source": "textbook",
+      "figureRefs": [
+        "parceltrack-gantt"
+      ]
+    },
+    {
+      "id": "cs-01-q05",
+      "kk": [
+        "U3O1-KK04",
+        "U3O2-KK14"
+      ],
+      "commandTerm": "justify",
+      "marks": 3,
+      "prompt": "In Leila's draft object description (Figure 3), consignmentId has the data type Integer. Justify a more suitable data type for consignmentId.",
+      "points": [
+        {
+          "text": "States String.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that consignment numbers such as KBF-0042817 contain letters and a hyphen, which an Integer can't store.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that an Integer would drop the leading zeros of the digits (0042817 would become 42817), or that the number is used only to identify a consignment, never in calculations.",
+          "marks": 1
+        }
+      ],
+      "model": "consignmentId should be a String. Kestrel Bay's consignment numbers, such as KBF-0042817, contain the letters KBF and a hyphen, and an Integer can hold only whole numbers. Even the digits on their own would lose their leading zeros as an Integer, so 0042817 would become 42817 and no longer match the label. The number is only used to identify and look up a consignment, never in a calculation, so there's no reason to store it as a number.",
+      "mistake": "Calling it a consignment *number* doesn't make it numeric data. KBF-0042817 contains letters, a hyphen and leading zeros and is never used in a calculation, so it is a String, not an Integer.",
+      "source": "textbook",
+      "figureRefs": [
+        "consignment-object"
+      ]
+    },
+    {
+      "id": "cs-01-q06",
+      "kk": [
+        "U3O1-KK07"
+      ],
+      "commandTerm": "explain",
+      "marks": 5,
+      "prompt": "Leila plans to make every property of the Consignment class (Figure 3) private and every method public.\n\n1. Explain how this use of encapsulation would protect the status property.\n2. Some Kestrel Bay customers send chilled goods that must be kept below a set temperature. Explain how inheritance could be used to represent a chilled consignment.",
+      "points": [
+        {
+          "text": "Because status is private, code outside the Consignment class can't read or change it directly.",
+          "marks": 1
+        },
+        {
+          "text": "status can be changed only through public methods: updateStatus(newStatus), which accepts only the four allowed values, and recordDelivery(signerName), which sets it to Delivered. So status can't be set to an invalid value such as \"Delivred\".",
+          "marks": 1
+        },
+        {
+          "text": "Creates a subclass, such as ChilledConsignment, that inherits from Consignment (the superclass).",
+          "marks": 1
+        },
+        {
+          "text": "Every ChilledConsignment object has Consignment's properties and methods (for example consignmentId, weightKg and calculateCharge()) without them being written again.",
+          "marks": 1
+        },
+        {
+          "text": "The subclass adds only what chilled goods need, for example a maxTemperature property (Floating point) and a recordTemperature(reading) method.",
+          "marks": 1
+        },
+        {
+          "text": "Explains a benefit: code is reused, so a fix or change to Consignment automatically applies to chilled consignments too.",
+          "marks": 1
+        }
+      ],
+      "model": "1. Because status is private, no code outside the Consignment class can change it directly. The only way to change it is through the public methods updateStatus(newStatus), which accepts only the four allowed values, and recordDelivery(signerName), which sets it to Delivered. Because of this, a misspelt or made-up status such as \"Delivred\" can never be stored, and status stays valid.\n\n2. Leila could create a ChilledConsignment subclass that inherits from Consignment. Every ChilledConsignment object would have Consignment's properties and methods, such as consignmentId, weightKg, updateStatus() and calculateCharge(), without them being written again. Because those properties are private, the subclass's own methods would work with them through the inherited public methods (or Leila could make them protected). It would add only what chilled goods need, such as a maxTemperature property (Floating point) and a recordTemperature(reading) method. Because the shared code is written once, any fix to Consignment also applies to chilled consignments.",
+      "mistake": "Encapsulation isn't encryption and isn't hiding the program from users. It bundles data with the methods that act on it and stops other code changing that data directly.",
+      "source": "textbook",
+      "figureRefs": [
+        "consignment-object"
+      ]
+    },
+    {
+      "id": "cs-01-q07",
+      "kk": [
+        "U3O1-KK14",
+        "U3O1-KK13",
+        "U4O1-KK06"
+      ],
+      "commandTerm": "complete",
+      "marks": 7,
+      "prompt": "Ben is alpha testing Tomas's deliveryCharge function (Figure 4) against the charging rules in the insert. Part of his test table is shown below.\n\n| Test number | Inputs (weightKg, zone, isExpress) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 12, 3, FALSE | 45.00 | 45.00 |\n| 2 | 30, 1, FALSE | | |\n| 3 | 40, 2, TRUE | | |\n\n1. Complete the expected output and actual output for tests 2 and 3.\n2. Identify the number of the line in Figure 4 that contains the error, and write the corrected line.\n3. State the type of error.",
+      "points": [
+        {
+          "text": "Test 2 expected output: 76.00 (15.00 + 30 × 1.20 = 51.00, plus the $25.00 surcharge, because a 30 kg consignment meets the rule of 30 kg or more).",
+          "marks": 1
+        },
+        {
+          "text": "Test 2 actual output: 51.00 (30 > 30 is false, so line 12 is skipped).",
+          "marks": 1
+        },
+        {
+          "text": "Test 3 expected output: 168.00 ((15.00 + 40 × 1.80 + 25.00) × 1.5).",
+          "marks": 1
+        },
+        {
+          "text": "Test 3 actual output: 168.00.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies line 11.",
+          "marks": 1
+        },
+        {
+          "text": "Corrected line: IF weightKg ≥ 30 THEN (also accept >= 30).",
+          "marks": 1
+        },
+        {
+          "text": "States that it is a logic error.",
+          "marks": 1
+        }
+      ],
+      "model": "1. Test 2: expected output 76.00, actual output 51.00. Test 3: expected output 168.00, actual output 168.00.\n\nFor test 2, the insert says consignments of 30 kg or more attract the surcharge, so the expected charge is 15.00 + 30 × 1.20 + 25.00 = 76.00. The function tests weightKg > 30, which is false for exactly 30 kg, so it returns 51.00. For test 3, (15.00 + 40 × 1.80 + 25.00) × 1.5 = 168.00, and the function gives the same result.\n\n2. Line 11 should be `IF weightKg ≥ 30 THEN`.\n\n3. It is a logic error: the function runs without crashing but gives the wrong result.",
+      "mistake": "Expected output comes from the requirements (here, the insert's charging rules), never from running the code. Working it out by tracing the code copies the bug into the test.",
+      "source": "textbook",
+      "figureRefs": [
+        "delivery-charge-pseudocode"
+      ]
+    },
+    {
+      "id": "cs-01-q08",
+      "kk": [
+        "U4O1-KK07"
+      ],
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "After alpha testing, Ben will beta test the driver app at the Ballarat depot. Describe how Ben should choose the beta testers, one test scenario he could give them, and how he should collect and document the results.",
+      "points": [
+        {
+          "text": "Chooses real Ballarat drivers who will use the app, not developers or IT staff.",
+          "marks": 1
+        },
+        {
+          "text": "Chooses a group that covers the range of users and conditions: for example, drivers with different levels of confidence with phones, on both town runs and rural runs with no mobile coverage.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a realistic scenario from the test plan: for example, complete a rural run that includes a delivery with no mobile coverage, get the receiver's signature, and check that the delivery uploads once coverage returns.",
+          "marks": 1
+        },
+        {
+          "text": "Collects results by observing drivers (for example, riding along) and timing how long each delivery takes to record against the 30-second requirement, or by collecting driver feedback through a short survey.",
+          "marks": 1
+        },
+        {
+          "text": "Documents what actually happened in each scenario against what was expected, including any problems found, so they can be fixed before go-live.",
+          "marks": 1
+        }
+      ],
+      "model": "Ben should choose a group of real Ballarat drivers who will use the app every day, not developers. The group should include drivers who are confident and drivers who are not confident with phones, and cover both town runs and rural runs through areas with no mobile coverage. One scenario: \"Complete your rural run as normal, including the farm delivery in the no-coverage area. Get the receiver's signature on the screen, and check that the delivery shows as uploaded once you're back in coverage.\" Ben should ride along to observe, noting where drivers hesitate or make mistakes, and time how long each delivery takes to record against the 30-second requirement. For each scenario he should record the expected result, what actually happened, any problems and the drivers' comments, so that problems can be fixed before go-live.",
+      "mistake": "Beta testing is done by real end users in real conditions, after alpha testing by the development team. Ben and the developers can't be the beta testers.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-01-q09",
+      "kk": [
+        "U4O1-KK09"
+      ],
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "Six months after go-live, Anjali must report on whether ParcelTrack is helping Kestrel Bay meet its objectives. Describe two techniques she could use to collect data for this evaluation. For each technique, state what data would be collected and what it would show.",
+      "points": [
+        {
+          "text": "Technique: count the customer service calls that ask where a consignment is, per day, from the call records for a period before go-live and for the months since.",
+          "marks": 1
+        },
+        {
+          "text": "Shows whether calls are falling towards the 40 per cent reduction set as an objective.",
+          "marks": 1
+        },
+        {
+          "text": "Technique: report from ParcelTrack's delivery records the percentage of consignments with an electronic proof of delivery, or the number of disputed deliveries that couldn't be proved.",
+          "marks": 1
+        },
+        {
+          "text": "Shows progress towards holding an electronic proof of delivery for every consignment.",
+          "marks": 1
+        },
+        {
+          "text": "Alternative technique: survey customers who have tracked a consignment since go-live, asking how they found out its status (the portal, an SMS or a phone call to customer service).",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: states what that data shows, for example how many customers now use the portal or SMS instead of phoning, which shows whether ParcelTrack is the reason calls are falling.",
+          "marks": 1
+        }
+      ],
+      "model": "First, Anjali could compare customer service call records. She would count the calls per day asking where a consignment is for the three months before go-live and for each month since. This shows whether calls are falling fast enough to reach the objective of a 40 per cent cut within 12 months. Second, she could run a report from ParcelTrack's delivery records showing the percentage of consignments with an electronic signature, and the number of disputed deliveries Kestrel Bay couldn't prove. This shows progress towards the objective of an electronic proof of delivery for every consignment.",
+      "mistake": "Match the data to the criterion. A survey asking whether customers like the portal can't show a 40 per cent drop in calls, but a before-and-after count of calls can.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-01-q10",
+      "kk": [
+        "U4O2-KK02"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Kestrel Bay decided to develop ParcelTrack in-house rather than engage the Melbourne software firm. Explain one advantage and one disadvantage of this decision for Kestrel Bay.",
+      "points": [
+        {
+          "text": "Identifies an advantage of in-house development, such as lower cost, an earlier start, knowledge of the business, or control over the code and its priorities.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the advantage using the insert: for example, the firm's $870,000 quote is $250,000 over the $620,000 budget and it couldn't start for five months, or the IT team already knows the depots, drivers and current website.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a disadvantage of in-house development, such as a lack of specialist skills, weak existing practices, or dependence on a few staff.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the disadvantage using the insert: for example, a team of six must build a phone app, a portal and a charging module, and Grace's list shows weak security practices; or the project depends on a few people, so if Priya or Tomas left, no one else would know their part of the code.",
+          "marks": 1
+        }
+      ],
+      "model": "Advantage: in-house development avoids the firm's cost and delay. The Melbourne firm quoted $870,000, which is $250,000 more than Kestrel Bay's $620,000 budget, and it couldn't start for five months. The in-house team can start now, and it already knows how the depots, drivers and current website work. Disadvantage: the IT team has only six people, and they must build a phone app, a web portal and a charging module while running the current systems. Grace's list shows that their development practices are insecure (a shared server, a password in the source code, no code review). An experienced external firm may already have secure practices in place, so developing in-house risks building ParcelTrack with the same weaknesses.",
+      "mistake": "Don't claim in-house development is always cheaper or always slower. Compare against the insert's figures: an $870,000 quote against a $620,000 budget, and a five-month wait.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-01-q11",
+      "kk": [
+        "U4O2-KK08",
+        "U3O1-KK01"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Explain two ethical issues raised by the way Priya uses the free online AI assistant (see the insert).",
+      "points": [
+        {
+          "text": "Identifies that pasting real customer records into an external AI tool gives customers' personal information (names, addresses, phone numbers) to a third party without their knowledge or consent.",
+          "marks": 1
+        },
+        {
+          "text": "Explains why this is wrong: customers gave Kestrel Bay their details only to have consignments delivered, the provider may store or reuse them, and Kestrel Bay can't get them back, which breaks customers' trust and their privacy.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies over-reliance on AI-generated code: Priya uses code the assistant generates, and no one reviews it before it goes live.",
+          "marks": 1
+        },
+        {
+          "text": "Explains why this is wrong: Priya and Kestrel Bay remain responsible for the code, and errors or security flaws could harm customers, for example through wrong charges or exposed data.",
+          "marks": 1
+        },
+        {
+          "text": "Alternative issue: generated code may copy other people's work without acknowledgement or a check of its licence.",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: explains why this is unfair to the original authors and could breach the licence conditions of that code.",
+          "marks": 1
+        }
+      ],
+      "model": "First, Priya pasted real customer records into a free online AI assistant. This handed customers' names, addresses and phone numbers to an outside company without their knowledge or consent. Customers gave Kestrel Bay those details only so their consignments could be delivered. The provider may keep or reuse them, and Kestrel Bay can't get them back, so customers' privacy and trust have been broken. Second, Priya relies on AI-generated code, and no one reviews it before it goes live. She and Kestrel Bay are still responsible for what the code does. If it contains errors or security flaws, customers could be charged incorrectly or have their data exposed, and using code nobody has checked isn't taking that responsibility seriously.",
+      "mistake": "An ethical issue is about treating people rightly, not only a technical risk. Say who is harmed (Kestrel Bay's customers) and why the action is unfair to them.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-01-q12",
+      "kk": [
+        "U4O2-KK05",
+        "U4O2-KK04"
+      ],
+      "commandTerm": "describe",
+      "marks": 5,
+      "prompt": "Grace is threat modelling ParcelTrack using Leila's context diagram (Figure 1).\n\n1. Describe one benefit to Kestrel Bay of threat modelling ParcelTrack now, before development starts.\n2. Choose two different data flows between ParcelTrack and an external entity in Figure 1. For each flow, describe a threat to it and a control that would reduce that threat.",
+      "points": [
+        {
+          "text": "Describes a benefit of threat modelling now: controls designed in before development cost less and are easier to build than changes made after ParcelTrack is written or after an attack (for example, Figure 2 has only a one-week security review after alpha testing, when the design can no longer change cheaply).",
+          "marks": 1
+        },
+        {
+          "text": "Names a first flow and describes a realistic threat to it. For example, proof_of_delivery could be intercepted or altered on its way from a driver's phone; someone who finds a lost phone could record false deliveries; a stolen or shared depot login could be used to change the weights and zones in consignment_details; an attacker could enter many consignment_number values to collect the delivery_status of other customers' consignments; or delivery_addresses sent to the mapping service could be intercepted.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a control that reduces the first threat. For example, send the data only over an encrypted connection; require each driver or staff member to log in with their own account and a second factor, such as a fingerprint; give depot staff access only to the functions their job needs; or require a second detail that only the customer knows, such as the delivery postcode, before the portal shows a status.",
+          "marks": 1
+        },
+        {
+          "text": "Names a second, different flow and describes a realistic threat to it (as in the examples above).",
+          "marks": 1
+        },
+        {
+          "text": "Describes a control that reduces the second threat (as in the examples above).",
+          "marks": 1
+        }
+      ],
+      "model": "1. Threat modelling now lets Grace build security controls into ParcelTrack's design from the start, which costs far less than changing ParcelTrack after it is written or after an attack. Figure 2 allows only a one-week security review after alpha testing, when the design can no longer change cheaply.\n\n2. proof_of_delivery travels from drivers' phones over mobile networks. An attacker could intercept it to read receivers' names and signatures, or alter it so that a delivery that never happened is recorded. ParcelTrack should accept proof_of_delivery only over an encrypted connection, so anyone who intercepts it can't read it or change it without the change being detected.\n\nconsignment_details, entered by depot staff, include each consignment's weight and zone, which set its charge. Someone using a colleague's login or a stolen password could change weights or zones so that consignments are undercharged. Each staff member should have their own account with multi-factor authentication and access only to the functions their job needs. A stolen password alone is then not enough to log in, and every change can be traced to one person.",
+      "mistake": "Tie each threat to a specific flow in the diagram. \"Hackers could attack the system\" names no flow, no threat and no control.",
+      "source": "textbook",
+      "figureRefs": [
+        "parceltrack-context",
+        "parceltrack-gantt"
+      ]
+    },
+    {
+      "id": "cs-01-q13",
+      "kk": [
+        "U4O2-KK10",
+        "U4O2-KK03",
+        "U4O2-KK09"
+      ],
+      "commandTerm": "recommend",
+      "marks": 8,
+      "prompt": "Grace must report on the security of the IT team's development practices before ParcelTrack's development begins. Identify two weaknesses in the development environment described in the insert. For each weakness, explain the risk it poses to Kestrel Bay, then recommend a control that would reduce the risk and justify your recommendation.",
+      "points": [
+        {
+          "text": "Identifies a first weakness from the insert. For example, development, testing and live versions share one server and files are copied straight to live; real customer data in the test database; the password in the source code; no version control; the shared administrator account without multi-factor authentication; the former contractor's active login; the unpatched framework; no code review; the backup drive left plugged into the server; or the unlocked storeroom.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the risk the first weakness poses to Kestrel Bay, for example untested code reaching customers, or 60,000 customers' personal details being exposed.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a control that addresses the first weakness, for example separate development, testing and production environments; dummy test data; moving the password out of the source code into protected configuration; individual accounts with multi-factor authentication; disabling accounts when people leave; version control; patching; code review; offline or off-site backups; or a locked storeroom.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies the first control by explaining how it reduces that risk.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a second, different weakness from the insert.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the risk the second weakness poses to Kestrel Bay.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a control that addresses the second weakness.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies the second control by explaining how it reduces that risk.",
+          "marks": 1
+        }
+      ],
+      "model": "Weakness 1: the development, testing and live versions of the website run on one server, and developers copy changed files straight into the live folder. Untested or half-finished code can reach customers, and a mistake made while testing could damage live data. Grace should recommend separate development, testing and production environments on separate servers, with changes released to production only after they pass testing. Faults are then found before customers see them, and work in development or testing can't touch live data.\n\nWeakness 2: the developers share one administrator account and no account uses multi-factor authentication. If the shared password is stolen, an attacker gains full control of the server, and because everyone uses the same login, Kestrel Bay can't tell who made a change. Grace should recommend an individual account for each developer, with only the access that person needs and multi-factor authentication. A stolen password alone would then not be enough to log in, every change could be traced to one person, and removing someone's access (such as the former contractor's) would not affect anyone else.",
+      "mistake": "Match each control to its weakness and say how it reduces that particular risk. A list of controls with no link to Kestrel Bay's weaknesses scores poorly.",
+      "source": "textbook"
+    }
+  ],
+  "totalMarks": 60
+}

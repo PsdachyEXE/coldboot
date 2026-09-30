@@ -1,0 +1,835 @@
+[
+  {
+    "id": "s-u4o1-kk01-001",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Tamsin is developing a rostering app for Wombat Gully Community Radio in Daylesford. The station manager commissioned the app, but it will be used by the volunteer presenters, most of whom are retirees who use their phones to claim and swap shifts.\n\nDescribe how Tamsin could apply user-centred design while she develops the app.",
+    "points": [
+      {
+        "text": "Involves representative users, the volunteer presenters (not only the station manager), in trying mock-ups or early versions of the app",
+        "marks": 1
+      },
+      {
+        "text": "Gathers their feedback on real tasks, such as claiming or swapping a shift, for example by observing them or asking them",
+        "marks": 1
+      },
+      {
+        "text": "Revises the design in response to the feedback and has the volunteers try the revised version again",
+        "marks": 1
+      }
+    ],
+    "model": "Tamsin should involve the people who will actually use the app: the volunteer presenters, many of them retirees using phones, not only the station manager. She could give a small group an early version and watch them claim and swap shifts, noting where they hesitate or make mistakes, and ask what they found difficult. She would then change the design in response, for example by enlarging buttons or reducing the steps needed to swap a shift, and have the volunteers try the revised version, repeating this until the app suits them.",
+    "mistake": "A general description of user-centred design earns little. Name the actual users in the scenario and the tasks they perform.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk01-002",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Silky Oak Physio in Ballarat has made two changes to its appointment program:\n\n1. Receptionists now pick the appointment date from a calendar control instead of typing it.\n2. Before an appointment is saved, the program checks that the physiotherapist isn't already booked at that time.\n\nFor each change, explain how it improves the efficiency or the effectiveness of the program.",
+    "points": [
+      {
+        "text": "Change 1: identifies an improvement in efficiency (or in effectiveness, when justified by fewer incorrectly entered dates)",
+        "marks": 1
+      },
+      {
+        "text": "Change 1: explains that picking a date needs fewer keystrokes and less effort than typing it (or that it prevents badly formatted or impossible dates)",
+        "marks": 1
+      },
+      {
+        "text": "Change 2: identifies an improvement in effectiveness",
+        "marks": 1
+      },
+      {
+        "text": "Change 2: explains that it prevents double bookings, so the appointment records are accurate and no patient is booked into a time that is already taken",
+        "marks": 1
+      }
+    ],
+    "model": "Change 1 improves efficiency. Picking a date from a calendar control replaces typing it in full, so each booking needs fewer keystrokes and less effort from the receptionist.\n\nChange 2 improves effectiveness. Checking for an existing appointment before saving prevents two patients being booked with the same physiotherapist at the same time, so the appointment records are accurate and the program better achieves its purpose of scheduling patients correctly.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk02-001",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK05"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Coralie is developing a stock program for Mountain Ash Hollow Nursery in Emerald. When the program starts, it reads `stock.csv`, where each line holds a plant code (e.g. LR-0193), plant name, quantity on hand and price (e.g. 14.95). Staff search for and update plants during the day, and the program writes the stock list back to the file when it closes.\n\nJustify a data structure for holding the stock list while the program runs, and a data type for each of the quantity on hand and the price.",
+    "points": [
+      {
+        "text": "Identifies an array of records, with one record per plant",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: each record keeps one plant's fields, of different data types, together under names, and the array lets the program loop through or search all plants",
+        "marks": 1
+      },
+      {
+        "text": "Quantity on hand as Integer, because it is a whole number of plants that is added to and subtracted from",
+        "marks": 1
+      },
+      {
+        "text": "Price as Floating point, because it includes cents and is used in calculations (displayed to two decimal places)",
+        "marks": 1
+      }
+    ],
+    "model": "An array of records suits the stock list. Each record holds one plant's code, name, quantity and price together, even though these have different data types, and each field can be referred to by name. Holding one record per plant in an array lets the program loop through every plant to find or update one.\n\nQuantity on hand should be an Integer, because the nursery counts whole plants and the quantity is added to and subtracted from as stock arrives and sells. Price should be Floating point, because prices such as $14.95 include cents and are used in calculations, such as the value of stock; it is displayed to two decimal places.",
+    "mistake": "Name data types in full (Integer, Floating point), and tie each justification to the data in the scenario rather than giving a general definition.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk02-002",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK06"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Stringybark Ski Hire in Mansfield exports each day's hires from its booking system to `hires.csv`. Each line holds a customer name, the number of days hired and the daily rate, for example:\n\n`Dimitri Pappas,3,42.50`\n\nOmar's reporting program reads the file and calculates the day's total hire income. Explain **three** things the program must do with each line so that the hire's income is added to the total.",
+    "points": [
+      {
+        "text": "Splits the line at each comma to separate the name, the number of days and the daily rate",
+        "marks": 1
+      },
+      {
+        "text": "Converts the days to Integer and the rate to Floating point, because every field read from the file is a String",
+        "marks": 1
+      },
+      {
+        "text": "Multiplies the days by the daily rate and adds the result to the running total",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: checks that each field is present and numeric before converting, so a damaged line doesn't cause a runtime error",
+        "marks": 1
+      }
+    ],
+    "model": "First, the program splits the line at each comma, separating the name (Dimitri Pappas), the days (3) and the rate (42.50) into three fields. Second, because every field read from a CSV file is a String, it converts the days to an Integer and the rate to Floating point; without this, \"3\" and \"42.50\" can't be multiplied. Third, it multiplies the days by the rate (3 × 42.50 = 127.50) and adds the result to the running total for the day.",
+    "mistake": "The conversion step is the one most often left out. Values read from a text file stay Strings until the program converts them.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk03-001",
+    "kk": [
+      "U4O1-KK03",
+      "U4O1-KK05"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Nadia is developing an online booking form for Kookaburra Creek Kayak Tours in Mallacoota. Her first version uses a text box for every input. The form collects:\n\n- the tour (one of four tours)\n- the number of paddlers (1 to 8)\n- whether the customer wants to hire a wetsuit\n- the customer's name\n\nRecommend a more suitable GUI control for the tour, the number of paddlers and the wetsuit hire, and explain how using these controls improves the accuracy of bookings.",
+    "points": [
+      {
+        "text": "Tour: radio buttons or a drop-down list, because exactly one of four fixed tours is chosen",
+        "marks": 1
+      },
+      {
+        "text": "Number of paddlers: a drop-down list (or number spinner) limited to 1 to 8",
+        "marks": 1
+      },
+      {
+        "text": "Wetsuit hire: a check box, because the answer is yes or no",
+        "marks": 1
+      },
+      {
+        "text": "Explains that the controls allow only valid values, so misspelt tours and non-numeric or out-of-range numbers can't be entered",
+        "marks": 1
+      }
+    ],
+    "model": "The tour should use radio buttons (or a drop-down list), so the customer picks one of the four tours instead of typing a name that could be misspelt. The number of paddlers should use a drop-down list, or a number spinner, that offers only 1 to 8. Wetsuit hire should use a check box, since the answer is simply yes or no.\n\nThese controls offer only valid values, so a customer can't enter a tour that doesn't exist, text such as \"four\" for the number of paddlers, or a group of 12. Bookings are more accurate, and the program needs fewer type and range checks on these fields, although it should still check that a tour has been chosen.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk03-002",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "commandTerm": "write",
+    "marks": 3,
+    "prompt": "Bluetongue Miniature Railway in Castlemaine charges by age: children under 4 ride free, riders aged 4 to 15 pay $6, and riders aged 16 and over pay $10.\n\nWrite pseudocode for a function `ticketPrice` that takes a rider's age as a parameter and returns the price.",
+    "points": [
+      {
+        "text": "A function header naming `ticketPrice` with a parameter for the age, closed with ENDFUNCTION",
+        "marks": 1
+      },
+      {
+        "text": "Selection with correct boundaries: under 4 gives 0, 4 to 15 gives 6, and 16 and over gives 10",
+        "marks": 1
+      },
+      {
+        "text": "Returns the price to the caller with RETURN, rather than displaying it",
+        "marks": 1
+      }
+    ],
+    "model": "```pseudo\nFUNCTION ticketPrice(age)\n    IF age < 4 THEN\n        price ← 0\n    ELSEIF age ≤ 15 THEN\n        price ← 6\n    ELSE\n        price ← 10\n    ENDIF\n    RETURN price\nENDFUNCTION\n```\n\nAges 3, 4, 15 and 16 return 0, 6, 6 and 10, which checks each boundary.",
+    "mistake": "Check each boundary. Writing `age < 15` instead of `age ≤ 15` would charge a 15-year-old $10.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk04-001",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Ellie is developing a booking app for Brolga Wetlands Tours in Kerang. The app uses a third-party weather API to warn customers when strong winds may cancel a boat tour.\n\nExplain one risk of relying on this API, and describe two ways Ellie could reduce the impact of that risk.",
+    "points": [
+      {
+        "text": "Explains a risk and its effect on the app, e.g. the provider changes its data format, starts charging or revokes access, so wind warnings stop working",
+        "marks": 1
+      },
+      {
+        "text": "One way to reduce the impact, e.g. keeping all calls to the API in one module, so only that module needs changing",
+        "marks": 1
+      },
+      {
+        "text": "A second way, e.g. a fallback such as showing the last saved forecast or switching to another provider, or monitoring the provider's notices of changes",
+        "marks": 1
+      }
+    ],
+    "model": "The weather API is controlled by its provider, not by Ellie. If the provider changes the format of its data, starts charging, or revokes the app's access, the app's requests will fail and customers won't be warned about winds that may cancel their tour.\n\nEllie could keep every call to the weather API in a single module, so that if the API changes, only that module needs to be rewritten and retested. She could also build a fallback: if a request fails, the app shows the most recent forecast it saved, with the time it was issued, or requests the forecast from a second provider, so customers still receive a warning.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk04-002",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "commandTerm": "describe",
+    "marks": 4,
+    "prompt": "Three developers at Redthroat Software in Wodonga are building a booking system for a local council. At present they email copies of their code files to each other, and last week one developer's changes overwrote another's.\n\nDescribe **two** benefits of storing the team's code in a shared code repository.",
+    "points": [
+      {
+        "text": "Benefit 1: every change is recorded with who made it and when, giving a history of the code",
+        "marks": 1
+      },
+      {
+        "text": "Applies benefit 1: e.g. the team can find which change introduced an error and roll back to the last working version",
+        "marks": 1
+      },
+      {
+        "text": "Benefit 2: all developers work from one shared copy, and their changes are merged into it instead of one copy replacing another",
+        "marks": 1
+      },
+      {
+        "text": "Applies benefit 2: e.g. last week's lost work wouldn't happen, because both developers' changes are kept and any conflicting lines are flagged for them to resolve",
+        "marks": 1
+      }
+    ],
+    "model": "First, the repository records every change with its author, the date and a message. If the booking system starts producing errors, the team can see exactly what changed since the last working version and roll back that change, instead of guessing which emailed file is current.\n\nSecond, all three developers work from one shared copy of the code. When two of them change the same file, the version control tool merges their changes and flags any lines that conflict for them to resolve, so one developer's work can't silently overwrite another's, as happened last week.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk05-001",
+    "kk": [
+      "U4O1-KK05"
+    ],
+    "commandTerm": "describe",
+    "marks": 4,
+    "prompt": "Brushtail Bike Hire in Beechworth has a hire program. Staff type the length of each hire, in whole hours from 1 to 8, into a text box. At present the program crashes if a staff member types letters, and it accepts hires of 0 and 40 hours.\n\nDescribe the validation the program needs for the hire length, including the order of the checks and what the program should do when a check fails.",
+    "points": [
+      {
+        "text": "Existence check: the hire length hasn't been left blank",
+        "marks": 1
+      },
+      {
+        "text": "Type check: the entry is a whole number, applied before it is converted to Integer, which prevents the crash when letters are typed",
+        "marks": 1
+      },
+      {
+        "text": "Range check: the hire length is from 1 to 8 inclusive, which rejects 0 and 40",
+        "marks": 1
+      },
+      {
+        "text": "When a check fails: displays a message stating what is accepted and asks again, without processing the hire",
+        "marks": 1
+      }
+    ],
+    "model": "The program first applies an existence check, rejecting the entry if the hire length is blank. Next it applies a type check, confirming that the entry is a whole number before converting it to an Integer; this stops the crash when a staff member types letters. Finally, a range check confirms that the hire length is from 1 to 8 hours inclusive, which rejects entries such as 0 and 40.\n\nIf any check fails, the program displays a message that says what is accepted, such as \"Enter a whole number of hours from 1 to 8\", and asks again. It doesn't calculate or save the hire until the entry passes all three checks.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk05-002",
+    "kk": [
+      "U4O1-KK05"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Pobblebonk Escape Rooms in Ballarat takes bookings for groups of 2 to 10 people. Asha wrote the algorithm shown to validate the group size.\n\nExplain the error in Asha's algorithm, give inputs that would show its effect, and state how to correct it.",
+    "points": [
+      {
+        "text": "Explains that line 3 uses selection (IF), so the check runs only once and the second entry is never checked",
+        "marks": 1
+      },
+      {
+        "text": "Gives inputs that show the effect, e.g. 12 then 15, which produces a booking for 15 guests",
+        "marks": 1
+      },
+      {
+        "text": "Corrects it with a loop, e.g. replacing line 3 with `WHILE guests < 2 OR guests > 10 DO` and line 6 with ENDWHILE, so each new entry is checked until it is valid",
+        "marks": 1
+      }
+    ],
+    "model": "Line 3 uses IF, which is selection, so the group size is checked only once. If the first entry is invalid, a second entry is read on line 5, but it is never checked. For example, if the user enters 12 and then 15, the message is displayed once and the algorithm displays \"Booked for 15 guests\", an invalid booking.\n\nThe IF on line 3 should be replaced with a pre-test loop, `WHILE guests < 2 OR guests > 10 DO`, and the ENDIF on line 6 with ENDWHILE, so every new entry is checked until the group size is from 2 to 10.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "pobblebonk-guests",
+        "kind": "pseudocode",
+        "code": "BEGIN\n    INPUT guests\n    IF guests < 2 OR guests > 10 THEN\n        DISPLAY \"Groups of 2 to 10 only\"\n        INPUT guests\n    ENDIF\n    DISPLAY \"Booked for \" + guests + \" guests\"\nEND"
+      }
+    ]
+  },
+  {
+    "id": "s-u4o1-kk06-001",
+    "kk": [
+      "U4O1-KK06",
+      "U3O1-KK14"
+    ],
+    "commandTerm": "complete",
+    "marks": 4,
+    "prompt": "Mirrim Parking in Traralgon charges $3 for each hour or part of an hour, up to a maximum of $15. Stays of 15 minutes or less are free. During alpha testing, Keira runs the function shown with the test data in the test table.\n\nComplete the expected output and actual output for tests 2 and 3, and identify the cause of any difference between them.",
+    "points": [
+      {
+        "text": "Test 2 expected output: $6, because 90 minutes is one hour and part of another",
+        "marks": 1
+      },
+      {
+        "text": "Test 2 actual output: $3",
+        "marks": 1
+      },
+      {
+        "text": "Test 3 expected output and actual output: both $15, because the maximum applies",
+        "marks": 1
+      },
+      {
+        "text": "Identifies the cause: `minutes DIV 60` on line 5 rounds down, so a part hour isn't charged",
+        "marks": 1
+      }
+    ],
+    "model": "Test 2: expected output $6, because 90 minutes is one full hour plus part of a second hour. Actual output $3, because line 5 calculates 90 DIV 60 = 1, so only one hour is charged.\n\nTest 3: expected output $15 and actual output $15. 600 minutes is 10 hours, which would cost $30, so the $15 maximum applies, and lines 7 to 9 cap the fee correctly.\n\nThe difference in test 2 is caused by line 5: DIV rounds down, so any part hour is ignored. The number of hours should be rounded up instead, for example `hours ← (minutes + 59) DIV 60`.",
+    "mistake": "Work out the expected output from the charging rules, not by tracing the code. Tracing the code gives the actual output.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "mirrim-parking-fee",
+        "kind": "pseudocode",
+        "code": "FUNCTION parkingFee(minutes)\n    IF minutes ≤ 15 THEN\n        fee ← 0\n    ELSE\n        hours ← minutes DIV 60\n        fee ← hours * 3\n        IF fee > 15 THEN\n            fee ← 15\n        ENDIF\n    ENDIF\n    RETURN fee\nENDFUNCTION"
+      },
+      {
+        "id": "mirrim-tests",
+        "kind": "table",
+        "title": "Test table",
+        "columns": [
+          "Test number",
+          "Input(s)",
+          "Expected output",
+          "Actual output"
+        ],
+        "rows": [
+          [
+            "1",
+            "minutes = 10",
+            "$0",
+            "$0"
+          ],
+          [
+            "2",
+            "minutes = 90",
+            "",
+            ""
+          ],
+          [
+            "3",
+            "minutes = 600",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u4o1-kk06-002",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Wren is developing a room-booking module for Saltmarsh Community Hall in Port Albert. Rooms can be booked for 1 to 6 hours, and members receive 20% off the hire fee. Before the module is given to hall members for beta testing, Wren will alpha test it.\n\nDescribe how Wren should alpha test the module.",
+    "points": [
+      {
+        "text": "Prepares test data that includes valid, invalid and boundary values, e.g. 1 and 6 hours, 0 and 7 hours and non-numeric entries, for both members and non-members",
+        "marks": 1
+      },
+      {
+        "text": "Records each test in a test table with the test number, input(s), expected output (worked out from the hall's rules) and actual output",
+        "marks": 1
+      },
+      {
+        "text": "Where actual output differs from expected output, locates the error with a debugging technique such as a breakpoint or debugging output, fixes it and re-runs the tests",
+        "marks": 1
+      }
+    ],
+    "model": "Wren should prepare test data that covers every requirement: a valid length such as 3 hours; the boundary values 1 and 6 hours and the values just outside them, 0 and 7; invalid entries such as text; and bookings by both a member and a non-member, to check the 20% discount. For each test she records the test number, the inputs and the expected output, calculated by hand from the hall's rules, in a test table, then runs the module and records the actual output. Where the actual output differs from the expected output, she uses a breakpoint or debugging output statements to locate the error, fixes it, and re-runs that test and the earlier tests.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk07-001",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "commandTerm": "describe",
+    "marks": 4,
+    "prompt": "Marran Freight in Geelong has had a delivery-tracking app developed for its 25 drivers, who use it on their phones to record pick-ups and deliveries, including the customer's signature. The app is nearly complete.\n\nDescribe how Marran Freight should conduct beta testing of the app. Refer to the user group, scenarios, observation and the recording of results.",
+    "points": [
+      {
+        "text": "User group: a small group of Marran Freight drivers who represent the range of drivers (experience, age, phone types, routes), not the developers",
+        "marks": 1
+      },
+      {
+        "text": "Scenarios: realistic tasks stated as goals, e.g. record a delivery with the customer's signature, carried out on drivers' own phones on real or realistic runs",
+        "marks": 1
+      },
+      {
+        "text": "Observation: a developer watches drivers complete the scenarios without helping, noting hesitations, errors and time taken",
+        "marks": 1
+      },
+      {
+        "text": "Recording: each problem logged with the scenario, driver, what should have happened, what actually happened and its severity, so it can be fixed before release",
+        "marks": 1
+      }
+    ],
+    "model": "Marran Freight should choose about five drivers who reflect the range of its 25 drivers, such as new and experienced drivers, older and younger drivers, and drivers with different phones. The developers shouldn't be the testers, because they already know how the app works.\n\nEach driver should be given realistic scenarios written as goals, such as 'Record the delivery of two pallets and collect the customer's signature', and carry them out on their own phone during real or realistic runs.\n\nA developer should ride along or watch without helping, noting where drivers hesitate, make errors or take a long time, for example while collecting a signature.\n\nEvery problem should be recorded in a log with the date, driver, scenario, what should have happened, what actually happened and how serious it is, so the developers can reproduce and fix the most serious problems before the app is released.",
+    "mistake": "Generic answers ('choose some users and give them tasks') earn little. Each part should name something specific to the drivers and their deliveries.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk07-002",
+    "kk": [
+      "U4O1-KK07",
+      "U4O1-KK06"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "The developers of Marran Freight's delivery-tracking app have alpha tested every module against a full test table, and every test passed. The operations manager wants to release the app to all 25 drivers straight away.\n\nExplain why the app should still be beta tested before it is released.",
+    "points": [
+      {
+        "text": "Alpha testing was done by developers, who know how the app is meant to be used, with planned test data in the development environment",
+        "marks": 1
+      },
+      {
+        "text": "Beta testing puts the app in the hands of actual drivers in realistic conditions, e.g. on their own phones, in trucks, with patchy mobile coverage",
+        "marks": 1
+      },
+      {
+        "text": "So it can find problems alpha testing can't, e.g. drivers who can't find how to capture a signature, or deliveries that fail to save when the signal drops, which can then be fixed before all drivers rely on the app",
+        "marks": 1
+      }
+    ],
+    "model": "The alpha tests were designed and run by the developers, who already know how the app should be used, with planned test data on development equipment. Passing every test shows that the modules produce the expected outputs, not that drivers can use the app on the road.\n\nBeta testing gives the nearly complete app to a group of real drivers, who use it on their own phones in their trucks, sometimes with poor mobile coverage. This can uncover problems the developers didn't anticipate, such as drivers who can't find the signature screen or deliveries that fail to save when the signal drops. Finding these before release means they can be fixed before all 25 drivers depend on the app.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk08-001",
+    "kk": [
+      "U4O1-KK08",
+      "U4O1-KK09"
+    ],
+    "commandTerm": "describe",
+    "marks": 4,
+    "prompt": "Tarrone Community Health in Warrnambool will launch a new check-in kiosk program in February. The software requirements specification states that clients must be able to check in within one minute, and that clients with low vision must be able to check in without help.\n\nDescribe an evaluation strategy for the kiosk program. Refer to two evaluation criteria, the data to be collected for each, and when the evaluation would take place.",
+    "points": [
+      {
+        "text": "A measurable criterion based on the one-minute requirement, e.g. at least 90% of check-ins are completed in under one minute",
+        "marks": 1
+      },
+      {
+        "text": "A measurable criterion based on the low-vision requirement, e.g. at least 9 of 10 low-vision clients observed check in without staff help",
+        "marks": 1
+      },
+      {
+        "text": "Suitable data and method for each criterion, e.g. the kiosk's log of start and finish times for every check-in; observation of low-vision clients, with a record of whether each needed help",
+        "marks": 1
+      },
+      {
+        "text": "Timing: after the kiosk has been in normal use for several weeks (e.g. data collected in March and April, reported in May), so clients are past the learning stage",
+        "marks": 1
+      }
+    ],
+    "model": "Criterion 1 (efficiency): at least 90% of check-ins are completed in under one minute. The kiosk program would log the start and finish time of every check-in, so the percentage completed within one minute can be calculated.\n\nCriterion 2: at least 9 of 10 clients with low vision can check in without help from staff. A staff member would observe a sample of low-vision clients as they check in and record whether each one needed help.\n\nTiming: data would be collected from the start of March, once clients have had several weeks to get used to the kiosk, until the end of April. The practice manager would then compare the results with the criteria and report in May.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk08-002",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Tarrone Community Health's manager wants to evaluate the new check-in kiosk program in its first week of use, 'while it is still fresh'. One evaluation criterion is that at least 90% of check-ins are completed in under one minute.\n\nExplain why the evaluation should take place later.",
+    "points": [
+      {
+        "text": "In the first week most clients are using the kiosk for the first time and are still learning, so check-ins are slower and more help is needed than in normal use",
+        "marks": 1
+      },
+      {
+        "text": "So data from that week reflects the learning stage, not everyday use, and judging it against the one-minute criterion would give a misleading result",
+        "marks": 1
+      }
+    ],
+    "model": "In the first week, most clients will be using the kiosk for the first time, so they will be slower and more likely to ask staff for help than once they are familiar with it. Check-in times from that week would reflect the learning stage rather than normal use, so comparing them with the one-minute criterion would make the kiosk seem less efficient than it really is. Waiting several weeks gives data about everyday use.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk09-001",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "High Plains Outdoors in Mansfield has launched a new online store. Two of its evaluation criteria are:\n\n1. Customers can complete a purchase in under three minutes.\n2. At least 80% of customers are satisfied with the checkout process.\n\nFor each criterion, identify a suitable data collection technique and justify your choice.",
+    "points": [
+      {
+        "text": "Criterion 1: analyse the store's system logs of the time between starting checkout and the order being confirmed (or time a sample of customers while observing them)",
+        "marks": 1
+      },
+      {
+        "text": "Justification for criterion 1: gives measured times, which can be checked directly against the three-minute target, rather than customers' estimates",
+        "marks": 1
+      },
+      {
+        "text": "Criterion 2: an online survey or questionnaire with a satisfaction rating, sent to customers after they buy",
+        "marks": 1
+      },
+      {
+        "text": "Justification for criterion 2: satisfaction is an opinion only customers can give; a survey reaches many customers quickly and the ratings can be totalled as a percentage to compare with 80%",
+        "marks": 1
+      }
+    ],
+    "model": "Criterion 1: I would analyse the online store's system logs, which record when each customer starts checkout and when the order is confirmed. This gives an accurate, measured time for every purchase without disturbing customers, and the times can be checked directly against the three-minute target.\n\nCriterion 2: I would email a short online survey to customers after each purchase, asking them to rate their satisfaction with checkout from 1 to 5. Satisfaction is an opinion that only customers can report, and a survey reaches many of them quickly. The number of satisfied customers can be converted to a percentage and compared with the 80% target.",
+    "mistake": "Using a survey to measure time is a common error. Time-based criteria need measured times, from system logs or by timing users.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk09-002",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Mooralla Shire Council has built an online permit system so that residents can apply for building permits without phoning or visiting the council office. To evaluate the criterion 'Residents can lodge an application without needing help from council staff', the project manager plans to survey the 12 council staff who process applications.\n\nExplain one weakness of this plan and recommend a better data collection technique.",
+    "points": [
+      {
+        "text": "Weakness: council staff are not the people the criterion is about; residents lodge the applications",
+        "marks": 1
+      },
+      {
+        "text": "So staff can only guess or pass on second-hand reports of whether residents needed help, and their answers won't reliably show whether the criterion is met",
+        "marks": 1
+      },
+      {
+        "text": "Better technique that collects data from or about residents, e.g. a short survey shown to residents as they lodge an application, asking whether they needed help; or counting permit help calls in the council's call records against the number of applications",
+        "marks": 1
+      }
+    ],
+    "model": "The criterion is about residents, but the plan collects data only from council staff, who process applications rather than lodge them. Staff can only guess, or pass on what a few residents have told them, about whether residents needed help, so the data won't reliably show whether the criterion has been met.\n\nA better technique is a short online survey shown to residents as soon as they lodge an application, asking whether they needed help from council staff to complete it. This collects data directly from the people the criterion is about, and the responses can be totalled.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk10-001",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Jarrah Lane Software is building a membership program for the Narrawong Sailing Club. During coding, the club president asks for an event-booking feature that isn't in the software requirements specification, and the developers agree to add it without changing the plan. In the same week, the team's lead developer is moved to another project.\n\nExplain how each of these two factors could affect the effectiveness of the project plan.",
+    "points": [
+      {
+        "text": "Identifies the event-booking request as scope creep: new work added after the scope was agreed, without the plan being changed",
+        "marks": 1
+      },
+      {
+        "text": "Effect of the scope creep: the Gantt chart has no time for designing, coding and testing the feature, so coding runs over, later tasks and milestones slip, or testing time is squeezed",
+        "marks": 1
+      },
+      {
+        "text": "Identifies the lead developer's move as a change in personnel: their tasks must be reassigned",
+        "marks": 1
+      },
+      {
+        "text": "Effect of the personnel change: other developers need time to learn the lead developer's code, so those tasks take longer and, if they are on the critical path, the handover date moves",
+        "marks": 1
+      }
+    ],
+    "model": "The event-booking feature is scope creep, because it adds work after the scope was agreed in the SRS and the plan hasn't been changed to allow for it. The Gantt chart has no time for designing, coding and testing the feature, so coding will run over, the tasks that depend on it will start late, and testing time may be cut to hold the deadline, which risks releasing a program with more errors.\n\nThe lead developer's move is a change in personnel. Their unfinished tasks must be given to other developers, who need time to understand code they didn't write. Those tasks will take longer than estimated, and if they are on the critical path, the program will be handed over to the club later than planned.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk10-002",
+    "kk": [
+      "U4O1-KK10",
+      "U3O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Dooen Meter Services in Horsham is having a meter-reading app developed. The Gantt chart shows the plan, in days. The laptop used to build the database fails, and Code database takes 5 days longer than planned.\n\nExplain the effect of this delay on the release date. Use the Gantt chart in your answer.",
+    "points": [
+      {
+        "text": "Code database is not on the critical path (Analyse needs → Design app screens → Code app screens → Connect app to database → Alpha test → Beta test), which plans the release for day 28",
+        "marks": 1
+      },
+      {
+        "text": "Code database was due to finish on day 13, while Connect app to database can't start until day 16; with the 5-day delay it finishes on day 18",
+        "marks": 1
+      },
+      {
+        "text": "So Connect app to database starts 2 days late and the release moves from day 28 to day 30, 2 days late; the database tasks are now on the critical path",
+        "marks": 1
+      }
+    ],
+    "model": "The critical path is Analyse needs, Design app screens, Code app screens, Connect app to database, Alpha test and Beta test, which plans the release for day 28. Code database isn't on this path: it was due to finish on day 13, while Connect app to database can't start until Code app screens finishes on day 16.\n\nWith the 5-day delay, Code database finishes on day 18. Connect app to database has to wait for it, so it starts 2 days late, and every later task moves by 2 days. The release moves from day 28 to day 30. The path through Design database and Code database is now the critical path.",
+    "mistake": "Don't assume the whole 5-day delay passes to the release date. A task off the critical path moves the finish only by the amount its delay exceeds the time its path had to spare.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "dooen-gantt",
+        "kind": "gantt",
+        "title": "Dooen Meter Services meter-reading app",
+        "caption": "Connect app to database starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "t1",
+            "name": "Analyse needs",
+            "duration": 5,
+            "dependsOn": []
+          },
+          {
+            "id": "t2",
+            "name": "Design app screens",
+            "duration": 4,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t3",
+            "name": "Design database",
+            "duration": 3,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t4",
+            "name": "Code app screens",
+            "duration": 7,
+            "dependsOn": [
+              "t2"
+            ]
+          },
+          {
+            "id": "t5",
+            "name": "Code database",
+            "duration": 5,
+            "dependsOn": [
+              "t3"
+            ]
+          },
+          {
+            "id": "t6",
+            "name": "Connect app to database",
+            "duration": 3,
+            "dependsOn": [
+              "t4",
+              "t5"
+            ]
+          },
+          {
+            "id": "t7",
+            "name": "Alpha test",
+            "duration": 4,
+            "dependsOn": [
+              "t6"
+            ]
+          },
+          {
+            "id": "t8",
+            "name": "Beta test",
+            "duration": 5,
+            "dependsOn": [
+              "t7"
+            ]
+          },
+          {
+            "id": "m1",
+            "name": "Release",
+            "duration": 0,
+            "dependsOn": [
+              "t8"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "s-u4o1-kk11-001",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "commandTerm": "describe",
+    "marks": 4,
+    "prompt": "Nadia is the only developer building a volunteer rostering program for the Dunmore Creek Netball Association. Her project plan is a Gantt chart, and the program must be ready before the season starts.\n\nDescribe two techniques Nadia could use to record the progress of her project, and how each would help her.",
+    "points": [
+      {
+        "text": "Technique 1: a dated development journal or log recording tasks worked on, time spent, problems met, and decisions with reasons",
+        "marks": 1
+      },
+      {
+        "text": "How it helps: explains the causes of delays and why changes were made, giving evidence for assessing the plan, and helps her pick up work after a break",
+        "marks": 1
+      },
+      {
+        "text": "Technique 2: annotating the Gantt chart (or using project management software) with actual start and finish dates, percentage complete and reasons for changes, while keeping the planned dates",
+        "marks": 1
+      },
+      {
+        "text": "How it helps: shows planned against actual progress at a glance, so she can see early whether a delay threatens the start of the season and adjust dependent tasks",
+        "marks": 1
+      }
+    ],
+    "model": "Nadia could keep a development journal, writing a dated entry each session that records the tasks she worked on, how long they took, any problems and how she solved them, and decisions with her reasons. Because she works alone, this explains later why tasks took longer than planned, and it gives her evidence when she assesses her project plan.\n\nShe could also annotate her Gantt chart as she goes, adding actual start and finish dates, the percentage of each task complete and short notes on any changes, while keeping the original dates visible. This lets her compare planned and actual progress at a glance and see early whether a delay will push the program past the start of the season, so she can adjust later tasks in time.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk11-002",
+    "kk": [
+      "U4O1-KK11",
+      "U4O1-KK12"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Nadia's coding took a week longer than planned, so she moved her testing tasks a week later on her Gantt chart, writing over the original dates.\n\nExplain why she should have kept the original dates.",
+    "points": [
+      {
+        "text": "Keeping the original dates beside the adjusted or actual dates lets planned and actual progress be compared",
+        "marks": 1
+      },
+      {
+        "text": "That comparison is the evidence needed to assess the effectiveness of her project plan, e.g. it shows her coding estimate was a week short, so future plans can be more realistic",
+        "marks": 1
+      }
+    ],
+    "model": "By writing over the original dates, Nadia has lost the record of what she planned. If she had kept them beside the adjusted dates, she could compare planned and actual progress. That comparison is the evidence she needs when assessing her project plan: it would show that her coding estimate was a week short, which she could allow for in future plans.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk12-001",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK10"
+    ],
+    "commandTerm": "evaluate",
+    "marks": 4,
+    "prompt": "Thomson River Dental in Sale had a booking program developed. The tasks ran one after another. The table shows the planned and actual durations, with notes from the developer's journal.\n\nEvaluate the effectiveness of the project plan. Refer to the data in your answer.",
+    "points": [
+      {
+        "text": "Overall result from the data: 32 days against 29 planned, so the handover was 3 days late",
+        "marks": 1
+      },
+      {
+        "text": "A strength supported by the data: three of the five estimates (Interview staff, Design screens, Code reports) were exactly right; or adding a second tester cut Test from 5 days to 3, recovering 2 of the 5 days lost",
+        "marks": 1
+      },
+      {
+        "text": "Weakness: Code booking module ran 5 days over because SMS reminders, not in the SRS, were added without changing the plan (scope creep), so the plan had no control over changes",
+        "marks": 1
+      },
+      {
+        "text": "Judgement weighing the evidence: the plan was only partly effective, because its estimates were sound and it was adjusted to recover time, but uncontrolled scope creep still made the handover late",
+        "marks": 1
+      }
+    ],
+    "model": "The project took 32 days against the 29 planned, so the booking program was handed over 3 days late.\n\nThe plan's time estimates were mostly realistic: Interview staff, Design screens and Code reports each took exactly as long as planned. The plan was also adjusted well once it slipped: adding a second tester cut Test from 5 days to 3, recovering 2 of the days lost.\n\nIts main weakness was that it had no way of controlling changes. Code booking module took 15 days instead of 10 because the practice manager's request for SMS reminders, which wasn't in the SRS, was added without changing the plan. This is scope creep.\n\nOverall the plan was only partly effective. Its estimates were sound and it was adjusted to recover time, but uncontrolled scope creep still made the handover 3 days late. Future plans should put new requests through a change process that adjusts the schedule before work begins.",
+    "mistake": "A judgement needs evidence. Quote the planned and actual figures and give the cause of each difference, rather than just saying the project was late.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "thomson-actuals",
+        "kind": "table",
+        "title": "Planned and actual durations",
+        "columns": [
+          "Task",
+          "Planned (days)",
+          "Actual (days)",
+          "Journal note"
+        ],
+        "rows": [
+          [
+            "Interview staff",
+            "3",
+            "3",
+            "–"
+          ],
+          [
+            "Design screens",
+            "5",
+            "5",
+            "–"
+          ],
+          [
+            "Code booking module",
+            "10",
+            "15",
+            "Practice manager asked for SMS reminders, not in the SRS; added without changing the plan"
+          ],
+          [
+            "Code reports",
+            "6",
+            "6",
+            "–"
+          ],
+          [
+            "Test",
+            "5",
+            "3",
+            "Second tester added to recover time"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u4o1-kk12-002",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Thomson River Dental's booking program was handed over 3 days late, after SMS reminders were added part-way through coding without the plan being changed. Two months later, the practice manager said: 'Patients love the new program, so the project plan must have been effective.'\n\nExplain why this reasoning is flawed.",
+    "points": [
+      {
+        "text": "Patients' satisfaction is evidence about the solution (part of evaluating its effectiveness), not about the project plan",
+        "marks": 1
+      },
+      {
+        "text": "The plan is judged by comparing planned and actual progress; here it finished 3 days late because of uncontrolled scope change, so the plan was only partly effective even though the program is popular",
+        "marks": 1
+      }
+    ],
+    "model": "Patients' views are evidence about the solution: they help evaluate how effective the booking program is. The project plan is judged separately, by comparing what was planned with what actually happened. Here the project finished 3 days late because SMS reminders were added without changing the plan, so the plan was only partly effective, even though the program itself is popular.",
+    "source": "textbook"
+  }
+]

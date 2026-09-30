@@ -419,6 +419,9 @@ describe('drill', () => {
   });
 
   it('says so when no MCQs are installed', async () => {
+    const empty = { cards: [], mcq: [], short: [] };
+    const psm = { stages: [], specifications: [], cards: [], mcq: [], short: [] } as unknown as PsmFile;
+    useContent.setState({ index: buildIndex({ areas: [empty, empty, empty, empty], terms: [], psm, caseStudies: [] }), status: 'ready' });
     await submitLine('drill', mockEnv());
     expect(printed()).toContain('No multiple-choice questions are installed yet.');
   });

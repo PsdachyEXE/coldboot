@@ -1,0 +1,1106 @@
+[
+  {
+    "id": "c-u4o1-kk01-001",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "type": "reverse",
+    "front": "User-centred design",
+    "back": "An approach that bases design decisions on the needs, goals, tasks and setting of the people who will use the solution, and involves those users throughout design and development.",
+    "mistake": "User-centred design isn't one survey at the start of a project. Users are consulted repeatedly, and their feedback changes the design as development continues.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk01-002",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "type": "compare",
+    "front": "Client versus user",
+    "back": "| | Client | User |\n|:--|:--|:--|\n| Who | The person or organisation that commissions and pays for the solution | The person who operates the solution to do their work |\n| Example | The practice manager of a dental clinic | The receptionists who book appointments |\n\nUser-centred design centres on the users, who may not be the client.",
+    "mistake": "The client and the users are often different people. Designing only from the client's point of view can produce a solution that users find slow or confusing.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk01-003",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "type": "basic",
+    "front": "Give three practices that make the development of a solution user-centred.",
+    "back": "- Find out who the users are, what tasks they perform and where they work\n- Have users try mock-ups or early versions and give feedback\n- Revise the solution in response to that feedback, then check it with users again",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk01-004",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "type": "basic",
+    "front": "Why does user-centred design tend to produce a more effective solution?",
+    "back": "Designs are checked against how real users work, so missing functions and confusing screens are found and fixed during development. The finished solution is then more likely to achieve its purpose for the people who use it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk01-005",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "type": "cloze",
+    "front": "In user-centred design, users are involved {{throughout development}}, not only at the start, and the design is {{revised in response to their feedback}}.",
+    "back": "Repeated cycles of trying, feedback and revision keep the solution matched to users' needs as it is built.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk01-006",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "type": "basic",
+    "front": "Booking a service in a car-repair app took seven screens. A redesign needs three, and bookings are recorded just as accurately as before. Which quality of the solution does the redesign most directly improve, and why?",
+    "back": "Efficiency: the user completes the same booking in less time and with less effort. Accuracy, a measure of effectiveness, is unchanged, so the redesign can't be credited with more accurate bookings.",
+    "mistake": "A faster process isn't automatically a more accurate one. Judge each measure separately: time and effort are measures of efficiency; accuracy and completeness are measures of effectiveness.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk01-007",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "type": "basic",
+    "front": "Give two interface features that make a solution more efficient for its users.",
+    "back": "Any two of:\n\n- Default values, such as today's date already filled in\n- Drop-down lists or check boxes instead of typing\n- Keyboard shortcuts for frequent tasks\n\nEach cuts the time and effort a task needs.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk01-008",
+    "kk": [
+      "U4O1-KK01",
+      "U4O1-KK05"
+    ],
+    "type": "basic",
+    "front": "A developer speeds up an order module by removing its validation checks. Why is this a poor trade-off?",
+    "back": "The module becomes more efficient but less effective. Invalid orders can now be stored and processed, producing wrong output, so the solution achieves its purpose less well.",
+    "mistake": "An efficiency gain is of little value if the solution no longer meets its requirements. Speed never makes up for incorrect output.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-001",
+    "kk": [
+      "U4O1-KK02"
+    ],
+    "type": "basic",
+    "front": "Why must numeric fields read from a CSV file be converted before they are used in calculations?",
+    "back": "When a program reads a line of a CSV file and splits it at the commas, every field is a String. A quantity such as \"12\" must be converted to Integer, and a price such as \"12.50\" to Floating point, before it can be used in arithmetic or compared as a number.",
+    "mistake": "A CSV file doesn't store data types. The characters `42` in a file are text until the program converts them.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-002",
+    "kk": [
+      "U4O1-KK02"
+    ],
+    "type": "basic",
+    "front": "A CSV file holds one customer per line: name, postcode and account balance. Which data structure suits holding the file while the program runs, and why?",
+    "back": "An array of records. Each record keeps one customer's fields together under names, each with its own data type, and the array holds one record per line so the program can loop through or search every customer.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-003",
+    "kk": [
+      "U4O1-KK02"
+    ],
+    "type": "compare",
+    "front": "Data held in an array versus data written to a file",
+    "back": "| | Array | File |\n|:--|:--|:--|\n| Where | Memory, while the program runs | Storage, such as a drive |\n| Lasts | Until the program closes | Between runs of the program |\n| Suits | Fast searching and processing | Keeping data and sharing it with other programs |",
+    "mistake": "Data in variables and arrays disappears when the program closes. Anything needed next time must be written to a file first.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-004",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK06"
+    ],
+    "type": "basic",
+    "front": "A program must send each event's results, with a different number of competitors in each event, to another organisation's system. Why does XML suit this output better than CSV?",
+    "back": "XML elements can be nested, so each event element can hold any number of competitor elements, and the tags name every field so the receiving system can read it. CSV suits flat records that all have the same fields.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-005",
+    "kk": [
+      "U4O1-KK02"
+    ],
+    "type": "basic",
+    "front": "Why should a program store a price as a number, and add the $ sign and two decimal places only when the price is output?",
+    "back": "Stored as Floating point, the price can be totalled and compared. The $ sign and decimal places are a matter of display, so they are applied at output; storing \"$12.50\" as a String would need converting back before every calculation.",
+    "mistake": "A value that looks right on screen isn't necessarily stored in a usable type. Keep how data is stored separate from how it is displayed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-006",
+    "kk": [
+      "U4O1-KK02"
+    ],
+    "type": "cloze",
+    "front": "A program reads the line `BK-204,3,18.50` (product code, quantity, unit price). It splits the line at each {{comma}}, keeps the product code as a {{String}}, and converts the quantity to {{Integer}} and the price to {{Floating point}} before storing them in a record.",
+    "back": "Only fields used as numbers are converted. The product code contains letters and a hyphen, and is never used in arithmetic.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-007",
+    "kk": [
+      "U4O1-KK02",
+      "U4O1-KK01"
+    ],
+    "type": "basic",
+    "front": "Why might a program read a whole data file into an array of records when it starts, instead of re-reading the file for every search?",
+    "back": "Searching data held in memory is much faster than reading the file each time, so the program is more efficient. Any changes must be written back to the file before the program closes, or they are lost.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-008",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK06"
+    ],
+    "type": "basic",
+    "front": "Why is a CSV file a better output than a plain text report when the results will be analysed in a spreadsheet?",
+    "back": "A CSV file keeps the data's structure: one record per line and a delimiter between fields, so a spreadsheet can import each field into its own column. Sentences in a plain text report can't be split into fields reliably.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk03-001",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "Why is a solution built from functions and procedures with parameters easier to develop and maintain?",
+    "back": "Each module does one job and can be tested on its own. Parameters let one module work on different data, so code is reused instead of copied, and a fix made in one place corrects every call.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk03-002",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "type": "compare",
+    "front": "Parameter versus return value",
+    "back": "| | Parameter | Return value |\n|:--|:--|:--|\n| Direction | Into the function when it is called | Out of the function, back to the caller |\n| Example | `weight` in `shippingCost(weight)` | `RETURN cost` |",
+    "mistake": "Displaying a result inside a function isn't the same as returning it. The calling code can use only a value that the function returns.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk03-003",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "Which GUI control suits each input?\n\n- Whether a customer wants a printed receipt\n- One of three delivery options\n- One of 80 suburbs\n- A customer's surname",
+    "back": "- Check box (yes or no)\n- Radio buttons (one choice from a few)\n- Drop-down list (one choice from many)\n- Text box (free text)",
+    "mistake": "A text box for a fixed set of choices invites typing errors. A control that offers only the valid choices is quicker for the user and more accurate.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk03-004",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "type": "cloze",
+    "front": "To read a file whose number of lines is unknown and may be zero, a {{pre-test}} loop suits, because its condition is checked {{before}} the first line is read.",
+    "back": "A post-test loop always runs at least once, so it would try to read a line from an empty file. A counted loop needs the number of lines in advance.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk03-005",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "Why should a program close a file once it has finished reading or writing it?",
+    "back": "Closing makes sure any data still waiting to be written is saved, and releases the file so that other programs, or other parts of the same program, can open it. A file left open can lose data or stay locked.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk03-006",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "In a GUI program, what is an event, and how does the program respond to one?",
+    "back": "An event is an action such as clicking a button or changing a selection. The program runs the procedure linked to that event (its event handler); for example, clicking *Calculate* runs the code that works out the fee.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk03-007",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "Why should variables be declared locally inside a module where possible?",
+    "back": "A local variable exists only while its module runs, so other modules can't change it by accident. Modules stay independent and errors are easier to trace. Data a module needs is passed in as parameters.",
+    "mistake": "Making every variable global to avoid passing parameters lets any module change any value, which makes logic errors hard to find.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk03-008",
+    "kk": [
+      "U4O1-KK03",
+      "U3O1-KK07"
+    ],
+    "type": "basic",
+    "front": "In an object-oriented solution, how does calling a method differ from calling a standalone function?",
+    "back": "A method belongs to a class and acts on the properties of the object it is called on; for example, `booking.cancel()` changes only that booking's status. A standalone function isn't tied to any object; it works on the data passed to it as parameters.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk04-001",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "type": "reverse",
+    "front": "Application programming interface (API)",
+    "back": "A defined set of rules, such as the requests a program can make and the format of the data returned, that lets one program use the services or data of another without knowing how it works inside.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "API"
+    ]
+  },
+  {
+    "id": "c-u4o1-kk04-002",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "type": "reverse",
+    "front": "Code library",
+    "back": "A collection of pre-written, reusable modules, such as functions or classes, that a developer includes in a program to carry out common tasks, such as handling dates or drawing charts.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "Library",
+      "Software library"
+    ]
+  },
+  {
+    "id": "c-u4o1-kk04-003",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "type": "reverse",
+    "front": "Code repository",
+    "back": "A central store for a project's source code and its full history of changes, which lets developers share code, see who changed what and when, and return to an earlier version.",
+    "mistake": "A repository isn't just a backup copy. It records each change with its author and a message, so a particular change can be reviewed or undone.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "Repository"
+    ]
+  },
+  {
+    "id": "c-u4o1-kk04-004",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "type": "compare",
+    "front": "Code library versus online API",
+    "back": "| | Code library | Online API |\n|:--|:--|:--|\n| Where the code runs | Inside your program | On the provider's system |\n| Who controls changes | You decide when to upgrade | The provider, at any time |\n| If the provider withdraws it | Your copy keeps running, but gets no more fixes | Requests fail and the feature stops |",
+    "mistake": "Using an online API means depending on its provider. If the provider changes it or revokes access, your program can stop working even though your own code hasn't changed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk04-005",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "type": "basic",
+    "front": "Give three risks of building a feature on a third-party API.",
+    "back": "- The provider changes the API, such as renaming a request or changing the data format, and requests fail\n- Access is revoked, or the price or usage limits change\n- The provider's service goes offline, so the feature stops working",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk04-006",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "type": "basic",
+    "front": "How can a developer reduce the risk of depending on a third-party API or library?",
+    "back": "- Keep all calls to it in one module, so a change affects only that module\n- Fix the library version used, and test before upgrading\n- Plan a fallback, such as saved data or another provider\n- Watch for the provider's notices of changes",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk04-007",
+    "kk": [
+      "U4O1-KK04",
+      "U3O1-KK01"
+    ],
+    "type": "compare",
+    "front": "Using a published code library versus using code from an AI-based assistant",
+    "back": "| | Published library | AI-generated code |\n|:--|:--|:--|\n| Testing | Usually tested and used by many developers | New and untested |\n| Origin | Documented, with a stated licence | Unclear; may resemble someone else's code |\n| Developer's job | Learn its functions and follow its licence | Read, understand and test every line |",
+    "mistake": "AI-generated code isn't pre-tested like an established library. Treat it as your own untested code.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk04-008",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "type": "cloze",
+    "front": "A code repository records each saved set of changes as a {{commit}}, so a developer can see who changed what and when, and {{roll back}} to an earlier version if a change introduces an error.",
+    "back": "Each commit records its author, the date and a message describing the change.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-001",
+    "kk": [
+      "U4O1-KK05"
+    ],
+    "type": "basic",
+    "front": "At what point should a program validate input, and why?",
+    "back": "As soon as the data is entered or read, before it is processed or stored. Invalid data is then rejected before it can cause a runtime error, produce wrong output or be saved into stored records.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-002",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK01"
+    ],
+    "type": "basic",
+    "front": "What makes a validation error message useful?",
+    "back": "It names the field, says what is wrong and states what is accepted, for example \"Nights must be a whole number from 1 to 14\". The user can then fix the entry without re-entering the whole form.",
+    "mistake": "A message such as \"Invalid input\" says that something is wrong but not how to fix it, which slows users down and leads to repeated errors.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-003",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "How does a drop-down list or check box reduce the validation a program needs?",
+    "back": "It offers only valid values, so the user can't enter the wrong type of data or a value out of range. Type and range checks on that field become unnecessary, but an existence check is still needed if the control can be left with nothing selected.",
+    "mistake": "Restricting input with a control doesn't remove every check. The program must still confirm that a choice was made.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-004",
+    "kk": [
+      "U4O1-KK05"
+    ],
+    "type": "cloze",
+    "front": "For a quantity that must be from 1 to 20 inclusive, the value is valid when `qty ≥ 1` {{AND}} `qty ≤ 20`, and invalid when `qty < 1` {{OR}} `qty > 20`.",
+    "back": "Swapping the operators breaks the check: `qty < 1 AND qty > 20` is never true, because no number is both below 1 and above 20, so every value would be accepted.",
+    "mistake": "Take care at the boundaries. Testing `qty ≤ 1 OR qty > 20` for invalid input would wrongly reject 1, which is valid.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-005",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK02"
+    ],
+    "type": "basic",
+    "front": "Why should data read from a file be validated, not just data typed by a user?",
+    "back": "A file may have been edited by hand, exported by another program or damaged, so a field can be missing, the wrong type or out of range. Checking each record as it is read prevents runtime errors and stops bad data being stored.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-006",
+    "kk": [
+      "U4O1-KK05"
+    ],
+    "type": "basic",
+    "front": "Why is validation often placed inside a loop?",
+    "back": "The loop keeps asking for the value, showing an error message each time, until the entry passes every check. Processing continues only once the data is valid.",
+    "mistake": "A single IF statement checks the input only once, so a second invalid entry is accepted.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-007",
+    "kk": [
+      "U4O1-KK05",
+      "U3O1-KK13"
+    ],
+    "type": "basic",
+    "front": "A form checks that the weight field isn't empty, then converts the entry to Floating point. What happens if the user types \"12kg\", and which check prevents it?",
+    "back": "In most languages the conversion fails while the program runs (a type mismatch), which can crash the program. A type check before the conversion rejects the entry because it isn't a number, and shows an error message instead.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-008",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK06"
+    ],
+    "type": "basic",
+    "front": "How should a module's validation be tested during alpha testing?",
+    "back": "With test data for every check: valid values, each kind of invalid value (blank, wrong type, out of range), and boundary values on and just outside each limit. Each test's expected and actual output is recorded in a test table.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk06-001",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "type": "reverse",
+    "front": "Alpha testing",
+    "back": "Testing carried out by the developers, or an in-house test team, during development and before release to users, to check that each module and the whole solution work as designed and meet the requirements.",
+    "mistake": "Alpha testing isn't done by the intended users. Testing by a group of real users is beta testing, which follows alpha testing.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk06-002",
+    "kk": [
+      "U4O1-KK06",
+      "U4O1-KK07"
+    ],
+    "type": "compare",
+    "front": "Alpha testing versus beta testing",
+    "back": "| | Alpha testing | Beta testing |\n|:--|:--|:--|\n| Who | Developers or in-house testers | A selected group of real users |\n| When | During development, before release | After alpha testing, on a near-final version |\n| Focus | Correct processing against the design, using test data | How the solution works for users in their own setting |",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk06-003",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "type": "basic",
+    "front": "When a test's actual output doesn't match its expected output, what should the developer do?",
+    "back": "Record the result in the test table, locate the cause (for example with a breakpoint or debugging output), fix the code, then run that test again, along with earlier tests, to check that the fix hasn't broken anything else.",
+    "mistake": "Re-running only the failed test isn't enough. A fix can break something that passed before, so the earlier tests are run again too.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk06-004",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "type": "basic",
+    "front": "Why should each module be tested on its own before the modules are tested together?",
+    "back": "An error is easier to find in one small module with known inputs. Once each module works, testing them together checks that data passes correctly between them.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk06-005",
+    "kk": [
+      "U4O1-KK06",
+      "U3O1-KK14"
+    ],
+    "type": "cloze",
+    "front": "Working through an algorithm by hand with test data, recording each variable's value as each line runs, is called {{desk checking}}; it can find {{logic errors}} before the code is run.",
+    "back": "Desk checking follows the algorithm exactly as written, so it shows what the code actually does rather than what the developer intended.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk06-006",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "type": "basic",
+    "front": "Why should debugging output statements be removed before a solution is released?",
+    "back": "They were added only to show values while the developer found errors. Left in, they clutter the screen or log, can confuse users, may reveal internal data and slow processing.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk06-007",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "type": "basic",
+    "front": "Why can't alpha testing prove that a program has no errors?",
+    "back": "Testing shows only how the program behaves for the data tested; an untested value or combination may still fail. Test data that covers every requirement, with valid, invalid and boundary values, makes undetected errors less likely.",
+    "mistake": "A program that passes every test in its test table has passed those tests, not every possible input.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk06-008",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "type": "basic",
+    "front": "Besides checking that calculations are correct, what should alpha testing check?",
+    "back": "- Each functional requirement is met\n- Invalid input is handled without crashing\n- Files are read and written correctly\n- Modules work together, passing data between them correctly",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk07-001",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "Beta testing",
+    "back": "Testing of a nearly complete solution by a selected group of its intended users, outside the development team, in realistic conditions before the solution is released.",
+    "mistake": "Beta testing isn't the developers running more tests near the end. The testers are real or representative users who didn't build the solution.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk07-002",
+    "kk": [
+      "U4O1-KK07",
+      "U4O1-KK06"
+    ],
+    "type": "cloze",
+    "front": "Beta testing takes place {{after alpha testing}}, when the solution is {{nearly complete}}, and before it is released to all its users.",
+    "back": "By then the developers have found and fixed the main errors, so beta testers can show how well the solution works for real users in real conditions.",
+    "mistake": "Beta testing doesn't replace alpha testing. Skipping alpha testing leaves beta testers meeting errors the developers should have found first.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk07-003",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "type": "basic",
+    "front": "What should guide the choice of a beta test user group?",
+    "back": "The group should represent the intended users: their roles, range of skills and experience, ages, devices and any accessibility needs. It should not include developers or others who already know how the solution works.",
+    "mistake": "Picking only the most confident users, or friends of the developer, gives smoother results than real users will get. The group must match the real user base.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk07-004",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "type": "basic",
+    "front": "What is a scenario in beta testing?",
+    "back": "A realistic task, described in the user's own terms, that a tester carries out with the solution, e.g. 'Book a 30-minute appointment for next Tuesday afternoon.' It states the goal, not the steps.",
+    "mistake": "A scenario that lists each button to press tests whether users can follow instructions, not whether they can use the interface.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk07-005",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "type": "basic",
+    "front": "Why do developers observe beta testers instead of relying only on a survey afterwards?",
+    "back": "Observation shows what users actually do: where they hesitate, make errors or take a long way round. Users often forget these problems or don't report them in a survey.",
+    "mistake": "The observer shouldn't help or prompt the tester. A hint hides the very problem the test is meant to find.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk07-006",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "type": "cloze",
+    "front": "A beta test plan names the {{user group}}, the {{scenarios}} they will carry out, when and where testing happens, and how {{results}} will be recorded.",
+    "back": "The plan is written before testing so that every tester works through the same tasks under similar conditions and the results can be compared.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk07-007",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "type": "basic",
+    "front": "What should be recorded for each problem found in a beta test?",
+    "back": "The date, tester and scenario; what the tester did; what should have happened; what actually happened; and how serious the problem is. This lets developers reproduce the problem and decide which fixes come first.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk07-008",
+    "kk": [
+      "U4O1-KK07",
+      "U4O1-KK08"
+    ],
+    "type": "compare",
+    "front": "Beta testing versus evaluation",
+    "back": "Beta testing happens before release, to find problems that must be fixed. Evaluation happens after the solution has been in use for some time, to judge its efficiency and effectiveness against evaluation criteria.",
+    "mistake": "Asking users for their opinions doesn't make an activity an evaluation. If it happens before release to find problems, it's testing.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk08-001",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "type": "reverse",
+    "front": "Evaluation strategy",
+    "back": "A plan for judging a solution once it is in use. It typically sets out the evaluation criteria, what data will be collected for each and how, when collection and evaluation happen, and who is responsible for each task.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk08-002",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "type": "basic",
+    "front": "When is a solution usually evaluated, and why then?",
+    "back": "After it has been in normal use for a period, such as several weeks. By then users are past the learning stage and there is real data about its use, so the judgement reflects everyday performance.",
+    "mistake": "Evaluating on the first day mostly measures how quickly users learn a new system, not how efficient and effective it is.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk08-004",
+    "kk": [
+      "U4O1-KK08",
+      "U4O1-KK01"
+    ],
+    "type": "compare",
+    "front": "Efficiency criterion versus effectiveness criterion",
+    "back": "An efficiency criterion judges the time, cost or effort involved, e.g. 'An order can be entered in under 2 minutes.' An effectiveness criterion judges how well the solution achieves its purpose, e.g. 'Invoices contain no calculation errors.'",
+    "mistake": "Speed is a measure of efficiency, not effectiveness. Accuracy is a measure of effectiveness.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk08-005",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "type": "cloze",
+    "front": "Evaluation criteria should be {{measurable}}, so that the data collected shows clearly whether each one has been met.",
+    "back": "'The program is fast' can't be judged. 'A search returns results within 2 seconds' can.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk08-006",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "type": "basic",
+    "front": "Why must an evaluation strategy be planned well before the evaluation takes place?",
+    "back": "Some data has to be gathered over weeks of use, such as system logs, or before the change, such as how long tasks took with the old system. Without a plan, that data won't exist when the evaluation happens.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk08-007",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "type": "basic",
+    "front": "What does the timeline in an evaluation strategy show? Give an example.",
+    "back": "When each evaluation activity happens, e.g. booking times logged from launch, a staff survey in week 6, and the results compared with the criteria and reported in week 8.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk08-008",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "type": "basic",
+    "front": "Why is it useful for an evaluation strategy to name who is responsible for each evaluation task?",
+    "back": "Evaluation tasks, such as exporting system logs, running a survey and writing the report, often fall to different staff weeks after launch. Naming a person for each task means the data is actually collected on time and someone is accountable for reporting the results.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk09-001",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "type": "basic",
+    "front": "List four techniques for collecting data to evaluate a solution.",
+    "back": "Any four: surveys or questionnaires; interviews; observing users; timing tasks; analysing system logs, such as response times and error counts; checking outputs against source records for errors.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk09-003",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "type": "basic",
+    "front": "Which technique gives the most reliable data for an efficiency criterion such as 'A booking takes under two minutes'?",
+    "back": "Measuring the time directly: observing users and timing each booking, or using system logs of start and finish times.",
+    "mistake": "Asking users how long a task takes gives estimates, not measurements. Time-based criteria need timed data.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk09-004",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "type": "compare",
+    "front": "Quantitative versus qualitative evaluation data",
+    "back": "Quantitative data is numeric and can be totalled or averaged, e.g. task times, error counts and ratings. Qualitative data is descriptive, e.g. comments explaining why users find a screen confusing.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk09-005",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "type": "basic",
+    "front": "How is an evaluation criterion applied once the data has been collected?",
+    "back": "Compare the data with the criterion's target, decide whether it has been met, and support the judgement with the evidence, e.g. 'Average booking time was 95 seconds against a target of 120 seconds: met.'",
+    "mistake": "A judgement without the figures earns little. State the data, the target and the result.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk09-006",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "type": "cloze",
+    "front": "Collecting the same measurements from the {{old system}} before the new one goes live lets the evaluation show whether the solution is an {{improvement}}.",
+    "back": "For example, if quotes took 9 minutes each by hand, a new average of 4 minutes shows a clear gain in efficiency.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk09-008",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "type": "basic",
+    "front": "What evaluation data can a solution record automatically?",
+    "back": "System logs can record task start and finish times, response times, the number of transactions, error messages, crashes and failed logins, without interrupting users.",
+    "mistake": "Logs show what happened, not why. They are often paired with interviews or surveys to explain the numbers.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk09-009",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "type": "compare",
+    "front": "System logs versus a user survey as sources of evaluation data",
+    "back": "| | System logs | User survey |\n|:--|:--|:--|\n| Data | Measured facts: task times, transactions, errors | Users' opinions and ratings |\n| Coverage | Every use, recorded automatically | Only the users who respond |\n| Limitation | Show what happened, not why | Self-reported, so times are only estimates |\n| Suits criteria about | Times, counts and errors | How users feel about the solution |",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-002",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "type": "basic",
+    "front": "How can scope creep affect a project plan?",
+    "back": "The added work takes time the plan didn't allow for, so tasks and milestones slip, costs rise, and time for testing is often squeezed, which can lower the quality of the solution.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-003",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "type": "basic",
+    "front": "How can a development team control scope creep?",
+    "back": "Document the agreed scope in the SRS and have the client sign it off. Put each new request through a change process that assesses its effect on time and cost before approval, or defer it to a later version.",
+    "mistake": "The aim isn't to refuse every change. A change can be accepted once its cost in time and money is agreed and the plan is updated.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-004",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "type": "basic",
+    "front": "How can a change in personnel disrupt a project plan?",
+    "back": "The departing person's tasks are delayed or reassigned, knowledge of their work may be lost, and a replacement needs time to learn the project, so tasks take longer than planned.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-005",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "type": "basic",
+    "front": "What reduces the effect of a team member leaving part-way through a project?",
+    "back": "Clear internal documentation and up-to-date progress journals, all code kept in a shared repository, and more than one person familiar with each part of the solution.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-006",
+    "kk": [
+      "U4O1-KK10",
+      "U4O1-KK04"
+    ],
+    "type": "basic",
+    "front": "Give three examples of technical issues that can disrupt a project plan.",
+    "back": "Any three: hardware failure; code or data lost without a backup; a library or API that changes or is withdrawn; software that is incompatible with the client's devices; a bug that takes far longer to fix than planned; a server or network outage.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-007",
+    "kk": [
+      "U4O1-KK10",
+      "U3O2-KK03"
+    ],
+    "type": "cloze",
+    "front": "A delay to a task on the {{critical path}} delays the project's finish date by the same amount, unless later critical tasks are {{shortened}}.",
+    "back": "A delay to a task off the critical path moves the finish date only if the delay makes that task's chain longer than the original critical path.",
+    "mistake": "Not every delay moves the finish date. Check first whether the delayed task is on the critical path.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-008",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "type": "basic",
+    "front": "Why might a project manager build extra time into a project plan before the deadline?",
+    "back": "Some disruptions, such as illness or a technical fault, can't be predicted. A time allowance lets the project absorb small delays without missing its deadline.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-009",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "type": "basic",
+    "front": "What can a development team do to reduce the effect of technical issues on a project plan?",
+    "back": "Back up code and data regularly, for example in a shared repository; test on the client's actual devices early; check that any library or API the solution relies on is stable, and have an alternative in mind; and allow some spare time for faults that can't be predicted.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk11-001",
+    "kk": [
+      "U4O1-KK11",
+      "U4O1-KK12"
+    ],
+    "type": "basic",
+    "front": "Why is progress recorded during a software project?",
+    "back": "To see whether tasks are on schedule, to spot delays early enough to adjust the plan, to keep the team and client informed, and to provide evidence for assessing the project plan afterwards.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk11-002",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "type": "basic",
+    "front": "What annotations might be added to a Gantt chart during a project?",
+    "back": "Actual start and finish dates, the percentage of each task completed, the dates milestones were actually reached, and brief notes explaining delays or changes.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk11-003",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "type": "basic",
+    "front": "When a task runs late, what adjustments might be made to the project plan?",
+    "back": "Move dependent tasks to later dates, reassign people to critical tasks, run tasks side by side where dependencies allow, reduce scope with the client's agreement, or agree a new deadline.",
+    "mistake": "Don't overwrite the original plan when adjusting it. Keep the planned dates alongside the changes so planned and actual progress can be compared.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk11-004",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "type": "basic",
+    "front": "What should a development journal entry contain?",
+    "back": "The date, the tasks worked on and time spent, problems met and how they were solved, decisions made and the reasons for them, any changes to the plan, and the next steps.",
+    "mistake": "'Worked on the program' is not a useful entry. Without specific tasks, problems and reasons, the journal gives no evidence later.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk11-005",
+    "kk": [
+      "U4O1-KK11",
+      "U4O1-KK12"
+    ],
+    "type": "cloze",
+    "front": "A development journal records not only what was done but {{why}} decisions and changes were made, which is the evidence needed to explain delays when the project plan is assessed.",
+    "back": "The Gantt chart shows that a task slipped; the journal explains the cause, such as a late client decision or a failed server.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk11-006",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "type": "basic",
+    "front": "What can project management software do that a Gantt chart drawn by hand can't easily do?",
+    "back": "Recalculate dependent tasks and the critical path automatically when a date changes, keep planned and actual dates side by side, track percentage complete, assign tasks to people and share the current plan with the whole team.",
+    "mistake": "The software doesn't manage the project by itself. Its plan is only as accurate as the progress data people enter.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk11-007",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "type": "compare",
+    "front": "Annotation versus adjustment on a project plan",
+    "back": "An annotation records what happened, e.g. 'Coding finished 2 days late: test server down.' An adjustment changes the plan in response, e.g. moving testing 2 days later or adding a second developer.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk11-008",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "type": "basic",
+    "front": "Why should journal entries be written at the time, rather than at the end of the project?",
+    "back": "Details such as the cause of a delay or the reason for a decision are forgotten or misremembered later. Entries made at the time are more accurate and show when each problem actually arose.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-001",
+    "kk": [
+      "U4O1-KK12"
+    ],
+    "type": "basic",
+    "front": "What does assessing the effectiveness of a project plan involve?",
+    "back": "Comparing what was planned with what happened, such as task durations, start and finish dates, milestones and the final deadline, then explaining the causes of any differences and judging how well the plan guided the project.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-002",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK08"
+    ],
+    "type": "compare",
+    "front": "Evaluating the solution versus assessing the project plan",
+    "back": "Evaluating the solution judges the product: how efficiently and effectively it meets its requirements. Assessing the project plan judges the process: whether the tasks, durations and dependencies were realistic and how well the plan was managed.",
+    "mistake": "A project can deliver an effective solution even though its plan was poor, and a well-run plan can still deliver a weak solution. Keep the two judgements separate.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-003",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK11"
+    ],
+    "type": "basic",
+    "front": "Which records provide evidence for assessing a project plan?",
+    "back": "The original Gantt chart with its annotations and adjustments, progress logs and development journals, and the planned and actual dates kept in project management software.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-004",
+    "kk": [
+      "U4O1-KK12"
+    ],
+    "type": "basic",
+    "front": "Give three questions to ask when assessing a project plan.",
+    "back": "Any three: Were all the necessary tasks included? Were the time estimates realistic? Were the dependencies correct? Were milestones reached on time? Was the deadline met? Were disruptions handled well by adjusting the plan?",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-005",
+    "kk": [
+      "U4O1-KK12"
+    ],
+    "type": "cloze",
+    "front": "If most tasks took longer than planned for reasons that could have been foreseen, the plan's {{time estimates}} were unrealistic.",
+    "back": "The fix for the next project is better estimation, for example using the actual durations recorded in this project's journals.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-006",
+    "kk": [
+      "U4O1-KK12"
+    ],
+    "type": "basic",
+    "front": "Does finishing late mean a project plan was ineffective?",
+    "back": "Not by itself. The assessment must explain why dates slipped. Missing tasks or unrealistic estimates show a weak plan. A delay caused by an event no one could foresee, handled by prompt adjustments, says less about the plan's quality.",
+    "mistake": "Don't judge a plan only by whether the deadline was met. Explain the cause of each difference between planned and actual.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-007",
+    "kk": [
+      "U4O1-KK12"
+    ],
+    "type": "basic",
+    "front": "How does a missing task show up when a project plan is assessed?",
+    "back": "Journals or annotations record work that was never on the Gantt chart, such as transferring records from the old system, and it pushed later tasks back. The plan was incomplete, not just badly timed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-008",
+    "kk": [
+      "U4O1-KK12"
+    ],
+    "type": "basic",
+    "front": "Why is it worth assessing a project plan once the project is over?",
+    "back": "It shows which estimates and dependencies were wrong and which adjustments worked, so the next project's plan can be more realistic.",
+    "difficulty": 1,
+    "source": "textbook"
+  }
+]

@@ -1,0 +1,1470 @@
+[
+  {
+    "id": "s-u3o2-kk01-001",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Kellbrook Physiotherapy in Ballarat records appointments in a paper diary at reception. Clients can book only by phone during opening hours, and the diary is sometimes double-booked when two receptionists take calls at once. Receptionists also spend about an hour each day phoning clients to remind them of appointments. A physiotherapy clinic across town has recently started taking bookings online.\n\nExplain **two** reasons why Kellbrook Physiotherapy would undertake a software development project. Refer to the scenario in your answer.",
+    "points": [
+      {
+        "text": "Identifies a first reason, e.g. to fix a problem with the paper diary (double-bookings), to save reception time spent phoning reminders, or to take an opportunity (online bookings outside opening hours)",
+        "marks": 1
+      },
+      {
+        "text": "Explains the first reason with reference to Kellbrook, e.g. a shared booking program that checks availability stops two receptionists booking the same slot, so appointments are recorded accurately",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second, different reason",
+        "marks": 1
+      },
+      {
+        "text": "Explains the second reason with reference to Kellbrook, e.g. automatic reminders free about an hour of reception time each day, or online booking lets clients book after hours so the clinic doesn't lose them to the rival clinic",
+        "marks": 1
+      }
+    ],
+    "model": "First, the clinic has a problem with its current system. Two receptionists write in one paper diary while taking separate calls, so the same time slot is sometimes booked twice. A booking program that checks whether a slot is free before saving a booking would stop double-bookings, so appointments would be recorded accurately.\n\nSecond, the clinic can take an opportunity. Clients can book only by phone during opening hours, while a nearby clinic now takes bookings online. An online booking system would let Kellbrook's clients book at any time, so the clinic could keep clients who might otherwise book with its rival.",
+    "mistake": "Naming 'problem' or 'opportunity' earns little on its own. Each reason needs the scenario detail that shows it, and what the software would change.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk01-002",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "commandTerm": "classify",
+    "marks": 3,
+    "prompt": "Merrowvale Freight in Geelong is considering three software projects.\n\n1. Drivers fill in paper delivery dockets, which are often lost, so customers are invoiced weeks late.\n2. The company's insurer will renew its policy only if every truck's pre-trip safety check is recorded electronically. At present drivers record the checks on paper forms, which are complete and accurate.\n3. GPS units already fitted to the trucks could let customers track their deliveries live, a service no local competitor offers.\n\nClassify each project as responding to a problem, a need or an opportunity, and justify each classification.",
+    "points": [
+      {
+        "text": "Project 1: a problem, because the current paper dockets are failing (lost dockets delay invoices)",
+        "marks": 1
+      },
+      {
+        "text": "Project 2: a need, because the company must keep electronic safety-check records to have its insurance renewed, even though the current paper records are complete and accurate",
+        "marks": 1
+      },
+      {
+        "text": "Project 3: an opportunity, because existing GPS technology would let the company offer a new service that gives it an advantage over competitors",
+        "marks": 1
+      }
+    ],
+    "model": "Project 1 responds to a problem. The current paper process is falling short: dockets are lost, so customers are invoiced weeks late.\n\nProject 2 responds to a need. Merrowvale must keep electronic records of its safety checks to have its insurance renewed. The paper records are complete and accurate, so nothing is failing; the company has a requirement it can't yet meet.\n\nProject 3 takes an opportunity. The GPS units already in the trucks would let Merrowvale offer live tracking, a service no local competitor provides.",
+    "mistake": "A classification with no reason from the scenario usually earns no mark. Say what in the scenario makes it a problem, a need or an opportunity.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk02-001",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Quollby Pet Supplies has two shops in Wodonga. Stock levels are kept in a spreadsheet that each shop updates at closing time, so products often sell out during the day without anyone noticing. The owner, Declan, wants staff at both shops to see current stock levels on the shop tablets, and has a budget of $8000. Before analysis begins, the developer, Priya, will prepare a brief.\n\nDescribe **three** features that Priya's brief should document, applying each to Quollby Pet Supplies.",
+    "points": [
+      {
+        "text": "Background or current situation, applied (e.g. two shops in Wodonga; stock kept in a spreadsheet updated only at closing time)",
+        "marks": 1
+      },
+      {
+        "text": "The problem, need or opportunity, applied (e.g. products sell out during the day unnoticed because stock levels aren't current)",
+        "marks": 1
+      },
+      {
+        "text": "The users or stakeholders, applied (e.g. staff at both shops, who will check stock, and the owner, Declan)",
+        "marks": 1
+      },
+      {
+        "text": "What the solution should achieve, applied (e.g. staff at both shops can see current stock levels on the shop tablets)",
+        "marks": 1
+      },
+      {
+        "text": "Known constraints, applied (e.g. a budget of $8000; the solution must run on the existing shop tablets)",
+        "marks": 1
+      }
+    ],
+    "model": "The brief should describe the background: Quollby Pet Supplies runs two shops in Wodonga and records stock in a spreadsheet that each shop updates only at closing time.\n\nIt should state the problem: because stock levels aren't current during the day, products sell out without staff at either shop noticing.\n\nIt should state known constraints: the solution must cost no more than $8000 and must run on the tablets the shops already use.",
+    "mistake": "Listing headings such as 'background' and 'constraints' isn't describing them. Each feature needs the Quollby details it would contain.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk02-002",
+    "kk": [
+      "U3O2-KK02",
+      "U3O2-KK09"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Explain why a brief on its own does not give developers enough information to design and test a solution.",
+    "points": [
+      {
+        "text": "A brief is prepared before analysis, so it describes the context and goals only at a high level; it doesn't set out detailed, precise requirements",
+        "marks": 1
+      },
+      {
+        "text": "Developers need detailed functional and non-functional requirements, constraints and scope, found through data collection and documented in the SRS, to design the solution and test it against",
+        "marks": 1
+      }
+    ],
+    "model": "A brief is prepared at the start of a project, before any data has been collected from stakeholders, so it states the problem and the intended outcome only in broad terms. To design a solution and test whether it works, developers need precise functional and non-functional requirements, constraints and scope. These come from analysis and are documented in the SRS.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk03-001",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "commandTerm": "identify",
+    "marks": 2,
+    "prompt": "Aroha is managing the development of an appointment program for Tarrawin Dental in Mildura. Her Gantt chart is shown, in days.\n\nIdentify the critical path for this project and state the minimum time needed to complete it.",
+    "points": [
+      {
+        "text": "Critical path: Survey patients → Write SRS → SRS approved → Write pseudocode → Develop program → Test program → Handover to client (milestones may be omitted)",
+        "marks": 1
+      },
+      {
+        "text": "Minimum duration: 28 days",
+        "marks": 1
+      }
+    ],
+    "model": "The critical path is Survey patients → Write SRS → SRS approved → Write pseudocode → Develop program → Test program → Handover to client. It is the longest chain of dependent tasks, totalling 6 + 3 + 5 + 10 + 4 = 28 days, so the project needs at least 28 days.",
+    "mistake": "Adding every task's duration (37 days) ignores tasks that run at the same time. Follow the longest chain of dependent tasks instead.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "tarrawin-gantt",
+        "kind": "gantt",
+        "title": "Tarrawin Dental appointment program",
+        "caption": "Write SRS starts when all three data collection tasks have finished. Develop program starts when both design tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "b1",
+            "name": "Interview dentists",
+            "duration": 2,
+            "dependsOn": []
+          },
+          {
+            "id": "b2",
+            "name": "Observe reception",
+            "duration": 3,
+            "dependsOn": []
+          },
+          {
+            "id": "b3",
+            "name": "Survey patients",
+            "duration": 6,
+            "dependsOn": []
+          },
+          {
+            "id": "b4",
+            "name": "Write SRS",
+            "duration": 3,
+            "dependsOn": [
+              "b1",
+              "b2",
+              "b3"
+            ]
+          },
+          {
+            "id": "m1",
+            "name": "SRS approved",
+            "duration": 0,
+            "dependsOn": [
+              "b4"
+            ],
+            "milestone": true
+          },
+          {
+            "id": "b5",
+            "name": "Design mock-ups",
+            "duration": 4,
+            "dependsOn": [
+              "m1"
+            ]
+          },
+          {
+            "id": "b6",
+            "name": "Write pseudocode",
+            "duration": 5,
+            "dependsOn": [
+              "m1"
+            ]
+          },
+          {
+            "id": "b7",
+            "name": "Develop program",
+            "duration": 10,
+            "dependsOn": [
+              "b5",
+              "b6"
+            ]
+          },
+          {
+            "id": "b8",
+            "name": "Test program",
+            "duration": 4,
+            "dependsOn": [
+              "b7"
+            ]
+          },
+          {
+            "id": "m2",
+            "name": "Handover to client",
+            "duration": 0,
+            "dependsOn": [
+              "b8"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk03-002",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Aroha's Gantt chart for Tarrawin Dental's appointment program is shown, in days. Writing the pseudocode ends up taking 7 days instead of the planned 5.\n\nExplain the effect of this delay on the project.",
+    "points": [
+      {
+        "text": "The project finishes 2 days later: 30 days instead of 28",
+        "marks": 1
+      },
+      {
+        "text": "Because Write pseudocode is on the critical path, so Develop program, Test program and the handover all start or occur 2 days later",
+        "marks": 1
+      }
+    ],
+    "model": "Write pseudocode is on the critical path, and Develop program can't start until it has finished. The 2-day delay pushes back Develop program, Test program and the handover to Tarrawin Dental by 2 days each, so the project takes 30 days instead of 28.",
+    "mistake": "Saying the project is 'delayed' isn't enough. State by how much, and explain that it's because the task is on the critical path.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "tarrawin-gantt",
+        "kind": "gantt",
+        "title": "Tarrawin Dental appointment program",
+        "caption": "Write SRS starts when all three data collection tasks have finished. Develop program starts when both design tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "b1",
+            "name": "Interview dentists",
+            "duration": 2,
+            "dependsOn": []
+          },
+          {
+            "id": "b2",
+            "name": "Observe reception",
+            "duration": 3,
+            "dependsOn": []
+          },
+          {
+            "id": "b3",
+            "name": "Survey patients",
+            "duration": 6,
+            "dependsOn": []
+          },
+          {
+            "id": "b4",
+            "name": "Write SRS",
+            "duration": 3,
+            "dependsOn": [
+              "b1",
+              "b2",
+              "b3"
+            ]
+          },
+          {
+            "id": "m1",
+            "name": "SRS approved",
+            "duration": 0,
+            "dependsOn": [
+              "b4"
+            ],
+            "milestone": true
+          },
+          {
+            "id": "b5",
+            "name": "Design mock-ups",
+            "duration": 4,
+            "dependsOn": [
+              "m1"
+            ]
+          },
+          {
+            "id": "b6",
+            "name": "Write pseudocode",
+            "duration": 5,
+            "dependsOn": [
+              "m1"
+            ]
+          },
+          {
+            "id": "b7",
+            "name": "Develop program",
+            "duration": 10,
+            "dependsOn": [
+              "b5",
+              "b6"
+            ]
+          },
+          {
+            "id": "b8",
+            "name": "Test program",
+            "duration": 4,
+            "dependsOn": [
+              "b7"
+            ]
+          },
+          {
+            "id": "m2",
+            "name": "Handover to client",
+            "duration": 0,
+            "dependsOn": [
+              "b8"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk04-001",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Mellowbrook Orchards in Cobram wants an app for seasonal pickers to log each bin of fruit they pick. At present, pickers are paid from paper tally cards, which are sometimes lost or hard to read. The table shows the stakeholder groups.\n\nRecommend a data collection technique for the seasonal pickers and a different technique for the owners, and justify each choice.",
+    "points": [
+      {
+        "text": "Recommends a suitable technique for the pickers: observation, or a short survey of simple closed questions that is translated or uses pictures",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it using the scenario, e.g. observing pickers in the orchard shows how bins are currently tallied and where cards are lost, without relying on written English",
+        "marks": 1
+      },
+      {
+        "text": "Recommends interviews for the owners",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it using the scenario, e.g. there are only two owners, who hold detailed knowledge of pay rates and payroll errors that follow-up questions can draw out",
+        "marks": 1
+      }
+    ],
+    "model": "Observation suits the seasonal pickers. There are about 60 of them working across the orchard, and many speak English as an additional language, so a written survey or long interviews may not work well. Watching pickers fill and tally bins shows how the paper cards are actually used, and where they get lost or become hard to read.\n\nInterviews suit the owners. There are only two owners, and they set pay rates and deal with payroll errors, so they hold detailed knowledge. An interview lets the developer ask follow-up questions about how pay is calculated and what the app must record.",
+    "mistake": "Naming a technique earns only part of the marks. The justification must use details of the group, such as its size, location or language, not a generic advantage.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "mellowbrook-stakeholders",
+        "kind": "table",
+        "title": "Mellowbrook Orchards stakeholder groups",
+        "columns": [
+          "Stakeholder group",
+          "Number",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "Owners",
+            "2",
+            "Set pay rates; want to reduce payroll errors"
+          ],
+          [
+            "Seasonal pickers",
+            "About 60",
+            "Work across the orchard; many speak English as an additional language"
+          ],
+          [
+            "Packing shed supervisors",
+            "3",
+            "Check bins as they arrive at the shed"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk04-002",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "commandTerm": "describe",
+    "marks": 2,
+    "prompt": "Stonyford Medical Centre in Traralgon is replacing its appointment system. The developer plans to observe the five reception staff while they take appointments over two busy mornings.\n\nDescribe one advantage and one disadvantage of using observation to collect data from the reception staff.",
+    "points": [
+      {
+        "text": "An advantage, applied, e.g. the developer sees how appointments are really made, including workarounds and delays staff might not think to mention",
+        "marks": 1
+      },
+      {
+        "text": "A disadvantage, applied, e.g. staff may work differently while being watched; two mornings may not show every kind of appointment; or it shows what staff do but not why",
+        "marks": 1
+      }
+    ],
+    "model": "An advantage is that the developer sees exactly how reception staff make appointments on busy mornings, including workarounds and hold-ups they might not think to mention in an interview.\n\nA disadvantage is that staff may work more carefully, or differently, while they are being watched, so the developer may not see how appointments are usually handled.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk05-001",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "commandTerm": "identify",
+    "marks": 4,
+    "prompt": "Wirra Community Pantry in Sunshine is run by volunteers, many of whom have little computer experience. Volunteers record each client's visit and the items in their food parcel on paper. The pantry wants a program that records visits and produces weekly totals for its funding reports. Volunteers will use the pantry's two donated laptops and, on busy days, their own phones. The pantry's Wi-Fi sometimes drops out.\n\nIdentify **two** functional requirements and **two** non-functional requirements for the pantry's program. State each non-functional requirement so that it could be measured.",
+    "points": [
+      {
+        "text": "A first functional requirement from the scenario, e.g. record each client's visit with the date and the items in their parcel",
+        "marks": 1
+      },
+      {
+        "text": "A second, different functional requirement, e.g. produce weekly totals of visits and items for funding reports",
+        "marks": 1
+      },
+      {
+        "text": "A measurable non-functional requirement, e.g. usability: a new volunteer can record a visit within two minutes after a five-minute demonstration",
+        "marks": 1
+      },
+      {
+        "text": "A second, different measurable non-functional requirement, e.g. portability: the program works in a web browser on the laptops and on Android and iOS phones; or reliability: no visit records are lost when the Wi-Fi drops out",
+        "marks": 1
+      }
+    ],
+    "model": "Functional requirements:\n- The program must record each client visit, including the date and the items in the food parcel.\n- The program must produce a weekly report totalling the visits and items given out, for funding reports.\n\nNon-functional requirements:\n- Usability: a volunteer who has never used the program can record a visit within two minutes after a five-minute demonstration.\n- Reliability: no visit records are lost when the pantry's Wi-Fi drops out; records entered offline are saved once the connection returns.",
+    "mistake": "A non-functional requirement such as 'easy to use' earns less than one with a target that could be checked, such as a time limit for new volunteers.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk05-002",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "commandTerm": "classify",
+    "marks": 4,
+    "prompt": "The table lists four requirements for a court booking app for Mirrim Tennis Club in Kyneton.\n\nClassify each requirement as functional or non-functional. For each non-functional requirement, name the quality it describes.",
+    "points": [
+      {
+        "text": "Requirement 1: functional",
+        "marks": 1
+      },
+      {
+        "text": "Requirement 2: non-functional, portability",
+        "marks": 1
+      },
+      {
+        "text": "Requirement 3: functional",
+        "marks": 1
+      },
+      {
+        "text": "Requirement 4: non-functional, usability",
+        "marks": 1
+      }
+    ],
+    "model": "1. Functional: booking a court is something the app does.\n2. Non-functional (portability): it describes the range of platforms the app runs on.\n3. Functional: sending a reminder is something the app does.\n4. Non-functional (usability): it sets a measurable target for how easily a new member can use the app.",
+    "mistake": "For a non-functional requirement, 'non-functional' alone isn't the full answer here. Name the quality: portability, usability or reliability.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "mirrim-requirements",
+        "kind": "table",
+        "title": "Mirrim Tennis Club court booking app",
+        "columns": [
+          "Requirement",
+          "Description"
+        ],
+        "rows": [
+          [
+            "1",
+            "Members can book a court up to seven days ahead."
+          ],
+          [
+            "2",
+            "The app works on Android and iOS phones and in a web browser."
+          ],
+          [
+            "3",
+            "The app sends a reminder notification one hour before each booking."
+          ],
+          [
+            "4",
+            "A first-time member can complete a booking within two minutes without help."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk06-001",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Sienna is developing a volunteer rostering app for Saltmarsh Point Surf Rescue in Torquay. The club has a $3000 grant for the project, and the app must be ready before patrols start on 1 December. The app must run on the club's two older laptops and on volunteers' own phones.\n\nIdentify **two** constraints on Sienna's project and explain how each could affect the design or development of the app.",
+    "points": [
+      {
+        "text": "Identifies a first constraint from the scenario: the $3000 budget, the 1 December deadline, or having to run on the older laptops and volunteers' phones",
+        "marks": 1
+      },
+      {
+        "text": "Explains how the first constraint affects the design or development, e.g. the $3000 budget rules out paid libraries or hosting, so Sienna uses free tools and low-cost hosting",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second, different constraint from the scenario",
+        "marks": 1
+      },
+      {
+        "text": "Explains how the second constraint affects the design or development, e.g. the older laptops mean a lightweight, browser-based app; or the 1 December deadline means lower-priority features are left out",
+        "marks": 1
+      }
+    ],
+    "model": "One constraint is the $3000 grant. Sienna can't afford paid libraries, paid hosting or extra developers, so she will need free development tools and low-cost hosting, and may have to leave out features that would cost more to build.\n\nAnother constraint is that the app must run on the club's two older laptops and on volunteers' own phones. Sienna will need a lightweight app that runs in a web browser, rather than one that needs powerful hardware or a single operating system, and she must test it on the older laptops and on a range of phones.",
+    "mistake": "Copying a constraint from the scenario earns only the identify mark. The explanation must say what Sienna will do differently because of it.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk06-002",
+    "kk": [
+      "U3O2-KK06",
+      "U3O2-KK05"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Sienna's client wants the statement 'the app must cost no more than $3000 to develop' listed with the app's non-functional requirements.\n\nExplain why this statement is a constraint rather than a non-functional requirement.",
+    "points": [
+      {
+        "text": "A constraint limits the project or the options available to the developer; here it limits the money available for development",
+        "marks": 1
+      },
+      {
+        "text": "A non-functional requirement describes a quality of the finished solution, such as reliability or usability, and development cost is not a quality of the app",
+        "marks": 1
+      }
+    ],
+    "model": "The $3000 limit restricts the project: it limits the money Sienna has, and so the tools, hosting and time she can use to build the app. A non-functional requirement describes a quality the finished app must have, such as how reliable or usable it is, and can be tested in the app itself. The development cost isn't a quality of the app, so the statement is a constraint.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk07-001",
+    "kk": [
+      "U3O2-KK07",
+      "U4O1-KK10"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Talia is developing a rostering app for Pelican Reef Surf Life Saving Club in Warrnambool. The SRS states that the app will roster volunteers onto beach patrols and send patrol reminders, and that it will not manage merchandise or membership payments. Halfway through development, the club president asks Talia to add an online shop for club merchandise.\n\nExplain how the documented scope helps Talia respond to this request.",
+    "points": [
+      {
+        "text": "States that the scope sets out what the app will and will not do, and that merchandise is explicitly excluded",
+        "marks": 1
+      },
+      {
+        "text": "Explains that this lets Talia show the president that the shop is a change to the agreed scope, not part of the current work",
+        "marks": 1
+      },
+      {
+        "text": "Explains that the change should be assessed for its effect on time and cost and agreed, or left for a later version, before any work starts, which prevents scope creep",
+        "marks": 1
+      }
+    ],
+    "model": "The SRS records that the app will roster patrols and send reminders, and that it will not manage merchandise. Because merchandise is listed as outside the scope, Talia can show the president that an online shop isn't part of the work that was agreed.\n\nShe can then treat the shop as a request to change the scope. She assesses how much extra time and cost it would add and whether it would delay the patrol features, and the club decides whether to accept those costs or leave the shop for a later version. This stops the shop from quietly growing the project (scope creep) and putting the patrol roster at risk.",
+    "mistake": "Saying the developer should simply refuse misses the point. The scope lets the request be recognised and assessed as a change; the client can still choose to accept the extra time and cost.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk07-002",
+    "kk": [
+      "U3O2-KK07"
+    ],
+    "commandTerm": "write",
+    "marks": 2,
+    "prompt": "Redgum Flat Tennis Club in Mildura wants an app so that members can book courts online. Court hire will still be paid at the clubhouse, and coaching lessons will continue to be booked through the coach's own system.\n\nWrite **two** scope statements for the app: one stating something the app will do, and one stating something it will not do.",
+    "points": [
+      {
+        "text": "A statement of what the app will do that fits the scenario, e.g. the app will let members book courts online",
+        "marks": 1
+      },
+      {
+        "text": "A statement of what the app will not do that fits the scenario, e.g. the app will not take payments for court hire, or will not book coaching lessons",
+        "marks": 1
+      }
+    ],
+    "model": "The app will allow members to book tennis courts online.\n\nThe app will not process court hire payments, which will continue to be made at the clubhouse.",
+    "mistake": "'The app must be easy to use' isn't a scope statement. It describes a quality of the app (a non-functional requirement), not a boundary on what the app does.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk08-001",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Tallowood Pantry, a food relief charity in Warragul, is having a system developed to manage food parcels. Clients request parcels, suppliers send details of donations, volunteers receive packing lists and the manager receives stock reports. Stock records will be stored within the new system.\n\nThe context diagram drawn for the system is shown. It contains two convention errors.\n\nIdentify **two** errors in the context diagram and explain how each should be corrected.",
+    "points": [
+      {
+        "text": "Identifies that *Stock records* is drawn as an external entity, although it is data stored within the system",
+        "marks": 1
+      },
+      {
+        "text": "Explains the correction: remove *Stock records* and the `stock_update` flow, because a context diagram shows no data stores; stored data sits inside the single process",
+        "marks": 1
+      },
+      {
+        "text": "Identifies that `delivery_roster` flows directly between two external entities, *Supplier* and *Volunteer*",
+        "marks": 1
+      },
+      {
+        "text": "Explains the correction: remove the flow, because data that doesn't pass through the system is outside its boundary (or redraw it so the data passes through the system)",
+        "marks": 1
+      }
+    ],
+    "model": "First, *Stock records* is drawn as an external entity. The stock records will be stored within the new system, so they are a data store inside the system, not a source or destination of data outside it. The *Stock records* box and its `stock_update` flow should be removed, because a context diagram shows no data stores; stored data is hidden inside the single process.\n\nSecond, `delivery_roster` flows directly from *Supplier* to *Volunteer*. That data passes between two external entities without going through the food parcel system, so it is outside the system's boundary. The flow should be removed from the diagram.",
+    "mistake": "Saying 'the arrow is wrong' earns nothing. Name the element or flow, say which convention it breaks, and say how to fix it.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "pantry-context",
+        "kind": "context",
+        "title": "Context diagram: food parcel system",
+        "width": 640,
+        "height": 400,
+        "system": {
+          "label": "Food parcel system",
+          "x": 320,
+          "y": 190
+        },
+        "entities": [
+          {
+            "id": "client",
+            "label": "Client",
+            "x": 104,
+            "y": 90
+          },
+          {
+            "id": "supplier",
+            "label": "Supplier",
+            "x": 104,
+            "y": 300
+          },
+          {
+            "id": "manager",
+            "label": "Manager",
+            "x": 536,
+            "y": 90
+          },
+          {
+            "id": "stock",
+            "label": "Stock records",
+            "x": 536,
+            "y": 300
+          },
+          {
+            "id": "volunteer",
+            "label": "Volunteer",
+            "x": 360,
+            "y": 350
+          }
+        ],
+        "flows": [
+          {
+            "from": "client",
+            "to": "system",
+            "label": "parcel_request",
+            "labelAt": {
+              "x": 184,
+              "y": 166
+            }
+          },
+          {
+            "from": "system",
+            "to": "client",
+            "label": "pickup_time",
+            "via": [
+              {
+                "x": 228,
+                "y": 108
+              }
+            ],
+            "labelAt": {
+              "x": 238,
+              "y": 92
+            }
+          },
+          {
+            "from": "supplier",
+            "to": "system",
+            "label": "donation_details"
+          },
+          {
+            "from": "system",
+            "to": "manager",
+            "label": "stock_report"
+          },
+          {
+            "from": "system",
+            "to": "stock",
+            "label": "stock_update"
+          },
+          {
+            "from": "system",
+            "to": "volunteer",
+            "label": "packing_list"
+          },
+          {
+            "from": "supplier",
+            "to": "volunteer",
+            "label": "delivery_roster"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk08-002",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Paddlesteamer Lane Library in Echuca is having a library app developed. Every time a member borrows an item, the app checks that their membership is current. Members who have overdue items must pay the fine before they can borrow. Part of the use case diagram is shown.\n\nExplain why *Check membership* is linked to *Borrow item* with an <<includes>> relationship, while *Pay overdue fine* is linked to *Borrow item* with an <<extends>> relationship. Refer to the library in your answer.",
+    "points": [
+      {
+        "text": "States that <<includes>> means the included use case is always carried out as part of the base use case",
+        "marks": 1
+      },
+      {
+        "text": "Applies it: membership is checked every time a member borrows an item",
+        "marks": 1
+      },
+      {
+        "text": "States that <<extends>> means the extending use case adds behaviour that happens only under a certain condition",
+        "marks": 1
+      },
+      {
+        "text": "Applies it: a fine is paid only when the member has overdue items, so most loans don't involve it",
+        "marks": 1
+      }
+    ],
+    "model": "An <<includes>> relationship means the included use case is carried out every time the base use case runs. Whenever a member borrows an item, the app must check that their membership is current, so *Check membership* is always part of *Borrow item*.\n\nAn <<extends>> relationship means the extending use case adds optional behaviour that happens only when a condition is met. A member pays an overdue fine only if they have overdue items when they borrow, so most loans run without it. That makes *Pay overdue fine* an extension of *Borrow item*.",
+    "mistake": "The difference isn't how important the step is. It is whether the step happens every time (includes) or only under a condition (extends).",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "library-usecase",
+        "kind": "usecase",
+        "title": "Use case diagram (part): library app",
+        "width": 640,
+        "height": 400,
+        "system": {
+          "label": "Library app",
+          "x": 340,
+          "y": 200,
+          "w": 360,
+          "h": 330
+        },
+        "actors": [
+          {
+            "id": "member",
+            "label": "Member",
+            "x": 72,
+            "y": 200
+          },
+          {
+            "id": "librarian",
+            "label": "Librarian",
+            "x": 580,
+            "y": 270
+          }
+        ],
+        "useCases": [
+          {
+            "id": "borrow",
+            "label": "Borrow item",
+            "x": 250,
+            "y": 100,
+            "rx": 70
+          },
+          {
+            "id": "check",
+            "label": "Check membership",
+            "x": 430,
+            "y": 100,
+            "rx": 70
+          },
+          {
+            "id": "fine",
+            "label": "Pay overdue fine",
+            "x": 250,
+            "y": 210,
+            "rx": 70
+          },
+          {
+            "id": "reserve",
+            "label": "Reserve item",
+            "x": 250,
+            "y": 310,
+            "rx": 70
+          },
+          {
+            "id": "add",
+            "label": "Add new item",
+            "x": 430,
+            "y": 270,
+            "rx": 70
+          }
+        ],
+        "links": [
+          {
+            "from": "member",
+            "to": "borrow",
+            "type": "association"
+          },
+          {
+            "from": "member",
+            "to": "reserve",
+            "type": "association"
+          },
+          {
+            "from": "borrow",
+            "to": "check",
+            "type": "includes",
+            "labelAt": {
+              "x": 340,
+              "y": 58
+            }
+          },
+          {
+            "from": "fine",
+            "to": "borrow",
+            "type": "extends",
+            "labelAt": {
+              "x": 312,
+              "y": 155
+            }
+          },
+          {
+            "from": "librarian",
+            "to": "add",
+            "type": "association"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk09-001",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Hamish is leading the development of a bin-tracking program for Redbrick Orchards in Cobram. The SRS has just been approved by the orchard's manager. Among other things, it states that pickers must be able to record each full bin on the orchard's existing Android phones, that the program must keep working in parts of the orchard with no mobile coverage, and that the manager must receive a daily report of the bins picked by each picker.\n\nExplain **two** ways the SRS will be used later in the project. Refer to the orchard's program in your answer.",
+    "points": [
+      {
+        "text": "Identifies a first use, e.g. designers use the SRS to plan a solution that meets its requirements and constraints",
+        "marks": 1
+      },
+      {
+        "text": "Applies the first use to the scenario, e.g. designing the bin-recording screen for the existing Android phones and planning how records are kept when there is no coverage",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second, different use, e.g. test cases are written from the SRS, or the finished program is evaluated against it",
+        "marks": 1
+      },
+      {
+        "text": "Applies the second use to the scenario, e.g. a test that records bins with no coverage and checks none are lost, or checking that the daily report totals bins for each picker",
+        "marks": 1
+      }
+    ],
+    "model": "First, the SRS guides design. The designers will plan screens and data storage that meet each requirement and constraint, for example designing the bin-recording screen for the orchard's existing Android phones, and planning how bin records are kept on the phone until it is back in coverage.\n\nSecond, the SRS is the basis for testing. Test cases will be written from its requirements, such as recording bins in an area with no coverage and checking that none are lost once the phone reconnects, and checking that the daily report correctly totals the bins for each picker.",
+    "mistake": "Saying the SRS is 'used for design' earns only one mark. Say what the designers or testers will do with it for this program.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk09-002",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Heron Bay Dental in Bairnsdale is having a self check-in kiosk developed for its waiting room. Patients range in age from 18 to over 90, and some have low vision or have rarely used a touchscreen. Reception staff will use the same system to see who has arrived.\n\nExplain why the SRS should describe the intended users of the kiosk. Refer to the clinic in your answer.",
+    "points": [
+      {
+        "text": "States that describing the users lets designers match the interface to the users' abilities, experience and needs",
+        "marks": 1
+      },
+      {
+        "text": "Applies it to the clinic, e.g. older patients with low vision or little touchscreen experience need large text, strong contrast, large buttons and few, simple steps",
+        "marks": 1
+      },
+      {
+        "text": "Explains a further use, e.g. testing or evaluation can involve representative users, such as patients across the age range, to check the kiosk is usable for them",
+        "marks": 1
+      }
+    ],
+    "model": "Describing the intended users tells designers who they are designing for, so the interface can match the users' abilities and experience. At Heron Bay Dental the users include patients over 90, some with low vision and little touchscreen experience, so the kiosk will need large text, strong contrast, large buttons and only a few simple steps to check in.\n\nThe description also guides testing. The developer can test the kiosk with patients from across the age range, including older patients, to check that they can check in without help.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk10-001",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Dusky Road Driving School in Wodonga is having a booking program developed. Learners will enter their name, date of birth, address, phone number and learner permit number, and instructors will add notes after each lesson.\n\nExplain **two** features the program should have to protect the privacy of learners' personal information. Refer to the driving school in your answer.",
+    "points": [
+      {
+        "text": "Identifies a first feature, e.g. a login for each staff member, with each instructor able to see only their own learners' records",
+        "marks": 1
+      },
+      {
+        "text": "Explains how the first feature protects the learners' personal information in this program",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second, different feature, e.g. encrypting stored records, collecting only the details needed, letting learners view and correct their details, or deleting records when no longer needed",
+        "marks": 1
+      },
+      {
+        "text": "Explains how the second feature protects the learners' personal information in this program",
+        "marks": 1
+      }
+    ],
+    "model": "First, the program should require each instructor and office worker to log in, and show each instructor only the learners they teach. Learner permit numbers, addresses and lesson notes could then be seen only by staff who need them, not by anyone who can reach the office computer.\n\nSecond, the program should encrypt the stored learner records. If the database or a backup were stolen, the names, dates of birth and permit numbers would be unreadable without the key, so the learners' identities couldn't easily be misused.",
+    "mistake": "'Keep the data safe' earns nothing on its own. Name a specific feature and explain how it protects the learners' information in this program.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk10-002",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Blackwood Reach Rowing Club in Nagambie hires Farah, a freelance developer, to build a program for booking boats. The club assumes it will own the code because it is paying for the program. Farah's contract does not mention ownership of the code.\n\nExplain who owns the copyright in Farah's code, and how the club could have secured ownership.",
+    "points": [
+      {
+        "text": "States that Farah owns the copyright in the code",
+        "marks": 1
+      },
+      {
+        "text": "Explains why: the author owns copyright unless the code is written by an employee as part of their job or assigned in writing, and Farah is a contractor whose contract assigns nothing",
+        "marks": 1
+      },
+      {
+        "text": "Explains that the club should have included a written clause in the contract assigning copyright in the code to the club",
+        "marks": 1
+      }
+    ],
+    "model": "Farah owns the copyright in the code. Copyright belongs to the person who writes the code, unless they write it as an employee as part of their job or transfer it in writing. Farah is a freelance contractor, not a club employee, and her contract doesn't transfer the copyright, so paying for the program doesn't make the club the owner.\n\nTo secure ownership, the club should have included a clause in the written contract, signed by Farah, assigning the copyright in the code to the club.",
+    "mistake": "Paying for software isn't the same as owning its copyright. Unless the developer is an employee, ownership passes to the client only through a written assignment.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk11-001",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Ari and Sione are developing a booking app for Seahorse Cove Dive School in Queenscliff. They keep all of the project files in one folder on Ari's laptop, with names such as `app.py`, `app_new.py`, `app_final.py` and `app_final2.py`. They have never backed up the files, and last week Sione accidentally saved over a working version of the code.\n\nRecommend **two** file management practices the team should adopt. Justify each recommendation with reference to the scenario.",
+    "points": [
+      {
+        "text": "Recommends a first practice, e.g. version control, or a consistent naming convention with version numbers",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it with reference to the scenario, e.g. names such as `app_final2.py` don't show which file is current, and keeping versions would have let Sione restore the working code",
+        "marks": 1
+      },
+      {
+        "text": "Recommends a second, different practice, e.g. regular backups with a copy kept away from the laptop, off-site or in cloud storage",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it with reference to the scenario, e.g. every file is on Ari's laptop, so its failure, loss or theft would destroy the whole project",
+        "marks": 1
+      }
+    ],
+    "model": "First, the team should use version control, with version numbers such as `booking_v1.3.py` instead of names like `app_final2.py`. At the moment neither developer can tell which file is current, and when Sione saved over the working code there was no earlier version to go back to. With each change kept as a new version, they could restore the last working version and see what changed.\n\nSecond, they should back up the project every day and keep at least one copy away from Ari's laptop, such as in cloud storage or on a drive kept at another location. All of the dive school's project files are on one laptop, so if it failed, was lost or was stolen, the whole project would be gone.",
+    "mistake": "Recommending 'back up the files' without saying where the copy is kept, or how it solves this team's problem, earns only part of the marks.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk11-002",
+    "kk": [
+      "U3O2-KK11",
+      "U3O2-KK10"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Nikita tested a new appointments program for Bluegum Veterinary Hospital in Kyneton using a copy of real client records, including owners' names, phone numbers and addresses. The copy is stored on a USB drive. Testing is now finished.\n\nExplain why the test data must be securely disposed of, and describe one suitable method.",
+    "points": [
+      {
+        "text": "Explains the risk: the drive holds clients' personal information, which could be seen or misused if the drive is lost or reused",
+        "marks": 1
+      },
+      {
+        "text": "Explains that deleting the files isn't enough, because deleted data can often be recovered",
+        "marks": 1
+      },
+      {
+        "text": "Describes a suitable method, e.g. overwriting the whole drive with data-wiping software, or physically destroying the USB drive",
+        "marks": 1
+      }
+    ],
+    "model": "The USB drive holds the personal information of the hospital's clients: names, phone numbers and addresses. Testing is over, so this copy is no longer needed, and keeping it risks the drive being lost or reused and the information being seen or misused, breaching the clients' privacy. Simply deleting the files isn't enough, because deleted files can often be recovered with free tools.\n\nNikita should run data-wiping software that overwrites the entire drive, or physically destroy the drive, for example by shredding it, so that the data can't be recovered.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk12-001",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "commandTerm": "describe",
+    "marks": 4,
+    "prompt": "Ngaire is generating design ideas for a ticketing app for Redgum Youth Theatre in Warrnambool. The app must let families choose a show and buy tickets, and the theatre wants the app to reflect its bold, playful posters.\n\nDescribe how Ngaire could use **two** different ideation techniques or tools to generate design ideas for the app.",
+    "points": [
+      {
+        "text": "Names a first ideation technique or tool (e.g. brainstorming, mind map, mood board or sketches)",
+        "marks": 1
+      },
+      {
+        "text": "Describes how it would be used for the Redgum app, e.g. a mood board of the theatre's posters, colours and fonts to set a bold, playful style",
+        "marks": 1
+      },
+      {
+        "text": "Names a second, different ideation technique or tool",
+        "marks": 1
+      },
+      {
+        "text": "Describes how it would be used for the Redgum app, e.g. sketches of alternative ticket-buying screens to compare layouts, or a brainstorm with theatre staff to list what families need",
+        "marks": 1
+      }
+    ],
+    "model": "Ngaire could create a mood board. She would collect images from the theatre's posters, swatches of their bold colours and samples of playful fonts, and arrange them on one page. This lets her and the theatre agree on the look and feel of the app before any screens are designed.\n\nShe could also sketch several alternative layouts for the ticket-buying screen, for example one built around a calendar of shows and one built around a list of show posters. Quick sketches let her explore and compare different ways families could choose a show and buy tickets before she commits to one design.",
+    "mistake": "Naming a technique earns at most one mark. Each technique needs a description of how it would be used for this app.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk12-002",
+    "kk": [
+      "U3O2-KK12",
+      "U3O2-KK13"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Arjun is designing an inventory program for Tallis Bike Hire in Bright. He produced one design idea and went straight to mock-ups and pseudocode for it.\n\nExplain why Arjun should have generated more than one design idea, and how he would then choose between them.",
+    "points": [
+      {
+        "text": "Explains that alternatives can be compared, so a better design is less likely to be missed than when the first idea is used",
+        "marks": 1
+      },
+      {
+        "text": "States that each design idea is evaluated against evaluation criteria based on the requirements",
+        "marks": 1
+      },
+      {
+        "text": "States that the idea that best meets the criteria becomes the preferred design, which is then developed into the detailed design",
+        "marks": 1
+      }
+    ],
+    "model": "With only one design idea, Arjun had nothing to compare it with, so a design that better suited Tallis Bike Hire's staff could have been missed. He should have generated two or three alternative ideas, for example different layouts for recording a bike's return. He would then evaluate each idea against evaluation criteria drawn from the program's requirements, such as how quickly staff can record a hire. The idea that best meets the criteria becomes the preferred design, and only then should he produce mock-ups and pseudocode for it.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk13-001",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "commandTerm": "propose",
+    "marks": 4,
+    "prompt": "Crestmoor Medical Clinic in Bendigo is designing a self check-in kiosk. Patients will enter their name and date of birth, confirm their appointment, and be told how many patients are ahead of them. The clinic wants check-in to be quicker than queuing at reception, and wants every check-in matched to the right appointment.\n\nPropose **two** evaluation criteria for the kiosk, one for efficiency and one for effectiveness. For each criterion, state how it could be measured.",
+    "points": [
+      {
+        "text": "An efficiency criterion that is specific and measurable, e.g. a patient can complete check-in in under 60 seconds",
+        "marks": 1
+      },
+      {
+        "text": "How it could be measured, e.g. timing a sample of patients checking in and comparing with the time spent queuing at reception",
+        "marks": 1
+      },
+      {
+        "text": "An effectiveness criterion that is specific and checkable, e.g. every check-in is matched to the correct patient's appointment",
+        "marks": 1
+      },
+      {
+        "text": "How it could be measured, e.g. comparing a week of kiosk check-ins with the appointment records and counting mismatches",
+        "marks": 1
+      }
+    ],
+    "model": "Efficiency: a patient can complete check-in at the kiosk in under 60 seconds. This could be measured by timing a sample of patients as they check in over a week and comparing the times with how long patients previously spent queuing at reception.\n\nEffectiveness: every check-in is matched to the correct patient's appointment. This could be measured by comparing a week of kiosk check-ins with the clinic's appointment records and counting any check-ins matched to the wrong appointment, with a target of none.",
+    "mistake": "Criteria such as \"the kiosk is fast\" or \"the kiosk works well\" can't be measured. Give a figure or a condition that can be checked.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk13-002",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Poppy is designing a lost-property app for Sandpiper Beach Surf Club in Torquay. One requirement is that a volunteer on patrol can log a found item, with a photo and a description. Poppy's draft evaluation criterion is: \"The app is good for volunteers.\"\n\nExplain why this criterion is unsuitable, and rewrite it so that it could be used to evaluate the app.",
+    "points": [
+      {
+        "text": "Explains that \"good\" is vague and can't be measured, so different evaluators could reach different judgements",
+        "marks": 1
+      },
+      {
+        "text": "Explains that it doesn't identify which requirement, or which aspect of efficiency or effectiveness, is being judged",
+        "marks": 1
+      },
+      {
+        "text": "Rewrites the criterion so it is specific, measurable and tied to the logging requirement, e.g. a volunteer can log a found item with a photo and description in under one minute",
+        "marks": 1
+      }
+    ],
+    "model": "\"Good\" can't be measured, so two people evaluating the app could reach different conclusions, and neither could show that the criterion had been met. The criterion also doesn't say which requirement it tests, or whether it concerns efficiency or effectiveness. A better criterion is: \"A volunteer on patrol can log a found item, including a photo and a description, in under one minute.\" This ties the criterion to the logging requirement, and it can be checked by timing volunteers as they log items.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk14-001",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "commandTerm": "complete",
+    "marks": 4,
+    "prompt": "Harbourline Parking in Geelong charges $4.50 for each hour parked, up to a maximum of $22.00 for a day. Mereana is designing a module that receives the number of whole hours a car was parked, calculates the parking fee and displays it.\n\nComplete the IPO chart for this module.",
+    "points": [
+      {
+        "text": "Input: the number of hours parked (e.g. `hoursParked`)",
+        "marks": 1
+      },
+      {
+        "text": "Processing: multiply the hours parked by $4.50",
+        "marks": 1
+      },
+      {
+        "text": "Processing: if the result is more than $22.00, set the fee to $22.00",
+        "marks": 1
+      },
+      {
+        "text": "Output: the parking fee, displayed (e.g. `parkingFee`)",
+        "marks": 1
+      }
+    ],
+    "model": "| Input | Processing | Output |\n|:--|:--|:--|\n| hoursParked | Multiply hoursParked by 4.50 to get parkingFee. If parkingFee is more than 22.00, set parkingFee to 22.00. | parkingFee (displayed) |",
+    "mistake": "Putting the $4.50 rate or the $22.00 cap in the Output column, or writing \"calculate fee\" as an output. The output is the fee itself; the calculation and the cap are processing.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "parking-ipo-blank",
+        "kind": "table",
+        "title": "IPO chart: parking fee",
+        "columns": [
+          "Input",
+          "Processing",
+          "Output"
+        ],
+        "rows": [
+          [
+            "",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk14-002",
+    "kk": [
+      "U3O2-KK14",
+      "U3O1-KK07"
+    ],
+    "commandTerm": "complete",
+    "marks": 4,
+    "prompt": "Tran is designing a car-share program for Lowan Car Share in Traralgon. For each car, the program must record its registration, its hourly hire rate and whether it is currently available. When a member books a car for a number of hours, the program must work out the cost of the booking.\n\nComplete the object description below for a `Car` object. Include **three** properties, each with a suitable data type, and **one** method.",
+    "points": [
+      {
+        "text": "A property for the registration with a suitable data type, e.g. registration: String",
+        "marks": 1
+      },
+      {
+        "text": "A property for the hourly rate with a suitable data type, e.g. hourlyRate: Floating point",
+        "marks": 1
+      },
+      {
+        "text": "A property for availability with a suitable data type, e.g. isAvailable: Boolean",
+        "marks": 1
+      },
+      {
+        "text": "A suitable method that is an action on the car, e.g. calculateCost(hours) returning hours multiplied by hourlyRate",
+        "marks": 1
+      }
+    ],
+    "model": "| Element | Name | Data type or description |\n|:--|:--|:--|\n| Property | registration | String |\n| Property | hourlyRate | Floating point |\n| Property | isAvailable | Boolean |\n| Method | calculateCost(hours) | Returns hours multiplied by hourlyRate |",
+    "mistake": "Listing an action such as calculateCost as a property, or giving a property with no data type. Properties are data and need a type; methods are actions.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "car-object-blank",
+        "kind": "table",
+        "title": "Object description: Car",
+        "columns": [
+          "Element",
+          "Name",
+          "Data type or description"
+        ],
+        "rows": [
+          [
+            "Property",
+            "",
+            ""
+          ],
+          [
+            "Property",
+            "",
+            ""
+          ],
+          [
+            "Property",
+            "",
+            ""
+          ],
+          [
+            "Method",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk15-001",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Broken Creek Water Co-operative in Numurkah is developing an app that lets farmers order irrigation water. Farmers will use the app on their phones while working outdoors, and each order must be sent to the co-operative's existing scheduling system.\n\nExplain how the app's design could address **affordance** and **interoperability**. Refer to the scenario in your answer.",
+    "points": [
+      {
+        "text": "Affordance: describes a design feature whose appearance shows how it is used, e.g. a large, shaded \"Order water\" button that looks pressable",
+        "marks": 1
+      },
+      {
+        "text": "Explains the benefit for farmers, e.g. working quickly on a phone outdoors, they can see at a glance what to tap, reducing mistakes",
+        "marks": 1
+      },
+      {
+        "text": "Interoperability: the app sends orders in a format the existing scheduling system can read",
+        "marks": 1
+      },
+      {
+        "text": "Explains the benefit, e.g. orders reach the schedule without being retyped by staff, avoiding delays and copying errors",
+        "marks": 1
+      }
+    ],
+    "model": "Affordance: the order button should look clearly pressable, for example a large, shaded button labelled \"Order water\", and the quantity control should look like something that can be adjusted. Farmers using a phone outdoors can then see immediately what to tap, so they can place orders quickly and without mistakes.\n\nInteroperability: the app should send each order to the co-operative's scheduling system in a format that system can already read, using the same fields it uses now. Orders then flow straight into the schedule without staff retyping them, which avoids delays and copying errors.",
+    "mistake": "Defining affordance and interoperability without saying what the app would do earns few marks. Each answer needs a design feature for this app and its benefit to the farmers or the co-operative.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk15-002",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Merricks Lane Pharmacy in Mornington is designing an app that lets customers reorder their regular prescriptions. The pharmacist wants customers to enter a password and a one-time code every time they open the app.\n\nExplain how this decision would affect **two** user experience characteristics, and suggest one way the design could balance them.",
+    "points": [
+      {
+        "text": "Security is strengthened: with a one-time code, someone who has a customer's password still can't see their prescription details",
+        "marks": 1
+      },
+      {
+        "text": "Usability is reduced: entering a password and a code every time adds steps and effort to each reorder",
+        "marks": 1
+      },
+      {
+        "text": "Suggests a suitable balance, e.g. asking for the code only on a new device, or allowing fingerprint sign-in on a trusted phone",
+        "marks": 1
+      }
+    ],
+    "model": "Security would improve. Prescription details are sensitive health information, and requiring a one-time code as well as a password means someone who has stolen or guessed a customer's password still can't see or change their prescriptions. Usability would suffer, because customers must type a password and wait for a code every time they open the app, just to reorder a regular medicine. To balance these, the app could ask for the one-time code only when a customer signs in on a new phone, and allow fingerprint sign-in on a phone it already trusts.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk16-001",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Hollis Library in Horsham is designing a self-checkout kiosk. Borrowers range from young children to older adults, and the kiosk will sit beside a large, bright window.\n\nExplain how the designer could apply **contrast** and **consistency** in the kiosk's interface. Refer to the scenario in your answer.",
+    "points": [
+      {
+        "text": "Contrast: a specific application, e.g. dark text on a light background, or a large \"Check out\" button in a strong colour that stands out from other controls",
+        "marks": 1
+      },
+      {
+        "text": "Explains why it suits the scenario, e.g. text stays readable in glare from the window and for older borrowers with weaker eyesight, and children can find the main action",
+        "marks": 1
+      },
+      {
+        "text": "Consistency: a specific application, e.g. the \"Back\" and \"Finish\" buttons keep the same position, label and colour on every screen",
+        "marks": 1
+      },
+      {
+        "text": "Explains why it suits the scenario, e.g. occasional users of all ages can predict where to tap on each screen instead of searching, so they make fewer mistakes",
+        "marks": 1
+      }
+    ],
+    "model": "Contrast: the kiosk should use dark text on a light background, and make the main action, \"Check out\", a large button in a strong colour that stands apart from everything else on the screen. Beside a bright window, low-contrast text would be washed out by glare, and older borrowers with weaker eyesight need text that stands out clearly, while children can see at once which button to press.\n\nConsistency: the \"Back\" and \"Finish\" buttons should sit in the same place, with the same labels and colours, on every screen, and the same wording should be used throughout. Children and older adults who use the kiosk only occasionally can then predict where to tap on each screen instead of searching, so they finish checking out quickly and with fewer mistakes.",
+    "mistake": "Defining contrast and consistency without applying them to the kiosk earns few marks. Name a specific design choice and link it to the borrowers or the bright window.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk16-002",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "The mock-up below shows two consecutive screens from a booking app for Corella Kayak Tours in Echuca. Annotations give each button's colour.\n\nIdentify the design principle that the two screens most clearly fail to apply, and explain one change that would fix the problem.",
+    "points": [
+      {
+        "text": "Identifies consistency",
+        "marks": 1
+      },
+      {
+        "text": "Describes a change, e.g. use the same label, colour and position (such as a green \"Next\" button at bottom right) for the move-forward button on every screen",
+        "marks": 1
+      },
+      {
+        "text": "Explains the benefit, e.g. users learn once where to tap to move on, so they don't have to search and are less likely to tap the wrong control",
+        "marks": 1
+      }
+    ],
+    "model": "The screens fail to apply consistency. The button that moves to the next step is a green \"Next\" button at the bottom right of Screen 1, but an orange \"Continue\" button at the bottom left of Screen 2. The designer should use the same button on every screen, for example a green \"Next\" button at the bottom right. Users then learn once where to tap to move forward, so they don't have to search for the button on each new screen and are less likely to tap the wrong control.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "kayak-two-screens",
+        "kind": "mockup",
+        "title": "Mock-up: two booking screens",
+        "width": 640,
+        "height": 400,
+        "elements": [
+          {
+            "type": "window",
+            "x": 160,
+            "y": 200,
+            "w": 272,
+            "h": 352,
+            "text": "Screen 1"
+          },
+          {
+            "type": "heading",
+            "x": 160,
+            "y": 72,
+            "w": 208,
+            "h": 28,
+            "text": "Choose a tour"
+          },
+          {
+            "type": "list",
+            "x": 160,
+            "y": 172,
+            "w": 208,
+            "h": 120,
+            "text": "Morning paddle, Sunset paddle, Full-day trip"
+          },
+          {
+            "type": "button",
+            "x": 220,
+            "y": 320,
+            "w": 88,
+            "h": 36,
+            "text": "Next",
+            "note": "Green button"
+          },
+          {
+            "type": "window",
+            "x": 480,
+            "y": 200,
+            "w": 272,
+            "h": 352,
+            "text": "Screen 2"
+          },
+          {
+            "type": "heading",
+            "x": 480,
+            "y": 72,
+            "w": 208,
+            "h": 28,
+            "text": "Your details"
+          },
+          {
+            "type": "label",
+            "x": 400,
+            "y": 132,
+            "w": 72,
+            "h": 24,
+            "text": "Name"
+          },
+          {
+            "type": "textbox",
+            "x": 522,
+            "y": 132,
+            "w": 136,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 400,
+            "y": 184,
+            "w": 72,
+            "h": 24,
+            "text": "Phone"
+          },
+          {
+            "type": "textbox",
+            "x": 522,
+            "y": 184,
+            "w": 136,
+            "h": 28
+          },
+          {
+            "type": "button",
+            "x": 416,
+            "y": 320,
+            "w": 104,
+            "h": 36,
+            "text": "Continue",
+            "note": "Orange button"
+          }
+        ]
+      }
+    ]
+  }
+]

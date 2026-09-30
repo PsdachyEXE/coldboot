@@ -768,3 +768,19 @@ Bar characters: '#' for critical tasks, '=' for other tasks, '.' for slack up to
 **Reason.** `ls` prints this order, and deskcheck is the flagship.
 
 **Rejected.** Appending the new games after sort and search.
+
+## D-093 Floors enforced everywhere again
+
+**Decision.** Supersedes D-009. With Phase 1 content in (503 cards including 75 glossary cards, 221 MCQs, 104 short answers and one case study, all floors met), branch CI enforces the floors in both the tests and `content:check`, exactly as the deploy does.
+
+**Reason.** The relaxation existed only while content was being authored.
+
+**Rejected.** Keeping the warn mode on branches, which would let a later content change drop a KK below its floor unnoticed until deploy.
+
+## D-094 Content authoring in fragments with a separate review
+
+**Decision.** Content was written as 13 fragment files outside the repository (one per group of KKs, plus the glossary, the PSM and case study 1), checked with `scripts/content-parts.ts check`, reviewed item by item by a second agent, and merged with `scripts/content-parts.ts merge`. Reviewers logged every drop and every held-back topic, and those logs make up `docs/CONTENT_NOTES.md`.
+
+**Reason.** Parallel authors editing the same JSON files would conflict, and Section 8.3 requires a separate review pass.
+
+**Rejected.** One author per outcome writing straight into the content files, which would have been slower and left no second pair of eyes on each item.

@@ -1,0 +1,1049 @@
+[
+  {
+    "id": "t-abstraction",
+    "kk": [
+      "TERMS",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "abstraction",
+    "back": "Reducing complexity by representing only the details that matter for the problem and hiding the rest. For example, a `Student` class stores a name and student ID but not shoe size, and other code can call its methods without knowing how they work inside.",
+    "mistake": "Abstraction isn't the same as encapsulation. Abstraction decides which details to show; encapsulation bundles data with its methods and restricts direct access to that data.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-access-modifier",
+    "kk": [
+      "TERMS",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "access modifier",
+    "back": "A keyword, such as `public`, `private` or `protected`, that sets which other code can see and use a class's attributes and methods.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "access specifier"
+    ]
+  },
+  {
+    "id": "t-affordance",
+    "kk": [
+      "TERMS",
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "affordance",
+    "back": "A property of an interface element that signals how it can be used, such as a raised button that looks pressable or underlined text that looks clickable.",
+    "mistake": "Affordance has nothing to do with cost (\"affordable\"). It is about how obvious an element's use is from the way it looks.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-algorithm",
+    "kk": [
+      "TERMS",
+      "U3O1-KK12"
+    ],
+    "type": "reverse",
+    "front": "algorithm",
+    "back": "A finite, ordered set of precise steps that solves a problem or completes a task. It can be written as pseudocode before it is coded in any programming language.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-alpha-testing",
+    "kk": [
+      "TERMS",
+      "U4O1-KK06"
+    ],
+    "type": "reverse",
+    "front": "alpha testing",
+    "back": "Testing carried out by the developers (or others on the development team) during development, before the solution is released to users, to find and fix errors.",
+    "mistake": "Alpha testing is done by the developers; beta testing is done by real or representative users. Who does the testing, and when, is what separates them.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-api",
+    "kk": [
+      "TERMS",
+      "U4O1-KK04"
+    ],
+    "type": "reverse",
+    "front": "API",
+    "back": "A defined set of rules and functions that lets one program request data or services from another program or service without needing to know how it works internally, such as a mapping service that returns travel times.",
+    "mistake": "Don't assume an external API will always stay the same or stay available. If the provider changes it, starts charging or revokes access, the features that depend on it can stop working.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "application programming interface"
+    ]
+  },
+  {
+    "id": "t-array",
+    "kk": [
+      "TERMS",
+      "U3O1-KK05"
+    ],
+    "type": "reverse",
+    "front": "array",
+    "back": "A data structure that stores a collection of elements of the same data type under one name, with each element reached by an integer index (in a two-dimensional array, by a row index and a column index).",
+    "mistake": "Don't assume the first index is 1. In a zero-based array of 10 elements the indices run from 0 to 9, so `scores[10]` is out of range. Always check the stated index base.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-authentication",
+    "kk": [
+      "TERMS",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "authentication",
+    "back": "Confirming that a user or device is who or what it claims to be, using something the user knows (a password), has (a phone or security key) or is (a biometric such as a fingerprint).",
+    "mistake": "Authentication confirms identity. Authorisation is the separate step that decides what an identified user is allowed to access.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-backup",
+    "kk": [
+      "TERMS",
+      "U3O2-KK11"
+    ],
+    "type": "reverse",
+    "front": "backup",
+    "back": "A copy of files or data kept separately from the originals, ideally off-site or in the cloud, so the data can be restored if the originals are lost, damaged or corrupted.",
+    "mistake": "A backup stored on the same device as the originals is lost along with them. Keep backups separate, and test that they can actually be restored.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "back-up"
+    ]
+  },
+  {
+    "id": "t-beta-testing",
+    "kk": [
+      "TERMS",
+      "U4O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "beta testing",
+    "back": "Testing of a nearly finished solution by a selected group of real or representative users in realistic conditions, to find remaining errors and gather feedback before the final release.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-binary-search",
+    "kk": [
+      "TERMS",
+      "U3O1-KK12"
+    ],
+    "type": "reverse",
+    "front": "binary search",
+    "back": "A search of sorted data that compares the target with the middle element, discards the half that can't contain the target, and repeats on the remaining half until the target is found or no elements remain.",
+    "mistake": "Binary search only works if the data is already sorted. On unsorted data, use a linear search or sort the data first.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-camel-case",
+    "kk": [
+      "TERMS",
+      "U3O1-KK09"
+    ],
+    "type": "reverse",
+    "front": "camel case",
+    "back": "A naming convention that joins words without spaces, writing the first word in lower case and starting each later word with a capital letter, such as `totalCost`.",
+    "mistake": "`TotalCost`, with a capital first letter, is Pascal case (sometimes called upper camel case). Camel case in its usual sense starts in lower case: `totalCost`.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "camelCase",
+      "camel casing"
+    ]
+  },
+  {
+    "id": "t-class",
+    "kk": [
+      "TERMS",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "class",
+    "back": "A template (blueprint) that defines the attributes and methods that every object of that type will have. Objects are created from it.",
+    "mistake": "A class isn't an object. `Dog` is the class; `rex` and `bella` are two objects (instances) of it, each holding its own attribute values.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-code-repository",
+    "kk": [
+      "TERMS",
+      "U4O1-KK04"
+    ],
+    "type": "reverse",
+    "front": "code repository",
+    "back": "A central storage location for a project's source code and its full history of changes, often hosted online, that lets a team share, track and manage code using version control.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "repository",
+      "repo"
+    ]
+  },
+  {
+    "id": "t-code-review",
+    "kk": [
+      "TERMS",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "code review",
+    "back": "A systematic check of source code by developers other than its author, usually before it is merged or released, to find errors, security weaknesses and departures from coding standards.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-constraint",
+    "kk": [
+      "TERMS",
+      "U3O2-KK06"
+    ],
+    "type": "reverse",
+    "front": "constraint",
+    "back": "A condition or limit that the solution must be developed within, such as a fixed budget (economic), privacy law (legal) or having to run on existing hardware (technical).",
+    "mistake": "A constraint is a limit the solution must work within, such as a budget or a law, not a task the solution performs, so it doesn't belong in the functional requirements.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-context-diagram",
+    "kk": [
+      "TERMS",
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "context diagram",
+    "back": "A top-level diagram that shows the whole system as a single process, the external entities that interact with it, and the labelled data flows between the entities and the system.",
+    "mistake": "A context diagram shows no data stores and no internal processes. Those belong in a data flow diagram.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-control-structure",
+    "kk": [
+      "TERMS",
+      "U3O1-KK08"
+    ],
+    "type": "reverse",
+    "front": "control structure",
+    "back": "A construct that sets the order in which a program's instructions run: sequence (one after another), selection (choosing a path, as with IF ... THEN ... ELSE) or iteration (repeating a block with a loop).",
+    "mistake": "A loop is iteration, not selection, even though it tests a condition. Selection chooses between paths once; iteration repeats a block while or until a condition holds.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-critical-path",
+    "kk": [
+      "TERMS",
+      "U3O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "critical path",
+    "back": "The longest chain of dependent tasks, by total duration, from the start of a project to its end. Its length is the shortest time the project can take, so delaying any task on it delays the whole project.",
+    "mistake": "The critical path is the longest chain of dependent tasks, not the shortest one, and not simply the tasks that seem most important.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-csv",
+    "kk": [
+      "TERMS",
+      "U3O1-KK06"
+    ],
+    "type": "reverse",
+    "front": "CSV",
+    "back": "A delimited plain text file format that stores tabular data with one record per line and commas separating the fields. It is compact and can be opened by spreadsheets and most programs.",
+    "mistake": "A field that itself contains a comma, such as an address, will be split into extra fields unless it is enclosed in quotation marks.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "comma-separated values",
+      "comma separated values"
+    ]
+  },
+  {
+    "id": "t-data-dictionary",
+    "kk": [
+      "TERMS",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "data dictionary",
+    "back": "A table that describes each data item in a solution, typically giving its name, data type, size or format, and a description, and sometimes validation rules or an example value.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-data-flow-diagram",
+    "kk": [
+      "TERMS",
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "data flow diagram",
+    "back": "A diagram that shows how data moves through a system, using external entities, numbered processes, data stores and the labelled data flows between them.",
+    "mistake": "Data can't flow directly between two data stores, between two external entities, or between an external entity and a data store. Each of these flows must pass through a process.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "DFD"
+    ]
+  },
+  {
+    "id": "t-debugging",
+    "kk": [
+      "TERMS",
+      "U3O1-KK14"
+    ],
+    "type": "reverse",
+    "front": "debugging",
+    "back": "Locating and fixing the cause of errors in code, using techniques such as breakpoints, debugging output statements and commenting out sections of code.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-effectiveness",
+    "kk": [
+      "TERMS",
+      "U3O2-KK13"
+    ],
+    "type": "reverse",
+    "front": "effectiveness",
+    "back": "A measure of how well a solution achieves its intended purpose, for example how accurate, complete and usable its output and operation are.",
+    "mistake": "Effective doesn't mean efficient. A solution can produce accurate, complete results (effective) but take users more steps, or cost more to run, than it should (inefficient).",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-efficiency",
+    "kk": [
+      "TERMS",
+      "U3O2-KK13"
+    ],
+    "type": "reverse",
+    "front": "efficiency",
+    "back": "A measure of how well a solution uses resources such as time, cost and effort to produce its results, for example how quickly it processes data or how few steps a user needs to complete a task.",
+    "mistake": "Efficiency is about the resources used, not whether the output is right. Correct, complete output is a matter of effectiveness.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-encapsulation",
+    "kk": [
+      "TERMS",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "encapsulation",
+    "back": "Bundling an object's attributes and the methods that act on them into one class, and restricting direct access to the attributes (usually by making them private) so that other code must use the class's public methods.",
+    "mistake": "Encapsulation is more than putting code in a class. The key idea is protecting the data by controlling how it can be read and changed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-encryption",
+    "kk": [
+      "TERMS",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "encryption",
+    "back": "Converting readable data (plaintext) into an unreadable form (ciphertext) using an algorithm and a key, so that only someone with the correct key can decrypt and read it.",
+    "mistake": "Encryption doesn't stop data being stolen; it stops stolen data being read, as long as the key stays secret.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-essential-eight",
+    "kk": [
+      "TERMS",
+      "U4O2-KK07"
+    ],
+    "type": "reverse",
+    "front": "Essential Eight",
+    "back": "A set of eight prioritised mitigation strategies, including multi-factor authentication, patching and regular backups, published by the Australian Cyber Security Centre (ACSC) to help organisations protect their systems, with maturity levels that describe how thoroughly they are implemented.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "Essential 8"
+    ]
+  },
+  {
+    "id": "t-evaluation-criteria",
+    "kk": [
+      "TERMS",
+      "U3O2-KK13"
+    ],
+    "type": "reverse",
+    "front": "evaluation criteria",
+    "back": "Measurable statements, based on the solution requirements, used to judge how efficient and effective a design idea or a finished solution is.",
+    "mistake": "\"The app is good\" is not a criterion because it can't be measured. \"A new booking can be made in under one minute\" can be checked against the solution.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "evaluation criterion"
+    ]
+  },
+  {
+    "id": "t-existence-check",
+    "kk": [
+      "TERMS",
+      "U3O1-KK10"
+    ],
+    "type": "reverse",
+    "front": "existence check",
+    "back": "A validation check that a required field has not been left empty before the data is accepted.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "presence check"
+    ]
+  },
+  {
+    "id": "t-functional-requirement",
+    "kk": [
+      "TERMS",
+      "U3O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "functional requirement",
+    "back": "A statement of what a solution must do: a function or task it must perform, such as calculating a total fee or producing a monthly report.",
+    "mistake": "If a statement describes how well the solution must work (how fast, how easy to use), it is a non-functional requirement, not a functional one.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-gantt-chart",
+    "kk": [
+      "TERMS",
+      "U3O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Gantt chart",
+    "back": "A project management chart that shows each task as a horizontal bar against a timeline, so its start, duration and finish can be read off. It often also shows the dependencies between tasks, milestones and the critical path.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-generalisation",
+    "kk": [
+      "TERMS",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "generalisation",
+    "back": "Identifying the attributes and methods that several classes have in common and placing them in a more general superclass, which those classes then inherit from. For example, `Car` and `Truck` are generalised into `Vehicle`.",
+    "mistake": "Generalisation and inheritance describe one relationship from two directions: generalisation is the design step of moving shared features up into a superclass; inheritance is how the subclasses then receive them.",
+    "difficulty": 3,
+    "source": "textbook",
+    "aliases": [
+      "generalization"
+    ]
+  },
+  {
+    "id": "t-generative-ai",
+    "kk": [
+      "TERMS",
+      "U3O1-KK01"
+    ],
+    "type": "reverse",
+    "front": "generative AI",
+    "back": "Artificial intelligence that produces new content, such as text, images or program code, in response to a prompt, using patterns learned from large amounts of training data.",
+    "mistake": "AI-generated code isn't automatically correct: it can look right and still contain errors or security flaws. The programmer stays responsible for it, so read it, test it and acknowledge that AI was used.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "generative artificial intelligence",
+      "GenAI"
+    ]
+  },
+  {
+    "id": "t-goal",
+    "kk": [
+      "TERMS",
+      "U4O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "goal",
+    "back": "A broad, long-term aim that states what an organisation wants to achieve, such as improving customer service or growing its membership.",
+    "mistake": "Goals are broad and long-term; objectives are specific, measurable targets with a time frame that work towards a goal.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-hungarian-notation",
+    "kk": [
+      "TERMS",
+      "U3O1-KK09"
+    ],
+    "type": "reverse",
+    "front": "Hungarian notation",
+    "back": "A naming convention that starts a name with a short prefix showing its data type or control type, such as `strSurname` for a string variable or `txtSurname` for a text box.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-inheritance",
+    "kk": [
+      "TERMS",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "inheritance",
+    "back": "The mechanism by which a subclass (child class) automatically receives the attributes and methods of its superclass (parent class), and can add its own or override inherited ones.",
+    "mistake": "Inheritance flows from superclass to subclass only. A `Car` subclass has everything `Vehicle` has, but `Vehicle` doesn't gain the extra attributes that `Car` adds.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-intellectual-property",
+    "kk": [
+      "TERMS",
+      "U3O2-KK10"
+    ],
+    "type": "reverse",
+    "front": "intellectual property",
+    "back": "Creations of the mind, such as software, designs, written works and brand names, that the law allows their creators or owners to control and profit from, for example through copyright.",
+    "mistake": "Code isn't free to reuse just because it is publicly visible online. It is still someone's intellectual property, so check its licence and acknowledge its source.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-internal-documentation",
+    "kk": [
+      "TERMS",
+      "U3O1-KK11"
+    ],
+    "type": "reverse",
+    "front": "internal documentation",
+    "back": "Comments written in the source code that explain the purpose of each module, its key features and the reasons for processing choices, so programmers can understand and maintain the code.",
+    "mistake": "Good comments explain why, not just what. `// binary search because the list is always kept sorted` is more useful than `// search the list`.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-interoperability",
+    "kk": [
+      "TERMS",
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "interoperability",
+    "back": "The ability of a solution to exchange data and work with other systems, programs or devices, often by using shared formats or standards such as CSV or XML.",
+    "mistake": "Interoperability (working with other systems) is not portability (running on different platforms with little or no change).",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-ipo-chart",
+    "kk": [
+      "TERMS",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "IPO chart",
+    "back": "A table for one module or problem that lists its inputs, the processing that turns those inputs into results, and the outputs produced.",
+    "mistake": "Keep each column to its job: data items go in the input and output columns, and actions such as calculate, compare or sort go in the processing column.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "input-process-output chart",
+      "input process output chart"
+    ]
+  },
+  {
+    "id": "t-least-privilege",
+    "kk": [
+      "TERMS",
+      "U4O2-KK09"
+    ],
+    "type": "reverse",
+    "front": "least privilege",
+    "back": "The security principle that each user, program or process is given only the minimum access rights it needs to do its job, so a compromised or careless account can do less damage.",
+    "mistake": "Least privilege applies to developers too. A developer who needs to change code doesn't automatically need access to production data.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "principle of least privilege"
+    ]
+  },
+  {
+    "id": "t-library",
+    "kk": [
+      "TERMS",
+      "U4O1-KK04"
+    ],
+    "type": "reverse",
+    "front": "library",
+    "back": "A collection of pre-written, reusable code, such as functions and classes, that programmers can include in their own programs instead of writing that code themselves.",
+    "mistake": "A library is still someone else's code. Check its licence, acknowledge it and keep it updated, because a vulnerable or abandoned library becomes a weakness in your solution.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-logic-error",
+    "kk": [
+      "TERMS",
+      "U3O1-KK13"
+    ],
+    "type": "reverse",
+    "front": "logic error",
+    "back": "An error in the program's reasoning, such as using `<` where `≤` was needed or applying the wrong formula, so the program runs without crashing but produces incorrect output.",
+    "mistake": "The translator can't detect a logic error because the code is valid. It is found by testing: comparing actual output with expected output.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "logical error"
+    ]
+  },
+  {
+    "id": "t-method",
+    "kk": [
+      "TERMS",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "method",
+    "back": "A function or procedure defined inside a class that describes something its objects can do, such as calculating a value or changing an attribute.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-milestone",
+    "kk": [
+      "TERMS",
+      "U3O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "milestone",
+    "back": "A significant point in a project, such as the end of a stage or the delivery of a product, used to mark progress. It has no duration and is usually drawn as a diamond on a Gantt chart.",
+    "mistake": "A milestone is an event, not a task: it takes no time and uses no resources.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-mock-up",
+    "kk": [
+      "TERMS",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "mock-up",
+    "back": "A drawing of how a screen or user interface will look, showing the layout of elements such as headings, input controls and buttons, usually annotated with details such as fonts, colours and what each control does.",
+    "mistake": "A mock-up shows appearance and layout, not processing. The logic behind a button belongs in pseudocode or an IPO chart.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "mockup",
+      "mock up"
+    ]
+  },
+  {
+    "id": "t-multi-factor-authentication",
+    "kk": [
+      "TERMS",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "multi-factor authentication",
+    "back": "Authentication that requires two or more different types of factor, such as a password (something you know) plus a code sent to a phone (something you have), so a stolen password alone isn't enough.",
+    "mistake": "A password and a PIN are both something you know, so together they are not multi-factor authentication. The factors must be of different types.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "MFA",
+      "multifactor authentication"
+    ]
+  },
+  {
+    "id": "t-non-functional-requirement",
+    "kk": [
+      "TERMS",
+      "U3O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "non-functional requirement",
+    "back": "A quality or characteristic a solution must have, describing how well it performs its functions rather than what it does, such as reliability, usability or portability.",
+    "mistake": "\"A booking must load in under two seconds\" is non-functional (a performance quality), even though it mentions a task the solution does.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "nonfunctional requirement"
+    ]
+  },
+  {
+    "id": "t-object",
+    "kk": [
+      "TERMS",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "object",
+    "back": "A single instance of a class, created while the program runs, that holds its own values for the class's attributes and can carry out the class's methods.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-object-description",
+    "kk": [
+      "TERMS",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "object description",
+    "back": "A design tool that describes an object by its name, its properties (attributes) with their data types, and its methods (what it can do).",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-objective",
+    "kk": [
+      "TERMS",
+      "U4O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "objective",
+    "back": "A specific, measurable target, usually with a time frame, that helps an organisation achieve a goal, such as cutting processing time by 20% within a year.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-patching",
+    "kk": [
+      "TERMS",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "patching",
+    "back": "Installing updates (patches) released by a software or hardware vendor to fix bugs and close security vulnerabilities. Applying patches promptly removes weaknesses that attackers may already know about.",
+    "mistake": "Patching isn't only for the finished product. The libraries, tools and operating systems a development team uses need patching too.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-pseudocode",
+    "kk": [
+      "TERMS",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "pseudocode",
+    "back": "A way of writing an algorithm as structured, English-like statements with keywords such as IF, WHILE and DISPLAY, independent of the syntax of any programming language.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "pseudo-code"
+    ]
+  },
+  {
+    "id": "t-range-check",
+    "kk": [
+      "TERMS",
+      "U3O1-KK10"
+    ],
+    "type": "reverse",
+    "front": "range check",
+    "back": "A validation check that a value falls within set lower and upper limits, for example a percentage from 0 to 100.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-record",
+    "kk": [
+      "TERMS",
+      "U3O1-KK05"
+    ],
+    "type": "reverse",
+    "front": "record",
+    "back": "A data structure that groups related data items, which can be of different data types, under one name, with each item stored in a named field (for example, a member's name as a string and age as an integer).",
+    "mistake": "Unlike an array, a record's fields can hold different data types and are reached by field name, not by an index.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-risk",
+    "kk": [
+      "TERMS",
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "risk",
+    "back": "The likelihood that a threat will exploit a vulnerability, considered together with the impact if it does. Risks are often rated by likelihood and impact to decide which to deal with first.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "t-runtime-error",
+    "kk": [
+      "TERMS",
+      "U3O1-KK13"
+    ],
+    "type": "reverse",
+    "front": "runtime error",
+    "back": "An error that occurs while the program is running, such as a division by zero, an index out of range or an overflow. Unless the error is handled, it usually makes the program stop unexpectedly (crash).",
+    "mistake": "A runtime error isn't a syntax error: the code is valid and translates, but an operation becomes impossible with particular data, such as dividing by a count of zero.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "run-time error",
+      "run time error"
+    ]
+  },
+  {
+    "id": "t-scope",
+    "kk": [
+      "TERMS",
+      "U3O2-KK07"
+    ],
+    "type": "reverse",
+    "front": "scope",
+    "back": "The boundaries of a solution: what it will and won't do or include, agreed during analysis so that everyone knows what will be delivered.",
+    "mistake": "Project scope is not variable scope (whether a variable is local or global). Stating what the solution will *not* do is part of defining its scope.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "project scope",
+      "solution scope"
+    ]
+  },
+  {
+    "id": "t-scope-creep",
+    "kk": [
+      "TERMS",
+      "U4O1-KK10"
+    ],
+    "type": "reverse",
+    "front": "scope creep",
+    "back": "The gradual, uncontrolled growth of a project's requirements or features after its scope has been agreed, usually without matching extra time or budget, which can delay the project and raise its costs.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-snake-case",
+    "kk": [
+      "TERMS",
+      "U3O1-KK09"
+    ],
+    "type": "reverse",
+    "front": "snake case",
+    "back": "A naming convention that writes names in lower case with an underscore between words, such as `total_cost`.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "snake_case",
+      "snake casing"
+    ]
+  },
+  {
+    "id": "t-software-requirements-specification",
+    "kk": [
+      "TERMS",
+      "U3O2-KK09"
+    ],
+    "type": "reverse",
+    "front": "software requirements specification",
+    "back": "A document produced during analysis that sets out in detail what a proposed solution must do and the conditions it must meet, including its requirements, constraints and scope, as the agreed basis for design, development and evaluation.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "SRS"
+    ]
+  },
+  {
+    "id": "t-syntax-error",
+    "kk": [
+      "TERMS",
+      "U3O1-KK13"
+    ],
+    "type": "reverse",
+    "front": "syntax error",
+    "back": "An error where code breaks the grammar rules of the programming language, such as a missing bracket or a misspelt keyword, so the code can't be translated and the program won't run until it is fixed.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-test-data",
+    "kk": [
+      "TERMS",
+      "U3O1-KK14"
+    ],
+    "type": "reverse",
+    "front": "test data",
+    "back": "Input values chosen to test a solution, including valid data, invalid data and boundary values at the edges of acceptable ranges, each with its expected output worked out in advance.",
+    "mistake": "Testing only valid data isn't enough. Errors often hide at the limits, so for an accepted range of 1 to 10, test 0, 1, 10 and 11 as well as a typical value.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-testing",
+    "kk": [
+      "TERMS",
+      "U3O1-KK14"
+    ],
+    "type": "reverse",
+    "front": "testing",
+    "back": "Running a solution with planned test data and comparing its actual output with the expected output, to check that it works correctly and meets its requirements.",
+    "mistake": "Testing shows that errors exist; debugging is the separate job of locating their cause and fixing them.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-threat",
+    "kk": [
+      "TERMS",
+      "U4O2-KK09"
+    ],
+    "type": "reverse",
+    "front": "threat",
+    "back": "Anything that could harm a system or its data by exploiting a vulnerability: a deliberate act (such as an attacker stealing passwords), an accident (such as an employee deleting files by mistake) or an event (such as a fire or power failure).",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-threat-modelling",
+    "kk": [
+      "TERMS",
+      "U4O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "threat modelling",
+    "back": "A structured process, begun during design and revisited as the system changes, for identifying the threats a system faces, deciding which matter most, and planning controls to reduce them.",
+    "mistake": "Threat modelling is done early, before code is written, not only after an attack. A security flaw built into the design costs far more to fix later.",
+    "difficulty": 3,
+    "source": "textbook",
+    "aliases": [
+      "threat modeling"
+    ]
+  },
+  {
+    "id": "t-type-check",
+    "kk": [
+      "TERMS",
+      "U3O1-KK10"
+    ],
+    "type": "reverse",
+    "front": "type check",
+    "back": "A validation check that input is of the expected data type, for example rejecting letters typed into a quantity field that must hold an integer.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "data type check"
+    ]
+  },
+  {
+    "id": "t-usability",
+    "kk": [
+      "TERMS",
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "usability",
+    "back": "How easily and efficiently users can learn and operate a solution to complete their tasks, and how satisfied they are when using it.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-use-case-diagram",
+    "kk": [
+      "TERMS",
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "use case diagram",
+    "back": "A diagram that shows the actors who interact with a system, the use cases (goals) they carry out inside the system boundary, and the associations and `<<includes>>` or `<<extends>>` relationships between them.",
+    "mistake": "A use case diagram shows who does what with the system. It doesn't show the order of steps or the data that flows; actors sit outside the system boundary and use cases inside it.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "use-case diagram"
+    ]
+  },
+  {
+    "id": "t-user-centred-design",
+    "kk": [
+      "TERMS",
+      "U4O1-KK01"
+    ],
+    "type": "reverse",
+    "front": "user-centred design",
+    "back": "An approach to designing a solution that puts the needs, abilities and goals of its users at the centre, involving users throughout and refining the design using their feedback and testing.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "user-centered design",
+      "user centred design"
+    ]
+  },
+  {
+    "id": "t-validation",
+    "kk": [
+      "TERMS",
+      "U3O1-KK10"
+    ],
+    "type": "reverse",
+    "front": "validation",
+    "back": "Checking input data before it is processed or stored, to make sure it is reasonable and follows set rules, using techniques such as existence, type and range checks.",
+    "mistake": "Validation checks that data is reasonable, not that it is correct. An age of 34 passes a range check even if the person is really 43.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "t-version-control",
+    "kk": [
+      "TERMS",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "version control",
+    "back": "A system that records each change made to files over time, including who made it and when, so developers can work on the same code together, compare versions and roll back to an earlier version.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "version control system",
+      "source control"
+    ]
+  },
+  {
+    "id": "t-vulnerability",
+    "kk": [
+      "TERMS",
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "vulnerability",
+    "back": "A weakness in a system, program, process or environment that a threat could exploit to cause harm, such as unpatched software or an administrator password shared by the whole team.",
+    "mistake": "A vulnerability is the weakness itself. A threat is what might exploit it, and risk combines how likely that is with how much harm it would cause.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "t-xml",
+    "kk": [
+      "TERMS",
+      "U3O1-KK06"
+    ],
+    "type": "reverse",
+    "front": "XML",
+    "back": "A plain text format that stores data between named opening and closing tags, such as `<surname>Nguyen</surname>`, nested in a hierarchy. The tags describe the data (self-describing), and new elements can be added without breaking the existing structure (extensible).",
+    "mistake": "XML tags aren't a fixed set like HTML's display tags: the author names them to describe the data they hold.",
+    "difficulty": 2,
+    "source": "textbook",
+    "aliases": [
+      "Extensible Markup Language"
+    ]
+  }
+]

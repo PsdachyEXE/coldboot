@@ -1,0 +1,1733 @@
+[
+  {
+    "id": "m-u4o1-kk01-001",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "stem": "Which statement best describes user-centred design?",
+    "options": [
+      "The client's budget and deadline decide each design choice, and users see the final product",
+      "The developer designs the interface, and users take part only once beta testing begins",
+      "Users' needs and feedback guide design decisions throughout the development of the solution",
+      "Screens follow the programming language's standard templates so that every solution looks alike"
+    ],
+    "answer": 2,
+    "explanation": "User-centred design puts the people who will use the solution at the centre: their needs shape the design, and their feedback is sought and acted on throughout development.",
+    "whyWrong": [
+      "Budget and deadline are constraints; a design that ignores users until the end isn't user-centred.",
+      "Involving users only at beta testing is too late for their needs to shape the design.",
+      "",
+      "Standard templates suit the developer's convenience, not the needs of a particular group of users."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk01-002",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "stem": "Quenda Plumbing in Shepparton updates its job-logging app. The update adds a drop-down list of common job types and fills in the date and the technician's name automatically. Technicians now log a job in 40 seconds instead of two minutes, and the job records are as accurate as before. Which statement best describes the update?",
+    "options": [
+      "It improves efficiency, because each job takes less time and effort to log",
+      "It improves effectiveness, because each job takes less time and effort to log",
+      "It improves effectiveness, because the job records are now more accurate",
+      "It improves efficiency, because the job records now contain more detail"
+    ],
+    "answer": 0,
+    "explanation": "Logging a job now takes less time and fewer keystrokes, which is a gain in efficiency. The records are no more accurate than before, so the update can't be credited with an accuracy gain.",
+    "whyWrong": [
+      "",
+      "Time and effort are measures of efficiency, not effectiveness.",
+      "The scenario says the records are as accurate as before, so accuracy hasn't improved.",
+      "Nothing suggests more detail is recorded, and completeness would be a measure of effectiveness."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk01-003",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "stem": "Kalinda is developing a medication-reminder app for residents of Marlock House, an aged-care home in Warragul. Which action best reflects user-centred design?",
+    "options": [
+      "Asking the home's IT manager to approve the colour scheme before coding begins",
+      "Watching residents use an early version and changing screens where they struggle",
+      "Choosing the code library that lets her finish the app in the shortest time",
+      "Writing pseudocode for every module before speaking with any of the residents"
+    ],
+    "answer": 1,
+    "explanation": "Observing the actual users with an early version, and revising the design where they have difficulty, puts the residents' needs at the centre of development.",
+    "whyWrong": [
+      "The IT manager isn't a user of the app; a manager's approval doesn't show that the design suits residents.",
+      "",
+      "Choosing tools for the developer's speed may make development quicker, but it doesn't involve users.",
+      "Designing every module without consulting residents is the opposite of user-centred design."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk01-004",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "stem": "A developer at Pipi Beach Couriers in Warrnambool changes the route-planning module so that it compares only 20 of the 60 possible routes for each delivery run. Processing time halves, but the recommended route is now sometimes longer than the shortest route. Which evaluation of the change to the route-planning module is most accurate?",
+    "options": [
+      "Effectiveness has improved, because recommendations now appear in half the time",
+      "Efficiency and effectiveness have both improved, because less processing is needed",
+      "Effectiveness is unchanged, because a route is still recommended for every run",
+      "Efficiency has improved, but effectiveness has fallen, as routes are less accurate"
+    ],
+    "answer": 3,
+    "explanation": "Halving the processing time is a gain in efficiency. The module's purpose is to recommend the shortest route; recommending longer routes means it achieves that purpose less accurately, so effectiveness has fallen.",
+    "whyWrong": [
+      "Speed is a measure of efficiency, not effectiveness.",
+      "Longer recommended routes reduce accuracy, so effectiveness hasn't improved.",
+      "Producing a route isn't enough; the route is now sometimes wrong, so effectiveness has fallen.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk02-001",
+    "kk": [
+      "U4O1-KK02"
+    ],
+    "stem": "Saltbush Lane Community Garden in Horsham has a plot-booking program that holds bookings in an array of records while it runs. Members report that bookings made yesterday disappeared after the program was closed and reopened. What is the most likely cause?",
+    "options": [
+      "The bookings were saved in a CSV file instead of an XML file",
+      "The bookings were held only in the array and never written to a file",
+      "The booking dates were stored as Strings instead of as Integers",
+      "The array held records instead of a two-dimensional array of values"
+    ],
+    "answer": 1,
+    "explanation": "An array exists in memory only while the program runs. Unless the bookings are written to a file before the program closes, they are lost.",
+    "whyWrong": [
+      "A CSV file keeps its data between runs, just as an XML file does.",
+      "",
+      "The data type of a field doesn't decide whether the data survives the program closing.",
+      "Any structure held in memory is lost when the program closes, so the choice of structure isn't the cause."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk02-002",
+    "kk": [
+      "U4O1-KK02"
+    ],
+    "stem": "Quandong Hardware in Maldon keeps its stock list in `stock.csv`. The table shows the fields in each line, with an example value. When the program reads a line, it stores the fields in a record. Which data types best suit `onHand`, `price` and `discontinued`, in that order?",
+    "options": [
+      "Integer, Integer, Character",
+      "Floating point, Floating point, String",
+      "Integer, Floating point, Boolean",
+      "String, Floating point, Boolean"
+    ],
+    "answer": 2,
+    "explanation": "`onHand` counts whole items, so Integer suits. `price` includes cents, so Floating point suits. `discontinued` has only two possible states, so Boolean suits.",
+    "whyWrong": [
+      "An Integer can't hold cents, and a two-state value suits Boolean rather than Character.",
+      "A stock count is a whole number, and a String can't be tested directly as true or false.",
+      "",
+      "A stock count stored as a String can't be added to or subtracted from without conversion."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "quandong-stock-fields",
+        "kind": "table",
+        "title": "Fields in each line of stock.csv",
+        "columns": [
+          "Field",
+          "Example value"
+        ],
+        "rows": [
+          [
+            "code",
+            "QH-0042"
+          ],
+          [
+            "description",
+            "Garden hose 20 m"
+          ],
+          [
+            "onHand",
+            "14"
+          ],
+          [
+            "price",
+            "39.95"
+          ],
+          [
+            "discontinued",
+            "FALSE"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk02-003",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK04"
+    ],
+    "stem": "Ovens Bend Outdoor Supplies in Bright stores its stock in a CSV file. A program reads one line of the file and splits it into the array `fields`; the algorithm shown sets `fields` to the result. Every value read from the file is a String. Arrays are indexed from 0. What does the algorithm display?",
+    "options": [
+      "17",
+      "12 5",
+      "BK-20412",
+      "125"
+    ],
+    "answer": 3,
+    "explanation": "`onShelf` holds the String \"12\" and `inStoreroom` holds the String \"5\". With Strings, `+` joins the values, so the algorithm displays 125. Converting both to Integer first would display 17.",
+    "whyWrong": [
+      "17 would be displayed only if both values were converted to Integer before being added.",
+      "Joining Strings with `+` doesn't insert a space between them.",
+      "This joins `fields[0]` and `fields[1]`, treating the array as if it were indexed from 1.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "ovens-bend-fields",
+        "kind": "pseudocode",
+        "indexBase": 0,
+        "code": "BEGIN\n    fields ← [\"BK-204\", \"12\", \"5\"]\n    onShelf ← fields[1]\n    inStoreroom ← fields[2]\n    DISPLAY onShelf + inStoreroom\nEND"
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk02-004",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK06"
+    ],
+    "stem": "Pardalote Athletics Club in Ararat must send each carnival's results to the state association's system. Each event has a different number of competitors, and the association plans to add new fields to the results next season. Which output format best suits?",
+    "options": [
+      "An XML file, because nested elements with named tags can vary in number and be extended",
+      "A CSV file, because every record has the same fields, which are separated by commas",
+      "A plain text file, because any program can open it and display its contents to a user",
+      "A two-dimensional array, because it stores events in rows and competitors in columns"
+    ],
+    "answer": 0,
+    "explanation": "XML lets each event element contain any number of competitor elements, and its self-describing tags let new fields be added without breaking programs that read the existing ones.",
+    "whyWrong": [
+      "",
+      "CSV is flat and identifies fields only by their position, so it can't nest competitors within events, and adding new fields could break the association's program.",
+      "Plain text has no field structure, so the association's system couldn't reliably extract the results.",
+      "An array exists only in a program's memory; it isn't a file format that can be sent to another system."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk03-001",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "stem": "A booking form must let a customer choose exactly one of three fixed delivery methods. Which GUI control is most suitable?",
+    "options": [
+      "A group of check boxes",
+      "A single-line text box",
+      "A single command button",
+      "A group of radio buttons"
+    ],
+    "answer": 3,
+    "explanation": "Radio buttons show every option and allow only one to be selected, which matches choosing exactly one of a few fixed methods.",
+    "whyWrong": [
+      "Check boxes allow several options to be selected at once.",
+      "A text box lets the customer type anything, so misspelt or invalid methods could be entered.",
+      "A button triggers an action when clicked; it doesn't record a choice.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk03-002",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "stem": "Tallowwood Hollow Nursery in Bairnsdale uses the function shown to calculate the cost of sending an online order. What does `shippingCost(8, TRUE)` return?",
+    "options": [
+      "13.10",
+      "26.20",
+      "19.00",
+      "38.20"
+    ],
+    "answer": 1,
+    "explanation": "8 is greater than 5, so line 5 sets `cost` to 9.50 + 3 × 1.20 = 13.10. `express` is TRUE, so line 8 doubles it to 26.20, which is returned.",
+    "whyWrong": [
+      "13.10 is the cost before line 8 doubles it for express delivery.",
+      "",
+      "19.00 doubles the rate on line 3, but line 3 runs only when the weight is 5 or less.",
+      "38.20 multiplies the whole weight by 1.20 instead of only the 3 above 5."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "tallowwood-shipping",
+        "kind": "pseudocode",
+        "code": "FUNCTION shippingCost(weight, express)\n    IF weight ≤ 5 THEN\n        cost ← 9.50\n    ELSE\n        cost ← 9.50 + (weight - 5) * 1.20\n    ENDIF\n    IF express = TRUE THEN\n        cost ← cost * 2\n    ENDIF\n    RETURN cost\nENDFUNCTION"
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk03-003",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "stem": "Juniper is developing an ordering program for Mudlark Deliveries in Echuca. She copied the same 12 lines that calculate a delivery fee into four event handlers. When the fee rule changed to include a $10 minimum, she updated three of the copies but missed the fourth, so some customers were undercharged. Which approach would best have prevented this error?",
+    "options": [
+      "Writing the calculation once as a function that each event handler calls",
+      "Storing the per-kilometre rate in a global variable that every handler reads",
+      "Adding a comment beside each copy of the calculation to explain its purpose",
+      "Setting a breakpoint in each handler to check the fee while the program runs"
+    ],
+    "answer": 0,
+    "explanation": "With the calculation in one function, the new $10 minimum would be written once and every handler would use it. Each copy of duplicated code must be changed separately, and one can be missed.",
+    "whyWrong": [
+      "",
+      "A shared rate helps only when the rate changes; here the rule changed, and the calculation was still copied four times.",
+      "Comments explain code but don't stop copies of it from getting out of step.",
+      "Breakpoints help find an error during testing; they don't prevent the duplicated code that caused it."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk03-004",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "stem": "Wattle Wagon Toy Library in Hamilton calculates late fees with the function `lateFee` and the algorithm shown. Arrays are indexed from 0. What does the algorithm display?",
+    "options": [
+      "11",
+      "21",
+      "16",
+      "10"
+    ],
+    "answer": 2,
+    "explanation": "`lateFee(0)` returns 0, because neither condition is true. `lateFee(3)` returns 5. `lateFee(10)` returns 5 + 3 × 2 = 11. The total is 0 + 5 + 11 = 16.",
+    "whyWrong": [
+      "11 is only the fee for 10 days; the loop adds all three fees to `total`.",
+      "21 charges $5 for 0 days, but `days > 0` is FALSE when `days` is 0.",
+      "",
+      "10 charges the flat $5 for 10 days, but `days > 7` is checked first and is TRUE."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "wattle-wagon-late-fee",
+        "kind": "pseudocode",
+        "title": "Function lateFee",
+        "code": "FUNCTION lateFee(days)\n    fee ← 0\n    IF days > 7 THEN\n        fee ← 5 + (days - 7) * 2\n    ELSEIF days > 0 THEN\n        fee ← 5\n    ENDIF\n    RETURN fee\nENDFUNCTION"
+      },
+      {
+        "id": "wattle-wagon-total",
+        "kind": "pseudocode",
+        "title": "Algorithm",
+        "indexBase": 0,
+        "code": "BEGIN\n    daysLate ← [0, 3, 10]\n    total ← 0\n    FOR i ← 0 TO 2\n        total ← total + lateFee(daysLate[i])\n    ENDFOR\n    DISPLAY total\nEND"
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk04-001",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "stem": "What is the main purpose of a code repository in a software development project?",
+    "options": [
+      "To supply pre-written functions that the program calls to do common tasks",
+      "To let the program request data from a service run by another organisation",
+      "To store the project's code and its history of changes for the team to share",
+      "To generate new code automatically from a description of what is needed"
+    ],
+    "answer": 2,
+    "explanation": "A repository stores source code with a history of every change, so team members can share code, see who changed what and return to earlier versions.",
+    "whyWrong": [
+      "This describes a code library.",
+      "This describes an API.",
+      "",
+      "This describes an AI-based coding assistant."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk04-002",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "stem": "Currawong Community Bus in Bendigo has an app that shows where each bus is on a map, using a third-party mapping API. The provider announces that free access will end in 60 days, after which every request will need a paid key. Which response best manages this risk?",
+    "options": [
+      "Save the provider's map images in the app's repository so that they can be reused later",
+      "Compare the new fee with other providers, then update the module that calls the API",
+      "Remove the map and have drivers type their locations into a CSV file every hour",
+      "Leave the code unchanged, because the map feature has already passed alpha testing"
+    ],
+    "answer": 1,
+    "explanation": "The change is a known risk of depending on an API. Weighing the fee against other providers, then changing only the module that calls the API, keeps the feature working before free access ends.",
+    "whyWrong": [
+      "Copying the provider's images is likely to breach its terms of use, and the saved maps would soon be out of date.",
+      "",
+      "Typing locations once an hour would make them late and less accurate, reducing the app's effectiveness.",
+      "Passing earlier tests doesn't protect the app; once free access ends, its requests will fail."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk04-003",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "stem": "Dan finds an open-source charting library he could use in a reporting program for Hopkins Flats Dairy Co-op in Warrnambool. Which check is most important before he includes it in the program?",
+    "options": [
+      "That its licence allows this use, and what acknowledgement it requires",
+      "That its functions follow the same naming convention as Dan's own code",
+      "That its source code has been rewritten as pseudocode for the design",
+      "That it reads its data from XML files rather than from CSV files"
+    ],
+    "answer": 0,
+    "explanation": "A library's licence sets the conditions for using it, such as whether it may be included in the co-op's program and how its authors must be acknowledged. Ignoring the licence can infringe the authors' rights.",
+    "whyWrong": [
+      "",
+      "Naming conventions affect readability; they aren't a condition of using the library.",
+      "Pseudocode is a design tool for the developer's own modules; a library doesn't need to be rewritten.",
+      "The file format a library reads doesn't decide whether it may be used."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk04-004",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "stem": "An app for Kestrel Hill Orchard in Harcourt shows a frost forecast using data from a weather API. The temperature used to arrive in a `<temp>` element. Without warning, the provider renamed it `<temperature>`, and the app now shows a blank forecast. The app's code hasn't changed. Which statement best explains the failure?",
+    "options": [
+      "A syntax error was introduced the last time the app's code was translated",
+      "The weather library's licence expired, so its functions were switched off",
+      "The code repository rolled the app back to an earlier version of its code",
+      "The app depends on a data format that the provider controls and changed"
+    ],
+    "answer": 3,
+    "explanation": "The app looks for an element named `temp`. The provider controls the API's data format; when it renamed the element, the app could no longer find the value, even though the app's own code was unchanged.",
+    "whyWrong": [
+      "The code hasn't changed, and a syntax error would stop the code being translated rather than blank one value.",
+      "The app uses an online API, not a library, and nothing suggests a licence has expired.",
+      "A repository doesn't change code by itself, and the app's code is unchanged.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk05-001",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK03"
+    ],
+    "stem": "An online order form for Seedpod Nursery in Kyneton asks customers to type their state or territory into a text box. Many entries are misspelt. Which change would most reduce the validation this field needs?",
+    "options": [
+      "Storing the state in a Character variable instead of a String variable",
+      "Replacing the text box with a drop-down list of the states and territories",
+      "Adding a debugging output statement that displays the state after entry",
+      "Making the text box wider so that longer state names are fully visible"
+    ],
+    "answer": 1,
+    "explanation": "A drop-down list offers only valid states and territories, so misspelt or invalid entries can't be made. Only an existence check, confirming that a state has been chosen, is still needed.",
+    "whyWrong": [
+      "A Character holds a single character, so it can't store a state name, and it wouldn't stop misspellings.",
+      "",
+      "Debugging output helps a developer find errors; it doesn't stop users entering invalid data.",
+      "A wider box changes the layout, not what the user can type."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk05-002",
+    "kk": [
+      "U4O1-KK05"
+    ],
+    "stem": "Redgum Flat Junior Cricket Club in Donald accepts players aged 5 to 17 inclusive. Which condition is TRUE exactly when an entered age is invalid?",
+    "options": [
+      "`age < 5 AND age > 17`",
+      "`age ≤ 5 OR age ≥ 17`",
+      "`age > 5 OR age < 17`",
+      "`age < 5 OR age > 17`"
+    ],
+    "answer": 3,
+    "explanation": "An age is invalid if it is below 5 or above 17. `OR` makes the condition TRUE when either is the case, and the strict `<` and `>` keep the boundary ages 5 and 17 valid.",
+    "whyWrong": [
+      "No age is both below 5 and above 17, so this is never TRUE and every age is accepted.",
+      "`≤` and `≥` make the valid boundary ages 5 and 17 count as invalid.",
+      "Every age is either above 5 or below 17, so this is always TRUE and every age is rejected.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk05-003",
+    "kk": [
+      "U4O1-KK05"
+    ],
+    "stem": "Tarwin Tide Egg Farm in Tarwin Lower sells eggs online in orders of 1 to 12 trays. The algorithm shown checks the number of trays. A customer enters 13, then 0, then 12, then 5. How many times is the message on line 4 displayed, and what does line 7 display?",
+    "options": [
+      "Twice; then `Order: 12 trays`",
+      "Three times; then `Order: 5 trays`",
+      "Once; then `Order: 12 trays`",
+      "Twice; then `Order: 5 trays`"
+    ],
+    "answer": 0,
+    "explanation": "13 fails the check, so the message is displayed and 0 is read. 0 also fails, so the message is displayed again and 12 is read. 12 passes, so the loop ends and line 7 displays `Order: 12 trays`; 5 is never read.",
+    "whyWrong": [
+      "",
+      "12 is valid, so the loop ends after it is read; 5 is never read and 12 is never rejected.",
+      "0 is below 1, so it fails the check and the message is displayed a second time.",
+      "The message count is right, but the loop ends when 12 is entered, so 5 is never read."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "tarwin-tide-trays",
+        "kind": "pseudocode",
+        "code": "BEGIN\n    INPUT trays\n    WHILE trays < 1 OR trays > 12 DO\n        DISPLAY \"Enter 1 to 12 trays\"\n        INPUT trays\n    ENDWHILE\n    DISPLAY \"Order: \" + trays + \" trays\"\nEND"
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk05-004",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK02"
+    ],
+    "stem": "Kooyoora Rainfall Group in Wedderburn imports members' daily readings from a CSV file. One line holds `ERR` in the rainfall field instead of a number, and the import program crashes when it converts that field. Which technique would best prevent this?",
+    "options": [
+      "Setting a breakpoint on the line of code that reads each record from the file",
+      "Storing every rainfall reading as a String so that any value can be read in",
+      "Type checking each rainfall field as it is read, and reporting invalid lines",
+      "Range checking each rainfall reading after the monthly totals are calculated"
+    ],
+    "answer": 2,
+    "explanation": "A type check applied as each line is read finds the non-numeric field before it is converted, so the program can skip and report that line instead of crashing.",
+    "whyWrong": [
+      "A breakpoint helps a developer inspect the program during testing; it doesn't stop the crash when the program is used.",
+      "Readings stored as Strings can't be totalled, so the problem simply moves to the calculation.",
+      "",
+      "The crash happens when the field is converted, before any totals exist, and a range check doesn't detect text."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk06-001",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "stem": "Which statement best describes alpha testing?",
+    "options": [
+      "Testing by a selected group of real users in their own setting",
+      "Checking that data entered is reasonable before it is processed",
+      "Judging the finished solution against evaluation criteria after release",
+      "Testing by the developers before the solution is released to users"
+    ],
+    "answer": 3,
+    "explanation": "Alpha testing is done by the developers, or an in-house team, during development, to check that the solution works as designed before users see it.",
+    "whyWrong": [
+      "This describes beta testing, which follows alpha testing.",
+      "This describes validation.",
+      "This describes evaluation, which takes place once the solution is in use.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk06-002",
+    "kk": [
+      "U4O1-KK06",
+      "U3O1-KK14"
+    ],
+    "stem": "Kurrajong Kids Swim School in Horsham charges $18 per lesson, with 10% off the total when a family books 10 or more lessons. During alpha testing, the function shown is run with the test data in the test table. Which test's actual output will differ from its expected output?",
+    "options": [
+      "Test 1",
+      "Test 2",
+      "Test 3",
+      "Test 4"
+    ],
+    "answer": 1,
+    "explanation": "Ten lessons should earn the discount, but line 3 tests `lessons > 10`, which is FALSE when `lessons` is 10. The function returns 180, not 162.00. The condition should be `lessons ≥ 10`.",
+    "whyWrong": [
+      "4 lessons get no discount, and the function correctly returns 4 × 18 = 72.",
+      "",
+      "11 > 10 is TRUE, so the function correctly returns 198 × 0.9 = 178.20.",
+      "20 > 10 is TRUE, so the function correctly returns 360 × 0.9 = 324."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "kurrajong-lesson-cost",
+        "kind": "pseudocode",
+        "code": "FUNCTION lessonCost(lessons)\n    cost ← lessons * 18\n    IF lessons > 10 THEN\n        cost ← cost * 0.9\n    ENDIF\n    RETURN cost\nENDFUNCTION"
+      },
+      {
+        "id": "kurrajong-tests",
+        "kind": "table",
+        "title": "Test table",
+        "columns": [
+          "Test number",
+          "Input(s)",
+          "Expected output",
+          "Actual output"
+        ],
+        "rows": [
+          [
+            "1",
+            "lessons = 4",
+            "72.00",
+            ""
+          ],
+          [
+            "2",
+            "lessons = 10",
+            "162.00",
+            ""
+          ],
+          [
+            "3",
+            "lessons = 11",
+            "178.20",
+            ""
+          ],
+          [
+            "4",
+            "lessons = 20",
+            "324.00",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk06-003",
+    "kk": [
+      "U4O1-KK06",
+      "U3O1-KK14"
+    ],
+    "stem": "Hamid is alpha testing a program for Sunset Plains Grain in Ouyen that totals the tonnes delivered in 200 loads. The final total is wrong. He wants to see how the running total changes as each load is added, while the program runs to the end without stopping. Which technique suits best?",
+    "options": [
+      "Setting a breakpoint on the line after the loop that totals the loads",
+      "Commenting out the loop so that only the first load's tonnes are totalled",
+      "Adding a debugging output statement inside the loop to show the total",
+      "Adding a range check that rejects any load outside the expected tonnes"
+    ],
+    "answer": 2,
+    "explanation": "A debugging output statement inside the loop shows the running total after every load without pausing the program, so Hamid can see where the total goes wrong.",
+    "whyWrong": [
+      "A breakpoint pauses the program, and one after the loop shows only the final total, not each step.",
+      "Commenting out the loop removes the very processing he needs to watch.",
+      "",
+      "A range check validates input; it doesn't show how the total changes."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk06-004",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "stem": "Wedgetail Archery Club in Seymour uses the function shown to find a competitor's highest score. Arrays are indexed from 0, and all scores are positive. Test 1, `highestScore([12, 18, 7, 15])`, returned 18, as expected. Which input for a second test would reveal the logic error in the function?",
+    "options": [
+      "`[20, 18, 7, 15]`",
+      "`[12, 18, 7, 25]`",
+      "`[5, 9, 14, 3]`",
+      "`[4, 4, 4, 4]`"
+    ],
+    "answer": 0,
+    "explanation": "The loop on line 3 starts at 1, so `scores[0]` is never compared. With `[20, 18, 7, 15]` the function returns 18 instead of 20, which reveals the error. In the other inputs the highest score also appears after index 0, so the function still returns the right answer.",
+    "whyWrong": [
+      "",
+      "The highest score, 25, is at index 3, which the loop checks, so the function correctly returns 25.",
+      "The highest score, 14, is at index 2, which the loop checks, so the function correctly returns 14.",
+      "The same score appears at indexes 1 to 3, so the function still correctly returns 4."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "wedgetail-highest",
+        "kind": "pseudocode",
+        "indexBase": 0,
+        "code": "FUNCTION highestScore(scores)\n    highest ← 0\n    FOR i ← 1 TO LENGTH(scores) - 1\n        IF scores[i] > highest THEN\n            highest ← scores[i]\n        ENDIF\n    ENDFOR\n    RETURN highest\nENDFUNCTION"
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk07-001",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "stem": "Which statement best describes beta testing?",
+    "options": [
+      "Developers test each module with prepared test data during coding.",
+      "Intended users try a nearly complete solution in realistic conditions.",
+      "Users rate the solution against criteria after months of normal use.",
+      "Testers check that each value entered falls within an acceptable range."
+    ],
+    "answer": 1,
+    "explanation": "Beta testing puts a nearly finished solution in the hands of people who match its intended users, in the conditions where it will be used, to find problems before release.",
+    "whyWrong": [
+      "Developers testing modules with test data during coding is alpha testing.",
+      "",
+      "Rating the solution against criteria after a period of use is evaluation, not testing.",
+      "Checking that values fall within an acceptable range describes a range check, a validation technique."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk07-002",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "stem": "Wemen Plains Grain Co-operative in the Mallee is having an app developed so that its 40 member farmers can book grain delivery times at the silo from their phones. Many members are older farmers with little experience of apps. Which group is most suitable for beta testing the app?",
+    "options": [
+      "The four developers who wrote and debugged the app",
+      "The office staff who helped write the requirements",
+      "Eight member farmers with a range of ages and app experience",
+      "Twenty university students recruited through an advertisement"
+    ],
+    "answer": 2,
+    "explanation": "A beta test group should represent the people who will use the app. Member farmers of varying ages and experience will meet the same problems as the wider membership, including members who are unfamiliar with apps.",
+    "whyWrong": [
+      "Developers already know how the app works, so they won't meet the problems farmers will. Testing by developers is alpha testing.",
+      "Office staff won't be booking deliveries, and they already know what the app is meant to do.",
+      "",
+      "Students aren't the app's users and are likely to be more experienced with apps than many members."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk07-003",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "stem": "Priya is preparing to beta test a booking app for Orchard Hill Physiotherapy in Ballarat. Which is the most appropriate scenario to give testers?",
+    "options": [
+      "Book a 30-minute session with any physiotherapist next week.",
+      "Tap Book, choose Sam Lin, select 10:30, then tap Confirm.",
+      "Enter 32/13/2026 as the date to check that it is rejected.",
+      "Rate how satisfied you are with the app on a scale of 1 to 5."
+    ],
+    "answer": 0,
+    "explanation": "A beta test scenario gives a realistic goal in the user's terms and leaves the tester to work out how to reach it. Observers can then see whether real users can complete the task unaided.",
+    "whyWrong": [
+      "",
+      "Listing each step tests whether the tester can follow instructions, not whether the interface is easy to use.",
+      "Entering an impossible date is a validation test with invalid data, which belongs in alpha testing.",
+      "A satisfaction rating is a survey question, not a task for the tester to carry out."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk07-004",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "stem": "During a beta test of a timesheet program for Coldwater Joinery in Wendouree, a tester can't work out how to submit a timesheet. The observing developer points to the Submit button so that the test can continue. What is the main problem with the developer's action?",
+    "options": [
+      "The test becomes alpha testing because a developer took part in it.",
+      "The tester should have been given boundary test data to enter instead.",
+      "Observation should be replaced by a survey completed after the test.",
+      "The result no longer shows whether users can complete the task unaided."
+    ],
+    "answer": 3,
+    "explanation": "Beta testing aims to find where real users struggle. Once the observer shows the tester the button, the scenario records a success that users working alone might not achieve, and the usability problem can be missed. The observer should record the difficulty without helping.",
+    "whyWrong": [
+      "Observing a beta test doesn't turn it into alpha testing. The tester is still an intended user in realistic conditions.",
+      "Boundary test data checks how inputs are handled during alpha testing; it wouldn't show whether users can find features.",
+      "A survey would miss problems testers forget or don't report. Observation is the right technique if the observer doesn't help.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk08-001",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "stem": "When should a new software solution normally be evaluated?",
+    "options": [
+      "During coding, as each module is completed",
+      "Just before release, while beta testers use it",
+      "On the first day it is used by all its users",
+      "After it has been in normal use for some time"
+    ],
+    "answer": 3,
+    "explanation": "Evaluation judges how efficiently and effectively the solution performs in everyday use, so it waits until users are familiar with it and data about real use has built up.",
+    "whyWrong": [
+      "Checking modules as they are completed is testing during development, not evaluation.",
+      "Users trying the solution before release is beta testing, which looks for problems to fix.",
+      "On the first day users are still learning, so the data would reflect the learning stage, not normal use.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk08-002",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "stem": "Harcourt Road Vets in Bendigo is planning how to evaluate its new online booking program. Which is the most suitable evaluation criterion?",
+    "options": [
+      "At least 90% of online bookings are completed in under two minutes.",
+      "The program is written in an object-oriented programming language.",
+      "Clients will be surveyed six weeks after the program goes live.",
+      "The program must be fast and easy for clients to use at all times."
+    ],
+    "answer": 0,
+    "explanation": "A good evaluation criterion is based on a requirement and is measurable. The program can log how long each online booking takes, so the percentage completed in under two minutes can be calculated and compared with the 90% target.",
+    "whyWrong": [
+      "",
+      "This describes how the program is built, not how well it performs for the clinic and its clients.",
+      "This is part of the timeline and data collection method, not a criterion to judge the program against.",
+      "'Fast and easy' has no measurable target, so the data can't show whether it has been met."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk08-003",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "stem": "What is the main purpose of an evaluation strategy?",
+    "options": [
+      "To plan the tasks, durations and dependencies of the project",
+      "To plan which scenarios beta testers will complete before release",
+      "To plan how and when the solution will be judged against criteria",
+      "To plan the test data used to check the outputs of each module"
+    ],
+    "answer": 2,
+    "explanation": "An evaluation strategy plans the evaluation of the solution in use: the criteria, the data and how it is collected, the timing and who is responsible.",
+    "whyWrong": [
+      "Tasks, durations and dependencies make up the project plan, such as a Gantt chart.",
+      "Scenarios for beta testers belong in a beta test plan, which is carried out before release.",
+      "",
+      "Test data for checking module outputs belongs in a test table used during alpha testing."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk08-004",
+    "kk": [
+      "U4O1-KK08",
+      "U4O1-KK09"
+    ],
+    "stem": "Mount Napier Office Supplies in Hamilton has written this evaluation strategy for its new online ordering program. What is the main weakness in the strategy?",
+    "options": [
+      "Criterion 1 should be measured with a survey rather than system logs.",
+      "Criterion 2 relies on opinions instead of checking invoices for errors.",
+      "Criterion 3 should be measured by counting calculation errors instead.",
+      "Data for every criterion should be collected on the first day of use."
+    ],
+    "answer": 1,
+    "explanation": "Whether invoices contain calculation errors is a matter of fact that can be checked by recalculating a sample of invoices. Staff opinions may be wrong or incomplete, so they don't give reliable evidence for criterion 2.",
+    "whyWrong": [
+      "System logs give accurate times for every order; a survey would give only staff estimates.",
+      "",
+      "Criterion 3 is about customers' views of ease of use, so a rating from customers suits it.",
+      "First-day data would reflect users learning the program, not its normal use."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "mount-napier-strategy",
+        "kind": "table",
+        "title": "Evaluation strategy (extract)",
+        "columns": [
+          "Criterion",
+          "Data collected",
+          "Method",
+          "When",
+          "Responsible"
+        ],
+        "rows": [
+          [
+            "1. Staff enter an order in under 3 minutes",
+            "Time from opening to saving each order",
+            "System log",
+            "Weeks 5 to 8 after launch",
+            "IT officer"
+          ],
+          [
+            "2. Invoices contain no calculation errors",
+            "Staff opinions of invoice accuracy",
+            "Survey of office staff",
+            "Week 8",
+            "Office manager"
+          ],
+          [
+            "3. At least 80% of customers rate ordering 4 or 5 out of 5 for ease of use",
+            "Ease-of-use rating out of 5",
+            "Online questionnaire",
+            "Week 6",
+            "Sales manager"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk09-001",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "stem": "Which data collection technique is best suited to finding out why users dislike a new screen layout?",
+    "options": [
+      "Analysing system logs of response times",
+      "Counting the errors in printed reports",
+      "Interviewing a small group of users",
+      "Timing how long each task takes users"
+    ],
+    "answer": 2,
+    "explanation": "Interviews let the evaluator ask follow-up questions and collect detailed qualitative data about users' reasons, which is what a 'why' question needs.",
+    "whyWrong": [
+      "Response times show how fast the system is, not why users dislike the layout.",
+      "Counting report errors measures the accuracy of output, not users' views of a screen.",
+      "",
+      "Timing tasks shows how long they take, but not the reasons behind users' opinions."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk09-002",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "stem": "Goulburn Plains Removals in Shepparton set this evaluation criterion for its new quoting program: 'The average time to create a quote is under 240 seconds.' The table shows the times the system log recorded for eight quotes. Which statement correctly applies the criterion to the data?",
+    "options": [
+      "Met, because the average time is about 236 seconds",
+      "Not met, because the average time is about 249 seconds",
+      "Not met, because four quotes took 240 seconds or longer",
+      "Met, because the fastest quote took only 150 seconds"
+    ],
+    "answer": 0,
+    "explanation": "The eight times total 1890 seconds, and 1890 ÷ 8 = 236.25 seconds. The criterion sets a target for the average, and 236 seconds is under 240, so it is met.",
+    "whyWrong": [
+      "",
+      "About 249 seconds comes from leaving out the fastest quote. All eight recorded times count.",
+      "The criterion is about the average time, not about how many individual quotes were slow.",
+      "One fast quote says nothing about the average; the criterion needs all eight times."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "goulburn-quote-times",
+        "kind": "table",
+        "title": "Quote times from the system log",
+        "columns": [
+          "Quote",
+          "Time (seconds)"
+        ],
+        "rows": [
+          [
+            "1",
+            "210"
+          ],
+          [
+            "2",
+            "270"
+          ],
+          [
+            "3",
+            "180"
+          ],
+          [
+            "4",
+            "330"
+          ],
+          [
+            "5",
+            "210"
+          ],
+          [
+            "6",
+            "240"
+          ],
+          [
+            "7",
+            "150"
+          ],
+          [
+            "8",
+            "300"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk09-003",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "stem": "Norwood Street Library in Ballarat has a new catalogue and loans program. Which pairing of an evaluation criterion with a data collection technique is most appropriate?",
+    "options": [
+      "Search results appear within 2 seconds: interview borrowers",
+      "Staff renew a loan in under 30 seconds: time each renewal",
+      "90% of borrowers rate the search as easy to use: system logs",
+      "No overdue notices are sent in error: survey borrowers' opinions"
+    ],
+    "answer": 1,
+    "explanation": "The criterion sets a time target, so timing staff as they renew loans measures exactly what the criterion states.",
+    "whyWrong": [
+      "Borrowers can't accurately report a response time of 2 seconds; it needs timing or system logs.",
+      "",
+      "Ratings are opinions, which system logs can't record; a survey is needed.",
+      "Whether notices were sent in error is checked by comparing notices with loan records, not by opinion."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk09-004",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "stem": "Tarrawingee Cycles in Wangaratta set this criterion for its new service-booking app: 'At least 85% of survey respondents rate the app 4 or 5 out of 5.' The table shows the survey results. Which statement correctly applies the criterion to the data?",
+    "options": [
+      "Met, because the average rating is above 4 out of 5",
+      "Met, because 92.5% of respondents gave a rating of 3 or more",
+      "Not met, because only 35% of respondents gave the top rating of 5",
+      "Not met, because 82.5% of respondents gave a rating of 4 or 5"
+    ],
+    "answer": 3,
+    "explanation": "33 of the 40 respondents (14 + 19) rated the app 4 or 5, which is 82.5%. The target is at least 85%, so the criterion is not met.",
+    "whyWrong": [
+      "The average is about 4.1, but the criterion sets a target for the percentage rating 4 or 5, not for the average.",
+      "Ratings of 3 don't count; the criterion specifies ratings of 4 or 5.",
+      "Ratings of 4 also count towards the target, so 35% is the wrong figure to apply.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "tarrawingee-ratings",
+        "kind": "table",
+        "title": "Survey of app users (40 respondents)",
+        "columns": [
+          "Rating out of 5",
+          "Respondents"
+        ],
+        "rows": [
+          [
+            "5",
+            "14"
+          ],
+          [
+            "4",
+            "19"
+          ],
+          [
+            "3",
+            "4"
+          ],
+          [
+            "2",
+            "2"
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk10-001",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "stem": "Which situation is an example of scope creep?",
+    "options": [
+      "A programmer resigns and her tasks are given to a new team member.",
+      "The client approves the mock-ups a week later than the plan allowed.",
+      "The client keeps asking for extra reports that were never agreed.",
+      "The test server fails and three days of testing must be repeated."
+    ],
+    "answer": 2,
+    "explanation": "Scope creep is the uncontrolled growth of what the project must deliver. Extra reports that were never agreed add work without the plan being changed to allow for it.",
+    "whyWrong": [
+      "A team member leaving is a change in personnel, not a change to what the project delivers.",
+      "A late approval delays the plan, but the scope of the project stays the same.",
+      "",
+      "A server failure is a technical issue; the work to be delivered hasn't grown."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk10-002",
+    "kk": [
+      "U4O1-KK10",
+      "U4O1-KK11",
+      "U3O2-KK03"
+    ],
+    "stem": "Saltbush Solar in Mildura is having an invoicing program developed. The Gantt chart shows the plan, in days. The lead developer falls ill, and Code interface takes 3 days longer than planned. To recover time, the project manager adds a second tester so that Integrate and test takes 2 days instead of 4. Compared with the original plan, when is the handover?",
+    "options": [
+      "On time",
+      "1 day late",
+      "3 days late",
+      "5 days late"
+    ],
+    "answer": 1,
+    "explanation": "The critical path is Analyse requirements → Design interface → Code interface → Integrate and test → Beta test, giving a handover on day 24. The 3-day delay to Code interface means Integrate and test starts on day 20 instead of day 17. Shortening it by 2 days recovers 2 of those days, so the handover is on day 25, 1 day late.",
+    "whyWrong": [
+      "The 2 days saved in testing don't fully cover the 3-day delay to a critical task.",
+      "",
+      "3 days late ignores the 2 days recovered by shortening Integrate and test.",
+      "5 days late adds the 2 days to the delay instead of subtracting them."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "saltbush-gantt",
+        "kind": "gantt",
+        "title": "Saltbush Solar invoicing program",
+        "caption": "Integrate and test starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "t1",
+            "name": "Analyse requirements",
+            "duration": 4,
+            "dependsOn": []
+          },
+          {
+            "id": "t2",
+            "name": "Design interface",
+            "duration": 5,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t3",
+            "name": "Design database",
+            "duration": 3,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t4",
+            "name": "Code interface",
+            "duration": 8,
+            "dependsOn": [
+              "t2"
+            ]
+          },
+          {
+            "id": "t5",
+            "name": "Code database",
+            "duration": 6,
+            "dependsOn": [
+              "t3"
+            ]
+          },
+          {
+            "id": "t6",
+            "name": "Integrate and test",
+            "duration": 4,
+            "dependsOn": [
+              "t4",
+              "t5"
+            ]
+          },
+          {
+            "id": "t7",
+            "name": "Beta test",
+            "duration": 3,
+            "dependsOn": [
+              "t6"
+            ]
+          },
+          {
+            "id": "m1",
+            "name": "Handover",
+            "duration": 0,
+            "dependsOn": [
+              "t7"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk10-003",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "stem": "Halfway through the development of a rostering program for Silverleaf Aged Care in Warragul, the only developer who has worked on the payroll module leaves the team. Which practice, if followed from the start of the project, would most reduce the resulting delay?",
+    "options": [
+      "Adding validation checks to every input in the payroll module",
+      "Beta testing the payroll module with a group of care staff",
+      "Setting measurable evaluation criteria for the payroll module",
+      "Documenting the payroll module's code and progress throughout"
+    ],
+    "answer": 3,
+    "explanation": "When the only person who knows a module leaves, a replacement must learn it before work can continue. Internal documentation and up-to-date progress records let them understand the code and pick up where it was left, so less time is lost.",
+    "whyWrong": [
+      "Validation improves the quality of input data but doesn't help a new developer understand the module.",
+      "Beta testing finds problems users meet; it doesn't pass on the departing developer's knowledge.",
+      "Evaluation criteria are used to judge the finished solution, not to continue its development.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk10-004",
+    "kk": [
+      "U4O1-KK10",
+      "U3O2-KK03"
+    ],
+    "stem": "Murray Bend Pharmacy in Echuca is having a stock program developed. The Gantt chart shows the plan, in days. Which event, on its own, would delay the handover?",
+    "options": [
+      "Design stock screens takes 1 more day than planned",
+      "Code report module takes 3 more days than planned",
+      "Design reports takes 2 more days than planned",
+      "The two report tasks take 3 more days between them"
+    ],
+    "answer": 0,
+    "explanation": "The critical path is Gather requirements → Design stock screens → Code stock module → Alpha testing → Beta testing, taking 18 days, so any delay to a task on it delays the handover. The report tasks are due to finish on day 10, but Alpha testing can't start until day 13, so up to 3 extra days on the report path don't move the handover.",
+    "whyWrong": [
+      "",
+      "Code report module would finish on day 13, the same day as Code stock module, so Alpha testing still starts on time.",
+      "Design reports would finish on day 7 and Code report module on day 12, before Alpha testing is due to start.",
+      "Between them these add 3 days, so the report path finishes on day 13, exactly when Alpha testing is due to start."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "murray-bend-gantt",
+        "kind": "gantt",
+        "title": "Murray Bend Pharmacy stock program",
+        "caption": "Alpha testing starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "t1",
+            "name": "Gather requirements",
+            "duration": 3,
+            "dependsOn": []
+          },
+          {
+            "id": "t2",
+            "name": "Design stock screens",
+            "duration": 4,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t3",
+            "name": "Design reports",
+            "duration": 2,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t4",
+            "name": "Code stock module",
+            "duration": 6,
+            "dependsOn": [
+              "t2"
+            ]
+          },
+          {
+            "id": "t5",
+            "name": "Code report module",
+            "duration": 5,
+            "dependsOn": [
+              "t3"
+            ]
+          },
+          {
+            "id": "t6",
+            "name": "Alpha testing",
+            "duration": 3,
+            "dependsOn": [
+              "t4",
+              "t5"
+            ]
+          },
+          {
+            "id": "t7",
+            "name": "Beta testing",
+            "duration": 2,
+            "dependsOn": [
+              "t6"
+            ]
+          },
+          {
+            "id": "m1",
+            "name": "Handover",
+            "duration": 0,
+            "dependsOn": [
+              "t7"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk11-001",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "stem": "Which record would most help a developer explain, at the end of a project, why coding took longer than planned?",
+    "options": [
+      "The software requirements specification",
+      "The evaluation criteria for the solution",
+      "A test table of the expected and actual outputs",
+      "A dated development journal kept during coding"
+    ],
+    "answer": 3,
+    "explanation": "A journal kept during coding records problems, decisions and changes as they happened, so it shows the causes of the delay.",
+    "whyWrong": [
+      "The SRS states what the solution must do; it doesn't record what happened during coding.",
+      "Evaluation criteria are for judging the finished solution, not for recording progress.",
+      "A test table records test results, not why coding tasks took longer than planned.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk11-002",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "stem": "Ashleigh manages the development of a stock program for Tidewater Seafoods in Portland. Coding has finished 3 days late because the client's price data arrived late. How should she record this on the project's Gantt chart?",
+    "options": [
+      "Replace the planned dates with the actual dates so the chart stays current",
+      "Annotate the actual finish date and the cause, keeping the planned dates visible",
+      "Leave the chart unchanged, because it shows the plan the client agreed to",
+      "Delete the coding task and add a new task with its actual duration instead"
+    ],
+    "answer": 1,
+    "explanation": "An annotation records what actually happened and why, while keeping the original plan visible. Planned and actual dates can then be compared when the project plan is assessed.",
+    "whyWrong": [
+      "Overwriting the planned dates loses the original plan, so planned and actual can't be compared later.",
+      "",
+      "An unchanged chart doesn't record progress, and the tasks that depend on coding won't be rescheduled.",
+      "Deleting the task loses the planned duration and gives no reason for the delay."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk11-003",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "stem": "Which feature of project management software is most useful when a task runs late?",
+    "options": [
+      "Moving dependent tasks and recalculating the critical path automatically",
+      "Checking that each date entered is in the correct format before saving",
+      "Storing each version of the source code in a shared online repository",
+      "Surveying users about the solution once it has been released for use"
+    ],
+    "answer": 0,
+    "explanation": "When a task runs late, every task that depends on it may need to move. The software reschedules them and shows whether the critical path, and so the finish date, has changed.",
+    "whyWrong": [
+      "",
+      "Checking the format of dates is validation; it doesn't show the effect of a delay on the plan.",
+      "Storing versions of code is version control, which doesn't reschedule tasks.",
+      "Surveying users after release is part of evaluating the solution, not tracking the project."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk11-004",
+    "kk": [
+      "U4O1-KK11",
+      "U3O2-KK03"
+    ],
+    "stem": "Little Wrens Childcare in Frankston is having an enrolment program developed. The Gantt chart shows the plan, in days. Code forms finishes 2 days later than planned. Which adjustment, on its own, would still let the program go live on the planned day?",
+    "options": [
+      "Add a developer so Code reports takes 2 days instead of 4",
+      "Add a tester so Beta test takes 2 days instead of 3",
+      "Add two testers so Alpha test takes 1 day instead of 3",
+      "Use a template so Design reports takes 1 day instead of 2"
+    ],
+    "answer": 2,
+    "explanation": "Code forms is on the critical path (Collect requirements → Design forms → Code forms → Alpha test → Beta test), so the 2-day delay moves go-live from day 19 to day 21. Only a saving of at least 2 days on a later critical task recovers it: cutting Alpha test from 3 days to 1 brings go-live back to day 19.",
+    "whyWrong": [
+      "Code reports isn't on the critical path, so finishing it sooner doesn't bring Alpha test forward.",
+      "Saving 1 day on Beta test recovers only half of the delay, so go-live would be on day 20.",
+      "",
+      "Design reports isn't on the critical path, so shortening it has no effect on go-live."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "little-wrens-gantt",
+        "kind": "gantt",
+        "title": "Little Wrens Childcare enrolment program",
+        "caption": "Alpha test starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "t1",
+            "name": "Collect requirements",
+            "duration": 4,
+            "dependsOn": []
+          },
+          {
+            "id": "t2",
+            "name": "Design forms",
+            "duration": 3,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t3",
+            "name": "Design reports",
+            "duration": 2,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t4",
+            "name": "Code forms",
+            "duration": 6,
+            "dependsOn": [
+              "t2"
+            ]
+          },
+          {
+            "id": "t5",
+            "name": "Code reports",
+            "duration": 4,
+            "dependsOn": [
+              "t3"
+            ]
+          },
+          {
+            "id": "t6",
+            "name": "Alpha test",
+            "duration": 3,
+            "dependsOn": [
+              "t4",
+              "t5"
+            ]
+          },
+          {
+            "id": "t7",
+            "name": "Beta test",
+            "duration": 3,
+            "dependsOn": [
+              "t6"
+            ]
+          },
+          {
+            "id": "m1",
+            "name": "Go live",
+            "duration": 0,
+            "dependsOn": [
+              "t7"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk12-001",
+    "kk": [
+      "U4O1-KK12"
+    ],
+    "stem": "Which activity is part of assessing the effectiveness of a project plan?",
+    "options": [
+      "Comparing planned and actual task durations and explaining the differences",
+      "Comparing the solution's actual outputs with the expected outputs in a test table",
+      "Comparing users' ratings of the solution with the targets in its evaluation criteria",
+      "Comparing the features of the solution with its list of functional requirements"
+    ],
+    "answer": 0,
+    "explanation": "A project plan is assessed by comparing what was planned with what happened, such as durations and dates, and explaining why they differ.",
+    "whyWrong": [
+      "",
+      "Comparing actual and expected outputs is testing the solution, not assessing the plan.",
+      "Comparing ratings with criteria is part of evaluating the solution, not the project plan.",
+      "Checking features against functional requirements judges the solution, not the plan that produced it."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk12-002",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK10"
+    ],
+    "stem": "Hargreaves Lane Bakery in Bendigo has had an online ordering app developed. The table compares the planned and actual durations of the project's tasks, which ran one after another. Which conclusion about the project plan is best supported?",
+    "options": [
+      "Testing was poorly planned, because it finished a day early.",
+      "The owner's extra screen was the main cause of the delay.",
+      "Most of the delay came from a technical issue during coding.",
+      "The analysis estimate was the least effective part of the plan."
+    ],
+    "answer": 2,
+    "explanation": "The project took 31 days against 25 planned, so it finished 6 days late. Coding alone ran 6 days over because the payment library changed, which is a technical issue. The extra screen added only 1 day, and testing saved 1 day.",
+    "whyWrong": [
+      "Finishing a day early doesn't show poor planning; the estimate was close and offset part of the delay.",
+      "The extra screen added only 1 day, while coding ran 6 days over.",
+      "",
+      "Analysis took exactly as long as planned, so its estimate was accurate."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "hargreaves-actuals",
+        "kind": "table",
+        "title": "Planned and actual durations",
+        "columns": [
+          "Task",
+          "Planned (days)",
+          "Actual (days)",
+          "Journal note"
+        ],
+        "rows": [
+          [
+            "Analyse requirements",
+            "5",
+            "5",
+            "–"
+          ],
+          [
+            "Design",
+            "6",
+            "7",
+            "Owner asked for one extra screen"
+          ],
+          [
+            "Code",
+            "10",
+            "16",
+            "Card payment library changed; payment code rewritten"
+          ],
+          [
+            "Test",
+            "4",
+            "3",
+            "–"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk12-003",
+    "kk": [
+      "U4O1-KK12",
+      "U3O2-KK03"
+    ],
+    "stem": "Tawonga Snow Hire's booking system was developed to the plan shown in the Gantt chart, in days. Each task started as soon as the tasks it depended on had finished. The table shows how long each task actually took. How late was the handover compared with the plan?",
+    "options": [
+      "On time",
+      "1 day late",
+      "5 days late",
+      "6 days late"
+    ],
+    "answer": 1,
+    "explanation": "In the plan, Code booking finishes on day 15, so the handover is on day 19. In fact the booking path took 3 + 5 + 7 = 15 days, but the reports path took 3 + 3 + 10 = 16 days. Test could only start on day 16, so the handover was on day 20: 1 day late. The reports tasks became the critical path.",
+    "whyWrong": [
+      "The original critical path did finish on time, but the reports path became longer and held up Test.",
+      "",
+      "Code reports ran 5 days over, but its path had 4 days to spare in the plan, so only 1 day passed to the handover.",
+      "6 days adds every overrun (1 + 5) as if all the tasks ran one after another."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "tawonga-gantt",
+        "kind": "gantt",
+        "title": "Tawonga Snow Hire booking system (planned)",
+        "caption": "Test starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "t1",
+            "name": "Analyse",
+            "duration": 3,
+            "dependsOn": []
+          },
+          {
+            "id": "t2",
+            "name": "Design booking screens",
+            "duration": 4,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t3",
+            "name": "Design staff reports",
+            "duration": 3,
+            "dependsOn": [
+              "t1"
+            ]
+          },
+          {
+            "id": "t4",
+            "name": "Code booking",
+            "duration": 8,
+            "dependsOn": [
+              "t2"
+            ]
+          },
+          {
+            "id": "t5",
+            "name": "Code reports",
+            "duration": 5,
+            "dependsOn": [
+              "t3"
+            ]
+          },
+          {
+            "id": "t6",
+            "name": "Test",
+            "duration": 4,
+            "dependsOn": [
+              "t4",
+              "t5"
+            ]
+          },
+          {
+            "id": "m1",
+            "name": "Handover",
+            "duration": 0,
+            "dependsOn": [
+              "t6"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      },
+      {
+        "id": "tawonga-actuals",
+        "kind": "table",
+        "title": "Actual durations",
+        "columns": [
+          "Task",
+          "Planned (days)",
+          "Actual (days)"
+        ],
+        "rows": [
+          [
+            "Analyse",
+            "3",
+            "3"
+          ],
+          [
+            "Design booking screens",
+            "4",
+            "5"
+          ],
+          [
+            "Design staff reports",
+            "3",
+            "3"
+          ],
+          [
+            "Code booking",
+            "8",
+            "7"
+          ],
+          [
+            "Code reports",
+            "5",
+            "10"
+          ],
+          [
+            "Test",
+            "4",
+            "4"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk12-004",
+    "kk": [
+      "U4O1-KK12"
+    ],
+    "stem": "When Gembrook Lane Legal in Traralgon assessed the project plan for its new client-records program, the journals showed that 9 days had been spent transferring client records from the old system. This task wasn't in the plan. Which improvement to future project plans does this most directly support?",
+    "options": [
+      "Collect more evaluation data after the solution is released",
+      "Increase the number of users in the beta testing group",
+      "Add more validation checks to the data entry screens",
+      "Include data transfer as a task when planning the project"
+    ],
+    "answer": 3,
+    "explanation": "The delay came from work the plan had left out, so the plan was incomplete. Future plans should list every task, including moving data from an old system, with a realistic duration.",
+    "whyWrong": [
+      "More evaluation data helps judge the solution, not the accuracy of the project plan.",
+      "A larger beta test group finds more usability problems but doesn't account for the missing task.",
+      "Validation improves the quality of input data but doesn't fix a task missing from the plan.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  }
+]

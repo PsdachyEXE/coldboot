@@ -671,5 +671,405 @@
       "status": "provisional"
     }
   ],
-  "glossary": []
+  "glossary": [
+    {
+      "term": "abstraction",
+      "status": "provisional"
+    },
+    {
+      "term": "access modifier",
+      "aliases": [
+        "access specifier"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "affordance",
+      "status": "provisional"
+    },
+    {
+      "term": "algorithm",
+      "status": "provisional"
+    },
+    {
+      "term": "alpha testing",
+      "status": "provisional"
+    },
+    {
+      "term": "API",
+      "aliases": [
+        "application programming interface"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "array",
+      "status": "provisional"
+    },
+    {
+      "term": "authentication",
+      "status": "provisional"
+    },
+    {
+      "term": "backup",
+      "aliases": [
+        "back-up"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "beta testing",
+      "status": "provisional"
+    },
+    {
+      "term": "binary search",
+      "status": "provisional"
+    },
+    {
+      "term": "camel case",
+      "aliases": [
+        "camelCase",
+        "camel casing"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "class",
+      "status": "provisional"
+    },
+    {
+      "term": "code repository",
+      "aliases": [
+        "repository",
+        "repo"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "code review",
+      "status": "provisional"
+    },
+    {
+      "term": "constraint",
+      "status": "provisional"
+    },
+    {
+      "term": "context diagram",
+      "status": "provisional"
+    },
+    {
+      "term": "control structure",
+      "status": "provisional"
+    },
+    {
+      "term": "critical path",
+      "status": "provisional"
+    },
+    {
+      "term": "CSV",
+      "aliases": [
+        "comma-separated values",
+        "comma separated values"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "data dictionary",
+      "status": "provisional"
+    },
+    {
+      "term": "data flow diagram",
+      "aliases": [
+        "DFD"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "debugging",
+      "status": "provisional"
+    },
+    {
+      "term": "effectiveness",
+      "status": "provisional"
+    },
+    {
+      "term": "efficiency",
+      "status": "provisional"
+    },
+    {
+      "term": "encapsulation",
+      "status": "provisional"
+    },
+    {
+      "term": "encryption",
+      "status": "provisional"
+    },
+    {
+      "term": "Essential Eight",
+      "aliases": [
+        "Essential 8"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "evaluation criteria",
+      "aliases": [
+        "evaluation criterion"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "existence check",
+      "aliases": [
+        "presence check"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "functional requirement",
+      "status": "provisional"
+    },
+    {
+      "term": "Gantt chart",
+      "status": "provisional"
+    },
+    {
+      "term": "generalisation",
+      "aliases": [
+        "generalization"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "generative AI",
+      "aliases": [
+        "generative artificial intelligence",
+        "GenAI"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "goal",
+      "status": "provisional"
+    },
+    {
+      "term": "Hungarian notation",
+      "status": "provisional"
+    },
+    {
+      "term": "inheritance",
+      "status": "provisional"
+    },
+    {
+      "term": "intellectual property",
+      "status": "provisional"
+    },
+    {
+      "term": "internal documentation",
+      "status": "provisional"
+    },
+    {
+      "term": "interoperability",
+      "status": "provisional"
+    },
+    {
+      "term": "IPO chart",
+      "aliases": [
+        "input-process-output chart",
+        "input process output chart"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "least privilege",
+      "aliases": [
+        "principle of least privilege"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "library",
+      "status": "provisional"
+    },
+    {
+      "term": "logic error",
+      "aliases": [
+        "logical error"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "method",
+      "status": "provisional"
+    },
+    {
+      "term": "milestone",
+      "status": "provisional"
+    },
+    {
+      "term": "mock-up",
+      "aliases": [
+        "mockup",
+        "mock up"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "multi-factor authentication",
+      "aliases": [
+        "MFA",
+        "multifactor authentication"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "non-functional requirement",
+      "aliases": [
+        "nonfunctional requirement"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "object",
+      "status": "provisional"
+    },
+    {
+      "term": "object description",
+      "status": "provisional"
+    },
+    {
+      "term": "objective",
+      "status": "provisional"
+    },
+    {
+      "term": "patching",
+      "status": "provisional"
+    },
+    {
+      "term": "pseudocode",
+      "aliases": [
+        "pseudo-code"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "range check",
+      "status": "provisional"
+    },
+    {
+      "term": "record",
+      "status": "provisional"
+    },
+    {
+      "term": "risk",
+      "status": "provisional"
+    },
+    {
+      "term": "runtime error",
+      "aliases": [
+        "run-time error",
+        "run time error"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "scope",
+      "aliases": [
+        "project scope",
+        "solution scope"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "scope creep",
+      "status": "provisional"
+    },
+    {
+      "term": "snake case",
+      "aliases": [
+        "snake_case",
+        "snake casing"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "software requirements specification",
+      "aliases": [
+        "SRS"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "syntax error",
+      "status": "provisional"
+    },
+    {
+      "term": "test data",
+      "status": "provisional"
+    },
+    {
+      "term": "testing",
+      "status": "provisional"
+    },
+    {
+      "term": "threat",
+      "status": "provisional"
+    },
+    {
+      "term": "threat modelling",
+      "aliases": [
+        "threat modeling"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "type check",
+      "aliases": [
+        "data type check"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "usability",
+      "status": "provisional"
+    },
+    {
+      "term": "use case diagram",
+      "aliases": [
+        "use-case diagram"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "user-centred design",
+      "aliases": [
+        "user-centered design",
+        "user centred design"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "validation",
+      "status": "provisional"
+    },
+    {
+      "term": "version control",
+      "aliases": [
+        "version control system",
+        "source control"
+      ],
+      "status": "provisional"
+    },
+    {
+      "term": "vulnerability",
+      "status": "provisional"
+    },
+    {
+      "term": "XML",
+      "aliases": [
+        "Extensible Markup Language"
+      ],
+      "status": "provisional"
+    }
+  ]
 }

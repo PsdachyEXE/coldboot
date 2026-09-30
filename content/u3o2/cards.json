@@ -1,0 +1,1509 @@
+[
+  {
+    "id": "c-u3o2-kk01-001",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "Problem",
+    "back": "A situation in which an existing system or process isn't working as it should, for example because it causes errors, delays or extra cost.",
+    "mistake": "A problem needs something that is currently falling short. If the current system works well and the goal is to gain something new, it's an opportunity, not a problem.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk01-002",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "Need",
+    "back": "Something an individual or organisation requires but doesn't yet have, such as a way to meet a new legal reporting duty.",
+    "mistake": "A need doesn't depend on anything going wrong. It can arise when a new obligation applies that the organisation has never had to meet, even though its current system works well.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk01-003",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "Opportunity",
+    "back": "A chance to gain an advantage or do something new, often opened up by new technology or a new market, even when the current system works well.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk01-004",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "basic",
+    "front": "Give four reasons an organisation might undertake a software development project.",
+    "back": "Any four of:\n- to fix a problem with a current system, such as errors or delays\n- to meet a need, such as a new legal obligation\n- to take an opportunity, such as a service that new technology makes possible\n- to make processes more efficient or more effective\n- to replace an outdated system that is no longer supported",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk01-005",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "basic",
+    "front": "Why might an individual, rather than an organisation, undertake a software development project?",
+    "back": "To solve a personal problem or automate a task they do often; to create a product they can sell or share; to meet the needs of a group they belong to, such as a club; or to build their skills and portfolio.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk01-006",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "compare",
+    "front": "Problem versus opportunity",
+    "back": "| | Problem | Opportunity |\n|:--|:--|:--|\n| Current system | Falling short (errors, delays, cost) | May work well |\n| Aim | Fix what isn't working | Gain an advantage or offer something new |\n| Example | Paper bookings cause double-bookings | Online booking would let a clinic take bookings after hours |",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk01-007",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "cloze",
+    "front": "A café whose handwritten orders are often misread by kitchen staff has {{a problem}}; a café that could sell meal subscriptions online, which no local rival offers, has {{an opportunity}}.",
+    "back": "A problem means the current process falls short. An opportunity means gaining something new, even when nothing is broken.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk01-008",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "basic",
+    "front": "Why should a software project start by identifying the problem, need or opportunity?",
+    "back": "It states why the solution is being built. That purpose shapes the brief, guides which data is collected and which requirements matter, and gives criteria for judging later whether the solution succeeded.",
+    "mistake": "The reason for a project isn't 'to build an app'. The app is the means; the reason is the problem, need or opportunity it addresses.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-001",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "type": "reverse",
+    "front": "Brief",
+    "back": "A short document that sets out the context of a project and the problem, need or opportunity it responds to, and outlines what the solution should achieve. It is the starting point for analysis.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "Project brief"
+    ]
+  },
+  {
+    "id": "c-u3o2-kk02-002",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "type": "basic",
+    "front": "What does a brief typically document?",
+    "back": "- background: the organisation and its current situation\n- the problem, need or opportunity\n- the stakeholders and intended users\n- what the solution is expected to achieve\n- known constraints, such as a budget or deadline",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-003",
+    "kk": [
+      "U3O2-KK02",
+      "U3O2-KK09"
+    ],
+    "type": "compare",
+    "front": "Brief versus software requirements specification (SRS)",
+    "back": "| | Brief | SRS |\n|:--|:--|:--|\n| When | Start of the project | After data collection and analysis |\n| Detail | Short and high level | Detailed and precise |\n| Purpose | Explain why a solution is wanted | Set out what the solution must do, for design and testing |",
+    "mistake": "A brief isn't a short SRS. It comes before analysis, so it can't yet list the detailed requirements that analysis produces.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-004",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "type": "basic",
+    "front": "Why is a brief usually written in plain, non-technical language?",
+    "back": "Its readers include the client and other stakeholders, not only developers. They need to be able to confirm that it describes their situation and goals correctly before analysis begins.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-005",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "type": "basic",
+    "front": "What kind of content doesn't belong in a brief?",
+    "back": "Design and development detail, such as mock-ups, pseudocode, data dictionaries, test tables and a full list of requirements. These are produced later, once analysis has worked out what the solution must do.",
+    "mistake": "Suggesting screen layouts or code in a brief jumps ahead of analysis. A brief says what is wanted and why, not how it will be built.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-006",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "type": "cloze",
+    "front": "A brief explains {{why}} a solution is wanted and what it should achieve; it does not explain {{how}} the solution will work.",
+    "back": "How the solution works is decided in the design stage, after analysis.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-007",
+    "kk": [
+      "U3O2-KK02",
+      "U3O2-KK04"
+    ],
+    "type": "basic",
+    "front": "How does a developer use a brief at the start of analysis?",
+    "back": "As the starting point. It identifies the stakeholders to collect data from and the issues to ask them about. The requirements, constraints and scope found through that data collection are then documented in the SRS.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-008",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "type": "basic",
+    "front": "Why should a brief identify the intended users?",
+    "back": "The users' characteristics, such as their skills, age, devices and working conditions, shape which data is collected from them and later requirements such as usability.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-001",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Critical path",
+    "back": "The longest chain of dependent tasks through a project, from start to finish. Its total duration is the shortest time in which the project can be completed.",
+    "mistake": "The critical path isn't a list of the most important or hardest tasks. It's the chain of dependent tasks with the longest total duration.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-002",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Milestone",
+    "back": "A marker on a Gantt chart for a significant point in a project, such as the client approving the SRS. It has zero duration, so it takes no time itself.",
+    "mistake": "A milestone isn't a task. It marks a point in time, such as a sign-off, and adds nothing to the project's duration.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-003",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Dependency",
+    "back": "A link between two tasks in which one task can't start until the other (its predecessor) has finished.",
+    "mistake": "Two tasks drawn one after the other aren't necessarily dependent. A dependency exists only when one task needs the other to finish first.",
+    "difficulty": 1,
+    "source": "textbook",
+    "aliases": [
+      "Task dependency"
+    ]
+  },
+  {
+    "id": "c-u3o2-kk03-004",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "basic",
+    "front": "What does a Gantt chart show?",
+    "back": "Each task as a horizontal bar against a timeline, showing its start, duration and finish; the sequence of tasks and the dependencies between them; milestones; and often the critical path.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-005",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "basic",
+    "front": "A task on the critical path finishes two days late. What happens to the project's finish date, and why?",
+    "back": "The project finishes two days late, unless later critical tasks are shortened. The task is part of the longest chain, so the delay pushes back every later task in that chain and the finish date.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-006",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "cloze",
+    "front": "Tasks that don't depend on each other can run {{concurrently}}, which can shorten the project; tasks linked by a dependency must run in {{sequence}}.",
+    "back": "Concurrent tasks overlap on the timeline. Sequenced tasks run one after another because each needs the previous one finished.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-007",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "basic",
+    "front": "How do you find the critical path and the minimum project duration from a set of tasks and their dependencies?",
+    "back": "Trace every chain of dependent tasks from the project's start to its finish and add up each chain's durations. The chain with the largest total is the critical path, and that total is the minimum project duration.",
+    "mistake": "Adding every task's duration gives the project length only if no tasks overlap. Tasks that run concurrently are counted once, through the longest chain.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-008",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "compare",
+    "front": "Critical task versus non-critical task",
+    "back": "| | Critical task | Non-critical task |\n|:--|:--|:--|\n| On the critical path? | Yes | No |\n| If it is delayed | The project finishes later by the same amount | It can be delayed a limited time before the finish date moves |",
+    "mistake": "A non-critical task can still delay the project if its delay is long enough to make its chain the longest one.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-001",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "compare",
+    "front": "Interview versus survey",
+    "back": "| | Interview | Survey |\n|:--|:--|:--|\n| People reached | A few | Many, quickly |\n| Depth | Detailed; follow-up questions possible | Limited to the set questions |\n| Data | Mostly qualitative | Mostly quantitative (closed questions) |\n| Anonymity | No | Possible |",
+    "mistake": "A survey isn't better just because it reaches more people. It can't follow up a vague or surprising answer.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-002",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "basic",
+    "front": "When does observation suit data collection better than an interview or a survey?",
+    "back": "When the developer needs to see how a task is actually done: the real steps, workarounds, time taken and where problems occur. People often can't describe routine tasks accurately, or leave steps out.",
+    "mistake": "Observation shows what people do, not what they think. It isn't the technique for finding out users' opinions or preferences.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-003",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "basic",
+    "front": "State two limitations of observation as a data collection technique.",
+    "back": "Any two of:\n- people may work differently when they know they're being watched\n- it shows what people do, but not why, or what they would prefer\n- it is time-consuming, so only a few people or sessions can be observed\n- the situations of interest may not happen while the observer is there",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-004",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "compare",
+    "front": "Open question versus closed question",
+    "back": "| | Open question | Closed question |\n|:--|:--|:--|\n| Answer | In the respondent's own words | Chosen from set options (yes/no, rating scale) |\n| Data | Qualitative: reasons and detail | Quantitative: easy to count and compare |\n| Collating | Slow | Quick |",
+    "mistake": "Closed questions aren't weaker questions. They produce data that can be counted and compared across hundreds of responses.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-005",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "compare",
+    "front": "Qualitative data versus quantitative data",
+    "back": "Qualitative data describes opinions, reasons and experiences in words, e.g. a receptionist's account of why bookings go wrong. Quantitative data is numerical and can be counted or measured, e.g. 68% of surveyed members rating the current system 'difficult'.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-006",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "basic",
+    "front": "Why is a survey often used to collect data from a large stakeholder group, such as customers?",
+    "back": "It reaches many people quickly and cheaply, including people in different places. Responses can be anonymous, which encourages honest answers, and closed questions produce data that is quick to collate and analyse.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-007",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "basic",
+    "front": "Why might a developer interview a manager rather than send them a survey?",
+    "back": "Managers are few and hold detailed knowledge of goals and processes. An interview allows follow-up questions and clarification, so the developer gets in-depth information that fixed survey questions would miss.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-008",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "cloze",
+    "front": "A large group spread across many locations suits {{a survey}}; a few people with detailed knowledge suit {{interviews}}; staff carrying out a routine process suit {{observation}}.",
+    "back": "Match the technique to the stakeholder group: its size, where its members are, and whether you need opinions, detail or evidence of how a task is really done.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-001",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "Functional requirement",
+    "back": "What a solution must do: a function or feature, such as the data it accepts, the processing it performs or the output it produces.",
+    "mistake": "A functional requirement doesn't say how well something is done. 'Calculate the fee' is functional; 'calculate it within one second' adds a non-functional requirement.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-002",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "Non-functional requirement",
+    "back": "A quality the solution must have, describing how well it performs its functions rather than what they are, such as its reliability, usability or portability.",
+    "mistake": "Non-functional doesn't mean optional or less important. A solution that works but is unreliable or hard to use can still fail its users.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-003",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "basic",
+    "front": "What does reliability mean as a non-functional requirement?",
+    "back": "The solution performs its functions consistently and correctly whenever it is needed, without crashing or losing data. E.g. the booking system stays available throughout clinic hours.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-004",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "basic",
+    "front": "What does usability mean as a non-functional requirement?",
+    "back": "How easily the intended users can learn and use the solution to complete their tasks. E.g. a new receptionist can make a booking within two minutes without help.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-005",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "basic",
+    "front": "What does portability mean as a non-functional requirement?",
+    "back": "The solution can run on different devices, operating systems or platforms with little or no change. E.g. the app works on Android and iOS phones and in a web browser.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-006",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "compare",
+    "front": "Functional requirement versus non-functional requirement",
+    "back": "| | Functional | Non-functional |\n|:--|:--|:--|\n| Describes | What the solution does | How well it does it |\n| Example | Calculate each member's annual fee | A new user can pay a fee in under two minutes |\n| Checked by | Testing that outputs are correct | Measuring against a stated target |",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-007",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "basic",
+    "front": "Why should a non-functional requirement be measurable?",
+    "back": "So it can be tested during development and checked in evaluation. 'The app should be user-friendly' can't be checked; 'a new user can book a court in under two minutes without help' can.",
+    "mistake": "Words like 'user-friendly', 'fast' or 'reliable' on their own aren't requirements a developer can test. Add a measurable target.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-008",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "cloze",
+    "front": "'The program must email each client an invoice' is a {{functional}} requirement; 'the program must stay available during all opening hours' is a {{non-functional}} requirement concerning {{reliability}}.",
+    "back": "Functional requirements state what the solution does; non-functional requirements state qualities it must have, such as reliability, usability and portability.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-001",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "type": "reverse",
+    "front": "Constraint",
+    "back": "A condition that limits the solution or how it can be developed, such as a fixed budget, a deadline, a law the solution must comply with, or the hardware it must run on.",
+    "mistake": "A constraint isn't something the solution does. It's a limit the developer has to work within.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-002",
+    "kk": [
+      "U3O2-KK06",
+      "U3O2-KK05"
+    ],
+    "type": "compare",
+    "front": "Constraint versus non-functional requirement",
+    "back": "A non-functional requirement is a quality the solution itself must have, such as reliability or usability, and is tested in the finished solution. A constraint limits the project or the options available, such as a budget, a deadline, a law or existing hardware.",
+    "mistake": "'Development must cost less than $9000' isn't a non-functional requirement. Cost limits the project; it isn't a quality of the solution.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-003",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "type": "basic",
+    "front": "Give an example of an economic constraint on a software project.",
+    "back": "A limit on the money available, e.g. the club can spend no more than $6000 on development, which may rule out paid libraries or hiring a second developer.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-004",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "type": "basic",
+    "front": "Give an example of a technical constraint on a software project.",
+    "back": "A limit set by the technology available, e.g. the program must run on the clinic's existing laptops, or the clinic has only a slow, unreliable internet connection.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-005",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "type": "basic",
+    "front": "Give an example of a legal constraint on a software project.",
+    "back": "A limit set by law, e.g. patients' personal and health information must be collected, stored and shared only as privacy law allows, or the solution must not use images or code without the owner's permission.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-006",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "type": "basic",
+    "front": "Why must constraints be identified during analysis, before design begins?",
+    "back": "They limit which designs are possible. A design that ignores a constraint, for example one that costs more than the budget or won't run on the existing hardware, would have to be reworked. Constraints are recorded in the SRS so designers work within them.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-007",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "type": "cloze",
+    "front": "'The app must run on the school's existing Chromebooks' is {{a technical}} constraint; 'development must cost no more than $4000' is {{an economic}} constraint.",
+    "back": "Technical constraints come from the hardware, software and networks available; economic constraints come from the money available.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-008",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "type": "basic",
+    "front": "How can a constraint shape a design decision? Give an example.",
+    "back": "It rules options in or out. E.g. if the orchard's tablets often have no internet connection, the design must store records on the device and upload them later; a small budget may rule out a paid mapping library.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk07-001",
+    "kk": [
+      "U3O2-KK07"
+    ],
+    "type": "reverse",
+    "front": "Scope (of a solution)",
+    "back": "The boundaries of a solution: what it will do and what it will not do. Scope is set during analysis and recorded in the SRS.",
+    "mistake": "Scope isn't only a list of features. The exclusions matter just as much, because they let everyone recognise a request for something extra.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk07-002",
+    "kk": [
+      "U3O2-KK07",
+      "U4O1-KK10"
+    ],
+    "type": "reverse",
+    "front": "Scope creep",
+    "back": "The gradual, uncontrolled growth of a project's scope after it has been agreed, as features are added without adjusting the time, budget or plan.",
+    "mistake": "Scope creep isn't caused only by clients. A developer who adds features nobody asked for causes it too.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk07-003",
+    "kk": [
+      "U3O2-KK07",
+      "U3O2-KK06"
+    ],
+    "type": "compare",
+    "front": "Scope versus constraint",
+    "back": "| | Scope | Constraint |\n|:--|:--|:--|\n| What it is | A boundary chosen for the solution | A condition that limits the solution or the project |\n| Example | Will take bookings; will not take payments | Must cost less than $20 000 |\n| Question it answers | What will the solution cover? | What must the project work within? |",
+    "mistake": "A deadline or a budget is a constraint, not scope. Scope describes what the solution covers, not the limits it is built under.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk07-004",
+    "kk": [
+      "U3O2-KK07",
+      "U3O2-KK05"
+    ],
+    "type": "compare",
+    "front": "Scope versus functional requirements",
+    "back": "| | Scope | Functional requirements |\n|:--|:--|:--|\n| Detail | High level: the main features included and those excluded | Detailed: each specific thing the solution must do |\n| Example | Will record tool loans; will not manage memberships | Must list every tool that is past its due date |\n| Relationship | Sets the outer limits | Every one falls inside the scope |",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk07-005",
+    "kk": [
+      "U3O2-KK07",
+      "U3O2-KK09",
+      "PSM"
+    ],
+    "type": "cloze",
+    "front": "The scope of a solution is determined in the {{analysis}} stage of the problem-solving methodology and recorded in the {{software requirements specification}} (SRS).",
+    "back": "Scope must be settled before design, so designers know which features to plan for and which to leave out.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk07-006",
+    "kk": [
+      "U3O2-KK07"
+    ],
+    "type": "basic",
+    "front": "Give three reasons why a clearly documented scope matters to a software project.",
+    "back": "Any three:\n- the client and developer agree on what will be delivered\n- time and cost can be estimated realistically\n- requests for extra features can be recognised as scope changes\n- it is clear when the solution is complete\n- evaluation can judge the solution against what was agreed",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk07-007",
+    "kk": [
+      "U3O2-KK07",
+      "U4O1-KK10"
+    ],
+    "type": "basic",
+    "front": "How should a project team handle a request for a feature outside the agreed scope?",
+    "back": "Treat it as a change to the scope. Record the request, assess its effect on time, cost and other tasks, and add it only if the client agrees to the change. Otherwise, leave it for a later version.",
+    "mistake": "Adding a 'small' extra without assessing it is how scope creep starts. Many small additions can delay the whole project.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk07-008",
+    "kk": [
+      "U3O2-KK07"
+    ],
+    "type": "basic",
+    "front": "What problems can a poorly defined scope cause?",
+    "back": "Features nobody needs get built, requests for extras can't be recognised (scope creep), deadlines and budgets are missed, and the client and developer may disagree about whether the solution is finished.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk08-001",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "Context diagram",
+    "back": "A diagram showing the whole system as a single process, the external entities it exchanges data with, and the labelled data flows between them. It shows no internal processes or data stores.",
+    "mistake": "Data stores never appear on a context diagram. Stored data is inside the system, so it is hidden within the single process.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk08-002",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "Data flow diagram (DFD)",
+    "back": "A diagram showing how data moves through a system: the processes that transform data, the data stores that hold it, the external entities that supply or receive it, and the labelled data flows between them.",
+    "aliases": [
+      "DFD"
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk08-003",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "Use case diagram",
+    "back": "A diagram showing the actors that interact with a system, the use cases (goals) they can achieve with it, the system boundary, and the relationships between actors and use cases, and between use cases.",
+    "mistake": "A use case diagram doesn't show data moving or the order of steps. It shows who can do what with the system.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk08-004",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "cloze",
+    "front": "In a DFD, a process is named with a {{verb phrase}} such as *Calculate fee*, while data flows and data stores are named with {{nouns}} such as `booking_details` and *Bookings*.",
+    "back": "A process does something to data, so its name is an action. A flow or a store is the data itself, so its name says what the data is.",
+    "mistake": "A flow labelled `check_stock` names an action, not data. Rename it for the data that moves, such as `stock_query`.",
+    "difficulty": 2,
+    "source": "exam-convention"
+  },
+  {
+    "id": "c-u3o2-kk08-005",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "basic",
+    "front": "State four convention errors to check for in a DFD.",
+    "back": "Any four:\n- data flowing directly between two data stores\n- an external entity connected directly to a data store\n- data flowing directly between two external entities\n- a process with inputs but no output, or outputs but no input\n- a data flow with no label, or labelled with an action",
+    "mistake": "An external entity never reads from or writes to a data store directly. A process must sit between them to handle the data.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk08-006",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "compare",
+    "front": "External entity versus actor",
+    "back": "| | External entity | Actor |\n|:--|:--|:--|\n| Diagram | Context diagram and DFD | Use case diagram |\n| Drawn as | Rectangle | Stick figure |\n| Role | A source or destination of data outside the system | A person, organisation or other system that interacts with the system to reach a goal |",
+    "mistake": "Entities and actors aren't only people. A payment service that the system sends card details to is an external entity on a DFD and an actor on a use case diagram.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk08-007",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "compare",
+    "front": "Data flow versus association (use case diagram)",
+    "back": "| | Data flow | Association |\n|:--|:--|:--|\n| Diagram | Context diagram and DFD | Use case diagram |\n| Shows | Data moving, in the direction of the arrow | That an actor takes part in a use case |\n| Label | A noun naming the data, such as `payment_details` | None needed: the line only links actor and use case |",
+    "mistake": "Associations don't carry data labels. A use case diagram shows who interacts with which use case, not what data moves.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk08-008",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "compare",
+    "front": "<<includes>> versus <<extends>>",
+    "back": "| | <<includes>> | <<extends>> |\n|:--|:--|:--|\n| When it runs | Every time the base use case runs | Only under a condition, as an optional addition |\n| Arrow direction | From the base use case to the included one | From the extending use case to the base one |\n| Example | *Place order* includes *Calculate total* | *Apply discount code* extends *Place order* |",
+    "mistake": "The arrows point in opposite directions. An <<extends>> arrow points to the base use case, not away from it.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-001",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "type": "reverse",
+    "front": "Software requirements specification (SRS)",
+    "back": "A document produced at the end of analysis that sets out what a solution must do and the conditions it must meet, so the client and developer share one agreed description before design begins.",
+    "aliases": [
+      "SRS",
+      "Software requirements specification"
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-002",
+    "kk": [
+      "U3O2-KK09",
+      "PSM"
+    ],
+    "type": "basic",
+    "front": "When in the problem-solving methodology is the SRS produced, and which stage uses it next?",
+    "back": "At the end of the analysis stage, after data has been collected and the requirements identified. The design stage uses it next: designs are planned to meet its requirements, constraints and scope.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-003",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "type": "cloze",
+    "front": "An SRS describes {{what}} a solution must do, not {{how}} it will be built.",
+    "back": "Choices such as algorithms, pseudocode and detailed screen layouts are made later, in the design stage. Putting them in the SRS would tie designers down before the requirements are settled.",
+    "mistake": "Pseudocode and algorithm choices don't belong in an SRS. They are design decisions, made after the SRS is agreed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-004",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "type": "basic",
+    "front": "Who uses an SRS, and for what?",
+    "back": "- The client: to confirm the requirements are right before work begins\n- Designers: to plan a solution that meets the requirements and constraints\n- Developers and testers: to check the solution does what is required\n- Evaluators: to judge whether the finished solution meets its requirements",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-005",
+    "kk": [
+      "U3O2-KK09",
+      "U3O2-KK07"
+    ],
+    "type": "basic",
+    "front": "Why should the client approve the SRS before design begins?",
+    "back": "Approval confirms that both sides agree on what will be built. Designers can then work from settled requirements, and any later request can be recognised as a change to be costed and agreed, which limits scope creep and disputes.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-006",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "type": "basic",
+    "front": "What is a solution's operating environment, and why is it described during analysis?",
+    "back": "The hardware, operating system, network and other software the solution will run on or alongside, such as an office's existing Windows laptops. Describing it early lets designers and developers choose tools and designs that will work there.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-007",
+    "kk": [
+      "U3O2-KK09",
+      "U3O2-KK03"
+    ],
+    "type": "compare",
+    "front": "SRS versus project plan (Gantt chart)",
+    "back": "| | SRS | Project plan |\n|:--|:--|:--|\n| Describes | What the solution must do and the conditions it must meet | The tasks needed to produce it, with durations, order and dependencies |\n| Used to | Design, test and evaluate the solution | Schedule and track the project |",
+    "mistake": "The SRS doesn't schedule the project. It may record a deadline as a constraint, but the tasks, durations and dependencies that meet the deadline belong in the project plan.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-008",
+    "kk": [
+      "U3O2-KK09",
+      "U3O2-KK05"
+    ],
+    "type": "basic",
+    "front": "A draft SRS lists only what the solution must do. Why is that not enough?",
+    "back": "It doesn't say how well the solution must perform (non-functional requirements such as usability or reliability) or what limits it must work within (constraints such as budget or existing hardware). A design could provide every function yet still be unacceptable.",
+    "mistake": "Non-functional requirements aren't optional extras. A solution that works but is too slow or too hard to use doesn't meet its requirements.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-001",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "reverse",
+    "front": "Intellectual property (IP)",
+    "back": "Creations of the mind, such as program code, designs, graphics and written content, that the law protects by giving their owner rights over how they are copied and used.",
+    "aliases": [
+      "IP",
+      "Intellectual property"
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-002",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "basic",
+    "front": "In Australia, when does program code become protected by copyright?",
+    "back": "Automatically, as soon as it is written down or saved. No registration, fee or © symbol is needed.",
+    "mistake": "Code doesn't need to be registered to be protected. Australia has no copyright register; IP Australia handles patents, trade marks and designs, not copyright.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-003",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "basic",
+    "front": "Does copyright protect the idea behind a program, or the program's code?",
+    "back": "The code: the way the program is expressed. Copyright doesn't protect the underlying idea or functionality, so another developer may build a similar program by writing their own code.",
+    "mistake": "Building an app with the same features as a rival's isn't copyright infringement. Copying the rival's code, graphics or text is.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-004",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "compare",
+    "front": "Code written by an employee versus code written by a contractor",
+    "back": "| | Employee | Contractor |\n|:--|:--|:--|\n| Default copyright owner | The employer, when the code is written as part of the job | The contractor who wrote it |\n| How the client gains ownership | The employer already owns it | Through a written contract that assigns the copyright |",
+    "mistake": "Paying a contractor doesn't by itself transfer copyright. Unless the contract assigns it in writing, the contractor keeps ownership of the code.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-005",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "basic",
+    "front": "A developer adds an open-source library to a client's program. What must they do?",
+    "back": "Follow the library's licence. Open-source code is still protected by copyright; its licence gives permission to use it on conditions, such as keeping the copyright notice and, under some licences, releasing changes under the same licence.",
+    "mistake": "Open source doesn't mean free of conditions. Using the code without meeting its licence terms can infringe the owner's copyright.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-006",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "reverse",
+    "front": "Personal information",
+    "back": "Information or an opinion about an identified person, or about a person who can reasonably be identified from it, such as a name, address, date of birth or driver licence number.",
+    "mistake": "Information doesn't need a name to be personal. A driver licence number or an email address can be enough to identify someone.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-007",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "basic",
+    "front": "List four ways a program can be designed to protect the privacy of the personal information it handles.",
+    "back": "Any four:\n- collect only the information needed for its purpose\n- tell users what is collected and why\n- use it only for the purpose it was collected for\n- restrict access to it and encrypt it when stored\n- let users view and correct their own information\n- delete or de-identify it when it is no longer needed",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-008",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "cloze",
+    "front": "In Australia, the {{Copyright Act 1968}} (Cth) protects program code as a literary work, and the {{Privacy Act 1988}} (Cth) sets rules for handling personal information through the Australian Privacy Principles.",
+    "back": "Copyright law covers who may copy and use code. Privacy law covers how personal information is collected, used, stored and disclosed. The Privacy Act applies to Australian Government agencies and many private organisations.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-001",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "type": "basic",
+    "front": "What makes a good file naming convention for a software project?",
+    "back": "Names that are consistent, descriptive and sortable: the same order of parts every time, the project and document named, dates written as YYYY-MM-DD, a version number, and no spaces or special characters. For example, `2026-05-04_bookingapp_srs_v1.2.docx`.",
+    "mistake": "'final' isn't a version. Files are often changed after they are called final, which leads to names like `srs_final2_FINAL.docx`.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-002",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "type": "cloze",
+    "front": "Writing dates in file names as {{YYYY-MM-DD}} means that sorting the files by name also sorts them into {{date order}}.",
+    "back": "Year first, then month, then day, each with a fixed number of digits, so `2026-03-09` sorts before `2026-10-02`. A day-first date such as `9-3-26` doesn't sort correctly.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-003",
+    "kk": [
+      "U3O2-KK11",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "Version control",
+    "back": "Recording and managing changes to files over time, so that earlier versions can be recovered, changes compared and the work of several developers combined. It may use version numbers in file names, or a version control system that keeps every saved change in a repository.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-004",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "type": "basic",
+    "front": "Why should a software project keep versions of its files?",
+    "back": "- A working earlier version can be restored if a change breaks the program\n- Versions can be compared to find when a bug appeared\n- Everyone knows which version is current\n- Developers don't overwrite each other's work",
+    "mistake": "Saving over the same file each time isn't versioning. Once it is overwritten, the earlier working copy is gone.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-005",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "type": "compare",
+    "front": "Backup versus archive",
+    "back": "| | Backup | Archive |\n|:--|:--|:--|\n| What it is | A copy of current files | Files no longer in active use, moved to long-term storage |\n| Purpose | Restore files after loss or damage | Keep records without cluttering working storage |\n| Originals | Stay in place | Usually removed from the working location |",
+    "mistake": "An archive isn't a backup. Archived files are often the only copy, so the archive itself needs backing up.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-006",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "type": "basic",
+    "front": "Why should at least one backup be kept off-site?",
+    "back": "A fire, flood or theft that destroys the original files can also destroy a backup kept in the same place. An off-site copy, such as one at another location or in cloud storage, survives a disaster at the main site.",
+    "mistake": "A backup on a second drive in the same computer protects against a failed drive, but not against fire, theft, or ransomware that reaches both.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-007",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "type": "compare",
+    "front": "Full backup versus incremental backup",
+    "back": "| | Full | Incremental |\n|:--|:--|:--|\n| Copies | Every selected file | Only files changed since the last backup |\n| Time and space | Slowest, largest | Fastest, smallest |\n| To restore | The latest full backup alone | The latest full backup plus every incremental since it, in order |",
+    "mistake": "An incremental backup can't restore files on its own. It holds only recent changes, so it needs the full backup and every earlier incremental in the chain.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-008",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "type": "reverse",
+    "front": "Secure disposal",
+    "back": "Destroying data so that it can't be recovered, such as by overwriting storage with data-wiping software, physically destroying drives, or shredding paper records.",
+    "mistake": "Deleting a file or emptying the recycle bin doesn't reliably destroy the data. It can remain on the drive and be recovered with free tools.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk12-001",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "type": "reverse",
+    "front": "Brainstorming",
+    "back": "An ideation technique, usually run in a group, in which people suggest as many ideas as possible in a short time and every idea is recorded without being judged. The ideas are evaluated afterwards.",
+    "mistake": "Criticising or discarding ideas during the session defeats the purpose. Judging comes afterwards, when the ideas are evaluated against criteria.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk12-002",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "type": "reverse",
+    "front": "Mind map",
+    "back": "A diagram with a central topic and branches radiating out to related ideas and sub-ideas, showing how the ideas group together and connect.",
+    "mistake": "A mind map doesn't show a sequence of steps. Its branches group related ideas; no order is implied.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk12-003",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "type": "reverse",
+    "front": "Mood board",
+    "back": "A collection of images, colour swatches, fonts and textures arranged together to capture the intended look and feel of a solution.",
+    "mistake": "A mood board sets visual style only. It doesn't show where controls go on a screen or how the solution works; sketches and, later, mock-ups do that.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk12-004",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "type": "basic",
+    "front": "How are sketches used when generating design ideas?",
+    "back": "Quick, rough drawings of possible screen layouts let a designer explore several alternatives cheaply and show them to others for feedback before committing to one.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk12-005",
+    "kk": [
+      "U3O2-KK12",
+      "U3O2-KK14"
+    ],
+    "type": "compare",
+    "front": "Sketch versus mock-up",
+    "back": "| | Sketch | Mock-up |\n|:--|:--|:--|\n| Typical use | Generating and comparing design ideas | Detailed design of the preferred idea |\n| Detail | Quick and rough | Precise layout, annotated with fonts, colours and control types |\n| Purpose | Explore options cheaply | Show developers exactly how a screen will look |",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk12-006",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "type": "compare",
+    "front": "Brainstorming versus mind map",
+    "back": "**Brainstorming** produces ideas: the aim is quantity, recorded without judgement, often as an unordered list. A **mind map** organises ideas around a central topic to show how they group and connect. A brainstorm's output is often sorted into a mind map.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk12-007",
+    "kk": [
+      "U3O2-KK12",
+      "U3O2-KK13"
+    ],
+    "type": "basic",
+    "front": "Why should a designer generate several design ideas rather than developing the first one?",
+    "back": "Comparing alternatives against evaluation criteria shows which idea best meets the requirements. Settling on the first idea risks missing a better solution.",
+    "mistake": "Generating design ideas isn't the same as producing the detailed design. Ideas are broad alternatives; only the chosen one is detailed with mock-ups, pseudocode and other design tools.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk12-008",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "type": "cloze",
+    "front": "A brainstorm aims for a large {{quantity}} of ideas and {{defers judgement}} until the session ends.",
+    "back": "Unusual ideas often spark better ones. Judging ideas during the session makes people hold back their suggestions.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk13-001",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "type": "reverse",
+    "front": "Efficiency",
+    "back": "A measure of the resources used to achieve a result: how much time, cost and effort a solution or process needs.",
+    "mistake": "Efficiency says nothing about whether the output is right. A program can produce wrong results very quickly; correctness is a matter of effectiveness.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk13-002",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "type": "reverse",
+    "front": "Effectiveness",
+    "back": "A measure of how well a solution achieves its intended purpose, for example whether its output is accurate, complete and usable.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk13-003",
+    "kk": [
+      "U3O2-KK13",
+      "U4O1-KK01"
+    ],
+    "type": "compare",
+    "front": "Efficiency versus effectiveness",
+    "back": "| | Efficiency | Effectiveness |\n|:--|:--|:--|\n| Asks | How much time, cost and effort? | How well is the purpose achieved? |\n| Measures | Speed, cost, effort | Accuracy, completeness, usability |\n| Example | A report runs in 2 seconds, not 40 | Every total in the report is correct |",
+    "mistake": "The two are independent. A solution can be efficient but ineffective (fast but inaccurate), or effective but inefficient (correct but slow).",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk13-004",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "type": "basic",
+    "front": "Give three measures of the efficiency of a solution.",
+    "back": "- Speed: how long processing or a task takes\n- Cost: how much it costs to run or maintain\n- Effort: how many steps a user needs to complete a task",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk13-005",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "type": "basic",
+    "front": "Give three measures of the effectiveness of a solution.",
+    "back": "- Accuracy: the output is correct\n- Completeness: the output includes everything required\n- Usability: users can achieve their goals easily\n\nReadability of the output is another common measure.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk13-006",
+    "kk": [
+      "U3O2-KK13",
+      "U3O2-KK05"
+    ],
+    "type": "basic",
+    "front": "Where do evaluation criteria come from?",
+    "back": "From the solution's requirements. Criteria check how well the functional and non-functional requirements have been met, so each criterion can be traced back to what was documented and agreed with the client.",
+    "mistake": "Criteria aren't invented after the solution is built. They come from the requirements agreed earlier, so the solution is judged against what the client needed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk13-007",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "type": "basic",
+    "front": "What makes an evaluation criterion well written?",
+    "back": "It is specific and measurable, is tied to one requirement, and says what will be checked. For example, \"A new user can complete a booking in under two minutes without help\" rather than \"The app is easy to use\".",
+    "mistake": "Vague criteria such as \"the program is fast\" can't be judged objectively, so the evaluation becomes a matter of opinion.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk13-008",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "type": "cloze",
+    "front": "During design, evaluation criteria are used to {{choose between design ideas}}; after development, they are used to judge the solution's {{efficiency and effectiveness}}.",
+    "back": "Both sets of criteria are drawn from the requirements, so the preferred design and the finished solution are both judged against what the client needs.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-001",
+    "kk": [
+      "U3O2-KK14",
+      "U3O2-KK12"
+    ],
+    "type": "basic",
+    "front": "How does a detailed design differ from a design idea?",
+    "back": "A design idea is a broad alternative, often sketched, used to compare approaches. A detailed design documents the chosen idea precisely, with tools such as mock-ups, data dictionaries, object descriptions, IPO charts and pseudocode, so developers can build it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-002",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "type": "basic",
+    "front": "Why is a detailed design produced before development starts?",
+    "back": "- The client can check the appearance and processing before any code is written\n- Errors are cheaper to fix in a design than in code\n- Developers get a precise specification to build from",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-003",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "type": "basic",
+    "front": "Why should the names in a data dictionary match those used in the pseudocode and object descriptions?",
+    "back": "So every design tool refers to each data item in the same way. Developers then use one agreed identifier and data type, which avoids confusion and errors when modules are combined.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-004",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "type": "basic",
+    "front": "What does the Size column of a data dictionary record?",
+    "back": "How large a data item can be. For a String, this is usually the maximum number of characters, e.g. 30 for a surname. It guides the width of input fields and the limits a validation check enforces.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-005",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "type": "cloze",
+    "front": "In an IPO chart, the {{Processing}} column describes actions such as \"calculate the delivery fee\", while the Input and Output columns list {{data}}.",
+    "back": "Inputs and outputs are data items, such as `parcelWeight` and `deliveryFee`. Processing describes what is done to the inputs to produce the outputs.",
+    "mistake": "Writing an action such as \"calculate total\" in the Output column. The output is the total itself; calculating it is processing.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-006",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "type": "cloze",
+    "front": "A mock-up shows the {{layout and appearance}} of a screen, but it is a drawing, not a {{working}} interface.",
+    "back": "Annotations add details such as fonts, colours, control types and what each button does, so developers know exactly what to build.",
+    "mistake": "A mock-up doesn't show how data moves through a system; that is the job of a data flow diagram.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-007",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "type": "compare",
+    "front": "Data dictionary versus object description",
+    "back": "A **data dictionary** lists the data items in a solution, typically each with its name, data type, size and description. An **object description** describes one object: its name, its properties (each with a data type) and its methods, the actions it can perform.",
+    "mistake": "A data dictionary has no methods. Actions belong in an object description or in pseudocode.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-008",
+    "kk": [
+      "U3O2-KK14",
+      "U3O1-KK04"
+    ],
+    "type": "basic",
+    "front": "How should an input control on a mock-up relate to the data dictionary or object description?",
+    "back": "The data each input control captures should appear as a data item or property, with a data type that matches the control. For example, a checkbox is ticked or not, so it maps to a Boolean.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-001",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "Affordance",
+    "back": "The quality of an interface element whose appearance suggests how it is used, e.g. a raised, shaded button that looks pressable, or a slider handle that looks draggable.",
+    "mistake": "Affordance isn't the same as usability. Good affordance is one thing that makes a solution usable: a control's appearance tells users what they can do with it.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-002",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "Interoperability",
+    "back": "The ability of a solution to work with other systems, software or devices by exchanging data that each can use, e.g. exporting timesheets in a format a payroll program can import.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-003",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "Usability",
+    "back": "How easily users can learn and use a solution to complete their tasks accurately, quickly and with satisfaction.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-004",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "type": "basic",
+    "front": "How does security form part of a user's experience?",
+    "back": "Users need to trust that their data and accounts are protected, through features such as sign-in, multi-factor authentication and clear privacy settings. These features also add steps, so they must protect users without making the solution frustrating to use.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-005",
+    "kk": [
+      "U3O2-KK15",
+      "U3O2-KK05"
+    ],
+    "type": "compare",
+    "front": "Interoperability versus portability",
+    "back": "**Interoperability**: the solution exchanges data with other systems, e.g. its bookings can be imported into a calendar app. **Portability**: the solution runs on different platforms, e.g. on Android, on iOS and in a web browser.",
+    "mistake": "Running on both Android and iOS is portability, not interoperability. Interoperability is about working with other systems and their data.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-006",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "type": "cloze",
+    "front": "A \"Next\" option shown as flat grey text, with no border or shading, has poor {{affordance}}, because nothing in its appearance suggests it can be clicked.",
+    "back": "Borders, shading, button shapes and changes on hover all signal that an element is interactive.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-007",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "type": "basic",
+    "front": "How can adding a security feature reduce usability, and how can a designer limit the effect?",
+    "back": "Features such as multi-factor authentication add steps before users reach their task. Designers can limit this, for example by remembering trusted devices or offering fingerprint sign-in, so protection stays strong with less effort.",
+    "mistake": "Security and usability aren't a choice of one or the other. The aim is a design that protects users while keeping extra steps to a minimum.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-008",
+    "kk": [
+      "U3O2-KK15",
+      "U3O1-KK06"
+    ],
+    "type": "cloze",
+    "front": "A club's app exports its membership list as a CSV file so that the club's accounting program can import it. This improves the app's {{interoperability}}.",
+    "back": "A standard, widely supported format lets data move between different programs without being retyped.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-001",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "reverse",
+    "front": "Alignment",
+    "back": "Placing elements so their edges or centres line up along shared lines. It gives a screen a clear, ordered structure and makes related items easier to scan.",
+    "mistake": "Alignment doesn't mean centring everything. Centred labels and fields create ragged edges; a shared left edge is usually easier to scan on a form.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-002",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "reverse",
+    "front": "Contrast",
+    "back": "Making elements clearly different, through colour, size, weight or shape, so that important items stand out and text is easy to read against its background.",
+    "mistake": "Contrast isn't only about colour. Size, bold type and shape also create it, and colour alone fails users who can't tell some colours apart.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-003",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "reverse",
+    "front": "Consistency",
+    "back": "Using the same layout, colours, controls, wording and behaviour for the same purpose throughout a solution, so users can predict how each part works.",
+    "mistake": "Consistency doesn't mean making everything look the same. It applies to elements with the same purpose; elements with different purposes should look different.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-004",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "basic",
+    "front": "How do design principles affect a solution's functionality, not just its appearance?",
+    "back": "They change how quickly and accurately people can use it. Consistent controls mean users learn once and make fewer mistakes; strong contrast makes text readable; aligned form fields are faster to scan and complete.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-005",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "cloze",
+    "front": "Light grey text on a white background has low {{contrast}}, so it is hard to read, especially for users with low vision.",
+    "back": "Dark text on a light background, or light text on a dark one, raises contrast and keeps text readable in more conditions, such as on a phone in sunlight.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-006",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "compare",
+    "front": "Consistency versus contrast",
+    "back": "**Consistency**: things with the same purpose look and behave the same, e.g. every Save button has the same colour and position. **Contrast**: things that differ, especially in importance, look different, e.g. a Delete button stands out from Save. Good designs use both.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-007",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "basic",
+    "front": "Give an example of inconsistency in an interface and its effect on users.",
+    "back": "The \"Next\" button sits bottom right on one screen and top left on the next, or is labelled \"Continue\" elsewhere. Users must search for it each time, which slows them down and causes mistakes.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-008",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "basic",
+    "front": "Why should the labels and text boxes on a data entry form be aligned?",
+    "back": "Shared edges create clear columns, so the eye moves in a straight line down the form. Users find each field faster and can tell which label belongs to which box, and the form looks orderly.",
+    "difficulty": 2,
+    "source": "textbook"
+  }
+]

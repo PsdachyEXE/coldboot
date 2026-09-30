@@ -1,0 +1,1003 @@
+[
+  {
+    "id": "s-u3o1-kk01-001",
+    "kk": [
+      "U3O1-KK01"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Jarrah is writing a module for Quartzline Bike Hire, a Bendigo business. Hire costs $4.50 per hour, members receive a 20% discount, and the cost must be displayed to two decimal places. Jarrah gives an AI code generator this prompt:\n\n*Write code that works out the hire cost.*\n\nIdentify **two** pieces of information missing from Jarrah's prompt, and explain how including each would improve the generated code.",
+    "points": [
+      {
+        "text": "Identifies a first missing piece of information, e.g. the pricing rules ($4.50 per hour and the 20% member discount), the inputs and outputs with their data types, the display format (two decimal places), or the programming language",
+        "marks": 1
+      },
+      {
+        "text": "Explains how including the first piece improves the generated code for the bike-hire module (e.g. with the rates stated, the AI calculates the cost Quartzline actually charges instead of inventing a rate or omitting the discount)",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second, different missing piece of information",
+        "marks": 1
+      },
+      {
+        "text": "Explains how including the second piece improves the generated code (e.g. stating the inputs, a Boolean membership status and a Floating point cost shown to two decimal places means the function fits Jarrah's module and meets the display requirement)",
+        "marks": 1
+      }
+    ],
+    "model": "The prompt doesn't state the pricing rules. Including '$4.50 per hour, with a 20% discount for members' means the AI calculates the cost Quartzline actually charges, rather than guessing a rate or leaving out the member discount.\n\nThe prompt also doesn't state the inputs and outputs or their data types. Specifying the number of hours and a Boolean membership status as inputs, and a Floating point cost displayed to two decimal places as the output, means the generated function accepts the data Jarrah's module holds and meets the display requirement without rework.",
+    "mistake": "Listing missing items isn't enough for 'explain'. Each one needs a statement of how including it would change the code the AI generates.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk01-002",
+    "kk": [
+      "U3O1-KK01",
+      "U3O1-KK14"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Ella, a junior developer at Brackenfield Freight in Geelong, used an AI assistant to generate a module that checks each consignment's weight before it is booked. Describe **three** steps Ella should take before the module is added to the company's booking program.",
+    "points": [
+      {
+        "text": "Reads through the generated code until she understands, and could explain, each part of the weight check",
+        "marks": 1
+      },
+      {
+        "text": "Tests the module with her own test data, including boundary and invalid weights, comparing expected and actual output in a test table",
+        "marks": 1
+      },
+      {
+        "text": "Checks the code for security and quality problems, such as hard-coded passwords, calls to functions that don't exist, or names that break the company's naming conventions",
+        "marks": 1
+      },
+      {
+        "text": "Acknowledges the AI assistance in the module's internal documentation, so other developers know its origin and review it closely",
+        "marks": 1
+      },
+      {
+        "text": "Has another developer review the code before it is added to the booking program",
+        "marks": 1
+      }
+    ],
+    "model": "First, Ella reads the generated code line by line until she can explain how it checks each consignment's weight, so she isn't adding code she doesn't understand. Second, she builds a test table with her own test data, including weights just inside and just outside the accepted range and invalid entries such as text, and compares the expected and actual output of each test. Third, she notes in the module's internal documentation that an AI assistant generated it, so Brackenfield Freight's other developers know to review it closely.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk02-001",
+    "kk": [
+      "U3O1-KK02",
+      "U3O2-KK05"
+    ],
+    "commandTerm": "classify",
+    "marks": 4,
+    "prompt": "Wattlebank Physio, a Ballarat clinic, has listed these statements for its new booking program.\n\n1. The program sends each client an SMS reminder the day before their appointment.\n2. Reception staff can book an appointment in no more than four clicks.\n3. The program must be ready before the new financial year begins on 1 July.\n4. The program will handle bookings for the Ballarat clinic only, not the planned Ararat branch.\n\nClassify each statement as a functional requirement, a non-functional requirement, a constraint or scope.",
+    "points": [
+      {
+        "text": "Statement 1: functional requirement",
+        "marks": 1
+      },
+      {
+        "text": "Statement 2: non-functional requirement",
+        "marks": 1
+      },
+      {
+        "text": "Statement 3: constraint",
+        "marks": 1
+      },
+      {
+        "text": "Statement 4: scope",
+        "marks": 1
+      }
+    ],
+    "model": "1. Functional requirement: sending reminders is a task the program performs.\n2. Non-functional requirement: it describes how easy the program is to use (usability).\n3. Constraint: the deadline limits the time available to develop the program.\n4. Scope: it sets a boundary on what the program will cover.",
+    "mistake": "Statement 2 contains a number, but it describes a quality of the program (ease of use), not a task, so it is non-functional.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk02-002",
+    "kk": [
+      "U3O1-KK02",
+      "U3O1-KK04",
+      "U3O1-KK10"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Nhu is writing a module for Pinnacle Loop Shuttles, a Halls Gap bus company. One functional requirement states:\n\n*The program calculates the fare for a booking at $18.50 per adult and $9.25 per child, and displays the total to two decimal places. Every booking must include at least one adult.*\n\nExplain **three** decisions this requirement sets for the design of Nhu's module.",
+    "points": [
+      {
+        "text": "Inputs: the number of adults and the number of children, each stored as an Integer because passengers are counted in whole numbers",
+        "marks": 1
+      },
+      {
+        "text": "Processing: the total fare is calculated as adults × 18.50 + children × 9.25, because the requirement sets a separate rate for adults and for children",
+        "marks": 1
+      },
+      {
+        "text": "Output: the total is stored as Floating point, because it includes cents, and displayed to two decimal places",
+        "marks": 1
+      },
+      {
+        "text": "Validation: a range check rejects a booking with fewer than one adult (and a negative number of children), because every booking must include an adult",
+        "marks": 1
+      }
+    ],
+    "model": "The inputs are the number of adults and the number of children, each an Integer because passengers are counted in whole numbers. The fare is calculated as adults × 18.50 + children × 9.25 and stored as Floating point, because the rates include cents, then displayed to two decimal places; for example, 2 adults and 1 child gives $46.25. A range check rejects any booking with fewer than one adult, because the requirement says every booking must include an adult.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk03-001",
+    "kk": [
+      "U3O1-KK03",
+      "U3O1-KK04",
+      "U3O1-KK07"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Oscar has drafted the object description below for the job-tracking module at Sprocketworks Cycle Repairs in Shepparton. Identify **two** errors in the object description and explain how each should be corrected.",
+    "points": [
+      {
+        "text": "Identifies that `customerPhone` has the wrong data type (Integer)",
+        "marks": 1
+      },
+      {
+        "text": "Explains that it should be a String, because a number such as 0412 345 678 starts with 0 and contains spaces, and is never used in calculations",
+        "marks": 1
+      },
+      {
+        "text": "Identifies that `calculateCost()` is listed as a property",
+        "marks": 1
+      },
+      {
+        "text": "Explains that it should be moved to the methods, because it performs processing (working out the cost) rather than storing a value",
+        "marks": 1
+      }
+    ],
+    "model": "`customerPhone` is given the data type Integer. It should be a String, because a number such as 0412 345 678 begins with 0, which an Integer would drop, contains spaces, and is never used in arithmetic.\n\n`calculateCost()` is listed under properties. It should be moved to the methods, because it is an action the Job object performs (working out the cost of the job), not a value the object stores.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "job-object",
+        "kind": "object",
+        "title": "Object description: Job (draft)",
+        "name": "Job",
+        "properties": [
+          {
+            "name": "jobNumber",
+            "type": "Integer",
+            "description": "Next number in sequence, e.g. 1047"
+          },
+          {
+            "name": "customerName",
+            "type": "String"
+          },
+          {
+            "name": "customerPhone",
+            "type": "Integer",
+            "description": "Mobile number, e.g. 0412 345 678"
+          },
+          {
+            "name": "labourHours",
+            "type": "Floating point"
+          },
+          {
+            "name": "isComplete",
+            "type": "Boolean"
+          },
+          {
+            "name": "calculateCost()",
+            "type": "Floating point"
+          }
+        ],
+        "methods": [
+          {
+            "name": "markComplete()"
+          },
+          {
+            "name": "printInvoice()"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk03-002",
+    "kk": [
+      "U3O1-KK03"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Ruby is designing a module for Kiata Grain Co-op in Horsham. A weighbridge operator enters each truck's load, and the module calculates the payment, adding a bonus when the grain's protein level is above 11.5%.\n\nRecommend a design tool for each of the following needs, and justify each choice.\n\n1. The operators want to see and comment on the data entry screen before any code is written.\n2. The programmer needs the exact steps for calculating the payment, including when the bonus applies.",
+    "points": [
+      {
+        "text": "Need 1: mock-up",
+        "marks": 1
+      },
+      {
+        "text": "Justifies the mock-up: it shows the layout of the entry screen's labels, text boxes and buttons, so the operators can comment on it before coding starts",
+        "marks": 1
+      },
+      {
+        "text": "Need 2: pseudocode",
+        "marks": 1
+      },
+      {
+        "text": "Justifies pseudocode: it shows the order of the steps and the condition for the protein bonus (above 11.5%), which the programmer can code in any language and which can be checked by hand first",
+        "marks": 1
+      }
+    ],
+    "model": "1. A mock-up. It shows how the entry screen will look, with the placement of each label, text box and button, so the weighbridge operators can suggest changes before any coding effort is spent.\n2. Pseudocode. It sets out the exact sequence of steps for calculating the payment, including the selection that adds the bonus only when the protein level is above 11.5%, so the programmer can code it directly and the logic can be checked by hand first.",
+    "mistake": "An IPO chart would list the payment calculation as processing, but it wouldn't show the order of the steps or the condition for the bonus.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk04-001",
+    "kk": [
+      "U3O1-KK04"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Stonecutter Fitness, a Bendigo gym, is building a membership module that stores the data items below. Justify an appropriate data type for each data item.",
+    "points": [
+      {
+        "text": "`memberPhone`: String, because it starts with 0 and contains spaces, and is never used in calculations",
+        "marks": 1
+      },
+      {
+        "text": "`monthlyFee`: Floating point, because the fee includes cents and is used in calculations",
+        "marks": 1
+      },
+      {
+        "text": "`visitsThisMonth`: Integer, because visits are counted in whole numbers",
+        "marks": 1
+      },
+      {
+        "text": "`hasLocker`: Boolean, because a member either has a locker or doesn't (two states)",
+        "marks": 1
+      }
+    ],
+    "model": "`memberPhone` should be a String: 0412 345 678 starts with 0 and contains spaces, which an Integer can't keep, and no arithmetic is done on it. `monthlyFee` should be Floating point, because $54.95 includes cents and is used to calculate what members owe. `visitsThisMonth` should be an Integer, because visits are whole counts. `hasLocker` should be Boolean, because each member either has a locker or doesn't, so TRUE or FALSE is enough.",
+    "mistake": "Naming the data type isn't enough for 'justify'. Each type needs a reason tied to that data item.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "gym-data-items",
+        "kind": "table",
+        "title": "Data items for the membership module",
+        "columns": [
+          "Data item",
+          "Example value"
+        ],
+        "rows": [
+          [
+            "memberPhone",
+            "0412 345 678"
+          ],
+          [
+            "monthlyFee",
+            "54.95"
+          ],
+          [
+            "visitsThisMonth",
+            "12"
+          ],
+          [
+            "hasLocker",
+            "yes or no"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk04-002",
+    "kk": [
+      "U3O1-KK04"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Jess's program for Twin Rivers Netball League in Wodonga stores player registration numbers as Strings. When the coach sorts the players by registration number, the list shows 1, 10, 100, 2, 25. Explain why the list is in this order, and how Jess could make it sort as 1, 2, 10, 25, 100.",
+    "points": [
+      {
+        "text": "Strings are compared character by character from the left, so every number beginning with 1 (1, 10, 100) comes before those beginning with 2",
+        "marks": 1
+      },
+      {
+        "text": "Store the registration numbers as Integers (or convert them to Integers before sorting), so they are compared by numeric value",
+        "marks": 1
+      }
+    ],
+    "model": "Because the registration numbers are Strings, they are compared one character at a time from the left: \"1\", \"10\" and \"100\" all begin with 1, so they come before \"2\" and \"25\". If Jess stores the registration numbers as Integers, or converts them before sorting, they are compared by value and sort as 1, 2, 10, 25, 100.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk05-001",
+    "kk": [
+      "U3O1-KK05"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "Ayesha is writing a ladder module for the Tall Timbers Junior Football League in the Yarra Valley. For each of the league's 18 teams, the module stores the team name, the number of wins, the team's percentage (e.g. 112.5) and whether the team has qualified for finals. Recommend a data structure for this data and justify your recommendation.",
+    "points": [
+      {
+        "text": "Recommends an array of records, one record per team",
+        "marks": 1
+      },
+      {
+        "text": "Each record holds fields of different data types: team name (String), wins (Integer), percentage (Floating point), qualified (Boolean)",
+        "marks": 1
+      },
+      {
+        "text": "The array lets the module loop through all 18 teams by index (e.g. to sort the ladder), and each team's fields stay together when records are moved",
+        "marks": 1
+      },
+      {
+        "text": "A two-dimensional array is unsuitable because all its elements must have the same data type",
+        "marks": 1
+      }
+    ],
+    "model": "An array of 18 records, one per team. Each record has named fields of different data types: `teamName` (String), `wins` (Integer), `percentage` (Floating point) and `qualified` (Boolean), which a two-dimensional array couldn't hold because all its elements share one data type. Storing the records in an array lets the module loop through all 18 teams by index, for example to sort the ladder by wins, and each team's details move together when records are swapped.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk05-002",
+    "kk": [
+      "U3O1-KK05",
+      "U3O1-KK14"
+    ],
+    "commandTerm": "determine",
+    "marks": 3,
+    "prompt": "Quillpoint Theatre in Ballarat stores its seating plan in the two-dimensional array `seats[row][col]` shown below, where TRUE means the seat is booked. Arrays are indexed from 0. Determine the output of the algorithm, and explain why row 2 is not the row displayed.",
+    "points": [
+      {
+        "text": "The output names row 1 (`bestRow` is 1)",
+        "marks": 1
+      },
+      {
+        "text": "The output gives 3 free seats (`bestFree` is 3), so the display is `Row 1: 3 free`",
+        "marks": 1
+      },
+      {
+        "text": "Row 2 also has 3 free seats, but `free > bestFree` is false when the counts are equal (3 > 3), so `bestRow` is not updated",
+        "marks": 1
+      }
+    ],
+    "model": "Row 0 has 1 free seat; 1 > 0, so `bestFree` becomes 1 and `bestRow` becomes 0. Row 1 has 3 free seats; 3 > 1, so `bestFree` becomes 3 and `bestRow` becomes 1. Row 2 also has 3 free seats, but 3 > 3 is false, so nothing changes. The algorithm displays `Row 1: 3 free`. Row 2 isn't displayed because the condition uses > rather than ≥, so a later row that only equals the best count doesn't replace it.",
+    "mistake": "With >, the first row to reach the highest count is kept and a tie doesn't replace it. Changing > to ≥ on line 11 would make the algorithm display row 2.",
+    "source": "exam-convention",
+    "figures": [
+      {
+        "id": "seats-array",
+        "kind": "table",
+        "title": "seats[row][col] (TRUE = booked)",
+        "columns": [
+          "Row",
+          "Col 0",
+          "Col 1",
+          "Col 2",
+          "Col 3"
+        ],
+        "rows": [
+          [
+            "0",
+            "TRUE",
+            "TRUE",
+            "FALSE",
+            "TRUE"
+          ],
+          [
+            "1",
+            "FALSE",
+            "FALSE",
+            "TRUE",
+            "FALSE"
+          ],
+          [
+            "2",
+            "TRUE",
+            "FALSE",
+            "FALSE",
+            "FALSE"
+          ]
+        ]
+      },
+      {
+        "id": "seats-best-row",
+        "kind": "pseudocode",
+        "code": "BEGIN\n    bestRow ← 0\n    bestFree ← 0\n    FOR row ← 0 TO 2\n        free ← 0\n        FOR col ← 0 TO 3\n            IF seats[row][col] = FALSE THEN\n                free ← free + 1\n            ENDIF\n        ENDFOR\n        IF free > bestFree THEN\n            bestFree ← free\n            bestRow ← row\n        ENDIF\n    ENDFOR\n    DISPLAY \"Row \" + bestRow + \": \" + bestFree + \" free\"\nEND",
+        "indexBase": 0
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk06-001",
+    "kk": [
+      "U3O1-KK06"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "Grebe Wetlands Rescue, a Warrnambool volunteer group, records bird sightings in a new program. Each sighting has a date, a location and one or more birds, and each bird has a species and a count. The data will be sent to a state wildlife database, and next year the group expects to add fields such as a photo reference. Justify storing the sightings in an XML file rather than a CSV file.",
+    "points": [
+      {
+        "text": "XML elements can be nested, so one sighting element can hold any number of bird elements; a flat CSV file would have to repeat the sighting's details on every row or use a separate file.",
+        "marks": 1
+      },
+      {
+        "text": "XML is self-describing: tags name every value (e.g. `<species>`), so the state database can interpret the data without relying on a column order.",
+        "marks": 1
+      },
+      {
+        "text": "XML is extensible: a new element such as `<photoRef>` can be added next year without breaking programs that read the existing tags by name.",
+        "marks": 1
+      }
+    ],
+    "model": "Each sighting can include several birds. XML elements nest, so a `<sighting>` element can hold as many `<bird>` elements as needed, whereas a flat CSV file would have to repeat the date and location on every row. The data is going to another organisation's database, and XML's tags name each value, such as `<species>` and `<count>`, so the receiving system can tell what each value means without knowing a column order. Next year the group plans to add a photo reference. Because XML is extensible, a `<photoRef>` element can be added, and programs that read the existing tags by name will still work.",
+    "mistake": "Saying XML is 'better' or 'more modern' earns nothing. Each mark needs a feature of XML (nesting, naming tags, extensibility) linked to the sightings data.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk06-002",
+    "kk": [
+      "U3O1-KK06"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Lowan Irrigation Co-op in Mildura logs about two million sensor readings a month. Every reading has the same three fields (sensor ID, time and flow rate), and only the co-op's own analysis program reads the file. Explain why a CSV file suits this data better than an XML file.",
+    "points": [
+      {
+        "text": "A CSV file is more compact: no tags are repeated for each reading, so two million records take less storage and are quicker to read.",
+        "marks": 1
+      },
+      {
+        "text": "The readings are flat, each has the same three fields, and only one known program reads them, so XML's nesting, self-describing tags and extensibility add size without adding value.",
+        "marks": 1
+      }
+    ],
+    "model": "With about two million readings a month, file size and processing speed matter. A CSV file stores each reading as one short line, such as `S14,2026-03-02 06:00,12.5`, with no repeated tags, so it is much smaller and quicker to read than XML, which would wrap every value in start and end tags. The readings are flat, each has the same three fields, and only the co-op's own program reads them, so XML's advantages (nesting, tags that describe the data for other systems, and extensibility) aren't needed.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk07-001",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Boltbox Hardware in Shepparton uses a stock program containing the `Product` class described. The developer declares `stockLevel` as private. Explain how encapsulation protects `stockLevel` in this program.",
+    "points": [
+      {
+        "text": "Because `stockLevel` is private, code outside `Product` can't read or change it directly.",
+        "marks": 1
+      },
+      {
+        "text": "Other classes change the stock only through public methods such as `sellItem()` and `receiveStock()`, and read it with `getStockLevel()`.",
+        "marks": 1
+      },
+      {
+        "text": "Those methods can check a change before applying it, e.g. `sellItem()` refuses a sale larger than the stock held, so `stockLevel` can't become negative or invalid.",
+        "marks": 1
+      }
+    ],
+    "model": "Encapsulation bundles `stockLevel` with the methods that act on it and hides it from other code. Because `stockLevel` is private, no other class in the stock program can assign it a value directly, such as setting it to -5 by mistake. Instead, a sale must go through `sellItem(quantity)` and a delivery through `receiveStock(quantity)`, while `getStockLevel()` lets other classes read the value. `sellItem()` only reduces `stockLevel` when enough stock is held, so the attribute can't become negative, and every change passes through the class's own methods, where it can be checked.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-product",
+        "kind": "object",
+        "name": "Product",
+        "properties": [
+          {
+            "name": "productCode",
+            "type": "String"
+          },
+          {
+            "name": "description",
+            "type": "String"
+          },
+          {
+            "name": "price",
+            "type": "Floating point"
+          },
+          {
+            "name": "stockLevel",
+            "type": "Integer",
+            "description": "Number of units held"
+          }
+        ],
+        "methods": [
+          {
+            "name": "sellItem(quantity)",
+            "description": "Reduces stockLevel by quantity if enough stock is held"
+          },
+          {
+            "name": "receiveStock(quantity)",
+            "description": "Adds quantity to stockLevel"
+          },
+          {
+            "name": "getStockLevel()",
+            "description": "Returns stockLevel"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk07-002",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Quoll Creek Vet Clinic in Wangaratta has a program with a `Dog` class and a `Cat` class. Both classes store `ownerName`, `petName` and `dateOfBirth`, and both have an identical `calculateAge()` method. `Dog` also stores `breed`, and `Cat` also stores `indoorOnly`. Describe how generalisation and inheritance could improve this design.",
+    "points": [
+      {
+        "text": "Generalisation: create a superclass such as `Pet` that holds the shared attributes `ownerName`, `petName` and `dateOfBirth` and the `calculateAge()` method.",
+        "marks": 1
+      },
+      {
+        "text": "Inheritance: `Dog` and `Cat` become subclasses of `Pet` that inherit the shared members and declare only their own attributes (`breed`, `indoorOnly`).",
+        "marks": 1
+      },
+      {
+        "text": "Benefit: the shared code is written once, so a change to `calculateAge()` is made in one place, reducing duplication and inconsistency (or a new animal class can reuse it).",
+        "marks": 1
+      }
+    ],
+    "model": "Generalisation identifies what `Dog` and `Cat` have in common and moves it into a new `Pet` superclass: the attributes `ownerName`, `petName` and `dateOfBirth`, and the `calculateAge()` method. Through inheritance, `Dog` and `Cat` become subclasses of `Pet` that receive these members automatically, so `Dog` only declares `breed` and `Cat` only declares `indoorOnly`. The age calculation is now written once in `Pet`, so if it needs fixing it is changed in one place and both subclasses use the corrected version.",
+    "mistake": "Describing generalisation and inheritance as the same step loses a mark. Generalisation creates `Pet` from the shared features; inheritance is how `Dog` and `Cat` then receive them.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk08-001",
+    "kk": [
+      "U3O1-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Magpie Lane Café in Bendigo adds a 10% surcharge on public holidays. In the café's ordering program the surcharge rate is typed as `0.1` in six different places. Explain why the developer should replace these with a single named constant, and why a constant is safer here than a global variable.",
+    "points": [
+      {
+        "text": "When the surcharge rate changes, it is updated in one place, so none of the six uses can be missed.",
+        "marks": 1
+      },
+      {
+        "text": "A name such as `surchargeRate` shows what the value means, so the code is easier to read and maintain than an unexplained `0.1`.",
+        "marks": 1
+      },
+      {
+        "text": "A constant can't be changed while the program runs, whereas any module could accidentally change a global variable and produce wrong totals.",
+        "marks": 1
+      }
+    ],
+    "model": "If the surcharge changes, for example to 15%, the developer currently has to find and edit all six copies of `0.1`, and missing one would give inconsistent totals. With a constant such as `surchargeRate` set once, the change is made in one place. The name also tells anyone reading the code what the value is for, whereas a bare `0.1` could mean anything. A global variable would also be available everywhere, but any module could change its value while the program runs, and then every surcharge calculation would be wrong. A constant's value can't be changed at runtime, so the rate is protected.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk08-002",
+    "kk": [
+      "U3O1-KK08"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "Breakwater Parking in Warrnambool is building a kiosk program. The kiosk must ask a customer to choose a four-digit PIN for their parking session and keep asking until a valid four-digit PIN is entered. The number of attempts a customer will need is not known in advance. Justify the use of a post-test loop for this task rather than a counted loop.",
+    "points": [
+      {
+        "text": "The customer must be asked at least once before there is a PIN to check, and a post-test loop always runs its body at least once.",
+        "marks": 1
+      },
+      {
+        "text": "The condition is checked after each entry, so the loop repeats until a valid PIN is entered and then stops (e.g. `UNTIL pinValid = TRUE`).",
+        "marks": 1
+      },
+      {
+        "text": "A counted loop runs a fixed number of times, but the number of attempts isn't known in advance, so it could stop before a valid PIN is entered or keep asking after one is entered.",
+        "marks": 1
+      }
+    ],
+    "model": "The kiosk can't check a PIN until the customer has entered one, so the request must happen at least once. A post-test loop such as `REPEAT ... UNTIL` runs its body before testing the condition, which guarantees the first request. Because the condition is tested after each entry, the loop keeps asking until a valid PIN is entered and then stops. A counted loop such as `FOR attempt ← 1 TO 3` repeats a fixed number of times, but nobody knows how many attempts a customer will need, so it could end before a valid PIN is entered or keep asking after one has been accepted.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk09-001",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "commandTerm": "complete",
+    "marks": 4,
+    "prompt": "Spokesmith Bike Hire in Bright is building a hire program. Complete the table by writing a suitable identifier for each item, using the convention given.",
+    "points": [
+      {
+        "text": "Postcode text box: a control prefix such as `txt` followed by camel case, e.g. `txtPostcode`.",
+        "marks": 1
+      },
+      {
+        "text": "Helmet variable: a Boolean prefix such as `bln` or `bool` followed by camel case, e.g. `blnHelmetHired`.",
+        "marks": 1
+      },
+      {
+        "text": "Total hire cost: lowercase words joined by underscores, e.g. `total_hire_cost`.",
+        "marks": 1
+      },
+      {
+        "text": "Late fee function: camel case starting with a lowercase letter, e.g. `calculateLateFee`.",
+        "marks": 1
+      }
+    ],
+    "model": "- Postcode text box: `txtPostcode`\n- Helmet hired: `blnHelmetHired`\n- Total hire cost: `total_hire_cost`\n- Late-return fee function: `calculateLateFee`",
+    "mistake": "A text box is a control, so it takes a control prefix (`txt`), not a data type prefix such as `str`.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-bike-identifiers",
+        "kind": "table",
+        "columns": [
+          "Item",
+          "Convention",
+          "Identifier"
+        ],
+        "rows": [
+          [
+            "Text box where the customer types their postcode",
+            "Hungarian notation with camel case",
+            ""
+          ],
+          [
+            "Boolean variable recording whether a helmet is hired",
+            "Hungarian notation with camel case",
+            ""
+          ],
+          [
+            "Floating point variable holding the total hire cost",
+            "Snake case",
+            ""
+          ],
+          [
+            "Function that calculates the late-return fee",
+            "Camel case",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk09-002",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Three developers at Otway Ridge Software share the code for a club membership program. One names variables in snake case, one in camel case, and one uses Hungarian notation, and the code now contains both `memberCount` and `member_count`. Explain one problem this causes and how an agreed naming convention would address it.",
+    "points": [
+      {
+        "text": "Problem: the mixed styles make the code harder to read and maintain, and near-identical names such as `memberCount` and `member_count` can be confused, so a developer may update one while the program uses the other, causing a logic error.",
+        "marks": 1
+      },
+      {
+        "text": "Solution: with one agreed convention every developer names identifiers the same way, so each item has one predictable name and any developer can read and debug the others' code.",
+        "marks": 1
+      }
+    ],
+    "model": "Because `memberCount` and `member_count` both exist, a developer can easily update one while the program displays the other, giving a wrong member total that is hard to trace. The mix of styles also slows anyone reading a colleague's code. If the team agrees on one convention, such as camel case for variables and Hungarian prefixes for controls, each item has a single predictable name, duplicates like these are avoided, and any of the three developers can read and debug the others' modules.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk10-001",
+    "kk": [
+      "U3O1-KK10"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Aroha is building an enrolment program for Kingfisher Lane Swim School in Bendigo. Parents type their child's age into a text box, and the school only teaches children aged 3 to 12. Describe an existence check, a type check and a range check that the program should apply to the age.",
+    "points": [
+      {
+        "text": "Existence check: reject the enrolment, with a message, if the age text box is left empty.",
+        "marks": 1
+      },
+      {
+        "text": "Type check: reject input that is not a whole number, such as `five` or `4.5`.",
+        "marks": 1
+      },
+      {
+        "text": "Range check: reject ages below 3 or above 12, accepting 3 to 12 inclusive.",
+        "marks": 1
+      }
+    ],
+    "model": "An existence check confirms that the age text box isn't empty, and asks the parent to enter an age if it is. A type check confirms that the input is a whole number, rejecting entries such as `five` or `4.5`. A range check then confirms that the age is from 3 to 12 inclusive, so an age such as 2 or 13 is rejected with a message that the school teaches children aged 3 to 12.",
+    "mistake": "A range check needs both limits from the scenario. 'Check the age is sensible' earns no mark; 'reject ages below 3 or above 12' does.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk10-002",
+    "kk": [
+      "U3O1-KK10",
+      "U3O1-KK08"
+    ],
+    "commandTerm": "write",
+    "marks": 3,
+    "prompt": "Inkwell Row Printing in Geelong takes online orders for business cards. The number of boxes ordered must be from 1 to 20 inclusive. Write pseudocode that asks for the quantity and keeps asking, with an error message, until it is within this range. Assume the input is always a whole number.",
+    "points": [
+      {
+        "text": "The input is inside a loop that repeats until the quantity is valid (e.g. `REPEAT ... UNTIL`).",
+        "marks": 1
+      },
+      {
+        "text": "The condition accepts exactly 1 to 20 inclusive, e.g. `quantity ≥ 1 AND quantity ≤ 20`.",
+        "marks": 1
+      },
+      {
+        "text": "An error message is displayed whenever the quantity is outside the range.",
+        "marks": 1
+      }
+    ],
+    "model": "```pseudo\nBEGIN\n    REPEAT\n        INPUT quantity\n        IF quantity < 1 OR quantity > 20 THEN\n            DISPLAY \"Enter a quantity from 1 to 20\"\n        ENDIF\n    UNTIL quantity ≥ 1 AND quantity ≤ 20\n    DISPLAY \"Quantity accepted: \" + quantity\nEND\n```\n\nThe post-test loop asks at least once and repeats until the quantity is from 1 to 20. A quantity outside the range triggers the error message and another request.",
+    "mistake": "Writing the accepting condition as `quantity > 1 AND quantity < 20` wrongly rejects the boundary values 1 and 20. Check the condition with 0, 1, 20 and 21.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk11-001",
+    "kk": [
+      "U3O1-KK11"
+    ],
+    "commandTerm": "write",
+    "marks": 3,
+    "prompt": "Mai is writing the fee module for Pinebark Caravan Park in Bright. A powered site costs $48 a night and an unpowered site $36 a night. Stays of 7 nights or more get 10% off the whole stay. Her function is shown. Write a header comment for the function that states its purpose, describes one key feature and justifies one processing choice.",
+    "points": [
+      {
+        "text": "States the purpose: calculates and returns the total fee, in dollars, for a stay, from the number of nights and whether the site is powered.",
+        "marks": 1
+      },
+      {
+        "text": "Describes a key feature, e.g. the parameters and what each means, the nightly rates used, or that 10% comes off stays of 7 or more nights.",
+        "marks": 1
+      },
+      {
+        "text": "Justifies a processing choice with a reason linked to the park's rules, e.g. the discount is applied after the nightly total is calculated so that it covers the whole stay; or `≥ 7` is used so that a stay of exactly 7 nights gets the discount.",
+        "marks": 1
+      }
+    ],
+    "model": "```pseudo\n// stayFee: returns the total fee in dollars for a stay at the park.\n// Parameters: nights (Integer), powered (Boolean, TRUE for a powered site).\n// Nightly rate is $48 for a powered site and $36 for an unpowered site.\n// The discount is applied after the nightly total is calculated, so the 10%\n// comes off the whole stay. The test uses ≥ 7 so that a stay of exactly\n// 7 nights receives the discount.\n```",
+    "mistake": "A comment that only says what each line does ('multiplies nights by rate') earns no justification mark. The justification must give a reason linked to the park's rules.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-stay-fee",
+        "kind": "pseudocode",
+        "code": "FUNCTION stayFee(nights, powered)\n    IF powered = TRUE THEN\n        rate ← 48.00\n    ELSE\n        rate ← 36.00\n    ENDIF\n    fee ← nights * rate\n    IF nights ≥ 7 THEN\n        fee ← fee * 0.9\n    ENDIF\n    RETURN fee\nENDFUNCTION"
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk11-002",
+    "kk": [
+      "U3O1-KK11"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Tariq wrote the scheduling program for Ironbark Lane Freight, a Dandenong trucking company, but has left the business. A new developer must change how the program allocates trucks to deliveries. Explain two ways in which thorough internal documentation in Tariq's code would help the new developer.",
+    "points": [
+      {
+        "text": "Comments stating each module's purpose and key features let the developer find and understand the allocation code quickly, without working through every line.",
+        "marks": 1
+      },
+      {
+        "text": "Comments justifying processing choices show why the allocation works as it does, so the developer doesn't undo a deliberate decision and introduce a logic error.",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: comments stating assumptions (e.g. the order the data must be in, or the units used) stop the developer passing data that makes the module give wrong results.",
+        "marks": 1
+      }
+    ],
+    "model": "First, header comments that state what each module does, and what it takes in and returns, let the new developer find the truck-allocation code and understand it without tracing every line, so the change is made sooner. Second, comments that justify processing choices, such as why deliveries are allocated in a particular order, record Tariq's reasoning. Without them, the developer might \"fix\" something that was deliberate and introduce a logic error into the allocation.",
+    "mistake": "'Documentation makes the code easier to understand' earns little on its own. Say what the developer can then do, such as find the module sooner or avoid undoing a deliberate choice.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk12-001",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "Pellbrook Tyres in Morwell has a stock program that holds 40 000 part numbers, kept in ascending order. Counter staff look up part numbers several hundred times a day. Recommend either a linear search or a binary search for looking up a part number, and justify your recommendation.",
+    "points": [
+      {
+        "text": "Recommends binary search.",
+        "marks": 1
+      },
+      {
+        "text": "The part numbers are already kept in ascending order, so the sorted data binary search needs is available without extra sorting.",
+        "marks": 1
+      },
+      {
+        "text": "Binary search halves the range still to be searched with each comparison, so a lookup needs at most 16 comparisons against up to 40 000 for a linear search; with hundreds of lookups a day this saves a lot of time.",
+        "marks": 1
+      }
+    ],
+    "model": "Binary search. The 40 000 part numbers are already stored in ascending order, so the condition for a binary search is met and no sorting is needed. Each comparison halves the range still to be searched, so a lookup needs at most 16 comparisons, whereas a linear search may have to check all 40 000 part numbers. With several hundred lookups a day, binary search makes the counter staff's lookups much faster.",
+    "mistake": "Saying binary search is 'faster' earns little on its own. Link the choice to the scenario: the data is already sorted, the list is large and it is searched often.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk12-002",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Kestrelwood Research, a Warrnambool market-research firm, has a module that sorts about 50 000 customer records by customer number. It uses selection sort, and the sort takes too long. Explain why replacing selection sort with quick sort would be likely to reduce the sorting time, and identify one situation in which quick sort would lose most of this advantage.",
+    "points": [
+      {
+        "text": "Selection sort compares every remaining item on every pass, whatever the starting order, so its comparisons grow with the square of the list size (e.g. about 1.25 billion for 50 000 records).",
+        "marks": 1
+      },
+      {
+        "text": "Quick sort partitions the records around a pivot and sorts each part separately; on average the parts shrink quickly, so it needs far fewer comparisons (e.g. in the order of a million).",
+        "marks": 1
+      },
+      {
+        "text": "Quick sort loses its advantage when the pivot is repeatedly the smallest or largest remaining value, e.g. the first record is always the pivot and the records are already sorted; it then makes about as many comparisons as selection sort.",
+        "marks": 1
+      }
+    ],
+    "model": "Selection sort scans the whole unsorted part of the list on every pass to find the next smallest customer number, so it makes n(n − 1)/2 comparisons: about 1.25 billion for 50 000 records, however the records start. Quick sort instead partitions the records around a pivot, so that smaller customer numbers go before it and larger ones after it, and then sorts each part the same way. On average the parts shrink quickly, so the sort needs in the order of a million comparisons, which is far less time. The advantage is lost if the pivot keeps being the smallest or largest value, for example if the first record is always chosen as the pivot and the records are already in customer-number order. Quick sort then makes about as many comparisons as selection sort.",
+    "mistake": "Quick sort isn't guaranteed to be faster. An answer that claims it always is, without naming the poor-pivot case, misses the third mark.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk13-001",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "commandTerm": "identify",
+    "marks": 3,
+    "prompt": "Redgum Bend Swim Club in Swan Hill stores each swimmer's lap times, in seconds, in the array `laps`, which holds `n` times. Arrays are indexed from 0. The function shown should return the fastest (lowest) lap time, but it contains three errors: one syntax error, one logic error and one runtime error. For each error, identify the line on which it occurs and describe the error.",
+    "points": [
+      {
+        "text": "Syntax error: the IF on line 4 is never closed; an ENDIF is missing after line 5 (accept line 4, 5 or 6).",
+        "marks": 1
+      },
+      {
+        "text": "Logic error: line 4 uses `>`, so the function keeps the slowest (highest) time; it should use `<`.",
+        "marks": 1
+      },
+      {
+        "text": "Runtime error: line 3 lets `i` reach `n`, so line 4 reads `laps[n]`, one past the last index (`n − 1`): index out of range (accept line 3 or 4).",
+        "marks": 1
+      }
+    ],
+    "model": "Syntax error, line 4: the IF statement has no matching ENDIF, which should follow line 5, so the function can't be translated. Logic error, line 4: `laps[i] > fastest` keeps the highest time, which is the slowest lap; it should be `laps[i] < fastest`. Runtime error, line 3: the loop runs up to `n`, but the last valid index is `n − 1`, so on the final pass line 4 reads `laps[n]` and an index out of range error occurs. The loop should be `FOR i ← 1 TO n - 1`.",
+    "mistake": "Calling the `>` problem a syntax error is a common slip. The line obeys the language's rules but does the wrong thing, which makes it a logic error.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-fastest-lap",
+        "kind": "pseudocode",
+        "indexBase": 0,
+        "code": "FUNCTION fastestLap(laps, n)\n    fastest ← laps[0]\n    FOR i ← 1 TO n\n        IF laps[i] > fastest THEN\n            fastest ← laps[i]\n    ENDFOR\n    RETURN fastest\nENDFUNCTION"
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk13-002",
+    "kk": [
+      "U3O1-KK13",
+      "U3O1-KK10"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Chaffline Stockfeeds in Benalla has an ordering program. Staff type the number of bags of feed into a text box, and the program converts the entry to an Integer. When a staff member typed \"ten\", the program crashed. Identify the type of error that occurred, and describe how the developer could use an extra check and error handling to stop this input crashing the program.",
+    "points": [
+      {
+        "text": "Identifies a type mismatch (a runtime error): the text \"ten\" can't be converted to an Integer.",
+        "marks": 1
+      },
+      {
+        "text": "Extra check: before converting, test that the entry contains only digits; if it doesn't, display a message and ask again, so the conversion is never attempted on bad data.",
+        "marks": 1
+      },
+      {
+        "text": "Error handling: wrap the conversion in error-handling code that catches the conversion error when it occurs, displays a message and lets the user re-enter the quantity instead of crashing.",
+        "marks": 1
+      }
+    ],
+    "model": "Typing \"ten\" caused a type mismatch, a runtime error, because the program tried to convert text that isn't a whole number to an Integer. As an extra check, the developer could test the entry before converting it: if it contains anything other than digits, the program displays \"Enter the number of bags as a whole number\" and asks again, so the conversion only runs on suitable data. The conversion could also be wrapped in error handling that catches the conversion error if it occurs, displays the same message and lets the staff member re-enter the quantity, so the program keeps running.",
+    "mistake": "'Add validation' on its own earns little. Describe what is checked, when, and what the program does when the check fails.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk14-001",
+    "kk": [
+      "U3O1-KK14"
+    ],
+    "commandTerm": "complete",
+    "marks": 4,
+    "prompt": "Tallis Creek Library in Kyneton charges an overdue fine of $0.50 per day, up to a maximum fine of $10.00. A book returned on time (0 days overdue) has no fine. Complete the test table shown by writing the expected output for (a), (b) and (c), and a suitable input for (d).",
+    "points": [
+      {
+        "text": "(a) $0.00",
+        "marks": 1
+      },
+      {
+        "text": "(b) $6.00",
+        "marks": 1
+      },
+      {
+        "text": "(c) $10.00, because 25 × $0.50 = $12.50 exceeds the maximum",
+        "marks": 1
+      },
+      {
+        "text": "(d) daysOverdue = 19",
+        "marks": 1
+      }
+    ],
+    "model": "(a) $0.00: a book with no days overdue has no fine. (b) $6.00: 12 × $0.50. (c) $10.00: 25 × $0.50 is $12.50, which is capped at the $10.00 maximum. (d) daysOverdue = 19, because 19 × $0.50 = $9.50, which is below the maximum.",
+    "mistake": "Expected outputs come from the library's rules, not from running the program. Writing $12.50 for (c) ignores the maximum fine.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-library-fine-tests",
+        "kind": "table",
+        "columns": [
+          "Test number",
+          "Input(s)",
+          "Expected output",
+          "Actual output"
+        ],
+        "rows": [
+          [
+            "1",
+            "daysOverdue = 0",
+            "(a)",
+            ""
+          ],
+          [
+            "2",
+            "daysOverdue = 12",
+            "(b)",
+            ""
+          ],
+          [
+            "3",
+            "daysOverdue = 25",
+            "(c)",
+            ""
+          ],
+          [
+            "4",
+            "(d)",
+            "$9.50",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk14-002",
+    "kk": [
+      "U3O1-KK14"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Ines is writing a module for Crumbwell Bakery in Castlemaine that totals a customer's order. The module loops through the items in the order, adds each price to `total`, then applies a loyalty discount. For some orders, the total displayed is wrong. Describe how Ines could use each of these techniques to locate the error: a breakpoint, a debugging output statement, and commenting out code.",
+    "points": [
+      {
+        "text": "Breakpoint: set a breakpoint on the line inside the loop that adds to `total`, then step through, inspecting the item price and `total` on each pass to see where the value first goes wrong.",
+        "marks": 1
+      },
+      {
+        "text": "Debugging output statement: add a temporary statement inside the loop, or before and after the discount, that displays the item price and `total`, and compare the values shown with values worked out by hand.",
+        "marks": 1
+      },
+      {
+        "text": "Commenting out code: comment out the line that applies the discount and rerun the same order; if the total now equals the correct undiscounted total, the loop works and the error is in the discount code.",
+        "marks": 1
+      }
+    ],
+    "model": "Breakpoint: Ines sets a breakpoint on the line inside the loop that adds each price to `total`. Each time execution pauses, she inspects the price and `total`, stepping through until she sees the pass where `total` stops matching her own calculation. Debugging output statement: she adds a temporary `DISPLAY \"price = \" + price + \", total = \" + total` inside the loop and another after the discount, runs a faulty order, and compares the values displayed with those she worked out by hand. Commenting out: she comments out the discount line and reruns the same order. If the total now equals the correct total before discount, the loop is correct and the error is in the discount calculation; if not, the error is in the loop.",
+    "mistake": "Describing what a breakpoint is earns less than applying it. Say where Ines would put it and what she would look for in the bakery's order total.",
+    "source": "textbook"
+  }
+]

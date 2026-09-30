@@ -1,0 +1,701 @@
+[
+  {
+    "id": "s-u4o2-kk01-001",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Paddlesteamer Insurance, an Echuca insurer with 900 staff, wants to improve customer satisfaction. Its developers are building a portal that lets customers lodge and track claims online.\n\nExplain the difference between a goal and an objective, using Paddlesteamer Insurance's claims portal as an example.",
+    "points": [
+      {
+        "text": "A goal is a broad, long-term aim that is not directly measurable, such as improving customer satisfaction",
+        "marks": 1
+      },
+      {
+        "text": "An objective is a specific, measurable target with a time frame that shows progress towards a goal",
+        "marks": 1
+      },
+      {
+        "text": "Gives an objective for the claims portal that has a measure and a time frame and supports the goal, e.g. reduce the average time to settle a claim from 15 working days to 7 within 12 months of launch",
+        "marks": 1
+      }
+    ],
+    "model": "A goal is a broad, long-term aim that sets the organisation's direction but can't be measured directly. Paddlesteamer Insurance's goal is to improve customer satisfaction. An objective is a specific, measurable target with a deadline that shows progress towards a goal. An objective for the claims portal could be to reduce the average time taken to settle a claim from 15 working days to 7 within 12 months of the portal's launch. Meeting that target is evidence that the portal is helping to improve customer satisfaction.",
+    "mistake": "An objective that restates the goal in other words ('customers will be happier with claims') earns no mark. It needs a figure to check against and a deadline.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk01-002",
+    "kk": [
+      "U4O2-KK01",
+      "U4O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Tall Timber Outdoor, a Wodonga camping retailer with 300 staff and an online store, has the goal of becoming the most trusted outdoor retailer in north-east Victoria. Its developers keep the online store's source code, and a copy of the customer database, on a shared network drive that every employee can open.\n\nExplain how this practice could stop Tall Timber Outdoor achieving its goal.",
+    "points": [
+      {
+        "text": "Identifies the vulnerability: every employee, not only the developers, can read, copy or change the source code and customer data",
+        "marks": 1
+      },
+      {
+        "text": "Describes a likely consequence, e.g. customer data leaked or code altered by an employee, deliberately or by accident, or reached by an attacker through any one compromised staff account",
+        "marks": 1
+      },
+      {
+        "text": "Links the consequence to the goal: exposed customer data would damage customers' trust and the retailer's reputation, working against becoming the most trusted outdoor retailer",
+        "marks": 1
+      }
+    ],
+    "model": "Because the shared drive is open to every employee, anyone in the company, not just the developers, can read, copy or change the online store's source code and customers' personal details. An employee could leak customer records or alter the code, deliberately or by mistake, and an attacker who took over any single staff account would gain the same access. If customer data were exposed, customers would stop trusting Tall Timber Outdoor with their details, which works directly against its goal of being the most trusted outdoor retailer in north-east Victoria.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk02-001",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Numbat Legal, a Melbourne law firm with 150 staff, needs a document management system that will store confidential client files. Its IT team of three maintains the office network and laptops but has never built a large program. The system could be developed in-house by the IT team, or by an external software developer.\n\nRecommend one of these options for Numbat Legal. Justify your recommendation by explaining one advantage and one disadvantage of the option you choose, and how the firm could manage that disadvantage.",
+    "points": [
+      {
+        "text": "Recommends an option and gives an advantage of it that applies to Numbat Legal, e.g. external: specialist developers have the skills the three-person IT team lacks; in-house: confidential client files stay within the firm",
+        "marks": 1
+      },
+      {
+        "text": "Explains why that advantage matters for the firm, e.g. a system built by experienced developers is less likely to contain flaws that expose client files; or no third party ever sees client documents",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a disadvantage of the chosen option that applies to the firm, e.g. external: the developer's staff may see confidential client files; in-house: the team's lack of development experience could make the system slow to build or insecure",
+        "marks": 1
+      },
+      {
+        "text": "Describes a realistic way to manage that disadvantage, e.g. a contract with confidentiality and security terms and invented test files; or hiring or training an experienced developer and reviewing the code",
+        "marks": 1
+      }
+    ],
+    "model": "I recommend that Numbat Legal have the system developed externally. The firm's three IT staff maintain the network but have never built a large program, whereas a specialist developer has the skills and experience to build a document management system. This matters because a system built by inexperienced staff is more likely to contain security flaws that could expose confidential client files. The disadvantage is that the developer's staff may need access to the firm's systems and could see confidential client files. The firm can manage this with a contract that includes confidentiality and security obligations, by giving the developer invented test documents instead of real client files, and by reviewing the delivered code before it goes live.",
+    "mistake": "Either option can earn full marks. The marks come from reasons tied to Numbat Legal (the three-person IT team, the confidential client files), not from the choice itself.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk02-002",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Tumbleweed Couriers, a Dandenong delivery company with 200 staff, had its booking app built by an external developer. The contract didn't mention the source code, and the developer has refused to hand it over. A security flaw has now been found in the app.\n\nExplain one consequence of this situation for Tumbleweed Couriers, and state one contract term that would have prevented it.",
+    "points": [
+      {
+        "text": "Explains a consequence: without the source code, Tumbleweed Couriers can't fix the security flaw itself or have another developer fix it, so the flaw stays open to attack, or it must pay the original developer on that developer's terms",
+        "marks": 1
+      },
+      {
+        "text": "States a contract term: the source code and its documentation are owned by, or handed over to, Tumbleweed Couriers when the project ends",
+        "marks": 1
+      }
+    ],
+    "model": "Without the source code, Tumbleweed Couriers can't patch the security flaw itself or hire another developer to do it, so the app stays open to attack until the original developer agrees to fix it, on whatever terms and price that developer sets. The contract should have stated that the source code and its documentation belong to Tumbleweed Couriers and are handed over when the project ends.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk03-001",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Pardalote Health Software, a Bendigo company with 120 staff, develops a patient portal for medical clinics. Its current development practices are shown in the table.\n\nIdentify two vulnerabilities in these practices and explain a risk that each creates for Pardalote Health Software.",
+    "points": [
+      {
+        "text": "Any two vulnerabilities, 1 mark each. Development, testing and release all happen on the server that runs the live patient portal",
+        "marks": 1
+      },
+      {
+        "text": "Risk of the shared server (1 mark if this vulnerability is one of the two): an untested change or mistake could take the patient portal offline or expose patient records to other users",
+        "marks": 1
+      },
+      {
+        "text": "Any two vulnerabilities, 1 mark each. The six developers share one administrator login",
+        "marks": 1
+      },
+      {
+        "text": "Risk of the shared login (1 mark if this vulnerability is one of the two): no action can be traced to one developer, so misuse or mistakes can't be investigated, and access can't be removed from one developer without changing it for all",
+        "marks": 1
+      },
+      {
+        "text": "Any two vulnerabilities, 1 mark each. New features are tested with a copy of real patient data",
+        "marks": 1
+      },
+      {
+        "text": "Risk of real test data (1 mark if this vulnerability is one of the two): patients' health information sits in a less protected environment where more people can see it, so a breach of the test copy exposes it",
+        "marks": 1
+      },
+      {
+        "text": "Any two vulnerabilities, 1 mark each. Third-party libraries are not updated promptly",
+        "marks": 1
+      },
+      {
+        "text": "Risk of outdated libraries (1 mark if this vulnerability is one of the two): attackers can exploit publicly known flaws in them to reach the portal or patient data",
+        "marks": 1
+      }
+    ],
+    "model": "First, the developers write, test and release code on the server that runs the live patient portal. An untested change or a developer's mistake goes straight to the live system, so it could take the portal offline for clinics or expose patient records to the wrong users. Second, new features are tested with a copy of the live patient database. Patients' health information is then held in a test environment with weaker controls and more people using it, so anyone with test access can see it, and a breach of the test copy would expose it.",
+    "mistake": "Naming a practice earns the identify mark only. The second mark needs the harm it could cause to Pardalote's portal or its patients' data.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "pardalote-practices",
+        "kind": "table",
+        "title": "Development practices at Pardalote Health Software",
+        "columns": [
+          "Area",
+          "Current practice"
+        ],
+        "rows": [
+          [
+            "Environments",
+            "Developers write, test and release code on the server that runs the live patient portal"
+          ],
+          [
+            "Accounts",
+            "The six developers share one administrator login"
+          ],
+          [
+            "Test data",
+            "New features are tested with a copy of the live patient database"
+          ],
+          [
+            "Libraries",
+            "Third-party libraries are updated when a developer has spare time"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u4o2-kk03-002",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Hollowlog Media, a Melbourne app developer with 60 staff, did not disable the accounts of three developers who left the company last year. The accounts can still log in to the company's code repository.\n\nExplain why these accounts are a vulnerability for Hollowlog Media.",
+    "points": [
+      {
+        "text": "The former developers can still read, copy or change Hollowlog Media's code although they no longer have any legitimate need for access",
+        "marks": 1
+      },
+      {
+        "text": "Nobody is using or watching the accounts, so an attacker who obtains one of their passwords can get into the repository with little chance of being noticed",
+        "marks": 1
+      }
+    ],
+    "model": "The three former developers can still log in to the repository and read, copy or change Hollowlog Media's code, even though they no longer work there and have no legitimate need for access. Because nobody uses or monitors these accounts, an attacker who obtained one of their passwords could also get into the repository and alter or steal code with little chance of being noticed.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk04-001",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Mallee Rise Water, a regional water corporation with 350 staff, has eight in-house developers. They log in to every system with a username and password, and every developer has administrator access to the live billing system, which stores customers' names, addresses and bank account details.\n\nRecommend two software security controls that would better protect the billing data, and explain how each would protect it.",
+    "points": [
+      {
+        "text": "Any two controls, 1 mark each. Multi-factor authentication for developer logins",
+        "marks": 1
+      },
+      {
+        "text": "How multi-factor authentication protects the data (1 mark if it is one of the two): a stolen or guessed password is no longer enough on its own to reach the billing system",
+        "marks": 1
+      },
+      {
+        "text": "Any two controls, 1 mark each. Identity and access management with least privilege, such as role-based access",
+        "marks": 1
+      },
+      {
+        "text": "How least privilege protects the data (1 mark if it is one of the two): developers get only the access their role needs, so fewer accounts can read or change customers' bank details",
+        "marks": 1
+      },
+      {
+        "text": "Any two controls, 1 mark each. Encryption of the stored billing data",
+        "marks": 1
+      },
+      {
+        "text": "How encryption protects the data (1 mark if it is one of the two): bank details copied from the database can't be read without the key",
+        "marks": 1
+      },
+      {
+        "text": "Any two controls, 1 mark each. Separate development, testing and production environments",
+        "marks": 1
+      },
+      {
+        "text": "How separation protects the data (1 mark if it is one of the two): developers build and test with invented data and don't need access to the live billing system",
+        "marks": 1
+      }
+    ],
+    "model": "First, Mallee Rise Water should require multi-factor authentication, such as a password plus a code from an authenticator app, for every developer login. A developer's stolen or guessed password would then not be enough on its own to reach customers' bank details. Second, it should apply least privilege through identity and access management, giving each developer only the access their role needs. Most developers would lose administrator access to the live billing system, so far fewer accounts could read or change customers' bank details, whether through misuse, error or a compromised account.",
+    "mistake": "Recommending 'strong passwords' adds little here: Mallee Rise already uses passwords. Recommend a control that changes the current situation, and say what it protects.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk04-002",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "commandTerm": "describe",
+    "marks": 2,
+    "prompt": "Bottlebrush Software's development servers and backup drives sit on an open shelf in an unlocked storeroom beside the staff kitchen in its Ballarat office. Visitors and cleaners use the kitchen every day.\n\nDescribe two physical security controls that would protect the servers and backup drives.",
+    "points": [
+      {
+        "text": "A lock on the storeroom, such as swipe-card or key access, so that only authorised staff can enter",
+        "marks": 1
+      },
+      {
+        "text": "CCTV or an entry log for the storeroom, so that anyone who enters is recorded and can be identified",
+        "marks": 1
+      },
+      {
+        "text": "Backup drives kept in a locked safe or stored off-site, so that they can't be taken or destroyed along with the servers",
+        "marks": 1
+      }
+    ],
+    "model": "Bottlebrush Software should fit a swipe-card lock to the storeroom so that only authorised staff can enter, keeping visitors and cleaners away from the servers. It should also keep the backup drives in a locked safe or at a separate site, so that a single theft, fire or flood in the storeroom can't take both the servers and their backups.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk05-001",
+    "kk": [
+      "U4O2-KK05",
+      "U4O2-KK04"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Pepper Creek Vets, a Bendigo veterinary group with 140 staff, is designing an app in which pet owners book appointments and vets record treatments. Part of the design is shown in the DFD. The developers are threat modelling the design.\n\nIdentify one threat to the data shown in the DFD. Explain how the developers should mitigate it, and how they could test that the mitigation works.",
+    "points": [
+      {
+        "text": "Identifies a threat tied to a named element of the DFD, e.g. booking_request intercepted in transit; someone posing as a vet sends false treatment_notes; unauthorised access to the Medical records store",
+        "marks": 1
+      },
+      {
+        "text": "Explains the harm the threat would cause, e.g. owners' personal details exposed; pets' medical records altered or disclosed",
+        "marks": 1
+      },
+      {
+        "text": "Describes a control that mitigates that threat, e.g. encrypting the flow in transit; multi-factor authentication for vets; role-based access and encryption for the Medical records store",
+        "marks": 1
+      },
+      {
+        "text": "Describes a test that would show the mitigation works, e.g. trying to submit treatment notes with a correct password but no second factor and confirming it is refused",
+        "marks": 1
+      }
+    ],
+    "model": "One threat is that someone who has stolen a vet's password could pose as that vet and send false `treatment_notes` to process 2, altering pets' records in the Medical records store. Wrong treatment records could lead to a pet being given the wrong medication. The developers should mitigate this by requiring multi-factor authentication for vets, so a password alone can't be used to record a treatment. To test the mitigation, they would try to log in as a test vet with the correct password but without the second factor, and confirm that the app refuses to accept any treatment notes.",
+    "mistake": "A threat that isn't tied to the diagram, such as 'hackers', earns little. Name the flow, process or store at risk and what could happen to it.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "pepper-creek-dfd",
+        "kind": "dfd",
+        "title": "DFD (part): Pepper Creek Vets app",
+        "width": 640,
+        "height": 400,
+        "nodes": [
+          {
+            "id": "owner",
+            "type": "entity",
+            "label": "Pet owner",
+            "x": 104,
+            "y": 90
+          },
+          {
+            "id": "vet",
+            "type": "entity",
+            "label": "Vet",
+            "x": 536,
+            "y": 90
+          },
+          {
+            "id": "p1",
+            "type": "process",
+            "label": "Book appointment",
+            "number": "1",
+            "x": 200,
+            "y": 220
+          },
+          {
+            "id": "p2",
+            "type": "process",
+            "label": "Record treatment",
+            "number": "2",
+            "x": 440,
+            "y": 220
+          },
+          {
+            "id": "d1",
+            "type": "store",
+            "label": "Appointments",
+            "number": "D1",
+            "x": 200,
+            "y": 344
+          },
+          {
+            "id": "d2",
+            "type": "store",
+            "label": "Medical records",
+            "number": "D2",
+            "x": 440,
+            "y": 344
+          }
+        ],
+        "flows": [
+          {
+            "from": "owner",
+            "to": "p1",
+            "label": "booking_request",
+            "labelAt": {
+              "x": 88,
+              "y": 170
+            }
+          },
+          {
+            "from": "p1",
+            "to": "d1",
+            "label": "booking_details",
+            "labelAt": {
+              "x": 128,
+              "y": 297
+            }
+          },
+          {
+            "from": "d1",
+            "to": "p2",
+            "label": "appointment_details"
+          },
+          {
+            "from": "vet",
+            "to": "p2",
+            "label": "treatment_notes",
+            "labelAt": {
+              "x": 552,
+              "y": 165
+            }
+          },
+          {
+            "from": "p2",
+            "to": "d2",
+            "label": "treatment_record",
+            "labelAt": {
+              "x": 514,
+              "y": 297
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u4o2-kk05-002",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "The Pepper Creek Vets developers want to leave threat modelling until the app has been released, so that they can finish building it sooner.\n\nExplain why they should carry out threat modelling during design instead.",
+    "points": [
+      {
+        "text": "Threats found during design can be removed by changing the design, which is cheaper and faster than reworking the code of the released app",
+        "marks": 1
+      },
+      {
+        "text": "Weaknesses are dealt with before release, so pet owners' personal details and pets' medical records are never exposed through the live app",
+        "marks": 1
+      }
+    ],
+    "model": "If the developers model threats during design, any weakness they find can be removed by changing the design before code is written, which is far cheaper and quicker than reworking the released app. It also means the controls are in place from the first day the app is live, so pet owners' personal details and pets' medical records aren't exposed to attackers while the developers catch up.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk06-001",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "commandTerm": "propose",
+    "marks": 4,
+    "prompt": "Keelback Logistics, a Bendigo freight company, employs six developers who maintain its parcel-tracking system. The system stores customers' names, addresses and phone numbers. Management wants to evaluate how secure the team's development practices are.\n\nPropose two criteria Keelback Logistics could use to evaluate the security of its development practices. For each criterion, describe the evidence that would show whether it is met.",
+    "points": [
+      {
+        "text": "Criterion 1: a specific, checkable standard for one development practice, e.g. every change to the tracking system is approved by a second developer before it is merged",
+        "marks": 1
+      },
+      {
+        "text": "Evidence for criterion 1 that directly shows whether it is met, e.g. the repository's merge history shows an approval by a developer other than the author for each change",
+        "marks": 1
+      },
+      {
+        "text": "Criterion 2: a specific, checkable standard for a different practice, e.g. test environments contain no identifiable customer names, addresses or phone numbers",
+        "marks": 1
+      },
+      {
+        "text": "Evidence for criterion 2, e.g. an inspection of a sample of test database records confirms that customer details are made up or de-identified",
+        "marks": 1
+      }
+    ],
+    "model": "Criterion 1: Every change to the parcel-tracking system's code is reviewed and approved by a second developer before it is merged. Evidence: the repository's merge history for the last three months, checked to confirm that each merged change was approved by a developer other than its author.\n\nCriterion 2: Test environments contain no identifiable customer names, addresses or phone numbers. Evidence: an inspection of a sample of records in the test database, confirming that the customer details are made up or de-identified rather than copied from the live system.",
+    "mistake": "Criteria such as 'the system is secure' can't be checked, and evidence such as 'ask the developers' is opinion. Name a specific practice, and a record, log or test that shows whether it happens.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk07-001",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Bristlebird Allied Health, a private clinic in Warrnambool, has engaged Tawnyhill Apps, an external developer, to build a booking and treatment-notes app. The app will store patients' contact details and treatment notes. Tawnyhill Apps plans to include an open-source calendar library in the app.\n\nIdentify two Acts that apply to this project and explain how each affects the way Tawnyhill Apps develops the app.",
+    "points": [
+      {
+        "text": "Identifies a privacy Act that applies to patients' information: the Health Records Act 2001 (Vic) or the Privacy Act 1988 (Cth)",
+        "marks": 1
+      },
+      {
+        "text": "Explains its effect on development, applied to the app, e.g. the app must protect treatment notes from unauthorised access (such as by encrypting them and letting only authorised clinic staff view them), collect only the information the clinic needs, and be tested without real patient records",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second Act: the Copyright Act 1968 (Cth) for the calendar library, or the other privacy Act",
+        "marks": 1
+      },
+      {
+        "text": "Explains its effect on development, e.g. Tawnyhill Apps follows the library's licence conditions, such as keeping its copyright notice, and acknowledges it in the documentation",
+        "marks": 1
+      }
+    ],
+    "model": "The Health Records Act 2001 (Vic) applies because the app stores treatment notes, which are health information held by a private Victorian clinic. The app must let the clinic meet the Act, so Tawnyhill Apps must build it to protect the notes from unauthorised access, for example by encrypting them and letting only authorised clinic staff view them, and it should test the app with made-up patient records rather than real ones.\n\nThe Copyright Act 1968 (Cth) applies to the open-source calendar library, which is protected by copyright even though it is freely available. Tawnyhill Apps must follow the library's licence conditions, such as keeping its copyright notice, and acknowledge the library in the app's documentation.",
+    "mistake": "Naming an Act without linking it to the app earns little. Say which data or code the Act covers and what Tawnyhill Apps must do because of it.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk07-002",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK09"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Sandstone Freight Systems in Dandenong has six developers. All of them log in to their laptops and to the build server with administrator accounts, and the build server's operating system has not been updated for 14 months.\n\nIdentify two Essential Eight strategies that the team is not following, and explain how applying each would reduce the risk to Sandstone Freight Systems' code and data.",
+    "points": [
+      {
+        "text": "Identifies restrict administrative privileges",
+        "marks": 1
+      },
+      {
+        "text": "Explains: developers use standard accounts for daily work, so a stolen login or malware running under a developer's account can't change settings or install software across the build server",
+        "marks": 1
+      },
+      {
+        "text": "Identifies patch operating systems",
+        "marks": 1
+      },
+      {
+        "text": "Explains: updating the build server's operating system closes known vulnerabilities that attackers could use to access or alter the code it builds",
+        "marks": 1
+      }
+    ],
+    "model": "Restrict administrative privileges: the developers should use standard accounts for everyday work, with administrator rights given only to the few staff who need them. If a developer's login is stolen or malware runs on a laptop, it can't install software or change settings across the build server, which limits the damage to Sandstone's code.\n\nPatch operating systems: the build server's operating system should be updated promptly. After 14 months without updates it has known vulnerabilities that attackers can use, and patching closes them, reducing the chance that the code built on the server is accessed or altered.",
+    "mistake": "Naming 'patching' without saying what is patched, or 'admin rights' without saying who loses them, doesn't apply the strategy to the scenario.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk08-001",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Galah Creek Software, a small Geelong company, is building a membership app for a chain of gyms. To meet a tight deadline, its developers:\n- paste AI-generated functions into the app without reviewing them\n- copy code from online forums without recording where it came from\n- test the app using the gyms' real member records.\n\nExplain two ethical issues raised by Galah Creek Software's development practices.",
+    "points": [
+      {
+        "text": "Identifies an ethical issue from the scenario, e.g. over-reliance on AI-generated code that hasn't been reviewed",
+        "marks": 1
+      },
+      {
+        "text": "Explains the harm and who bears it, e.g. the functions may contain errors or vulnerabilities that expose members' details, while Galah Creek remains responsible for the code it releases",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second ethical issue, e.g. using real member records for testing, or not acknowledging code copied from forums",
+        "marks": 1
+      },
+      {
+        "text": "Explains the harm, e.g. members didn't agree to their data being used for testing and it is more exposed in a test environment; or authors aren't credited and the code's licence and security can't be checked",
+        "marks": 1
+      }
+    ],
+    "model": "Over-reliance on AI-generated code: the developers paste in functions they haven't reviewed, so the app may contain errors or security vulnerabilities that expose gym members' personal details. Galah Creek remains responsible for that code, and the gyms and their members carry the risk without knowing it.\n\nUsing real member records for testing: members gave their details to join a gym, not to have them used to test software. Test environments usually have weaker controls, so the records are more likely to be exposed. Made-up test data would avoid this harm.",
+    "mistake": "Stating that a practice is 'unethical' without saying who is harmed, and how, earns little. Name the stakeholder, such as the gym members, and the harm to them.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk09-001",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "commandTerm": "propose",
+    "marks": 4,
+    "prompt": "At Boobook Surveying, a Horsham company, the three developers share one administrator login for the code repository and the live server. They test new features on the live server during business hours.\n\nFor each of these two practices, propose a measure that would reduce the risk, and explain how it reduces the risk.",
+    "points": [
+      {
+        "text": "Shared administrator login: proposes individual accounts for each developer, with only the rights each needs (least privilege), optionally with multi-factor authentication",
+        "marks": 1
+      },
+      {
+        "text": "Explains: actions can be traced to one person, and a stolen or misused login gives access only to what that developer needs",
+        "marks": 1
+      },
+      {
+        "text": "Testing on the live server: proposes a separate testing environment, with changes released to the live server only after they pass testing",
+        "marks": 1
+      },
+      {
+        "text": "Explains: faulty or unfinished code can't crash the live system or corrupt live data while staff are using it",
+        "marks": 1
+      }
+    ],
+    "model": "Shared administrator login: each developer should have their own account with only the rights they need, protected by multi-factor authentication. Actions on the repository and server can then be traced to a person, and if one login is stolen the attacker gains only that developer's limited access, not full administrator control.\n\nTesting on the live server: Boobook should set up a separate testing environment and move changes to the live server only after they pass testing. Faulty or unfinished features then can't crash the live system or corrupt survey data while staff are using it.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk09-002",
+    "kk": [
+      "U4O2-KK09",
+      "U4O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Jonah, a developer at Ferncastle Lending in Bendigo, wrote the login module below. The arrays `users` and `passwords` hold each staff member's username and password, and `passwords[i]` belongs to `users[i]`. No staff member has the username `guest`. Arrays are indexed from 0.\n\nState what the module displays when the username `guest` and the password `Kookaburra99` are entered. Explain the weakness this shows, and propose two measures that would reduce or remove the risk.",
+    "points": [
+      {
+        "text": "States the output: Welcome guest",
+        "marks": 1
+      },
+      {
+        "text": "Explains the weakness: lines 2 and 11 hard-code a master password that logs anyone in under any username, and anyone who can read the source code or its version history can see it",
+        "marks": 1
+      },
+      {
+        "text": "Measure 1, e.g. delete line 2 and remove the master password test from line 11, so that every login must match a real staff account",
+        "marks": 1
+      },
+      {
+        "text": "Measure 2, e.g. require a second developer to review every change before it is merged, or scan code for hard-coded secrets, so that back doors and passwords in code are caught before release",
+        "marks": 1
+      }
+    ],
+    "model": "The module displays **Welcome guest**. No staff member is called guest, so `found` stays FALSE, but line 11 also accepts the master password on its own. This is a hard-coded back door: anyone who knows Kookaburra99 can log in under any username, and anyone who can read the source code or the repository's history can find it on line 2.\n\nMeasure 1: delete line 2 and change line 11 to `IF found = TRUE THEN`, so that every login must match a real staff account. Any administrator who needs access should have their own account, protected by multi-factor authentication.\n\nMeasure 2: require a second developer to review every change before it is merged, so that back doors and hard-coded passwords like this one are caught before the module is released.",
+    "mistake": "The weakness isn't only that a password can be read in the code. Line 11 accepts the master password with any username, so it bypasses the account check completely.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "ferncastle-login",
+        "kind": "pseudocode",
+        "title": "Login module",
+        "code": "BEGIN\n    masterPassword ← \"Kookaburra99\"\n    INPUT username\n    INPUT password\n    found ← FALSE\n    FOR i ← 0 TO LENGTH(users) - 1\n        IF users[i] = username AND passwords[i] = password THEN\n            found ← TRUE\n        ENDIF\n    ENDFOR\n    IF found = TRUE OR password = masterPassword THEN\n        DISPLAY \"Welcome \" + username\n    ELSE\n        DISPLAY \"Login failed\"\n    ENDIF\nEND",
+        "indexBase": 0
+      }
+    ]
+  },
+  {
+    "id": "s-u4o2-kk10-001",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK09"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Pardalote Rostering, a Ballarat company, builds rostering software for aged-care providers. An evaluation of its development practices produced the findings shown.\n\nRecommend two improvements to Pardalote Rostering's development practices. Justify each recommendation with reference to the findings.",
+    "points": [
+      {
+        "text": "Recommendation 1: a specific action that addresses one finding, e.g. require a second developer to approve every change before it is merged",
+        "marks": 1
+      },
+      {
+        "text": "Justification 1, linked to the finding, e.g. developers now merge their own changes unchecked, so flaws such as hard-coded passwords reach the live system; a reviewer would catch them",
+        "marks": 1
+      },
+      {
+        "text": "Recommendation 2: a specific action that addresses a different finding, e.g. disable the former developers' accounts and review access regularly; move the database password into a protected secrets store and change it; or use made-up staff records for testing",
+        "marks": 1
+      },
+      {
+        "text": "Justification 2, linked to the finding, e.g. the former developers no longer need access, and their accounts could be used to copy or change the code without anyone noticing",
+        "marks": 1
+      }
+    ],
+    "model": "Recommendation 1: Pardalote should require a second developer to review and approve every change before it can be merged. At present developers merge their own changes, so errors and security flaws, such as the live database password written into three source files, reach the live system unnoticed. A reviewer would catch these before release.\n\nRecommendation 2: Pardalote should immediately disable the repository accounts of the two developers who left in June, and review all access each month. Former staff no longer need access, and their accounts could be used to copy or change the rostering code without anyone noticing.",
+    "mistake": "A recommendation that could apply to any company, such as 'use better security', earns little. Name the finding it fixes and the risk it removes.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "pardalote-findings",
+        "kind": "table",
+        "title": "Evaluation findings",
+        "columns": [
+          "Area",
+          "Finding"
+        ],
+        "rows": [
+          [
+            "Code changes",
+            "Developers merge their own changes without review"
+          ],
+          [
+            "Credentials",
+            "The live database password is written in three source files"
+          ],
+          [
+            "Accounts",
+            "Two developers who left in June still have repository access"
+          ],
+          [
+            "Testing",
+            "The test system uses a full copy of live staff records"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u4o2-kk10-002",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK08",
+      "U4O2-KK06"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "Stringybark Credit Co-operative in Traralgon lets its developers paste customers' account records into a public AI chatbot to help them find the causes of errors.\n\nRecommend one change to this practice. Justify your recommendation, and describe how the co-operative could check that the change is being followed.",
+    "points": [
+      {
+        "text": "Recommends a specific change, e.g. a rule that developers never enter real customer records into AI tools and use made-up or de-identified records instead",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: pasting real account records into a public chatbot discloses customers' personal information to an outside party, where it may be stored and is beyond the co-operative's control",
+        "marks": 1
+      },
+      {
+        "text": "Describes a check that uses evidence, e.g. provide an approved AI tool and review its prompt logs regularly for real customer names or account numbers",
+        "marks": 1
+      }
+    ],
+    "model": "The co-operative should adopt a rule that developers never paste real customer records into AI tools, and use made-up or de-identified records when they need help finding the cause of an error. At present, customers' account details are being disclosed to an outside company, where they may be stored and reused beyond the co-operative's control. This exposes customers to harm and breaks their trust.\n\nTo check that the rule is followed, the co-operative could provide an approved AI tool and review its prompt logs each month, confirming that no real customer names or account numbers appear in them.",
+    "source": "textbook"
+  }
+]

@@ -1,0 +1,945 @@
+[
+  {
+    "id": "c-u4o2-kk01-001",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "Organisational goal",
+    "back": "A broad, long-term statement of what an organisation aims to achieve, such as improving customer service or growing its membership. It sets direction but is usually not stated as a measurable target.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk01-002",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "Organisational objective",
+    "back": "A specific, measurable target with a time frame that shows progress towards a goal, such as cutting the average time to process an insurance claim from ten days to five by the end of the financial year.",
+    "mistake": "An objective isn't just a narrower goal. Without a measure and a time frame, a statement such as 'improve the security of customer logins' is still a goal.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk01-003",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "compare",
+    "front": "Goal versus objective",
+    "back": "| | Goal | Objective |\n|:--|:--|:--|\n| Scope | Broad aim | Specific target |\n| Time frame | Long term, often open-ended | A stated deadline |\n| Measurable | Not directly | Yes: a figure to check against |\n| Example | Improve customer service | Answer 90% of calls within two minutes by June |",
+    "mistake": "Goals and objectives aren't alternatives. Each objective should serve a goal, and the goal is achieved through its objectives.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk01-004",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "cloze",
+    "front": "An objective is written so that it can be {{measured}}, and it usually states a {{time frame}} for achieving it.",
+    "back": "Without a measure and a deadline, an organisation can't tell whether it has met the objective.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk01-005",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "basic",
+    "front": "Why do medium and large organisations set measurable objectives as well as broad goals?",
+    "back": "Many departments and staff must work towards the same aims. Objectives turn each goal into targets they can plan for, and managers can measure results to see whether the goal is being achieved.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk01-006",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "basic",
+    "front": "How does a software development project support an organisation's goals?",
+    "back": "The software is built to meet objectives that serve a goal. An online claims portal that halves claim processing time meets an objective that supports the goal of better customer service.",
+    "mistake": "A project justified only by the technology ('we need an app') is weak. Link it to the goal and objective it serves.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk01-007",
+    "kk": [
+      "U4O2-KK01",
+      "U4O2-KK03"
+    ],
+    "type": "basic",
+    "front": "How can insecure software development practices threaten an organisation's goals?",
+    "back": "A breach caused by weak development practices can bring financial loss, legal penalties, disrupted services and lost customer trust. Each works directly against goals such as growth, profitability or a trusted reputation.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk01-008",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "basic",
+    "front": "Goal or objective? 'Reduce the number of failed website logins reported to the help desk by 30% within six months.'",
+    "back": "An objective. It sets a measurable target (a 30% reduction) and a time frame (six months).",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk02-001",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "reverse",
+    "front": "In-house development",
+    "back": "Software designed, built and maintained by the organisation's own employees, using its own equipment and processes.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk02-002",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "reverse",
+    "front": "External development",
+    "back": "Software designed and built for the organisation by another company or a contractor, under a contract that sets the requirements, cost and deadline.",
+    "aliases": [
+      "Outsourced development"
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk02-003",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "compare",
+    "front": "In-house versus external development",
+    "back": "| | In-house | External |\n|:--|:--|:--|\n| Control | Organisation sets priorities and controls the code | Shared, and set by the contract |\n| Expertise | Limited to current staff | Specialist skills and experience |\n| Knowledge of the organisation | Already there | Must be learned |\n| Data and code | Stay inside the organisation | Shared with a third party |\n| Cost | Salaries, training, equipment | Contract price, plus fees for later changes |",
+    "mistake": "External development isn't automatically cheaper. Fees for changes, support and maintenance after delivery can outweigh the cost of in-house staff.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk02-004",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "basic",
+    "front": "Why can in-house development make it easier to protect data and source code?",
+    "back": "Only the organisation's own staff handle the data and code, under its own security policies, access controls and supervision. No third party needs access, so there are fewer people and systems through which data could leak.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk02-005",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "basic",
+    "front": "When is external development likely to be the better choice?",
+    "back": "When the organisation's staff lack the specialist skills needed, when the project is a one-off that doesn't justify hiring, or when the solution is needed sooner than existing staff could deliver it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk02-006",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "basic",
+    "front": "What security risk does external development create for an organisation's data?",
+    "back": "The developer's staff may need access to personal or confidential data and to the source code. A breach at the developer, weak practices or a dishonest employee there can expose that data, and the organisation can't directly control how it is protected.",
+    "mistake": "Outsourcing the work doesn't outsource the responsibility. Customers still hold the organisation that collected their data responsible when it leaks.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk02-007",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "basic",
+    "front": "How can an organisation reduce the risks of external development?",
+    "back": "- A contract stating requirements, deadlines, cost, ownership of the code and security obligations\n- A confidentiality agreement for the developer's staff\n- Invented test data, with access to real data only where essential\n- Its own code review and testing of what is delivered",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk02-008",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "cloze",
+    "front": "Before external development starts, the contract should state who owns the {{source code}} and that it is handed over when the project ends.",
+    "back": "Without the source code, even a small fix or security patch depends on the original developer, who may charge for it, refuse, or go out of business.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-001",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Vulnerability",
+    "back": "A weakness in software, hardware, a process or an environment that a threat could exploit to cause harm, such as an unpatched library or a password written into source code.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-002",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "compare",
+    "front": "Vulnerability versus threat versus risk",
+    "back": "| | Meaning | Example |\n|:--|:--|:--|\n| Vulnerability | A weakness | A former developer's account is still active |\n| Threat | A person or event that could exploit a weakness | The former developer, or an attacker who learns the password |\n| Risk | How likely harm is, combined with how severe it would be | High: the account can still change live code |",
+    "mistake": "A hacker is a threat, not a vulnerability. The vulnerability is the weakness they exploit, such as the account that was never disabled.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-003",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "basic",
+    "front": "Why is it a vulnerability for development, testing and production to share one environment?",
+    "back": "Untested code and developers' experiments run beside the live system, so one faulty change or misconfiguration can break the live service or expose real data. Developers also end up with access to production data they don't need.",
+    "mistake": "The danger isn't only deliberate misuse. In a shared environment, an honest mistake reaches live users before anyone has tested it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-004",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "basic",
+    "front": "Why is writing passwords or API keys directly into source code a vulnerability?",
+    "back": "Anyone who can read the code, including other staff, external developers or the public if the repository is exposed, gains those credentials. The secret also stays in earlier versions kept by version control.",
+    "mistake": "Deleting a hard-coded password in a later version doesn't remove it: earlier versions in the repository still contain it. The password must also be changed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-005",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Insider threat",
+    "back": "A threat from someone with legitimate access, such as an employee or contractor, who harms the organisation deliberately or by accident.",
+    "mistake": "Insider threats aren't only malicious staff. A trusted developer who makes a storage folder public by mistake is an insider threat too.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-006",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "basic",
+    "front": "Why is testing with copies of real personal data a risk?",
+    "back": "Test environments usually have weaker controls and more people with access than production. Real personal data there can be seen by staff who don't need it, or leaked if the test environment is breached.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-007",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "basic",
+    "front": "Why do unpatched development tools and third-party libraries put an organisation at risk?",
+    "back": "Security fixes are usually published with a description of the flaw they fix, so attackers know what to look for in systems that haven't been updated. A flaw in a widely used library can affect every program built with it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-008",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "basic",
+    "front": "Why is it a risk for several developers to share one login account?",
+    "back": "No action can be traced to one person, so mistakes and misuse can't be investigated. The password also spreads further, and access can't be removed from one person, such as someone who leaves, without changing it for everyone.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-001",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "type": "compare",
+    "front": "Physical versus software security controls",
+    "back": "| | Physical controls | Software controls |\n|:--|:--|:--|\n| Protect | Premises, hardware and storage media | Systems, code and data, through programs and settings |\n| Examples | Locked server rooms, swipe-card entry, CCTV, locked storage for backup drives | Authentication, access permissions, encryption, version control, patching |",
+    "mistake": "Physical controls still matter when data is digital. A thief who takes a laptop or backup drive can read its data directly, without logging in, unless the data is encrypted.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-002",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "Identity and access management (IAM)",
+    "back": "The policies and tools that give each person their own account, confirm who they are when they log in, and control what each account may access, updating that access as people join, change roles or leave.",
+    "aliases": [
+      "IAM",
+      "Identity and access management"
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-003",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "type": "compare",
+    "front": "Authentication versus authorisation",
+    "back": "| | Authentication | Authorisation |\n|:--|:--|:--|\n| Question | Who are you? | What may you do? |\n| How | Password, security key, fingerprint | Permissions or roles attached to the account |\n| Example | A developer logs in with a password and a code | That developer may change test code but not release to production |\n\nAuthentication happens first.",
+    "mistake": "Logging in doesn't decide what a user can do. A correctly authenticated user should still get only the permissions their role needs.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-004",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "type": "cloze",
+    "front": "Authentication factors fall into three main categories: something you {{know}}, something you {{have}} and something you {{are}}.",
+    "back": "A password or PIN is known; a phone or security key is had; a fingerprint or face (a biometric) is what you are.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-005",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "What makes authentication multi-factor?",
+    "back": "The user must present factors from at least two different categories, such as a password (something you know) and a code from an authenticator app on their phone (something you have).",
+    "mistake": "A password plus a PIN or a security question is not multi-factor: both are something you know.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-006",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "How does version control act as a security control in software development?",
+    "back": "It records every change with who made it and when, so unauthorised or faulty changes can be traced and reviewed, and the code can be rolled back to a known good version.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-007",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "Why is a code review a security control?",
+    "back": "A second developer examines code before it is merged. This catches vulnerabilities the author missed, such as a hard-coded password or missing validation, and makes it harder for anyone to slip in malicious code unnoticed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-008",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "type": "compare",
+    "front": "Encryption at rest versus encryption in transit",
+    "back": "| | At rest | In transit |\n|:--|:--|:--|\n| Protects | Stored data: databases, backups, laptops | Data moving across a network |\n| Guards against | A stolen or copied drive being read | Data being intercepted on the way |",
+    "mistake": "Encryption doesn't stop data being stolen. It makes stolen data unreadable to anyone without the key.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-001",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "Threat modelling",
+    "back": "A structured process for working out what could go wrong with a system's security: identifying its threats, judging how serious each is, and planning controls to mitigate them, ideally while the software is still being designed.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-002",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "type": "basic",
+    "front": "Why is threat modelling best started during design rather than after release?",
+    "back": "A threat found in design can be removed by changing the design, which is far cheaper and quicker than reworking released code. Controls are then built in from the start rather than added later.",
+    "mistake": "Threat modelling isn't a one-off check before release. It starts in design and is revisited whenever the system changes.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-003",
+    "kk": [
+      "U4O2-KK05",
+      "U3O2-KK08"
+    ],
+    "type": "basic",
+    "front": "What does a data flow diagram contribute to threat modelling?",
+    "back": "It shows where data enters and leaves the system, the processes that handle it and the stores that hold it. The team can then ask what could go wrong at each flow, process and store.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-004",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "type": "basic",
+    "front": "How are threats prioritised in threat modelling?",
+    "back": "By risk: how likely each threat is to happen and how severe the harm would be. Threats that are both likely and harmful are mitigated first.",
+    "mistake": "The most likely threat isn't automatically first. A less likely threat that would expose every customer's records can outrank a common threat that causes minor harm.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-005",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "Threat mitigation",
+    "back": "Reducing a threat's likelihood or impact by applying a control, such as encrypting a data flow that could be intercepted, or requiring multi-factor authentication on accounts whose passwords could be guessed.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-006",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "type": "basic",
+    "front": "Why must each mitigation be tested once it has been built?",
+    "back": "A planned control only helps if it was built correctly and actually blocks the threat. Testing it, for example by trying to open another user's record without permission, confirms that no identified threat has been left open.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-007",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "type": "basic",
+    "front": "Why should a threat model be updated when a feature is added?",
+    "back": "A new feature can add data flows, data stores or ways into the system, and each can bring threats the original model never considered.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-008",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "type": "basic",
+    "front": "What is a security requirement? Give an example.",
+    "back": "A requirement stating what the solution must do to protect its data and functions, which can be tested like any other requirement. Example: only pharmacists can view a customer's prescription history.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk06-001",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "type": "basic",
+    "front": "What is a criterion for evaluating the security of development practices?",
+    "back": "A specific, checkable standard used to judge how well an organisation's software development practices protect its code, data and systems, such as 'Every code repository account requires multi-factor authentication'.",
+    "mistake": "A criterion isn't a vague goal such as 'the code is secure'. It must be specific enough that evidence can show whether it is met.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk06-002",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "type": "basic",
+    "front": "What makes a criterion for evaluating the security of development practices useful?",
+    "back": "It is:\n- **specific**: it names one practice\n- **measurable**: evidence can show whether it is met\n- **relevant**: it is linked to a real risk to the organisation's code or data\n- **realistic** for the organisation to meet",
+    "mistake": "'Developers follow good security' can't be tested. 'Access is removed on each leaver's last day' can be checked against records.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk06-003",
+    "kk": [
+      "U4O2-KK06",
+      "U4O2-KK04"
+    ],
+    "type": "compare",
+    "front": "Security control versus security evaluation criterion",
+    "back": "| | Control | Criterion |\n|:--|:--|:--|\n| What it is | A measure that protects code or data | A standard used to judge whether practices are secure |\n| Example | Multi-factor authentication | All repository accounts require multi-factor authentication |\n| Used when | Securing the practices | Evaluating the practices |",
+    "mistake": "Listing a control ('MFA') doesn't answer a question that asks for a criterion. A criterion states the standard a practice must meet, so the practice can be judged against it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk06-004",
+    "kk": [
+      "U4O2-KK06",
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "State three criteria for evaluating how an organisation controls access to its code and data.",
+    "back": "Any three:\n- each person has an individual account, with no shared logins\n- access follows the principle of least privilege\n- multi-factor authentication protects repositories and servers\n- access is removed when staff leave\n- access rights are reviewed regularly",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk06-005",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "type": "basic",
+    "front": "State three criteria for evaluating how securely an organisation handles its source code.",
+    "back": "Any three:\n- every change is reviewed by a second developer before it is merged\n- no passwords or keys are stored in source code\n- all code is kept in version control with a change history\n- third-party libraries are updated when patches are released\n- AI-generated code is reviewed and tested like any other code",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk06-006",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "type": "basic",
+    "front": "State two criteria for evaluating how well an organisation separates its development environments.",
+    "back": "Any two:\n- development, testing and production run in separate environments\n- developers can't change production directly; changes reach it only through a controlled release\n- test environments use made-up or de-identified data, not live personal data",
+    "mistake": "Having a separate test server isn't enough if it holds a full copy of live customer data. The data in it must be protected too.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk06-007",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "type": "basic",
+    "front": "What evidence could show whether the criterion 'access is removed on each staff member's last day' is met?",
+    "back": "Compare staff departure dates in HR records with the dates their accounts were disabled in the access logs, and list any former staff accounts that are still active.",
+    "mistake": "Asking managers whether access is removed gives their opinion, which may be wrong. Records and logs show what actually happened.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk06-008",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "type": "cloze",
+    "front": "Evaluating the security of development practices judges the {{processes}} used to build software, such as access control and code review, not only the security of the {{finished solution}}.",
+    "back": "An app can pass its security testing while the team that built it shares logins and stores passwords in its code.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-001",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "type": "basic",
+    "front": "What does the Privacy Act 1988 (Cth) regulate?",
+    "back": "How personal information is collected, used, stored, disclosed and disposed of by Australian Government agencies and many private sector organisations. Its rules are set out in the Australian Privacy Principles.",
+    "mistake": "The Privacy Act doesn't cover every organisation. Victorian public sector bodies, such as state departments and local councils, are covered by the Privacy and Data Protection Act 2014 (Vic) instead.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-002",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "type": "compare",
+    "front": "Privacy Act 1988 (Cth) versus Privacy and Data Protection Act 2014 (Vic)",
+    "back": "| | Privacy Act 1988 (Cth) | Privacy and Data Protection Act 2014 (Vic) |\n|:--|:--|:--|\n| Binds | Australian Government agencies and many private organisations | Victorian public sector bodies, such as departments and councils, and contractors bound by their contracts |\n| Principles | Australian Privacy Principles | Information Privacy Principles |",
+    "mistake": "Being based in Victoria doesn't put a private business under the Victorian Act. It binds the Victorian public sector, and a contractor only when its contract with a public sector body says so.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-003",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "type": "reverse",
+    "front": "Health Records Act 2001 (Vic)",
+    "back": "Victorian law that regulates how health information is collected, used, stored and disclosed by public and private sector organisations in Victoria, through its Health Privacy Principles.",
+    "mistake": "It isn't limited to public hospitals. A private physiotherapy clinic in Victoria that keeps treatment notes must follow it too.",
+    "aliases": [
+      "Health Records Act"
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-004",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "type": "basic",
+    "front": "Why would a software development team apply the Essential Eight?",
+    "back": "It gives a prioritised set of strategies for protecting the computers and servers the team uses to write, store and build code. Strategies such as patching, multi-factor authentication, restricting administrative privileges and regular backups make it much harder for attackers to break in, and help the team recover if they do.",
+    "mistake": "The Essential Eight is guidance, not legislation. Most private organisations adopt it by choice, not because a law requires it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-005",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK09"
+    ],
+    "type": "basic",
+    "front": "Name the eight mitigation strategies in the Essential Eight.",
+    "back": "- Patch applications\n- Patch operating systems\n- Multi-factor authentication\n- Restrict administrative privileges\n- Application control\n- Restrict Microsoft Office macros\n- User application hardening\n- Regular backups",
+    "mistake": "Encryption, firewalls and antivirus software are useful controls, but none of them is one of the eight strategies.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-006",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "type": "reverse",
+    "front": "Information Security Manual (ISM)",
+    "back": "A cyber security framework published by the Australian Cyber Security Centre, part of the Australian Signals Directorate, that sets out principles and detailed controls, including guidelines for software development, for organisations to apply according to their risks.",
+    "mistake": "The ISM isn't an Act or a fixed checklist. It is updated regularly, and each organisation chooses controls based on its own risks.",
+    "aliases": [
+      "Information Security Manual",
+      "ISM"
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-007",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "type": "compare",
+    "front": "Legislation versus a security framework",
+    "back": "| | Legislation | Framework |\n|:--|:--|:--|\n| Examples | Privacy Act 1988 (Cth), Health Records Act 2001 (Vic) | Essential Eight, Information Security Manual |\n| Made by | A parliament | A government agency or standards body |\n| Compliance | Compulsory for those it covers; breaches can bring penalties | Voluntary guidance, unless a contract or policy requires it |",
+    "mistake": "Following a framework doesn't by itself meet legal obligations, and meeting the law doesn't mean every control a framework recommends is in place.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-008",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK08"
+    ],
+    "type": "basic",
+    "front": "Under the Privacy Act 1988 (Cth), what must a covered organisation do after a data breach that is likely to cause serious harm?",
+    "back": "Notify the individuals affected and the Office of the Australian Information Commissioner as soon as practicable, under the Notifiable Data Breaches scheme, so that people can act to protect themselves.",
+    "mistake": "Fixing the vulnerability doesn't end the duty to notify. If serious harm is still likely, the people affected must be told.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-001",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "type": "compare",
+    "front": "Legal issue versus ethical issue",
+    "back": "| | Legal issue | Ethical issue |\n|:--|:--|:--|\n| Question | Does this break a law? | Is this the right thing to do? |\n| Judged against | Legislation | Values such as honesty, fairness and care for others |\n| Consequence | Penalties or legal action | Harm to stakeholders and loss of trust |",
+    "mistake": "Legal doesn't mean ethical. No law stops a developer committing AI-generated code they haven't checked, yet doing so knowingly puts users at risk.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-002",
+    "kk": [
+      "U4O2-KK08",
+      "U3O1-KK01"
+    ],
+    "type": "basic",
+    "front": "Why is over-reliance on AI-generated code an ethical issue for a developer?",
+    "back": "The developer stays responsible for the code they commit. AI output can contain errors, security vulnerabilities or copied code, so using it unchecked puts users and their data at risk without their knowledge.",
+    "mistake": "'The AI wrote it' is no defence. The developer and organisation that release the code are accountable for its flaws.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-003",
+    "kk": [
+      "U4O2-KK08",
+      "U4O2-KK07"
+    ],
+    "type": "basic",
+    "front": "Why is failing to acknowledge reused code an ethical issue?",
+    "back": "It presents someone else's work as the developer's own, denies the original author credit, and hides where the code came from, so others can't check its licence or apply its security updates.",
+    "mistake": "Acknowledgement matters even when a licence allows reuse. Permission to use code isn't permission to claim it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-004",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "type": "basic",
+    "front": "Why is copying live customer data into a test environment an ethical issue?",
+    "back": "Customers gave their data for one purpose, not for testing. Test environments usually have weaker controls and more people with access, so the data is more likely to be exposed. Made-up or de-identified test data avoids this harm.",
+    "mistake": "Realistic test data doesn't have to be real. Made-up records can match the format and range of live data.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-005",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "type": "basic",
+    "front": "A developer finds a serious vulnerability two days before a release deadline. What is the ethical course of action, and why?",
+    "back": "Report it to the project manager with its likely impact, so the organisation can fix it or delay the release. Hiding it to meet the deadline puts the organisation's convenience ahead of users' safety.",
+    "mistake": "Releasing on time and fixing it 'in the next update' without telling anyone leaves users exposed in the meantime, without their knowledge.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-006",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "type": "cloze",
+    "front": "An ethical issue arises when a development decision could {{harm stakeholders}} or treat them unfairly, even when {{no law is broken}}.",
+    "back": "Ethics asks whether a choice is right for everyone affected, such as users, clients, colleagues and the public, not only whether it is legal.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-007",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "type": "basic",
+    "front": "Why is collecting more personal data than a program needs an ethical issue?",
+    "back": "Every extra item stored adds to the harm if the data is exposed, and users may not expect or agree to it being kept. Collecting only what the program needs limits both problems.",
+    "mistake": "'We might need it later' isn't a reason to collect data. Data that is never collected can't be exposed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-008",
+    "kk": [
+      "U4O2-KK08",
+      "U4O2-KK07"
+    ],
+    "type": "basic",
+    "front": "Why is hiding a data breach from the people affected an ethical issue?",
+    "back": "Without being told, people can't protect themselves, for example by changing passwords or watching their accounts. Hiding the breach also misleads them and damages their trust in the organisation.",
+    "mistake": "Hiding a breach isn't only an ethical issue. When serious harm is likely, organisations covered by the Privacy Act 1988 (Cth) must notify the people affected.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk09-001",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "type": "basic",
+    "front": "How does least privilege limit the damage when a developer's account is stolen?",
+    "back": "The attacker can do only what that account was allowed to do. If the developer's account reaches only the development and test systems, the attacker can't change production or read live customer data through it.",
+    "mistake": "Least privilege doesn't stop an account being stolen; it limits what a stolen account can do. Multi-factor authentication makes theft harder, so the two work together.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk09-002",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "type": "compare",
+    "front": "Reducing a risk versus eliminating a risk",
+    "back": "| | Reduce | Eliminate |\n|:--|:--|:--|\n| Effect | Lowers the likelihood or the impact | Removes the threat or vulnerability entirely |\n| Example | Encrypting stored card numbers | No longer storing card numbers at all |",
+    "mistake": "Most measures reduce risk rather than remove it. Encrypted data can still be exposed if the key is stolen.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk09-003",
+    "kk": [
+      "U4O2-KK09",
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "How does separating development, testing and production environments reduce risk?",
+    "back": "Unfinished or faulty code can't directly affect the live system, developers don't need access to live data, and an attacker who breaks into the development environment doesn't automatically reach production.",
+    "mistake": "Separation only works if changes reach production through a controlled release. A developer who can still edit production directly defeats it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk09-004",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "type": "basic",
+    "front": "A database password is hard-coded in source code stored in the team's repository. What measures remove this risk?",
+    "back": "Change the password, because the old one remains in the version history, and store credentials outside the code, in a protected configuration file or secrets store that only authorised systems can read.",
+    "mistake": "Moving the password into a configuration file doesn't help if that file is committed to the repository too. Files that hold secrets must be kept out of version control.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk09-006",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "type": "cloze",
+    "front": "Backups don't stop an attack, but they reduce its {{impact}} by letting code and data be {{restored}}, provided restores are {{tested}} regularly.",
+    "back": "An untested backup may be incomplete or unreadable. Keeping one copy offline, disconnected from the network, stops ransomware from encrypting it too.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk09-007",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "type": "basic",
+    "front": "Why should an organisation layer several security measures rather than rely on one?",
+    "back": "If one measure fails or is bypassed, the others still protect the code and data. Multi-factor authentication, least privilege, code review and tested backups each cover gaps the others leave. This approach is often called defence in depth.",
+    "mistake": "A strong password isn't enough on its own. Once it is phished, multi-factor authentication stops it working alone, and least privilege limits what an attacker can reach.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk09-008",
+    "kk": [
+      "U4O2-KK09",
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "Give two physical measures that protect a development team's code and data.",
+    "back": "Any two:\n- servers kept in a locked room with logged swipe-card access\n- backup drives stored in a locked, fire-resistant safe away from the main office\n- visitors signed in and escorted through development areas\n- old drives physically destroyed before disposal",
+    "mistake": "Passwords and encryption are software measures. Physical measures control who can reach the equipment itself.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-001",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "type": "basic",
+    "front": "What makes a recommendation to improve an organisation's development practices effective?",
+    "back": "It:\n- states a specific action\n- is linked to a weakness found in that organisation\n- explains how the action reduces the risk\n- is realistic for the organisation's budget, skills and size",
+    "mistake": "'Improve security' isn't a recommendation. Say what to change, where, and which risk it reduces.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-002",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "type": "compare",
+    "front": "Finding versus recommendation",
+    "back": "| | Finding | Recommendation |\n|:--|:--|:--|\n| States | What is wrong now | What should change, and why |\n| Example | Developers share one administrator login | Give each developer an individual account with only the rights they need, so actions can be traced and misuse limited |",
+    "mistake": "Restating the problem ('there is no code review') isn't a recommendation. Turn it into an action and state its benefit.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-003",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "type": "basic",
+    "front": "How should an organisation prioritise several security recommendations?",
+    "back": "By the risk each one addresses: deal first with the weaknesses that have the highest likelihood and impact, favouring quick, low-cost fixes for serious risks, such as turning on multi-factor authentication that is already available.",
+    "mistake": "The most expensive recommendation isn't automatically the most important. A free setting change can remove a serious risk.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-004",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK09"
+    ],
+    "type": "basic",
+    "front": "What should a recommendation to introduce mandatory code review specify?",
+    "back": "That every change is approved by a developer other than its author before it is merged, that the repository blocks unapproved merges, what reviewers check (such as secrets, validation and AI-generated code), and which risk this reduces.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-005",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "type": "cloze",
+    "front": "When a question asks you to {{recommend}}, choose a course of action and give a {{reason}} that links it to the scenario.",
+    "back": "A list of options with no choice made, or a choice with no reason, doesn't do what the command term asks. If the question asks for two recommendations, give two, each with its own reason.",
+    "mistake": "Listing several options without choosing between them doesn't answer a 'recommend' question. Commit to a choice and give its reason.",
+    "difficulty": 1,
+    "source": "exam-convention"
+  },
+  {
+    "id": "c-u4o2-kk10-006",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "type": "basic",
+    "front": "Why should a recommendation consider its effect on the development team's work?",
+    "back": "Measures that slow work too much are often bypassed, such as sharing one login to avoid multi-factor authentication prompts. A practical measure that staff actually follow protects more than a stricter one they work around.",
+    "mistake": "The most secure option isn't always the best recommendation. It must suit the organisation's size, budget and way of working.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-007",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK08"
+    ],
+    "type": "basic",
+    "front": "Recommend rules for a development team's use of AI coding assistants.",
+    "back": "AI-generated code is reviewed and tested like any other code, developers must understand code before committing it, AI use is recorded, and no confidential code or personal data is entered into public AI tools.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-008",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK06"
+    ],
+    "type": "basic",
+    "front": "How can an organisation check whether a recommendation has improved its development practices?",
+    "back": "Evaluate the practices again against the same criteria used before the change, with the same kinds of evidence, and compare the results, for example the number of accounts holding administrator rights they don't need.",
+    "difficulty": 2,
+    "source": "textbook"
+  }
+]

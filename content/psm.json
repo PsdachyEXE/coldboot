@@ -1,0 +1,706 @@
+{
+  "stages": [
+    {
+      "id": "analysis",
+      "name": "Analysis",
+      "summary": "Working out what the solution must do and the conditions it must work within. The team studies the problem, need or opportunity, usually by collecting data from the people involved, and ends with documented requirements, constraints and scope. Analysis settles *what* the solution must do, not *how*.",
+      "activities": [
+        {
+          "id": "investigate-need",
+          "name": "Investigating the problem, need or opportunity",
+          "summary": "Collecting data from stakeholders, for example by interviews, surveys or observation, and representing the current or proposed system with tools such as context diagrams, data flow diagrams and use case diagrams."
+        },
+        {
+          "id": "solution-requirements",
+          "name": "Determining solution requirements",
+          "summary": "Stating the functional requirements (what the solution must do) and the non-functional requirements (qualities it must have, such as reliability or usability)."
+        },
+        {
+          "id": "solution-constraints",
+          "name": "Identifying constraints",
+          "summary": "Recording the conditions that limit the solution, such as a fixed budget, a deadline, legal obligations or the devices it must run on."
+        },
+        {
+          "id": "solution-scope",
+          "name": "Defining scope",
+          "summary": "Setting the boundaries of the solution: what it will do and, just as importantly, what it will not do."
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "name": "Design",
+      "summary": "Planning how the solution will work and look before any code is written. The team generates and compares different design ideas, develops the preferred one into a detailed design, and sets the criteria that will later be used to evaluate the finished solution.",
+      "activities": [
+        {
+          "id": "generate-design-ideas",
+          "name": "Generating design ideas",
+          "summary": "Producing a range of genuinely different ways the solution could look and work, using ideation techniques such as brainstorming and sketching."
+        },
+        {
+          "id": "evaluate-design-ideas",
+          "name": "Evaluating design ideas",
+          "summary": "Comparing the ideas against criteria drawn from the requirements and constraints, then choosing a preferred design and recording the reasons for the choice."
+        },
+        {
+          "id": "detailed-design",
+          "name": "Producing a detailed design",
+          "summary": "Setting out the preferred design's appearance and functionality with design tools such as mock-ups, data dictionaries, object descriptions, IPO charts and pseudocode, in enough detail for a developer to code from."
+        },
+        {
+          "id": "evaluation-criteria",
+          "name": "Setting evaluation criteria",
+          "summary": "Deciding, from the requirements, the measurable criteria that will be used in the evaluation stage to judge how efficient and effective the finished solution is."
+        }
+      ]
+    },
+    {
+      "id": "development",
+      "name": "Development",
+      "summary": "Building the solution from the detailed design. The team codes it in a programming language, adds validation of input data, tests and debugs it until it works as intended, and documents it for developers and for users.",
+      "activities": [
+        {
+          "id": "coding",
+          "name": "Coding the solution",
+          "summary": "Writing the program in a programming language, following the detailed design and using suitable data types, data structures and naming conventions."
+        },
+        {
+          "id": "validation",
+          "name": "Validating input data",
+          "summary": "Adding checks, such as existence, type and range checks, that reject unreasonable input before it is processed."
+        },
+        {
+          "id": "testing",
+          "name": "Testing and debugging",
+          "summary": "Checking that the solution works as intended by running test data and comparing expected with actual output in test tables, then finding and fixing the errors this reveals."
+        },
+        {
+          "id": "documentation",
+          "name": "Documenting the solution",
+          "summary": "Writing internal documentation (comments that explain each module's purpose and the reasons for processing choices) for developers, and user documentation that shows users how to operate the solution."
+        }
+      ]
+    },
+    {
+      "id": "evaluation",
+      "name": "Evaluation",
+      "summary": "Judging how well the finished solution meets the need it was built for, once it has been in use for a while. The team plans how it will evaluate, collects the data, and reports on the solution's efficiency and effectiveness against the evaluation criteria.",
+      "activities": [
+        {
+          "id": "evaluation-strategy",
+          "name": "Planning the evaluation strategy",
+          "summary": "Deciding how the evaluation will run. A strategy typically says which criteria will be used, what data will be collected and how, when this will happen, and who is responsible."
+        },
+        {
+          "id": "collect-evaluation-data",
+          "name": "Collecting evaluation data",
+          "summary": "Gathering evidence from the solution in real use, for example by timing tasks, counting errors, examining logs, or surveying and interviewing users."
+        },
+        {
+          "id": "evaluation-report",
+          "name": "Reporting the evaluation",
+          "summary": "Applying each evaluation criterion to the data collected and reporting, with evidence, how efficient and effective the solution is."
+        }
+      ]
+    }
+  ],
+  "specifications": [
+    "Analysis: the documentation states the problem, need or opportunity, records what was learnt from stakeholders, and sets out the functional and non-functional requirements, the constraints and the scope. Many projects gather these findings in a software requirements specification (SRS).",
+    "Analysis: analytical tools such as context diagrams, data flow diagrams and use case diagrams show the system's boundary, the data moving in and out of it, and how users interact with it.",
+    "Design: the documentation shows a range of genuinely different design ideas, how each idea was judged against criteria, and the reasons the preferred design was chosen.",
+    "Design: the detailed design describes the preferred design's appearance and functionality closely enough for a developer to code from it, using tools such as mock-ups, data dictionaries, object descriptions, IPO charts and pseudocode.",
+    "Design: the evaluation criteria for the finished solution are recorded, each based on the requirements and worded so that it can be measured or checked with data.",
+    "Development: the working solution is accompanied by internal documentation that explains the purpose of each module and the reasons for key processing choices.",
+    "Development: the documentation shows the validation applied to input data and the evidence of testing: test data (including valid, invalid and boundary values), test tables with expected and actual output, and the errors found and fixed.",
+    "Development: user documentation explains how to operate the solution, written for its intended users rather than for developers.",
+    "Evaluation: an evaluation strategy sets out how the solution will be judged, typically which criteria apply, what data will be collected and how, when the evaluation takes place, and who is responsible.",
+    "Evaluation: the report applies each evaluation criterion to the data collected and states, with evidence, how efficient and effective the solution is."
+  ],
+  "cards": [
+    {
+      "id": "psm-c-001",
+      "kk": [
+        "PSM"
+      ],
+      "type": "reverse",
+      "front": "Problem-solving methodology (PSM)",
+      "back": "A structured approach to creating a software solution in four stages: analysis, design, development and evaluation. Each stage has its own activities, and each stage builds on the work of the one before it.",
+      "difficulty": 1,
+      "source": "textbook",
+      "aliases": [
+        "PSM",
+        "Problem-solving methodology",
+        "Problem solving methodology"
+      ]
+    },
+    {
+      "id": "psm-c-002",
+      "kk": [
+        "PSM"
+      ],
+      "type": "cloze",
+      "front": "The four stages of the problem-solving methodology, in order, are {{analysis}}, {{design}}, {{development}} and {{evaluation}}.",
+      "back": "Each stage relies on the one before it: design ideas are judged against the requirements found in analysis, the code is built from the detailed design, and evaluation needs a finished solution that has been in use.",
+      "mistake": "Testing is not a stage of its own. It is an activity inside the development stage.",
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-003",
+      "kk": [
+        "PSM",
+        "U3O2-KK05",
+        "U3O2-KK07"
+      ],
+      "type": "reverse",
+      "front": "Analysis stage",
+      "back": "The PSM stage that works out *what* the solution must do. The team investigates the problem, need or opportunity and documents the functional and non-functional requirements, the constraints and the scope.",
+      "mistake": "Analysis doesn't decide how the solution will look or work. Screen layouts and algorithms belong to design.",
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-004",
+      "kk": [
+        "PSM",
+        "U3O2-KK13",
+        "U3O2-KK14"
+      ],
+      "type": "reverse",
+      "front": "Design stage",
+      "back": "The PSM stage that plans *how* the solution will work and look: generating and evaluating design ideas, producing a detailed design of the preferred idea, and setting the criteria for evaluating the finished solution.",
+      "mistake": "Evaluating design ideas happens here, in design. It is not part of the evaluation stage.",
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-005",
+      "kk": [
+        "PSM",
+        "U4O1-KK05",
+        "U4O1-KK06"
+      ],
+      "type": "reverse",
+      "front": "Development stage",
+      "back": "The PSM stage in which the solution is built from the detailed design: it is coded, validation is added to its inputs, it is tested and debugged, and internal and user documentation is written.",
+      "mistake": "Validation and testing both happen in development, but they aren't the same. Validation is code that checks each input as the program runs; testing is the developer checking that the solution, including its validation, gives the expected output.",
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-006",
+      "kk": [
+        "PSM",
+        "U4O1-KK08",
+        "U4O1-KK09"
+      ],
+      "type": "reverse",
+      "front": "Evaluation stage",
+      "back": "The PSM stage that judges the finished solution after it has been in use. The team plans an evaluation strategy, collects data, and reports how efficient and effective the solution is against the evaluation criteria.",
+      "mistake": "Evaluation isn't a final round of testing. It asks how well the solution serves its users, not whether each module gives the right output.",
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-007",
+      "kk": [
+        "PSM",
+        "U4O1-KK06",
+        "U4O1-KK09"
+      ],
+      "type": "compare",
+      "front": "Testing versus evaluation",
+      "back": "| Aspect | Testing | Evaluation |\n|:--|:--|:--|\n| Stage | Development | Evaluation |\n| Asks | Does it work as intended? | How efficient and effective is it? |\n| When | While it is being built | After a period of real use |\n| Checked against | Expected output | Evaluation criteria |",
+      "mistake": "Re-running the test table after launch isn't an evaluation. Evaluation measures the solution in real use against the criteria set in design.",
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-008",
+      "kk": [
+        "PSM",
+        "U3O2-KK13",
+        "U4O1-KK09"
+      ],
+      "type": "compare",
+      "front": "Evaluating design ideas versus evaluating the solution",
+      "back": "**Design ideas** are evaluated in the *design* stage: several possible designs are compared against criteria so the best one can be chosen before coding starts. The **solution** is evaluated in the *evaluation* stage: the finished solution is judged against the evaluation criteria after it has been in use.",
+      "mistake": "An activity with 'evaluate' in its name isn't automatically in the evaluation stage. Comparing design ideas is a design activity.",
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-010",
+      "kk": [
+        "PSM",
+        "U3O2-KK13",
+        "U4O1-KK09"
+      ],
+      "type": "cloze",
+      "front": "Evaluation criteria are set in the {{design}} stage and applied in the {{evaluation}} stage.",
+      "back": "The criteria come from the requirements and are fixed before the solution is built, so the finished solution is judged against targets agreed in advance.",
+      "mistake": "Criteria aren't written once the solution is finished. Criteria chosen at the end tend to fit whatever the solution already does.",
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-011",
+      "kk": [
+        "PSM",
+        "U3O2-KK14"
+      ],
+      "type": "basic",
+      "front": "What should a detailed design show, and why?",
+      "back": "The preferred design's appearance (for example, mock-ups) and its functionality (for example, pseudocode, a data dictionary, object descriptions or IPO charts), in enough detail that a developer could code the solution without guessing what was intended.",
+      "mistake": "A single sketch of the main screen isn't a detailed design. It says nothing about the data or the processing.",
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-012",
+      "kk": [
+        "PSM",
+        "U3O2-KK05",
+        "U3O2-KK07"
+      ],
+      "type": "basic",
+      "front": "Why does analysis come before design?",
+      "back": "Design ideas can only be judged against the requirements, constraints and scope. Without them, the team could design and build something that doesn't meet the need, and a mistake found late costs far more to fix than one found on paper.",
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-014",
+      "kk": [
+        "PSM",
+        "U3O2-KK04",
+        "U4O1-KK09"
+      ],
+      "type": "compare",
+      "front": "Collecting data in analysis versus collecting data in evaluation",
+      "back": "In **analysis**, data (for example, from interviews, surveys or observation) shows what users need and what is wrong with the current situation. In **evaluation**, data shows how well the finished solution meets the evaluation criteria.",
+      "mistake": "A survey doesn't belong to one stage. Ask what the data is for: finding requirements (analysis) or judging the finished solution (evaluation).",
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-015",
+      "kk": [
+        "PSM",
+        "U3O2-KK05",
+        "U3O2-KK14"
+      ],
+      "type": "cloze",
+      "front": "Analysis works out {{what}} the solution must do; design works out {{how}} it will do it.",
+      "back": "'Record each booking' is a requirement from analysis. The mock-up of the booking screen and the pseudocode that saves a booking come from design.",
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-018",
+      "kk": [
+        "PSM",
+        "U4O1-KK09"
+      ],
+      "type": "basic",
+      "front": "What does an evaluation report do?",
+      "back": "It applies each evaluation criterion to the data collected under the evaluation strategy and states, with evidence, how efficient and effective the solution is.",
+      "mistake": "A report that lists the solution's features, or says users 'liked it', without data for each criterion hasn't evaluated anything.",
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-c-019",
+      "kk": [
+        "PSM",
+        "U3O2-KK08"
+      ],
+      "type": "basic",
+      "front": "In which PSM stage are context diagrams, data flow diagrams and use case diagrams mainly used, and why?",
+      "back": "Analysis. They show the system's boundary, the data moving in and out of it, and how users interact with it, which helps the team work out and communicate the requirements before any design begins.",
+      "difficulty": 2,
+      "source": "textbook"
+    }
+  ],
+  "mcq": [
+    {
+      "id": "psm-m-001",
+      "kk": [
+        "PSM",
+        "U3O2-KK04"
+      ],
+      "stem": "Priya's team is building a rostering program for an aged care home in Warrnambool. This week the team is surveying care staff about the problems they have with the current paper rosters. Which stage of the problem-solving methodology is the team working in?",
+      "options": [
+        "Analysis",
+        "Design",
+        "Development",
+        "Evaluation"
+      ],
+      "answer": 0,
+      "explanation": "The team is collecting data about the current system to find out what staff need. Investigating the problem to work out the requirements is analysis.",
+      "whyWrong": [
+        "",
+        "Design plans how the solution will look and work, which can't start until the requirements are known.",
+        "Development builds and tests the program, which can't start until there is a design to build from.",
+        "Evaluation surveys users about the finished solution, but this survey is about the current paper rosters."
+      ],
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-002",
+      "kk": [
+        "PSM",
+        "U3O2-KK13"
+      ],
+      "stem": "Tomás has sketched three possible home screens for a volunteer sign-up app for an animal shelter in Bendigo. He scores each sketch against criteria such as 'a volunteer can see this week's open shifts without scrolling', then chooses the highest-scoring sketch. Which activity is Tomás carrying out?",
+      "options": [
+        "Evaluating the solution, in the evaluation stage",
+        "Evaluating design ideas, in the design stage",
+        "Testing the interface, in the development stage",
+        "Determining requirements, in the analysis stage"
+      ],
+      "answer": 1,
+      "explanation": "Tomás is comparing alternative designs against criteria to choose a preferred one before anything is built. That is evaluating design ideas, a design activity.",
+      "whyWrong": [
+        "The evaluation stage judges a finished solution in use, and these are only sketches.",
+        "",
+        "Testing runs a built program with test data, and nothing has been coded yet.",
+        "Requirements say what the app must do; Tomás is choosing how it will look."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-003",
+      "kk": [
+        "PSM",
+        "U4O1-KK05",
+        "U4O1-KK06"
+      ],
+      "stem": "A stock program for a Geelong hardware store has a range check on its quantity field. Mei Lin types a quantity of -3, checks that an error message appears, and records the result in a test table. Which activity is Mei Lin carrying out?",
+      "options": [
+        "Validation, because the program is checking the input it receives",
+        "Evaluation, because she is judging how effective the program is",
+        "Design, because she is deciding what range the quantity must be in",
+        "Testing, because she is checking actual output against expected output"
+      ],
+      "answer": 3,
+      "explanation": "The range check in the program is validation, but Mei Lin's own task is different: she runs test data through the program and records whether the expected error message appears. That is testing, a development activity.",
+      "whyWrong": [
+        "The program validates the input, but Mei Lin's task of trying an input and recording the result is testing.",
+        "Evaluation judges the finished solution in real use against evaluation criteria, not single inputs in a test table.",
+        "The allowed range was decided earlier; she is checking that the code enforces it.",
+        ""
+      ],
+      "difficulty": 3,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-004",
+      "kk": [
+        "PSM",
+        "U4O1-KK09"
+      ],
+      "stem": "Two months after a Torquay physiotherapy clinic started using its new booking program, the practice manager compares the average time taken to make a booking with the time recorded for the old system, as the clinic's plan set out. Which stage of the problem-solving methodology is she working in?",
+      "options": [
+        "Analysis, because she is collecting data about how bookings are made",
+        "Development, because she is testing how quickly the program runs",
+        "Evaluation, because she is judging the program in use against a criterion",
+        "Design, because she is comparing the old system with the new one"
+      ],
+      "answer": 2,
+      "explanation": "The program has been in use for two months, and she is collecting planned data to judge it against a criterion (the time taken to make a booking). That is evaluation.",
+      "whyWrong": [
+        "Analysis collects data to find requirements before a solution exists, but this program is already in use.",
+        "Testing happens before release with test data; she is measuring real use two months later.",
+        "",
+        "Design compares ideas before coding; she is judging a finished solution."
+      ],
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-005",
+      "kk": [
+        "PSM"
+      ],
+      "stem": "Which sequence of activities follows the order of the problem-solving methodology?",
+      "options": [
+        "Determine requirements, code the solution, evaluate design ideas, report against criteria",
+        "Evaluate design ideas, determine requirements, code the solution, report against criteria",
+        "Determine requirements, evaluate design ideas, code the solution, report against criteria",
+        "Determine requirements, evaluate design ideas, report against criteria, code the solution"
+      ],
+      "answer": 2,
+      "explanation": "Requirements come from analysis, design ideas are evaluated in design, coding happens in development, and reporting against the evaluation criteria happens in evaluation.",
+      "whyWrong": [
+        "Design ideas are evaluated before coding, so that the chosen design can guide the code.",
+        "Design ideas can only be judged against the requirements, so the requirements must come first.",
+        "",
+        "A report on the solution needs a finished solution, so coding must come before it."
+      ],
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-006",
+      "kk": [
+        "PSM",
+        "U3O2-KK13",
+        "U3O2-KK05"
+      ],
+      "stem": "The evaluation criteria for a solution are mainly based on the output of which activity?",
+      "options": [
+        "Determining the solution requirements, in the analysis stage",
+        "Generating design ideas, in the design stage",
+        "Testing modules against test tables, in the development stage",
+        "Collecting user feedback, in the evaluation stage"
+      ],
+      "answer": 0,
+      "explanation": "Evaluation criteria check whether the solution does what it was meant to do, and what it was meant to do is set out in the requirements determined in analysis.",
+      "whyWrong": [
+        "",
+        "Design ideas are themselves judged against criteria; they don't define what success looks like.",
+        "Testing checks that the program works as intended; it doesn't define the evaluation criteria.",
+        "Feedback is data that the criteria are applied to, not the source of the criteria."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-007",
+      "kk": [
+        "PSM",
+        "U3O2-KK14"
+      ],
+      "stem": "Hana's team is building an ordering app for a Ballarat bakery. Which of these documents would the team produce in the design stage?",
+      "options": [
+        "A test table showing expected and actual totals for five orders",
+        "A list of constraints, including the fixed budget and the deadline",
+        "A report comparing order times before and after the app's launch",
+        "A mock-up of the order screen with each control labelled"
+      ],
+      "answer": 3,
+      "explanation": "A mock-up shows the planned appearance of the solution, which is part of the detailed design produced in the design stage.",
+      "whyWrong": [
+        "Test tables record testing, which happens in development.",
+        "Constraints are identified in analysis, before design begins.",
+        "Comparing performance after launch belongs in the evaluation report.",
+        ""
+      ],
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-008",
+      "kk": [
+        "PSM",
+        "U3O2-KK07"
+      ],
+      "stem": "A fruit growers' co-operative in Mildura is having a program developed to record deliveries from its members. Which activity belongs to the analysis stage?",
+      "options": [
+        "Stating that the program will record deliveries but not pay members",
+        "Drawing a mock-up of the delivery entry screen for the weighbridge",
+        "Writing a range check that rejects a delivery weight of zero",
+        "Surveying members about the program a month after it goes live"
+      ],
+      "answer": 0,
+      "explanation": "Deciding what the program will and won't do sets its scope, which is defined in analysis.",
+      "whyWrong": [
+        "",
+        "A mock-up plans the solution's appearance, which is a design activity.",
+        "Coding a validation check is a development activity.",
+        "Surveying users about the finished program is part of evaluation."
+      ],
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-009",
+      "kk": [
+        "PSM",
+        "U4O1-KK06",
+        "U4O1-KK09"
+      ],
+      "stem": "A student argues that because every module of a solution produced its expected output during testing, the evaluation stage is no longer needed. Why is the student wrong?",
+      "options": [
+        "Testing takes place in design, so its results can't be used to judge the solution",
+        "Testing checks the solution works; evaluation judges how efficient and effective it is in use",
+        "Evaluation repeats the tests with a larger set of test data to confirm the earlier results",
+        "Evaluation is needed only when testing has found errors that the developers didn't fix"
+      ],
+      "answer": 1,
+      "explanation": "Correct output doesn't show that the solution is efficient or effective for its users. Evaluation measures the solution in real use against the evaluation criteria.",
+      "whyWrong": [
+        "Testing is a development activity, not a design one.",
+        "",
+        "Evaluation isn't retesting; it measures the solution in real use against the evaluation criteria.",
+        "Every solution is evaluated, even one with no known errors, because correct output isn't the same as meeting users' needs."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-010",
+      "kk": [
+        "PSM",
+        "U4O1-KK08"
+      ],
+      "stem": "A Shepparton transport company started using a new timesheet program last week. Before the evaluation begins, Grace writes down that she will export the program's error logs in week six and interview three supervisors in week eight. Which activity is Grace carrying out?",
+      "options": [
+        "Setting evaluation criteria, in the design stage",
+        "Collecting data about needs, in the analysis stage",
+        "Planning the evaluation strategy, in the evaluation stage",
+        "Writing a test plan, in the development stage"
+      ],
+      "answer": 2,
+      "explanation": "Grace is planning what data will be collected, how and when, so the program can be judged later. That plan is the evaluation strategy.",
+      "whyWrong": [
+        "Criteria say what success looks like; Grace is planning how and when the data will be gathered.",
+        "Analysis collects data before a solution exists; Grace is planning to study a finished program in use.",
+        "",
+        "A test plan checks that the program works before release; Grace is planning how to judge it in use."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-011",
+      "kk": [
+        "PSM",
+        "U3O1-KK11"
+      ],
+      "stem": "While coding a quote calculator for a pool builder in Sale, Jonah adds a comment above a function explaining why he chose a binary search over a linear search. Which stage and activity is this?",
+      "options": [
+        "Design: producing pseudocode for the detailed design",
+        "Development: writing internal documentation",
+        "Development: writing user documentation",
+        "Evaluation: reporting on the solution's efficiency"
+      ],
+      "answer": 1,
+      "explanation": "A comment in the code that justifies a processing choice is internal documentation, written for developers while the solution is being coded.",
+      "whyWrong": [
+        "Pseudocode plans the algorithm before coding; Jonah is commenting code he has already written.",
+        "",
+        "User documentation explains how to operate the program; users never read comments in the code.",
+        "An evaluation report judges the finished solution in use, not individual lines of code."
+      ],
+      "difficulty": 1,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-012",
+      "kk": [
+        "PSM",
+        "U3O2-KK14"
+      ],
+      "stem": "Three of these activities belong to the same stage of the problem-solving methodology. Which activity belongs to a different stage?",
+      "options": [
+        "Writing a validation check for the date of birth field",
+        "Recording actual output in a test table for the login module",
+        "Writing a quick start guide for the program's users",
+        "Producing a data dictionary for the data the program will store"
+      ],
+      "answer": 3,
+      "explanation": "A data dictionary that plans the data to be stored is a detailed design tool, so producing it is a design activity. The other three are development activities.",
+      "whyWrong": [
+        "Coding a validation check is a development activity, like two of the other options.",
+        "Recording test results is testing, a development activity.",
+        "User documentation is written in development, once there is a solution to describe.",
+        ""
+      ],
+      "difficulty": 3,
+      "source": "textbook"
+    },
+    {
+      "id": "psm-m-013",
+      "kk": [
+        "PSM",
+        "U3O2-KK14"
+      ],
+      "stem": "Kiri's team generated four design ideas for a loans app for a Horsham library, evaluated them, and chose a preferred idea. Which activity should the team carry out next?",
+      "options": [
+        "Generate more design ideas to compare with the preferred one",
+        "Define the scope of the solution for the library's approval",
+        "Produce a detailed design of the preferred idea",
+        "Code the solution directly from the preferred idea"
+      ],
+      "answer": 2,
+      "explanation": "A chosen idea is still only an outline. The next step is to develop it into a detailed design that a developer can code from.",
+      "whyWrong": [
+        "The team has already compared a range of ideas and chosen one; more ideas would repeat that work.",
+        "Scope is defined in analysis, before any design ideas are generated.",
+        "",
+        "Coding needs a detailed design first; an idea on its own leaves too much for the developer to guess."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    }
+  ],
+  "short": [
+    {
+      "id": "psm-s-001",
+      "kk": [
+        "PSM"
+      ],
+      "commandTerm": "classify",
+      "marks": 4,
+      "prompt": "Zara is developing an online booking program for a veterinary clinic in Wodonga. Classify each of the following activities by the stage of the problem-solving methodology in which it takes place.\n\n1. Interviewing reception staff about how appointments are booked now.\n2. Drawing a mock-up of the screen clients will use to choose an appointment time.\n3. Entering a booking date in the past to check that it is rejected, and recording the result in a test table.\n4. Surveying clients three months after launch about how easy the program is to use.",
+      "points": [
+        {
+          "text": "Activity 1: analysis (collecting data about the current system to find the requirements).",
+          "marks": 1
+        },
+        {
+          "text": "Activity 2: design (a mock-up is part of the detailed design).",
+          "marks": 1
+        },
+        {
+          "text": "Activity 3: development (testing that the validation works as intended).",
+          "marks": 1
+        },
+        {
+          "text": "Activity 4: evaluation (collecting data about the solution in use).",
+          "marks": 1
+        }
+      ],
+      "model": "1. Analysis: Zara is collecting data about how the clinic books appointments now, to find out what the program must do.\n2. Design: the mock-up plans how the booking screen will look before it is coded.\n3. Development: entering a past date and recording the result is testing, which checks that the validation works as intended.\n4. Evaluation: surveying clients after three months of use collects data to judge the program against the evaluation criteria.",
+      "mistake": "Surveys and interviews aren't always analysis. Activity 4 is a survey, but it asks about the finished program in use, so it is evaluation.",
+      "source": "textbook"
+    },
+    {
+      "id": "psm-s-002",
+      "kk": [
+        "PSM",
+        "U4O1-KK06",
+        "U4O1-KK08",
+        "U4O1-KK09"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Zara has developed an online booking program for a veterinary clinic in Wodonga. The clinic's practice manager plans to evaluate the program on its launch day by re-running the test table Zara used during development.\n\nExplain two weaknesses in this plan.",
+      "points": [
+        {
+          "text": "Re-running the test table only shows that the program still gives the expected output, that is, that it works as intended (testing).",
+          "marks": 1
+        },
+        {
+          "text": "It doesn't measure how efficient and effective the program is against the evaluation criteria, e.g. whether clients book faster or make fewer booking errors.",
+          "marks": 1
+        },
+        {
+          "text": "On launch day, staff and clients have not yet had time to become familiar with the program.",
+          "marks": 1
+        },
+        {
+          "text": "So there is no meaningful data from real use yet; the evaluation should take place after the program has been in use for a period, e.g. a few months.",
+          "marks": 1
+        }
+      ],
+      "model": "First, the test table only checks that the program produces the expected output, which Zara already confirmed during development. It says nothing about how efficient and effective the program is for the clinic, such as whether clients can book an appointment faster or with fewer errors than before, which is what the evaluation criteria measure. Second, on launch day the reception staff and clients haven't had time to become familiar with the program, so any data collected would mostly reflect their unfamiliarity. The evaluation should take place after the program has been in use for a few months, when there is enough real booking data to apply each criterion.",
+      "mistake": "Testing and evaluation aren't interchangeable. Testing checks that the program works; evaluation judges how well it serves its users after a period of real use.",
+      "source": "textbook"
+    }
+  ]
+}
