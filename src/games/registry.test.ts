@@ -4,10 +4,16 @@ import { DAILY_GENERATOR_GAMES } from './daily';
 import { DRILL_GAME, GAMES, findGame } from './registry';
 
 describe('game registry', () => {
-  it("lists the P0 games in the brief's order with student-facing man pages", () => {
-    expect(GAMES.map((g) => g.id)).toEqual(['deskcheck', 'sort', 'search', 'triage', 'validate', 'blitz', 'daily']);
+  it("lists the P0 games, then the P1 games, in the brief's order with student-facing man pages", () => {
+    const p0 = ['deskcheck', 'sort', 'search', 'triage', 'validate', 'blitz', 'daily'];
+    const p1 = ['dfd', 'usecase', 'reqs', 'gantt', 'threat', 'law', 'naming', 'types', 'oop', 'psm'];
+    expect(GAMES.slice(0, p0.length).map((g) => g.id)).toEqual(p0);
+    const rest = GAMES.slice(p0.length);
+    expect(rest.every((g) => g.priority === 'P1')).toBe(true);
+    // P1 games follow the brief's order, whichever of them are built so far.
+    expect(rest.map((g) => g.id)).toEqual(p1.filter((id) => rest.some((g) => g.id === id)));
     for (const meta of GAMES) {
-      expect(meta.priority).toBe('P0');
+      expect(meta.priority).toBe(p0.includes(meta.id) ? 'P0' : 'P1');
       const usage = meta.id === 'daily' ? 'Usage: daily' : meta.fixedDifficulty ? `Usage: play ${meta.id}` : `Usage: play ${meta.id} [--easy|--hard]`;
       expect(meta.man.endsWith(usage)).toBe(true);
       expect(meta.man.startsWith(`${meta.id} `)).toBe(true);
@@ -26,6 +32,7 @@ describe('game registry', () => {
     for (const id of ['deskcheck', 'sort', 'search', 'triage', 'validate']) expect(flags(id)).toEqual([true, false, false]);
     expect(flags('blitz')).toEqual([false, true, true]);
     expect(flags('daily')).toEqual([false, true, true]);
+    for (const id of ['naming']) expect(flags(id)).toEqual([true, false, false]);
   });
 
   it('loads games whose ids, titles and generators match their metadata', async () => {
