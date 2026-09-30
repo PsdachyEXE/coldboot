@@ -3,7 +3,7 @@
  * check them in isolation, and the merge step builds the canonical content files from all parts.
  *
  *   npx tsx scripts/content-parts.ts check <part.json> [...]
- *   npx tsx scripts/content-parts.ts merge <partsDir> [--out <repoRoot>]
+ *   npx tsx scripts/content-parts.ts merge <partsDir> [--out <repoRoot>] [--append]
  *
  * Part file shapes (JSON):
  *   { "kind": "items", "kks": ["U3O1-KK01", ...], "cards": [...], "mcq": [...], "short": [...] }
@@ -144,15 +144,44 @@ function writeJson(path: string, value: unknown): void {
   writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`);
 }
 
-function merge(dir: string, outRoot: string): void {
+function readIfExists<T>(path: string, fallback: T): T {
+  return existsSync(path) ? (JSON.parse(readFileSync(path, 'utf8')) as T) : fallback;
+}
+
+/**
+ * Builds the canonical files from parts. With `append`, parts ADD to the content already in the
+ * repository (new items only; an id that already exists is an error), which is how content grows
+ * after the first merge. Without it, the parts are the whole content (the first build).
+ */
+function merge(dir: string, outRoot: string, append: boolean): void {
   const parts = listParts(dir).map(readPart);
-  const byArea = Object.fromEntries(AREA_IDS.map((a) => [a, { cards: [] as Card[], mcq: [] as Mcq[], short: [] as ShortAnswer[] }])) as Record<
-    AreaId,
-    { cards: Card[]; mcq: Mcq[]; short: ShortAnswer[] }
-  >;
-  const glossary: GlossaryEntry[] = [];
-  const terms: Card[] = [];
-  let psm: PsmFile | null = null;
+  const content = resolve(outRoot, 'content');
+  const existingIds = new Set<string>();
+  const byArea = Object.fromEntries(
+    AREA_IDS.map((a) => {
+      const areaDir = resolve(content, a.toLowerCase());
+      const load = <T extends { id: string }>(name: string): T[] => {
+        const items = append ? readIfExists<T[]>(resolve(areaDir, name), []) : [];
+        items.forEach((i) => existingIds.add(i.id));
+        return items;
+      };
+      return [a, { cards: load<Card>('cards.json'), mcq: load<Mcq>('mcq.json'), short: load<ShortAnswer>('short.json') }];
+    }),
+  ) as Record<AreaId, { cards: Card[]; mcq: Mcq[]; short: ShortAnswer[] }>;
+  const sdPath = resolve(content, 'study-design.json');
+  const glossary: GlossaryEntry[] = append ? [...(readIfExists<{ glossary: GlossaryEntry[] }>(sdPath, { glossary: [] }).glossary ?? [])] : [];
+  const terms: Card[] = append ? readIfExists<Card[]>(resolve(content, 'terms.json'), []) : [];
+  terms.forEach((t) => existingIds.add(t.id));
+  let psm: PsmFile | null = append ? readIfExists<PsmFile | null>(resolve(content, 'psm.json'), null) : null;
+  psm?.cards.forEach((i) => existingIds.add(i.id));
+  psm?.mcq.forEach((i) => existingIds.add(i.id));
+  psm?.short.forEach((i) => existingIds.add(i.id));
+  const claim = (id: string) => {
+    if (existingIds.has(id)) throw new Error(`id ${id} already exists; parts may only add new ids`);
+    existingIds.add(id);
+  };
+  let psmTouched = false;
+  let termsTouched = false;
   const cases: CaseStudy[] = [];
   for (const part of parts) {
     if (part.kind === 'items') {
@@ -160,18 +189,30 @@ function merge(dir: string, outRoot: string): void {
         for (const item of part[key] ?? []) {
           const area = areaOfItem(item);
           if (!area) throw new Error(`item ${item.id} has no Unit 3/4 primary KK`);
+          claim(item.id);
           (byArea[area][key] as unknown[]).push(item);
         }
       }
     } else if (part.kind === 'terms') {
+      part.cards.forEach((c) => claim(c.id));
       glossary.push(...part.glossary);
       terms.push(...part.cards);
+      termsTouched = true;
     } else if (part.kind === 'psm') {
-      psm = part.psm;
-    } else cases.push(part.caseStudy);
+      if (append && psm) {
+        // Growth parts add PSM items; the stages and specifications stay as they are.
+        for (const key of ['cards', 'mcq', 'short'] as const) {
+          for (const item of part.psm[key] ?? []) claim(item.id);
+          (psm[key] as unknown[]).push(...(part.psm[key] ?? []));
+        }
+      } else psm = part.psm;
+      psmTouched = true;
+    } else {
+      if (append && existsSync(resolve(content, 'case-studies', `${part.caseStudy.id}.json`))) throw new Error(`case study ${part.caseStudy.id} already exists`);
+      cases.push(part.caseStudy);
+    }
   }
   const byId = <T extends { id: string }>(a: T, b: T) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
-  const content = resolve(outRoot, 'content');
   for (const area of AREA_IDS) {
     const dirOut = resolve(content, area.toLowerCase());
     for (const key of ['cards', 'mcq', 'short'] as const) {
@@ -179,14 +220,13 @@ function merge(dir: string, outRoot: string): void {
       if (items.length) writeJson(resolve(dirOut, `${key}.json`), items);
     }
   }
-  if (terms.length) {
+  if (terms.length && (termsTouched || !append)) {
     writeJson(resolve(content, 'terms.json'), [...terms].sort(byId));
-    const sdPath = resolve(content, 'study-design.json');
     const sd = JSON.parse(readFileSync(sdPath, 'utf8')) as { glossary: GlossaryEntry[] };
     sd.glossary = [...glossary].sort((a, b) => a.term.toLowerCase().localeCompare(b.term.toLowerCase()));
     writeJson(sdPath, sd);
   }
-  if (psm) writeJson(resolve(content, 'psm.json'), psm);
+  if (psm && (psmTouched || !append)) writeJson(resolve(content, 'psm.json'), psm);
   for (const cs of cases) writeJson(resolve(content, 'case-studies', `${cs.id}.json`), cs);
   const counts = AREA_IDS.map((a) => `${a}: ${byArea[a].cards.length}/${byArea[a].mcq.length}/${byArea[a].short.length}`).join(', ');
   console.info(`merged ${parts.length} parts. cards/mcq/short per area: ${counts}; ${terms.length} glossary cards; psm ${psm ? 'yes' : 'no'}; ${cases.length} case studies`);
@@ -198,10 +238,10 @@ if (cmd === 'check') {
   process.exit(check(rest) ? 1 : 0);
 } else if (cmd === 'merge') {
   const dir = rest[0];
-  if (!dir || !existsSync(dir)) throw new Error('usage: content-parts.ts merge <partsDir> [--out <repoRoot>]');
+  if (!dir || !existsSync(dir)) throw new Error('usage: content-parts.ts merge <partsDir> [--out <repoRoot>] [--append]');
   const outIdx = rest.indexOf('--out');
-  merge(dir, outIdx >= 0 ? resolve(rest[outIdx + 1]) : repoRoot);
+  merge(dir, outIdx >= 0 ? resolve(rest[outIdx + 1]) : repoRoot, rest.includes('--append'));
 } else {
-  console.error('usage: content-parts.ts check <part.json> [...] | merge <partsDir> [--out <repoRoot>]');
+  console.error('usage: content-parts.ts check <part.json> [...] | merge <partsDir> [--out <repoRoot>] [--append]');
   process.exit(1);
 }
