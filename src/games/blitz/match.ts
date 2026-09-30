@@ -8,8 +8,11 @@
  * 3. An exact match with a different glossary term or alias is incorrect, however close the
  *    spelling ("validation" is never accepted for "verification").
  * 4. Otherwise the answer is correct when its edit distance to the term or an alias is within
- *    that spelling's tolerance. Edit distance counts insertions, deletions, substitutions and
- *    swaps of two neighbouring letters, one each (optimal string alignment).
+ *    that spelling's tolerance, unless it is strictly closer to a different glossary term or alias
+ *    than to this term ("functional requirements" is never accepted for "non-functional
+ *    requirement"). A slip as close to this term as to another one still counts. Edit distance
+ *    counts insertions, deletions, substitutions and swaps of two neighbouring letters, one each
+ *    (optimal string alignment).
  * 5. Tolerance, from the normalised spelling's length n (spaces count):
  *      n ≤ 4:        1
  *      5 ≤ n ≤ 14:   2
@@ -57,13 +60,17 @@ export type TermMatch = 'exact' | 'close' | 'other-term' | 'wrong';
 
 /**
  * Matches a typed answer against a term and its aliases. `otherTerms` is every other glossary
- * term and alias (raw spellings); an exact match with one of them is 'other-term'.
+ * term and alias (raw spellings); an exact match with one of them, or a slip strictly closer to
+ * one of them than to this term, is 'other-term'.
  */
 export function matchTerm(input: string, term: string, aliases: readonly string[], otherTerms: readonly string[]): TermMatch {
   const typed = normaliseTerm(input);
   if (!typed) return 'wrong';
   const accepted = [term, ...aliases].map(normaliseTerm).filter(Boolean);
   if (accepted.includes(typed)) return 'exact';
-  if (otherTerms.some((t) => normaliseTerm(t) === typed)) return 'other-term';
-  return accepted.some((a) => typoDistance(typed, a) <= tolerance(a.length)) ? 'close' : 'wrong';
+  const others = otherTerms.map(normaliseTerm).filter(Boolean);
+  if (others.includes(typed)) return 'other-term';
+  if (!accepted.some((a) => typoDistance(typed, a) <= tolerance(a.length))) return 'wrong';
+  const nearest = Math.min(...accepted.map((a) => typoDistance(typed, a)));
+  return others.some((o) => typoDistance(typed, o) < nearest) ? 'other-term' : 'close';
 }
