@@ -32,7 +32,7 @@ describe('game registry', () => {
     for (const id of ['deskcheck', 'sort', 'search', 'triage', 'validate']) expect(flags(id)).toEqual([true, false, false]);
     expect(flags('blitz')).toEqual([false, true, true]);
     expect(flags('daily')).toEqual([false, true, true]);
-    for (const id of ['naming']) expect(flags(id)).toEqual([true, false, false]);
+    for (const id of ['naming', 'types']) expect(flags(id)).toEqual([true, false, false]);
   });
 
   it('loads games whose ids, titles and generators match their metadata', async () => {
@@ -55,8 +55,9 @@ describe('game registry', () => {
   it('writes man pages in sentence case without all-caps words', () => {
     for (const meta of [...GAMES, DRILL_GAME]) {
       const words = meta.man.match(/\b[A-Z]{2,}\b/g) ?? [];
-      // Only KK and area ids, TERMS and PSM, pseudocode keywords quoted as code, and the wordmark in the share line may be capitalised.
-      const code = new Set<string>([...PSEUDO_KEYWORDS, 'LENGTH', 'COLDBOOT']);
+      // Only KK and area ids, TERMS and PSM, pseudocode keywords quoted as code, the wordmark in the share line, and the
+      // abbreviations the brief says to keep (CSV and XML, which students type as answers) may be capitalised.
+      const code = new Set<string>([...PSEUDO_KEYWORDS, 'LENGTH', 'COLDBOOT', 'CSV', 'XML']);
       expect(words.filter((w) => !code.has(w) && !/^(TERMS|PSM|KK\d*|U\dO\d)$/.test(w))).toEqual([]);
     }
   });

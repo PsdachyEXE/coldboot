@@ -18,6 +18,7 @@ import { NAMING_GAME_KK, NAMING_ID, NAMING_MAN, NAMING_SUMMARY, NAMING_TITLE } f
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
+import { TYPES_GAME_KK, TYPES_ID, TYPES_MAN, TYPES_SUMMARY, TYPES_TITLE } from './types-game/meta';
 import { VALIDATE_ID, VALIDATE_KK, VALIDATE_MAN, VALIDATE_SUMMARY, VALIDATE_TITLE } from './validate/meta';
 import type { GameMeta } from './types';
 
@@ -104,6 +105,17 @@ export const GAMES: GameMeta[] = [
     man: NAMING_MAN,
     generator: true,
     load: () => import('./naming').then((m) => m.default),
+  },
+  {
+    id: TYPES_ID,
+    title: TYPES_TITLE,
+    priority: 'P1',
+    kk: TYPES_GAME_KK,
+    summary: TYPES_SUMMARY,
+    man: TYPES_MAN,
+    generator: true,
+    // types-game, because ./types is the game contract (src/games/types.ts).
+    load: () => import('./types-game').then((m) => m.default),
   },
 ];
 
