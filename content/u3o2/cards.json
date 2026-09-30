@@ -186,30 +186,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u3o2-kk03-001",
-    "kk": [
-      "U3O2-KK03"
-    ],
-    "type": "reverse",
-    "front": "Critical path",
-    "back": "The longest chain of dependent tasks through a project, from start to finish. Its total duration is the shortest time in which the project can be completed.",
-    "mistake": "The critical path isn't a list of the most important or hardest tasks. It's the chain of dependent tasks with the longest total duration.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk03-002",
-    "kk": [
-      "U3O2-KK03"
-    ],
-    "type": "reverse",
-    "front": "Milestone",
-    "back": "A marker on a Gantt chart for a significant point in a project, such as the client approving the SRS. It has zero duration, so it takes no time itself.",
-    "mistake": "A milestone isn't a task. It marks a point in time, such as a sign-off, and adds nothing to the project's duration.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u3o2-kk03-003",
     "kk": [
       "U3O2-KK03"
@@ -223,17 +199,6 @@
     "aliases": [
       "Task dependency"
     ]
-  },
-  {
-    "id": "c-u3o2-kk03-004",
-    "kk": [
-      "U3O2-KK03"
-    ],
-    "type": "basic",
-    "front": "What does a Gantt chart show?",
-    "back": "Each task as a horizontal bar against a timeline, showing its start, duration and finish; the sequence of tasks and the dependencies between them; milestones; and often the critical path.",
-    "difficulty": 1,
-    "source": "textbook"
   },
   {
     "id": "c-u3o2-kk03-005",
@@ -331,7 +296,8 @@
   {
     "id": "c-u3o2-kk04-005",
     "kk": [
-      "U3O2-KK04"
+      "U3O2-KK04",
+      "U4O1-KK09"
     ],
     "type": "compare",
     "front": "Qualitative data versus quantitative data",
@@ -373,30 +339,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u3o2-kk05-001",
-    "kk": [
-      "U3O2-KK05"
-    ],
-    "type": "reverse",
-    "front": "Functional requirement",
-    "back": "What a solution must do: a function or feature, such as the data it accepts, the processing it performs or the output it produces.",
-    "mistake": "A functional requirement doesn't say how well something is done. 'Calculate the fee' is functional; 'calculate it within one second' adds a non-functional requirement.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk05-002",
-    "kk": [
-      "U3O2-KK05"
-    ],
-    "type": "reverse",
-    "front": "Non-functional requirement",
-    "back": "A quality the solution must have, describing how well it performs its functions rather than what they are, such as its reliability, usability or portability.",
-    "mistake": "Non-functional doesn't mean optional or less important. A solution that works but is unreliable or hard to use can still fail its users.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u3o2-kk05-003",
     "kk": [
       "U3O2-KK05"
@@ -432,7 +374,8 @@
   {
     "id": "c-u3o2-kk05-006",
     "kk": [
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "type": "compare",
     "front": "Functional requirement versus non-functional requirement",
@@ -455,36 +398,12 @@
   {
     "id": "c-u3o2-kk05-008",
     "kk": [
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "type": "cloze",
     "front": "'The program must email each client an invoice' is a {{functional}} requirement; 'the program must stay available during all opening hours' is a {{non-functional}} requirement concerning {{reliability}}.",
     "back": "Functional requirements state what the solution does; non-functional requirements state qualities it must have, such as reliability, usability and portability.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk06-001",
-    "kk": [
-      "U3O2-KK06"
-    ],
-    "type": "reverse",
-    "front": "Constraint",
-    "back": "A condition that limits the solution or how it can be developed, such as a fixed budget, a deadline, a law the solution must comply with, or the hardware it must run on.",
-    "mistake": "A constraint isn't something the solution does. It's a limit the developer has to work within.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk06-002",
-    "kk": [
-      "U3O2-KK06",
-      "U3O2-KK05"
-    ],
-    "type": "compare",
-    "front": "Constraint versus non-functional requirement",
-    "back": "A non-functional requirement is a quality the solution itself must have, such as reliability or usability, and is tested in the finished solution. A constraint limits the project or the options available, such as a budget, a deadline, a law or existing hardware.",
-    "mistake": "'Development must cost less than $9000' isn't a non-functional requirement. Cost limits the project; it isn't a quality of the solution.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -555,35 +474,11 @@
     "source": "textbook"
   },
   {
-    "id": "c-u3o2-kk07-001",
-    "kk": [
-      "U3O2-KK07"
-    ],
-    "type": "reverse",
-    "front": "Scope (of a solution)",
-    "back": "The boundaries of a solution: what it will do and what it will not do. Scope is set during analysis and recorded in the SRS.",
-    "mistake": "Scope isn't only a list of features. The exclusions matter just as much, because they let everyone recognise a request for something extra.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk07-002",
-    "kk": [
-      "U3O2-KK07",
-      "U4O1-KK10"
-    ],
-    "type": "reverse",
-    "front": "Scope creep",
-    "back": "The gradual, uncontrolled growth of a project's scope after it has been agreed, as features are added without adjusting the time, budget or plan.",
-    "mistake": "Scope creep isn't caused only by clients. A developer who adds features nobody asked for causes it too.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u3o2-kk07-003",
     "kk": [
       "U3O2-KK07",
-      "U3O2-KK06"
+      "U3O2-KK06",
+      "U3O1-KK02"
     ],
     "type": "compare",
     "front": "Scope versus constraint",
@@ -653,44 +548,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u3o2-kk08-001",
-    "kk": [
-      "U3O2-KK08"
-    ],
-    "type": "reverse",
-    "front": "Context diagram",
-    "back": "A diagram showing the whole system as a single process, the external entities it exchanges data with, and the labelled data flows between them. It shows no internal processes or data stores.",
-    "mistake": "Data stores never appear on a context diagram. Stored data is inside the system, so it is hidden within the single process.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk08-002",
-    "kk": [
-      "U3O2-KK08"
-    ],
-    "type": "reverse",
-    "front": "Data flow diagram (DFD)",
-    "back": "A diagram showing how data moves through a system: the processes that transform data, the data stores that hold it, the external entities that supply or receive it, and the labelled data flows between them.",
-    "aliases": [
-      "DFD"
-    ],
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk08-003",
-    "kk": [
-      "U3O2-KK08"
-    ],
-    "type": "reverse",
-    "front": "Use case diagram",
-    "back": "A diagram showing the actors that interact with a system, the use cases (goals) they can achieve with it, the system boundary, and the relationships between actors and use cases, and between use cases.",
-    "mistake": "A use case diagram doesn't show data moving or the order of steps. It shows who can do what with the system.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u3o2-kk08-004",
     "kk": [
       "U3O2-KK08"
@@ -748,21 +605,6 @@
     "back": "| | <<includes>> | <<extends>> |\n|:--|:--|:--|\n| When it runs | Every time the base use case runs | Only under a condition, as an optional addition |\n| Arrow direction | From the base use case to the included one | From the extending use case to the base one |\n| Example | *Place order* includes *Calculate total* | *Apply discount code* extends *Place order* |",
     "mistake": "The arrows point in opposite directions. An <<extends>> arrow points to the base use case, not away from it.",
     "difficulty": 3,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk09-001",
-    "kk": [
-      "U3O2-KK09"
-    ],
-    "type": "reverse",
-    "front": "Software requirements specification (SRS)",
-    "back": "A document produced at the end of analysis that sets out what a solution must do and the conditions it must meet, so the client and developer share one agreed description before design begins.",
-    "aliases": [
-      "SRS",
-      "Software requirements specification"
-    ],
-    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -847,21 +689,6 @@
     "back": "It doesn't say how well the solution must perform (non-functional requirements such as usability or reliability) or what limits it must work within (constraints such as budget or existing hardware). A design could provide every function yet still be unacceptable.",
     "mistake": "Non-functional requirements aren't optional extras. A solution that works but is too slow or too hard to use doesn't meet its requirements.",
     "difficulty": 3,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk10-001",
-    "kk": [
-      "U3O2-KK10"
-    ],
-    "type": "reverse",
-    "front": "Intellectual property (IP)",
-    "back": "Creations of the mind, such as program code, designs, graphics and written content, that the law protects by giving their owner rights over how they are copied and used.",
-    "aliases": [
-      "IP",
-      "Intellectual property"
-    ],
-    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -975,10 +802,11 @@
       "U3O2-KK11",
       "U4O2-KK04"
     ],
-    "type": "reverse",
-    "front": "Version control",
-    "back": "Recording and managing changes to files over time, so that earlier versions can be recovered, changes compared and the work of several developers combined. It may use version numbers in file names, or a version control system that keeps every saved change in a repository.",
-    "difficulty": 1,
+    "type": "compare",
+    "front": "Version numbers in file names versus a version control system",
+    "back": "| | Version numbers in file names | Version control system |\n|:--|:--|:--|\n| How versions are kept | Manually, by saving a new copy, e.g. `booking_v1.3.py` | Recorded each time a change is committed |\n| Records | Only the order of versions | Every change, with its author, date and message |\n| Allows | Going back to a saved copy | Comparing versions, combining developers' work and rolling back |",
+    "mistake": "Numbered file names aren't a version control system. They depend on people remembering to save a new copy, and they can't show who changed what or combine two developers' work.",
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -1136,29 +964,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u3o2-kk13-001",
-    "kk": [
-      "U3O2-KK13"
-    ],
-    "type": "reverse",
-    "front": "Efficiency",
-    "back": "A measure of the resources used to achieve a result: how much time, cost and effort a solution or process needs.",
-    "mistake": "Efficiency says nothing about whether the output is right. A program can produce wrong results very quickly; correctness is a matter of effectiveness.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk13-002",
-    "kk": [
-      "U3O2-KK13"
-    ],
-    "type": "reverse",
-    "front": "Effectiveness",
-    "back": "A measure of how well a solution achieves its intended purpose, for example whether its output is accurate, complete and usable.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u3o2-kk13-003",
     "kk": [
       "U3O2-KK13",
@@ -1213,8 +1018,8 @@
     ],
     "type": "basic",
     "front": "What makes an evaluation criterion well written?",
-    "back": "It is specific and measurable, is tied to one requirement, and says what will be checked. For example, \"A new user can complete a booking in under two minutes without help\" rather than \"The app is easy to use\".",
-    "mistake": "Vague criteria such as \"the program is fast\" can't be judged objectively, so the evaluation becomes a matter of opinion.",
+    "back": "It is specific and measurable, is tied to one requirement, and says what will be checked. For example, 'A new user can complete a booking in under two minutes without help' rather than 'The app is easy to use'.",
+    "mistake": "Vague criteria such as 'the program is fast' can't be judged objectively, so the evaluation becomes a matter of opinion.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -1280,9 +1085,9 @@
       "U3O2-KK14"
     ],
     "type": "cloze",
-    "front": "In an IPO chart, the {{Processing}} column describes actions such as \"calculate the delivery fee\", while the Input and Output columns list {{data}}.",
+    "front": "In an IPO chart, the {{Processing}} column describes actions such as 'calculate the delivery fee', while the Input and Output columns list {{data}}.",
     "back": "Inputs and outputs are data items, such as `parcelWeight` and `deliveryFee`. Processing describes what is done to the inputs to produce the outputs.",
-    "mistake": "Writing an action such as \"calculate total\" in the Output column. The output is the total itself; calculating it is processing.",
+    "mistake": "An action such as 'calculate total' doesn't belong in the Output column. The output is the total itself; calculating it is processing.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -1318,7 +1123,7 @@
     ],
     "type": "basic",
     "front": "How should an input control on a mock-up relate to the data dictionary or object description?",
-    "back": "The data each input control captures should appear as a data item or property, with a data type that matches the control. For example, a checkbox is ticked or not, so it maps to a Boolean.",
+    "back": "The data each input control captures should appear as a data item or property, with a data type that matches the control. For example, a check box is ticked or not, so it maps to a Boolean.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -1327,33 +1132,11 @@
     "kk": [
       "U3O2-KK15"
     ],
-    "type": "reverse",
-    "front": "Affordance",
-    "back": "The quality of an interface element whose appearance suggests how it is used, e.g. a raised, shaded button that looks pressable, or a slider handle that looks draggable.",
-    "mistake": "Affordance isn't the same as usability. Good affordance is one thing that makes a solution usable: a control's appearance tells users what they can do with it.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk15-002",
-    "kk": [
-      "U3O2-KK15"
-    ],
-    "type": "reverse",
-    "front": "Interoperability",
-    "back": "The ability of a solution to work with other systems, software or devices by exchanging data that each can use, e.g. exporting timesheets in a format a payroll program can import.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o2-kk15-003",
-    "kk": [
-      "U3O2-KK15"
-    ],
-    "type": "reverse",
-    "front": "Usability",
-    "back": "How easily users can learn and use a solution to complete their tasks accurately, quickly and with satisfaction.",
-    "difficulty": 1,
+    "type": "compare",
+    "front": "Affordance versus usability",
+    "back": "| | Affordance | Usability |\n|:--|:--|:--|\n| Describes | One element: whether its appearance shows how to use it | The whole solution: how easily users learn and operate it to complete their tasks, and how satisfied they are |\n| Example | A raised, shaded button that looks pressable | New staff can record a sale without help |",
+    "mistake": "Affordance isn't the same as usability. Good affordance is one thing that makes a solution usable, because a control's appearance tells users what they can do with it, but unclear wording or navigation can still make the solution hard to use.",
+    "difficulty": 2,
     "source": "textbook"
   },
   {

@@ -85,69 +85,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u3o1-kk01-008",
-    "kk": [
-      "U3O1-KK01",
-      "U4O2-KK08"
-    ],
-    "type": "basic",
-    "front": "What is over-reliance on AI-generated code, and why is it a risk?",
-    "back": "Accepting AI output without understanding it. The developer can't explain, debug or maintain the code, so logic errors and security flaws go unnoticed, and their own programming skills don't develop.",
-    "mistake": "Using AI isn't the problem in itself. Using its output without understanding and checking it is.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk02-001",
-    "kk": [
-      "U3O1-KK02",
-      "U3O2-KK05"
-    ],
-    "type": "reverse",
-    "front": "Functional requirement",
-    "back": "Something the solution must do: a task or feature it performs, usually described in terms of its inputs, processing and outputs.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk02-002",
-    "kk": [
-      "U3O1-KK02",
-      "U3O2-KK05"
-    ],
-    "type": "reverse",
-    "front": "Non-functional requirement",
-    "back": "A quality or characteristic the solution must have, such as usability, reliability or portability, rather than a task it performs.",
-    "mistake": "Non-functional doesn't mean optional. It describes how well the solution must work, and it still has to be met.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk02-003",
-    "kk": [
-      "U3O1-KK02",
-      "U3O2-KK06"
-    ],
-    "type": "reverse",
-    "front": "Constraint",
-    "back": "A condition that limits the solution or how it can be developed, such as the budget, the deadline, or laws the solution must comply with.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk02-004",
-    "kk": [
-      "U3O1-KK02",
-      "U3O2-KK07"
-    ],
-    "type": "basic",
-    "front": "What does the scope of a solution set out?",
-    "back": "The solution's boundaries: what it will do and, just as importantly, what it will not do.",
-    "mistake": "Scope isn't only a list of included features. Stating what is excluded is what guards against scope creep.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u3o1-kk02-005",
     "kk": [
       "U3O1-KK02"
@@ -162,7 +99,9 @@
   {
     "id": "c-u3o1-kk02-006",
     "kk": [
-      "U3O1-KK02"
+      "U3O1-KK02",
+      "U3O2-KK05",
+      "U3O2-KK06"
     ],
     "type": "compare",
     "front": "Non-functional requirement versus constraint",
@@ -191,54 +130,6 @@
     "type": "basic",
     "front": "Why should a developer confirm what is out of scope before coding a module?",
     "back": "So they don't spend time building features nobody asked for. A clear scope keeps the module to what was agreed, within the time and budget, and makes it clear when the module is complete.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk03-001",
-    "kk": [
-      "U3O1-KK03"
-    ],
-    "type": "reverse",
-    "front": "Data dictionary",
-    "back": "A table documenting each data item a solution uses, typically its name, data type, size, format, description and validation rules.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk03-002",
-    "kk": [
-      "U3O1-KK03"
-    ],
-    "type": "basic",
-    "front": "What are the three columns of an IPO chart, and what goes in each?",
-    "back": "- **Input**: the data the module receives\n- **Processing**: what the module does with that data\n- **Output**: the information the module produces",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk03-003",
-    "kk": [
-      "U3O1-KK03"
-    ],
-    "type": "reverse",
-    "front": "Mock-up",
-    "back": "A drawing of how a user interface will look, showing the placement of controls, text and images, usually annotated with details such as fonts, colours and control types.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "Mockup"
-    ]
-  },
-  {
-    "id": "c-u3o1-kk03-004",
-    "kk": [
-      "U3O1-KK03",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "Object description",
-    "back": "A design tool that describes an object by its name, its properties (attributes, each with a data type) and its methods (the actions it can perform).",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -322,10 +213,7 @@
     "front": "Floating point",
     "back": "A numeric data type for numbers with a fractional part, such as 72.5 or 19.95.",
     "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "Float"
-    ]
+    "source": "textbook"
   },
   {
     "id": "c-u3o1-kk04-004",
@@ -382,23 +270,9 @@
     "type": "basic",
     "front": "Which data type suits recording whether a member has paid their fees, and why?",
     "back": "Boolean. There are only two states (paid or not paid), the value can be used directly in a condition such as `IF hasPaid THEN`, and it can't hold an invalid value.",
-    "mistake": "Storing 'Yes' or 'No' as a String allows inconsistent entries such as 'Y' or 'yes', which then fail comparisons.",
+    "mistake": "Storing \"Yes\" or \"No\" as a String allows inconsistent entries such as \"Y\" or \"yes\", which then fail comparisons.",
     "difficulty": 1,
     "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk05-001",
-    "kk": [
-      "U3O1-KK05"
-    ],
-    "type": "reverse",
-    "front": "One-dimensional array",
-    "back": "A data structure that stores a set of values of the same data type under one name, each accessed by an integer index, e.g. `scores[3]`.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "1D array"
-    ]
   },
   {
     "id": "c-u3o1-kk05-002",
@@ -414,17 +288,6 @@
     "aliases": [
       "2D array"
     ]
-  },
-  {
-    "id": "c-u3o1-kk05-003",
-    "kk": [
-      "U3O1-KK05"
-    ],
-    "type": "reverse",
-    "front": "Record",
-    "back": "A data structure that groups related fields, which can have different data types, under one name; each field is accessed by its name, e.g. `member.surname`.",
-    "difficulty": 1,
-    "source": "textbook"
   },
   {
     "id": "c-u3o1-kk05-004",
@@ -494,21 +357,6 @@
     "back": "A text file that stores one record per line, with each field separated from the next by a set character (the delimiter), such as a comma in a CSV file or a tab.",
     "difficulty": 1,
     "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk06-002",
-    "kk": [
-      "U3O1-KK06"
-    ],
-    "type": "reverse",
-    "front": "XML file",
-    "back": "A text file that stores data between user-defined start and end tags, e.g. `<suburb>Geelong</suburb>`. The tags name each value, and elements can be nested inside a single root element to form a hierarchy.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "XML",
-      "Extensible Markup Language"
-    ]
   },
   {
     "id": "c-u3o1-kk06-003",
@@ -581,61 +429,14 @@
     "source": "textbook"
   },
   {
-    "id": "c-u3o1-kk07-001",
-    "kk": [
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "Class",
-    "back": "A template that defines the attributes (data) and methods (behaviour) shared by every object of one type, e.g. a `Booking` class with `date`, `groupSize` and `calculateFee()`.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk07-002",
-    "kk": [
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "Encapsulation",
-    "back": "Bundling an object's attributes with the methods that act on them in one class, and hiding the attributes (e.g. making them private) so other code can change them only through the class's methods.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
     "id": "c-u3o1-kk07-003",
     "kk": [
       "U3O1-KK07"
     ],
     "type": "basic",
-    "front": "What is inheritance in OOP?",
-    "back": "A subclass (child class) automatically gains the attributes and methods of its superclass (parent class). It can add its own members and override inherited methods, e.g. `Truck` inherits `registration` from `Vehicle` and adds `maxLoad`.",
-    "mistake": "A subclass can't directly use its superclass's private attributes. It reaches them through inherited public or protected methods, or the attributes must be declared protected.",
+    "front": "Can a subclass directly use its superclass's private attributes?",
+    "back": "No. Only the superclass's own methods can use a private attribute directly, even though every subclass object still has it. If `Manager` is a subclass of `Employee`, a `Manager` method reaches the private `payRate` through inherited public or protected methods such as `getPayRate()`, or `payRate` is declared protected.",
     "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk07-004",
-    "kk": [
-      "U3O1-KK07"
-    ],
-    "type": "basic",
-    "front": "What is generalisation in OOP?",
-    "back": "Finding the attributes and methods that several classes share and moving them into one more general superclass. For example, `Car` and `Truck` both have `registration` and `odometer`, so these move up to a `Vehicle` superclass.",
-    "mistake": "Generalisation and inheritance aren't the same thing. Generalisation is the design step that creates the superclass from shared features; inheritance is the mechanism that then passes those features down to each subclass.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk07-005",
-    "kk": [
-      "U3O1-KK07"
-    ],
-    "type": "basic",
-    "front": "What is abstraction in OOP?",
-    "back": "Modelling only the details relevant to the problem and hiding how things work behind a simple interface. A clinic's `Patient` class stores name and appointment details but not hair colour, and other code calls `bookAppointment()` without knowing its steps.",
-    "mistake": "Abstraction isn't the same as encapsulation. Abstraction decides which details are modelled and shown; encapsulation bundles data with its methods and restricts access to that data.",
-    "difficulty": 3,
     "source": "textbook"
   },
   {
@@ -732,17 +533,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u3o1-kk08-006",
-    "kk": [
-      "U3O1-KK08"
-    ],
-    "type": "cloze",
-    "front": "The three basic control structures are {{sequence}}, where statements run in order; {{selection}}, where a condition decides which statements run; and {{iteration}}, where statements repeat.",
-    "back": "`IF ... THEN ... ELSE` is selection; `FOR`, `WHILE` and `REPEAT` loops are iteration. Any algorithm can be written by combining these three.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u3o1-kk08-007",
     "kk": [
       "U3O1-KK08"
@@ -765,47 +555,6 @@
     "mistake": "`MOD` gives the remainder, not the quotient: `17 MOD 5` is 2, while `17 DIV 5` is 3.",
     "difficulty": 2,
     "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk09-001",
-    "kk": [
-      "U3O1-KK09"
-    ],
-    "type": "reverse",
-    "front": "Hungarian notation",
-    "back": "A naming convention that begins an identifier with a short lowercase prefix showing its data type or control type, e.g. `intAge` for an Integer variable or `btnSave` for a button.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk09-002",
-    "kk": [
-      "U3O1-KK09"
-    ],
-    "type": "reverse",
-    "front": "Camel case",
-    "back": "Joining words without spaces, with the first word in lowercase and each later word starting with a capital letter, e.g. `totalCost` or `dateOfBirth`.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "camelCase",
-      "camel casing"
-    ]
-  },
-  {
-    "id": "c-u3o1-kk09-003",
-    "kk": [
-      "U3O1-KK09"
-    ],
-    "type": "reverse",
-    "front": "Snake case",
-    "back": "Joining words in lowercase with an underscore between each word, e.g. `total_cost` or `date_of_birth`.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "snake_case",
-      "snake casing"
-    ]
   },
   {
     "id": "c-u3o1-kk09-004",
@@ -837,7 +586,7 @@
     ],
     "type": "compare",
     "front": "`txtQuantity` versus `intQuantity`",
-    "back": "`txtQuantity` names a text box control on the form; whatever the user types into it is a string. `intQuantity` names an Integer variable that holds the quantity after the program converts that string to a number.",
+    "back": "`txtQuantity` names a text box control on the form; whatever the user types into it is a String. `intQuantity` names an Integer variable that holds the quantity after the program converts that String to an Integer.",
     "mistake": "Naming a text box `intQuantity` misleads the reader: a text box holds text, and its contents must still be converted before any arithmetic.",
     "difficulty": 2,
     "source": "textbook"
@@ -863,39 +612,6 @@
     "back": "Consistent, meaningful names make code easier for any team member to read, debug and maintain. A reader can tell an identifier's purpose (and, with Hungarian notation, its type or control) at a glance, and near-duplicates such as `totalCost` and `total_cost` are avoided.",
     "mistake": "A Hungarian prefix doesn't set or enforce a data type; the declaration does. Naming conventions help the people reading the code, not the compiler or interpreter.",
     "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk10-001",
-    "kk": [
-      "U3O1-KK10"
-    ],
-    "type": "reverse",
-    "front": "Existence check",
-    "back": "A validation check that confirms data has been entered in a required field, e.g. rejecting a booking form whose surname field is empty. Also called a presence check.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk10-002",
-    "kk": [
-      "U3O1-KK10"
-    ],
-    "type": "reverse",
-    "front": "Type check",
-    "back": "A validation check that confirms input is of the expected data type, e.g. rejecting `six` or `2.5` where a whole-number quantity is required.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk10-003",
-    "kk": [
-      "U3O1-KK10"
-    ],
-    "type": "reverse",
-    "front": "Range check",
-    "back": "A validation check that confirms a value lies between set lower and upper limits, e.g. accepting a guest count only from 1 to 12 inclusive.",
-    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -957,18 +673,6 @@
     "back": "15, 16, 65 and 66: each limit and the value just outside it. These reveal errors such as writing `age < 65` where `age ≤ 65` was needed, which would wrongly reject 65.",
     "mistake": "Testing only a typical value such as 30 misses boundary errors. Most range-check faults show up at the limits.",
     "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk11-001",
-    "kk": [
-      "U3O1-KK11"
-    ],
-    "type": "reverse",
-    "front": "Internal documentation",
-    "back": "Comments and other notes written inside a program's source code for programmers. They explain what a module is for, its key features and why particular processing choices were made.",
-    "mistake": "Internal documentation isn't a user manual or help screen. It lives in the code, and its readers are the programmers who maintain the program, not its users.",
-    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -1068,11 +772,10 @@
     "kk": [
       "U3O1-KK12"
     ],
-    "type": "reverse",
-    "front": "Binary search",
-    "back": "Searches a sorted list by comparing the target with the middle element of the remaining range, then discarding the half that can't contain it, until the target is found or no elements remain.",
-    "mistake": "Running it on unsorted data doesn't crash or give a warning. It can report 'not found' for an item that is in the list, which is a logic error.",
-    "difficulty": 1,
+    "type": "basic",
+    "front": "What happens if a binary search is run on unsorted data?",
+    "back": "It doesn't crash or warn. It can discard the half that holds the target and report 'not found' for an item that is in the list, a logic error. Sort the data first or use a linear search.",
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -1146,43 +849,6 @@
     "mistake": "'Binary search is always better' is wrong. It only pays off when the data is already sorted, or will be searched often enough to justify sorting it.",
     "difficulty": 3,
     "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk13-001",
-    "kk": [
-      "U3O1-KK13"
-    ],
-    "type": "reverse",
-    "front": "Syntax error",
-    "back": "An error that breaks the rules of the programming language, such as a misspelt keyword or a missing bracket. The translator reports it, and the code can't be run until it is fixed.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk13-002",
-    "kk": [
-      "U3O1-KK13"
-    ],
-    "type": "reverse",
-    "front": "Logic error",
-    "back": "An error in the algorithm: the program runs but produces incorrect results, e.g. `<` used where `≤` was needed. The translator can't detect it; testing and desk checking reveal it.",
-    "mistake": "A program that runs without crashing is not necessarily correct. Logic errors show up only when actual output is compared with expected output.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk13-003",
-    "kk": [
-      "U3O1-KK13"
-    ],
-    "type": "reverse",
-    "front": "Runtime error",
-    "back": "An error that occurs while the program is running, when an instruction can't be carried out, such as dividing by zero or reading past the end of an array. Unless it is handled, the program usually stops.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "Run-time error"
-    ]
   },
   {
     "id": "c-u3o1-kk13-004",
@@ -1314,18 +980,6 @@
     "front": "Expected output versus actual output",
     "back": "| | Expected output | Actual output |\n|:--|:--|:--|\n| Comes from | the requirements | running the program with the test's inputs |\n| Recorded | before the test is run | when the test is run |\n\nA test passes when the two match. A mismatch shows an error to find and fix.",
     "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u3o1-kk14-007",
-    "kk": [
-      "U3O1-KK14"
-    ],
-    "type": "basic",
-    "front": "Why should test data include each limit of a valid range and the values just beyond it?",
-    "back": "Errors cluster at the edges, e.g. `<` written where `≤` was needed. For a range of 1 to 14, testing 0, 1, 14 and 15 confirms that both limits are accepted and the values just beyond them are rejected.",
-    "mistake": "Testing only typical values, such as 7 for a range of 1 to 14, can pass even when both limits are handled wrongly.",
-    "difficulty": 2,
     "source": "textbook"
   },
   {

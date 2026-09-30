@@ -1,7 +1,7 @@
 {
   "id": "cs-01",
   "title": "Kestrel Bay Freight: ParcelTrack",
-  "insert": "**Kestrel Bay Freight**\n\nKestrel Bay Freight is a freight company based in Geelong. It employs 480 staff, runs 11 depots across western Victoria and operates 160 trucks and vans. It delivers about 9,000 consignments a day. Every consignment has a number, such as `KBF-0042817`, printed on its label.\n\nThe board's goal is for Kestrel Bay to be known as the most dependable regional carrier in western Victoria. To support this goal, it has set two objectives:\n\n- cut calls to customer service asking where a consignment is by 40 per cent within 12 months of a new tracking system going live\n- hold an electronic proof of delivery for every consignment within 18 months of go-live, ending paper consignment notes.\n\n**Current situation**\n\nDrivers carry printed run sheets. The receiver signs a paper consignment note, which the driver brings back to the depot at the end of the day. Administration staff scan the notes the next morning, so the tracking page on Kestrel Bay's website can show a consignment as delivered up to a day late. The customer service team of 14 takes about 1,100 calls a day, most of them asking where a consignment is. About 150 signed notes are lost or damaged each month. When a customer disputes a delivery, Kestrel Bay often cannot prove it took place and has to pay for the goods.\n\nDepot staff calculate each consignment's charge in a spreadsheet.\n\n**The proposed solution: ParcelTrack**\n\n- A **driver app** on company-issued Android phones. Drivers see their run for the day, and the receiver signs on the screen. Many rural runs pass through areas with no mobile coverage, so the app stores deliveries on the phone and uploads them when coverage returns. A driver must be able to record a delivery in 30 seconds or less.\n- A **customer portal** where anyone can enter a consignment number to see its status and an estimated delivery time, which an external mapping service calculates. Customers receive an SMS when their consignment is out for delivery. The portal must be available at least 99.5 per cent of the time.\n- A **charging module** for depot staff. A charge is a $15.00 base fee plus a rate per kilogram for the delivery zone (zone 1 $1.20, zone 2 $1.80, zone 3 $2.50). Consignments of 30 kg or more attract a $25.00 heavy-item surcharge. Express service costs 1.5 times the standard charge, including any surcharge.\n\nTaking payments and booking pick-ups are outside the scope of ParcelTrack. The budget is $620,000. Kestrel Bay will build ParcelTrack in-house with its IT team of six. A Melbourne software firm quoted $870,000 and could not start for five months.\n\n**The project team**\n\n- **Anjali Mehta**, project manager (project plan, Figure 2)\n- **Leila Haddad**, systems analyst (draft context diagram, Figure 1; draft object description, Figure 3)\n- **Priya Raman**, developer (driver app)\n- **Tomas Kovac**, developer (customer portal and charging module; pseudocode, Figure 4)\n- **Ben Nguyen**, tester\n- **Grace O'Connell**, IT security lead\n- **Rhys Walker**, operations manager and project sponsor\n\n**The development environment**\n\nGrace has recorded how the IT team currently works.\n\n- One server, in an unlocked storeroom at head office, runs the development, testing and live versions of the current website. Developers copy changed files straight into the live folder.\n- The test database is a full copy of the live customer database, including the names, addresses and phone numbers of about 60,000 customers.\n- The database password is written into the source code. Code is kept in a shared network folder with no version control, in files named like `portal_final_v3_FIXED.zip`.\n- The developers share one administrator account, and no account uses multi-factor authentication.\n- A contractor who left in March can still log in remotely.\n- The server's web framework has not been updated for 14 months.\n- Priya uses a free online AI assistant to generate code. To fix a slow database query, she pasted real customer records into it. No one reviews code before it goes live.\n- Each night a backup is copied to an external drive that stays plugged into the server.\n\n*Kestrel Bay Freight and everyone named here are fictional.*",
+  "insert": "**Kestrel Bay Freight**\n\nKestrel Bay Freight is a freight company based in Geelong. It employs 480 staff, runs 11 depots across western Victoria and operates 160 trucks and vans. It delivers about 9000 consignments a day. Every consignment has a number, such as `KBF-0042817`, printed on its label.\n\nThe board's goal is for Kestrel Bay to be known as the most dependable regional carrier in western Victoria. To support this goal, it has set two objectives:\n\n- cut calls to customer service asking where a consignment is by 40% within 12 months of a new tracking system going live\n- hold an electronic proof of delivery for every consignment within 18 months of go-live, ending paper consignment notes.\n\n**Current situation**\n\nDrivers carry printed run sheets. The receiver signs a paper consignment note, which the driver brings back to the depot at the end of the day. Administration staff scan the notes the next morning, so the tracking page on Kestrel Bay's website can show a consignment as delivered up to a day late. The customer service team of 14 takes about 1100 calls a day, most of them asking where a consignment is. About 150 signed notes are lost or damaged each month. When a customer disputes a delivery, Kestrel Bay often cannot prove it took place and has to pay for the goods.\n\nDepot staff calculate each consignment's charge in a spreadsheet.\n\n**The proposed solution: ParcelTrack**\n\n- A **driver app** on company-issued Android phones. Drivers see their run for the day, and the receiver signs on the screen. Many rural runs pass through areas with no mobile coverage, so the app stores deliveries on the phone and uploads them when coverage returns. A driver must be able to record a delivery in 30 seconds or less.\n- A **customer portal** where anyone can enter a consignment number to see its status and an estimated delivery time, which an external mapping service calculates. Customers receive an SMS when their consignment is out for delivery. The portal must be available at least 99.5% of the time.\n- A **charging module** for depot staff. A charge is a $15.00 base fee plus a rate per kilogram for the delivery zone (zone 1 $1.20, zone 2 $1.80, zone 3 $2.50). Consignments of 30 kg or more attract a $25.00 heavy-item surcharge. Express service costs 1.5 times the standard charge, including any surcharge.\n\nTaking payments and booking pick-ups are outside the scope of ParcelTrack. The budget is $620 000. Kestrel Bay will build ParcelTrack in-house with its IT team of six. A Melbourne software firm quoted $870 000 and could not start for five months.\n\n**The project team**\n\n- **Anjali Mehta**, project manager (project plan, Figure 2)\n- **Leila Haddad**, systems analyst (draft context diagram, Figure 1; draft object description, Figure 3)\n- **Priya Raman**, developer (driver app)\n- **Tomas Kovac**, developer (customer portal and charging module; pseudocode, Figure 4)\n- **Ben Nguyen**, tester\n- **Grace O'Connell**, IT security lead\n- **Rhys Walker**, operations manager and project sponsor\n\n**The development environment**\n\nGrace has recorded how the IT team currently works.\n\n- One server, in an unlocked storeroom at head office, runs the development, testing and live versions of the current website. Developers copy changed files straight into the live folder.\n- The test database is a full copy of the live customer database, including the names, addresses and phone numbers of about 60 000 customers.\n- The database password is written into the source code. Code is kept in a shared network folder with no version control, in files named like `portal_final_v3_FIXED.zip`.\n- The developers share one administrator account, and no account uses multi-factor authentication.\n- A contractor who left in March can still log in remotely.\n- The server's web framework has not been updated for 14 months.\n- Priya uses a free online AI assistant to generate code. To fix a slow database query, she pasted real customer records into it. No one reviews code before it goes live.\n- Each night a backup is copied to an external drive that stays plugged into the server.\n\n*Kestrel Bay Freight and everyone named here are fictional.*",
   "figures": [
     {
       "id": "parceltrack-context",
@@ -360,7 +360,7 @@
           "marks": 1
         },
         {
-          "text": "Describes an objective as a specific, measurable target with a time frame that works towards the goal, using one of Kestrel Bay's objectives (for example, cutting calls asking where a consignment is by 40 per cent within 12 months of go-live).",
+          "text": "Describes an objective as a specific, measurable target with a time frame that works towards the goal, using one of Kestrel Bay's objectives (for example, cutting calls asking where a consignment is by 40% within 12 months of go-live).",
           "marks": 1
         },
         {
@@ -368,7 +368,7 @@
           "marks": 1
         }
       ],
-      "model": "A goal is a broad, long-term aim that describes what an organisation wants to achieve, such as Kestrel Bay's goal of being known as the most dependable regional carrier in western Victoria. An objective is a specific, measurable target with a time frame that moves the organisation towards its goal, such as cutting calls to customer service asking where a consignment is by 40 per cent within 12 months of go-live. ParcelTrack's customer portal shows each consignment's status and estimated delivery time, and customers receive an SMS when their consignment is out for delivery. Customers can find this out for themselves instead of phoning, so the number of where-is-my-consignment calls should fall.",
+      "model": "A goal is a broad, long-term aim that describes what an organisation wants to achieve, such as Kestrel Bay's goal of being known as the most dependable regional carrier in western Victoria. An objective is a specific, measurable target with a time frame that moves the organisation towards its goal, such as cutting calls to customer service asking where a consignment is by 40% within 12 months of go-live. ParcelTrack's customer portal shows each consignment's status and estimated delivery time, and customers receive an SMS when their consignment is out for delivery. Customers can find this out for themselves instead of phoning, so the number of where-is-my-consignment calls should fall.",
       "mistake": "Generic definitions score poorly in Section C. Quote Kestrel Bay's actual goal and objective, and link a specific ParcelTrack feature to the objective it serves.",
       "source": "textbook"
     },
@@ -394,12 +394,12 @@
           "marks": 1
         },
         {
-          "text": "Gives a non-functional requirement from the insert. For example, the portal must be available at least 99.5 per cent of the time, or a driver must be able to record a delivery in 30 seconds or less.",
+          "text": "Gives a non-functional requirement from the insert. For example, the portal must be available at least 99.5% of the time, or a driver must be able to record a delivery in 30 seconds or less.",
           "marks": 1
         }
       ],
-      "model": "A functional requirement describes what ParcelTrack must do: a task, calculation or output it performs. For example, the charging module must calculate each consignment's charge from its weight, zone and service type. A non-functional requirement describes a quality ParcelTrack must have, not a task it performs. For example, the customer portal must be available at least 99.5 per cent of the time, which is a measure of how reliable it is rather than something it does.",
-      "mistake": "A non-functional requirement is still a requirement of the solution. The $620,000 budget limits the project, so it is a constraint, not a non-functional requirement.",
+      "model": "A functional requirement describes what ParcelTrack must do: a task, calculation or output it performs. For example, the charging module must calculate each consignment's charge from its weight, zone and service type. A non-functional requirement describes a quality ParcelTrack must have, not a task it performs. For example, the customer portal must be available at least 99.5% of the time, which is a measure of how reliable it is rather than something it does.",
+      "mistake": "A non-functional requirement is still a requirement of the solution. The $620 000 budget limits the project, so it is a constraint, not a non-functional requirement.",
       "source": "textbook"
     },
     {
@@ -440,7 +440,7 @@
       ],
       "commandTerm": "explain",
       "marks": 6,
-      "prompt": "Figure 2 shows Anjali's project plan. Durations are in weeks.\n\n1. Identify the tasks on the critical path, and state the planned length of the project.\n2. Tomas will be on leave for two weeks while *Develop portal and charging module* is under way, so that task will take six weeks instead of four. Explain whether this changes the go-live date.\n3. In week 7, Rhys asks for the driver app to also photograph each delivered consignment. Priya estimates this will add two weeks to *Develop driver app*. Identify the factor affecting the project plan that this represents, explain its effect on the go-live date, and describe how Anjali should record the change.",
+      "prompt": "Figure 2 shows Anjali's project plan. Durations are in weeks.\n\n1. Identify the tasks on the critical path, and state the planned length of the project.\n2. Tomas will be on leave for two weeks while *Develop portal and charging module* is under way, so that task will take six weeks instead of four. Explain whether this changes the go-live date.\n3. In week 7, Rhys asks Priya directly for the driver app to also photograph each delivered consignment, and she starts building it without the plan being changed. The feature will add two weeks to *Develop driver app*. Identify the factor affecting the project plan that this represents, explain its effect on the go-live date, and describe how Anjali should record the change once she finds out.",
       "points": [
         {
           "text": "Critical path: Analyse requirements and write SRS, Design driver app screens, Develop driver app, Connect mapping service, Alpha testing, Beta testing at Ballarat depot, Train drivers and depot staff (then Go-live).",
@@ -455,7 +455,7 @@
           "marks": 1
         },
         {
-          "text": "Identifies the photo request as scope creep: a feature added after the scope was agreed.",
+          "text": "Identifies the photo request as scope creep: a feature added after the scope was agreed, without the plan being assessed or changed.",
           "marks": 1
         },
         {
@@ -467,7 +467,7 @@
           "marks": 1
         }
       ],
-      "model": "1. The critical path is Analyse requirements and write SRS (3), Design driver app screens (3), Develop driver app (5), Connect mapping service (2), Alpha testing (2), Beta testing at Ballarat depot (2) and Train drivers and depot staff (2), ending at the Go-live milestone. The project is planned to take 19 weeks.\n\n2. The go-live date doesn't change. Develop portal and charging module starts after week 5, so at six weeks it finishes at the end of week 11. Alpha testing can't start until Connect mapping service finishes at the end of week 13, so the portal task still finishes two weeks before it is needed.\n\n3. Rhys's request is scope creep, because it adds a feature after the scope was agreed. Develop driver app is on the critical path, so the extra two weeks push back Connect mapping service, Alpha testing, Beta testing and training, and go-live moves from the end of week 19 to the end of week 21. Anjali should annotate the Gantt chart with the new duration of Develop driver app, the reason (the photo feature requested by Rhys) and the date it was agreed, then update the start dates of the later tasks and the new go-live date.",
+      "model": "1. The critical path is Analyse requirements and write SRS (3), Design driver app screens (3), Develop driver app (5), Connect mapping service (2), Alpha testing (2), Beta testing at Ballarat depot (2) and Train drivers and depot staff (2), ending at the Go-live milestone. The project is planned to take 19 weeks.\n\n2. The go-live date doesn't change. Develop portal and charging module starts after week 5, so at six weeks it finishes at the end of week 11. Alpha testing can't start until Connect mapping service finishes at the end of week 13, so the portal task still finishes two weeks before it is needed.\n\n3. Rhys's request is scope creep, because a feature was added after the scope was agreed without the plan being changed. Develop driver app is on the critical path, so the extra two weeks push back Connect mapping service, Alpha testing, Beta testing and training, and go-live moves from the end of week 19 to the end of week 21. Anjali should annotate the Gantt chart with the new duration of Develop driver app, the reason (the photo feature requested by Rhys) and the date the change was found, then update the start dates of the later tasks and the new go-live date.",
       "mistake": "The critical path is the longest chain of dependent tasks, not simply the tasks with the longest durations. A delay to a task off the critical path moves the finish date only if the delay is longer than the time that task had to spare.",
       "source": "textbook",
       "figureRefs": [
@@ -622,7 +622,7 @@
           "marks": 1
         }
       ],
-      "model": "Ben should choose a group of real Ballarat drivers who will use the app every day, not developers. The group should include drivers who are confident and drivers who are not confident with phones, and cover both town runs and rural runs through areas with no mobile coverage. One scenario: \"Complete your rural run as normal, including the farm delivery in the no-coverage area. Get the receiver's signature on the screen, and check that the delivery shows as uploaded once you're back in coverage.\" Ben should ride along to observe, noting where drivers hesitate or make mistakes, and time how long each delivery takes to record against the 30-second requirement. For each scenario he should record the expected result, what actually happened, any problems and the drivers' comments, so that problems can be fixed before go-live.",
+      "model": "Ben should choose a group of real Ballarat drivers who will use the app every day, not developers. The group should include drivers who are confident and drivers who are not confident with phones, and cover both town runs and rural runs through areas with no mobile coverage. One scenario: 'Complete your rural run as normal, including the farm delivery in the no-coverage area. Get the receiver's signature on the screen, and check that the delivery shows as uploaded once you're back in coverage.' Ben should ride along to observe, noting where drivers hesitate or make mistakes, and time how long each delivery takes to record against the 30-second requirement. For each scenario he should record the expected result, what actually happened, any problems and the drivers' comments, so that problems can be fixed before go-live.",
       "mistake": "Beta testing is done by real end users in real conditions, after alpha testing by the development team. Ben and the developers can't be the beta testers.",
       "source": "textbook"
     },
@@ -640,7 +640,7 @@
           "marks": 1
         },
         {
-          "text": "Shows whether calls are falling towards the 40 per cent reduction set as an objective.",
+          "text": "Shows whether calls are falling towards the 40% reduction set as an objective.",
           "marks": 1
         },
         {
@@ -660,8 +660,8 @@
           "marks": 1
         }
       ],
-      "model": "First, Anjali could compare customer service call records. She would count the calls per day asking where a consignment is for the three months before go-live and for each month since. This shows whether calls are falling fast enough to reach the objective of a 40 per cent cut within 12 months. Second, she could run a report from ParcelTrack's delivery records showing the percentage of consignments with an electronic signature, and the number of disputed deliveries Kestrel Bay couldn't prove. This shows progress towards the objective of an electronic proof of delivery for every consignment.",
-      "mistake": "Match the data to the criterion. A survey asking whether customers like the portal can't show a 40 per cent drop in calls, but a before-and-after count of calls can.",
+      "model": "First, Anjali could compare customer service call records. She would count the calls per day asking where a consignment is for the three months before go-live and for each month since. This shows whether calls are falling fast enough to reach the objective of a 40% cut within 12 months. Second, she could run a report from ParcelTrack's delivery records showing the percentage of consignments with an electronic signature, and the number of disputed deliveries Kestrel Bay couldn't prove. This shows progress towards the objective of an electronic proof of delivery for every consignment.",
+      "mistake": "Match the data to the criterion. A survey asking whether customers like the portal can't show a 40% drop in calls, but a before-and-after count of calls can.",
       "source": "textbook"
     },
     {
@@ -678,7 +678,7 @@
           "marks": 1
         },
         {
-          "text": "Explains the advantage using the insert: for example, the firm's $870,000 quote is $250,000 over the $620,000 budget and it couldn't start for five months, or the IT team already knows the depots, drivers and current website.",
+          "text": "Explains the advantage using the insert: for example, the firm's $870 000 quote is $250 000 over the $620 000 budget and it couldn't start for five months, or the IT team already knows the depots, drivers and current website.",
           "marks": 1
         },
         {
@@ -690,8 +690,8 @@
           "marks": 1
         }
       ],
-      "model": "Advantage: in-house development avoids the firm's cost and delay. The Melbourne firm quoted $870,000, which is $250,000 more than Kestrel Bay's $620,000 budget, and it couldn't start for five months. The in-house team can start now, and it already knows how the depots, drivers and current website work. Disadvantage: the IT team has only six people, and they must build a phone app, a web portal and a charging module while running the current systems. Grace's list shows that their development practices are insecure (a shared server, a password in the source code, no code review). An experienced external firm may already have secure practices in place, so developing in-house risks building ParcelTrack with the same weaknesses.",
-      "mistake": "Don't claim in-house development is always cheaper or always slower. Compare against the insert's figures: an $870,000 quote against a $620,000 budget, and a five-month wait.",
+      "model": "Advantage: in-house development avoids the firm's cost and delay. The Melbourne firm quoted $870 000, which is $250 000 more than Kestrel Bay's $620 000 budget, and it couldn't start for five months. The in-house team can start now, and it already knows how the depots, drivers and current website work. Disadvantage: the IT team has only six people, and they must build a phone app, a web portal and a charging module while running the current systems. Grace's list shows that their development practices are insecure (a shared server, a password in the source code, no code review). An experienced external firm may already have secure practices in place, so developing in-house risks building ParcelTrack with the same weaknesses.",
+      "mistake": "Don't claim in-house development is always cheaper or always slower. Compare against the insert's figures: an $870 000 quote against a $620 000 budget, and a five-month wait.",
       "source": "textbook"
     },
     {
@@ -752,7 +752,7 @@
           "marks": 1
         },
         {
-          "text": "Describes a control that reduces the first threat. For example, send the data only over an encrypted connection; require each driver or staff member to log in with their own account and a second factor, such as a fingerprint; give depot staff access only to the functions their job needs; or require a second detail that only the customer knows, such as the delivery postcode, before the portal shows a status.",
+          "text": "Describes a control that reduces the first threat. For example, send the data only over an encrypted connection; require each driver or staff member to log in with their own account and a second factor, such as a fingerprint; give depot staff access only to the functions their job needs; or require customers to log in to their own account before the portal shows a consignment's status, so a guessed consignment number alone reveals nothing.",
           "marks": 1
         },
         {
@@ -765,7 +765,7 @@
         }
       ],
       "model": "1. Threat modelling now lets Grace build security controls into ParcelTrack's design from the start, which costs far less than changing ParcelTrack after it is written or after an attack. Figure 2 allows only a one-week security review after alpha testing, when the design can no longer change cheaply.\n\n2. proof_of_delivery travels from drivers' phones over mobile networks. An attacker could intercept it to read receivers' names and signatures, or alter it so that a delivery that never happened is recorded. ParcelTrack should accept proof_of_delivery only over an encrypted connection, so anyone who intercepts it can't read it or change it without the change being detected.\n\nconsignment_details, entered by depot staff, include each consignment's weight and zone, which set its charge. Someone using a colleague's login or a stolen password could change weights or zones so that consignments are undercharged. Each staff member should have their own account with multi-factor authentication and access only to the functions their job needs. A stolen password alone is then not enough to log in, and every change can be traced to one person.",
-      "mistake": "Tie each threat to a specific flow in the diagram. \"Hackers could attack the system\" names no flow, no threat and no control.",
+      "mistake": "Tie each threat to a specific flow in the diagram. 'Hackers could attack the system' names no flow, no threat and no control.",
       "source": "textbook",
       "figureRefs": [
         "parceltrack-context",
@@ -788,7 +788,7 @@
           "marks": 1
         },
         {
-          "text": "Explains the risk the first weakness poses to Kestrel Bay, for example untested code reaching customers, or 60,000 customers' personal details being exposed.",
+          "text": "Explains the risk the first weakness poses to Kestrel Bay, for example untested code reaching customers, or 60 000 customers' personal details being exposed.",
           "marks": 1
         },
         {

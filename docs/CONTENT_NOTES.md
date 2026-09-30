@@ -420,3 +420,88 @@ Held back:
 - Naming the quality of the 30-second recording target (U3O2-KK05): held back. It could be classed as usability or as performance or efficiency, so it is accepted as non-functional without naming its quality. The model uses the 99.5 per cent availability (reliability) example.
 - The offline store-and-upload feature as a requirement example (U3O2-KK05): held back. It could be read as functional or as a reliability requirement.
 - PSM stage names (PSM): held back. They are unconfirmed, so no model answer assigns an activity to a named stage.
+
+## Cross-unit consistency pass
+
+After the units were merged, four finders read all content across units: duplicates and contradictions, every pseudocode listing run through the `deskcheck` interpreter along with every other computed claim, language and conventions, and the unit reviewers' residual concerns. They raised 63 findings. Fixers then worked through them file by file, re-verifying each one before applying it. Most drops below remove area cards that repeated a glossary card's term, so students don't review the same definition twice.
+
+### u3o1
+
+- `c-u3o1-kk01-008` (U3O1-KK01): dropped. Its 'over-reliance on AI-generated code' front and answer duplicate c-u4o2-kk08-002, which already carries U3O1-KK01; c-u3o1-kk01-002 covers the risk angle.
+- `c-u3o1-kk02-001` (U3O1-KK02): dropped: duplicates the glossary card t-functional-requirement.
+- `c-u3o1-kk02-002` (U3O1-KK02): dropped: duplicates the glossary card t-non-functional-requirement.
+- `c-u3o1-kk02-003` (U3O1-KK02): dropped: duplicates the glossary card t-constraint.
+- `c-u3o1-kk02-004` (U3O1-KK02): dropped: duplicates the glossary card t-scope (same will/won't answer and mistake note).
+- `c-u3o1-kk03-001` (U3O1-KK03): dropped: duplicates the glossary card t-data-dictionary.
+- `c-u3o1-kk03-002` (U3O1-KK03): dropped: duplicates the glossary card t-ipo-chart (same input, processing and output content).
+- `c-u3o1-kk03-003` (U3O1-KK03): dropped: duplicates the glossary card t-mock-up.
+- `c-u3o1-kk03-004` (U3O1-KK03): dropped: duplicates the glossary card t-object-description.
+- `c-u3o1-kk05-001` (U3O1-KK05): dropped: duplicates the glossary card t-array.
+- `c-u3o1-kk05-003` (U3O1-KK05): dropped: duplicates the glossary card t-record.
+- `c-u3o1-kk06-002` (U3O1-KK06): dropped: duplicates the glossary card t-xml.
+- `c-u3o1-kk07-001` (U3O1-KK07): dropped: duplicates the glossary card t-class.
+- `c-u3o1-kk07-002` (U3O1-KK07): dropped: duplicates the glossary card t-encapsulation.
+- `c-u3o1-kk07-004` (U3O1-KK07): dropped: duplicates the glossary card t-generalisation (same Car/Truck to Vehicle example).
+- `c-u3o1-kk07-005` (U3O1-KK07): dropped: duplicates the glossary card t-abstraction (mistake note almost word for word).
+- `c-u3o1-kk08-006` (U3O1-KK08): dropped: duplicates the glossary card t-control-structure.
+- `c-u3o1-kk09-001` (U3O1-KK09): dropped: duplicates the glossary card t-hungarian-notation.
+- `c-u3o1-kk09-002` (U3O1-KK09): dropped: duplicates the glossary card t-camel-case.
+- `c-u3o1-kk09-003` (U3O1-KK09): dropped: duplicates the glossary card t-snake-case.
+- `c-u3o1-kk10-001` (U3O1-KK10): dropped: duplicates the glossary card t-existence-check.
+- `c-u3o1-kk10-002` (U3O1-KK10): dropped: duplicates the glossary card t-type-check.
+- `c-u3o1-kk10-003` (U3O1-KK10): dropped: duplicates the glossary card t-range-check.
+- `c-u3o1-kk11-001` (U3O1-KK11): dropped: duplicates the glossary card t-internal-documentation.
+- `c-u3o1-kk13-001` (U3O1-KK13): dropped: duplicates the glossary card t-syntax-error.
+- `c-u3o1-kk13-002` (U3O1-KK13): dropped: duplicates the glossary card t-logic-error.
+- `c-u3o1-kk13-003` (U3O1-KK13): dropped: duplicates the glossary card t-runtime-error.
+- `c-u3o1-kk14-007` (U3O1-KK14): dropped. It teaches the same boundary-value fact, with the same `<` versus `≤` reason, as c-u3o1-kk10-008, which already carries U3O1-KK14.
+- `m-u3o1-kk02-001` (U3O1-KK02): dropped. Its stem, key type (a fee calculation) and distractor types repeat m-u3o2-kk05-001. U3O1-KK02 keeps 3 MCQs.
+
+### u3o2
+
+- `c-u3o2-kk03-001` (U3O2-KK03): dropped. Duplicates the glossary card t-critical-path.
+- `c-u3o2-kk03-002` (U3O2-KK03): dropped. Duplicates the glossary card t-milestone.
+- `c-u3o2-kk03-004` (U3O2-KK03): dropped. 'What does a Gantt chart show?' repeats the back of t-gantt-chart almost word for word.
+- `c-u3o2-kk05-001` (U3O2-KK05): dropped. Duplicates the glossary card t-functional-requirement. It was the third reverse card for the term, alongside c-u3o1-kk02-001.
+- `c-u3o2-kk05-002` (U3O2-KK05): dropped. Duplicates the glossary card t-non-functional-requirement. It was the third reverse card for the term, alongside c-u3o1-kk02-002.
+- `c-u3o2-kk06-001` (U3O2-KK06): dropped. Duplicates the glossary card t-constraint. It was the third reverse card for the term, alongside c-u3o1-kk02-003.
+- `c-u3o2-kk06-002` (U3O2-KK06, U3O2-KK05): dropped. 'Constraint versus non-functional requirement' mirrors c-u3o1-kk02-006, which now also carries U3O2-KK06 and U3O2-KK05.
+- `c-u3o2-kk07-001` (U3O2-KK07): dropped. Duplicates the glossary card t-scope (and c-u3o1-kk02-004), with the same will/won't answer.
+- `c-u3o2-kk07-002` (U3O2-KK07, U4O1-KK10): dropped. A second reverse card for Scope creep that duplicates t-scope-creep. Its mistake note moves to t-scope-creep.
+- `c-u3o2-kk08-001` (U3O2-KK08): dropped. Duplicates the glossary card t-context-diagram.
+- `c-u3o2-kk08-002` (U3O2-KK08): dropped. Duplicates the glossary card t-data-flow-diagram.
+- `c-u3o2-kk08-003` (U3O2-KK08): dropped. Duplicates the glossary card t-use-case-diagram.
+- `c-u3o2-kk09-001` (U3O2-KK09): dropped. Duplicates the glossary card t-software-requirements-specification.
+- `c-u3o2-kk10-001` (U3O2-KK10): dropped. Duplicates the glossary card t-intellectual-property.
+- `c-u3o2-kk13-001` (U3O2-KK13): dropped. Duplicates the glossary card t-efficiency.
+- `c-u3o2-kk13-002` (U3O2-KK13): dropped. Duplicates the glossary card t-effectiveness.
+- `c-u3o2-kk15-002` (U3O2-KK15): dropped. Duplicates the glossary card t-interoperability.
+- `c-u3o2-kk15-003` (U3O2-KK15): dropped. Duplicates the glossary card t-usability, and its 'accurately, quickly' wording mixed efficiency into usability.
+- `m-u3o2-kk07-002` (U3O2-KK07): dropped. It told the same story as s-u3o2-kk07-001: a feature the scope explicitly excluded is requested halfway through development and treated as a scope change assessed for time and cost. The short answer tests that reasoning in more depth.
+
+### u4o1
+
+- `c-u4o1-kk01-001` (U4O1-KK01): dropped. It duplicates the glossary card t-user-centred-design; its mistake note moves to t-user-centred-design.
+- `c-u4o1-kk04-001` (U4O1-KK04): dropped. It duplicates the glossary card t-api.
+- `c-u4o1-kk04-002` (U4O1-KK04): dropped. It duplicates the glossary card t-library.
+- `c-u4o1-kk04-003` (U4O1-KK04): dropped. It duplicates the glossary card t-code-repository; its mistake note moves to t-code-repository.
+- `c-u4o1-kk06-001` (U4O1-KK06): dropped. It duplicates the glossary card t-alpha-testing.
+- `c-u4o1-kk07-001` (U4O1-KK07): dropped. It duplicates the glossary card t-beta-testing; its mistake note moves to t-beta-testing.
+- `c-u4o1-kk09-004` (U4O1-KK09): dropped. Its quantitative versus qualitative contrast repeats c-u3o2-kk04-005, which now also carries U4O1-KK09.
+- `c-u4o1-kk10-003` (U4O1-KK10): dropped. 'How can a development team control scope creep?' repeats c-u3o2-kk07-007 (record the request, assess time and cost, agree or defer), which already carries U4O1-KK10.
+- `c-u4o1-kk10-007` (U4O1-KK10): dropped. Its critical-path cloze repeats c-u3o2-kk03-005, down to 'unless later critical tasks are shortened'.
+- `c-u4o1-kk08-004` (U4O1-KK08): dropped. 'Efficiency criterion versus effectiveness criterion' repeats c-u3o2-kk13-003 ('Efficiency versus effectiveness'), which carries U4O1-KK01.
+- `c-u4o1-kk08-005` (U4O1-KK08): dropped. The 'criteria should be measurable' cloze repeats c-u3o2-kk13-007, and both use the 'program is fast' example.
+- `m-u4o1-kk10-001` (U4O1-KK10): dropped. 'Which situation is an example of scope creep?' is m-u3o2-kk07-001 turned around, with the same personnel-change and technical-issue distractors; m-u3o2-kk07-001 already carries U4O1-KK10.
+
+### u4o2
+
+- `c-u4o2-kk01-001` (U4O2-KK01): dropped. Duplicates the glossary card t-goal.
+- `c-u4o2-kk01-002` (U4O2-KK01): dropped. Duplicates the glossary card t-objective.
+- `c-u4o2-kk03-001` (U4O2-KK03): dropped. Duplicates the glossary card t-vulnerability.
+- `c-u4o2-kk04-005` (U4O2-KK04): dropped. Duplicates the glossary card t-multi-factor-authentication, including its password-plus-PIN mistake note.
+- `c-u4o2-kk05-001` (U4O2-KK05): dropped. Duplicates the glossary card t-threat-modelling.
+
+### shared
+
+- `t-*` / `psm-*` / `cs-01-*` (all): none dropped. No id was removed from terms.json, psm.json or cs-01.json. The docs/CONTENT_NOTES.md lines that need updating (docs/ is off-limits to me) are listed under `added`.

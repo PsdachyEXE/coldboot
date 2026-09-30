@@ -1,17 +1,5 @@
 [
   {
-    "id": "c-u4o1-kk01-001",
-    "kk": [
-      "U4O1-KK01"
-    ],
-    "type": "reverse",
-    "front": "User-centred design",
-    "back": "An approach that bases design decisions on the needs, goals, tasks and setting of the people who will use the solution, and involves those users throughout design and development.",
-    "mistake": "User-centred design isn't one survey at the start of a project. Users are consulted repeatedly, and their feedback changes the design as development continues.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u4o1-kk01-002",
     "kk": [
       "U4O1-KK01"
@@ -63,7 +51,7 @@
     ],
     "type": "basic",
     "front": "Booking a service in a car-repair app took seven screens. A redesign needs three, and bookings are recorded just as accurately as before. Which quality of the solution does the redesign most directly improve, and why?",
-    "back": "Efficiency: the user completes the same booking in less time and with less effort. Accuracy, a measure of effectiveness, is unchanged, so the redesign can't be credited with more accurate bookings.",
+    "back": "Efficiency: the user completes the same booking in less time and with less effort. Accuracy, a measure of effectiveness, is unchanged, so the redesign can't be credited with more accurate bookings. Fewer screens may also make the app easier to use, but the most direct gain is the time and effort saved on each booking.",
     "mistake": "A faster process isn't automatically a more accurate one. Judge each measure separately: time and effort are measures of efficiency; accuracy and completeness are measures of effectiveness.",
     "difficulty": 2,
     "source": "textbook"
@@ -279,50 +267,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u4o1-kk04-001",
-    "kk": [
-      "U4O1-KK04"
-    ],
-    "type": "reverse",
-    "front": "Application programming interface (API)",
-    "back": "A defined set of rules, such as the requests a program can make and the format of the data returned, that lets one program use the services or data of another without knowing how it works inside.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "API"
-    ]
-  },
-  {
-    "id": "c-u4o1-kk04-002",
-    "kk": [
-      "U4O1-KK04"
-    ],
-    "type": "reverse",
-    "front": "Code library",
-    "back": "A collection of pre-written, reusable modules, such as functions or classes, that a developer includes in a program to carry out common tasks, such as handling dates or drawing charts.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "Library",
-      "Software library"
-    ]
-  },
-  {
-    "id": "c-u4o1-kk04-003",
-    "kk": [
-      "U4O1-KK04"
-    ],
-    "type": "reverse",
-    "front": "Code repository",
-    "back": "A central store for a project's source code and its full history of changes, which lets developers share code, see who changed what and when, and return to an earlier version.",
-    "mistake": "A repository isn't just a backup copy. It records each change with its author and a message, so a particular change can be reviewed or undone.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "Repository"
-    ]
-  },
-  {
     "id": "c-u4o1-kk04-004",
     "kk": [
       "U4O1-KK04"
@@ -478,18 +422,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u4o1-kk06-001",
-    "kk": [
-      "U4O1-KK06"
-    ],
-    "type": "reverse",
-    "front": "Alpha testing",
-    "back": "Testing carried out by the developers, or an in-house test team, during development and before release to users, to check that each module and the whole solution work as designed and meet the requirements.",
-    "mistake": "Alpha testing isn't done by the intended users. Testing by a group of real users is beta testing, which follows alpha testing.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u4o1-kk06-002",
     "kk": [
       "U4O1-KK06",
@@ -568,18 +500,6 @@
     "front": "Besides checking that calculations are correct, what should alpha testing check?",
     "back": "- Each functional requirement is met\n- Invalid input is handled without crashing\n- Files are read and written correctly\n- Modules work together, passing data between them correctly",
     "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u4o1-kk07-001",
-    "kk": [
-      "U4O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "Beta testing",
-    "back": "Testing of a nearly complete solution by a selected group of its intended users, outside the development team, in realistic conditions before the solution is released.",
-    "mistake": "Beta testing isn't the developers running more tests near the end. The testers are real or representative users who didn't build the solution.",
-    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -690,30 +610,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u4o1-kk08-004",
-    "kk": [
-      "U4O1-KK08",
-      "U4O1-KK01"
-    ],
-    "type": "compare",
-    "front": "Efficiency criterion versus effectiveness criterion",
-    "back": "An efficiency criterion judges the time, cost or effort involved, e.g. 'An order can be entered in under 2 minutes.' An effectiveness criterion judges how well the solution achieves its purpose, e.g. 'Invoices contain no calculation errors.'",
-    "mistake": "Speed is a measure of efficiency, not effectiveness. Accuracy is a measure of effectiveness.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u4o1-kk08-005",
-    "kk": [
-      "U4O1-KK08"
-    ],
-    "type": "cloze",
-    "front": "Evaluation criteria should be {{measurable}}, so that the data collected shows clearly whether each one has been met.",
-    "back": "'The program is fast' can't be judged. 'A search returns results within 2 seconds' can.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u4o1-kk08-006",
     "kk": [
       "U4O1-KK08"
@@ -730,7 +626,7 @@
       "U4O1-KK08"
     ],
     "type": "basic",
-    "front": "What does the timeline in an evaluation strategy show? Give an example.",
+    "front": "What does a timeline in an evaluation strategy show? Give an example.",
     "back": "When each evaluation activity happens, e.g. booking times logged from launch, a staff survey in week 6, and the results compared with the criteria and reported in week 8.",
     "difficulty": 2,
     "source": "textbook"
@@ -767,17 +663,6 @@
     "back": "Measuring the time directly: observing users and timing each booking, or using system logs of start and finish times.",
     "mistake": "Asking users how long a task takes gives estimates, not measurements. Time-based criteria need timed data.",
     "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u4o1-kk09-004",
-    "kk": [
-      "U4O1-KK09"
-    ],
-    "type": "compare",
-    "front": "Quantitative versus qualitative evaluation data",
-    "back": "Quantitative data is numeric and can be totalled or averaged, e.g. task times, error counts and ratings. Qualitative data is descriptive, e.g. comments explaining why users find a screen confusing.",
-    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -838,18 +723,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u4o1-kk10-003",
-    "kk": [
-      "U4O1-KK10"
-    ],
-    "type": "basic",
-    "front": "How can a development team control scope creep?",
-    "back": "Document the agreed scope in the SRS and have the client sign it off. Put each new request through a change process that assesses its effect on time and cost before approval, or defer it to a later version.",
-    "mistake": "The aim isn't to refuse every change. A change can be accepted once its cost in time and money is agreed and the plan is updated.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
     "id": "c-u4o1-kk10-004",
     "kk": [
       "U4O1-KK10"
@@ -881,19 +754,6 @@
     "front": "Give three examples of technical issues that can disrupt a project plan.",
     "back": "Any three: hardware failure; code or data lost without a backup; a library or API that changes or is withdrawn; software that is incompatible with the client's devices; a bug that takes far longer to fix than planned; a server or network outage.",
     "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u4o1-kk10-007",
-    "kk": [
-      "U4O1-KK10",
-      "U3O2-KK03"
-    ],
-    "type": "cloze",
-    "front": "A delay to a task on the {{critical path}} delays the project's finish date by the same amount, unless later critical tasks are {{shortened}}.",
-    "back": "A delay to a task off the critical path moves the finish date only if the delay makes that task's chain longer than the original critical path.",
-    "mistake": "Not every delay moves the finish date. Check first whether the delayed task is on the critical path.",
-    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -972,7 +832,7 @@
       "U4O1-KK12"
     ],
     "type": "cloze",
-    "front": "A development journal records not only what was done but {{why}} decisions and changes were made, which is the evidence needed to explain delays when the project plan is assessed.",
+    "front": "A development journal records what was done and {{why}} decisions and changes were made, which is the evidence needed to explain delays when the project plan is assessed.",
     "back": "The Gantt chart shows that a task slipped; the journal explains the cause, such as a late client decision or a failed server.",
     "difficulty": 2,
     "source": "textbook"

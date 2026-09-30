@@ -28,7 +28,7 @@
       "U3O1-KK01",
       "U3O1-KK13"
     ],
-    "stem": "Priya is developing a water-use report for Kialla Irrigators Co-op in Shepparton. An AI assistant generates a function that calls `waterlib.dailyMedian()`. When she runs the program, it halts with an error stating that `waterlib` has no function called `dailyMedian`. Which response is most appropriate?",
+    "stem": "Yusuf is developing a water-use report for Kialla Irrigators Co-op in Shepparton. An AI assistant generates a function that calls `waterlib.dailyMedian()`. When he runs the program, it halts with an error stating that `waterlib` has no function called `dailyMedian`. Which response is most appropriate?",
     "options": [
       "Treat it as an AI hallucination: check the library documentation, rewrite the call and retest.",
       "Treat it as a logic error: set a breakpoint inside `dailyMedian()` and step through its code.",
@@ -36,7 +36,7 @@
       "Treat it as a type mismatch: convert the water readings to Strings before calling the function."
     ],
     "answer": 0,
-    "explanation": "The AI has invented a function that looks plausible but doesn't exist. Priya needs to confirm what the library actually provides, replace the call and test the corrected function.",
+    "explanation": "The AI has invented a function that looks plausible but doesn't exist. Yusuf needs to confirm what the library actually provides, replace the call and test the corrected function.",
     "whyWrong": [
       "",
       "A logic error produces wrong output without halting, and there is no `dailyMedian()` code to step through.",
@@ -92,30 +92,6 @@
       "AI-suggested test data can be used once the developer has checked it; the problem is that it misses the boundaries."
     ],
     "difficulty": 3,
-    "source": "textbook"
-  },
-  {
-    "id": "m-u3o1-kk02-001",
-    "kk": [
-      "U3O1-KK02",
-      "U3O2-KK05"
-    ],
-    "stem": "Which of the following is a functional requirement for a library loans program?",
-    "options": [
-      "The program is easy for volunteers with little computer experience to use.",
-      "The program calculates the overdue fee for each item returned late.",
-      "The program must be completed before the start of Term 2.",
-      "The program runs on both Windows and macOS computers."
-    ],
-    "answer": 1,
-    "explanation": "Calculating an overdue fee is a task the program performs, so it is a functional requirement.",
-    "whyWrong": [
-      "Ease of use for inexperienced volunteers is usability, a non-functional requirement.",
-      "",
-      "A completion date limits the project; it is a constraint, not something the program does.",
-      "Running on more than one operating system is portability, a non-functional requirement."
-    ],
-    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -361,9 +337,9 @@
     "explanation": "An item is either on loan or not, so the value has exactly two states: TRUE or FALSE.",
     "whyWrong": [
       "",
-      "A Character could hold 'Y' or 'N', but it also allows any other symbol.",
+      "A Character could hold \"Y\" or \"N\", but it also allows any other symbol.",
       "An Integer could use 0 and 1, but it also allows every other whole number.",
-      "A String such as 'on loan' is harder to test in a condition and allows inconsistent entries."
+      "A String such as \"on loan\" is harder to test in a condition and allows inconsistent entries."
     ],
     "difficulty": 1,
     "source": "textbook"
@@ -610,7 +586,7 @@
     "kk": [
       "U3O1-KK06"
     ],
-    "stem": "Ridgeback Freight, a Geelong transport company, sends its daily consignment records to a partner's reporting program. There are about 40 000 records a day, every record has the same six fields, the field order never changes, and file size must be kept small. Which data source best suits this?",
+    "stem": "Wattleseed Pharmacies, a group of 30 pharmacies across western Victoria, sends its daily sales records to a supplier's reporting program. There are about 40 000 records a day, every record has the same six fields, the field order never changes, and file size must be kept small. Which data source best suits this?",
     "options": [
       "CSV, because each record is a compact line of fields in a fixed order",
       "XML, because repeating the tag names in each record keeps files small",
@@ -815,8 +791,8 @@
     "stem": "Tidewrack Kayak Tours in Apollo Bay has a booking program with a `Booking` class. When a customer books, the program creates `booking3071` from the class and stores that booking's own date and group size in it. What is `booking3071`?",
     "options": [
       "A subclass that inherits from `Booking`",
-      "An attribute of the `Booking` class",
-      "An object, an instance of the `Booking` class",
+      "An attribute declared in the `Booking` class",
+      "An object created from the `Booking` class",
       "A method defined in the `Booking` class"
     ],
     "answer": 2,
@@ -965,7 +941,7 @@
     "kk": [
       "U3O1-KK09"
     ],
-    "stem": "Priya is building the registration form for the Gumnut Gully Netball Club in Traralgon. The form has a text box for the player's surname, a button that submits the form, and a label that shows the registration fee. Using Hungarian notation, which set of names is most suitable?",
+    "stem": "Freya is building the registration form for the Gumnut Gully Netball Club in Traralgon. The form has a text box for the player's surname, a button that submits the form, and a label that shows the registration fee. Using Hungarian notation, which set of names is most suitable?",
     "options": [
       "`strSurname`, `btnSubmit`, `fltFee`",
       "`txtSurname`, `btnSubmit`, `txtFee`",
@@ -1062,7 +1038,7 @@
     "kk": [
       "U3O1-KK10"
     ],
-    "stem": "The group booking form for Kestrel Ridge Adventure Park in Gippsland rejects a group size of 0 and a group size of 45, because groups must have 1 to 30 people. Which validation check is this?",
+    "stem": "The group booking form for Treetop Hollow Adventure Park in Gippsland rejects a group size of 0 and a group size of 45, because groups must have 1 to 30 people. Which validation check is this?",
     "options": [
       "A range check, because the group size must lie within set limits",
       "A type check, because the group size must be a whole number",
@@ -1165,7 +1141,7 @@
     "stem": "Which comment best justifies a processing choice in a module?",
     "options": [
       "`// Loop through each booking in the array, one at a time`",
-      "`// Linear search: bookings are kept unsorted, as they arrive`",
+      "`// Linear search: the bookings are stored unsorted`",
       "`// Written by J. Tran for the booking system, March 2026`",
       "`// Returns the booking's index, or -1 if it isn't found`"
     ],
@@ -1190,7 +1166,7 @@
     "options": [
       "The module fails to translate, because its comment no longer matches the code",
       "The module runs more slowly, because the translator still reads the old comment",
-      "A later developer trusts the comment, stores stock unsorted and gets wrong results",
+      "A developer trusts the comment, stores stock unsorted and gets wrong results",
       "The module raises a runtime error each time it's called with an unsorted list"
     ],
     "answer": 2,
@@ -1238,24 +1214,24 @@
     "id": "m-u3o1-kk11-004",
     "kk": [
       "U3O1-KK11",
-      "U3O1-KK12"
+      "U3O1-KK08"
     ],
-    "stem": "Sami is writing the member-lookup module for Pulsewell Gyms, a Geelong fitness chain with 15 000 members. The module uses a binary search. Which comment best justifies this choice?",
+    "stem": "Sami is writing a module for Gullrock Cheese in Wonthaggi that records the cool room's temperature every hour. Food safety inspectors can ask to see any reading from the past year. The module opens the log file in append mode. Which comment best justifies this choice?",
     "options": [
-      "`// Binary search: it works whether or not the member list is sorted`",
-      "`// Binary search: it checks each member number in turn from the start`",
-      "`// Binary search: it's the fastest way to search a list of any kind`",
-      "`// Binary search: the 15 000 member numbers are kept in ascending order`"
+      "`// Append mode: it replaces last week's readings with this week's`",
+      "`// Append mode: it saves each new reading faster than write mode`",
+      "`// Open the log file, then add the new reading at the end of it`",
+      "`// Append mode: inspectors can ask to see any earlier reading`"
     ],
     "answer": 3,
-    "explanation": "A justification ties the choice to the data. Binary search needs sorted data, and its advantage over linear search grows with the list's size; this comment confirms that both conditions hold.",
+    "explanation": "A justification ties the choice to the problem. Write mode would replace the file's contents each time it is opened, but inspectors can ask for any reading from the past year, so every earlier reading must stay in the log. Append mode adds each new reading to the end and keeps the rest.",
     "whyWrong": [
-      "Binary search only works on sorted data, so this comment is wrong and would mislead a maintainer.",
-      "This describes linear search, so the comment misstates what the code does.",
-      "Binary search can't be used on an unsorted list, so the claim is inaccurate and ignores the data.",
+      "Append mode keeps the existing entries; replacing them is what write mode does, so the comment misstates the code.",
+      "Speed isn't why append mode is used; the comment gives no reason tied to the readings that must be kept.",
+      "It describes what the code does, which the code already shows, and gives no reason.",
       ""
     ],
-    "difficulty": 3,
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -1276,7 +1252,7 @@
       "Duplicates don't stop a binary search working; it finds one of the matching elements.",
       "The middle position is found with integer division, so any number of elements works.",
       "",
-      "Binary search is normally applied to a one-dimensional array; a 2D array is not required."
+      "Binary search is normally applied to a one-dimensional array; a two-dimensional array is not required."
     ],
     "difficulty": 1,
     "source": "textbook"
@@ -1286,7 +1262,7 @@
     "kk": [
       "U3O1-KK12"
     ],
-    "stem": "Arrays are indexed from 0. The function shown is called as `binarySearch(codes, 30)`, where `codes` holds [3, 8, 12, 17, 21, 26, 30, 34, 41, 47]. `DIV` gives the whole-number part of a division. In what order are values of `list[mid]` compared with 30?",
+    "stem": "Arrays are indexed from 0. The function shown is called as `binarySearch(codes, 30)`, where `codes` holds [3, 8, 12, 17, 21, 26, 30, 34, 41, 47]. `DIV` divides and rounds the result down to a whole number. In what order are values of `list[mid]` compared with 30?",
     "options": [
       "21, 26, 30",
       "21, 34, 26, 30",
@@ -1362,7 +1338,7 @@
         "id": "fig-selection-sort",
         "kind": "pseudocode",
         "indexBase": 0,
-        "code": "BEGIN\n    list ← [29, 41, 12, 7, 33]\n    FOR i ← 0 TO LENGTH(list) - 2\n        minIndex ← i\n        FOR j ← i + 1 TO LENGTH(list) - 1\n            IF list[j] < list[minIndex] THEN\n                minIndex ← j\n            ENDIF\n        ENDFOR\n        temp ← list[i]\n        list[i] ← list[minIndex]\n        list[minIndex] ← temp\n    ENDFOR\n    DISPLAY list\nEND"
+        "code": "BEGIN\n    list ← [29, 41, 12, 7, 33]\n    FOR i ← 0 TO LENGTH(list) - 2\n        minIndex ← i\n        FOR j ← i + 1 TO LENGTH(list) - 1\n            IF list[j] < list[minIndex] THEN\n                minIndex ← j\n            ENDIF\n        ENDFOR\n        temp ← list[i]\n        list[i] ← list[minIndex]\n        list[minIndex] ← temp\n    ENDFOR\nEND"
       }
     ]
   },
@@ -1587,28 +1563,28 @@
     "kk": [
       "U3O1-KK14"
     ],
-    "stem": "Tidal Flats Kayak Hire in Port Fairy charges $12 an hour for the first 4 hours and $8 for each hour after that, with $5 off the total for members. Hours are whole numbers. The function shown contains an error. Which test would reveal it?",
+    "stem": "Kilnworks Makerspace in Wangaratta charges for laser cutter time: $10 an hour for the first 3 hours and $6 for each hour after that, with $4 off the total for members. Hours are whole numbers. The function shown contains an error. Which test would reveal it?",
     "options": [
-      "hours = 3, member = TRUE",
-      "hours = 4, member = FALSE",
-      "hours = 6, member = TRUE",
-      "hours = 5, member = FALSE"
+      "hours = 2, member = TRUE",
+      "hours = 3, member = FALSE",
+      "hours = 5, member = TRUE",
+      "hours = 4, member = FALSE"
     ],
     "answer": 3,
-    "explanation": "For 5 hours, `5 > 5` on line 2 is false, so line 5 charges 5 × $12 = $60. The rule gives $48 + $8 = $56, so the actual output differs from the expected output. Line 2 should test `hours > 4`.",
+    "explanation": "For 4 hours, `4 > 4` on line 2 is false, so line 5 charges 4 × $10 = $40. The rule gives $30 + $6 = $36, so the actual output differs from the expected output. Line 2 should test `hours > 3`.",
     "whyWrong": [
-      "3 hours gives 3 × $12 − $5 = $31, which matches the rule.",
-      "4 hours gives 4 × $12 = $48, which matches the rule.",
-      "6 hours uses line 3: $48 + 2 × $8 − $5 = $59, which matches the rule.",
+      "2 hours gives 2 × $10 − $4 = $16, which matches the rule.",
+      "3 hours gives 3 × $10 = $30, which matches the rule.",
+      "5 hours uses line 3: $30 + 2 × $6 − $4 = $38, which matches the rule.",
       ""
     ],
     "difficulty": 3,
     "source": "textbook",
     "figures": [
       {
-        "id": "fig-hire-fee",
+        "id": "fig-laser-fee",
         "kind": "pseudocode",
-        "code": "FUNCTION hireFee(hours, member)\n    IF hours > 5 THEN\n        fee ← 48 + (hours - 4) * 8\n    ELSE\n        fee ← hours * 12\n    ENDIF\n    IF member = TRUE THEN\n        fee ← fee - 5\n    ENDIF\n    RETURN fee\nENDFUNCTION"
+        "code": "FUNCTION laserFee(hours, member)\n    IF hours > 4 THEN\n        fee ← 30 + (hours - 3) * 6\n    ELSE\n        fee ← hours * 10\n    ENDIF\n    IF member = TRUE THEN\n        fee ← fee - 4\n    ENDIF\n    RETURN fee\nENDFUNCTION"
       }
     ]
   }

@@ -1,28 +1,5 @@
 [
   {
-    "id": "c-u4o2-kk01-001",
-    "kk": [
-      "U4O2-KK01"
-    ],
-    "type": "reverse",
-    "front": "Organisational goal",
-    "back": "A broad, long-term statement of what an organisation aims to achieve, such as improving customer service or growing its membership. It sets direction but is usually not stated as a measurable target.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u4o2-kk01-002",
-    "kk": [
-      "U4O2-KK01"
-    ],
-    "type": "reverse",
-    "front": "Organisational objective",
-    "back": "A specific, measurable target with a time frame that shows progress towards a goal, such as cutting the average time to process an insurance claim from ten days to five by the end of the financial year.",
-    "mistake": "An objective isn't just a narrower goal. Without a measure and a time frame, a statement such as 'improve the security of customer logins' is still a goal.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u4o2-kk01-003",
     "kk": [
       "U4O2-KK01"
@@ -40,7 +17,7 @@
       "U4O2-KK01"
     ],
     "type": "cloze",
-    "front": "An objective is written so that it can be {{measured}}, and it usually states a {{time frame}} for achieving it.",
+    "front": "An objective is written so that it can be {{measured}}, and it states a {{time frame}} for achieving it.",
     "back": "Without a measure and a deadline, an organisation can't tell whether it has met the objective.",
     "difficulty": 1,
     "source": "textbook"
@@ -185,17 +162,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u4o2-kk03-001",
-    "kk": [
-      "U4O2-KK03"
-    ],
-    "type": "reverse",
-    "front": "Vulnerability",
-    "back": "A weakness in software, hardware, a process or an environment that a threat could exploit to cause harm, such as an unpatched library or a password written into source code.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "c-u4o2-kk03-002",
     "kk": [
       "U4O2-KK03"
@@ -227,7 +193,6 @@
     "type": "basic",
     "front": "Why is writing passwords or API keys directly into source code a vulnerability?",
     "back": "Anyone who can read the code, including other staff, external developers or the public if the repository is exposed, gains those credentials. The secret also stays in earlier versions kept by version control.",
-    "mistake": "Deleting a hard-coded password in a later version doesn't remove it: earlier versions in the repository still contain it. The password must also be changed.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -327,18 +292,6 @@
     "source": "textbook"
   },
   {
-    "id": "c-u4o2-kk04-005",
-    "kk": [
-      "U4O2-KK04"
-    ],
-    "type": "basic",
-    "front": "What makes authentication multi-factor?",
-    "back": "The user must present factors from at least two different categories, such as a password (something you know) and a code from an authenticator app on their phone (something you have).",
-    "mistake": "A password plus a PIN or a security question is not multi-factor: both are something you know.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
     "id": "c-u4o2-kk04-006",
     "kk": [
       "U4O2-KK04"
@@ -370,17 +323,6 @@
     "back": "| | At rest | In transit |\n|:--|:--|:--|\n| Protects | Stored data: databases, backups, laptops | Data moving across a network |\n| Guards against | A stolen or copied drive being read | Data being intercepted on the way |",
     "mistake": "Encryption doesn't stop data being stolen. It makes stolen data unreadable to anyone without the key.",
     "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "c-u4o2-kk05-001",
-    "kk": [
-      "U4O2-KK05"
-    ],
-    "type": "reverse",
-    "front": "Threat modelling",
-    "back": "A structured process for working out what could go wrong with a system's security: identifying its threats, judging how serious each is, and planning controls to mitigate them, ideally while the software is still being designed.",
-    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -542,7 +484,7 @@
     ],
     "type": "basic",
     "front": "What evidence could show whether the criterion 'access is removed on each staff member's last day' is met?",
-    "back": "Compare staff departure dates in HR records with the dates their accounts were disabled in the access logs, and list any former staff accounts that are still active.",
+    "back": "Compare staff departure dates in staff records with the dates their accounts were disabled in the access logs, and list any former staff accounts that are still active.",
     "mistake": "Asking managers whether access is removed gives their opinion, which may be wrong. Records and logs show what actually happened.",
     "difficulty": 3,
     "source": "textbook"
@@ -708,7 +650,7 @@
     ],
     "type": "basic",
     "front": "Why is copying live customer data into a test environment an ethical issue?",
-    "back": "Customers gave their data for one purpose, not for testing. Test environments usually have weaker controls and more people with access, so the data is more likely to be exposed. Made-up or de-identified test data avoids this harm.",
+    "back": "Customers gave their data for one purpose and didn't agree to it being used for testing, and they don't know it has been copied. Using it anyway treats their information as the organisation's to use as it likes. Made-up or de-identified test data avoids this.",
     "mistake": "Realistic test data doesn't have to be real. Made-up records can match the format and range of live data.",
     "difficulty": 2,
     "source": "textbook"
@@ -925,7 +867,7 @@
       "U4O2-KK08"
     ],
     "type": "basic",
-    "front": "Recommend rules for a development team's use of AI coding assistants.",
+    "front": "State four rules a development team could set for its use of AI coding assistants.",
     "back": "AI-generated code is reviewed and tested like any other code, developers must understand code before committing it, AI use is recorded, and no confidential code or personal data is entered into public AI tools.",
     "difficulty": 2,
     "source": "textbook"

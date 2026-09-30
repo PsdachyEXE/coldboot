@@ -73,19 +73,19 @@
     "kk": [
       "U4O1-KK01"
     ],
-    "stem": "A developer at Pipi Beach Couriers in Warrnambool changes the route-planning module so that it compares only 20 of the 60 possible routes for each delivery run. Processing time halves, but the recommended route is now sometimes longer than the shortest route. Which evaluation of the change to the route-planning module is most accurate?",
+    "stem": "A developer at Pipi Beach Couriers in Warrnambool changes the invoicing module so that it rechecks every total against the rate table before saving. Invoicing a day's jobs now takes 12 minutes instead of 5, and the pricing errors that used to appear on about 1 in 50 invoices have stopped. Which evaluation of the change is most accurate?",
     "options": [
-      "Effectiveness has improved, because recommendations now appear in half the time",
-      "Efficiency and effectiveness have both improved, because less processing is needed",
-      "Effectiveness is unchanged, because a route is still recommended for every run",
-      "Efficiency has improved, but effectiveness has fallen, as routes are less accurate"
+      "Efficiency has improved, because every total is now checked before saving",
+      "Efficiency and effectiveness have both improved, because errors have stopped",
+      "Effectiveness is unchanged, because an invoice is still produced for every job",
+      "Effectiveness has improved, but efficiency has fallen, as invoicing takes longer"
     ],
     "answer": 3,
-    "explanation": "Halving the processing time is a gain in efficiency. The module's purpose is to recommend the shortest route; recommending longer routes means it achieves that purpose less accurately, so effectiveness has fallen.",
+    "explanation": "The module's purpose is to produce correct invoices. Stopping the pricing errors means it achieves that purpose more accurately, so effectiveness has improved. Invoicing now takes 12 minutes instead of 5, which uses more time, so efficiency has fallen.",
     "whyWrong": [
-      "Speed is a measure of efficiency, not effectiveness.",
-      "Longer recommended routes reduce accuracy, so effectiveness hasn't improved.",
-      "Producing a route isn't enough; the route is now sometimes wrong, so effectiveness has fallen.",
+      "Checking totals improves accuracy, a measure of effectiveness, and the extra time means efficiency has fallen.",
+      "Invoicing takes 12 minutes instead of 5, so efficiency has fallen, not improved.",
+      "Producing an invoice isn't enough; the invoices are now more accurate, so effectiveness has improved.",
       ""
     ],
     "difficulty": 3,
@@ -96,7 +96,7 @@
     "kk": [
       "U4O1-KK02"
     ],
-    "stem": "Saltbush Lane Community Garden in Horsham has a plot-booking program that holds bookings in an array of records while it runs. Members report that bookings made yesterday disappeared after the program was closed and reopened. What is the most likely cause?",
+    "stem": "Emu Bush Community Garden in Horsham has a plot-booking program that holds bookings in an array of records while it runs. Members report that bookings made yesterday disappeared after the program was closed and reopened. What is the most likely cause?",
     "options": [
       "The bookings were saved in a CSV file instead of an XML file",
       "The bookings were held only in the array and never written to a file",
@@ -119,7 +119,7 @@
     "kk": [
       "U4O1-KK02"
     ],
-    "stem": "Quandong Hardware in Maldon keeps its stock list in `stock.csv`. The table shows the fields in each line, with an example value. When the program reads a line, it stores the fields in a record. Which data types best suit `onHand`, `price` and `discontinued`, in that order?",
+    "stem": "Pickaxe Lane Hardware in Maldon keeps its stock list in `stock.csv`. The table shows the fields in each line, with an example value. When the program reads a line, it stores the fields in a record. Which data types best suit `onHand`, `price` and `discontinued`, in that order?",
     "options": [
       "Integer, Integer, Character",
       "Floating point, Floating point, String",
@@ -138,7 +138,7 @@
     "source": "textbook",
     "figures": [
       {
-        "id": "quandong-stock-fields",
+        "id": "pickaxe-stock-fields",
         "kind": "table",
         "title": "Fields in each line of stock.csv",
         "columns": [
@@ -208,7 +208,7 @@
       "U4O1-KK02",
       "U3O1-KK06"
     ],
-    "stem": "Pardalote Athletics Club in Ararat must send each carnival's results to the state association's system. Each event has a different number of competitors, and the association plans to add new fields to the results next season. Which output format best suits?",
+    "stem": "Sugar Glider Athletics Club in Ararat must send each carnival's results to the state association's system. Each event has a different number of competitors, and the association plans to add new fields to the results next season. Which output format best suits?",
     "options": [
       "An XML file, because nested elements with named tags can vary in number and be extended",
       "A CSV file, because every record has the same fields, which are separated by commas",
@@ -414,7 +414,7 @@
     "kk": [
       "U4O1-KK04"
     ],
-    "stem": "An app for Kestrel Hill Orchard in Harcourt shows a frost forecast using data from a weather API. The temperature used to arrive in a `<temp>` element. Without warning, the provider renamed it `<temperature>`, and the app now shows a blank forecast. The app's code hasn't changed. Which statement best explains the failure?",
+    "stem": "An app for Thornbill Rise Orchard in Harcourt shows a frost forecast using data from a weather API. The temperature used to arrive in a `<temp>` element. Without warning, the provider renamed it `<temperature>`, and the app now shows a blank forecast. The app's code hasn't changed. Which statement best explains the failure?",
     "options": [
       "A syntax error was introduced the last time the app's code was translated",
       "The weather library's licence expired, so its functions were switched off",
@@ -730,7 +730,7 @@
     "kk": [
       "U4O1-KK07"
     ],
-    "stem": "Priya is preparing to beta test a booking app for Orchard Hill Physiotherapy in Ballarat. Which is the most appropriate scenario to give testers?",
+    "stem": "Soraya is preparing to beta test a booking app for Orchard Hill Physiotherapy in Ballarat. Which is the most appropriate scenario to give testers?",
     "options": [
       "Book a 30-minute session with any physiotherapist next week.",
       "Tap Book, choose Sam Lin, select 10:30, then tap Confirm.",
@@ -830,7 +830,7 @@
       "To plan the test data used to check the outputs of each module"
     ],
     "answer": 2,
-    "explanation": "An evaluation strategy plans the evaluation of the solution in use: the criteria, the data and how it is collected, the timing and who is responsible.",
+    "explanation": "An evaluation strategy plans the evaluation of the solution in use. It typically sets out the criteria, the data and how it is collected, the timing and who is responsible.",
     "whyWrong": [
       "Tasks, durations and dependencies make up the project plan, such as a Gantt chart.",
       "Scenarios for beta testers belong in a beta test plan, which is carried out before release.",
@@ -1072,29 +1072,6 @@
     ]
   },
   {
-    "id": "m-u4o1-kk10-001",
-    "kk": [
-      "U4O1-KK10"
-    ],
-    "stem": "Which situation is an example of scope creep?",
-    "options": [
-      "A programmer resigns and her tasks are given to a new team member.",
-      "The client approves the mock-ups a week later than the plan allowed.",
-      "The client keeps asking for extra reports that were never agreed.",
-      "The test server fails and three days of testing must be repeated."
-    ],
-    "answer": 2,
-    "explanation": "Scope creep is the uncontrolled growth of what the project must deliver. Extra reports that were never agreed add work without the plan being changed to allow for it.",
-    "whyWrong": [
-      "A team member leaving is a change in personnel, not a change to what the project delivers.",
-      "A late approval delays the plan, but the scope of the project stays the same.",
-      "",
-      "A server failure is a technical issue; the work to be delivered hasn't grown."
-    ],
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "m-u4o1-kk10-002",
     "kk": [
       "U4O1-KK10",
@@ -1109,7 +1086,7 @@
       "5 days late"
     ],
     "answer": 1,
-    "explanation": "The critical path is Analyse requirements → Design interface → Code interface → Integrate and test → Beta test, giving a handover on day 24. The 3-day delay to Code interface means Integrate and test starts on day 20 instead of day 17. Shortening it by 2 days recovers 2 of those days, so the handover is on day 25, 1 day late.",
+    "explanation": "The critical path is Analyse requirements → Design interface → Code interface → Integrate and test → Beta test, giving a handover on day 24. The 3-day delay means Code interface finishes on day 20 instead of day 17, so Integrate and test starts on day 21 instead of day 18. Shortening it by 2 days recovers 2 of those days, so the handover is on day 25, 1 day late.",
     "whyWrong": [
       "The 2 days saved in testing don't fully cover the 3-day delay to a critical task.",
       "",
@@ -1232,12 +1209,12 @@
       "The two report tasks take 3 more days between them"
     ],
     "answer": 0,
-    "explanation": "The critical path is Gather requirements → Design stock screens → Code stock module → Alpha testing → Beta testing, taking 18 days, so any delay to a task on it delays the handover. The report tasks are due to finish on day 10, but Alpha testing can't start until day 13, so up to 3 extra days on the report path don't move the handover.",
+    "explanation": "The critical path is Gather requirements → Design stock screens → Code stock module → Alpha testing → Beta testing, taking 18 days, so any delay to a task on it delays the handover. The report tasks are due to finish on day 10, but Alpha testing can't start until Code stock module finishes on day 13, so up to 3 extra days on the report path don't move the handover.",
     "whyWrong": [
       "",
       "Code report module would finish on day 13, the same day as Code stock module, so Alpha testing still starts on time.",
       "Design reports would finish on day 7 and Code report module on day 12, before Alpha testing is due to start.",
-      "Between them these add 3 days, so the report path finishes on day 13, exactly when Alpha testing is due to start."
+      "Between them these add 3 days, so the report path finishes on day 13, the same day as Code stock module, and Alpha testing still starts on day 14."
     ],
     "difficulty": 3,
     "source": "textbook",
@@ -1587,7 +1564,7 @@
       "6 days late"
     ],
     "answer": 1,
-    "explanation": "In the plan, Code booking finishes on day 15, so the handover is on day 19. In fact the booking path took 3 + 5 + 7 = 15 days, but the reports path took 3 + 3 + 10 = 16 days. Test could only start on day 16, so the handover was on day 20: 1 day late. The reports tasks became the critical path.",
+    "explanation": "In the plan, Code booking finishes on day 15, so the handover is on day 19. In fact the booking path took 3 + 5 + 7 = 15 days, but the reports path took 3 + 3 + 10 = 16 days. Test could only start on day 17, after the reports path finished on day 16, so it ran on days 17 to 20 and the handover was on day 20: 1 day late. The reports tasks became the critical path.",
     "whyWrong": [
       "The original critical path did finish on time, but the reports path became longer and held up Test.",
       "",

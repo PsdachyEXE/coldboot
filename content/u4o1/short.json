@@ -93,7 +93,7 @@
     ],
     "commandTerm": "explain",
     "marks": 3,
-    "prompt": "Stringybark Ski Hire in Mansfield exports each day's hires from its booking system to `hires.csv`. Each line holds a customer name, the number of days hired and the daily rate, for example:\n\n`Dimitri Pappas,3,42.50`\n\nOmar's reporting program reads the file and calculates the day's total hire income. Explain **three** things the program must do with each line so that the hire's income is added to the total.",
+    "prompt": "Alpine Ash Ski Hire in Mansfield exports each day's hires from its booking system to `hires.csv`. Each line holds a customer name, the number of days hired and the daily rate, for example:\n\n`Dimitri Pappas,3,42.50`\n\nOmar's reporting program reads the file and calculates the day's total hire income. Explain **three** things the program must do with each line so that the hire's income is added to the total.",
     "points": [
       {
         "text": "Splits the line at each comma to separate the name, the number of days and the daily rate",
@@ -363,7 +363,7 @@
     ],
     "commandTerm": "describe",
     "marks": 3,
-    "prompt": "Wren is developing a room-booking module for Saltmarsh Community Hall in Port Albert. Rooms can be booked for 1 to 6 hours, and members receive 20% off the hire fee. Before the module is given to hall members for beta testing, Wren will alpha test it.\n\nDescribe how Wren should alpha test the module.",
+    "prompt": "Wren is developing a room-booking module for Seagrass Point Community Hall in Port Albert. Rooms can be booked for 1 to 6 hours, and members receive 20% off the hire fee. Before the module is given to hall members for beta testing, Wren will alpha test it.\n\nDescribe how Wren should alpha test the module.",
     "points": [
       {
         "text": "Prepares test data that includes valid, invalid and boundary values, e.g. 1 and 6 hours, 0 and 7 hours and non-numeric entries, for both members and non-members",
@@ -388,27 +388,27 @@
     ],
     "commandTerm": "describe",
     "marks": 4,
-    "prompt": "Marran Freight in Geelong has had a delivery-tracking app developed for its 25 drivers, who use it on their phones to record pick-ups and deliveries, including the customer's signature. The app is nearly complete.\n\nDescribe how Marran Freight should conduct beta testing of the app. Refer to the user group, scenarios, observation and the recording of results.",
+    "prompt": "Hopbush Community Nursing in Maryborough has had a visit-recording app developed for its 30 community nurses, who use it on work tablets to record each home visit, including the client's observations, the care given and any follow-up needed. The app is nearly complete.\n\nDescribe how Hopbush Community Nursing should conduct beta testing of the app. Refer to the user group, scenarios, observation and the recording of results.",
     "points": [
       {
-        "text": "User group: a small group of Marran Freight drivers who represent the range of drivers (experience, age, phone types, routes), not the developers",
+        "text": "User group: a small group of Hopbush nurses who represent the range of nurses (experience, age, confidence with technology, kinds of visit), not the developers",
         "marks": 1
       },
       {
-        "text": "Scenarios: realistic tasks stated as goals, e.g. record a delivery with the customer's signature, carried out on drivers' own phones on real or realistic runs",
+        "text": "Scenarios: realistic tasks stated as goals, e.g. record a visit where a wound dressing was changed and a follow-up visit is needed, carried out on the nurses' work tablets in realistic conditions with test client records",
         "marks": 1
       },
       {
-        "text": "Observation: a developer watches drivers complete the scenarios without helping, noting hesitations, errors and time taken",
+        "text": "Observation: a developer watches nurses complete the scenarios without helping, noting hesitations, errors and time taken",
         "marks": 1
       },
       {
-        "text": "Recording: each problem logged with the scenario, driver, what should have happened, what actually happened and its severity, so it can be fixed before release",
+        "text": "Recording: each problem logged with the scenario, nurse, what should have happened, what actually happened and its severity, so it can be fixed before release",
         "marks": 1
       }
     ],
-    "model": "Marran Freight should choose about five drivers who reflect the range of its 25 drivers, such as new and experienced drivers, older and younger drivers, and drivers with different phones. The developers shouldn't be the testers, because they already know how the app works.\n\nEach driver should be given realistic scenarios written as goals, such as 'Record the delivery of two pallets and collect the customer's signature', and carry them out on their own phone during real or realistic runs.\n\nA developer should ride along or watch without helping, noting where drivers hesitate, make errors or take a long time, for example while collecting a signature.\n\nEvery problem should be recorded in a log with the date, driver, scenario, what should have happened, what actually happened and how serious it is, so the developers can reproduce and fix the most serious problems before the app is released.",
-    "mistake": "Generic answers ('choose some users and give them tasks') earn little. Each part should name something specific to the drivers and their deliveries.",
+    "model": "Hopbush Community Nursing should choose about five nurses who reflect the range of its 30 nurses, such as new and experienced nurses, nurses who are more and less confident with technology, and nurses who make different kinds of visits. The developers shouldn't be the testers, because they already know how the app works.\n\nEach nurse should be given realistic scenarios written as goals, such as 'Record a visit where you changed a wound dressing, and book a follow-up visit for next week', and carry them out on their work tablet in realistic conditions, such as in the car between visits, using test client records rather than real ones.\n\nA developer should watch without helping, noting where nurses hesitate, make errors or take a long time, for example while entering the client's observations.\n\nEvery problem should be recorded in a log with the date, nurse, scenario, what should have happened, what actually happened and how serious it is, so the developers can reproduce and fix the most serious problems before the app is released.",
+    "mistake": "Generic answers ('choose some users and give them tasks') earn little. Each part should name something specific to the nurses and their home visits.",
     "source": "textbook"
   },
   {
@@ -419,22 +419,22 @@
     ],
     "commandTerm": "explain",
     "marks": 3,
-    "prompt": "The developers of Marran Freight's delivery-tracking app have alpha tested every module against a full test table, and every test passed. The operations manager wants to release the app to all 25 drivers straight away.\n\nExplain why the app should still be beta tested before it is released.",
+    "prompt": "The developers of Hopbush Community Nursing's visit-recording app have alpha tested every module against a full test table, and every test passed. The nursing manager wants to release the app to all 30 nurses straight away.\n\nExplain why the app should still be beta tested before it is released.",
     "points": [
       {
         "text": "Alpha testing was done by developers, who know how the app is meant to be used, with planned test data in the development environment",
         "marks": 1
       },
       {
-        "text": "Beta testing puts the app in the hands of actual drivers in realistic conditions, e.g. on their own phones, in trucks, with patchy mobile coverage",
+        "text": "Beta testing puts the app in the hands of actual nurses in realistic conditions, e.g. on their work tablets, in the car between home visits, with little time to spare",
         "marks": 1
       },
       {
-        "text": "So it can find problems alpha testing can't, e.g. drivers who can't find how to capture a signature, or deliveries that fail to save when the signal drops, which can then be fixed before all drivers rely on the app",
+        "text": "So it can find problems alpha testing can't, e.g. nurses who can't find where to record a follow-up visit, or a visit form that takes too long to fill in between appointments, which can then be fixed before all nurses rely on the app",
         "marks": 1
       }
     ],
-    "model": "The alpha tests were designed and run by the developers, who already know how the app should be used, with planned test data on development equipment. Passing every test shows that the modules produce the expected outputs, not that drivers can use the app on the road.\n\nBeta testing gives the nearly complete app to a group of real drivers, who use it on their own phones in their trucks, sometimes with poor mobile coverage. This can uncover problems the developers didn't anticipate, such as drivers who can't find the signature screen or deliveries that fail to save when the signal drops. Finding these before release means they can be fixed before all 25 drivers depend on the app.",
+    "model": "The alpha tests were designed and run by the developers, who already know how the app should be used, with planned test data on development equipment. Passing every test shows that the modules produce the expected outputs, not that nurses can use the app during their rounds.\n\nBeta testing gives the nearly complete app to a group of real nurses, who use it on their work tablets in realistic conditions, such as in the car between home visits with little time to spare. This can uncover problems the developers didn't anticipate, such as nurses who can't find where to record a follow-up visit, or a visit form that takes too long to fill in between appointments. Finding these before release means they can be fixed before all 30 nurses depend on the app.",
     "source": "textbook"
   },
   {
@@ -587,7 +587,7 @@
         "marks": 1
       },
       {
-        "text": "Code database was due to finish on day 13, while Connect app to database can't start until day 16; with the 5-day delay it finishes on day 18",
+        "text": "Code database was due to finish on day 13, while Connect app to database can't start until Code app screens finishes on day 16; with the 5-day delay it finishes on day 18",
         "marks": 1
       },
       {

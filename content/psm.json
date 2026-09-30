@@ -35,7 +35,7 @@
         {
           "id": "generate-design-ideas",
           "name": "Generating design ideas",
-          "summary": "Producing a range of genuinely different ways the solution could look and work, using ideation techniques such as brainstorming and sketching."
+          "summary": "Producing a range of distinct ways the solution could look and work, using ideation techniques such as brainstorming and sketching."
         },
         {
           "id": "evaluate-design-ideas",
@@ -84,7 +84,7 @@
     {
       "id": "evaluation",
       "name": "Evaluation",
-      "summary": "Judging how well the finished solution meets the need it was built for, once it has been in use for a while. The team plans how it will evaluate, collects the data, and reports on the solution's efficiency and effectiveness against the evaluation criteria.",
+      "summary": "Judging how well the finished solution meets the need it was built for, once it has been in use for a while. The team follows an evaluation strategy, planned before the solution goes live, collects the data, and reports on the solution's efficiency and effectiveness against the evaluation criteria.",
       "activities": [
         {
           "id": "evaluation-strategy",
@@ -107,7 +107,7 @@
   "specifications": [
     "Analysis: the documentation states the problem, need or opportunity, records what was learnt from stakeholders, and sets out the functional and non-functional requirements, the constraints and the scope. Many projects gather these findings in a software requirements specification (SRS).",
     "Analysis: analytical tools such as context diagrams, data flow diagrams and use case diagrams show the system's boundary, the data moving in and out of it, and how users interact with it.",
-    "Design: the documentation shows a range of genuinely different design ideas, how each idea was judged against criteria, and the reasons the preferred design was chosen.",
+    "Design: the documentation shows a range of distinct design ideas, how each idea was judged against criteria, and the reasons the preferred design was chosen.",
     "Design: the detailed design describes the preferred design's appearance and functionality closely enough for a developer to code from it, using tools such as mock-ups, data dictionaries, object descriptions, IPO charts and pseudocode.",
     "Design: the evaluation criteria for the finished solution are recorded, each based on the requirements and worded so that it can be measured or checked with data.",
     "Development: the working solution is accompanied by internal documentation that explains the purpose of each module and the reasons for key processing choices.",
@@ -196,7 +196,7 @@
       ],
       "type": "reverse",
       "front": "Evaluation stage",
-      "back": "The PSM stage that judges the finished solution after it has been in use. The team plans an evaluation strategy, collects data, and reports how efficient and effective the solution is against the evaluation criteria.",
+      "back": "The PSM stage that judges the finished solution after a period of use. It follows an evaluation strategy, planned before the solution goes live so that data such as task times on the old system can be collected, then applies the evaluation criteria to the data and reports how efficient and effective the solution is.",
       "mistake": "Evaluation isn't a final round of testing. It asks how well the solution serves its users, not whether each module gives the right output.",
       "difficulty": 1,
       "source": "textbook"
@@ -329,7 +329,7 @@
         "PSM",
         "U3O2-KK04"
       ],
-      "stem": "Priya's team is building a rostering program for an aged care home in Warrnambool. This week the team is surveying care staff about the problems they have with the current paper rosters. Which stage of the problem-solving methodology is the team working in?",
+      "stem": "Farid's team is building a rostering program for an aged care home in Warrnambool. This week the team is surveying care staff about the problems they have with the current paper rosters. Which stage of the problem-solving methodology is the team working in?",
       "options": [
         "Analysis",
         "Design",
@@ -547,7 +547,7 @@
         "PSM",
         "U4O1-KK08"
       ],
-      "stem": "A Shepparton transport company started using a new timesheet program last week. Before the evaluation begins, Grace writes down that she will export the program's error logs in week six and interview three supervisors in week eight. Which activity is Grace carrying out?",
+      "stem": "A Shepparton transport company will start using a new timesheet program next month. Before it goes live, Grace writes down that she will export the program's error logs in week six and interview three supervisors in week eight. Which activity is Grace carrying out?",
       "options": [
         "Setting evaluation criteria, in the design stage",
         "Collecting data about needs, in the analysis stage",
@@ -571,7 +571,7 @@
         "PSM",
         "U3O1-KK11"
       ],
-      "stem": "While coding a quote calculator for a pool builder in Sale, Jonah adds a comment above a function explaining why he chose a binary search over a linear search. Which stage and activity is this?",
+      "stem": "While coding a quote calculator for a pool builder in Sale, Jonah adds a comment above a function explaining why the pool's surface area is rounded up to whole square metres. Which stage and activity is this?",
       "options": [
         "Design: producing pseudocode for the detailed design",
         "Development: writing internal documentation",

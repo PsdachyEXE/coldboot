@@ -75,15 +75,15 @@
       "U3O2-KK05",
       "U3O2-KK06"
     ],
-    "stem": "A manager at Merrowvale Freight in Geelong wrote four statements about a planned dispatch program. Which statement describes the reason for the project, rather than a requirement or a constraint?",
+    "stem": "A manager at Firetail Heating and Cooling in Traralgon wrote four statements about a planned dispatch program. Which statement describes the reason for the project, rather than a requirement or a constraint?",
     "options": [
-      "The program must let staff search consignments by customer name.",
-      "The program must run on the existing Windows computers in the depot.",
+      "The program must let staff search service jobs by customer name.",
+      "The program must run on the existing Windows computers in the office.",
       "The program must return the results of a search within two seconds.",
-      "Staff enter each consignment three times, causing errors and delays."
+      "Staff enter each service job three times, causing errors and delays."
     ],
     "answer": 3,
-    "explanation": "Entering every consignment three times, with the errors and delays that causes, describes a problem with the current process. That is why the project is undertaken; the other statements describe what the solution must do or the limits it must work within.",
+    "explanation": "Entering every service job three times, with the errors and delays that causes, describes a problem with the current process. That is why the project is undertaken; the other statements describe what the solution must do or the limits it must work within.",
     "whyWrong": [
       "This is a functional requirement: it states something the program must do.",
       "This is a technical constraint: it limits the hardware the program must run on.",
@@ -123,7 +123,7 @@
     ],
     "stem": "Mei is writing a brief for Silvergull Kayak Hire in Lakes Entrance. Which sentence belongs in the brief?",
     "options": [
-      "The booking form will use a date picker and a dropdown list of kayak types.",
+      "The booking form will use a date picker and a drop-down list of kayak types.",
       "Test 4: a hire date of 31/02/2027 should be rejected as an invalid date.",
       "Phone bookings are often lost, so kayaks sit unused on the busiest days.",
       "Store kayakType as a String of up to 20 characters in the bookings file."
@@ -396,7 +396,7 @@
     "answer": 3,
     "explanation": "A milestone marks a key point in a project, such as the client approving the SRS. It has zero duration, so it doesn't add to the project's length.",
     "whyWrong": [
-      "A milestone has no duration; it isn't a task on the critical path.",
+      "A milestone has no duration, so it can't be the longest task; it can sit on the critical path, but it adds no time to it.",
       "Tasks that can overlap are concurrent tasks; a milestone isn't a task at all.",
       "That describes a task every other task depends on, not a milestone.",
       ""
@@ -409,34 +409,34 @@
     "kk": [
       "U3O2-KK03"
     ],
-    "stem": "Merrowvale Freight's plan for a driver app is shown in the Gantt chart, in days. Interviewing managers ends up taking 5 days instead of 2. What is the effect on the project?",
+    "stem": "Firetail Heating and Cooling's plan for a technician app is shown in the Gantt chart, in days. Interviewing managers ends up taking 5 days instead of 2. What is the effect on the project?",
     "options": [
       "It finishes 1 day later, and Interview managers joins the critical path.",
       "It finishes 3 days later, because every task delay moves the finish date.",
       "The finish date is unchanged, because Interview managers isn't critical.",
-      "It finishes 1 day later, and Observe drivers stays on the critical path."
+      "It finishes 1 day later, and Observe technicians stays on the critical path."
     ],
     "answer": 0,
-    "explanation": "The original critical path runs Observe drivers (4) → Write SRS (3) → SRS signed off → Design screens (5) → Develop app (8) → Alpha test (3), a total of 23 days. With 5-day interviews, the chain through Interview managers totals 5 + 3 + 5 + 8 + 3 = 24 days. It becomes the longest chain, so the project finishes 1 day later and the critical path now runs through Interview managers instead of Observe drivers.",
+    "explanation": "The original critical path runs Observe technicians (4) → Write SRS (3) → SRS signed off → Design screens (5) → Develop app (8) → Alpha test (3), a total of 23 days. With 5-day interviews, the chain through Interview managers totals 5 + 3 + 5 + 8 + 3 = 24 days. It becomes the longest chain, so the project finishes 1 day later and the critical path now runs through Interview managers instead of Observe technicians.",
     "whyWrong": [
       "",
       "Interview managers wasn't on the critical path, so only the part of the delay that makes its chain longer than 23 days moves the finish date.",
       "A non-critical task delays the project once its chain becomes longer than the critical path, as happens here.",
-      "With 5-day interviews, the chain through Observe drivers still totals 23 days, a day less than the chain through Interview managers, so it drops off the critical path."
+      "With 5-day interviews, the chain through Observe technicians still totals 23 days, a day less than the chain through Interview managers, so it drops off the critical path."
     ],
     "difficulty": 3,
     "source": "textbook",
     "figures": [
       {
-        "id": "merrowvale-gantt",
+        "id": "firetail-gantt",
         "kind": "gantt",
-        "title": "Merrowvale Freight driver app",
+        "title": "Firetail Heating and Cooling technician app",
         "caption": "Write SRS starts when both data collection tasks have finished. Alpha test starts when Develop app and Prepare test data have both finished.",
         "unit": "day",
         "tasks": [
           {
             "id": "a1",
-            "name": "Observe drivers",
+            "name": "Observe technicians",
             "duration": 4,
             "dependsOn": []
           },
@@ -805,29 +805,6 @@
     "source": "textbook"
   },
   {
-    "id": "m-u3o2-kk07-002",
-    "kk": [
-      "U3O2-KK07"
-    ],
-    "stem": "Kelpie Point Community Radio in Portland agreed a scope for its new app: it will stream live broadcasts and show the program guide, but it will not host podcasts or take donations. Halfway through development, the station manager asks for a donations page. How should the developer treat this request?",
-    "options": [
-      "As a minor fix that can be added during development without changing the plan",
-      "As a change to the agreed scope, assessed for time and cost before it is accepted",
-      "As a new constraint to record, because it limits how the app can be designed",
-      "As an evaluation criterion, because it describes how the app will be judged"
-    ],
-    "answer": 1,
-    "explanation": "Donations were explicitly excluded from the scope, so the request is a change to the scope. Assessing its effect on time and cost, and getting agreement before starting, stops scope creep.",
-    "whyWrong": [
-      "Donations were excluded; adding the page without changing the plan is how scope creep starts.",
-      "",
-      "A constraint limits the project, such as a budget or deadline; a requested feature isn't a constraint.",
-      "Evaluation criteria come from the agreed requirements; an excluded feature isn't one of them."
-    ],
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
     "id": "m-u3o2-kk07-003",
     "kk": [
       "U3O2-KK07"
@@ -855,7 +832,7 @@
     "kk": [
       "U3O2-KK07"
     ],
-    "stem": "The scope of Gumleaf Cafe's ordering app in Beechworth states that the app will take takeaway orders and payments, and will not manage staff rosters. At evaluation, staff complain that the app can't produce rosters. How should this be treated?",
+    "stem": "The scope of Gumleaf Café's ordering app in Beechworth states that the app will take takeaway orders and payments, and will not manage staff rosters. At evaluation, staff complain that the app can't produce rosters. How should this be treated?",
     "options": [
       "Not as a failure, since rosters were excluded from the agreed scope",
       "As a failure, as the solution doesn't meet all of the staff's current needs",
@@ -1153,7 +1130,7 @@
     "kk": [
       "U3O2-KK09"
     ],
-    "stem": "Priya's team at Stringybark Freight in Geelong has finished developing a delivery-tracking program. A tester is writing test cases to check that the program meets the client's requirements. Which document should the test cases be based on?",
+    "stem": "Rohan's team at Spinebill Linen Hire in Ballarat has finished developing an order-tracking program. A tester is writing test cases to check that the program meets the client's requirements. Which document should the test cases be based on?",
     "options": [
       "The project brief, because it describes why the program was wanted",
       "The Gantt chart, because it lists the tasks the team has completed",
@@ -1200,7 +1177,7 @@
     "kk": [
       "U3O2-KK09"
     ],
-    "stem": "Saltbush Bend Caravan Park in Swan Hill is having a booking system developed. Which statement from its SRS describes the solution's operating environment?",
+    "stem": "Blackbox Bend Caravan Park in Swan Hill is having a booking system developed. Which statement from its SRS describes the solution's operating environment?",
     "options": [
       "Most office staff are casual workers with basic computer skills.",
       "The system will run on the office's Windows 11 laptops and network.",
@@ -1338,7 +1315,7 @@
     "kk": [
       "U3O2-KK11"
     ],
-    "stem": "Kestrel Ridge Plumbing in Sale keeps the project files for its job-scheduling program on an office computer. Every night the files are backed up to an external drive kept in the same office. A flood destroys both the computer and the drive. Which practice would have prevented the loss of the files?",
+    "stem": "Spoonbill Plumbing in Sale keeps the project files for its job-scheduling program on an office computer. Every night the files are backed up to an external drive kept in the same office. A flood destroys both the computer and the drive. Which practice would have prevented the loss of the files?",
     "options": [
       "Archiving completed job files to the external drive each month",
       "Adding version numbers to the file names of every project document",
@@ -1408,7 +1385,7 @@
     "kk": [
       "U3O2-KK12"
     ],
-    "stem": "Talia is designing a booking app for Silvergull Cruises, a tour operator in Lakes Entrance. The owner wants the app to feel \"calm and coastal\". Talia gathers photographs of the lakes, sand and sea colour swatches, and samples of rounded fonts, and arranges them on one page so she and the owner can agree on a visual style. Which ideation tool has Talia created?",
+    "stem": "Talia is designing a booking app for Tussock Point Cruises, a tour operator in Lakes Entrance. The owner wants the app to feel 'calm and coastal'. Talia gathers photographs of the lakes, sand and sea colour swatches, and samples of rounded fonts, and arranges them on one page so she and the owner can agree on a visual style. Which ideation tool has Talia created?",
     "options": [
       "A mind map",
       "A mock-up",
@@ -1524,7 +1501,7 @@
     "kk": [
       "U3O2-KK13"
     ],
-    "stem": "Greyrock Freight in Geelong replaced its paper delivery log with a tablet app. Before the change, about one delivery record in twenty had a wrong address or time. Since the change, drivers take the same time as before to log a delivery, but the records have been error-free for three months. Which statement best describes the change?",
+    "stem": "Yabby Creek Pool Care in Shepparton replaced its paper service log with a tablet app. Before the change, about one service record in twenty had a wrong address or time. Since the change, staff take the same time as before to log a pool service, but the records have been error-free for three months. Which statement best describes the change?",
     "options": [
       "The solution is more efficient because records are logged faster",
       "The solution is less efficient because drivers now use a tablet",
@@ -1558,9 +1535,9 @@
     "explanation": "A useful criterion is specific and measurable, so it can be checked objectively. Finding a stock level in under ten seconds can be timed.",
     "whyWrong": [
       "",
-      "\"Easy to use\" is vague: without a measure, different people will judge it differently.",
+      "'Easy to use' is vague: without a measure, different people will judge it differently.",
       "This describes how the program is built, not how well it performs, so it can't judge efficiency or effectiveness.",
-      "\"Attractive and modern\" is a matter of opinion and can't be measured as written."
+      "'Attractive and modern' is a matter of opinion and can't be measured as written."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -1660,12 +1637,12 @@
       "towelHire, with the data type Floating point"
     ],
     "answer": 1,
-    "explanation": "A checkbox is either ticked or not, so the data it captures has exactly two states. Boolean is the most suitable data type for a property that stores it.",
+    "explanation": "A check box is either ticked or not, so the data it captures has exactly two states. Boolean is the most suitable data type for a property that stores it.",
     "whyWrong": [
-      "A String could hold \"yes\" or \"no\" but allows other values too; Boolean matches the two states of a checkbox.",
+      "A String could hold \"yes\" or \"no\" but allows other values too; Boolean matches the two states of a check box.",
       "",
-      "The checkbox captures data to be stored, so it belongs in a property, not a method.",
-      "The checkbox records whether a towel is hired, not an amount; the $3 fee is fixed and needn't be captured."
+      "The check box captures data to be stored, so it belongs in a property, not a method.",
+      "The check box records whether a towel is hired, not an amount; the $3 fee is fixed and needn't be captured."
     ],
     "difficulty": 2,
     "source": "textbook",
@@ -1904,7 +1881,7 @@
       "Enlarge the text and cut the number of screens"
     ],
     "answer": 3,
-    "explanation": "Both reports concern how easily users can use the app. Larger text and fewer screens make booking easier to read and quicker to complete, which improves usability.",
+    "explanation": "Both reports concern how easily users can use the app. Larger text and fewer screens make booking easier to read and simpler to follow, which improves usability.",
     "whyWrong": [
       "Encryption improves security but doesn't make the text larger or the booking shorter.",
       "Exporting bookings improves interoperability, which doesn't address small text or too many screens.",
@@ -1947,7 +1924,7 @@
       "Align the departure times with the left edge of the screen",
       "Show the departure times in the same font as the headings",
       "Move the departure times onto a separate screen of their own",
-      "Show the departure times in dark text on the white background"
+      "Show departure times in dark text on the white background"
     ],
     "answer": 3,
     "explanation": "Pale yellow on white has very low contrast. Dark text on a light background increases contrast, so the times stay readable even in bright light.",
@@ -2083,10 +2060,10 @@
     "kk": [
       "U3O2-KK16"
     ],
-    "stem": "Priya is designing a document editor for Lindqvist Legal in Mildura. For consistency, she gives the \"Delete document\" button exactly the same colour, size and style as the \"Save\" button, and places the two side by side. Why is this a poor design decision?",
+    "stem": "Farida is designing a document editor for Lindqvist Legal in Mildura. For consistency, she gives the \"Delete document\" button exactly the same colour, size and style as the \"Save\" button, and places the two side by side. Why is this a poor design decision?",
     "options": [
       "Two buttons can't share a row without breaking alignment",
-      "Delete has a different purpose, so it should contrast with Save",
+      "Delete does another job, so it should contrast with Save",
       "Consistency requires every button to have its own colour",
       "Matching styles stops the buttons from looking pressable"
     ],

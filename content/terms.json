@@ -36,7 +36,7 @@
     "type": "reverse",
     "front": "affordance",
     "back": "A property of an interface element that signals how it can be used, such as a raised button that looks pressable or underlined text that looks clickable.",
-    "mistake": "Affordance has nothing to do with cost (\"affordable\"). It is about how obvious an element's use is from the way it looks.",
+    "mistake": "Affordance has nothing to do with cost ('affordable'). It is about how obvious an element's use is from the way it looks.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -90,7 +90,7 @@
     "type": "reverse",
     "front": "array",
     "back": "A data structure that stores a collection of elements of the same data type under one name, with each element reached by an integer index (in a two-dimensional array, by a row index and a column index).",
-    "mistake": "Don't assume the first index is 1. In a zero-based array of 10 elements the indices run from 0 to 9, so `scores[10]` is out of range. Always check the stated index base.",
+    "mistake": "Don't assume the first index is 1. In an array of 10 elements indexed from 0, the indexes run from 0 to 9, so `scores[10]` is out of range. Always check the stated index base.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -132,6 +132,7 @@
     "type": "reverse",
     "front": "beta testing",
     "back": "Testing of a nearly finished solution by a selected group of real or representative users in realistic conditions, to find remaining errors and gather feedback before the final release.",
+    "mistake": "Beta testing isn't the developers running more tests near the end. The testers are real or representative users who didn't build the solution.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -156,8 +157,8 @@
     ],
     "type": "reverse",
     "front": "camel case",
-    "back": "A naming convention that joins words without spaces, writing the first word in lower case and starting each later word with a capital letter, such as `totalCost`.",
-    "mistake": "`TotalCost`, with a capital first letter, is Pascal case (sometimes called upper camel case). Camel case in its usual sense starts in lower case: `totalCost`.",
+    "back": "A naming convention that joins words without spaces, writing the first word in lowercase and starting each later word with a capital letter, such as `totalCost`.",
+    "mistake": "`TotalCost`, with a capital first letter, is Pascal case (sometimes called upper camel case). Camel case in its usual sense starts in lowercase: `totalCost`.",
     "difficulty": 1,
     "source": "textbook",
     "aliases": [
@@ -187,6 +188,7 @@
     "type": "reverse",
     "front": "code repository",
     "back": "A central storage location for a project's source code and its full history of changes, often hosted online, that lets a team share, track and manage code using version control.",
+    "mistake": "A repository isn't just a backup copy. It records each change with its author and a message, so a particular change can be reviewed or undone.",
     "difficulty": 1,
     "source": "textbook",
     "aliases": [
@@ -210,7 +212,8 @@
     "id": "t-constraint",
     "kk": [
       "TERMS",
-      "U3O2-KK06"
+      "U3O2-KK06",
+      "U3O1-KK02"
     ],
     "type": "reverse",
     "front": "constraint",
@@ -279,7 +282,8 @@
     "id": "t-data-dictionary",
     "kk": [
       "TERMS",
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "type": "reverse",
     "front": "data dictionary",
@@ -375,7 +379,7 @@
     ],
     "type": "reverse",
     "front": "Essential Eight",
-    "back": "A set of eight prioritised mitigation strategies, including multi-factor authentication, patching and regular backups, published by the Australian Cyber Security Centre (ACSC) to help organisations protect their systems, with maturity levels that describe how thoroughly they are implemented.",
+    "back": "A set of eight prioritised mitigation strategies, including multi-factor authentication, patching and regular backups, published by the Australian Cyber Security Centre (ACSC) to help organisations protect their systems against cyber attacks.",
     "difficulty": 2,
     "source": "textbook",
     "aliases": [
@@ -391,7 +395,7 @@
     "type": "reverse",
     "front": "evaluation criteria",
     "back": "Measurable statements, based on the solution requirements, used to judge how efficient and effective a design idea or a finished solution is.",
-    "mistake": "\"The app is good\" is not a criterion because it can't be measured. \"A new booking can be made in under one minute\" can be checked against the solution.",
+    "mistake": "'The app is good' is not a criterion because it can't be measured. 'A new booking can be made in under one minute' can be checked against the solution.",
     "difficulty": 2,
     "source": "textbook",
     "aliases": [
@@ -417,7 +421,8 @@
     "id": "t-functional-requirement",
     "kk": [
       "TERMS",
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "type": "reverse",
     "front": "functional requirement",
@@ -447,7 +452,7 @@
     "type": "reverse",
     "front": "generalisation",
     "back": "Identifying the attributes and methods that several classes have in common and placing them in a more general superclass, which those classes then inherit from. For example, `Car` and `Truck` are generalised into `Vehicle`.",
-    "mistake": "Generalisation and inheritance describe one relationship from two directions: generalisation is the design step of moving shared features up into a superclass; inheritance is how the subclasses then receive them.",
+    "mistake": "Generalisation isn't another word for inheritance. Generalisation is the design step of moving shared features up into a superclass; inheritance is the mechanism by which the subclasses then receive them.",
     "difficulty": 3,
     "source": "textbook",
     "aliases": [
@@ -492,7 +497,7 @@
     ],
     "type": "reverse",
     "front": "Hungarian notation",
-    "back": "A naming convention that starts a name with a short prefix showing its data type or control type, such as `strSurname` for a string variable or `txtSurname` for a text box.",
+    "back": "A naming convention that starts a name with a short prefix showing its data type or control type, such as `strSurname` for a String variable or `txtSurname` for a text box.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -531,7 +536,7 @@
     "type": "reverse",
     "front": "internal documentation",
     "back": "Comments written in the source code that explain the purpose of each module, its key features and the reasons for processing choices, so programmers can understand and maintain the code.",
-    "mistake": "Good comments explain why, not just what. `// binary search because the list is always kept sorted` is more useful than `// search the list`.",
+    "mistake": "Good comments explain why, not just what. `// post-test loop: the menu must be shown at least once` is more useful than `// loop until the user quits`.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -552,7 +557,8 @@
     "id": "t-ipo-chart",
     "kk": [
       "TERMS",
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "type": "reverse",
     "front": "IPO chart",
@@ -639,7 +645,8 @@
     "id": "t-mock-up",
     "kk": [
       "TERMS",
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "type": "reverse",
     "front": "mock-up",
@@ -673,12 +680,13 @@
     "id": "t-non-functional-requirement",
     "kk": [
       "TERMS",
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "type": "reverse",
     "front": "non-functional requirement",
     "back": "A quality or characteristic a solution must have, describing how well it performs its functions rather than what it does, such as reliability, usability or portability.",
-    "mistake": "\"A booking must load in under two seconds\" is non-functional (a performance quality), even though it mentions a task the solution does.",
+    "mistake": "'A booking must load in under two seconds' is non-functional (a performance quality), even though it mentions a task the solution does.",
     "difficulty": 2,
     "source": "textbook",
     "aliases": [
@@ -701,7 +709,9 @@
     "id": "t-object-description",
     "kk": [
       "TERMS",
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03",
+      "U3O1-KK07"
     ],
     "type": "reverse",
     "front": "object description",
@@ -717,7 +727,7 @@
     ],
     "type": "reverse",
     "front": "objective",
-    "back": "A specific, measurable target, usually with a time frame, that helps an organisation achieve a goal, such as cutting processing time by 20% within a year.",
+    "back": "A specific, measurable target with a time frame that helps an organisation achieve a goal, such as cutting processing time by 20% within a year.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -769,7 +779,7 @@
     ],
     "type": "reverse",
     "front": "record",
-    "back": "A data structure that groups related data items, which can be of different data types, under one name, with each item stored in a named field (for example, a member's name as a string and age as an integer).",
+    "back": "A data structure that groups related data items, which can be of different data types, under one name, with each item stored in a named field (for example, a member's name as a String and age as an Integer).",
     "mistake": "Unlike an array, a record's fields can hold different data types and are reached by field name, not by an index.",
     "difficulty": 2,
     "source": "textbook"
@@ -807,28 +817,31 @@
     "id": "t-scope",
     "kk": [
       "TERMS",
-      "U3O2-KK07"
+      "U3O2-KK07",
+      "U3O1-KK02"
     ],
     "type": "reverse",
-    "front": "scope",
+    "front": "solution scope",
     "back": "The boundaries of a solution: what it will and won't do or include, agreed during analysis so that everyone knows what will be delivered.",
-    "mistake": "Project scope is not variable scope (whether a variable is local or global). Stating what the solution will *not* do is part of defining its scope.",
+    "mistake": "Solution scope is not variable scope (whether a variable is local or global). Stating what the solution will *not* do is part of defining its scope.",
     "difficulty": 2,
     "source": "textbook",
     "aliases": [
-      "project scope",
-      "solution scope"
+      "scope",
+      "project scope"
     ]
   },
   {
     "id": "t-scope-creep",
     "kk": [
       "TERMS",
-      "U4O1-KK10"
+      "U4O1-KK10",
+      "U3O2-KK07"
     ],
     "type": "reverse",
     "front": "scope creep",
     "back": "The gradual, uncontrolled growth of a project's requirements or features after its scope has been agreed, usually without matching extra time or budget, which can delay the project and raise its costs.",
+    "mistake": "Scope creep isn't caused only by clients. A developer who adds features nobody asked for causes it too.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -840,7 +853,7 @@
     ],
     "type": "reverse",
     "front": "snake case",
-    "back": "A naming convention that writes names in lower case with an underscore between words, such as `total_cost`.",
+    "back": "A naming convention that writes names in lowercase with an underscore between words, such as `total_cost`.",
     "difficulty": 1,
     "source": "textbook",
     "aliases": [
@@ -937,7 +950,7 @@
     ],
     "type": "reverse",
     "front": "type check",
-    "back": "A validation check that input is of the expected data type, for example rejecting letters typed into a quantity field that must hold an integer.",
+    "back": "A validation check that input is of the expected data type, for example rejecting letters typed into a quantity field that must hold an Integer.",
     "difficulty": 1,
     "source": "textbook",
     "aliases": [
@@ -952,7 +965,7 @@
     ],
     "type": "reverse",
     "front": "usability",
-    "back": "How easily and efficiently users can learn and operate a solution to complete their tasks, and how satisfied they are when using it.",
+    "back": "How easily users can learn and operate a solution to complete their tasks, and how satisfied they are when using it.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -964,7 +977,7 @@
     ],
     "type": "reverse",
     "front": "use case diagram",
-    "back": "A diagram that shows the actors who interact with a system, the use cases (goals) they carry out inside the system boundary, and the associations and `<<includes>>` or `<<extends>>` relationships between them.",
+    "back": "A diagram that shows the actors who interact with a system, the use cases (goals) they carry out inside the system boundary, and the associations and <<includes>> or <<extends>> relationships between them.",
     "mistake": "A use case diagram shows who does what with the system. It doesn't show the order of steps or the data that flows; actors sit outside the system boundary and use cases inside it.",
     "difficulty": 2,
     "source": "textbook",
@@ -981,6 +994,7 @@
     "type": "reverse",
     "front": "user-centred design",
     "back": "An approach to designing a solution that puts the needs, abilities and goals of its users at the centre, involving users throughout and refining the design using their feedback and testing.",
+    "mistake": "User-centred design isn't one survey at the start of a project. Users are consulted repeatedly, and their feedback changes the design as development continues.",
     "difficulty": 2,
     "source": "textbook",
     "aliases": [
@@ -1005,7 +1019,8 @@
     "id": "t-version-control",
     "kk": [
       "TERMS",
-      "U4O2-KK04"
+      "U4O2-KK04",
+      "U3O2-KK11"
     ],
     "type": "reverse",
     "front": "version control",

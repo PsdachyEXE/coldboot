@@ -4,15 +4,15 @@
     "kk": [
       "U4O2-KK01"
     ],
-    "stem": "Tallowood Freight, a Geelong transport company with 400 staff, is setting its priorities for next year. Which statement is an objective rather than a goal?",
+    "stem": "Karrabee Cove Hotels, a Phillip Island company with 400 staff that runs six hotels, is setting its priorities for next year. Which statement is an objective rather than a goal?",
     "options": [
-      "Become the most trusted and reliable freight company in regional Victoria",
-      "Improve the security of the customer data held in company systems",
+      "Make every guest's stay comfortable, welcoming and worth repeating",
+      "Improve the security of the guest data held in company systems",
       "Cut the average time to confirm a booking to under three minutes by 30 June",
-      "Give customers a better and simpler online experience when booking deliveries"
+      "Give guests a better and simpler online experience when booking rooms"
     ],
     "answer": 2,
-    "explanation": "Only this statement sets a measurable target (under three minutes) and a deadline (30 June), so Tallowood Freight can check whether it has been met. The others are broad aims.",
+    "explanation": "Only this statement sets a measurable target (under three minutes) and a deadline (30 June), so Karrabee Cove Hotels can check whether it has been met. The others are broad aims.",
     "whyWrong": [
       "A broad aim with no measure or deadline, so it is a goal.",
       "It names an area to improve but gives no measure or deadline, so it is a goal.",
@@ -50,18 +50,18 @@
     "kk": [
       "U4O2-KK01"
     ],
-    "stem": "Tallowood Freight has the goal of reducing its environmental impact. Which objective best supports this goal?",
+    "stem": "Karrabee Cove Hotels has the goal of reducing its environmental impact. Which objective best supports this goal?",
     "options": [
-      "Use the new route-planning software to make every delivery more environmentally friendly",
-      "Increase revenue from interstate deliveries by 15% within the next 18 months",
+      "Use the new energy-management software to make every hotel more environmentally friendly",
+      "Increase revenue from winter bookings by 15% within the next 18 months",
       "Move the booking system to a cloud-based platform by the end of the financial year",
-      "Reduce the fuel used per delivery by 10% within 18 months using route-planning software"
+      "Reduce the electricity used per occupied room by 10% within 18 months"
     ],
     "answer": 3,
-    "explanation": "It is measurable (10% less fuel per delivery), has a time frame (18 months) and relates directly to environmental impact, so progress towards the goal can be checked.",
+    "explanation": "It is measurable (10% less electricity per occupied room), has a time frame (18 months) and relates directly to environmental impact, so progress towards the goal can be checked.",
     "whyWrong": [
       "It relates to the goal but has no measure or time frame, so it reads as another goal.",
-      "It is measurable, but it serves a financial goal, and more interstate trips could increase the company's impact.",
+      "It is measurable, but it serves a financial goal, and more guests could increase the company's impact.",
       "It has a deadline, but nothing in it measures environmental impact.",
       ""
     ],
@@ -166,10 +166,10 @@
     "kk": [
       "U4O2-KK02"
     ],
-    "stem": "Quandong Grocers, a Shepparton supermarket chain with 1200 staff, has contracted Peppercress Software to build a loyalty app. The app will store customers' names, email addresses and purchase histories. Which contract term best protects Quandong Grocers' customer data during development?",
+    "stem": "Cumbungi Grocers, a Shepparton supermarket chain with 1200 staff, has contracted Peppercress Software to build a loyalty app. The app will store customers' names, email addresses and purchase histories. Which contract term best protects Cumbungi Grocers' customer data during development?",
     "options": [
       "Peppercress Software pays a penalty for each day the app is delivered after the agreed date",
-      "Peppercress Software writes the app in a language that Quandong Grocers' developers know",
+      "Peppercress Software writes the app in a language that Cumbungi Grocers' developers know",
       "Peppercress Software tests with invented data and limits real customer data to named staff",
       "Peppercress Software hands over the source code and its documentation when the project ends"
     ],
@@ -360,20 +360,20 @@
     "kk": [
       "U4O2-KK04"
     ],
-    "stem": "Saltbush Energy, a Mildura solar company with 200 staff, kept the only backup of its source code repository on a drive in the same server rack as the repository. Ransomware encrypted both the server and the backup drive. Which control would most likely have allowed the company to recover its code?",
+    "stem": "Wallaby Grass Software, a Leongatha company with 40 staff, backs up its code repository every night to a removable drive, which is then kept in a locked safe at another site. When ransomware encrypted the repository server, the team found the backup drive couldn't be read: no one had ever tried restoring from it. Which control would most likely have allowed the company to recover its code?",
     "options": [
       "Multi-factor authentication for every developer who logs in to the repository",
       "Encryption at rest for the source code stored on the server's drives",
-      "Regular, tested backups kept offline or off-site, separate from the server",
+      "Regularly restoring from the backups to check that they actually work",
       "A code review of every change before it is merged into the repository"
     ],
     "answer": 2,
-    "explanation": "A backup kept offline or off-site can't be reached by ransomware on the server, and testing restores confirms the copy works, so the code can be recovered.",
+    "explanation": "The backup was kept off-site, but it had never been tested, so no one knew it couldn't be read. Restoring from the backups regularly shows whether they work while there is still time to fix them, so a usable copy of the code would have been available.",
     "whyWrong": [
-      "MFA makes unauthorised logins harder but doesn't recover data once it has been encrypted.",
-      "Ransomware can encrypt files that are already encrypted, so access would still be lost.",
+      "Multi-factor authentication makes unauthorised logins harder but doesn't recover data once it has been encrypted.",
+      "Ransomware can encrypt files that are already encrypted, and this does nothing to make the backup readable.",
       "",
-      "Code review checks changes for flaws; it provides no copy of the code to restore."
+      "Code review checks changes for flaws; it provides no working copy of the code to restore."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -418,7 +418,7 @@
     "explanation": "Interception targets data while it moves across a network. Encrypting the flow in transit means that intercepted payment details can't be read.",
     "whyWrong": [
       "",
-      "MFA protects against someone logging in as a customer, not against data being intercepted in transit.",
+      "Multi-factor authentication protects against someone logging in as a customer, not against data being intercepted in transit.",
       "Off-site backups protect the stored orders, not data travelling to the payment provider.",
       "Code review may find flaws in the process, but it doesn't protect data crossing the network."
     ],
@@ -596,7 +596,7 @@
     "kk": [
       "U4O2-KK05"
     ],
-    "stem": "Stringybark Ticketing's threat model lists the threat that a logged-in customer could change the booking number in a web address to view another customer's booking. The planned mitigation is a check that each requested booking belongs to the logged-in customer. Which activity best confirms that the threat has been mitigated?",
+    "stem": "Spadefoot Ticketing's threat model lists the threat that a logged-in customer could change the booking number in a web address to view another customer's booking. The planned mitigation is a check that each requested booking belongs to the logged-in customer. Which activity best confirms that the threat has been mitigated?",
     "options": [
       "Confirm that the Gantt chart shows the check was finished before the release milestone",
       "As one test customer, request another test customer's booking and confirm it is refused",
@@ -811,7 +811,7 @@
       "U4O2-KK07",
       "U4O2-KK08"
     ],
-    "stem": "A developer at Saltbush Outdoor Supplies, a Mildura retailer covered by the Privacy Act 1988 (Cth), leaves a customer database publicly accessible. An unknown party downloads customers' names, dates of birth and driver licence numbers, and serious harm to those customers is likely. What does the Act require the retailer to do?",
+    "stem": "A developer at Mulgara Outdoor Supplies, a Kerang retailer covered by the Privacy Act 1988 (Cth), leaves a customer database publicly accessible. An unknown party downloads customers' names, dates of birth and driver licence numbers, and serious harm to those customers is likely. What does the Act require the retailer to do?",
     "options": [
       "Notify the Victorian Information Commissioner, as the retailer is in Victoria",
       "Restore the database from a backup, which ends any duty to notify anyone",
@@ -858,7 +858,7 @@
       "U4O2-KK08",
       "U3O1-KK01"
     ],
-    "stem": "Priya, a junior developer at Quellwood Energy in Ballarat, uses an AI assistant to generate the login module for the customer portal. She commits the code without reading or testing it, because it compiles without errors. Which ethical issue does this most directly raise?",
+    "stem": "Imogen, a junior developer at Quellwood Energy in Ballarat, uses an AI assistant to generate the login module for the customer portal. She commits the code without reading or testing it, because it compiles without errors. Which ethical issue does this most directly raise?",
     "options": [
       "Over-reliance on AI-generated code without checking it for flaws",
       "Scope creep from adding features that the client didn't request",
@@ -866,7 +866,7 @@
       "Failure to acknowledge a licensed library used in the portal code"
     ],
     "answer": 0,
-    "explanation": "Priya is trusting AI output she hasn't read or tested. Compiling only shows there are no syntax errors; the module could still contain logic errors or security flaws that expose customers' accounts.",
+    "explanation": "Imogen is trusting AI output she hasn't read or tested. Compiling only shows there are no syntax errors; the module could still contain logic errors or security flaws that expose customers' accounts.",
     "whyWrong": [
       "",
       "Scope creep is a project management issue, and no extra features are described.",
@@ -950,20 +950,20 @@
     "kk": [
       "U4O2-KK09"
     ],
-    "stem": "Developers at Coolabah Ticketing, a Melbourne events company, upload changes straight to the live booking server. Last month a faulty update took online bookings offline for a day. Which measure would most directly prevent this from happening again?",
+    "stem": "Lomandra Fitness, a Bairnsdale gym chain, runs a class-booking website built with a third-party library. Eight months ago the library's authors released a new version that fixes a published security flaw, but the website still uses the old version. Which measure most directly reduces the risk from this weakness?",
     "options": [
       "Require multi-factor authentication for all developer accounts",
-      "Test changes in a separate environment before releasing them",
-      "Encrypt the booking database stored on the live server",
+      "Update to the patched version and keep a record of library versions",
+      "Encrypt the member database stored on the booking server",
       "Keep a full backup of the booking server at an off-site location"
     ],
     "answer": 1,
-    "explanation": "The problem was untested code reaching the live system. A separate testing environment lets faulty changes be found before release, so changes reach production only after they have been tested.",
+    "explanation": "The flaw has been published, so attackers know what to look for in websites that still run the old version. Updating to the patched version closes the flaw, and a record of the library versions each program uses shows when future updates are needed.",
     "whyWrong": [
-      "Multi-factor authentication stops unauthorised logins, but the faulty update came from an authorised developer.",
+      "Multi-factor authentication protects developer logins, but attackers can exploit the library's flaw through the website without logging in.",
       "",
-      "Encryption stops stored data being read; it doesn't stop a faulty update.",
-      "A backup could speed recovery after an outage, but it doesn't prevent the faulty update."
+      "Encryption protects stored data if it is copied, but it leaves the known flaw open to attack.",
+      "A backup helps recovery after an attack, but it doesn't close the known flaw."
     ],
     "difficulty": 2,
     "source": "textbook"

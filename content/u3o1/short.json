@@ -37,14 +37,14 @@
     ],
     "commandTerm": "describe",
     "marks": 3,
-    "prompt": "Ella, a junior developer at Brackenfield Freight in Geelong, used an AI assistant to generate a module that checks each consignment's weight before it is booked. Describe **three** steps Ella should take before the module is added to the company's booking program.",
+    "prompt": "Ella, a junior developer at Flintmoss Rural Supplies, a Sale-based chain of farm supply stores, used an AI assistant to generate a module that checks the hours on each employee's timesheet before it is submitted for payroll. Describe **three** steps Ella should take before the module is added to the company's payroll program.",
     "points": [
       {
-        "text": "Reads through the generated code until she understands, and could explain, each part of the weight check",
+        "text": "Reads through the generated code until she understands, and could explain, each part of the hours check",
         "marks": 1
       },
       {
-        "text": "Tests the module with her own test data, including boundary and invalid weights, comparing expected and actual output in a test table",
+        "text": "Tests the module with her own test data, including boundary and invalid hours, comparing expected and actual output in a test table",
         "marks": 1
       },
       {
@@ -56,11 +56,11 @@
         "marks": 1
       },
       {
-        "text": "Has another developer review the code before it is added to the booking program",
+        "text": "Has another developer review the code before it is added to the payroll program",
         "marks": 1
       }
     ],
-    "model": "First, Ella reads the generated code line by line until she can explain how it checks each consignment's weight, so she isn't adding code she doesn't understand. Second, she builds a test table with her own test data, including weights just inside and just outside the accepted range and invalid entries such as text, and compares the expected and actual output of each test. Third, she notes in the module's internal documentation that an AI assistant generated it, so Brackenfield Freight's other developers know to review it closely.",
+    "model": "First, Ella reads the generated code line by line until she can explain how it checks the hours on each timesheet, so she isn't adding code she doesn't understand. Second, she builds a test table with her own test data, including hours just inside and just outside the accepted range and invalid entries such as text, and compares the expected and actual output of each test. Third, she notes in the module's internal documentation that an AI assistant generated it, so Flintmoss Rural Supplies' other developers know to review it closely.",
     "source": "textbook"
   },
   {
@@ -756,7 +756,7 @@
         "marks": 1
       }
     ],
-    "model": "```pseudo\n// stayFee: returns the total fee in dollars for a stay at the park.\n// Parameters: nights (Integer), powered (Boolean, TRUE for a powered site).\n// Nightly rate is $48 for a powered site and $36 for an unpowered site.\n// The discount is applied after the nightly total is calculated, so the 10%\n// comes off the whole stay. The test uses ≥ 7 so that a stay of exactly\n// 7 nights receives the discount.\n```",
+    "model": "```pseudo\nFUNCTION stayFee(nights, powered)\n    // stayFee: returns the total fee in dollars for a stay at the park.\n    // Parameters: nights (Integer), powered (Boolean, TRUE for a powered site).\n    // Nightly rate is $48 for a powered site and $36 for an unpowered site.\n    // The discount is applied after the nightly total is calculated, so the 10%\n    // comes off the whole stay. The test uses ≥ 7 so that a stay of exactly\n    // 7 nights receives the discount.\n    IF powered = TRUE THEN\n        rate ← 48.00\n    ELSE\n        rate ← 36.00\n    ENDIF\n    fee ← nights * rate\n    IF nights ≥ 7 THEN\n        fee ← fee * 0.9\n    ENDIF\n    RETURN fee\nENDFUNCTION\n```",
     "mistake": "A comment that only says what each line does ('multiplies nights by rate') earns no justification mark. The justification must give a reason linked to the park's rules.",
     "source": "textbook",
     "figures": [
@@ -789,7 +789,7 @@
         "marks": 1
       }
     ],
-    "model": "First, header comments that state what each module does, and what it takes in and returns, let the new developer find the truck-allocation code and understand it without tracing every line, so the change is made sooner. Second, comments that justify processing choices, such as why deliveries are allocated in a particular order, record Tariq's reasoning. Without them, the developer might \"fix\" something that was deliberate and introduce a logic error into the allocation.",
+    "model": "First, header comments that state what each module does, and what it takes in and returns, let the new developer find the truck-allocation code and understand it without tracing every line, so the change is made sooner. Second, comments that justify processing choices, such as why deliveries are allocated in a particular order, record Tariq's reasoning. Without them, the developer might 'fix' something that was deliberate and introduce a logic error into the allocation.",
     "mistake": "'Documentation makes the code easier to understand' earns little on its own. Say what the developer can then do, such as find the module sooner or avoid undoing a deliberate choice.",
     "source": "textbook"
   },
@@ -811,7 +811,7 @@
         "marks": 1
       },
       {
-        "text": "Binary search halves the range still to be searched with each comparison, so a lookup needs at most 16 comparisons against up to 40 000 for a linear search; with hundreds of lookups a day this saves a lot of time.",
+        "text": "Binary search halves the range still to be searched with each comparison, so a lookup needs at most 16 comparisons against up to 40 000 for a linear search; with several hundred lookups a day, the time saved is substantial.",
         "marks": 1
       }
     ],
@@ -826,7 +826,7 @@
     ],
     "commandTerm": "explain",
     "marks": 3,
-    "prompt": "Kestrelwood Research, a Warrnambool market-research firm, has a module that sorts about 50 000 customer records by customer number. It uses selection sort, and the sort takes too long. Explain why replacing selection sort with quick sort would be likely to reduce the sorting time, and identify one situation in which quick sort would lose most of this advantage.",
+    "prompt": "Lookout Point Research, a Warrnambool market-research firm, has a module that sorts about 50 000 customer records by customer number. It uses selection sort, and the sort takes too long. Explain why replacing selection sort with quick sort would be likely to reduce the sorting time, and identify one situation in which quick sort would lose most of this advantage.",
     "points": [
       {
         "text": "Selection sort compares every remaining item on every pass, whatever the starting order, so its comparisons grow with the square of the list size (e.g. about 1.25 billion for 50 000 records).",
@@ -863,11 +863,11 @@
         "marks": 1
       },
       {
-        "text": "Runtime error: line 3 lets `i` reach `n`, so line 4 reads `laps[n]`, one past the last index (`n − 1`): index out of range (accept line 3 or 4).",
+        "text": "Runtime error: line 3 lets `i` reach `n`, so line 4 reads `laps[n]`, one past the last index (`n - 1`): index out of range (accept line 3 or 4).",
         "marks": 1
       }
     ],
-    "model": "Syntax error, line 4: the IF statement has no matching ENDIF, which should follow line 5, so the function can't be translated. Logic error, line 4: `laps[i] > fastest` keeps the highest time, which is the slowest lap; it should be `laps[i] < fastest`. Runtime error, line 3: the loop runs up to `n`, but the last valid index is `n − 1`, so on the final pass line 4 reads `laps[n]` and an index out of range error occurs. The loop should be `FOR i ← 1 TO n - 1`.",
+    "model": "Syntax error, line 4: the IF statement has no matching ENDIF, which should follow line 5, so the function can't be translated. Logic error, line 4: `laps[i] > fastest` keeps the highest time, which is the slowest lap; it should be `laps[i] < fastest`. Runtime error, line 3: the loop runs up to `n`, but the last valid index is `n - 1`, so on the final pass line 4 reads `laps[n]` and an index out of range error occurs. The loop should be `FOR i ← 1 TO n - 1`.",
     "mistake": "Calling the `>` problem a syntax error is a common slip. The line obeys the language's rules but does the wrong thing, which makes it a logic error.",
     "source": "textbook",
     "figures": [
@@ -913,7 +913,7 @@
     ],
     "commandTerm": "complete",
     "marks": 4,
-    "prompt": "Tallis Creek Library in Kyneton charges an overdue fine of $0.50 per day, up to a maximum fine of $10.00. A book returned on time (0 days overdue) has no fine. Complete the test table shown by writing the expected output for (a), (b) and (c), and a suitable input for (d).",
+    "prompt": "Snowgum Lane Library in Kyneton charges an overdue fine of $0.50 per day, up to a maximum fine of $10.00. A book returned on time (0 days overdue) has no fine. Complete the test table shown by writing the expected output for (a), (b) and (c), and a suitable input for (d).",
     "points": [
       {
         "text": "(a) $0.00",

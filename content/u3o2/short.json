@@ -36,10 +36,10 @@
     ],
     "commandTerm": "classify",
     "marks": 3,
-    "prompt": "Merrowvale Freight in Geelong is considering three software projects.\n\n1. Drivers fill in paper delivery dockets, which are often lost, so customers are invoiced weeks late.\n2. The company's insurer will renew its policy only if every truck's pre-trip safety check is recorded electronically. At present drivers record the checks on paper forms, which are complete and accurate.\n3. GPS units already fitted to the trucks could let customers track their deliveries live, a service no local competitor offers.\n\nClassify each project as responding to a problem, a need or an opportunity, and justify each classification.",
+    "prompt": "Firetail Heating and Cooling in Traralgon is considering three software projects.\n\n1. Technicians fill in paper job sheets, which are often lost, so customers are invoiced weeks late.\n2. The company's insurer will renew its policy only if every van's pre-trip safety check is recorded electronically. At present technicians record the checks on paper forms, which are complete and accurate.\n3. GPS units already fitted to the vans could let customers track their technician's arrival live, a service no local competitor offers.\n\nClassify each project as responding to a problem, a need or an opportunity, and justify each classification.",
     "points": [
       {
-        "text": "Project 1: a problem, because the current paper dockets are failing (lost dockets delay invoices)",
+        "text": "Project 1: a problem, because the current paper job sheets are failing (lost job sheets delay invoices)",
         "marks": 1
       },
       {
@@ -51,7 +51,7 @@
         "marks": 1
       }
     ],
-    "model": "Project 1 responds to a problem. The current paper process is falling short: dockets are lost, so customers are invoiced weeks late.\n\nProject 2 responds to a need. Merrowvale must keep electronic records of its safety checks to have its insurance renewed. The paper records are complete and accurate, so nothing is failing; the company has a requirement it can't yet meet.\n\nProject 3 takes an opportunity. The GPS units already in the trucks would let Merrowvale offer live tracking, a service no local competitor provides.",
+    "model": "Project 1 responds to a problem. The current paper process is falling short: job sheets are lost, so customers are invoiced weeks late.\n\nProject 2 responds to a need. Firetail must keep electronic records of its safety checks to have its insurance renewed. The paper records are complete and accurate, so nothing is failing; the company has a requirement it can't yet meet.\n\nProject 3 takes an opportunity. The GPS units already in the vans would let Firetail offer live tracking of each technician's arrival, a service no local competitor provides.",
     "mistake": "A classification with no reason from the scenario usually earns no mark. Say what in the scenario makes it a problem, a need or an opportunity.",
     "source": "textbook"
   },
@@ -62,7 +62,7 @@
     ],
     "commandTerm": "describe",
     "marks": 3,
-    "prompt": "Quollby Pet Supplies has two shops in Wodonga. Stock levels are kept in a spreadsheet that each shop updates at closing time, so products often sell out during the day without anyone noticing. The owner, Declan, wants staff at both shops to see current stock levels on the shop tablets, and has a budget of $8000. Before analysis begins, the developer, Priya, will prepare a brief.\n\nDescribe **three** features that Priya's brief should document, applying each to Quollby Pet Supplies.",
+    "prompt": "Quollby Pet Supplies has two shops in Wodonga. Stock levels are kept in a spreadsheet that each shop updates at closing time, so products often sell out during the day without anyone noticing. The owner, Declan, wants staff at both shops to see current stock levels on the shop tablets, and has a budget of $8000. Before analysis begins, the developer, Minh, will prepare a brief.\n\nDescribe **three** features that Minh's brief should document, applying each to Quollby Pet Supplies.",
     "points": [
       {
         "text": "Background or current situation, applied (e.g. two shops in Wodonga; stock kept in a spreadsheet updated only at closing time)",
@@ -513,10 +513,10 @@
     ],
     "commandTerm": "explain",
     "marks": 4,
-    "prompt": "Sienna is developing a volunteer rostering app for Saltmarsh Point Surf Rescue in Torquay. The club has a $3000 grant for the project, and the app must be ready before patrols start on 1 December. The app must run on the club's two older laptops and on volunteers' own phones.\n\nIdentify **two** constraints on Sienna's project and explain how each could affect the design or development of the app.",
+    "prompt": "Sienna is developing a volunteer rostering app for Boobialla Beach Surf Rescue in Inverloch. The club has a $3000 grant for the project, and the app must be ready before patrols start on 1 December. The app must run on the club's two older laptops, which have little memory.\n\nIdentify **two** constraints on Sienna's project and explain how each could affect the design or development of the app.",
     "points": [
       {
-        "text": "Identifies a first constraint from the scenario: the $3000 budget, the 1 December deadline, or having to run on the older laptops and volunteers' phones",
+        "text": "Identifies a first constraint from the scenario: the $3000 budget, the 1 December deadline, or having to run on the club's two older laptops",
         "marks": 1
       },
       {
@@ -528,11 +528,11 @@
         "marks": 1
       },
       {
-        "text": "Explains how the second constraint affects the design or development, e.g. the older laptops mean a lightweight, browser-based app; or the 1 December deadline means lower-priority features are left out",
+        "text": "Explains how the second constraint affects the design or development, e.g. the older laptops mean a lightweight app that runs without powerful hardware; or the 1 December deadline means lower-priority features are left out",
         "marks": 1
       }
     ],
-    "model": "One constraint is the $3000 grant. Sienna can't afford paid libraries, paid hosting or extra developers, so she will need free development tools and low-cost hosting, and may have to leave out features that would cost more to build.\n\nAnother constraint is that the app must run on the club's two older laptops and on volunteers' own phones. Sienna will need a lightweight app that runs in a web browser, rather than one that needs powerful hardware or a single operating system, and she must test it on the older laptops and on a range of phones.",
+    "model": "One constraint is the $3000 grant. Sienna can't afford paid libraries, paid hosting or extra developers, so she will need free development tools and low-cost hosting, and may have to leave out features that would cost more to build.\n\nAnother constraint is that the app must run on the club's two older laptops, which have little memory. Sienna will need a lightweight app that runs well without powerful hardware, and she must test it on those laptops before patrols start.",
     "mistake": "Copying a constraint from the scenario earns only the identify mark. The explanation must say what Sienna will do differently because of it.",
     "source": "textbook"
   },
@@ -566,7 +566,7 @@
     ],
     "commandTerm": "explain",
     "marks": 3,
-    "prompt": "Talia is developing a rostering app for Pelican Reef Surf Life Saving Club in Warrnambool. The SRS states that the app will roster volunteers onto beach patrols and send patrol reminders, and that it will not manage merchandise or membership payments. Halfway through development, the club president asks Talia to add an online shop for club merchandise.\n\nExplain how the documented scope helps Talia respond to this request.",
+    "prompt": "Talia is developing a rostering app for Plover Point Surf Life Saving Club in Warrnambool. The SRS states that the app will roster volunteers onto beach patrols and send patrol reminders, and that it will not manage merchandise or membership payments. Halfway through development, the club president asks Talia to add an online shop for club merchandise.\n\nExplain how the documented scope helps Talia respond to this request.",
     "points": [
       {
         "text": "States that the scope sets out what the app will and will not do, and that merchandise is explicitly excluded",
@@ -592,7 +592,7 @@
     ],
     "commandTerm": "write",
     "marks": 2,
-    "prompt": "Redgum Flat Tennis Club in Mildura wants an app so that members can book courts online. Court hire will still be paid at the clubhouse, and coaching lessons will continue to be booked through the coach's own system.\n\nWrite **two** scope statements for the app: one stating something the app will do, and one stating something it will not do.",
+    "prompt": "Bluebush Tennis Club in Mildura wants an app so that members can book courts online. Court hire will still be paid at the clubhouse, and coaching lessons will continue to be booked through the coach's own system.\n\nWrite **two** scope statements for the app: one stating something the app will do, and one stating something it will not do.",
     "points": [
       {
         "text": "A statement of what the app will do that fits the scenario, e.g. the app will let members book courts online",
@@ -614,7 +614,7 @@
     ],
     "commandTerm": "explain",
     "marks": 4,
-    "prompt": "Tallowood Pantry, a food relief charity in Warragul, is having a system developed to manage food parcels. Clients request parcels, suppliers send details of donations, volunteers receive packing lists and the manager receives stock reports. Stock records will be stored within the new system.\n\nThe context diagram drawn for the system is shown. It contains two convention errors.\n\nIdentify **two** errors in the context diagram and explain how each should be corrected.",
+    "prompt": "Correa Lane Pantry, a food relief charity in Warragul, is having a system developed to manage food parcels. Clients request parcels, suppliers send details of donations, volunteers receive packing lists and the manager receives stock reports. Stock records will be stored within the new system.\n\nThe context diagram drawn for the system is shown. It contains two convention errors.\n\nIdentify **two** errors in the context diagram and explain how each should be corrected.",
     "points": [
       {
         "text": "Identifies that *Stock records* is drawn as an external entity, although it is data stored within the system",
@@ -1003,7 +1003,7 @@
         "marks": 1
       }
     ],
-    "model": "First, the team should use version control, with version numbers such as `booking_v1.3.py` instead of names like `app_final2.py`. At the moment neither developer can tell which file is current, and when Sione saved over the working code there was no earlier version to go back to. With each change kept as a new version, they could restore the last working version and see what changed.\n\nSecond, they should back up the project every day and keep at least one copy away from Ari's laptop, such as in cloud storage or on a drive kept at another location. All of the dive school's project files are on one laptop, so if it failed, was lost or was stolen, the whole project would be gone.",
+    "model": "First, the team should keep its code in a version control system, or at least save each change as a new numbered version such as `booking_v1.3.py` instead of names like `app_final2.py`. At the moment neither developer can tell which file is current, and when Sione saved over the working code there was no earlier version to go back to. With every change kept, they could restore the last working version, and a version control system would also show what changed and who changed it.\n\nSecond, they should back up the project every day and keep at least one copy away from Ari's laptop, such as in cloud storage or on a drive kept at another location. All of the dive school's project files are on one laptop, so if it failed, was lost or was stolen, the whole project would be gone.",
     "mistake": "Recommending 'back up the files' without saying where the copy is kept, or how it solves this team's problem, earns only part of the marks.",
     "source": "textbook"
   },
@@ -1116,7 +1116,7 @@
       }
     ],
     "model": "Efficiency: a patient can complete check-in at the kiosk in under 60 seconds. This could be measured by timing a sample of patients as they check in over a week and comparing the times with how long patients previously spent queuing at reception.\n\nEffectiveness: every check-in is matched to the correct patient's appointment. This could be measured by comparing a week of kiosk check-ins with the clinic's appointment records and counting any check-ins matched to the wrong appointment, with a target of none.",
-    "mistake": "Criteria such as \"the kiosk is fast\" or \"the kiosk works well\" can't be measured. Give a figure or a condition that can be checked.",
+    "mistake": "Criteria such as 'the kiosk is fast' or 'the kiosk works well' can't be measured. Give a figure or a condition that can be checked.",
     "source": "textbook"
   },
   {
@@ -1126,10 +1126,10 @@
     ],
     "commandTerm": "explain",
     "marks": 3,
-    "prompt": "Poppy is designing a lost-property app for Sandpiper Beach Surf Club in Torquay. One requirement is that a volunteer on patrol can log a found item, with a photo and a description. Poppy's draft evaluation criterion is: \"The app is good for volunteers.\"\n\nExplain why this criterion is unsuitable, and rewrite it so that it could be used to evaluate the app.",
+    "prompt": "Poppy is designing a lost-property app for Sandpiper Beach Surf Club in Torquay. One requirement is that a volunteer on patrol can log a found item, with a photo and a description. Poppy's draft evaluation criterion is: 'The app is good for volunteers.'\n\nExplain why this criterion is unsuitable, and rewrite it so that it could be used to evaluate the app.",
     "points": [
       {
-        "text": "Explains that \"good\" is vague and can't be measured, so different evaluators could reach different judgements",
+        "text": "Explains that 'good' is vague and can't be measured, so different evaluators could reach different judgements",
         "marks": 1
       },
       {
@@ -1141,7 +1141,7 @@
         "marks": 1
       }
     ],
-    "model": "\"Good\" can't be measured, so two people evaluating the app could reach different conclusions, and neither could show that the criterion had been met. The criterion also doesn't say which requirement it tests, or whether it concerns efficiency or effectiveness. A better criterion is: \"A volunteer on patrol can log a found item, including a photo and a description, in under one minute.\" This ties the criterion to the logging requirement, and it can be checked by timing volunteers as they log items.",
+    "model": "'Good' can't be measured, so two people evaluating the app could reach different conclusions, and neither could show that the criterion had been met. The criterion also doesn't say which requirement it tests, or whether it concerns efficiency or effectiveness. A better criterion is: 'A volunteer on patrol can log a found item, including a photo and a description, in under one minute.' This ties the criterion to the logging requirement, and it can be checked by timing volunteers as they log items.",
     "source": "textbook"
   },
   {
@@ -1171,7 +1171,7 @@
       }
     ],
     "model": "| Input | Processing | Output |\n|:--|:--|:--|\n| hoursParked | Multiply hoursParked by 4.50 to get parkingFee. If parkingFee is more than 22.00, set parkingFee to 22.00. | parkingFee (displayed) |",
-    "mistake": "Putting the $4.50 rate or the $22.00 cap in the Output column, or writing \"calculate fee\" as an output. The output is the fee itself; the calculation and the cap are processing.",
+    "mistake": "The $4.50 rate, the $22.00 cap and 'calculate fee' don't belong in the Output column. The output is the fee itself; the calculation and the cap are processing.",
     "source": "textbook",
     "figures": [
       {
@@ -1221,7 +1221,7 @@
       }
     ],
     "model": "| Element | Name | Data type or description |\n|:--|:--|:--|\n| Property | registration | String |\n| Property | hourlyRate | Floating point |\n| Property | isAvailable | Boolean |\n| Method | calculateCost(hours) | Returns hours multiplied by hourlyRate |",
-    "mistake": "Listing an action such as calculateCost as a property, or giving a property with no data type. Properties are data and need a type; methods are actions.",
+    "mistake": "An action such as `calculateCost` isn't a property, and every property needs a data type. Properties are data; methods are actions.",
     "source": "textbook",
     "figures": [
       {
@@ -1397,7 +1397,7 @@
             "y": 172,
             "w": 208,
             "h": 120,
-            "text": "Morning paddle, Sunset paddle, Full-day trip"
+            "text": "Morning paddle\nSunset paddle\nFull-day trip"
           },
           {
             "type": "button",

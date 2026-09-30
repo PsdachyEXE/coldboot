@@ -112,35 +112,19 @@
     "prompt": "Pardalote Health Software, a Bendigo company with 120 staff, develops a patient portal for medical clinics. Its current development practices are shown in the table.\n\nIdentify two vulnerabilities in these practices and explain a risk that each creates for Pardalote Health Software.",
     "points": [
       {
-        "text": "Any two vulnerabilities, 1 mark each. Development, testing and release all happen on the server that runs the live patient portal",
+        "text": "Identifies a first vulnerability from the table, e.g. development, testing and release all happen on the live portal's server; the six developers share one administrator login; new features are tested with a copy of real patient data; or third-party libraries are not updated promptly",
         "marks": 1
       },
       {
-        "text": "Risk of the shared server (1 mark if this vulnerability is one of the two): an untested change or mistake could take the patient portal offline or expose patient records to other users",
+        "text": "Explains a risk the first vulnerability creates for Pardalote, e.g. an untested change takes the portal offline or exposes patient records; no action can be traced to one developer and one person's access can't be removed alone; a breach of the less protected test copy exposes patients' health information; or attackers exploit publicly known library flaws",
         "marks": 1
       },
       {
-        "text": "Any two vulnerabilities, 1 mark each. The six developers share one administrator login",
+        "text": "Identifies a second, different vulnerability from the table",
         "marks": 1
       },
       {
-        "text": "Risk of the shared login (1 mark if this vulnerability is one of the two): no action can be traced to one developer, so misuse or mistakes can't be investigated, and access can't be removed from one developer without changing it for all",
-        "marks": 1
-      },
-      {
-        "text": "Any two vulnerabilities, 1 mark each. New features are tested with a copy of real patient data",
-        "marks": 1
-      },
-      {
-        "text": "Risk of real test data (1 mark if this vulnerability is one of the two): patients' health information sits in a less protected environment where more people can see it, so a breach of the test copy exposes it",
-        "marks": 1
-      },
-      {
-        "text": "Any two vulnerabilities, 1 mark each. Third-party libraries are not updated promptly",
-        "marks": 1
-      },
-      {
-        "text": "Risk of outdated libraries (1 mark if this vulnerability is one of the two): attackers can exploit publicly known flaws in them to reach the portal or patient data",
+        "text": "Explains a risk the second vulnerability creates (as in the examples above)",
         "marks": 1
       }
     ],
@@ -208,35 +192,19 @@
     "prompt": "Mallee Rise Water, a regional water corporation with 350 staff, has eight in-house developers. They log in to every system with a username and password, and every developer has administrator access to the live billing system, which stores customers' names, addresses and bank account details.\n\nRecommend two software security controls that would better protect the billing data, and explain how each would protect it.",
     "points": [
       {
-        "text": "Any two controls, 1 mark each. Multi-factor authentication for developer logins",
+        "text": "Recommends a first software control, e.g. multi-factor authentication for developer logins; least privilege through identity and access management; encryption of the stored billing data; or separate development, testing and production environments",
         "marks": 1
       },
       {
-        "text": "How multi-factor authentication protects the data (1 mark if it is one of the two): a stolen or guessed password is no longer enough on its own to reach the billing system",
+        "text": "Explains how the first control protects the billing data, e.g. a stolen password alone no longer reaches the system; fewer accounts can read or change bank details; copied bank details can't be read without the key; or developers work with invented data and don't need live access",
         "marks": 1
       },
       {
-        "text": "Any two controls, 1 mark each. Identity and access management with least privilege, such as role-based access",
+        "text": "Recommends a second, different control",
         "marks": 1
       },
       {
-        "text": "How least privilege protects the data (1 mark if it is one of the two): developers get only the access their role needs, so fewer accounts can read or change customers' bank details",
-        "marks": 1
-      },
-      {
-        "text": "Any two controls, 1 mark each. Encryption of the stored billing data",
-        "marks": 1
-      },
-      {
-        "text": "How encryption protects the data (1 mark if it is one of the two): bank details copied from the database can't be read without the key",
-        "marks": 1
-      },
-      {
-        "text": "Any two controls, 1 mark each. Separate development, testing and production environments",
-        "marks": 1
-      },
-      {
-        "text": "How separation protects the data (1 mark if it is one of the two): developers build and test with invented data and don't need access to the live billing system",
+        "text": "Explains how the second control protects the billing data (as in the examples above)",
         "marks": 1
       }
     ],
@@ -549,26 +517,27 @@
     ],
     "commandTerm": "propose",
     "marks": 4,
-    "prompt": "At Boobook Surveying, a Horsham company, the three developers share one administrator login for the code repository and the live server. They test new features on the live server during business hours.\n\nFor each of these two practices, propose a measure that would reduce the risk, and explain how it reduces the risk.",
+    "prompt": "Boobook Surveying, a Horsham company, has three developers who build its survey-processing software. Each developer keeps a full copy of the source code on a laptop that they take home and to job sites, and the laptops' drives are not encrypted. The office server that holds the code repository and the client database is backed up once a month.\n\nFor each of these two practices, propose a measure that would reduce the risk, and explain how it reduces the risk.",
     "points": [
       {
-        "text": "Shared administrator login: proposes individual accounts for each developer, with only the rights each needs (least privilege), optionally with multi-factor authentication",
+        "text": "Unencrypted laptops: proposes encrypting each laptop's whole drive (encryption at rest)",
         "marks": 1
       },
       {
-        "text": "Explains: actions can be traced to one person, and a stolen or misused login gives access only to what that developer needs",
+        "text": "Explains: if a laptop is lost or stolen, the source code on it can't be read without the key, so the thief gets the hardware but not the code or any secrets in it",
         "marks": 1
       },
       {
-        "text": "Testing on the live server: proposes a separate testing environment, with changes released to the live server only after they pass testing",
+        "text": "Monthly backups: proposes automatic backups at least daily, optionally kept offline or off-site with restores tested",
         "marks": 1
       },
       {
-        "text": "Explains: faulty or unfinished code can't crash the live system or corrupt live data while staff are using it",
+        "text": "Explains: if the server fails, is attacked or files are deleted by mistake, the code and client data can be restored with at most a day's work lost, instead of up to a month's",
         "marks": 1
       }
     ],
-    "model": "Shared administrator login: each developer should have their own account with only the rights they need, protected by multi-factor authentication. Actions on the repository and server can then be traced to a person, and if one login is stolen the attacker gains only that developer's limited access, not full administrator control.\n\nTesting on the live server: Boobook should set up a separate testing environment and move changes to the live server only after they pass testing. Faulty or unfinished features then can't crash the live system or corrupt survey data while staff are using it.",
+    "model": "Unencrypted laptops: Boobook should encrypt the whole drive of every developer's laptop. If a laptop is lost or stolen at a job site, the source code on it can't be read without the key, so the thief gets the hardware but not the company's code.\n\nMonthly backups: Boobook should back up the server automatically every night. If the server fails, is hit by ransomware or files are deleted by mistake, the repository and client database can be restored with at most one day's work lost, rather than up to a month's.",
+    "mistake": "Encrypting data in transit doesn't protect a stolen laptop. The code on its drive is stored data, so it needs encryption at rest.",
     "source": "textbook"
   },
   {
@@ -619,7 +588,7 @@
     ],
     "commandTerm": "recommend",
     "marks": 4,
-    "prompt": "Pardalote Rostering, a Ballarat company, builds rostering software for aged-care providers. An evaluation of its development practices produced the findings shown.\n\nRecommend two improvements to Pardalote Rostering's development practices. Justify each recommendation with reference to the findings.",
+    "prompt": "Myrtle Beech Rostering, a Ballarat company, builds rostering software for aged-care providers. An evaluation of its development practices produced the findings shown.\n\nRecommend two improvements to Myrtle Beech Rostering's development practices. Justify each recommendation with reference to the findings.",
     "points": [
       {
         "text": "Recommendation 1: a specific action that addresses one finding, e.g. require a second developer to approve every change before it is merged",
@@ -638,12 +607,12 @@
         "marks": 1
       }
     ],
-    "model": "Recommendation 1: Pardalote should require a second developer to review and approve every change before it can be merged. At present developers merge their own changes, so errors and security flaws, such as the live database password written into three source files, reach the live system unnoticed. A reviewer would catch these before release.\n\nRecommendation 2: Pardalote should immediately disable the repository accounts of the two developers who left in June, and review all access each month. Former staff no longer need access, and their accounts could be used to copy or change the rostering code without anyone noticing.",
+    "model": "Recommendation 1: Myrtle Beech Rostering should require a second developer to review and approve every change before it can be merged. At present developers merge their own changes, so errors and security flaws, such as the live database password written into three source files, reach the live system unnoticed. A reviewer would catch these before release.\n\nRecommendation 2: Myrtle Beech Rostering should immediately disable the repository accounts of the two developers who left in June, and review all access each month. Former staff no longer need access, and their accounts could be used to copy or change the rostering code without anyone noticing.",
     "mistake": "A recommendation that could apply to any company, such as 'use better security', earns little. Name the finding it fixes and the risk it removes.",
     "source": "textbook",
     "figures": [
       {
-        "id": "pardalote-findings",
+        "id": "myrtle-beech-findings",
         "kind": "table",
         "title": "Evaluation findings",
         "columns": [
@@ -680,7 +649,7 @@
     ],
     "commandTerm": "recommend",
     "marks": 3,
-    "prompt": "Stringybark Credit Co-operative in Traralgon lets its developers paste customers' account records into a public AI chatbot to help them find the causes of errors.\n\nRecommend one change to this practice. Justify your recommendation, and describe how the co-operative could check that the change is being followed.",
+    "prompt": "Antechinus Credit Co-operative in Traralgon lets its developers paste customers' account records into a public AI chatbot to help them find the causes of errors.\n\nRecommend one change to this practice. Justify your recommendation, and describe how the co-operative could check that the change is being followed.",
     "points": [
       {
         "text": "Recommends a specific change, e.g. a rule that developers never enter real customer records into AI tools and use made-up or de-identified records instead",
