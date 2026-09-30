@@ -13,7 +13,7 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Markdown | `src/content/markdown.ts`, `src/ui/Markdown.tsx` | markdown-it, HTML off; ```` ```pseudo ```` fences get numbered, highlighted listings |
 | Content checker | `src/content/check.ts`, `scripts/content-check.ts`, `tests/content.test.ts` | |
 | Command terms | `src/content/commandTerms.ts` | |
-| Terminal output blocks | `src/terminal/blocks.ts` | `TerminalBlock` union; plain data |
+| Terminal output blocks | `src/terminal/blocks.ts` | `TerminalBlock` union; plain data. A `figure` block may carry `highlight` and `compact`, passed to `FigureView`; the speech digest reads out marked elements |
 | Games | `src/games/types.ts` | `Game`, `GameSession`, `GameContext`, `AnswerResult`, `GameSummary`, `GameMeta`, `QuizItem`, `CheckResult`; `markdown` on `AnswerResult`/`CheckResult` marks feedback from bundled content; `GameSession.unavailable` holds blocks explaining why a game can't run (the host prints them and starts nothing); `GameMeta.fixedDifficulty` marks a one-level game (blitz, daily) |
 | Quiz engine | `src/games/engine.ts`, `src/games/answers.ts`, `src/games/mcq.ts` | `createQuizSession` over a `QuizItem` list or a seeded generator (round of 10, timed rounds, `exposeItemIds`, `resumeScores` to resume a list after items answered in an earlier sitting, `intro` blocks shown once above the first prompt); `unavailableSession(gameId, blocks)`; lenient answer parsers; `mcqItem` for content MCQs |
 | Game registry | `src/games/registry.ts` | `GAMES` (what `ls`, `man`, `play` and completion see; the seven P0 games in the brief's order: deskcheck, sort, search, triage, validate, blitz, daily), `findGame`, `DRILL_GAME` |

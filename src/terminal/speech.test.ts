@@ -26,6 +26,22 @@ describe('terminal speech digest', () => {
     expect(blockToSpeech({ kind: 'pseudo', code: 'BEGIN\n    DISPLAY a[1]\nEND', indexBase: 1 })).toBe('Pseudocode listing, 3 lines, shown in the terminal. Array indexes start at 1.');
   });
 
+  it('names a figure and reads out its marked elements', () => {
+    const figure = {
+      id: 'f',
+      kind: 'context' as const,
+      width: 400,
+      height: 200,
+      system: { label: 'Booking system', x: 200, y: 100 },
+      entities: [{ id: 'customer', label: 'Customer', x: 60, y: 100 }],
+      flows: [{ id: 'f1', from: 'customer', to: 'system', label: 'booking_request' }],
+    };
+    expect(blockToSpeech({ kind: 'figure', figure })).toBe('Figure: context.');
+    expect(blockToSpeech({ kind: 'figure', figure: { ...figure, title: 'Bookings' }, highlight: ['f1', 'customer'] })).toBe(
+      'Figure: Bookings. Marked: A: booking_request from Customer (external entity) to Booking system (the system); B: Customer (external entity).',
+    );
+  });
+
   it('caps long digests on a word boundary', () => {
     const long = blocksToSpeech([{ kind: 'text', text: 'word '.repeat(500) }], 100);
     expect(long.length).toBeLessThan(160);

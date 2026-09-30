@@ -4,6 +4,8 @@
  * terminal announces one plain-text digest of what it printed through announce(). Answer feedback
  * leads the digest ("Correct." or "Incorrect. Expected: ..."), followed by the next question.
  */
+import { describeFigure } from '../figures/describe';
+import { highlightMarkers } from '../figures/highlight';
 import { announce } from '../ui/announce';
 import type { TerminalBlock } from './blocks';
 import { useTerminalSession } from './session';
@@ -42,8 +44,13 @@ export function blockToSpeech(b: TerminalBlock): string {
       const rows = [b.columns, ...b.rows].map((r) => sentence(r.join(', ')));
       return [b.caption ? sentence(b.caption) : '', ...rows].filter(Boolean).join(' ');
     }
-    case 'figure':
-      return sentence(`Figure: ${b.figure.title ?? b.figure.kind}`);
+    case 'figure': {
+      // Marked elements are read out, so a question about "the element marked B" can be answered
+      // without the picture. The full text description sits below the figure.
+      const marked = b.highlight ? describeFigure(b.figure, highlightMarkers(b.highlight)).sections.find((s) => s.heading === 'Marked on the figure') : undefined;
+      const tail = marked ? ` Marked: ${marked.items.join('; ')}.` : '';
+      return `${sentence(`Figure: ${b.figure.title ?? b.figure.kind}`)}${tail}`;
+    }
     case 'link':
       return sentence(`Link: ${b.label}`);
     case 'list':

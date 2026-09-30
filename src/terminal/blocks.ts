@@ -4,6 +4,7 @@
  * Blocks are plain data so games stay pure and testable; src/terminal renders them.
  */
 import type { Figure } from '../content/schema';
+import type { Highlight } from '../figures/highlight';
 
 export type Tone = 'normal' | 'muted' | 'accent' | 'correct' | 'incorrect' | 'warning';
 
@@ -15,7 +16,11 @@ export type TerminalBlock =
   /** Highlighted pseudocode with line numbers. State the index base whenever arrays appear. */
   | { kind: 'pseudo'; code: string; title?: string; indexBase?: 0 | 1; highlightLines?: number[] }
   | { kind: 'table'; columns: string[]; rows: string[][]; caption?: string }
-  | { kind: 'figure'; figure: Figure }
+  /**
+   * A figure drawn by FigureView. `highlight` rings elements with text markers (ids marked A, B,
+   * C, ... or an id-to-marker map; see src/figures/highlight.ts); `compact` tightens the spacing.
+   */
+  | { kind: 'figure'; figure: Figure; highlight?: Highlight; compact?: boolean }
   /** A link into an app route (hash path such as "/drill?kk=U3O1-KK04"). */
   | { kind: 'link'; label: string; to: string }
   | { kind: 'list'; items: string[]; ordered?: boolean }

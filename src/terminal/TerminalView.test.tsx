@@ -186,4 +186,11 @@ describe('block renderer', () => {
     const { container } = renderBlock({ kind: 'figure', figure: { id: 'f', kind: 'pseudocode', code: 'DISPLAY 1', title: 'Listing' } });
     expect(container.querySelector('[data-figure="pseudocode"]')).not.toBeNull();
   });
+
+  it('passes highlight markers and compact spacing to the figure', () => {
+    const { container } = renderBlock({ kind: 'figure', figure: { id: 'f', kind: 'pseudocode', code: 'DISPLAY 1\nDISPLAY 2', title: 'Listing' }, highlight: { '2': 'A' }, compact: true });
+    const figure = container.querySelector('[data-figure="pseudocode"]')!;
+    expect(figure.className).toMatch(/compact/);
+    expect(figure.textContent).toContain('Marked: line 2 (A).');
+  });
 });
