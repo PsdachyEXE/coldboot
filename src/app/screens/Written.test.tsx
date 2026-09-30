@@ -164,6 +164,40 @@ describe('Written', () => {
     ]);
   });
 
+  it('moves focus to Next question after answering a case study question', () => {
+    // The case study keeps each answer and passes it straight back as the question's saved answer.
+    renderWritten('/written?cs=cs-01');
+    fireEvent.click(screen.getAllByRole('radio')[2]);
+    fireEvent.click(screen.getByRole('button', { name: 'Check answer' }));
+    expect(screen.getByRole('button', { name: 'Next question' })).toHaveFocus();
+  });
+
+  it('keeps focus on the page after answering the last case study question, which has no next action', () => {
+    renderWritten('/written?cs=cs-01&q=cs-01-q02');
+    fireEvent.change(screen.getByLabelText('Your answer'), { target: { value: 'A range check on weight.' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Show model answer' }));
+    fireEvent.click(screen.getAllByRole('checkbox')[0]);
+    const save = screen.getByRole('button', { name: 'Save score' });
+    save.focus();
+    fireEvent.click(save);
+    expect(screen.queryByRole('button', { name: 'Next question' })).toBeNull();
+    expect(screen.getByText('Score saved: 1 of 2 marks.')).toHaveFocus();
+  });
+
+  it('keeps focus on the verdict after checking a last case study question that is multiple choice', () => {
+    const base = fxCaseStudy('cs-02');
+    const mcqLast: typeof base = { ...base, questions: [base.questions[1], base.questions[0]] };
+    provideContent(fixtureIndex({ short: [item], caseStudies: [mcqLast] }));
+    renderWritten('/written?cs=cs-02&q=cs-02-q01');
+    fireEvent.click(screen.getAllByRole('radio')[2]);
+    const checkAnswer = screen.getByRole('button', { name: 'Check answer' });
+    checkAnswer.focus();
+    fireEvent.click(checkAnswer);
+    expect(screen.queryByRole('button', { name: 'Check answer' })).toBeNull();
+    // The verdict and explanation, which Feedback also announces.
+    expect(document.activeElement).toHaveTextContent(/^✓ Correct/);
+  });
+
   it('shows the insert beside the question on wide screens', () => {
     vi.stubGlobal('matchMedia', (query: string) => ({ matches: query.includes('min-width: 1100px'), media: query, addEventListener: () => {}, removeEventListener: () => {} }));
     renderWritten('/written?cs=cs-01');
