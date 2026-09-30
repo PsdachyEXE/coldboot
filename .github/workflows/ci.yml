@@ -41,3 +41,64 @@ jobs:
         run: npm run installer:lint
       - name: Build (Pages base path)
         run: npm run build
+
+  # Parse both installer scripts and run PSScriptAnalyzer on Windows before anything reaches main, so the
+  # post-deploy installer job in deploy.yml never meets a static problem for the first time.
+  installer-static:
+    name: Installer static checks (${{ matrix.label }})
+    runs-on: windows-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - shell: powershell
+            label: Windows PowerShell 5.1
+          - shell: pwsh
+            label: PowerShell 7
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Parse both scripts
+        run: |
+          foreach ($file in 'install.ps1', 'uninstall.ps1') {
+            $tokens = $null
+            $parseErrors = $null
+            $path = (Resolve-Path -LiteralPath $file).Path
+            $null = [System.Management.Automation.Language.Parser]::ParseFile($path, [ref] $tokens, [ref] $parseErrors)
+            if ($parseErrors.Count -gt 0) {
+              foreach ($parseError in $parseErrors) {
+                Write-Host "$($file):$($parseError.Extent.StartLineNumber): $($parseError.Message)"
+              }
+              throw "$file doesn't parse under PowerShell $($PSVersionTable.PSVersion)."
+            }
+            Write-Host "$file parses under PowerShell $($PSVersionTable.PSVersion)."
+          }
+
+      - name: Analyse both scripts with PSScriptAnalyzer
+        run: |
+          # Rules left out on purpose. Keep this list short, with a reason for each.
+          #  - PSAvoidUsingWriteHost: both scripts talk to a person at a console, and coloured text is the point.
+          $excludedRules = @('PSAvoidUsingWriteHost')
+          if (-not (Get-Module -ListAvailable -Name PSScriptAnalyzer)) {
+            if ($PSVersionTable.PSEdition -eq 'Desktop') {
+              # Windows PowerShell 5.1 needs the NuGet provider before it can install from the Gallery.
+              $null = Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Scope CurrentUser -Force
+            }
+            Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
+          }
+          Import-Module -Name PSScriptAnalyzer
+          Write-Host "PSScriptAnalyzer $((Get-Module -Name PSScriptAnalyzer).Version)"
+          $findings = @()
+          foreach ($file in 'install.ps1', 'uninstall.ps1') {
+            $findings += @(Invoke-ScriptAnalyzer -Path $file -ExcludeRule $excludedRules)
+          }
+          # Information findings are shown but don't fail the job. Errors, warnings and parse errors do.
+          $findings | Format-Table -Property ScriptName, Line, Severity, RuleName, Message -AutoSize -Wrap | Out-String -Width 400 | Write-Host
+          $blocking = @($findings | Where-Object { $_.Severity -ne 'Information' })
+          if ($blocking.Count -gt 0) {
+            throw "PSScriptAnalyzer reported $($blocking.Count) error(s) or warning(s)."
+          }
+          Write-Host 'PSScriptAnalyzer reported no errors or warnings.'
