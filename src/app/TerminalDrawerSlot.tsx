@@ -7,7 +7,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { whenIdle } from '../lib/idle';
-import { isEditable } from '../terminal/dom';
+import { isEditable, modalDialogOpen } from '../terminal/dom';
 import { focusRouteInput } from '../terminal/routeFocus';
 import { useTerminal } from '../terminal/useTerminal';
 import { paths } from './paths';
@@ -40,7 +40,7 @@ export function TerminalDrawerSlot() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== '`' || e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented) return;
       if (e.target instanceof Element && e.target.closest('[data-terminal-input]')) return;
-      if (isEditable(e.target)) return;
+      if (isEditable(e.target) || modalDialogOpen()) return;
       e.preventDefault();
       if (onRoute) focusRouteInput();
       else useTerminal.getState().setOpen(true);

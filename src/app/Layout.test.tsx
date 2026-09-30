@@ -112,6 +112,33 @@ describe('Layout', () => {
     await waitFor(() => expect(screen.getByRole('main')).toHaveFocus());
   });
 
+  it('moves focus to the main column when a navigation within the same route drops it', async () => {
+    onboard();
+    const router = renderAt('/about');
+    await screen.findByRole('heading', { level: 1, name: 'About COLDBOOT' });
+    expect(document.activeElement).toBe(document.body);
+    // For example "Change drill" (/drill?mode=random to /drill): the button that had focus is gone.
+    await act(async () => {
+      await router.navigate('/about?from=link');
+    });
+    await waitFor(() => expect(screen.getByRole('main')).toHaveFocus());
+  });
+
+  it('leaves focus alone after a navigation within the same route when something still has it', async () => {
+    onboard();
+    const router = renderAt('/about');
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+    const link = within(nav).getByRole('link', { name: 'About' });
+    link.focus();
+    await act(async () => {
+      await router.navigate('/about?from=link');
+    });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 20));
+    });
+    expect(link).toHaveFocus();
+  });
+
   it('uses five tabs and a More menu below 720 px', async () => {
     onboard();
     narrowScreen();
@@ -131,6 +158,22 @@ describe('Layout', () => {
     expect(more).toHaveFocus();
     // The phone header keeps the terminal button for touch.
     expect(screen.getByRole('button', { name: 'Open terminal' })).toBeInTheDocument();
+  });
+
+  it('closes the More menu when keyboard focus leaves it, so it never covers the focused control', async () => {
+    onboard();
+    narrowScreen();
+    renderAt('/');
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+    const more = within(nav).getByRole('button', { name: 'More' });
+    fireEvent.click(more);
+    const about = within(nav).getByRole('link', { name: 'About' });
+    // Moving within the menu keeps it open.
+    act(() => about.focus());
+    expect(more).toHaveAttribute('aria-expanded', 'true');
+    // Tab past the last item into the page.
+    act(() => screen.getByRole('link', { name: 'Skip to main content' }).focus());
+    expect(more).toHaveAttribute('aria-expanded', 'false');
   });
 
   it('closes the More menu after choosing an item, and marks More as current there', async () => {

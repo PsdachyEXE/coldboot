@@ -84,7 +84,8 @@ export function TabBar() {
   const moreRef = useRef<HTMLButtonElement>(null);
   const moreActive = MORE_ITEMS.some((name) => location.pathname === paths[name]);
 
-  // Esc or a tap outside closes it; Esc puts focus back on More.
+  // Esc, a tap outside or focus moving outside (Tab past the last item) closes it; Esc puts focus
+  // back on More. Focus is checked where it lands, so a click on a menu link is never swallowed.
   useEffect(() => {
     if (!moreOpen) return;
     const onKey = (e: KeyboardEvent) => {
@@ -93,14 +94,16 @@ export function TabBar() {
         moreRef.current?.focus();
       }
     };
-    const onPointer = (e: PointerEvent) => {
+    const outside = (e: Event) => {
       if (navRef.current && e.target instanceof Node && !navRef.current.contains(e.target)) setOpenOn(null);
     };
     document.addEventListener('keydown', onKey);
-    document.addEventListener('pointerdown', onPointer);
+    document.addEventListener('pointerdown', outside);
+    document.addEventListener('focusin', outside);
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.removeEventListener('pointerdown', onPointer);
+      document.removeEventListener('pointerdown', outside);
+      document.removeEventListener('focusin', outside);
     };
   }, [moreOpen]);
 

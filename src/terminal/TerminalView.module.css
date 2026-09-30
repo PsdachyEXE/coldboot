@@ -172,7 +172,8 @@
 
 /*
  * Phones: the chips stay on one row that scrolls sideways, so they never take three rows of a
- * short screen. The chips are buttons, so keyboard focus scrolls each one into view.
+ * short screen. A chip scrolls itself into view when it takes focus (TerminalChips), since the
+ * browser leaves a partly visible one where it is.
  */
 @media (max-width: 719.98px) {
   .chipRow {

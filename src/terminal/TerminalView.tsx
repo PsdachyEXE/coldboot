@@ -2,7 +2,7 @@
  * The terminal itself: the output log, the prompt with a real <input>, and tappable chips. The
  * drawer and the full-screen route both render this over the one shared session.
  */
-import { useLayoutEffect, useRef, useState, type FormEvent, type KeyboardEvent, type MouseEvent, type RefObject } from 'react';
+import { useLayoutEffect, useRef, useState, type FocusEvent, type FormEvent, type KeyboardEvent, type MouseEvent, type RefObject } from 'react';
 import { useSettings } from '../state/settings';
 import { useReducedMotion } from '../ui/motion';
 import { BlockView } from './BlockView';
@@ -166,6 +166,9 @@ function TerminalChips({ env, inputRef }: { env: TerminalEnv; inputRef: RefObjec
       if (keyboard ? lost : !touch) inputRef.current?.focus({ preventScroll: true });
     });
   };
+  // On phones the chips share one row that scrolls sideways, and the browser doesn't scroll a
+  // partly visible button into view when it takes focus, so do it here.
+  const reveal = (e: FocusEvent<HTMLButtonElement>) => e.currentTarget.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
 
   return (
     <div className={styles.chipRow}>
@@ -176,6 +179,7 @@ function TerminalChips({ env, inputRef }: { env: TerminalEnv; inputRef: RefObjec
               key={chip}
               type="button"
               className={styles.chip}
+              onFocus={reveal}
               onClick={(e) => {
                 void submitLine(chip, env);
                 refocus(e);
@@ -190,6 +194,7 @@ function TerminalChips({ env, inputRef }: { env: TerminalEnv; inputRef: RefObjec
         <button
           type="button"
           className={cx(styles.chip, styles.abort)}
+          onFocus={reveal}
           onClick={(e) => {
             interrupt();
             refocus(e);

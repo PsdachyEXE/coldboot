@@ -54,7 +54,11 @@ export function McqQuestion({ mcq, position, where, onAnswered, next, locked = f
   const name = useId();
   const regionRef = useRef<HTMLElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const verdictRef = useRef<HTMLDivElement>(null);
   const checkedOnce = useRef(initialChosen !== null);
+  // Shown already answered (going back to a case study question). Read once: the case study echoes
+  // a new answer straight back as `initialChosen`, and that answer still moves focus on.
+  const [revisited] = useState(initialChosen !== null);
 
   useEffect(() => {
     if (autoFocus) regionRef.current?.focus();
@@ -70,10 +74,11 @@ export function McqQuestion({ mcq, position, where, onAnswered, next, locked = f
     onAnswered?.({ itemId: mcq.id, kk: [...mcq.kk], chosen: selected, correct, ms: now - shownAt });
   };
 
-  // After the check, put focus on the next action so Enter or Space moves on.
+  // After the check, put focus on the next action so Enter or Space moves on. With none (the last
+  // case study question), focus goes to the verdict, since Check answer is gone.
   useEffect(() => {
-    if (answered && checkedOnce.current && initialChosen === null) nextRef.current?.focus();
-  }, [answered, initialChosen]);
+    if (answered && !revisited) (nextRef.current ?? verdictRef.current)?.focus();
+  }, [answered, revisited]);
 
   useShortcuts((e) => {
     const key = e.key.toLowerCase();
@@ -152,12 +157,22 @@ export function McqQuestion({ mcq, position, where, onAnswered, next, locked = f
       </fieldset>
 
       {answered ? (
-        <Feedback key={`${mcq.id}-verdict`} correct={correct} summary={`The answer is ${answerLetter}.`} className={styles.feedback}>
-          <p>
-            The answer is <strong>{answerLetter}</strong>: <Markdown inline text={mcq.options[mcq.answer]} />
-          </p>
-          <Markdown text={mcq.explanation} />
-        </Feedback>
+        <div ref={verdictRef} tabIndex={-1}>
+          {/* A verdict shown again on a revisit was already spoken and heard. */}
+          <Feedback
+            key={`${mcq.id}-verdict`}
+            correct={correct}
+            summary={`The answer is ${answerLetter}.`}
+            announce={!revisited}
+            cue={!revisited}
+            className={styles.feedback}
+          >
+            <p>
+              The answer is <strong>{answerLetter}</strong>: <Markdown inline text={mcq.options[mcq.answer]} />
+            </p>
+            <Markdown text={mcq.explanation} />
+          </Feedback>
+        </div>
       ) : null}
 
       <div className={study.actions}>

@@ -62,7 +62,8 @@ describe('ReportDialog', () => {
     expect(writeText).toHaveBeenCalledWith(
       reportClipboardText({ itemId: 'm-u3o1-kk12-002', reason: 'wrong-answer', note: '', appVersion: BUILD }),
     );
-    expect(screen.getByRole('status')).toHaveTextContent('Report copied to the clipboard.');
+    // The dialog's own status line (every dialog also carries empty live regions for announce()).
+    expect(screen.getByText('Report copied to the clipboard.')).toHaveAttribute('role', 'status');
   });
 
   it('falls back to selectable text when the clipboard is blocked', async () => {

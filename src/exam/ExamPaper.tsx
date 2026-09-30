@@ -242,11 +242,14 @@ function SubmitDialog({
     .filter((u) => u.numbers.length > 0);
   const total = unanswered.reduce((n, u) => n + u.numbers.length, 0);
   const flags = paper.flags.length;
+  // Open on the safe button, so a second Enter (or a held key) can't submit by accident.
+  const keepRef = useRef<HTMLButtonElement>(null);
   return (
     <Dialog
       open={open}
       onClose={onClose}
       title="Submit your paper?"
+      initialFocus={keepRef}
       actions={
         <>
           <Button
@@ -258,7 +261,9 @@ function SubmitDialog({
           >
             Submit paper
           </Button>
-          <Button onClick={onClose}>Keep writing</Button>
+          <Button ref={keepRef} onClick={onClose}>
+            Keep writing
+          </Button>
         </>
       }
     >

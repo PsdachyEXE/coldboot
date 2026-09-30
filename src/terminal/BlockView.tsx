@@ -43,7 +43,8 @@ function Progress({ current, total, label }: { current: number; total: number; l
 /**
  * A table. On phones a two-column table stacks each row (see Block.module.css); the explicit roles
  * keep it a table for screen readers when its rows display as blocks. When the table is wider than
- * the terminal, its scroll box becomes a labelled tab stop so keyboard users can scroll it.
+ * the terminal, its scroll box becomes a labelled tab stop so keyboard users can scroll it: a group,
+ * not a region, since a round can print several with the same label and regions are landmarks.
  */
 function TableBlock({ block }: { block: Extract<TerminalBlock, { kind: 'table' }> }) {
   const [ref, scrollable] = useScrollable<HTMLDivElement>();
@@ -56,7 +57,7 @@ function TableBlock({ block }: { block: Extract<TerminalBlock, { kind: 'table' }
       ref={ref}
       className={styles.tableWrap}
       tabIndex={scrollable ? 0 : undefined}
-      role={scrollable ? 'region' : undefined}
+      role={scrollable ? 'group' : undefined}
       aria-label={scrollable ? `${block.caption ?? 'Table'} (scrolls sideways)` : undefined}
     >
       <table className={cx(styles.table, stacked && styles.stacked)} role="table">
@@ -117,7 +118,7 @@ function PreBlock({ block }: { block: Extract<TerminalBlock, { kind: 'pre' }> })
         ref={ref}
         className={cx(styles.pre, block.wrap && styles.preWrap)}
         tabIndex={focusable ? 0 : undefined}
-        role={focusable ? 'region' : undefined}
+        role={focusable ? 'group' : undefined}
         aria-label={focusable ? `${block.label ?? 'Text'} (scrolls sideways)` : undefined}
       >
         {block.text}

@@ -10,7 +10,7 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | KK map | `content/study-design.json`, `src/content/studyDesign.ts` | ids `U3O1-KK01`…, plus `TERMS` and `PSM`; `status` is `provisional` until checked against the study design |
 | Content loading and index | `src/content/loader.ts` | per-outcome dynamic imports; `loadAllContent()` returns a `ContentIndex` (with `caseByKk` and `cardIds`); failed loads are retried, never cached |
 | Shared content store | `src/content/store.ts` | `useContentIndex()` loads once for every screen; prunes SRS records for cards that left the content |
-| Markdown | `src/content/markdown.ts`, `src/ui/Markdown.tsx` | markdown-it, HTML off; ```` ```pseudo ```` fences get numbered, highlighted listings |
+| Markdown | `src/content/markdown.ts`, `src/ui/Markdown.tsx` | markdown-it, HTML off; ```` ```pseudo ```` fences get numbered, highlighted listings; a table whose corner header is empty (a comparison) gets row headers (`th scope="row"`) and a plain corner cell |
 | Content checker | `src/content/check.ts`, `scripts/content-check.ts`, `tests/content.test.ts` | |
 | Command terms | `src/content/commandTerms.ts` | |
 | Terminal output blocks | `src/terminal/blocks.ts` | `TerminalBlock` union; plain data. A `figure` block may carry `highlight` and `compact`, passed to `FigureView`; the speech digest reads out marked elements |
@@ -34,7 +34,7 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | SM-2 and queue | `src/srs/sm2.ts`, `src/srs/queue.ts` | `schedule`, `buildQueue` and `orderNewCards` signatures locked. `schedule` applies the final-week cap (`FINAL_WEEK_DAYS`, `FINAL_WEEK_MAX_INTERVAL`) and the exam-day clamp (`EXAM_CAP_DAYS_BEFORE`), keeps `due` at the start of a study day and stores the interval actually scheduled; also `RATINGS`, `nextEase`, `newCardState`, `capDueDay`, `MAX_EASE`, `MAX_INTERVAL_DAYS`, `directionFor(card, reps)` and `nextDueAfter(srs, now, known?)` |
 | Study hooks | `src/srs/hooks.ts` | `useMastery()` (memoised on the attempt log, roll-up and KK map, refreshed every `MASTERY_TICK_MS`), `masteryNow()`, `useExamAt()`, `useDueSummary(now)` |
 | Routes | `src/app/paths.ts`, `src/app/routes.tsx` | hash router; `drillPath`, `writtenPath` (including `cs` for Section C practice), `reviewPath`, `examPath` |
-| Announcements | `src/ui/announce.ts` | `announce(message, priority)` feeds the ARIA live regions that `<LiveRegions>` renders in the shell; `politeSeq` and `assertiveSeq` let a repeated message speak again in its own region. A native modal makes those regions inert, so a dialog that announces needs its own live region |
+| Announcements | `src/ui/announce.ts` | `announce(message, priority)` feeds the ARIA live regions that `<LiveRegions>` renders in the shell; `politeSeq` and `assertiveSeq` let a repeated message speak again in its own region. A native modal makes those regions inert, so every open `Dialog` mounts its own pair (`<LiveRegions since>`), which speaks only what is announced after it opened |
 | Motion | `src/ui/motion.ts` | `useReducedMotion()`, `prefersReducedMotion()` |
 | Sound | `src/ui/sound.ts` | `playCue('correct' \| 'incorrect' \| 'complete')`: WebAudio tones only when `settings.sound` is on; never throws; `CUES` holds the tones |
 | Terminal drawer state | `src/terminal/useTerminal.ts` | `useTerminal`: `open`, `toggle`, `setOpen`, `run(command)` (opens the drawer and runs a command), `takePending`, `lastGameEnd`, `reportGameEnd` |

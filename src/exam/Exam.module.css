@@ -257,7 +257,8 @@
 .qtitle {
   margin: 0;
   font-size: var(--step-2);
-  scroll-margin-top: var(--exam-bar-offset, var(--space-7));
+  /* The page's scroll padding already clears the sticky bar (useStickyTop). */
+  scroll-margin-top: var(--space-3);
 }
 .qtitle:focus {
   outline: none;

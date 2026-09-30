@@ -7,6 +7,7 @@ import { SECTION_KIND } from './links';
 import { marksAvailable, type PaperItem, type ResolvedPaper } from './marking';
 import { SECTION_IDS, paperTiming, type ExamPaper, type SectionId } from './store';
 import { timerState, type TimerState } from './timer';
+import { useStickyTop } from '../ui/useStickyTop';
 
 /** The timer state, re-read at each phase boundary. `refresh` re-reads it now. */
 export function usePaperTimer(paper: ExamPaper): [TimerState, () => void] {
@@ -30,18 +31,18 @@ export function usePaperTimer(paper: ExamPaper): [TimerState, () => void] {
 }
 
 /**
- * Keeps the case study insert's sticky panel, and headings scrolled to by focus, below the page's
- * sticky bar, whatever its height.
+ * Keeps the case study insert's sticky panel, and anything focus or a scroll brings into view,
+ * below the page's sticky bar, whatever its height. The page's scroll padding (`useStickyTop`)
+ * covers focus and headings; the insert's `top` is set here.
  */
 export function useStickyOffset(root: RefObject<HTMLElement | null>, bar: RefObject<HTMLElement | null>): void {
+  useStickyTop(bar);
   useEffect(() => {
     const r = root.current;
     const b = bar.current;
     if (!r || !b) return;
     const apply = () => {
-      const offset = `${Math.ceil(b.getBoundingClientRect().height) + 12}px`;
-      r.style.setProperty('--case-insert-top', offset);
-      r.style.setProperty('--exam-bar-offset', offset);
+      r.style.setProperty('--case-insert-top', `${Math.ceil(b.getBoundingClientRect().height) + 12}px`);
     };
     apply();
     if (typeof ResizeObserver === 'undefined') return;
@@ -82,7 +83,9 @@ export function useQuestionNav(key: string, heading: RefObject<HTMLElement | nul
     if (!el) return;
     el.focus({ preventScroll: true });
     const top = el.getBoundingClientRect().top;
-    const offset = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    // Where scrollIntoView would put it: below the page's scroll padding (which includes the
+    // sticky bar) and the heading's own scroll margin.
+    const offset = (parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0) + (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
     if (top < offset || top > window.innerHeight - 160) el.scrollIntoView?.({ block: 'start' });
   }, [key, heading]);
   const go = useCallback((section: SectionId, index: number) => {

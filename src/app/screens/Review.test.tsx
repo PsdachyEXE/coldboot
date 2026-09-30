@@ -79,6 +79,29 @@ describe('Review card flip', () => {
     expect(useReportDialog.getState().request).toEqual({ itemId: 'c-u3o1-kk04-002', where: 'Review' });
   });
 
+  it('describes the focused card with its question, then with its answer once flipped', () => {
+    renderReview();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    // The card's name is only its position, so the text a screen reader reads on focus is the description.
+    expect(screen.getByRole('region', { name: 'Card 1 of 2, question' })).toHaveAccessibleDescription('Why store a phone number as a string? Recall the answer.');
+    press(' ');
+    const flipped = screen.getByRole('region', { name: 'Card 1 of 2, answer shown' });
+    expect(flipped).toHaveFocus();
+    expect(flipped).toHaveAccessibleDescription('It keeps leading zeros and is never used in arithmetic.');
+  });
+
+  it('describes a flipped cloze card with the filled-in text as well as the explanation', () => {
+    const cloze = fxCard('c-u3o1-kk04-003', ['U3O1-KK04'], { type: 'cloze', front: 'A phone number is stored as a {{string}}.', back: 'It keeps the leading zero.' });
+    provideContent(fixtureIndex({ cards: [cloze] }));
+    renderReview();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    expect(screen.getByRole('region', { name: 'Card 1 of 1, question' })).toHaveAccessibleDescription('A phone number is stored as a [ ... ]. Recall the missing words.');
+    press(' ');
+    expect(screen.getByRole('region', { name: 'Card 1 of 1, answer shown' })).toHaveAccessibleDescription(
+      'A phone number is stored as a string. It keeps the leading zero.',
+    );
+  });
+
   it('ignores the shortcuts while the report dialog is open', () => {
     renderReview();
     fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
@@ -121,6 +144,40 @@ describe('Review card flip', () => {
     expect(screen.getByText('Cards reviewed').nextSibling).toHaveTextContent('1');
     expect(screen.getByText('Rated Again').nextSibling).toHaveTextContent('1 time');
     expect(screen.getByText('Your next review is due tomorrow.')).toBeInTheDocument();
+  });
+
+  it('brings a card rated Again back once its 10 minutes are up, ahead of the rest of a long queue', () => {
+    vi.useFakeTimers({ toFake: ['Date', 'setTimeout', 'setInterval'] });
+    vi.setSystemTime(new Date(2026, 9, 1, 19, 0));
+    const cards = Array.from({ length: 20 }, (_, i) =>
+      fxCard(`c-u3o1-kk04-${String(i + 1).padStart(3, '0')}`, ['U3O1-KK04'], { front: `Question ${i + 1}?`, back: `Answer ${i + 1}.` }),
+    );
+    provideContent(fixtureIndex({ cards }));
+    useSettings.setState({ newCardLimit: 20 });
+    renderReview();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    const front = () => {
+      const card = document.activeElement as HTMLElement;
+      return within(card).getByText(/^Question \d+\?$/).textContent;
+    };
+    expect(front()).toBe('Question 1?');
+    press(' ');
+    press('1');
+    // One card a minute from here.
+    const shown: string[] = [];
+    for (let minute = 1; minute <= 12; minute++) {
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+      shown.push(front() ?? '');
+      press(' ');
+      press('3');
+    }
+    // Card 1 is due again 10 minutes after it was rated: it follows the card rated at minute 10,
+    // instead of waiting for the other 19 cards.
+    expect(shown.slice(0, 10)).toEqual(Array.from({ length: 10 }, (_, i) => `Question ${i + 2}?`));
+    expect(shown[10]).toBe('Question 1?');
+    expect(shown[11]).toBe('Question 12?');
   });
 
   it('lets the student finish while waiting for a requeued card', () => {

@@ -3,7 +3,7 @@
  * together, with the KK tags and the mistake note. The flip is a 150 ms turn (none under reduced
  * motion). Card text is bundled content, so it renders as Markdown.
  */
-import { forwardRef } from 'react';
+import { forwardRef, useId } from 'react';
 import type { Card } from '../../content/schema';
 import { renderCloze } from '../../content/markdown';
 import type { ReviewDirection } from '../../srs/queue';
@@ -53,8 +53,21 @@ export const ReviewCard = forwardRef<HTMLElement, ReviewCardProps>(function Revi
   ref,
 ) {
   const ask = promptFor(card, direction);
+  const frontId = useId();
+  const askId = useId();
+  const answerId = useId();
+  // The runner focuses this section on every card and flip. Its name is only the position, so the
+  // description carries what a screen reader should read: the question and what to recall, then
+  // the answer (with the filled-in front for a cloze card, whose answer is the missing words).
+  const described = !flipped ? `${frontId} ${askId}` : card.type === 'cloze' ? `${frontId} ${answerId}` : answerId;
   return (
-    <section ref={ref} tabIndex={-1} aria-label={`${position}, ${flipped ? 'answer shown' : 'question'}`} className={styles.cardWrap}>
+    <section
+      ref={ref}
+      tabIndex={-1}
+      aria-label={`${position}, ${flipped ? 'answer shown' : 'question'}`}
+      aria-describedby={described}
+      className={styles.cardWrap}
+    >
       <div
         key={flipped ? 'back' : 'front'}
         className={[styles.card, flipped && animate ? styles.flip : ''].filter(Boolean).join(' ')}
@@ -67,19 +80,23 @@ export const ReviewCard = forwardRef<HTMLElement, ReviewCardProps>(function Revi
             {card.type === 'reverse' ? <Tag>{direction === 'reverse' ? 'Definition to term' : 'Term to definition'}</Tag> : null}
           </div>
         </div>
-        <Markdown
-          text={frontText(card, direction, flipped)}
-          className={[styles.front, card.type === 'reverse' && direction === 'forward' ? styles.term : ''].filter(Boolean).join(' ')}
-        />
+        <div id={frontId}>
+          <Markdown
+            text={frontText(card, direction, flipped)}
+            className={[styles.front, card.type === 'reverse' && direction === 'forward' ? styles.term : ''].filter(Boolean).join(' ')}
+          />
+        </div>
         {flipped ? (
-          <div className={styles.answer}>
+          <div id={answerId} className={styles.answer}>
             <Markdown
               text={backText(card, direction)}
               className={[styles.back, card.type === 'reverse' && direction === 'reverse' ? styles.term : ''].filter(Boolean).join(' ')}
             />
           </div>
         ) : (
-          <p className={styles.ask}>{ask}</p>
+          <p id={askId} className={styles.ask}>
+            {ask}
+          </p>
         )}
       </div>
       {flipped ? (
