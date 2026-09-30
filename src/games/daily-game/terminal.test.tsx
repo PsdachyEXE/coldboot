@@ -10,10 +10,13 @@ import { MemoryRouter } from 'react-router';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useContent } from '../../content/store';
 import { useAttempts } from '../../state/attempts';
+import { recordAttempt } from '../../state/record';
 import { useSession } from '../../state/session';
 import { useTerminalSession } from '../../terminal/session';
 import { TerminalView } from '../../terminal/TerminalView';
+import { useTerminal } from '../../terminal/useTerminal';
 import { resetStores } from '../../terminal/testing';
+import { dailyShareText } from '../daily';
 import { fixtureContent } from '../drill/fixture';
 import { dailyItem, dailyRefs, loadGenerators, type Generators } from './index';
 import { typedAnswer, wrongAnswer } from './testing';
@@ -119,6 +122,53 @@ describe('daily challenge in the terminal', () => {
     expect(useTerminalSession.getState().game).toBeNull();
     expect(useTerminalSession.getState().lastShare).toBe('COLDBOOT daily 2026-10-01  9/10\n🟦🟦🟦🟦🟦🟦🟦🟦🟦⬛');
     expect(useSession.getState().daily[TODAY]).toEqual(stored);
+    expect(useAttempts.getState().log).toHaveLength(10);
+  });
+
+  /** What the Daily screen does for question `index`: log the attempt, then record the first answer. */
+  function answerOnScreen(index: number, correct: boolean) {
+    const id = useSession.getState().daily[TODAY].itemIds[index];
+    recordAttempt({ itemId: id, kk: ['U3O1-KK12'], score: correct ? 1 : 0, timestamp: Date.now(), ms: 1_000 });
+    useSession.getState().recordDaily(TODAY, index, correct, Date.now());
+  }
+
+  it('carries on from the stored record when the Daily screen answered questions meanwhile', async () => {
+    const user = userEvent.setup();
+    const input = renderView();
+    await startDaily(user, input);
+    await user.type(input, `${typeable(typedAnswer(currentItem()))}{Enter}`);
+    // The student switches to the Daily screen and answers questions 2 to 5 there, all wrong.
+    for (let i = 1; i < 5; i++) answerOnScreen(i, false);
+    expect(useTerminalSession.getState().game?.session.progress).toEqual({ current: 2, total: 10 });
+
+    // Back in the terminal, the question still showing was answered on the screen: nothing counts again.
+    await user.type(input, `${typeable(typedAnswer(currentItem()))}{Enter}`);
+    expect(screen.getByText('That question was already answered on the Daily screen, so the challenge carries on from your saved answers.')).toBeInTheDocument();
+    await waitFor(() => expect(useTerminalSession.getState().game?.session.progress).toEqual({ current: 6, total: 10 }));
+    expect(useSession.getState().daily[TODAY].results).toEqual([1, 0, 0, 0, 0]);
+    expect(useAttempts.getState().log).toHaveLength(5);
+
+    for (let i = 5; i < 10; i++) await user.type(input, `${typeable(typedAnswer(currentItem()))}{Enter}`);
+    const stored = useSession.getState().daily[TODAY].results;
+    expect(stored).toEqual([1, 0, 0, 0, 0, 1, 1, 1, 1, 1]);
+    expect(screen.getByText('Daily challenge complete: 6 of 10 correct.')).toBeInTheDocument();
+    expect(useTerminalSession.getState().lastShare).toBe(dailyShareText(TODAY, stored, 10));
+    expect(useTerminal.getState().lastGameEnd).toMatchObject({ gameId: 'daily', score: 6, total: 10 });
+    expect(useAttempts.getState().log).toHaveLength(10);
+  });
+
+  it('shows the stored result when the Daily screen finished the day while the terminal waited', async () => {
+    const user = userEvent.setup();
+    const input = renderView();
+    await startDaily(user, input);
+    await user.type(input, `${typeable(typedAnswer(currentItem()))}{Enter}`);
+    for (let i = 1; i < 10; i++) answerOnScreen(i, i % 2 === 0);
+    await user.type(input, `${typeable(typedAnswer(currentItem()))}{Enter}`);
+    await waitFor(() => expect(screen.getByText("You've already finished today's daily challenge: 5 of 10 correct.")).toBeInTheDocument());
+    expect(useTerminalSession.getState().game).toBeNull();
+    const stored = useSession.getState().daily[TODAY].results;
+    expect(stored).toEqual([1, 0, 1, 0, 1, 0, 1, 0, 1, 0]);
+    expect(useTerminalSession.getState().lastShare).toBe(dailyShareText(TODAY, stored, 10));
     expect(useAttempts.getState().log).toHaveLength(10);
   });
 
