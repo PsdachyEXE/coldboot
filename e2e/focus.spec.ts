@@ -25,9 +25,12 @@ for (const [width, height] of [
 ] as const) {
   test(`Shift+Tab upwards through a paper never lands under the sticky exam bar at ${width} px`, async ({ page }) => {
     await page.setViewportSize({ width, height });
+    // A paused clock: the paper's seed comes from the time it starts, so every run sits the same paper.
     await page.clock.install({ time: FIXED_NOW });
+    await page.clock.pauseAt(FIXED_NOW.getTime() + 1_000);
     await onboard(page);
     await page.goto('/#/exam?mini=1');
+    await page.clock.runFor(2_000);
     await page.getByRole('button', { name: 'Start mini paper' }).click();
     // Past the mini paper's reading time, into writing time.
     await page.clock.runFor(3 * 60_000 + 2_000);
@@ -43,12 +46,27 @@ for (const [width, height] of [
         const el = document.activeElement as HTMLElement | null;
         const bar = document.querySelector('[role="timer"]')?.parentElement;
         if (!el || !bar || !el.closest('main')) return null;
-        if (bar.contains(el)) return { skip: true, name: '', top: 0, barBottom: 0 };
+        if (bar.contains(el)) return { skip: true, name: '', top: 0, bottom: 0, barBottom: 0, room: 0 };
+        // The part of the element that isn't clipped by a scroll box (a figure, the insert panel).
+        const r = el.getBoundingClientRect();
+        let top = Math.max(r.top, 0);
+        let bottom = Math.min(r.bottom, window.innerHeight);
+        for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+          const cs = getComputedStyle(a);
+          if (cs.overflowX === 'visible' && cs.overflowY === 'visible') continue;
+          const c = a.getBoundingClientRect();
+          top = Math.max(top, c.top);
+          bottom = Math.min(bottom, c.bottom);
+        }
+        const barBottom = bar.getBoundingClientRect().bottom;
         const name = (el.getAttribute('aria-label') ?? el.textContent ?? '').trim().slice(0, 40);
-        return { skip: false, name, top: el.getBoundingClientRect().top, barBottom: bar.getBoundingClientRect().bottom };
+        return { skip: false, name, top, bottom, barBottom, room: window.innerHeight - barBottom };
       });
       if (!f) break;
-      if (!f.skip && f.top < f.barBottom - 1) hidden.push(`${f.name} at ${Math.round(f.top)} under a bar ending at ${Math.round(f.barBottom)}`);
+      if (f.skip) continue;
+      // What fits below the bar must sit wholly below it; a taller box must at least show below it.
+      const under = f.bottom - f.top <= f.room - 32 ? f.top < f.barBottom - 1 : f.bottom <= f.barBottom + 1;
+      if (under) hidden.push(`${f.name} at ${Math.round(f.top)} under a bar ending at ${Math.round(f.barBottom)}`);
     }
     expect(hidden).toEqual([]);
   });
