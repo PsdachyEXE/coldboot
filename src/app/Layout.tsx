@@ -4,12 +4,12 @@
  * update prompt and the boot sequence. Until first run is complete, every route except /welcome
  * redirects there and the shell shows only the wordmark and the main column.
  */
-import { useEffect, useRef, type MouseEvent } from 'react';
+import { Suspense, useEffect, useRef, type MouseEvent } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router';
 import { useContent } from '../content/store';
 import { useSettings } from '../state/settings';
 import { useStorageHealth } from '../state/storage';
-import { TerminalDrawer, useTerminal } from '../terminal';
+import { useTerminal } from '../terminal/useTerminal';
 import { announce } from '../ui/announce';
 import { Banner } from '../ui/Banner';
 import { Button } from '../ui/Button';
@@ -22,6 +22,7 @@ import { Rail, TabBar, TerminalButton, Wordmark } from './LayoutNav';
 import { paths } from './paths';
 import { usePwa } from './pwa';
 import { StatusBar } from './StatusBar';
+import { TerminalDrawerSlot } from './TerminalDrawerSlot';
 import styles from './Layout.module.css';
 
 export default function Layout() {
@@ -80,13 +81,17 @@ export default function Layout() {
       <main id="main" ref={mainRef} tabIndex={-1} className={styles.main}>
         <div className={styles.content}>
           <StorageWarning />
-          {redirect ? <Navigate to={redirect} replace /> : <Outlet />}
+          {/*
+            Lazy screens load inside this boundary. It is already showing, so a navigation (a
+            transition) keeps the current page up until the next screen's chunk has arrived.
+          */}
+          <Suspense fallback={<p role="status">Loading</p>}>{redirect ? <Navigate to={redirect} replace /> : <Outlet />}</Suspense>
         </div>
       </main>
       {onboarded ? <StatusBar /> : null}
       {layout === 'tabs' ? <TabBar /> : null}
       <UpdatePrompt />
-      {onboarded ? <TerminalDrawer /> : null}
+      {onboarded ? <TerminalDrawerSlot /> : null}
       <LiveRegions />
       <ReportDialog />
       <Boot />

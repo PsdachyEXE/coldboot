@@ -9,8 +9,9 @@ import '@fontsource-variable/atkinson-hyperlegible-next';
 import './ui/tokens.css';
 import './ui/global.css';
 import './ui/markdown.css';
-import { createAppRouter } from './app/routes';
+import { createAppRouter, prefetchScreens } from './app/routes';
 import { startPwa } from './app/pwa';
+import { whenIdle } from './lib/idle';
 import { useSettings, type MotionPreference } from './state/settings';
 
 // Mirror the motion setting onto <html data-motion> so global.css can stop animations.
@@ -38,3 +39,6 @@ createRoot(document.getElementById('root')!).render(
     <RouterProvider router={router} />
   </StrictMode>,
 );
+
+// Once the shell is idle, fetch the lazily loaded screens so the first visit to each is instant.
+whenIdle(prefetchScreens, 5000);

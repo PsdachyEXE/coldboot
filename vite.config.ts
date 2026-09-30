@@ -82,7 +82,8 @@ export default defineConfig({
   build: {
     target: 'es2022',
     sourcemap: false,
-    chunkSizeWarningLimit: 800,
+    // Warn when a chunk passes 500 kB, so a regression in the entry chunk shows up in the build log.
+    chunkSizeWarningLimit: 500,
     // The CSP allows fonts from 'self' only, so a small font subset must never be inlined as a data: URI.
     assetsInlineLimit: (file: string) => (/\.(woff2?|ttf|otf)$/.test(file) ? false : undefined),
   },

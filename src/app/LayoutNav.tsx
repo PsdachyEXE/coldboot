@@ -4,7 +4,7 @@
  */
 import { useEffect, useId, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router';
-import { useTerminal } from '../terminal';
+import { useTerminal } from '../terminal/useTerminal';
 import { Kbd } from '../ui/Kbd';
 import { MORE_ITEMS, TAB_ITEMS, navLabel } from './LayoutItems';
 import { RAIL, paths } from './paths';
