@@ -1,0 +1,247 @@
+/* Written: short answers, self-marking and case study practice. */
+
+.question {
+  min-width: 0;
+  scroll-margin-top: var(--space-5);
+}
+.question:focus {
+  outline: none;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-3);
+  font-size: var(--step-2);
+  line-height: var(--lh-head);
+}
+.marks {
+  font-size: var(--step-1);
+  color: var(--ice);
+}
+
+.prompt {
+  margin: 0 0 var(--space-4);
+  max-width: var(--measure);
+}
+.prompt > :last-child {
+  margin-bottom: 0;
+}
+
+.answer {
+  max-width: none;
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.model {
+  margin: var(--space-5) 0;
+  padding: var(--space-4);
+  background: var(--trench);
+  border: var(--hairline);
+  max-width: calc(var(--measure) + 2 * var(--space-4));
+}
+.model h3 {
+  margin: 0 0 var(--space-2);
+}
+.model > :last-child {
+  margin-bottom: 0;
+}
+
+.points {
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.pointsLegend {
+  padding: 0;
+  margin: 0 0 var(--space-3);
+  font-weight: 700;
+}
+.pointMarks {
+  color: var(--ice);
+  white-space: nowrap;
+}
+
+.tally {
+  font-weight: 700;
+  margin: 0;
+}
+
+.saved {
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: var(--lh-head);
+  margin: 0;
+}
+
+/* Results after a round. */
+.resultList {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  max-width: calc(var(--measure) + var(--space-7));
+}
+.resultList li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: var(--hairline);
+  max-width: none;
+}
+.resultMarks {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+/* ---- Case study practice ---- */
+
+.caseLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+.caseLayoutWide {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: var(--space-6);
+}
+
+.insert {
+  position: sticky;
+  top: var(--space-4);
+  max-height: calc(100vh - var(--status-h) - var(--space-6));
+  max-height: calc(100dvh - var(--status-h) - var(--space-6));
+  overflow-y: auto;
+  padding: var(--space-4);
+  background: var(--trench);
+  border: var(--hairline);
+  min-width: 0;
+}
+.insert h2 {
+  margin-top: 0;
+  font-size: var(--step-2);
+}
+
+.insertBody > :last-child {
+  margin-bottom: 0;
+}
+
+.insertFigures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.insertFigure {
+  padding: var(--space-3);
+  border: 1px solid transparent;
+  min-width: 0;
+  overflow-x: auto;
+  scroll-margin-top: var(--space-4);
+}
+.insertFigure[data-referenced='true'] {
+  border: 2px solid var(--phosphor);
+  padding: calc(var(--space-3) - 1px);
+}
+.refLabel {
+  margin: 0 0 var(--space-2);
+  font-size: var(--step-0);
+  font-weight: 700;
+  color: var(--ice);
+}
+
+.details {
+  border: var(--hairline);
+  background: var(--trench);
+  min-width: 0;
+}
+.details > summary {
+  display: flex;
+  align-items: center;
+  min-height: var(--control-h);
+  padding: 0 var(--space-4);
+  font-weight: 700;
+  cursor: pointer;
+}
+.details > summary:hover {
+  text-decoration: underline;
+}
+.detailsBody {
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+.refs {
+  margin: 0 0 var(--space-4);
+  font-size: var(--step-0);
+}
+.refButton {
+  font: inherit;
+  color: var(--phosphor);
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+.qnav ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+.qnav li {
+  max-width: none;
+}
+.qlink {
+  display: inline-grid;
+  place-items: center;
+  min-width: var(--control-h);
+  min-height: var(--control-h);
+  padding: 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--ice);
+  text-decoration: none;
+  border: 1px dashed var(--steel);
+  border-radius: var(--radius-control);
+}
+.qlink:hover {
+  text-decoration: underline;
+}
+.qlink[data-done='true'] {
+  border-style: solid;
+  background: var(--trench);
+}
+.qlink[aria-current='page'] {
+  border: 2px solid var(--ice);
+  font-weight: 700;
+}
+
+.caseList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-5);
+}
+.caseList li {
+  padding: var(--space-3) 0;
+  border-bottom: var(--hairline);
+  max-width: none;
+}
+.caseList p {
+  margin: var(--space-1) 0 0;
+}
+
+.caseQuestion {
+  min-width: 0;
+}

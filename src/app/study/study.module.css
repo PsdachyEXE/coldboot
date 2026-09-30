@@ -1,0 +1,145 @@
+/* Shared layout for the study screens: Review, Drill, Written, Today's run. */
+
+.page {
+  max-width: calc(var(--measure) + var(--space-7));
+  min-width: 0;
+}
+
+.lead {
+  font-size: var(--step-2);
+  line-height: 1.4;
+  margin-bottom: var(--space-5);
+}
+@media (max-width: 719.98px) {
+  .lead {
+    font-size: var(--step-1);
+    line-height: var(--lh-body);
+  }
+}
+
+.muted {
+  color: var(--steel);
+}
+
+.small {
+  font-size: var(--step-0);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-5) 0;
+}
+
+.actionsEnd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: var(--hairline);
+}
+
+/* A two-column list of facts, e.g. counts after a review. */
+.facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: var(--space-1) var(--space-5);
+  margin: 0 0 var(--space-5);
+}
+.facts dt {
+  color: var(--steel);
+}
+.facts dd {
+  margin: 0;
+  min-width: 0;
+}
+@media (max-width: 559.98px) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .facts dd + dt {
+    margin-top: var(--space-2);
+  }
+}
+
+/* Keyboard hints under a control row. */
+.keys {
+  font-size: var(--step-0);
+  color: var(--steel);
+  margin: var(--space-3) 0 0;
+}
+.keys kbd {
+  color: var(--ice);
+}
+
+/* Position in a round: "Card 3 of 37". */
+.progress {
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--ice);
+  margin: 0;
+}
+
+.figures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-4);
+  min-width: 0;
+}
+.figure {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+/* The misconception note shown after an answer. */
+.mistake {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--trench);
+  border-left: 4px solid var(--phosphor);
+  max-width: calc(var(--measure) + 2 * var(--space-4));
+}
+.mistake > :last-child {
+  margin-bottom: 0;
+}
+.mistakeTitle {
+  font-weight: 700;
+  margin: 0 0 var(--space-1);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tags li {
+  max-width: 100%;
+}
+
+/* A heading that receives focus when a phase changes; it is not a control, so no ring. */
+.focusTarget:focus {
+  outline: none;
+}
+
+.notice {
+  padding: var(--space-3) var(--space-4);
+  background: var(--trench);
+  border-left: 4px solid var(--phosphor);
+  margin: 0 0 var(--space-5);
+  max-width: calc(var(--measure) + 2 * var(--space-4));
+}
+.notice > :last-child {
+  margin-bottom: 0;
+}
+
+.form {
+  margin: 0 0 var(--space-6);
+}

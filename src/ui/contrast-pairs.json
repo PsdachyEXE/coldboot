@@ -34,6 +34,9 @@
     { "fg": "--phosphor", "bg": "--trench", "level": "text", "use": "Text description disclosure on panels and in the terminal drawer" },
     { "fg": "--ice", "bg": "--trench", "level": "text", "use": "figure captions, text descriptions and object description section headers on trench" },
     { "fg": "--steel", "bg": "--trench", "level": "ui", "use": "figure table hairlines on panels and in the terminal drawer" },
-    { "fg": "--phosphor", "bg": "--trench", "level": "ui", "use": "rule of the Gantt chart's cannot-draw message" }
+    { "fg": "--phosphor", "bg": "--trench", "level": "ui", "use": "rule of the Gantt chart's cannot-draw message" },
+    { "fg": "--void", "bg": "--flare", "level": "text", "use": "drill: the correct option's letter on its flare box" },
+    { "fg": "--flare", "bg": "--void", "level": "ui", "use": "drill: the correct option's frame" },
+    { "fg": "--phosphor", "bg": "--void", "level": "ui", "use": "case study: the frame round a figure the question refers to" }
   ]
 }
