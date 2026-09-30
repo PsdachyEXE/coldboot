@@ -114,8 +114,13 @@ export async function startGame(meta: GameMeta, opts: StartOptions): Promise<boo
       daily: meta.id === 'daily' ? (useSession.getState().daily[today] ?? null) : null,
     };
     const session = game.start(ctx, { difficulty: opts.difficulty, seed: opts.seed ?? freshSeed(t), kk: opts.kk, count: opts.count });
+    if (session.unavailable) {
+      term().print([say(meta.title, 'accent'), ...session.unavailable]);
+      return false;
+    }
     if (session.itemIds?.length) useSession.getState().beginDaily(today, [...session.itemIds]);
-    term().print([say(meta.title, 'accent'), say(introLine(session, opts), 'muted')]);
+    // A session that is already done (today's daily challenge, finished earlier) only needs its summary.
+    term().print(session.done ? [say(meta.title, 'accent')] : [say(meta.title, 'accent'), say(introLine(session, opts), 'muted')]);
     term().setGame({
       gameId: meta.id,
       meta,

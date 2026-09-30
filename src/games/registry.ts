@@ -10,6 +10,7 @@
  * need study content set needsContent; games with Game.generate set generator: true. The
  * terminal's `daily` command runs `play daily`.
  */
+import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './blitz/meta';
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
@@ -68,6 +69,17 @@ export const GAMES: GameMeta[] = [
     man: VALIDATE_MAN,
     generator: true,
     load: () => import('./validate').then((m) => m.default),
+  },
+  {
+    id: BLITZ_ID,
+    title: BLITZ_TITLE,
+    priority: 'P0',
+    kk: BLITZ_KK,
+    summary: BLITZ_SUMMARY,
+    man: BLITZ_MAN,
+    needsContent: true,
+    fixedDifficulty: true,
+    load: () => import('./blitz').then((m) => m.default),
   },
 ];
 

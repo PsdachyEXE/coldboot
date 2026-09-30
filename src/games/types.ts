@@ -108,6 +108,12 @@ export interface GameSession {
   readonly itemIds?: readonly string[];
   /** The item currently awaiting an answer (for the Report action). */
   current?(): { itemId: string; kk: KkId[]; instance?: string } | null;
+  /**
+   * Set when the game can't run at all, e.g. blitz with no glossary installed: the blocks say why
+   * and what to do instead. The host prints them after the title and doesn't start the game (no
+   * attempts, no game end, no sound).
+   */
+  readonly unavailable?: TerminalBlock[];
 }
 
 /** Result of checking one answer against one item. */
@@ -166,5 +172,10 @@ export interface GameMeta {
   needsContent?: boolean;
   /** True when the game implements Game.generate (eligible for the daily challenge's generated items). */
   generator?: boolean;
+  /**
+   * True when the game has one level (blitz, daily): the terminal refuses --easy and --hard and
+   * doesn't print a difficulty.
+   */
+  fixedDifficulty?: boolean;
   load: () => Promise<Game>;
 }

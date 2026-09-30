@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { KkId } from '../content/schema';
-import { createQuizSession, DEFAULT_ROUND, formatDuration, formatScore } from './engine';
+import { createQuizSession, DEFAULT_ROUND, formatDuration, formatScore, unavailableSession } from './engine';
 import type { QuizItem } from './types';
 
 function numberItem(n: number, kk: KkId = 'U3O1-KK12'): QuizItem {
@@ -120,6 +120,53 @@ describe('quiz engine', () => {
     const sum = s.summary();
     expect(sum.shareText).toBe('score 1');
     expect(sum.blocks.at(-1)).toEqual({ kind: 'text', text: 'extra' });
+  });
+
+  it('resumes after items answered in an earlier sitting', () => {
+    const c = clock();
+    const items = [numberItem(1), numberItem(2, 'U3O1-KK04'), numberItem(3), numberItem(4)];
+    const s = createQuizSession({
+      gameId: 'daily',
+      now: c.now,
+      items,
+      exposeItemIds: true,
+      resumeScores: [1, 0],
+      intro: [{ kind: 'text', text: 'Resuming at question 3.' }],
+    });
+    expect(s.itemIds).toEqual(['gen-test-1', 'gen-test-2', 'gen-test-3', 'gen-test-4']);
+    expect(s.progress).toEqual({ current: 3, total: 4 });
+    expect(s.current?.()?.itemId).toBe('gen-test-3');
+    const first = s.prompt();
+    expect(first[0]).toEqual({ kind: 'text', text: 'Resuming at question 3.' });
+    expect(first[1]).toMatchObject({ kind: 'progress', current: 3, total: 4 });
+    expect(s.prompt()[0]).toMatchObject({ kind: 'progress' });
+    c.advance(5000);
+    s.answer('3');
+    c.advance(5000);
+    s.answer('9');
+    expect(s.done).toBe(true);
+    expect(s.results.map((r) => r.score)).toEqual([1, 0, 1, 0]);
+    const sum = s.summary();
+    expect(sum).toMatchObject({ score: 2, total: 4, ms: 10_000 });
+    expect(sum.perKk['U3O1-KK04']).toEqual({ correct: 0, total: 1 });
+    expect(sum.perKk['U3O1-KK12']).toEqual({ correct: 2, total: 3 });
+  });
+
+  it('is done at once when every item was answered before, and then shows no time', () => {
+    const s = createQuizSession({ gameId: 'daily', now: clock().now, items: [numberItem(1), numberItem(2)], resumeScores: [1, 1], summaryTitle: 'Already done' });
+    expect(s.done).toBe(true);
+    expect(s.prompt()).toEqual([]);
+    const sum = s.summary();
+    expect(sum).toMatchObject({ score: 2, total: 2 });
+    expect(sum.blocks.some((b) => b.kind === 'text' && b.text === 'Already done: 2 of 2 correct.')).toBe(true);
+    expect(sum.blocks.some((b) => b.kind === 'text' && b.text.startsWith('Time:'))).toBe(false);
+  });
+
+  it('builds a session for a game that cannot run', () => {
+    const s = unavailableSession('blitz', [{ kind: 'text', text: 'No glossary yet.' }]);
+    expect(s.done).toBe(true);
+    expect(s.unavailable).toEqual([{ kind: 'text', text: 'No glossary yet.' }]);
+    expect(s.answer('x').counted).toBe(false);
   });
 
   it('formats durations and scores', () => {

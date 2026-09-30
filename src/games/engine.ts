@@ -28,6 +28,15 @@ export interface QuizSessionOptions {
   deadline?: number;
   /** Publish the round's item ids up front (the daily challenge). Needs `items`. */
   exposeItemIds?: boolean;
+  /**
+   * Scores (0 to 1) of the first items, answered in an earlier sitting (the daily challenge). The
+   * round resumes after them: they count in the summary and per-KK tallies, using each item's
+   * KKs, but are never asked again, and progress keeps counting from the start of the list.
+   * Needs `items`.
+   */
+  resumeScores?: readonly number[];
+  /** Blocks shown once, above the first prompt (e.g. which question a resumed round starts at). */
+  intro?: TerminalBlock[];
   /** Progress line label. Default "Question". */
   progressLabel?: string;
   /** First line of the summary. Default "Round complete" ("Time's up" once a deadline passes). */
@@ -66,6 +75,20 @@ export function formatScore(score: number): string {
   return Number.isInteger(score) ? String(score) : score.toFixed(1);
 }
 
+/**
+ * A session for a game that can't run (for example blitz with no glossary installed). The host
+ * prints `blocks` under the title instead of starting it.
+ */
+export function unavailableSession(gameId: string, blocks: TerminalBlock[]): GameSession {
+  return {
+    done: true,
+    unavailable: blocks,
+    prompt: () => [],
+    answer: () => ({ correct: false, expected: '', reason: '', kk: [], itemId: gameId, score: 0, counted: false }),
+    summary: () => ({ gameId, score: 0, total: 0, ms: 0, perKk: {}, blocks: [] }),
+  };
+}
+
 export function createQuizSession(opts: QuizSessionOptions): QuizSession {
   if (!opts.items && !opts.generate) throw new Error('createQuizSession needs items or generate');
   const items = opts.items ? [...opts.items] : null;
@@ -76,6 +99,23 @@ export function createQuizSession(opts: QuizSessionOptions): QuizSession {
   const startedAt = opts.now();
   let lastAnswerAt = startedAt;
   let index = 0;
+  let answeredNow = 0;
+  let introShown = !opts.intro?.length;
+
+  const tally = (item: QuizItem, correct: boolean, score: number) => {
+    results.push({ itemId: item.id, kk: item.kk, correct, score });
+    for (const kk of new Set(item.kk)) {
+      const t = perKk[kk] ?? { correct: 0, total: 0 };
+      perKk[kk] = { correct: t.correct + score, total: t.total + 1 };
+    }
+  };
+  if (items && opts.resumeScores) {
+    for (const raw of opts.resumeScores.slice(0, total)) {
+      const score = Math.min(1, Math.max(0, raw));
+      tally(items[index], score === 1, score);
+      index++;
+    }
+  }
 
   const expired = () => opts.deadline !== undefined && opts.now() >= opts.deadline;
   const isDone = () => index >= total || expired();
@@ -103,7 +143,7 @@ export function createQuizSession(opts: QuizSessionOptions): QuizSession {
       { kind: 'rule' },
       { kind: 'text', text: `${title}: ${formatScore(s.score)} of ${s.total} correct.`, tone: 'accent' },
     ];
-    if (s.total) blocks.push({ kind: 'text', text: `Time: ${formatDuration(s.ms)}.`, tone: 'muted' });
+    if (answeredNow) blocks.push({ kind: 'text', text: `Time: ${formatDuration(s.ms)}.`, tone: 'muted' });
     const kks = Object.entries(s.perKk) as [KkId, KkTally][];
     if (kks.length > 1) {
       blocks.push({
@@ -140,6 +180,10 @@ export function createQuizSession(opts: QuizSessionOptions): QuizSession {
       if (isDone()) return [];
       const p = progress();
       const blocks: TerminalBlock[] = [];
+      if (!introShown) {
+        introShown = true;
+        blocks.push(...opts.intro!);
+      }
       if (p) blocks.push({ kind: 'progress', current: p.current, total: p.total, label: opts.progressLabel });
       return [...blocks, ...itemAt(index).prompt];
     },
@@ -153,12 +197,9 @@ export function createQuizSession(opts: QuizSessionOptions): QuizSession {
       const base = { expected: check.expected, reason: check.reason, kk: item.kk, itemId: item.id, instance: item.instance, markdown: check.markdown };
       if (check.counted === false) return { ...base, correct: false, score: 0, counted: false };
       const score = Math.min(1, Math.max(0, check.score ?? (check.correct ? 1 : 0)));
-      results.push({ itemId: item.id, kk: item.kk, correct: check.correct, score });
-      for (const kk of new Set(item.kk)) {
-        const t = perKk[kk] ?? { correct: 0, total: 0 };
-        perKk[kk] = { correct: t.correct + score, total: t.total + 1 };
-      }
+      tally(item, check.correct, score);
       lastAnswerAt = opts.now();
+      answeredNow++;
       index++;
       return { ...base, correct: check.correct, score, followUp: check.followUp };
     },

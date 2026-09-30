@@ -1,5 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useContent } from '../content/store';
+import { buildIndex } from '../content/loader';
+import type { PsmFile } from '../content/schema';
+import { fixtureTerms } from '../games/blitz/fixture';
 import { fixtureContent } from '../games/drill/fixture';
 import { GAMES } from '../games/registry';
 import { fromSortInstance } from '../games/sort/items';
@@ -338,6 +341,41 @@ describe('games in the terminal', () => {
     expect(term().game).toBeNull();
     expect(term().busy).toBe(false);
     finishGame();
+  });
+});
+
+describe('blitz in the terminal', () => {
+  it('says there is no glossary, suggests another game and starts nothing', async () => {
+    useContent.setState({ index: fixtureContent(), status: 'ready' });
+    await submitLine('play blitz', mockEnv());
+    expect(printed()).toContain('Glossary blitz');
+    expect(printed()).toContain('No glossary terms are installed yet');
+    expect(printed()).toContain('play deskcheck');
+    expect(printed()).not.toContain('Answer at the prompt');
+    expect(term().game).toBeNull();
+    expect(useTerminal.getState().lastGameEnd).toBeNull();
+  });
+
+  it('runs against the clock with the glossary and ends at 60 seconds', async () => {
+    const terms = fixtureTerms();
+    const empty = { cards: [], mcq: [], short: [] };
+    const psm = { stages: [], specifications: [], cards: [], mcq: [], short: [] } as unknown as PsmFile;
+    useContent.setState({ index: buildIndex({ areas: [empty, empty, empty, empty], terms, psm, caseStudies: [] }), status: 'ready' });
+    await submitLine('play blitz', mockEnv());
+    expect(printed()).toContain('You have 60 seconds.');
+    expect(printed()).not.toContain('Normal difficulty');
+    const first = terms.find((c) => c.id === term().game!.session.current!()!.itemId)!;
+    await submitLine(first.front, mockEnv());
+    expect(useAttempts.getState().log[0][0]).toBe(first.id);
+    vi.advanceTimersByTime(60_100);
+    expect(term().game).toBeNull();
+    expect(printed()).toContain("Time's up: 1 of 1 correct.");
+  });
+
+  it('refuses difficulty options for games with one level', async () => {
+    await submitLine('play blitz --hard', mockEnv());
+    expect(printed()).toContain('blitz has one level, so it has no --easy or --hard option. Type play blitz to start it.');
+    expect(term().game).toBeNull();
   });
 });
 
