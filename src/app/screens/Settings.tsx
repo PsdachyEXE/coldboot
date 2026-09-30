@@ -5,17 +5,17 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { toMelbourneWallTime } from '../../lib/time';
-import { buildExport, exportFilename, resetAllProgress } from '../../state/exportImport';
+import { resetAllProgress } from '../../state/exportImport';
 import { useSettings, type MotionPreference } from '../../state/settings';
 import { announce } from '../../ui/announce';
 import { Button } from '../../ui/Button';
-import { downloadJson } from '../../ui/download';
 import { Checkbox, RadioGroup, TextField } from '../../ui/Field';
 import { useMediaQuery } from '../../ui/useMediaQuery';
 import { paths } from '../paths';
 import { usePwa, type UpdateCheck } from '../pwa';
 import { ImportProgress } from './settings/ImportProgress';
 import { StudyFields } from './settings/StudyFields';
+import { useExportProgress } from './settings/useExportProgress';
 import { validateStudyForm, type StudyErrors, type StudyForm } from './settings/validate';
 import styles from './ShellScreens.module.css';
 
@@ -141,18 +141,8 @@ function SoundAndMotion() {
 
 function YourProgress({ onImported }: { onImported(): void }) {
   const navigate = useNavigate();
-  const [exported, setExported] = useState<string | null>(null);
-  const [exportFailed, setExportFailed] = useState(false);
+  const { exportProgress, status: exportStatus } = useExportProgress();
   const [confirmText, setConfirmText] = useState('');
-
-  function exportProgress() {
-    const now = Date.now();
-    const name = exportFilename(now);
-    const ok = downloadJson(name, buildExport(now));
-    setExportFailed(!ok);
-    setExported(ok ? name : null);
-    if (ok) announce(`Progress exported as ${name}.`);
-  }
 
   function reset() {
     if (confirmText !== RESET_WORD) return;
@@ -173,16 +163,7 @@ function YourProgress({ onImported }: { onImported(): void }) {
         <h3>Export progress</h3>
         <p>Saves a file with your settings, review schedule, attempts and streak.</p>
         <Button onClick={exportProgress}>Export progress</Button>
-        {exported ? (
-          <p className={styles.status}>
-            Progress exported as {exported}. Keep it somewhere safe, such as your school drive.
-          </p>
-        ) : null}
-        {exportFailed ? (
-          <p role="alert" className={styles.status}>
-            Your browser blocked the download. Allow downloads for this site, then try again.
-          </p>
-        ) : null}
+        {exportStatus}
       </div>
 
       <div className={styles.subsection}>
