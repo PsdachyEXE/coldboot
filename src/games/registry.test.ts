@@ -4,16 +4,14 @@ import { DAILY_GENERATOR_GAMES } from './daily';
 import { DRILL_GAME, GAMES, findGame } from './registry';
 
 describe('game registry', () => {
-  it("lists the P0 games, then the P1 games, in the brief's order with student-facing man pages", () => {
+  it("lists the P0 games, then the P1 games, then the P2 games, in the brief's order with student-facing man pages", () => {
     const p0 = ['deskcheck', 'sort', 'search', 'triage', 'validate', 'blitz', 'daily'];
     const p1 = ['dfd', 'usecase', 'reqs', 'gantt', 'threat', 'law', 'naming', 'types', 'oop', 'psm'];
-    expect(GAMES.slice(0, p0.length).map((g) => g.id)).toEqual(p0);
-    const rest = GAMES.slice(p0.length);
-    expect(rest.every((g) => g.priority === 'P1')).toBe(true);
-    // Every P1 game is built, in the brief's order.
-    expect(rest.map((g) => g.id)).toEqual(p1);
+    const p2 = ['ux'];
+    // Every game is built, in the brief's order.
+    expect(GAMES.map((g) => g.id)).toEqual([...p0, ...p1, ...p2]);
     for (const meta of GAMES) {
-      expect(meta.priority).toBe(p0.includes(meta.id) ? 'P0' : 'P1');
+      expect(meta.priority).toBe(p0.includes(meta.id) ? 'P0' : p1.includes(meta.id) ? 'P1' : 'P2');
       const usage = meta.id === 'daily' ? 'Usage: daily' : meta.fixedDifficulty ? `Usage: play ${meta.id}` : `Usage: play ${meta.id} [--easy|--hard]`;
       expect(meta.man.endsWith(usage)).toBe(true);
       expect(meta.man.startsWith(`${meta.id} `)).toBe(true);
@@ -29,7 +27,7 @@ describe('game registry', () => {
       const m = findGame(id)!;
       return [Boolean(m.generator), Boolean(m.needsContent), Boolean(m.fixedDifficulty)];
     };
-    const generators = ['deskcheck', 'sort', 'search', 'triage', 'validate', 'dfd', 'usecase', 'reqs', 'gantt', 'threat', 'law', 'naming', 'types', 'oop'];
+    const generators = ['deskcheck', 'sort', 'search', 'triage', 'validate', 'dfd', 'usecase', 'reqs', 'gantt', 'threat', 'law', 'naming', 'types', 'oop', 'ux'];
     for (const id of generators) expect(flags(id)).toEqual([true, false, false]);
     expect(flags('blitz')).toEqual([false, true, true]);
     expect(flags('daily')).toEqual([false, true, true]);

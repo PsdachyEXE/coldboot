@@ -6,8 +6,8 @@
  * P1: dfd, usecase, reqs, gantt, threat, law, naming, types, oop, psm
  * P2: boss, ux
  *
- * GAMES lists the P0 games in the brief's order, then the P1 games in the brief's order; that is
- * the order `ls` prints. Games that need study content set needsContent; games with
+ * GAMES lists the P0 games in the brief's order, then the P1 games, then the P2 games, each in the
+ * brief's order; that is the order `ls` prints. Games that need study content set needsContent; games with
  * Game.generate set generator: true. The terminal's `daily` command runs `play daily`.
  */
 import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './blitz/meta';
@@ -27,6 +27,7 @@ import { THREAT_GAME_KK, THREAT_ID, THREAT_MAN, THREAT_SUMMARY, THREAT_TITLE } f
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
 import { TYPES_GAME_KK, TYPES_ID, TYPES_MAN, TYPES_SUMMARY, TYPES_TITLE } from './types-game/meta';
 import { USECASE_GAME_KK, USECASE_ID, USECASE_MAN, USECASE_SUMMARY, USECASE_TITLE } from './usecase/meta';
+import { UX_GAME_KK, UX_ID, UX_MAN, UX_SUMMARY, UX_TITLE } from './ux/meta';
 import { VALIDATE_ID, VALIDATE_KK, VALIDATE_MAN, VALIDATE_SUMMARY, VALIDATE_TITLE } from './validate/meta';
 import type { GameMeta } from './types';
 
@@ -204,6 +205,16 @@ export const GAMES: GameMeta[] = [
     man: PSM_MAN,
     needsContent: true,
     load: () => import('./psm').then((m) => m.default),
+  },
+  {
+    id: UX_ID,
+    title: UX_TITLE,
+    priority: 'P2',
+    kk: UX_GAME_KK,
+    summary: UX_SUMMARY,
+    man: UX_MAN,
+    generator: true,
+    load: () => import('./ux').then((m) => m.default),
   },
 ];
 
