@@ -5,6 +5,7 @@ import type { PsmFile } from '../content/schema';
 import { fixtureTerms } from '../games/blitz/fixture';
 import { fixtureContent } from '../games/drill/fixture';
 import { GAMES } from '../games/registry';
+import type { GameMeta, GameSession } from '../games/types';
 import { fromSortInstance } from '../games/sort/items';
 import { useAttempts } from '../state/attempts';
 import { useSession } from '../state/session';
@@ -275,6 +276,47 @@ describe('games in the terminal', () => {
     expect(useReportDialog.getState().request?.itemId).toBe('gen-fake-2');
     // "report" is not taken as an answer.
     expect(term().game?.session.progress).toEqual({ current: 2, total: 3 });
+  });
+
+  it('moves on without recording an advanced answer, and records a self-marked one without a verdict', async () => {
+    let step = 0;
+    const session: GameSession = {
+      get done() {
+        return step >= 2;
+      },
+      prompt: () => [{ kind: 'text', text: step === 0 ? 'Write your answer.' : 'Which points did you earn?' }],
+      answer: (input) => {
+        if (step === 0) {
+          step = 1;
+          return { correct: false, expected: '', reason: '', kk: ['U3O2-KK05'], itemId: 's-x', score: 0, counted: false, advanced: true, followUp: [{ kind: 'text', text: 'Model answer shown.' }] };
+        }
+        if (input !== '1') return { correct: false, expected: '', reason: 'Type 1.', kk: ['U3O2-KK05'], itemId: 's-x', score: 0, counted: false };
+        step = 2;
+        return { correct: false, expected: '', reason: '', kk: ['U3O2-KK05'], itemId: 's-x', score: 0.5, selfMarked: true, followUp: [{ kind: 'text', text: 'You gave yourself 1 of 2 marks.' }] };
+      },
+      chips: () => (step === 0 ? ['skip'] : ['all', 'none']),
+      summary: () => ({ gameId: 'written-fake', score: 0.5, total: 1, ms: 0, perKk: {}, blocks: [{ kind: 'text', text: 'Done.' }] }),
+    };
+    const meta: GameMeta = { ...fakeGame({ id: 'written-fake' }), load: async () => ({ id: 'written-fake', title: 'Fake game', kk: [], man: 'Fake.', start: () => session }) };
+    GAMES.push(meta);
+    await submitLine('play written-fake', mockEnv());
+    vi.advanceTimersByTime(5000);
+    await submitLine('help me with this answer', mockEnv());
+    expect(printed()).toContain('Model answer shown.\nWhich points did you earn?');
+    expect(printed()).not.toContain('A game is running');
+    expect(term().game?.chips).toEqual(['all', 'none']);
+    expect(useAttempts.getState().log).toHaveLength(0);
+    await submitLine('9', mockEnv());
+    expect(printed()).toContain('Type 1.');
+    vi.advanceTimersByTime(3000);
+    await submitLine('1', mockEnv());
+    const log = useAttempts.getState().log;
+    expect(log.map((t) => [t[0], t[2]])).toEqual([['s-x', 0.5]]);
+    // Timed from when the question first appeared, not from the reveal.
+    expect(log[0][4]).toBe(8000);
+    expect(printed()).not.toMatch(/\b(Correct|Incorrect)\b/);
+    expect(useAnnouncer.getState().polite).toMatch(/^You gave yourself 1 of 2 marks\. Done\./);
+    expect(term().game).toBeNull();
   });
 
   it('explains that a command typed during a game is read as an answer', async () => {

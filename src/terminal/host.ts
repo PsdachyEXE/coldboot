@@ -8,6 +8,10 @@
  * for each counted answer, where index is progress.current - 1 before the answer. The stored record
  * is the source of truth: when the Daily screen has answered questions while the terminal waited,
  * the next answer here isn't checked or logged, and the game restarts from the record instead.
+ *
+ * Written answers (the boss round's case study): an `advanced` result moves the game on to its
+ * marking points without recording anything; a `selfMarked` result records the student's own mark
+ * and prints what was recorded instead of a Correct or Incorrect verdict.
  */
 import type { ContentIndex } from '../content/loader';
 import type { KkId } from '../content/schema';
@@ -186,23 +190,36 @@ export function submitAnswer(input: string): AnswerResult | null {
   }
   term().patchGame({ answers: [...game.answers, input].slice(-GAME_ANSWERS_MAX) });
   if (result.counted === false) {
-    term().print(say(result.reason, 'warning'));
+    if (!result.advanced) {
+      term().print(say(result.reason, 'warning'));
+      return result;
+    }
+    // The game moved on without marking anything (a written answer before its marking points).
+    // shownAt stays put, so the attempt recorded next is timed from when the question appeared.
+    term().print(result.followUp ?? []);
+    if (session.done) finishGame();
+    else {
+      term().print(session.prompt());
+      term().patchGame({ chips: session.chips?.() ?? [] });
+    }
     return result;
   }
-  term().print([
-    {
-      kind: 'feedback',
-      correct: result.correct,
-      expected: result.expected || undefined,
-      reason: result.reason || undefined,
-      markdown: result.markdown === true ? true : undefined,
-    },
-    ...(result.followUp ?? []),
-  ]);
+  const verdict: TerminalBlock[] = result.selfMarked
+    ? []
+    : [
+        {
+          kind: 'feedback',
+          correct: result.correct,
+          expected: result.expected || undefined,
+          reason: result.reason || undefined,
+          markdown: result.markdown === true ? true : undefined,
+        },
+      ];
+  term().print([...verdict, ...(result.followUp ?? [])]);
   recordAttempt({ itemId: result.itemId, kk: result.kk, score: result.score, timestamp: t, ms: t - game.shownAt });
   if (session.itemIds && index >= 0) useSession.getState().recordDaily(game.today, index, result.correct, t);
   term().setLastAnswered({ itemId: result.itemId, kk: result.kk, instance: result.instance, where: game.where });
-  playCue(result.correct ? 'correct' : 'incorrect');
+  if (!result.selfMarked) playCue(result.correct ? 'correct' : 'incorrect');
   if (session.done) {
     finishGame();
     return result;

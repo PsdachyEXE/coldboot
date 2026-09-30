@@ -89,7 +89,8 @@ export async function submitLine(raw: string, env: TerminalEnv, opts: SubmitOpti
       else if (line.trim()) {
         const result = submitAnswer(line);
         const word = line.trim().split(/\s+/)[0].toLowerCase();
-        if (result?.counted === false && VISIBLE_COMMANDS.includes(word)) {
+        // A written answer that moved the game on (result.advanced) was meant as an answer.
+        if (result?.counted === false && !result.advanced && VISIBLE_COMMANDS.includes(word)) {
           term().print({ kind: 'text', text: `A game is running, so that was read as an answer. To run ${word}, stop the game first with Ctrl+C or Abort game.`, tone: 'muted' });
         }
       }
