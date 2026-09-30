@@ -290,7 +290,10 @@ export function rewriteItem(task: RewriteTask, seed: number, difficulty: Difficu
       const typed = cleanIdentifier(input);
       if (!typed) return { correct: false, expected, reason: 'Type the identifier.', counted: false };
       if (typed === expected) return { correct: true, expected, reason };
-      return { correct: false, expected, reason: `${diagnoseRewrite(c, typed)} ${reason}`.trim() };
+      const diagnosis = diagnoseRewrite(c, typed);
+      // A wrong prefix is already explained, so the rest of the reason only covers the words.
+      const rest = diagnosis.startsWith('The prefix for') ? `Each word after the prefix starts with a capital letter: ${expected}.` : reason;
+      return { correct: false, expected, reason: `${diagnosis} ${rest}` };
     },
   };
 }

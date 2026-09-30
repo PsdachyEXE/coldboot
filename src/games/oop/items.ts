@@ -183,7 +183,8 @@ export function blankedFigure(obj: ObjectEntry, gap: string): ObjectDescription 
     kind: 'object',
     title: `Object description: ${obj.name}`,
     name: obj.name,
-    properties: obj.properties.map((p) => ({ ...p })),
+    // Name and data type only, as exam object descriptions show them; it also fits a phone.
+    properties: obj.properties.map((p) => ({ name: p.name, type: p.type })),
     methods: obj.methods.map((name) => ({ name })),
   };
   if (gap.startsWith('type-')) {
@@ -235,6 +236,7 @@ function typeGapItem(obj: ObjectEntry, gap: string, seed: number, difficulty: Di
     chips: TYPE_OPTIONS.map((o) => o.label),
     prompt: [
       { kind: 'figure', figure: blankedFigure(obj, gap) },
+      { kind: 'text', text: `${property.name}: ${property.description}.` },
       { kind: 'text', text: `The data type of ${property.name} is missing, marked with a question mark. Which data type should it have?`, tone: 'accent' },
       { kind: 'text', text: TYPE_HINT, tone: 'muted' },
     ],
