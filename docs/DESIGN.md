@@ -102,7 +102,7 @@ Phone (below 720 px)
 +------------------------------+
 ```
 
-- **Eight destinations in five tabs.** The tab bar holds Home, Review, Drill and Terminal, the four places a student goes every day, plus More. More opens a menu above the tab bar with Written, Exam, Map, Stats, Settings and About. Five tabs of 72 px fit 360 px with room for "Terminal" at 14 px. More is marked as current (bold, top bar) whenever the current page is one of its items. Esc, choosing an item, or tapping outside closes it and returns focus to More.
+- **Eight destinations in five tabs.** The tab bar holds Home, Review, Drill and Terminal, the four places a student goes every day, plus More. More opens a menu above the tab bar with Written, Exam, Map, Stats, Settings and About. Five tabs of 72 px fit 360 px with room for "Terminal" at 14 px. More is marked as current (bold, top bar) whenever the current page is one of its items. Esc, choosing an item, tapping outside or moving keyboard focus outside closes it, and Esc returns focus to More.
 - Only the countdown and the due count stay in the status bar. The streak and offline segments return at 720 px; the storage warning banner still shows at every width.
 - The page never scrolls sideways at 360 px. Wide content (tables, pseudocode) scrolls inside its own box.
 

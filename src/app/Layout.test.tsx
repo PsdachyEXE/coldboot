@@ -160,6 +160,22 @@ describe('Layout', () => {
     expect(screen.getByRole('button', { name: 'Open terminal' })).toBeInTheDocument();
   });
 
+  it('closes the More menu when keyboard focus leaves it, so it never covers the focused control', async () => {
+    onboard();
+    narrowScreen();
+    renderAt('/');
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+    const more = within(nav).getByRole('button', { name: 'More' });
+    fireEvent.click(more);
+    const about = within(nav).getByRole('link', { name: 'About' });
+    // Moving within the menu keeps it open.
+    act(() => about.focus());
+    expect(more).toHaveAttribute('aria-expanded', 'true');
+    // Tab past the last item into the page.
+    act(() => screen.getByRole('link', { name: 'Skip to main content' }).focus());
+    expect(more).toHaveAttribute('aria-expanded', 'false');
+  });
+
   it('closes the More menu after choosing an item, and marks More as current there', async () => {
     onboard();
     narrowScreen();
