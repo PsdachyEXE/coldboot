@@ -12,7 +12,7 @@ import { useSettings } from '../state/settings';
 import { useSrs } from '../state/srs';
 import { useAnnouncer } from '../ui/announce';
 import { useReportDialog } from '../ui/report';
-import { DAILY_MISSING, SUDO_MESSAGE } from './commands';
+import { SUDO_MESSAGE } from './commands';
 import { abortGame, finishGame, startGame } from './host';
 import { useTerminalSession, walkHistory } from './session';
 import { completeAt, historyDown, historyUp, interrupt, promptFor, submitLine, suggestCommand } from './shell';
@@ -93,11 +93,7 @@ describe('commands', () => {
     expect(printed()).toContain('Did you mean sort?');
   });
 
-  it('treats daily and unknown games the same friendly way', async () => {
-    await submitLine('daily', mockEnv());
-    expect(printed()).toContain(DAILY_MISSING);
-    await submitLine('play daily', mockEnv());
-    expect(printed().split(DAILY_MISSING)).toHaveLength(3);
+  it('treats unknown games in a friendly way', async () => {
     await submitLine('play chess', mockEnv());
     expect(printed()).toContain('The game "chess" isn\'t installed in this build yet.');
     await submitLine('play serch', mockEnv());
@@ -246,8 +242,8 @@ describe('games in the terminal', () => {
 
   it('follows the daily protocol and prints the share line', async () => {
     const items = [numberItem(1, 'm-u3o1-kk12-001'), numberItem(2, 'gen-daily-sort:42')];
-    GAMES.push(fakeGame({ id: 'daily', items, exposeItemIds: true, share: true }));
-    await submitLine('daily', mockEnv());
+    // The real daily game is registered; this checks the host's protocol with a fake one.
+    await startGame(fakeGame({ id: 'daily', items, exposeItemIds: true, share: true }), { difficulty: 'normal', where: 'test' });
     expect(useSession.getState().daily['2026-10-01']).toEqual({ itemIds: ['m-u3o1-kk12-001', 'gen-daily-sort:42'], results: [], completedAt: null });
     await submitLine('1', mockEnv());
     await submitLine('5', mockEnv());

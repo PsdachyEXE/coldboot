@@ -11,6 +11,7 @@
  * terminal's `daily` command runs `play daily`.
  */
 import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './blitz/meta';
+import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './daily-game/meta';
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
@@ -80,6 +81,18 @@ export const GAMES: GameMeta[] = [
     needsContent: true,
     fixedDifficulty: true,
     load: () => import('./blitz').then((m) => m.default),
+  },
+  {
+    id: DAILY_ID,
+    title: DAILY_TITLE,
+    priority: 'P0',
+    kk: DAILY_KK,
+    summary: DAILY_SUMMARY,
+    man: DAILY_MAN,
+    needsContent: true,
+    fixedDifficulty: true,
+    // Loads the generator games the set draws on (daily-game/index.ts), then the game.
+    load: () => import('./daily-game').then((m) => m.loadDailyGame()),
   },
 ];
 

@@ -44,7 +44,6 @@ export interface CommandSpec {
 }
 
 export const SUDO_MESSAGE = 'Permission denied. This terminal runs with least privilege.';
-export const DAILY_MISSING = "The daily challenge isn't installed in this build yet.";
 
 const out = (...blocks: TerminalBlock[]) => useTerminalSession.getState().print(blocks);
 const say = (text: string, tone?: Tone): TerminalBlock => ({ kind: 'text', text, tone });
@@ -66,10 +65,6 @@ function difficultyFrom(cmd: ParsedCommand): { difficulty: Difficulty } | { erro
 }
 
 function notInstalled(id: string): void {
-  if (id === 'daily') {
-    out(say(DAILY_MISSING, 'warning'), say('Type ls to see the games you can play now.', 'muted'));
-    return;
-  }
   const near = nearest(id, GAMES.map((g) => g.id));
   out(
     say(`The game "${id}" isn't installed in this build yet.`, 'warning'),
@@ -231,10 +226,6 @@ function man(cmd: ParsedCommand): void {
   const command = findCommand(topic);
   if (command && !command.hidden) {
     out(say(`Usage: ${command.usage}`, 'accent'), say(`${command.summary}.`));
-    return;
-  }
-  if (topic === 'daily') {
-    out(say(DAILY_MISSING, 'warning'));
     return;
   }
   const near = nearest(topic, [...GAMES.map((g) => g.id), DRILL_ID]);
