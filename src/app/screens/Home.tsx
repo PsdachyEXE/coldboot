@@ -15,6 +15,7 @@ import { streak, useSession } from '../../state/session';
 import { useSrs } from '../../state/srs';
 import { ButtonLink } from '../../ui/Button';
 import { drillPath, paths } from '../paths';
+import { ContentErrorNotice } from '../study/ContentGate';
 import { CoverageGrid, CoverageLegend } from '../study/CoverageGrid';
 import { plural } from '../study/format';
 import { kksWithItems, rankWeakest } from '../study/select';
@@ -33,6 +34,7 @@ export default function Home() {
   return (
     <div>
       <h1>Today</h1>
+      <ContentErrorNotice />
       <RunPreview content={content} mastery={mastery} due={due} newRemaining={newRemaining} dailyDone={Boolean(daily?.completedAt)} />
       <p>
         <ButtonLink variant="primary" to={paths.run}>

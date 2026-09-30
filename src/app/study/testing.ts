@@ -91,8 +91,10 @@ export function provideContent(index: ContentIndex): ContentIndex {
   return index;
 }
 
+const originalLoad = useContent.getState().load;
+
 export function resetStudyStores(): void {
-  useContent.setState({ index: null, status: 'idle', error: null });
+  useContent.setState({ index: null, status: 'idle', error: null, load: originalLoad });
   useSrs.getState().reset();
   useAttempts.getState().reset();
   useSession.getState().reset();

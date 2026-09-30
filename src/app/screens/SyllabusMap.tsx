@@ -15,6 +15,7 @@ import { Meter } from '../../ui/Meter';
 import { Tag } from '../../ui/Tag';
 import { VisuallyHidden } from '../../ui/VisuallyHidden';
 import { drillPath } from '../paths';
+import { ContentErrorNotice } from '../study/ContentGate';
 import { lastPractised, plural } from '../study/format';
 import styles from '../study/Map.module.css';
 
@@ -34,9 +35,9 @@ export default function SyllabusMap() {
         <p>
           You've practised {seen} of {plural(allIds.length, 'key knowledge point')}.
           {status === 'loading' || status === 'idle' ? ' Counting the questions for each one.' : null}
-          {status === 'error' ? " Question counts aren't available because study content didn't load." : null}
         </p>
       </div>
+      <ContentErrorNotice />
       <div className={styles.areas}>
         {AREA_IDS.map((area) => {
           const kks = kksByArea[area];
