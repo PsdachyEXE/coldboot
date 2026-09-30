@@ -6,6 +6,7 @@ import { memo } from 'react';
 import { Link } from 'react-router';
 import { renderPseudo } from '../content/markdown';
 import { FigureView } from '../figures';
+import { useScrollable } from '../figures/useScrollable';
 import { Markdown } from '../ui/Markdown';
 import type { TerminalBlock } from './blocks';
 import styles from './Block.module.css';
@@ -38,13 +39,85 @@ function Progress({ current, total, label }: { current: number; total: number; l
   );
 }
 
+/**
+ * A table. On phones a two-column table stacks each row (see Block.module.css); the explicit roles
+ * keep it a table for screen readers when its rows display as blocks. When the table is wider than
+ * the terminal, its scroll box becomes a labelled tab stop so keyboard users can scroll it.
+ */
+function TableBlock({ block }: { block: Extract<TerminalBlock, { kind: 'table' }> }) {
+  const [ref, scrollable] = useScrollable<HTMLDivElement>();
+  // Columns whose cells are all numbers line up on the right.
+  const numeric = block.columns.map((_, i) => i > 0 && block.rows.length > 0 && block.rows.every((r) => /^-?[\d,.]+$/.test(r[i] ?? '')));
+  const align = (i: number) => (numeric[i] ? styles.numeric : undefined);
+  const stacked = block.columns.length === 2;
+  return (
+    <div
+      ref={ref}
+      className={styles.tableWrap}
+      tabIndex={scrollable ? 0 : undefined}
+      role={scrollable ? 'region' : undefined}
+      aria-label={scrollable ? `${block.caption ?? 'Table'} (scrolls sideways)` : undefined}
+    >
+      <table className={cx(styles.table, stacked && styles.stacked)} role="table">
+        {block.caption && <caption className={styles.caption}>{block.caption}</caption>}
+        <thead role="rowgroup">
+          <tr role="row">
+            {block.columns.map((c, i) => (
+              <th key={i} scope="col" role="columnheader" className={align(i)}>
+                {c}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody role="rowgroup">
+          {block.rows.map((row, r) => (
+            <tr key={r} role="row">
+              {row.map((cell, i) =>
+                i === 0 ? (
+                  <th key={i} scope="row" role="rowheader">
+                    {cell}
+                  </th>
+                ) : (
+                  <td key={i} role="cell" className={align(i)}>
+                    {cell}
+                  </td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+/** Preformatted text. It scrolls sideways when too wide (and is then a tab stop), unless it wraps. */
+function PreBlock({ block }: { block: Extract<TerminalBlock, { kind: 'pre' }> }) {
+  const [ref, scrollable] = useScrollable<HTMLPreElement>();
+  const focusable = scrollable && !block.wrap;
+  return (
+    <figure className={styles.preBlock}>
+      {block.label && <figcaption className={styles.caption}>{block.label}</figcaption>}
+      <pre
+        ref={ref}
+        className={cx(styles.pre, block.wrap && styles.preWrap)}
+        tabIndex={focusable ? 0 : undefined}
+        role={focusable ? 'region' : undefined}
+        aria-label={focusable ? `${block.label ?? 'Text'} (scrolls sideways)` : undefined}
+      >
+        {block.text}
+      </pre>
+    </figure>
+  );
+}
+
 export const BlockView = memo(function BlockView({ block, animate = false, onNavigate }: BlockViewProps) {
   switch (block.kind) {
     case 'text':
       return <p className={cx(styles.text, styles[block.tone ?? 'normal'])}>{block.text}</p>;
 
     case 'markdown':
-      return <Markdown text={block.text} className={styles.markdown} />;
+      return <Markdown text={block.text} className={cx(styles.markdown, block.tone === 'muted' && styles.markdownMuted)} />;
 
     case 'pseudo':
       return (
@@ -55,45 +128,8 @@ export const BlockView = memo(function BlockView({ block, animate = false, onNav
         </figure>
       );
 
-    case 'table': {
-      const wide = block.columns.length > 6;
-      // Columns whose cells are all numbers line up on the right.
-      const numeric = block.columns.map((_, i) => i > 0 && block.rows.length > 0 && block.rows.every((r) => /^-?[\d,.]+$/.test(r[i] ?? '')));
-      const align = (i: number) => (numeric[i] ? styles.numeric : undefined);
-      return (
-        <div className={styles.tableWrap} tabIndex={wide ? 0 : undefined} role={wide ? 'region' : undefined} aria-label={wide ? (block.caption ?? 'Table') : undefined}>
-          <table className={styles.table}>
-            {block.caption && <caption className={styles.caption}>{block.caption}</caption>}
-            <thead>
-              <tr>
-                {block.columns.map((c, i) => (
-                  <th key={i} scope="col" className={align(i)}>
-                    {c}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {block.rows.map((row, r) => (
-                <tr key={r}>
-                  {row.map((cell, i) =>
-                    i === 0 ? (
-                      <th key={i} scope="row">
-                        {cell}
-                      </th>
-                    ) : (
-                      <td key={i} className={align(i)}>
-                        {cell}
-                      </td>
-                    ),
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      );
-    }
+    case 'table':
+      return <TableBlock block={block} />;
 
     case 'figure':
       return (
@@ -123,12 +159,7 @@ export const BlockView = memo(function BlockView({ block, animate = false, onNav
     }
 
     case 'pre':
-      return (
-        <figure className={styles.preBlock}>
-          {block.label && <figcaption className={styles.caption}>{block.label}</figcaption>}
-          <pre className={styles.pre}>{block.text}</pre>
-        </figure>
-      );
+      return <PreBlock block={block} />;
 
     case 'choices':
       return (

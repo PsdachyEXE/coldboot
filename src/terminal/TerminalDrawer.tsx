@@ -7,6 +7,7 @@
 import { useEffect, useRef, type KeyboardEvent } from 'react';
 import { useLocation } from 'react-router';
 import { paths } from '../app/paths';
+import { Kbd } from '../ui/Kbd';
 import { useReducedMotion } from '../ui/motion';
 import { isEditable, trapTab } from './dom';
 import { focusRouteInput } from './routeFocus';
@@ -97,7 +98,9 @@ export function TerminalDrawer() {
         <h2 id="terminal-drawer-title" className={styles.title}>
           Terminal
         </h2>
-        <p className={styles.hint}>Press ` or Esc to close</p>
+        <p className={styles.hint}>
+          Press <Kbd>`</Kbd> or <Kbd>Esc</Kbd> to close
+        </p>
         <button type="button" className={styles.close} onClick={close}>
           Close
         </button>

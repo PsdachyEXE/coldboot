@@ -210,7 +210,7 @@ export function finishGame(): void {
   useTerminal.getState().reportGameEnd({ gameId: game.gameId, score: summary.score, total: summary.total, at: Date.now() });
   if (summary.shareText) {
     term().print([
-      { kind: 'pre', text: summary.shareText, label: 'Share line' },
+      { kind: 'pre', text: summary.shareText, label: 'Share line', wrap: true },
       say('Type share to copy it to the clipboard.', 'muted'),
     ]);
     term().setLastShare(summary.shareText);

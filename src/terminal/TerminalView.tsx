@@ -152,7 +152,9 @@ function TerminalInput({ env, inputRef }: { env: TerminalEnv; inputRef: RefObjec
 function TerminalChips({ env, inputRef }: { env: TerminalEnv; inputRef: RefObject<HTMLInputElement | null> }) {
   const inGame = useTerminalSession((s) => s.game !== null);
   const gameChips = useTerminalSession((s) => s.game?.chips);
-  const chips = inGame ? (gameChips ?? []) : IDLE_CHIPS;
+  const canShare = useTerminalSession((s) => s.lastShare !== null);
+  // Once a share line has been printed, copying it is one tap away.
+  const chips = inGame ? (gameChips ?? []) : canShare ? ['share', ...IDLE_CHIPS] : IDLE_CHIPS;
 
   // After a chip: mouse users go back to typing; a keyboard user whose chip disappeared with the
   // next question lands in the input; touch users keep the keyboard closed.
