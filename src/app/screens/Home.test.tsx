@@ -183,13 +183,18 @@ describe('Home on exam day', () => {
     expect(screen.getByText('Less than a minute to go.')).toBeInTheDocument();
   });
 
-  it.each(['2026-11-13T15:00:00+11:00', '2026-11-13T15:14:59+11:00', '2026-11-13T15:15:00+11:00', '2026-11-13T17:14:59+11:00'])(
+  it.each([
+    ['2026-11-13T15:00:00+11:00', 'Reading time ends at 3:15 pm, then writing time runs until 5:15 pm (Melbourne time).'],
+    ['2026-11-13T15:14:59+11:00', 'Reading time ends at 3:15 pm, then writing time runs until 5:15 pm (Melbourne time).'],
+    ['2026-11-13T15:15:00+11:00', 'Writing time ends at 5:15 pm (Melbourne time).'],
+    ['2026-11-13T17:14:59+11:00', 'Writing time ends at 5:15 pm (Melbourne time).'],
+  ])(
     'wishes luck with no study nags during reading and writing time (%s)',
-    (iso) => {
+    (iso, ends) => {
       renderAt(iso);
       expect(screen.getByRole('heading', { level: 1, name: 'Today' })).toBeInTheDocument();
       const notice = screen.getByRole('region', { name: 'The exam is underway. Good luck.' });
-      expect(notice).toHaveTextContent('Reading time ends at 3:15 pm and writing time at 5:15 pm (Melbourne time).');
+      expect(notice).toHaveTextContent(ends);
       expect(screen.queryAllByRole('link')).toHaveLength(0);
       expect(screen.queryAllByRole('button')).toHaveLength(0);
       expect(screen.queryByText(/due|streak|daily|drill|review/i)).toBeNull();

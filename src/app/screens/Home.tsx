@@ -45,7 +45,7 @@ export default function Home() {
   const examAt = useExamAt();
   const mode = examDayState(now, examAt);
   // During the exam nothing asks for study: no run, no due count, no coverage.
-  if (mode === 'underway') return <ExamUnderway examAt={examAt} />;
+  if (mode === 'underway') return <ExamUnderway now={now} examAt={examAt} />;
   return <Today now={now} examAt={examAt} mode={mode} />;
 }
 
@@ -138,17 +138,19 @@ function ExamDay({ now, examAt }: { now: number; examAt: number }) {
   );
 }
 
-/** Reading and writing time: good luck, and nothing else. */
-function ExamUnderway({ examAt }: { examAt: number }) {
-  const readingEnds = formatMelbourneClock(examAt + EXAM_READING_MS);
-  const writingEnds = formatMelbourneClock(examAt + EXAM_READING_MS + EXAM_WRITING_MS);
+/** Reading and writing time: good luck, when it ends, and nothing else. */
+function ExamUnderway({ now, examAt }: { now: number; examAt: number }) {
+  const readingEnds = examAt + EXAM_READING_MS;
+  const writingEnds = formatMelbourneClock(readingEnds + EXAM_WRITING_MS);
   return (
     <div>
       <h1>Today</h1>
       <Panel as="section" aria-labelledby="exam-underway" className={styles.exam}>
         <h2 id="exam-underway">The exam is underway. Good luck.</h2>
         <p>
-          Reading time ends at {readingEnds} and writing time at {writingEnds} (Melbourne time).
+          {now < readingEnds
+            ? `Reading time ends at ${formatMelbourneClock(readingEnds)}, then writing time runs until ${writingEnds} (Melbourne time).`
+            : `Writing time ends at ${writingEnds} (Melbourne time).`}
         </p>
       </Panel>
     </div>
