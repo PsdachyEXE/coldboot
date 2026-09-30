@@ -326,8 +326,7 @@ export function WeakestSection({ weakest, now }: { weakest: Weakest; now: number
                   <li key={w.kk}>
                     <div className={styles.weakHead}>
                       <Link to={drillPath({ kk: w.kk })} className={styles.weakName}>
-                        <span className={styles.weakId}>{id}</span>
-                        {title}
+                        <span className={styles.weakId}>{id}</span> {title}
                       </Link>
                       <span className={styles.weakValue}>
                         {formatPercent(w.value)}, {masteryBand(w.value)}

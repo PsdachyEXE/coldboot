@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
-import { ALL_KK_IDS } from '../../content/studyDesign';
+import { ALL_KK_IDS, kkLabel } from '../../content/studyDesign';
 import { addDays, studyDay, studyDayStart } from '../../lib/time';
 import { recordAttempt } from '../../state/record';
 import { useSession } from '../../state/session';
@@ -122,6 +122,8 @@ describe('Stats', () => {
       expect(within(items[0]).getByRole('link')).toHaveAttribute('href', '/drill?kk=PSM');
       expect(items[0]).toHaveTextContent('0%, weak');
       expect(within(items[1]).getByRole('link')).toHaveAttribute('href', '/drill?kk=U3O1-KK04');
+      // The id and the title are separate words in the link's accessible name, not "U3O1-KK04Data types".
+      expect(within(items[1]).getByRole('link', { name: kkLabel('U3O1-KK04') })).toBeInTheDocument();
       expect(within(weakest).getByText(new RegExp(`${ALL_KK_IDS.length - 2} key knowledge points are unseen`))).toBeInTheDocument();
       expect(within(weakest).getByRole('link', { name: 'Find unseen key knowledge on the syllabus map' })).toHaveAttribute('href', '/map');
     });
