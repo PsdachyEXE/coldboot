@@ -14,7 +14,7 @@ import type { MasteryMap } from '../../srs/mastery';
 import { streak, useSession, type DailyRecord } from '../../state/session';
 import { useSrs } from '../../state/srs';
 import { ButtonLink } from '../../ui/Button';
-import { drillPath, paths } from '../paths';
+import { paths, practisePath } from '../paths';
 import { ContentErrorNotice } from '../study/ContentGate';
 import { CoverageGrid, CoverageLegend } from '../study/CoverageGrid';
 import { plural } from '../study/format';
@@ -73,7 +73,7 @@ export default function Home() {
           <Link to={paths.map}>syllabus map</Link> for the detail.
         </p>
         <CoverageLegend />
-        <CoverageGrid mastery={mastery} onSelect={(kk) => navigate(drillPath({ kk }))} />
+        <CoverageGrid mastery={mastery} onSelect={(kk) => navigate(practisePath(kk))} />
       </section>
     </div>
   );

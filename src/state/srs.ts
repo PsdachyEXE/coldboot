@@ -5,6 +5,7 @@
  * Reverse cards keep ONE record: the review direction alternates with `reps` (see src/srs/queue.ts).
  */
 import { create } from 'zustand';
+import { MAX_EPOCH_MS } from '../lib/time';
 import { z } from '../lib/zodConfig';
 import { persistStore } from './persist';
 
@@ -47,9 +48,9 @@ export const SrsCardStateSchema = z
     reps: z.number().int().min(0).max(10_000),
     interval: z.number().min(0).max(36_500),
     ease: z.number().min(1.3).max(10),
-    due: z.number().nonnegative(),
+    due: z.number().nonnegative().max(MAX_EPOCH_MS),
     lapses: z.number().int().min(0).max(10_000),
-    last: z.number().nonnegative(),
+    last: z.number().nonnegative().max(MAX_EPOCH_MS),
   })
   .strict();
 

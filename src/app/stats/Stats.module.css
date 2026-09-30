@@ -200,7 +200,7 @@
 .weakId {
   font-family: var(--font-mono);
   font-size: var(--step-0);
-  margin-right: var(--space-2);
+  margin-right: var(--space-1);
 }
 .weakValue {
   font-weight: 700;

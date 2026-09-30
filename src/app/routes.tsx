@@ -17,6 +17,7 @@ import { paths } from './paths';
 import Home from './screens/Home';
 import FirstRun from './screens/FirstRun';
 import NotFound from './screens/NotFound';
+import RouteError from './screens/RouteError';
 
 const screens = {
   review: () => import('./screens/Review'),
@@ -53,6 +54,8 @@ export const routes: RouteObject[] = [
   {
     path: '/',
     element: <Layout />,
+    // A screen that throws shows a plain explanation with links to Settings and Home, not a stack trace.
+    errorElement: <RouteError />,
     children: [
       { index: true, element: <Home /> },
       { path: paths.welcome.slice(1), element: <FirstRun /> },

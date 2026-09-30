@@ -16,6 +16,12 @@ export const EXAM_WRITING_MS = 120 * 60_000;
 export const DAY_MS = 86_400_000;
 export const HOUR_MS = 3_600_000;
 export const STUDY_DAY_ROLLOVER_HOUR = 4;
+/**
+ * The latest instant a stored timestamp may hold: 1 January 3000 UTC. Every date the app shows
+ * formats as a four-digit year up to here, and a stored date past it can only come from a damaged
+ * or edited file. It sits well past the furthest real value, an SM-2 due date 36,500 days away.
+ */
+export const MAX_EPOCH_MS = Date.UTC(3000, 0, 1);
 
 function pad(n: number, width = 2): string {
   return String(n).padStart(width, '0');

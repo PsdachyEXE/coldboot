@@ -3,7 +3,7 @@
  * A seen cell is a solid box with a four-segment gauge lit by mastery band (weak 1, shaky 2,
  * solid 3, strong 4); an unseen cell is a dashed outline with no gauge, so unseen never looks like
  * weak, with or without colour. Each cell is a button named with its KK, title and mastery, and
- * starts a focused drill.
+ * starts a focused drill (Home sends the glossary's cell to Review, through practisePath).
  */
 import type { KkId } from '../../content/schema';
 import { AREA_IDS } from '../../content/schema';

@@ -150,6 +150,14 @@ describe('Drill', () => {
     expect(screen.getByRole('heading', { name: /No questions for U3O2-KK05/ })).toBeInTheDocument();
   });
 
+  it('points the glossary to its flashcards without saying questions are coming', () => {
+    provideContent(fixtureIndex({ mcq: [q1], cards: [fxCard('t-algorithm', ['TERMS'])] }));
+    renderDrill('/drill?kk=TERMS');
+    expect(screen.getByRole('heading', { name: 'The glossary is practised with flashcards' })).toBeInTheDocument();
+    expect(screen.queryByText(/yet/)).toBeNull();
+    expect(screen.getByRole('link', { name: 'Review the glossary' })).toHaveAttribute('href', '/review?kk=TERMS');
+  });
+
   it('flags a drill link it does not understand', () => {
     renderDrill('/drill?kk=U9O9-KK99');
     expect(screen.getByText(/That drill link names something COLDBOOT doesn't have/)).toBeInTheDocument();

@@ -12,8 +12,9 @@
  */
 import { create } from 'zustand';
 import { z } from '../lib/zodConfig';
-import { isKkId, type KkId } from '../content/schema';
-import { EXAM_READING_MS, EXAM_WRITING_MS } from '../lib/time';
+import { isKkId, kkRenamer, type KkId, type KkRename } from '../content/schema';
+import { studyDesign } from '../content/studyDesign';
+import { EXAM_READING_MS, EXAM_WRITING_MS, MAX_EPOCH_MS } from '../lib/time';
 import { persistStore } from '../state/persist';
 import type { TimerConfig } from './timer';
 
@@ -70,6 +71,8 @@ export interface ExamSummary {
   sections: Record<SectionId, Tally>;
   /** [KK, earned, available] per KK the paper touched. */
   kk: [KkId, number, number][];
+  /** Study-design KK map version the `kk` ids belong to; absent (map 1) in summaries saved before it existed. */
+  kkMap?: number;
 }
 
 export interface ExamData {
@@ -118,7 +121,7 @@ export function isAnswered(value: ExamAnswer | undefined): boolean {
 // ---------------------------------------------------------------------------
 
 const ItemId = z.string().regex(/^[a-z0-9][a-z0-9-]{1,79}$/);
-const Epoch = z.number().int().positive();
+const Epoch = z.number().int().positive().max(MAX_EPOCH_MS);
 const Mode = z.enum(['full', 'mini']);
 const Section = z.enum(['a', 'b', 'c']);
 const CaseId = z.string().regex(/^cs-\d{2}$/);
@@ -181,6 +184,7 @@ export const SummarySchema = z
     kk: z
       .array(z.tuple([z.custom<KkId>(isKkId), Mark, Mark]).refine(([, earned, available]) => earned <= available, 'More marks earned than available'))
       .max(80),
+    kkMap: z.number().int().min(1).optional(),
   })
   .strict();
 
@@ -217,6 +221,23 @@ export const useExam = create<ExamState>()((set) => ({
 
 export function selectExamData(s: ExamData): ExamData {
   return { paper: s.paper, history: s.history };
+}
+
+/**
+ * Moves a history summary's KK ids to the current KK map (each version's renames at once), adding up
+ * the tallies of KKs that became one. Pure; a summary already on the current map is returned as is.
+ */
+export function renameSummaryKks(summary: ExamSummary, renames: readonly KkRename[] = studyDesign.renames, current = studyDesign.kkMapVersion): ExamSummary {
+  const from = summary.kkMap ?? 1;
+  if (from >= current) return summary;
+  const rename = kkRenamer(renames, from, current);
+  const byKk = new Map<KkId, [KkId, number, number]>();
+  for (const [kk, earned, available] of summary.kk) {
+    const to = rename(kk);
+    const prev = byKk.get(to);
+    byKk.set(to, prev ? [to, prev[1] + earned, prev[2] + available] : [to, earned, available]);
+  }
+  return { ...summary, kk: [...byKk.values()], kkMap: current };
 }
 
 // ---------------------------------------------------------------------------
@@ -315,10 +336,14 @@ export function mergeExam(local: ExamData, incoming: ExamData): ExamData {
 
 export const examPersistence = persistStore(useExam, {
   name: 'exam',
-  version: 1,
+  // Version 2 added `kkMap` to history summaries, so a build that doesn't know it blocks instead of
+  // setting those summaries aside. Bump again with every KK renumbering (docs/CONTRACTS.md).
+  version: 2,
   schema: ExamDataSchema as z.ZodType<ExamData>,
   select: selectExamData,
-  hydrate: (data) => data,
+  // Version 1 summaries have no kkMap, which reads as map 1.
+  migrate: (data) => data,
+  hydrate: (data) => ({ paper: data.paper, history: data.history.map((h) => renameSummaryKks(h)) }),
   defaults: defaultExam,
   salvage: salvageExam,
   merge: mergeExam,

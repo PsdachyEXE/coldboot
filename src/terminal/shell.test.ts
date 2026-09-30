@@ -387,7 +387,7 @@ describe('drill', () => {
     await submitLine('a', mockEnv());
     const feedback = term().entries.findLast((e) => e.block.kind === 'feedback')!.block;
     expect(feedback).toMatchObject({ kind: 'feedback', correct: false, expected: 'C. Three', markdown: true });
-    expect(feedback.kind === 'feedback' && feedback.reason).toContain('**Why not A:** Not one.');
+    expect(feedback.kind === 'feedback' && feedback.reason).toContain('**Why not A (your answer):** Not one.');
     await submitLine('3', mockEnv());
     expect(term().entries.findLast((e) => e.block.kind === 'feedback')!.block).toMatchObject({ correct: true });
   });
@@ -408,6 +408,14 @@ describe('drill', () => {
     await submitLine('drill U3O1-KK11', mockEnv());
     expect(printed()).toContain('There are no multiple-choice questions for U3O1-KK11 yet.');
     expect(printed()).toContain('Try drill U3O1-KK12, which has 6 questions.');
+    expect(term().game).toBeNull();
+  });
+
+  it('points drill TERMS to the glossary flashcards and blitz', async () => {
+    useContent.setState({ index: fixtureContent(), status: 'ready' });
+    await submitLine('drill TERMS', mockEnv());
+    expect(printed()).toContain('The glossary has no multiple-choice questions. Type play blitz to practise its terms, or review to revise your flashcards.');
+    expect(printed()).not.toContain('Try drill');
     expect(term().game).toBeNull();
   });
 

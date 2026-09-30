@@ -46,7 +46,11 @@ describe('drill selection', () => {
     const wrong = session.answer('a');
     expect(wrong.correct).toBe(false);
     expect(wrong.markdown).toBe(true);
-    expect(wrong.reason).toContain('**Why not A:** Not one.');
-    expect(session.answer('C').correct).toBe(true);
+    expect(wrong.reason).toContain('**Why not A (your answer):** Not one.');
+    expect(wrong.reason).toContain('**Why not B:** Not two.');
+    expect(wrong.reason).toContain('**Why not D:** Not four.');
+    const right = session.answer('C');
+    expect(right.correct).toBe(true);
+    expect(right.reason).toContain('**Why not A:** Not one.');
   });
 });

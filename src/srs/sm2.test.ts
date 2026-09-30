@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_EXAM_AT, parseInstant, studyDayStart } from '../lib/time';
+import { DAY_MS, DEFAULT_EXAM_AT, MAX_EPOCH_MS, parseInstant, studyDayStart } from '../lib/time';
 import type { SrsCardState } from '../state/srs';
 import { SrsCardStateSchema } from '../state/srs';
 import {
   INITIAL_EASE,
+  MAX_INTERVAL_DAYS,
   MIN_EASE,
   RATING_QUALITY,
   REQUEUE_MS,
@@ -132,13 +133,19 @@ describe('SM-2 intervals', () => {
   });
 
   it('always produces a state the SRS store accepts', () => {
+    // Easy on every due date, for as long as the longest interval still ends before MAX_EPOCH_MS
+    // (about the year 2900; a review happens now, so a real due date stays near 2126 at most).
+    const lastReview = MAX_EPOCH_MS - MAX_INTERVAL_DAYS * DAY_MS;
     let state: SrsCardState | undefined;
     let now = local(2026, 12, 1);
-    for (let i = 0; i < 40; i++) {
+    let reviews = 0;
+    for (; reviews < 40 && now < lastReview; reviews++) {
       state = schedule(state, 4, now, { examAt: EXAM }).next;
       expect(SrsCardStateSchema.safeParse(state).success).toBe(true);
       now = state.due + 3_600_000;
     }
+    expect(state?.interval).toBe(MAX_INTERVAL_DAYS);
+    expect(reviews).toBeGreaterThan(10);
   });
 });
 

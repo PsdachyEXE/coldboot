@@ -5,7 +5,9 @@
  *
  * Daily challenge protocol (docs/CONTRACTS.md): when a session exposes `itemIds`, the host calls
  * useSession.beginDaily(today, itemIds) once at start, then recordDaily(today, index, correct, now)
- * for each counted answer, where index is progress.current - 1 before the answer.
+ * for each counted answer, where index is progress.current - 1 before the answer. The stored record
+ * is the source of truth: when the Daily screen has answered questions while the terminal waited,
+ * the next answer here isn't checked or logged, and the game restarts from the record instead.
  */
 import type { ContentIndex } from '../content/loader';
 import type { KkId } from '../content/schema';
@@ -15,6 +17,7 @@ import type { AnswerResult, Difficulty, Game, GameContext, GameMeta, GameSession
 import { melbourneDate } from '../lib/time';
 import { computeMastery, masteryValue } from '../srs/mastery';
 import { useAttempts } from '../state/attempts';
+import { onClearTabState } from '../state/persist';
 import { recordAttempt } from '../state/record';
 import { useSession } from '../state/session';
 import { useSettings } from '../state/settings';
@@ -163,6 +166,16 @@ export function submitAnswer(input: string): AnswerResult | null {
     return null;
   }
   const index = session.progress ? session.progress.current - 1 : -1;
+  if (session.itemIds && index >= 0) {
+    const record = useSession.getState().daily[game.today];
+    if (record && record.results.length !== index) {
+      term().print(say('That question was already answered on the Daily screen, so the challenge carries on from your saved answers.', 'muted'));
+      const from = term().nextId;
+      // startGame rebuilds the session from the record: the first unanswered question, or the stored result.
+      void startGame(game.meta, { difficulty: game.difficulty, where: game.where }).then(() => announceSince(from));
+      return null;
+    }
+  }
   const t = Date.now();
   let result: AnswerResult;
   try {
@@ -224,6 +237,18 @@ function endGameQuietly(): void {
   term().setGame(null);
   term().setBusy(false);
 }
+
+/**
+ * Back to a fresh terminal: abandons any running or loading game and clears the scrollback, the
+ * last answered item and the last share line. Runs when progress is reset or replaced, so the next
+ * student in the same tab never sees the last one's commands.
+ */
+export function resetTerminal(): void {
+  endGameQuietly();
+  term().reset();
+}
+
+onClearTabState(resetTerminal);
 
 /**
  * Aborts the running (or loading) game. Attempts already recorded stay recorded. Returns false

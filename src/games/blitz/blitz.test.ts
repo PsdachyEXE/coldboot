@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import glossaryJson from '../../../content/terms.json';
 import { buildIndex, type ContentIndex } from '../../content/loader';
-import { CardSchema, type PsmFile } from '../../content/schema';
+import { CardSchema, type Card, type PsmFile } from '../../content/schema';
 import type { GameContext } from '../types';
 import { fixtureTerms } from './fixture';
 import game, { blitzItem, maskDefinition } from './index';
@@ -59,6 +60,50 @@ describe('blitz tolerance rule', () => {
     expect(matchTerm('verification', 'validation', [], others)).toBe('other-term');
     expect(matchTerm('XSD', 'XML', [], others)).toBe('other-term');
     expect(matchTerm('', 'XML', [], [])).toBe('wrong');
+  });
+
+  it('rejects a slip that is closer to another glossary term than to this one', () => {
+    const nfr = ['non-functional requirement', ['nonfunctional requirement']] as const;
+    // Plurals and unhyphenated forms of the opposite term are within tolerance, but closer to it.
+    expect(matchTerm('functional requirements', nfr[0], nfr[1], ['functional requirement'])).toBe('other-term');
+    expect(matchTerm('nonfunctional requirements', 'functional requirement', [], [nfr[0], ...nfr[1]])).toBe('other-term');
+    expect(matchTerm('non-functional requirements', 'functional requirement', [], [nfr[0], ...nfr[1]])).toBe('wrong');
+    // A slip as close to this term as to another one still counts, so ordinary typos keep working.
+    expect(matchTerm('mackup', 'mock-up', ['mockup'], ['markup'])).toBe('close');
+    expect(matchTerm('non-functional requirments', nfr[0], nfr[1], ['functional requirement'])).toBe('close');
+  });
+});
+
+describe('blitz on the real glossary', () => {
+  const glossary = CardSchema.array().parse(glossaryJson);
+  const spellings = (c: Card) => [c.front, ...(c.aliases ?? [])];
+
+  it('never accepts another term, its plural or its unhyphenated form', () => {
+    const accepted: string[] = [];
+    for (const card of glossary) {
+      const own = new Set(spellings(card).map(normaliseTerm));
+      const others = glossary.filter((c) => c !== card).flatMap(spellings);
+      const item = blitzItem(card, others);
+      for (const other of others) {
+        for (const typed of [other, `${other}s`, other.replace(/-/g, '')]) {
+          if (own.has(normaliseTerm(typed))) continue;
+          if (item.check(typed).correct) accepted.push(`${typed} for ${card.front}`);
+        }
+      }
+    }
+    expect(accepted).toEqual([]);
+  });
+
+  it('still accepts a one-letter slip in every term', () => {
+    const rejected: string[] = [];
+    for (const card of glossary) {
+      const item = blitzItem(card, glossary.filter((c) => c !== card).flatMap(spellings));
+      const word = card.front;
+      if (normaliseTerm(word).length < 5) continue;
+      // Drop the last letter: one edit, well inside the tolerance for five or more characters.
+      if (!item.check(word.slice(0, -1)).correct) rejected.push(word);
+    }
+    expect(rejected).toEqual([]);
   });
 });
 

@@ -96,7 +96,8 @@ describe('exam screen', () => {
     vi.setSystemTime(T0 + 15 * MIN + 500);
     await waitFor(() => expect(screen.getByLabelText('Your answer')).not.toHaveAttribute('readonly'), { timeout: 2500 });
     expect(screen.getByRole('button', { name: 'Submit paper' })).toBeInTheDocument();
-    expect(useAnnouncer.getState().assertive).toMatch(/Writing time has started: you have 2 hours/);
+    // The announcement comes from a passive effect that can run after the commit waitFor saw.
+    await waitFor(() => expect(useAnnouncer.getState().assertive).toMatch(/Writing time has started: you have 2 hours/));
     expect(screen.queryByText(/You can't answer yet/)).toBeNull();
   });
 
@@ -116,7 +117,7 @@ describe('exam screen', () => {
     expect(screen.getByText('Saving')).toBeInTheDocument();
     await waitFor(() => expect(screen.getByText('Saved')).toBeInTheDocument(), { timeout: 2000 });
     const saved = JSON.parse(window.localStorage.getItem('coldboot:v1:exam')!);
-    expect(saved).toMatchObject({ v: 1, data: { paper: { answers: { [mcqA.id]: 2, [short.id]: 'It keeps the <b>leading</b> zero.' }, flags: [mcqA.id] } } });
+    expect(saved).toMatchObject({ v: 2, data: { paper: { answers: { [mcqA.id]: 2, [short.id]: 'It keeps the <b>leading</b> zero.' }, flags: [mcqA.id] } } });
     // The student's text is plain text, never markup.
     expect(screen.getByLabelText('Your answer')).toHaveValue('It keeps the <b>leading</b> zero.');
     expect(document.querySelector('b')).toBeNull();
