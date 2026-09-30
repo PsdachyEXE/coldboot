@@ -86,3 +86,49 @@ export function formatAnd(values: readonly (number | string)[]): string {
 export function sameList(a: readonly number[], b: readonly number[]): boolean {
   return a.length === b.length && a.every((v, i) => v === b[i]);
 }
+
+/** Option letters, A to H: the terminal's choices block labels up to eight options. */
+export const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] as const;
+
+/**
+ * One of a list of lettered options, typed as its letter or number ("b", "2"), its text
+ * ("multi-factor authentication"), or both as the feedback line prints them ("B. Multi-factor
+ * authentication"). Case, spaces, hyphens and underscores are ignored in the text. Returns the
+ * 0-based index, or null when the input matches no option.
+ */
+export function parseOption(input: string, options: readonly string[]): number | null {
+  const byLetter = parseChoice(input, options.length);
+  if (byLetter !== null) return byLetter;
+  const key = squash(input);
+  if (!key) return null;
+  const byText = options.findIndex((o) => squash(o) === key);
+  if (byText >= 0) return byText;
+  const m = /^[([]?([a-h])[)\].:]\s*(.+)$/i.exec(input.trim());
+  if (!m) return null;
+  const index = m[1].toLowerCase().charCodeAt(0) - 97;
+  return index < options.length && squash(m[2]) === squash(options[index]) ? index : null;
+}
+
+/**
+ * Several lettered options at once: "A C D", "a, c, d", "acd" and "A and D" all parse. Returns the
+ * distinct 0-based indexes in ascending order, or null when the input is empty or holds anything
+ * other than letters among the first `count`.
+ */
+export function parseLetters(input: string, count: number): number[] | null {
+  const tokens = normaliseAnswer(input)
+    .replace(/\band\b/g, ' ')
+    .split(/[\s,;/&+]+/)
+    .map((t) => t.replace(/^[([]+|[)\].:]+$/g, ''))
+    .filter(Boolean);
+  if (!tokens.length) return null;
+  const picked = new Set<number>();
+  for (const token of tokens) {
+    if (!/^[a-z]+$/.test(token)) return null;
+    for (const ch of token) {
+      const index = ch.charCodeAt(0) - 97;
+      if (index >= count) return null;
+      picked.add(index);
+    }
+  }
+  return [...picked].sort((a, b) => a - b);
+}
