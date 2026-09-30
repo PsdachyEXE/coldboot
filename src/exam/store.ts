@@ -312,7 +312,10 @@ export const useExam = create<ExamState>()((set, get) => {
         const timing = paperTiming(paper);
         const expired = timerState(paper, timing, now).expired;
         const { submittedAt } = submitTimer(paper, timing, now);
-        return submittedAt === null ? paper : { ...paper, submittedAt, autoSubmitted: expired };
+        if (submittedAt === null) return paper;
+        // Marking starts from the beginning of the paper.
+        const first = SECTION_IDS.find((s) => paper.sections[s].length > 0) ?? 'a';
+        return { ...paper, submittedAt, autoSubmitted: expired, at: { section: first, index: 0 } };
       }),
     setTicks: (itemId, ticked) =>
       update((paper) => {
