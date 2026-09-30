@@ -96,7 +96,8 @@ describe('exam screen', () => {
     vi.setSystemTime(T0 + 15 * MIN + 500);
     await waitFor(() => expect(screen.getByLabelText('Your answer')).not.toHaveAttribute('readonly'), { timeout: 2500 });
     expect(screen.getByRole('button', { name: 'Submit paper' })).toBeInTheDocument();
-    expect(useAnnouncer.getState().assertive).toMatch(/Writing time has started: you have 2 hours/);
+    // The announcement comes from a passive effect that can run after the commit waitFor saw.
+    await waitFor(() => expect(useAnnouncer.getState().assertive).toMatch(/Writing time has started: you have 2 hours/));
     expect(screen.queryByText(/You can't answer yet/)).toBeNull();
   });
 
