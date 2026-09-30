@@ -11,6 +11,14 @@ export function isEditable(target: EventTarget | null): boolean {
   return false;
 }
 
+/**
+ * True while a native modal dialog (the report dialog, a confirmation) is open. The backtick is
+ * ignored then: the drawer would open behind the dialog, where its input can't take focus.
+ */
+export function modalDialogOpen(): boolean {
+  return typeof document !== 'undefined' && document.querySelector('dialog[open]') !== null;
+}
+
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function focusablesIn(container: HTMLElement): HTMLElement[] {

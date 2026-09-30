@@ -18,6 +18,7 @@ function renderHome() {
       { path: '/', element: <Home /> },
       { path: '/run', element: <h1>Run screen</h1> },
       { path: '/drill', element: <h1>Drill screen</h1> },
+      { path: '/review', element: <h1>Review screen</h1> },
     ],
     { initialEntries: ['/'] },
   );
@@ -115,5 +116,12 @@ describe('Home', () => {
     fireEvent.click(screen.getByRole('button', { name: `${kkLabel('U3O2-KK08')}, unseen` }));
     expect(router.state.location.pathname).toBe('/drill');
     expect(router.state.location.search).toBe('?kk=U3O2-KK08');
+  });
+
+  it('opens the glossary flashcards from the Terms cell, which has no questions to drill', () => {
+    const router = renderHome();
+    fireEvent.click(screen.getByRole('button', { name: 'Terms used in this study, unseen' }));
+    expect(router.state.location.pathname).toBe('/review');
+    expect(router.state.location.search).toBe('?kk=TERMS');
   });
 });

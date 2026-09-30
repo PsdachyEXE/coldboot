@@ -52,6 +52,8 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
   const barRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const finished = useRef(false);
+  // The finish dialog opens on Keep marking, so a second Enter can't lock the marks by accident.
+  const keepMarkingRef = useRef<HTMLButtonElement>(null);
   useStickyOffset(rootRef, barRef);
 
   const { answers, ticks } = paper;
@@ -184,6 +186,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
         open={dialog === 'finish'}
         onClose={() => setDialog(null)}
         title="Finish marking?"
+        initialFocus={keepMarkingRef}
         actions={
           <>
             <Button
@@ -195,7 +198,9 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
             >
               Finish marking
             </Button>
-            <Button onClick={() => setDialog(null)}>Keep marking</Button>
+            <Button ref={keepMarkingRef} onClick={() => setDialog(null)}>
+              Keep marking
+            </Button>
           </>
         }
       >

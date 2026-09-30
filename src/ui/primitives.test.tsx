@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { useState } from 'react';
 import { Button, ButtonLink, ExternalButtonLink } from './Button';
@@ -152,5 +152,60 @@ describe('Dialog', () => {
     expect(screen.getByRole('dialog', { name: 'Replace your progress?' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(screen.queryByText("This can't be undone.")).not.toBeInTheDocument();
+  });
+
+  it('speaks what is announced while it is open from live regions inside it, and nothing older', () => {
+    // A native modal makes the shell's live regions inert, so a time warning must reach these.
+    act(() => announce('Correct. The answer is B.'));
+    render(
+      <Dialog open onClose={() => {}} title="Submit your paper?">
+        <p>Once you submit, your answers can't be changed.</p>
+      </Dialog>,
+    );
+    const dialog = screen.getByRole('dialog', { name: 'Submit your paper?' });
+    expect(within(dialog).getByTestId('dialog-live-polite')).toHaveTextContent('');
+    act(() => announce('5 minutes of writing time left.', 'assertive'));
+    expect(within(dialog).getByTestId('dialog-live-assertive')).toHaveTextContent('5 minutes of writing time left.');
+    expect(within(dialog).getByTestId('dialog-live-polite')).toHaveTextContent('');
+  });
+
+  it('returns focus to the page heading when the control that opened it has gone', () => {
+    function Harness() {
+      const [open, setOpen] = useState(false);
+      const [submitted, setSubmitted] = useState(false);
+      return (
+        <main id="main" tabIndex={-1}>
+          {submitted ? (
+            <h1 tabIndex={-1}>Mark your paper</h1>
+          ) : (
+            <>
+              <h1 tabIndex={-1}>Mini paper</h1>
+              <Button onClick={() => setOpen(true)}>Report a problem</Button>
+            </>
+          )}
+          <Dialog
+            open={open}
+            onClose={() => setOpen(false)}
+            title="Report a content problem"
+            actions={
+              <>
+                <Button onClick={() => setSubmitted(true)}>Run out of time</Button>
+                <Button onClick={() => setOpen(false)}>Close</Button>
+              </>
+            }
+          >
+            <p>What's wrong?</p>
+          </Dialog>
+        </main>
+      );
+    }
+    render(<Harness />);
+    const opener = screen.getByRole('button', { name: 'Report a problem' });
+    opener.focus();
+    fireEvent.click(opener);
+    // Writing time ends behind the dialog: the view, and the button that opened it, change.
+    fireEvent.click(screen.getByRole('button', { name: 'Run out of time' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Close' }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Mark your paper' })).toHaveFocus();
   });
 });

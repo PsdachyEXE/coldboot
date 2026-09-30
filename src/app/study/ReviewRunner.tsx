@@ -61,9 +61,13 @@ interface RunnerState {
   nextSeq: number;
 }
 
-/** Takes the first entry that is available at `now` out of `rest`. */
+/**
+ * Takes the next entry to show out of `rest`: a card rated Again whose 10 minutes are up comes
+ * first (they are appended in the order they fall due), then the next card of the original queue.
+ */
 function promote(rest: Pending[], now: number): { current: Pending | null; rest: Pending[] } {
-  const i = rest.findIndex((e) => e.availableAt <= now);
+  let i = rest.findIndex((e) => e.availableAt > 0 && e.availableAt <= now);
+  if (i === -1) i = rest.findIndex((e) => e.availableAt <= now);
   if (i === -1) return { current: null, rest };
   return { current: rest[i], rest: [...rest.slice(0, i), ...rest.slice(i + 1)] };
 }

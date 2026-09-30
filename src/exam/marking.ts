@@ -6,7 +6,7 @@
 import { markScore } from '../app/study/written';
 import type { ContentIndex } from '../content/loader';
 import { isMcq, type CaseStudy, type KkId, type Mcq, type ShortAnswer } from '../content/schema';
-import { ALL_KK_IDS } from '../content/studyDesign';
+import { ALL_KK_IDS, studyDesign } from '../content/studyDesign';
 import type { Attempt } from '../state/attempts';
 import { SECTION_IDS, isAnswered, paperTiming, type ExamAnswer, type ExamPaper, type ExamSummary, type SectionId, type Tally } from './store';
 import { timerState, totalMs } from './timer';
@@ -128,6 +128,7 @@ export function summarise(paper: ExamPaper, marks: PaperMarks, markedAt: number)
     autoSubmitted: paper.autoSubmitted || state.expired,
     sections: { a: [...marks.sections.a], b: [...marks.sections.b], c: [...marks.sections.c] },
     kk: marks.byKk.map((t): [KkId, number, number] => [t.kk, t.earned, t.available]),
+    kkMap: studyDesign.kkMapVersion,
   };
 }
 

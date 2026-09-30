@@ -1,7 +1,8 @@
 /**
  * Syllabus map (Section 6.8): every KK in four area columns, then the Terms and PSM groups. Each row
  * shows the KK's id, title and summary, a mastery meter (unseen shown distinctly from zero), what
- * there is to practise and when it was last practised. A row starts a focused drill.
+ * there is to practise and when it was last practised. A row starts a focused drill; the glossary's
+ * row opens its flashcards in Review, since it has no multiple-choice questions.
  *
  * Below 720 px each area folds behind a disclosure button, with the area holding the weakest key
  * knowledge open, so the page is a few screens long instead of seventeen.
@@ -19,7 +20,7 @@ import { Meter } from '../../ui/Meter';
 import { Tag } from '../../ui/Tag';
 import { useNarrow } from '../../ui/useMediaQuery';
 import { VisuallyHidden } from '../../ui/VisuallyHidden';
-import { drillPath } from '../paths';
+import { practisePath } from '../paths';
 import { ContentErrorNotice } from '../study/ContentGate';
 import { lastPractised, plural } from '../study/format';
 import { rankWeakest } from '../study/select';
@@ -168,8 +169,8 @@ function KkRow({
   return (
     <li className={styles.row} data-kk={kk}>
       {/* The focus ring goes round the whole row, so bring all of it into view, clear of the fixed bars. */}
-      <Link to={drillPath({ kk })} className={styles.rowLink} onFocus={(e) => e.currentTarget.parentElement?.scrollIntoView?.({ block: 'nearest' })}>
-        <VisuallyHidden>Drill</VisuallyHidden>{' '}
+      <Link to={practisePath(kk)} className={styles.rowLink} onFocus={(e) => e.currentTarget.parentElement?.scrollIntoView?.({ block: 'nearest' })}>
+        <VisuallyHidden>{kk === 'TERMS' ? 'Review' : 'Drill'}</VisuallyHidden>{' '}
         {group ? null : <span className={styles.rowId}>{kk}</span>}{' '}
         <span className={styles.rowTitle}>{title}</span>
       </Link>

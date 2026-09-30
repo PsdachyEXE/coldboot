@@ -4,7 +4,7 @@
  * (optionally `&q=cs-01-q03`) practises a case study with its insert beside the questions.
  */
 import { useState, type ReactNode } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router';
 import type { ContentIndex } from '../../content/loader';
 import type { AreaId, KkId, ShortAnswer } from '../../content/schema';
 import { ALL_KK_IDS, kkLabel } from '../../content/studyDesign';
@@ -44,7 +44,8 @@ export default function Written() {
           ) : scope ? (
             <WrittenRound key={params.toString()} content={content} scope={scope} />
           ) : (
-            <WrittenSetup content={content} invalid={invalid} onStart={(s) => navigate(writtenPath(toPathOptions(s)))} />
+            // `started` tells the round to put focus on its first question, as a drill does.
+            <WrittenSetup content={content} invalid={invalid} onStart={(s) => navigate(writtenPath(toPathOptions(s)), { state: { started: true } })} />
           )
         }
       </ContentGate>
@@ -116,6 +117,10 @@ function WrittenRound({ content, scope }: { content: ContentIndex; scope: StudyS
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<WrittenResult[]>([]);
   const [finished, setFinished] = useState(false);
+  // Started or restarted from a button: the first question takes focus. A direct link leaves focus
+  // to the page, which starts at main.
+  const location = useLocation();
+  const [focusFirst, setFocusFirst] = useState(() => (location.state as { started?: unknown } | null)?.started === true);
 
   if (!round.items.length) {
     const kk = scope.mode === 'kk' ? scope.kk : null;
@@ -146,6 +151,7 @@ function WrittenRound({ content, scope }: { content: ContentIndex; scope: StudyS
               setIndex(0);
               setResults([]);
               setFinished(false);
+              setFocusFirst(true);
             }}
           >
             Practise again
@@ -172,7 +178,7 @@ function WrittenRound({ content, scope }: { content: ContentIndex; scope: StudyS
         where="Written"
         onScored={(r) => setResults((list) => [...list, r])}
         next={{ label: last ? 'Finish practice' : 'Next question', onNext: () => (last ? setFinished(true) : setIndex((i) => i + 1)) }}
-        autoFocus={index > 0}
+        autoFocus={index > 0 || focusFirst}
       />
       {!(last && scored) ? (
         <p>

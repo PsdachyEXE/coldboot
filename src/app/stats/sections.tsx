@@ -9,7 +9,7 @@ import type { KkId } from '../../content/schema';
 import { areaById, kkById, studyDesign } from '../../content/studyDesign';
 import { masteryBand } from '../../srs/mastery';
 import { ButtonLink } from '../../ui/Button';
-import { drillPath, paths, reviewPath } from '../paths';
+import { drillPath, paths, practisePath, reviewPath } from '../paths';
 import { lastPractised, plural } from '../study/format';
 import { FORECAST_DAYS, STATS_DAYS, sumValues, type AreaAccuracy, type AreaKey, type DayValue, type Forecast, type Weakest } from './aggregate';
 import { ChartSection, ColumnChart, DataTable, PercentBar, PercentLine, PercentScale, Swatch, type Column } from './charts';
@@ -325,9 +325,8 @@ export function WeakestSection({ weakest, now }: { weakest: Weakest; now: number
                 return (
                   <li key={w.kk}>
                     <div className={styles.weakHead}>
-                      <Link to={drillPath({ kk: w.kk })} className={styles.weakName}>
-                        <span className={styles.weakId}>{id}</span>
-                        {title}
+                      <Link to={practisePath(w.kk)} className={styles.weakName}>
+                        <span className={styles.weakId}>{id}</span> {title}
                       </Link>
                       <span className={styles.weakValue}>
                         {formatPercent(w.value)}, {masteryBand(w.value)}

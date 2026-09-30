@@ -47,7 +47,11 @@ export function WrittenQuestion({ item, position, where, onScored, next, autoFoc
   const regionRef = useRef<HTMLElement>(null);
   const modelRef = useRef<HTMLHeadingElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const savedRef = useRef<HTMLParagraphElement>(null);
   const savedOnce = useRef(saved !== null);
+  // Shown already scored (going back to a case study question). Read once: the case study echoes a
+  // new score straight back as `saved`, and that score still moves focus on.
+  const [revisited] = useState(saved !== null);
 
   useEffect(() => {
     if (autoFocus) regionRef.current?.focus();
@@ -86,9 +90,11 @@ export function WrittenQuestion({ item, position, where, onScored, next, autoFoc
     onScored?.(r);
   };
 
+  // After saving, focus the next action; with none (the last case study question), the saved
+  // score, since Save score is gone.
   useEffect(() => {
-    if (phase === 'scored' && !saved) nextRef.current?.focus();
-  }, [phase, saved]);
+    if (phase === 'scored' && !revisited) (nextRef.current ?? savedRef.current)?.focus();
+  }, [phase, revisited]);
 
   return (
     <section ref={regionRef} tabIndex={-1} aria-labelledby={promptId} className={styles.question}>
@@ -140,7 +146,7 @@ export function WrittenQuestion({ item, position, where, onScored, next, autoFoc
             </>
           ) : result ? (
             <>
-              <p className={styles.saved}>
+              <p ref={savedRef} tabIndex={-1} className={styles.saved}>
                 Score saved: {result.earned} of {plural(result.marks, 'mark')}.
               </p>
               {item.mistake ? <MistakeNote text={item.mistake} /> : null}

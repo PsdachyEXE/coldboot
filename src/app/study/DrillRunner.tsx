@@ -10,6 +10,7 @@ import type { DrillAnswer, DrillResult } from './drill';
 import { useNow } from '../../lib/useNow';
 import { announce } from '../../ui/announce';
 import { Button } from '../../ui/Button';
+import { useStickyTop } from '../../ui/useStickyTop';
 import { formatClock, formatClockWords, plural } from './format';
 import { McqQuestion, type McqResult } from './McqQuestion';
 import { timedAllowance } from './select';
@@ -87,6 +88,8 @@ function DrillTimer({ deadline, onTimeUp }: { deadline: number; onTimeUp(): void
   const now = useNow(1000);
   const left = Math.max(0, deadline - now);
   const spoken = useRef(new Set<number>());
+  const barRef = useRef<HTMLDivElement>(null);
+  useStickyTop(barRef);
   const onTimeUpRef = useRef(onTimeUp);
   useEffect(() => {
     onTimeUpRef.current = onTimeUp;
@@ -112,7 +115,7 @@ function DrillTimer({ deadline, onTimeUp }: { deadline: number; onTimeUp(): void
 
   const low = left <= 60_000;
   return (
-    <div className={styles.timerBar}>
+    <div className={styles.timerBar} ref={barRef}>
       <p className={styles.timer} role="timer" aria-label={`Time left: ${formatClockWords(left)}`}>
         Time left <strong className={low ? styles.timerLow : undefined}>{formatClock(left)}</strong>
       </p>

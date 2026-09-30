@@ -34,8 +34,11 @@ export function reportTitle(r: ContentReport): string {
 }
 
 export function reportBody(r: ContentReport): string {
+  return bodyWithNote(r, r.note.trim().slice(0, NOTE_MAX) || '(no note)');
+}
+
+function bodyWithNote(r: ContentReport, note: string): string {
   const label = REPORT_REASONS.find((x) => x.id === r.reason)?.label ?? 'Other';
-  const note = r.note.trim().slice(0, NOTE_MAX) || '(no note)';
   return [
     `Item: ${r.itemId}`,
     r.instance ? `Instance: ${r.instance}` : null,
@@ -50,10 +53,33 @@ export function reportBody(r: ContentReport): string {
     .join('\n');
 }
 
-/** Prefilled new-issue URL. Title and body are URL-encoded; GitHub renders them as plain Markdown text. */
+/**
+ * Longest issue link offered. GitHub answers 414 (URI too long) from a little over 8,100
+ * characters, and percent-encoding turns each non-Latin character into 6 to 12, so a long note in
+ * another script can pass it well within the note's 2,000-character cap.
+ */
+export const ISSUE_URL_MAX = 8000;
+const SHORTENED = '\n\n[Note shortened to fit the link. Use Copy report for the full text.]';
+
+/**
+ * Prefilled new-issue URL. Title and body are URL-encoded; GitHub renders them as plain Markdown
+ * text. A note too long for the link is shortened in the link only (the clipboard text keeps it).
+ */
 export function issueUrl(r: ContentReport): string {
-  const q = new URLSearchParams({ title: reportTitle(r), body: reportBody(r) });
-  return `${ISSUE_URL}?${q.toString()}`;
+  const link = (body: string) => `${ISSUE_URL}?${new URLSearchParams({ title: reportTitle(r), body }).toString()}`;
+  const full = link(reportBody(r));
+  if (full.length <= ISSUE_URL_MAX) return full;
+  // The longest start of the note that fits, in whole code points so a surrogate pair is never split.
+  const chars = Array.from(r.note.trim().slice(0, NOTE_MAX));
+  const shortened = (n: number) => link(bodyWithNote(r, `${chars.slice(0, n).join('').trimEnd()}${SHORTENED}`));
+  let lo = 0;
+  let hi = chars.length;
+  while (lo < hi) {
+    const mid = (lo + hi + 1) >> 1;
+    if (shortened(mid).length <= ISSUE_URL_MAX) lo = mid;
+    else hi = mid - 1;
+  }
+  return shortened(lo);
 }
 
 /** Clipboard text for people without GitHub accounts. */

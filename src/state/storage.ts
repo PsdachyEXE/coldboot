@@ -124,3 +124,21 @@ export function removeAllKeys(): void {
     fail(error, 'reset');
   }
 }
+
+/**
+ * Removes every COLDBOOT key from this tab's sessionStorage (written-answer drafts). Failures are
+ * ignored: the drafts are gone when the tab closes anyway.
+ */
+export function removeSessionKeys(): void {
+  try {
+    const s = window.sessionStorage;
+    const keys: string[] = [];
+    for (let i = 0; i < s.length; i++) {
+      const k = s.key(i);
+      if (k?.startsWith(STORAGE_PREFIX)) keys.push(k);
+    }
+    keys.forEach((k) => s.removeItem(k));
+  } catch {
+    // Storage disabled or unavailable: there are no drafts to clear.
+  }
+}

@@ -1,6 +1,6 @@
 /**
  * The drop-down console (Section 7.1). The backtick key toggles it from anywhere except other text
- * fields; on the /terminal route the backtick focuses the route's input instead. It slides down from
+ * fields and open modal dialogs; on the /terminal route the backtick focuses the route's input instead. It slides down from
  * the top over everything (180 ms, instant under reduced motion), moves focus to its input when it
  * opens and returns focus when it closes. Other screens start commands with useTerminal.run().
  */
@@ -9,7 +9,7 @@ import { useLocation } from 'react-router';
 import { paths } from '../app/paths';
 import { Kbd } from '../ui/Kbd';
 import { useReducedMotion } from '../ui/motion';
-import { isEditable, trapTab } from './dom';
+import { isEditable, modalDialogOpen, trapTab } from './dom';
 import { focusRouteInput } from './routeFocus';
 import { submitLine } from './shell';
 import { TerminalView } from './TerminalView';
@@ -32,13 +32,13 @@ export function TerminalDrawer() {
   const inputRef = useRef<HTMLInputElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
 
-  // Backtick from anywhere. The terminal inputs handle their own backtick.
+  // Backtick from anywhere but a text field or a modal dialog. The terminal inputs handle their own.
   useEffect(() => {
     const onKey = (e: globalThis.KeyboardEvent) => {
       if (e.key !== '`' || e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented) return;
       const target = e.target;
       if (target instanceof Element && target.closest('[data-terminal-input]')) return;
-      if (isEditable(target)) return;
+      if (isEditable(target) || modalDialogOpen()) return;
       e.preventDefault();
       if (onRoute) focusRouteInput();
       else useTerminal.getState().toggle();
@@ -47,20 +47,27 @@ export function TerminalDrawer() {
     return () => window.removeEventListener('keydown', onKey);
   }, [onRoute]);
 
-  // Focus moves in when the drawer opens and back to where it was when it closes.
+  // Focus moves in when the drawer opens and back to where it was when it closes, or to main when
+  // that control has gone (the page changed underneath, or it was never recorded).
+  const wasVisible = useRef(false);
   useEffect(() => {
     const drawer = drawerRef.current;
     if (visible) {
+      wasVisible.current = true;
       const active = document.activeElement;
       if (active instanceof HTMLElement && active !== document.body && !drawer?.contains(active)) returnFocus.current = active;
       inputRef.current?.focus({ preventScroll: true });
       return;
     }
+    if (!wasVisible.current) return;
+    wasVisible.current = false;
     const back = returnFocus.current;
     returnFocus.current = null;
     const active = document.activeElement;
     const focusWasInside = !active || active === document.body || !!drawer?.contains(active);
-    if (focusWasInside && back?.isConnected) back.focus({ preventScroll: true });
+    if (!focusWasInside) return;
+    if (back?.isConnected) back.focus({ preventScroll: true });
+    else document.getElementById('main')?.focus({ preventScroll: true });
   }, [visible]);
 
   // Commands other screens asked for (useTerminal.run), e.g. Today's run starting `daily`.

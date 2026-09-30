@@ -1,4 +1,4 @@
-/* Shared page styles for First run, Settings, About and Not found. */
+/* Shared page styles for First run, Settings, About, Not found and the route error screen. */
 .page {
   max-width: var(--measure);
 }
@@ -83,4 +83,15 @@
 
 .links li + li {
   margin-top: var(--space-2);
+}
+
+/* The route error screen replaces the whole shell, so it pads itself like the bare shell's main column. */
+.errorPage {
+  display: block;
+  padding: var(--space-6) var(--space-7) var(--space-7);
+}
+@media (max-width: 719.98px) {
+  .errorPage {
+    padding: var(--space-5) var(--space-4) var(--space-7);
+  }
 }

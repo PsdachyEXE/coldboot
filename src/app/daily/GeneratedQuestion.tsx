@@ -10,6 +10,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import type { CheckResult, QuizItem } from '../../games/types';
 import { recordAttempt } from '../../state/record';
 import { BlockView } from '../../terminal/BlockView';
+import { announce } from '../../ui/announce';
 import { Button } from '../../ui/Button';
 import { Feedback } from '../../ui/Feedback';
 import { TextField } from '../../ui/Field';
@@ -51,6 +52,7 @@ export function GeneratedQuestion({ item, position, where, onAnswered, next, aut
   const nextRef = useRef<HTMLButtonElement>(null);
   const checkedOnce = useRef(false);
   const positionId = useId();
+  const promptId = useId();
 
   useEffect(() => {
     if (autoFocus) regionRef.current?.focus();
@@ -60,11 +62,20 @@ export function GeneratedQuestion({ item, position, where, onAnswered, next, aut
     if (answered) nextRef.current?.focus();
   }, [answered]);
 
+  /**
+   * Shows why the input isn't an answer under the field, and says it: pressing Enter in the field
+   * leaves focus where it is, so a screen reader wouldn't read the field's new description.
+   */
+  const showHint = (message: string) => {
+    setHint(message);
+    announce(message);
+  };
+
   const submit = (value: string) => {
     if (checkedOnce.current) return;
     const typed = value.trim();
     if (!typed) {
-      setHint('Type an answer first, or choose one of the suggested answers.');
+      showHint('Type an answer first, or choose one of the suggested answers.');
       inputRef.current?.focus();
       return;
     }
@@ -72,11 +83,11 @@ export function GeneratedQuestion({ item, position, where, onAnswered, next, aut
     try {
       check = item.check(typed);
     } catch {
-      setHint('Something went wrong checking that answer. Report this question so it can be fixed.');
+      showHint('Something went wrong checking that answer. Report this question so it can be fixed.');
       return;
     }
     if (check.counted === false) {
-      setHint(check.reason || 'That answer is not in a form this question accepts. Check the instructions above it.');
+      showHint(check.reason || 'That answer is not in a form this question accepts. Check the instructions above it.');
       inputRef.current?.focus();
       return;
     }
@@ -97,11 +108,12 @@ export function GeneratedQuestion({ item, position, where, onAnswered, next, aut
   const chips = item.chips ?? [];
 
   return (
-    <section ref={regionRef} tabIndex={-1} aria-labelledby={positionId} className={styles.question}>
+    // Named by its position and described by its prompt, so focus on it reads the question too.
+    <section ref={regionRef} tabIndex={-1} aria-labelledby={positionId} aria-describedby={promptId} className={styles.question}>
       <p className={study.progress} id={positionId}>
         {position}
       </p>
-      <div className={styles.terminal}>
+      <div id={promptId} className={styles.terminal}>
         {item.prompt.map((block, i) => (
           <BlockView key={i} block={block} />
         ))}

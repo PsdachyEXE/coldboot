@@ -23,6 +23,24 @@ describe('markdown', () => {
     expect(html).toContain('md-align-center');
   });
 
+  it('gives a comparison table with an empty corner row headers instead of an empty column header', () => {
+    // A compare card: the rows are the aspects compared, so each row's first cell heads that row.
+    const html = renderMarkdown('| | Linear search | Binary search |\n|---|---|---|\n| Data order | Any | Must be sorted |\n| Method | One by one | Halves the range |');
+    expect(html).not.toMatch(/<th[^>]*>\s*<\/th>/);
+    expect(html).toMatch(/<thead>\s*<tr>\s*<td><\/td>\s*<th>Linear search<\/th>\s*<th>Binary search<\/th>/);
+    expect(html).toContain('<th scope="row">Data order</th>');
+    expect(html).toContain('<th scope="row">Method</th>');
+    expect(html).toContain('<td>Must be sorted</td>');
+    expect(html.match(/<th scope="row">/g)).toHaveLength(2);
+  });
+
+  it('leaves a table with a corner header as it is', () => {
+    const html = renderMarkdown('| Term | Meaning |\n|---|---|\n| Validation | Checking input is reasonable |');
+    expect(html).toContain('<th>Term</th>');
+    expect(html).toContain('<td>Validation</td>');
+    expect(html).not.toContain('scope="row"');
+  });
+
   it('renders pseudo fences with numbered lines and highlighted keywords', () => {
     const html = renderMarkdown('```pseudo\nBEGIN\n  x ← 5\n  DISPLAY "done"\nEND\n```');
     expect(html).toContain('class="pseudo"');

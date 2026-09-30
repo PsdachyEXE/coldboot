@@ -91,6 +91,49 @@ describe('terminal drawer', () => {
     expect(useTerminal.getState().open).toBe(false);
   });
 
+  it('ignores the backtick while a modal dialog is open, since the drawer would open behind it', async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter>
+        <dialog open aria-label="Report a content problem">
+          <label>
+            <input type="radio" name="reason" defaultChecked /> Wrong answer
+          </label>
+        </dialog>
+        <TerminalDrawer />
+      </MemoryRouter>,
+    );
+    screen.getByRole('radio', { name: 'Wrong answer' }).focus();
+    await user.keyboard('`');
+    expect(useTerminal.getState().open).toBe(false);
+    expect(drawer()).toHaveAttribute('data-open', 'false');
+  });
+
+  it('returns focus to main on close when the control that opened it has gone', async () => {
+    const user = userEvent.setup();
+    function Opener() {
+      const open = useTerminal((s) => s.open);
+      return open ? null : (
+        <button type="button" onClick={() => useTerminal.getState().run('help')}>
+          Start the daily challenge
+        </button>
+      );
+    }
+    render(
+      <MemoryRouter>
+        <main id="main" tabIndex={-1}>
+          <Opener />
+        </main>
+        <TerminalDrawer />
+      </MemoryRouter>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Start the daily challenge' }));
+    expect(drawerInput()).toHaveFocus();
+    await user.keyboard('{Escape}');
+    expect(drawer()).toHaveAttribute('data-open', 'false');
+    expect(screen.getByRole('main')).toHaveFocus();
+  });
+
   it('keeps Tab inside the open drawer', async () => {
     const user = userEvent.setup();
     renderAt('/');

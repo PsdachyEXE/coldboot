@@ -15,7 +15,8 @@ export function useScrollableChildren(container: RefObject<HTMLElement | null>, 
     const update = (el: HTMLElement) => {
       if (el.scrollWidth > el.clientWidth + 1) {
         el.tabIndex = 0;
-        el.setAttribute('role', 'region');
+        // A group, not a region: several boxes can share a label, and regions are landmarks.
+        el.setAttribute('role', 'group');
         el.setAttribute('aria-label', `${label(el)} (scrolls sideways)`);
       } else {
         el.removeAttribute('tabindex');

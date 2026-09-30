@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { fixtureIndex, fxCaseStudy, fxMcq, fxShort } from '../app/study/testing';
+import { studyDesign } from '../content/studyDesign';
 import type { ExamPaper } from './store';
 import { FULL_TIMING } from './timer';
 import { attemptsFor, markItem, markPaper, resolvePaper, sortKkTallies, summarise, weakestKks } from './marking';
@@ -107,6 +108,8 @@ describe('marking a paper', () => {
       sections: { a: [1, 3], b: [3, 5], c: [3, 3] },
     });
     expect(summary.kk[0]).toEqual(['U3O2-KK03', 0, 1]);
+    // The KK map version the ids belong to, so a renumbering can rename them later.
+    expect(summary.kkMap).toBe(studyDesign.kkMapVersion);
   });
 
   it('records every answered item: MCQs 0 or 1, written answers marks over marks available', () => {
