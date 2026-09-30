@@ -1,5 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useContent } from '../content/store';
+import { buildIndex } from '../content/loader';
+import type { PsmFile } from '../content/schema';
+import { fixtureTerms } from '../games/blitz/fixture';
 import { fixtureContent } from '../games/drill/fixture';
 import { GAMES } from '../games/registry';
 import { fromSortInstance } from '../games/sort/items';
@@ -9,7 +12,7 @@ import { useSettings } from '../state/settings';
 import { useSrs } from '../state/srs';
 import { useAnnouncer } from '../ui/announce';
 import { useReportDialog } from '../ui/report';
-import { DAILY_MISSING, SUDO_MESSAGE } from './commands';
+import { SUDO_MESSAGE } from './commands';
 import { abortGame, finishGame, startGame } from './host';
 import { useTerminalSession, walkHistory } from './session';
 import { completeAt, historyDown, historyUp, interrupt, promptFor, submitLine, suggestCommand } from './shell';
@@ -17,6 +20,8 @@ import { fakeGame, mockEnv, numberItem, printed, resetStores } from './testing';
 import { useTerminal } from './useTerminal';
 
 const NOW = new Date('2026-10-01T10:00:00+10:00').getTime();
+/** The registered games; tests push fakes after them and remove them again. */
+const REGISTERED = GAMES.length;
 
 beforeEach(() => {
   resetStores();
@@ -26,7 +31,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.useRealTimers();
-  GAMES.splice(2);
+  GAMES.splice(REGISTERED);
 });
 
 const term = () => useTerminalSession.getState();
@@ -88,11 +93,7 @@ describe('commands', () => {
     expect(printed()).toContain('Did you mean sort?');
   });
 
-  it('treats daily and unknown games the same friendly way', async () => {
-    await submitLine('daily', mockEnv());
-    expect(printed()).toContain(DAILY_MISSING);
-    await submitLine('play daily', mockEnv());
-    expect(printed().split(DAILY_MISSING)).toHaveLength(3);
+  it('treats unknown games in a friendly way', async () => {
     await submitLine('play chess', mockEnv());
     expect(printed()).toContain('The game "chess" isn\'t installed in this build yet.');
     await submitLine('play serch', mockEnv());
@@ -241,8 +242,8 @@ describe('games in the terminal', () => {
 
   it('follows the daily protocol and prints the share line', async () => {
     const items = [numberItem(1, 'm-u3o1-kk12-001'), numberItem(2, 'gen-daily-sort:42')];
-    GAMES.push(fakeGame({ id: 'daily', items, exposeItemIds: true, share: true }));
-    await submitLine('daily', mockEnv());
+    // The real daily game is registered; this checks the host's protocol with a fake one.
+    await startGame(fakeGame({ id: 'daily', items, exposeItemIds: true, share: true }), { difficulty: 'normal', where: 'test' });
     expect(useSession.getState().daily['2026-10-01']).toEqual({ itemIds: ['m-u3o1-kk12-001', 'gen-daily-sort:42'], results: [], completedAt: null });
     await submitLine('1', mockEnv());
     await submitLine('5', mockEnv());
@@ -336,6 +337,41 @@ describe('games in the terminal', () => {
     expect(term().game).toBeNull();
     expect(term().busy).toBe(false);
     finishGame();
+  });
+});
+
+describe('blitz in the terminal', () => {
+  it('says there is no glossary, suggests another game and starts nothing', async () => {
+    useContent.setState({ index: fixtureContent(), status: 'ready' });
+    await submitLine('play blitz', mockEnv());
+    expect(printed()).toContain('Glossary blitz');
+    expect(printed()).toContain('No glossary terms are installed yet');
+    expect(printed()).toContain('play deskcheck');
+    expect(printed()).not.toContain('Answer at the prompt');
+    expect(term().game).toBeNull();
+    expect(useTerminal.getState().lastGameEnd).toBeNull();
+  });
+
+  it('runs against the clock with the glossary and ends at 60 seconds', async () => {
+    const terms = fixtureTerms();
+    const empty = { cards: [], mcq: [], short: [] };
+    const psm = { stages: [], specifications: [], cards: [], mcq: [], short: [] } as unknown as PsmFile;
+    useContent.setState({ index: buildIndex({ areas: [empty, empty, empty, empty], terms, psm, caseStudies: [] }), status: 'ready' });
+    await submitLine('play blitz', mockEnv());
+    expect(printed()).toContain('You have 60 seconds.');
+    expect(printed()).not.toContain('Normal difficulty');
+    const first = terms.find((c) => c.id === term().game!.session.current!()!.itemId)!;
+    await submitLine(first.front, mockEnv());
+    expect(useAttempts.getState().log[0][0]).toBe(first.id);
+    vi.advanceTimersByTime(60_100);
+    expect(term().game).toBeNull();
+    expect(printed()).toContain("Time's up: 1 of 1 correct.");
+  });
+
+  it('refuses difficulty options for games with one level', async () => {
+    await submitLine('play blitz --hard', mockEnv());
+    expect(printed()).toContain('blitz has one level, so it has no --easy or --hard option. Type play blitz to start it.');
+    expect(term().game).toBeNull();
   });
 });
 

@@ -141,7 +141,7 @@ describe('terminal drawer', () => {
     await user.keyboard('`');
     await user.keyboard('pl{Tab}');
     expect(drawerInput()).toHaveValue('play ');
-    await user.keyboard('{Tab}');
+    await user.keyboard('s{Tab}');
     expect(drawerInput()).toHaveValue('play s');
     expect(within(drawer()).getByText('sort search')).toBeInTheDocument();
     await user.keyboard('{ArrowUp}');

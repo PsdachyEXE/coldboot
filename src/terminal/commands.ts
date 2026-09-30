@@ -44,7 +44,6 @@ export interface CommandSpec {
 }
 
 export const SUDO_MESSAGE = 'Permission denied. This terminal runs with least privilege.';
-export const DAILY_MISSING = "The daily challenge isn't installed in this build yet.";
 
 const out = (...blocks: TerminalBlock[]) => useTerminalSession.getState().print(blocks);
 const say = (text: string, tone?: Tone): TerminalBlock => ({ kind: 'text', text, tone });
@@ -66,10 +65,6 @@ function difficultyFrom(cmd: ParsedCommand): { difficulty: Difficulty } | { erro
 }
 
 function notInstalled(id: string): void {
-  if (id === 'daily') {
-    out(say(DAILY_MISSING, 'warning'), say('Type ls to see the games you can play now.', 'muted'));
-    return;
-  }
   const near = nearest(id, GAMES.map((g) => g.id));
   out(
     say(`The game "${id}" isn't installed in this build yet.`, 'warning'),
@@ -88,7 +83,13 @@ async function playGame(id: string, cmd: ParsedCommand, where: string): Promise<
     notInstalled(id);
     return;
   }
-  await startGame(meta, { difficulty: level.difficulty, where, showDifficulty: true });
+  if (meta.fixedDifficulty && cmd.flags.length) {
+    const start = id === 'daily' ? 'daily' : `play ${id}`;
+    const why = id === 'daily' ? 'The daily challenge is the same set for everyone, so it' : `${id} has one level, so it`;
+    out(say(`${why} has no --easy or --hard option. Type ${start} to start it.`, 'warning'));
+    return;
+  }
+  await startGame(meta, { difficulty: level.difficulty, where, showDifficulty: !meta.fixedDifficulty });
 }
 
 async function play(cmd: ParsedCommand): Promise<void> {
@@ -225,10 +226,6 @@ function man(cmd: ParsedCommand): void {
   const command = findCommand(topic);
   if (command && !command.hidden) {
     out(say(`Usage: ${command.usage}`, 'accent'), say(`${command.summary}.`));
-    return;
-  }
-  if (topic === 'daily') {
-    out(say(DAILY_MISSING, 'warning'));
     return;
   }
   const near = nearest(topic, [...GAMES.map((g) => g.id), DRILL_ID]);
@@ -403,7 +400,7 @@ export const COMMANDS: readonly CommandSpec[] = [
   { name: 'ls', usage: 'ls', summary: 'List the games', run: ls },
   { name: 'man', usage: 'man <game>', summary: 'Show how a game works', run: man },
   { name: 'play', usage: 'play <game> [--easy|--hard]', summary: 'Start a game', flags: DIFFICULTY_FLAGS, run: play },
-  { name: 'daily', usage: 'daily', summary: "Start today's daily challenge", flags: DIFFICULTY_FLAGS, run: (cmd) => playGame('daily', cmd, `terminal: ${cmd.raw}`) },
+  { name: 'daily', usage: 'daily', summary: "Start today's daily challenge", run: (cmd) => playGame('daily', cmd, `terminal: ${cmd.raw}`) },
   { name: 'drill', usage: 'drill [kk|area]', summary: 'Answer up to 10 Section A questions', run: drill },
   { name: 'due', usage: 'due', summary: 'Show the cards due now and over the week', run: due },
   { name: 'review', usage: 'review', summary: 'Open flashcard review', run: (_c, env) => open('review', reviewPath(), env) },

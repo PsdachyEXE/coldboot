@@ -6,16 +6,31 @@
  * P1: dfd, usecase, reqs, gantt, threat, law, naming, types, oop, psm
  * P2: boss, ux
  *
- * Shipped here: sort, search. Track B2 adds deskcheck, triage, validate, blitz and daily by
- * appending entries to GAMES (daily sets needsContent; generator games set generator: true).
- * The terminal's `daily` command runs `play daily` once a game with the id 'daily' is registered.
+ * GAMES lists the P0 games in the brief's order, which is the order `ls` prints. Games that
+ * need study content set needsContent; games with Game.generate set generator: true. The
+ * terminal's `daily` command runs `play daily`.
  */
+import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './blitz/meta';
+import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './daily-game/meta';
+import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
+import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
+import { VALIDATE_ID, VALIDATE_KK, VALIDATE_MAN, VALIDATE_SUMMARY, VALIDATE_TITLE } from './validate/meta';
 import type { GameMeta } from './types';
 
 export const GAMES: GameMeta[] = [
+  {
+    id: DESKCHECK_ID,
+    title: DESKCHECK_TITLE,
+    priority: 'P0',
+    kk: DESKCHECK_KK,
+    summary: DESKCHECK_SUMMARY,
+    man: DESKCHECK_MAN,
+    generator: true,
+    load: () => import('./deskcheck').then((m) => m.default),
+  },
   {
     id: SORT_ID,
     title: SORT_TITLE,
@@ -35,6 +50,49 @@ export const GAMES: GameMeta[] = [
     man: SEARCH_MAN,
     generator: true,
     load: () => import('./search').then((m) => m.default),
+  },
+  {
+    id: TRIAGE_ID,
+    title: TRIAGE_TITLE,
+    priority: 'P0',
+    kk: TRIAGE_KK,
+    summary: TRIAGE_SUMMARY,
+    man: TRIAGE_MAN,
+    generator: true,
+    load: () => import('./triage').then((m) => m.default),
+  },
+  {
+    id: VALIDATE_ID,
+    title: VALIDATE_TITLE,
+    priority: 'P0',
+    kk: VALIDATE_KK,
+    summary: VALIDATE_SUMMARY,
+    man: VALIDATE_MAN,
+    generator: true,
+    load: () => import('./validate').then((m) => m.default),
+  },
+  {
+    id: BLITZ_ID,
+    title: BLITZ_TITLE,
+    priority: 'P0',
+    kk: BLITZ_KK,
+    summary: BLITZ_SUMMARY,
+    man: BLITZ_MAN,
+    needsContent: true,
+    fixedDifficulty: true,
+    load: () => import('./blitz').then((m) => m.default),
+  },
+  {
+    id: DAILY_ID,
+    title: DAILY_TITLE,
+    priority: 'P0',
+    kk: DAILY_KK,
+    summary: DAILY_SUMMARY,
+    man: DAILY_MAN,
+    needsContent: true,
+    fixedDifficulty: true,
+    // Loads the generator games the set draws on (daily-game/index.ts), then the game.
+    load: () => import('./daily-game').then((m) => m.loadDailyGame()),
   },
 ];
 

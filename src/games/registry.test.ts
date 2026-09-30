@@ -1,19 +1,31 @@
 import { describe, expect, it } from 'vitest';
+import { PSEUDO_KEYWORDS } from '../content/markdown';
 import { DAILY_GENERATOR_GAMES } from './daily';
 import { DRILL_GAME, GAMES, findGame } from './registry';
 
 describe('game registry', () => {
-  it('lists sort and search as P0 generator games with student-facing man pages', () => {
-    for (const id of ['sort', 'search']) {
-      const meta = findGame(id)!;
+  it("lists the P0 games in the brief's order with student-facing man pages", () => {
+    expect(GAMES.map((g) => g.id)).toEqual(['deskcheck', 'sort', 'search', 'triage', 'validate', 'blitz', 'daily']);
+    for (const meta of GAMES) {
       expect(meta.priority).toBe('P0');
-      expect(meta.generator).toBe(true);
-      expect(meta.kk).toEqual(['U3O1-KK12']);
-      expect(meta.man).toContain(`Usage: play ${id}`);
+      const usage = meta.id === 'daily' ? 'Usage: daily' : meta.fixedDifficulty ? `Usage: play ${meta.id}` : `Usage: play ${meta.id} [--easy|--hard]`;
+      expect(meta.man.endsWith(usage)).toBe(true);
+      expect(meta.man.startsWith(`${meta.id} `)).toBe(true);
       expect(meta.summary.length).toBeGreaterThan(10);
     }
+    expect(findGame('sort')!.kk).toEqual(['U3O1-KK12']);
     expect(new Set(GAMES.map((g) => g.id)).size).toBe(GAMES.length);
     expect(findGame('nope')).toBeUndefined();
+  });
+
+  it('marks generator, content and one-level games', () => {
+    const flags = (id: string) => {
+      const m = findGame(id)!;
+      return [Boolean(m.generator), Boolean(m.needsContent), Boolean(m.fixedDifficulty)];
+    };
+    for (const id of ['deskcheck', 'sort', 'search', 'triage', 'validate']) expect(flags(id)).toEqual([true, false, false]);
+    expect(flags('blitz')).toEqual([false, true, true]);
+    expect(flags('daily')).toEqual([false, true, true]);
   });
 
   it('loads games whose ids, titles and generators match their metadata', async () => {
@@ -36,8 +48,9 @@ describe('game registry', () => {
   it('writes man pages in sentence case without all-caps words', () => {
     for (const meta of [...GAMES, DRILL_GAME]) {
       const words = meta.man.match(/\b[A-Z]{2,}\b/g) ?? [];
-      // Only KK and area ids, DIV (the pseudocode operator) and TERMS/PSM may be capitalised.
-      expect(words.filter((w) => !/^(DIV|TERMS|PSM|KK\d*|U\dO\d)$/.test(w))).toEqual([]);
+      // Only KK and area ids, TERMS and PSM, pseudocode keywords quoted as code, and the wordmark in the share line may be capitalised.
+      const code = new Set<string>([...PSEUDO_KEYWORDS, 'LENGTH', 'COLDBOOT']);
+      expect(words.filter((w) => !code.has(w) && !/^(TERMS|PSM|KK\d*|U\dO\d)$/.test(w))).toEqual([]);
     }
   });
 });
