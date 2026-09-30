@@ -32,7 +32,7 @@ describe('game registry', () => {
     for (const id of ['deskcheck', 'sort', 'search', 'triage', 'validate']) expect(flags(id)).toEqual([true, false, false]);
     expect(flags('blitz')).toEqual([false, true, true]);
     expect(flags('daily')).toEqual([false, true, true]);
-    for (const id of ['naming', 'types', 'oop']) expect(flags(id)).toEqual([true, false, false]);
+    for (const id of ['threat', 'naming', 'types', 'oop']) expect(flags(id)).toEqual([true, false, false]);
   });
 
   it('loads games whose ids, titles and generators match their metadata', async () => {

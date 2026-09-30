@@ -18,6 +18,7 @@ import { NAMING_GAME_KK, NAMING_ID, NAMING_MAN, NAMING_SUMMARY, NAMING_TITLE } f
 import { OOP_GAME_KK, OOP_ID, OOP_MAN, OOP_SUMMARY, OOP_TITLE } from './oop/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
+import { THREAT_GAME_KK, THREAT_ID, THREAT_MAN, THREAT_SUMMARY, THREAT_TITLE } from './threat/meta';
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
 import { TYPES_GAME_KK, TYPES_ID, TYPES_MAN, TYPES_SUMMARY, TYPES_TITLE } from './types-game/meta';
 import { VALIDATE_ID, VALIDATE_KK, VALIDATE_MAN, VALIDATE_SUMMARY, VALIDATE_TITLE } from './validate/meta';
@@ -96,6 +97,16 @@ export const GAMES: GameMeta[] = [
     fixedDifficulty: true,
     // Loads the generator games the set draws on (daily-game/index.ts), then the game.
     load: () => import('./daily-game').then((m) => m.loadDailyGame()),
+  },
+  {
+    id: THREAT_ID,
+    title: THREAT_TITLE,
+    priority: 'P1',
+    kk: THREAT_GAME_KK,
+    summary: THREAT_SUMMARY,
+    man: THREAT_MAN,
+    generator: true,
+    load: () => import('./threat').then((m) => m.default),
   },
   {
     id: NAMING_ID,
