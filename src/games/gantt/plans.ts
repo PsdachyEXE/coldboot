@@ -183,7 +183,7 @@ function rollPlan(rng: Rng, difficulty: Difficulty): Plan | null {
       id: ids.get(t.key)!,
       name: t.name,
       duration: randInt(rng, dLo, dHi),
-      dependsOn: t.after.map((d) => ids.get(d)!),
+      dependsOn: t.after.map((d) => ids.get(d)!).sort(),
       ...(t.milestone ? { event: t.milestone } : {}),
     }));
     if (suitable(computeSchedule(tasks))) return { template: template.id, org: template.org, project: template.project, tasks };

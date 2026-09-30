@@ -120,7 +120,7 @@ function scenarioFigure(sc: ErrorScenario): Dfd | ContextDiagram {
   const id = `dfd-${sc.system}-${sc.injection}`;
   return sc.diagram === 'context'
     ? buildContext(sys, { mirror: sc.mirror, injection: sc.injection, id })
-    : buildDfd(sys, { mirror: sc.mirror, injection: sc.injection, id, caption: `Part of the Level 1 data flow diagram for ${sys.org}.` });
+    : buildDfd(sys, { mirror: sc.mirror, injection: sc.injection, id, caption: "Only part of the diagram is shown." });
 }
 
 /** The marked elements of an error scenario, in letter order; one is the faulty element. */

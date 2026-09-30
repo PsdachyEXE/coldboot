@@ -43,31 +43,36 @@ function taskLabel(t: PlanTask): string {
   return `${t.id} (${t.name})`;
 }
 
-export function planTable(plan: Plan): TerminalBlock {
-  return {
-    kind: 'table',
-    caption: `Project plan: ${plan.project} for ${plan.org}`,
-    columns: ['Task', 'Description', 'Days', 'Depends on'],
-    rows: plan.tasks.map((t) => [t.id, t.name, String(t.duration), t.dependsOn.length ? t.dependsOn.join(', ') : 'None']),
-  };
+export function planBlocks(plan: Plan): TerminalBlock[] {
+  return [
+    { kind: 'text', text: `${plan.org} is planning ${plan.project}.`, tone: 'muted' },
+    {
+      kind: 'table',
+      caption: 'Project plan',
+      columns: ['Task', 'Description', 'Days', 'After'],
+      rows: plan.tasks.map((t) => [t.id, t.name, String(t.duration), t.dependsOn.length ? t.dependsOn.join(', ') : 'None']),
+    },
+  ];
 }
 
-const PLAN_RULES = 'Each task starts as soon as every task it depends on has finished. Tasks without a dependency start on day 1.';
+const PLAN_RULES = 'Each task depends on the tasks in its After column: it starts as soon as all of them have finished. Tasks with none start on day 1.';
 
 /**
  * The text Gantt chart shown after an answer. `stage` decides how much it marks: bars only, then
  * the critical path, then the spare days (dots) as well.
  */
-export function chartBlock(plan: Plan, schedule: Schedule, stage: 'bars' | 'critical' | 'full'): TerminalBlock {
-  const text = asciiGantt(plan.tasks, schedule, { unit: 'day', showCritical: stage !== 'bars', showSlack: stage === 'full' });
-  return { kind: 'pre', text: sparedWording(text), label: 'Gantt chart' };
+export function chartBlocks(plan: Plan, schedule: Schedule, stage: 'bars' | 'critical' | 'full'): TerminalBlock[] {
+  const text = asciiGantt(plan.tasks, schedule, { unit: 'day', showCritical: stage !== 'bars', showSlack: stage === 'full', nameWidth: 30 });
+  const blocks: TerminalBlock[] = [{ kind: 'pre', text: sparedWording(text), label: 'Gantt chart' }];
+  if (stage === 'full') blocks.push({ kind: 'text', text: 'The Spare column and the dots show how many days each task can be delayed without delaying the project.', tone: 'muted' });
+  return blocks;
 }
 
 /** Rewords the chart's slack column and key in the game's own terms (see the file comment). */
 export function sparedWording(chart: string): string {
   const lines = chart.split('\n');
   lines[0] = lines[0].replace('Slack', 'Spare');
-  return lines.join('\n').replace('. slack', '. days it can be delayed without delaying the project');
+  return lines.join('\n').replace('. slack', '. spare days');
 }
 
 function chainSum(plan: Plan, ids: readonly string[]): string {
@@ -286,17 +291,17 @@ export function ganttItem(spec: GanttSpec, difficulty: Difficulty): QuizItem {
           : spec.kind === 'effect'
             ? effectQuestion(plan, schedule, rng, difficulty)
             : milestoneQuestion(plan, schedule, rng);
-  const chart = chartBlock(plan, schedule, built.chart);
+  const chart = chartBlocks(plan, schedule, built.chart);
   return {
     id: `gen-gantt-${spec.kind}`,
     kk: built.kk,
     instance: `gantt:${spec.kind}:seed=${seed}:${difficulty}`,
     chips: built.chips,
-    prompt: [planTable(plan), { kind: 'text', text: PLAN_RULES, tone: 'muted' }, ...built.prompt],
+    prompt: [...planBlocks(plan), { kind: 'text', text: PLAN_RULES, tone: 'muted' }, ...built.prompt],
     check(input) {
       const r = built.check(input);
       if ('counted' in r) return { correct: false, expected: built.expected, reason: r.reason, counted: false };
-      return { correct: r.correct, expected: built.expected, reason: r.reason, followUp: [chart] };
+      return { correct: r.correct, expected: built.expected, reason: r.reason, followUp: chart };
     },
   };
 }

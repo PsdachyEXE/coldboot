@@ -245,7 +245,7 @@ describe('gantt items', () => {
 
   it('rewords the chart key and column', () => {
     const chart = 'Task  Days  Slack  1\nx\n\nScale: 1 column = 1 day. Key: = other task, . slack.';
-    expect(sparedWording(chart)).toBe('Task  Days  Spare  1\nx\n\nScale: 1 column = 1 day. Key: = other task, . days it can be delayed without delaying the project.');
+    expect(sparedWording(chart)).toBe('Task  Days  Spare  1\nx\n\nScale: 1 column = 1 day. Key: = other task, . spare days.');
   });
 });
 
