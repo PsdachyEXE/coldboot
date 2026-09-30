@@ -1,0 +1,23 @@
+.empty {
+  padding: var(--space-5) 0;
+  border-top: var(--hairline);
+  border-bottom: var(--hairline);
+  margin: 0 0 var(--space-5);
+  max-width: var(--measure);
+}
+.title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--step-2);
+}
+.text {
+  color: var(--ice);
+}
+.text > :last-child {
+  margin-bottom: 0;
+}
+.action {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

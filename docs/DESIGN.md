@@ -1,0 +1,197 @@
+# Design
+
+The design plan for COLDBOOT, written before the screens were built and reviewed against Section 9 of the build brief. Track A owns this file, `src/ui/**` and the shell. Everything here is implemented in `src/ui/tokens.css`, `src/ui/global.css` and the primitives exported from `src/ui/index.ts`.
+
+## Intent
+
+The users are Year 12 students revising for one exam, often late at night and under stress. The subject is software, so the terminal is the product's natural voice and its one bold element. Everything around it stays quiet: a true-black page, blue text, flat surfaces, and no decoration that competes with the study content.
+
+## Tokens
+
+### Colour
+
+The palette is fixed by the brief. No other colours exist in the product and no token is tinted or mixed to make a new one. The only translucency is the dialog backdrop, a `--void` scrim at 85% that dims the page behind a modal.
+
+| Token | Hex | Use |
+|---|---|---|
+| `--void` | `#000000` | Page background, status bar, rail |
+| `--trench` | `#06122B` | Raised surfaces: panels, inputs, dialogs, the incorrect-answer block, the terminal drawer |
+| `--steel` | `#6B80A8` | Muted text, hairline rules, control borders, disabled controls |
+| `--cobalt` | `#2450E8` | Primary buttons (with `--ice` text), the focus ring, text selection, checked controls |
+| `--phosphor` | `#7FC7FF` | Links, terminal text, the boot sequence, active navigation marker, meter fill |
+| `--ice` | `#DCEAFF` | Primary text, the inner halo of the focus ring |
+| `--flare` | `#22D3FF` | Correct answers only (always with the ✓ glyph and the word "Correct") |
+
+Every text and background pairing in use has a row in `src/ui/contrast-pairs.json`, and `npm run contrast:check` fails the build if any drops below WCAG AA (4.5:1 for text, 3:1 for large text and meaningful non-text marks).
+
+Two pairings sit close to the line and are handled on purpose:
+
+- `--cobalt` on `--trench` is exactly 3.0:1. The focus ring therefore carries a 2 px `--ice` inner halo (see Focus below), so it stays clearly visible on panels and inputs rather than relying on the minimum.
+- `--steel` on `--trench` is 4.67:1. It passes for body text, so muted text and the incorrect block may use it, but it is never used below 14 px.
+
+### Type
+
+| Role | Family | Size / line-height |
+|---|---|---|
+| Reading text and interface | Atkinson Hyperlegible Next Variable (`--font-read`) | 16 px / 1.5 |
+| Small text: hints, tags, tab labels | Atkinson Hyperlegible Next | 14 px / 1.5 |
+| `h3` | Atkinson Hyperlegible Next, weight 700 | 20 px / 1.3 |
+| `h2` | Atkinson Hyperlegible Next, weight 700 | 25 px / 1.3 |
+| `h1` | Atkinson Hyperlegible Next, weight 700 | 31 px / 1.3 (25 px below 720 px wide) |
+| Code, pseudocode, terminal, status bar, boot sequence, wordmark | Martian Mono Variable (`--font-mono`) | 14 px (code inside reading text is 0.9 em) |
+
+The scale is 14, 16, 20, 25 and 31 px (`--step-0` to `--step-4`). Both families are self-hosted through Fontsource packages and are covered by the SIL Open Font License 1.1. Reading columns cap at `--measure` (72ch) and are left-aligned; nothing is centred or justified.
+
+The COLDBOOT wordmark is Martian Mono at weight 700 with 0.08 em tracking. It is the only all-caps text in the product.
+
+### Space, size and layers
+
+| Token | Value | Use |
+|---|---|---|
+| `--space-1` to `--space-7` | 4, 8, 12, 16, 24, 32, 48 px | Gaps and padding; nothing else is used |
+| `--control-h` | 44 px | Minimum height of buttons, inputs and tabs (touch target) |
+| `--radius-control` | 2 px | Buttons, inputs, checkboxes, tags, keycaps |
+| `--rail-w` | 208 px | Desktop navigation rail |
+| `--status-h` | 32 px (28 px below 720 px) | Status bar |
+| `--tabbar-h` | 56 px | Bottom tab bar below 720 px |
+| `--z-*` | rail 10, bars 20, popover 30, drawer 40, boot 60 | Stacking. Dialogs use the native top layer. |
+
+Panels have no radius. Nothing has a shadow or a gradient.
+
+## Layout
+
+```
+Desktop (720 px and wider)
++----------+------------------------------------------------+
+| COLDBOOT |  [storage warning banner, when needed]          |
+|          |                                                 |
+| Home     |  main column, left-aligned                      |
+| Review   |  text capped at 72ch; wide blocks (grids,       |
+| Drill    |  tables) may use the full column up to 1120 px  |
+| Written  |                                                 |
+| Exam     |                                                 |
+| Map      |                                                 |
+| Stats    |                                                 |
+| Terminal |                                                 |
+|          |                                                 |
+| Open     |                                                 |
+| terminal |                                                 |
+| Settings |                                                 |
+| About    |                                                 |
++----------+------------------------------------------------+
+| [T-44d 04h] [37 due] [streak 6] [offline ready]            |
++-----------------------------------------------------------+
+```
+
+- The rail is fixed to the left edge, 208 px wide, on `--void` with a hairline `--steel` rule on its right. The active item has aria-current="page", bold text and a 2 px `--phosphor` bar on its left edge, so the current page never depends on colour alone.
+- The main column scrolls with the page. Padding is 32 px top and 40 px sides on desktop, 16 px at phone width.
+- The status bar is fixed along the bottom of every screen, full width, in Martian Mono 14 px, with a hairline rule above it.
+- The drop-down terminal (track B) slides over everything from the top.
+
+```
+Phone (below 720 px)
++------------------------------+
+| COLDBOOT       Open terminal |   header scrolls away with the page
+|                              |
+| main column, 16 px gutters   |
+|                              |
++------------------------------+
+| [T-44d 04h] [37 due]         |   status bar, countdown and due only
++------------------------------+
+| Home Review Drill Term. More |   tab bar, five tabs
++------------------------------+
+```
+
+- **Eight destinations in five tabs.** The tab bar holds Home, Review, Drill and Terminal, the four places a student goes every day, plus More. More opens a menu above the tab bar with Written, Exam, Map, Stats, Settings and About. Five tabs of 72 px fit 360 px with room for "Terminal" at 14 px. More is marked as current (bold, top bar) whenever the current page is one of its items. Esc, choosing an item, or tapping outside closes it and returns focus to More.
+- Only the countdown and the due count stay in the status bar. The streak and offline segments return at 720 px; the storage warning banner still shows at every width.
+- The page never scrolls sideways at 360 px. Wide content (tables, pseudocode) scrolls inside its own box.
+
+During first run the shell shows only the wordmark and the main column: no rail, tabs, status bar or terminal, because every other route redirects to `/welcome` until setup is done.
+
+## Principles
+
+1. **The terminal is the one bold element.** Everything else is flat and quiet: `--void` and `--trench` surfaces, hairline `--steel` rules only where structure needs them, no shadows, no gradients, no grids of identical rounded cards.
+2. **One orchestrated motion moment.** The cold-boot sequence at launch. Everywhere else motion only answers a user action, and it is short.
+3. **Colour never carries meaning alone.** Correct and incorrect answers carry a glyph and a word. The current page carries a bar and bold weight. Meters print their value as text. The unseen state is a dashed outline and the word "Unseen", never an empty bar that reads as zero.
+4. **Words do the work.** Sentence case, plain active verbs. A button's name matches its result ("Export progress" leads to "Progress exported"). Empty states say what to do next. Errors say what happened and how to fix it. Australian spelling.
+5. **No shouting.** No all-caps labels (the COLDBOOT wordmark is the only all-caps text), no eyebrow labels above headings, no arrows appended to button text, no middle-dot metadata strings.
+6. **Keyboard first.** Everything works from the keyboard, with a visible focus ring on every focusable element and a skip link as the first stop.
+
+## Focus
+
+Every focusable element gets the same ring on `:focus-visible`: a 2 px `--cobalt` outline offset by 2 px, with the offset gap filled by a 2 px `--ice` halo (drawn with a zero-blur `box-shadow` spread, which is a ring and not an elevation shadow). The halo keeps the ring visible on `--trench` panels and on `--cobalt` buttons, where cobalt alone would not be. `main` receives focus after a route change so screen readers start at the new page; it shows no ring because it is not a control.
+
+## Component inventory
+
+All primitives live in `src/ui`, use CSS modules plus the tokens, and are exported from `src/ui/index.ts`.
+
+| Component | Purpose | Notes |
+|---|---|---|
+| `Button` | Actions | `variant`: `primary` (`--cobalt` with `--ice` text, one per view), `secondary` (hairline outline), `quiet` (text only, `--phosphor`). `size`: `normal` (44 px) or `small` (36 px). Disabled: dashed `--steel` border, `--steel` text, not-allowed cursor. Hover underlines the label; no colour animation. |
+| `ButtonLink` | A router link styled as a button | Same variants. Use when the action navigates. |
+| `ExternalButtonLink` | An external link styled as a button | Opens in a new tab with `rel="noopener noreferrer"` and says so to screen readers. |
+| `TextField`, `TextArea`, `NumberField`, `DateField`, `TimeField` | Text entry | Visible label, optional hint, optional error. Hint and error are linked with aria-describedby; errors set aria-invalid and start with "Error:" for screen readers. `--trench` fill, hairline border, 2 px radius. |
+| `Select` | Native select | Same field frame. |
+| `Checkbox` | On/off settings | Native input, custom-drawn: `--cobalt` fill and an `--ice` ✓ when checked, so state shows by shape as well as colour. |
+| `RadioGroup` | One choice from a few | `fieldset` and `legend`; native radios drawn as rings with a filled centre. |
+| `Dialog` | Modal | Native `<dialog>` with `showModal()`, labelled by its heading, Esc closes, focus returns to the element that opened it. `--trench` surface with a hairline border, no radius. |
+| `Panel` | A raised flat surface | `--trench`, no radius, optional hairline border. |
+| `Kbd` | A key | Martian Mono 14 px, hairline border, 2 px radius. |
+| `Meter` | Mastery or progress | A labelled bar that prints its value in words ("62%", "3 of 10", "Unseen"). `role="meter"` or `role="progressbar"`. The unseen state is a dashed empty track. |
+| `Tag` | KK tags | Martian Mono 14 px id in a hairline box, optional title after it. `KkTag` fills the title from the study design. |
+| `EmptyState` | Nothing to show | A heading, a sentence saying what to do next, and one action. |
+| `Banner` | Persistent warning | `--trench` block with a 4 px `--phosphor` left rule and a bold title, so it reads as a warning without colour. Stays until the problem is gone. |
+| `VisuallyHidden` | Screen-reader-only text | |
+| `Feedback` | Answer verdict | "✓ Correct" in `--flare`, or "✗ Incorrect" in `--steel` on `--trench` with a 120 ms horizontal nudge. Announces the verdict through the polite live region. |
+| `LiveRegions` | The app's two live regions | One polite (`role="status"`), one assertive (`role="alert"`), both visually hidden, fed by `announce()` in `src/ui/announce.ts`. Mounted once in the layout. |
+| `ReportDialog` | Report a content problem (6.11) | Mounted once in the layout, opened with `openReport({ itemId })` from anywhere. |
+| `ExternalLink` | A text link to another site | New tab, `rel="noopener noreferrer"`, and a hidden "(opens in a new tab)". |
+
+Shell components in `src/app`: `Layout` (skip link, rail, tab bar and More menu, main column, storage banner, update prompt, onboarding guard, page titles), `StatusBar`, `Boot`.
+
+## Motion inventory
+
+| Motion | Duration | Trigger | Reduced motion |
+|---|---|---|---|
+| Boot sequence, full | About 1.2 s: lines print one by one over 1 s, then hold 0.2 s | First launch of each study day | Skipped entirely |
+| Boot sequence, condensed | 300 ms, four lines | Every other launch | Skipped entirely |
+| Card flip | 150 ms (`--dur-flip`) | Flipping a review card (track E) | Instant swap |
+| Terminal drawer | 180 ms (`--dur-drawer`) | Opening or closing the drawer (track B) | Instant |
+| Incorrect nudge | 120 ms (`--dur-nudge`), 4 px left and right | An incorrect answer | No movement |
+
+Nothing else moves: no hover transitions, no page transitions, no loading spinners (loading states are words). Reduced motion applies when the user picks "Reduce motion" in Settings, or when the device asks for it and the setting is "Match my device". `main.tsx` mirrors the setting onto `html[data-motion]` (`system`, `reduce` or `full`); `global.css` stops every animation and transition when `data-motion="reduce"`, or when the device prefers reduced motion and `data-motion` is not `full`. Components with JavaScript-driven motion also check `useReducedMotion()` or `prefersReducedMotion()`.
+
+Any key, click or tap skips the boot sequence. It is `aria-hidden`, holds nothing focusable, and never makes the page inert, so it never traps focus or blocks a screen reader.
+
+## Status bar
+
+tmux-style bracketed segments in Martian Mono: `[T-44d 04h] [37 due] [streak 6] [offline ready]`, plus `[not saving]` when storage fails. During the exam window it shows `[exam underway]`, and afterwards `[exam finished]`. Each segment's bracketed text is hidden from screen readers and replaced by a spoken label ("44 days and 4 hours until the exam", "37 reviews due"). The bar is not a live region, so the ticking countdown never interrupts anyone.
+
+## Review against Section 9
+
+Checked against each point of Section 9 after the plan was written, and again after the screens were built and screenshotted at 1280 px and 360 px.
+
+- **Palette.** Only the seven tokens are used. No green or red anywhere, including focus, errors and the storage warning. Errors use `--ice` text with a bold "Error:" or a phrase, never colour alone.
+- **Focus ring (changed).** The brief puts the focus ring in `--cobalt`. Measured against `--trench`, cobalt is exactly 3.0:1, the bare minimum. I kept the cobalt ring and added a 2 px `--ice` halo in the offset gap so the ring is unmistakable on panels, inputs and primary buttons. It is drawn with a zero-blur `box-shadow` spread; that is a ring, not a shadow, and it is the only `box-shadow` in the product.
+- **Hover states (changed).** Only seven colours exist, so hover can't lighten or darken a surface. Buttons underline their label on hover, and secondary buttons also switch their border to `--ice`. There are no hover transitions, keeping motion to user actions that matter.
+- **All caps (noted).** The COLDBOOT wordmark is the only all-caps text. Two unavoidable exceptions are literal strings, not labels: the word RESET that Settings asks the user to type (required by 6.10, shown as a keyed-in code in Martian Mono), and area ids such as U3O1 and KK ids, which are identifiers.
+- **Eight destinations on a phone (decided).** Section 9 says the rail becomes a bottom tab bar but doesn't say how eight items fit 360 px. Five tabs (Home, Review, Drill, Terminal, More) with More opening a menu. The rejected alternative was a horizontally scrolling tab bar, which hides items and breaks the no-sideways-scroll rule.
+- **First run (decided).** The rail, tabs, status bar and terminal are hidden until setup is done, because every route redirects to `/welcome` until then and a rail of dead links would mislead.
+- **Status bar on a phone.** Kept at the bottom above the tab bar, reduced to the countdown and due count as briefed. The phone header with the wordmark and the terminal button scrolls away so the fixed chrome costs 84 px, not 132.
+- **Boot sequence.** Built from real data only: the build id, KK counts per area and the map's provisional status, the content status once loaded, reviews due, and the time to the exam with its Melbourne time. Nothing in it is invented (no fake memory checks).
+- **Screenshot critique (1280 px and 360 px, production build in Chromium).** Found and fixed:
+  - The production CSP (`font-src 'self'`) blocked one Martian Mono subset that Vite had inlined as a `data:` URI. Fonts are now never inlined.
+  - The date and time picker icons had been inverted into near-invisibility on the dark fields.
+  - The hidden "(opens in a new tab)" text left a visible space before commas after external links.
+  - A lone checkbox crowded the legend below it.
+  - Boot lines wrapped heavily at 360 px; the phone label column is narrower and the map line is shorter.
+  - Pressing Reload within 200 ms of an update being found activated the new build without reloading the page.
+  - No page scrolls sideways at 360 px (checked on Home, Settings, About and Not found); the focus ring shows on the skip link, rail links, inputs and buttons; the update prompt and storage banner sit clear of the status bar and tab bar.
+
+## Notes for other tracks
+
+- Global styles cap `p`, `li`, `dd`, `dt`, `figcaption` and `blockquote` at 72ch. Terminal output and tables that need the full width should set `max-width: none` on their own elements.
+- The terminal drawer should use `z-index: var(--z-drawer)` so it sits over the rail, status bar and tab bar but under the boot overlay. Dialogs use the native top layer.
+- `Feedback` announces the verdict and plays the sound cue itself; call `announce()` only for other events.
+- `useNow(intervalMs)` in `src/lib/useNow.ts` is the shared clock; `useNarrow()` in `src/ui/useMediaQuery.ts` is true below 720 px.
+- `ExternalLink` and `ExternalButtonLink` are the only way to link off-site; `downloadJson` in `src/ui/download.ts` hands the user a file.

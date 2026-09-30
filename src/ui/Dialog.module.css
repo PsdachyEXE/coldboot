@@ -1,0 +1,48 @@
+.dialog {
+  width: min(36rem, calc(100vw - 2 * var(--space-4)));
+  max-height: calc(100dvh - 2 * var(--space-4));
+  padding: 0;
+  margin: auto;
+  background: var(--trench);
+  color: var(--ice);
+  border: var(--hairline);
+  border-radius: 0;
+  overflow: auto;
+}
+.dialog::backdrop {
+  background: var(--void);
+  opacity: 0.85;
+}
+/* Fallback when showModal() is unavailable: sit above the page. */
+.dialog[open]:not(:modal) {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-popover);
+}
+
+.body {
+  padding: var(--space-5);
+}
+@media (max-width: 719.98px) {
+  .body {
+    padding: var(--space-4);
+  }
+}
+
+.title {
+  margin: 0 0 var(--space-4);
+  font-size: var(--step-2);
+}
+
+.content > :last-child {
+  margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: var(--hairline);
+}

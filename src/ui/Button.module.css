@@ -1,0 +1,74 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-h);
+  padding: 0 var(--space-4);
+  font-family: var(--font-read);
+  font-size: var(--step-1);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.small {
+  min-height: var(--control-h-small);
+  padding: 0 var(--space-3);
+  font-size: var(--step-0);
+}
+
+/* Hover underlines the label: the palette has no lighter or darker shades to swap in. */
+.button:hover:not(:disabled) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.primary {
+  background: var(--cobalt);
+  color: var(--ice);
+  border-color: var(--cobalt);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--ice);
+  border-color: var(--steel);
+}
+.secondary:hover:not(:disabled) {
+  border-color: var(--ice);
+}
+.secondary:active:not(:disabled) {
+  background: var(--trench);
+}
+
+.quiet {
+  background: transparent;
+  color: var(--phosphor);
+  border-color: transparent;
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.quiet:hover:not(:disabled) {
+  text-decoration-thickness: 2px;
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  background: transparent;
+  color: var(--steel);
+  border: 1px dashed var(--steel);
+  cursor: not-allowed;
+  text-decoration: none;
+}

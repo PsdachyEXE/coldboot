@@ -1,0 +1,182 @@
+/*
+ * Global styles: page, type, links, focus, selection and reduced motion.
+ * Components style themselves with CSS modules; this file only sets defaults every screen shares.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  background: var(--void);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scrollbar-color: var(--steel) var(--void);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--void);
+  color: var(--ice);
+  font-family: var(--font-read);
+  font-size: var(--step-1);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: break-word;
+}
+
+/* Headings: 31 / 25 / 20 px at 1.3. */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-read);
+  font-weight: 700;
+  line-height: var(--lh-head);
+  color: var(--ice);
+  margin: 0 0 var(--space-4);
+  max-width: var(--measure);
+}
+h1 {
+  font-size: var(--step-4);
+}
+h2 {
+  font-size: var(--step-3);
+  margin-top: var(--space-6);
+}
+h3 {
+  font-size: var(--step-2);
+  margin-top: var(--space-5);
+}
+h4 {
+  font-size: var(--step-1);
+  margin-top: var(--space-4);
+}
+@media (max-width: 719.98px) {
+  h1 {
+    font-size: var(--step-3);
+  }
+  h2 {
+    font-size: var(--step-2);
+  }
+}
+
+p,
+ul,
+ol,
+dl {
+  margin: 0 0 var(--space-4);
+}
+
+/* Reading columns cap at 72 characters and stay left-aligned. */
+p,
+li,
+dd,
+dt,
+figcaption,
+blockquote {
+  max-width: var(--measure);
+}
+
+small {
+  font-size: var(--step-0);
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono);
+}
+code {
+  font-size: 0.9em;
+  color: var(--phosphor);
+}
+
+a {
+  color: var(--phosphor);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+hr {
+  border: 0;
+  border-top: var(--hairline);
+  margin: var(--space-5) 0;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--cobalt);
+  color: var(--ice);
+}
+
+/*
+ * Focus: a 2 px cobalt ring with a 2 px offset on every focusable element. The offset gap is
+ * filled with an ice halo (a zero-blur spread, not an elevation shadow) so the ring stays visible
+ * on --trench surfaces, where cobalt alone is only 3:1, and on cobalt primary buttons.
+ */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--ice);
+}
+/* Programmatic focus targets (main after a route change, headings) are not controls. */
+[tabindex='-1']:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/*
+ * Reduced motion. The settings override is mirrored onto html[data-motion] by main.tsx:
+ * "reduce" always stops motion; "system" follows the device; "full" keeps motion even when the
+ * device asks for less.
+ */
+html[data-motion='reduce'] *,
+html[data-motion='reduce'] *::before,
+html[data-motion='reduce'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion='full']) *,
+  html:not([data-motion='full']) *::before,
+  html:not([data-motion='full']) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

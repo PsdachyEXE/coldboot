@@ -1,0 +1,39 @@
+.meter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--step-0);
+}
+.label {
+  color: var(--ice);
+  min-width: 0;
+}
+.value {
+  font-family: var(--font-mono);
+  color: var(--ice);
+  white-space: nowrap;
+}
+
+.track {
+  position: relative;
+  height: 10px;
+  background: var(--trench);
+  border: var(--hairline);
+  overflow: hidden;
+}
+.fill {
+  height: 100%;
+  background: var(--phosphor);
+}
+.unseen {
+  background: transparent;
+  border-style: dashed;
+}

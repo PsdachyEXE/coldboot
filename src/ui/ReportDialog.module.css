@@ -1,0 +1,44 @@
+.dialog {
+  width: min(38rem, calc(100vw - 2 * var(--space-4)));
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-1) var(--space-4);
+  margin: 0 0 var(--space-5);
+}
+.meta dt {
+  color: var(--steel);
+}
+.meta dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.meta code {
+  color: var(--ice);
+  font-size: var(--step-0);
+}
+
+.help {
+  margin: 0;
+  font-size: var(--step-0);
+  color: var(--ice);
+}
+
+.status {
+  margin: var(--space-3) 0 0;
+  font-weight: 700;
+}
+.status:empty {
+  display: none;
+}
+
+.fallback {
+  margin-top: var(--space-4);
+}
+.fallback textarea {
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+}

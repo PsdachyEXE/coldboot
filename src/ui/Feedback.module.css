@@ -1,0 +1,57 @@
+.feedback {
+  margin: 0 0 var(--space-5);
+  max-width: calc(var(--measure) + 2 * var(--space-4));
+}
+
+.verdict {
+  margin: 0;
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: var(--lh-head);
+}
+.glyph {
+  display: inline-block;
+  min-width: 1em;
+}
+
+.correct {
+  color: var(--ice);
+}
+.correct .verdict {
+  color: var(--flare);
+}
+
+.incorrect {
+  background: var(--trench);
+  color: var(--ice);
+  padding: var(--space-3) var(--space-4);
+}
+.incorrect .verdict {
+  color: var(--steel);
+}
+
+.detail {
+  margin-top: var(--space-2);
+}
+.detail > :last-child {
+  margin-bottom: 0;
+}
+
+.nudge {
+  animation: nudge var(--dur-nudge) linear 1;
+}
+
+@keyframes nudge {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
