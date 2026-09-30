@@ -6,7 +6,7 @@ import { useSession } from '../../state/session';
 import { useSettings } from '../../state/settings';
 import { useSrs } from '../../state/srs';
 import { useReportDialog } from '../../ui/report';
-import { fixtureIndex, fxCard, provideContent, resetStudyStores } from '../study/testing';
+import { fixtureIndex, fxCard, fxMcq, provideContent, resetStudyStores } from '../study/testing';
 import Review from './Review';
 
 function renderReview(path = '/review') {
@@ -157,6 +157,7 @@ describe('Review card flip', () => {
   });
 
   it('says when nothing is due and offers a drill', () => {
+    provideContent(fixtureIndex({ cards: [basic, second], mcq: [fxMcq('m-u3o1-kk04-001', ['U3O1-KK04'])] }));
     useSrs.getState().setCard('c-u3o1-kk04-001', { reps: 1, interval: 1, ease: 2.5, due: Date.now() + 86_400_000, lapses: 0, last: 1 });
     useSrs.getState().setCard('c-u3o1-kk04-002', { reps: 1, interval: 1, ease: 2.5, due: Date.now() + 86_400_000, lapses: 0, last: 1 });
     renderReview();
@@ -165,10 +166,17 @@ describe('Review card flip', () => {
     expect(screen.getByRole('link', { name: 'Go to Drill' })).toHaveAttribute('href', '/drill');
   });
 
-  it('says when there are no flashcards for a focused KK', () => {
+  it('says when there are no flashcards for a focused KK and offers its drill', () => {
+    provideContent(fixtureIndex({ cards: [basic], mcq: [fxMcq('m-u4o2-kk03-001', ['U4O2-KK03'])] }));
     renderReview('/review?kk=U4O2-KK03');
     expect(screen.getByRole('heading', { name: 'No flashcards yet' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Drill this key knowledge' })).toHaveAttribute('href', '/drill?kk=U4O2-KK03');
+  });
+
+  it('points to the syllabus map when a KK has nothing to review or drill', () => {
+    renderReview('/review?kk=U4O2-KK03');
+    expect(screen.getByText(/The syllabus map shows what you can practise now\./)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Open the syllabus map' })).toHaveAttribute('href', '/map');
   });
 
   it('focuses the queue on one KK', () => {

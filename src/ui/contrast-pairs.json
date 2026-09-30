@@ -22,6 +22,9 @@
     { "fg": "--steel", "bg": "--trench", "level": "ui", "use": "control borders and the meter track border on panels" },
     { "fg": "--phosphor", "bg": "--trench", "level": "ui", "use": "meter fill against its track; warning banner rule" },
     { "fg": "--phosphor", "bg": "--void", "level": "ui", "use": "active navigation bar; field error rule" },
-    { "fg": "--steel", "bg": "--trench", "level": "large", "use": "incorrect verdict (20 px bold) on its trench block" }
+    { "fg": "--steel", "bg": "--trench", "level": "large", "use": "incorrect verdict (20 px bold) on its trench block" },
+    { "fg": "--void", "bg": "--flare", "level": "text", "use": "drill: the correct option's letter on its flare box" },
+    { "fg": "--flare", "bg": "--void", "level": "ui", "use": "drill: the correct option's frame" },
+    { "fg": "--phosphor", "bg": "--void", "level": "ui", "use": "case study: the frame round a figure the question refers to" }
   ]
 }

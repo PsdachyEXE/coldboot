@@ -123,8 +123,21 @@ button.cell:hover .cellId {
   gap: var(--space-2);
   max-width: none;
 }
+/* Legend swatches: the cell's frame and gauge without a number. */
 .swatch {
-  cursor: default;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 36px;
+  height: 24px;
+  padding: 4px;
+  background: var(--trench);
+  border: 1px solid var(--steel);
+  border-radius: var(--radius-control);
+}
+.swatch[data-band='unseen'] {
+  background: var(--void);
+  border-style: dashed;
 }
 
 /* Today's facts: three figures in a row, separated by hairlines. */

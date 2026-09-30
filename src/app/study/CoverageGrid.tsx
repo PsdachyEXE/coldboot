@@ -64,8 +64,7 @@ export function CoverageLegend() {
     <ul className={styles.legend} aria-label="Key">
       {BAND_LEGEND.map(({ band, label }) => (
         <li key={band}>
-          <span className={[styles.cell, styles.swatch].join(' ')} data-band={band} aria-hidden="true">
-            <span className={styles.cellId}>04</span>
+          <span className={styles.swatch} data-band={band} aria-hidden="true">
             <Gauge band={band} />
           </span>
           {label}

@@ -75,16 +75,16 @@ function advance(content: ContentIndex, state: Omit<RunState, 'step' | 'focus'>,
     if (id === 'review') {
       const queue = reviewQueue(content, useSrs.getState(), useSettings.getState().newCardLimit, masteryNow(now), now);
       if (queue.length) return { ...state, outcomes, step: 'review', queue, stepAt: now };
-      outcomes.review = { status: 'skipped', text: 'Nothing was due, so this step was skipped.' };
+      outcomes.review = { status: 'skipped', text: 'Nothing was due.' };
     } else if (id === 'drill') {
       const drill = pickRunDrill(content, masteryNow(now), mulberry32(freshSeed(now))).items;
       if (drill.length) return { ...state, outcomes, step: 'drill', drill, stepAt: now };
-      outcomes.drill = { status: 'skipped', text: 'There are no questions to drill yet, so this step was skipped.' };
+      outcomes.drill = { status: 'skipped', text: 'There are no questions to drill yet.' };
     } else {
       const dailyDate = melbourneDate(now);
       const record = useSession.getState().daily[dailyDate];
       if (!findGame('daily')) {
-        outcomes.daily = { status: 'skipped', text: "The daily challenge isn't in this version of COLDBOOT yet, so this step was skipped." };
+        outcomes.daily = { status: 'skipped', text: "The daily challenge isn't in this version of COLDBOOT yet." };
       } else if (record?.completedAt) {
         outcomes.daily = { status: 'done', text: `Already done today: ${record.results.reduce<number>((s, r) => s + r, 0)} of ${record.itemIds.length} correct.` };
       } else {
@@ -131,34 +131,14 @@ function RunSteps({ content }: { content: ContentIndex }) {
     setState((prev) => ({
       ...prev,
       step: 'complete',
-      outcomes: { ...prev.outcomes, daily: { status: 'skipped', text: 'You skipped it today.' } },
+      outcomes: { ...prev.outcomes, daily: { status: 'skipped', text: 'Type daily in the terminal to take it later today.' } },
       focus: true,
     }));
 
   return (
     <>
       <h1>Today's run</h1>
-      <ol className={styles.steps} aria-label="Steps">
-        {STEPS.map((s, i) => {
-          const outcome = outcomes[s.id];
-          const current = s.id === step;
-          const status = outcome ? (outcome.status === 'done' ? 'Done' : 'Skipped') : current ? 'Now' : 'Up next';
-          return (
-            <li key={s.id} className={styles.step} aria-current={current ? 'step' : undefined} data-status={outcome?.status ?? (current ? 'current' : 'todo')}>
-              <span className={styles.stepNumber} aria-hidden="true">
-                {i + 1}
-              </span>
-              <span className={styles.stepBody}>
-                <span className={styles.stepTitle}>{s.title}</span>
-                <span className={styles.stepStatus}>
-                  {status}
-                  {outcome ? `: ${outcome.text}` : '.'}
-                </span>
-              </span>
-            </li>
-          );
-        })}
-      </ol>
+      {step === 'complete' ? null : <StepList step={step} outcomes={outcomes} />}
 
       {step === 'review' ? (
         <section key="review" aria-labelledby="run-step">
@@ -179,6 +159,33 @@ function RunSteps({ content }: { content: ContentIndex }) {
         <RunComplete content={content} outcomes={outcomes} drillResult={state.drillResult} focus={focus} />
       )}
     </>
+  );
+}
+
+function StepList({ step, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
+  const upNextIndex = STEPS.findIndex((t) => !outcomes[t.id] && t.id !== step);
+  return (
+    <ol className={styles.steps} aria-label="Steps">
+      {STEPS.map((s, i) => {
+        const outcome = outcomes[s.id];
+        const current = s.id === step;
+        const status = outcome ? (outcome.status === 'done' ? 'Done' : 'Skipped') : current ? 'Now' : i === upNextIndex ? 'Up next' : 'Later';
+        return (
+          <li key={s.id} className={styles.step} aria-current={current ? 'step' : undefined} data-status={outcome?.status ?? (current ? 'current' : 'todo')}>
+            <span className={styles.stepNumber} aria-hidden="true">
+              {i + 1}
+            </span>
+            <span className={styles.stepBody}>
+              <span className={styles.stepTitle}>{s.title}</span>
+              <span className={styles.stepStatus}>
+                {status}
+                {outcome ? `: ${outcome.text}` : '.'}
+              </span>
+            </span>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
@@ -243,12 +250,15 @@ function RunComplete({
         Run complete
       </PhaseHeading>
       <dl className={study.facts}>
-        {STEPS.map((s) => (
-          <Fragment key={s.id}>
-            <dt>{s.title}</dt>
-            <dd>{outcomes[s.id]?.text ?? 'Not started.'}</dd>
-          </Fragment>
-        ))}
+        {STEPS.map((s) => {
+          const outcome = outcomes[s.id];
+          return (
+            <Fragment key={s.id}>
+              <dt>{s.title}</dt>
+              <dd>{outcome ? `${outcome.status === 'done' ? 'Done' : 'Skipped'}: ${outcome.text}` : 'Not started.'}</dd>
+            </Fragment>
+          );
+        })}
       </dl>
       {next ? (
         <>

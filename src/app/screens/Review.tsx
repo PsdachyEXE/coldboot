@@ -16,7 +16,6 @@ import { useSrs } from '../../state/srs';
 import { Button, ButtonLink } from '../../ui/Button';
 import { EmptyState } from '../../ui/EmptyState';
 import { Kbd } from '../../ui/Kbd';
-import { KkTag } from '../../ui/Tag';
 import { drillPath, paths } from '../paths';
 import { ContentGate } from '../study/ContentGate';
 import { describeDue, plural } from '../study/format';
@@ -104,7 +103,7 @@ function readyLine(due: number, fresh: number): string {
 function FocusLine({ kk }: { kk: KkId }) {
   return (
     <p>
-      Only cards for <KkTag kk={kk} showTitle />. <Link to={paths.review}>Review every key knowledge point</Link>
+      Only the cards for {kkLabel(kk)}. <Link to={paths.review}>Review every key knowledge point</Link>
     </p>
   );
 }
@@ -114,8 +113,10 @@ function NothingToReview({ content, kk, now }: { content: ContentIndex; kk: KkId
   const limit = useSettings((s) => s.newCardLimit);
   const srsCards = useSrs((s) => s.cards);
   const inScope = kk ? (content.byKk.get(kk)?.cards ?? []) : content.cards.map((c) => c.id);
-  const drill = kk ? drillPath({ kk }) : paths.drill;
-  const drillLabel = kk ? 'Drill this key knowledge' : 'Go to Drill';
+  // Offer a drill only where there are questions to drill; otherwise the map shows what there is.
+  const canDrill = kk ? (content.byKk.get(kk)?.mcq.length ?? 0) > 0 : content.mcq.length > 0;
+  const drill = !canDrill ? paths.map : kk ? drillPath({ kk }) : paths.drill;
+  const drillLabel = !canDrill ? 'Open the syllabus map' : kk ? 'Drill this key knowledge' : 'Go to Drill';
 
   if (inScope.length === 0) {
     return (
@@ -128,9 +129,12 @@ function NothingToReview({ content, kk, now }: { content: ContentIndex; kk: KkId
         }
       >
         <p>
-          {kk
-            ? `There are no flashcards for ${kkLabel(kk)} yet. Practise its multiple-choice questions in a drill instead.`
-            : 'This version of COLDBOOT has no flashcards yet. Practise multiple-choice questions in a drill instead.'}
+          {kk ? `There are no flashcards for ${kkLabel(kk)} yet.` : 'This version of COLDBOOT has no flashcards yet.'}{' '}
+          {canDrill
+            ? kk
+              ? 'Practise its multiple-choice questions in a drill instead.'
+              : 'Practise multiple-choice questions in a drill instead.'
+            : 'The syllabus map shows what you can practise now.'}
         </p>
       </EmptyState>
     );
@@ -153,7 +157,7 @@ function NothingToReview({ content, kk, now }: { content: ContentIndex; kk: KkId
           <Link to={paths.settings}>Settings</Link>.
         </p>
       ) : null}
-      <p>In the meantime, a drill of multiple-choice questions keeps your recall sharp.</p>
+      {canDrill ? <p>In the meantime, a drill of multiple-choice questions keeps your recall sharp.</p> : null}
     </EmptyState>
   );
 }

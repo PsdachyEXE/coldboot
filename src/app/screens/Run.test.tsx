@@ -33,6 +33,13 @@ function steps() {
   return within(screen.getByRole('list', { name: 'Steps' })).getAllByRole('listitem');
 }
 
+/** The Run complete summary, one line per step. */
+function summary(): string[] {
+  return ['Review cards', 'Drill your weakest key knowledge', 'Daily challenge'].map(
+    (title) => screen.getByText(title, { selector: 'dt' }).nextElementSibling?.textContent ?? '',
+  );
+}
+
 describe("Today's run", () => {
   beforeEach(() => {
     resetStudyStores();
@@ -78,7 +85,7 @@ describe("Today's run", () => {
     expect(screen.queryByRole('heading', { name: 'Run complete' })).toBeNull();
     act(() => useTerminal.getState().reportGameEnd({ gameId: 'daily', score: 8, total: 10, at: Date.now() }));
     expect(screen.getByRole('heading', { name: 'Run complete' })).toHaveFocus();
-    expect(screen.getByText('Daily challenge', { selector: 'dt' }).nextSibling).toHaveTextContent('8 of 10 correct.');
+    expect(summary()).toEqual(['Done: 1 card reviewed, 1 of them new.', 'Done: 1 of 1 correct.', 'Done: 8 of 10 correct.']);
   });
 
   it('skips steps with nothing to do, with a note, and counts a daily already done today', () => {
@@ -88,10 +95,7 @@ describe("Today's run", () => {
     for (let i = 0; i < 10; i++) useSession.getState().recordDaily(today, i, i % 2 === 0, Date.now());
     renderRun();
     expect(screen.getByRole('heading', { name: 'Run complete' })).toBeInTheDocument();
-    const [review, drill, daily] = steps();
-    expect(review).toHaveTextContent('Skipped: Nothing was due, so this step was skipped.');
-    expect(drill).toHaveTextContent('Skipped: There are no questions to drill yet');
-    expect(daily).toHaveTextContent('Done: Already done today: 5 of 10 correct.');
+    expect(summary()).toEqual(['Skipped: Nothing was due.', 'Skipped: There are no questions to drill yet.', 'Done: Already done today: 5 of 10 correct.']);
   });
 
   it('completes the daily step from today\'s record as well as the terminal', () => {
@@ -104,7 +108,7 @@ describe("Today's run", () => {
       for (let i = 0; i < 10; i++) useSession.getState().recordDaily(today, i, true, Date.now());
     });
     expect(screen.getByRole('heading', { name: 'Run complete' })).toBeInTheDocument();
-    expect(steps()[2]).toHaveTextContent('Done: 10 of 10 correct.');
+    expect(summary()[2]).toBe('Done: 10 of 10 correct.');
   });
 
   it('lets the student skip the daily challenge', () => {
@@ -112,7 +116,7 @@ describe("Today's run", () => {
     renderRun();
     fireEvent.click(screen.getByRole('button', { name: 'Skip the daily challenge' }));
     expect(screen.getByRole('heading', { name: 'Run complete' })).toBeInTheDocument();
-    expect(steps()[2]).toHaveTextContent('Skipped: You skipped it today.');
+    expect(summary()[2]).toBe('Skipped: Type daily in the terminal to take it later today.');
   });
 
   it('skips the daily challenge when this build has no daily game', () => {
@@ -120,6 +124,6 @@ describe("Today's run", () => {
     provideContent(fixtureIndex());
     renderRun();
     expect(screen.getByRole('heading', { name: 'Run complete' })).toBeInTheDocument();
-    expect(steps()[2]).toHaveTextContent("Skipped: The daily challenge isn't in this version of COLDBOOT yet");
+    expect(summary()[2]).toBe("Skipped: The daily challenge isn't in this version of COLDBOOT yet.");
   });
 });

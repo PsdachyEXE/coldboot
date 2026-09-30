@@ -117,12 +117,8 @@
 
 .facts {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-4);
+  flex-direction: column;
   margin: 0;
   font-size: var(--step-0);
   color: var(--steel);
-}
-.facts span {
-  white-space: nowrap;
 }
