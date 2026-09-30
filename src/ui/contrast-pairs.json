@@ -5,6 +5,7 @@
     { "fg": "--ice", "bg": "--trench", "level": "text", "use": "primary text on panels, drawer, inputs" },
     { "fg": "--phosphor", "bg": "--void", "level": "text", "use": "terminal text, links" },
     { "fg": "--phosphor", "bg": "--trench", "level": "text", "use": "terminal drawer text, links on panels" },
+    { "fg": "--trench", "bg": "--phosphor", "level": "text", "use": "terminal block caret over the character at the cursor" },
     { "fg": "--steel", "bg": "--void", "level": "text", "use": "muted text" },
     { "fg": "--steel", "bg": "--trench", "level": "text", "use": "incorrect feedback, muted text on panels" },
     { "fg": "--ice", "bg": "--cobalt", "level": "text", "use": "primary button label" },
