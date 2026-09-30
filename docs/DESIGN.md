@@ -134,7 +134,7 @@ All primitives live in `src/ui`, use CSS modules plus the tokens, and are export
 | `Select` | Native select | Same field frame. |
 | `Checkbox` | On/off settings | Native input, custom-drawn: `--cobalt` fill and an `--ice` ✓ when checked, so state shows by shape as well as colour. |
 | `RadioGroup` | One choice from a few | `fieldset` and `legend`; native radios drawn as rings with a filled centre. |
-| `Dialog` | Modal | Native `<dialog>` with `showModal()`, labelled by its heading, Esc closes, focus returns to the element that opened it. `--trench` surface with a hairline border, no radius. |
+| `Dialog` | Modal | Native `<dialog>` with `showModal()`, labelled by its heading, Esc closes, focus returns to the element that opened it (or to the page's focusable `h1`, then `main`, if that element has gone). Carries its own live regions, so `announce()` still speaks while it is open. `--trench` surface with a hairline border, no radius. |
 | `Panel` | A raised flat surface | `--trench`, no radius, optional hairline border. |
 | `Kbd` | A key | Martian Mono 14 px, hairline border, 2 px radius. |
 | `Meter` | Mastery or progress | A labelled bar that prints its value in words ("62%", "3 of 10", "Unseen"). `role="meter"` or `role="progressbar"`. The unseen state is a dashed empty track. |
@@ -144,7 +144,7 @@ All primitives live in `src/ui`, use CSS modules plus the tokens, and are export
 | `Banner` | Persistent warning | `--trench` block with a 4 px `--phosphor` left rule and a bold title, so it reads as a warning without colour. Stays until the problem is gone. |
 | `VisuallyHidden` | Screen-reader-only text | |
 | `Feedback` | Answer verdict | "✓ Correct" in `--flare`, or "✗ Incorrect" in `--steel` on `--trench` with a 120 ms horizontal nudge. Announces the verdict through the polite live region. |
-| `LiveRegions` | The app's two live regions | One polite (`role="status"`), one assertive (`role="alert"`), both visually hidden, fed by `announce()` in `src/ui/announce.ts`. Mounted once in the layout. |
+| `LiveRegions` | The app's two live regions | One polite (`role="status"`), one assertive (`role="alert"`), both visually hidden, fed by `announce()` in `src/ui/announce.ts`. Mounted once in the layout, and again inside each open `Dialog` with `since`, so they speak only messages announced after it opened. |
 | `ReportDialog` | Report a content problem (6.11) | Mounted once in the layout, opened with `openReport({ itemId })` from anywhere. |
 | `ExternalLink` | A text link to another site | New tab, `rel="noopener noreferrer"`, and a hidden "(opens in a new tab)". |
 

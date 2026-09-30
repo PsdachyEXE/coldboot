@@ -1,4 +1,6 @@
-import { useEffect, useId, useRef, type ReactNode, type RefObject } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from 'react';
+import { useAnnouncer } from './announce';
+import { LiveRegions } from './LiveRegions';
 import styles from './Dialog.module.css';
 
 export interface DialogProps {
@@ -25,9 +27,29 @@ export function DialogActions({ children, className }: { children: ReactNode; cl
 }
 
 /**
+ * Live regions inside an open dialog. `showModal()` makes the shell's regions inert, so a time
+ * warning or an answer announced while a dialog is open is spoken from here instead. They start
+ * empty: only what is announced after the dialog opened is read.
+ */
+function DialogLiveRegions() {
+  const [since] = useState(() => useAnnouncer.getState().seq);
+  return <LiveRegions since={since} />;
+}
+
+/**
+ * Where focus goes when a dialog closes and the control that opened it has gone (the view changed
+ * underneath it, for example when writing time ran out): the page's focusable heading, else main.
+ */
+function focusPageStart() {
+  const target = document.querySelector<HTMLElement>('main h1[tabindex="-1"]') ?? document.getElementById('main');
+  target?.focus();
+}
+
+/**
  * A modal dialog built on the native `<dialog>` element and `showModal()`, so the browser traps
  * focus and makes the rest of the page inert. Esc closes it, and focus returns to the element that
- * opened it.
+ * opened it (or to the page's heading, if that element has gone). It carries its own live regions,
+ * so `announce()` still speaks while it is open.
  */
 export function Dialog({ open, onClose, title, children, actions, initialFocus, className }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -65,6 +87,7 @@ export function Dialog({ open, onClose, title, children, actions, initialFocus, 
       const back = opener.current;
       opener.current = null;
       if (back.isConnected) back.focus();
+      else focusPageStart();
     }
   }, [open, initialFocus]);
 
@@ -104,6 +127,7 @@ export function Dialog({ open, onClose, title, children, actions, initialFocus, 
           </h2>
           <div className={styles.content}>{children}</div>
           {actions ? <DialogActions>{actions}</DialogActions> : null}
+          <DialogLiveRegions />
         </div>
       ) : null}
     </dialog>
