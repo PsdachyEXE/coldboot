@@ -91,6 +91,24 @@ describe('terminal drawer', () => {
     expect(useTerminal.getState().open).toBe(false);
   });
 
+  it('ignores the backtick while a modal dialog is open, since the drawer would open behind it', async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter>
+        <dialog open aria-label="Report a content problem">
+          <label>
+            <input type="radio" name="reason" defaultChecked /> Wrong answer
+          </label>
+        </dialog>
+        <TerminalDrawer />
+      </MemoryRouter>,
+    );
+    screen.getByRole('radio', { name: 'Wrong answer' }).focus();
+    await user.keyboard('`');
+    expect(useTerminal.getState().open).toBe(false);
+    expect(drawer()).toHaveAttribute('data-open', 'false');
+  });
+
   it('keeps Tab inside the open drawer', async () => {
     const user = userEvent.setup();
     renderAt('/');
