@@ -8,9 +8,11 @@
  *
  * GAMES lists the P0 games in the brief's order, then the P1 games, then the P2 games, each in the
  * brief's order; that is the order `ls` prints. Games that need study content set needsContent; games with
- * Game.generate set generator: true. The terminal's `daily` command runs `play daily`.
+ * Game.generate set generator: true. The terminal's `daily` command runs `play daily`. boss draws on
+ * every generator game but has no `generate` of its own, so it never feeds the daily challenge.
  */
 import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './blitz/meta';
+import { BOSS_ID, BOSS_KK, BOSS_MAN, BOSS_SUMMARY, BOSS_TITLE } from './boss/meta';
 import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './daily-game/meta';
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
 import { DFD_GAME_KK, DFD_ID, DFD_MAN, DFD_SUMMARY, DFD_TITLE } from './dfd/meta';
@@ -205,6 +207,19 @@ export const GAMES: GameMeta[] = [
     man: PSM_MAN,
     needsContent: true,
     load: () => import('./psm').then((m) => m.default),
+  },
+  {
+    id: BOSS_ID,
+    title: BOSS_TITLE,
+    priority: 'P2',
+    kk: BOSS_KK,
+    summary: BOSS_SUMMARY,
+    man: BOSS_MAN,
+    // The case study slice needs the study content; the climb always runs from easy to hard.
+    needsContent: true,
+    fixedDifficulty: true,
+    // Loads every generator game the climb draws on (boss/index.ts), then the game.
+    load: () => import('./boss').then((m) => m.loadBossGame()),
   },
   {
     id: UX_ID,

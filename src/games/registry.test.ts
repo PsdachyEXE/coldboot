@@ -7,7 +7,7 @@ describe('game registry', () => {
   it("lists the P0 games, then the P1 games, then the P2 games, in the brief's order with student-facing man pages", () => {
     const p0 = ['deskcheck', 'sort', 'search', 'triage', 'validate', 'blitz', 'daily'];
     const p1 = ['dfd', 'usecase', 'reqs', 'gantt', 'threat', 'law', 'naming', 'types', 'oop', 'psm'];
-    const p2 = ['ux'];
+    const p2 = ['boss', 'ux'];
     // Every game is built, in the brief's order.
     expect(GAMES.map((g) => g.id)).toEqual([...p0, ...p1, ...p2]);
     for (const meta of GAMES) {
@@ -32,6 +32,9 @@ describe('game registry', () => {
     expect(flags('blitz')).toEqual([false, true, true]);
     expect(flags('daily')).toEqual([false, true, true]);
     expect(flags('psm')).toEqual([false, true, false]);
+    // boss draws on every generator game and a case study, but generates nothing itself.
+    expect(flags('boss')).toEqual([false, true, true]);
+    expect(DAILY_GENERATOR_GAMES as readonly string[]).not.toContain('boss');
   });
 
   it('loads games whose ids, titles and generators match their metadata', async () => {
