@@ -31,14 +31,19 @@ function parseDay(day: string): [number, number, number] {
   return [Number(m[1]), Number(m[2]), Number(m[3])];
 }
 
+/** The device's local calendar date for an instant, with no rollover (e.g. for file names). */
+export function localDate(ts: number): string {
+  const d = new Date(ts);
+  return isoDay(d.getFullYear(), d.getMonth() + 1, d.getDate());
+}
+
 /**
  * Local study day for an instant: the local calendar date, or the previous date before 4:00 am
  * wall-clock time. Uses wall-clock hours, so the rollover stays at 4 am on daylight-saving days.
  */
 export function studyDay(ts: number): string {
-  const d = new Date(ts);
-  const day = isoDay(d.getFullYear(), d.getMonth() + 1, d.getDate());
-  return d.getHours() < STUDY_DAY_ROLLOVER_HOUR ? addDays(day, -1) : day;
+  const day = localDate(ts);
+  return new Date(ts).getHours() < STUDY_DAY_ROLLOVER_HOUR ? addDays(day, -1) : day;
 }
 
 /** The instant a study day begins: 4:00 am local time on that date. */

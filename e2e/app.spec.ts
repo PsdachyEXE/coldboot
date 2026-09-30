@@ -8,8 +8,12 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test, type Locator, type Page } from '@playwright/test';
 
-/** 10 am on Thursday 1 October 2026 in Melbourne. */
-const FIXED_NOW = new Date('2026-10-01T10:00:00+10:00');
+/**
+ * 8 am on Thursday 1 October 2026 in Melbourne, which is still 30 September in UTC, so the export
+ * file name shows that the app uses the local date.
+ */
+const FIXED_NOW = new Date('2026-10-01T08:00:00+10:00');
+const LOCAL_DATE = '2026-10-01';
 
 test.beforeEach(async ({ page }) => {
   await page.clock.setFixedTime(FIXED_NOW);
@@ -112,8 +116,8 @@ test('first run, review, terminal, sort and export', async ({ page }) => {
     const downloading = page.waitForEvent('download');
     await page.getByRole('button', { name: 'Export progress' }).click();
     const download = await downloading;
-    // The app names the file by the UTC date of the export.
-    const filename = `coldboot-progress-${FIXED_NOW.toISOString().slice(0, 10)}.json`;
+    // The app names the file by the device's local date (Melbourne here), not the UTC date.
+    const filename = `coldboot-progress-${LOCAL_DATE}.json`;
     expect(download.suggestedFilename()).toBe(filename);
     await expect(page.getByText(`Progress exported as ${filename}. Keep it somewhere safe, such as your school drive.`)).toBeVisible();
 

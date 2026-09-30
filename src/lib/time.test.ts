@@ -6,6 +6,7 @@ import {
   daysBetween,
   examPhase,
   formatCountdown,
+  localDate,
   melbourneDate,
   parseInstant,
   studyDay,
@@ -47,6 +48,11 @@ describe('time', () => {
     expect(studyDay(lateNight)).toBe('2026-10-01');
     expect(studyDay(morning)).toBe('2026-10-02');
     expect(studyDayStart('2026-10-02')).toBe(morning);
+  });
+
+  it('gives the local calendar date with no rollover', () => {
+    expect(localDate(new Date(2026, 9, 2, 1, 30).getTime())).toBe('2026-10-02');
+    expect(localDate(new Date(2026, 0, 5, 23, 59).getTime())).toBe('2026-01-05');
   });
 
   it('does day arithmetic across month ends and DST changes', () => {

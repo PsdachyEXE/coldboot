@@ -140,4 +140,12 @@ describe('persistence', () => {
     tooNew.stores.srs.v = 7;
     expect(io.parseImport(JSON.stringify(tooNew))).toEqual({ ok: false, error: expect.stringMatching(/newer version/) });
   });
+
+  it("names the export file by the device's local date, not the UTC date", async () => {
+    const { io } = await freshState();
+    // Tests run in Australia/Melbourne: 8 am on 1 October is still 30 September in UTC.
+    expect(io.exportFilename(Date.parse('2026-10-01T08:00:00+10:00'))).toBe('coldboot-progress-2026-10-01.json');
+    // In daylight saving, 9 am on New Year's Day is still the previous year in UTC.
+    expect(io.exportFilename(Date.parse('2027-01-01T09:00:00+11:00'))).toBe('coldboot-progress-2027-01-01.json');
+  });
 });

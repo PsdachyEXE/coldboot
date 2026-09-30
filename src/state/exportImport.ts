@@ -7,6 +7,7 @@
  * imports after a store's shape changes (its data runs through that store's migration first).
  */
 import { z } from 'zod';
+import { localDate } from '../lib/time';
 // The exam autosave is optional in a progress file, but it registers here so export, import and
 // reset cover it even when the exam route has never been opened.
 import '../exam/store';
@@ -55,8 +56,9 @@ export function buildExport(now = Date.now()): ExportFile {
   };
 }
 
+/** Named by the device's local calendar date, so an export at 8 am in Melbourne isn't dated yesterday. */
 export function exportFilename(now = Date.now()): string {
-  return `coldboot-progress-${new Date(now).toISOString().slice(0, 10)}.json`;
+  return `coldboot-progress-${localDate(now)}.json`;
 }
 
 export interface ValidatedImport {
