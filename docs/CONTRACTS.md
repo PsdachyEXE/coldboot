@@ -21,6 +21,7 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Daily challenge set | `src/games/daily.ts` | `buildDailySet(date, mcqPool)` (8 MCQs by rendezvous hash + 2 generated), `dailyShareText` |
 | PRNG | `src/games/prng.ts` | `mulberry32`, `hashString`, `dailySeed`, `pick`, `shuffle`, `sample` |
 | Time | `src/lib/time.ts` | study day (4 am rollover), Melbourne date, countdown, exam phases |
+| Clock hook | `src/lib/useNow.ts` | `useNow(intervalMs)` returns epoch ms, refreshed every interval and when the page becomes visible again; the status bar uses 15 s |
 | Text matching | `src/lib/text.ts` | `normaliseAnswer`, `editDistance`, `nearest`, `parseList`, `parseNumberList` |
 | Report links | `src/lib/report.ts`, `src/ui/report.ts` | prefilled GitHub issue URL; `openReport({ itemId })` opens the shared dialog |
 | Stores | `src/state/settings.ts`, `srs.ts`, `attempts.ts`, `session.ts` | Zustand; persisted as `coldboot:v1:<name>` envelopes |
@@ -30,12 +31,15 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Mastery | `src/srs/mastery.ts` | `computeMastery(attempts, now)`; unseen KKs are absent, never 0 |
 | SM-2 and queue | `src/srs/sm2.ts`, `src/srs/queue.ts` | signatures locked; implemented by track E |
 | Routes | `src/app/paths.ts`, `src/app/routes.tsx` | hash router; `drillPath`, `writtenPath` (including `cs` for Section C practice), `reviewPath`, `examPath` |
-| Announcements | `src/ui/announce.ts` | `announce(message)` feeds the ARIA live region |
+| Announcements | `src/ui/announce.ts` | `announce(message, priority)` feeds the ARIA live regions that `<LiveRegions>` renders in the shell; `politeSeq` and `assertiveSeq` let a repeated message speak again in its own region. A native modal makes those regions inert, so a dialog that announces needs its own live region |
 | Motion | `src/ui/motion.ts` | `useReducedMotion()`, `prefersReducedMotion()` |
-| Sound | `src/ui/sound.ts` | `playCue('correct' \| 'incorrect' \| 'complete')` |
+| Sound | `src/ui/sound.ts` | `playCue('correct' \| 'incorrect' \| 'complete')`: WebAudio tones only when `settings.sound` is on; never throws; `CUES` holds the tones |
 | Terminal drawer state | `src/terminal/useTerminal.ts` | `useTerminal`: `open`, `toggle`, `setOpen`, `run(command)` (opens the drawer and runs a command), `takePending`, `lastGameEnd`, `reportGameEnd` |
 | Figures | `src/figures/index.ts` | `<FigureView figure={f} />` |
-| Design tokens | `src/ui/tokens.css`, `src/ui/contrast-pairs.json` | every new text/background pairing gets a row in contrast-pairs |
+| Design tokens | `src/ui/tokens.css`, `src/ui/contrast-pairs.json` | colours, type steps, spacing `--space-1`…`--space-7`, shell geometry (`--control-h`, `--rail-w`, `--status-h`, `--tabbar-h`, `--content-max`) and stacking (`--z-rail`, `--z-bars`, `--z-popover`, `--z-drawer`, `--z-boot`); every new text/background pairing gets a row in contrast-pairs |
+| UI primitives | `src/ui/index.ts`, `src/ui/global.css` | the shared components (buttons, fields, `Dialog`, `Panel`, `Meter`, `Tag`/`KkTag`, `EmptyState`, `Banner`, `Feedback`, `ReportDialog`, `useNarrow`, …) listed in `docs/DESIGN.md`; `global.css` sets page type, the focus ring and reduced motion, and caps reading elements at 72ch (wide terminal or table output sets `max-width: none`) |
+| Shell | `src/app/Layout.tsx`, `src/app/pwa.ts` | Layout mounts `<TerminalDrawer />` inside the router once first run is done, plus `<LiveRegions />` and `<ReportDialog />`; it sets `--terminal-route-offset` for the full-screen terminal. `usePwa` wraps the service worker (`needRefresh`, `reload`, `checkForUpdate`) |
+| Zod settings | `src/lib/zodConfig.ts` | imported first by `main.tsx`; jitless mode, so Zod never probes `new Function` under the production CSP |
 
 ## Ownership (Phase 1 tracks)
 
