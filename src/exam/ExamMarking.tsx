@@ -18,10 +18,10 @@ import { openReport } from '../ui/report';
 import { useMediaQuery } from '../ui/useMediaQuery';
 import { DiscardDialog, QuestionList, SectionTabs, type QuestionState } from './ExamParts';
 import { McqReview, ShortMarking } from './ExamQuestion';
-import { EXAM_PANEL_ID, neighbours, sectionTabs, tabId, useFocusOnChange, usePosition, useStickyOffset } from './hooks';
+import { EXAM_PANEL_ID, neighbours, sectionTabs, tabId, usePosition, useQuestionNav, useStickyOffset } from './hooks';
 import { SECTION_KIND, SECTION_LETTER, examReportPath } from './links';
 import { attemptsFor, markPaper, summarise, type ItemMark, type ResolvedPaper } from './marking';
-import { examPersistence, useExam, type ExamPaper } from './store';
+import { examPersistence, useExam, type ExamPaper, type SectionId } from './store';
 import styles from './Exam.module.css';
 
 function listState(m: ItemMark): QuestionState {
@@ -57,7 +57,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
   const marks = useMemo(() => markPaper({ answers, ticks }, resolved), [answers, ticks, resolved]);
   const byItem = useMemo(() => new Map(marks.items.map((m) => [m.itemId, m])), [marks]);
   const { sections, section, items, index, item } = usePosition(paper, resolved);
-  useFocusOnChange(`${section}:${index}`, headingRef);
+  const { go, select } = useQuestionNav(`${section}:${index}`, headingRef);
   const caseQuestion = section === 'c';
   const refs = useMemo(() => new Set(item && caseQuestion ? ((item as { figureRefs?: string[] }).figureRefs ?? []) : []), [item, caseQuestion]);
   const store = useExam.getState;
@@ -101,7 +101,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
           onTicks={(t) => store().setTicks(item.id, t)}
         />
       )}
-      <QuestionSteps paper={paper} resolved={resolved} sections={sections} />
+      <QuestionSteps steps={neighbours(sections, resolved, section, index)} go={go} />
       <p>
         <Button variant="quiet" size="small" onClick={() => openReport({ itemId: item.id, where: 'Exam marking' })}>
           Report a problem
@@ -119,7 +119,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
         section={section}
         items={items.map((it) => listState(byItem.get(it.id)!))}
         current={index}
-        onGo={(i) => store().goTo(section, i)}
+        onGo={(i) => go(section, i)}
       />
       <p className={styles.legend}>
         {items.some(isMcq) ? (
@@ -129,8 +129,12 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
             <span>– not answered</span>
           </>
         ) : null}
-        {items.some((it) => !isMcq(it)) ? <span>2/3: marks from your ticks</span> : null}
-        <span>Dashed box: not answered</span>
+        {items.some((it) => !isMcq(it)) ? (
+          <>
+            <span>2/3: marks from your ticks</span>
+            <span>Dashed box: not answered</span>
+          </>
+        ) : null}
       </p>
       {question}
     </div>
@@ -162,7 +166,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
           </Button>
         </div>
       </div>
-      <SectionTabs tabs={sectionTabs(sections, resolved)} current={section} onSelect={(s) => store().goTo(s, 0)} />
+      <SectionTabs tabs={sectionTabs(sections, resolved)} current={section} onSelect={select} />
       <div role="tabpanel" id={EXAM_PANEL_ID} aria-labelledby={tabId(section)}>
         {caseQuestion && resolved.caseStudy ? (
           <CaseStudyLayout cs={resolved.caseStudy} refs={refs} wide={wide}>
@@ -215,15 +219,13 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
   );
 }
 
-function QuestionSteps({ paper, resolved, sections }: { paper: ExamPaper; resolved: ResolvedPaper; sections: ReturnType<typeof usePosition>['sections'] }) {
-  const { section, index } = usePosition(paper, resolved);
-  const { prev, next } = neighbours(sections, resolved, section, index);
-  const store = useExam.getState;
+function QuestionSteps({ steps, go }: { steps: ReturnType<typeof neighbours>; go(section: SectionId, index: number): void }) {
+  const { prev, next } = steps;
   return (
     <nav className={styles.qnav} aria-label="Previous and next question">
-      {prev ? <Button onClick={() => store().goTo(prev.section, prev.index)}>{prev.label}</Button> : null}
+      {prev ? <Button onClick={() => go(prev.section, prev.index)}>{prev.label}</Button> : null}
       {next ? (
-        <Button className={styles.qnavNext} onClick={() => store().goTo(next.section, next.index)}>
+        <Button className={styles.qnavNext} onClick={() => go(next.section, next.index)}>
           {next.label}
         </Button>
       ) : (

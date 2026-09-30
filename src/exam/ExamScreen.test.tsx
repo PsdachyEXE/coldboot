@@ -221,6 +221,30 @@ describe('exam screen', () => {
     expect(screen.getByRole('button', { name: 'Start full paper' })).toBeInTheDocument();
   });
 
+  it('works from the keyboard: arrow keys move between section tabs, and moving to a question focuses it', () => {
+    seedWriting();
+    renderExam('/exam?sit=1');
+    const tabA = screen.getByRole('tab', { name: /Section A/ });
+    tabA.focus();
+    fireEvent.keyDown(tabA, { key: 'ArrowRight' });
+    const tabB = screen.getByRole('tab', { name: /Section B/ });
+    expect(tabB).toHaveAttribute('aria-selected', 'true');
+    expect(tabB).toHaveFocus();
+    expect(screen.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', tabB.id);
+    fireEvent.keyDown(tabB, { key: 'End' });
+    expect(screen.getByRole('tab', { name: /Section C/ })).toHaveFocus();
+    fireEvent.keyDown(screen.getByRole('tab', { name: /Section C/ }), { key: 'ArrowRight' });
+    expect(tabA).toHaveFocus();
+    expect(tabA).toHaveAttribute('tabindex', '0');
+    expect(tabB).toHaveAttribute('tabindex', '-1');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Question 3, not answered' }));
+    expect(screen.getByRole('heading', { level: 2, name: /Question 3/ })).toHaveFocus();
+    fireEvent.click(screen.getByRole('button', { name: 'Go to Section B' }));
+    expect(screen.getByRole('tab', { name: /Section B/ })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('heading', { level: 2, name: /Question 1/ })).toHaveFocus();
+  });
+
   it('says so when a report is not in history', () => {
     renderExam('/exam?report=p-nope-1');
     expect(screen.getByRole('heading', { name: 'Report not found' })).toBeInTheDocument();

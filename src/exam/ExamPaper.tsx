@@ -20,7 +20,7 @@ import { ExamClock, SaveStatus } from './ExamBar';
 import { ExamMarking } from './ExamMarking';
 import { DiscardDialog, FlagIcon, QuestionList, SectionTabs } from './ExamParts';
 import { ExamMcq, ExamShort } from './ExamQuestion';
-import { EXAM_PANEL_ID, neighbours, sectionMarks, sectionTabs, tabId, useFocusOnChange, usePaperTimer, usePosition, useStickyOffset } from './hooks';
+import { EXAM_PANEL_ID, neighbours, sectionMarks, sectionTabs, tabId, usePaperTimer, usePosition, useQuestionNav, useStickyOffset } from './hooks';
 import { SECTION_KIND, SECTION_LETTER, modeName, numberList } from './links';
 import { resolvePaper, type ResolvedPaper } from './marking';
 import { isAnswered, useExam, type ExamPaper, type SectionId } from './store';
@@ -69,7 +69,7 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
   useStickyOffset(rootRef, barRef);
 
   const { sections, section, items, index, item } = usePosition(paper, resolved);
-  useFocusOnChange(`${section}:${index}`, headingRef);
+  const { go, select } = useQuestionNav(`${section}:${index}`, headingRef);
   const locked = phase === 'reading';
   const store = useExam.getState;
 
@@ -132,9 +132,9 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
         />
       )}
       <nav className={styles.qnav} aria-label="Previous and next question">
-        {prev ? <Button onClick={() => store().goTo(prev.section, prev.index)}>{prev.label}</Button> : null}
+        {prev ? <Button onClick={() => go(prev.section, prev.index)}>{prev.label}</Button> : null}
         {next ? (
-          <Button className={styles.qnavNext} onClick={() => store().goTo(next.section, next.index)}>
+          <Button className={styles.qnavNext} onClick={() => go(next.section, next.index)}>
             {next.label}
           </Button>
         ) : (
@@ -163,7 +163,7 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
           return { id: it.id, answered, flagged: isFlagged, spoken: [answered ? 'answered' : 'not answered', isFlagged ? 'flagged' : ''].filter(Boolean).join(', ') };
         })}
         current={index}
-        onGo={(i) => store().goTo(section, i)}
+        onGo={(i) => go(section, i)}
       />
       <p className={styles.legend}>
         <span>Solid box: answered</span>
@@ -202,7 +202,7 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
           {resolved.missing.length === 1 ? 'it has' : 'they have'} been left out.
         </p>
       ) : null}
-      <SectionTabs tabs={sectionTabs(sections, resolved)} current={section} onSelect={(s) => store().goTo(s, 0)} />
+      <SectionTabs tabs={sectionTabs(sections, resolved)} current={section} onSelect={select} />
       <div role="tabpanel" id={EXAM_PANEL_ID} aria-labelledby={tabId(section)}>
         {caseQuestion && resolved.caseStudy ? (
           <CaseStudyLayout cs={resolved.caseStudy} refs={refs} wide={wide}>

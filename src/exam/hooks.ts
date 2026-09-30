@@ -4,7 +4,7 @@ import { plural } from '../app/study/format';
 import type { SectionTab } from './ExamParts';
 import { SECTION_KIND } from './links';
 import { marksAvailable, type PaperItem, type ResolvedPaper } from './marking';
-import { SECTION_IDS, paperTiming, type ExamPaper, type SectionId } from './store';
+import { SECTION_IDS, paperTiming, useExam, type ExamPaper, type SectionId } from './store';
 import { timerState, type TimerState } from './timer';
 
 /** The timer state, re-read at each phase boundary. `refresh` re-reads it now. */
@@ -68,21 +68,28 @@ export function sectionTabs(sections: readonly SectionId[], resolved: ResolvedPa
 }
 
 /**
- * Focuses the question heading when the question changes (not on first render), and scrolls it to
- * just below the sticky bar when the bar hides it or it starts low on the screen.
+ * Moves between questions. `go` (the question list, previous and next) puts focus on the question's
+ * heading and scrolls it to just below the sticky bar when the bar hides it or it starts low on the
+ * screen; `select` (a section tab) leaves focus on the tab.
  */
-export function useFocusOnChange(key: string, target: RefObject<HTMLElement | null>): void {
-  const first = useRef(key);
+export function useQuestionNav(key: string, heading: RefObject<HTMLElement | null>) {
+  const focusNext = useRef(false);
   useEffect(() => {
-    if (first.current === key) return;
-    first.current = '';
-    const el = target.current;
+    if (!focusNext.current) return;
+    focusNext.current = false;
+    const el = heading.current;
     if (!el) return;
     el.focus({ preventScroll: true });
     const top = el.getBoundingClientRect().top;
     const offset = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
     if (top < offset || top > window.innerHeight - 160) el.scrollIntoView?.({ block: 'start' });
-  }, [key, target]);
+  }, [key, heading]);
+  const go = useCallback((section: SectionId, index: number) => {
+    focusNext.current = true;
+    useExam.getState().goTo(section, index);
+  }, []);
+  const select = useCallback((section: SectionId) => useExam.getState().goTo(section, 0), []);
+  return { go, select };
 }
 
 export const EXAM_PANEL_ID = 'exam-section-panel';
