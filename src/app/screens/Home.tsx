@@ -30,6 +30,11 @@ export default function Home() {
   const activity = useSession((s) => s.activity);
   const daily = useSession((s) => s.daily[melbourneDate(now)]);
   const days = streak(activity, studyDay(now));
+  const dailyStatus = daily?.completedAt
+    ? `Done, ${daily.results.reduce<number>((s, r) => s + r, 0)} of ${daily.itemIds.length}`
+    : daily && daily.results.length > 0
+      ? `${daily.results.length} of ${daily.itemIds.length} answered`
+      : 'Not done yet';
 
   return (
     <div>
@@ -54,11 +59,9 @@ export default function Home() {
         <div>
           <dt>Daily challenge</dt>
           <dd>
-            {daily?.completedAt
-              ? `Done, ${daily.results.reduce<number>((s, r) => s + r, 0)} of ${daily.itemIds.length}`
-              : daily && daily.results.length > 0
-                ? `${daily.results.length} of ${daily.itemIds.length} answered`
-                : 'Not done yet'}
+            <Link to={paths.daily} aria-label={`Daily challenge: ${dailyStatus}`}>
+              {dailyStatus}
+            </Link>
           </dd>
         </div>
       </dl>

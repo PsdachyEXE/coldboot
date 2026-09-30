@@ -1,36 +1,46 @@
-/** Placeholder until the Daily challenge screen (P1) lands: the challenge itself runs in the terminal. */
-import { melbourneDate } from '../../lib/time';
-import { useNow } from '../../lib/useNow';
-import { useSession } from '../../state/session';
-import { useTerminal } from '../../terminal/useTerminal';
+/**
+ * Daily challenge (Section 6.12, P1 as a screen): today's ten questions, the same set and the same
+ * stored record as the terminal's `daily`, so either can start the day and the other carries on.
+ * Multiple-choice questions use the Drill question; generated questions show the terminal's blocks
+ * with an answer field. A finished day shows the result, the share line and when the next set is due.
+ */
+import type { ContentIndex } from '../../content/loader';
 import { Button } from '../../ui/Button';
 import { EmptyState } from '../../ui/EmptyState';
+import { DailyChallenge } from '../daily/DailyChallenge';
+import { useGenerators } from '../daily/useGenerators';
+import { ContentGate } from '../study/ContentGate';
+import study from '../study/study.module.css';
 
 export default function Daily() {
-  const now = useNow(60_000);
-  const record = useSession((s) => s.daily[melbourneDate(now)]);
-  const answered = record?.results.length ?? 0;
-  const label = record?.completedAt ? "Show today's result" : answered > 0 ? 'Continue the daily challenge' : 'Start the daily challenge';
   return (
-    <section>
+    <div className={study.page}>
+      <ContentGate heading="Daily challenge">{(content) => <DailyReady content={content} />}</ContentGate>
+    </div>
+  );
+}
+
+function DailyReady({ content }: { content: ContentIndex }) {
+  const { state, retry } = useGenerators();
+  return (
+    <>
       <h1>Daily challenge</h1>
-      <EmptyState
-        title="Play today's challenge in the terminal"
-        action={
-          <Button variant="primary" onClick={() => useTerminal.getState().run('daily')}>
-            {label}
-          </Button>
-        }
-      >
-        <p>
-          Ten questions, the same for everyone today. Only your first attempt counts.{' '}
-          {record?.completedAt
-            ? "You've finished today's: the terminal shows your result and the share line."
-            : answered > 0
-              ? `You've answered ${answered} of ${record?.itemIds.length}.`
-              : 'The terminal opens over this page.'}
-        </p>
-      </EmptyState>
-    </section>
+      {state.status === 'ready' ? (
+        <DailyChallenge content={content} generators={state.generators} />
+      ) : state.status === 'error' ? (
+        <EmptyState
+          title="Today's set didn't load"
+          action={
+            <Button variant="primary" onClick={retry}>
+              Try again
+            </Button>
+          }
+        >
+          <p role="alert">The questions from the terminal games couldn't load. Check your connection, then try again.</p>
+        </EmptyState>
+      ) : (
+        <p role="status">Loading today's set</p>
+      )}
+    </>
   );
 }

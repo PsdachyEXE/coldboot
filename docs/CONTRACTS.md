@@ -19,6 +19,8 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Game registry | `src/games/registry.ts` | `GAMES` (what `ls`, `man`, `play` and completion see; the seven P0 games in the brief's order: deskcheck, sort, search, triage, validate, blitz, daily; then the ten P1 games in the brief's order: dfd, usecase, reqs, gantt, threat, law, naming, types, oop, psm; the types game's folder is `types-game/`), `findGame`, `DRILL_GAME` |
 | Terminal session and host | `src/terminal/session.ts`, `src/terminal/host.ts` | `useTerminalSession`: one session for the drawer and the route; the host starts games, records answers, runs the daily protocol and ends timed games. It prints an unavailable session's blocks under the title instead of starting it, and `play` refuses `--easy` and `--hard` for a fixed-difficulty game |
 | Daily challenge set | `src/games/daily.ts`, `src/games/daily-game/` | `buildDailySet(date, mcqPool)` (8 MCQs by rendezvous hash + 2 generated), `dailyShareText`; the `daily` game (`loadDailyGame`) plays the set, with generated items as `gen-daily-<game>:<seed>` at normal difficulty |
+| Daily screen | `src/app/daily/` | `/daily` plays `dailyRefs` / `dailyItem` with `loadGenerators` (through `useGenerators`) and keeps the same record as the terminal: `beginDaily` on start, `recordDaily` after `recordAttempt` per counted answer |
+| Stats aggregations | `src/app/stats/aggregate.ts` | pure: `lastDays`, `accuracyByArea`, `reviewsPerDay`, `timePerDay`, `totalTime`, `dueForecast` (by study day, cards due now counted today), `weakestKks` (seen KKs only, unseen counted apart), `niceTicks` |
 | PRNG | `src/games/prng.ts` | `mulberry32`, `hashString`, `dailySeed`, `pick`, `shuffle`, `sample` |
 | Time | `src/lib/time.ts` | study day (4 am rollover), Melbourne date, countdown, exam phases |
 | Clock hook | `src/lib/useNow.ts` | `useNow(intervalMs)` returns epoch ms, refreshed every interval and when the page becomes visible again; the status bar uses 15 s |
@@ -65,7 +67,7 @@ Shared files (`package.json`, `src/app/routes.tsx`, `src/app/paths.ts`, contract
 - **Ids are permanent once shipped.** Dropped items are logged in `docs/CONTENT_NOTES.md`, never reused. Prefixes: `c-` cards, `m-` MCQs, `s-` short answers, `t-` glossary cards, `psm-c-`/`psm-m-`/`psm-s-` PSM items, `cs-NN-qNN` case study questions. Pattern: `c-u3o1-kk04-003`.
 - **Held KKs.** A KK whose items depend on an unconfirmed "verify" entry can be marked `held` in `study-design.json` (with a reason, mirrored in `CONTENT_NOTES.md`); its floor shortfall then warns instead of failing.
 - **Glossary.** `study-design.json` lists the glossary terms (labels only); `terms.json` has exactly one reverse card per entry.
-- **Daily challenge.** The set comes only from `buildDailySet`. The host calls `beginDaily(date, session.itemIds)` once, then `recordDaily(date, index, correct, now)` per answer; only the first attempt at each index counts, and the share line is built from the stored record. Once a day has begun, the game rebuilds its set from the stored item ids, resumes at the first unanswered question, and replaces an MCQ that has left the content with a generated item in the same place.
+- **Daily challenge.** The set comes only from `buildDailySet`. The host calls `beginDaily(date, session.itemIds)` once, then `recordDaily(date, index, correct, now)` per answer; only the first attempt at each index counts, and the share line is built from the stored record. The Daily screen follows the same protocol, so either can start the day and the other carries on. Once a day has begun, the game rebuilds its set from the stored item ids, resumes at the first unanswered question, and replaces an MCQ that has left the content with a generated item in the same place.
 - **Generated items** set `instance` (e.g. `deskcheck:seed=1234:i=4:hard`) so a report can regenerate them. Content reports carry `__BUILD_ID__`.
 - **Markdown flags.** `choices` and `feedback` blocks may set `markdown: true` only for strings from bundled content.
 
@@ -93,4 +95,5 @@ npm run content:check -- --floors=warn
 npm run contrast:check
 npm run installer:lint
 npm run build
+npm run e2e        # Playwright: builds, previews and drives Chromium (e2e/, playwright.config.ts)
 ```

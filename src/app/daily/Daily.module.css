@@ -1,0 +1,169 @@
+/* Daily challenge: generated questions on a terminal-style panel, progress pips and the result. */
+
+.date {
+  color: var(--steel);
+  margin: 0 0 var(--space-4);
+}
+
+.question {
+  min-width: 0;
+  scroll-margin-top: var(--space-5);
+}
+.question:focus {
+  outline: none;
+}
+
+/* The prompt, drawn by the terminal's block renderer on the terminal's own surface and type. */
+.terminal {
+  margin: var(--space-3) 0 var(--space-4);
+  padding: var(--space-4);
+  background: var(--trench);
+  color: var(--phosphor);
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  font-variant-ligatures: none;
+  max-width: calc(var(--measure) + var(--space-7));
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.terminal > :last-child {
+  margin-bottom: 0;
+}
+@media (max-width: 719.98px) {
+  .terminal {
+    padding: var(--space-3);
+  }
+}
+
+.answerForm {
+  margin: 0;
+}
+.answerInput {
+  font-family: var(--font-mono);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2);
+}
+
+.yourAnswer {
+  margin: 0 0 var(--space-3);
+}
+.yourAnswer code,
+.expected {
+  font-family: var(--font-mono);
+  color: var(--ice);
+  overflow-wrap: anywhere;
+}
+
+/* Progress pips: a box per question with its number, or a glyph once answered. */
+.soFar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0 0 var(--space-4);
+  max-width: none;
+}
+.pip {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--ice);
+  border: 1px dashed var(--steel);
+  border-radius: var(--radius-control);
+}
+.pip[data-state='correct'] {
+  border: 1px solid var(--flare);
+  color: var(--flare);
+}
+.pip[data-state='incorrect'] {
+  border: 1px solid var(--steel);
+  background: var(--trench);
+  color: var(--ice);
+}
+.pip[data-state='current'] {
+  border: 2px solid var(--ice);
+  font-weight: 700;
+}
+
+/* Result. */
+.score {
+  font-size: var(--step-3);
+  font-weight: 700;
+  line-height: var(--lh-head);
+  margin: 0 0 var(--space-4);
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: var(--space-1) var(--space-4);
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+  max-width: calc(var(--measure) + var(--space-7));
+}
+.results li {
+  max-width: none;
+  padding: var(--space-1) 0;
+  border-bottom: var(--hairline);
+}
+.resultNumber {
+  display: inline-block;
+  min-width: 2.5ch;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--ice);
+}
+.resultCorrect {
+  color: var(--flare);
+  font-weight: 700;
+}
+.resultIncorrect {
+  color: var(--steel);
+  font-weight: 700;
+}
+
+.share {
+  margin: 0;
+  max-width: 100%;
+}
+.shareCaption {
+  font-size: var(--step-0);
+  color: var(--steel);
+  margin: 0 0 var(--space-1);
+}
+.sharePre {
+  display: inline-block;
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  max-width: 100%;
+  overflow-x: auto;
+  background: var(--trench);
+  color: var(--ice);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  /* Wraps at a space on narrow screens; the copied text is always the exact share line. */
+  white-space: pre-wrap;
+  user-select: all;
+}
+@media (max-width: 719.98px) {
+  .sharePre {
+    padding: var(--space-3);
+  }
+}
+
+.copied {
+  margin: 0;
+}
+
+.fallback {
+  margin: 0 0 var(--space-5);
+}
