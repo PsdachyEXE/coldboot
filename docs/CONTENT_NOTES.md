@@ -529,3 +529,9 @@ Fixes:
 Held back (confirmed): no Act, framework, threat modelling step, trace table, slack or float or constraint type is named. Only house data type names are used. q13 (U4O2-KK06) asks for criteria built from the insert's own weaknesses. KK06 has no verify note, and no listed set of criteria is assumed.
 
 Noted, not changed: the mock-up renderer's `window` element always draws desktop minimise, maximise and close controls, so the phone screen in Figure 3 has them. No question refers to them.
+
+## Games that go further than the holdbacks (law, threat)
+
+- The law game and threat's Essential Eight round teach, at textbook level, which of the Privacy Act 1988 (Cth), the Privacy and Data Protection Act 2014 (Vic), the Health Records Act 2001 (Vic) and the Copyright Act 1968 (Cth) applies to a scenario, including the Privacy Act's $3 million turnover threshold, and they name the eight strategies. That goes further than the U4O2-KK07 and U3O2-KK10 holdbacks above, because the brief asks for these games (`DECISIONS.md` D-148). The study content keeps its holdbacks.
+- When the study design can be read (D-001), check both games against it: which Acts and frameworks it names, the ACSC's current name for the Office macro strategy, and any reform of the small business exemption. If the confirmed list drops an Act or the Essential Eight, change or retire the matching scenarios in `src/games/law/` and `src/games/threat/`.
+- The threat game's round that orders the threat modelling steps is not built, in line with the U4O2-KK05 holdback; its man page says why.

@@ -18,18 +18,18 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Quiz engine | `src/games/engine.ts`, `src/games/answers.ts`, `src/games/mcq.ts` | `createQuizSession` over a `QuizItem` list or a seeded generator (round of 10, timed rounds, `exposeItemIds`, `resumeScores` to resume a list after items answered in an earlier sitting, `intro` blocks shown once above the first prompt); `unavailableSession(gameId, blocks)`; lenient answer parsers, including `parseOption` (a lettered option by letter, text or both) and `parseLetters` (a set of letters, A to H); `mcqItem` for content MCQs |
 | Game registry | `src/games/registry.ts` | `GAMES` (what `ls`, `man`, `play` and completion see; the seven P0 games in the brief's order: deskcheck, sort, search, triage, validate, blitz, daily; then the ten P1 games in the brief's order: dfd, usecase, reqs, gantt, threat, law, naming, types, oop, psm; the types game's folder is `types-game/`), `findGame`, `DRILL_GAME` |
 | Terminal session and host | `src/terminal/session.ts`, `src/terminal/host.ts` | `useTerminalSession`: one session for the drawer and the route; the host starts games, records answers, runs the daily protocol and ends timed games. It prints an unavailable session's blocks under the title instead of starting it, and `play` refuses `--easy` and `--hard` for a fixed-difficulty game |
-| Daily challenge set | `src/games/daily.ts`, `src/games/daily-game/` | `buildDailySet(date, mcqPool)` (8 MCQs by rendezvous hash + 2 generated), `dailyShareText`; the `daily` game (`loadDailyGame`) plays the set, with generated items as `gen-daily-<game>:<seed>` at normal difficulty |
+| Daily challenge set | `src/games/daily.ts`, `src/games/daily-game/` | `buildDailySet(date, mcqPool)` (8 MCQs by rendezvous hash + 2 generated from `DAILY_GENERATOR_GAMES`: the five P0 generators and the nine P1 ones, psm excepted), `dailyShareText`; the `daily` game (`loadDailyGame`) plays the set, with generated items as `gen-daily-<game>:<seed>` at normal difficulty |
 | Daily screen | `src/app/daily/` | `/daily` plays `dailyRefs` / `dailyItem` with `loadGenerators` (through `useGenerators`) and keeps the same record as the terminal: `beginDaily` on start, `recordDaily` after `recordAttempt` per counted answer |
 | Stats aggregations | `src/app/stats/aggregate.ts` | pure: `lastDays`, `accuracyByArea`, `reviewsPerDay`, `timePerDay`, `totalTime`, `dueForecast` (by study day, cards due now counted today), `weakestKks` (seen KKs only, unseen counted apart), `niceTicks` |
 | PRNG | `src/games/prng.ts` | `mulberry32`, `hashString`, `dailySeed`, `pick`, `shuffle`, `sample` |
-| Time | `src/lib/time.ts` | study day (4 am rollover), Melbourne date, countdown, exam phases |
+| Time | `src/lib/time.ts` | study day (4 am rollover), `localDate` (the device's calendar date, no rollover), Melbourne date, countdown, exam phases |
 | Clock hook | `src/lib/useNow.ts` | `useNow(intervalMs)` returns epoch ms, refreshed every interval and when the page becomes visible again; the status bar uses 15 s |
 | Text matching | `src/lib/text.ts` | `normaliseAnswer`, `editDistance`, `nearest`, `parseList`, `parseNumberList` |
 | Report links | `src/lib/report.ts`, `src/ui/report.ts` | prefilled GitHub issue URL; `openReport({ itemId })` opens the shared dialog |
 | Stores | `src/state/settings.ts`, `srs.ts`, `attempts.ts`, `session.ts` | Zustand; persisted as `coldboot:v1:<name>` envelopes |
 | Persistence | `src/state/storage.ts`, `src/state/persist.ts` | guarded localStorage, debounced writes, migrations, per-record salvage with quarantine, newer-build blocking, cross-window merge, `useStorageHealth`, and the `persistedStores` registry that export, import and reset iterate. A new persisted store (e.g. the exam autosave) only needs `persistStore(...)` |
 | Recording answers | `src/state/record.ts` | `recordAttempt(attempt, { review })` is the only way to log an answer |
-| Export and import | `src/state/exportImport.ts` | format 1: one `{ v, data }` envelope per store (older store versions migrate on import); 5 MB cap; Zod-validated; all-or-nothing |
+| Export and import | `src/state/exportImport.ts` | format 1: one `{ v, data }` envelope per store (older store versions migrate on import); 5 MB cap; Zod-validated; all-or-nothing; `exportFilename` uses the device's local date |
 | Mastery | `src/srs/mastery.ts` | `computeMastery(attempts, now)`; unseen KKs are absent, never 0 |
 | SM-2 and queue | `src/srs/sm2.ts`, `src/srs/queue.ts` | `schedule`, `buildQueue` and `orderNewCards` signatures locked. `schedule` applies the final-week cap (`FINAL_WEEK_DAYS`, `FINAL_WEEK_MAX_INTERVAL`) and the exam-day clamp (`EXAM_CAP_DAYS_BEFORE`), keeps `due` at the start of a study day and stores the interval actually scheduled; also `RATINGS`, `nextEase`, `newCardState`, `capDueDay`, `MAX_EASE`, `MAX_INTERVAL_DAYS`, `directionFor(card, reps)` and `nextDueAfter(srs, now, known?)` |
 | Study hooks | `src/srs/hooks.ts` | `useMastery()` (memoised on the attempt log, roll-up and KK map, refreshed every `MASTERY_TICK_MS`), `masteryNow()`, `useExamAt()`, `useDueSummary(now)` |
@@ -57,6 +57,16 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | D. Unit 4 content, case study, figures | `content/u4o1/**`, `content/u4o2/**`, `content/case-studies/**`, `src/figures/**` |
 | E. SRS and study screens | `src/srs/**`, `src/app/screens/{Home,Run,Review,Drill,Written,SyllabusMap}.tsx` and their parts in `src/app/study/`, tests for `time` and `mastery` |
 | F. Distribution | `install.ps1`, `uninstall.ps1`, installer CI job in `.github/workflows/deploy.yml`, `README.md` |
+
+## Ownership (Phase 2, P1 tracks)
+
+| Track | Owns |
+|---|---|
+| X. Exam simulator | `src/exam/**`, and the shared `src/app/study/CaseInsert.tsx` and `MarkingPoints.tsx` it moved out of Written |
+| G1. Games | `src/games/{dfd,usecase,reqs,gantt,psm}/`, figure block `highlight` and `compact` in `src/terminal/blocks.ts` |
+| G2. Games | `src/games/{threat,law,naming,types-game,oop}/`, `parseOption` and `parseLetters` in `src/games/answers.ts` |
+| S. Stats, Daily and e2e | `src/app/stats/**`, `src/app/daily/**`, `src/app/screens/{Stats,Daily}.tsx`, `e2e/**`, `playwright.config.ts`, the e2e job in `.github/workflows/ci.yml` |
+| Orchestrator | merging, case study 2 (`content/case-studies/cs-02.json`), `DAILY_GENERATOR_GAMES`, `docs/DECISIONS.md` |
 
 Shared files (`package.json`, `src/app/routes.tsx`, `src/app/paths.ts`, contract files): change only when the task needs it, keep the change minimal, and say so in the commit message.
 

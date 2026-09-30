@@ -799,3 +799,440 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** Section 9 asks for a critique against the design principles before Phase 1 closes, and Section 14 sets Lighthouse targets of accessibility 95+ and desktop performance 90+.
 
 **Rejected.** Closing Phase 1 on component tests and the track agents' own screenshots alone. The critic found the daily clustering bug and several phone-only breakages that no test had covered.
+
+## D-096 Exam: Mini paper timing
+
+**Decision.** 30 minutes in all: 3 minutes of reading, then 27 of writing. Reading time is scaled from the full paper (15 of 135 minutes is a ninth, and a ninth of 30 is about 3). The 30-minute warning doesn't apply because writing time is only 27 minutes.
+
+**Reason.** Reading time is an exam skill worth practising daily (planning, reading the insert), and a 30-minute total matches about 25 marks at exam pace.
+
+**Rejected.** No reading time (loses the habit), and a full 15 minutes (half the session).
+
+## D-097 Exam: No pause, no skipping reading time, and submitting only in writing time
+
+**Decision.** The phase comes only from startedAt, submittedAt and the paper's stored timing. Submitting is only possible in writing time. Discarding is the only way out. The timing is stored with each paper, so a new build never changes a paper under way.
+
+**Reason.** It is a simulator: realism of timing is the point, and deriving the phase from timestamps is what makes it survive reloads.
+
+**Rejected.** An early-start button for writing time; pausing.
+
+## D-098 Exam: Automatic submission is stamped at the end of writing time
+
+**Decision.** When the page (or a later reopening) finds writing time over, it stores submittedAt at the end of writing time and marks the paper as submitted automatically. Time used is capped at the time allowed.
+
+**Reason.** The report's time used must be true even if the tab was closed for hours.
+
+**Rejected.** Stamping the moment the tab noticed.
+
+## D-099 Exam: Unanswered questions aren't logged as attempts
+
+**Decision.** Finish marking records every answered item (MCQs 0 or 1, written answers marks earned over marks available). Unanswered items score 0 on the paper and in the report but aren't written to the attempt log. Each attempt's ms is a share of the time used, proportional to its marks. The integration kept this reading.
+
+**Reason.** This follows D-070: an unanswered question says nothing about what the student knows. It also matches "every answer is recorded". The ms sharing keeps time-studied stats equal to the time used.
+
+**Rejected.** Logging unanswered items with a score of 0, which a literal reading of the brief's "every item" would suggest.
+
+## D-100 Exam: How Section A is shared out
+
+**Decision.** An item's bucket is its primary KK's area, or PSM (glossary items count toward their first area). Every bucket with questions gets one slot, then each further slot goes to the bucket furthest below its share by KK count. That gives U3O1 5, U3O2 6, U4O1 4, U4O2 4, PSM 1 for the full paper, and 2/3/2/2/1 for the mini. Within an area, questions are taken one KK at a time in seeded order.
+
+**Reason.** A pure KK-count share gives the PSM 0.38 of a question, which rounds to none, yet the brief wants it included.
+
+**Rejected.** Plain largest-remainder rounding, which drops the PSM.
+
+## D-101 Exam: Near-identical MCQ groups
+
+**Decision.** Two MCQs are near-identical when their stems' content words overlap by 0.6 or more (Jaccard), or when they share a KK and at least 3 of 4 option texts. Groups are joined through chains of such pairs. The rule is relaxed only when the pool can't fill the section otherwise.
+
+**Reason.** The content has no explicit variant groups. In current content this keeps 5 same-options pairs apart (for example the two "which OOP concept" MCQs) without treating distinct questions such as alpha versus beta testing as twins.
+
+**Rejected.** A new schema field for groups (a content contract change outside this track).
+
+## D-102 Exam: Section B has five or six questions, one per area in turn
+
+**Decision.** The seed prefers 5 or 6 questions (50/50). Each question count is tried nearest-preferred first, drawing one question from each area in turn with a completability table. Failing that, any subset (suffix subset-sum table) that makes exactly 20; failing that, the nearest total below 20.
+
+**Reason.** Short answers are worth 2 to 4 marks, so five questions totalling 20 are always five 4-mark items. Allowing six gives a mix of marks, and taking areas in turn guarantees all four areas.
+
+**Rejected.** A greedy pass in plain interleaved order, which sometimes drew from only two areas.
+
+## D-103 Exam: Case study choice and the mini paper's slice
+
+**Decision.** Case studies in id order, seed mod n, skipping the one sat last time when another exists. The mini slice is chosen uniformly by seed among every subset of 2 to 4 questions (kept in insert order) worth 10 to 15 marks. When none fits, the 1 to 4 question slice closest to 12 marks.
+
+**Reason.** Deterministic for a seed, and it varies between papers once more case studies land.
+
+**Rejected.** Contiguous runs only, which limit variety.
+
+## D-104 Exam: Exam views in the URL
+
+**Decision.** `/exam?sit=1` is the paper in progress and `/exam?report=<id>` a report, both built in src/exam/links.ts. `/exam` always shows the start screen with Resume, so a stray visit never starts or resumes a paper by itself. A reload on `?sit=1` goes straight back into the paper. Each view's heading takes focus, and the page scrolls to the top between views.
+
+**Reason.** Reloads return to the same place without touching the shared paths.ts or routes.tsx.
+
+**Rejected.** Keeping the view in component state, or adding helpers to paths.ts.
+
+## D-105 Exam: The store ships only data with the shell
+
+**Decision.** store.ts holds the types, schema, salvage, merge, persistence and replace/reset. `examActions` (start, answer, clearAnswer, toggleFlag, goTo, noteWarned, submit, setTicks, finish, discard) is in actions.ts, which only the lazy exam chunk loads. The timer isn't in the shell at all.
+
+**Reason.** The brief asks that the shell barely grow: +5.5 kB raw instead of +9 kB.
+
+**Rejected.** Actions inside the Zustand store (the pattern the other stores use).
+
+## D-106 Exam: Cross-window merge
+
+**Decision.** History is the union of both windows, one entry per paper id. A paper the other window has marked is removed. If the other window cleared its paper, it is cleared here too. Different papers: the more recently started wins. Same paper: this window's unsaved answers and ticks win, and the earlier submission stands.
+
+**Reason.** Two windows on one profile (the installed app and a tab) must not resurrect finished papers or lose the latest typing.
+
+**Rejected.** Taking the other window's data wholesale (the persist default).
+
+## D-107 Exam: Warnings are remembered with the paper
+
+**Decision.** Warning marks already given are stored with the paper, so a reload doesn't repeat them. After a reload or a sleeping tab, only the most urgent missed warning is spoken, as "Less than N minutes of writing time left." The visible notice always shows the most urgent mark reached.
+
+**Reason.** Assertive announcements must not repeat, or be stale, after a reload.
+
+**Rejected.** Keeping the given warnings in memory only.
+
+## D-108 Exam: Marking view details
+
+**Decision.** Submission resets the position to the first question, so marking starts at Section A question 1. Written answers left blank score 0 and can't be ticked. The finish dialog warns how many answered written responses have no ticks. Report a problem is offered in both the sitting and marking views.
+
+**Reason.** Predictable marking order; every item keeps a Report action.
+
+**Rejected.** Starting marking at whichever question the student had open when they submitted.
+
+## D-109 Exam: The case study panel and marking points are shared with Written
+
+**Decision.** CaseInsert.tsx (CASE_WIDE_QUERY, CaseInsert, CaseStudyLayout, QuestionFigureRefs) and MarkingPoints.tsx (ModelAnswer, MarkingPoints) were moved out of CaseStudyPractice and WrittenQuestion unchanged. Written.module.css `.insert` reads `--case-insert-top`, defaulting to the old 16 px, so the exam's sticky bar can push the panel down. At the merge, the design critique's "Show the case study insert" and "Hide the case study insert" summary moved into CaseStudyLayout, so the exam has it too.
+
+**Reason.** The brief asks to import rather than copy.
+
+**Rejected.** Copying the panel and the checkboxes into src/exam.
+
+## D-110 Games: Figure blocks carry highlight and compact
+
+**Decision.** Extended the TerminalBlock figure kind with optional `highlight` and `compact`, which BlockView passes to FigureView. The speech digest reads out the marked elements from describeFigure.
+
+**Reason.** The brief asks for letter markers on terminal diagrams, and the block had no way to carry them. A screen reader user must be able to answer "which element marked B".
+
+**Rejected.** Putting the markers only in the prompt text, which leaves the diagram unmarked; or a game-specific block kind.
+
+## D-111 Games: Actor-to-actor associations validate
+
+**Decision.** Relaxed UseCaseDiagramSchema's refinement: an association must involve at least one actor, so an actor-to-actor association validates. A use-case-to-use-case association is still rejected.
+
+**Reason.** The brief names actor-to-actor association as an error to render, and figures must pass FigureSchema. The DFD schema already accepts every convention error the dfd game teaches (an unlabelled flow, entity to entity), so schemas check structure and not conventions. The renderer and describeFigure already handled it.
+
+**Rejected.** Dropping that error from usecase, or adding an opt-in flag field to the figure schema.
+
+## D-112 Games: Non-functional requirement types in reqs
+
+**Decision.** Used reliability, usability and portability (the support material's examples), plus efficiency (response time) and maintainability. Security is excluded.
+
+**Reason.** A security statement reads too easily as a function (a login, encryption) or as a legal constraint (privacy law), so it can't be kept unambiguous. Efficiency and maintainability have clear textbook meanings. Easy rounds use only the three support-material types.
+
+**Rejected.** Including security, performance/capacity and accessibility as separate types.
+
+## D-113 Games: psm has no generate()
+
+**Decision.** psm sets needsContent, builds its items from ctx.content.psm and sets `instance`, but implements no Game.generate and isn't marked generator.
+
+**Reason.** Game.generate(seed, difficulty) receives no content, and the brief says psm draws on content/psm.json. The daily set leaves psm out for the same reason (D-147).
+
+**Rejected.** Statically importing psm.json into the game chunk, which would duplicate content outside the loader and skip its validation.
+
+## D-114 Games: One hand-laid dfd layout in four views
+
+**Decision.** One Level 1 DFD layout (three columns: entity, process, store) and one matching context layout. A seed picks one of four views: as laid out, mirrored left to right, flipped top to bottom, or both. Explicit coordinates throughout, with injected flows placed on straight lines between neighbouring elements; the context entity-to-entity label is pinned on the outer side.
+
+**Reason.** Every topology edge and every injected error then has a clean straight path, which the layout tests verify. The views move the faulty element around the page. A second arrangement with processes in a row needed diagonals that crossed the paired flow labels, or a canvas about 1000 units wide.
+
+**Rejected.** A second DFD topology per business, which doubles the hand-written labels, and any auto-layout.
+
+## D-115 Games: Only part of a DFD is shown
+
+**Decision.** Error-round DFDs are captioned "Only part of the diagram is shown." A process loses its inputs or outputs only when every other element keeps a flow and every other process keeps an input and an output.
+
+**Reason.** Some stores are only read or only written in the layout, and removing flows can make that more visible. The caption stops a student treating it as a seventh error, and the injection filter keeps the injected error the only one.
+
+**Rejected.** Adding a store-must-be-read-and-written rule, which the brief doesn't list.
+
+## D-116 Games: dfd noun names and word bank
+
+**Decision.** Noun process names were chosen so their first word can't be read as a verb (Parcels, Delivery dockets, Payment receipts, not Packing slips or Courier bookings). The labelling word bank holds exactly the blanked labels, sorted alphabetically and numbered; the student answers by label or number.
+
+**Reason.** A noun name that can be read as a verb phrase would make the "noun" error arguable. A bank of only the blanks, each pinned by its flows, gives each blank one answer.
+
+**Rejected.** Distractor labels in the word bank, which would need case-by-case proof that they fit no blank.
+
+## D-117 Games: dfd round shape and chips
+
+**Decision.** A round is three error diagrams (letter, then rule, each a different rule and business) plus one labelling diagram with four blanks, placed at a seeded position. Easy draws a context diagram for errors that can appear on one 60% of the time, normal 35% and hard 15%; hard marks five elements instead of four. Rule chips are the numbers 1 to 6.
+
+**Reason.** This gives exactly 10 questions and covers both round types in every round. The rules are printed as a numbered list just above, and six phrase chips took five rows at 360 px.
+
+**Rejected.** A mode flag for round type, which the terminal has no way to pass, and phrase chips.
+
+## D-118 Games: The dfd rule question follows the element question
+
+**Decision.** The element question's feedback names the faulty element but not the rule. In a round, the rule question is a follow-up that doesn't reprint the diagram; standalone, it shows the diagram with only that element marked.
+
+**Reason.** Naming the rule in the first feedback would give away the second question. The follow-up pattern matches triage's (D-083).
+
+**Rejected.** One two-part answer such as `C 2`, which chips can't build and which gives less precise feedback.
+
+## D-119 Games: gantt wording, chart stages and table
+
+**Decision.** Questions and reasons never say slack or float. asciiGantt's Slack header becomes "Spare" and its key ". spare days", with a sentence after the chart explaining the dots. The chart reveals only what has been asked: bars after the duration question, critical marks after the critical path, spare days after later questions. The plan table's columns are Task, Description, Days, After.
+
+**Reason.** U3O2-KK03's verify note leaves open whether slack is named, so the man page mentions it only as an aside. A column headed "Depends on" clipped at 360 px.
+
+**Rejected.** Hiding the spare-days column altogether, or keeping "Depends on" with a clipped table on phones.
+
+## D-120 Games: gantt plan generation and questions
+
+**Decision.** Five project templates for invented organisations. Each is cut to 5 to 9 tasks, keeping the first task, the main coding task, testing and the last task; a dropped task's dependants inherit its dependencies, with implied ones pruned. Durations are re-rolled until there is exactly one critical path of 3 or more tasks, at least two tasks with time to spare, and a length of 45 days or less. "Finishes n days later than planned" is the delay question, and its answer is recomputed rather than assumed. The milestone question is four options: the right event on the right day, the same event on its start day, a task with a duration, and "halfway through" a task.
+
+**Reason.** A single critical path makes "the critical path" one answer, and plans keep a sensible order. Recomputing the shift keeps the answer tied to computeSchedule.
+
+**Rejected.** Random dependency graphs with arbitrary task names, and accepting any of several tied critical paths.
+
+## D-121 Games: gantt and reqs KK tags
+
+**Decision.** gantt tags U3O2-KK03 and adds U4O1-KK12 on the late-finish question. reqs tags each classification with its answer's KK (U3O2-KK05, 06 or 07) plus U3O1-KK02, and the quality follow-up with U3O2-KK05.
+
+**Reason.** Mastery is then credited to the KK the student actually got right or wrong. Explaining how a slip moves the finish fits "assessing the project plan".
+
+**Rejected.** One fixed KK list for every item in a game.
+
+## D-122 Games: usecase item design
+
+**Decision.** Actors are chosen by typing their numbers from a list: every actor, in any order. Every non-actor candidate is mentioned in the scenario: the system itself, data, hardware, or a party with no contact with the system. Spot-the-error marks four elements (five on hard), favouring the same kind as the faulty one, and each scenario states which step always happens and which only sometimes. Arrows follow the content's convention: includes from the base, extends into the base.
+
+**Reason.** Typed actor names can't be matched reliably. Marking elements of the same kind makes students read the scenario, and the direction rule matches the existing content.
+
+**Rejected.** Typing actor names freely, and asking what is wrong with a diagram in free text.
+
+## D-123 Games: P1 registry order and its test
+
+**Decision.** GAMES lists the seven P0 games, then the P1 games in the brief's order (dfd, usecase, reqs, gantt, psm so far). The registry test now checks that P0 prefix, and that the P1 games that exist follow the brief's order. Superseded in part at the merge: with all ten P1 games built, the test now checks the full P1 order exactly.
+
+**Reason.** Other tracks are adding threat, law, naming, types and oop in parallel. A subsequence check lets their entries merge in without rewriting the test.
+
+**Rejected.** Hard-coding the full list in the test, which every parallel track would conflict on.
+
+## D-124 Games: The types game's folder is types-game
+
+**Decision.** The types game lives in src/games/types-game/ (the game id is still `types`), and the registry loads `./types-game`.
+
+**Reason.** src/games/types.ts, the game contract, already answers every `./types` and `../types` import, so a `types/` folder would be ambiguous. This follows D-091 (daily-game).
+
+**Rejected.** src/games/types/ as literally assigned. It would work only with explicit `./types/index` imports, and one plain `./types` import would silently load the contract instead.
+
+## D-125 Games: Shared parsers for lettered answers
+
+**Decision.** Added OPTION_LETTERS (A to H), parseOption and parseLetters to src/games/answers.ts. parseOption accepts a letter, the option's text, or both as feedback prints them (`B. Version control`). parseLetters reads a set such as `A C D`, `a, c, d` or `acd`. Tests are in a new src/games/answers-options.test.ts.
+
+**Reason.** threat, law and oop all need to accept typed-back option text and multi-letter answers, and the existing LETTERS stops at F while the Essential Eight list needs up to H. A new test file avoids touching answers.test.ts, which another track owns.
+
+**Rejected.** Copying the helpers into each game folder, or changing the existing LETTERS and parseChoice exports.
+
+## D-126 Games: Registry test and man-page abbreviations
+
+**Decision.** registry.test.ts uses the same P0-then-P1 ordering test as track G1, word for word. The man-page all-caps check now allows CSV and XML. At the merge the two tracks' flag checks became one list of generator games.
+
+**Reason.** The identical hunk should merge cleanly with G1. CSV and XML are abbreviations the brief says to keep, and students type them as answers in `types`.
+
+**Rejected.** Writing "comma-separated values" and "extensible markup language" throughout the man page.
+
+## D-127 Games: How the law scenarios are built
+
+**Decision.** Rules relied on, at textbook-summary level: the Privacy Act 1988 (Cth) binds Australian Government agencies, private organisations with annual turnover above $3 million, and some smaller businesses such as health service providers, and it does not cover state or local government. The Privacy and Data Protection Act 2014 (Vic) binds the Victorian public sector (departments, councils, government schools) and the contracted service providers its contracts bind, and a private business is not covered just because it is based in Victoria. Health information held in Victoria, by public or private organisations, goes under the Health Records Act 2001 (Vic), not the PDP Act. The Copyright Act 1968 (Cth) protects code, images and text, so reuse needs permission or a licence, and being published online does not make a work free to copy. Every stated turnover sits far from $3 million. Where two Acts genuinely apply (a private Victorian health provider), the question asks for "the Victorian Act" or "the Commonwealth Act" and the feedback names both. "Why" options only use statements that are false for the scenario, plus the one true reason for its Act, all phrased around who holds the information.
+
+**Reason.** Each scenario then has exactly one best answer, and the test re-derives it from the scenario's recorded facts. Keeping turnovers far from the threshold means a small-business law reform would not flip an answer.
+
+**Rejected.** Accepting two answers with an explanation. Asking which Act applies to a small non-health business under $3 million, where arguably none of the four does.
+
+## D-128 Games: The Office macro strategy's name
+
+**Decision.** The option reads "Restrict Microsoft Office macros", matching content card c-u4o2-kk07-005. The man page adds that it is also described as configuring Microsoft Office macro settings.
+
+**Reason.** The name matches the app's own cards, and a student who learned the older name the brief uses is not misled.
+
+**Rejected.** Using only "Configure Microsoft Office macro settings", which would clash with the cards.
+
+## D-129 Games: threat distractors
+
+**Decision.** Each control lists the other controls that could reasonably be argued against its weaknesses (ALSO_HELPS), and some scenarios add their own (alsoHelps). None of these is ever offered as a distractor. Essential Eight distractors are checked so none is another name for one of the eight: no application whitelisting, browser patching, two-factor or daily backups.
+
+**Reason.** This keeps exactly one clearly best answer when several controls partly help.
+
+**Rejected.** Drawing distractors at random from all controls, which would sometimes offer a defensible second answer.
+
+## D-130 Games: naming rules
+
+**Decision.** A prefix from the stated table followed by a capital letter makes an identifier Hungarian notation, even though the rest looks like camel case. Pascal case, kebab case and capitalised snake count as "none of the three", and typing `pascal` or `kebab` for those also counts. A Hungarian name is the lowercase prefix followed by each word capitalised. Rewrites must match exactly and are case-sensitive; only whitespace and wrapping quotes or backticks are stripped. Hungarian variables name their type below hard, and on hard are described by their data only.
+
+**Reason.** strFirstName is both Hungarian and camel-shaped, so a stated priority rule is needed for one answer. Accepting the lookalike's own name rewards correct knowledge.
+
+**Rejected.** Treating prefixed identifiers as camel case. Accepting case-insensitive rewrites.
+
+## D-131 Games: How types and oop treat informal answers
+
+**Decision.** Short type names (int, float, char, bool, text, number) and a bare `array` re-prompt without recording an attempt, with a reminder to name the type in full or say which array. The oop object figure shows name and data type only; a data-type blank states the property's description above the question. Ambiguous type blanks (yearLevel, seatNumber) were removed. oop imports the types-game answer parser.
+
+**Reason.** This teaches the "name data types in full" advice without marking a nearly right answer wrong. The two-column figure matches exam object descriptions and fits 360 px without sideways scrolling.
+
+**Rejected.** Marking short forms as incorrect. Showing a Description column, which scrolled sideways on phones.
+
+## D-132 Games: Access modifiers stay language-neutral
+
+**Decision.** protected means the class and its subclasses, and no protected question names Java. Questions that depend on package access say "The program is written in Java". "default" is also asked language-neutrally as the name for the access a member gets when no modifier is written.
+
+**Reason.** The brief asks for accuracy about protected and default without Java-only rules unless the language is stated. Tests enforce both rules.
+
+**Rejected.** Java semantics everywhere (protected includes the package), which would make the neutral protected scenarios ambiguous.
+
+## D-133 Games: Item ids and round shapes for threat, law, naming, types and oop
+
+**Decision.** Attempt item ids are per kind (gen-threat-match, gen-threat-e8, gen-law-act, gen-law-why, gen-naming-identify, gen-naming-rewrite, gen-types-type/structure/source, gen-oop-principle/object/access), and the scenario goes in `instance`. Rounds of 10:
+- threat: 7 weaknesses with different controls and 3 Essential Eight lists, never first and never side by side;
+- law: 5 scenarios asked as Act then why, over at least 3 Acts;
+- naming: 4 identify and 6 rewrite, with no phrase repeated;
+- types: type, structure, source in turn;
+- oop: 4 principles, 3 objects, 3 access modifiers, with answers spread.
+
+**Reason.** This matches the existing games' id style, and generated items never count toward content floors. The instance can regenerate any reported item.
+
+**Rejected.** Per-scenario item ids, which would scatter attempt statistics.
+
+## D-134 Stats: The chart window is calendar study days
+
+**Decision.** The history charts cover the last 21 study days on the calendar (4 am rollover), ending today, and a day without data is drawn as a gap.
+
+**Reason.** Gaps only mean something on a calendar axis. It also means accuracy, reviews and time share one x-axis.
+
+**Rejected.** Using the last 21 days on which the student studied, which would hide the days they skipped.
+
+## D-135 Stats: Accuracy is drawn as lines with dots
+
+**Decision.** Each area is a 0 to 100% line with a dot on every day that has answers. A day with no answers breaks the line.
+
+**Reason.** With columns, a day at 0% and a day with no answers would look the same. Dots also show a single isolated day.
+
+**Rejected.** Columns per area.
+
+## D-136 Stats: Accuracy is the mean score
+
+**Decision.** Accuracy is summed score over answers. Card ratings contribute their scores (Again 0, Hard 0.5, Good 0.8, Easy 1), and the chart says so.
+
+**Reason.** That is what DayActivity.areas stores as [n, s] pairs.
+
+**Rejected.** Counting only multiple-choice and game answers, which the stored activity can't separate.
+
+## D-137 Stats: Due forecast buckets
+
+**Decision.** Cards are bucketed by the study day they fall due over 14 days from today. Anything already due counts today and is drawn hatched. Records for cards that have left the content are left out, and cards due after the window are shown as one number.
+
+**Reason.** This agrees with the due count everywhere else, and the hatch pattern separates due-now from due-later without relying on colour.
+
+**Rejected.** Leaving overdue cards out of the forecast.
+
+## D-138 Stats: Charts are drawn at their measured pixel width
+
+**Decision.** A ResizeObserver measures each chart's box and the SVG is drawn at that pixel width. Label widths come from per-character estimates measured in the reading font (digits 9 px, % 13 px). Gridlines use --trench, one step off the page colour; baselines use --steel.
+
+**Reason.** A scaled viewBox would shrink the text below 14 px at 360 px. The design rules forbid tinting tokens, so no opacity on gridlines.
+
+**Rejected.** A viewBox with preserveAspectRatio, or --steel gridlines at reduced opacity.
+
+## D-139 Stats: One empty state for no progress, per-chart ones otherwise
+
+**Decision.** With no activity, no scheduled cards and no mastery, the page shows one empty state pointing to Start today's run. Otherwise each empty chart has its own next step, and its data table is hidden.
+
+**Reason.** Five identical empty charts would be noise for a new student.
+
+**Rejected.** Always rendering all five sections.
+
+## D-140 Stats: Weakest KKs as an HTML list with SVG bars
+
+**Decision.** Each weakest KK is a list row with a link (id and title) that wraps, a bar on a shared 0 to 100% scale, and the value in words with its mastery band.
+
+**Reason.** KK titles have to wrap at 360 px, which SVG text can't do, and each row needs to be a real link to its drill.
+
+**Rejected.** An all-SVG horizontal bar chart, or reusing Meter, which has no shared scale.
+
+## D-141 Daily: A start button, then the stored record decides the question
+
+**Decision.** The screen shows an intro with "Start the daily challenge" (or "Carry on from question N"). Starting calls beginDaily and pins the Melbourne date. The question shown is always the first unanswered one in the stored record, except while this screen is showing feedback for the question just answered.
+
+**Reason.** The screen and the terminal share one record, so an answer in either moves both on. Pinning the date keeps an answer given just after midnight with the set it belongs to.
+
+**Rejected.** Keeping a separate question index on the screen, which would drift from the terminal.
+
+## D-142 Daily: Generated questions use a text field, suggested-answer buttons and Feedback
+
+**Decision.** The prompt is drawn with the terminal's BlockView on a terminal-style panel. Answers go in a labelled field or through the item's chips as buttons. Input the item can't read shows its hint as a field error and isn't recorded. The verdict uses the Feedback primitive, and follow-up blocks such as traces go through BlockView.
+
+**Reason.** Multiple-choice and generated questions then look and announce the same on this screen, and the terminal's rendering is reused.
+
+**Rejected.** Embedding a second terminal view, or rendering the terminal's feedback block, which doesn't announce.
+
+## D-143 Daily: Home links its daily status to the Daily screen
+
+**Decision.** Home's daily challenge status is a link to /daily. The status text moved into a const, and the link has the accessible name `Daily challenge: <status>`.
+
+**Reason.** A visually hidden prefix lost its space in the accessible name, and a bare "Not done yet" is unclear in a list of links.
+
+**Rejected.** A link with no extra context, or a VisuallyHidden prefix.
+
+## D-144 Stats: The end-to-end run uses default motion and a pinned clock
+
+**Decision.** The e2e runs with default motion (Playwright waits for the boot sequence and the drawer slide). The clock is pinned to 2026-10-01 10:00 Melbourne with page.clock.setFixedTime, and the expected export filename is derived from its UTC date. Superseded in part at integration: under reduced motion the drawer now focuses its input (the fix is in TerminalDrawer.module.css), and a separate test runs with reducedMotion `reduce`; the clock is pinned to 8 am Melbourne, still 30 September in UTC, and the export file is expected under the local date, which the app now uses. Every test also fails on a CSP violation (D-149).
+
+**Reason.** First run rejects exam dates in the past, so CI must not depend on the real date. Under reduced motion the drawer failed to focus its input at the time, which would have failed the backtick step for a bug outside this track.
+
+**Rejected.** Forcing reduced motion and dropping the input-focus assertion, which would hide that bug.
+
+## D-145 Stats: The end-to-end run answers sort without knowing the question
+
+**Decision.** Click the first suggested answer when there are chips. Otherwise read the question: an array of the right length, `[1] [2]` for sub-lists, `3` for counting questions. Then assert a Correct or Incorrect verdict.
+
+**Reason.** The spec only needs one counted answer. This works for every sort question kind and doesn't depend on the seed.
+
+**Rejected.** Hard-coding the answer for the pinned seed, which breaks if sort's generator changes.
+
+## D-146 Stats: The end-to-end run has its own port and never reuses a server
+
+**Decision.** The preview runs on E2E_PORT (default 4317) with reuseExistingServer false, and BASE_PATH is `/` so CI's GITHUB_REPOSITORY base doesn't apply.
+
+**Reason.** Several worktrees preview builds on this machine at once. Reusing a server could test another checkout.
+
+**Rejected.** Vite's default port 4173 with server reuse.
+
+## D-147 Daily: The daily set draws on the P1 generator games
+
+**Decision.** `DAILY_GENERATOR_GAMES` now lists the nine P1 games that have `generate` (dfd, usecase, reqs, gantt, threat, law, naming, types and oop) after the five P0 ones. psm has no `generate` (D-113), so it stays out. A day's two generated questions still come from the two games that rank lowest for its date: over 730 days each of the 14 games appears on 86 to 115 days, and never twice on one day. The change applies from the next day that hasn't started; a day already begun keeps its stored item ids. The daily game still loads every listed game through the registry, and a test checks that each one loads and that its daily items rebuild from a stored record. Today's run still hands step 3 to the terminal, and now adds a secondary "Do it on screen instead" link to /daily.
+
+**Reason.** The daily challenge should range across the course, and the P1 games cover Unit 3 Outcome 2 and Unit 4 key knowledge that the P0 generators don't reach. Stored records keep their item ids (D-088), so the change is safe mid-day.
+
+**Rejected.** Keeping the P0 list, which leaves the new games out of the daily set. Weighting the P0 games more heavily, which would favour Unit 3 Outcome 1. Loading only the two games a day needs, which would change how both the terminal and the Daily screen load the set for a small saving, since every game chunk is already precached.
+
+## D-148 Games: The law game and the Essential Eight round go further than the content holdbacks
+
+**Decision.** The law game and threat's Essential Eight round teach, at textbook level, which of four Acts applies to a scenario and why (the Privacy Act 1988 (Cth) with its $3 million turnover threshold, the Privacy and Data Protection Act 2014 (Vic), the Health Records Act 2001 (Vic) and the Copyright Act 1968 (Cth)), and the eight strategies by name. That goes further than the content's holdbacks for U4O2-KK07 and U3O2-KK10, which keep Act scope, the turnover threshold and named frameworks out of the cards, questions and case studies (`docs/CONTENT_NOTES.md`). The games stay as built until they can be checked against the study design and current sources (D-001), including the ACSC's current name for the Office macro strategy (D-128) and any reform of the Privacy Act's small business exemption.
+
+**Reason.** The brief asks for these games by name, and neither can be built without naming the Acts and the strategies. Each law scenario is built to have one best answer and turnovers sit far from the threshold (D-127), so a small business reform would not flip an answer.
+
+**Rejected.** Holding back the law game and the Essential Eight round until the sources are confirmed, which would leave two of the brief's games unbuilt. Loosening the content holdbacks to match the games, which would widen what the study content claims before the source check.
+
+## D-149 Zod is configured wherever a schema is built
+
+**Decision.** `src/lib/zodConfig.ts` exports the configured `z`, and every module that builds or runs a schema imports it from there. ESLint forbids value imports from `'zod'` anywhere else. The end-to-end run now fails on any CSP violation.
+
+**Reason.** Since screens load on demand (D-095), the bundler puts Zod and the stores in chunks that run before `main.tsx`'s own body, so the first object schema was built before jitless mode was on. Zod's eval probe then raised a `script-src` CSP violation on every page load in production. The P1 smoke test found it, and a build of the pre-merge branch shows it too. A module's imports always run before it, so importing the configured `z` holds whatever the code splitting.
+
+**Rejected.** Pinning Zod and its settings into one chunk with the bundler's chunking options, which depends on bundler behaviour that has already changed once. Relaxing the CSP.
