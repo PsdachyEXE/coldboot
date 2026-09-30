@@ -10,8 +10,8 @@ describe('game registry', () => {
     expect(GAMES.slice(0, p0.length).map((g) => g.id)).toEqual(p0);
     const rest = GAMES.slice(p0.length);
     expect(rest.every((g) => g.priority === 'P1')).toBe(true);
-    // P1 games follow the brief's order, whichever of them are built so far.
-    expect(rest.map((g) => g.id)).toEqual(p1.filter((id) => rest.some((g) => g.id === id)));
+    // Every P1 game is built, in the brief's order.
+    expect(rest.map((g) => g.id)).toEqual(p1);
     for (const meta of GAMES) {
       expect(meta.priority).toBe(p0.includes(meta.id) ? 'P0' : 'P1');
       const usage = meta.id === 'daily' ? 'Usage: daily' : meta.fixedDifficulty ? `Usage: play ${meta.id}` : `Usage: play ${meta.id} [--easy|--hard]`;
@@ -29,7 +29,8 @@ describe('game registry', () => {
       const m = findGame(id)!;
       return [Boolean(m.generator), Boolean(m.needsContent), Boolean(m.fixedDifficulty)];
     };
-    for (const id of ['deskcheck', 'sort', 'search', 'triage', 'validate', 'dfd', 'usecase', 'reqs', 'gantt']) expect(flags(id)).toEqual([true, false, false]);
+    const generators = ['deskcheck', 'sort', 'search', 'triage', 'validate', 'dfd', 'usecase', 'reqs', 'gantt', 'threat', 'law', 'naming', 'types', 'oop'];
+    for (const id of generators) expect(flags(id)).toEqual([true, false, false]);
     expect(flags('blitz')).toEqual([false, true, true]);
     expect(flags('daily')).toEqual([false, true, true]);
     expect(flags('psm')).toEqual([false, true, false]);
@@ -55,8 +56,9 @@ describe('game registry', () => {
   it('writes man pages in sentence case without all-caps words', () => {
     for (const meta of [...GAMES, DRILL_GAME]) {
       const words = meta.man.match(/\b[A-Z]{2,}\b/g) ?? [];
-      // Only KK and area ids, TERMS and PSM, pseudocode keywords quoted as code, and the wordmark in the share line may be capitalised.
-      const code = new Set<string>([...PSEUDO_KEYWORDS, 'LENGTH', 'COLDBOOT']);
+      // Only KK and area ids, TERMS and PSM, pseudocode keywords quoted as code, the wordmark in the share line, and the
+      // abbreviations the brief says to keep (CSV and XML, which students type as answers) may be capitalised.
+      const code = new Set<string>([...PSEUDO_KEYWORDS, 'LENGTH', 'COLDBOOT', 'CSV', 'XML']);
       expect(words.filter((w) => !code.has(w) && !/^(TERMS|PSM|KK\d*|U\dO\d)$/.test(w))).toEqual([]);
     }
   });

@@ -12,16 +12,21 @@
  */
 import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_SUMMARY, BLITZ_TITLE } from './blitz/meta';
 import { DAILY_ID, DAILY_KK, DAILY_MAN, DAILY_SUMMARY, DAILY_TITLE } from './daily-game/meta';
-import { DFD_GAME_KK, DFD_ID, DFD_MAN, DFD_SUMMARY, DFD_TITLE } from './dfd/meta';
 import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK_TITLE } from './deskcheck/meta';
+import { DFD_GAME_KK, DFD_ID, DFD_MAN, DFD_SUMMARY, DFD_TITLE } from './dfd/meta';
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { GANTT_GAME_KK, GANTT_ID, GANTT_MAN, GANTT_SUMMARY, GANTT_TITLE } from './gantt/meta';
+import { LAW_GAME_KK, LAW_ID, LAW_MAN, LAW_SUMMARY, LAW_TITLE } from './law/meta';
+import { NAMING_GAME_KK, NAMING_ID, NAMING_MAN, NAMING_SUMMARY, NAMING_TITLE } from './naming/meta';
+import { OOP_GAME_KK, OOP_ID, OOP_MAN, OOP_SUMMARY, OOP_TITLE } from './oop/meta';
 import { PSM_ID, PSM_KK, PSM_MAN, PSM_SUMMARY, PSM_TITLE } from './psm/meta';
 import { REQS_ID, REQS_KK, REQS_MAN, REQS_SUMMARY, REQS_TITLE } from './reqs/meta';
-import { USECASE_GAME_KK, USECASE_ID, USECASE_MAN, USECASE_SUMMARY, USECASE_TITLE } from './usecase/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
+import { THREAT_GAME_KK, THREAT_ID, THREAT_MAN, THREAT_SUMMARY, THREAT_TITLE } from './threat/meta';
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
+import { TYPES_GAME_KK, TYPES_ID, TYPES_MAN, TYPES_SUMMARY, TYPES_TITLE } from './types-game/meta';
+import { USECASE_GAME_KK, USECASE_ID, USECASE_MAN, USECASE_SUMMARY, USECASE_TITLE } from './usecase/meta';
 import { VALIDATE_ID, VALIDATE_KK, VALIDATE_MAN, VALIDATE_SUMMARY, VALIDATE_TITLE } from './validate/meta';
 import type { GameMeta } from './types';
 
@@ -138,6 +143,57 @@ export const GAMES: GameMeta[] = [
     man: GANTT_MAN,
     generator: true,
     load: () => import('./gantt').then((m) => m.default),
+  },
+  {
+    id: THREAT_ID,
+    title: THREAT_TITLE,
+    priority: 'P1',
+    kk: THREAT_GAME_KK,
+    summary: THREAT_SUMMARY,
+    man: THREAT_MAN,
+    generator: true,
+    load: () => import('./threat').then((m) => m.default),
+  },
+  {
+    id: LAW_ID,
+    title: LAW_TITLE,
+    priority: 'P1',
+    kk: LAW_GAME_KK,
+    summary: LAW_SUMMARY,
+    man: LAW_MAN,
+    generator: true,
+    load: () => import('./law').then((m) => m.default),
+  },
+  {
+    id: NAMING_ID,
+    title: NAMING_TITLE,
+    priority: 'P1',
+    kk: NAMING_GAME_KK,
+    summary: NAMING_SUMMARY,
+    man: NAMING_MAN,
+    generator: true,
+    load: () => import('./naming').then((m) => m.default),
+  },
+  {
+    id: TYPES_ID,
+    title: TYPES_TITLE,
+    priority: 'P1',
+    kk: TYPES_GAME_KK,
+    summary: TYPES_SUMMARY,
+    man: TYPES_MAN,
+    generator: true,
+    // types-game, because ./types is the game contract (src/games/types.ts).
+    load: () => import('./types-game').then((m) => m.default),
+  },
+  {
+    id: OOP_ID,
+    title: OOP_TITLE,
+    priority: 'P1',
+    kk: OOP_GAME_KK,
+    summary: OOP_SUMMARY,
+    man: OOP_MAN,
+    generator: true,
+    load: () => import('./oop').then((m) => m.default),
   },
   {
     id: PSM_ID,
