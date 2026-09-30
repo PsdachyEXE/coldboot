@@ -5,6 +5,7 @@ import { fixtureIndex, fxCaseStudy, fxMcq, fxShort, provideContent, resetStudySt
 import { useAttempts } from '../state/attempts';
 import { useSettings } from '../state/settings';
 import { useAnnouncer } from '../ui/announce';
+import { examActions } from './actions';
 import ExamScreen from './ExamScreen';
 import { useExam } from './store';
 import { FULL_TIMING } from './timer';
@@ -33,7 +34,7 @@ function renderExam(path = '/exam') {
 
 /** A paper already 20 minutes in (writing time), started at T0 - 20 minutes. */
 function seedWriting() {
-  useExam.getState().start(
+  examActions.start(
     { mode: 'full', seed: 5, sections: { a: [mcqA.id, mcqB.id, mcqC.id], b: [short.id], c: ['cs-01-q01', 'cs-01-q02'] }, caseStudyId: 'cs-01', timing: FULL_TIMING },
     T0 - 20 * MIN,
   );

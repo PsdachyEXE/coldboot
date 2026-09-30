@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ExamDataSchema,
   HISTORY_MAX,
-  cleanAnswer,
   mergeExam,
   salvageExam,
   useExam,
@@ -11,6 +10,7 @@ import {
   type ExamSummary,
   type NewPaper,
 } from './store';
+import { cleanAnswer, examActions } from './actions';
 import { FULL_TIMING, MINI_TIMING } from './timer';
 
 const MIN = 60_000;
@@ -43,7 +43,7 @@ function summary(id: string, markedAt: number, overrides: Partial<ExamSummary> =
 }
 
 function started(): ExamPaper {
-  expect(useExam.getState().start(NEW, T0)).toBe(true);
+  expect(examActions.start(NEW, T0)).toBe(true);
   return useExam.getState().paper!;
 }
 
@@ -56,13 +56,13 @@ describe('exam store', () => {
     expect(p).toMatchObject({ mode: 'full', seed: 77, startedAt: T0, readingMs: 15 * MIN, writingMs: 120 * MIN, submittedAt: null, at: { section: 'a', index: 0 } });
     expect(p.id).toMatch(/^p-[a-z0-9]+-[a-z0-9]+$/);
     expect(ExamDataSchema.safeParse({ paper: p, history: [] }).success).toBe(true);
-    expect(useExam.getState().start({ ...NEW, seed: 78 }, T0 + 1)).toBe(false);
+    expect(examActions.start({ ...NEW, seed: 78 }, T0 + 1)).toBe(false);
     expect(useExam.getState().paper?.seed).toBe(77);
   });
 
   it('locks answers during reading time and after submission, and saves them during writing', () => {
     started();
-    const s = useExam.getState();
+    const s = examActions;
     s.answer('s-u3o1-kk04-001', 'Too early', T0 + 5 * MIN);
     expect(useExam.getState().paper!.answers).toEqual({});
     s.answer('s-u3o1-kk04-001', 'Keeps the \u202eleading zero\u0007.\nLine two', WRITING);
@@ -79,7 +79,7 @@ describe('exam store', () => {
 
   it('flags questions, remembers the position, and keeps track of warnings given', () => {
     started();
-    const s = useExam.getState();
+    const s = examActions;
     s.toggleFlag('m-u3o1-kk04-002');
     s.toggleFlag('cs-01-q01');
     s.toggleFlag('cs-01-q01');
@@ -91,38 +91,38 @@ describe('exam store', () => {
 
   it('submits during writing time only, and stamps an automatic submission at the end of writing', () => {
     started();
-    useExam.getState().submit(T0 + 5 * MIN);
+    examActions.submit(T0 + 5 * MIN);
     expect(useExam.getState().paper!.submittedAt).toBeNull();
-    useExam.getState().submit(T0 + 7 * 60 * MIN);
+    examActions.submit(T0 + 7 * 60 * MIN);
     expect(useExam.getState().paper).toMatchObject({ submittedAt: T0 + 135 * MIN, autoSubmitted: true });
   });
 
   it('takes marking-point ticks only after submission', () => {
     started();
-    useExam.getState().setTicks('s-u3o1-kk04-001', [1]);
+    examActions.setTicks('s-u3o1-kk04-001', [1]);
     expect(useExam.getState().paper!.ticks).toEqual({});
-    useExam.getState().submit(WRITING);
-    useExam.getState().setTicks('s-u3o1-kk04-001', [2, 0, 2, -1, 99]);
+    examActions.submit(WRITING);
+    examActions.setTicks('s-u3o1-kk04-001', [2, 0, 2, -1, 99]);
     expect(useExam.getState().paper!.ticks).toEqual({ 's-u3o1-kk04-001': [0, 2] });
   });
 
   it('files marked papers in a short history and clears the paper', () => {
     const p = started();
-    useExam.getState().finish(summary(p.id, T0 + 3 * 60 * MIN));
+    examActions.finish(summary(p.id, T0 + 3 * 60 * MIN));
     expect(useExam.getState().paper).toBeNull();
-    for (let i = 0; i < HISTORY_MAX + 3; i++) useExam.getState().finish(summary(`p-old${i}-1`, T0 + i * MIN));
+    for (let i = 0; i < HISTORY_MAX + 3; i++) examActions.finish(summary(`p-old${i}-1`, T0 + i * MIN));
     const h = useExam.getState().history;
     expect(h).toHaveLength(HISTORY_MAX);
     expect(h[h.length - 1].id).toBe(p.id);
-    useExam.getState().finish(summary('p-bad-1', T0, { sections: { a: [21, 20], b: [0, 20], c: [0, 60] } }));
+    examActions.finish(summary('p-bad-1', T0, { sections: { a: [21, 20], b: [0, 20], c: [0, 60] } }));
     expect(useExam.getState().history.some((s) => s.id === 'p-bad-1')).toBe(false);
   });
 
   it('discards a paper without touching history', () => {
     started();
-    useExam.getState().finish(summary('p-keep-1', T0));
-    useExam.getState().start(NEW, T0 + MIN);
-    useExam.getState().discard();
+    examActions.finish(summary('p-keep-1', T0));
+    examActions.start(NEW, T0 + MIN);
+    examActions.discard();
     expect(useExam.getState()).toMatchObject({ paper: null, history: [expect.objectContaining({ id: 'p-keep-1' })] });
   });
 
@@ -135,8 +135,8 @@ describe('exam store', () => {
 describe('exam schema, salvage and merge', () => {
   const base = (): ExamData => {
     useExam.getState().reset();
-    useExam.getState().start(NEW, T0);
-    useExam.getState().answer('s-u3o1-kk04-001', 'Mine', WRITING);
+    examActions.start(NEW, T0);
+    examActions.answer('s-u3o1-kk04-001', 'Mine', WRITING);
     return { paper: structuredClone(useExam.getState().paper!), history: [summary('p-one-1', T0 - 60 * MIN)] };
   };
 
@@ -203,7 +203,7 @@ describe('exam schema, salvage and merge', () => {
 
   it('stores the mini timing with the paper', () => {
     useExam.getState().reset();
-    useExam.getState().start({ ...NEW, mode: 'mini', timing: MINI_TIMING }, T0);
+    examActions.start({ ...NEW, mode: 'mini', timing: MINI_TIMING }, T0);
     expect(useExam.getState().paper).toMatchObject({ mode: 'mini', readingMs: 3 * MIN, writingMs: 27 * MIN });
     useExam.getState().reset();
   });
@@ -223,14 +223,15 @@ describe('exam data in progress files', () => {
     vi.resetModules();
     const io = await import('../state/exportImport');
     const exam = await import('./store');
-    return { io, exam };
+    const { examActions: actions } = await import('./actions');
+    return { io, exam, actions };
   }
 
   it('exports, resets and imports the paper in progress and the history', async () => {
-    const { io, exam } = await fresh();
-    exam.useExam.getState().start(NEW, T0);
-    exam.useExam.getState().answer('s-u3o1-kk04-001', 'Kept through export', WRITING);
-    exam.useExam.getState().finish(summary('p-past-1', T0 - 60 * MIN));
+    const { io, exam, actions } = await fresh();
+    actions.start(NEW, T0);
+    actions.answer('s-u3o1-kk04-001', 'Kept through export', WRITING);
+    actions.finish(summary('p-past-1', T0 - 60 * MIN));
     const file = io.buildExport(T0 + 30 * MIN);
     expect(file.stores.exam.v).toBe(1);
     const text = JSON.stringify(file);

@@ -2,8 +2,11 @@
  * Exam store: the paper in progress (autosaved on every change) and a short history of marked
  * papers (summaries only). Persisted as `coldboot:v1:exam`. `src/state/exportImport.ts` imports this
  * module, so the store hydrates and registers for export, import and reset with the shell, even
- * when the exam route has never been opened. Keep it small: everything heavier (paper assembly,
- * marking, the screens) lives in the lazily loaded exam chunk.
+ * when the exam route has never been opened.
+ *
+ * It ships with the shell, so it holds only the data, its schema, salvage and merge. The actions
+ * that change a paper (actions.ts), the timer, paper assembly, marking and the screens live in the
+ * lazily loaded exam chunk.
  *
  * Answers are the student's own text: render them only as React text.
  */
@@ -12,7 +15,7 @@ import { z } from 'zod';
 import { isKkId, type KkId } from '../content/schema';
 import { EXAM_READING_MS, EXAM_WRITING_MS } from '../lib/time';
 import { persistStore } from '../state/persist';
-import { submitTimer, timerState, type TimerConfig } from './timer';
+import type { TimerConfig } from './timer';
 
 export type ExamMode = 'full' | 'mini';
 export type SectionId = 'a' | 'b' | 'c';
@@ -83,23 +86,8 @@ export interface NewPaper {
   timing: TimerConfig;
 }
 
+/** The store holds data only; exam/actions.ts changes it. */
 export interface ExamState extends ExamData {
-  /** Starts a paper now. Refused (false) while another paper is in progress. */
-  start(paper: NewPaper, now?: number): boolean;
-  /** Saves an answer. Ignored outside writing time and for items not on the paper. */
-  answer(itemId: string, value: ExamAnswer, now?: number): void;
-  clearAnswer(itemId: string, now?: number): void;
-  /** Flags or unflags a question for review, until the paper is submitted. */
-  toggleFlag(itemId: string): void;
-  goTo(section: SectionId, index: number): void;
-  noteWarned(marks: readonly number[]): void;
-  /** Submits during writing time, or stores the automatic submission once writing time is over. */
-  submit(now?: number): void;
-  /** Sets the ticked marking points for a written answer after submission. */
-  setTicks(itemId: string, ticked: readonly number[]): void;
-  /** Files the summary in history and clears the paper. */
-  finish(summary: ExamSummary): void;
-  discard(): void;
   replace(data: ExamData): void;
   reset(): void;
 }
@@ -110,12 +98,7 @@ const MAX_ITEMS = { a: 40, b: 20, c: 30 } as const;
 
 // C0 and C1 controls except tab and newline, DEL, bidi controls and zero-width characters.
 // eslint-disable-next-line no-control-regex
-const ANSWER_UNSAFE = /[\u0000-\u0008\u000b-\u001f\u007f-\u009f\u061c\u200b-\u200f\u202a-\u202e\u2060-\u2069\ufeff]/;
-
-/** Strips characters a written answer never needs and caps its length. Keeps spaces and line breaks. */
-export function cleanAnswer(text: string): string {
-  return Array.from(text.replace(new RegExp(ANSWER_UNSAFE.source, 'g'), '')).slice(0, ANSWER_MAX).join('');
-}
+export const ANSWER_UNSAFE = /[\u0000-\u0008\u000b-\u001f\u007f-\u009f\u061c\u200b-\u200f\u202a-\u202e\u2060-\u2069\ufeff]/;
 
 export function paperTiming(paper: Pick<ExamPaper, 'readingMs' | 'writingMs'>): TimerConfig {
   return { readingMs: paper.readingMs, writingMs: paper.writingMs };
@@ -150,7 +133,7 @@ const Ticks = z
   .max(40)
   .refine((t) => new Set(t).size === t.length, 'Duplicate tick');
 
-const PaperSchema = z
+export const PaperSchema = z
   .object({
     id: PaperId,
     mode: Mode,
@@ -183,7 +166,7 @@ const PaperSchema = z
 const Mark = z.number().int().min(0).max(200);
 const TallySchema = z.tuple([Mark, Mark]).refine(([earned, available]) => earned <= available, 'More marks earned than available');
 
-const SummarySchema = z
+export const SummarySchema = z
   .object({
     id: PaperId,
     mode: Mode,
@@ -219,119 +202,18 @@ export function defaultExam(): ExamData {
 // Store
 // ---------------------------------------------------------------------------
 
-function paperId(startedAt: number, seed: number): string {
-  return `p-${startedAt.toString(36)}-${(seed >>> 0).toString(36)}`;
-}
-
-function onPaper(paper: ExamPaper, itemId: string): boolean {
-  return paperItemIds(paper).includes(itemId);
-}
-
-function phaseOf(paper: ExamPaper, now: number) {
-  return timerState(paper, paperTiming(paper), now).phase;
-}
-
 /** Oldest first, one entry per paper, capped at HISTORY_MAX. */
-function fileHistory(history: readonly ExamSummary[], add: readonly ExamSummary[]): ExamSummary[] {
+export function fileHistory(history: readonly ExamSummary[], add: readonly ExamSummary[]): ExamSummary[] {
   const byId = new Map<string, ExamSummary>();
   for (const s of [...history, ...add]) byId.set(s.id, s);
   return [...byId.values()].sort((a, b) => a.markedAt - b.markedAt || a.id.localeCompare(b.id)).slice(-HISTORY_MAX);
 }
 
-export const useExam = create<ExamState>()((set, get) => {
-  /** Applies `change` to the paper when there is one. */
-  const update = (change: (paper: ExamPaper) => ExamPaper | null) =>
-    set((s) => {
-      if (!s.paper) return s;
-      const next = change(s.paper);
-      return next === s.paper ? s : { paper: next };
-    });
-
-  return {
-    ...defaultExam(),
-    start: (p, now = Date.now()) => {
-      if (get().paper) return false;
-      const sections = { a: [...p.sections.a], b: [...p.sections.b], c: [...p.sections.c] };
-      const first = SECTION_IDS.find((s) => sections[s].length > 0) ?? 'a';
-      const paper: ExamPaper = {
-        id: paperId(now, p.seed),
-        mode: p.mode,
-        seed: p.seed >>> 0,
-        sections,
-        caseStudyId: p.caseStudyId,
-        startedAt: now,
-        readingMs: p.timing.readingMs,
-        writingMs: p.timing.writingMs,
-        answers: {},
-        flags: [],
-        ticks: {},
-        submittedAt: null,
-        autoSubmitted: false,
-        warned: [],
-        at: { section: first, index: 0 },
-      };
-      if (!PaperSchema.safeParse(paper).success) return false;
-      set({ paper });
-      return true;
-    },
-    answer: (itemId, value, now = Date.now()) =>
-      update((paper) => {
-        if (!onPaper(paper, itemId) || phaseOf(paper, now) !== 'writing') return paper;
-        const clean = typeof value === 'string' ? cleanAnswer(value) : value;
-        if (typeof clean === 'number' && !(Number.isInteger(clean) && clean >= 0 && clean <= 3)) return paper;
-        if (paper.answers[itemId] === clean) return paper;
-        return { ...paper, answers: { ...paper.answers, [itemId]: clean } };
-      }),
-    clearAnswer: (itemId, now = Date.now()) =>
-      update((paper) => {
-        if (!(itemId in paper.answers) || phaseOf(paper, now) !== 'writing') return paper;
-        const answers = { ...paper.answers };
-        delete answers[itemId];
-        return { ...paper, answers };
-      }),
-    toggleFlag: (itemId) =>
-      update((paper) => {
-        if (!onPaper(paper, itemId) || paper.submittedAt !== null) return paper;
-        const flags = paper.flags.includes(itemId) ? paper.flags.filter((f) => f !== itemId) : [...paper.flags, itemId];
-        return { ...paper, flags };
-      }),
-    goTo: (section, index) =>
-      update((paper) => {
-        const i = Math.max(0, Math.min(index, paper.sections[section].length - 1));
-        if (paper.sections[section].length === 0 || (paper.at.section === section && paper.at.index === i)) return paper;
-        return { ...paper, at: { section, index: i } };
-      }),
-    noteWarned: (marks) =>
-      update((paper) => {
-        const add = marks.filter((m) => Number.isInteger(m) && m >= 1 && m <= 120 && !paper.warned.includes(m));
-        return add.length ? { ...paper, warned: [...paper.warned, ...add].slice(-8) } : paper;
-      }),
-    submit: (now = Date.now()) =>
-      update((paper) => {
-        if (paper.submittedAt !== null) return paper;
-        const timing = paperTiming(paper);
-        const expired = timerState(paper, timing, now).expired;
-        const { submittedAt } = submitTimer(paper, timing, now);
-        if (submittedAt === null) return paper;
-        // Marking starts from the beginning of the paper.
-        const first = SECTION_IDS.find((s) => paper.sections[s].length > 0) ?? 'a';
-        return { ...paper, submittedAt, autoSubmitted: expired, at: { section: first, index: 0 } };
-      }),
-    setTicks: (itemId, ticked) =>
-      update((paper) => {
-        if (paper.submittedAt === null || !onPaper(paper, itemId)) return paper;
-        const clean = [...new Set(ticked.filter((t) => Number.isInteger(t) && t >= 0 && t < 40))].sort((a, b) => a - b);
-        return { ...paper, ticks: { ...paper.ticks, [itemId]: clean } };
-      }),
-    finish: (summary) => {
-      if (!SummarySchema.safeParse(summary).success) return;
-      set((s) => ({ paper: s.paper?.id === summary.id ? null : s.paper, history: fileHistory(s.history, [summary]) }));
-    },
-    discard: () => set({ paper: null }),
-    replace: (data) => set({ paper: data.paper, history: data.history }),
-    reset: () => set(defaultExam()),
-  };
-});
+export const useExam = create<ExamState>()((set) => ({
+  ...defaultExam(),
+  replace: (data) => set({ paper: data.paper, history: data.history }),
+  reset: () => set(defaultExam()),
+}));
 
 export function selectExamData(s: ExamData): ExamData {
   return { paper: s.paper, history: s.history };

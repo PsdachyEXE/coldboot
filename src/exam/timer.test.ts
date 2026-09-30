@@ -125,12 +125,13 @@ describe('the timer survives a reload', () => {
     vi.resetModules();
     const store = await import('./store');
     const timer = await import('./timer');
-    return { store, timer };
+    const { examActions: actions } = await import('./actions');
+    return { store, timer, actions };
   }
 
   it('restores reading time mid-reading and writing time mid-writing from the saved timestamps', async () => {
-    let { store, timer } = await reload();
-    const started = store.useExam.getState().start({
+    let { store, timer, actions } = await reload();
+    const started = actions.start({
       mode: 'full',
       seed: 42,
       sections: { a: ['m-u3o1-kk04-001'], b: ['s-u3o1-kk04-001'], c: [] },
@@ -142,20 +143,20 @@ describe('the timer survives a reload', () => {
 
     // Six minutes into reading time, the tab reloads.
     vi.setSystemTime(T0 + 6 * MIN);
-    ({ store, timer } = await reload());
+    ({ store, timer, actions } = await reload());
     let paper = store.useExam.getState().paper!;
     expect(paper.startedAt).toBe(T0);
     let state = timer.timerState(paper, store.paperTiming(paper), Date.now());
     expect(state).toMatchObject({ phase: 'reading', phaseLeft: 9 * MIN });
 
     // Answers are locked during reading time.
-    store.useExam.getState().answer('s-u3o1-kk04-001', 'Too early');
+    actions.answer('s-u3o1-kk04-001', 'Too early');
     expect(store.useExam.getState().paper!.answers).toEqual({});
 
     // Forty minutes into writing time: answer, then the laptop sleeps and the page reloads.
     vi.setSystemTime(T0 + 55 * MIN);
-    store.useExam.getState().answer('s-u3o1-kk04-001', 'Keeps the leading zero.');
-    store.useExam.getState().answer('m-u3o1-kk04-001', 2);
+    actions.answer('s-u3o1-kk04-001', 'Keeps the leading zero.');
+    actions.answer('m-u3o1-kk04-001', 2);
     store.examPersistence.flush();
     vi.setSystemTime(T0 + 100 * MIN);
     ({ store, timer } = await reload());
@@ -166,10 +167,10 @@ describe('the timer survives a reload', () => {
 
     // Reopened long after writing time ended: submitted automatically, stamped at the end.
     vi.setSystemTime(T0 + 300 * MIN);
-    ({ store, timer } = await reload());
+    ({ store, timer, actions } = await reload());
     paper = store.useExam.getState().paper!;
     expect(timer.timerState(paper, store.paperTiming(paper), Date.now())).toMatchObject({ phase: 'submitted', expired: true });
-    store.useExam.getState().submit();
+    actions.submit();
     expect(store.useExam.getState().paper).toMatchObject({ submittedAt: T0 + 135 * MIN, autoSubmitted: true });
   });
 });

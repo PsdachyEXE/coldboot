@@ -16,12 +16,13 @@ import { Button } from '../ui/Button';
 import { Dialog } from '../ui/Dialog';
 import { openReport } from '../ui/report';
 import { useMediaQuery } from '../ui/useMediaQuery';
+import { examActions } from './actions';
 import { DiscardDialog, QuestionList, SectionTabs, type QuestionState } from './ExamParts';
 import { McqReview, ShortMarking } from './ExamQuestion';
 import { EXAM_PANEL_ID, neighbours, sectionTabs, tabId, usePosition, useQuestionNav, useStickyOffset } from './hooks';
 import { SECTION_KIND, SECTION_LETTER, examReportPath } from './links';
 import { attemptsFor, markPaper, summarise, type ItemMark, type ResolvedPaper } from './marking';
-import { examPersistence, useExam, type ExamPaper, type SectionId } from './store';
+import { examPersistence, type ExamPaper, type SectionId } from './store';
 import styles from './Exam.module.css';
 
 function listState(m: ItemMark): QuestionState {
@@ -60,7 +61,6 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
   const { go, select } = useQuestionNav(`${section}:${index}`, headingRef);
   const caseQuestion = section === 'c';
   const refs = useMemo(() => new Set(item && caseQuestion ? ((item as { figureRefs?: string[] }).figureRefs ?? []) : []), [item, caseQuestion]);
-  const store = useExam.getState;
 
   const finish = () => {
     if (finished.current) return;
@@ -68,7 +68,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
     const now = Date.now();
     const summary = summarise(paper, marks, now);
     for (const attempt of attemptsFor(marks, summary.usedMs, now)) recordAttempt(attempt);
-    store().finish(summary);
+    examActions.finish(summary);
     examPersistence.flush();
     announce('Marking complete. Your report is ready.');
     navigate(examReportPath(summary.id), { replace: true, state: { fresh: true } });
@@ -98,7 +98,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
           answer={typeof answers[item.id] === 'string' ? (answers[item.id] as string) : undefined}
           ticked={ticks[item.id] ?? []}
           caseQuestion={caseQuestion}
-          onTicks={(t) => store().setTicks(item.id, t)}
+          onTicks={(t) => examActions.setTicks(item.id, t)}
         />
       )}
       <QuestionSteps steps={neighbours(sections, resolved, section, index)} go={go} />

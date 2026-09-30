@@ -16,6 +16,7 @@ import { Button } from '../ui/Button';
 import { Dialog } from '../ui/Dialog';
 import { openReport } from '../ui/report';
 import { useMediaQuery } from '../ui/useMediaQuery';
+import { examActions } from './actions';
 import { ExamClock, SaveStatus } from './ExamBar';
 import { ExamMarking } from './ExamMarking';
 import { DiscardDialog, FlagIcon, QuestionList, SectionTabs } from './ExamParts';
@@ -23,7 +24,7 @@ import { ExamMcq, ExamShort } from './ExamQuestion';
 import { EXAM_PANEL_ID, neighbours, sectionMarks, sectionTabs, tabId, usePaperTimer, usePosition, useQuestionNav, useStickyOffset } from './hooks';
 import { SECTION_KIND, SECTION_LETTER, modeName, numberList } from './links';
 import { resolvePaper, type ResolvedPaper } from './marking';
-import { isAnswered, useExam, type ExamPaper, type SectionId } from './store';
+import { isAnswered, type ExamPaper, type SectionId } from './store';
 import { formatTimerWords, type TimerState } from './timer';
 import styles from './Exam.module.css';
 
@@ -35,7 +36,7 @@ export function PaperView({ paper, content }: { paper: ExamPaper; content: Conte
   // Writing time ran out (perhaps while the tab was closed): store the automatic submission.
   useEffect(() => {
     if (!state.expired) return;
-    useExam.getState().submit();
+    examActions.submit();
     announce("Time's up. Your paper has been submitted.", 'assertive');
   }, [state.expired]);
 
@@ -71,7 +72,6 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
   const { sections, section, items, index, item } = usePosition(paper, resolved);
   const { go, select } = useQuestionNav(`${section}:${index}`, headingRef);
   const locked = phase === 'reading';
-  const store = useExam.getState;
 
   const refs = useMemo(() => new Set(item && resolved.caseStudy && section === 'c' ? ((item as { figureRefs?: string[] }).figureRefs ?? []) : []), [item, resolved.caseStudy, section]);
 
@@ -101,7 +101,7 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
           Question {index + 1} <span className={styles.qmarks}>of {items.length}</span>
           {isMcq(item) ? <span className={styles.qmarks}> (1 mark)</span> : null}
         </h2>
-        <Button size="small" onClick={() => store().toggleFlag(item.id)}>
+        <Button size="small" onClick={() => examActions.toggleFlag(item.id)}>
           {flagged ? 'Remove flag' : 'Flag for review'}
         </Button>
       </div>
@@ -118,8 +118,8 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
           chosen={typeof answer === 'number' ? answer : undefined}
           locked={locked}
           caseQuestion={caseQuestion}
-          onChoose={(i) => store().answer(item.id, i)}
-          onClear={() => store().clearAnswer(item.id)}
+          onChoose={(i) => examActions.answer(item.id, i)}
+          onClear={() => examActions.clearAnswer(item.id)}
         />
       ) : (
         <ExamShort
@@ -128,7 +128,7 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
           value={typeof answer === 'string' ? answer : ''}
           locked={locked}
           caseQuestion={caseQuestion}
-          onChange={(text) => store().answer(item.id, text)}
+          onChange={(text) => examActions.answer(item.id, text)}
         />
       )}
       <nav className={styles.qnav} aria-label="Previous and next question">
@@ -255,7 +255,7 @@ function SubmitDialog({
             variant="primary"
             onClick={() => {
               onClose();
-              useExam.getState().submit();
+              examActions.submit();
             }}
           >
             Submit paper

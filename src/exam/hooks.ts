@@ -1,10 +1,11 @@
 /** Hooks and helpers shared by the paper and marking views. */
 import { useCallback, useEffect, useRef, useState, type RefObject } from 'react';
 import { plural } from '../app/study/format';
+import { examActions } from './actions';
 import type { SectionTab } from './ExamParts';
 import { SECTION_KIND } from './links';
 import { marksAvailable, type PaperItem, type ResolvedPaper } from './marking';
-import { SECTION_IDS, paperTiming, useExam, type ExamPaper, type SectionId } from './store';
+import { SECTION_IDS, paperTiming, type ExamPaper, type SectionId } from './store';
 import { timerState, type TimerState } from './timer';
 
 /** The timer state, re-read at each phase boundary. `refresh` re-reads it now. */
@@ -86,9 +87,9 @@ export function useQuestionNav(key: string, heading: RefObject<HTMLElement | nul
   }, [key, heading]);
   const go = useCallback((section: SectionId, index: number) => {
     focusNext.current = true;
-    useExam.getState().goTo(section, index);
+    examActions.goTo(section, index);
   }, []);
-  const select = useCallback((section: SectionId) => useExam.getState().goTo(section, 0), []);
+  const select = useCallback((section: SectionId) => examActions.goTo(section, 0), []);
   return { go, select };
 }
 

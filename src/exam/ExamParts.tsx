@@ -4,9 +4,10 @@ import { announce } from '../ui/announce';
 import { Button } from '../ui/Button';
 import { Dialog } from '../ui/Dialog';
 import { VisuallyHidden } from '../ui/VisuallyHidden';
+import { examActions } from './actions';
 import { EXAM_PANEL_ID, tabId } from './hooks';
 import { SECTION_LETTER } from './links';
-import { useExam, type SectionId } from './store';
+import type { SectionId } from './store';
 import styles from './Exam.module.css';
 
 /** A small flag, drawn so it doesn't depend on a font having the glyph. */
@@ -135,7 +136,7 @@ export function DiscardDialog({ open, onClose, onDiscard }: { open: boolean; onC
             variant="primary"
             onClick={() => {
               onClose();
-              useExam.getState().discard();
+              examActions.discard();
               announce('Paper discarded.');
               onDiscard?.();
             }}

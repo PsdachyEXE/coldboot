@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNow } from '../lib/useNow';
 import { useStorageHealth } from '../state/storage';
 import { announce } from '../ui/announce';
+import { examActions } from './actions';
 import { examPersistence, paperTiming, useExam, type ExamPaper } from './store';
 import { activeWarning, formatTimer, formatTimerWords, timerState, warningText, warningsDue, type TimerPhase } from './timer';
 import styles from './Exam.module.css';
@@ -35,7 +36,7 @@ export function ExamClock({ paper, phase, onPhaseChange }: ExamClockProps) {
   const due = warningsDue(state, timing, paper.warned);
   useEffect(() => {
     if (!due.marks.length) return;
-    useExam.getState().noteWarned(due.marks);
+    examActions.noteWarned(due.marks);
     if (due.announce !== null) announce(warningText(due.announce, due.late), 'assertive');
   }, [due.marks, due.announce, due.late]);
 

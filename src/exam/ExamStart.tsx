@@ -16,6 +16,7 @@ import { announce } from '../ui/announce';
 import { Button, ButtonLink } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
 import { Panel } from '../ui/Panel';
+import { examActions } from './actions';
 import { DiscardDialog } from './ExamParts';
 import { examReportPath, examSitPath, formatDate, modeName } from './links';
 import { BLUEPRINTS, assemblePaper } from './paper';
@@ -41,7 +42,7 @@ export function ExamStart({ content, mini }: { content: ContentIndex; mini: bool
     const last = history[history.length - 1]?.caseStudyId;
     const assembled = assemblePaper(content, mode, freshSeed(now), { avoidCaseStudies: last ? [last] : [] });
     const timing = mode === 'full' ? FULL_TIMING : MINI_TIMING;
-    if (!useExam.getState().start({ ...assembled, timing }, now)) return;
+    if (!examActions.start({ ...assembled, timing }, now)) return;
     announce(`Reading time has started: ${formatTimerWords(timing.readingMs)}. Read the questions and plan your answers; you can answer once writing time starts.`);
     navigate(examSitPath);
   };
