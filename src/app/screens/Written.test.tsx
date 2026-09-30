@@ -108,7 +108,7 @@ describe('Written', () => {
     const router = renderWritten('/written?cs=cs-01');
     expect(screen.getByRole('heading', { level: 1, name: 'Riverbend Freight' })).toBeInTheDocument();
     // jsdom has no matchMedia, so this is the narrow layout: the insert folds into a section.
-    expect(screen.getByText('Case study insert')).toBeInTheDocument();
+    expect(screen.getByText('Show the case study insert')).toBeInTheDocument();
     expect(screen.getByText(/Riverbend Freight is a Geelong freight company/)).toBeInTheDocument();
     const nav = screen.getByRole('navigation', { name: 'Case study questions' });
     const links = within(nav).getAllByRole('link');

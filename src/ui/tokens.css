@@ -23,6 +23,12 @@
   --lh-body: 1.5;
   --lh-head: 1.3;
   --measure: 72ch;
+  /*
+   * One width for every panel and control block in a study column (card, options, feedback,
+   * model answer, mistake note, notices), so their right edges line up. `ch` resolves where the
+   * token is used, so it follows that element's font size.
+   */
+  --block-max: calc(var(--measure) + var(--space-7));
 
   --radius-control: 2px;
   --hairline: 1px solid var(--steel);

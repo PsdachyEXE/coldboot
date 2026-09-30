@@ -22,9 +22,14 @@ const BAND_LEGEND: { band: MasteryBand; label: string }[] = [
   { band: 'strong', label: 'Strong, 85% and over' },
 ];
 
-/** "U3O1-KK04 Data types, 62% mastery" or "... , unseen". */
-function cellName(kk: KkId, value: number | null): string {
-  return `${kkLabel(kk)}, ${value === null ? 'unseen' : `${Math.round(value)}% mastery`}`;
+/**
+ * "U3O1-KK04 Data types, 62% mastery" or "... , unseen". The name always contains the visible
+ * label, so speech users can say what they see: "PSM, Problem-solving methodology, unseen".
+ */
+function cellName(kk: KkId, label: string, value: number | null): string {
+  const title = kkLabel(kk);
+  const name = title.includes(label) ? title : `${label}, ${title}`;
+  return `${name}, ${value === null ? 'unseen' : `${Math.round(value)}% mastery`}`;
 }
 
 function Gauge({ band }: { band: MasteryBand }) {
@@ -47,7 +52,7 @@ function Cell({ kk, label, value, onSelect }: { kk: KkId; label: string; value: 
         type="button"
         className={[styles.cell, kk === 'TERMS' || kk === 'PSM' ? styles.wide : ''].filter(Boolean).join(' ')}
         data-band={band}
-        aria-label={cellName(kk, value)}
+        aria-label={cellName(kk, label, value)}
         onClick={() => onSelect(kk)}
       >
         <span className={styles.cellId} aria-hidden="true">

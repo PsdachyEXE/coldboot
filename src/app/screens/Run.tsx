@@ -19,6 +19,7 @@ import { useSettings } from '../../state/settings';
 import { useSrs } from '../../state/srs';
 import { useTerminal } from '../../terminal/useTerminal';
 import { Button, ButtonLink } from '../../ui/Button';
+import { useNarrow } from '../../ui/useMediaQuery';
 import { paths } from '../paths';
 import { ContentGate } from '../study/ContentGate';
 import { suggestNextStep, type DrillResult } from '../study/drill';
@@ -32,10 +33,10 @@ import study from '../study/study.module.css';
 import styles from '../study/Run.module.css';
 
 type StepId = 'review' | 'drill' | 'daily';
-const STEPS: { id: StepId; title: string }[] = [
-  { id: 'review', title: 'Review cards' },
-  { id: 'drill', title: 'Drill your weakest key knowledge' },
-  { id: 'daily', title: 'Daily challenge' },
+const STEPS: { id: StepId; title: string; short: string }[] = [
+  { id: 'review', title: 'Review cards', short: 'review cards' },
+  { id: 'drill', title: 'Drill your weakest key knowledge', short: 'drill' },
+  { id: 'daily', title: 'Daily challenge', short: 'the daily challenge' },
 ];
 
 interface Outcome {
@@ -101,6 +102,7 @@ function RunSteps({ content }: { content: ContentIndex }) {
     focus: false,
   }));
 
+  const narrow = useNarrow();
   const lastGameEnd = useTerminal((s) => s.lastGameEnd);
   const dailyRecord = useSession((s) => (state.dailyDate ? s.daily[state.dailyDate] : undefined));
 
@@ -123,10 +125,15 @@ function RunSteps({ content }: { content: ContentIndex }) {
       focus: true,
     }));
   const finishDrill = (r: DrillResult) =>
-    setState((prev) => ({
-      ...advance(content, { ...prev, drillResult: r, outcomes: { ...prev.outcomes, drill: { status: 'done', text: `${r.correct} of ${r.total} correct.` } } }, 'drill'),
-      focus: true,
-    }));
+    setState((prev) => {
+      // Ending the drill before answering anything is a skip, not "0 of 0 correct".
+      const drill: Outcome =
+        r.total === 0 ? { status: 'skipped', text: 'You ended the drill before answering.' } : { status: 'done', text: `${r.correct} of ${r.total} correct.` };
+      return {
+        ...advance(content, { ...prev, drillResult: r.total === 0 ? null : r, outcomes: { ...prev.outcomes, drill } }, 'drill'),
+        focus: true,
+      };
+    });
   const skipDaily = () =>
     setState((prev) => ({
       ...prev,
@@ -135,25 +142,31 @@ function RunSteps({ content }: { content: ContentIndex }) {
       focus: true,
     }));
 
+  // Phones show the task first: the step list folds into one line under the step heading.
+  const summary = step !== 'complete' && narrow ? <StepSummary step={step} outcomes={outcomes} /> : null;
+
   return (
     <>
       <h1>Today's run</h1>
-      {step === 'complete' ? null : <StepList step={step} outcomes={outcomes} />}
+      {step === 'complete' || narrow ? null : <StepList step={step} outcomes={outcomes} />}
 
       {step === 'review' ? (
         <section key="review" aria-labelledby="run-step">
           <StepHeading focus={focus} index={0} />
+          {summary}
           <ReviewRunner content={content} queue={state.queue} where="Today's run" onFinish={finishReview} autoFocus={false} />
         </section>
       ) : step === 'drill' ? (
         <section key="drill" aria-labelledby="run-step">
           <StepHeading focus={focus} index={1} />
+          {summary}
           <DrillRunner questions={state.drill} where="Today's run" onFinish={finishDrill} autoFocus={false} />
         </section>
       ) : step === 'daily' ? (
         <section key="daily" aria-labelledby="run-step">
           <StepHeading focus={focus} index={2} />
-          <DailyStep onSkip={skipDaily} />
+          {summary}
+          <DailyStep date={state.dailyDate} onSkip={skipDaily} />
         </section>
       ) : (
         <RunComplete content={content} outcomes={outcomes} drillResult={state.drillResult} focus={focus} />
@@ -189,6 +202,19 @@ function StepList({ step, outcomes }: { step: StepId; outcomes: Partial<Record<S
   );
 }
 
+/** Phones: "Next: drill, then the daily challenge", opening to the full step list. */
+function StepSummary({ step, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
+  const at = STEPS.findIndex((t) => t.id === step);
+  const ahead = STEPS.filter((s, i) => i > at && !outcomes[s.id]);
+  const next = ahead.length === 0 ? 'This is the last step' : `Next: ${ahead.map((s) => s.short).join(', then ')}`;
+  return (
+    <details className={styles.stepSummary}>
+      <summary>{next}</summary>
+      <StepList step={step} outcomes={outcomes} />
+    </details>
+  );
+}
+
 function reviewText(s: ReviewSummary): string {
   if (s.cards === 0) return 'You finished before rating any cards.';
   const base = `${plural(s.cards, 'card')} reviewed${s.newCards ? `, ${s.newCards} of them new` : ''}.`;
@@ -203,21 +229,31 @@ function StepHeading({ index, focus }: { index: number; focus: boolean }) {
   );
 }
 
-function DailyStep({ onSkip }: { onSkip(): void }) {
+function DailyStep({ date, onSkip }: { date: string; onSkip(): void }) {
   const open = useTerminal((s) => s.open);
+  const record = useSession((s) => (date ? s.daily[date] : undefined));
   const [started, setStarted] = useState(false);
+  // A day already begun carries on from the next unanswered question.
+  const answered = record && !record.completedAt ? record.results.length : 0;
   const start = () => {
     setStarted(true);
     useTerminal.getState().run('daily');
   };
   return (
     <>
-      <p>Ten questions, the same for everyone today. Only your first attempt counts. It runs in the terminal, which opens over this page.</p>
+      {answered > 0 ? (
+        <p>
+          You've answered {answered} of {record?.itemIds.length}. Carry on from question {answered + 1}. Only your first attempt at each question counts.
+          It runs in the terminal, which opens over this page.
+        </p>
+      ) : (
+        <p>Ten questions, the same for everyone today. Only your first attempt counts. It runs in the terminal, which opens over this page.</p>
+      )}
       {started ? <p>This step finishes when you answer the tenth question. If you close the terminal, open it again to carry on.</p> : null}
       <div className={study.actions}>
         {!started ? (
           <Button variant="primary" onClick={start}>
-            Start the daily challenge
+            {answered > 0 ? 'Continue the daily challenge' : 'Start the daily challenge'}
           </Button>
         ) : !open ? (
           <Button variant="primary" onClick={() => useTerminal.getState().setOpen(true)}>

@@ -1,6 +1,6 @@
 .feedback {
   margin: 0 0 var(--space-5);
-  max-width: calc(var(--measure) + 2 * var(--space-4));
+  max-width: var(--block-max);
 }
 
 .verdict {

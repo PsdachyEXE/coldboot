@@ -7,8 +7,11 @@
 import {
   forwardRef,
   useId,
+  type ForwardedRef,
   type InputHTMLAttributes,
+  type ReactElement,
   type ReactNode,
+  type Ref,
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
 } from 'react';
@@ -279,21 +282,37 @@ export interface RadioGroupProps<T extends string> {
   onChange(value: T): void;
   options: readonly RadioOption<T>[];
   hint?: ReactNode;
+  /** Validation message for the group, e.g. when nothing is chosen. Shown under the legend. */
+  error?: string | null;
   className?: string;
 }
 
-/** One choice from a few options, as a fieldset of native radio buttons. */
-export function RadioGroup<T extends string>({ legend, name, value, onChange, options, hint, className }: RadioGroupProps<T>) {
+/**
+ * One choice from a few options, as a fieldset of native radio buttons. Pass a `value` that matches
+ * no option (such as '') to start with nothing chosen.
+ */
+export const RadioGroup = forwardRef(function RadioGroup<T extends string>(
+  { legend, name, value, onChange, options, hint, error, className }: RadioGroupProps<T>,
+  ref: ForwardedRef<HTMLFieldSetElement>,
+) {
   const base = useId();
   const hintId = hint ? `r${base}-hint` : undefined;
+  const errorId = error ? `r${base}-error` : undefined;
+  const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
   return (
-    <fieldset className={[styles.fieldset, className].filter(Boolean).join(' ')} aria-describedby={hintId}>
+    <fieldset
+      ref={ref}
+      tabIndex={error ? -1 : undefined}
+      className={[styles.fieldset, className].filter(Boolean).join(' ')}
+      aria-describedby={describedBy}
+    >
       <legend className={styles.legend}>{legend}</legend>
       {hint ? (
         <p className={styles.hint} id={hintId}>
           {hint}
         </p>
       ) : null}
+      {error ? <FieldError id={errorId}>{error}</FieldError> : null}
       {options.map((o) => {
         const id = `r${base}-${o.value}`;
         const optHint = o.hint ? `${id}-hint` : undefined;
@@ -324,4 +343,4 @@ export function RadioGroup<T extends string>({ legend, name, value, onChange, op
       })}
     </fieldset>
   );
-}
+}) as <T extends string>(props: RadioGroupProps<T> & { ref?: Ref<HTMLFieldSetElement> }) => ReactElement;

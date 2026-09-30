@@ -42,6 +42,7 @@ export interface CaseStudyPracticeProps {
 export function CaseStudyPractice({ cs, questionId, onSelect }: CaseStudyPracticeProps) {
   const wide = useMediaQuery(CASE_WIDE_QUERY);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
+  const [insertOpen, setInsertOpen] = useState(false);
   const found = cs.questions.findIndex((q) => q.id === questionId);
   const index = found === -1 ? 0 : found;
   const question = cs.questions[index];
@@ -119,11 +120,11 @@ export function CaseStudyPractice({ cs, questionId, onSelect }: CaseStudyPractic
           })}
         </ol>
       </nav>
-      <p className={study.small}>
-        {done.length === 0
-          ? `${plural(cs.questions.length, 'question')}, ${plural(cs.totalMarks, 'mark')} in all.`
-          : `Answered ${done.length} of ${cs.questions.length}: ${earned} of ${plural(attempted, 'mark')} so far.`}
-      </p>
+      {done.length > 0 ? (
+        <p className={study.small}>
+          Answered {done.length} of {cs.questions.length}: {earned} of {plural(attempted, 'mark')} so far.
+        </p>
+      ) : null}
       {referenced.length ? (
         wide ? (
           <p className={styles.refs}>
@@ -198,8 +199,8 @@ export function CaseStudyPractice({ cs, questionId, onSelect }: CaseStudyPractic
   }
   return (
     <div className={styles.caseLayout}>
-      <details className={styles.details}>
-        <summary>Case study insert</summary>
+      <details className={styles.details} open={insertOpen} onToggle={(e) => setInsertOpen(e.currentTarget.open)}>
+        <summary>{insertOpen ? 'Hide the case study insert' : 'Show the case study insert'}</summary>
         <div className={styles.detailsBody}>{insert}</div>
       </details>
       {body}

@@ -310,7 +310,7 @@
 .table td :global(code),
 .table th :global(code) {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: max(0.9em, var(--step-0));
   color: var(--phosphor);
 }
 
@@ -370,8 +370,10 @@
   width: fit-content;
 }
 
-.details > summary:hover {
-  text-decoration: underline;
+@media (hover: hover) {
+  .details > summary:hover {
+    text-decoration: underline;
+  }
 }
 
 .descSummary {
@@ -386,4 +388,15 @@
 .descList {
   margin: 0;
   padding-left: 1.5em;
+}
+
+/* Gantt chart: the box it measures, and the compact layout's task table under the bars. */
+.ganttBox {
+  min-width: 0;
+}
+.ganttTasks {
+  margin-top: var(--space-3);
+}
+.ganttTasks .numeric {
+  text-align: right;
 }

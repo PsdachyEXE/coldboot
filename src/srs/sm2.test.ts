@@ -192,6 +192,19 @@ describe('SM-2 exam caps', () => {
     expect(dueDay(after.due)).toBe('2026-11-28');
   });
 
+  it('says which cap moved the due date, so the rating buttons can explain it', () => {
+    const exam = schedule(card({ reps: 2, interval: 20, ease: 2.5 }), 3, local(2026, 10, 20), { examAt: EXAM });
+    expect(exam.capped).toBe('exam');
+    const week = schedule(card({ reps: 2, interval: 6 }), 3, local(2026, 11, 6), { examAt: EXAM });
+    expect(week.capped).toBe('final-week');
+    const free = schedule(card({ reps: 2, interval: 6 }), 3, local(2026, 10, 1), { examAt: EXAM });
+    expect(free.capped).toBeNull();
+    const again = schedule(card({ reps: 2, interval: 6 }), 1, local(2026, 11, 6), { examAt: EXAM });
+    expect(again.capped).toBeNull();
+    const after = schedule(card({ reps: 2, interval: 6 }), 3, EXAM + 60_000, { examAt: EXAM });
+    expect(after.capped).toBeNull();
+  });
+
   it('caps the due day with capDueDay directly', () => {
     const now = local(2026, 11, 1);
     expect(capDueDay('2026-11-01', 30, now, EXAM)).toBe('2026-11-11');

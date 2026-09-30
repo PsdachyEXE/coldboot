@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { act, fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { useSettings } from '../state/settings';
 import { useStorageHealth } from '../state/storage';
@@ -89,6 +89,18 @@ describe('Layout', () => {
     expect(document.title).toBe('Home - COLDBOOT');
   });
 
+  it('opens the terminal on a backtick even before the drawer has loaded', async () => {
+    onboard();
+    renderAt('/');
+    await screen.findByRole('navigation', { name: 'Main' });
+    act(() => {
+      fireEvent.keyDown(document.body, { key: '`' });
+    });
+    expect(useTerminal.getState().open).toBe(true);
+    const drawer = await screen.findByRole('dialog', { name: 'Terminal' });
+    await waitFor(() => expect(drawer).toHaveAttribute('data-open', 'true'));
+  });
+
   it('moves focus to the main column after navigating', async () => {
     onboard();
     renderAt('/');
@@ -96,7 +108,8 @@ describe('Layout', () => {
     await act(async () => {
       fireEvent.click(within(nav).getByRole('link', { name: 'Drill' }));
     });
-    expect(screen.getByRole('main')).toHaveFocus();
+    // Drill is its own chunk; focus moves once the new page is in.
+    await waitFor(() => expect(screen.getByRole('main')).toHaveFocus());
   });
 
   it('uses five tabs and a More menu below 720 px', async () => {
@@ -130,7 +143,8 @@ describe('Layout', () => {
       fireEvent.click(within(nav).getByRole('link', { name: 'Settings' }));
     });
     expect(router.state.location.pathname).toBe('/settings');
-    expect(within(nav).queryByRole('link', { name: 'Settings' })).toBeNull();
+    // Settings is its own chunk: the page (and the open menu) change once it has loaded.
+    await waitFor(() => expect(within(nav).queryByRole('link', { name: 'Settings' })).toBeNull());
     expect(within(nav).getByRole('button', { name: 'More' }).className).toMatch(/tabActive/);
   });
 

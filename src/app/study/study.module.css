@@ -1,7 +1,7 @@
 /* Shared layout for the study screens: Review, Drill, Written, Today's run. */
 
 .page {
-  max-width: calc(var(--measure) + var(--space-7));
+  max-width: var(--block-max);
   min-width: 0;
 }
 
@@ -66,14 +66,23 @@
   }
 }
 
-/* Keyboard hints under a control row. */
+/* Small print under a control row, and keyboard hints. */
+.hint,
 .keys {
   font-size: var(--step-0);
   color: var(--steel);
   margin: var(--space-3) 0 0;
 }
+.hint kbd,
 .keys kbd {
   color: var(--ice);
+}
+/* Keyboard-only hints (.keys blocks, .keyOnly spans) are clutter on touch screens with no keys. */
+@media (hover: none) and (pointer: coarse) {
+  .keys,
+  .keyOnly {
+    display: none;
+  }
 }
 
 /* Position in a round: "Card 3 of 37". */
@@ -102,7 +111,7 @@
   padding: var(--space-3) var(--space-4);
   background: var(--trench);
   border-left: 4px solid var(--phosphor);
-  max-width: calc(var(--measure) + 2 * var(--space-4));
+  max-width: var(--block-max);
 }
 .mistake > :last-child {
   margin-bottom: 0;
@@ -134,7 +143,7 @@
   background: var(--trench);
   border-left: 4px solid var(--phosphor);
   margin: 0 0 var(--space-5);
-  max-width: calc(var(--measure) + 2 * var(--space-4));
+  max-width: var(--block-max);
 }
 .notice > :last-child {
   margin-bottom: 0;

@@ -6,12 +6,12 @@
 import { Link, useNavigate } from 'react-router';
 import type { ContentIndex } from '../../content/loader';
 import { useContentIndex } from '../../content/store';
-import { kkLabel } from '../../content/studyDesign';
+import { ALL_KK_IDS, kkLabel } from '../../content/studyDesign';
 import { melbourneDate, studyDay } from '../../lib/time';
 import { useNow } from '../../lib/useNow';
 import { useDueSummary, useMastery } from '../../srs/hooks';
 import type { MasteryMap } from '../../srs/mastery';
-import { streak, useSession } from '../../state/session';
+import { streak, useSession, type DailyRecord } from '../../state/session';
 import { useSrs } from '../../state/srs';
 import { ButtonLink } from '../../ui/Button';
 import { drillPath, paths } from '../paths';
@@ -35,7 +35,7 @@ export default function Home() {
     <div>
       <h1>Today</h1>
       <ContentErrorNotice />
-      <RunPreview content={content} mastery={mastery} due={due} newRemaining={newRemaining} dailyDone={Boolean(daily?.completedAt)} />
+      <RunPreview content={content} mastery={mastery} due={due} newRemaining={newRemaining} daily={daily} />
       <p>
         <ButtonLink variant="primary" to={paths.run}>
           Start today's run
@@ -81,35 +81,44 @@ function RunPreview({
   mastery,
   due,
   newRemaining,
-  dailyDone,
+  daily,
 }: {
   content: ContentIndex | null;
   mastery: MasteryMap;
   due: number;
   newRemaining: number;
-  dailyDone: boolean;
+  /** Today's daily challenge record, if the student has started it. */
+  daily: DailyRecord | undefined;
 }) {
   const cards = useSrs((s) => s.cards);
   const unseen = content ? content.cards.filter((c) => !cards[c.id]).length : 0;
   const fresh = Math.min(unseen, newRemaining);
-  const weakest = content ? rankWeakest(kksWithItems(content, 'mcq'), mastery)[0] : undefined;
+  // Until the content has loaded, every KK but Terms (which has no questions) is a candidate, so
+  // the line reads the same before and after and the page below doesn't shift.
+  const weakest = rankWeakest(content ? kksWithItems(content, 'mcq') : ALL_KK_IDS.filter((kk) => kk !== 'TERMS'), mastery)[0];
 
-  const review =
-    due && fresh
+  const review = !content
+    ? due
+      ? `Review ${plural(due, 'due card')} and today's new cards.`
+      : "Learn today's new cards."
+    : due && fresh
       ? `Review ${plural(due, 'due card')} and ${plural(fresh, 'new card')}.`
       : due
         ? `Review ${plural(due, 'due card')}.`
         : fresh
           ? `Learn ${plural(fresh, 'new card')}.`
-          : content
-            ? 'No cards to review: this step is skipped.'
-            : 'Review the cards that are due.';
+          : 'No cards to review: this step is skipped.';
+  // With no attempts at the chosen KK, it is simply the first one not tried yet, not the weakest.
   const drill = weakest
-    ? `Drill 10 questions, starting with your weakest key knowledge, ${kkLabel(weakest)}.`
-    : content
-      ? 'No questions to drill yet: this step is skipped.'
-      : 'Drill 10 questions on your weakest key knowledge.';
-  const dailyText = dailyDone ? "Daily challenge: you've done today's." : 'Take the daily challenge in the terminal.';
+    ? mastery.has(weakest)
+      ? `Drill 10 questions, starting with your weakest key knowledge, ${kkLabel(weakest)}.`
+      : `Drill 10 questions, starting with key knowledge you haven't tried yet, ${kkLabel(weakest)}.`
+    : 'No questions to drill yet: this step is skipped.';
+  const dailyText = daily?.completedAt
+    ? "Daily challenge: you've done today's."
+    : daily && daily.results.length > 0
+      ? `Finish the daily challenge: ${daily.results.length} of ${daily.itemIds.length} answered.`
+      : 'Take the daily challenge in the terminal.';
 
   return (
     <ol className={styles.steps} aria-label="Today's run">

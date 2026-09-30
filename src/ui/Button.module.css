@@ -23,12 +23,20 @@
   padding: 0 var(--space-3);
   font-size: var(--step-0);
 }
+/* Touch screens: small buttons keep the full 44 px touch target. */
+@media (pointer: coarse) {
+  .small {
+    min-height: var(--control-h);
+  }
+}
 
 /* Hover underlines the label: the palette has no lighter or darker shades to swap in. */
-.button:hover:not(:disabled) {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
+@media (hover: hover) {
+  .button:hover:not(:disabled) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
 }
 
 .primary {
@@ -42,8 +50,10 @@
   color: var(--ice);
   border-color: var(--steel);
 }
-.secondary:hover:not(:disabled) {
-  border-color: var(--ice);
+@media (hover: hover) {
+  .secondary:hover:not(:disabled) {
+    border-color: var(--ice);
+  }
 }
 .secondary:active:not(:disabled) {
   background: var(--trench);
@@ -55,13 +65,17 @@
   border-color: transparent;
   padding-left: var(--space-2);
   padding-right: var(--space-2);
+  /* The label lines up with the column edge; the padding still counts toward the hit area. */
+  margin-inline: calc(-1 * var(--space-2));
   font-weight: 400;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
 }
-.quiet:hover:not(:disabled) {
-  text-decoration-thickness: 2px;
+@media (hover: hover) {
+  .quiet:hover:not(:disabled) {
+    text-decoration-thickness: 2px;
+  }
 }
 
 .button:disabled,

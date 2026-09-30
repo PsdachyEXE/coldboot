@@ -71,9 +71,11 @@
   text-decoration: none;
   border-left: 2px solid transparent;
 }
-.navLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+@media (hover: hover) {
+  .navLink:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
 }
 .navLinkActive {
   font-weight: 700;
@@ -116,12 +118,20 @@
   text-align: left;
   cursor: pointer;
 }
-.terminalButton:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+@media (hover: hover) {
+  .terminalButton:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
 }
 .terminalKey {
   flex: none;
+}
+/* The backtick keycap is a keyboard hint; touch screens have no key to press. */
+@media (hover: none) and (pointer: coarse) {
+  .terminalKey {
+    display: none;
+  }
 }
 
 /* ---- Top bar: phones, and first run on any width ---- */

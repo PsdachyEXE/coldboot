@@ -42,3 +42,18 @@
   font-family: var(--font-mono);
   font-size: var(--step-0);
 }
+
+/*
+ * Phones: the dialog is taller than the screen, so the buttons stick to the bottom of it on
+ * --trench with a hairline above, instead of sitting below the fold.
+ */
+@media (max-width: 719.98px) {
+  .actions {
+    position: sticky;
+    bottom: 0;
+    margin-inline: calc(-1 * var(--space-4));
+    margin-bottom: calc(-1 * var(--space-4));
+    padding: var(--space-3) var(--space-4);
+    background: var(--trench);
+  }
+}

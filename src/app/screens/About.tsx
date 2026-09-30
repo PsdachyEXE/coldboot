@@ -53,8 +53,7 @@ export default function About() {
           </li>
           <li>
             <strong>Development models (agile, waterfall, spiral) are left out.</strong> They were part of the previous study design and still
-            fill a lot of revision material, but the build brief couldn't find them in the 2025 key knowledge. They stay out until that is
-            confirmed.
+            fill a lot of revision material, but we couldn't find them in the 2025 key knowledge. They stay out until that is confirmed.
           </li>
           <li>
             <strong>Exam tips are advice, not rules.</strong> Tips such as naming data types in full come from a Victorian school's teacher

@@ -61,7 +61,7 @@ export function ScopeForm({ content, kind, legend, submitLabel, timedOption = fa
           {
             value: 'weak',
             label: 'Your weakest key knowledge',
-            hint: "The key knowledge you score lowest on. Until you've tried three, it includes some you haven't tried yet.",
+            hint: "The key knowledge you score lowest on. Until you've tried at least three key knowledge points, it mixes in some you haven't tried yet.",
           },
           { value: 'kk', label: 'One key knowledge point' },
           { value: 'area', label: 'One area of study' },

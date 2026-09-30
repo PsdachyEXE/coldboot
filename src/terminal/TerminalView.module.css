@@ -16,9 +16,12 @@
   font-variant-ligatures: none;
 }
 
-/* Touch screens get 16 px text, which also stops mobile browsers zooming into the input. */
+/*
+ * Touch screens: the prompt line is 16 px, which stops mobile browsers zooming into the input.
+ * The output stays at 14 px so a 360 px phone still fits about 35 characters of Martian Mono.
+ */
 @media (pointer: coarse) {
-  .root { font-size: var(--step-1); }
+  .form { font-size: var(--step-1); }
 }
 
 .root ::selection {
@@ -165,6 +168,31 @@
 .abort {
   margin-left: auto;
   color: var(--ice);
+}
+
+/*
+ * Phones: the chips stay on one row that scrolls sideways, so they never take three rows of a
+ * short screen. The chips are buttons, so keyboard focus scrolls each one into view.
+ */
+@media (max-width: 719.98px) {
+  .chipRow {
+    flex-wrap: nowrap;
+  }
+  .chips {
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    /* Room inside the scroll box for a chip's focus ring. */
+    margin: -4px;
+    padding: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--steel) var(--trench);
+  }
+  .chip {
+    flex: none;
+    white-space: nowrap;
+  }
 }
 
 @media (pointer: coarse) {

@@ -36,6 +36,10 @@
   max-width: 72ch;
 }
 
+/* A muted hint whose bold spans (command names) stand out in --ice. */
+.markdownMuted { color: var(--steel); }
+.markdownMuted :global(strong) { color: var(--ice); font-weight: 700; }
+
 .markdown :global(pre.pseudo),
 .markdown :global(pre.code),
 .pseudo :global(pre.pseudo) {
@@ -61,6 +65,12 @@
   white-space: pre;
 }
 
+/* Share lines wrap rather than scroll: the whole line matters, and it is copied as text anyway. */
+.preWrap {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .tableWrap {
   max-width: 100%;
   overflow-x: auto;
@@ -68,6 +78,7 @@
 }
 
 .tableWrap:focus-visible,
+.pre:focus-visible,
 .link:focus-visible {
   outline: 2px solid var(--cobalt);
   outline-offset: 2px;
@@ -91,9 +102,48 @@
   border-bottom: 1px solid var(--steel);
 }
 
-.table tbody th { color: var(--ice); white-space: nowrap; }
+.table tbody th { color: var(--ice); }
 .table td { color: var(--phosphor); }
 .table .numeric { text-align: right; padding-left: 8px; }
+
+/* Wide screens keep a command signature such as "play <game> [--easy|--hard]" on one line. */
+@media (min-width: 720px) {
+  .table tbody th { white-space: nowrap; }
+}
+
+/*
+ * Phones: a two-column table (help, ls, results by key knowledge) stacks each row, the first cell
+ * on its own line and the second indented beneath it, so neither column is squeezed to a word per
+ * line. The column headings stay for screen readers; the explicit roles in BlockView keep the table
+ * semantics when the rows are displayed as blocks.
+ */
+@media (max-width: 719.98px) {
+  .stacked thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .stacked,
+  .stacked tbody,
+  .stacked tr,
+  .stacked th,
+  .stacked td {
+    display: block;
+  }
+  .stacked caption { display: block; }
+  .stacked tbody tr { padding: 2px 0; }
+  .stacked tbody th,
+  .stacked tbody td {
+    padding: 0;
+  }
+  .stacked tbody td {
+    padding-left: 2ch;
+  }
+  .stacked .numeric { text-align: left; }
+}
 
 .link {
   color: var(--phosphor);

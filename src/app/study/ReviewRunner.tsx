@@ -23,6 +23,7 @@ import { useReducedMotion } from '../../ui/motion';
 import { VisuallyHidden } from '../../ui/VisuallyHidden';
 import { openReport } from '../../ui/report';
 import { formatInterval, formatWait, plural } from './format';
+import { capNote } from './ratings';
 import { isActivatingTarget, useShortcuts } from './keys';
 import { ReviewCard } from './ReviewCard';
 import styles from './Review.module.css';
@@ -229,7 +230,7 @@ export function ReviewRunner({ content, queue, where, onFinish, autoFocus = true
         animate={!reduced}
       />
       {flipped ? (
-        <RatingButtons previews={previews} onRate={rate} />
+        <RatingButtons previews={previews} now={state.shownAt} onRate={rate} />
       ) : (
         <div className={study.actions}>
           <Button variant="primary" onClick={flip} aria-keyshortcuts="Space">
@@ -242,7 +243,10 @@ export function ReviewRunner({ content, queue, where, onFinish, autoFocus = true
       )}
       <div className={styles.runnerFoot}>
         <Button variant="quiet" size="small" onClick={report} aria-keyshortcuts="R">
-          Report a problem <Kbd>R</Kbd>
+          Report a problem
+          <span className={study.keyOnly} aria-hidden="true">
+            <Kbd>R</Kbd>
+          </span>
         </Button>
         <Button variant="quiet" size="small" onClick={() => finish(true)}>
           Finish review
@@ -252,14 +256,16 @@ export function ReviewRunner({ content, queue, where, onFinish, autoFocus = true
   );
 }
 
-function RatingButtons({ previews, onRate }: { previews: ScheduleResult[]; onRate(r: Rating): void }) {
+function RatingButtons({ previews, now, onRate }: { previews: ScheduleResult[]; now: number; onRate(r: Rating): void }) {
   const questionId = useId();
+  const noteId = useId();
+  const note = capNote(previews, now);
   return (
     <div className={styles.rateBlock}>
       <p className={styles.rateQuestion} id={questionId}>
         How well did you recall it?
       </p>
-      <div className={styles.rates} role="group" aria-labelledby={questionId}>
+      <div className={styles.rates} role="group" aria-labelledby={questionId} aria-describedby={note ? noteId : undefined}>
         {RATINGS.map((r, i) => {
           const res = previews[i];
           const when = res.requeueAfterMs !== null ? formatWait(res.requeueAfterMs) : formatInterval(res.next.interval);
@@ -268,15 +274,23 @@ function RatingButtons({ previews, onRate }: { previews: ScheduleResult[]; onRat
               <span className={styles.rateLabel}>{RATING_LABELS[r]}</span>
               <VisuallyHidden>, comes back in</VisuallyHidden>{' '}
               <span className={styles.rateWhen}>{when}</span>
-              <span className={styles.rateKey} aria-hidden="true">
+              <span className={`${styles.rateKey} ${study.keyOnly}`} aria-hidden="true">
                 <Kbd>{r}</Kbd>
               </span>
             </Button>
           );
         })}
       </div>
-      <p className={study.keys}>
-        Press <Kbd>1</Kbd> to <Kbd>4</Kbd> to rate. The time under each rating is when the card comes back.
+      {note ? (
+        <p className={study.hint} id={noteId}>
+          {note}
+        </p>
+      ) : null}
+      <p className={study.hint}>
+        <span className={study.keyOnly}>
+          Press <Kbd>1</Kbd> to <Kbd>4</Kbd> to rate.{' '}
+        </span>
+        The time on each rating is when the card comes back.
       </p>
     </div>
   );

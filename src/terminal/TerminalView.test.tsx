@@ -45,6 +45,13 @@ describe('terminal view', () => {
     expect(within(log).getByText('COLDBOOT terminal')).toBeInTheDocument();
   });
 
+  it('offers a share chip once a share line has been printed', () => {
+    useTerminalSession.getState().setLastShare('COLDBOOT daily 2026-10-02  8/10');
+    renderView();
+    const chips = screen.getByRole('group', { name: 'Suggested commands' });
+    expect(within(chips).getAllByRole('button')[0]).toHaveTextContent('share');
+  });
+
   it('uses student in the prompt until a name is set', () => {
     renderView();
     expect(screen.getByText('student@coldboot:~$')).toBeInTheDocument();

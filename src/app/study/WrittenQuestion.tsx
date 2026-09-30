@@ -92,9 +92,10 @@ export function WrittenQuestion({ item, position, where, onScored, next, autoFoc
   return (
     <section ref={regionRef} tabIndex={-1} aria-labelledby={promptId} className={styles.question}>
       {position ? <p className={study.progress}>{position}</p> : null}
-      <p className={styles.meta}>
-        <strong>{capitalise(item.commandTerm)}</strong> <span className={styles.marks}>({plural(item.marks, 'mark')})</span>
-      </p>
+      {/* The command term heads the question, so "Model answer" (h3) sits under it in the outline. */}
+      <h2 className={styles.meta}>
+        {capitalise(item.commandTerm)} <span className={styles.marks}>({plural(item.marks, 'mark')})</span>
+      </h2>
       <ItemFigures figures={item.figures} />
       <div id={promptId} className={styles.prompt}>
         <Markdown text={item.prompt} />
@@ -117,7 +118,7 @@ export function WrittenQuestion({ item, position, where, onScored, next, autoFoc
           <Button variant="primary" onClick={reveal}>
             Show model answer
           </Button>
-          {answer.trim() === '' ? <span className={study.keys}>Write your answer first; it stays here if you leave and come back.</span> : null}
+          {answer.trim() === '' ? <span className={study.hint}>Write your answer first; it stays here if you leave and come back.</span> : null}
         </div>
       ) : (
         <>

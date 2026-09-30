@@ -10,8 +10,11 @@
 export const LABEL_SIZE = 14;
 /** Line advance for wrapped labels. */
 export const LINE_HEIGHT = 18;
-/** The smallest on-screen label size the scroll container allows (Section 9 legibility floor). */
-export const MIN_LABEL_PX = 12;
+/**
+ * The smallest on-screen label size the scroll container allows: 14 px, the bottom of the type
+ * scale (Section 9), so a figure wider than its box scrolls inside it rather than shrinking.
+ */
+export const MIN_LABEL_PX = 14;
 
 // Advance widths for characters 32 (space) to 126 (~), in thousandths of an em.
 // prettier-ignore

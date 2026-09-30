@@ -31,6 +31,16 @@ describe('bootLines', () => {
     expect(text).toContain('Fri 13 Nov 2026, 3:00 pm AEDT');
   });
 
+  it('keeps every line short enough for one row on a phone', () => {
+    const lines = bootLines(data, 'full', { narrow: true });
+    const text = bootText(lines);
+    expect(text).toContain('U3O1     14 KK points  ok');
+    expect(text).toContain('content  412 cards, 180 Qs  ok');
+    expect(text).toContain('13 Nov, 3:00 pm AEDT');
+    // 23 characters of Martian Mono fit beside the label column at 360 px.
+    for (const l of lines) expect(`${l.detail}${l.result ? `  ${l.result}` : ''}`.length).toBeLessThanOrEqual(23);
+  });
+
   it('reports content while it loads and when it fails', () => {
     expect(bootText(bootLines({ ...data, content: { status: 'loading', cards: 0, questions: 0 } }, 'full'))).toContain('content  loading');
     expect(bootText(bootLines({ ...data, content: { status: 'error', cards: 0, questions: 0 } }, 'full'))).toContain(

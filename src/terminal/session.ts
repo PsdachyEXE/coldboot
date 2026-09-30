@@ -75,7 +75,7 @@ export function walkHistory(state: HistoryWalk, history: readonly string[], dir:
 
 export const WELCOME: TerminalBlock[] = [
   { kind: 'text', text: 'COLDBOOT terminal', tone: 'accent' },
-  { kind: 'text', text: 'Type help to see the commands, ls to list the games, or play sort to start one.', tone: 'muted' },
+  { kind: 'markdown', text: 'Type **help** to see the commands, **ls** to list the games, or **play sort** to start one.', tone: 'muted' },
 ];
 
 export interface TerminalSessionState {

@@ -10,8 +10,11 @@ export type Tone = 'normal' | 'muted' | 'accent' | 'correct' | 'incorrect' | 'wa
 export type TerminalBlock =
   /** One or more lines of plain text. Newlines are preserved. Never interpreted as HTML. */
   | { kind: 'text'; text: string; tone?: Tone }
-  /** Markdown subset (bundled content only; never user or imported text). */
-  | { kind: 'markdown'; text: string }
+  /**
+   * Markdown subset (bundled content only; never user or imported text). `tone: 'muted'` prints the
+   * prose in --steel with bold spans in --ice, e.g. command names in a hint.
+   */
+  | { kind: 'markdown'; text: string; tone?: 'muted' }
   /** Highlighted pseudocode with line numbers. State the index base whenever arrays appear. */
   | { kind: 'pseudo'; code: string; title?: string; indexBase?: 0 | 1; highlightLines?: number[] }
   | { kind: 'table'; columns: string[]; rows: string[][]; caption?: string }
@@ -19,8 +22,11 @@ export type TerminalBlock =
   /** A link into an app route (hash path such as "/drill?kk=U3O1-KK04"). */
   | { kind: 'link'; label: string; to: string }
   | { kind: 'list'; items: string[]; ordered?: boolean }
-  /** Preformatted monospace text: ASCII Gantt charts, share lines, arrays. */
-  | { kind: 'pre'; text: string; label?: string }
+  /**
+   * Preformatted monospace text: ASCII Gantt charts, share lines, arrays. Lines keep their spacing
+   * and the block scrolls sideways when too wide; `wrap: true` wraps long lines instead (share lines).
+   */
+  | { kind: 'pre'; text: string; label?: string; wrap?: boolean }
   /**
    * Lettered options (A to D) for an MCQ, or numbered choices. `markdown` may be true only when the
    * options come from bundled content; user-typed text never sets it.
