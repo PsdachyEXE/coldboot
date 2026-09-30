@@ -173,6 +173,17 @@
   min-width: 0;
 }
 
+/*
+ * The full-screen terminal route is 100dvh minus this offset: the vertical chrome around the main
+ * column (the phone top bar is 56 px), so the route fills the screen without a page scroll.
+ */
+.shell[data-layout='rail'] {
+  --terminal-route-offset: calc(var(--space-6) + var(--status-h) + var(--space-7));
+}
+.shell[data-layout='tabs'] {
+  --terminal-route-offset: calc(56px + var(--space-5) + var(--status-h) + var(--tabbar-h) + var(--space-6) + env(safe-area-inset-bottom, 0px));
+}
+
 /* ---- Phone tab bar ---- */
 .tabbar {
   position: fixed;
