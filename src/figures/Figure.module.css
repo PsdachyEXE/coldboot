@@ -370,8 +370,10 @@
   width: fit-content;
 }
 
-.details > summary:hover {
-  text-decoration: underline;
+@media (hover: hover) {
+  .details > summary:hover {
+    text-decoration: underline;
+  }
 }
 
 .descSummary {

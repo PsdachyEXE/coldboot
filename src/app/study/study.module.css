@@ -1,7 +1,7 @@
 /* Shared layout for the study screens: Review, Drill, Written, Today's run. */
 
 .page {
-  max-width: calc(var(--measure) + var(--space-7));
+  max-width: var(--block-max);
   min-width: 0;
 }
 
@@ -102,7 +102,7 @@
   padding: var(--space-3) var(--space-4);
   background: var(--trench);
   border-left: 4px solid var(--phosphor);
-  max-width: calc(var(--measure) + 2 * var(--space-4));
+  max-width: var(--block-max);
 }
 .mistake > :last-child {
   margin-bottom: 0;
@@ -134,7 +134,7 @@
   background: var(--trench);
   border-left: 4px solid var(--phosphor);
   margin: 0 0 var(--space-5);
-  max-width: calc(var(--measure) + 2 * var(--space-4));
+  max-width: var(--block-max);
 }
 .notice > :last-child {
   margin-bottom: 0;

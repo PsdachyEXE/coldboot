@@ -4,7 +4,7 @@
   border-left: 4px solid var(--phosphor);
   padding: var(--space-3) var(--space-4);
   margin: 0 0 var(--space-5);
-  max-width: calc(var(--measure) + 2 * var(--space-4));
+  max-width: var(--block-max);
 }
 .title {
   margin: 0;

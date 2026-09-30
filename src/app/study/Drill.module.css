@@ -23,7 +23,7 @@
   padding: 0;
   border: 0;
   min-width: 0;
-  max-width: calc(var(--measure) + var(--space-7));
+  max-width: var(--block-max);
 }
 .legend {
   padding: 0;
@@ -50,8 +50,10 @@
   border-radius: var(--radius-control);
   cursor: pointer;
 }
-.option:hover {
-  border-color: var(--ice);
+@media (hover: hover) {
+  .option:hover {
+    border-color: var(--ice);
+  }
 }
 .option:focus-within {
   outline: 2px solid var(--cobalt);
@@ -61,8 +63,10 @@
 .options:disabled .option {
   cursor: default;
 }
-.options:disabled .option:hover {
-  border-color: var(--steel);
+@media (hover: hover) {
+  .options:disabled .option:hover {
+    border-color: var(--steel);
+  }
 }
 
 .letter {
@@ -166,7 +170,7 @@
 /* Results. */
 .results {
   width: 100%;
-  max-width: calc(var(--measure) + var(--space-7));
+  max-width: var(--block-max);
   border-collapse: collapse;
   margin: 0 0 var(--space-5);
 }

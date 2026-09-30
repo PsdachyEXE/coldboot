@@ -41,10 +41,11 @@
   color: var(--ice);
 }
 
+/* Fields side by side; when they wrap onto two lines, the row gap keeps them apart. */
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 var(--space-5);
+  gap: var(--space-4) var(--space-5);
 }
 .row > * {
   margin-bottom: 0;
@@ -70,7 +71,7 @@
   padding: var(--space-4);
   background: var(--trench);
   border-left: 4px solid var(--phosphor);
-  max-width: calc(var(--measure) + 2 * var(--space-4));
+  max-width: var(--block-max);
 }
 .summary {
   margin: 0 0 var(--space-2);

@@ -71,11 +71,15 @@
   border-radius: var(--radius-control);
   cursor: pointer;
 }
-.cell:hover {
-  border-color: var(--ice);
+@media (hover: hover) {
+  .cell:hover {
+    border-color: var(--ice);
+  }
 }
-button.cell:hover .cellId {
-  text-decoration: underline;
+@media (hover: hover) {
+  button.cell:hover .cellId {
+    text-decoration: underline;
+  }
 }
 .wide {
   width: auto;

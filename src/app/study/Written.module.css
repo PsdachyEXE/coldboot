@@ -41,7 +41,7 @@
   padding: var(--space-4);
   background: var(--trench);
   border: var(--hairline);
-  max-width: calc(var(--measure) + 2 * var(--space-4));
+  max-width: var(--block-max);
 }
 .model h3 {
   margin: 0 0 var(--space-2);
@@ -83,7 +83,7 @@
   list-style: none;
   margin: 0 0 var(--space-5);
   padding: 0;
-  max-width: calc(var(--measure) + var(--space-7));
+  max-width: var(--block-max);
 }
 .resultList li {
   display: flex;
@@ -170,8 +170,10 @@
   font-weight: 700;
   cursor: pointer;
 }
-.details > summary:hover {
-  text-decoration: underline;
+@media (hover: hover) {
+  .details > summary:hover {
+    text-decoration: underline;
+  }
 }
 .detailsBody {
   padding: 0 var(--space-4) var(--space-4);
@@ -216,8 +218,10 @@
   border: 1px dashed var(--steel);
   border-radius: var(--radius-control);
 }
-.qlink:hover {
-  text-decoration: underline;
+@media (hover: hover) {
+  .qlink:hover {
+    text-decoration: underline;
+  }
 }
 .qlink[data-done='true'] {
   border-style: solid;

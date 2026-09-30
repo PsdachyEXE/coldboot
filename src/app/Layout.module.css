@@ -71,9 +71,11 @@
   text-decoration: none;
   border-left: 2px solid transparent;
 }
-.navLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+@media (hover: hover) {
+  .navLink:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
 }
 .navLinkActive {
   font-weight: 700;
@@ -116,9 +118,11 @@
   text-align: left;
   cursor: pointer;
 }
-.terminalButton:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+@media (hover: hover) {
+  .terminalButton:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
 }
 .terminalKey {
   flex: none;

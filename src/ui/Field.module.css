@@ -33,8 +33,10 @@
   font-size: var(--step-1);
   line-height: 1.4;
 }
-.input:hover {
-  border-color: var(--ice);
+@media (hover: hover) {
+  .input:hover {
+    border-color: var(--ice);
+  }
 }
 .input::placeholder {
   color: var(--steel);
@@ -140,9 +142,11 @@
 .radio {
   border-radius: 50%;
 }
-.checkbox:hover,
-.radio:hover {
-  border-color: var(--ice);
+@media (hover: hover) {
+  .checkbox:hover,
+  .radio:hover {
+    border-color: var(--ice);
+  }
 }
 .checkbox:checked {
   background: var(--cobalt);

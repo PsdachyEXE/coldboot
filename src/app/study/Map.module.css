@@ -65,8 +65,10 @@
   border-bottom: var(--hairline);
   max-width: none;
 }
-.row:hover {
-  background: var(--trench);
+@media (hover: hover) {
+  .row:hover {
+    background: var(--trench);
+  }
 }
 /* The whole row is the drill link's target; its focus ring goes round the row. */
 .row:has(.rowLink:focus-visible) {
@@ -93,9 +95,11 @@
   outline: none;
   box-shadow: none;
 }
-.row:hover .rowTitle {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+@media (hover: hover) {
+  .row:hover .rowTitle {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
 }
 
 .rowId {

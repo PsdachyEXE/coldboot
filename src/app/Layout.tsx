@@ -73,7 +73,8 @@ export default function Layout() {
       {layout !== 'rail' ? (
         <header className={styles.topbar}>
           <Wordmark />
-          {layout === 'tabs' ? <TerminalButton className={styles.topbarTerminal} /> : null}
+          {/* On the Terminal route the page is the terminal, so the button would only focus it. */}
+          {layout === 'tabs' && location.pathname !== paths.terminal ? <TerminalButton className={styles.topbarTerminal} /> : null}
         </header>
       ) : null}
       <main id="main" ref={mainRef} tabIndex={-1} className={styles.main}>
