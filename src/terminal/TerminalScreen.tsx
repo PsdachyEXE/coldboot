@@ -23,7 +23,11 @@ export default function TerminalScreen() {
   }, []);
 
   useEffect(() => {
-    if (open) useTerminal.getState().setOpen(false);
+    if (open) {
+      // The shell's terminal button (or useTerminal.run) asked for the terminal: this route is it.
+      useTerminal.getState().setOpen(false);
+      inputRef.current?.focus({ preventScroll: true });
+    }
     if (pending === null) return;
     const command = useTerminal.getState().takePending();
     if (command) void submitLine(command, env, { fromPending: true });

@@ -93,6 +93,7 @@
 
 .table tbody th { color: var(--ice); white-space: nowrap; }
 .table td { color: var(--phosphor); }
+.table .numeric { text-align: right; padding-left: 8px; }
 
 .link {
   color: var(--phosphor);
@@ -101,7 +102,9 @@
   border-radius: var(--radius-control);
 }
 
-.link:hover { color: var(--ice); }
+@media (hover: hover) {
+  .link:hover { color: var(--ice); }
+}
 
 .list {
   margin: 0 0 6px;

@@ -154,11 +154,14 @@ function TerminalChips({ env, inputRef }: { env: TerminalEnv; inputRef: RefObjec
   const gameChips = useTerminalSession((s) => s.game?.chips);
   const chips = inGame ? (gameChips ?? []) : IDLE_CHIPS;
 
-  // A keyboard user whose chip disappears with the next question lands back in the input.
+  // After a chip: mouse users go back to typing; a keyboard user whose chip disappeared with the
+  // next question lands in the input; touch users keep the keyboard closed.
   const refocus = (e: MouseEvent<HTMLButtonElement>) => {
-    if (e.detail !== 0) return;
+    const keyboard = e.detail === 0;
+    const touch = (e.nativeEvent as PointerEvent).pointerType === 'touch';
     requestAnimationFrame(() => {
-      if (!document.activeElement || document.activeElement === document.body) inputRef.current?.focus({ preventScroll: true });
+      const lost = !document.activeElement || document.activeElement === document.body;
+      if (keyboard ? lost : !touch) inputRef.current?.focus({ preventScroll: true });
     });
   };
 

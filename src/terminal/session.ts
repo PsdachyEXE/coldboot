@@ -6,7 +6,7 @@
  */
 import { create } from 'zustand';
 import type { KkId } from '../content/schema';
-import type { Difficulty, GameSession } from '../games/types';
+import type { Difficulty, GameMeta, GameSession } from '../games/types';
 import type { TerminalBlock } from './blocks';
 
 /** Scrollback cap: older entries drop off the top. */
@@ -21,6 +21,8 @@ export interface TerminalEntry {
 
 export interface ActiveGame {
   gameId: string;
+  /** Registry metadata of the running game (title, KKs, man page). */
+  meta: GameMeta;
   title: string;
   session: GameSession;
   difficulty: Difficulty;

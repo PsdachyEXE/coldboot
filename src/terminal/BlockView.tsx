@@ -57,6 +57,9 @@ export const BlockView = memo(function BlockView({ block, animate = false, onNav
 
     case 'table': {
       const wide = block.columns.length > 6;
+      // Columns whose cells are all numbers line up on the right.
+      const numeric = block.columns.map((_, i) => i > 0 && block.rows.length > 0 && block.rows.every((r) => /^-?[\d,.]+$/.test(r[i] ?? '')));
+      const align = (i: number) => (numeric[i] ? styles.numeric : undefined);
       return (
         <div className={styles.tableWrap} tabIndex={wide ? 0 : undefined} role={wide ? 'region' : undefined} aria-label={wide ? (block.caption ?? 'Table') : undefined}>
           <table className={styles.table}>
@@ -64,7 +67,7 @@ export const BlockView = memo(function BlockView({ block, animate = false, onNav
             <thead>
               <tr>
                 {block.columns.map((c, i) => (
-                  <th key={i} scope="col">
+                  <th key={i} scope="col" className={align(i)}>
                     {c}
                   </th>
                 ))}
@@ -79,7 +82,9 @@ export const BlockView = memo(function BlockView({ block, animate = false, onNav
                         {cell}
                       </th>
                     ) : (
-                      <td key={i}>{cell}</td>
+                      <td key={i} className={align(i)}>
+                        {cell}
+                      </td>
                     ),
                   )}
                 </tr>

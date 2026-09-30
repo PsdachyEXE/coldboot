@@ -47,13 +47,14 @@
   flex-wrap: wrap;
   align-items: baseline;
   column-gap: 1ch;
-  padding: 8px 16px;
+  padding: 7px 16px 8px;
   border-top: 1px solid var(--steel);
 }
 
+/* Focus: the hairline above the prompt becomes a 2 px cobalt rule, and the caret turns solid. */
 .form:focus-within {
-  outline: 2px solid var(--cobalt);
-  outline-offset: -2px;
+  padding-top: 6px;
+  border-top: 2px solid var(--cobalt);
 }
 
 .prompt {
@@ -78,8 +79,8 @@
 
 .inputWrap {
   position: relative;
-  flex: 1 1 16ch;
-  min-width: 16ch;
+  flex: 1 1 10ch;
+  min-width: 10ch;
   height: 1.6em;
   overflow: hidden;
 }
@@ -152,7 +153,9 @@
   cursor: pointer;
 }
 
-.chip:hover { border-color: var(--phosphor); }
+@media (hover: hover) {
+  .chip:hover { border-color: var(--phosphor); }
+}
 
 .chip:focus-visible {
   outline: 2px solid var(--cobalt);

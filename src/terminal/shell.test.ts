@@ -12,7 +12,7 @@ import { useReportDialog } from '../ui/report';
 import { DAILY_MISSING, SUDO_MESSAGE } from './commands';
 import { abortGame, finishGame, startGame } from './host';
 import { useTerminalSession, walkHistory } from './session';
-import { completeAt, historyDown, historyUp, interrupt, promptFor, submitLine } from './shell';
+import { completeAt, historyDown, historyUp, interrupt, promptFor, submitLine, suggestCommand } from './shell';
 import { fakeGame, mockEnv, numberItem, printed, resetStores } from './testing';
 import { useTerminal } from './useTerminal';
 
@@ -62,6 +62,16 @@ describe('commands', () => {
     expect(printed()).toContain('Did you mean review?');
     await submitLine('xyzzy', mockEnv());
     expect(printed()).toContain('Type help to list the commands.');
+    expect(suggestCommand('dialy')).toBe('daily');
+    expect(suggestCommand('lss')).toBe('ls');
+    expect(suggestCommand('q')).toBeNull();
+  });
+
+  it('explains that there is nothing to answer when no game is running', async () => {
+    await submitLine('3 1 2', mockEnv());
+    expect(printed()).toContain('No game is running, so there is nothing to answer.');
+    await submitLine('[1] [2]', mockEnv());
+    expect(printed()).not.toContain('Did you mean');
   });
 
   it('reports a bad quote instead of running anything', async () => {
@@ -264,6 +274,15 @@ describe('games in the terminal', () => {
     expect(useReportDialog.getState().request?.itemId).toBe('gen-fake-2');
     // "report" is not taken as an answer.
     expect(term().game?.session.progress).toEqual({ current: 2, total: 3 });
+  });
+
+  it('explains that a command typed during a game is read as an answer', async () => {
+    GAMES.push(fakeGame());
+    await submitLine('play fake', mockEnv());
+    await submitLine('play search', mockEnv());
+    expect(printed()).toContain('Type a number.');
+    expect(printed()).toContain('A game is running, so that was read as an answer. To run play, stop the game first with Ctrl+C or Abort game.');
+    expect(term().game?.gameId).toBe('fake');
   });
 
   it('runs a pending command as a command, aborting a game in progress', async () => {

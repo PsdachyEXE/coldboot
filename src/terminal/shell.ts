@@ -26,6 +26,14 @@ export function currentPrompt(): string {
 
 const term = () => useTerminalSession.getState();
 
+/**
+ * The nearest command within edit distance 2, tightened for very short words so "1" doesn't
+ * suggest "ls": at most half the word's length, and at least 1.
+ */
+export function suggestCommand(word: string): string | null {
+  return nearest(word, VISIBLE_COMMANDS, Math.min(2, Math.max(1, Math.floor(word.length / 2))));
+}
+
 async function runCommand(line: string, env: TerminalEnv): Promise<void> {
   const trimmed = line.trim();
   if (!trimmed) return;
@@ -37,8 +45,15 @@ async function runCommand(line: string, env: TerminalEnv): Promise<void> {
   }
   if (!parsed.command) return;
   const spec = findCommand(parsed.command.name);
+  if (!spec && /^[\d[({-]/.test(parsed.command.name)) {
+    term().print([
+      { kind: 'text', text: 'No game is running, so there is nothing to answer.', tone: 'warning' },
+      { kind: 'text', text: 'Type play sort, or ls to list the games.', tone: 'muted' },
+    ]);
+    return;
+  }
   if (!spec) {
-    const near = nearest(parsed.command.name, VISIBLE_COMMANDS);
+    const near = suggestCommand(parsed.command.name);
     term().print([
       { kind: 'text', text: `There's no command called "${parsed.command.name}".`, tone: 'warning' },
       { kind: 'text', text: near ? `Did you mean ${near}?` : 'Type help to list the commands.', tone: 'muted' },
@@ -71,7 +86,13 @@ export async function submitLine(raw: string, env: TerminalEnv, opts: SubmitOpti
       term().print({ kind: 'text', text: 'Still loading. Try again when the first question appears.', tone: 'muted' });
     } else if (s.game) {
       if (/^\s*report(\s+current)?\s*$/i.test(line)) reportCommand(line.trim().split(/\s+/).slice(1));
-      else if (line.trim()) submitAnswer(line);
+      else if (line.trim()) {
+        const result = submitAnswer(line);
+        const word = line.trim().split(/\s+/)[0].toLowerCase();
+        if (result?.counted === false && VISIBLE_COMMANDS.includes(word)) {
+          term().print({ kind: 'text', text: `A game is running, so that was read as an answer. To run ${word}, stop the game first with Ctrl+C or Abort game.`, tone: 'muted' });
+        }
+      }
     } else {
       await runCommand(line, env);
     }

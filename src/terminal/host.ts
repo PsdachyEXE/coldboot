@@ -112,6 +112,7 @@ export async function startGame(meta: GameMeta, opts: StartOptions): Promise<boo
     term().print([say(meta.title, 'accent'), say(introLine(session, opts), 'muted')]);
     term().setGame({
       gameId: meta.id,
+      meta,
       title: meta.title,
       session,
       difficulty: opts.difficulty,
@@ -138,14 +139,14 @@ export async function startGame(meta: GameMeta, opts: StartOptions): Promise<boo
   }
 }
 
-/** Checks one typed answer against the running game and prints the feedback and next prompt. */
-export function submitAnswer(input: string): void {
+/** Checks one typed answer against the running game and prints the feedback and next prompt. Returns the result, or null when nothing was checked. */
+export function submitAnswer(input: string): AnswerResult | null {
   const game = term().game;
-  if (!game) return;
+  if (!game) return null;
   const { session } = game;
   if (session.done) {
     finishGame();
-    return;
+    return null;
   }
   const index = session.progress ? session.progress.current - 1 : -1;
   const t = Date.now();
@@ -154,12 +155,12 @@ export function submitAnswer(input: string): void {
     result = session.answer(input);
   } catch {
     term().print(say('Something went wrong checking that answer. Type report current to tell us about this question.', 'warning'));
-    return;
+    return null;
   }
   term().patchGame({ answers: [...game.answers, input].slice(-GAME_ANSWERS_MAX) });
   if (result.counted === false) {
     term().print(say(result.reason, 'warning'));
-    return;
+    return result;
   }
   term().print([
     {
@@ -177,10 +178,11 @@ export function submitAnswer(input: string): void {
   playCue(result.correct ? 'correct' : 'incorrect');
   if (session.done) {
     finishGame();
-    return;
+    return result;
   }
   term().print(session.prompt());
   term().patchGame({ shownAt: Date.now(), chips: session.chips?.() ?? [] });
+  return result;
 }
 
 /** Prints the summary, publishes the game end and clears the game. */

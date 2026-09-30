@@ -42,7 +42,7 @@ export interface ConceptItemBase {
 export function whichItem<T extends string>(base: ConceptItemBase, concept: WhichConcept<T>, answers: readonly NamedAnswer<T>[]): QuizItem {
   const labels = answers.map((a) => a.label);
   const question = `${labels.slice(0, -1).join(', ')} or ${labels.at(-1)}?`;
-  const expected = answers.find((a) => a.value === concept.answer)?.label ?? concept.answer;
+  const expected = capitalise(answers.find((a) => a.value === concept.answer)?.label ?? concept.answer);
   const prompt: TerminalBlock[] = [
     { kind: 'text', text: concept.prompt },
     { kind: 'text', text: capitalise(question), tone: 'accent' },
@@ -56,7 +56,7 @@ export function whichItem<T extends string>(base: ConceptItemBase, concept: Whic
     check(input) {
       const value = matchOption(input, answers);
       if (value === null) return { correct: false, expected, reason: `Answer ${question.replace(/\?$/, '.')}`, counted: false };
-      return { correct: value === concept.answer, expected: capitalise(expected), reason: concept.reason };
+      return { correct: value === concept.answer, expected, reason: concept.reason };
     },
   };
 }
