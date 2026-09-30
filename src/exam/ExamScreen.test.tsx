@@ -219,6 +219,7 @@ describe('exam screen', () => {
     });
     expect(useExam.getState().paper).toBeNull();
     expect(screen.getByText(/Paper discarded\. Nothing from it was recorded\./)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Exam' })).toHaveFocus();
     expect(screen.getByRole('button', { name: 'Start full paper' })).toBeInTheDocument();
   });
 
@@ -244,6 +245,23 @@ describe('exam screen', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Go to Section B' }));
     expect(screen.getByRole('tab', { name: /Section B/ })).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByRole('heading', { level: 2, name: /Question 1/ })).toHaveFocus();
+  });
+
+  it("shows the case study insert in Section C, and a question's own figures with it", () => {
+    const study = fxCaseStudy('cs-01');
+    const [q1, q2] = study.questions;
+    const withFigure = {
+      ...study,
+      questions: [q1, { ...q2, figures: [{ id: 'fig-own', kind: 'table' as const, title: 'Shift rota', columns: ['Day', 'Staff'], rows: [['Monday', '3']] }] }],
+    };
+    provideContent(fixtureIndex({ mcq: [mcqA], short: [short], caseStudies: [withFigure] }));
+    examActions.start({ mode: 'mini', seed: 1, sections: { a: [mcqA.id], b: [short.id], c: [q1.id, q2.id] }, caseStudyId: 'cs-01', timing: FULL_TIMING }, T0 - 20 * MIN);
+    renderExam('/exam?sit=1');
+    fireEvent.click(screen.getByRole('tab', { name: /Section C/ }));
+    expect(screen.getByText('Case study insert')).toBeInTheDocument();
+    expect(screen.getByText(/Riverbend Freight is a Geelong freight company/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /^Question 2\b/ }));
+    expect(screen.getAllByText('Shift rota').length).toBeGreaterThan(0);
   });
 
   it('says so when a report is not in history', () => {

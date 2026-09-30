@@ -85,7 +85,10 @@ export function ExamStart({ content, mini }: { content: ContentIndex; mini: bool
 
   return (
     <div className={styles.column}>
-      <PhaseHeading focus>Exam</PhaseHeading>
+      {/* Remounts on each visit, including after a discard here, so focus lands on the heading. */}
+      <PhaseHeading key={location.key} focus>
+        Exam
+      </PhaseHeading>
       {discarded ? (
         <p role="status" className={study.notice}>
           Paper discarded. Nothing from it was recorded.

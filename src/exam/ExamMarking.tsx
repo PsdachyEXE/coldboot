@@ -88,7 +88,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
       {caseQuestion && resolved.caseStudy ? <QuestionFigureRefs cs={resolved.caseStudy} figureRefs={(item as { figureRefs?: string[] }).figureRefs} wide={wide} /> : null}
       {isMcq(item) ? (
         <>
-          <McqReview key={item.id} mcq={item} chosen={typeof answers[item.id] === 'number' ? (answers[item.id] as number) : undefined} caseQuestion={caseQuestion} />
+          <McqReview key={item.id} mcq={item} chosen={typeof answers[item.id] === 'number' ? (answers[item.id] as number) : undefined} />
           <KkTagList kks={item.kk} />
         </>
       ) : (
@@ -97,7 +97,6 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
           item={item}
           answer={typeof answers[item.id] === 'string' ? (answers[item.id] as string) : undefined}
           ticked={ticks[item.id] ?? []}
-          caseQuestion={caseQuestion}
           onTicks={(t) => examActions.setTicks(item.id, t)}
         />
       )}

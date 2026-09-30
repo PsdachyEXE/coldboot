@@ -27,27 +27,21 @@ function capitalise(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-/** Figures for a standalone item (case study questions show theirs through the insert). */
-function Figures({ item, caseQuestion }: { item: Mcq | ShortAnswer; caseQuestion: boolean }) {
-  return caseQuestion ? null : <ItemFigures figures={item.figures} />;
-}
-
 export interface ExamMcqProps {
   mcq: Mcq;
   chosen: number | undefined;
   /** Reading time: the options can be read but not chosen. */
   locked: boolean;
-  caseQuestion?: boolean;
   onChoose(index: number): void;
   onClear(): void;
 }
 
 /** An MCQ while sitting the paper: choose an option (no feedback until the paper is marked). */
-export function ExamMcq({ mcq, chosen, locked, caseQuestion = false, onChoose, onClear }: ExamMcqProps) {
+export function ExamMcq({ mcq, chosen, locked, onChoose, onClear }: ExamMcqProps) {
   const name = useId();
   return (
     <>
-      <Figures item={mcq} caseQuestion={caseQuestion} />
+      <ItemFigures figures={mcq.figures} />
       <div className={drill.stem}>
         <Markdown text={mcq.stem} />
       </div>
@@ -80,14 +74,14 @@ export function ExamMcq({ mcq, chosen, locked, caseQuestion = false, onChoose, o
 }
 
 /** An MCQ once the paper is submitted: marked, with the answer, the explanation and why each distractor is wrong. */
-export function McqReview({ mcq, chosen, caseQuestion = false }: { mcq: Mcq; chosen: number | undefined; caseQuestion?: boolean }) {
+export function McqReview({ mcq, chosen }: { mcq: Mcq; chosen: number | undefined }) {
   const name = useId();
   const answered = chosen !== undefined;
   const correct = chosen === mcq.answer;
   const letter = LETTERS[mcq.answer];
   return (
     <>
-      <Figures item={mcq} caseQuestion={caseQuestion} />
+      <ItemFigures figures={mcq.figures} />
       <div className={drill.stem}>
         <Markdown text={mcq.stem} />
       </div>
@@ -154,16 +148,15 @@ export interface ExamShortProps {
   item: ShortAnswer;
   value: string;
   locked: boolean;
-  caseQuestion?: boolean;
   onChange(text: string): void;
 }
 
 /** A written answer while sitting the paper. The hint sizes the answer from the marks. */
-export function ExamShort({ item, value, locked, caseQuestion = false, onChange }: ExamShortProps) {
+export function ExamShort({ item, value, locked, onChange }: ExamShortProps) {
   return (
     <>
       <ShortMeta item={item} />
-      <Figures item={item} caseQuestion={caseQuestion} />
+      <ItemFigures figures={item.figures} />
       <div className={written.prompt}>
         <Markdown text={item.prompt} />
       </div>
@@ -186,12 +179,11 @@ export interface ShortMarkingProps {
   item: ShortAnswer;
   answer: string | undefined;
   ticked: readonly number[];
-  caseQuestion?: boolean;
   onTicks(ticked: number[]): void;
 }
 
 /** A written answer being self-marked: the answer as written, the model answer and the marking points. */
-export function ShortMarking({ item, answer, ticked, caseQuestion = false, onTicks }: ShortMarkingProps) {
+export function ShortMarking({ item, answer, ticked, onTicks }: ShortMarkingProps) {
   const headingId = useId();
   const answered = isAnswered(answer);
   const set = new Set(ticked);
@@ -205,7 +197,7 @@ export function ShortMarking({ item, answer, ticked, caseQuestion = false, onTic
   return (
     <>
       <ShortMeta item={item} />
-      <Figures item={item} caseQuestion={caseQuestion} />
+      <ItemFigures figures={item.figures} />
       <div className={written.prompt}>
         <Markdown text={item.prompt} />
       </div>

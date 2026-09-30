@@ -117,7 +117,6 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
           mcq={item}
           chosen={typeof answer === 'number' ? answer : undefined}
           locked={locked}
-          caseQuestion={caseQuestion}
           onChoose={(i) => examActions.answer(item.id, i)}
           onClear={() => examActions.clearAnswer(item.id)}
         />
@@ -127,7 +126,6 @@ function ExamSitting({ paper, resolved, phase, refresh }: SittingProps) {
           item={item}
           value={typeof answer === 'string' ? answer : ''}
           locked={locked}
-          caseQuestion={caseQuestion}
           onChange={(text) => examActions.answer(item.id, text)}
         />
       )}
