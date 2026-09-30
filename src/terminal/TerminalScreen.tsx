@@ -1,9 +1,44 @@
-/** Stub (owner: track B). The full-screen Terminal route. */
+/**
+ * The full-screen Terminal route. It shares the drawer's session, so a game started in one carries
+ * on in the other. While this route is showing, the drawer stays closed, the backtick key focuses
+ * this input, and commands other screens send with useTerminal.run() run here.
+ */
+import { useEffect, useRef } from 'react';
+import { registerRouteFocus } from './routeFocus';
+import { submitLine } from './shell';
+import { TerminalView } from './TerminalView';
+import { useTerminal } from './useTerminal';
+import { useTerminalEnv } from './useTerminalEnv';
+import styles from './TerminalScreen.module.css';
+
 export default function TerminalScreen() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const open = useTerminal((s) => s.open);
+  const pending = useTerminal((s) => s.pending);
+  const env = useTerminalEnv('route');
+
+  useEffect(() => {
+    inputRef.current?.focus({ preventScroll: true });
+    return registerRouteFocus(() => inputRef.current?.focus());
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      // The shell's terminal button (or useTerminal.run) asked for the terminal: this route is it.
+      useTerminal.getState().setOpen(false);
+      inputRef.current?.focus({ preventScroll: true });
+    }
+    if (pending === null) return;
+    const command = useTerminal.getState().takePending();
+    if (command) void submitLine(command, env, { fromPending: true });
+  }, [open, pending, env]);
+
   return (
-    <section>
-      <h1>Terminal</h1>
-      <p>The terminal is being built.</p>
+    <section className={styles.screen} aria-labelledby="terminal-route-title">
+      <h1 id="terminal-route-title" className={styles.title}>
+        Terminal
+      </h1>
+      <TerminalView presentation="route" inputRef={inputRef} className={styles.terminal} />
     </section>
   );
 }

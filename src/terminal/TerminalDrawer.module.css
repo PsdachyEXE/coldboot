@@ -1,0 +1,100 @@
+/* The drop-down console: a flat --trench slab from the top edge with a hairline --steel bottom edge. */
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  height: min(64vh, 680px);
+  min-height: 300px;
+  background: var(--trench);
+  border-bottom: 1px solid var(--steel);
+  transform: translateY(-100%);
+  visibility: hidden;
+  transition:
+    transform var(--dur-drawer) ease-out,
+    visibility 0s linear var(--dur-drawer);
+}
+
+.open {
+  transform: none;
+  visibility: visible;
+  transition:
+    transform var(--dur-drawer) ease-out,
+    visibility 0s;
+}
+
+.instant,
+.instant.open {
+  transition: none;
+}
+
+/* Small screens: the drawer takes the full height. */
+@media (max-width: 719px) {
+  .drawer {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    border-bottom: 0;
+  }
+}
+
+.bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--steel);
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ice);
+}
+
+.hint {
+  margin: 0 0 0 auto;
+  color: var(--steel);
+}
+
+.close {
+  min-height: 32px;
+  padding: 2px 12px;
+  border: 1px solid var(--steel);
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--ice);
+  font: inherit;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .close:hover { border-color: var(--phosphor); }
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 2px;
+}
+
+@media (max-width: 719px) {
+  .hint { display: none; }
+  .close { margin-left: auto; }
+}
+
+@media (pointer: coarse) {
+  .close { min-height: 44px; }
+}
+
+.view {
+  flex: 1 1 auto;
+}

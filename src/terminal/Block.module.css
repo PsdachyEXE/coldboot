@@ -1,0 +1,191 @@
+/* Terminal output blocks. Everything sits on --trench; the palette pairs are in src/ui/contrast-pairs.json. */
+
+.text {
+  margin: 0 0 4px;
+  max-width: 88ch;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.normal { color: var(--phosphor); }
+.muted { color: var(--steel); }
+.accent { color: var(--ice); font-weight: 600; }
+.correct { color: var(--flare); }
+.incorrect { color: var(--steel); }
+.warning { color: var(--ice); }
+
+.caption {
+  margin: 0 0 2px;
+  color: var(--steel);
+  text-align: left;
+}
+
+.command {
+  margin: 14px 0 4px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.command:first-child { margin-top: 0; }
+.commandPrompt { color: var(--phosphor); font-weight: 600; }
+.commandInput { color: var(--ice); }
+
+.markdown {
+  margin: 0 0 6px;
+  color: var(--ice);
+  max-width: 72ch;
+}
+
+.markdown :global(pre.pseudo),
+.markdown :global(pre.code),
+.pseudo :global(pre.pseudo) {
+  background: var(--void);
+}
+
+.pseudo,
+.preBlock,
+.figure {
+  margin: 0 0 8px;
+  max-width: 100%;
+}
+
+.figure { overflow-x: auto; }
+
+.pre {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  font: inherit;
+  color: var(--ice);
+  white-space: pre;
+}
+
+.tableWrap {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0 0 8px;
+}
+
+.tableWrap:focus-visible,
+.link:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 2px;
+}
+
+.table {
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 2px 16px 2px 0;
+  text-align: left;
+  vertical-align: top;
+  font-weight: 400;
+}
+
+.table thead th {
+  color: var(--ice);
+  font-weight: 600;
+  border-bottom: 1px solid var(--steel);
+}
+
+.table tbody th { color: var(--ice); white-space: nowrap; }
+.table td { color: var(--phosphor); }
+.table .numeric { text-align: right; padding-left: 8px; }
+
+.link {
+  color: var(--phosphor);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-radius: var(--radius-control);
+}
+
+@media (hover: hover) {
+  .link:hover { color: var(--ice); }
+}
+
+.list {
+  margin: 0 0 6px;
+  padding-left: 4ch;
+  color: var(--phosphor);
+}
+
+.ordered ::marker { color: var(--steel); }
+
+.choices {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  color: var(--phosphor);
+}
+
+.choice {
+  display: flex;
+  gap: 1ch;
+  margin: 0 0 2px;
+}
+
+.choiceLabel {
+  flex: none;
+  color: var(--ice);
+  font-weight: 700;
+}
+
+.inline { max-width: none; }
+
+.feedback {
+  margin: 6px 0 8px;
+  padding: 2px 0 2px 12px;
+  border-left: 2px solid var(--steel);
+}
+
+.feedbackCorrect { border-left-color: var(--flare); }
+.feedbackIncorrect { border-left-color: var(--steel); }
+
+.verdict {
+  margin: 0;
+  font-weight: 700;
+}
+
+.expected {
+  margin: 0;
+  color: var(--ice);
+  overflow-wrap: anywhere;
+}
+
+.reason {
+  margin: 0;
+  color: var(--phosphor);
+  white-space: pre-wrap;
+  max-width: 88ch;
+}
+
+.reasonMd {
+  margin: 0;
+  color: var(--phosphor);
+}
+
+.reasonMd :global(strong) { color: var(--ice); }
+
+.nudge { animation: nudge var(--dur-nudge) ease-in-out 1; }
+
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.progress {
+  margin: 14px 0 4px;
+  color: var(--steel);
+}
+
+.bar { margin-left: 1ch; }
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--steel);
+  margin: 12px 0;
+}

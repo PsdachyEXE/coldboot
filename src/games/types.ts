@@ -62,6 +62,11 @@ export interface AnswerResult {
    * `reason` and re-prompts without recording an attempt.
    */
   counted?: boolean;
+  /**
+   * True only when `expected` and `reason` come from bundled content (e.g. an MCQ explanation), so
+   * the feedback block may render them as Markdown. Generated and user-typed text leaves it unset.
+   */
+  markdown?: boolean;
 }
 
 export interface KkTally {
@@ -115,6 +120,8 @@ export interface CheckResult {
   followUp?: TerminalBlock[];
   /** False when the input wasn't an attempt (unparseable); the host re-prompts without recording. */
   counted?: boolean;
+  /** See AnswerResult.markdown: bundled content only. */
+  markdown?: boolean;
 }
 
 /** One question: the unit the shared quiz-loop engine (./engine.ts) runs. */

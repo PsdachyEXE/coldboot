@@ -1,0 +1,28 @@
+/*
+ * The full-screen terminal fills the main column. The shell can tune how much vertical space its
+ * own chrome takes with --terminal-route-offset.
+ */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: calc(100vh - var(--terminal-route-offset, 160px));
+  height: calc(100dvh - var(--terminal-route-offset, 160px));
+  min-height: 360px;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step-2);
+  line-height: var(--lh-head);
+  font-weight: 600;
+  color: var(--ice);
+}
+
+.terminal {
+  flex: 1 1 auto;
+  border: 1px solid var(--steel);
+}
