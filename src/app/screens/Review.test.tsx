@@ -133,6 +133,21 @@ describe('Review card flip', () => {
     expect(screen.getByRole('heading', { name: 'Review complete' })).toBeInTheDocument();
   });
 
+  it('offers to review the cards left after finishing early', () => {
+    provideContent(fixtureIndex({ cards: [basic, second] }));
+    renderReview();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    press(' ');
+    press('3');
+    fireEvent.click(screen.getByRole('button', { name: 'Finish review' }));
+    expect(screen.getByRole('heading', { name: 'Review complete' })).toBeInTheDocument();
+    expect(screen.getByText('You finished early. 1 new card is ready.')).toBeInTheDocument();
+    expect(screen.getByText('After those, your next card is due tomorrow.')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Go to Drill' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Review the remaining card' }));
+    expect(screen.getByRole('region', { name: 'Card 1 of 1, question' })).toBeInTheDocument();
+  });
+
   it('shows a reverse card in the reverse direction on odd reps', () => {
     const term = fxCard('t-validation', ['TERMS'], { type: 'reverse', front: 'Validation', back: 'Checking that input is reasonable before processing it.' });
     provideContent(fixtureIndex({ cards: [term] }));

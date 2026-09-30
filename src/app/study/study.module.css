@@ -66,14 +66,23 @@
   }
 }
 
-/* Keyboard hints under a control row. */
+/* Small print under a control row, and keyboard hints. */
+.hint,
 .keys {
   font-size: var(--step-0);
   color: var(--steel);
   margin: var(--space-3) 0 0;
 }
+.hint kbd,
 .keys kbd {
   color: var(--ice);
+}
+/* Keyboard-only hints (.keys blocks, .keyOnly spans) are clutter on touch screens with no keys. */
+@media (hover: none) and (pointer: coarse) {
+  .keys,
+  .keyOnly {
+    display: none;
+  }
 }
 
 /* Position in a round: "Card 3 of 37". */

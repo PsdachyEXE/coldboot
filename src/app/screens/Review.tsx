@@ -63,10 +63,11 @@ function ReviewScreen({ content, kk, invalid }: { content: ContentIndex; kk: KkI
       </>
     );
   }
-  if (phase.name === 'complete') return <ReviewComplete summary={phase.summary} kk={kk} />;
-
   const due = queue.filter((e) => !e.isNew).length;
   const fresh = queue.length - due;
+
+  if (phase.name === 'complete') return <ReviewComplete summary={phase.summary} kk={kk} due={due} fresh={fresh} onRestart={start} />;
+
   return (
     <>
       <h1>Review</h1>
@@ -162,9 +163,33 @@ function NothingToReview({ content, kk, now }: { content: ContentIndex; kk: KkId
   );
 }
 
-function ReviewComplete({ summary, kk }: { summary: ReviewSummary; kk: KkId | null }) {
+/**
+ * "Review complete". When the student finished early and cards are still waiting, the primary
+ * action reviews them; otherwise it suggests a drill.
+ */
+function ReviewComplete({
+  summary,
+  kk,
+  due,
+  fresh,
+  onRestart,
+}: {
+  summary: ReviewSummary;
+  kk: KkId | null;
+  /** Cards still due in this review's scope. */
+  due: number;
+  /** New cards still ready in this review's scope. */
+  fresh: number;
+  onRestart(): void;
+}) {
   const now = useNow(60_000);
-  const { nextDue, due } = useDueSummary(now);
+  const { nextDue } = useDueSummary(now);
+  const left = summary.finishedEarly ? due + fresh : 0;
+  const drill = (
+    <ButtonLink variant={left ? 'secondary' : 'primary'} to={kk ? drillPath({ kk }) : paths.drill}>
+      {kk ? 'Drill this key knowledge' : 'Go to Drill'}
+    </ButtonLink>
+  );
   return (
     <>
       <PhaseHeading focus>Review complete</PhaseHeading>
@@ -176,14 +201,21 @@ function ReviewComplete({ summary, kk }: { summary: ReviewSummary; kk: KkId | nu
         <dt>Rated Again</dt>
         <dd>{summary.again === 0 ? 'None' : plural(summary.again, 'time')}</dd>
       </dl>
-      {summary.finishedEarly && due > 0 ? (
-        <p>{plural(due, 'card')} you didn't get to {due === 1 ? 'is' : 'are'} still due. Start another review to finish them.</p>
-      ) : null}
-      <p>{nextDue !== null ? `Your next review is due ${describeDue(nextDue, now)}.` : 'Nothing else is scheduled yet.'}</p>
+      {left ? (
+        <>
+          <p>You finished early. {readyLine(due, fresh)}</p>
+          {nextDue !== null ? <p>After those, your next card is due {describeDue(nextDue, now)}.</p> : null}
+        </>
+      ) : (
+        <p>{nextDue !== null ? `Your next review is due ${describeDue(nextDue, now)}.` : 'Nothing else is scheduled yet.'}</p>
+      )}
       <div className={study.actions}>
-        <ButtonLink variant="primary" to={kk ? drillPath({ kk }) : paths.drill}>
-          {kk ? 'Drill this key knowledge' : 'Go to Drill'}
-        </ButtonLink>
+        {left ? (
+          <Button variant="primary" onClick={onRestart}>
+            {left === 1 ? 'Review the remaining card' : `Review the ${left} remaining cards`}
+          </Button>
+        ) : null}
+        {drill}
         <ButtonLink to={paths.home}>Go to Home</ButtonLink>
       </div>
     </>

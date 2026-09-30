@@ -135,6 +135,20 @@
   font-weight: 400;
   color: var(--ice);
 }
+/* Phones: a 2 x 2 grid of single-line 44 px buttons, so all four fit above the fixed bars. */
+@media (max-width: 479.98px) {
+  .rate {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: 'label when key';
+    align-items: baseline;
+    min-height: var(--control-h);
+    padding: var(--space-2) var(--space-3);
+  }
+  .rateWhen {
+    text-align: right;
+    justify-self: end;
+  }
+}
 
 .runnerFoot {
   display: flex;

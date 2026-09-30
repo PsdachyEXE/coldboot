@@ -40,10 +40,15 @@ export const EXAM_CAP_DAYS_BEFORE = 2;
 export const MAX_EASE = 10;
 export const MAX_INTERVAL_DAYS = 36_500;
 
+/** Which exam cap shortened an interval: the final-week limit, or the last date before the exam. */
+export type CapReason = 'final-week' | 'exam';
+
 export interface ScheduleResult {
   next: SrsCardState;
   /** Set when the card should come back later in the same session (quality below 3). */
   requeueAfterMs: number | null;
+  /** Set when an exam cap brought the due date earlier than SM-2 alone would have. */
+  capped: CapReason | null;
 }
 
 export interface ScheduleOptions {
@@ -70,16 +75,29 @@ export function newCardState(now: number): SrsCardState {
  * EXAM_CAP_DAYS_BEFORE days before the exam's study day, but never earlier than tomorrow.
  */
 export function capDueDay(today: string, interval: number, now: number, examAt: number): string {
+  return capDue(today, interval, now, examAt).day;
+}
+
+/** capDueDay, plus which cap (if any) moved the due day earlier. */
+export function capDue(today: string, interval: number, now: number, examAt: number): { day: string; capped: CapReason | null } {
   const tomorrow = addDays(today, 1);
-  if (!Number.isFinite(examAt) || now >= examAt) return addDays(today, Math.max(1, interval));
+  const uncapped = addDays(today, Math.max(1, interval));
+  if (!Number.isFinite(examAt) || now >= examAt) return { day: uncapped, capped: null };
   const examDay = studyDay(examAt);
   let days = Math.max(1, interval);
-  if (daysBetween(today, examDay) <= FINAL_WEEK_DAYS) days = Math.min(days, FINAL_WEEK_MAX_INTERVAL);
+  let capped: CapReason | null = null;
+  if (daysBetween(today, examDay) <= FINAL_WEEK_DAYS && days > FINAL_WEEK_MAX_INTERVAL) {
+    days = FINAL_WEEK_MAX_INTERVAL;
+    capped = 'final-week';
+  }
   let due = addDays(today, days);
   const latest = addDays(examDay, -EXAM_CAP_DAYS_BEFORE);
-  if (due > latest) due = latest;
+  if (due > latest) {
+    due = latest;
+    capped = 'exam';
+  }
   if (due < tomorrow) due = tomorrow;
-  return due;
+  return { day: due, capped: due < uncapped ? capped : null };
 }
 
 export function schedule(prev: SrsCardState | undefined, rating: Rating, now: number, opts: ScheduleOptions): ScheduleResult {
@@ -104,7 +122,7 @@ export function schedule(prev: SrsCardState | undefined, rating: Rating, now: nu
   }
 
   const today = studyDay(now);
-  const dueDay = capDueDay(today, interval, now, opts.examAt);
+  const { day: dueDay, capped } = capDue(today, interval, now, opts.examAt);
   return {
     next: {
       reps,
@@ -115,5 +133,6 @@ export function schedule(prev: SrsCardState | undefined, rating: Rating, now: nu
       last: now,
     },
     requeueAfterMs,
+    capped,
   };
 }
