@@ -116,7 +116,7 @@ describe('persistence', () => {
     settings.useSettings.getState().setName('Mia');
     record.recordAttempt({ itemId: 'gen-sort', kk: ['U3O1-KK12'], score: 1, timestamp: 2_000_000_000_000, ms: 10 });
     const file = io.buildExport(2_000_000_000_000);
-    expect(Object.keys(file.stores).sort()).toEqual(['attempts', 'session', 'settings', 'srs']);
+    expect(Object.keys(file.stores).sort()).toEqual(['attempts', 'exam', 'session', 'settings', 'srs']);
     const text = JSON.stringify(file);
 
     io.resetAllProgress();

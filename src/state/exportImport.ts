@@ -7,6 +7,9 @@
  * imports after a store's shape changes (its data runs through that store's migration first).
  */
 import { z } from 'zod';
+// The exam autosave is optional in a progress file, but it registers here so export, import and
+// reset cover it even when the exam route has never been opened.
+import '../exam/store';
 import './attempts';
 import './session';
 import './settings';
