@@ -29,11 +29,30 @@ describe('pwa store', () => {
     expect(usePwa.getState().updateWaiting).toBe(true);
   });
 
-  it('reload activates the waiting build through the plugin', async () => {
+  it('reload activates the waiting build, then reloads once it takes control', async () => {
+    vi.useFakeTimers();
+    const reload = vi.fn();
+    resetPwaForTests(reload);
     const fake = fakeRegister();
     startPwa(fake.registerSW);
+    fake.options().onRegisteredSW?.('sw.js', fakeRegistration({ waiting: {} as ServiceWorker }));
     await usePwa.getState().reload();
     expect(fake.updateSW).toHaveBeenCalledWith(true);
+    expect(reload).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(4000);
+    expect(reload).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
+  });
+
+  it('reload just reloads when nothing is waiting', async () => {
+    const reload = vi.fn();
+    resetPwaForTests(reload);
+    const fake = fakeRegister();
+    startPwa(fake.registerSW);
+    fake.options().onRegisteredSW?.('sw.js', fakeRegistration());
+    await usePwa.getState().reload();
+    expect(fake.updateSW).not.toHaveBeenCalled();
+    expect(reload).toHaveBeenCalledTimes(1);
   });
 
   it('reports offline ready on first precache and on later visits', () => {

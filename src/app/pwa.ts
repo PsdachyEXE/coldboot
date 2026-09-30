@@ -39,6 +39,10 @@ export interface PwaState {
 let updateSW: ((reloadPage?: boolean) => Promise<void>) | null = null;
 let registration: ServiceWorkerRegistration | null = null;
 let pollTimer: ReturnType<typeof setInterval> | null = null;
+let reloadPage: () => void = () => window.location.reload();
+
+/** If the new build hasn't taken control by then, reload anyway (it activates on the next load). */
+const TAKEOVER_WAIT_MS = 4000;
 
 /** How often an open window checks for a new deploy. The installed app can stay open for days. */
 export const UPDATE_POLL_MS = 60 * 60 * 1000;
@@ -68,11 +72,22 @@ export const usePwa = create<PwaState>()((set, get) => ({
   updateWaiting: false,
   offlineReady: false,
   reload: async () => {
-    if (updateSW) {
-      await updateSW(true);
+    const waiting = registration?.waiting ?? null;
+    if (!updateSW || (registration && !waiting)) {
+      reloadPage();
       return;
     }
-    window.location.reload();
+    // Reload as soon as the new build controls the page. The plugin reloads too, but only once its
+    // own 'waiting' event has fired (200 ms after install), so a quick click could otherwise stall.
+    let reloaded = false;
+    const once = () => {
+      if (reloaded) return;
+      reloaded = true;
+      reloadPage();
+    };
+    navigator.serviceWorker?.addEventListener('controllerchange', once, { once: true });
+    setTimeout(once, TAKEOVER_WAIT_MS);
+    await updateSW(true);
   },
   dismiss: () => set({ needRefresh: false }),
   checkForUpdate: async () => {
@@ -126,8 +141,9 @@ export function startPwa(registerSW: RegisterSW): void {
   }
 }
 
-/** Test hook: forget the registration and reset the store. */
-export function resetPwaForTests(): void {
+/** Test hook: forget the registration and reset the store; optionally replace the page reload. */
+export function resetPwaForTests(reload?: () => void): void {
+  reloadPage = reload ?? (() => window.location.reload());
   if (pollTimer) clearInterval(pollTimer);
   pollTimer = null;
   updateSW = null;
