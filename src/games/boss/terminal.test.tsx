@@ -70,7 +70,7 @@ describe('boss in the terminal', () => {
     await waitFor(() => expect(useTerminalSession.getState().game?.gameId).toBe('boss'));
     expect(screen.getByText('Boss round')).toBeInTheDocument();
     expect(printed()).toContain('15 questions. Answer at the prompt and press Enter.');
-    expect(printed()).toContain('Three lives and 15 questions from every game: easy first, then normal, then hard.');
+    expect(printed()).toContain('Three lives. The questions come from every game, easy first, then normal, then hard, and each wrong answer costs a life. Then three case study questions');
     expect(printed()).toMatch(/Easy question from [a-z]+\. 3 lives left\./);
 
     // One right answer, then three wrong ones.

@@ -156,11 +156,11 @@ export function startBoss(ctx: GameContext, generators: readonly BossGenerator[]
     const blocks: TerminalBlock[] = [];
     if (!introShown) {
       introShown = true;
+      // The host's intro line has already given the number of questions.
+      const then = slice ? ' Then three case study questions that you mark yourself, which cost no lives.' : '';
       blocks.push({
         kind: 'text',
-        text: `Three lives and ${plural(plan.length, 'question')} from every game: easy first, then normal, then hard. Each wrong answer costs a life. ${
-          slice ? 'Then three case study questions that you mark yourself, which cost no lives.' : ''
-        }`.trim(),
+        text: `Three lives. The questions come from every game, easy first, then normal, then hard, and each wrong answer costs a life.${then}`,
         tone: 'muted',
       });
     }
