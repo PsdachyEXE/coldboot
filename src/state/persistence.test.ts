@@ -190,6 +190,41 @@ describe('persistence', () => {
     expect(Object.keys(again.srs.useSrs.getState().cards)).toEqual(['c-good-001']);
   });
 
+  it("clears this tab's written drafts and terminal on reset, on import and on a reset in another window", async () => {
+    const { io } = await freshState();
+    // The terminal host registers the terminal's reset when it loads.
+    await import('../terminal/host');
+    const { useTerminalSession } = await import('../terminal/session');
+    const fresh = useTerminalSession.getState().entries.length;
+    const alice = () => {
+      window.sessionStorage.setItem(KEY('draft:cs-01-q01'), "Alice's private draft");
+      window.sessionStorage.setItem('other-site:key', 'keep');
+      useTerminalSession.getState().print({ kind: 'command', prompt: 'Alice@coldboot:~$', input: 'whoami' });
+      useTerminalSession.getState().setLastShare('COLDBOOT daily 2026-10-01  9/10');
+    };
+    const cleared = () => {
+      expect(window.sessionStorage.getItem(KEY('draft:cs-01-q01'))).toBeNull();
+      expect(window.sessionStorage.getItem('other-site:key')).toBe('keep');
+      expect(useTerminalSession.getState().entries).toHaveLength(fresh);
+      expect(useTerminalSession.getState().lastShare).toBeNull();
+    };
+
+    alice();
+    io.resetAllProgress();
+    cleared();
+
+    alice();
+    const parsed = io.parseImport(JSON.stringify(io.buildExport(2_000_000_000_000)));
+    if (parsed.ok) io.applyImport(parsed.file);
+    cleared();
+
+    // Another window reset: its storage events reach this tab, which clears what only it holds.
+    alice();
+    window.dispatchEvent(new StorageEvent('storage', { key: KEY('settings'), oldValue: '{}', newValue: null, storageArea: window.localStorage }));
+    cleared();
+    window.sessionStorage.clear();
+  });
+
   it("names the export file by the device's local date, not the UTC date", async () => {
     const { io } = await freshState();
     // Tests run in Australia/Melbourne: 8 am on 1 October is still 30 September in UTC.

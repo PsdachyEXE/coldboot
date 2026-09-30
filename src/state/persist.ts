@@ -16,7 +16,7 @@
  */
 import type { StoreApi } from 'zustand';
 import type { z } from 'zod';
-import { peekVersion, readJson, storageKey, warnStorage, writeJson } from './storage';
+import { peekVersion, readJson, removeSessionKeys, storageKey, warnStorage, writeJson } from './storage';
 
 export interface PersistOptions<S, D> {
   /** Key suffix: stored as `coldboot:v1:<name>`. */
@@ -98,6 +98,34 @@ function listenForHide(): void {
 /** Flushes every pending debounced write now (export, import, tests, before reload). */
 export function flushAllPersisted(): void {
   flushers.forEach((f) => f());
+}
+
+const tabClearers = new Set<() => void>();
+
+/**
+ * Registers `clear` to run when this tab's progress is reset or replaced (here or, for a reset, in
+ * another window), for state that lives only in this tab's memory, such as the terminal's
+ * scrollback. Returns a function that unregisters it.
+ */
+export function onClearTabState(clear: () => void): () => void {
+  tabClearers.add(clear);
+  return () => tabClearers.delete(clear);
+}
+
+/**
+ * Clears what this tab holds outside the persisted stores: its sessionStorage drafts and whatever
+ * registered with onClearTabState. Called after a reset or an import, so the next student in the
+ * same tab never sees the last one's drafts or terminal.
+ */
+export function clearTabState(): void {
+  removeSessionKeys();
+  for (const clear of tabClearers) {
+    try {
+      clear();
+    } catch {
+      // One failing clearer mustn't stop the others.
+    }
+  }
 }
 
 const NEWER_BUILD =
@@ -212,11 +240,12 @@ export function persistStore<S, D>(store: StoreApi<S>, opts: PersistOptions<S, D
       if (e.storageArea !== window.localStorage) return;
       if (e.key !== null && e.key !== storageKey(opts.name)) return;
       if (e.key === null || e.newValue === null) {
-        // Progress was reset in another window.
+        // Progress was reset in another window: this tab's drafts and terminal go with it.
         if (timer) clearTimeout(timer);
         timer = null;
         lastSaved = undefined;
         setSilently(opts.defaults());
+        clearTabState();
         return;
       }
       let incoming: unknown;

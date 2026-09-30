@@ -17,6 +17,7 @@ import type { AnswerResult, Difficulty, Game, GameContext, GameMeta, GameSession
 import { melbourneDate } from '../lib/time';
 import { computeMastery, masteryValue } from '../srs/mastery';
 import { useAttempts } from '../state/attempts';
+import { onClearTabState } from '../state/persist';
 import { recordAttempt } from '../state/record';
 import { useSession } from '../state/session';
 import { useSettings } from '../state/settings';
@@ -236,6 +237,18 @@ function endGameQuietly(): void {
   term().setGame(null);
   term().setBusy(false);
 }
+
+/**
+ * Back to a fresh terminal: abandons any running or loading game and clears the scrollback, the
+ * last answered item and the last share line. Runs when progress is reset or replaced, so the next
+ * student in the same tab never sees the last one's commands.
+ */
+export function resetTerminal(): void {
+  endGameQuietly();
+  term().reset();
+}
+
+onClearTabState(resetTerminal);
 
 /**
  * Aborts the running (or loading) game. Attempts already recorded stay recorded. Returns false

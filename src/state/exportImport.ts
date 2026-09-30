@@ -15,7 +15,7 @@ import './attempts';
 import './session';
 import './settings';
 import './srs';
-import { flushAllPersisted, persistedStores } from './persist';
+import { clearTabState, flushAllPersisted, persistedStores } from './persist';
 import { removeAllKeys } from './storage';
 
 export const EXPORT_SCHEMA = 1;
@@ -132,14 +132,22 @@ export async function readImportFile(file: Blob): Promise<ImportResult> {
   }
 }
 
-/** Replaces all progress with a validated import and writes it to storage immediately. */
+/**
+ * Replaces all progress with a validated import and writes it to storage immediately. This tab's
+ * drafts and terminal belonged to the progress being replaced, so they are cleared too.
+ */
 export function applyImport(file: ValidatedImport): void {
   for (const [name, data] of Object.entries(file.data)) persistedStores.get(name)?.apply(data);
   flushAllPersisted();
+  clearTabState();
 }
 
-/** Deletes every COLDBOOT key and resets every persisted store to first-run state. */
+/**
+ * Deletes every COLDBOOT key and resets every persisted store to first-run state, along with this
+ * tab's written drafts and terminal session (scrollback, running game, last share line).
+ */
 export function resetAllProgress(): void {
   for (const reg of persistedStores.values()) reg.resetSilently();
   removeAllKeys();
+  clearTabState();
 }
