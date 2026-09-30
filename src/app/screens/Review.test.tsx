@@ -146,6 +146,40 @@ describe('Review card flip', () => {
     expect(screen.getByText('Your next review is due tomorrow.')).toBeInTheDocument();
   });
 
+  it('brings a card rated Again back once its 10 minutes are up, ahead of the rest of a long queue', () => {
+    vi.useFakeTimers({ toFake: ['Date', 'setTimeout', 'setInterval'] });
+    vi.setSystemTime(new Date(2026, 9, 1, 19, 0));
+    const cards = Array.from({ length: 20 }, (_, i) =>
+      fxCard(`c-u3o1-kk04-${String(i + 1).padStart(3, '0')}`, ['U3O1-KK04'], { front: `Question ${i + 1}?`, back: `Answer ${i + 1}.` }),
+    );
+    provideContent(fixtureIndex({ cards }));
+    useSettings.setState({ newCardLimit: 20 });
+    renderReview();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    const front = () => {
+      const card = document.activeElement as HTMLElement;
+      return within(card).getByText(/^Question \d+\?$/).textContent;
+    };
+    expect(front()).toBe('Question 1?');
+    press(' ');
+    press('1');
+    // One card a minute from here.
+    const shown: string[] = [];
+    for (let minute = 1; minute <= 12; minute++) {
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+      shown.push(front() ?? '');
+      press(' ');
+      press('3');
+    }
+    // Card 1 is due again 10 minutes after it was rated: it follows the card rated at minute 10,
+    // instead of waiting for the other 19 cards.
+    expect(shown.slice(0, 10)).toEqual(Array.from({ length: 10 }, (_, i) => `Question ${i + 2}?`));
+    expect(shown[10]).toBe('Question 1?');
+    expect(shown[11]).toBe('Question 12?');
+  });
+
   it('lets the student finish while waiting for a requeued card', () => {
     provideContent(fixtureIndex({ cards: [basic] }));
     renderReview();
