@@ -145,6 +145,7 @@ All primitives live in `src/ui`, use CSS modules plus the tokens, and are export
 | `Feedback` | Answer verdict | "✓ Correct" in `--flare`, or "✗ Incorrect" in `--steel` on `--trench` with a 120 ms horizontal nudge. Announces the verdict through the polite live region. |
 | `LiveRegions` | The app's two live regions | One polite (`role="status"`), one assertive (`role="alert"`), both visually hidden, fed by `announce()` in `src/ui/announce.ts`. Mounted once in the layout. |
 | `ReportDialog` | Report a content problem (6.11) | Mounted once in the layout, opened with `openReport({ itemId })` from anywhere. |
+| `ExternalLink` | A text link to another site | New tab, `rel="noopener noreferrer"`, and a hidden "(opens in a new tab)". |
 
 Shell components in `src/app`: `Layout` (skip link, rail, tab bar and More menu, main column, storage banner, update prompt, onboarding guard, page titles), `StatusBar`, `Boot`.
 
@@ -178,4 +179,19 @@ Checked against each point of Section 9 after the plan was written, and again af
 - **First run (decided).** The rail, tabs, status bar and terminal are hidden until setup is done, because every route redirects to `/welcome` until then and a rail of dead links would mislead.
 - **Status bar on a phone.** Kept at the bottom above the tab bar, reduced to the countdown and due count as briefed. The phone header with the wordmark and the terminal button scrolls away so the fixed chrome costs 84 px, not 132.
 - **Boot sequence.** Built from real data only: the build id, KK counts per area and the map's provisional status, the content status once loaded, reviews due, and the time to the exam with its Melbourne time. Nothing in it is invented (no fake memory checks).
-- **Screenshot critique.** See the report for this track. Findings fixed before merge: listed in the commit history for `feat(shell)` and `fix(ui)` commits.
+- **Screenshot critique (1280 px and 360 px, production build in Chromium).** Found and fixed:
+  - The production CSP (`font-src 'self'`) blocked one Martian Mono subset that Vite had inlined as a `data:` URI. Fonts are now never inlined.
+  - The date and time picker icons had been inverted into near-invisibility on the dark fields.
+  - The hidden "(opens in a new tab)" text left a visible space before commas after external links.
+  - A lone checkbox crowded the legend below it.
+  - Boot lines wrapped heavily at 360 px; the phone label column is narrower and the map line is shorter.
+  - Pressing Reload within 200 ms of an update being found activated the new build without reloading the page.
+  - No page scrolls sideways at 360 px (checked on Home, Settings, About and Not found); the focus ring shows on the skip link, rail links, inputs and buttons; the update prompt and storage banner sit clear of the status bar and tab bar.
+
+## Notes for other tracks
+
+- Global styles cap `p`, `li`, `dd`, `dt`, `figcaption` and `blockquote` at 72ch. Terminal output and tables that need the full width should set `max-width: none` on their own elements.
+- The terminal drawer should use `z-index: var(--z-drawer)` so it sits over the rail, status bar and tab bar but under the boot overlay. Dialogs use the native top layer.
+- `Feedback` announces the verdict and plays the sound cue itself; call `announce()` only for other events.
+- `useNow(intervalMs)` in `src/lib/useNow.ts` is the shared clock; `useNarrow()` in `src/ui/useMediaQuery.ts` is true below 720 px.
+- `ExternalLink` and `ExternalButtonLink` are the only way to link off-site; `downloadJson` in `src/ui/download.ts` hands the user a file.
