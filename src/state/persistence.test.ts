@@ -233,3 +233,39 @@ describe('persistence', () => {
     expect(io.exportFilename(Date.parse('2027-01-01T09:00:00+11:00'))).toBe('coldboot-progress-2027-01-01.json');
   });
 });
+
+describe("this tab's session keys", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it('reads, writes and removes prefixed sessionStorage keys, and clearTabState removes them all', async () => {
+    const { storage, persist } = await freshState();
+    expect(storage.writeSessionJson('run', { step: 'daily' })).toBe(true);
+    expect(window.sessionStorage.getItem(KEY('run'))).toBe('{"step":"daily"}');
+    expect(storage.readSessionJson('run')).toEqual({ step: 'daily' });
+    storage.removeSessionKey('run');
+    expect(storage.readSessionJson('run')).toBeUndefined();
+    window.sessionStorage.setItem(KEY('run'), '{broken');
+    expect(storage.readSessionJson('run')).toBeUndefined();
+    storage.writeSessionJson('run', { step: 'drill' });
+    window.sessionStorage.setItem(KEY('draft:s-x'), 'text');
+    window.sessionStorage.setItem('another-site', 'kept');
+    persist.clearTabState();
+    expect(window.sessionStorage.getItem(KEY('run'))).toBeNull();
+    expect(window.sessionStorage.getItem(KEY('draft:s-x'))).toBeNull();
+    expect(window.sessionStorage.getItem('another-site')).toBe('kept');
+  });
+
+  it('fails quietly, with no storage warning, when the browser refuses', async () => {
+    const { storage } = await freshState();
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new DOMException('full', 'QuotaExceededError');
+    });
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new DOMException('denied', 'SecurityError');
+    });
+    expect(storage.writeSessionJson('run', { step: 'daily' })).toBe(false);
+    expect(storage.readSessionJson('run')).toBeUndefined();
+    expect(() => storage.removeSessionKey('run')).not.toThrow();
+    expect(storage.useStorageHealth.getState().ok).toBe(true);
+  });
+});
