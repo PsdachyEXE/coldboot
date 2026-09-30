@@ -6,6 +6,8 @@ export interface WrittenResult {
   kk: KkId[];
   /** Indices of the marking points ticked. */
   ticked: number[];
+  /** The answer as written (kept in memory only, so a revisited case study question shows it). */
+  answer: string;
   earned: number;
   marks: number;
   /** 0 to 1: min(ticked marks, marks) / marks. */

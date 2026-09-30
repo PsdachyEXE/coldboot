@@ -123,6 +123,29 @@ describe('Written', () => {
     expect(screen.getByLabelText('Your answer')).toBeInTheDocument();
   });
 
+  it('keeps answers when moving between case study questions, without recording them twice', () => {
+    renderWritten('/written?cs=cs-01');
+    fireEvent.keyDown(document.body, { key: 'c' });
+    fireEvent.keyDown(document.body, { key: 'Enter' });
+    fireEvent.click(screen.getByRole('button', { name: 'Next question' }));
+    fireEvent.change(screen.getByLabelText('Your answer'), { target: { value: 'A range check on weight.' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Show model answer' }));
+    fireEvent.click(screen.getAllByRole('checkbox')[0]);
+    fireEvent.click(screen.getByRole('button', { name: 'Save score' }));
+    expect(screen.getByText('Answered 2 of 2: 2 of 3 marks so far.')).toBeInTheDocument();
+
+    const nav = screen.getByRole('navigation', { name: 'Case study questions' });
+    fireEvent.click(within(nav).getByRole('link', { name: 'Question 1, 1 mark, answered' }));
+    expect(screen.getByText('Correct')).toBeInTheDocument();
+    fireEvent.click(within(nav).getByRole('link', { name: 'Question 2, 2 marks, answered' }));
+    expect(screen.getByLabelText('Your answer')).toHaveValue('A range check on weight.');
+    expect(screen.getByText('Score saved: 1 of 2 marks.')).toBeInTheDocument();
+    expect(useAttempts.getState().log.map((t) => [t[0], t[2]])).toEqual([
+      ['cs-01-q01', 1],
+      ['cs-01-q02', 0.5],
+    ]);
+  });
+
   it('shows the insert beside the question on wide screens', () => {
     vi.stubGlobal('matchMedia', (query: string) => ({ matches: query.includes('min-width: 1100px'), media: query, addEventListener: () => {}, removeEventListener: () => {} }));
     renderWritten('/written?cs=cs-01');

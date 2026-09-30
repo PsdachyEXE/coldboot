@@ -37,7 +37,7 @@ function capitalise(s: string): string {
 }
 
 export function WrittenQuestion({ item, position, where, onScored, next, autoFocus = false, saved = null }: WrittenQuestionProps) {
-  const [answer, setAnswer] = useState(() => readDraft(item.id));
+  const [answer, setAnswer] = useState(() => saved?.answer ?? readDraft(item.id));
   const [phase, setPhase] = useState<'writing' | 'marking' | 'scored'>(saved ? 'scored' : 'writing');
   const [ticked, setTicked] = useState<Set<number>>(() => new Set(saved?.ticked ?? []));
   const [result, setResult] = useState<WrittenResult | null>(saved);
@@ -78,7 +78,7 @@ export function WrittenQuestion({ item, position, where, onScored, next, autoFoc
     const now = Date.now();
     recordAttempt({ itemId: item.id, kk: item.kk, score, timestamp: now, ms: now - shownAt });
     clearDraft(item.id);
-    const r: WrittenResult = { itemId: item.id, kk: [...item.kk], ticked: [...ticked].sort((a, b) => a - b), earned, marks: item.marks, score };
+    const r: WrittenResult = { itemId: item.id, kk: [...item.kk], ticked: [...ticked].sort((a, b) => a - b), answer, earned, marks: item.marks, score };
     setResult(r);
     setPhase('scored');
     announce(`Score saved: ${earned} of ${plural(item.marks, 'mark')}.`);
