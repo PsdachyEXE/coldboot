@@ -33,13 +33,32 @@ describe('mcq item', () => {
     expect(item.check('(b)').correct).toBe(true);
   });
 
-  it('explains a wrong choice with its whyWrong line', () => {
+  it('explains every distractor after a wrong choice, marking the one chosen', () => {
     const r = item.check('c');
     expect(r.correct).toBe(false);
     expect(r.expected).toBe('B. Binary search');
-    expect(r.reason).toContain(mcq.explanation);
-    expect(r.reason).toContain('**Why not C:** Selection is a sort, not a search.');
+    expect(r.reason).toBe(
+      [
+        mcq.explanation,
+        '**Why not A:** Linear search works on unsorted data.',
+        '**Why not C (your answer):** Selection is a sort, not a search.',
+        '**Why not D:** Hashing is outside this study.',
+      ].join('\n\n'),
+    );
     expect(r.markdown).toBe(true);
+  });
+
+  it('explains every distractor after a correct choice too', () => {
+    const r = item.check('b');
+    expect(r.correct).toBe(true);
+    expect(r.reason).toBe(
+      [
+        mcq.explanation,
+        '**Why not A:** Linear search works on unsorted data.',
+        '**Why not C:** Selection is a sort, not a search.',
+        '**Why not D:** Hashing is outside this study.',
+      ].join('\n\n'),
+    );
   });
 
   it('re-prompts on input that is not a choice', () => {

@@ -387,7 +387,7 @@ describe('drill', () => {
     await submitLine('a', mockEnv());
     const feedback = term().entries.findLast((e) => e.block.kind === 'feedback')!.block;
     expect(feedback).toMatchObject({ kind: 'feedback', correct: false, expected: 'C. Three', markdown: true });
-    expect(feedback.kind === 'feedback' && feedback.reason).toContain('**Why not A:** Not one.');
+    expect(feedback.kind === 'feedback' && feedback.reason).toContain('**Why not A (your answer):** Not one.');
     await submitLine('3', mockEnv());
     expect(term().entries.findLast((e) => e.block.kind === 'feedback')!.block).toMatchObject({ correct: true });
   });
