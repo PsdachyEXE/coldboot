@@ -1236,3 +1236,187 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** Since screens load on demand (D-095), the bundler puts Zod and the stores in chunks that run before `main.tsx`'s own body, so the first object schema was built before jitless mode was on. Zod's eval probe then raised a `script-src` CSP violation on every page load in production. The P1 smoke test found it, and a build of the pre-merge branch shows it too. A module's imports always run before it, so importing the configured `z` holds whatever the code splitting.
 
 **Rejected.** Pinning Zod and its settings into one chunk with the bundler's chunking options, which depends on bundler behaviour that has already changed once. Relaxing the CSP.
+
+## D-150 Final adversarial review before handover
+
+**Decision.** Five independent reviewers each read the whole app through one lens: data integrity, security and CSP, learning logic against the spec (run under several device timezones), accessibility (axe on every route at 1280 and 360 px) and a line-by-line spec audit. Skeptics then tried to refute every finding. Of 40 findings, 26 were confirmed (4 medium, 22 low, none critical or high) and fixed on two branches, each with a test that failed before its fix, including four new Playwright focus checks. The 14 findings the skeptics rejected are either deliberate decisions already recorded here, or latent cases that need several rare events at once.
+
+**Reason.** The app holds weeks of students' progress and runs during the final revision window, so it gets an adversarial pass before handover rather than relying on the tracks' own tests.
+
+**Rejected.** Shipping on the tracks' own checks and the Phase 1 critique alone.
+
+## D-151 Review fixes: Dialog live regions start empty
+
+**Decision.** Every open Dialog mounts <LiveRegions since={seq when it opened}>, so it renders only messages announced after it opened. Its test ids are prefixed 'dialog-'.
+
+**Reason.** The skeptic noted that a role=alert that mounts already holding text can be read out, which would re-read a stale warning. announce() callers don't change.
+
+**Rejected.** Mounting the regions with the store's current text, as the original fix proposed, and per-screen live regions in each exam or drill dialog.
+
+## D-152 Review fixes: Dialog focus fallback queries the heading, then main
+
+**Decision.** querySelector('main h1[tabindex="-1"]') ?? getElementById('main')
+
+**Reason.** A selector list returns the first match in document order, and #main comes before any h1 inside it, so the suggested single selector would always return main.
+
+**Rejected.** document.querySelector('main h1[tabindex="-1"], #main')
+
+## D-153 Review fixes: Sticky bar height through a CSS custom property
+
+**Decision.** useStickyTop sets --sticky-top on <html>, and global.css adds it to scroll-padding-top. The exam heading's scroll-margin drops to 12 px, and useQuestionNav's check adds the page padding.
+
+**Reason.** The rule stays in global.css next to the bottom padding. Keeping the old bar-sized heading margin would have counted the bar twice, because scrollIntoView adds scroll-margin to scroll-padding.
+
+**Rejected.** Writing documentElement.style.scrollPaddingTop directly, and an html:has([data-sticky-bar]) rule.
+
+## D-154 Review fixes: Case study revisit is read once at mount
+
+**Decision.** McqQuestion and WrittenQuestion keep const [revisited] = useState(initialChosen !== null or saved !== null) and use it for moving focus and for Feedback's announce and cue.
+
+**Reason.** CaseStudyPractice passes each new answer straight back as initialChosen or saved in the same render. The existing checks, and the suggested announce={initialChosen === null}, therefore treated every new case study answer as a revisit. Focus after Check answer or Save score was lost on every case study question, not only the last.
+
+**Rejected.** announce={initialChosen === null} cue={initialChosen === null} from the verdict.
+
+## D-155 Review fixes: What the review card's description says
+
+**Decision.** Before the flip, the description is the front plus the 'Recall ...' prompt. After it, the answer, and for a cloze card the filled-in front plus the answer. The aria-label is kept.
+
+**Reason.** A cloze card's answer is the missing words in the front, and the prompt tells a reverse card's direction.
+
+**Rejected.** Describing the flipped card by the answer block only, and announcing the answer on flip.
+
+## D-156 Review fixes: Row headers only for tables with an empty corner
+
+**Decision.** The core rule rewrites a table only when its corner header is empty: that cell becomes a td, and each body row's first cell becomes a th with scope=row.
+
+**Reason.** An empty corner marks the compare-card shape, where rows are aspects. Other tables keep their current semantics.
+
+**Rejected.** Visually hidden 'Aspect' text in the corner, and making every table's first column row headers.
+
+## D-157 Review fixes: Browser-layout checks go in a new e2e spec
+
+**Decision.** e2e/focus.spec.ts covers the date and time ring, Shift+Tab under the sticky exam bar at 1280 and 360 px, and chip scrolling. It pauses the clock so every run sits the same mini paper.
+
+**Reason.** jsdom has no layout or :focus-within on shadow parts. With a running clock the paper changed each run, which made the sticky check flaky.
+
+**Rejected.** CSS-text unit tests for these (only the global.css padding rule has one) and leaving them to the scratch scripts.
+
+## D-158 Review fixes: More menu closes on focusin outside
+
+**Decision.** A document focusin listener checks the event target against the nav. D-013 should be amended to add 'moving keyboard focus outside' to Esc, choosing an item and tapping outside. DESIGN.md already says so; DECISIONS.md was left for the orchestrator.
+
+**Reason.** The skeptic showed that onBlur with relatedTarget null (Safari, where a clicked link doesn't take focus) would close the menu on mousedown and swallow the click.
+
+**Rejected.** nav onBlur using relatedTarget.
+
+## D-159 Review fixes: Report dialog stays open when the exam auto-submits
+
+**Decision.** It is not closed programmatically.
+
+**Reason.** Closing it would throw away a note the student is typing. The in-dialog live region now speaks "Time's up", and closing the dialog lands on the new heading.
+
+**Rejected.** useReportDialog.closeReport() on auto-submit and on the end of a timed drill.
+
+## D-160 Review fixes: The drawer's main fallback runs only on a close
+
+**Decision.** TerminalDrawer tracks wasVisible and falls back to #main only on a visible-to-hidden transition, when focus was inside the drawer or on body.
+
+**Reason.** Without the guard, the effect's first run on mount would pull focus to main when the drawer mounts at idle.
+
+**Rejected.** Falling back to main whenever visible is false.
+
+## D-161 Review fixes: Scroll boxes are groups
+
+**Decision.** role=group for every sideways-scroll box: useScrollableChildren and BlockView's table and pre. charts.tsx's single labelled stats table region was left alone.
+
+**Reason.** This matches D-042's figure boxes. A round prints several listings with the same label, and duplicate region landmarks fail axe's landmark-unique rule.
+
+**Rejected.** Making each label unique, for example 'Pseudocode, question 3'.
+
+## D-162 Review fixes: Files this branch shares with the parallel fixer
+
+**Decision.** Minimal edits, flagged for merge: ReportDialog.test.tsx (one assertion), ExamPaper.tsx (SubmitDialog only), Run.tsx (DailyStep's button only) and Run.test.tsx (one new test).
+
+**Reason.** Findings 1, 13 and 15 need these edits, and the other fixer's indexes 6, 9, 10 and 25 list the same files.
+
+**Rejected.** Leaving those findings partly unfixed to avoid the overlap.
+
+## D-163 Review fixes: Games: blitz rejects a slip closer to another term (amends D-086)
+
+**Decision.** A typed answer within the target's tolerance is still wrong ('other-term') when it is strictly closer by edit distance to a different glossary spelling than to the target's nearest spelling. When the distances are equal, it counts.
+
+**Reason.** D-086 says a real but different term should never count, but only exact spellings were blocked. Plurals and unhyphenated forms of functional/non-functional requirement were marked correct. Strict comparison rejects those without losing single-edit typos of any glossary term.
+
+**Rejected.** Rejecting on a tie (<=), which the reviewer found drops legitimate equidistant typos such as 'mackup'. Also a per-card `rejects` list now, which is a content-schema change for the content track.
+
+## D-164 Review fixes: State: KK renames apply one version at a time, as a simultaneous map
+
+**Decision.** kkRenamer (src/content/schema.ts) groups renames by `since`, applies each version as one map and applies versions in ascending order. StudyDesignSchema rejects a duplicate `from` within a version, a rename past kkMapVersion, and a rename whose composed id is off the map.
+
+**Reason.** With chained steps, a shift listed in ascending order collapsed two KKs into one and a swap could not be expressed. Nothing validated renames.
+
+**Rejected.** Keeping sequential application and documenting 'list shifts in descending order', which still can't express a swap.
+
+## D-165 Review fixes: State: a KK renumbering ships with attempts and exam store version bumps
+
+**Decision.** CONTRACTS.md now requires any kkMapVersion change to bump the attempts and exam store versions, each with a pass-through migrate, since hydrate renames the data. A test in src/state/attempts.test.ts pins {kkMapVersion 1, attempts 1, exam 2} so it fails until both stores are bumped.
+
+**Reason.** A build on the old map open in another window would otherwise adopt new-map data and append old-map ids under the new kkMap. The existing newer-version block is the safe path.
+
+**Rejected.** Special-casing a kkMap newer than the build's map inside mergeAttempts or hydrate, which would duplicate the blocking logic.
+
+## D-166 Review fixes: Exam: store version 2 with kkMap on history summaries
+
+**Decision.** ExamSummary gains an optional kkMap (absent means map 1). summarise() stamps studyDesign.kkMapVersion and hydrate renames old summaries. The exam store moves from v1 to v2 with an identity migrate.
+
+**Reason.** The summary schema is strict. A build without the field would set every new summary aside, quarantine it and then overwrite storage without it. The bump makes such a build block instead.
+
+**Rejected.** Adding the optional field without a bump, or writing kkMap only when it isn't 1, which silently relies on no renumbering ever shipping.
+
+## D-167 Review fixes: Terminal: the daily re-syncs by restarting from the stored record
+
+**Decision.** Before checking an answer, the host compares daily[today].results.length with the session's index. On a mismatch it prints a muted note, discards the answer and restarts the game with startGame, which resumes from the record or shows the stored result.
+
+**Reason.** It reuses the existing resume and finished-day paths, keeps re-answers out of the attempt log, and leaves the session's results always equal to the record, so the share line and score line need no separate path.
+
+**Rejected.** Rebuilding only the share line from the record, which would still ask answered questions again and log extra attempts.
+
+## D-168 Review fixes: State: stored timestamps are capped at 1 January 3000 UTC, and the root route has an error screen
+
+**Decision.** MAX_EPOCH_MS = Date.UTC(3000, 0, 1) bounds srs due/last, exam timestamps and attempt seconds. A root errorElement (RouteError) replaces React Router's stack-trace page.
+
+**Reason.** Edited files with out-of-range dates crashed Exam, Map and Stats on every load. The year 3000 keeps every formatted date at four digits and stays far past the furthest real value (SM-2 caps an interval at 36,500 days).
+
+**Rejected.** Date.UTC(2100, 0, 1) from the original finding, which would refuse legitimate post-exam Easy reviews.
+
+## D-169 Review fixes: State: tab-only state is cleared through a registry in persist.ts
+
+**Decision.** clearTabState() removes this tab's coldboot:v1: sessionStorage keys and runs the callbacks registered with onClearTabState. Reset, import and a reset in another window call it, and the terminal host registers resetTerminal when it loads.
+
+**Reason.** State never imports the terminal. Calling the host from ImportProgress would pull it into the FirstRun shell chunk. The registry also covers a reset made in another window.
+
+**Rejected.** Calling the helpers from Settings.tsx and ImportProgress, which misses cross-window resets and grows the shell.
+
+## D-170 Review fixes: Report: the issue link is capped at 8,000 characters
+
+**Decision.** When the prefilled URL would exceed ISSUE_URL_MAX, only the note in the link is shortened, in whole code points, with a line pointing to Copy report. The copied text keeps the whole note.
+
+**Reason.** GitHub answers 414 a little above 8,100 characters, and long notes in non-Latin scripts reach that well inside the 2,000-character note cap.
+
+**Rejected.** Only showing a hint beside the button, which leaves the button broken.
+
+## D-171 Review fixes: Study: the glossary's practise links go to Review
+
+**Decision.** practisePath(kk) gives drillPath({ kk }), or reviewPath({ kk: 'TERMS' }) for TERMS. Home, the syllabus map and the Stats weakest list use it. The Drill empty state and `drill TERMS` explain that the glossary is practised with flashcards and blitz.
+
+**Reason.** TERMS has cards and blitz but no MCQs by design, so a drill link led to 'No questions ... yet'.
+
+**Rejected.** Adding glossary MCQs, or hiding the TERMS cell and row.
+
+## D-172 Review fixes: Games: terminal MCQ feedback lists every distractor
+
+**Decision.** After any answer, mcqItem gives the explanation, then one 'Why not X' line per distractor, marking the one chosen '(your answer)'.
+
+**Reason.** This matches Section 6.4 and the Drill and Daily screens, so the same item teaches the same way in the terminal. The reviewer checked that the speech digest cap is rarely hit.
+
+**Rejected.** Keeping only the chosen option's line, which the mcq.ts header had documented but DECISIONS never recorded.
