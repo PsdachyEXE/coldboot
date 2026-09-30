@@ -12,3 +12,6 @@ test-results/
 .DS_Store
 .vite/
 .tmp/
+
+# Agent worktrees
+.claude/worktrees/
