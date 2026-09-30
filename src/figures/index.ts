@@ -1,0 +1,1 @@
+export { FigureView } from './FigureView';

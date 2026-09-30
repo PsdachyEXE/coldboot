@@ -1,18 +1,15 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { RouterProvider } from 'react-router';
+import '@fontsource-variable/martian-mono';
+import '@fontsource-variable/atkinson-hyperlegible-next';
 import './ui/tokens.css';
+import { createAppRouter } from './app/routes';
 
-function Placeholder() {
-  return (
-    <main style={{ fontFamily: 'system-ui, sans-serif', color: '#DCEAFF', background: '#000', minHeight: '100vh', padding: 24 }}>
-      <h1>COLDBOOT</h1>
-      <p>Build in progress. Revision for VCE Applied Computing: Software Development, Units 3 and 4.</p>
-    </main>
-  );
-}
+const router = createAppRouter();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Placeholder />
+    <RouterProvider router={router} />
   </StrictMode>,
 );

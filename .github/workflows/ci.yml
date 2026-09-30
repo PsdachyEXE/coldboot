@@ -27,10 +27,14 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
+      # Floors are reported, not enforced, on branches while content is being authored (DECISIONS.md D-009).
+      # The deploy workflow always enforces them.
       - name: Unit and component tests
         run: npm test
+        env:
+          COLDBOOT_SKIP_FLOORS: '1'
       - name: Content check
-        run: npm run content:check
+        run: npm run content:check -- --floors=warn
       - name: Contrast check
         run: npm run contrast:check
       - name: Installer lint

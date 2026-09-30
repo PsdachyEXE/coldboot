@@ -57,3 +57,19 @@ Every call made without asking the operator, with the reason and the alternative
 **Reason.** Current major versions of the official actions; Node 22 matches the development container.
 
 **Rejected.** Node 24 (no benefit for this build and a mismatch with local runs).
+
+## D-008 Content file shapes
+
+**Decision.** Per-outcome files (`cards.json`, `mcq.json`, `short.json`) and `terms.json` are plain arrays; `psm.json` is an object holding the stages, activities, specification notes and its own cards, MCQs and short answers. Cloze gaps are written `{{text}}` in `front`. Glossary cards are `reverse` cards whose `front` is the term, with an optional `aliases` list that `blitz` accepts. Case study questions are the MCQ or short-answer schema plus `figureRefs`, told apart by their fields (strict schemas make the union unambiguous). Each KK entry carries `status` (`confirmed` or `provisional`) and an optional `verify` note.
+
+**Reason.** Plain arrays are the easiest shape to author and diff. The additions (`aliases`, `status`, `verify`) are optional or metadata, so the Section 8.1 item shapes are unchanged.
+
+**Rejected.** A `format` discriminator on case study questions (redundant with strict schemas) and wrapping every file in a versioned object (content ships with the app, so it never needs migrating).
+
+## D-009 Floors on branch CI
+
+**Decision.** `ci.yml` (branches and pull requests) reports content floors without failing (`content:check -- --floors=warn`, `COLDBOOT_SKIP_FLOORS=1` for the floors test). `deploy.yml` always enforces them. The relaxation is removed once Phase 1 content lands.
+
+**Reason.** Content is authored after the app code, and a permanently red branch CI would hide real regressions in the meantime.
+
+**Rejected.** Enforcing floors everywhere from day one.
