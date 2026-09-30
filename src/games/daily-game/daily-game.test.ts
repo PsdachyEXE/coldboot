@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import type { ContentIndex } from '../../content/loader';
 import type { DailyRecord } from '../../state/session';
-import { buildDailySet, dailyShareText, DAILY_SIZE } from '../daily';
+import { buildDailySet, dailyShareText, DAILY_GENERATOR_GAMES, DAILY_SIZE, type DailyItemRef } from '../daily';
 import { fixtureContent } from '../drill/fixture';
 import type { GameContext, QuizItem } from '../types';
 import { dailyItem, dailyRefs, loadDailyGame, loadGenerators, msUntilNextSet, startDaily, type Generators } from './index';
@@ -52,8 +52,28 @@ describe('daily set in the game', () => {
     for (const ref of generated) {
       const item = dailyItem(ref, fixtureContent(), generators);
       expect(item.id).toBe(ref.id);
-      expect(item.id).toMatch(/^gen-daily-(deskcheck|sort|search|triage|validate):\d+$/);
+      expect(item.id).toMatch(new RegExp(`^gen-daily-(${DAILY_GENERATOR_GAMES.join('|')}):\\d+$`));
       expect(item.instance).toBeTruthy();
+    }
+  });
+
+  it('loads a generator for every listed game, P1 included, and rebuilds its items from a stored record', () => {
+    expect(Object.keys(generators).sort()).toEqual([...DAILY_GENERATOR_GAMES].sort());
+    for (const gameId of DAILY_GENERATOR_GAMES) {
+      const refs: DailyItemRef[] = [11, 222, 3333].map((seed) => ({ kind: 'generated', id: `gen-daily-${gameId}:${seed}`, gameId, seed }));
+      // A stored record keeps generated ids; they read back as the same generated items.
+      const record: DailyRecord = { itemIds: refs.map((r) => r.id), results: [], completedAt: null };
+      expect(dailyRefs(TODAY, fixtureContent(), record)).toEqual({ refs, replaced: 0 });
+      for (const ref of refs) {
+        const item = dailyItem(ref, fixtureContent(), generators);
+        expect(item.id, gameId).toBe(ref.id);
+        expect(item.instance, gameId).toBeTruthy();
+        expect(item.kk.length, gameId).toBeGreaterThan(0);
+        expect(item.prompt.length, gameId).toBeGreaterThan(0);
+        expect(dailyItem(ref, fixtureContent(), generators).prompt, gameId).toEqual(item.prompt);
+        expect(item.check(typedAnswer(item)).correct, `${gameId} ${ref.seed}`).toBe(true);
+        expect(item.check(wrongAnswer(item)).correct, `${gameId} ${ref.seed}`).toBe(false);
+      }
     }
   });
 

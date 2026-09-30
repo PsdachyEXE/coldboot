@@ -1,5 +1,5 @@
 /**
- * One generated daily question (deskcheck, sort, search, triage or validate) on the Daily screen.
+ * One generated daily question (from any game in DAILY_GENERATOR_GAMES) on the Daily screen.
  * The prompt is the item's TerminalBlocks drawn by the terminal's own block renderer, on a
  * terminal-style panel; below it sit an answer field, the item's suggested answers as buttons, and
  * Check answer. Input that isn't an attempt (an array with the wrong length, say) gets the item's

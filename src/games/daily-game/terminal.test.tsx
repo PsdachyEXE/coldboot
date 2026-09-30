@@ -122,6 +122,23 @@ describe('daily challenge in the terminal', () => {
     expect(useAttempts.getState().log).toHaveLength(10);
   });
 
+  it('plays a generated P1 question with its plan table, and records it under its daily id', async () => {
+    // A day whose first question is a gantt item: a plan table, and a question worked out from it.
+    const seed = Array.from({ length: 200 }, (_, i) => i + 1).find((n) => generators.gantt(n, 'normal').prompt.some((b) => b.kind === 'table'))!;
+    const ganttId = `gen-daily-gantt:${seed}`;
+    const rest = dailyRefs(TODAY, fixtureContent(), null).refs.map((r) => r.id).slice(1);
+    useSession.getState().beginDaily(TODAY, [ganttId, ...rest]);
+    const user = userEvent.setup();
+    const input = renderView();
+    await startDaily(user, input);
+    expect(useTerminalSession.getState().game?.session.current!()!.itemId).toBe(ganttId);
+    expect(screen.getAllByRole('table').length).toBeGreaterThan(0);
+    await user.type(input, `${typeable(typedAnswer(currentItem()))}{Enter}`);
+    expect(useSession.getState().daily[TODAY].results).toEqual([1]);
+    expect(useAttempts.getState().log.map((t) => t[0])).toEqual([ganttId]);
+    expect(useTerminalSession.getState().game?.session.progress).toEqual({ current: 2, total: 10 });
+  });
+
   it('refuses a difficulty for the daily challenge', async () => {
     const user = userEvent.setup();
     const input = renderView();

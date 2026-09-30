@@ -162,6 +162,26 @@ describe('Daily screen', () => {
     expect(useAttempts.getState().log[first][0]).toBe(item.id);
   });
 
+  it('plays a generated P1 question: a data flow diagram with marked elements', async () => {
+    // A day whose first question is a dfd item that asks which marked element is wrong.
+    const seed = Array.from({ length: 200 }, (_, i) => i + 1).find((n) => generators.dfd(n, 'normal').id === 'gen-dfd-element')!;
+    const dfdId = `gen-daily-dfd:${seed}`;
+    const day = [dfdId, ...buildDailySet(TODAY, fixtureContent().mcq).map((r) => r.id).slice(1)];
+    useSession.getState().beginDaily(TODAY, day);
+    const item = dailyItem(refsNow()[0], fixtureContent(), generators);
+
+    renderDaily();
+    fireEvent.click(await screen.findByRole('button', { name: 'Start the daily challenge' }));
+    expect(screen.getByText('Question 1 of 10')).toBeInTheDocument();
+    expect(screen.getByRole('figure')).toBeInTheDocument();
+    const chips = within(screen.getByRole('group', { name: 'Suggested answers' })).getAllByRole('button');
+    expect(chips.map((c) => c.textContent)).toEqual(item.chips);
+    fireEvent.click(screen.getByRole('button', { name: typedAnswer(item) }));
+    expect(screen.getByText('Correct')).toBeInTheDocument();
+    expect(useSession.getState().daily[TODAY].results).toEqual([1]);
+    expect(useAttempts.getState().log.map((t) => t[0])).toEqual([dfdId]);
+  });
+
   it('shows a finished day\'s stored result without counting again', async () => {
     const day = buildDailySet(TODAY, fixtureContent().mcq).map((r) => r.id);
     useSession.getState().beginDaily(TODAY, day);

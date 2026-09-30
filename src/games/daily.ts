@@ -12,8 +12,28 @@ import { hashString, mix32 } from './prng';
 
 export const DAILY_SIZE = 10;
 export const DAILY_MCQS = 8;
-/** P0 games whose `generate` feeds the daily challenge. Order matters only for tie-breaks. */
-export const DAILY_GENERATOR_GAMES = ['deskcheck', 'sort', 'search', 'triage', 'validate'] as const;
+/**
+ * Games whose `generate` feeds the daily challenge: the P0 generators, then the P1 ones (psm has no
+ * `generate`). Order matters only for tie-breaks. A day's two games are the two that rank lowest
+ * for its date, so adding a game changes which games unstarted days draw on; a day already started
+ * keeps its stored item ids.
+ */
+export const DAILY_GENERATOR_GAMES = [
+  'deskcheck',
+  'sort',
+  'search',
+  'triage',
+  'validate',
+  'dfd',
+  'usecase',
+  'reqs',
+  'gantt',
+  'threat',
+  'law',
+  'naming',
+  'types',
+  'oop',
+] as const;
 export type DailyGeneratorGame = (typeof DAILY_GENERATOR_GAMES)[number];
 
 export type DailyItemRef =

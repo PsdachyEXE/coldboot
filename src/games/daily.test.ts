@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DAILY_MCQS, DAILY_SIZE, buildDailySet, dailyShareText } from './daily';
+import { DAILY_GENERATOR_GAMES, DAILY_MCQS, DAILY_SIZE, buildDailySet, dailyShareText } from './daily';
 
 const pool = Array.from({ length: 60 }, (_, i) => ({ id: `m-u3o1-kk${String((i % 14) + 1).padStart(2, '0')}-${String(i).padStart(3, '0')}` }));
 
@@ -80,6 +80,23 @@ describe('daily challenge set', () => {
     const small = realistic.filter((m) => m.kk[0].startsWith('U4O2')).slice(0, 12);
     const set = buildDailySet('2026-10-02', small);
     expect(set.filter((i) => i.kind === 'mcq')).toHaveLength(8);
+  });
+
+  it('draws two different generator games a day, spread evenly over the P0 and P1 games', () => {
+    const counts = new Map<string, number>();
+    const days = dates(730);
+    for (const date of days) {
+      const set = buildDailySet(date, realistic);
+      expect(buildDailySet(date, [...realistic].reverse()), date).toEqual(set);
+      const games = set.flatMap((i) => (i.kind === 'generated' ? [i.gameId] : []));
+      expect(new Set(games).size, date).toBe(2);
+      for (const g of games) counts.set(g, (counts.get(g) ?? 0) + 1);
+    }
+    const share = (days.length * 2) / DAILY_GENERATOR_GAMES.length;
+    for (const g of DAILY_GENERATOR_GAMES) {
+      expect(counts.get(g) ?? 0, g).toBeGreaterThan(share * 0.6);
+      expect(counts.get(g) ?? 0, g).toBeLessThan(share * 1.4);
+    }
   });
 
   it('formats the share line', () => {
