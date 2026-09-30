@@ -6,7 +6,7 @@
  * Each persisted store is exported as its own `{ v, data }` envelope, so a backup made today still
  * imports after a store's shape changes (its data runs through that store's migration first).
  */
-import { z } from 'zod';
+import { z } from '../lib/zodConfig';
 import { localDate } from '../lib/time';
 // The exam autosave is optional in a progress file, but it registers here so export, import and
 // reset cover it even when the exam route has never been opened.

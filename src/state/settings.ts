@@ -1,6 +1,6 @@
 /** Settings store: display name, exam instant, daily new-card limit, sound and motion. */
 import { create } from 'zustand';
-import { z } from 'zod';
+import { z } from '../lib/zodConfig';
 import { DEFAULT_EXAM_AT, parseInstant } from '../lib/time';
 import { cleanPlainText, isCleanPlainText } from '../lib/text';
 import { persistStore } from './persist';

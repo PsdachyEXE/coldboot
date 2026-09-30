@@ -24,6 +24,12 @@ export default tseslint.config(
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
+      '@typescript-eslint/no-restricted-imports': [
+        'error',
+        {
+          paths: [{ name: 'zod', allowTypeImports: true, message: 'Import z from src/lib/zodConfig, which turns on jitless mode before any schema is built.' }],
+        },
+      ],
     },
   },
   {

@@ -7,7 +7,7 @@
  * when the map is renumbered, hydration rewrites old ids through `studyDesign.renames`.
  */
 import { create } from 'zustand';
-import { z } from 'zod';
+import { z } from '../lib/zodConfig';
 import { isKkId, type KkId } from '../content/schema';
 import { studyDesign } from '../content/studyDesign';
 import { persistStore } from './persist';

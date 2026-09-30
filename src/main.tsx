@@ -1,5 +1,5 @@
 /// <reference types="vite-plugin-pwa/vanillajs" />
-// First: configures Zod before any schema module is evaluated (see the file for why).
+// First: configures Zod (every schema module imports z from here too; see the file for why).
 import './lib/zodConfig';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

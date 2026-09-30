@@ -3,7 +3,7 @@
  * (for the streak, stats and time studied) and the last day the full boot sequence played.
  */
 import { create } from 'zustand';
-import { z } from 'zod';
+import { z } from '../lib/zodConfig';
 import { areaOf, type AreaId, type GroupId, type KkId } from '../content/schema';
 import { addDays } from '../lib/time';
 import { cleanPlainText, isCleanPlainText } from '../lib/text';

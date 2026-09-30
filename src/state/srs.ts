@@ -5,7 +5,7 @@
  * Reverse cards keep ONE record: the review direction alternates with `reps` (see src/srs/queue.ts).
  */
 import { create } from 'zustand';
-import { z } from 'zod';
+import { z } from '../lib/zodConfig';
 import { persistStore } from './persist';
 
 export interface SrsCardState {

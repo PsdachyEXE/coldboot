@@ -5,7 +5,7 @@
  * Text fields use a small Markdown subset: **bold**, *italics*, `inline code`, lists, tables
  * and fenced ```pseudo blocks for pseudocode. Raw HTML is never allowed.
  */
-import { z } from 'zod';
+import { z } from '../lib/zodConfig';
 
 // ---------------------------------------------------------------------------
 // Identifiers

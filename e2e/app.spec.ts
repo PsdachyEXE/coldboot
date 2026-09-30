@@ -18,6 +18,16 @@ const LOCAL_DATE = '2026-10-01';
 
 test.beforeEach(async ({ page }) => {
   await page.clock.setFixedTime(FIXED_NOW);
+  // The production CSP must never fire: record every violation for the check after each test.
+  await page.addInitScript(() => {
+    const seen: string[] = [];
+    (window as unknown as { __cspViolations: string[] }).__cspViolations = seen;
+    document.addEventListener('securitypolicyviolation', (e) => seen.push(`${e.violatedDirective} blocked ${e.blockedURI} at ${e.sourceFile}`));
+  });
+});
+
+test.afterEach(async ({ page }) => {
+  expect(await page.evaluate(() => (window as unknown as { __cspViolations?: string[] }).__cspViolations ?? [])).toEqual([]);
 });
 
 /**

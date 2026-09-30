@@ -11,7 +11,7 @@
  * Answers are the student's own text: render them only as React text.
  */
 import { create } from 'zustand';
-import { z } from 'zod';
+import { z } from '../lib/zodConfig';
 import { isKkId, type KkId } from '../content/schema';
 import { EXAM_READING_MS, EXAM_WRITING_MS } from '../lib/time';
 import { persistStore } from '../state/persist';
