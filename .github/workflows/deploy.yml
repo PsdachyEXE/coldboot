@@ -168,7 +168,9 @@ jobs:
               $shortcut = $shell.CreateShortcut($lnk)
               Assert-That ($shortcut.TargetPath.EndsWith('msedge.exe', [StringComparison]::OrdinalIgnoreCase)) "its target ends with msedge.exe ($($shortcut.TargetPath))"
               Assert-That ($shortcut.Arguments -ceq $expectedArguments) "its arguments are exactly '$expectedArguments' (got '$($shortcut.Arguments)')"
-              Assert-That ($shortcut.IconLocation -eq "$iconPath,0") "its icon is $iconPath (got '$($shortcut.IconLocation)')"
+              # Windows may store the icon path with variables such as %USERPROFILE%, so expand it first.
+              $icon = [Environment]::ExpandEnvironmentVariables($shortcut.IconLocation)
+              Assert-That ($icon -eq "$iconPath,0") "its icon is $iconPath (got '$icon')"
               Assert-That (-not (Test-Path -LiteralPath (Get-ShortcutPath $folder 'url'))) "there's no .url shortcut beside it"
             }
             Assert-That (Test-Path -LiteralPath $iconPath -PathType Leaf) "$iconPath exists"
