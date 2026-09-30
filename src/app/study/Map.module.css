@@ -20,6 +20,15 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+/* Phones: folded areas sit closer together. */
+@media (max-width: 719.98px) {
+  .areas {
+    gap: var(--space-4);
+  }
+  .areaHead {
+    margin-bottom: 0;
+  }
+}
 
 .groups {
   display: grid;

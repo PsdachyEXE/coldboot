@@ -2,12 +2,13 @@
  * Renders one TerminalBlock. Plain text is always React text; only blocks built from bundled content
  * (markdown, pseudo, and choices or feedback with `markdown: true`) go through the Markdown renderer.
  */
-import { memo } from 'react';
+import { memo, useMemo, useRef } from 'react';
 import { Link } from 'react-router';
 import { renderPseudo } from '../content/markdown';
 import { FigureView } from '../figures';
 import { useScrollable } from '../figures/useScrollable';
 import { Markdown } from '../ui/Markdown';
+import { useScrollableChildren } from '../ui/useScrollableChildren';
 import type { TerminalBlock } from './blocks';
 import styles from './Block.module.css';
 
@@ -91,6 +92,20 @@ function TableBlock({ block }: { block: Extract<TerminalBlock, { kind: 'table' }
   );
 }
 
+/** A pseudocode listing. A listing wider than the terminal scrolls, and is then a labelled tab stop. */
+function PseudoBlock({ block }: { block: Extract<TerminalBlock, { kind: 'pseudo' }> }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const html = useMemo(() => renderPseudo(block.code, { highlightLines: block.highlightLines }), [block.code, block.highlightLines]);
+  useScrollableChildren(ref, 'pre', () => block.title ?? 'Pseudocode', html);
+  return (
+    <figure className={styles.pseudo}>
+      {block.title && <figcaption className={styles.caption}>{block.title}</figcaption>}
+      {block.indexBase !== undefined && <p className={styles.caption}>Array indexes start at {block.indexBase}.</p>}
+      <div ref={ref} dangerouslySetInnerHTML={{ __html: html }} />
+    </figure>
+  );
+}
+
 /** Preformatted text. It scrolls sideways when too wide (and is then a tab stop), unless it wraps. */
 function PreBlock({ block }: { block: Extract<TerminalBlock, { kind: 'pre' }> }) {
   const [ref, scrollable] = useScrollable<HTMLPreElement>();
@@ -120,13 +135,7 @@ export const BlockView = memo(function BlockView({ block, animate = false, onNav
       return <Markdown text={block.text} className={cx(styles.markdown, block.tone === 'muted' && styles.markdownMuted)} />;
 
     case 'pseudo':
-      return (
-        <figure className={styles.pseudo}>
-          {block.title && <figcaption className={styles.caption}>{block.title}</figcaption>}
-          {block.indexBase !== undefined && <p className={styles.caption}>Array indexes start at {block.indexBase}.</p>}
-          <div dangerouslySetInnerHTML={{ __html: renderPseudo(block.code, { highlightLines: block.highlightLines }) }} />
-        </figure>
-      );
+      return <PseudoBlock block={block} />;
 
     case 'table':
       return <TableBlock block={block} />;

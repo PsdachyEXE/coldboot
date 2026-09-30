@@ -10,7 +10,7 @@ import { Canvas, HighlightRing, TextLines } from '../svg';
 import { LINE_HEIGHT, textWidth } from '../text';
 import type { BodyProps } from '../types';
 import { cx } from '../cx';
-import { useFigureId } from '../useScrollable';
+import { useFigureId, useScrollable } from '../useScrollable';
 import { BAR_HEIGHT, DIAMOND, HEADER_BOTTOM, HEADER_UNIT_Y, HEADER_Y, layoutGantt, PAD, unitHeader, type GanttRow } from './layout';
 import { trySchedule } from './schedule';
 import styles from '../Figure.module.css';
@@ -127,8 +127,15 @@ function useBoxWidth<T extends HTMLElement>(): [RefObject<T | null>, number] {
 
 /** The compact layout's task table: names, durations and dependencies, under the bars. */
 function TaskTable({ figure: f, title }: { figure: Gantt; title: string }) {
+  const [ref, scrollable] = useScrollable<HTMLDivElement>();
   return (
-    <div className={styles.tableScroll}>
+    <div
+      ref={ref}
+      className={styles.tableScroll}
+      tabIndex={scrollable ? 0 : undefined}
+      role={scrollable ? 'group' : undefined}
+      aria-label={scrollable ? `${title}: tasks (scrolls sideways)` : undefined}
+    >
       <table className={cx(styles.table, styles.ganttTasks)} aria-label={`${title}: tasks`}>
         <thead>
           <tr>

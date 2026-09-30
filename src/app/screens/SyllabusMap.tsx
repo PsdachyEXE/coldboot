@@ -167,7 +167,8 @@ function KkRow({
   const itemCounts = counts(content, kk);
   return (
     <li className={styles.row} data-kk={kk}>
-      <Link to={drillPath({ kk })} className={styles.rowLink}>
+      {/* The focus ring goes round the whole row, so bring all of it into view, clear of the fixed bars. */}
+      <Link to={drillPath({ kk })} className={styles.rowLink} onFocus={(e) => e.currentTarget.parentElement?.scrollIntoView?.({ block: 'nearest' })}>
         <VisuallyHidden>Drill</VisuallyHidden>{' '}
         {group ? null : <span className={styles.rowId}>{kk}</span>}{' '}
         <span className={styles.rowTitle}>{title}</span>
