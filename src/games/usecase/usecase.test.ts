@@ -179,6 +179,19 @@ describe('usecase rounds', () => {
     }
   });
 
+  it.each(LEVELS)('plans rounds whose every item accepts its own answer and parses nothing else (%s, 500 seeds)', (level) => {
+    for (const seed of SEEDS) {
+      for (const spec of planUsecaseRound(seed, level)) {
+        const item = usecaseItem(spec, level);
+        for (const b of item.prompt) if (b.kind === 'figure') expect(FigureSchema.safeParse(b.figure).success).toBe(true);
+        const miss = item.check('zz');
+        expect(miss.counted, item.instance).toBe(false);
+        const typed = /^[A-E]: /.test(miss.expected) ? miss.expected.charAt(0) : miss.expected.replace(/ \([^)]*\)/g, '').replace(/ and /g, ' ');
+        expect(item.check(typed).correct, `${item.instance}: ${typed}`).toBe(true);
+      }
+    }
+  });
+
   it('generates standalone items deterministically', () => {
     const ids = new Set<string>();
     for (const seed of SEEDS.slice(0, 200)) {

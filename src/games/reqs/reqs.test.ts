@@ -149,6 +149,10 @@ describe('reqs rounds', () => {
       plan.forEach((p, i) => {
         if (p.kind === 'type') expect(plan[i - 1]).toMatchObject({ kind: 'classify', statement: p.statement });
         const item = reqsItem(p, level);
+        const expected = item.check('?').expected;
+        expect(item.check(expected).correct, item.instance).toBe(true);
+        const chips = item.chips ?? [];
+        expect(chips.filter((c) => item.check(c).correct), item.instance).toHaveLength(1);
         if (seed < 200) expect(fromReqsInstance(item.instance!)?.prompt).toEqual(item.prompt);
       });
       if (level === 'easy') expect(classify.every((p) => statementsFor('easy').some((s) => s.id === p.statement))).toBe(true);
