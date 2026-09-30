@@ -17,6 +17,7 @@ import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { GANTT_GAME_KK, GANTT_ID, GANTT_MAN, GANTT_SUMMARY, GANTT_TITLE } from './gantt/meta';
 import { PSM_ID, PSM_KK, PSM_MAN, PSM_SUMMARY, PSM_TITLE } from './psm/meta';
 import { REQS_ID, REQS_KK, REQS_MAN, REQS_SUMMARY, REQS_TITLE } from './reqs/meta';
+import { USECASE_GAME_KK, USECASE_ID, USECASE_MAN, USECASE_SUMMARY, USECASE_TITLE } from './usecase/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
@@ -96,6 +97,16 @@ export const GAMES: GameMeta[] = [
     fixedDifficulty: true,
     // Loads the generator games the set draws on (daily-game/index.ts), then the game.
     load: () => import('./daily-game').then((m) => m.loadDailyGame()),
+  },
+  {
+    id: USECASE_ID,
+    title: USECASE_TITLE,
+    priority: 'P1',
+    kk: USECASE_GAME_KK,
+    summary: USECASE_SUMMARY,
+    man: USECASE_MAN,
+    generator: true,
+    load: () => import('./usecase').then((m) => m.default),
   },
   {
     id: REQS_ID,

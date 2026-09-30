@@ -185,7 +185,11 @@ export const UseCaseDiagramSchema = z
     useCases: z
       .array(z.object({ id: z.string(), label: Text, x: Coord, y: Coord, rx: z.number().positive().optional(), ry: z.number().positive().optional() }).strict())
       .min(1),
-    /** association: actor to use case. includes/extends: use case to use case, drawn dashed with <<includes>> or <<extends>>. */
+    /**
+     * association: actor to use case. includes/extends: use case to use case, drawn dashed with
+     * <<includes>> or <<extends>>. An association between two actors is a convention error; it
+     * validates only so a figure can teach that error (the usecase game), as unlabelled DFD flows do.
+     */
     links: z
       .array(
         z
@@ -211,8 +215,8 @@ export const UseCaseDiagramSchema = z
         ctx.addIssue({ code: 'custom', message: `Link ${l.from} to ${l.to} names an unknown actor or use case`, path: ['links', i] });
         return;
       }
-      if (l.type === 'association' && !(actors.has(l.from) !== actors.has(l.to))) {
-        ctx.addIssue({ code: 'custom', message: 'An association joins one actor and one use case', path: ['links', i] });
+      if (l.type === 'association' && !actors.has(l.from) && !actors.has(l.to)) {
+        ctx.addIssue({ code: 'custom', message: 'An association joins an actor to a use case', path: ['links', i] });
       }
       if (l.type !== 'association' && !(cases.has(l.from) && cases.has(l.to))) {
         ctx.addIssue({ code: 'custom', message: `<<${l.type}>> joins two use cases`, path: ['links', i] });
