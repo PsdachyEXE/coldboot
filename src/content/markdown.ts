@@ -99,6 +99,45 @@ function createRenderer(): MarkdownRenderer {
     };
   }
 
+  // A comparison table ('| | Linear search | Binary search |') leaves its corner header empty: its
+  // rows are the aspects compared. The corner becomes a plain cell, not an empty header, and each
+  // row's first cell heads its row, so a screen reader reads 'Data order' with 'Must be sorted'.
+  md.core.ruler.push('table_row_headers', (state) => {
+    const tokens = state.tokens;
+    let rowHeaders = false;
+    let inBody = false;
+    let firstInRow = false;
+    for (let i = 0; i < tokens.length; i++) {
+      const t = tokens[i];
+      if (t.type === 'table_open') {
+        const corner = tokens.findIndex((u, j) => j > i && u.type === 'th_open');
+        rowHeaders = corner !== -1 && tokens[corner + 1]?.type === 'inline' && tokens[corner + 1].content.trim() === '';
+        if (rowHeaders) {
+          tokens[corner].type = 'td_open';
+          tokens[corner].tag = 'td';
+          const close = tokens.findIndex((u, j) => j > corner && u.type === 'th_close');
+          tokens[close].type = 'td_close';
+          tokens[close].tag = 'td';
+        }
+      } else if (t.type === 'table_close') {
+        rowHeaders = false;
+        inBody = false;
+      } else if (t.type === 'tbody_open') {
+        inBody = true;
+      } else if (t.type === 'tr_open') {
+        firstInRow = inBody && rowHeaders;
+      } else if (firstInRow && t.type === 'td_open') {
+        t.type = 'th_open';
+        t.tag = 'th';
+        t.attrSet('scope', 'row');
+      } else if (firstInRow && t.type === 'td_close') {
+        t.type = 'th_close';
+        t.tag = 'th';
+        firstInRow = false;
+      }
+    }
+  });
+
   // Tables scroll horizontally on narrow screens instead of widening the page.
   md.renderer.rules.table_open = () => '<div class="md-table"><table>\n';
   md.renderer.rules.table_close = () => '</table></div>\n';

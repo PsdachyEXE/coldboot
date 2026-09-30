@@ -10,7 +10,7 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | KK map | `content/study-design.json`, `src/content/studyDesign.ts` | ids `U3O1-KK01`…, plus `TERMS` and `PSM`; `status` is `provisional` until checked against the study design |
 | Content loading and index | `src/content/loader.ts` | per-outcome dynamic imports; `loadAllContent()` returns a `ContentIndex` (with `caseByKk` and `cardIds`); failed loads are retried, never cached |
 | Shared content store | `src/content/store.ts` | `useContentIndex()` loads once for every screen; prunes SRS records for cards that left the content |
-| Markdown | `src/content/markdown.ts`, `src/ui/Markdown.tsx` | markdown-it, HTML off; ```` ```pseudo ```` fences get numbered, highlighted listings |
+| Markdown | `src/content/markdown.ts`, `src/ui/Markdown.tsx` | markdown-it, HTML off; ```` ```pseudo ```` fences get numbered, highlighted listings; a table whose corner header is empty (a comparison) gets row headers (`th scope="row"`) and a plain corner cell |
 | Content checker | `src/content/check.ts`, `scripts/content-check.ts`, `tests/content.test.ts` | |
 | Command terms | `src/content/commandTerms.ts` | |
 | Terminal output blocks | `src/terminal/blocks.ts` | `TerminalBlock` union; plain data. A `figure` block may carry `highlight` and `compact`, passed to `FigureView`; the speech digest reads out marked elements |
