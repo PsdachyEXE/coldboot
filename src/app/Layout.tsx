@@ -50,6 +50,18 @@ export default function Layout() {
     window.scrollTo?.(0, 0);
   }, [location.pathname]);
 
+  // A navigation within the same route (only the query changes, such as "Change drill" or "Start
+  // written practice") remounts the screen, and the control that had focus may be gone. This runs
+  // after the screen's own effects, so a screen that placed focus keeps it; otherwise start at main.
+  const firstKey = useRef(location.key);
+  useEffect(() => {
+    if (location.key === firstKey.current) return;
+    firstKey.current = '';
+    if (useTerminal.getState().open) return;
+    const active = document.activeElement;
+    if (!active || active === document.body || !active.isConnected) mainRef.current?.focus({ preventScroll: true });
+  }, [location.key]);
+
   // Load study content in the background once the shell has painted.
   useEffect(() => {
     const t = setTimeout(() => void useContent.getState().load(), 0);

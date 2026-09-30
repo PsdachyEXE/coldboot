@@ -98,6 +98,24 @@ describe('Written', () => {
     expect(screen.getByText('2 of 3 marks')).toBeInTheDocument();
   });
 
+  it('puts focus on the first question when a round is started or restarted from a button', () => {
+    const router = renderWritten('/written');
+    fireEvent.click(screen.getByRole('button', { name: 'Start written practice' }));
+    expect(router.state.location.search).toBe('?mode=weak');
+    const question = () => screen.getByRole('region', { name: 'Justify storing a phone number as a string.' });
+    expect(question()).toHaveFocus();
+
+    fireEvent.click(screen.getByRole('button', { name: 'End practice now' }));
+    expect(screen.getByRole('heading', { name: 'Written practice complete' })).toHaveFocus();
+    fireEvent.click(screen.getByRole('button', { name: 'Practise again' }));
+    expect(question()).toHaveFocus();
+  });
+
+  it('leaves focus to the page on a direct link to a round', () => {
+    renderWritten('/written?kk=U3O1-KK04');
+    expect(screen.getByRole('region', { name: 'Justify storing a phone number as a string.' })).not.toHaveFocus();
+  });
+
   it('lists case studies on the setup screen', () => {
     renderWritten('/written');
     expect(screen.getByRole('button', { name: 'Start written practice' })).toBeInTheDocument();
