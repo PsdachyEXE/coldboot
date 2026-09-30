@@ -51,6 +51,7 @@ export function GeneratedQuestion({ item, position, where, onAnswered, next, aut
   const nextRef = useRef<HTMLButtonElement>(null);
   const checkedOnce = useRef(false);
   const positionId = useId();
+  const promptId = useId();
 
   useEffect(() => {
     if (autoFocus) regionRef.current?.focus();
@@ -97,11 +98,12 @@ export function GeneratedQuestion({ item, position, where, onAnswered, next, aut
   const chips = item.chips ?? [];
 
   return (
-    <section ref={regionRef} tabIndex={-1} aria-labelledby={positionId} className={styles.question}>
+    // Named by its position and described by its prompt, so focus on it reads the question too.
+    <section ref={regionRef} tabIndex={-1} aria-labelledby={positionId} aria-describedby={promptId} className={styles.question}>
       <p className={study.progress} id={positionId}>
         {position}
       </p>
-      <div className={styles.terminal}>
+      <div id={promptId} className={styles.terminal}>
         {item.prompt.map((block, i) => (
           <BlockView key={i} block={block} />
         ))}

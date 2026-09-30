@@ -79,6 +79,29 @@ describe('Review card flip', () => {
     expect(useReportDialog.getState().request).toEqual({ itemId: 'c-u3o1-kk04-002', where: 'Review' });
   });
 
+  it('describes the focused card with its question, then with its answer once flipped', () => {
+    renderReview();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    // The card's name is only its position, so the text a screen reader reads on focus is the description.
+    expect(screen.getByRole('region', { name: 'Card 1 of 2, question' })).toHaveAccessibleDescription('Why store a phone number as a string? Recall the answer.');
+    press(' ');
+    const flipped = screen.getByRole('region', { name: 'Card 1 of 2, answer shown' });
+    expect(flipped).toHaveFocus();
+    expect(flipped).toHaveAccessibleDescription('It keeps leading zeros and is never used in arithmetic.');
+  });
+
+  it('describes a flipped cloze card with the filled-in text as well as the explanation', () => {
+    const cloze = fxCard('c-u3o1-kk04-003', ['U3O1-KK04'], { type: 'cloze', front: 'A phone number is stored as a {{string}}.', back: 'It keeps the leading zero.' });
+    provideContent(fixtureIndex({ cards: [cloze] }));
+    renderReview();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    expect(screen.getByRole('region', { name: 'Card 1 of 1, question' })).toHaveAccessibleDescription('A phone number is stored as a [ ... ]. Recall the missing words.');
+    press(' ');
+    expect(screen.getByRole('region', { name: 'Card 1 of 1, answer shown' })).toHaveAccessibleDescription(
+      'A phone number is stored as a string. It keeps the leading zero.',
+    );
+  });
+
   it('ignores the shortcuts while the report dialog is open', () => {
     renderReview();
     fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
