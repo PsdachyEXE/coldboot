@@ -784,3 +784,18 @@ Bar characters: '#' for critical tasks, '=' for other tasks, '.' for slack up to
 **Reason.** Parallel authors editing the same JSON files would conflict, and Section 8.3 requires a separate review pass.
 
 **Rejected.** One author per outcome writing straight into the content files, which would have been slower and left no second pair of eyes on each item.
+
+## D-095 Phase 1 design critique and Lighthouse
+
+**Decision.** Before Phase 1 closed, a critic took 190 screenshots of every screen at 1280 and 360 px, with real content and seeded progress, and ran Lighthouse and axe. A separate fixer resolved all 29 findings on its own branch; `docs/DESIGN.md` records the details. The fixes that matter most:
+- the daily set's ranking now runs through an avalanche finaliser (`mix32`), because plain FNV-1a kept sibling item ids together and a day's eight MCQs came from two or three KKs;
+- terminal output reflows on phones, so the share line and the `help` table are no longer cut off;
+- scroll padding keeps focused controls clear of the fixed status bar and tab bar (WCAG 2.4.11);
+- figure labels and code never render below 14 px;
+- the rating buttons explain when the exam cap makes several ratings land on the same day.
+
+After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on every route tested. Desktop performance is 99 to 100, and mobile performance varies between 92 and 99 with blocking-time noise.
+
+**Reason.** Section 9 asks for a critique against the design principles before Phase 1 closes, and Section 14 sets Lighthouse targets of accessibility 95+ and desktop performance 90+.
+
+**Rejected.** Closing Phase 1 on component tests and the track agents' own screenshots alone. The critic found the daily clustering bug and several phone-only breakages that no test had covered.
