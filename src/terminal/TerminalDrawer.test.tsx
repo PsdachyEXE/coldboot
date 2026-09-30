@@ -125,6 +125,13 @@ describe('terminal drawer', () => {
     await user.keyboard('abc{Control>}c{/Control}');
     expect(within(drawer()).getByText('abc^C')).toBeInTheDocument();
     expect(drawerInput()).toHaveValue('');
+    // With focus on the output log, Ctrl+C still aborts a game.
+    await user.keyboard('play sort{Enter}');
+    await waitFor(() => expect(useTerminalSession.getState().game).not.toBeNull());
+    within(drawer()).getByRole('log').focus();
+    await user.keyboard('{Control>}c{/Control}');
+    expect(useTerminalSession.getState().game).toBeNull();
+    expect(within(drawer()).getByText('Game aborted.')).toBeInTheDocument();
   });
 
   it('completes with Tab and walks history with Up and Down', async () => {

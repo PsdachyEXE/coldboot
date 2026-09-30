@@ -14,7 +14,10 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | Content checker | `src/content/check.ts`, `scripts/content-check.ts`, `tests/content.test.ts` | |
 | Command terms | `src/content/commandTerms.ts` | |
 | Terminal output blocks | `src/terminal/blocks.ts` | `TerminalBlock` union; plain data |
-| Games | `src/games/types.ts` | `Game`, `GameSession`, `GameContext`, `AnswerResult`, `GameSummary`, `GameMeta`, `QuizItem`, `CheckResult` |
+| Games | `src/games/types.ts` | `Game`, `GameSession`, `GameContext`, `AnswerResult`, `GameSummary`, `GameMeta`, `QuizItem`, `CheckResult`; `markdown` on `AnswerResult`/`CheckResult` marks feedback from bundled content |
+| Quiz engine | `src/games/engine.ts`, `src/games/answers.ts`, `src/games/mcq.ts` | `createQuizSession` over a `QuizItem` list or a seeded generator (round of 10, timed rounds, `exposeItemIds`); lenient answer parsers; `mcqItem` for content MCQs |
+| Game registry | `src/games/registry.ts` | `GAMES` (what `ls`, `man`, `play` and completion see), `findGame`, `DRILL_GAME` |
+| Terminal session and host | `src/terminal/session.ts`, `src/terminal/host.ts` | `useTerminalSession`: one session for the drawer and the route; the host starts games, records answers, runs the daily protocol and ends timed games |
 | Daily challenge set | `src/games/daily.ts` | `buildDailySet(date, mcqPool)` (8 MCQs by rendezvous hash + 2 generated), `dailyShareText` |
 | PRNG | `src/games/prng.ts` | `mulberry32`, `hashString`, `dailySeed`, `pick`, `shuffle`, `sample` |
 | Time | `src/lib/time.ts` | study day (4 am rollover), Melbourne date, countdown, exam phases |

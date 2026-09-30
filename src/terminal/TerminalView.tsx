@@ -202,8 +202,23 @@ function TerminalChips({ env, inputRef }: { env: TerminalEnv; inputRef: RefObjec
 
 export function TerminalView({ presentation, inputRef, className }: TerminalViewProps) {
   const env = useTerminalEnv(presentation);
+
+  // Ctrl+C and Ctrl+L also work with focus on the output or a chip (the input handles its own).
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.defaultPrevented || !e.ctrlKey || e.metaKey || e.altKey) return;
+    const key = e.key.toLowerCase();
+    if (key === 'c' && !window.getSelection()?.toString()) {
+      e.preventDefault();
+      interrupt();
+    } else if (key === 'l') {
+      e.preventDefault();
+      clearScreen();
+    }
+  };
+
   return (
-    <div className={cx(styles.root, className)}>
+    // The handler only adds shortcuts to the interactive elements inside; it is not a control itself.
+    <div className={cx(styles.root, className)} onKeyDown={onKeyDown}>
       <TerminalOutput presentation={presentation} inputRef={inputRef} />
       <TerminalInput env={env} inputRef={inputRef} />
       <TerminalChips env={env} inputRef={inputRef} />
