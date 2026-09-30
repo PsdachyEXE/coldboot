@@ -1,7 +1,8 @@
 /**
  * End-to-end run (Section 12, P1) against the production build: first run, a card flipped and
  * rated in Review, the terminal opened with the backtick key and `help`, one answered question of
- * `sort` then Ctrl+C, and a progress export whose JSON is checked. Selectors are roles and labels;
+ * `sort` then Ctrl+C, and a progress export whose JSON is checked; then the Daily screen and the
+ * terminal sharing one day, and the drawer taking focus under reduced motion. Selectors are roles and labels;
  * nothing sleeps. The clock is pinned to a date before the exam, so first run's "exam is in the
  * past" check and the day's content never depend on when CI happens to run.
  */
@@ -134,7 +135,8 @@ test('first run, review, terminal, sort and export', async ({ page }) => {
   });
 });
 
-test('the daily challenge screen starts the same set the terminal plays', async ({ page }) => {
+/** Skips first run: settings for a student who has already onboarded, before the app loads. */
+async function seedOnboarded(page: Page): Promise<void> {
   await page.addInitScript(
     ({ createdAt }) => {
       const settings = { name: 'Robin', examAt: '2026-11-13T15:00:00+11:00', newCardLimit: 25, sound: false, motion: 'system', onboarded: true, createdAt };
@@ -144,6 +146,10 @@ test('the daily challenge screen starts the same set the terminal plays', async 
     },
     { createdAt: FIXED_NOW.getTime() },
   );
+}
+
+test('the daily challenge screen starts the same set the terminal plays', async ({ page }) => {
+  await seedOnboarded(page);
 
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1, name: 'Today' })).toBeVisible();
@@ -167,4 +173,31 @@ test('the daily challenge screen starts the same set the terminal plays', async 
   await expect
     .poll(() => page.evaluate(() => JSON.parse(window.localStorage.getItem('coldboot:v1:session') ?? 'null')?.data?.daily?.['2026-10-01']?.itemIds?.length ?? 0))
     .toBe(10);
+});
+
+test.describe('under reduced motion', () => {
+  test.use({ contextOptions: { reducedMotion: 'reduce' } });
+
+  test('the backtick opens the terminal drawer with focus in its input', async ({ page }) => {
+    await seedOnboarded(page);
+    await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1, name: 'Today' })).toBeVisible();
+    expect(await page.evaluate(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)).toBe(true);
+
+    // Focus on the page, not a control, then open the drawer: focus must land in its input.
+    await page.getByRole('heading', { level: 1, name: 'Today' }).click();
+    await page.keyboard.press('Backquote');
+    const drawer = page.getByRole('dialog', { name: 'Terminal' });
+    const input = drawer.getByRole('textbox', { name: 'Terminal command' });
+    await expect(drawer).toBeVisible();
+    await expect(input).toBeFocused();
+    await page.keyboard.type('help');
+    await page.keyboard.press('Enter');
+    await expect(drawer.getByRole('log', { name: 'Terminal output' }).getByRole('table', { name: 'Commands' })).toBeVisible();
+
+    // Escape closes it at once, and focus leaves the drawer.
+    await page.keyboard.press('Escape');
+    await expect(drawer).toBeHidden();
+    await expect.poll(() => page.evaluate(() => Boolean(document.querySelector('[role="dialog"]')?.contains(document.activeElement)))).toBe(false);
+  });
 });

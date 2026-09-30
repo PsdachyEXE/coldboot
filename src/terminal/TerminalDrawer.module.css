@@ -32,6 +32,17 @@
   transition: none;
 }
 
+/*
+ * Under reduced motion, global.css gives every element a 0.01ms transition, so the drawer's
+ * descendants would briefly transition their inherited visibility from hidden, and the input's
+ * focus() on opening would be ignored. Nothing inside an instant drawer transitions.
+ */
+.instant *,
+.instant *::before,
+.instant *::after {
+  transition: none !important;
+}
+
 /* Small screens: the drawer takes the full height. */
 @media (max-width: 719px) {
   .drawer {
