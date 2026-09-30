@@ -158,7 +158,15 @@ export function McqQuestion({ mcq, position, where, onAnswered, next, locked = f
 
       {answered ? (
         <div ref={verdictRef} tabIndex={-1}>
-          <Feedback key={`${mcq.id}-verdict`} correct={correct} summary={`The answer is ${answerLetter}.`} className={styles.feedback}>
+          {/* A verdict shown again on a revisit was already spoken and heard. */}
+          <Feedback
+            key={`${mcq.id}-verdict`}
+            correct={correct}
+            summary={`The answer is ${answerLetter}.`}
+            announce={!revisited}
+            cue={!revisited}
+            className={styles.feedback}
+          >
             <p>
               The answer is <strong>{answerLetter}</strong>: <Markdown inline text={mcq.options[mcq.answer]} />
             </p>

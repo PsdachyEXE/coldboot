@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { useAttempts } from '../../state/attempts';
+import { useAnnouncer } from '../../ui/announce';
 import { storageKey } from '../../state/storage';
 import { useSettings } from '../../state/settings';
 import { fixtureIndex, fxCaseStudy, fxShort, provideContent, resetStudyStores } from '../study/testing';
@@ -170,6 +171,19 @@ describe('Written', () => {
     fireEvent.click(screen.getAllByRole('radio')[2]);
     fireEvent.click(screen.getByRole('button', { name: 'Check answer' }));
     expect(screen.getByRole('button', { name: 'Next question' })).toHaveFocus();
+  });
+
+  it('announces a case study verdict once, not again when the student goes back to the question', () => {
+    renderWritten('/written?cs=cs-01');
+    fireEvent.click(screen.getAllByRole('radio')[2]);
+    fireEvent.click(screen.getByRole('button', { name: 'Check answer' }));
+    expect(useAnnouncer.getState().polite).toBe('Correct. The answer is C.');
+    const seq = useAnnouncer.getState().seq;
+    fireEvent.click(screen.getByRole('button', { name: 'Next question' }));
+    const nav = screen.getByRole('navigation', { name: 'Case study questions' });
+    fireEvent.click(within(nav).getByRole('link', { name: 'Question 1, 1 mark, answered' }));
+    expect(screen.getByText('Correct')).toBeInTheDocument();
+    expect(useAnnouncer.getState().seq).toBe(seq);
   });
 
   it('keeps focus on the page after answering the last case study question, which has no next action', () => {
