@@ -16,6 +16,7 @@ import { DESKCHECK_ID, DESKCHECK_KK, DESKCHECK_MAN, DESKCHECK_SUMMARY, DESKCHECK
 import { DRILL_ID, DRILL_MAN, DRILL_SUMMARY, DRILL_TITLE } from './drill/meta';
 import { GANTT_GAME_KK, GANTT_ID, GANTT_MAN, GANTT_SUMMARY, GANTT_TITLE } from './gantt/meta';
 import { PSM_ID, PSM_KK, PSM_MAN, PSM_SUMMARY, PSM_TITLE } from './psm/meta';
+import { REQS_ID, REQS_KK, REQS_MAN, REQS_SUMMARY, REQS_TITLE } from './reqs/meta';
 import { SEARCH_ID, SEARCH_KK, SEARCH_MAN, SEARCH_SUMMARY, SEARCH_TITLE } from './search/meta';
 import { SORT_ID, SORT_KK, SORT_MAN, SORT_SUMMARY, SORT_TITLE } from './sort/meta';
 import { TRIAGE_ID, TRIAGE_KK, TRIAGE_MAN, TRIAGE_SUMMARY, TRIAGE_TITLE } from './triage/meta';
@@ -95,6 +96,16 @@ export const GAMES: GameMeta[] = [
     fixedDifficulty: true,
     // Loads the generator games the set draws on (daily-game/index.ts), then the game.
     load: () => import('./daily-game').then((m) => m.loadDailyGame()),
+  },
+  {
+    id: REQS_ID,
+    title: REQS_TITLE,
+    priority: 'P1',
+    kk: REQS_KK,
+    summary: REQS_SUMMARY,
+    man: REQS_MAN,
+    generator: true,
+    load: () => import('./reqs').then((m) => m.default),
   },
   {
     id: GANTT_ID,
