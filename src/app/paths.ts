@@ -54,8 +54,9 @@ export function writtenPath(opts: { kk?: KkId; area?: AreaId; cs?: string; q?: s
   return withQuery(paths.written, { kk: opts.kk, area: opts.area, cs: opts.cs, q: opts.q, mode: opts.mode });
 }
 
-export function reviewPath(opts: { kk?: KkId } = {}): string {
-  return withQuery(paths.review, { kk: opts.kk });
+/** `/review?kk=U3O1-KK04`; `due: true` adds `due=1`, a review of the cards that are due with no new cards. */
+export function reviewPath(opts: { kk?: KkId; due?: boolean } = {}): string {
+  return withQuery(paths.review, { kk: opts.kk, due: opts.due ? '1' : undefined });
 }
 
 /**

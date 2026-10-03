@@ -164,7 +164,8 @@ describe('Home on exam day', () => {
     renderAt('2026-11-13T00:00:00+11:00');
     const notice = screen.getByRole('region', { name: 'Exam today at 3:00 pm (Melbourne time)' });
     expect(within(notice).getByText('15 hours to go.')).toBeInTheDocument();
-    expect(within(notice).getByRole('link', { name: 'Review a few cards' })).toHaveAttribute('href', '/review');
+    // A warm-up of the cards that are due, not today's new cards.
+    expect(within(notice).getByRole('link', { name: 'Review a few cards' })).toHaveAttribute('href', '/review?due=1');
     expect(within(notice).getByRole('link', { name: 'Sit the mini paper' })).toHaveAttribute('href', '/exam?mini=1');
     expect(within(notice).getByText(/light warm-up, not new work/)).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: "Start today's run" })).toBeNull();

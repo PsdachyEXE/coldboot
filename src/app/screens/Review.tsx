@@ -1,7 +1,7 @@
 /**
  * Review (Section 6.3): flashcards scheduled by SM-2. "Start review" runs the queue (due cards,
  * then new cards coverage-first) and ends at "Review complete". `/review?kk=U3O1-KK04` focuses the
- * queue on one KK.
+ * queue on one KK, and `/review?due=1` leaves out new cards (Home's exam-day warm-up).
  */
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
@@ -29,10 +29,11 @@ export default function Review() {
   const [params] = useSearchParams();
   const kkParam = params.get('kk');
   const kk = isKnownKk(kkParam) ? kkParam : null;
+  const dueOnly = params.get('due') === '1';
   return (
     <div className={study.page}>
       <ContentGate heading="Review">
-        {(content) => <ReviewScreen key={kkParam ?? ''} content={content} kk={kk} invalid={kkParam !== null && !kk} />}
+        {(content) => <ReviewScreen key={`${kkParam ?? ''}:${dueOnly}`} content={content} kk={kk} dueOnly={dueOnly} invalid={kkParam !== null && !kk} />}
       </ContentGate>
     </div>
   );
@@ -40,18 +41,20 @@ export default function Review() {
 
 type Phase = { name: 'start' } | { name: 'active'; queue: QueueEntry[] } | { name: 'complete'; summary: ReviewSummary };
 
-function ReviewScreen({ content, kk, invalid }: { content: ContentIndex; kk: KkId | null; invalid: boolean }) {
+function ReviewScreen({ content, kk, dueOnly, invalid }: { content: ContentIndex; kk: KkId | null; dueOnly: boolean; invalid: boolean }) {
   const [phase, setPhase] = useState<Phase>({ name: 'start' });
   const now = useNow(60_000);
   const mastery = useMastery();
   const cards = useSrs((s) => s.cards);
   const introduced = useSrs((s) => s.introduced);
-  const limit = useSettings((s) => s.newCardLimit);
+  const setting = useSettings((s) => s.newCardLimit);
+  // A due-only review offers no new cards, and a restart keeps it that way.
+  const limit = dueOnly ? 0 : setting;
   const queue = useMemo(() => reviewQueue(content, { cards, introduced }, limit, mastery, now, kk), [content, cards, introduced, limit, mastery, now, kk]);
 
   const start = () => {
     const t = Date.now();
-    setPhase({ name: 'active', queue: reviewQueue(content, useSrs.getState(), useSettings.getState().newCardLimit, masteryNow(t), t, kk) });
+    setPhase({ name: 'active', queue: reviewQueue(content, useSrs.getState(), dueOnly ? 0 : useSettings.getState().newCardLimit, masteryNow(t), t, kk) });
   };
 
   if (phase.name === 'active') {
@@ -75,8 +78,9 @@ function ReviewScreen({ content, kk, invalid }: { content: ContentIndex; kk: KkI
         <p className={study.notice}>That link names key knowledge COLDBOOT doesn't have, so this review covers every key knowledge point.</p>
       ) : null}
       {kk ? <FocusLine kk={kk} /> : null}
+      {dueOnly ? <p>Only the cards that are due, with no new cards.</p> : null}
       {queue.length === 0 ? (
-        <NothingToReview content={content} kk={kk} now={now} />
+        <NothingToReview content={content} kk={kk} dueOnly={dueOnly} now={now} />
       ) : (
         <>
           <p className={study.lead}>{readyLine(due, fresh)}</p>
@@ -109,7 +113,7 @@ function FocusLine({ kk }: { kk: KkId }) {
   );
 }
 
-function NothingToReview({ content, kk, now }: { content: ContentIndex; kk: KkId | null; now: number }) {
+function NothingToReview({ content, kk, dueOnly, now }: { content: ContentIndex; kk: KkId | null; dueOnly: boolean; now: number }) {
   const { nextDue, newRemaining } = useDueSummary(now);
   const limit = useSettings((s) => s.newCardLimit);
   const srsCards = useSrs((s) => s.cards);
@@ -152,7 +156,7 @@ function NothingToReview({ content, kk, now }: { content: ContentIndex; kk: KkId
       }
     >
       <p>{nextDue !== null ? `Your next review is due ${describeDue(nextDue, now)}.` : "You've reviewed every card that's due."}</p>
-      {unseenLeft && newRemaining === 0 ? (
+      {unseenLeft && newRemaining === 0 && !dueOnly ? (
         <p>
           You've started today's {plural(limit, 'new card')}, so more arrive tomorrow. To see more each day, raise the limit in{' '}
           <Link to={paths.settings}>Settings</Link>.

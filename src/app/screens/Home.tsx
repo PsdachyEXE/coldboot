@@ -129,7 +129,7 @@ function ExamDay({ now, examAt }: { now: number; examAt: number }) {
         something, drink some water and get to the exam room early.
       </p>
       <div className={study.actions}>
-        <ButtonLink variant="primary" to={reviewPath()}>
+        <ButtonLink variant="primary" to={reviewPath({ due: true })}>
           Review a few cards
         </ButtonLink>
         <ButtonLink to={examPath({ mini: true })}>Sit the mini paper</ButtonLink>
