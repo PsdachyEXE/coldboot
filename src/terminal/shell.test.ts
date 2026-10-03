@@ -8,14 +8,14 @@ import { GAMES } from '../games/registry';
 import type { GameMeta, GameSession } from '../games/types';
 import { fromSortInstance } from '../games/sort/items';
 import { useAttempts } from '../state/attempts';
-import { useSession } from '../state/session';
+import { HISTORY_ENTRY_MAX, useSession } from '../state/session';
 import { useSettings } from '../state/settings';
 import { useSrs } from '../state/srs';
 import { useAnnouncer } from '../ui/announce';
 import { useReportDialog } from '../ui/report';
 import { SUDO_MESSAGE } from './commands';
 import { abortGame, finishGame, startGame } from './host';
-import { useTerminalSession, walkHistory } from './session';
+import { GAME_INPUT_MAX, useTerminalSession, walkHistory } from './session';
 import { completeAt, historyDown, historyUp, interrupt, promptFor, submitLine, suggestCommand } from './shell';
 import { fakeGame, mockEnv, numberItem, printed, resetStores } from './testing';
 import { useTerminal } from './useTerminal';
@@ -317,6 +317,37 @@ describe('games in the terminal', () => {
     expect(printed()).not.toMatch(/\b(Correct|Incorrect)\b/);
     expect(useAnnouncer.getState().polite).toMatch(/^You gave yourself 1 of 2 marks\. Done\./);
     expect(term().game).toBeNull();
+  });
+
+  it('passes a long written answer to the game whole, and keeps commands to 500 characters', async () => {
+    const received: string[] = [];
+    const session: GameSession = {
+      get done() {
+        return false;
+      },
+      prompt: () => [{ kind: 'text', text: 'Write your answer.' }],
+      answer: (input) => {
+        received.push(input);
+        return { correct: false, expected: '', reason: '', kk: ['U3O2-KK05'], itemId: 's-x', score: 0, counted: false, advanced: true };
+      },
+      summary: () => ({ gameId: 'essay-fake', score: 0, total: 0, ms: 0, perKk: {}, blocks: [] }),
+    };
+    GAMES.push({ ...fakeGame({ id: 'essay-fake' }), load: async () => ({ id: 'essay-fake', title: 'Fake game', kk: [], man: 'Fake.', start: () => session }) });
+    await submitLine('play essay-fake', mockEnv());
+    const essay = 'Validation checks that input is reasonable before it is processed. '.repeat(18).trim();
+    expect(essay.length).toBeGreaterThan(1_200);
+    await submitLine(essay, mockEnv());
+    expect(received).toEqual([essay]);
+    expect(term().game?.answers.at(-1)).toBe(essay);
+    // Even an answer has a limit.
+    await submitLine('x'.repeat(GAME_INPUT_MAX + 500), mockEnv());
+    expect(received[1]).toHaveLength(GAME_INPUT_MAX);
+    abortGame();
+    // Outside a game, a line is a command, and history keeps commands to 500 characters.
+    await submitLine(`echo ${'y'.repeat(1_000)}`, mockEnv());
+    const echo = term().entries.findLast((e) => e.block.kind === 'command')!.block;
+    expect(echo.kind === 'command' && echo.input).toHaveLength(HISTORY_ENTRY_MAX);
+    expect(useSession.getState().terminalHistory.at(-1)).toHaveLength(HISTORY_ENTRY_MAX);
   });
 
   it('explains that a command typed during a game is read as an answer', async () => {

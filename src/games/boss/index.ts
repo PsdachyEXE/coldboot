@@ -218,7 +218,8 @@ export function startBoss(ctx: GameContext, generators: readonly BossGenerator[]
       ...questionFigures(s.caseStudy, q).map((figure): TerminalBlock => ({ kind: 'figure', figure, compact: true })),
       { kind: 'markdown', text: q.prompt },
       { kind: 'text', text: `${capital(q.commandTerm)}, ${plural(q.marks, 'mark')}. ${suggestedLength(q.marks)}`, tone: 'accent' },
-      { kind: 'text', text: 'Type your answer on one line and press Enter, or type skip to go straight to the marking points.', tone: 'muted' },
+      // The terminal takes up to GAME_INPUT_MAX (src/terminal/session.ts) characters during a game.
+      { kind: 'text', text: 'Type your answer on one line (up to 4,000 characters) and press Enter, or type skip to go straight to the marking points.', tone: 'muted' },
     );
     return blocks;
   };

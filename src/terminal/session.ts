@@ -13,6 +13,12 @@ import type { TerminalBlock } from './blocks';
 export const SCROLLBACK_MAX = 500;
 /** Answers kept per game for Up and Down while a game runs. */
 export const GAME_ANSWERS_MAX = 50;
+/**
+ * Longest line the terminal takes while a game runs: room for a written case study answer of
+ * several developed points (boss). In-game input stays in memory (`ActiveGame.answers`); commands,
+ * which history persists, keep to HISTORY_ENTRY_MAX (500).
+ */
+export const GAME_INPUT_MAX = 4_000;
 
 export interface TerminalEntry {
   id: number;

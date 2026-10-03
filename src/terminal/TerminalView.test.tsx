@@ -8,7 +8,7 @@ import { useAttempts } from '../state/attempts';
 import { useSettings } from '../state/settings';
 import { useAnnouncer } from '../ui/announce';
 import { BlockView } from './BlockView';
-import { useTerminalSession } from './session';
+import { GAME_INPUT_MAX, useTerminalSession } from './session';
 import { resetStores } from './testing';
 import { TerminalView } from './TerminalView';
 import { useTerminal } from './useTerminal';
@@ -43,6 +43,18 @@ describe('terminal view', () => {
     const log = screen.getByRole('log', { name: 'Terminal output' });
     expect(log).toHaveAttribute('aria-live', 'off');
     expect(within(log).getByText('COLDBOOT terminal')).toBeInTheDocument();
+  });
+
+  it('takes up to 500 characters for a command, and 4,000 for an answer while a game runs', async () => {
+    const user = userEvent.setup();
+    const input = renderView();
+    expect(input).toHaveAttribute('maxlength', '500');
+    await user.type(input, 'play sort{Enter}');
+    await waitFor(() => expect(useTerminalSession.getState().game?.gameId).toBe('sort'));
+    expect(input).toHaveAttribute('maxlength', String(GAME_INPUT_MAX));
+    expect(GAME_INPUT_MAX).toBe(4_000);
+    await user.click(screen.getByRole('button', { name: 'Abort game' }));
+    expect(input).toHaveAttribute('maxlength', '500');
   });
 
   it('offers a share chip once a share line has been printed', () => {

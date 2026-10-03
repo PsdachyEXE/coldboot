@@ -12,7 +12,7 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vite
 import { loadAllContent, type ContentIndex } from '../../content/loader';
 import { useContent } from '../../content/store';
 import { useAttempts } from '../../state/attempts';
-import { useTerminalSession } from '../../terminal/session';
+import { GAME_INPUT_MAX, useTerminalSession } from '../../terminal/session';
 import { TerminalView } from '../../terminal/TerminalView';
 import { useTerminal } from '../../terminal/useTerminal';
 import { useAnnouncer } from '../../ui/announce';
@@ -99,6 +99,11 @@ describe('boss in the terminal', () => {
     const figures = slice!.caseStudy.figures.filter((f) => slice!.questions[0].figureRefs?.includes(f.id));
     for (const f of figures) expect(container.querySelector(`figure[data-figure="${f.kind}"]`)).not.toBeNull();
     const verdicts = screen.queryAllByText(/^(Correct|Incorrect)$/).length;
+    // A written answer has room for every developed point, and the instruction says how much.
+    expect(input).toHaveAttribute('maxlength', String(GAME_INPUT_MAX));
+    expect(printed()).toContain(
+      `Type your answer on one line (up to ${GAME_INPUT_MAX.toLocaleString('en-AU')} characters) and press Enter, or type skip to go straight to the marking points.`,
+    );
 
     // Question 1: a written answer reveals the model answer and the marking points, and records nothing.
     const [q1, q2, q3] = slice!.questions;
