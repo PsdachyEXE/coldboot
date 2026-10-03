@@ -175,3 +175,23 @@
 .steps li + li {
   margin-top: var(--space-1);
 }
+
+/* Exam day: the notice that stands in for the run on the exam's date, during it and after it. */
+.exam {
+  max-width: var(--block-max);
+  margin-bottom: var(--space-6);
+}
+.exam > h2 {
+  margin: 0 0 var(--space-2);
+}
+.examLead {
+  font-size: var(--step-2);
+  line-height: 1.4;
+  font-weight: 700;
+}
+@media (max-width: 719.98px) {
+  .examLead {
+    font-size: var(--step-1);
+    line-height: var(--lh-body);
+  }
+}

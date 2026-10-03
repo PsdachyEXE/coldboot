@@ -10,7 +10,7 @@ import { VISIBLE_COMMANDS, completionSources, findCommand, reportCommand, type T
 import { complete } from './complete';
 import { abortGame, submitAnswer } from './host';
 import { parseCommandLine } from './parse';
-import { useTerminalSession } from './session';
+import { GAME_INPUT_MAX, useTerminalSession } from './session';
 import { announceSince } from './speech';
 
 export type { TerminalEnv } from './commands';
@@ -73,8 +73,9 @@ export interface SubmitOptions {
 
 /** Echoes and runs one submitted line, then announces what it printed. */
 export async function submitLine(raw: string, env: TerminalEnv, opts: SubmitOptions = {}): Promise<void> {
-  const line = raw.replace(/[\r\n]+/g, ' ').slice(0, HISTORY_ENTRY_MAX);
   const s = term();
+  // An answer can be a written paragraph; a command (which history keeps) is shorter.
+  const line = raw.replace(/[\r\n]+/g, ' ').slice(0, s.game && !opts.fromPending ? GAME_INPUT_MAX : HISTORY_ENTRY_MAX);
   const from = s.nextId + 1;
   s.print({ kind: 'command', prompt: currentPrompt(), input: line });
   s.setDraft('');
@@ -89,7 +90,8 @@ export async function submitLine(raw: string, env: TerminalEnv, opts: SubmitOpti
       else if (line.trim()) {
         const result = submitAnswer(line);
         const word = line.trim().split(/\s+/)[0].toLowerCase();
-        if (result?.counted === false && VISIBLE_COMMANDS.includes(word)) {
+        // A written answer that moved the game on (result.advanced) was meant as an answer.
+        if (result?.counted === false && !result.advanced && VISIBLE_COMMANDS.includes(word)) {
           term().print({ kind: 'text', text: `A game is running, so that was read as an answer. To run ${word}, stop the game first with Ctrl+C or Abort game.`, tone: 'muted' });
         }
       }

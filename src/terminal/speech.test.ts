@@ -42,6 +42,14 @@ describe('terminal speech digest', () => {
     );
   });
 
+  it("speaks a text or markdown block's own speech in place of its text, and leaves the block out when that is empty", () => {
+    expect(blockToSpeech({ kind: 'text', text: 'Shown on screen', speech: 'Spoken instead' })).toBe('Spoken instead.');
+    expect(blockToSpeech({ kind: 'markdown', text: '**A long insert**\n\nMany paragraphs.', speech: 'The insert is in the terminal output.' })).toBe(
+      'The insert is in the terminal output.',
+    );
+    expect(blocksToSpeech([{ kind: 'text', text: 'Heading', speech: '' }, { kind: 'markdown', text: 'Body', speech: '' }, { kind: 'text', text: 'Next' }])).toBe('Next.');
+  });
+
   it('caps long digests on a word boundary', () => {
     const long = blocksToSpeech([{ kind: 'text', text: 'word '.repeat(500) }], 100);
     expect(long.length).toBeLessThan(160);

@@ -67,6 +67,18 @@ export interface AnswerResult {
    * the feedback block may render them as Markdown. Generated and user-typed text leaves it unset.
    */
   markdown?: boolean;
+  /**
+   * With `counted: false`: the input moved the game on without being marked (the boss round's
+   * written answer, which reveals the model answer and marking points). The host records nothing
+   * and prints no verdict or `reason`, only `followUp` and the next prompt.
+   */
+  advanced?: boolean;
+  /**
+   * The student marked their own answer (the boss round's case study questions). The host records
+   * the attempt with `score` but prints no Correct or Incorrect verdict and plays no cue: `followUp`
+   * says what was recorded.
+   */
+  selfMarked?: boolean;
 }
 
 export interface KkTally {
@@ -150,7 +162,7 @@ export interface Game {
   man: string;
   start(ctx: GameContext, opts: GameStartOptions): GameSession;
   /**
-   * One self-contained generated item for a seed, used by the daily challenge (and later `boss`).
+   * One self-contained generated item for a seed, used by the daily challenge and `boss`.
    * Deterministic: the same seed and difficulty always give the same item.
    */
   generate?(seed: number, difficulty: Difficulty): QuizItem;

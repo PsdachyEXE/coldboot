@@ -251,6 +251,28 @@ describe('Review card flip', () => {
     expect(screen.getByRole('link', { name: 'Open the syllabus map' })).toHaveAttribute('href', '/map');
   });
 
+  it('reviews only the cards that are due when asked, with no new cards (the exam-day warm-up)', () => {
+    provideContent(fixtureIndex({ cards: [basic, second, fxCard('c-u3o1-kk04-003', ['U3O1-KK04'])], mcq: [fxMcq('m-u3o1-kk04-001', ['U3O1-KK04'])] }));
+    useSrs.getState().setCard('c-u3o1-kk04-001', { reps: 2, interval: 6, ease: 2.5, due: Date.now() - 1000, lapses: 0, last: 1 });
+    renderReview('/review?due=1');
+    expect(screen.getByText('Only the cards that are due, with no new cards.')).toBeInTheDocument();
+    expect(screen.getByText('1 card is due.')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    expect(screen.getByRole('region', { name: 'Card 1 of 1, question' })).toBeInTheDocument();
+    press(' ');
+    press('3');
+    expect(screen.getByRole('heading', { name: 'Review complete' })).toBeInTheDocument();
+    expect(useSrs.getState().introduced.count).toBe(0);
+  });
+
+  it('says nothing is due, rather than offering new cards, when only due cards were asked for', () => {
+    provideContent(fixtureIndex({ cards: [basic, second], mcq: [fxMcq('m-u3o1-kk04-001', ['U3O1-KK04'])] }));
+    renderReview('/review?due=1');
+    expect(screen.getByRole('heading', { name: 'No reviews due' })).toBeInTheDocument();
+    expect(screen.queryByText(/new cards? (is|are) ready/)).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Start review' })).toBeNull();
+  });
+
   it('focuses the queue on one KK', () => {
     const other = fxCard('c-u3o2-kk01-001', ['U3O2-KK01']);
     provideContent(fixtureIndex({ cards: [basic, other] }));

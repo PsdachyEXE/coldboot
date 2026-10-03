@@ -1,9 +1,14 @@
 /**
  * The boot sequence's POST-style lines, built only from real data: the build id, the KK map, the
  * content status, reviews due and the time to the exam. Nothing here is decorative filler.
+ *
+ * On exam day the exam line gives the hours and minutes left, rounded down as Home and the status
+ * bar round them; during the exam it wishes the student luck and drops the reviews line, so nothing
+ * asks for study; afterwards it says the exam is over and the reviews line notes that the exam caps
+ * have lifted.
  */
 import { AREA_IDS, type AreaId } from '../content/schema';
-import { countdown, examPhase, formatCountdown } from '../lib/time';
+import { countdown, examDayState, formatCountdown, formatTimeLeftShort } from '../lib/time';
 
 export type BootMode = 'full' | 'condensed';
 
@@ -79,19 +84,30 @@ function contentLine(c: BootData['content'], narrow: boolean): BootLine {
 }
 
 function examLines(d: BootData, narrow: boolean): BootLine[] {
-  const phase = examPhase(d.now, d.examAt);
+  const state = examDayState(d.now, d.examAt);
   const when = { key: 'exam-at', label: '', detail: narrow ? formatExamTimeShort(d.examAt) : formatExamTime(d.examAt) };
-  if (phase === 'before') return [{ key: 'exam', label: 'exam', detail: `${formatCountdown(countdown(d.now, d.examAt))} to go` }, when];
-  if (phase === 'finished') return [{ key: 'exam', label: 'exam', detail: 'finished' }, when];
-  return [{ key: 'exam', label: 'exam', detail: 'underway' }, when];
+  if (state === 'study') return [{ key: 'exam', label: 'exam', detail: `${formatCountdown(countdown(d.now, d.examAt))} to go` }, when];
+  if (state === 'exam-day') return [{ key: 'exam', label: 'exam', detail: `today, ${formatTimeLeftShort(d.now, d.examAt)} to go` }, when];
+  if (state === 'underway') return [{ key: 'exam', label: 'exam', detail: 'underway, good luck' }, when];
+  return [{ key: 'exam', label: 'exam', detail: 'over, well done' }, when];
+}
+
+function reviewsLine(d: BootData, narrow: boolean): BootLine | null {
+  const state = examDayState(d.now, d.examAt);
+  // No study nags while the exam is on.
+  if (state === 'underway') return null;
+  const due = d.due === 0 ? 'none due' : `${d.due.toLocaleString('en-AU')} due`;
+  const lifted = state === 'over' ? (narrow ? ', caps lifted' : ', exam caps lifted') : '';
+  return { key: 'reviews', label: 'reviews', detail: `${due}${lifted}` };
 }
 
 export function bootLines(d: BootData, mode: BootMode, opts: BootOptions = {}): BootLine[] {
   const narrow = opts.narrow ?? false;
   const build: BootLine = { key: 'build', label: 'COLDBOOT', detail: `build ${d.buildId}` };
-  const reviews: BootLine = { key: 'reviews', label: 'reviews', detail: d.due === 0 ? 'none due' : `${d.due.toLocaleString('en-AU')} due` };
+  const reviews = reviewsLine(d, narrow);
+  const study = reviews ? [reviews] : [];
   const ready: BootLine = { key: 'ready', label: 'ready', detail: '' };
-  if (mode === 'condensed') return [build, reviews, examLines(d, narrow)[0], ready];
+  if (mode === 'condensed') return [build, ...study, examLines(d, narrow)[0], ready];
   const areas = AREA_IDS.map<BootLine>((area) => ({
     key: area,
     label: area,
@@ -102,7 +118,7 @@ export function bootLines(d: BootData, mode: BootMode, opts: BootOptions = {}): 
     d.provisional > 0
       ? { key: 'map', label: 'kk map', detail: 'provisional, see About' }
       : { key: 'map', label: 'kk map', detail: 'checked', result: 'ok' };
-  return [build, ...areas, map, contentLine(d.content, narrow), reviews, ...examLines(d, narrow), ready];
+  return [build, ...areas, map, contentLine(d.content, narrow), ...study, ...examLines(d, narrow), ready];
 }
 
 /** The same lines as plain text, one per line (used by tests and for copying). */

@@ -168,6 +168,10 @@ Any key, click or tap skips the boot sequence. It is `aria-hidden`, holds nothin
 
 tmux-style bracketed segments in Martian Mono: `[T-44d 04h] [37 due] [streak 6] [offline ready]`, plus `[not saving]` when storage fails. During the exam window it shows `[exam underway]`, and afterwards `[exam finished]`. Each segment's bracketed text is hidden from screen readers and replaced by a spoken label ("44 days and 4 hours until the exam", "37 reviews due"). The bar is not a live region, so the ticking countdown never interrupts anyone.
 
+## Exam day
+
+Home and the boot sequence change on the exam's date (D-178). From midnight in Melbourne until the start, Home's run gives way to a `Panel` headed with the start time ("Exam today at 3:00 pm (Melbourne time)"), the time left as a 20 px bold lead, one calm paragraph and two actions (Review a few cards, which reviews only the cards that are due, and Sit the mini paper); the coverage grid stays below. During reading and writing time Home shows only the heading and a panel saying the exam is underway and when each part ends: no run, due count, coverage or links. Afterwards a panel says the exam is over, with Export progress (primary), stats and the syllabus map. The boot sequence's exam line follows the same states ("today, 4h 12m to go", "underway, good luck", "over, well done"), and drops its reviews line during the exam. Every time left is rounded down to the minute, as the status bar rounds it.
+
 ## Review against Section 9
 
 Checked against each point of Section 9 after the plan was written, and again after the screens were built and screenshotted at 1280 px and 360 px.
@@ -210,6 +214,15 @@ A second critique at the close of Phase 1 ran the production build with real con
 - **Headings and names.** A written question's command term line is an `h2`, so "Model answer" (`h3`) sits under it in the outline. Coverage cells' accessible names start with their visible label ("PSM, Problem-solving methodology, unseen").
 - **Loading (decided).** Home and first run ship with the shell; every other screen is its own chunk, and the terminal drawer (which brings the terminal, the figure renderers and markdown-it) mounts once the shell is idle, with a backtick before then loading it at once. The first load fell from 768 kB to 522 kB of JavaScript (249 to 164 kB gzip). The router updates in a transition under a Suspense boundary that is already showing, so a navigation keeps the current page up until the next screen's chunk arrives instead of flashing a loading state, and the lazy chunks are prefetched when the browser is idle. With the smaller entry chunk the first render beat the web fonts and the swap moved the page, so the build preloads the Latin subsets of both fonts.
 - **Not changed.** Review cards keep inline code at 0.9 em of the card text (18 px on a 20 px front): it is above the floor and reads as code. The desktop case study insert is narrow enough that the context diagram now scrolls sideways rather than shrinking below 14 px; that is the intended trade.
+
+## Phase 3 check
+
+The production build was driven at 1280 px and 360 px (touch) with seeded progress and a pinned clock: Home and the boot sequence on exam day before 3 pm, in reading time, in writing time and after the exam, a boss round through its case study and summary, and a ux round. No page scrolled sideways and nothing tripped the CSP or logged an error. Found and fixed:
+
+- **ux phone mock-ups scrolled sideways at 360 px.** They were 320 units wide, and the full-screen terminal at 360 px leaves a figure 294 px; since figures never scale below their natural size, the right edge (the Add button, the third column of keys) sat behind a scroll. Phone mock-ups are now 288 units wide (D-174).
+- **The boot sequence and Home disagreed about the time left on exam day** by a minute, one rounding up and the other down. Both now round down, as the status bar does (D-178).
+
+Not changed: in a narrow terminal the progress line of a boss case study question ("Case study question 2 of 3 [##.]") wraps before its bar, as any progress line longer than the row does; and the status bar keeps its due count and streak during the exam, since Home and the boot sequence are where study is asked for.
 
 ## Notes for other tracks
 

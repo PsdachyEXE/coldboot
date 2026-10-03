@@ -4,8 +4,13 @@ import {
   addDays,
   countdown,
   daysBetween,
+  examDayState,
   examPhase,
   formatCountdown,
+  formatMelbourneClock,
+  formatTimeLeft,
+  formatTimeLeftShort,
+  isExamDay,
   localDate,
   melbourneDate,
   parseInstant,
@@ -102,5 +107,53 @@ describe('time in Melbourne across daylight saving', () => {
     expect(toMelbourneWallTime(DEFAULT_EXAM_AT)).toEqual({ day: '2026-11-13', time: '15:00' });
     expect(toMelbourneWallTime('2026-11-13T04:00:00Z')).toEqual({ day: '2026-11-13', time: '15:00' });
     expect(melbourneOffsetMinutes(EXAM)).toBe(660);
+  });
+});
+
+describe('exam day', () => {
+  const t = (iso: string) => parseInstant(iso);
+
+  it('is the exam date in Melbourne, from midnight until the start', () => {
+    expect(isExamDay(t('2026-11-12T23:59:59+11:00'), EXAM)).toBe(false);
+    expect(isExamDay(t('2026-11-13T00:00:00+11:00'), EXAM)).toBe(true);
+    expect(isExamDay(t('2026-11-13T14:59:59+11:00'), EXAM)).toBe(true);
+    expect(isExamDay(t('2026-11-13T15:00:00+11:00'), EXAM)).toBe(false);
+    // Midnight in Melbourne is still the 12th in UTC; the device's zone doesn't matter.
+    expect(isExamDay(t('2026-11-12T13:00:00Z'), EXAM)).toBe(true);
+  });
+
+  it('moves from study to exam day, underway and over at each boundary', () => {
+    const cases: [string, string][] = [
+      ['2026-11-12T23:59:59+11:00', 'study'],
+      ['2026-11-13T00:00:00+11:00', 'exam-day'],
+      ['2026-11-13T14:59:59.999+11:00', 'exam-day'],
+      ['2026-11-13T15:00:00+11:00', 'underway'],
+      ['2026-11-13T15:15:00+11:00', 'underway'],
+      ['2026-11-13T17:14:59.999+11:00', 'underway'],
+      ['2026-11-13T17:15:00+11:00', 'over'],
+      ['2027-01-01T00:00:00+11:00', 'over'],
+    ];
+    for (const [iso, state] of cases) expect(examDayState(t(iso), EXAM), iso).toBe(state);
+  });
+
+  it('formats Melbourne clock times and the time left', () => {
+    expect(formatMelbourneClock(EXAM)).toBe('3:00 pm');
+    expect(formatMelbourneClock(t('2026-11-13T17:15:00+11:00'))).toBe('5:15 pm');
+    expect(formatMelbourneClock(t('2026-11-13T09:05:00+11:00'))).toBe('9:05 am');
+    expect(formatTimeLeft(t('2026-11-13T00:00:00+11:00'), EXAM)).toBe('15 hours');
+    expect(formatTimeLeft(t('2026-11-13T10:48:00+11:00'), EXAM)).toBe('4 hours and 12 minutes');
+    expect(formatTimeLeft(t('2026-11-13T13:59:00+11:00'), EXAM)).toBe('1 hour and 1 minute');
+    expect(formatTimeLeft(t('2026-11-13T14:15:00+11:00'), EXAM)).toBe('45 minutes');
+    expect(formatTimeLeft(t('2026-11-13T14:59:30+11:00'), EXAM)).toBe('less than a minute');
+    expect(formatTimeLeft(EXAM + 1, EXAM)).toBe('less than a minute');
+  });
+
+  it('gives the short form of the time left for the boot sequence, rounded down the same way', () => {
+    expect(formatTimeLeftShort(t('2026-11-13T00:00:00+11:00'), EXAM)).toBe('15h 00m');
+    expect(formatTimeLeftShort(t('2026-11-13T10:48:30+11:00'), EXAM)).toBe('4h 11m');
+    expect(formatTimeLeftShort(t('2026-11-13T14:15:00+11:00'), EXAM)).toBe('45m');
+    expect(formatTimeLeftShort(t('2026-11-13T14:59:00+11:00'), EXAM)).toBe('1m');
+    expect(formatTimeLeftShort(t('2026-11-13T14:59:30+11:00'), EXAM)).toBe('under 1m');
+    expect(formatTimeLeftShort(EXAM, EXAM)).toBe('under 1m');
   });
 });

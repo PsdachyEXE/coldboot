@@ -9,13 +9,18 @@ import type { Highlight } from '../figures/highlight';
 export type Tone = 'normal' | 'muted' | 'accent' | 'correct' | 'incorrect' | 'warning';
 
 export type TerminalBlock =
-  /** One or more lines of plain text. Newlines are preserved. Never interpreted as HTML. */
-  | { kind: 'text'; text: string; tone?: Tone }
+  /**
+   * One or more lines of plain text. Newlines are preserved. Never interpreted as HTML. `speech`,
+   * when set, is what the screen reader digest says instead of the text ('' leaves the block out).
+   */
+  | { kind: 'text'; text: string; tone?: Tone; speech?: string }
   /**
    * Markdown subset (bundled content only; never user or imported text). `tone: 'muted'` prints the
-   * prose in --steel with bold spans in --ice, e.g. command names in a hint.
+   * prose in --steel with bold spans in --ice, e.g. command names in a hint. `speech` works as on
+   * `text`: a pointer such as "The case study insert is in the terminal output" in place of text
+   * far longer than the digest's cap.
    */
-  | { kind: 'markdown'; text: string; tone?: 'muted' }
+  | { kind: 'markdown'; text: string; tone?: 'muted'; speech?: string }
   /** Highlighted pseudocode with line numbers. State the index base whenever arrays appear. */
   | { kind: 'pseudo'; code: string; title?: string; indexBase?: 0 | 1; highlightLines?: number[] }
   | { kind: 'table'; columns: string[]; rows: string[][]; caption?: string }

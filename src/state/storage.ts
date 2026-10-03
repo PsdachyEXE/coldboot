@@ -126,8 +126,51 @@ export function removeAllKeys(): void {
 }
 
 /**
- * Removes every COLDBOOT key from this tab's sessionStorage (written-answer drafts). Failures are
- * ignored: the drafts are gone when the tab closes anyway.
+ * This tab's sessionStorage, for state that should survive leaving a screen (and a reload) but not
+ * the tab: written-answer drafts and where Today's run is up to. Failures are ignored and raise no
+ * warning, since nothing here is progress: the caller simply starts afresh.
+ */
+function session(): Storage | null {
+  try {
+    return typeof window !== 'undefined' ? window.sessionStorage : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Reads and parses a sessionStorage key. Undefined when absent, unreadable or not JSON. */
+export function readSessionJson(name: string): unknown {
+  try {
+    const raw = session()?.getItem(storageKey(name));
+    return raw == null ? undefined : (JSON.parse(raw) as unknown);
+  } catch {
+    return undefined;
+  }
+}
+
+/** Serialises and writes a sessionStorage key. Returns false when the browser refused. */
+export function writeSessionJson(name: string, value: unknown): boolean {
+  try {
+    const s = session();
+    if (!s) return false;
+    s.setItem(storageKey(name), JSON.stringify(value));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function removeSessionKey(name: string): void {
+  try {
+    session()?.removeItem(storageKey(name));
+  } catch {
+    // Storage unavailable: there is nothing to remove.
+  }
+}
+
+/**
+ * Removes every COLDBOOT key from this tab's sessionStorage (written-answer drafts and Today's
+ * run). Failures are ignored: the keys are gone when the tab closes anyway.
  */
 export function removeSessionKeys(): void {
   try {

@@ -3,11 +3,12 @@
  * drawer and the full-screen route both render this over the one shared session.
  */
 import { useLayoutEffect, useRef, useState, type FocusEvent, type FormEvent, type KeyboardEvent, type MouseEvent, type RefObject } from 'react';
+import { HISTORY_ENTRY_MAX } from '../state/session';
 import { useSettings } from '../state/settings';
 import { useReducedMotion } from '../ui/motion';
 import { BlockView } from './BlockView';
 import type { TerminalEnv } from './commands';
-import { useTerminalSession } from './session';
+import { GAME_INPUT_MAX, useTerminalSession } from './session';
 import { IDLE_CHIPS, clearScreen, completeAt, historyDown, historyUp, interrupt, promptFor, submitLine } from './shell';
 import { useBlockCaret } from './useBlockCaret';
 import { useTerminal } from './useTerminal';
@@ -141,7 +142,7 @@ function TerminalInput({ env, inputRef }: { env: TerminalEnv; inputRef: RefObjec
           autoCorrect="off"
           spellCheck={false}
           enterKeyHint="send"
-          maxLength={500}
+          maxLength={inGame ? GAME_INPUT_MAX : HISTORY_ENTRY_MAX}
         />
         <span ref={caretRef} className={styles.caret} aria-hidden="true" />
       </span>

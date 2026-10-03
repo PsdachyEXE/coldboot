@@ -190,20 +190,37 @@ describe('persistence', () => {
     expect(Object.keys(again.srs.useSrs.getState().cards)).toEqual(['c-good-001']);
   });
 
-  it("clears this tab's written drafts and terminal on reset, on import and on a reset in another window", async () => {
+  it("clears this tab's written drafts, Today's run and terminal on reset, on import and on a reset in another window", async () => {
     const { io } = await freshState();
     // The terminal host registers the terminal's reset when it loads.
     await import('../terminal/host');
     const { useTerminalSession } = await import('../terminal/session');
+    const run = await import('../app/study/runState');
     const fresh = useTerminalSession.getState().entries.length;
+    const day = '2026-10-01';
     const alice = () => {
       window.sessionStorage.setItem(KEY('draft:cs-01-q01'), "Alice's private draft");
       window.sessionStorage.setItem('other-site:key', 'keep');
+      run.saveRun({
+        v: run.RUN_VERSION,
+        day,
+        step: 'drill',
+        outcomes: { review: { status: 'done', text: '3 cards reviewed.' } },
+        review: { ratings: 3, cardIds: ['c-u3o1-kk04-001'], newCards: 1, again: 0 },
+        drillIds: ['m-u3o1-kk04-001'],
+        drillAnswers: [],
+        drillResult: null,
+        stepAt: 1,
+        dailyDate: day,
+      });
+      expect(run.readRun(day)).not.toBeNull();
       useTerminalSession.getState().print({ kind: 'command', prompt: 'Alice@coldboot:~$', input: 'whoami' });
       useTerminalSession.getState().setLastShare('COLDBOOT daily 2026-10-01  9/10');
     };
     const cleared = () => {
       expect(window.sessionStorage.getItem(KEY('draft:cs-01-q01'))).toBeNull();
+      expect(window.sessionStorage.getItem(KEY('run'))).toBeNull();
+      expect(run.readRun(day)).toBeNull();
       expect(window.sessionStorage.getItem('other-site:key')).toBe('keep');
       expect(useTerminalSession.getState().entries).toHaveLength(fresh);
       expect(useTerminalSession.getState().lastShare).toBeNull();
@@ -231,5 +248,41 @@ describe('persistence', () => {
     expect(io.exportFilename(Date.parse('2026-10-01T08:00:00+10:00'))).toBe('coldboot-progress-2026-10-01.json');
     // In daylight saving, 9 am on New Year's Day is still the previous year in UTC.
     expect(io.exportFilename(Date.parse('2027-01-01T09:00:00+11:00'))).toBe('coldboot-progress-2027-01-01.json');
+  });
+});
+
+describe("this tab's session keys", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it('reads, writes and removes prefixed sessionStorage keys, and clearTabState removes them all', async () => {
+    const { storage, persist } = await freshState();
+    expect(storage.writeSessionJson('run', { step: 'daily' })).toBe(true);
+    expect(window.sessionStorage.getItem(KEY('run'))).toBe('{"step":"daily"}');
+    expect(storage.readSessionJson('run')).toEqual({ step: 'daily' });
+    storage.removeSessionKey('run');
+    expect(storage.readSessionJson('run')).toBeUndefined();
+    window.sessionStorage.setItem(KEY('run'), '{broken');
+    expect(storage.readSessionJson('run')).toBeUndefined();
+    storage.writeSessionJson('run', { step: 'drill' });
+    window.sessionStorage.setItem(KEY('draft:s-x'), 'text');
+    window.sessionStorage.setItem('another-site', 'kept');
+    persist.clearTabState();
+    expect(window.sessionStorage.getItem(KEY('run'))).toBeNull();
+    expect(window.sessionStorage.getItem(KEY('draft:s-x'))).toBeNull();
+    expect(window.sessionStorage.getItem('another-site')).toBe('kept');
+  });
+
+  it('fails quietly, with no storage warning, when the browser refuses', async () => {
+    const { storage } = await freshState();
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new DOMException('full', 'QuotaExceededError');
+    });
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new DOMException('denied', 'SecurityError');
+    });
+    expect(storage.writeSessionJson('run', { step: 'daily' })).toBe(false);
+    expect(storage.readSessionJson('run')).toBeUndefined();
+    expect(() => storage.removeSessionKey('run')).not.toThrow();
+    expect(storage.useStorageHealth.getState().ok).toBe(true);
   });
 });

@@ -2,9 +2,10 @@
  * End-to-end run (Section 12, P1) against the production build: first run, a card flipped and
  * rated in Review, the terminal opened with the backtick key and `help`, one answered question of
  * `sort` then Ctrl+C, and a progress export whose JSON is checked; then the Daily screen and the
- * terminal sharing one day, and the drawer taking focus under reduced motion. Selectors are roles and labels;
- * nothing sleeps. The clock is pinned to a date before the exam, so first run's "exam is in the
- * past" check and the day's content never depend on when CI happens to run.
+ * terminal sharing one day, Today's run keeping its place across the Daily screen and a reload,
+ * and the drawer taking focus under reduced motion. Selectors are roles and labels; nothing
+ * sleeps. The clock is pinned to a date before the exam, so first run's "exam is in the past"
+ * check and the day's content never depend on when CI happens to run.
  */
 import { readFile } from 'node:fs/promises';
 import { expect, test, type Locator, type Page } from '@playwright/test';
@@ -183,6 +184,36 @@ test('the daily challenge screen starts the same set the terminal plays', async 
   await expect
     .poll(() => page.evaluate(() => JSON.parse(window.localStorage.getItem('coldboot:v1:session') ?? 'null')?.data?.daily?.['2026-10-01']?.itemIds?.length ?? 0))
     .toBe(10);
+});
+
+test("today's run keeps its place across the Daily screen and a reload", async ({ page }) => {
+  await seedOnboarded(page);
+  await page.goto('/');
+  await page.getByRole('link', { name: "Start today's run" }).click();
+  await expect(page.getByRole('heading', { level: 2, name: 'Step 1 of 3: Review cards' })).toBeVisible();
+  await page.getByRole('button', { name: 'Finish review' }).click();
+  await expect(page.getByRole('heading', { level: 2, name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeVisible();
+  await page.getByRole('button', { name: 'End drill now' }).click();
+  const daily = page.getByRole('heading', { level: 2, name: 'Step 3 of 3: Daily challenge' });
+  await expect(daily).toBeVisible();
+
+  await page.getByRole('link', { name: 'Do it on screen instead' }).click();
+  await expect(page.getByRole('heading', { level: 1, name: 'Daily challenge' })).toBeVisible();
+  await page.goBack();
+  await expect(daily).toBeVisible();
+  await page.reload();
+  await expect(daily).toBeVisible();
+  // The earlier steps' outcomes came back with it.
+  await expect(page.getByRole('list', { name: 'Steps' })).toContainText('Skipped: You ended the drill before answering.');
+
+  // Home says where the run is up to, and carries it on rather than starting a new one.
+  await page.goto('/');
+  const place = page.getByRole('list', { name: "Today's run" });
+  await expect(place).toContainText('Drill your weakest key knowledge. Skipped: You ended the drill before answering.');
+  await expect(place).toContainText('Next: the daily challenge.');
+  await expect(page.getByRole('link', { name: "Start today's run" })).toHaveCount(0);
+  await page.getByRole('link', { name: "Continue today's run" }).click();
+  await expect(daily).toBeVisible();
 });
 
 test.describe('under reduced motion', () => {

@@ -5,16 +5,17 @@ import type { PsmFile } from '../content/schema';
 import { fixtureTerms } from '../games/blitz/fixture';
 import { fixtureContent } from '../games/drill/fixture';
 import { GAMES } from '../games/registry';
+import type { GameMeta, GameSession } from '../games/types';
 import { fromSortInstance } from '../games/sort/items';
 import { useAttempts } from '../state/attempts';
-import { useSession } from '../state/session';
+import { HISTORY_ENTRY_MAX, useSession } from '../state/session';
 import { useSettings } from '../state/settings';
 import { useSrs } from '../state/srs';
 import { useAnnouncer } from '../ui/announce';
 import { useReportDialog } from '../ui/report';
 import { SUDO_MESSAGE } from './commands';
 import { abortGame, finishGame, startGame } from './host';
-import { useTerminalSession, walkHistory } from './session';
+import { GAME_INPUT_MAX, useTerminalSession, walkHistory } from './session';
 import { completeAt, historyDown, historyUp, interrupt, promptFor, submitLine, suggestCommand } from './shell';
 import { fakeGame, mockEnv, numberItem, printed, resetStores } from './testing';
 import { useTerminal } from './useTerminal';
@@ -275,6 +276,78 @@ describe('games in the terminal', () => {
     expect(useReportDialog.getState().request?.itemId).toBe('gen-fake-2');
     // "report" is not taken as an answer.
     expect(term().game?.session.progress).toEqual({ current: 2, total: 3 });
+  });
+
+  it('moves on without recording an advanced answer, and records a self-marked one without a verdict', async () => {
+    let step = 0;
+    const session: GameSession = {
+      get done() {
+        return step >= 2;
+      },
+      prompt: () => [{ kind: 'text', text: step === 0 ? 'Write your answer.' : 'Which points did you earn?' }],
+      answer: (input) => {
+        if (step === 0) {
+          step = 1;
+          return { correct: false, expected: '', reason: '', kk: ['U3O2-KK05'], itemId: 's-x', score: 0, counted: false, advanced: true, followUp: [{ kind: 'text', text: 'Model answer shown.' }] };
+        }
+        if (input !== '1') return { correct: false, expected: '', reason: 'Type 1.', kk: ['U3O2-KK05'], itemId: 's-x', score: 0, counted: false };
+        step = 2;
+        return { correct: false, expected: '', reason: '', kk: ['U3O2-KK05'], itemId: 's-x', score: 0.5, selfMarked: true, followUp: [{ kind: 'text', text: 'You gave yourself 1 of 2 marks.' }] };
+      },
+      chips: () => (step === 0 ? ['skip'] : ['all', 'none']),
+      summary: () => ({ gameId: 'written-fake', score: 0.5, total: 1, ms: 0, perKk: {}, blocks: [{ kind: 'text', text: 'Done.' }] }),
+    };
+    const meta: GameMeta = { ...fakeGame({ id: 'written-fake' }), load: async () => ({ id: 'written-fake', title: 'Fake game', kk: [], man: 'Fake.', start: () => session }) };
+    GAMES.push(meta);
+    await submitLine('play written-fake', mockEnv());
+    vi.advanceTimersByTime(5000);
+    await submitLine('help me with this answer', mockEnv());
+    expect(printed()).toContain('Model answer shown.\nWhich points did you earn?');
+    expect(printed()).not.toContain('A game is running');
+    expect(term().game?.chips).toEqual(['all', 'none']);
+    expect(useAttempts.getState().log).toHaveLength(0);
+    await submitLine('9', mockEnv());
+    expect(printed()).toContain('Type 1.');
+    vi.advanceTimersByTime(3000);
+    await submitLine('1', mockEnv());
+    const log = useAttempts.getState().log;
+    expect(log.map((t) => [t[0], t[2]])).toEqual([['s-x', 0.5]]);
+    // Timed from when the question first appeared, not from the reveal.
+    expect(log[0][4]).toBe(8000);
+    expect(printed()).not.toMatch(/\b(Correct|Incorrect)\b/);
+    expect(useAnnouncer.getState().polite).toMatch(/^You gave yourself 1 of 2 marks\. Done\./);
+    expect(term().game).toBeNull();
+  });
+
+  it('passes a long written answer to the game whole, and keeps commands to 500 characters', async () => {
+    const received: string[] = [];
+    const session: GameSession = {
+      get done() {
+        return false;
+      },
+      prompt: () => [{ kind: 'text', text: 'Write your answer.' }],
+      answer: (input) => {
+        received.push(input);
+        return { correct: false, expected: '', reason: '', kk: ['U3O2-KK05'], itemId: 's-x', score: 0, counted: false, advanced: true };
+      },
+      summary: () => ({ gameId: 'essay-fake', score: 0, total: 0, ms: 0, perKk: {}, blocks: [] }),
+    };
+    GAMES.push({ ...fakeGame({ id: 'essay-fake' }), load: async () => ({ id: 'essay-fake', title: 'Fake game', kk: [], man: 'Fake.', start: () => session }) });
+    await submitLine('play essay-fake', mockEnv());
+    const essay = 'Validation checks that input is reasonable before it is processed. '.repeat(18).trim();
+    expect(essay.length).toBeGreaterThan(1_200);
+    await submitLine(essay, mockEnv());
+    expect(received).toEqual([essay]);
+    expect(term().game?.answers.at(-1)).toBe(essay);
+    // Even an answer has a limit.
+    await submitLine('x'.repeat(GAME_INPUT_MAX + 500), mockEnv());
+    expect(received[1]).toHaveLength(GAME_INPUT_MAX);
+    abortGame();
+    // Outside a game, a line is a command, and history keeps commands to 500 characters.
+    await submitLine(`echo ${'y'.repeat(1_000)}`, mockEnv());
+    const echo = term().entries.findLast((e) => e.block.kind === 'command')!.block;
+    expect(echo.kind === 'command' && echo.input).toHaveLength(HISTORY_ENTRY_MAX);
+    expect(useSession.getState().terminalHistory.at(-1)).toHaveLength(HISTORY_ENTRY_MAX);
   });
 
   it('explains that a command typed during a game is read as an answer', async () => {

@@ -2,7 +2,9 @@
  * Screen reader output for the terminal. The output log is a role="log" region with aria-live off,
  * so nothing is announced twice: after each submitted line (and when a timed game ends), the
  * terminal announces one plain-text digest of what it printed through announce(). Answer feedback
- * leads the digest ("Correct." or "Incorrect. Expected: ..."), followed by the next question.
+ * leads the digest ("Correct." or "Incorrect. Expected: ..."), followed by the next question. A text
+ * or markdown block's `speech` replaces its text in the digest, so a long passage that is already
+ * in the log (a case study insert, a model answer) can be a pointer that leaves room for the question.
  */
 import { describeFigure } from '../figures/describe';
 import { highlightMarkers } from '../figures/highlight';
@@ -33,9 +35,9 @@ const LETTERS = 'ABCDEFGH';
 export function blockToSpeech(b: TerminalBlock): string {
   switch (b.kind) {
     case 'text':
-      return sentence(b.text);
+      return sentence(b.speech ?? b.text);
     case 'markdown':
-      return sentence(stripMarkdown(b.text));
+      return sentence(b.speech ?? stripMarkdown(b.text));
     case 'pseudo': {
       const base = b.indexBase === undefined ? '' : ` Array indexes start at ${b.indexBase}.`;
       return `${sentence(`${b.title ? `${b.title}. ` : ''}Pseudocode listing, ${b.code.replace(/\s+$/, '').split('\n').length} lines, shown in the terminal`)}${base}`;

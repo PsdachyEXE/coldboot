@@ -1,20 +1,24 @@
 /**
  * Today's run (Section 6.2): due reviews, a 10-question drill on the weakest KK, then the daily
- * challenge in the terminal, ending at "Run complete". Review and Drill run embedded here so the
- * run isn't lost by navigating away. A step with nothing to do is skipped with a note.
+ * challenge in the terminal, ending at "Run complete". Review and Drill run embedded here, and the
+ * run keeps its place in this tab (src/app/study/runState.ts): leaving the page, for the Daily
+ * screen or anywhere else, and coming back carries on from the same step, with the ratings and
+ * answers so far. A step with nothing to do is skipped with a note. A finished run isn't kept, so
+ * the next visit starts a new one.
  *
  * The daily challenge starts with `useTerminal.run('daily')`, with a secondary link to the Daily
  * screen for students who would rather answer on screen; the step completes when the terminal
  * reports a finished `daily` game, or when today's daily record (Melbourne date) is complete.
  */
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import type { ContentIndex } from '../../content/loader';
 import type { Mcq } from '../../content/schema';
 import { findGame } from '../../games/registry';
 import { freshSeed, mulberry32 } from '../../games/prng';
-import { melbourneDate } from '../../lib/time';
+import { melbourneDate, studyDay } from '../../lib/time';
 import { masteryNow } from '../../srs/hooks';
 import type { QueueEntry } from '../../srs/queue';
+import { onClearTabState } from '../../state/persist';
 import { useSession } from '../../state/session';
 import { useSettings } from '../../state/settings';
 import { useSrs } from '../../state/srs';
@@ -23,27 +27,16 @@ import { Button, ButtonLink } from '../../ui/Button';
 import { useNarrow } from '../../ui/useMediaQuery';
 import { paths } from '../paths';
 import { ContentGate } from '../study/ContentGate';
-import { suggestNextStep, type DrillResult } from '../study/drill';
+import { suggestNextStep, type DrillAnswer, type DrillResult } from '../study/drill';
 import { DrillRunner } from '../study/DrillRunner';
 import { plural } from '../study/format';
 import { PhaseHeading } from '../study/parts';
-import { ReviewRunner, type ReviewSummary } from '../study/ReviewRunner';
+import { ReviewRunner, type ReviewSummary, type ReviewTally } from '../study/ReviewRunner';
 import { reviewQueue } from '../study/reviewQueue';
+import { clearRun, EMPTY_TALLY, readRun, RUN_STEPS, RUN_VERSION, saveRun, type Outcome, type StepId } from '../study/runState';
 import { pickRunDrill } from '../study/select';
 import study from '../study/study.module.css';
 import styles from '../study/Run.module.css';
-
-type StepId = 'review' | 'drill' | 'daily';
-const STEPS: { id: StepId; title: string; short: string }[] = [
-  { id: 'review', title: 'Review cards', short: 'review cards' },
-  { id: 'drill', title: 'Drill your weakest key knowledge', short: 'drill' },
-  { id: 'daily', title: 'Daily challenge', short: 'the daily challenge' },
-];
-
-interface Outcome {
-  status: 'done' | 'skipped';
-  text: string;
-}
 
 interface RunState {
   step: StepId | 'complete';
@@ -55,9 +48,16 @@ interface RunState {
   stepAt: number;
   /** The Melbourne date the daily step is for. */
   dailyDate: string;
+  /** Ratings so far in the review step, and answers so far in the drill, kept with the run. */
+  reviewTally: ReviewTally;
+  drillAnswers: DrillAnswer[];
+  /** The study day the run began. */
+  day: string;
   /** Move focus to the step heading (after a transition, not on page load). */
   focus: boolean;
 }
+
+type Progress = Omit<RunState, 'step' | 'focus'>;
 
 export default function Run() {
   return (
@@ -67,20 +67,24 @@ export default function Run() {
   );
 }
 
+function currentReviewQueue(content: ContentIndex, now: number): QueueEntry[] {
+  return reviewQueue(content, useSrs.getState(), useSettings.getState().newCardLimit, masteryNow(now), now);
+}
+
 /** Moves to the first step after `after` that has something to do, noting the ones skipped. */
-function advance(content: ContentIndex, state: Omit<RunState, 'step' | 'focus'>, after: StepId | null): Omit<RunState, 'focus'> {
+function advance(content: ContentIndex, state: Progress, after: StepId | null): Omit<RunState, 'focus'> {
   const now = Date.now();
   const outcomes = { ...state.outcomes };
   const order: StepId[] = ['review', 'drill', 'daily'];
   for (let i = after ? order.indexOf(after) + 1 : 0; i < order.length; i++) {
     const id = order[i];
     if (id === 'review') {
-      const queue = reviewQueue(content, useSrs.getState(), useSettings.getState().newCardLimit, masteryNow(now), now);
-      if (queue.length) return { ...state, outcomes, step: 'review', queue, stepAt: now };
+      const queue = currentReviewQueue(content, now);
+      if (queue.length) return { ...state, outcomes, step: 'review', queue, stepAt: now, reviewTally: EMPTY_TALLY };
       outcomes.review = { status: 'skipped', text: 'Nothing was due.' };
     } else if (id === 'drill') {
       const drill = pickRunDrill(content, masteryNow(now), mulberry32(freshSeed(now))).items;
-      if (drill.length) return { ...state, outcomes, step: 'drill', drill, stepAt: now };
+      if (drill.length) return { ...state, outcomes, step: 'drill', drill, stepAt: now, drillAnswers: [] };
       outcomes.drill = { status: 'skipped', text: 'There are no questions to drill yet.' };
     } else {
       const dailyDate = melbourneDate(now);
@@ -97,9 +101,74 @@ function advance(content: ContentIndex, state: Omit<RunState, 'step' | 'focus'>,
   return { ...state, outcomes, step: 'complete', stepAt: now };
 }
 
+function reviewOutcome(tally: ReviewTally, finishedEarly: boolean): Outcome {
+  const s: ReviewSummary = { ratings: tally.ratings, cards: tally.cardIds.length, newCards: tally.newCards, again: tally.again, finishedEarly };
+  return { status: 'done', text: reviewText(s) };
+}
+
+function drillOutcome(r: DrillResult): Outcome {
+  // Ending the drill before answering anything is a skip, not "0 of 0 correct".
+  return r.total === 0 ? { status: 'skipped', text: 'You ended the drill before answering.' } : { status: 'done', text: `${r.correct} of ${r.total} correct.` };
+}
+
+function untimedResult(answers: DrillAnswer[]): DrillResult {
+  return { answers, correct: answers.filter((a) => a.correct).length, total: answers.length, timed: false, timedOut: false, msLeft: 0 };
+}
+
+/**
+ * The run saved in this tab for today, carried on: the same step, its outcomes so far, and the
+ * progress inside the step. A review carries on with the cards still due (a card rated since, here
+ * or on the Review screen, isn't due any more); a drill with its first unanswered question. A
+ * step with nothing left moves on. Null when there's no saved run for today.
+ */
+function restoreRun(content: ContentIndex): Omit<RunState, 'focus'> | null {
+  const now = Date.now();
+  const day = studyDay(now);
+  const saved = readRun(day);
+  if (!saved) return null;
+  const base: Progress = {
+    outcomes: saved.outcomes,
+    queue: [],
+    drill: [],
+    drillResult: saved.drillResult,
+    stepAt: saved.stepAt,
+    dailyDate: saved.dailyDate,
+    reviewTally: saved.review,
+    drillAnswers: saved.drillAnswers,
+    day,
+  };
+  if (saved.step === 'review') {
+    const queue = currentReviewQueue(content, now);
+    if (queue.length) return { ...base, step: 'review', queue };
+    const review = saved.review.ratings ? reviewOutcome(saved.review, false) : { status: 'skipped' as const, text: 'Nothing was left to review.' };
+    return advance(content, { ...base, outcomes: { ...base.outcomes, review } }, 'review');
+  }
+  if (saved.step === 'drill') {
+    const drill = saved.drillIds.flatMap((id) => {
+      const entry = content.byId.get(id);
+      return entry?.kind === 'mcq' && !entry.caseStudyId ? [entry.item] : [];
+    });
+    const answered = new Set(saved.drillAnswers.map((a) => a.itemId));
+    if (drill.some((q) => !answered.has(q.id))) return { ...base, step: 'drill', drill };
+    const result = untimedResult(saved.drillAnswers);
+    return advance(content, { ...base, drillResult: result.total ? result : null, outcomes: { ...base.outcomes, drill: drillOutcome(result) } }, 'drill');
+  }
+  // The study day rolls over at 4 am local time, but the daily challenge at midnight in Melbourne.
+  // Past that midnight the terminal and the Daily screen play the new date's set, so the step
+  // follows it, unless the saved date's challenge was finished (which completes the step below).
+  // stepAt stays, so a daily game that ended in the terminal meanwhile still counts.
+  const dailyDate = useSession.getState().daily[saved.dailyDate]?.completedAt ? saved.dailyDate : melbourneDate(now);
+  return { ...base, step: 'daily', dailyDate };
+}
+
 function RunSteps({ content }: { content: ContentIndex }) {
   const [state, setState] = useState<RunState>(() => ({
-    ...advance(content, { outcomes: {}, queue: [], drill: [], drillResult: null, stepAt: 0, dailyDate: '' }, null),
+    ...(restoreRun(content) ??
+      advance(
+        content,
+        { outcomes: {}, queue: [], drill: [], drillResult: null, stepAt: 0, dailyDate: '', reviewTally: EMPTY_TALLY, drillAnswers: [], day: studyDay(Date.now()) },
+        null,
+      )),
     focus: false,
   }));
 
@@ -120,21 +189,42 @@ function RunSteps({ content }: { content: ContentIndex }) {
   const outcomes = dailyOutcome ? { ...state.outcomes, daily: dailyOutcome } : state.outcomes;
   const focus = state.focus || dailyOutcome !== null;
 
+  // Keep the run's place in this tab while it's under way; a finished run isn't kept. After a
+  // reset or an import (here or in another window) the old run is never written back.
+  const cleared = useRef(false);
+  useEffect(() => onClearTabState(() => (cleared.current = true)), []);
+  useEffect(() => {
+    if (cleared.current) return;
+    if (step === 'complete') {
+      clearRun();
+      return;
+    }
+    saveRun({
+      v: RUN_VERSION,
+      day: state.day,
+      step,
+      outcomes: state.outcomes,
+      review: state.reviewTally,
+      drillIds: state.drill.map((q) => q.id),
+      drillAnswers: state.drillAnswers,
+      drillResult: state.drillResult,
+      stepAt: state.stepAt,
+      dailyDate: state.dailyDate,
+    });
+  }, [state, step]);
+
   const finishReview = (s: ReviewSummary) =>
     setState((prev) => ({
       ...advance(content, { ...prev, outcomes: { ...prev.outcomes, review: { status: 'done', text: reviewText(s) } } }, 'review'),
       focus: true,
     }));
   const finishDrill = (r: DrillResult) =>
-    setState((prev) => {
-      // Ending the drill before answering anything is a skip, not "0 of 0 correct".
-      const drill: Outcome =
-        r.total === 0 ? { status: 'skipped', text: 'You ended the drill before answering.' } : { status: 'done', text: `${r.correct} of ${r.total} correct.` };
-      return {
-        ...advance(content, { ...prev, drillResult: r.total === 0 ? null : r, outcomes: { ...prev.outcomes, drill } }, 'drill'),
-        focus: true,
-      };
-    });
+    setState((prev) => ({
+      ...advance(content, { ...prev, drillResult: r.total === 0 ? null : r, outcomes: { ...prev.outcomes, drill: drillOutcome(r) } }, 'drill'),
+      focus: true,
+    }));
+  const noteReview = (reviewTally: ReviewTally) => setState((prev) => (prev.step === 'review' ? { ...prev, reviewTally } : prev));
+  const noteDrill = (drillAnswers: DrillAnswer[]) => setState((prev) => (prev.step === 'drill' ? { ...prev, drillAnswers } : prev));
   const skipDaily = () =>
     setState((prev) => ({
       ...prev,
@@ -155,13 +245,28 @@ function RunSteps({ content }: { content: ContentIndex }) {
         <section key="review" aria-labelledby="run-step">
           <StepHeading focus={focus} index={0} />
           {summary}
-          <ReviewRunner content={content} queue={state.queue} where="Today's run" onFinish={finishReview} autoFocus={false} />
+          <ReviewRunner
+            content={content}
+            queue={state.queue}
+            where="Today's run"
+            onFinish={finishReview}
+            autoFocus={false}
+            initial={state.reviewTally}
+            onProgress={noteReview}
+          />
         </section>
       ) : step === 'drill' ? (
         <section key="drill" aria-labelledby="run-step">
           <StepHeading focus={focus} index={1} />
           {summary}
-          <DrillRunner questions={state.drill} where="Today's run" onFinish={finishDrill} autoFocus={false} />
+          <DrillRunner
+            questions={state.drill}
+            where="Today's run"
+            onFinish={finishDrill}
+            autoFocus={false}
+            initialAnswers={state.drillAnswers}
+            onProgress={noteDrill}
+          />
         </section>
       ) : step === 'daily' ? (
         <section key="daily" aria-labelledby="run-step">
@@ -177,10 +282,10 @@ function RunSteps({ content }: { content: ContentIndex }) {
 }
 
 function StepList({ step, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
-  const upNextIndex = STEPS.findIndex((t) => !outcomes[t.id] && t.id !== step);
+  const upNextIndex = RUN_STEPS.findIndex((t) => !outcomes[t.id] && t.id !== step);
   return (
     <ol className={styles.steps} aria-label="Steps">
-      {STEPS.map((s, i) => {
+      {RUN_STEPS.map((s, i) => {
         const outcome = outcomes[s.id];
         const current = s.id === step;
         const status = outcome ? (outcome.status === 'done' ? 'Done' : 'Skipped') : current ? 'Now' : i === upNextIndex ? 'Up next' : 'Later';
@@ -205,8 +310,8 @@ function StepList({ step, outcomes }: { step: StepId; outcomes: Partial<Record<S
 
 /** Phones: "Next: drill, then the daily challenge", opening to the full step list. */
 function StepSummary({ step, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
-  const at = STEPS.findIndex((t) => t.id === step);
-  const ahead = STEPS.filter((s, i) => i > at && !outcomes[s.id]);
+  const at = RUN_STEPS.findIndex((t) => t.id === step);
+  const ahead = RUN_STEPS.filter((s, i) => i > at && !outcomes[s.id]);
   const next = ahead.length === 0 ? 'This is the last step' : `Next: ${ahead.map((s) => s.short).join(', then ')}`;
   return (
     <details className={styles.stepSummary}>
@@ -225,7 +330,7 @@ function reviewText(s: ReviewSummary): string {
 function StepHeading({ index, focus }: { index: number; focus: boolean }) {
   return (
     <PhaseHeading level={2} focus={focus} id="run-step">
-      Step {index + 1} of 3: {STEPS[index].title}
+      Step {index + 1} of 3: {RUN_STEPS[index].title}
     </PhaseHeading>
   );
 }
@@ -285,7 +390,7 @@ function RunComplete({
         Run complete
       </PhaseHeading>
       <dl className={study.facts}>
-        {STEPS.map((s) => {
+        {RUN_STEPS.map((s) => {
           const outcome = outcomes[s.id];
           return (
             <Fragment key={s.id}>

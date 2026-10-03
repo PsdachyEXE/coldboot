@@ -29,6 +29,17 @@ import { ReviewCard } from './ReviewCard';
 import styles from './Review.module.css';
 import study from './study.module.css';
 
+/** Ratings so far, for carrying a review on after the runner remounts (Today's run keeps its place). */
+export interface ReviewTally {
+  ratings: number;
+  /** Distinct cards rated, in the order first rated. */
+  cardIds: string[];
+  newCards: number;
+  again: number;
+}
+
+const NO_RATINGS: ReviewTally = { ratings: 0, cardIds: [], newCards: 0, again: 0 };
+
 export interface ReviewSummary {
   /** Ratings given, counting a card rated Again and then again later twice. */
   ratings: number;
@@ -85,9 +96,16 @@ export interface ReviewRunnerProps {
   onFinish(summary: ReviewSummary): void;
   /** Focus the first card when the runner mounts (after a button press, not on page load). */
   autoFocus?: boolean;
+  /**
+   * Ratings from an earlier sitting of the same review, counted in the summary and the card
+   * position. The queue then holds only what is left.
+   */
+  initial?: ReviewTally;
+  /** Called after each rating with the tally so far, including `initial`. */
+  onProgress?(tally: ReviewTally): void;
 }
 
-export function ReviewRunner({ content, queue, where, onFinish, autoFocus = true }: ReviewRunnerProps) {
+export function ReviewRunner({ content, queue, where, onFinish, autoFocus = true, initial = NO_RATINGS, onProgress }: ReviewRunnerProps) {
   const examAt = useExamAt();
   const reduced = useReducedMotion();
   const cardRef = useRef<HTMLElement>(null);
@@ -99,15 +117,27 @@ export function ReviewRunner({ content, queue, where, onFinish, autoFocus = true
       ...promote(pending, 0),
       flipped: false,
       shownAt: Date.now(),
-      ratings: 0,
-      cardIds: [],
-      newCards: 0,
-      again: 0,
+      ratings: initial.ratings,
+      cardIds: [...initial.cardIds],
+      newCards: initial.newCards,
+      again: initial.again,
       nextSeq: pending.length,
     };
   });
   const { current, rest, flipped } = state;
   const card = current ? cardOf(content, current.cardId) : null;
+
+  // Report the tally after each rating (not on mount, which would only repeat `initial`).
+  const onProgressRef = useRef(onProgress);
+  useEffect(() => {
+    onProgressRef.current = onProgress;
+  });
+  const reportedRatings = useRef(state.ratings);
+  useEffect(() => {
+    if (state.ratings === reportedRatings.current) return;
+    reportedRatings.current = state.ratings;
+    onProgressRef.current?.({ ratings: state.ratings, cardIds: state.cardIds, newCards: state.newCards, again: state.again });
+  }, [state.ratings, state.cardIds, state.newCards, state.again]);
 
   // Report the summary once, when nothing is left.
   const finished = useRef(false);
