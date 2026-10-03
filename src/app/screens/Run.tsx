@@ -33,16 +33,10 @@ import { plural } from '../study/format';
 import { PhaseHeading } from '../study/parts';
 import { ReviewRunner, type ReviewSummary, type ReviewTally } from '../study/ReviewRunner';
 import { reviewQueue } from '../study/reviewQueue';
-import { clearRun, EMPTY_TALLY, readRun, RUN_VERSION, saveRun, type Outcome, type StepId } from '../study/runState';
+import { clearRun, EMPTY_TALLY, readRun, RUN_STEPS, RUN_VERSION, saveRun, type Outcome, type StepId } from '../study/runState';
 import { pickRunDrill } from '../study/select';
 import study from '../study/study.module.css';
 import styles from '../study/Run.module.css';
-
-const STEPS: { id: StepId; title: string; short: string }[] = [
-  { id: 'review', title: 'Review cards', short: 'review cards' },
-  { id: 'drill', title: 'Drill your weakest key knowledge', short: 'drill' },
-  { id: 'daily', title: 'Daily challenge', short: 'the daily challenge' },
-];
 
 interface RunState {
   step: StepId | 'complete';
@@ -288,10 +282,10 @@ function RunSteps({ content }: { content: ContentIndex }) {
 }
 
 function StepList({ step, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
-  const upNextIndex = STEPS.findIndex((t) => !outcomes[t.id] && t.id !== step);
+  const upNextIndex = RUN_STEPS.findIndex((t) => !outcomes[t.id] && t.id !== step);
   return (
     <ol className={styles.steps} aria-label="Steps">
-      {STEPS.map((s, i) => {
+      {RUN_STEPS.map((s, i) => {
         const outcome = outcomes[s.id];
         const current = s.id === step;
         const status = outcome ? (outcome.status === 'done' ? 'Done' : 'Skipped') : current ? 'Now' : i === upNextIndex ? 'Up next' : 'Later';
@@ -316,8 +310,8 @@ function StepList({ step, outcomes }: { step: StepId; outcomes: Partial<Record<S
 
 /** Phones: "Next: drill, then the daily challenge", opening to the full step list. */
 function StepSummary({ step, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
-  const at = STEPS.findIndex((t) => t.id === step);
-  const ahead = STEPS.filter((s, i) => i > at && !outcomes[s.id]);
+  const at = RUN_STEPS.findIndex((t) => t.id === step);
+  const ahead = RUN_STEPS.filter((s, i) => i > at && !outcomes[s.id]);
   const next = ahead.length === 0 ? 'This is the last step' : `Next: ${ahead.map((s) => s.short).join(', then ')}`;
   return (
     <details className={styles.stepSummary}>
@@ -336,7 +330,7 @@ function reviewText(s: ReviewSummary): string {
 function StepHeading({ index, focus }: { index: number; focus: boolean }) {
   return (
     <PhaseHeading level={2} focus={focus} id="run-step">
-      Step {index + 1} of 3: {STEPS[index].title}
+      Step {index + 1} of 3: {RUN_STEPS[index].title}
     </PhaseHeading>
   );
 }
@@ -396,7 +390,7 @@ function RunComplete({
         Run complete
       </PhaseHeading>
       <dl className={study.facts}>
-        {STEPS.map((s) => {
+        {RUN_STEPS.map((s) => {
           const outcome = outcomes[s.id];
           return (
             <Fragment key={s.id}>

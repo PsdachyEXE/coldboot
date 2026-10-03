@@ -205,6 +205,15 @@ test("today's run keeps its place across the Daily screen and a reload", async (
   await expect(daily).toBeVisible();
   // The earlier steps' outcomes came back with it.
   await expect(page.getByRole('list', { name: 'Steps' })).toContainText('Skipped: You ended the drill before answering.');
+
+  // Home says where the run is up to, and carries it on rather than starting a new one.
+  await page.goto('/');
+  const place = page.getByRole('list', { name: "Today's run" });
+  await expect(place).toContainText('Drill your weakest key knowledge. Skipped: You ended the drill before answering.');
+  await expect(place).toContainText('Next: the daily challenge.');
+  await expect(page.getByRole('link', { name: "Start today's run" })).toHaveCount(0);
+  await page.getByRole('link', { name: "Continue today's run" }).click();
+  await expect(daily).toBeVisible();
 });
 
 test.describe('under reduced motion', () => {

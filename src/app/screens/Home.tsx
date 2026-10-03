@@ -1,7 +1,8 @@
 /**
  * Home (Section 6.2): one primary action, "Start today's run", with what the run holds; today's due
  * count, streak and daily challenge status; and the coverage grid of every KK shaded by mastery.
- * Selecting a cell starts a focused drill.
+ * Selecting a cell starts a focused drill. While a run is under way in this tab (left for the Daily
+ * screen or anywhere else), the action is "Continue today's run", with where the run is up to.
  *
  * Exam day (the status bar has the same states):
  * - on the exam's date before it starts, the run gives way to the exam time in Melbourne, the time
@@ -35,6 +36,7 @@ import { examPath, paths, practisePath, reviewPath } from '../paths';
 import { ContentErrorNotice } from '../study/ContentGate';
 import { CoverageGrid, CoverageLegend } from '../study/CoverageGrid';
 import { plural } from '../study/format';
+import { readRun, RUN_STEPS, type SavedRun } from '../study/runState';
 import { kksWithItems, rankWeakest } from '../study/select';
 import study from '../study/study.module.css';
 import styles from '../study/Coverage.module.css';
@@ -57,6 +59,8 @@ function Today({ now, examAt, mode }: { now: number; examAt: number; mode: Exclu
   const activity = useSession((s) => s.activity);
   const daily = useSession((s) => s.daily[melbourneDate(now)]);
   const days = streak(activity, studyDay(now));
+  // A run under way in this tab carries on where it was left (src/app/study/runState.ts).
+  const saved = mode === 'study' ? readRun(studyDay(now)) : null;
   const dailyStatus = daily?.completedAt
     ? `Done, ${daily.results.reduce<number>((s, r) => s + r, 0)} of ${daily.itemIds.length}`
     : daily && daily.results.length > 0
@@ -70,10 +74,10 @@ function Today({ now, examAt, mode }: { now: number; examAt: number; mode: Exclu
       {mode === 'exam-day' ? <ExamDay now={now} examAt={examAt} /> : mode === 'over' ? <ExamOver /> : null}
       {mode === 'study' ? (
         <>
-          <RunPreview content={content} mastery={mastery} due={due} newRemaining={newRemaining} daily={daily} />
+          {saved ? <RunPlace saved={saved} /> : <RunPreview content={content} mastery={mastery} due={due} newRemaining={newRemaining} daily={daily} />}
           <p>
             <ButtonLink variant="primary" to={paths.run}>
-              Start today's run
+              {saved ? "Continue today's run" : "Start today's run"}
             </ButtonLink>
           </p>
           <TodayFacts due={due} days={days} dailyStatus={dailyStatus} />
@@ -180,6 +184,37 @@ function ExamOver() {
         Exam date wrong? <Link to={paths.settings}>Change it in Settings</Link>.
       </p>
     </Panel>
+  );
+}
+
+/** Where a run under way is up to: the finished steps' outcomes, the step to carry on with, then the rest. */
+function RunPlace({ saved }: { saved: SavedRun }) {
+  const at = RUN_STEPS.findIndex((s) => s.id === saved.step);
+  const current = RUN_STEPS[at];
+  const ahead = RUN_STEPS.slice(at + 1);
+  const reviewed = saved.review.cardIds.length;
+  const detail =
+    saved.step === 'review' && reviewed > 0
+      ? `, ${plural(reviewed, 'card')} reviewed so far`
+      : saved.step === 'drill' && saved.drillIds.length > 0
+        ? `, ${saved.drillAnswers.length} of ${saved.drillIds.length} answered`
+        : '';
+  return (
+    <ol className={styles.steps} aria-label="Today's run">
+      {RUN_STEPS.slice(0, at).map((s) => {
+        const outcome = saved.outcomes[s.id];
+        return outcome ? (
+          <li key={s.id}>
+            {s.title}. {outcome.status === 'done' ? 'Done' : 'Skipped'}: {outcome.text}
+          </li>
+        ) : null;
+      })}
+      <li>
+        Next: {current.phrase}
+        {detail}.
+      </li>
+      {ahead.length ? <li>Then: {ahead.map((s) => s.short).join(', then ')}.</li> : null}
+    </ol>
   );
 }
 

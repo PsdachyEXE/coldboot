@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { kkLabel } from '../../content/studyDesign';
-import { melbourneDate } from '../../lib/time';
+import { melbourneDate, studyDay } from '../../lib/time';
 import { exportFilename } from '../../state/exportImport';
 import { recordAttempt } from '../../state/record';
 import { useSession } from '../../state/session';
@@ -86,6 +86,80 @@ describe('Home', () => {
     renderHome();
     const run = screen.getByRole('list', { name: "Today's run" });
     expect(within(run).getByText('Finish the daily challenge: 5 of 10 answered.')).toBeInTheDocument();
+  });
+
+  describe('with a run under way in this tab', () => {
+    /** A run left at its drill: the review done, two of ten drill questions answered. */
+    const savedRun = (day = studyDay(NOW)) => ({
+      v: 1,
+      day,
+      step: 'drill',
+      outcomes: { review: { status: 'done', text: '1 card reviewed, 1 of them new.' } },
+      review: { ratings: 1, cardIds: ['c-u3o1-kk04-001'], newCards: 1, again: 0 },
+      drillIds: Array.from({ length: 10 }, (_, i) => `m-u3o1-kk14-${String(i + 1).padStart(3, '0')}`),
+      drillAnswers: [
+        { itemId: 'm-u3o1-kk14-001', kk: ['U3O1-KK14'], correct: true, answered: true },
+        { itemId: 'm-u3o1-kk14-002', kk: ['U3O1-KK14'], correct: false, answered: true },
+      ],
+      drillResult: null,
+      stepAt: NOW - 600_000,
+      dailyDate: '',
+    });
+
+    it("offers to continue it, and says where it is up to instead of previewing a new run", () => {
+      window.sessionStorage.setItem('coldboot:v1:run', JSON.stringify(savedRun()));
+      const router = renderHome();
+      expect(screen.queryByRole('link', { name: "Start today's run" })).toBeNull();
+      const carryOn = screen.getByRole('link', { name: "Continue today's run" });
+      expect(carryOn).toHaveAttribute('href', '/run');
+      const run = screen.getByRole('list', { name: "Today's run" });
+      expect(within(run).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+        'Review cards. Done: 1 card reviewed, 1 of them new.',
+        'Next: drill your weakest key knowledge, 2 of 10 answered.',
+        'Then: the daily challenge.',
+      ]);
+      // Not the new run's preview.
+      expect(screen.queryByText(/^Learn \d+ new cards?\./)).toBeNull();
+      fireEvent.click(carryOn);
+      expect(router.state.location.pathname).toBe('/run');
+    });
+
+    it('says where a run left in its review or at the daily challenge is up to', () => {
+      const atReview = { ...savedRun(), step: 'review', outcomes: {}, drillIds: [], drillAnswers: [] };
+      window.sessionStorage.setItem('coldboot:v1:run', JSON.stringify(atReview));
+      const first = render(<RouterProvider router={createMemoryRouter([{ path: '/', element: <Home /> }], { initialEntries: ['/'] })} />);
+      expect(within(screen.getByRole('list', { name: "Today's run" })).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+        'Next: review cards, 1 card reviewed so far.',
+        'Then: drill, then the daily challenge.',
+      ]);
+      first.unmount();
+      const atDaily = {
+        ...savedRun(),
+        step: 'daily',
+        outcomes: { review: { status: 'skipped', text: 'Nothing was due.' }, drill: { status: 'done', text: '7 of 10 correct.' } },
+        dailyDate: melbourneDate(NOW),
+      };
+      window.sessionStorage.setItem('coldboot:v1:run', JSON.stringify(atDaily));
+      renderHome();
+      expect(within(screen.getByRole('list', { name: "Today's run" })).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+        'Review cards. Skipped: Nothing was due.',
+        'Drill your weakest key knowledge. Done: 7 of 10 correct.',
+        'Next: the daily challenge.',
+      ]);
+      expect(screen.getByRole('link', { name: "Continue today's run" })).toBeInTheDocument();
+    });
+
+    it('previews a new run when the saved one is from another study day or unreadable', () => {
+      for (const stored of [JSON.stringify(savedRun('2026-09-30')), '{not json']) {
+        window.sessionStorage.setItem('coldboot:v1:run', stored);
+        const { unmount } = render(
+          <RouterProvider router={createMemoryRouter([{ path: '/', element: <Home /> }], { initialEntries: ['/'] })} />,
+        );
+        expect(screen.getByRole('link', { name: "Start today's run" })).toBeInTheDocument();
+        expect(screen.getByText('Learn 2 new cards.')).toBeInTheDocument();
+        unmount();
+      }
+    });
   });
 
   it('says when the daily challenge is not done', () => {

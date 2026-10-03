@@ -22,6 +22,17 @@ export const RUN_VERSION = 1;
 
 export type StepId = 'review' | 'drill' | 'daily';
 
+/**
+ * The run's steps, in order: the heading Run shows, the step's name in a sentence ("Next: drill
+ * your weakest key knowledge"), and the short name in a list ("drill, then the daily challenge").
+ * Home reads them too, so they live here rather than in the Run screen's chunk.
+ */
+export const RUN_STEPS: readonly { id: StepId; title: string; phrase: string; short: string }[] = [
+  { id: 'review', title: 'Review cards', phrase: 'review cards', short: 'review cards' },
+  { id: 'drill', title: 'Drill your weakest key knowledge', phrase: 'drill your weakest key knowledge', short: 'drill' },
+  { id: 'daily', title: 'Daily challenge', phrase: 'the daily challenge', short: 'the daily challenge' },
+];
+
 export interface Outcome {
   status: 'done' | 'skipped';
   text: string;
