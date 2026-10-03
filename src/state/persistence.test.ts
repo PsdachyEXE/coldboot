@@ -190,20 +190,37 @@ describe('persistence', () => {
     expect(Object.keys(again.srs.useSrs.getState().cards)).toEqual(['c-good-001']);
   });
 
-  it("clears this tab's written drafts and terminal on reset, on import and on a reset in another window", async () => {
+  it("clears this tab's written drafts, Today's run and terminal on reset, on import and on a reset in another window", async () => {
     const { io } = await freshState();
     // The terminal host registers the terminal's reset when it loads.
     await import('../terminal/host');
     const { useTerminalSession } = await import('../terminal/session');
+    const run = await import('../app/study/runState');
     const fresh = useTerminalSession.getState().entries.length;
+    const day = '2026-10-01';
     const alice = () => {
       window.sessionStorage.setItem(KEY('draft:cs-01-q01'), "Alice's private draft");
       window.sessionStorage.setItem('other-site:key', 'keep');
+      run.saveRun({
+        v: run.RUN_VERSION,
+        day,
+        step: 'drill',
+        outcomes: { review: { status: 'done', text: '3 cards reviewed.' } },
+        review: { ratings: 3, cardIds: ['c-u3o1-kk04-001'], newCards: 1, again: 0 },
+        drillIds: ['m-u3o1-kk04-001'],
+        drillAnswers: [],
+        drillResult: null,
+        stepAt: 1,
+        dailyDate: day,
+      });
+      expect(run.readRun(day)).not.toBeNull();
       useTerminalSession.getState().print({ kind: 'command', prompt: 'Alice@coldboot:~$', input: 'whoami' });
       useTerminalSession.getState().setLastShare('COLDBOOT daily 2026-10-01  9/10');
     };
     const cleared = () => {
       expect(window.sessionStorage.getItem(KEY('draft:cs-01-q01'))).toBeNull();
+      expect(window.sessionStorage.getItem(KEY('run'))).toBeNull();
+      expect(run.readRun(day)).toBeNull();
       expect(window.sessionStorage.getItem('other-site:key')).toBe('keep');
       expect(useTerminalSession.getState().entries).toHaveLength(fresh);
       expect(useTerminalSession.getState().lastShare).toBeNull();
