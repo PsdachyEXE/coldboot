@@ -1548,3 +1548,11 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** Home previewed a fresh run (new cards, a drill on today's weakest key knowledge) while the button opened the saved one at a different drill. Home ships in the shell, so it reads the names from `runState.ts` rather than from the Run screen's chunk.
 
 **Rejected.** Keeping "Start today's run" for both cases. Section 6.2 names that action for a new run.
+
+## D-189 Content growth target above the floors
+
+**Decision.** Phase 3 grew every KK to at least 6 MCQs and 3 short answers whose primary KK is that KK, on top of the Section 8.2 floors. The new items lean on applied scenarios and on the command terms students most often under-answer (explain, justify, recommend). Two more case studies (cs-03, cs-04) bring the total to four, the P2 target. Growth was written as fragments, reviewed one by one, and append-merged; no existing item changed.
+
+**Reason.** Section 13 asks for content growth above the floors, guided by `EXAM_INSIGHTS.md`. That file couldn't draw on the examiners' report (D-001), so the growth targets the exam's shape instead: applied Section A questions and Section B answers that must be developed to the marks.
+
+**Rejected.** Growing cards first (the cross-unit pass had just removed 62 duplicate cards), and growing only the KKs with the fewest items (every KK sat at the same low depth of 3 to 4 MCQs and 1 to 2 short answers).

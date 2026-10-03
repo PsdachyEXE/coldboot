@@ -92,6 +92,75 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o1-kk01-005",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "stem": "Priya updates the order-entry module used by phone staff at Goldfinch Lane Produce, a fruit and vegetable wholesaler in Shepparton. Staff used to type each product name in full; now the module suggests matching products once the first three letters are typed. The owner wants to know whether the change has made the module more *effective*, by comparing a measurement taken before and after the change. Which measurement should be compared?",
+    "options": [
+      "The average time staff take to enter an order",
+      "The number of orders per 100 that list a wrong product",
+      "The average number of keystrokes needed to enter an order",
+      "The staff wages spent on taking phone orders each week"
+    ],
+    "answer": 1,
+    "explanation": "Effectiveness is how well the module achieves its purpose: recording what the customer actually ordered. The number of orders that list a wrong product measures accuracy, so it shows whether effectiveness has changed. Time, keystrokes and wage costs are measures of efficiency.",
+    "whyWrong": [
+      "Time taken to complete a task is a measure of efficiency, not effectiveness.",
+      "",
+      "Keystrokes measure the effort a task needs, which is a measure of efficiency.",
+      "Wages spent reflect time and cost, which are measures of efficiency."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk01-006",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "stem": "Ruby developed a spray-record app for Mulga Bend Table Grapes in Mildura, working on her office computer. After the app was released, she learnt that workers record each spray out in the vineyard, on a phone, in bright sunlight and often out of mobile range. Many of them can't read the screen, and sprays recorded out of range are never saved. Under user-centred design, which activity would most likely have revealed these problems earliest?",
+    "options": [
+      "Alpha testing each module against a test table before release",
+      "Beta testing a near-final version with a group of the workers",
+      "Surveying the workers about the app a month after it was released",
+      "Watching workers record sprays in the vineyard before designing"
+    ],
+    "answer": 3,
+    "explanation": "User-centred design begins by finding out who the users are, what tasks they do and where they do them. Watching workers in the vineyard before designing would have shown the bright sunlight and the patchy mobile coverage, so the screens, and the way records are saved, could have been designed for those conditions from the start.",
+    "whyWrong": [
+      "Alpha testing is done by the developers, usually away from the vineyard, so it checks the app's processing rather than the conditions it is used in.",
+      "Beta testing with the workers would probably reveal the problems, but only once the app is nearly finished, when redesigning it takes much more work.",
+      "A survey after release finds the problems only once the app is in use, which is when Ruby found them.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk01-007",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "stem": "Gang-gang Electrical in Healesville uses a quoting program. Staff build each quote by choosing items from a list of about 400 items and entering the labour hours. Which change would improve the program's efficiency without reducing its effectiveness?",
+    "options": [
+      "Showing the items quoted most often at the top of the item list",
+      "Removing the check that each quote's total matches its listed items",
+      "Asking staff to retype each quote's total on a second screen to confirm it",
+      "Leaving labour off each quote so that quotes are faster to prepare"
+    ],
+    "answer": 0,
+    "explanation": "Putting the most common items first cuts the time and effort needed to build a quote, which improves efficiency. Each quote still lists the same items and is just as accurate and complete, so effectiveness isn't reduced.",
+    "whyWrong": [
+      "",
+      "Quotes would be quicker to finish, but a total that doesn't match its items could reach a customer, so effectiveness falls.",
+      "Retyping every total adds time and effort to each quote, which reduces efficiency.",
+      "A quote without labour is incomplete and understates the price, so effectiveness falls."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o1-kk02-001",
     "kk": [
       "U4O1-KK02"
@@ -227,6 +296,141 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o1-kk02-005",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK05"
+    ],
+    "stem": "Blue Loam Potatoes, a grower near Thorpdale, keeps its yields in `yields.csv`, shown below. Each line holds one paddock's yields, in tonnes, for four seasons, and there is no header row. The program reads line 1 into row 0 of the two-dimensional array `yields[paddock][season]`, line 2 into row 1, and so on, converting each field to Integer. Arrays are indexed from 0. Which element holds the value 29?",
+    "options": [
+      "`yields[2][1]`",
+      "`yields[2][3]`",
+      "`yields[1][2]`",
+      "`yields[3][2]`"
+    ],
+    "answer": 2,
+    "explanation": "29 is on line 2 of the file, which is stored in row 1, and it is the third field on that line, which is at index 2. The row index comes first, so the element is `yields[1][2]`.",
+    "whyWrong": [
+      "This puts the field before the line: `yields[2][1]` is row 2 (line 3), index 1, which holds 53.",
+      "This counts from 1: with indexes from 0, `yields[2][3]` is the fourth field of line 3, which holds 46.",
+      "",
+      "This counts from 1 and puts the field first; the rows are indexed 0 to 2, so there is no row 3."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "blue-loam-yields",
+        "kind": "table",
+        "title": "Contents of yields.csv",
+        "columns": [
+          "Line",
+          "Text in the file"
+        ],
+        "rows": [
+          [
+            "1",
+            "42,38,51,47"
+          ],
+          [
+            "2",
+            "35,40,29,44"
+          ],
+          [
+            "3",
+            "50,53,48,46"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk02-006",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK04"
+    ],
+    "stem": "The data dictionary shown is part of the design for a harvest report at Spinifex Bend Almonds in Robinvale. The program reads each block's details from a file, calculates the average harvest per tree, and outputs a report. Which change should be made to the data dictionary?",
+    "options": [
+      "Change `avgKg` to Floating point",
+      "Change `totalKg` to Integer",
+      "Change `treeCount` to Floating point",
+      "Change `irrigated` to String"
+    ],
+    "answer": 0,
+    "explanation": "`avgKg` is calculated by division, so it usually has a fractional part: 18462.5 ÷ 640 is about 28.8. An Integer can't hold that value or report it to one decimal place, so `avgKg` should be Floating point.",
+    "whyWrong": [
+      "",
+      "Harvest weights such as 18462.5 kg include part kilograms, so Floating point suits `totalKg`.",
+      "Trees are counted in whole numbers, so Integer suits `treeCount`.",
+      "Whether a block is irrigated has only two states, so Boolean suits `irrigated`."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "spinifex-bend-dictionary",
+        "kind": "table",
+        "title": "Data dictionary (extract)",
+        "columns": [
+          "Name",
+          "Data type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "blockName",
+            "String",
+            "Name of the block, e.g. North 3"
+          ],
+          [
+            "treeCount",
+            "Integer",
+            "Number of trees in the block, e.g. 640"
+          ],
+          [
+            "totalKg",
+            "Floating point",
+            "Kilograms harvested from the block, e.g. 18462.5"
+          ],
+          [
+            "avgKg",
+            "Integer",
+            "Average kilograms per tree (totalKg ÷ treeCount), reported to one decimal place"
+          ],
+          [
+            "irrigated",
+            "Boolean",
+            "Whether the block is irrigated"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk02-007",
+    "kk": [
+      "U4O1-KK02"
+    ],
+    "stem": "Ringtail Couriers in Ballarat charges a delivery fee that depends on the suburb. Its delivery program holds each suburb and its fee in an array of records that is written into the program's code. The fees change every few months, and each change needs a developer to edit the code and release a new version. The office manager wants to update the fees herself. Which change best meets this need?",
+    "options": [
+      "Declare each suburb's fee as a named constant at the top of the code",
+      "Hold the suburbs and fees in a two-dimensional array instead of records",
+      "Have staff type the delivery fee into a text box for every order",
+      "Read the suburbs and fees from a file that the manager can edit"
+    ],
+    "answer": 3,
+    "explanation": "Data that changes often is better kept in a data source outside the code. If the program reads the suburbs and fees from a file, such as a CSV file, each time it starts, the manager can change a fee in the file and the program uses the new fee on its next run, with no change to the code. The program should still validate what it reads, because an edited file can contain mistakes.",
+    "whyWrong": [
+      "A constant is still part of the code, so each fee change would still need a developer to edit the program and release it again.",
+      "This changes only how the data is organised; a two-dimensional array written into the code still has to be edited by a developer.",
+      "Typing a fee for every order adds time and effort, and fees typed from memory can be wrong or inconsistent.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o1-kk03-001",
     "kk": [
       "U4O1-KK03"
@@ -341,6 +545,84 @@
     ]
   },
   {
+    "id": "m-u4o1-kk03-005",
+    "kk": [
+      "U4O1-KK03",
+      "U3O1-KK08"
+    ],
+    "stem": "Oystercatcher Point Kayak Hire in Metung calculates hire costs with the function shown, in which every seventh day of a hire is free. Callum wants the cost of an 8-day hire at $45 a day, so he writes `total ← hireCost(45, 8)`. What value does `total` receive?",
+    "options": [
+      "312",
+      "315",
+      "352",
+      "360"
+    ],
+    "answer": 0,
+    "explanation": "Arguments are passed to parameters in order, so `days` receives 45 and `dailyRate` receives 8. Line 2 sets `freeDays` to 45 DIV 7 = 6, and line 3 sets `cost` to (45 − 6) × 8 = 312. Callum should have written `hireCost(8, 45)`, which returns (8 − 1) × 45 = 315.",
+    "whyWrong": [
+      "",
+      "315 is what Callum intended, but arguments are matched to parameters by position, not by meaning, so `days` receives 45.",
+      "352 takes one free day, as for an 8-day hire, but `days` is 45, so 45 DIV 7 gives 6 free days.",
+      "360 leaves out the free days, but line 2 sets `freeDays` to 6 and line 3 subtracts them."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "oystercatcher-hire-cost",
+        "kind": "pseudocode",
+        "code": "FUNCTION hireCost(days, dailyRate)\n    freeDays ← days DIV 7\n    cost ← (days - freeDays) * dailyRate\n    RETURN cost\nENDFUNCTION"
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk03-006",
+    "kk": [
+      "U4O1-KK03",
+      "U3O1-KK08"
+    ],
+    "stem": "The weather station at Pelican Point Sailing Club on Lake Boga records the wind speed every half hour. At the end of each day, the array `wind` holds that day's 48 readings, oldest first. Arrays are indexed from 0. An end-of-day summary must show the day's last six readings, newest first. The body of each loop below is `DISPLAY wind[i]`. Which loop is correct?",
+    "options": [
+      "`FOR i ← 42 TO 47`",
+      "`FOR i ← 48 TO 43 STEP -1`",
+      "`FOR i ← 47 TO 41 STEP -1`",
+      "`FOR i ← 47 TO 42 STEP -1`"
+    ],
+    "answer": 3,
+    "explanation": "With 48 readings indexed from 0, the newest is at index 47, and the last six are at indexes 42 to 47. Counting down from 47 to 42 with `STEP -1` displays them newest first, and because both bounds are inclusive, the loop runs exactly six times.",
+    "whyWrong": [
+      "This displays the right six readings, but oldest first, because index 42 holds the earliest of them.",
+      "This counts as if the array were indexed from 1. Index 48 doesn't exist, so the first pass causes an index out of range error.",
+      "Counting down from 47 to 41 displays seven readings, one more than the six required.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk03-007",
+    "kk": [
+      "U4O1-KK03"
+    ],
+    "stem": "On the online order form for Woodfire Wren Pizza in Myrtleford, the price shown must update as soon as the customer picks a different pizza size from a drop-down list. Which is the most suitable way to program this?",
+    "options": [
+      "Run a loop that checks the drop-down list over and over for a new size",
+      "Link a procedure that recalculates the price to the list's change event",
+      "Store the chosen size in a global variable that every procedure can read",
+      "Recalculate the price only when the customer clicks the Order button"
+    ],
+    "answer": 1,
+    "explanation": "GUI programs are event-driven. Choosing a new size raises the drop-down list's change event, and the procedure linked to that event (its event handler) recalculates and displays the price straight away.",
+    "whyWrong": [
+      "Checking the list over and over wastes processing; a GUI program runs code when an event happens instead.",
+      "",
+      "A global variable can hold the size, but storing it doesn't make any code run when the size changes.",
+      "The price would update only when the order is placed, not when the size changes, as required."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o1-kk04-001",
     "kk": [
       "U4O1-KK04"
@@ -428,6 +710,75 @@
       "The app uses an online API, not a library, and nothing suggests a licence has expired.",
       "A repository doesn't change code by itself, and the app's code is unchanged.",
       ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk04-005",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "stem": "The developers at Tambo Crossing Software in Bairnsdale keep the code for a council's parking permit system in a shared code repository. Which commit message would be most useful to a team member reading the history months later?",
+    "options": [
+      "Friday afternoon's work on the permit reminders module",
+      "Fixed the bug that Sam found in testing",
+      "Updated the reminders module and several other files",
+      "Reminders now sent 30 days before expiry, not 14"
+    ],
+    "answer": 3,
+    "explanation": "The repository already records who made each commit, when, and which files changed. The message should say what the change does, so anyone reading the history can find the commit that changed a rule, check it, and roll it back if needed.",
+    "whyWrong": [
+      "The repository already records when each commit was made, and this message doesn't say what changed.",
+      "It doesn't say which bug was fixed or how, so the history can't be searched for the change.",
+      "The repository already records which files changed; the message should say what the change does.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk04-006",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "stem": "The invoicing program at Bindi Creek Plumbing Supplies in Sale uses a charting library. A developer upgraded the library to its newest version and released the program to staff the same day. The new version had renamed a function that the program calls, so the monthly sales chart stopped working. Which practice would have stopped the failure reaching staff?",
+    "options": [
+      "Replacing the library with an online API that its provider keeps up to date",
+      "Testing the program with the new version before releasing it to staff",
+      "Committing the invoicing code to the repository more often",
+      "Range checking the sales figures before passing them to the chart"
+    ],
+    "answer": 1,
+    "explanation": "With a library, the developer decides when to upgrade. Re-testing the program with the new version before releasing it, and keeping the working version until then, would have found the renamed function during testing, before staff were affected.",
+    "whyWrong": [
+      "An online API can be changed by its provider at any time, so the same failure could happen without the developer upgrading anything.",
+      "",
+      "Frequent commits make it easier to roll back, but the failure would still reach staff before anyone noticed it.",
+      "Validation checks the data; it can't detect that a library function has been renamed."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk04-007",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "stem": "The booking page for Ghost Crab Cruises in Cowes shows a marine weather forecast from a third-party API. The free plan allows 1000 requests a day, and the page requests the forecast every time a customer opens it. On busy days, requests start failing by early afternoon and the forecast goes blank. The provider updates its forecast every three hours. Which change best solves the problem?",
+    "options": [
+      "Request the forecast every 30 minutes, store it and show the stored copy",
+      "Move every call to the API into a single module that the page calls",
+      "Show a message asking customers to check the forecast again tomorrow",
+      "Request the forecast twice each time the page is opened, in case one fails"
+    ],
+    "answer": 0,
+    "explanation": "The page uses up the daily limit because it sends a request on every visit. Requesting the forecast every 30 minutes uses 48 requests a day, and showing the stored copy gives every customer a forecast. Because the provider updates its forecast only every three hours, the stored copy is never far behind, provided the plan's terms allow the forecast to be stored.",
+    "whyWrong": [
+      "",
+      "Keeping the API calls in one module makes a change to the API easier to handle, but the page would still send a request on every visit.",
+      "Customers would still see no forecast, so the feature would fail its purpose on busy days.",
+      "Doubling the requests uses up the daily limit twice as fast."
     ],
     "difficulty": 3,
     "source": "textbook"
@@ -532,6 +883,154 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk05-005",
+    "kk": [
+      "U4O1-KK05",
+      "U3O1-KK08"
+    ],
+    "stem": "Bilby Burrow Party Rooms in Wangaratta takes party bookings for 10 to 30 children. Parties are held in the small room or the large room, and the small room holds at most 15 children. The room is chosen with radio buttons, so `room` is always \"small\" or \"large\". Which condition is TRUE exactly when a booking is valid?",
+    "options": [
+      "`(children ≥ 10 AND children ≤ 30) OR (room = \"small\" AND children ≤ 15)`",
+      "`(children ≥ 10 OR children ≤ 30) AND (room = \"large\" OR children ≤ 15)`",
+      "`(children ≥ 10 AND children ≤ 30) AND (room = \"small\" OR children ≤ 15)`",
+      "`(children ≥ 10 AND children ≤ 30) AND (room = \"large\" OR children ≤ 15)`"
+    ],
+    "answer": 3,
+    "explanation": "The first part is a range check: 10 to 30 children. The second part applies the small room's limit: it is TRUE when the room is large, or when there are no more than 15 children. A valid booking must pass both parts, so they are joined with AND.",
+    "whyWrong": [
+      "With OR, passing either part is enough, so 25 children in the small room are accepted, and so are 5.",
+      "`children ≥ 10 OR children ≤ 30` is TRUE for every number, so a booking for 40 children in the large room is accepted.",
+      "This applies the limit to the wrong room: 20 children are rejected in the large room but accepted in the small room.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk05-006",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK06"
+    ],
+    "stem": "The online booking form at Tussock Lane Kitchen in Colac has two fields: the customer's name, which is required, and the number of guests, a whole number from 1 to 10. During alpha testing, the developer recorded the results shown. Which validation check do the results show is missing?",
+    "options": [
+      "An existence check on the number of guests",
+      "A type check on the number of guests",
+      "An existence check on the customer's name",
+      "A range check on the number of guests"
+    ],
+    "answer": 2,
+    "explanation": "In test 2 the name is left blank, and the booking is saved instead of being rejected with a message. The form is missing an existence check on the name.",
+    "whyWrong": [
+      "No test left the number of guests blank, so these results can't show whether that check is missing.",
+      "Test 3 shows \"three\" being rejected with the right message, so the type check is working.",
+      "",
+      "Test 4 shows 12 being rejected with the right message, so a range check is present."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "tussock-lane-tests",
+        "kind": "table",
+        "title": "Test table",
+        "columns": [
+          "Test number",
+          "Input(s)",
+          "Expected output",
+          "Actual output"
+        ],
+        "rows": [
+          [
+            "1",
+            "name = Ari Nguyen, guests = 3",
+            "Booking saved",
+            "Booking saved"
+          ],
+          [
+            "2",
+            "name left blank, guests = 4",
+            "Enter your name",
+            "Booking saved"
+          ],
+          [
+            "3",
+            "name = Li Wei, guests = three",
+            "Guests must be a whole number",
+            "Guests must be a whole number"
+          ],
+          [
+            "4",
+            "name = Li Wei, guests = 12",
+            "Guests must be from 1 to 10",
+            "Guests must be from 1 to 10"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk05-007",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK02"
+    ],
+    "stem": "Silvereye Singers, a community choir in Sale, takes concert bookings on paper forms, which a volunteer types into `bookings.csv`. Each line holds a name and a number of tickets. The booking program imports the file and applies three checks to each line: an existence check on the name, a type check that the number of tickets is a whole number, and a range check that it is from 1 to 10 inclusive. A line that fails any check is rejected and listed for the volunteer to correct. Which lines in the file shown are rejected?",
+    "options": [
+      "Lines 2, 3 and 5",
+      "Lines 2, 3, 5 and 6",
+      "Lines 3, 5 and 6",
+      "Lines 2, 3, 4, 5 and 6"
+    ],
+    "answer": 1,
+    "explanation": "Line 2 has no name, so it fails the existence check. Lines 3 and 6 fail the type check, because `two` and 2.5 aren't whole numbers. Line 5 fails the range check, because 11 is above 10. Lines 1 and 4 hold the boundary values 1 and 10, which an inclusive range accepts.",
+    "whyWrong": [
+      "Line 6 is also rejected: 2.5 isn't a whole number, so it fails the type check.",
+      "",
+      "Line 2 is also rejected: it has no name, so it fails the existence check.",
+      "The range is inclusive, so 10 is accepted; line 4 passes every check."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "silvereye-bookings",
+        "kind": "table",
+        "title": "Contents of bookings.csv",
+        "columns": [
+          "Line",
+          "Text in the file"
+        ],
+        "rows": [
+          [
+            "1",
+            "Mia Tran,1"
+          ],
+          [
+            "2",
+            ",4"
+          ],
+          [
+            "3",
+            "Jack Bell,two"
+          ],
+          [
+            "4",
+            "Ruby Hale,10"
+          ],
+          [
+            "5",
+            "Omar Aziz,11"
+          ],
+          [
+            "6",
+            "Ella Ross,2.5"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": "m-u4o1-kk06-001",
@@ -680,6 +1179,110 @@
     ]
   },
   {
+    "id": "m-u4o1-kk06-005",
+    "kk": [
+      "U4O1-KK06",
+      "U3O1-KK14"
+    ],
+    "stem": "Whipbird Hill Boarding Kennels in Benalla charges $25 a night for each dog, plus $10 a night for each dog that weighs over 30 kg. The function shown should work out one night's charge for a family's dogs from their weights in kilograms. Arrays are indexed from 0. During alpha testing, `nightlyCharge([12, 34, 8])` returns 95 instead of 85. Ash sets a breakpoint on line 6, which pauses the program each time line 6 is about to run. The table shows the values at each pause. What do the pauses show?",
+    "options": [
+      "The loop makes one pass too many, so line 6 runs after the last dog",
+      "Line 6 runs for the 8 kg dog, so line 5 tests the wrong value",
+      "Line 4 adds the nightly rate twice for the dog that weighs 34 kg",
+      "Line 6 runs for every dog, so each dog is charged the extra $10"
+    ],
+    "answer": 1,
+    "explanation": "Line 6 should run only for a dog over 30 kg, but the second pause shows it about to run when `i` is 2, and `weights[2]` is 8. Line 5 compares the running total with 30 instead of the dog's weight, so once `total` passes 30, every later dog is charged the $10. Changing line 5 to `IF weights[i] > 30 THEN` makes the function return 85.",
+    "whyWrong": [
+      "At the last pause `i` is 2, the last index of a three-element array, and the function returns without an error, so the loop runs the right number of times.",
+      "",
+      "At the first pause `total` is 50, which is $25 for each of the first two dogs, so line 4 adds the rate once per dog.",
+      "The program pauses only twice, when `i` is 1 and 2; it doesn't pause for the 12 kg dog at index 0."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "whipbird-nightly-charge",
+        "kind": "pseudocode",
+        "indexBase": 0,
+        "code": "FUNCTION nightlyCharge(weights)\n    total ← 0\n    FOR i ← 0 TO LENGTH(weights) - 1\n        total ← total + 25\n        IF total > 30 THEN\n            total ← total + 10\n        ENDIF\n    ENDFOR\n    RETURN total\nENDFUNCTION"
+      },
+      {
+        "id": "whipbird-pauses",
+        "kind": "table",
+        "title": "Values at each pause on line 6",
+        "columns": [
+          "Pause",
+          "i",
+          "weights[i]",
+          "total"
+        ],
+        "rows": [
+          [
+            "1",
+            "1",
+            "34",
+            "50"
+          ],
+          [
+            "2",
+            "2",
+            "8",
+            "85"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk06-006",
+    "kk": [
+      "U4O1-KK06"
+    ],
+    "stem": "The invoicing program at Nankeen Electrical in Traralgon has two modules written by different developers. `calculateFee` returns a job's fee in cents, for example 1250 for $12.50. `addGst` expects a fee in dollars and adds 10%. Each module passed every test in its own test table, but when the two modules were first run together, an invoice showed $1375.00 instead of $13.75. What does this show about alpha testing?",
+    "options": [
+      "The test tables for both modules must have held incorrect expected outputs",
+      "Beta testing by real users should replace alpha testing for this program",
+      "Each module needed a range check on the fee it receives or returns",
+      "Modules must also be tested together, checking data passed between them"
+    ],
+    "answer": 3,
+    "explanation": "Each module worked correctly with its own test data. The error appears only when `calculateFee`'s output, in cents, is passed to `addGst`, which expects dollars: 1250 × 1.1 = 1375. Testing the modules together, and checking the values passed between them, finds this kind of error before users see it.",
+    "whyWrong": [
+      "Each module does what its own design says, so its tests rightly passed; the fault lies in how the two modules fit together.",
+      "Beta testing follows alpha testing rather than replacing it, and users shouldn't be the first to find a calculation error.",
+      "1250 is a believable fee in dollars as well as in cents, so a range check wouldn't reliably catch the mismatch.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk06-007",
+    "kk": [
+      "U4O1-KK06",
+      "U3O1-KK14"
+    ],
+    "stem": "Since a loyalty-points feature was added to the till program at Grey Fantail Café in Heathcote, the program crashes every time it prints a receipt. Kim comments out the single line that calls `addPoints(order)`, and receipts then print without a crash. What is the most reasonable conclusion?",
+    "options": [
+      "The crash is caused by `addPoints` or by the data passed to it",
+      "The crash was a syntax error, which commenting out has corrected",
+      "The crash is in the receipt code, which runs differently without the line",
+      "The crash is a logic error, because the program ran before it stopped"
+    ],
+    "answer": 0,
+    "explanation": "Commenting out one line and seeing the crash stop narrows the search: the crash happens only when `addPoints` runs, so Kim should examine that function and the order data passed to it. She must restore the line once the error is fixed, or customers won't earn points.",
+    "whyWrong": [
+      "",
+      "Commenting out a line stops it running but doesn't correct anything, and the program runs normally until it prints a receipt, which points to a runtime error rather than a syntax error.",
+      "Receipts printed correctly before the feature was added and print again without the call, so the receipt code is unlikely to be the cause.",
+      "A logic error produces wrong output without stopping the program; a crash while the program runs is a runtime error."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o1-kk07-001",
     "kk": [
       "U4O1-KK07"
@@ -770,6 +1373,108 @@
     ],
     "difficulty": 3,
     "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk07-005",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "stem": "Yambuk Cold Stores in Port Fairy is having a stock app developed for its warehouse staff, who will scan cartons with handheld scanners inside a freezer room while wearing thick gloves. Grace, the developer, plans to beta test the app with five warehouse staff on desktop computers in the office. Which change would most improve her beta test?",
+    "options": [
+      "Have Grace's fellow developers carry out the scenarios instead of the warehouse staff",
+      "Give the warehouse staff a list of invalid inputs to type into each field of the app",
+      "Run the same scenarios on handheld scanners in the freezer room during a shift",
+      "Replace the scenarios with a survey that staff fill in after trying the app"
+    ],
+    "answer": 2,
+    "explanation": "Beta testing should happen in the conditions where the solution will really be used. On the scanners in the freezer room, with gloves on, testers will meet problems the office can't reveal, such as buttons too small to tap with a gloved finger.",
+    "whyWrong": [
+      "Developers already know how the app works, and testing by developers is alpha testing.",
+      "Checking validation with prepared invalid data is the developers' job in alpha testing, and it would still happen in the office.",
+      "",
+      "A survey loses the chance to observe real tasks, and the testing would still happen in the office."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk07-006",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "stem": "Talbot Ridge Dance School in Ballarat is having an app developed. Parents will use it to enrol their children in classes and pay fees, and the school's teachers will use it to mark attendance and message families. Which beta test plan is most suitable?",
+    "options": [
+      "Some parents and some teachers, each given scenarios for their own role",
+      "Teachers only, because they understand how the school's classes are organised",
+      "Parents only, because parents will make up most of the app's users",
+      "Parents and teachers, all given the same scenarios so results can be compared"
+    ],
+    "answer": 0,
+    "explanation": "The app has two groups of users with different tasks. The beta test group should represent both, and each tester should carry out realistic scenarios for their own role, such as a parent enrolling a child in a Saturday class or a teacher marking the roll.",
+    "whyWrong": [
+      "",
+      "Teachers don't enrol children or pay fees, so problems parents meet would go unnoticed.",
+      "Leaving out teachers means real users never try the attendance and messaging features.",
+      "Parents don't mark attendance and teachers don't enrol children, so identical scenarios don't match what each group really does."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk07-007",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "stem": "Kororoit Creek Fitness in Melton beta tested its new class-booking app with eight members. The table shows the results. Which conclusion is best supported by the results?",
+    "options": [
+      "The cancel function has a logic error, so it needs more alpha testing",
+      "Cancelling takes too long to process, so the app's response time must improve",
+      "Validation of card details failed, so it is the most urgent problem to fix",
+      "The Cancel option is hard to find, so its placement should be redesigned"
+    ],
+    "answer": 3,
+    "explanation": "Scenario 2 is the only one most testers couldn't finish without help, and the observer's note gives the reason: testers looked for Cancel under My account, but it is under Timetable. The long average time was spent searching, so the problem is where the option is placed, not how it works.",
+    "whyWrong": [
+      "Nothing shows that cancelling gives a wrong result; most testers couldn't find the option.",
+      "The notes show the time was spent searching for the option, not waiting for the app.",
+      "The expired cards were rejected with a clear message, so the validation worked as intended.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "kororoit-beta-results",
+        "kind": "table",
+        "title": "Beta test results (8 testers)",
+        "columns": [
+          "Scenario",
+          "Completed without help",
+          "Average time",
+          "Observer's notes"
+        ],
+        "rows": [
+          [
+            "1. Book a spin class for next Tuesday",
+            "8 of 8",
+            "1 min 10 s",
+            "–"
+          ],
+          [
+            "2. Cancel a class you have booked",
+            "3 of 8",
+            "3 min 40 s",
+            "Five testers opened My account looking for Cancel. It is under Timetable."
+          ],
+          [
+            "3. Update your payment card",
+            "8 of 8",
+            "2 min 5 s",
+            "Two testers typed an expired card. The app rejected it with a clear message, and they corrected it."
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": "m-u4o1-kk08-001",
@@ -896,6 +1601,90 @@
             "Online questionnaire",
             "Week 6",
             "Sales manager"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk08-005",
+    "kk": [
+      "U4O1-KK08",
+      "U4O1-KK09"
+    ],
+    "stem": "Tungamah Mower Repairs in Yarrawonga records warranty claims on paper forms and is replacing them with a claims program. One evaluation criterion is: 'The average time to process a warranty claim falls by at least 30%.' Which step must the evaluation strategy include so that this criterion can be applied?",
+    "options": [
+      "Survey staff in the first week about how quickly the program processes claims",
+      "Time staff processing a sample of paper claims before the program starts",
+      "Ask staff after launch to estimate how long a paper claim used to take them",
+      "Beta test the program with the staff who process warranty claims each day"
+    ],
+    "answer": 1,
+    "explanation": "A fall of 30% can only be judged against a measured starting point. The paper process has to be timed before it is replaced, because once the program is in use the old times can no longer be measured.",
+    "whyWrong": [
+      "First-week data reflects staff learning the program, and a survey gives opinions, not measured times.",
+      "",
+      "Estimates made from memory are unreliable, so the comparison with the new times wouldn't be sound.",
+      "Beta testing finds problems before release; it doesn't measure how long the paper process took."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk08-006",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "stem": "Wonwondah Produce in Horsham has had a stock and dispatch app built by Farid, an external developer whose contract ends when the app is handed over in March. The table shows an extract from the evaluation strategy. What is the main weakness in the strategy?",
+    "options": [
+      "Criterion 1's data should be collected from the day the app is handed over",
+      "Criterion 2 should compare the counts for every product, not a sample of 50",
+      "Criterion 3 should be measured with system logs instead of a questionnaire",
+      "Criterion 3 relies on someone who will no longer be working on the project"
+    ],
+    "answer": 3,
+    "explanation": "Farid's contract ends at the handover in March, but the questionnaire is due in June. Unless someone at Wonwondah Produce is made responsible for it, the drivers may never be surveyed and criterion 3 can't be applied. The other parts of the strategy are sound.",
+    "whyWrong": [
+      "Data from the first weeks would reflect staff learning the app; May and June show normal use.",
+      "A random sample of 50 products is a practical way to estimate how accurate the stock levels are.",
+      "Ratings are the drivers' opinions, which system logs can't record, so a questionnaire suits criterion 3.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "wonwondah-strategy",
+        "kind": "table",
+        "title": "Evaluation strategy (extract)",
+        "columns": [
+          "Criterion",
+          "Data collected",
+          "Method",
+          "When",
+          "Responsible"
+        ],
+        "rows": [
+          [
+            "1. The average time to record a delivery is under 45 seconds",
+            "Time from first scan to saving each delivery",
+            "System log",
+            "May and June",
+            "Warehouse supervisor"
+          ],
+          [
+            "2. At least 95% of recorded stock levels match the shelves",
+            "Recorded and counted stock for 50 randomly chosen products",
+            "Physical stock count",
+            "End of June",
+            "Warehouse supervisor"
+          ],
+          [
+            "3. At least 80% of drivers rate the app 4 or 5 out of 5 for ease of use",
+            "Ease-of-use ratings",
+            "Questionnaire",
+            "June",
+            "Farid (developer)"
           ]
         ]
       }
@@ -1070,6 +1859,75 @@
         ]
       }
     ]
+  },
+  {
+    "id": "m-u4o1-kk09-005",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "stem": "Wychitella Freight in Bendigo set this criterion for its new dispatch program: 'No more than 2% of printed labels have an incorrect address.' In weeks 5 to 8 after launch, the program printed 1 200 labels. Staff checked a random sample of 250 of them against the customers' orders and found 6 with an incorrect address. Which statement correctly applies the criterion to the data?",
+    "options": [
+      "Met, because 6 errors are only 0.5% of the 1 200 labels printed",
+      "Not met, because 2.4% of the sampled labels had a wrong address",
+      "Met, because an error rate of 2.4% rounds down to the 2% target",
+      "Met, because 244 correct labels are more than 98% of the sample"
+    ],
+    "answer": 1,
+    "explanation": "6 ÷ 250 = 0.024, so 2.4% of the sampled labels were wrong. A random sample stands for all the labels printed, so the best estimate of the error rate is 2.4%, which is more than the 2% allowed. The criterion is not met.",
+    "whyWrong": [
+      "Only 250 labels were checked, so the other 950 may hold errors too; the rate must come from the sample.",
+      "",
+      "'No more than 2%' is a limit, and 2.4% is above it. Rounding doesn't change that.",
+      "98% of 250 is 245, so 244 correct labels (97.6%) falls just short of 98%."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk09-006",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "stem": "Before launching a returns program, Toolamba Outdoor Gear in Shepparton timed staff processing returns by hand, and the average was 8.0 minutes. In weeks 5 to 8 after launch, the program's log gave an average of 6.2 minutes. The criterion is: 'The average time to process a return falls by at least 25%.' Which statement correctly applies the criterion?",
+    "options": [
+      "Met, because the average time fell by about 29%",
+      "Met, because the new average is lower than the old one",
+      "Met, because 6.2 minutes is within 25% of 8.0 minutes",
+      "Not met, because the average time fell by 22.5%"
+    ],
+    "answer": 3,
+    "explanation": "The average fell by 8.0 − 6.2 = 1.8 minutes. As a percentage of the original time, 1.8 ÷ 8.0 = 22.5%, which is less than the 25% required, so the criterion is not met. A 25% fall would have needed an average of 6.0 minutes or less.",
+    "whyWrong": [
+      "29% divides the fall by the new time (1.8 ÷ 6.2); a fall is measured against the original 8.0 minutes.",
+      "Any fall at all makes the new average lower; the criterion needs a fall of at least 25%.",
+      "Being within 25% of the old time isn't the same as falling by at least 25%, which needs 6.0 minutes or less.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk09-007",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "stem": "Rokewood Community Car Share has 300 members, who book its cars through a new app. To apply the criterion 'At least 80% of members find the app easy to use', the coordinator surveyed the 25 members who had phoned the help line about the app. Which change would make the evaluation data most reliable?",
+    "options": [
+      "Survey a random sample of all members who have booked with the app",
+      "Survey the volunteers who answer the help line about the calls they took",
+      "Ask the same 25 members to fill in the survey again a month later",
+      "Count how many calls the help line receives about the app each week"
+    ],
+    "answer": 0,
+    "explanation": "Members who phoned the help line are the ones who had trouble, so they don't represent the membership. A random sample of members who have used the app gives results that stand for all of them, so the percentage can fairly be compared with 80%.",
+    "whyWrong": [
+      "",
+      "Volunteers can only pass on what callers told them, not whether members in general find the app easy.",
+      "Surveying the same 25 again still leaves out every member who never needed help.",
+      "A count of calls doesn't show what percentage of members find the app easy to use."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
   },
   {
     "id": "m-u4o1-kk10-002",
@@ -1296,6 +2154,163 @@
     ]
   },
   {
+    "id": "m-u4o1-kk10-005",
+    "kk": [
+      "U4O1-KK10",
+      "U3O2-KK03"
+    ],
+    "stem": "Joel Joel Equine Clinic near Stawell is having a booking app developed. The Gantt chart shows the plan, in days. Mateo, who will code the database, is to be moved to another project for a few days partway through that task, so Code database (E) will finish late. What is the longest Code database can be delayed without delaying go-live?",
+    "options": [
+      "0 days",
+      "1 day",
+      "3 days",
+      "7 days"
+    ],
+    "answer": 2,
+    "explanation": "The critical path is A, B, D, G and H, with go-live at the end of day 23. Code database is due to finish at the end of day 13, but Integrate and alpha test (G) can't start until Code booking screens (D) finishes at the end of day 16. Code database can finish up to 3 days later, at the end of day 16, without holding up G, so go-live stays at day 23.",
+    "whyWrong": [
+      "Code database isn't on the critical path, so a short delay to it doesn't move go-live.",
+      "1 day compares only the two coding tasks (7 − 6) and ignores that Design database finishes 2 days before Design booking screens.",
+      "",
+      "7 days measures up to the start of Beta test, but G can't start until Code database has finished."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "joel-joel-gantt",
+        "kind": "gantt",
+        "title": "Joel Joel Equine Clinic booking app",
+        "caption": "Integrate and alpha test (G) starts when both coding tasks have finished. Beta test (H) needs both G and Write user guide (F) to be finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "A",
+            "name": "Analyse requirements",
+            "duration": 4,
+            "dependsOn": []
+          },
+          {
+            "id": "B",
+            "name": "Design booking screens",
+            "duration": 5,
+            "dependsOn": [
+              "A"
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Design database",
+            "duration": 3,
+            "dependsOn": [
+              "A"
+            ]
+          },
+          {
+            "id": "D",
+            "name": "Code booking screens",
+            "duration": 7,
+            "dependsOn": [
+              "B"
+            ]
+          },
+          {
+            "id": "E",
+            "name": "Code database",
+            "duration": 6,
+            "dependsOn": [
+              "C"
+            ]
+          },
+          {
+            "id": "F",
+            "name": "Write user guide",
+            "duration": 3,
+            "dependsOn": [
+              "B"
+            ]
+          },
+          {
+            "id": "G",
+            "name": "Integrate and alpha test",
+            "duration": 4,
+            "dependsOn": [
+              "D",
+              "E"
+            ]
+          },
+          {
+            "id": "H",
+            "name": "Beta test",
+            "duration": 3,
+            "dependsOn": [
+              "F",
+              "G"
+            ]
+          },
+          {
+            "id": "I",
+            "name": "Go live",
+            "duration": 0,
+            "dependsOn": [
+              "H"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk10-006",
+    "kk": [
+      "U4O1-KK10",
+      "U4O1-KK04"
+    ],
+    "stem": "Halfway through the coding of a delivery app for Gypsum Creek Couriers in Mildura, the publisher of the mapping library the app uses withdraws it. The developers must switch to another library and rewrite the map screens. The client's requirements haven't changed. Which statement best describes the effect on the project plan?",
+    "options": [
+      "Scope creep has occurred, so the agreed scope must be rewritten first",
+      "A technical issue has added unplanned work, so later tasks may slip",
+      "The plan is unaffected, because the app's requirements haven't changed",
+      "Only the testing tasks are affected, as the new library must be tested"
+    ],
+    "answer": 1,
+    "explanation": "Losing a library the app depends on is a technical issue. Choosing a replacement, rewriting the map screens and retesting them are work the plan didn't allow for, so coding takes longer, and if coding is on the critical path, later tasks and the handover slip.",
+    "whyWrong": [
+      "Scope creep is growth in what the solution must do. The requirements are unchanged; only the way of meeting them has changed.",
+      "",
+      "The requirements are the same, but the work needed to meet them has grown, and the plan has no time for it.",
+      "Rewriting the map screens is coding work, so coding takes longer before testing even starts."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk10-007",
+    "kk": [
+      "U4O1-KK10",
+      "U4O1-KK07"
+    ],
+    "stem": "Moonambel Music School near Avoca needs its new lesson-booking program, used by families and teachers, running by the first day of Term 1, a date that can't move. Scope creep during coding has used up 6 days, so the project manager plans to hold the date by cutting beta testing from 6 days to none. What is the most likely consequence?",
+    "options": [
+      "The critical path becomes longer, so the program misses Term 1 anyway",
+      "The added features are dropped, which reverses the effect of the scope creep",
+      "Nothing is lost, because alpha testing has already checked every module",
+      "Problems that families and teachers would have found appear after launch"
+    ],
+    "answer": 3,
+    "explanation": "Cutting beta testing keeps the date, but the time lost to scope creep is taken from quality. Problems that only real users in real conditions would reveal are found after launch, when families and teachers already depend on the program.",
+    "whyWrong": [
+      "Cutting a task shortens the path it is on; it can't make the critical path longer.",
+      "Cutting a test doesn't remove the features that were added; that work has already been done.",
+      "Alpha testing checks modules against test data; it can't show how real users manage with the program.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o1-kk11-001",
     "kk": [
       "U4O1-KK11"
@@ -1463,6 +2478,150 @@
         "showCriticalPath": false
       }
     ]
+  },
+  {
+    "id": "m-u4o1-kk11-005",
+    "kk": [
+      "U4O1-KK11",
+      "U4O1-KK12"
+    ],
+    "stem": "Four developers building a quoting program for Eurack Solar in Geelong keep journals. The table shows one entry from each. Which entry would be most useful when the project plan is assessed at the end of the project?",
+    "options": [
+      "Priya's entry",
+      "Tom's entry",
+      "Anh's entry",
+      "Kai's entry"
+    ],
+    "answer": 2,
+    "explanation": "Anh's entry records the date, the time spent, the task, a problem and its cause (a rule missing from the SRS), the decision taken and why, and the next step. If the quote screen later runs late, this entry explains why.",
+    "whyWrong": [
+      "It has no date or time spent, and 'some problems' doesn't say what went wrong or why.",
+      "It records the task and time spent but no problems, decisions or next steps.",
+      "",
+      "It gives no time spent, and a feeling about progress isn't evidence of what happened."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "eurack-journals",
+        "kind": "table",
+        "title": "Journal entries (extract)",
+        "columns": [
+          "Developer",
+          "Entry"
+        ],
+        "rows": [
+          [
+            "Priya",
+            "Tuesday. Worked on the quote screen. Some problems, but getting there."
+          ],
+          [
+            "Tom",
+            "12 May, 3 hours. Coded the panel cost calculation. Totals look right."
+          ],
+          [
+            "Anh",
+            "12 May, 4 hours. Quote screen. The rebate rule isn't in the SRS, so I emailed the client and paused that part until she replies. Next: the address lookup."
+          ],
+          [
+            "Kai",
+            "12 May. Quote PDF finished early. Very happy with progress this week!"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk11-006",
+    "kk": [
+      "U4O1-KK11",
+      "U3O2-KK03"
+    ],
+    "stem": "Moliagul Bike Hire in Maldon is having a booking system developed. At the end of day 12, the project manager annotated the plan with each task's progress, as shown in the table. If each task continues at its planned rate from now on, which task's progress will delay go-live?",
+    "options": [
+      "Code bookings",
+      "Code staff reports",
+      "Load test data",
+      "Write user guide"
+    ],
+    "answer": 0,
+    "explanation": "Turn each gap into days. Code bookings is 20% of 10 days = 2 days behind, Code staff reports is 60% of 5 = 3 days, Load test data is 25% of 4 = 1 day, and Write user guide is 50% of 8 = 4 days. Only Code bookings is further behind than it can afford, because it can't finish late at all, so go-live moves 2 days later. The other tasks will finish late, but within the time they have to spare.",
+    "whyWrong": [
+      "",
+      "It is the furthest behind in percentage terms (60%, or 3 days of work), but it can finish up to 4 days late without delaying go-live.",
+      "It should already have finished, but it is only 1 day behind and can finish up to 5 days late.",
+      "It hasn't started and is 4 days behind, but it can finish up to 5 days late."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "moliagul-progress",
+        "kind": "table",
+        "title": "Progress at the end of day 12",
+        "columns": [
+          "Task",
+          "Duration (days)",
+          "Planned % complete",
+          "Actual % complete",
+          "Days it can finish late without delaying go-live"
+        ],
+        "rows": [
+          [
+            "Code bookings",
+            "10",
+            "50%",
+            "30%",
+            "0"
+          ],
+          [
+            "Code staff reports",
+            "5",
+            "80%",
+            "20%",
+            "4"
+          ],
+          [
+            "Load test data",
+            "4",
+            "100%",
+            "75%",
+            "5"
+          ],
+          [
+            "Write user guide",
+            "8",
+            "50%",
+            "0%",
+            "5"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk11-007",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "stem": "Tariq is developing a client portal for Wareek Accounting in Maryborough. At a weekly meeting, the practice manager wants to see at a glance which tasks are on schedule and which are running late. Which record should Tariq show her?",
+    "options": [
+      "His development journal, with detailed notes from each work session",
+      "The Gantt chart, annotated with actual dates and task progress",
+      "The test table, with the expected and actual output of every test",
+      "The software requirements specification, with the agreed scope"
+    ],
+    "answer": 1,
+    "explanation": "An annotated Gantt chart shows planned and actual progress side by side for every task, so the manager can see at a glance what is on schedule and what is late. A journal explains why things happened; the chart shows where the whole project stands.",
+    "whyWrong": [
+      "A journal holds detailed notes on causes and decisions, but it doesn't show the whole schedule at a glance.",
+      "",
+      "A test table records test results, not progress against the plan.",
+      "The SRS states what the portal must do; it doesn't record progress."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
   },
   {
     "id": "m-u4o1-kk12-001",
@@ -1706,5 +2865,166 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk12-005",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK11"
+    ],
+    "stem": "Carapook Wool Studio in Casterton had an online shop and stock program developed. The tasks ran one after another, and the table compares their planned and actual durations. Which improvement to the next project plan does this evidence most directly support?",
+    "options": [
+      "Add a task for transferring data from the old stock records",
+      "Base the coding estimates on this project's actual durations",
+      "Keep a second developer available in case a team member leaves",
+      "Record and assess each change request before work on it begins"
+    ],
+    "answer": 1,
+    "explanation": "Both coding tasks took 50% longer than planned, and the journal notes rule out changed requirements and disruptions. That points to unrealistic coding estimates. The actual durations recorded in this project give a better basis for estimating the next one.",
+    "whyWrong": [
+      "Nothing in the evidence shows work that was missing from the plan.",
+      "",
+      "No one left the team; the journal notes rule out a personnel change.",
+      "The requirements didn't change, so scope creep didn't cause the overruns."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "carapook-actuals",
+        "kind": "table",
+        "title": "Planned and actual durations",
+        "columns": [
+          "Task",
+          "Planned (days)",
+          "Actual (days)",
+          "Journal note"
+        ],
+        "rows": [
+          [
+            "Analyse requirements",
+            "4",
+            "4",
+            "–"
+          ],
+          [
+            "Design screens",
+            "5",
+            "5",
+            "–"
+          ],
+          [
+            "Code online shop",
+            "8",
+            "12",
+            "No change to the requirements, no one away; needed more code than estimated"
+          ],
+          [
+            "Code stock module",
+            "6",
+            "9",
+            "Same team and same requirements; more complex than estimated"
+          ],
+          [
+            "Test",
+            "4",
+            "4",
+            "–"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk12-006",
+    "kk": [
+      "U4O1-KK12",
+      "U3O2-KK03"
+    ],
+    "stem": "Dergholm Timber Yard in Edenhope had a sales program developed to the plan shown in the Gantt chart, in days. Every task took exactly its planned duration, yet the handover was 5 days late. The developer's journal for day 8 reads: 'Can't start Code reports. Every report reads the sales tables, and they won't exist until Code database finishes on day 13.' Which conclusion about the project plan is best supported?",
+    "options": [
+      "The time estimate for Code reports was too short",
+      "Code database took longer than the plan allowed",
+      "A task the reports needed was missing from the plan",
+      "The plan left out a dependency between two tasks"
+    ],
+    "answer": 3,
+    "explanation": "Code reports needed Code database to be finished, but the plan showed it depending only on Design reports. Code reports had to wait until the end of day 13, so it ran on days 14 to 18, Test ran on days 19 to 21, and the handover moved from day 16 to day 21. The durations were right; a dependency was missing.",
+    "whyWrong": [
+      "Every task, including Code reports, took exactly its planned duration.",
+      "Code database finished at the end of day 13, as planned.",
+      "Code database was in the plan; what was missing was the link from it to Code reports.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "dergholm-gantt",
+        "kind": "gantt",
+        "title": "Dergholm Timber Yard sales program (planned)",
+        "caption": "Test starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "A",
+            "name": "Analyse requirements",
+            "duration": 4,
+            "dependsOn": []
+          },
+          {
+            "id": "B",
+            "name": "Design database",
+            "duration": 3,
+            "dependsOn": [
+              "A"
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Design reports",
+            "duration": 3,
+            "dependsOn": [
+              "A"
+            ]
+          },
+          {
+            "id": "D",
+            "name": "Code database",
+            "duration": 6,
+            "dependsOn": [
+              "B"
+            ]
+          },
+          {
+            "id": "E",
+            "name": "Code reports",
+            "duration": 5,
+            "dependsOn": [
+              "C"
+            ]
+          },
+          {
+            "id": "F",
+            "name": "Test",
+            "duration": 3,
+            "dependsOn": [
+              "D",
+              "E"
+            ]
+          },
+          {
+            "id": "G",
+            "name": "Handover",
+            "duration": 0,
+            "dependsOn": [
+              "F"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
   }
 ]

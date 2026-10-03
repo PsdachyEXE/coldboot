@@ -1,0 +1,737 @@
+{
+  "id": "cs-03",
+  "title": "Pardalote Foods: LotTrail",
+  "insert": "**Pardalote Foods**\n\nPardalote Foods makes chilled ready meals, soups and dips at two plants, in Dandenong South and Ballarat. It employs 760 staff and supplies supermarkets across eastern Australia. Each day it receives about 180 deliveries of ingredients from 95 suppliers and makes about 600 batches of product. Each batch is made for one supermarket's order.\n\nPardalote's goal is to be the chilled food maker that supermarkets trust most. To support this goal, the board has set two objectives:\n\n- within 12 months of a new system going live, identify every batch affected by a recalled ingredient within two hours of the supplier's recall notice (at present it can take two days)\n- by June 2028, have no product withdrawn from sale because an allergen was missing from its label (seven products were withdrawn last year).\n\n**Current situation**\n\nGoods-in staff write each delivery's supplier, product and quantity on a paper form, and probe chilled deliveries to check their temperature. Production supervisors list the ingredients used in each batch on a paper batch sheet. When a supplier recalls an ingredient, the quality team searches the batch sheets by hand. Some sheets are missing or hard to read, so Pardalote sometimes withdraws more product than it needs to. Label text, including allergens, is retyped by hand whenever a recipe changes.\n\n**The proposed solution: LotTrail**\n\n- **Goods-in.** Staff use a tablet to scan the barcode on each delivery and enter its quantity. For a chilled delivery, they also enter the probe temperature, measured to one decimal place. A chilled delivery warmer than 5.0 °C is rejected and goes back on the supplier's truck. LotTrail records every delivery as a lot with its own lot number, such as L0048213, and prints a lot label for each accepted delivery. Lot numbers are issued in sequence, so the lot records are always stored in order of lot number. It will keep about 120 000 lot records.\n- **Production.** Line workers scan the lot label of each ingredient as they add it to a batch. LotTrail then prints the batch's product labels, with the allergens taken from the product's recipe.\n- **Recalls.** The quality manager enters the lot number of a recalled ingredient. LotTrail finds the lot, lists every batch that used it, and sends a recall notice to each supermarket that received one of those batches, through that supermarket's supplier portal API.\n\nStock levels and ordering stay in Pardalote's existing stock system and are outside LotTrail's scope. The budget is $1.2 million, and LotTrail must be running at both plants by July 2027. Pardalote's own IT team is building it.\n\n**The project team**\n\n- **Harriet Lum**, project manager\n- **Farid Haidari**, systems analyst (draft DFD, Figure 1; draft data dictionary, Figure 2)\n- **Aroha Wiremu**, developer (goods-in and production modules)\n- **Jack Ferreira**, developer (recall module)\n- **Lily Tran**, user experience designer (draft mock-up, Figure 3)\n- **Declan Moore**, tester\n- **Imogen Walsh**, cyber security officer\n- **Bronwyn Hale**, head of food safety and project sponsor\n\nGraham Pettit, the operations manager, has asked Lily to design a dashboard for each production line (Figure 3). Graham hasn't told the line workers about it.\n\n**The development environment**\n\nImogen has noted these practices.\n\n- Developers take their laptops home. The laptops' drives aren't encrypted, and each holds LotTrail's source code and a test database containing every Pardalote recipe.\n- To share test files with the maker of Pardalote's label printers, Jack created a cloud storage folder that anyone with the link can open. The folder also holds an export of the supplier list, including suppliers' bank account details.\n- LotTrail reads barcodes with an open-source library downloaded in 2024. Its authors have since released a fix for a security flaw, but the fix hasn't been installed.\n- Every developer has full administrator rights on all of Pardalote's servers, including the live stock system.\n- On hot days, the server room door at Dandenong South is propped open to help the air-conditioning. It opens onto a corridor that contractors use.\n- The source code is backed up to a cloud drive every night, but no one has ever tried to restore a backup.\n\n*Pardalote Foods and everyone named here are fictional.*",
+  "figures": [
+    {
+      "id": "lottrail-dfd",
+      "kind": "dfd",
+      "title": "Figure 1: Draft data flow diagram for LotTrail",
+      "caption": "Drawn by Farid Haidari, systems analyst. This draft covers receiving deliveries, recording batches and tracing recalls. Printing product labels isn't shown yet.",
+      "width": 760,
+      "height": 520,
+      "nodes": [
+        {
+          "id": "goodsin",
+          "type": "entity",
+          "label": "Goods-in staff",
+          "x": 150,
+          "y": 64
+        },
+        {
+          "id": "lineworker",
+          "type": "entity",
+          "label": "Line worker",
+          "x": 420,
+          "y": 64
+        },
+        {
+          "id": "p1",
+          "type": "process",
+          "label": "Receive delivery",
+          "number": "1",
+          "x": 150,
+          "y": 200
+        },
+        {
+          "id": "p2",
+          "type": "process",
+          "label": "Record batch",
+          "number": "2",
+          "x": 420,
+          "y": 200
+        },
+        {
+          "id": "d1",
+          "type": "store",
+          "label": "Ingredient lots",
+          "number": "D1",
+          "x": 190,
+          "y": 320,
+          "w": 180
+        },
+        {
+          "id": "d2",
+          "type": "store",
+          "label": "Production batches",
+          "number": "D2",
+          "x": 570,
+          "y": 320,
+          "w": 190
+        },
+        {
+          "id": "p3",
+          "type": "process",
+          "label": "Trace recalled lot",
+          "number": "3",
+          "x": 380,
+          "y": 448
+        },
+        {
+          "id": "quality",
+          "type": "entity",
+          "label": "Quality manager",
+          "x": 650,
+          "y": 448
+        }
+      ],
+      "flows": [
+        {
+          "from": "goodsin",
+          "to": "p1",
+          "label": "delivery_details"
+        },
+        {
+          "from": "p1",
+          "to": "goodsin",
+          "label": "lot_label"
+        },
+        {
+          "from": "p1",
+          "to": "d1",
+          "label": "lot_record"
+        },
+        {
+          "from": "lineworker",
+          "to": "p2",
+          "label": "batch_details"
+        },
+        {
+          "from": "p2",
+          "to": "d2",
+          "label": "batch_record"
+        },
+        {
+          "from": "d1",
+          "to": "d2",
+          "label": "lot_numbers"
+        },
+        {
+          "from": "d1",
+          "to": "p3",
+          "label": "lot_details"
+        },
+        {
+          "from": "d2",
+          "to": "p3",
+          "label": "matching_batches"
+        },
+        {
+          "from": "p3",
+          "to": "quality",
+          "label": "recall_report"
+        },
+        {
+          "from": "quality",
+          "to": "p3",
+          "label": "recalled_lot_number"
+        }
+      ]
+    },
+    {
+      "id": "lot-dictionary",
+      "kind": "table",
+      "title": "Figure 2: Draft data dictionary for an ingredient lot record",
+      "caption": "Drawn by Farid Haidari, systems analyst. A ? marks a data type Farid hasn't chosen yet.",
+      "columns": [
+        "Field name",
+        "Data type",
+        "Example",
+        "Description"
+      ],
+      "rows": [
+        [
+          "lotNumber",
+          "String",
+          "L0048213",
+          "Lot number LotTrail gives each delivery"
+        ],
+        [
+          "supplierCode",
+          "?",
+          "0371",
+          "Four-digit code Pardalote gives each supplier"
+        ],
+        [
+          "strProductName",
+          "String",
+          "Liquid whole egg 15 kg",
+          "Supplier's name for the product"
+        ],
+        [
+          "quantity_kg",
+          "Floating point",
+          "450.5",
+          "Quantity delivered, in kilograms"
+        ],
+        [
+          "arrivalTemp",
+          "?",
+          "4.6",
+          "Probe temperature of a chilled delivery, in °C to one decimal place"
+        ],
+        [
+          "storageArea",
+          "Character",
+          "C",
+          "C (cool room), F (freezer) or D (dry store)"
+        ],
+        [
+          "isRejected",
+          "?",
+          "FALSE",
+          "TRUE if the delivery was rejected at goods-in"
+        ]
+      ]
+    },
+    {
+      "id": "line-dashboard-mockup",
+      "kind": "mockup",
+      "title": "Figure 3: Draft mock-up of the line dashboard",
+      "caption": "Drawn by Lily Tran, user experience designer, at Graham Pettit's request. The numbered notes are Lily's.",
+      "width": 640,
+      "height": 400,
+      "elements": [
+        {
+          "type": "window",
+          "x": 320,
+          "y": 200,
+          "w": 592,
+          "h": 352,
+          "text": "LotTrail: Line 3 dashboard"
+        },
+        {
+          "type": "heading",
+          "x": 150,
+          "y": 84,
+          "w": 220,
+          "h": 28,
+          "text": "Line 3, night shift",
+          "note": "Shown on a large screen beside each production line."
+        },
+        {
+          "type": "label",
+          "x": 200,
+          "y": 120,
+          "w": 320,
+          "h": 20,
+          "text": "Batches finished tonight: 14 of 18"
+        },
+        {
+          "type": "divider",
+          "x": 320,
+          "y": 144,
+          "w": 560,
+          "h": 2
+        },
+        {
+          "type": "label",
+          "x": 170,
+          "y": 172,
+          "w": 260,
+          "h": 20,
+          "text": "Fastest workers tonight"
+        },
+        {
+          "type": "list",
+          "x": 170,
+          "y": 236,
+          "w": 260,
+          "h": 72,
+          "text": "1. Mia R. (31 scans an hour)\n2. Tuan L. (29 scans an hour)\n3. Chloe B. (27 scans an hour)",
+          "note": "Speeds come from the times at which each worker scans lot labels."
+        },
+        {
+          "type": "label",
+          "x": 450,
+          "y": 172,
+          "w": 260,
+          "h": 20,
+          "text": "Slowest workers tonight"
+        },
+        {
+          "type": "list",
+          "x": 450,
+          "y": 236,
+          "w": 260,
+          "h": 72,
+          "text": "1. Ivan K. (12 scans an hour)\n2. Ruth M. (14 scans an hour)\n3. Sam O. (15 scans an hour)",
+          "note": "Shown in red, so supervisors can follow up with these workers."
+        },
+        {
+          "type": "button",
+          "x": 500,
+          "y": 318,
+          "w": 160,
+          "h": 36,
+          "text": "Show all workers"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "cs-03-q01",
+      "kk": [
+        "U4O2-KK01"
+      ],
+      "stem": "Pardalote's board wants to set a third objective that supports its goal. Which of the following statements is written as an objective?",
+      "options": [
+        "Be known across the food industry for the quality and safety of its meals",
+        "LotTrail must print each product's allergens on the labels for every batch",
+        "Cut supermarket complaints about its meals by 25 per cent by June 2028",
+        "LotTrail must be running at both plants within its $1.2 million budget"
+      ],
+      "answer": 2,
+      "explanation": "An objective is a specific, measurable target with a time frame that moves an organisation towards its goal. A 25 per cent cut in complaints by June 2028 can be measured and checked on a set date, and fewer complaints supports Pardalote's goal of being the chilled food maker that supermarkets trust most.",
+      "whyWrong": [
+        "This is a broad, long-term aim with no measure or deadline, so it is written as a goal, not an objective.",
+        "This is a functional requirement: something LotTrail must do, not a target for Pardalote to reach.",
+        "",
+        "This is a constraint on the project, a limit on its cost, and it sets no target that moves Pardalote towards its goal."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "cs-03-q02",
+      "kk": [
+        "U3O2-KK04"
+      ],
+      "commandTerm": "recommend",
+      "marks": 4,
+      "prompt": "Before writing the software requirements specification, Farid must collect data about how LotTrail should work from two groups:\n\n- the four members of the quality team, who trace recalls by hand and know where the current process goes wrong\n- the 24 goods-in staff, who receive deliveries across three shifts at the two plants.\n\nRecommend a suitable data collection technique for each group, and justify each recommendation.",
+      "points": [
+        {
+          "text": "Recommends a suitable technique for the quality team, for example interviews.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies it using the features of the quality team. For example: there are only four of them, so each can be interviewed; they have detailed knowledge of how recalls are traced and where the process goes wrong, and an interview allows follow-up questions to explore this in depth; or recalls happen only occasionally, so there may be none to observe while Farid is collecting data.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a suitable technique for the goods-in staff, for example observation (or a survey).",
+          "marks": 1
+        },
+        {
+          "text": "Justifies it using the features of the goods-in staff. For example: watching deliveries being received shows the real steps (writing up the paper form and probing chilled deliveries) and the problems and workarounds that staff may not think to mention; or a short survey reaches all 24 staff across three shifts and two plants without taking them away from the dock.",
+          "marks": 1
+        }
+      ],
+      "model": "Quality team: interviews. There are only four people in the quality team, so Farid can interview each of them. They have detailed knowledge of how a recall is traced through the paper batch sheets and where it goes wrong, and an interview lets Farid ask follow-up questions to explore each step and problem in depth. Recalls happen only occasionally, so there may be none to observe while he is collecting data.\n\nGoods-in staff: observation. Farid should watch goods-in staff receive deliveries on each shift at both plants. He would see the real steps (writing each delivery on the paper form and probing chilled deliveries), how long each takes and where mistakes happen, including workarounds that staff might not think to mention in an interview or a survey. This shows what LotTrail's goods-in screens must let staff do on the dock.",
+      "mistake": "Justify a technique with the features of the group (its size, where and when its members work, and what you need to find out), not with a general definition of the technique.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-03-q03",
+      "kk": [
+        "U3O2-KK08"
+      ],
+      "commandTerm": "explain",
+      "marks": 5,
+      "prompt": "Farid's draft data flow diagram (Figure 1) contains one error in DFD conventions.\n\n1. Identify the error, explain why it breaks DFD conventions, and describe how Farid should correct it.\n2. The insert says LotTrail sends recall notices to supermarkets, but Figure 1 doesn't show this yet. Describe the changes Farid should make to Figure 1 to show it.",
+      "points": [
+        {
+          "text": "Identifies the lot_numbers flow drawn directly from D1 Ingredient lots to D2 Production batches.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that data can't flow directly between two data stores. A data store only holds data, so a process must read the data from one store and write it to the other.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a correction: remove the lot_numbers flow, because the lot numbers already reach D2 through process 2 (line workers scan the lots used, which arrive in batch_details, and Record batch writes them to D2 in batch_record); or route the data through process 2, with a flow from D1 into Record batch.",
+          "marks": 1
+        },
+        {
+          "text": "Adds Supermarket (or the supermarket's supplier portal) as a new external entity.",
+          "marks": 1
+        },
+        {
+          "text": "Adds a labelled data flow, such as recall_notice, from process 3 Trace recalled lot to the new Supermarket entity (or adds a new process, such as 4 Send recall notices, that receives the affected batches from process 3 and sends recall_notice to Supermarket).",
+          "marks": 1
+        }
+      ],
+      "model": "1. The error is the lot_numbers flow drawn directly from D1 Ingredient lots to D2 Production batches. A data store can't send data to another store by itself: data moves between stores only through a process that reads it from one store and writes it to the other. Farid should delete the flow. The lot numbers already reach D2 through process 2: line workers scan the lot label of each ingredient they use, so the lot numbers arrive in batch_details, and Record batch writes them to D2 in batch_record.\n\n2. Farid should add Supermarket as an external entity and draw a data flow labelled recall_notice from process 3 Trace recalled lot to Supermarket.",
+      "mistake": "Every data flow in a DFD must start or end at a process. Don't correct an error by drawing a flow straight between a data store and an external entity, or between two data stores.",
+      "source": "exam-convention",
+      "figureRefs": [
+        "lottrail-dfd"
+      ]
+    },
+    {
+      "id": "cs-03-q04",
+      "kk": [
+        "U3O1-KK04",
+        "U3O2-KK14"
+      ],
+      "commandTerm": "justify",
+      "marks": 5,
+      "prompt": "Farid hasn't yet chosen the data types for three fields in his draft data dictionary (Figure 2). Justify a suitable data type for each of supplierCode, arrivalTemp and isRejected.",
+      "points": [
+        {
+          "text": "supplierCode: String.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies String: supplier codes such as 0371 begin with a zero, which an Integer would drop (0371 would be stored as 371 and no longer match the supplier's code); or the code only identifies a supplier and is never used in a calculation.",
+          "marks": 1
+        },
+        {
+          "text": "arrivalTemp: Floating point.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies Floating point: the probe gives temperatures to one decimal place, such as 4.6, and an Integer can't store the decimal part. A chilled delivery at 5.3 °C must be rejected, but stored as an Integer it would become 5 and pass the 5.0 °C check.",
+          "marks": 1
+        },
+        {
+          "text": "isRejected: Boolean, because a delivery is either rejected or not, so the field only ever needs two values, TRUE and FALSE.",
+          "marks": 1
+        }
+      ],
+      "model": "supplierCode should be a String. Pardalote's supplier codes, such as 0371, can begin with a zero, which an Integer would drop: 0371 would be stored as 371 and no longer match the code on the supplier's paperwork. The code only identifies a supplier and is never used in a calculation, so there is no reason to store it as a number.\n\narrivalTemp should be Floating point. The probe measures temperatures to one decimal place, such as 4.6 °C, and an Integer can hold only whole numbers. A delivery at 5.3 °C must be rejected, but stored as an Integer it would become 5, pass the 5.0 °C check and be wrongly accepted.\n\nisRejected should be Boolean. A delivery is either rejected or it isn't, so the field only ever needs the two values TRUE and FALSE.",
+      "mistake": "A code made of digits isn't automatically an Integer. If it can start with a zero and is never used in a calculation, it should be a String.",
+      "source": "textbook",
+      "figureRefs": [
+        "lot-dictionary"
+      ]
+    },
+    {
+      "id": "cs-03-q05",
+      "kk": [
+        "U3O1-KK09",
+        "U3O1-KK05",
+        "U4O1-KK02"
+      ],
+      "commandTerm": "explain",
+      "marks": 6,
+      "prompt": "Refer to Farid's draft data dictionary (Figure 2).\n\n1. Five of the field names in Figure 2 use plain camel case. Identify the naming convention used by quantity_kg and the one used by strProductName, and rewrite both names to match the other five.\n2. Jack's recall module will load the lot records into memory before searching them. Explain why an array of records suits this data better than a two-dimensional array.",
+      "points": [
+        {
+          "text": "quantity_kg uses snake case: lower-case words joined by underscores.",
+          "marks": 1
+        },
+        {
+          "text": "strProductName uses Hungarian notation: the prefix str shows that the field holds a String (the rest of the name is in camel case).",
+          "marks": 1
+        },
+        {
+          "text": "Rewritten in plain camel case to match the other five: quantityKg and productName.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that every element of a two-dimensional array has the same data type, but a lot's fields have different types: in Figure 2, lotNumber is a String, quantity_kg is Floating point and storageArea is a Character.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the cost of forcing the fields into a two-dimensional array: every value would have to be stored as a String and converted back before it is compared or used in a calculation (such as a quantity), which adds code and risks type errors.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that a record keeps all of one lot's fields together, each with its own name and data type, so the code reaches a field by its name (such as quantityKg) rather than by a column number, which is clearer and less error-prone; an array of these records then holds every lot for the module to search by lotNumber.",
+          "marks": 1
+        }
+      ],
+      "model": "1. quantity_kg uses snake case: lower-case words joined by an underscore. strProductName uses Hungarian notation: the prefix str shows that it holds a String. Rewritten in plain camel case to match lotNumber and the other fields, they become quantityKg and productName.\n\n2. Every element of a two-dimensional array must have the same data type, but a lot's fields have different types: in Figure 2, lotNumber is a String, quantity_kg is Floating point and storageArea is a Character. To fit them into a two-dimensional array, Jack would have to store every value as a String and convert it back before comparing or calculating with it, which adds code and risks type errors. A record keeps all of one lot's fields together, each with its own name and data type, so a quantity stays a Floating point value and each field is reached by its name, such as quantityKg, rather than by a column number, which makes the code clearer and harder to get wrong. An array of these records then holds every lot, so the module can search them by lotNumber.",
+      "mistake": "Hungarian notation adds a prefix that shows the data type or control type, as str does in strProductName. It is often combined with camel case, so strProductName uses both.",
+      "source": "textbook",
+      "figureRefs": [
+        "lot-dictionary"
+      ]
+    },
+    {
+      "id": "cs-03-q06",
+      "kk": [
+        "U3O1-KK12",
+        "U3O1-KK01",
+        "U4O1-KK04"
+      ],
+      "commandTerm": "explain",
+      "marks": 7,
+      "prompt": "When a supplier recalls an ingredient, process 3 in Figure 1 must find the recalled lot among the lot records in D1 Ingredient lots. Assume D1 holds 120 000 lot records, stored in order of lot number.\n\n1. Explain how a binary search would find the recalled lot, and why a binary search can be used on these records.\n2. State the greatest number of comparisons that a binary search and a linear search could each need to find one lot among the 120 000 records.\n3. Jack plans to use an AI coding assistant to generate the binary search function. Describe two details he should include in his prompt, and one thing he should do with the generated code before adding it to LotTrail.",
+      "points": [
+        {
+          "text": "Explains that the search compares the recalled lot number with the lot number of the middle record of the part still being searched.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that if they don't match, the half that can't contain the lot is discarded (the lower half if the recalled lot number is larger, otherwise the upper half), and the search repeats on the remaining half until the lot is found or no records are left.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that a binary search can be used because the records are sorted by lot number, which is what makes it safe to discard half of them after each comparison.",
+          "marks": 1
+        },
+        {
+          "text": "Binary search: at most 17 comparisons (each comparison halves the records left, and 2 to the power 17, which is 131 072, is the first power of 2 above 120 000). Linear search: up to 120 000 comparisons.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a first detail for the prompt. For example: the inputs and output (an array of lot records sorted by lot number, the number of records and the lot number to find, returning the index of the matching record, or a value such as −1 when there is no match); the programming language LotTrail is written in; that lot numbers are Strings such as L0048213; or the team's naming convention (camel case).",
+          "marks": 1
+        },
+        {
+          "text": "Describes a second, different detail, as in the examples above, or a requirement such as handling a lot number that isn't found, or adding comments that explain the code.",
+          "marks": 1
+        },
+        {
+          "text": "Describes one thing to do before adding the code. For example: read it until he understands every line; test it using a test table with lots at the start, middle and end of the array and a lot number that doesn't exist; have another developer review it; or record in a comment that it was generated with an AI assistant.",
+          "marks": 1
+        }
+      ],
+      "model": "1. The binary search compares the recalled lot number with the lot number of the middle record. If they match, the lot has been found. If the recalled lot number is larger, the lot can only be in the upper half, so the lower half is discarded; if it is smaller, the upper half is discarded. The search repeats on the remaining half, halving it each time, until the lot is found or no records are left. It can be used because the lot records are stored in order of lot number: only in sorted data does comparing with the middle record show which half the lot must be in.\n\n2. A binary search needs at most 17 comparisons. A linear search could need up to 120 000.\n\n3. Jack's prompt should state the function's inputs and output: an array of lot records sorted by lot number, the number of records and the lot number to find, with the function returning the index of the matching record, or −1 if there is none. It should also name the programming language LotTrail is written in and say that lot numbers are Strings such as L0048213. Before adding the code, Jack should test it with a test table that includes lots at the start, middle and end of the array and a lot number that doesn't exist, checking each actual output against the expected output.",
+      "mistake": "A binary search doesn't need a short list; it needs a sorted one. On unsorted data it can discard the half that holds the lot and wrongly report that the lot isn't there.",
+      "source": "textbook",
+      "figureRefs": [
+        "lottrail-dfd"
+      ]
+    },
+    {
+      "id": "cs-03-q07",
+      "kk": [
+        "U4O1-KK06",
+        "U3O1-KK14",
+        "U4O1-KK05"
+      ],
+      "commandTerm": "complete",
+      "marks": 5,
+      "prompt": "Declan is alpha testing the goods-in module's temperature check against the rule in the insert. Temperatures are entered to one decimal place.\n\n1. Complete the test table below with four tests: three that check the rule at the 5.0 °C limit and on either side of it, and one that checks what happens when the temperature entered isn't a number. Leave the Actual output column empty, because the tests haven't been run yet.\n2. Explain why one of your tests uses exactly 5.0 °C.\n\n| Test number | Input (temperature entered) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | | | |\n| 2 | | | |\n| 3 | | | |\n| 4 | | | |",
+      "points": [
+        {
+          "text": "A test at exactly 5.0, with expected output: delivery accepted and a lot label printed.",
+          "marks": 1
+        },
+        {
+          "text": "A test just above the limit, 5.1, with expected output: delivery rejected and no lot label printed.",
+          "marks": 1
+        },
+        {
+          "text": "A test below the limit, such as 4.9, with expected output: delivery accepted and a lot label printed.",
+          "marks": 1
+        },
+        {
+          "text": "A test with an input that isn't a number, such as `five` or a blank entry, with expected output: an error message asking for the temperature as a number, and the delivery neither accepted nor rejected until a valid temperature is entered.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that 5.0 is where an error in the comparison would show: if the code tested arrivalTemp ≥ 5.0 instead of arrivalTemp > 5.0, a delivery at exactly 5.0 °C would be wrongly rejected, while the tests at 4.9 and 5.1 would still pass.",
+          "marks": 1
+        }
+      ],
+      "model": "1.\n\n| Test number | Input (temperature entered) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 4.9 | Delivery accepted; lot label printed | |\n| 2 | 5.0 | Delivery accepted; lot label printed | |\n| 3 | 5.1 | Delivery rejected; no lot label printed | |\n| 4 | `five` | Error message asking for the temperature as a number; delivery not accepted or rejected | |\n\n2. Test 2 uses exactly 5.0 °C because the limit is where a mistake in the comparison would show. The rule rejects only deliveries warmer than 5.0 °C, so a delivery at 5.0 °C must be accepted. If the code tested arrivalTemp ≥ 5.0 instead of arrivalTemp > 5.0, test 2 would fail, while tests 1 and 3 would still pass.",
+      "mistake": "Temperatures far from the limit, such as 2.0 °C and 9.0 °C, give the right result whether the code uses > or ≥, so they can't reveal an error at the limit.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-03-q08",
+      "kk": [
+        "U4O1-KK04"
+      ],
+      "stem": "LotTrail will send recall notices through each supermarket chain's supplier portal API. Four months before go-live, one chain announces that at the end of 2027 it will switch off the version of its API that LotTrail uses and replace it with a new version. What should Pardalote's team do?",
+      "options": [
+        "Keep the current version, and ask the chain to keep it running just for Pardalote",
+        "Move LotTrail to the new version, and test recall notices with it before the switch-off",
+        "Stop using the chain's API, and have the quality team email that chain its recall notices",
+        "Wait until the old version stops working, then change LotTrail to use the new version"
+      ],
+      "answer": 1,
+      "explanation": "An API is controlled by the organisation that provides it, so it can change or be withdrawn. Moving LotTrail to the new version before the old one is switched off, and testing it, means recall notices keep reaching that chain. A recall notice that fails to arrive could leave affected product on sale.",
+      "whyWrong": [
+        "The chain controls its API and has announced the switch-off. It has no reason to keep an old version running for one supplier, so recall notices could stop reaching it.",
+        "",
+        "Emailing notices by hand is slower and depends on staff sending each one correctly during a recall. Moving to the new version keeps the notices automatic.",
+        "Recall notices to that chain would fail from the switch-off until LotTrail is fixed, and a recall could happen in that gap."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "cs-03-q09",
+      "kk": [
+        "U4O1-KK01",
+        "U3O2-KK13"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Explain how LotTrail should improve both the efficiency and the effectiveness of the way Pardalote responds when a supplier recalls an ingredient.",
+      "points": [
+        {
+          "text": "States that efficiency is about the time, cost or effort needed to do a task.",
+          "marks": 1
+        },
+        {
+          "text": "Applies efficiency to recalls: instead of the quality team searching paper batch sheets by hand, which can take two days, LotTrail finds the lot and lists every batch that used it within minutes, with far less staff effort.",
+          "marks": 1
+        },
+        {
+          "text": "States that effectiveness is about how well the solution does its job, for example how accurate and complete its results are.",
+          "marks": 1
+        },
+        {
+          "text": "Applies effectiveness to recalls: lots are scanned instead of being written on paper batch sheets, so batch records are no longer lost or unreadable. LotTrail lists every batch that used the recalled lot and only those batches, so no affected product is missed and Pardalote no longer withdraws more product than it needs to.",
+          "marks": 1
+        }
+      ],
+      "model": "Efficiency is about the time, cost and effort needed to do a task. At present, the quality team searches paper batch sheets by hand, which can take up to two days. LotTrail finds the recalled lot and lists every batch that used it within minutes, so each recall takes far less staff time and effort, and identifying affected batches within two hours becomes achievable.\n\nEffectiveness is about how well the solution does its job, such as how accurate and complete its results are. Because line workers scan lot labels instead of supervisors writing ingredients on paper batch sheets, batch records are no longer lost or unreadable. LotTrail's list of affected batches is therefore complete and accurate: every batch that used the recalled lot is found, so no affected product is left on sale, and batches that didn't use it aren't withdrawn unnecessarily.",
+      "mistake": "Apply each quality to the scenario separately. Here, efficiency is the staff time and effort a recall takes; effectiveness is finding every affected batch and only those batches.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-03-q10",
+      "kk": [
+        "U4O1-KK10",
+        "U4O1-KK11"
+      ],
+      "commandTerm": "describe",
+      "marks": 5,
+      "prompt": "In week 18 of Harriet's plan, Jack resigns. He is the only developer who has worked on the recall module, and his replacement can't start until week 24.\n\n1. Name the type of project plan disruption that Jack's resignation represents, and explain how it is likely to affect LotTrail's schedule.\n2. Describe one action Harriet could take to reduce the effect of Jack's resignation on the go-live date, and explain how it helps.\n3. Harriet updates the recall module's tasks in her project management software. Explain how this helps her manage the effect of Jack's resignation on the rest of the plan.",
+      "points": [
+        {
+          "text": "Names it as a personnel change: a member of the project team leaves.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the likely effect: no one works on the recall module for about six weeks, and the replacement will need time to learn Jack's code, so the module will finish later. Testing and go-live depend on the module, so go-live is likely to be delayed unless the time is made up elsewhere.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a suitable action. For example: before Jack leaves, have him finish the internal documentation of his code, commit all his work to the code repository and hand it over to Aroha; move Aroha onto the recall module and reschedule her remaining work; or bring in a contract developer until the replacement starts.",
+          "marks": 1
+        },
+        {
+          "text": "Explains how the action reduces the effect. For example: work on the recall module continues instead of stopping for six weeks, or the replacement can understand the code sooner because it is documented and complete in the repository.",
+          "marks": 1
+        },
+        {
+          "text": "Explains how the software helps: once the recall module's new durations and the person now responsible are entered, the software (with the plan's dependencies set up in it) moves the dates of the tasks that depend on it (such as testing and go-live), so Harriet can see at once whether go-live slips and which later tasks she must adjust; or everyone in the team works from the same updated plan and can see their changed tasks.",
+          "marks": 1
+        }
+      ],
+      "model": "1. Jack's resignation is a personnel change. No one will work on the recall module for about six weeks, and his replacement will then need time to learn Jack's code, so the module will take longer to finish. Testing and go-live depend on the recall module, so go-live is likely to be delayed unless the time is made up elsewhere.\n\n2. Before Jack leaves, Harriet should have him finish the internal documentation for the recall module, commit all his work to the code repository and hand it over to Aroha, who can keep the module moving until the replacement starts. Work on the module then doesn't stop for six weeks, and the replacement can understand the code much faster from Jack's comments and handover notes.\n\n3. When Harriet enters the recall module's new durations and Aroha as the person now responsible, the project management software moves the dates of the tasks that depend on the module, such as testing and go-live. Harriet can see at once whether go-live slips and which later tasks she needs to adjust, and every team member works from the same updated plan.",
+      "mistake": "A team member leaving is a personnel change, not scope creep. Scope creep is when requirements are added after the scope has been agreed.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-03-q11",
+      "kk": [
+        "U4O2-KK05",
+        "U4O2-KK04"
+      ],
+      "commandTerm": "describe",
+      "marks": 5,
+      "prompt": "Imogen is threat modelling LotTrail using Farid's DFD (Figure 1).\n\n1. Explain one reason a DFD is useful for identifying threats.\n2. Describe one threat to the integrity of the data in D2 Production batches, and explain the harm it could cause.\n3. Recommend a control that would reduce this threat, and explain how it does so.",
+      "points": [
+        {
+          "text": "Explains that a DFD shows every place where LotTrail stores data and every flow between processes, stores and external entities, so each can be checked for threats in turn and none is overlooked.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a threat to integrity: batch records in D2 are changed or deleted without authority. For example, someone using a stolen login, a developer with full administrator rights working on live data, or faulty code removes or alters the lot numbers recorded for a batch.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the harm: when a lot is recalled, process 3 wouldn't list every batch that used it, so affected meals would stay on sale and people who eat them could become ill; Pardalote would miss its objective of identifying every affected batch and lose the supermarkets' trust.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a suitable control. For example: identity and access management based on least privilege, so that batch records are added only through process 2, only a few named quality staff can correct a saved record, and developers have no access to live data; multi-factor authentication on accounts that can change records; a log of every change to D2; or regular backups of D2 that can be restored.",
+          "marks": 1
+        },
+        {
+          "text": "Explains how the control reduces the threat. For example: far fewer people can alter batch records, so a stolen developer login or a developer's mistake can't change them; a stolen password alone isn't enough to change a record; changes can be detected and traced to a person; or correct records can be restored.",
+          "marks": 1
+        }
+      ],
+      "model": "1. A DFD shows every data store in LotTrail and every flow of data between processes, stores and external entities. Imogen can work through each store and flow in turn and ask how it could be attacked or misused, so no part of the system is overlooked.\n\n2. Someone could change or delete batch records in D2 without authority, for example by logging in with a stolen password, or a developer with full administrator rights could alter live records by mistake. If the lot numbers recorded for a batch are removed or changed, then when that lot is recalled, process 3 won't list the batch. Affected meals would stay on supermarket shelves, and people who eat them could become ill. Pardalote would miss its objective of identifying every affected batch and lose the supermarkets' trust.\n\n3. Imogen should recommend identity and access management based on least privilege. Batch records should be added only through process 2, by line workers logged in with their own accounts; only a few named quality staff, using multi-factor authentication, should be able to correct a saved batch record; and developers should have no access to the live data. Far fewer people could then alter D2, a stolen password alone wouldn't be enough to change a record, and a developer's mistake couldn't reach the live records.",
+      "mistake": "A threat to integrity changes or deletes data so that it can no longer be trusted. It is different from a threat that only exposes data to people who shouldn't see it.",
+      "source": "textbook",
+      "figureRefs": [
+        "lottrail-dfd"
+      ]
+    },
+    {
+      "id": "cs-03-q12",
+      "kk": [
+        "U4O2-KK08"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Graham has asked Lily to add the line dashboard shown in Figure 3 to LotTrail. It would use the times at which each worker scans lot labels to rank workers by speed, and it would be shown on a large screen beside each production line.\n\nExplain one ethical issue raised by this feature. Then recommend one change to its design that would address the issue, and justify your recommendation.",
+      "points": [
+        {
+          "text": "Identifies an ethical issue. For example: scan data collected to trace ingredients is reused to rank workers by name without their knowledge or agreement; naming the slowest workers on a public screen singles them out in front of colleagues; or scan speed is an unfair measure of each worker's effort.",
+          "marks": 1
+        },
+        {
+          "text": "Explains who is harmed and why it is wrong. For example: workers scan lots for food safety, not to be monitored, so using the data to judge them breaks their trust; workers named as slowest are embarrassed and could be treated unfairly on misleading figures, because a new worker, one on a harder product or one who stops to check an allergen looks slow; or pressure to scan faster could push workers to rush and skip food safety checks.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a design change. For example: show only the line's totals for the shift, with no names; remove the Slowest workers tonight list and the Show all workers button; let each worker see only their own figures; or use the data this way only after workers have been told and have agreed.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies the change by explaining how it addresses the issue. For example: no individual worker can be identified or singled out, or workers keep control over how data about them is used.",
+          "marks": 1
+        }
+      ],
+      "model": "The dashboard takes data that workers create while scanning lot labels for food safety and reuses it to rank them by name on a screen everyone on the line can see. The workers haven't been told their scans would be used this way, and haven't agreed to it. Workers named as slowest are singled out in front of their colleagues, even though scan speed is an unfair measure: a new worker, one making a harder product, or one who stops to check an allergen will look slow. This breaks the workers' trust and could push them to rush and skip food safety checks.\n\nThe dashboard should show only the line's totals for the shift, such as batches finished, with no workers' names, no Slowest workers tonight list and no Show all workers button. The supervisor would still see whether the line is on track, but no worker could be identified or singled out, and the scan data would be used to track the line's progress rather than to judge individuals.",
+      "mistake": "An ethical issue is about treating people fairly, not only about security or the law. Say who is affected (here, the line workers) and why the feature treats them unfairly.",
+      "source": "textbook",
+      "figureRefs": [
+        "line-dashboard-mockup"
+      ]
+    },
+    {
+      "id": "cs-03-q13",
+      "kk": [
+        "U4O2-KK10",
+        "U4O2-KK03",
+        "U4O2-KK09"
+      ],
+      "commandTerm": "recommend",
+      "marks": 8,
+      "prompt": "Imogen must advise Harriet which weaknesses in her notes on the development environment (see the insert) to deal with first. Recommend the two weaknesses Pardalote should fix first. For each weakness:\n\n- explain the risk it poses to Pardalote\n- justify why it should be fixed first, in terms of how likely it is to be exploited and how much harm it would cause\n- recommend a control that would reduce the risk, and explain how the control reduces it.",
+      "points": [
+        {
+          "text": "Identifies a first weakness from the insert and explains the risk it poses to Pardalote. For example: anyone with the link to the cloud folder can download suppliers' bank account details; a laptop stolen from a developer's home exposes every recipe and the source code; the unpatched barcode library leaves a published security flaw open to attackers; developers' full administrator rights mean one stolen login or one mistake can damage the live stock system; anyone passing the open server room could steal or tamper with a server; or untested backups may fail when they are needed.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies the first weakness's priority by both likelihood and impact. For example: the link has already been shared outside Pardalote and can be forwarded, so exposure is likely, and bank details can be used for fraud, so the harm is severe and can't be undone.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a control that addresses the first weakness. For example: remove the public link, delete the supplier export and share test files only with named accounts; encrypt the laptops' drives; install the library's fix and keep libraries updated; give developers only the access they need (least privilege), with no rights on live systems; keep the server room locked, with access limited to IT staff; or regularly test restoring a backup.",
+          "marks": 1
+        },
+        {
+          "text": "Explains how the first control reduces the risk.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a second, different weakness from the insert and explains the risk it poses to Pardalote.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies the second weakness's priority by both likelihood and impact.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a control that addresses the second weakness.",
+          "marks": 1
+        },
+        {
+          "text": "Explains how the second control reduces the risk.",
+          "marks": 1
+        }
+      ],
+      "model": "Weakness 1: the cloud folder that anyone with the link can open, which holds suppliers' bank account details. Anyone who gets the link, for example from a forwarded email, can download the details and use them to attempt fraud against the suppliers' accounts, or to send suppliers convincing scam emails that appear to come from Pardalote. This should be fixed first because the data is already exposed: the link has been shared outside Pardalote and can be passed on without anyone knowing, so misuse is likely, and leaked bank details can't be taken back, so the harm to suppliers and to their trust in Pardalote would be severe. Imogen should have the public link removed at once, the supplier export deleted from the folder, and test files shared only with named accounts at the label printer company. Only people Pardalote has approved could then open the files, and the bank details would no longer be there to find.\n\nWeakness 2: every developer has full administrator rights on all of Pardalote's servers, including the live stock system. If any developer's login is stolen, for example from an unencrypted laptop taken from their home, an attacker gains full control of the live stock system, and a developer's mistake while testing could damage live data. This is a priority because every developer account carries this power, so it takes only one stolen login or one slip, and the harm would be severe: the stock system could be altered or shut down and production stopped. Imogen should recommend least privilege: developers get only the access they need on the development and test servers and no rights on live systems, and the few accounts that keep administrator rights use multi-factor authentication. A stolen developer login would then reach only the development servers, and a developer's mistake couldn't change live data.",
+      "mistake": "Prioritise using both likelihood and impact. A weakness that could cause great harm but is unlikely to be exploited can rank below one whose data is already exposed.",
+      "source": "textbook"
+    }
+  ],
+  "totalMarks": 60
+}

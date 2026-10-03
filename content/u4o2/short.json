@@ -52,6 +52,32 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o2-kk01-003",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "Wirraway Plains Water, which supplies towns across northern Victoria and has 600 staff, has the goal of providing a reliable water supply to every customer. One of its objectives is to cut the average time taken to repair a burst water main from nine hours to five hours by June 2028. At present, call centre staff phone each burst-main report through to a supervisor, who then rings a repair crew.\n\nThe IT department can fund only one of these projects this year:\n\n- **Project A**: a system that sends each burst-main report, with its location, from the call centre straight to the nearest repair crew's phones\n- **Project B**: an online portal where customers can view and pay their water bills, requested by the finance manager and cheaper than Project A\n\nRecommend which project Wirraway Plains Water should fund. Justify your recommendation with reference to the corporation's goal and objective.",
+    "points": [
+      {
+        "text": "Recommends Project A and explains how it supports the objective: reports reach a crew straight away instead of passing through a supervisor, so repairs start sooner and the average repair time falls towards five hours",
+        "marks": 1
+      },
+      {
+        "text": "Links Project A to the goal: shorter repairs mean customers are without water for less time, so the supply is more reliable",
+        "marks": 1
+      },
+      {
+        "text": "Explains why Project B is the weaker choice despite its lower cost: it makes paying bills more convenient but does nothing to shorten repairs or keep water flowing",
+        "marks": 1
+      }
+    ],
+    "model": "Wirraway Plains Water should fund Project A. At present each burst-main report is phoned through a supervisor before a crew hears about it. Sending the report and its location straight to the nearest crew removes that delay, so repairs can start sooner. This directly supports the objective of cutting the average repair time from nine hours to five.\n\nShorter repairs mean customers are without water for less time, which serves the goal of a reliable supply for every customer. Project B would make paying bills more convenient, and it costs less, but it does nothing to shorten repairs or keep water flowing, so it doesn't serve this goal or objective.",
+    "mistake": "A recommendation needs a choice and a reason tied to the scenario. 'Project A is more useful' earns little; link it to the nine-to-five-hour objective and the reliable-supply goal, and say why Project B doesn't serve them.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o2-kk02-001",
     "kk": [
       "U4O2-KK02"
@@ -100,6 +126,32 @@
       }
     ],
     "model": "Without the source code, Tumbleweed Couriers can't patch the security flaw itself or hire another developer to do it, so the app stays open to attack until the original developer agrees to fix it, on whatever terms and price that developer sets. The contract should have stated that the source code and its documentation belong to Tumbleweed Couriers and are handed over when the project ends.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk02-003",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "Bushwren Health Fund, a Geelong health insurer with 400 staff, has six developers who built and maintain its membership system. It now needs a module that records each member's claims, calculates the benefit paid for each claim and pays it into the member's bank account. The benefit rules change every April.\n\nThe board has decided to have the module developed in-house rather than by an external software firm. Justify the board's decision.",
+    "points": [
+      {
+        "text": "The fund's own developers already know the membership system that the module must work with, whereas an external firm would first have to learn it",
+        "marks": 1
+      },
+      {
+        "text": "The benefit rules change every April, and in-house developers can make each change when it is needed, without negotiating and paying for a new contract each time",
+        "marks": 1
+      },
+      {
+        "text": "Members' claims, which show the health services they used, and their bank account details stay within the fund, handled only by its own staff under its own security controls rather than shared with a third party",
+        "marks": 1
+      }
+    ],
+    "model": "The fund's six developers built the membership system, so they already understand the system the new module must work with. An external firm would have to learn it first, which adds time and cost.\n\nThe benefit rules change every April. In-house developers can update the module each time the rules change, as soon as the change is needed, instead of the fund negotiating and paying for new work under a contract every year.\n\nThe module will hold members' claims, which show the health services they have used, and their bank account details. Developing it in-house means only the fund's own staff handle that data, under its own security controls, so it isn't exposed to a third party's staff or systems.",
+    "mistake": "Justify needs reasons tied to the scenario. 'In-house gives more control' earns little unless it says what the fund controls, such as the April rule changes or members' claims and bank details, and why that matters here.",
     "source": "textbook"
   },
   {
@@ -183,6 +235,32 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o2-kk03-003",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Ironpot Fresh, a Wodonga online grocery delivery company with 140 staff, runs its development work and its live customer database on the same server. The database holds customers' names, home addresses, phone numbers and order histories. So that developers can work from home, the server accepts logins from anywhere on the internet with only a username and password.\n\nExplain how these two weaknesses together put customers' personal data at risk.",
+    "points": [
+      {
+        "text": "Because logins are accepted from anywhere with only a password, anyone who guesses, steals or tricks a developer out of their password can log in from outside the company",
+        "marks": 1
+      },
+      {
+        "text": "Because development and the live database share one server, getting into the development environment also reaches the live customer data",
+        "marks": 1
+      },
+      {
+        "text": "States the consequence for customers: their names, home addresses, phone numbers and order histories could be copied, changed or deleted, exposing them to scams and damaging their trust in the company",
+        "marks": 1
+      }
+    ],
+    "model": "Because the server accepts logins from anywhere with only a username and password, anyone who guesses or steals a developer's password, for example through a fake login email, can log in from outside the company with nothing else to stop them.\n\nBecause the development work and the live customer database share the same server, logging in to do development work also reaches the live customer records. Together, one stolen password could let an attacker copy, change or delete customers' names, home addresses, phone numbers and order histories. Customers could then be targeted by scams that use their real details, and they would lose trust in Ironpot Fresh.",
+    "mistake": "Describing each weakness on its own misses 'together'. Show how the first gives an attacker a way in, and how the second means that way in leads straight to live customer data.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o2-kk04-001",
     "kk": [
       "U4O2-KK04"
@@ -235,6 +313,36 @@
       }
     ],
     "model": "Bottlebrush Software should fit a swipe-card lock to the storeroom so that only authorised staff can enter, keeping visitors and cleaners away from the servers. It should also keep the backup drives in a locked safe or at a separate site, so that a single theft, fire or flood in the storeroom can't take both the servers and their backups.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk04-003",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Tarilta Homewares, a Castlemaine online homewares retailer with 200 staff, keeps its web store's code in a version control system. Any of its five developers can merge a change into the live code without anyone else checking it. Last month, an attacker who had stolen one developer's password added code that copied customers' card details to an outside server. The change went live straight away and wasn't noticed for a week.\n\n1. Explain how requiring a code review before every merge could have prevented this harm.\n2. Explain how the version control system helps Tarilta Homewares now that the attack has been found.",
+    "points": [
+      {
+        "text": "Part 1: a second developer must examine and approve each change before it is merged, so code sending card details to an outside server would very likely have been noticed",
+        "marks": 1
+      },
+      {
+        "text": "Part 1: the change would have been blocked before going live, so no card details would have been copied; holding one developer's account, the attacker couldn't approve their own change",
+        "marks": 1
+      },
+      {
+        "text": "Part 2: the version history shows exactly which lines were added, from which account and when, so the team can find all of the attacker's code, know which account was compromised and work out which week of orders was exposed",
+        "marks": 1
+      },
+      {
+        "text": "Part 2: the team can roll the web store back to the last version before the malicious change, or revert that change, removing the attacker's code quickly",
+        "marks": 1
+      }
+    ],
+    "model": "1. If every merge needed a code review, a second developer would have had to read and approve the attacker's change before it reached the live store. Code that sends customers' card details to an outside server is unusual and would very likely have been spotted. The attacker held only one developer's account, so they couldn't approve their own change, and it would have been blocked before any card details were copied.\n\n2. The version control system recorded the change. Its history shows exactly which lines were added, from which developer's account and when, so the team can find every part of the attacker's code, lock the compromised account and work out which week of orders was exposed. The team can also roll the web store back to the last version before the change, or revert that change, removing the malicious code quickly.",
+    "mistake": "Version control doesn't stop a malicious change; it records it. Credit comes from saying what the history shows and what rolling back achieves.",
     "source": "textbook"
   },
   {
@@ -390,6 +498,115 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o2-kk05-003",
+    "kk": [
+      "U4O2-KK05",
+      "U3O2-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "The Shire of Wandarrie, a council with 380 staff, has an app that residents use to register their pets. The council now wants the app to update each pet's record held by an outside microchip registry, sending the owner's name, address and phone number. This new feature is process 2 and its flows in the DFD. The development team completed a threat model for the app last year.\n\nExplain why the team must update its threat model before building this feature. In your answer, identify one new threat the feature introduces and a control that would mitigate it.",
+    "points": [
+      {
+        "text": "Explains why the model must be updated, e.g. the feature adds a new process and new flows, including owners' personal details leaving the council for an outside organisation, which last year's threat model never considered; or updating it before building lets controls be designed in, which is cheaper than changing finished code",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a new threat tied to process 2 or its flows, e.g. owner_details intercepted on the way to the registry; an attacker posing as the registry to collect owners' details or return a false update_status",
+        "marks": 1
+      },
+      {
+        "text": "Describes a control that mitigates the threat identified, e.g. encrypting owner_details in transit; confirming the registry's identity before any details are sent; sending only the fields the registry needs",
+        "marks": 1
+      }
+    ],
+    "model": "Last year's threat model covered only the elements the app had then. The new feature adds process 2, the microchip registry as a new external entity, and three new flows. For the first time residents' names, addresses and phone numbers leave the council for an outside organisation. The existing model never considered these elements, so their threats have not been identified or mitigated. Updating the model before building means any controls can be designed in, rather than added to finished code.\n\nOne new threat is that `owner_details` could be intercepted as they travel over the internet to the microchip registry, exposing pet owners' personal details. The team should mitigate this by encrypting `owner_details` in transit, so intercepted details can't be read.",
+    "mistake": "A threat that isn't tied to the new feature, such as 'hackers could attack the app', earns little. Name the new flow, process or entity and what could happen to it.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "wandarrie-dfd",
+        "kind": "dfd",
+        "title": "DFD (part): Shire of Wandarrie pet registration",
+        "caption": "Process 2 and its flows are the new feature.",
+        "width": 640,
+        "height": 400,
+        "nodes": [
+          {
+            "id": "owner",
+            "type": "entity",
+            "label": "Pet owner",
+            "x": 104,
+            "y": 72
+          },
+          {
+            "id": "registry",
+            "type": "entity",
+            "label": "Microchip registry",
+            "x": 536,
+            "y": 72
+          },
+          {
+            "id": "p1",
+            "type": "process",
+            "label": "Register pet",
+            "number": "1",
+            "x": 176,
+            "y": 224
+          },
+          {
+            "id": "p2",
+            "type": "process",
+            "label": "Update chip record",
+            "number": "2",
+            "x": 472,
+            "y": 224,
+            "w": 112
+          },
+          {
+            "id": "d1",
+            "type": "store",
+            "label": "Registrations",
+            "number": "D1",
+            "x": 176,
+            "y": 348
+          }
+        ],
+        "flows": [
+          {
+            "from": "owner",
+            "to": "p1",
+            "label": "registration_details"
+          },
+          {
+            "from": "p1",
+            "to": "d1",
+            "label": "registration_record"
+          },
+          {
+            "from": "d1",
+            "to": "p2",
+            "label": "registration_record"
+          },
+          {
+            "from": "p2",
+            "to": "registry",
+            "label": "owner_details"
+          },
+          {
+            "from": "registry",
+            "to": "p2",
+            "label": "update_status",
+            "labelAt": {
+              "x": 558,
+              "y": 150
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u4o2-kk06-001",
     "kk": [
       "U4O2-KK06"
@@ -417,6 +634,71 @@
     ],
     "model": "Criterion 1: Every change to the parcel-tracking system's code is reviewed and approved by a second developer before it is merged. Evidence: the repository's merge history for the last three months, checked to confirm that each merged change was approved by a developer other than its author.\n\nCriterion 2: Test environments contain no identifiable customer names, addresses or phone numbers. Evidence: an inspection of a sample of records in the test database, confirming that the customer details are made up or de-identified rather than copied from the live system.",
     "mistake": "Criteria such as 'the system is secure' can't be checked, and evidence such as 'ask the developers' is opinion. Name a specific practice, and a record, log or test that shows whether it happens.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk06-002",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Kunzea Home Loans, a Warragul lender, has five developers who maintain its loan application website. Applicants upload payslips and bank statements through the website. The IT manager, Petra, has drafted two criteria for evaluating the security of the team's development practices:\n\n- **Criterion 1**: Our developers take security seriously.\n- **Criterion 2**: The loan application website has a secure login page.\n\nExplain why each criterion is unsuitable for evaluating the security of Kunzea Home Loans' development practices.",
+    "points": [
+      {
+        "text": "Criterion 1 is an opinion that names no development practice, so it isn't specific or measurable",
+        "marks": 1
+      },
+      {
+        "text": "No record, log or test could show whether criterion 1 is met, so the evaluation couldn't reach a reliable judgement, e.g. the developers could believe they take security seriously while sharing one login",
+        "marks": 1
+      },
+      {
+        "text": "Criterion 2 judges a feature of the finished website, not the practices used to develop it",
+        "marks": 1
+      },
+      {
+        "text": "The login page could be secure while the practices are weak, e.g. a password written in the code or real applicants' payslips used for testing, so meeting criterion 2 wouldn't show that the practices are secure",
+        "marks": 1
+      }
+    ],
+    "model": "Criterion 1 is an opinion. It doesn't name any development practice, so there is nothing specific to check. No record, log or test could show whether it is met: the five developers could all believe they take security seriously while sharing one repository login. The evaluation couldn't reach a reliable judgement.\n\nCriterion 2 judges the finished website, not how Kunzea Home Loans develops it. The login page could be secure while the team's practices are weak, for example if a database password is written into the code, or if real applicants' payslips and bank statements are copied into the test environment. Meeting criterion 2 wouldn't show that the development practices are secure.",
+    "mistake": "Calling a criterion 'too vague' earns only part of the marks. Explain the consequence: no evidence could show whether it is met. Criterion 2 can look acceptable because it mentions security, but it judges the product, not the practices used to build it.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk06-003",
+    "kk": [
+      "U4O2-KK06",
+      "U4O2-KK03"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Hakea Legal Systems, a Ballarat company with 14 developers, builds case-management software that law firms use to store confidential client files. In the past year:\n\n- a contractor copied part of the source code three weeks after her contract ended, using her repository account, which was still active\n- a developer merged a change that switched off the password check on the software's administrator page for testing, and the change reached the live software unnoticed for two weeks.\n\nThe security officer, Aiko, will evaluate the team's development practices against these two criteria:\n\n- **A**: Repository access is removed on the day each staff member or contractor leaves.\n- **B**: Every change is approved by a developer other than its author before it is merged.\n\nJustify Aiko's choice of criteria.",
+    "points": [
+      {
+        "text": "A is linked to a real risk at Hakea: the former contractor's still-active account let her copy confidential source code after she left",
+        "marks": 1
+      },
+      {
+        "text": "A can be checked with evidence, e.g. comparing each person's leaving date with the date their account was disabled in the access logs",
+        "marks": 1
+      },
+      {
+        "text": "B is linked to a real risk at Hakea: a second developer reviewing the change would be likely to notice the switched-off password check before it reached the live software",
+        "marks": 1
+      },
+      {
+        "text": "B can be checked with evidence, e.g. the repository's merge history shows who approved each change",
+        "marks": 1
+      },
+      {
+        "text": "Both criteria judge how the software is developed rather than features of the finished software, so they suit an evaluation of development practices",
+        "marks": 1
+      }
+    ],
+    "model": "Criterion A targets a weakness that has already caused harm at Hakea. The contractor's account stayed active after her contract ended, and she used it to copy source code for software that handles law firms' confidential files. A is also checkable: Aiko can compare each person's leaving date in staff and contract records with the date their account was disabled in the access logs.\n\nCriterion B targets the second incident. The change that switched off the administrator password check was merged by its author without anyone else seeing it. A second developer reviewing it would be likely to notice the missing check before it reached the live software. B is also checkable, because the repository's merge history records who approved each change, so Aiko can confirm that no one approved their own work.",
+    "mistake": "Saying what each criterion checks isn't a justification. Link each criterion to the incident at Hakea that shows why it matters, and say what evidence would show whether it is met.",
     "source": "textbook"
   },
   {
@@ -481,6 +763,41 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o2-kk07-003",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK09"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Riflebird Ticketing, a Melbourne company covered by the Privacy Act 1988 (Cth), sells concert tickets through its website and stores customers' names, email addresses, phone numbers and purchase histories. A review of its development practices found that:\n\n- administrator accounts on the web server are protected by a password only\n- the web server's operating system is missing nine months of security updates\n- the customer database is backed up weekly, but no one has ever tried restoring a backup.\n\nThe operations manager says there is no point adopting the Essential Eight, because it is not law. Justify why Riflebird Ticketing should adopt the Essential Eight, with reference to the review's findings.",
+    "points": [
+      {
+        "text": "Although the Essential Eight is voluntary guidance, the Privacy Act requires Riflebird to take reasonable steps to protect the personal information it holds, and the Essential Eight gives it a recognised, prioritised set of strategies for taking those steps",
+        "marks": 1
+      },
+      {
+        "text": "Multi-factor authentication for the administrator accounts: a stolen or guessed password alone would no longer let an attacker into the web server and customer database",
+        "marks": 1
+      },
+      {
+        "text": "Patching operating systems: updating the web server closes the known vulnerabilities left open by nine months without updates, which attackers could use to break in",
+        "marks": 1
+      },
+      {
+        "text": "Regular backups, with restores tested: the weekly backups may not work, and testing them means customer data could be recovered after ransomware or an accidental deletion",
+        "marks": 1
+      },
+      {
+        "text": "Links the strategies to Riflebird's obligations: a breach likely to cause serious harm would have to be reported to the affected customers and the Australian Information Commissioner, damaging their trust",
+        "marks": 1
+      }
+    ],
+    "model": "The Essential Eight isn't law, but the Privacy Act requires Riflebird to take reasonable steps to protect the customers' personal information it holds. The Act doesn't list which controls to use, and the Essential Eight gives a recognised, prioritised set of strategies that match the weaknesses the review found.\n\nMulti-factor authentication would protect the administrator accounts, so a stolen or guessed password alone could no longer be used to reach the web server and the customer database. Patching operating systems would close the known vulnerabilities that have built up in the nine months since the web server was last updated, which attackers look for. Regular backups, with restores tested, would mean that customer data could actually be recovered after ransomware or an accidental deletion; at present no one knows whether the weekly backups work.\n\nTogether these make a breach of customers' details much less likely. A breach likely to cause serious harm would have to be reported to the affected customers and the Australian Information Commissioner, which would damage their trust in Riflebird.",
+    "mistake": "Calling the Essential Eight 'best practice' doesn't justify adopting it. Name each strategy, the finding at Riflebird it fixes, and the harm it prevents.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o2-kk08-001",
     "kk": [
       "U4O2-KK08"
@@ -508,6 +825,58 @@
     ],
     "model": "Over-reliance on AI-generated code: the developers paste in functions they haven't reviewed, so the app may contain errors or security vulnerabilities that expose gym members' personal details. Galah Creek remains responsible for that code, and the gyms and their members carry the risk without knowing it.\n\nUsing real member records for testing: members gave their details to join a gym, not to have them used to test software. Test environments usually have weaker controls, so the records are more likely to be exposed. Made-up test data would avoid this harm.",
     "mistake": "Stating that a practice is 'unethical' without saying who is harmed, and how, earns little. Name the stakeholder, such as the gym members, and the harm to them.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk08-002",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Two years ago Oskar, a developer at Eurabbie Plumbing Supplies in Geelong, copied a date-checking function from a public code repository into the company's online ordering app. He deleted the original author's comments and didn't record where the function came from. This month, a security flaw was announced in that function, and its author released a fixed version.\n\nExplain why Oskar's failure to acknowledge the reused function is an ethical issue. Refer to the security flaw in your answer.",
+    "points": [
+      {
+        "text": "Deleting the author's comments presents someone else's work as Oskar's own and denies the author credit, which is dishonest to the author and to his employer",
+        "marks": 1
+      },
+      {
+        "text": "With no record of the function's source, the team may not realise that the announced flaw affects the ordering app, or know that a fixed version exists",
+        "marks": 1
+      },
+      {
+        "text": "The app may therefore stay vulnerable, putting customers' orders and details at risk without their knowledge",
+        "marks": 1
+      }
+    ],
+    "model": "By deleting the author's comments, Oskar presents the function as his own work. The author loses the credit, and Eurabbie Plumbing Supplies is misled about who wrote its code.\n\nBecause Oskar didn't record where the function came from, no one at Eurabbie can link the announced flaw to the ordering app or know that a fixed version exists. The app may stay vulnerable for months, and the customers whose orders and details it holds carry that risk without knowing it.",
+    "mistake": "Calling it 'plagiarism' earns only part of the marks. Explain the harm: here, no one can link the announced flaw to the app, so customers stay exposed.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk08-003",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "A fault in the new invoicing module at a Horsham farm supplies business emailed each of 40 customers an invoice belonging to a different customer. Each invoice showed that customer's name, address, phone number and purchase history. The developer, Freya, has fixed the fault. The manager wants to say nothing to the customers whose invoices were sent to someone else, because the fault is fixed and telling them could harm the business's reputation.\n\nJustify why the business should tell those customers what happened.",
+    "points": [
+      {
+        "text": "Fixing the fault stops new errors but doesn't undo the disclosure: 40 customers' details are already in other people's inboxes",
+        "marks": 1
+      },
+      {
+        "text": "Once told, the affected customers can protect themselves, e.g. by being wary of scam calls or emails that use their details",
+        "marks": 1
+      },
+      {
+        "text": "Hiding the mistake is dishonest to customers who trusted the business with their details; telling them openly is more likely to keep their trust than having them find out later",
+        "marks": 1
+      }
+    ],
+    "model": "Fixing the fault stops it happening again, but it doesn't undo what has already happened: 40 customers' names, addresses, phone numbers and purchase histories are in other people's inboxes. Those customers are the ones at risk, and only if they are told can they protect themselves, for example by being wary of scam calls or emails that quote their details.\n\nSaying nothing would also be dishonest. The customers trusted the business with their details, and if they later found out that the business had hidden the mistake, they would lose far more trust in it than if they had been told openly.",
+    "mistake": "Saying 'it is the right thing to do' doesn't justify the decision, and neither does 'the law says so', because the scenario doesn't say whether a notification law covers this business. Give reasons tied to the scenario: the details are already exposed, and only customers who are told can protect themselves.",
     "source": "textbook"
   },
   {
@@ -579,6 +948,36 @@
         "indexBase": 0
       }
     ]
+  },
+  {
+    "id": "s-u4o2-kk09-003",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Sunita is one of six developers at a Sale company that builds booking software for camping grounds. All six developers can log in to the live booking database with full rights. Last month Sunita ran a clean-up script, meant for the test database, against the live database by mistake, and it deleted 2,000 upcoming bookings. The latest backup was a week old, so staff spent three days re-entering bookings from customers' emails.\n\nExplain how two measures would reduce the risk of this happening again. For each measure, state whether it reduces the likelihood or the impact of a repeat.",
+    "points": [
+      {
+        "text": "Measure 1 is specific to the scenario, e.g. remove developers' direct access to the live database so that only an approved release process can change it, or give the live and test databases separate logins so that a script aimed at the test database can't connect to the live one",
+        "marks": 1
+      },
+      {
+        "text": "Explains how measure 1 reduces the risk and classifies it correctly, e.g. a script run by mistake can no longer change live bookings, which reduces the likelihood",
+        "marks": 1
+      },
+      {
+        "text": "Measure 2 is specific to the scenario, e.g. automatic backups of the live database at least nightly, with restores tested",
+        "marks": 1
+      },
+      {
+        "text": "Explains how measure 2 reduces the risk and classifies it correctly, e.g. deleted bookings could be restored with at most a day's loss instead of three days of re-entry, which reduces the impact",
+        "marks": 1
+      }
+    ],
+    "model": "Measure 1: remove the developers' direct access to the live booking database, so that changes reach it only through an approved release process. A clean-up script run by mistake would then be refused by the live database, so this reduces the likelihood of bookings being deleted again.\n\nMeasure 2: back up the live database automatically every night, and test each month that a backup can be restored. If bookings were deleted again, they could be restored from the previous night's backup, losing at most a day's bookings instead of a week's, and staff wouldn't spend three days re-entering them. This reduces the impact of a repeat.",
+    "mistake": "'Be more careful' isn't a measure, and backing up more often reduces the impact of a repeat, not its likelihood. Say what changes, and classify each measure correctly.",
+    "source": "textbook"
   },
   {
     "id": "s-u4o2-kk10-001",
@@ -665,6 +1064,37 @@
       }
     ],
     "model": "The co-operative should adopt a rule that developers never paste real customer records into AI tools, and use made-up or de-identified records when they need help finding the cause of an error. At present, customers' account details are being disclosed to an outside company, where they may be stored and reused beyond the co-operative's control. This exposes customers to harm and breaks their trust.\n\nTo check that the rule is followed, the co-operative could provide an approved AI tool and review its prompt logs each month, confirming that no real customer names or account numbers appear in them.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk10-003",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK08"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Sittella Insurance, a Ballarat insurer with 600 staff, has 20 developers who use an AI coding assistant. Last month a junior developer committed an AI-generated function without reading it. The function let logged-in customers view other customers' claims, and a customer reported the flaw two weeks after release. The team leader wants to ban AI coding assistants. The developers say the assistant saves each of them several hours a week, and the team is behind schedule on its new claims app.\n\nRecommend whether Sittella Insurance should ban AI coding assistants or allow them with rules. Justify your recommendation.",
+    "points": [
+      {
+        "text": "Makes one clear recommendation: ban the assistants, or allow them with rules (either can earn full marks when justified)",
+        "marks": 1
+      },
+      {
+        "text": "Links the recommendation to the incident: the flaw reached customers because AI-generated code was committed unread and wasn't reviewed before release",
+        "marks": 1
+      },
+      {
+        "text": "Explains how the chosen option stops this happening again, e.g. a rule that every AI-generated change is read, tested and approved by a second developer before it is merged; or, for a ban, blocking the assistant and still reviewing every change, since human-written code can contain the same flaw",
+        "marks": 1
+      },
+      {
+        "text": "Weighs the other detail in the scenario, e.g. allowing the assistant with rules keeps the hours saved while the team is behind schedule; or a ban accepts slower work because junior developers can't yet check AI output reliably",
+        "marks": 1
+      }
+    ],
+    "model": "Sittella Insurance should allow AI coding assistants, with rules. The flaw didn't happen simply because an assistant was used. It happened because a junior developer committed code without reading it, and nobody reviewed it before release. A ban wouldn't fix that, because a developer's own code could contain the same flaw.\n\nThe rules should require every AI-generated function to be marked in a comment, read and understood by the developer who commits it, and tested and approved by a second developer before it is merged, with extra care for code that controls which customers can see which claims. Developers must also never paste customer data into the assistant.\n\nAllowing the assistant with these rules keeps the several hours a week each developer saves, which the team needs while it is behind schedule on the claims app, and it closes the gap that let the flaw reach customers.",
+    "mistake": "Listing both options without choosing, or choosing without a reason, doesn't answer a 'recommend' question. Commit to one option and tie each reason to the incident and to the schedule.",
     "source": "textbook"
   }
 ]

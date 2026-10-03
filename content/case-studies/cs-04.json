@@ -1,0 +1,789 @@
+{
+  "id": "cs-04",
+  "title": "Tarwin Valley Hire: PlantPass",
+  "insert": "**Tarwin Valley Hire**\n\nTarwin Valley Hire hires out equipment to builders, farmers and the public. It has its head office in Traralgon, 15 branches across Gippsland and Melbourne's south-east, and 410 staff. It owns about 12 000 items, from ladders and power tools to generators and excavators. Trade customers (businesses with an account) make about 70 per cent of its hires.\n\nIts goal is to be the safest and most dependable hire company in eastern Victoria. It has set two objectives:\n\n- from 1 July 2027, hire out no item that has failed its latest inspection or is due for a service\n- within two years of a new system going live, have trade customers make 40 per cent of their bookings online.\n\n**Current situation**\n\nAfter each hire, a mechanic inspects the item and hangs a paper tag on it marked *pass* or *fail*. Each engine-powered item also has an hour meter and a paper service card. It must be serviced after a set number of hours of use, its service interval (such as 250 hours). Counter staff should check the tag and the card before every hire, but at busy times they often don't. Last year, 212 hires were of items overdue for a service. In March, a hydraulic hose burst on an overdue mini excavator, injuring its operator. From July 2027, Tarwin Valley's insurer will require it to show any item's inspection and service history within one day.\n\nTrade customers book by phone. Many have asked to book online, which Tarwin Valley believes would win it more trade customers.\n\n**The proposed solution: PlantPass**\n\n- A **counter app** on each branch's counter computers. Staff scan an item's barcode to hire it out or take it back. When an engine-powered item comes back, staff type the reading on its hour meter, to one decimal place.\n- A **workshop app** on tablets, where mechanics record inspections (pass or fail) and services.\n- A **trade portal** where trade customers log in to book items for pick-up and see their current and past hires.\n\nPlantPass will refuse to hire out an item unless it passed its most recent inspection, and will refuse an engine-powered item unless the hours used since its last service, plus 8 hours for each day of the hire, are less than its service interval.\n\nPayments and invoices stay in Tarwin Valley's accounts system and are outside PlantPass's scope. PlantPass must be running at every branch by 1 July 2027. The budget is $950 000, and Tarwin Valley's IT team of nine is building it.\n\n**The project team**\n\n- **Thu Pham**, project manager (project plan, Figure 2)\n- **Callum Fraser**, systems analyst (draft use case diagram, Figure 1, and draft object description, Figure 3)\n- **Zainab Qureshi**, developer (counter app and workshop app)\n- **Marco Bianchi**, developer (trade portal)\n- **Kirra Anderson**, tester\n- **Joel Nakamura**, cyber security officer\n- **Pauline Kerr**, head of operations and project sponsor\n\n**Project files and the development environment**\n\nJoel has noted these practices.\n\n- Project documents are in one shared folder at head office, named like `SRS new.docx`, `SRS new (2) Callum edits.docx` and `counter screens FINAL.pdf`. Team members have worked from out-of-date copies. Documents from a project that ended in 2022 are mixed in, and the folder isn't backed up.\n- PlantPass's code is in a repository on Marco's personal account with an online code hosting service. Marco adds other developers himself; no one else at Tarwin Valley can manage it.\n- The trade portal's test server can be reached from the internet, so three trade customers can try the portal. Its database still uses the default administrator password supplied with the database software.\n- Developers post the test servers' passwords in the project's group chat, which includes all 15 branch managers.\n- Logging on the development and test servers was turned off in June to save disk space.\n- Two laptops used by a developer who left in August were given, unwiped, to counter staff at Sale and Bairnsdale. They still hold PlantPass's code and the developer's saved passwords.\n- The development and test databases hold only made-up customers and items that Kirra created.\n\n*Tarwin Valley Hire and everyone named here are fictional.*",
+  "figures": [
+    {
+      "id": "plantpass-usecase",
+      "kind": "usecase",
+      "title": "Figure 1: Draft use case diagram for PlantPass",
+      "caption": "Drawn by Callum Fraser, systems analyst.",
+      "width": 780,
+      "height": 610,
+      "system": {
+        "label": "PlantPass",
+        "x": 390,
+        "y": 305,
+        "w": 440,
+        "h": 562
+      },
+      "actors": [
+        {
+          "id": "counter",
+          "label": "Counter staff",
+          "x": 72,
+          "y": 158
+        },
+        {
+          "id": "mechanic",
+          "label": "Mechanic",
+          "x": 72,
+          "y": 440
+        },
+        {
+          "id": "customer",
+          "label": "Trade customer",
+          "x": 700,
+          "y": 470
+        }
+      ],
+      "useCases": [
+        {
+          "id": "hire",
+          "label": "Hire out item",
+          "x": 270,
+          "y": 85
+        },
+        {
+          "id": "check",
+          "label": "Check item is safe to hire",
+          "x": 510,
+          "y": 175
+        },
+        {
+          "id": "return",
+          "label": "Return item",
+          "x": 270,
+          "y": 230
+        },
+        {
+          "id": "meter",
+          "label": "Record hour meter reading",
+          "x": 510,
+          "y": 310
+        },
+        {
+          "id": "inspect",
+          "label": "Record inspection",
+          "x": 270,
+          "y": 390
+        },
+        {
+          "id": "service",
+          "label": "Record service",
+          "x": 270,
+          "y": 495
+        },
+        {
+          "id": "book",
+          "label": "Book item online",
+          "x": 510,
+          "y": 395
+        },
+        {
+          "id": "history",
+          "label": "View current and past hires",
+          "x": 510,
+          "y": 470
+        },
+        {
+          "id": "pay",
+          "label": "Pay invoice online",
+          "x": 510,
+          "y": 545
+        }
+      ],
+      "links": [
+        {
+          "from": "counter",
+          "to": "hire",
+          "type": "association"
+        },
+        {
+          "from": "counter",
+          "to": "return",
+          "type": "association"
+        },
+        {
+          "from": "check",
+          "to": "hire",
+          "type": "extends"
+        },
+        {
+          "from": "meter",
+          "to": "return",
+          "type": "extends"
+        },
+        {
+          "from": "mechanic",
+          "to": "inspect",
+          "type": "association"
+        },
+        {
+          "from": "mechanic",
+          "to": "service",
+          "type": "association"
+        },
+        {
+          "from": "customer",
+          "to": "book",
+          "type": "association"
+        },
+        {
+          "from": "customer",
+          "to": "history",
+          "type": "association"
+        },
+        {
+          "from": "customer",
+          "to": "pay",
+          "type": "association"
+        }
+      ]
+    },
+    {
+      "id": "plantpass-gantt",
+      "kind": "gantt",
+      "title": "Figure 2: Project plan for PlantPass",
+      "caption": "Drawn up by Thu Pham, project manager. Durations are in weeks.",
+      "unit": "week",
+      "tasks": [
+        {
+          "id": "A",
+          "name": "Analyse requirements and write SRS",
+          "duration": 3,
+          "dependsOn": []
+        },
+        {
+          "id": "B",
+          "name": "Design counter and workshop apps",
+          "duration": 3,
+          "dependsOn": [
+            "A"
+          ]
+        },
+        {
+          "id": "C",
+          "name": "Design trade portal",
+          "duration": 2,
+          "dependsOn": [
+            "A"
+          ]
+        },
+        {
+          "id": "D",
+          "name": "Develop counter and workshop apps",
+          "duration": 6,
+          "dependsOn": [
+            "B"
+          ]
+        },
+        {
+          "id": "E",
+          "name": "Develop trade portal",
+          "duration": 5,
+          "dependsOn": [
+            "C"
+          ]
+        },
+        {
+          "id": "F",
+          "name": "Convert paper service records",
+          "duration": 4,
+          "dependsOn": [
+            "B"
+          ]
+        },
+        {
+          "id": "G",
+          "name": "Alpha testing",
+          "duration": 2,
+          "dependsOn": [
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "H",
+          "name": "Beta testing at Traralgon and Sale",
+          "duration": 2,
+          "dependsOn": [
+            "F",
+            "G"
+          ]
+        },
+        {
+          "id": "I",
+          "name": "Train branch staff and mechanics",
+          "duration": 2,
+          "dependsOn": [
+            "D"
+          ]
+        },
+        {
+          "id": "J",
+          "name": "Go-live at all branches",
+          "duration": 0,
+          "dependsOn": [
+            "H",
+            "I"
+          ],
+          "milestone": true
+        }
+      ],
+      "showCriticalPath": false
+    },
+    {
+      "id": "engine-item-object",
+      "kind": "object",
+      "title": "Figure 3: Draft object description for the EngineItem class",
+      "caption": "Drawn by Callum Fraser, systems analyst.",
+      "name": "EngineItem",
+      "properties": [
+        {
+          "name": "itemCode",
+          "type": "String",
+          "description": "Code on the item's barcode label, e.g. TV-GEN-00417"
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "description": "e.g. 8 kVA generator"
+        },
+        {
+          "name": "dailyRate",
+          "type": "Floating point",
+          "description": "Hire charge per day, in dollars"
+        },
+        {
+          "name": "homeBranch",
+          "type": "String",
+          "description": "Branch that owns the item"
+        },
+        {
+          "name": "onHire",
+          "type": "Boolean",
+          "description": "TRUE while the item is out on hire"
+        },
+        {
+          "name": "passedInspection",
+          "type": "Boolean",
+          "description": "TRUE if the item passed its most recent inspection"
+        },
+        {
+          "name": "meterHours",
+          "type": "Floating point",
+          "description": "Hour meter reading when the item was last returned"
+        },
+        {
+          "name": "hoursAtLastService",
+          "type": "Floating point",
+          "description": "Hour meter reading at the item's last service"
+        },
+        {
+          "name": "serviceInterval",
+          "type": "Integer",
+          "description": "Hours of use allowed between services, e.g. 250"
+        }
+      ],
+      "methods": [
+        {
+          "name": "hireOut()",
+          "description": "Sets onHire to TRUE"
+        },
+        {
+          "name": "recordReturn()",
+          "description": "Sets onHire to FALSE, and passedInspection to FALSE until the item is inspected"
+        },
+        {
+          "name": "recordInspection(result)",
+          "description": "Sets passedInspection to result: TRUE for a pass, FALSE for a fail"
+        },
+        {
+          "name": "recordMeterReading(reading)",
+          "description": "Stores reading in meterHours"
+        },
+        {
+          "name": "recordService()",
+          "description": "Sets hoursAtLastService to meterHours"
+        },
+        {
+          "name": "hoursSinceService()",
+          "description": "Returns meterHours − hoursAtLastService"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "cs-04-q01",
+      "kk": [
+        "U3O2-KK01"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Organisations undertake software development projects to solve a problem, meet a need or take up an opportunity. Using the insert, explain one problem and one opportunity that have led Tarwin Valley Hire to develop PlantPass.",
+      "points": [
+        {
+          "text": "Identifies a problem from the insert: items that are overdue for a service are being hired out, because the checks of the paper tag and service card depend on counter staff, who often skip them at busy times (212 such hires last year).",
+          "marks": 1
+        },
+        {
+          "text": "Explains why it is a problem for Tarwin Valley: an overdue machine can fail and hurt someone, as when the mini excavator's hydraulic hose burst and injured its operator in March, and Tarwin Valley can't meet its objective of hiring out no item that is due for a service.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies the opportunity: trade customers, who make about 70 per cent of hires, have asked to book online, which they can't do now.",
+          "marks": 1
+        },
+        {
+          "text": "Explains why it is an opportunity: phone bookings still work, but offering online booking through the trade portal is a chance to win more trade customers and to meet the objective of trade customers making 40 per cent of their bookings online.",
+          "marks": 1
+        }
+      ],
+      "model": "One problem is that items overdue for a service are being hired out. Counter staff are meant to check each item's paper tag and service card before every hire, but at busy times they don't, and last year 212 hires were of items overdue for a service. This is a problem because an overdue machine can fail and hurt someone, as happened in March when a hydraulic hose burst on an overdue mini excavator and injured its operator. PlantPass addresses it by refusing to hire out any item that isn't safe to hire.\n\nOne opportunity is online booking. Trade customers, who make about 70 per cent of Tarwin Valley's hires, can book only by phone, and many have asked to book online. Phone bookings still work, but offering online booking through the trade portal is a chance to win more trade customers, and it supports the objective of having trade customers make 40 per cent of their bookings online.",
+      "mistake": "A problem is something going wrong now; an opportunity is a chance to do better even though nothing is broken. Online booking is an opportunity, because phone bookings still work. The insurer's new requirement is best described as a need, a new obligation, not a problem.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-04-q02",
+      "kk": [
+        "U3O2-KK08",
+        "U3O2-KK07"
+      ],
+      "commandTerm": "explain",
+      "marks": 5,
+      "prompt": "Callum's draft use case diagram (Figure 1) has two faults.\n\n1. One use case is outside PlantPass's scope. Identify it, and explain how the insert shows that it is outside the scope.\n2. One of the two <<extends>> relationships should be an <<includes>> relationship. Identify it, explain why using the insert, and describe how Callum should redraw it.\n3. Explain why the other <<extends>> relationship is correct.",
+      "points": [
+        {
+          "text": "Identifies *Pay invoice online* as the use case outside the scope.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that the insert says payments and invoices stay in Tarwin Valley's accounts system and are outside PlantPass's scope, so the use case (and the Trade customer's association with it) should be removed.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies the relationship between *Check item is safe to hire* and *Hire out item*, and explains that it must be <<includes>> because PlantPass refuses to hire out any item that isn't safe, so the check happens every time an item is hired out, not only under a condition.",
+          "marks": 1
+        },
+        {
+          "text": "Describes the redrawing: a dashed arrow from *Hire out item* to *Check item is safe to hire*, labelled <<includes>>.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that *Record hour meter reading* correctly extends *Return item*, because staff enter a reading only when the returned item is engine-powered: it is extra behaviour added to some returns under a condition.",
+          "marks": 1
+        }
+      ],
+      "model": "1. *Pay invoice online* is outside the scope. The insert says payments and invoices stay in Tarwin Valley's accounts system and are outside PlantPass's scope, so Callum should remove this use case and the Trade customer's association with it.\n\n2. The relationship between *Check item is safe to hire* and *Hire out item* should be <<includes>>. PlantPass refuses to hire out any item that isn't safe to hire, so it runs the check every time an item is hired out. The check is always part of hiring out, not something that happens only under a condition. Callum should redraw it as a dashed arrow from *Hire out item* to *Check item is safe to hire*, labelled <<includes>>.\n\n3. *Record hour meter reading* correctly extends *Return item*. Staff enter a reading only when the item that comes back is engine-powered, so recording the reading is extra behaviour added to some returns under a condition, not to every return.",
+      "mistake": "Changing the label isn't enough. An <<includes>> arrow points from the base use case to the one it includes, but an <<extends>> arrow points from the extending use case to the base, so Callum must also reverse the arrow.",
+      "source": "exam-convention",
+      "figureRefs": [
+        "plantpass-usecase"
+      ]
+    },
+    {
+      "id": "cs-04-q03",
+      "kk": [
+        "U3O1-KK05",
+        "U4O1-KK02"
+      ],
+      "stem": "Pauline wants PlantPass to report how many times items in each of Tarwin Valley's 60 item categories (such as generators and scissor lifts) were hired at each of its 15 branches last month. Which data structure is best for holding these counts while the report is produced?",
+      "options": [
+        "A one-dimensional array of 15 Integers, with one element holding each branch's count",
+        "A record with 60 Integer fields, with one field holding each item category's count",
+        "A two-dimensional array of Integers, with one row per branch and one column per category",
+        "A two-dimensional array of Strings, with one row per branch and one column per item category"
+      ],
+      "answer": 2,
+      "explanation": "Each count depends on two things, the branch and the item category, so a two-dimensional array fits: the element in a branch's row and a category's column holds the count for that branch and category, 15 × 60 = 900 counts in all. Every element holds the same kind of data, a whole number that is added to as hires are counted, so Integer is the right data type.",
+      "whyWrong": [
+        "A one-dimensional array holds only one count for each branch, so the split between item categories is lost.",
+        "One record holds one set of 60 counts, so it can't keep separate counts for each of the 15 branches.",
+        "",
+        "The counts are added to as hires are counted, and String elements can't be used in arithmetic without converting them first."
+      ],
+      "difficulty": 2,
+      "source": "textbook"
+    },
+    {
+      "id": "cs-04-q04",
+      "kk": [
+        "U3O1-KK07"
+      ],
+      "commandTerm": "explain",
+      "marks": 5,
+      "prompt": "Callum's draft object description (Figure 3) is for engine-powered items. Tarwin Valley also hires thousands of items without engines, such as ladders, trailers and electric power tools. These have no hour meter and are never serviced by hours, but they are hired out, returned and inspected in the same way as engine-powered items.\n\nExplain how Callum could use generalisation and inheritance to design classes for both kinds of item. Refer to properties and methods in Figure 3.",
+      "points": [
+        {
+          "text": "Explains generalisation: Callum identifies what every hire item has in common and places it in a more general superclass, such as HireItem.",
+          "marks": 1
+        },
+        {
+          "text": "Places the shared properties and methods in the superclass: itemCode, description, dailyRate, homeBranch, onHire and passedInspection, with hireOut(), recordReturn() and recordInspection(result).",
+          "marks": 1
+        },
+        {
+          "text": "Makes EngineItem a subclass that inherits from HireItem, so every EngineItem object has all of HireItem's properties and methods without them being written again.",
+          "marks": 1
+        },
+        {
+          "text": "EngineItem adds only what engine-powered items need: meterHours, hoursAtLastService and serviceInterval, with recordMeterReading(reading), recordService() and hoursSinceService().",
+          "marks": 1
+        },
+        {
+          "text": "Explains a benefit. For example: items without engines are HireItem objects that don't carry hour meter properties that mean nothing for them; or the shared code is written once, so a change to how items are returned or inspected is made in one place and applies to every kind of item.",
+          "marks": 1
+        }
+      ],
+      "model": "Callum should find what every hire item has in common and move it into a more general superclass, HireItem. This is generalisation. Every item, with or without an engine, has an itemCode, description, dailyRate, homeBranch, onHire and passedInspection, and is hired out, returned and inspected, so HireItem holds these properties and the hireOut(), recordReturn() and recordInspection(result) methods.\n\nEngineItem then becomes a subclass that inherits from HireItem. Every EngineItem object has all of HireItem's properties and methods without them being written again, and EngineItem adds only what engine-powered items need: the meterHours, hoursAtLastService and serviceInterval properties, and the recordMeterReading(reading), recordService() and hoursSinceService() methods.\n\nLadders, trailers and power tools become HireItem objects, so they don't carry hour meter properties that mean nothing for them. The code for hiring out, returning and inspecting is written once, in HireItem, so any change to it is made in one place and applies to every kind of item.",
+      "mistake": "Generalisation moves shared features *up* into a superclass. Copying the shared properties into a second, separate class for items without engines repeats the code instead of reusing it.",
+      "source": "textbook",
+      "figureRefs": [
+        "engine-item-object"
+      ]
+    },
+    {
+      "id": "cs-04-q05",
+      "kk": [
+        "U3O1-KK08",
+        "U3O2-KK14"
+      ],
+      "commandTerm": "write",
+      "marks": 5,
+      "prompt": "Zainab must write the function isSafeToHire(passed, hoursSince, interval, days) for the counter app. It returns TRUE if an engine-powered item can be hired out for the given number of days under the rules in the insert, and FALSE otherwise.\n\n- passed is TRUE if the item passed its most recent inspection.\n- hoursSince is the number of hours the item has been used since its last service, from hoursSinceService() in Figure 3.\n- interval is the item's service interval, in hours.\n- days is the number of days of the hire.\n\nFor example, generator TV-GEN-00417 passed its most recent inspection, has been used for 180.5 hours since its last service and has a service interval of 250 hours. It can be hired out for 8 days, but not for 9.\n\nWrite pseudocode for the function.",
+      "points": [
+        {
+          "text": "Calculates the hours of use for the hire as days × 8.",
+          "marks": 1
+        },
+        {
+          "text": "Adds the hours for the hire to hoursSince.",
+          "marks": 1
+        },
+        {
+          "text": "Compares the total with interval using < (so a total equal to the interval is refused).",
+          "marks": 1
+        },
+        {
+          "text": "Also requires passed to be TRUE, joining the two conditions with AND.",
+          "marks": 1
+        },
+        {
+          "text": "Returns TRUE only when both conditions hold and FALSE otherwise, inside FUNCTION ... ENDFUNCTION, using IF ... THEN ... ELSE ... ENDIF or by returning the value of the condition.",
+          "marks": 1
+        }
+      ],
+      "model": "```pseudo\nFUNCTION isSafeToHire(passed, hoursSince, interval, days)\n    // Allow 8 hours of use for each day of the hire\n    expectedHours ← days * 8\n    IF passed = TRUE AND hoursSince + expectedHours < interval THEN\n        RETURN TRUE\n    ELSE\n        RETURN FALSE\n    ENDIF\nENDFUNCTION\n```\n\nFor TV-GEN-00417, an 8-day hire gives 180.5 + 64 = 244.5 hours, which is less than 250, so the function returns TRUE. A 9-day hire gives 180.5 + 72 = 252.5 hours, which isn't less than 250, so it returns FALSE.",
+      "mistake": "Using ≤ instead of < would allow a hire that brings the item exactly to its service interval. The insert's rule says the total must be *less than* the interval.",
+      "source": "textbook",
+      "figureRefs": [
+        "engine-item-object"
+      ]
+    },
+    {
+      "id": "cs-04-q06",
+      "kk": [
+        "U4O1-KK05",
+        "U3O1-KK10"
+      ],
+      "commandTerm": "describe",
+      "marks": 5,
+      "prompt": "When an engine-powered item comes back, counter staff type the reading on its hour meter. A reading is reasonable only if it is no lower than the reading when the item went out, and no higher than that reading plus 24 hours for each day of the hire.\n\n1. Describe an existence check, a type check and a range check that PlantPass should apply to the hour meter reading.\n2. Generator TV-GEN-00417 went out for a 3-day hire with a reading of 1180.5 hours. State the lowest and highest readings the range check should accept when it comes back.\n3. Explain why a reading that passes all three checks could still be wrong.",
+      "points": [
+        {
+          "text": "Existence check: PlantPass won't save the return until a reading has been entered; if the field is left empty, a message asks for the reading.",
+          "marks": 1
+        },
+        {
+          "text": "Type check: the reading must be a number (it may include a decimal point); an entry such as `118O.5` (typed with the letter O) or `twelve` is rejected with a message.",
+          "marks": 1
+        },
+        {
+          "text": "Range check: the reading must be no lower than the reading when the item went out and no higher than that reading plus 24 × the number of days hired; a reading outside these limits is rejected with a message.",
+          "marks": 1
+        },
+        {
+          "text": "States the limits: lowest 1180.5 hours, highest 1252.5 hours (1180.5 + 24 × 3).",
+          "marks": 1
+        },
+        {
+          "text": "Explains that validation checks only that a reading is reasonable, not that it is correct: a mistyped reading inside the range, such as 1210.5 entered instead of 1201.5, passes every check.",
+          "marks": 1
+        }
+      ],
+      "model": "1. Existence check: PlantPass won't save the return until a reading has been entered; if the field is empty, it shows a message asking for the reading. Type check: the reading must be a number, which may include a decimal point, so an entry such as `118O.5` (typed with the letter O) or `twelve` is rejected with a message. Range check: the reading must be no lower than the reading when the item went out, and no higher than that reading plus 24 hours for each day of the hire; a reading outside those limits is rejected with a message.\n\n2. The lowest reading accepted is 1180.5 hours, and the highest is 1180.5 + 24 × 3 = 1252.5 hours.\n\n3. Validation checks only that a reading is reasonable, not that it is correct. If a staff member types 1210.5 when the meter shows 1201.5, the reading is present, is a number and is inside the range, so it passes all three checks, but hoursSinceService() will now return a value 9 hours too high.",
+      "mistake": "Validation can't prove that data is correct. It only rejects data that can't be right, such as a reading lower than the one recorded when the item went out.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-04-q07",
+      "kk": [
+        "U4O1-KK06",
+        "U3O1-KK14",
+        "U3O1-KK13"
+      ],
+      "commandTerm": "describe",
+      "marks": 6,
+      "prompt": "Kirra is alpha testing Zainab's isSafeToHire function. Tests 1 and 3 use generator TV-GEN-00417, which has been used for 180.5 hours since its last service and has a service interval of 250 hours. Part of her test table is shown below.\n\n| Test number | Inputs (passed, hoursSince, interval, days) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | TRUE, 180.5, 250, 8 | TRUE | TRUE |\n| 2 | FALSE, 20.0, 250, 2 | FALSE | FALSE |\n| 3 | TRUE, 180.5, 250, 9 | FALSE | TRUE |\n\nZainab's function first calculates expectedHours from days, then compares hoursSince + expectedHours with interval.\n\n1. Describe how Zainab could use a breakpoint to find the cause of the wrong result in test 3.\n2. Describe how Zainab could use debugging output statements to find the cause instead.\n3. When test 3 is run, expectedHours is 17. Identify the error in Zainab's code, and name the type of error it is.",
+      "points": [
+        {
+          "text": "Breakpoint: sets a breakpoint after expectedHours is calculated, for example on the line that compares hoursSince + expectedHours with interval, then runs the function with test 3's inputs so that it pauses there.",
+          "marks": 1
+        },
+        {
+          "text": "While the program is paused, inspects the values of hoursSince, expectedHours and interval and compares them with values worked out by hand (180.5, 72 and 250); the value that differs shows where the error is.",
+          "marks": 1
+        },
+        {
+          "text": "Debugging output: adds temporary DISPLAY statements after expectedHours is calculated to show hoursSince, expectedHours and their total, then runs test 3 again.",
+          "marks": 1
+        },
+        {
+          "text": "Compares the displayed values with the expected ones (72 and 252.5) to find the wrong value, then removes or comments out the statements once the error is fixed.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies the error: expectedHours is calculated as days + 8 (9 + 8 = 17) instead of days × 8 (72).",
+          "marks": 1
+        },
+        {
+          "text": "Names it a logic error: the function runs without crashing but gives the wrong result.",
+          "marks": 1
+        }
+      ],
+      "model": "1. Zainab should set a breakpoint on the line that compares hoursSince + expectedHours with interval, and run the function with test 3's inputs. When the program pauses at that line, she can inspect the values of hoursSince, expectedHours and interval and compare them with the values she works out by hand: 180.5, 72 (9 days × 8 hours) and 250. The value that differs shows her which calculation is wrong.\n\n2. Zainab could add temporary DISPLAY statements just after expectedHours is calculated, showing hoursSince, expectedHours and hoursSince + expectedHours, and run test 3 again. Comparing the output with the values she expects (180.5, 72 and 252.5) shows which value is wrong. She should remove or comment out the statements once the error is fixed.\n\n3. expectedHours is calculated as days + 8 instead of days * 8, so a 9-day hire allows only 17 hours instead of 72, and 180.5 + 17 = 197.5 is less than 250. This is a logic error: the function runs without crashing, but it gives the wrong result.",
+      "mistake": "A logic error doesn't stop the program or show an error message. It is found only by comparing actual output with expected output, as test 3 does, and then tracking down the wrong value.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-04-q08",
+      "kk": [
+        "U3O2-KK03"
+      ],
+      "commandTerm": "explain",
+      "marks": 5,
+      "prompt": "Figure 2 shows Thu's project plan. Durations are in weeks, and the project starts at the beginning of week 1.\n\n1. Thu has shown *Go-live at all branches* (J) as a milestone with a duration of 0 weeks. Explain why a milestone has no duration, and state the week at the end of which J is planned to occur.\n2. Kirra says that *Train branch staff and mechanics* should also depend on *Beta testing at Traralgon and Sale*, so that staff are trained on the version that will go live. If Thu adds this dependency, state the new planned length of the project, and explain how the critical path changes.",
+      "points": [
+        {
+          "text": "Explains that a milestone marks a key point in the project, here the moment PlantPass is running at every branch, rather than work to be done, so it takes no time and adds nothing to the length of the project; it gives Thu a fixed point to check progress against the 1 July 2027 deadline.",
+          "marks": 1
+        },
+        {
+          "text": "States that J is planned for the end of week 16, because it can't occur until *Beta testing at Traralgon and Sale* finishes at the end of the longest chain of tasks, A, B, D, G and H (3 + 3 + 6 + 2 + 2 = 16 weeks).",
+          "marks": 1
+        },
+        {
+          "text": "States the new planned length: 18 weeks, with go-live moving from the end of week 16 to the end of week 18.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that training can then start only when beta testing finishes at the end of week 16, so it runs in weeks 17 and 18 and go-live has to wait for it.",
+          "marks": 1
+        },
+        {
+          "text": "Explains the change to the critical path: it was A, B, D, G, H then J, and training had two weeks to spare; now training is on the critical path, which becomes A, B, D, G, H, I then J.",
+          "marks": 1
+        }
+      ],
+      "model": "1. A milestone marks a key point in the project rather than work to be done. Go-live is the moment PlantPass is running at every branch, which Tarwin Valley must reach by 1 July 2027, so it takes no time and adds nothing to the length of the project, but it gives Thu a fixed point to check progress against. J can't occur until both *Beta testing at Traralgon and Sale* (H) and *Train branch staff and mechanics* (I) have finished. The longest chain of tasks before it is A, B, D, G and H, which takes 3 + 3 + 6 + 2 + 2 = 16 weeks, so J is planned for the end of week 16.\n\n2. The project would take 18 weeks instead of 16. Training could no longer start as soon as the apps are developed; it would have to wait until beta testing finishes at the end of week 16, so it would run in weeks 17 and 18, and go-live would move to the end of week 18. Before the change, the critical path was A, B, D, G, H, then the go-live milestone J, and training had two weeks to spare. After it, training is on the critical path, which becomes A, B, D, G, H, I, then J.",
+      "mistake": "Adding a dependency can change the critical path. Training had two weeks to spare, but once it has to wait for beta testing it joins the longest chain of tasks, and go-live moves with it.",
+      "source": "textbook",
+      "figureRefs": [
+        "plantpass-gantt"
+      ]
+    },
+    {
+      "id": "cs-04-q09",
+      "kk": [
+        "U4O1-KK12",
+        "U4O1-KK11"
+      ],
+      "commandTerm": "evaluate",
+      "marks": 5,
+      "prompt": "Thu didn't add Kirra's dependency, so the project followed the plan in Figure 2. PlantPass went live at the end of week 19. Thu's log records these differences from the plan; every other task took the time planned.\n\n| Task | Planned | Actual | Note in Thu's log |\n|:--|:--|:--|:--|\n| D Develop counter and workshop apps | 6 weeks | 9 weeks | Zainab was moved to fix a fault in the accounts system for three weeks. |\n| F Convert paper service records | 4 weeks | 7 weeks | Service cards at three branches were incomplete and had to be rebuilt from workshop invoices. |\n| I Train branch staff and mechanics | 2 weeks | 2 weeks | The return screen was changed during beta testing, so counter staff at all 15 branches needed a second training session in week 19. |\n\nEvaluate the effectiveness of Thu's project plan. Compare planned and actual progress, explain which differences affected the go-live date, and make a judgement.",
+      "points": [
+        {
+          "text": "States that go-live was at the end of week 19, three weeks later than the planned end of week 16.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that *Develop counter and workshop apps* is on the critical path, so its three extra weeks delayed *Alpha testing*, *Beta testing at Traralgon and Sale* and go-live by three weeks; it accounts for the whole delay.",
+          "marks": 1
+        },
+        {
+          "text": "Explains that *Convert paper service records* also ran three weeks over but didn't affect go-live, because it finished at the end of week 13, before beta testing could start.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a weakness: training didn't depend on beta testing, so staff were trained before the return screen was final and had to be trained twice, wasting time and money.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies another weakness: the estimates allowed nothing for a developer being moved to other work or for incomplete service cards, and the plan left no spare time for delays to tasks on the critical path.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a strength: the plan's dependencies correctly showed which tasks could run late without moving go-live, or the log recorded each difference and its reason, so Thu can explain the delay and estimate better next time.",
+          "marks": 1
+        },
+        {
+          "text": "Makes a supported overall judgement. For example: the plan was partly effective, because it modelled the order of the work and the critical path well, but its optimistic estimates and the missing training dependency meant PlantPass went live late and staff needed extra training.",
+          "marks": 1
+        }
+      ],
+      "model": "PlantPass went live at the end of week 19, three weeks after the planned end of week 16.\n\nThe whole delay came from *Develop counter and workshop apps*. It is on the critical path, so its three extra weeks pushed *Alpha testing*, *Beta testing at Traralgon and Sale* and go-live back by three weeks. *Convert paper service records* also ran three weeks over, but it finished at the end of week 13, before beta testing could start, so it didn't affect go-live. In this respect the plan worked: its dependencies correctly showed which tasks could run late without moving go-live, and Thu's log recorded each difference and its reason, so she can explain the delay and estimate better on the next project.\n\nThe plan also had weaknesses. Its estimates allowed nothing for a developer being moved to other work or for incomplete service cards, and the plan left no spare time for delays to tasks on the critical path. Because training didn't depend on beta testing, counter staff were trained before the return screen was final and had to be trained a second time, which wasted time and money.\n\nOverall, the plan was only partly effective. It modelled the order of the work and the critical path well, but its optimistic estimates and the missing training dependency meant PlantPass went live three weeks late and staff needed extra training.",
+      "mistake": "A task running late delays go-live only if the delay makes its chain of tasks longer than the critical path. Convert paper service records ran three weeks over without moving go-live at all.",
+      "source": "textbook",
+      "figureRefs": [
+        "plantpass-gantt"
+      ]
+    },
+    {
+      "id": "cs-04-q10",
+      "kk": [
+        "U3O2-KK11"
+      ],
+      "commandTerm": "recommend",
+      "marks": 4,
+      "prompt": "Recommend two improvements to the way the PlantPass team manages its project documents, based on Joel's notes in the insert. Justify each recommendation.",
+      "points": [
+        {
+          "text": "Recommends a naming and versioning convention: every document named in the same pattern with a version number and date, such as `PlantPass_SRS_v1.3_2026-10-05.docx`, with only the current version in the working folder and earlier versions kept in a labelled versions folder.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies it: everyone can see which file is current and when it changed, so team members stop working from out-of-date copies such as `SRS new.docx`, and earlier versions can still be checked.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends backing up the folder automatically, at least daily, to a separate location such as cloud storage away from head office, and regularly testing that files can be restored.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies it: if the head office server fails, is stolen or is hit by ransomware, the SRS, designs and plans can be restored instead of months of work being lost.",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: recommends moving the documents from the project that ended in 2022 into a separate, read-only archive.",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: justifies archiving: the working folder then holds only PlantPass documents, so current files are easier to find and old ones can't be changed or mistaken for current ones, while still being kept for reference.",
+          "marks": 1
+        }
+      ],
+      "model": "First, the team should adopt a naming and versioning convention. Every document would be named in the same pattern, with a version number and date, such as `PlantPass_SRS_v1.3_2026-10-05.docx`. Only the current version would stay in the working folder, and earlier versions would move to a labelled versions folder. Everyone could then see at a glance which file is current, so team members would stop working from out-of-date copies such as `SRS new.docx`, and earlier versions would still be there if a change needed checking.\n\nSecond, the folder should be backed up automatically every night to a separate location, such as cloud storage away from head office, and restoring a file should be tested regularly. At present the only copy of the SRS, designs and plans is in one folder at head office. If that server failed, was stolen or was hit by ransomware, months of analysis and design work would be lost; with tested backups, the documents could be restored.",
+      "mistake": "Adding FINAL or new to a file name isn't versioning. A version number and a date show which file is current; a word like FINAL stops being true as soon as someone edits the file.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-04-q11",
+      "kk": [
+        "U4O2-KK05",
+        "U4O2-KK09",
+        "U4O2-KK04"
+      ],
+      "commandTerm": "justify",
+      "marks": 5,
+      "prompt": "The trade portal can be reached by anyone on the internet, and each trade customer's account will be protected only by a password. Joel is threat modelling the portal and has identified this threat: someone who learns or guesses a trade customer's password could log in as that customer and book expensive items, such as an excavator, for pick-up in the customer's name.\n\n1. Joel has rated this threat as a high priority. Justify his rating in terms of how likely the threat is and how much harm it could cause.\n2. Recommend a control that would mitigate this threat, and explain how it works.\n3. Describe how Kirra could test that the control works before the trade portal goes live.",
+      "points": [
+        {
+          "text": "Justifies the likelihood: anyone on the internet can reach the login page and a password is the only protection, so no special skill is needed; passwords are often reused on other websites and leaked, shared among a customer's staff or easy to guess, and an attacker can try many of them.",
+          "marks": 1
+        },
+        {
+          "text": "Justifies the impact: an excavator or other expensive item could be picked up and never returned, a large loss for Tarwin Valley, and the trade customer could be charged for a hire it never made; this damages trust in the portal and puts the objective of 40 per cent of bookings online at risk.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a control and explains how it works. For example: multi-factor authentication, where after the password the user must also enter a one-time code sent to a phone registered to the trade customer's account, so a password alone isn't enough to log in; or a code sent to the account's registered phone that must be entered before each online booking is accepted.",
+          "marks": 1
+        },
+        {
+          "text": "Describes a test that tries the attack against the control: using a made-up test trade account, Kirra enters only the correct password and then a wrong code, or no code, and tries to log in and book an item.",
+          "marks": 1
+        },
+        {
+          "text": "States the result that shows the control works: the portal refuses access (or the booking) and no booking is made, while with the correct password and the correct code she can still log in and book, so real customers aren't locked out.",
+          "marks": 1
+        }
+      ],
+      "model": "1. The threat is likely. Anyone on the internet can reach the portal's login page, and a password is the only thing protecting each account, so an attacker needs no special skill. Many people reuse passwords on other websites, where they can be leaked, and a trade customer's password may be shared among its staff or be easy to guess, so an attacker can simply try likely passwords. The harm is serious. An excavator or other expensive machine could be picked up and never returned, a large loss for Tarwin Valley, and the trade customer could be charged for a hire it never made. Customers who hear of this would lose trust in the portal, which puts the objective of 40 per cent of trade bookings online at risk.\n\n2. Joel should recommend multi-factor authentication for the trade portal. After entering the password, the user must also enter a one-time code sent to a mobile phone registered to the trade customer's account. Someone who has only the password can't log in, because they don't have the phone.\n\n3. Using a made-up test trade account, Kirra should log in with the correct password but enter a wrong code, then try again with no code. The control works if the portal refuses access both times and no booking can be made. She should also check that with the correct password and the correct code she can log in and book an item, so real customers aren't locked out.",
+      "mistake": "A stronger password rule doesn't stop someone who already has the password. A second factor means a leaked or shared password alone can't open the account.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-04-q12",
+      "kk": [
+        "U4O2-KK06",
+        "U4O2-KK03",
+        "U4O2-KK10"
+      ],
+      "commandTerm": "evaluate",
+      "marks": 6,
+      "prompt": "Joel will judge PlantPass's development practices against these three criteria.\n\n- **A**: Only people who need access to PlantPass's code, servers and passwords have it, and Tarwin Valley controls who has it.\n- **B**: No real customer information is used in development or testing.\n- **C**: Every login to the development and test servers can be traced to one person.\n\n1. Evaluate the practices in Joel's notes (see the insert) against each criterion.\n2. Recommend one improvement that would help Tarwin Valley meet a criterion that isn't met, and explain how it would help.",
+      "points": [
+        {
+          "text": "Judges that criterion A isn't met, with evidence about control: the code repository is on Marco's personal account, so Tarwin Valley can't see or control who has access, can't remove anyone's access itself, and could lose control of its code if Marco leaves.",
+          "marks": 1
+        },
+        {
+          "text": "Gives further evidence against A, of access beyond need. For example: all 15 branch managers can read the test servers' passwords in the group chat; the unwiped laptops given to counter staff hold the code and saved passwords; or anyone on the internet who tries the default administrator password can log in to the test database.",
+          "marks": 1
+        },
+        {
+          "text": "Judges that criterion B is met: the development and test databases hold only made-up customers and items that Kirra created, so no real customer's details are exposed even though the test server can be reached from the internet. (Also accept *mostly met*, if the answer notes that the three trade customers trying the test portal might enter real details.)",
+          "marks": 1
+        },
+        {
+          "text": "Judges that criterion C isn't met: logging was turned off in June, and passwords are shared in the group chat (and the default administrator password is still in use), so no login can be traced to one person.",
+          "marks": 1
+        },
+        {
+          "text": "Recommends a specific improvement for criterion A or C. For example: move the repository to an account owned by Tarwin Valley and managed by the IT team, with an individual account for each developer; give each person their own login and turn logging back on; change the default password and let only named accounts reach the test server; remove the passwords from the group chat and store them where only the developers can reach them; or wipe the two laptops.",
+          "marks": 1
+        },
+        {
+          "text": "Explains how the improvement helps meet the criterion. For example: Tarwin Valley can add and remove each person's access and keeps the code if Marco leaves; or every login is recorded against one person's account.",
+          "marks": 1
+        }
+      ],
+      "model": "Criterion A isn't met. PlantPass's code is in a repository on Marco's personal account, so Tarwin Valley can't see who has access or remove anyone's access itself, and it could lose control of its own code if Marco left. Access also goes well beyond need: all 15 branch managers can read the test servers' passwords in the group chat, the laptops given to counter staff at Sale and Bairnsdale still hold the code and saved passwords, and anyone on the internet who tries the default administrator password can log in to the test database.\n\nCriterion B is met. The development and test databases hold only made-up customers and items that Kirra created, so even though the test server can be reached from the internet, no real customer's details are exposed.\n\nCriterion C isn't met. Logging was turned off in June, so there is no record of logins at all. Because passwords are shared in the group chat and the default administrator password is still in use, a login couldn't be traced to one person even if it were recorded.\n\nJoel should recommend moving the repository to an account owned by Tarwin Valley and managed by the IT team, with an individual account for each developer. Tarwin Valley would then decide who can reach the code, could remove a person's access the day they leave, and would keep the code whatever happens to Marco, which helps it meet criterion A.",
+      "mistake": "Evaluating means making a judgement on each criterion and backing it with evidence. A criterion that is met, such as B here, should be judged as met, not skipped or treated as a weakness.",
+      "source": "textbook"
+    },
+    {
+      "id": "cs-04-q13",
+      "kk": [
+        "U4O2-KK08"
+      ],
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Rob Tanner, Tarwin Valley's sales manager, has asked Zainab to add a hidden button to the counter app. It would let a branch manager hire out an engine-powered item that PlantPass has refused because it is due for a service, when a large trade customer insists. The button's use wouldn't be recorded anywhere.\n\nExplain two ethical issues raised by Rob's request.",
+      "points": [
+        {
+          "text": "Identifies a safety issue: the button would let staff knowingly hire out machines that are due for a service.",
+          "marks": 1
+        },
+        {
+          "text": "Explains why this is wrong: the customer's operators and people nearby could be injured, as the excavator operator was in March, without knowing the risk; keeping a large customer happy would be put ahead of people's safety, and Zainab would be building a feature she knows could cause harm.",
+          "marks": 1
+        },
+        {
+          "text": "Identifies an honesty or accountability issue: because the button's use isn't recorded, the items' inspection and service histories would hide these hires, and no one could be held responsible for them.",
+          "marks": 1
+        },
+        {
+          "text": "Explains why this is wrong: the insurer and customers rely on the history being complete and true, so they would be misled, and Tarwin Valley would appear to meet its objective of hiring out no item that is due for a service when it doesn't.",
+          "marks": 1
+        }
+      ],
+      "model": "First, the button raises a safety issue. It would let branch managers knowingly hire out machines that are due for a service, and an overdue machine can fail, as the mini excavator's hydraulic hose did in March, injuring its operator. The customer's operators and people working nearby would carry a risk they don't know about, just so a large customer isn't turned away, and Zainab would be building a feature she knows could cause harm.\n\nSecond, the button raises an issue of honesty. Because its use wouldn't be recorded, each item's inspection and service history would hide these hires. Tarwin Valley's insurer and its customers rely on that history being complete and true, so they would be misled, and Tarwin Valley would appear to meet its objective of hiring out no item that is due for a service when it doesn't.",
+      "mistake": "Saying the button breaks the company's rules isn't enough. An ethical issue says who could be harmed or misled, and why that is unfair to them.",
+      "source": "textbook"
+    }
+  ],
+  "totalMarks": 60
+}

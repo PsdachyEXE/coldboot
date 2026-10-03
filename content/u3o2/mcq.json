@@ -94,6 +94,53 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk01-005",
+    "kk": [
+      "U3O2-KK01",
+      "U3O2-KK13"
+    ],
+    "stem": "Staff at Wagtail Party Hire in Bairnsdale record returned equipment on paper, and about one customer in ten is charged for the wrong number of hire days. The owner commissions a program to record hires and returns. Which evaluation criterion would best show whether the project has achieved its purpose?",
+    "options": [
+      "Under 1 in 100 customers are charged for the wrong number of days",
+      "The program runs on the shop's laptop and also on the owner's own phone",
+      "Staff rate the program's colours and screen layout at least 4 out of 5",
+      "The program is finished on time and within the owner's budget of $7000"
+    ],
+    "answer": 0,
+    "explanation": "The project exists to fix a problem: customers are charged for the wrong number of hire days. A criterion that measures how often this still happens once the program is in use shows directly whether that problem has been fixed.",
+    "whyWrong": [
+      "",
+      "Running on several devices is a portability quality. It says nothing about whether customers are now charged correctly.",
+      "Staff opinions of the colours and layout don't measure whether the billing errors that prompted the project have stopped.",
+      "Meeting the deadline and budget judges how the project was run, not whether the program fixed the billing errors."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk01-006",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "stem": "Two florists, one in Kyneton and one in Sale, commission the same online ordering app. At the Kyneton florist, paper order slips are often lost, so some bouquets are never made. At the Sale florist, orders are recorded reliably, but the owner wants to reach customers who would rather order online. Which statement is correct?",
+    "options": [
+      "Both projects fix a problem, because both apps replace the old process",
+      "Both projects take an opportunity, because both use new technology",
+      "Kyneton's project fixes a problem and Sale's takes an opportunity",
+      "Kyneton's project meets a need and Sale's takes an opportunity"
+    ],
+    "answer": 2,
+    "explanation": "The reason for a project depends on the organisation's situation, not on the software it commissions. Kyneton's current process is failing (lost order slips mean some bouquets are never made), so its project responds to a problem. Sale's process works well, and the owner is choosing to reach new customers, so its project takes an opportunity.",
+    "whyWrong": [
+      "Sale's orders are recorded reliably, so nothing is failing there; replacing a process that works isn't fixing a problem.",
+      "Kyneton's order slips are being lost, so its project is about fixing a failing process, not gaining an advantage.",
+      "",
+      "Nothing new requires Kyneton to change; its current process is producing errors, which makes the reason a problem, not a need."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o2-kk02-001",
     "kk": [
       "U3O2-KK02"
@@ -181,6 +228,53 @@
       "A data dictionary is a design tool, produced after analysis; a brief doesn't need one.",
       "Mock-ups are design tools; putting them in a brief would jump ahead of analysis.",
       "A brief can mention known constraints; an SRS is the detailed specification produced after analysis."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk02-005",
+    "kk": [
+      "U3O2-KK02",
+      "U3O2-KK04"
+    ],
+    "stem": "The brief for Blue Tongue Bushwalking Club's walk booking app in Daylesford says that most members are retirees over 65, and that many have poor eyesight or little experience with apps. How will this detail most help the developer during analysis?",
+    "options": [
+      "It sets the scope, because features older members won't use are left out",
+      "It gives the evaluation criteria, so no data needs to be collected from members",
+      "It tells the developer which programming language will suit older users best",
+      "It shows who to collect data from and points to key usability requirements"
+    ],
+    "answer": 3,
+    "explanation": "A brief identifies the intended users and their characteristics. Knowing that most members are older, with poor eyesight or little experience with apps, tells the developer which group to collect data from, and how, and points to usability requirements, such as large text and few steps, that analysis will make measurable.",
+    "whyWrong": [
+      "Scope is agreed during analysis from what the club needs; the members' ages alone don't settle which features are included.",
+      "User details don't replace data collection. The developer still has to find out what members need, and criteria come from those requirements.",
+      "The programming language is a development decision; the users' characteristics shape the requirements, not the language.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk02-006",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "stem": "The committee of Greenhood Tennis Club in Moe gives a developer this brief:\n\n*Build an app with a login screen, a calendar, a leaderboard and a chat page. Use the club's green and gold colours throughout.*\n\nWhat is the most important weakness of this brief?",
+    "options": [
+      "It gives no measurable non-functional requirements for the app's features",
+      "It doesn't describe the club or the problem the app is meant to address",
+      "It doesn't include a data dictionary for the calendar and the leaderboard",
+      "It doesn't include a Gantt chart showing when each feature will be built"
+    ],
+    "answer": 1,
+    "explanation": "A brief sets out the context and the problem, need or opportunity, so the developer knows what to analyse. This one jumps straight to features and colours for the solution, but never says why the club wants an app. Without that, nothing guides data collection, and there is no way to judge later whether the app solved anything.",
+    "whyWrong": [
+      "Measurable non-functional requirements are worked out during analysis and recorded in the SRS; a brief isn't expected to contain them.",
+      "",
+      "A data dictionary is produced once analysis has worked out what data is needed; a brief isn't expected to contain one.",
+      "A Gantt chart is the project plan, a separate document; leaving it out isn't a weakness of the brief."
     ],
     "difficulty": 3,
     "source": "textbook"
@@ -503,6 +597,238 @@
     ]
   },
   {
+    "id": "m-u3o2-kk03-005",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "stem": "Tessa is managing the development of a booking program for a riding school in Bacchus Marsh. Her Gantt chart is shown, in days. Which tasks are on the critical path?",
+    "options": [
+      "Survey parents, Write SRS, Design screens, Code booking module, Test program",
+      "Interview instructors, Write SRS, Design database, Code booking module, Test program",
+      "Survey parents, Write SRS, Design database, Code booking module, Test program",
+      "Survey parents, Write SRS, Design database, Code reports module, Test program"
+    ],
+    "answer": 2,
+    "explanation": "Add up each chain of dependent tasks. Survey parents (5) → Write SRS (3) → SRS approved → Design database (6) → Code booking module (7) → Test program (3) totals 24 days, the longest chain, so it is the critical path. Putting Design screens in place of Design database, or Interview instructors in place of Survey parents, gives a chain of 22 days, and the chain through Code reports module totals 21 days.",
+    "whyWrong": [
+      "Design screens (4 days) finishes before Design database (6 days), so this chain totals 22 days while Code booking module waits for the database design.",
+      "Interview instructors (3 days) finishes before Survey parents (5 days), so this chain totals 22 days while Write SRS waits for the survey.",
+      "",
+      "Code reports module (4 days) finishes before Code booking module (7 days), so this chain totals 21 days while Test program waits for the booking module."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "riding-school-gantt",
+        "kind": "gantt",
+        "title": "Riding school booking program",
+        "caption": "Write SRS starts when both data collection tasks have finished. Code booking module starts when both design tasks have finished. Test program starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "A",
+            "name": "Interview instructors",
+            "duration": 3,
+            "dependsOn": []
+          },
+          {
+            "id": "B",
+            "name": "Survey parents",
+            "duration": 5,
+            "dependsOn": []
+          },
+          {
+            "id": "C",
+            "name": "Write SRS",
+            "duration": 3,
+            "dependsOn": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "id": "M1",
+            "name": "SRS approved",
+            "duration": 0,
+            "dependsOn": [
+              "C"
+            ],
+            "milestone": true
+          },
+          {
+            "id": "D",
+            "name": "Design screens",
+            "duration": 4,
+            "dependsOn": [
+              "M1"
+            ]
+          },
+          {
+            "id": "E",
+            "name": "Design database",
+            "duration": 6,
+            "dependsOn": [
+              "M1"
+            ]
+          },
+          {
+            "id": "F",
+            "name": "Code booking module",
+            "duration": 7,
+            "dependsOn": [
+              "D",
+              "E"
+            ]
+          },
+          {
+            "id": "G",
+            "name": "Code reports module",
+            "duration": 4,
+            "dependsOn": [
+              "E"
+            ]
+          },
+          {
+            "id": "H",
+            "name": "Test program",
+            "duration": 3,
+            "dependsOn": [
+              "F",
+              "G"
+            ]
+          },
+          {
+            "id": "M2",
+            "name": "Handover",
+            "duration": 0,
+            "dependsOn": [
+              "H"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "m-u3o2-kk03-007",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "stem": "Tessa's Gantt chart for the riding school's booking program is shown, in days. She then learns that the database must be designed from the finished screen designs, so *Design database* can't start until *Design screens* has finished. Nothing else changes. What is the new minimum time to complete the project?",
+    "options": [
+      "24 days",
+      "28 days",
+      "30 days",
+      "35 days"
+    ],
+    "answer": 1,
+    "explanation": "Design database now starts when Design screens finishes at the end of day 12, instead of when the SRS is approved at the end of day 8, so it finishes at the end of day 18. Code booking module then runs from day 19 to day 25, and Test program from day 26 to day 28. The critical path becomes Survey parents → Write SRS → Design screens → Design database → Code booking module → Test program: 5 + 3 + 4 + 6 + 7 + 3 = 28 days. Design database was already on the critical path, so all 4 days of Design screens are added to it.",
+    "whyWrong": [
+      "24 days is the original plan. Design database now has to wait for Design screens, so it finishes 4 days later, and so does every task after it on the critical path.",
+      "",
+      "30 days adds Design database's 6 days a second time. It was already on the critical path; the new dependency adds only the 4 days of Design screens in front of it.",
+      "35 days adds every task's duration, but Interview instructors still runs alongside Survey parents, and Code reports module alongside Code booking module."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "riding-school-gantt",
+        "kind": "gantt",
+        "title": "Riding school booking program",
+        "caption": "Write SRS starts when both data collection tasks have finished. Code booking module starts when both design tasks have finished. Test program starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "A",
+            "name": "Interview instructors",
+            "duration": 3,
+            "dependsOn": []
+          },
+          {
+            "id": "B",
+            "name": "Survey parents",
+            "duration": 5,
+            "dependsOn": []
+          },
+          {
+            "id": "C",
+            "name": "Write SRS",
+            "duration": 3,
+            "dependsOn": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "id": "M1",
+            "name": "SRS approved",
+            "duration": 0,
+            "dependsOn": [
+              "C"
+            ],
+            "milestone": true
+          },
+          {
+            "id": "D",
+            "name": "Design screens",
+            "duration": 4,
+            "dependsOn": [
+              "M1"
+            ]
+          },
+          {
+            "id": "E",
+            "name": "Design database",
+            "duration": 6,
+            "dependsOn": [
+              "M1"
+            ]
+          },
+          {
+            "id": "F",
+            "name": "Code booking module",
+            "duration": 7,
+            "dependsOn": [
+              "D",
+              "E"
+            ]
+          },
+          {
+            "id": "G",
+            "name": "Code reports module",
+            "duration": 4,
+            "dependsOn": [
+              "E"
+            ]
+          },
+          {
+            "id": "H",
+            "name": "Test program",
+            "duration": 3,
+            "dependsOn": [
+              "F",
+              "G"
+            ]
+          },
+          {
+            "id": "M2",
+            "name": "Handover",
+            "duration": 0,
+            "dependsOn": [
+              "H"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
     "id": "m-u3o2-kk04-001",
     "kk": [
       "U3O2-KK04"
@@ -595,6 +921,52 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk04-005",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "stem": "In interviews, counter staff at Ironstone Gully Hardware in Maldon said they always check a customer's account number before charging goods to the account. When the developer later observed the counter, staff skipped this check on most busy mornings. What does this finding show?",
+    "options": [
+      "Interviews are unreliable, so they shouldn't be used to collect data from staff",
+      "Observation shows what people really do, which may differ from what they say",
+      "The staff should have been observed first and interviewed only afterwards",
+      "A survey of the staff would have shown the same result as the observation"
+    ],
+    "answer": 1,
+    "explanation": "People often describe how a task should be done, or how they believe they do it. Observation records what actually happens, including shortcuts taken under pressure. Using both techniques gave the developer a truer picture than either would have alone.",
+    "whyWrong": [
+      "Interviews still give useful detail, such as reasons and opinions; the finding shows the value of combining techniques, not of dropping one.",
+      "",
+      "The order doesn't explain the difference; staff would still describe the check they believe they make.",
+      "A survey also records what people say they do, so it would most likely repeat the interview answers."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk04-006",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "stem": "The owner of a Swan Hill courier company designed its paper run sheets himself, and the company's 25 drivers are reluctant to criticise them to his face. The developer wants the drivers' honest views on what is wrong with the run sheets. Which technique best suits this purpose?",
+    "options": [
+      "Interviews with each driver, held in the owner's office with him present",
+      "Observation of each driver while they fill in a run sheet during a shift",
+      "An interview with the owner about the complaints he has heard from drivers",
+      "An anonymous survey that drivers complete on their phones after a shift"
+    ],
+    "answer": 3,
+    "explanation": "Drivers who don't want to criticise the owner's design are more likely to answer honestly when their answers can't be traced back to them. With 25 drivers, an anonymous survey is practical, and open questions can capture what they think is wrong.",
+    "whyWrong": [
+      "With the owner present and each driver identifiable, drivers are likely to hold back their criticism.",
+      "Observation shows how the run sheets are used, but not what the drivers think is wrong with them.",
+      "The owner can pass on only what drivers chose to tell him, which is the problem the developer is trying to get around.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o2-kk05-001",
     "kk": [
       "U3O2-KK05"
@@ -682,6 +1054,53 @@
       "Showing a total is something the program does; the one-second limit concerns speed, not how easily users learn and use the program.",
       "",
       "Being testable doesn't make a requirement functional; a well-written non-functional requirement, like this time limit, is testable too."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk05-005",
+    "kk": [
+      "U3O2-KK05",
+      "U3O2-KK04"
+    ],
+    "stem": "While observing volunteers at an animal shelter in Morwell, a developer saw that new volunteers often gave up on the intake form in the current program because they couldn't find the right fields. Which requirement for the new program responds most directly to this finding?",
+    "options": [
+      "A new volunteer can record an animal's intake within two minutes, without help",
+      "The program records each animal's species, age, intake date and microchip number",
+      "The program runs in a web browser on the shelter's computers and on its tablets",
+      "The program stays available for the whole of the shelter's opening hours"
+    ],
+    "answer": 0,
+    "explanation": "The finding is about how hard the form is for new volunteers to use, so it points to a usability requirement. A measurable target for new volunteers means the new program can be checked against it.",
+    "whyWrong": [
+      "",
+      "This is a functional requirement about what the form records. The current form already had the fields; volunteers couldn't find them.",
+      "Running on several devices is portability; the finding is about how hard the form is to use, not where it runs.",
+      "Staying available is reliability; the volunteers gave up because the form was confusing, not because the program failed."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk05-006",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "stem": "The SRS for a Geelong dance school's enrolment app includes this requirement:\n\n*A parent who has never used the app can enrol a child in a class within three minutes, without help.*\n\nWhich activity would best check whether the finished app meets this requirement?",
+    "options": [
+      "Enter valid and invalid data in each field and compare the actual outputs",
+      "Ask the developers to time themselves enrolling children in several classes",
+      "Check that the enrolment code has no syntax errors and compiles correctly",
+      "Time several first-time parents enrolling a child, without giving any help"
+    ],
+    "answer": 3,
+    "explanation": "The requirement sets a measurable target for a particular group: parents using the app for the first time. Only timing real first-time parents as they enrol a child, without help, measures the app against that target.",
+    "whyWrong": [
+      "Testing inputs checks that the app processes data correctly; it doesn't measure how quickly a new user can enrol.",
+      "The developers already know the app well, so their times say little about a parent who has never used it.",
+      "Code that compiles can still be hard to use; this says nothing about how long a new parent takes to enrol.",
+      ""
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -781,6 +1200,54 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk06-005",
+    "kk": [
+      "U3O2-KK06",
+      "U3O2-KK10"
+    ],
+    "stem": "Jonah is building a website for a houseboat hire business in Echuca. He wants to use photos of the Murray River that he found through a search engine. Which approach best meets the legal constraint that applies to these photos?",
+    "options": [
+      "Use the photos, as long as each one is credited to the website it came from",
+      "Use the photos, because anything published online is free for others to use",
+      "Use only photos the business owns, or has permission or a licence to use",
+      "Use the photos after cropping and recolouring them so they become new works"
+    ],
+    "answer": 2,
+    "explanation": "Photos are protected by copyright whether or not they are online. Jonah can use a photo only if the business owns it or the copyright owner has given permission, for example through a licence whose conditions he follows.",
+    "whyWrong": [
+      "Crediting the source doesn't give permission; the copyright owner must still agree to the use.",
+      "Publishing a photo online doesn't remove its copyright; the photographer still owns it.",
+      "",
+      "Editing someone else's photo still copies their work; the changes don't make it free to use."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk06-006",
+    "kk": [
+      "U3O2-KK06",
+      "U3O2-KK07"
+    ],
+    "stem": "Amira has 8 weeks and a $4000 budget to build a booking app for a volunteer hall committee in Nhill. The whole budget pays for her own time. Her estimates show that the six features the committee asked for would take 11 weeks to build and test. Which response best works within the project's constraints?",
+    "options": [
+      "Hire a second developer so that all six features are ready within 8 weeks",
+      "Agree with the committee on the most important features and defer the rest",
+      "Build all six features, and have the committee start using the app in week 11",
+      "Shorten the testing so that all six features can be built within the 8 weeks"
+    ],
+    "answer": 1,
+    "explanation": "The deadline and the budget are both fixed, so the work has to shrink to fit them. Agreeing a smaller scope with the committee delivers the most important features within 8 weeks and $4000, and the deferred features can be added in a later version.",
+    "whyWrong": [
+      "The $4000 already pays for Amira's time, so a second developer would take the project over budget.",
+      "",
+      "Finishing in week 11 breaks the 8-week deadline, which is a constraint on the project.",
+      "Cutting testing meets the deadline by letting more errors reach the committee; it doesn't reduce the work to fit."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o2-kk07-001",
     "kk": [
       "U3O2-KK07",
@@ -848,6 +1315,76 @@
       "Nothing suggests the budget caused this; rosters were excluded when the scope was set."
     ],
     "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk07-005",
+    "kk": [
+      "U3O2-KK07",
+      "U3O2-KK03"
+    ],
+    "stem": "Leilani is preparing the Gantt chart for a Kilmore pony club's rally booking app. Why should the scope of the app be agreed before she finalises the chart?",
+    "options": [
+      "The scope sets the order of the tasks that are on the critical path",
+      "The features in scope decide which tasks are needed and their durations",
+      "The scope sets the deadline, which becomes the last milestone on the chart",
+      "Features excluded from the scope must each appear on the chart as a task"
+    ],
+    "answer": 1,
+    "explanation": "A Gantt chart plans the tasks needed to deliver the solution and how long each takes. Until the scope settles which features the app will and won't include, Leilani can't know which design, coding and testing tasks to plan, or how long the project will take.",
+    "whyWrong": [
+      "The order of tasks comes from the dependencies between them, not from the scope.",
+      "",
+      "A deadline is a constraint on the project, not part of the scope.",
+      "Excluded features won't be built, so no tasks are planned for them."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk07-006",
+    "kk": [
+      "U3O2-KK07"
+    ],
+    "stem": "Nell proposes a club app that will take bookings, sell merchandise, stream matches and manage player statistics. Her manager says the scope is too large for the 10 weeks available. What does the manager mean?",
+    "options": [
+      "It includes more features than can be built and tested in 10 weeks",
+      "It has more non-functional requirements than can be measured in 10 weeks",
+      "It names more stakeholders than data can be collected from in 10 weeks",
+      "It needs more money than the club's budget constraint will allow for"
+    ],
+    "answer": 0,
+    "explanation": "Scope is what the solution will and won't do. Nell's covers four large features, too many to build and test in 10 weeks. Narrowing it, for example to bookings and statistics now and the rest in a later version, makes the project achievable.",
+    "whyWrong": [
+      "",
+      "The concern is how many features must be built, not the qualities the app must have.",
+      "Stakeholders affect data collection; scope is about what the app will and won't do.",
+      "Nothing in the scenario mentions money; the manager's concern is fitting the features into 10 weeks."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk07-007",
+    "kk": [
+      "U3O2-KK07"
+    ],
+    "stem": "The scope in the SRS for a Warburton guesthouse's app said only: *The app will manage bookings.* At handover, the owner expected the app to take deposits by card and email each guest a feedback survey after their stay, but it does neither. Which change to the scope statement would most likely have prevented this disagreement?",
+    "options": [
+      "Adding a response-time target for confirming a booking in the app",
+      "Adding a deadline and a budget for developing the booking app",
+      "Listing the stakeholders who were interviewed about bookings",
+      "Stating what the app will not do, such as deposits and surveys"
+    ],
+    "answer": 3,
+    "explanation": "'Manage bookings' can be read broadly. A scope that also says what the app will not do, such as taking card deposits or emailing feedback surveys, makes the boundary clear, so the owner and the developer agree on what will be delivered before work begins.",
+    "whyWrong": [
+      "A response-time target is a non-functional requirement; it doesn't say which features are included.",
+      "A deadline and a budget are constraints; they don't say which features the app covers.",
+      "Listing stakeholders doesn't define the boundary of what the app will do.",
+      ""
+    ],
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -1102,6 +1639,352 @@
     ]
   },
   {
+    "id": "m-u3o2-kk08-005",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "stem": "A primary school canteen in Werribee is having an online lunch ordering system developed. The DFD drawn for the system is shown. Which statement identifies a convention error in the DFD?",
+    "options": [
+      "Process 1 sends data to *Parent* and to *D1 Orders*, but a process can have only one output",
+      "*D1 Orders* sends data to processes 2 and 3, but a data store can be read by only one process",
+      "*Canteen staff* gets `order_list` from process 2, but should read *D1 Orders* directly",
+      "Process 3 takes in `order_history` but sends no data to anything, so it produces nothing"
+    ],
+    "answer": 3,
+    "explanation": "Every process must turn its inputs into at least one output. Process 3 takes in `order_history` but sends nothing to an external entity or a data store, so the term charges it calculates go nowhere. It needs an output flow, such as `term_statement` sent to *Parent*.",
+    "whyWrong": [
+      "A process can have several outputs. Sending a confirmation to the parent and storing the order is correct.",
+      "A data store can be read by any number of processes.",
+      "This part follows the conventions: an external entity gets stored data through a process, never directly from a data store.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "canteen-dfd",
+        "kind": "dfd",
+        "title": "DFD: canteen lunch ordering system",
+        "width": 720,
+        "height": 400,
+        "nodes": [
+          {
+            "id": "parent",
+            "type": "entity",
+            "label": "Parent",
+            "x": 104,
+            "y": 96
+          },
+          {
+            "id": "p1",
+            "type": "process",
+            "label": "Take order",
+            "number": "1",
+            "x": 380,
+            "y": 96
+          },
+          {
+            "id": "d1",
+            "type": "store",
+            "label": "Orders",
+            "number": "D1",
+            "x": 600,
+            "y": 200
+          },
+          {
+            "id": "p2",
+            "type": "process",
+            "label": "Prepare order list",
+            "number": "2",
+            "x": 380,
+            "y": 304
+          },
+          {
+            "id": "staff",
+            "type": "entity",
+            "label": "Canteen staff",
+            "x": 104,
+            "y": 304
+          },
+          {
+            "id": "p3",
+            "type": "process",
+            "label": "Calculate term charges",
+            "number": "3",
+            "x": 600,
+            "y": 324
+          }
+        ],
+        "flows": [
+          {
+            "from": "parent",
+            "to": "p1",
+            "label": "order_details"
+          },
+          {
+            "from": "p1",
+            "to": "parent",
+            "label": "order_confirmation"
+          },
+          {
+            "from": "p1",
+            "to": "d1",
+            "label": "order_record"
+          },
+          {
+            "from": "d1",
+            "to": "p2",
+            "label": "todays_orders"
+          },
+          {
+            "from": "p2",
+            "to": "staff",
+            "label": "order_list"
+          },
+          {
+            "from": "d1",
+            "to": "p3",
+            "label": "order_history"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u3o2-kk08-006",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "stem": "A Ballarat gym is having a member app developed. Members book classes and pay their fees, which are processed by an external payment service, and trainers record workout plans in the app. Which statement identifies a convention error in the use case diagram shown?",
+    "options": [
+      "The line joining *Member* to *Trainer* links two actors, not an actor and a use case",
+      "*Payment service* is drawn as an actor, but an actor has to be a person using the app",
+      "*Payment service* should sit inside the boundary, because the app depends on it",
+      "Use case names such as *Book class* should be nouns, like the labels on data flows"
+    ],
+    "answer": 0,
+    "explanation": "An association shows that an actor takes part in a use case, so it always joins an actor to a use case. Members and trainers may talk to each other, but that happens outside the app, so the line between *Member* and *Trainer* should be removed.",
+    "whyWrong": [
+      "",
+      "Actors can be other systems as well as people. The external payment service interacts with the app, so it is correctly drawn as an actor.",
+      "The payment service is a separate system outside the app. External systems that interact with the app are actors, drawn outside the boundary.",
+      "A use case is named as an action, such as *Book class*, because it is a goal an actor achieves; noun labels belong on DFD data flows."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "gym-usecase",
+        "kind": "usecase",
+        "title": "Use case diagram: gym member app",
+        "width": 640,
+        "height": 400,
+        "system": {
+          "label": "Gym app",
+          "x": 310,
+          "y": 200,
+          "w": 280,
+          "h": 336
+        },
+        "actors": [
+          {
+            "id": "member",
+            "label": "Member",
+            "x": 84,
+            "y": 110
+          },
+          {
+            "id": "trainer",
+            "label": "Trainer",
+            "x": 84,
+            "y": 290
+          },
+          {
+            "id": "payment",
+            "label": "Payment service",
+            "x": 552,
+            "y": 200
+          }
+        ],
+        "useCases": [
+          {
+            "id": "book",
+            "label": "Book class",
+            "x": 310,
+            "y": 100
+          },
+          {
+            "id": "pay",
+            "label": "Pay fees",
+            "x": 310,
+            "y": 200
+          },
+          {
+            "id": "record",
+            "label": "Record workout plan",
+            "x": 310,
+            "y": 300
+          }
+        ],
+        "links": [
+          {
+            "from": "member",
+            "to": "book",
+            "type": "association"
+          },
+          {
+            "from": "member",
+            "to": "pay",
+            "type": "association"
+          },
+          {
+            "from": "pay",
+            "to": "payment",
+            "type": "association"
+          },
+          {
+            "from": "trainer",
+            "to": "record",
+            "type": "association"
+          },
+          {
+            "from": "member",
+            "to": "trainer",
+            "type": "association",
+            "via": [
+              {
+                "x": 40,
+                "y": 110
+              },
+              {
+                "x": 40,
+                "y": 290
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u3o2-kk08-007",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "stem": "Before any screens are designed, the developer of a Lakes Entrance youth sailing club's app wants to show the committee which tasks each type of user (coach, parent and sailor) will be able to carry out. Which tool best suits this purpose?",
+    "options": [
+      "A context diagram, because it shows each type of user as an external entity",
+      "A data flow diagram, because it shows each process that the app carries out",
+      "A use case diagram, because it shows each actor and the goals they achieve",
+      "A data dictionary, because it lists every field that each user will enter"
+    ],
+    "answer": 2,
+    "explanation": "A use case diagram shows the actors who interact with a system and the use cases, or goals, that each one takes part in. That is what the committee needs to see: which tasks coaches, parents and sailors will each be able to carry out.",
+    "whyWrong": [
+      "A context diagram shows the data flowing between the system and each entity, not the tasks each user carries out.",
+      "A DFD shows how data moves between processes and data stores, not which user carries out each task.",
+      "",
+      "A data dictionary describes the data the app stores, not what each type of user can do."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk08-008",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "stem": "A junior athletics club in Horsham is having a results system developed. Coaches enter race results, families receive results summaries and pay fees, the club's bank processes the payments, and the regional league receives the results of each meet. The system will store every athlete's details and results. Which statement identifies a convention error in the context diagram shown?",
+    "options": [
+      "*Bank* should be removed, because every external entity must be a person",
+      "The flow from the system to *Regional league* has no label naming its data",
+      "The system should be split into two processes, one for results and one for fees",
+      "A data store, *D1 Athletes*, should be added, because the system stores details"
+    ],
+    "answer": 1,
+    "explanation": "Every data flow is labelled with the data it carries, using a noun such as `meet_results`. The flow from the system to *Regional league* has no label, so the diagram doesn't show what data the league receives.",
+    "whyWrong": [
+      "External entities can be organisations or other systems, such as a bank, as well as people.",
+      "",
+      "A context diagram shows the whole system as a single process; separate processes appear only on a DFD.",
+      "A context diagram shows no data stores; stored data stays hidden inside the single process."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "athletics-context",
+        "kind": "context",
+        "title": "Context diagram: athletics results system",
+        "width": 640,
+        "height": 400,
+        "system": {
+          "label": "Athletics results system",
+          "x": 320,
+          "y": 200
+        },
+        "entities": [
+          {
+            "id": "coach",
+            "label": "Coach",
+            "x": 104,
+            "y": 72
+          },
+          {
+            "id": "family",
+            "label": "Family",
+            "x": 104,
+            "y": 328
+          },
+          {
+            "id": "bank",
+            "label": "Bank",
+            "x": 536,
+            "y": 72
+          },
+          {
+            "id": "league",
+            "label": "Regional league",
+            "x": 536,
+            "y": 328
+          }
+        ],
+        "flows": [
+          {
+            "from": "coach",
+            "to": "system",
+            "label": "race_results"
+          },
+          {
+            "from": "system",
+            "to": "family",
+            "label": "results_summary"
+          },
+          {
+            "from": "family",
+            "to": "system",
+            "label": "fee_payment"
+          },
+          {
+            "from": "system",
+            "to": "bank",
+            "label": "payment_details"
+          },
+          {
+            "from": "bank",
+            "to": "system",
+            "label": "payment_status"
+          },
+          {
+            "from": "system",
+            "to": "league",
+            "label": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "m-u3o2-kk09-001",
     "kk": [
       "U3O2-KK09",
@@ -1196,6 +2079,76 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk09-005",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "stem": "Tomasz has drafted the SRS for a volunteer rostering program for Petrel Point Community Radio in Portland. The station manager, who must approve it, says she can't follow much of it because it is full of technical terms. What is the best advice for Tomasz?",
+    "options": [
+      "Keep the technical terms, since the SRS is written mainly for developers",
+      "Rewrite it in plain language so the manager can check each requirement",
+      "Replace the requirements with pseudocode, which is easier to follow",
+      "Ask the manager to approve the brief instead, as it has less jargon"
+    ],
+    "answer": 1,
+    "explanation": "The client approves the SRS to confirm that its requirements are correct and complete before design begins. The manager can only do that if she understands what she is approving, so the requirements should be written in language she can follow, while staying precise.",
+    "whyWrong": [
+      "Developers use the SRS, but the client must also read and approve it, so it can't be written for developers alone.",
+      "",
+      "Pseudocode sets out how a module will work, which is a design decision; the SRS states what the program must do.",
+      "The brief is short and high level; the detailed requirements that must be agreed are in the SRS."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk09-006",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "stem": "The SRS for a stocktake program at Gelliondale Hardware & Timber in Yarram says the program will run on the store's existing tablets, which staff operate by touch alone, with no keyboard or mouse. Which design decision does this operating environment rule out?",
+    "options": [
+      "Showing a product's details only when the pointer hovers over it",
+      "Buttons large enough for staff to tap them accurately with a finger",
+      "An on-screen keyboard for typing a code when a barcode label is torn",
+      "Saving each count as soon as staff tap the Next product button"
+    ],
+    "answer": 0,
+    "explanation": "The operating environment is the hardware and software a solution will run on, and the design must work there. With touch alone there is no mouse pointer to hover, so details that appear only on hover could never be seen. They would need to open with a tap instead.",
+    "whyWrong": [
+      "",
+      "Large buttons suit finger taps, so they fit the tablets the SRS describes.",
+      "An on-screen keyboard is how text is entered on a tablet that has no physical keyboard.",
+      "Tapping a button works on a touchscreen, so saving each count this way suits the tablets."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk09-007",
+    "kk": [
+      "U3O2-KK09",
+      "U3O2-KK07"
+    ],
+    "stem": "Halfway through designing a class booking program for Ironbark Hollow Yoga in Heathcote, Shanti and the studio's owner agree to add a waiting list for full classes. The approved SRS doesn't mention a waiting list. Shanti has worked out the extra time and cost, and the owner has accepted them. What should Shanti do with the SRS?",
+    "options": [
+      "Leave the SRS as it is, because the owner approved it before design began",
+      "Describe the waiting list only in the pseudocode for the class module",
+      "Add the waiting list to the SRS, and have the owner approve the update",
+      "Record the waiting list only in her project journal, not in the SRS"
+    ],
+    "answer": 2,
+    "explanation": "The SRS is the agreed statement of what the program must do, and designers, testers and evaluators all work from it. An agreed change must therefore be added to it, and the owner's approval of the updated SRS confirms that both sides agree. Otherwise nothing would require the waiting list to be designed, tested or evaluated.",
+    "whyWrong": [
+      "An approved SRS can be updated when a change is agreed; left as it is, it no longer matches what will be built.",
+      "Pseudocode shows how a module will work; the requirement itself belongs in the SRS, where the owner can see and approve it.",
+      "",
+      "A journal records progress and decisions, but testers and evaluators work from the SRS, so the requirement could be missed."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o2-kk10-001",
     "kk": [
       "U3O2-KK10"
@@ -1285,6 +2238,52 @@
       "Mei copied no code, screens or graphics, so there is nothing of the rival's to acknowledge; similar features alone create no copyright obligation."
     ],
     "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk10-005",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "stem": "Anika is employed full-time as a developer by Wangoom Freight Lines in Warrnambool. As part of her job, she writes a program that plans delivery routes. She later resigns and wants to sell the program to other freight companies. Her employment contract says nothing about copyright. Who owns the copyright in the program's code?",
+    "options": [
+      "Anika, because she personally wrote every line of the code",
+      "Anika, because her employment contract doesn't mention copyright",
+      "The company, because Anika wrote the code as part of her job",
+      "Anika and the company jointly, as both contributed to it"
+    ],
+    "answer": 2,
+    "explanation": "When an employee writes code as part of their job, the employer owns the copyright unless an agreement says otherwise. Anika wrote the program in her job at Wangoom Freight Lines, so the company owns it, and she can't sell it without the company's permission.",
+    "whyWrong": [
+      "Authors usually own the copyright in their work, but code an employee writes as part of the job belongs to the employer.",
+      "For an employee, a contract that is silent leaves the employer as owner; it is a contractor who keeps the copyright when the contract is silent.",
+      "",
+      "Employing Anika doesn't make the company a co-author; the employer owns the code outright."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk10-006",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "stem": "Ines, a freelance developer in Geelong, wrote a booking module for Moolap Reach Sailing School. Her contract assigned the copyright in the module's code to the sailing school. A year later, a kayak hire business asks Ines for a booking module with similar features. The sailing school hasn't given permission for its code to be reused. Which statement is most accurate?",
+    "options": [
+      "She can copy the module's code, because she wrote every line of it",
+      "She can copy the module's code if she renames its variables and functions",
+      "She can copy the module's code, since the two businesses don't compete",
+      "She can write new code for similar features but not copy the old code"
+    ],
+    "answer": 3,
+    "explanation": "Assigning the copyright transferred ownership of the code to the sailing school, so Ines no longer has the right to copy it, even though she wrote it. Copyright protects the code, not the ideas behind it, so she can still write new code that provides similar features for the kayak hire business.",
+    "whyWrong": [
+      "Writing the code made Ines its first owner, but her contract assigned the copyright to the sailing school.",
+      "Renamed code is still a copy of the sailing school's code, so she would still need its permission.",
+      "Copyright doesn't depend on whether the businesses compete; copying the code needs the owner's permission.",
+      ""
+    ],
+    "difficulty": 3,
     "source": "textbook"
   },
   {
@@ -1381,6 +2380,53 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk11-005",
+    "kk": [
+      "U3O2-KK11",
+      "U3O2-KK10"
+    ],
+    "stem": "Tyers Lane Software in Traralgon has finished a project for a client. The contract requires every copy of the client's customer data to be destroyed when the project ends. The studio has run data-wiping software over the development server that held the data. The server was backed up every night during the project, and the backups are stored on a separate drive. What else must the studio do to meet the contract?",
+    "options": [
+      "Securely dispose of the customer data in the server's backups",
+      "Run one more full backup of the server so the deletion is recorded",
+      "Archive the backups to long-term storage in case the client asks",
+      "Rename the backup files so that they no longer name the client"
+    ],
+    "answer": 0,
+    "explanation": "Every nightly backup made during the project holds a copy of the customer data. Wiping the server leaves those copies untouched, so the studio must also securely dispose of the data in the backups, for example by wiping or destroying the backup drive once anything else on it that must be kept has been copied elsewhere.",
+    "whyWrong": [
+      "",
+      "A new backup doesn't remove the older backups, which still hold the customer data.",
+      "Archiving the backups keeps the customer data, which the contract says must be destroyed.",
+      "Renaming changes only the file names; the customer data inside the files is untouched."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk11-006",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "stem": "Elliminyt Web Studio in Colac finished a website for a football club three years ago. Nobody works on the project's files any more, but the studio's contract says they must be kept for seven years. The files take up space on the shared drive and clutter searches for current work. Which practice best suits these files?",
+    "options": [
+      "Securely dispose of them so that they can't be recovered by anyone",
+      "Move them to an archive in long-term storage, off the shared drive",
+      "Back them up each night with an incremental backup on the shared drive",
+      "Rename them with version numbers so they sort after current projects"
+    ],
+    "answer": 1,
+    "explanation": "Archiving moves files that are no longer in active use to long-term storage. The files are kept for the seven years the contract requires, and the shared drive holds only current work. The archive may be the only copy, so it should itself be backed up.",
+    "whyWrong": [
+      "The contract says the files must be kept for seven years, so destroying them now would breach it.",
+      "",
+      "Backing the files up leaves them on the shared drive, so the clutter remains; files that no longer change need no nightly backup.",
+      "Renaming leaves the files on the shared drive, still taking up space."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o2-kk12-001",
     "kk": [
       "U3O2-KK12"
@@ -1474,6 +2520,52 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk12-005",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "stem": "Hamid is generating design ideas for the home screen of a booking app for Wyuna Bend Houseboats in Echuca. He spends three days on a single sketch, drawing every icon precisely and matching each colour exactly, and plans to show only this sketch to the owners. What is the main problem with Hamid's approach?",
+    "options": [
+      "Sketches should be drawn only after the detailed design is approved",
+      "A sketch of a screen should also give the pseudocode for each button",
+      "He polished one idea instead of quickly sketching several to compare",
+      "He should use a brainstorm, which records each idea in precise detail"
+    ],
+    "answer": 2,
+    "explanation": "Sketches are quick, rough drawings that let a designer explore several alternatives cheaply and compare them before committing to one. Three days spent perfecting one sketch leaves the owners nothing to compare it with. Exact icons and colours can be settled once a preferred design has been chosen and is being detailed.",
+    "whyWrong": [
+      "Sketches are used while design ideas are generated, before a preferred design is chosen and detailed.",
+      "Pseudocode is a detailed design tool for processing; it isn't part of a sketch of a screen idea.",
+      "",
+      "A brainstorm records many ideas quickly without judging them; it doesn't set out any idea in precise detail."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk12-006",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "stem": "Rafael has created a mood board for a members' app for Snowbrush Alpine Club in Mansfield. It holds photos of snow gums and alpine huts, a palette of deep green and white, and samples of a bold, rounded font. The club president asks Rafael to use the mood board to decide where the Book and Cancel buttons should go on each screen. What is the best response?",
+    "options": [
+      "Use it, because a mood board shows where every control is placed",
+      "Brainstorm the positions, because a brainstorm settles the final layout",
+      "Add the buttons to the mood board so the president can approve them",
+      "Sketch the layouts; a mood board sets style, not control positions"
+    ],
+    "answer": 3,
+    "explanation": "A mood board captures the intended look and feel. It doesn't arrange anything on a screen, so it can't settle where buttons go. Sketches of alternative screen layouts are the tool for exploring placement, and the mood board's colours and fonts can then be applied to the chosen layout.",
+    "whyWrong": [
+      "A mood board is a collection of images, colours and fonts; it doesn't lay out controls on a screen.",
+      "A brainstorm produces many ideas without judging them; it doesn't settle a final layout.",
+      "Adding buttons to a collage of images doesn't show where they sit on each screen; that needs a layout drawing.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o2-kk13-001",
     "kk": [
       "U3O2-KK13"
@@ -1564,6 +2656,52 @@
       "The time saving makes the program more efficient; only its effectiveness has fallen."
     ],
     "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk13-005",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "stem": "One functional requirement for a fees program at Huon Creek Junior Soccer Club in Wodonga reads:\n\n*The program calculates each player's season fee, taking $30 off when a brother or sister also plays at the club.*\n\nWhich evaluation criterion best judges how well the solution meets this requirement?",
+    "options": [
+      "The fee screen shows each player's fee within two seconds of a search",
+      "Committee members agree that the fee screen looks clear and attractive",
+      "Every fee in a sample that includes siblings matches a hand calculation",
+      "The fee calculation is written as a function that can be reused next year"
+    ],
+    "answer": 2,
+    "explanation": "The requirement is about calculating fees correctly, including the sibling discount. Checking every fee in a sample that includes siblings against a hand calculation is specific and measurable, and it checks exactly what the requirement asks for.",
+    "whyWrong": [
+      "Speed is worth measuring, but it doesn't show whether the fees, including the sibling discount, are correct.",
+      "Opinions about appearance can't be measured objectively, and they say nothing about the fee calculation.",
+      "",
+      "This describes how the program is built, not how well it meets the requirement."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk13-006",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "stem": "Campaspe Crust Bakery in Kyneton trades seven days a week. Its new program produces a weekly report listing each day's sales, and the office manager produces it in about 20 seconds without help. When the owner checks the first report against the till receipts, every figure in it is correct, but Saturday and Sunday are missing. Which evaluation criterion does the report fail?",
+    "options": [
+      "The report includes sales for every day on which the bakery trades",
+      "Every sales figure shown in the report matches the bakery's till receipts",
+      "The weekly report can be produced in less than one minute",
+      "The office manager can produce the report without any help"
+    ],
+    "answer": 0,
+    "explanation": "Every figure the report shows is accurate, but two trading days are missing, so the report is incomplete. Completeness is a measure of effectiveness: the output must include everything that is required.",
+    "whyWrong": [
+      "",
+      "The owner found that every figure shown was correct, so the report meets this accuracy criterion.",
+      "The report takes about 20 seconds, well under a minute, so it meets this criterion.",
+      "The office manager produces the report without help, so it meets this criterion."
+    ],
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -1800,6 +2938,117 @@
     ]
   },
   {
+    "id": "m-u3o2-kk14-005",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "stem": "The pseudocode below is part of the detailed design for Yapeen Ridge Firewood in Castlemaine. It works out how many truck trips are needed to deliver a day's orders, in the order they were placed. Each order is measured in cubic metres, and the truck carries at most 10 cubic metres. Arrays are indexed from 0. What value is displayed?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 1,
+    "explanation": "The first load is 6 + 3 = 9. Adding 5 would make 14, which is over 10, so a trip is counted and the next load starts with 5. Adding 8 would make 13, so a second trip is counted and the next load starts with 8. Adding 2 makes exactly 10, which isn't over 10, so it fits. After the loop, lines 14 to 16 count the last load as the third trip, so 3 is displayed.",
+    "whyWrong": [
+      "This leaves out lines 14 to 16: the last load of 10 cubic metres still needs a trip after the loop ends.",
+      "",
+      "This treats 8 + 2 = 10 as too much; line 7 tests for more than 10, so a load of exactly 10 fits.",
+      "This gives every order its own trip; line 11 adds each order to the current load while the total stays within 10."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "firewood-trips-pseudocode",
+        "kind": "pseudocode",
+        "indexBase": 0,
+        "code": "BEGIN\n    orders ← [6, 3, 5, 8, 2]\n    load ← 0\n    trips ← 0\n    i ← 0\n    WHILE i < LENGTH(orders) DO\n        IF load + orders[i] > 10 THEN\n            trips ← trips + 1\n            load ← 0\n        ENDIF\n        load ← load + orders[i]\n        i ← i + 1\n    ENDWHILE\n    IF load > 0 THEN\n        trips ← trips + 1\n    ENDIF\n    DISPLAY trips\nEND"
+      }
+    ]
+  },
+  {
+    "id": "m-u3o2-kk14-006",
+    "kk": [
+      "U3O2-KK14",
+      "U3O1-KK04"
+    ],
+    "stem": "The IPO chart and data dictionary below are part of the detailed design for a module at Dollarbird Flat Caravan Park in Robinvale. The module calculates the cost of a stay. Which change should be made to the data dictionary?",
+    "options": [
+      "Add isMember, with the data type String",
+      "Add calculateCost, with the data type Floating point",
+      "Add isMember, with the data type Boolean",
+      "Change the data type of totalCost to Integer"
+    ],
+    "answer": 2,
+    "explanation": "isMember is an input in the IPO chart but has no entry in the data dictionary, and every data item a module uses should appear there. A guest either is or isn't a member, and the processing tests whether isMember is TRUE, so Boolean suits it.",
+    "whyWrong": [
+      "isMember is needed, but it has exactly two states and the processing tests it against TRUE, so Boolean suits it better than String.",
+      "Calculating the cost is processing, not a data item, so it doesn't belong in the data dictionary.",
+      "",
+      "Costs can include cents: 3 nights for a member is $121.50, so totalCost must stay Floating point."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "caravan-stay-ipo",
+        "kind": "table",
+        "title": "IPO chart: cost of a stay",
+        "columns": [
+          "Input",
+          "Processing",
+          "Output"
+        ],
+        "rows": [
+          [
+            "siteNumber",
+            "Multiply nights by 45.00 to get totalCost",
+            "siteNumber and totalCost, displayed"
+          ],
+          [
+            "nights",
+            "If isMember is TRUE, take 10% off totalCost",
+            ""
+          ],
+          [
+            "isMember",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "id": "caravan-stay-dictionary",
+        "kind": "table",
+        "title": "Data dictionary: cost of a stay",
+        "columns": [
+          "Name",
+          "Data type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "siteNumber",
+            "Integer",
+            "Number of the site booked, 1 to 80"
+          ],
+          [
+            "nights",
+            "Integer",
+            "Number of nights booked"
+          ],
+          [
+            "totalCost",
+            "Floating point",
+            "Cost of the stay in dollars"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "m-u3o2-kk15-001",
     "kk": [
       "U3O2-KK15"
@@ -1887,6 +3136,52 @@
       "Exporting bookings improves interoperability, which doesn't address small text or too many screens.",
       "Shading buttons improves affordance, but the users' problems are small text and too many steps.",
       ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk15-006",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "stem": "Tuckers Bend Library in Kerang has a kiosk where borrowers sign in to renew loans and see their borrowing history, address and phone number. Borrowers know how to sign out, but staff often find that a borrower has walked away still signed in. Which change best improves the kiosk's security for borrowers?",
+    "options": [
+      "Make the Sign out button larger and shade it so that it looks pressable",
+      "Enlarge the text on every screen and cut the steps needed to renew a loan",
+      "Sign the borrower out automatically after a minute without activity",
+      "Let borrowers export their loan history to a calendar or spreadsheet"
+    ],
+    "answer": 2,
+    "explanation": "While a borrower stays signed in, the next person at the kiosk could see their address and phone number or change their loans. Signing out automatically after a short idle time protects each borrower even when they forget, and adds no steps for those who remember.",
+    "whyWrong": [
+      "Borrowers already know how to sign out; a more visible button doesn't help when they forget to use it.",
+      "This improves usability, but the next person could still see a signed-in borrower's details.",
+      "",
+      "Exporting data improves interoperability and does nothing about accounts left signed in."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk15-007",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "stem": "Volunteers at Toolleen Wildlife Rescue near Elmore log each animal rescue in a phone app. In testing, every volunteer could see at once which buttons and boxes to use on each screen. However, logging one rescue took most volunteers over four minutes, because several of the app's nine screens ask for the same details again, and some volunteers gave up before finishing. Which characteristic of the user experience most needs improving?",
+    "options": [
+      "Affordance, because volunteers can't tell which controls they should use",
+      "Usability, because logging a rescue takes too long and too many steps",
+      "Interoperability, because the same details must be entered more than once",
+      "Security, because a rescue is lost if a volunteer gives up partway"
+    ],
+    "answer": 1,
+    "explanation": "Usability is how easily users can learn and operate a solution to complete their tasks. The volunteers could tell how to use every control, so affordance isn't the problem; the task itself is slow, repeats details and makes some volunteers give up. Asking for each detail once, on fewer screens, would improve usability.",
+    "whyWrong": [
+      "Testers found that every volunteer could see at once which buttons and boxes to use, so the controls already show how they are used.",
+      "",
+      "The details are asked for again within this one app. Interoperability is about exchanging data with other programs, and no other program is involved.",
+      "An unfinished record is lost because the task is too long, not because anyone gains access to data or accounts, which is what security protects against."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -2076,6 +3371,52 @@
       "Both still look like buttons, so their affordance is unchanged; the issue is telling them apart."
     ],
     "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk16-005",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "stem": "On the online enrolment form for Goulburn Bend Swim School in Seymour, required fields are marked only by showing their labels in red instead of black. Some parents with colour blindness say the red and black labels look the same to them. Which change best applies contrast to fix this?",
+    "options": [
+      "Show the required labels in a brighter shade of red than before",
+      "Line up every label and text box along one shared left edge",
+      "Use the same red for required labels on every screen of the form",
+      "Also mark required labels with bold type and an asterisk"
+    ],
+    "answer": 3,
+    "explanation": "Contrast can come from weight, size and shape as well as colour. Bold type and an asterisk make required labels stand out for every user, including parents who can't tell the two colours apart.",
+    "whyWrong": [
+      "A different red still relies on colour alone, which these parents can't distinguish.",
+      "Alignment makes the form easier to scan, but it doesn't show which fields are required.",
+      "Using red consistently still relies on colour alone, so these parents still can't see the difference.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk16-006",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "stem": "The price list screen of a stock program for Koorlong Irrigation Supplies in Mildura shows prices such as $8.50, $112.00 and $1,245.90 centred in their column. Staff say they often misjudge at a glance which prices are large. Which change best applies a design principle to fix this?",
+    "options": [
+      "Show the prices in bold type so that they stand out from item names",
+      "Right-align the prices so that their decimal points line up",
+      "Use the same font and colour for prices on every screen",
+      "Centre the column heading as well, so the column is symmetrical"
+    ],
+    "answer": 1,
+    "explanation": "Every price has two decimal places, so right-aligning the column lines up digits of the same place value, and a larger price visibly extends further to the left. Staff can then compare prices at a glance. This applies alignment.",
+    "whyWrong": [
+      "Bold type adds contrast with the item names, but centred prices still don't line up by place value.",
+      "",
+      "Consistency across screens doesn't change how the prices line up within this column.",
+      "Centring the heading leaves the prices centred, so their digits still don't line up."
+    ],
+    "difficulty": 2,
     "source": "textbook"
   }
 ]

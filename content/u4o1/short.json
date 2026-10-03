@@ -55,6 +55,32 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o1-kk01-003",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "Lina is developing a check-in app for the Cherry Ballart Farmers' Market in Alexandra. On market mornings, volunteers at the gate will use the app on a shared tablet to record each stallholder's arrival, confirm their site number and record that their stall fee has been paid, often while a queue of vans waits to get in. Most volunteers work at the gate only once a month. The market's coordinator has described what she wants, but Lina plans to spend the first week of the eight-week project watching volunteers check stallholders in with the current paper list, and having them try paper mock-ups of her screens. The coordinator thinks this wastes a week.\n\nJustify Lina's plan.",
+    "points": [
+      {
+        "text": "Watching volunteers at the gate shows how check-in really happens, e.g. a queue of vans waiting, or volunteers who work there only once a month and won't remember complicated steps, which the coordinator's description may leave out, so the app can be designed for these conditions",
+        "marks": 1
+      },
+      {
+        "text": "Problems found with paper mock-ups can be fixed quickly before any code is written, saving the time it would take to rewrite and retest code later in the eight weeks",
+        "marks": 1
+      },
+      {
+        "text": "An app designed around how the volunteers actually work is more likely to be used correctly, so check-in records are more accurate and complete and the app is more effective",
+        "marks": 1
+      }
+    ],
+    "model": "The coordinator's description is second-hand. Watching volunteers check stallholders in shows how it really happens: at the gate, with a queue of vans waiting, and by volunteers who work there only once a month and so can't be expected to remember complicated steps. Lina can design for these conditions, for example with few steps on each screen, only once she has seen them.\n\nHaving volunteers try paper mock-ups finds confusing screens before any code exists. Changing a drawing takes minutes, while changing finished code means rewriting and retesting it, so the week is likely to save time later in the eight-week project.\n\nFinally, an app built around how the volunteers actually work is more likely to be used correctly, so each stallholder's arrival, site and fee are recorded accurately and completely, and the app is more effective at its purpose.",
+    "mistake": "Justify needs reasons tied to the scenario. Saying that user-centred design is good practice earns little; say what watching these volunteers would reveal, and why that matters for this app.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o1-kk02-001",
     "kk": [
       "U4O1-KK02",
@@ -117,6 +143,37 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o1-kk02-003",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK06"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Jasmine is developing a program for Rosella Spur Walking Club in Bright to manage its walk leaders. For each leader, the program must remember their name, their leader grade (1, 2 or 3) and whether they hold a current first aid certificate, and it must keep this list between runs. Once a month, the club secretary opens the list in a spreadsheet to check which certificates have lapsed.\n\nRecommend how the program should store the list of leaders between runs, and explain how the program should handle the list when it starts and when it closes.",
+    "points": [
+      {
+        "text": "Recommends a CSV file, with one leader per line and the fields separated by commas",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: every leader has the same three fields, and the secretary's spreadsheet can open a CSV file directly, putting each field in its own column",
+        "marks": 1
+      },
+      {
+        "text": "When the program starts: reads the file line by line, splits each line at the commas, converts the grade to Integer and the certificate field to Boolean, and stores each leader as a record in an array",
+        "marks": 1
+      },
+      {
+        "text": "When the program closes (or after each change): writes every record in the array back to the file, one line per leader, so that changes made while it ran aren't lost",
+        "marks": 1
+      }
+    ],
+    "model": "The list should be stored in a CSV file, with one leader per line and the name, grade and certificate fields separated by commas, for example `Mara Quinlan,2,TRUE`. Every leader has the same three fields, so a flat file suits the data, and the secretary can open a CSV file directly in a spreadsheet, with each field in its own column, to check certificates each month.\n\nWhen the program starts, it reads the file line by line. It splits each line at the commas, converts the grade to an Integer and the certificate field to a Boolean, since each field is read from the file as text, and stores each leader as a record in an array. When the program closes, or straight after each change, it writes every record back to the file, one line per leader. Data held in the array is lost when the program closes, so without this step any new leaders or updated certificates would be lost.",
+    "mistake": "Data held in an array isn't kept between runs. The program must write the list back to the file, or every change made since it started is lost.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o1-kk03-001",
     "kk": [
       "U4O1-KK03",
@@ -173,6 +230,37 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o1-kk03-003",
+    "kk": [
+      "U4O1-KK03",
+      "U3O1-KK13"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Jonas is developing a membership program for Rufous Whistler Birdwatchers, a club in Wodonga. When the program starts, it opens `members.csv` and reads each member into an array of records; when it closes, it writes the array back to the file. Jonas tested the program on his own computer, where `members.csv` already existed. When the club secretary first ran it on her new laptop, where the file hadn't been created yet, the program stopped with an error as soon as it started.\n\nExplain why the program stopped, and describe how Jonas should change the program so that it handles this situation.",
+    "points": [
+      {
+        "text": "Explains that the program tries to open `members.csv` for reading, but the file doesn't exist on the new laptop, so opening it fails while the program runs (a runtime error), and nothing in the program handles that case",
+        "marks": 1
+      },
+      {
+        "text": "Describes checking whether the file exists before opening it (or handling the error that opening it raises), instead of assuming the file is there",
+        "marks": 1
+      },
+      {
+        "text": "Describes what the program does when the file is missing: it starts with an empty array of members instead of reading, and the file is created when the program first writes the members to it",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: displays a message telling the secretary that no member file was found and a new one will be created, so a file that has been moved or renamed by mistake is noticed",
+        "marks": 1
+      }
+    ],
+    "model": "The program assumes that `members.csv` exists. On Jonas's computer it did, so his tests passed, but on the secretary's new laptop the file hadn't been created yet. When the program tried to open it for reading, the open operation failed while the program was running, a runtime error, and because nothing in the program handles that case, the program stopped.\n\nJonas should make the program check whether `members.csv` exists before opening it, or handle the error that opening it raises. If the file exists, the program reads the members as before. If it doesn't, the program starts with an empty array of members instead of reading, and the file is created the first time the program writes the members to it, when it closes. The program could also display a message such as \"No member file found; a new one will be created\", so that the secretary would notice if the file had been moved or renamed by mistake.",
+    "mistake": "'Add error handling' on its own earns little. Say what the program checks before it opens the file, and what it does when the file is missing.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o1-kk04-001",
     "kk": [
       "U4O1-KK04"
@@ -224,6 +312,36 @@
       }
     ],
     "model": "First, the repository records every change with its author, the date and a message. If the booking system starts producing errors, the team can see exactly what changed since the last working version and roll back that change, instead of guessing which emailed file is current.\n\nSecond, all three developers work from one shared copy of the code. When two of them change the same file, the version control tool merges their changes and flags any lines that conflict for them to resolve, so one developer's work can't silently overwrite another's, as happened last week.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk04-003",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Mei is the only developer building a stock app for Messmate Hardware, which has three stores in South Gippsland. Staff will scan product barcodes with the camera on a store tablet. Mei estimates that writing her own barcode-reading module would take four weeks of her ten-week schedule. She has found an open-source barcode library that is used by thousands of developers and updated regularly. Its licence allows use in commercial software, provided its authors are acknowledged.\n\nRecommend whether Mei should use the library or write her own module, and justify your recommendation.",
+    "points": [
+      {
+        "text": "Recommends using the library",
+        "marks": 1
+      },
+      {
+        "text": "Justifies with time: it saves about four of the ten weeks, leaving time for the app's other modules and for testing",
+        "marks": 1
+      },
+      {
+        "text": "Justifies with quality: a library used by thousands of developers and updated regularly is likely to be better tested and more reliable than a module written quickly by one developer",
+        "marks": 1
+      },
+      {
+        "text": "Addresses a condition or risk, e.g. acknowledging the library's authors as the licence requires, or keeping to a tested version of the library and re-testing the app before upgrading",
+        "marks": 1
+      }
+    ],
+    "model": "Mei should use the library. Writing her own barcode module would take four of her ten weeks, leaving little time for the app's other modules and for testing; the library lets her spend that time on the parts only she can build.\n\nThe library is also likely to be more reliable than her own module. Thousands of developers use it and it is updated regularly, so errors are more likely to have been found and fixed than in code she writes under time pressure.\n\nShe must meet the licence's condition by acknowledging the library's authors, for example in the app's documentation. To manage the risk of a future version changing how it works, she should keep using the version she has tested, and re-test the app before upgrading.",
+    "mistake": "Using a library doesn't remove the developer's responsibilities. Its licence conditions must be met, and each new version must be tested before the program uses it.",
     "source": "textbook"
   },
   {
@@ -284,6 +402,130 @@
         "id": "pobblebonk-guests",
         "kind": "pseudocode",
         "code": "BEGIN\n    INPUT guests\n    IF guests < 2 OR guests > 10 THEN\n        DISPLAY \"Groups of 2 to 10 only\"\n        INPUT guests\n    ENDIF\n    DISPLAY \"Booked for \" + guests + \" guests\"\nEND"
+      }
+    ]
+  },
+  {
+    "id": "s-u4o1-kk05-003",
+    "kk": [
+      "U4O1-KK05",
+      "U4O1-KK03"
+    ],
+    "commandTerm": "justify",
+    "marks": 5,
+    "prompt": "Tilda is building the booking form shown for Bluestone Loop Shuttle, a weekend bus service between Daylesford and nearby wineries. Every booking needs a name and a pick-up stop, and a booking is for 1 to 12 passengers.\n\nJustify the validation, if any, that the program needs for each of the four inputs on the form.",
+    "points": [
+      {
+        "text": "Name: an existence check, because every booking needs a name and a text box can be left blank",
+        "marks": 1
+      },
+      {
+        "text": "Passengers: a type check before the entry is converted, because the text box accepts any characters, such as \"two\", which can't be treated as a number (with an existence check that it isn't blank)",
+        "marks": 1
+      },
+      {
+        "text": "Passengers: a range check that the number is from 1 to 12 inclusive, because a booking can't be for 0 or more than 12 passengers",
+        "marks": 1
+      },
+      {
+        "text": "Pick-up stop: only an existence check that a stop has been chosen; the drop-down list offers only valid stops, so type and range checks aren't needed",
+        "marks": 1
+      },
+      {
+        "text": "Return trip: no check is needed, because a check box is always either ticked or not ticked, so it can't hold an invalid value",
+        "marks": 1
+      }
+    ],
+    "model": "**Name.** An existence check is needed. Every booking needs a name, and a text box can be left empty, so the program must reject a blank name.\n\n**Passengers.** This is a text box, so the user can type anything. The program needs an existence check, then a type check that the entry is a whole number before it is converted, because an entry such as \"two\" can't be converted and would otherwise cause an error. It then needs a range check that the number is from 1 to 12 inclusive, because a booking can't be for 0 passengers or for more than the 12 allowed.\n\n**Pick-up stop.** The drop-down list offers only the real stops, so a misspelt or invalid stop can't be entered, and type and range checks aren't needed. The list starts on \"Choose a stop\", though, so an existence check must confirm that a stop has been chosen.\n\n**Return trip.** No check is needed. A check box is either ticked or not, so it always holds a valid yes or no.",
+    "mistake": "Not every input needs every check. A check box can only be ticked or not ticked, so it can't hold an invalid value and needs no type or range check.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "bluestone-booking-form",
+        "kind": "mockup",
+        "title": "Mock-up: booking form",
+        "width": 640,
+        "height": 400,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 200,
+            "w": 592,
+            "h": 352,
+            "text": "Bluestone Loop Shuttle"
+          },
+          {
+            "type": "heading",
+            "x": 216,
+            "y": 76,
+            "w": 240,
+            "h": 32,
+            "text": "Weekend bookings"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 128,
+            "w": 160,
+            "h": 24,
+            "text": "Name"
+          },
+          {
+            "type": "textbox",
+            "x": 396,
+            "y": 128,
+            "w": 220,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 176,
+            "w": 160,
+            "h": 24,
+            "text": "Passengers"
+          },
+          {
+            "type": "textbox",
+            "x": 326,
+            "y": 176,
+            "w": 80,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 224,
+            "w": 160,
+            "h": 24,
+            "text": "Pick-up stop"
+          },
+          {
+            "type": "dropdown",
+            "x": 396,
+            "y": 224,
+            "w": 220,
+            "h": 28,
+            "text": "Choose a stop"
+          },
+          {
+            "type": "checkbox",
+            "x": 396,
+            "y": 272,
+            "w": 220,
+            "h": 24,
+            "text": "Return trip"
+          },
+          {
+            "type": "button",
+            "x": 446,
+            "y": 332,
+            "w": 120,
+            "h": 40,
+            "text": "Book seats"
+          }
+        ]
       }
     ]
   },
@@ -382,6 +624,37 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o1-kk06-003",
+    "kk": [
+      "U4O1-KK06",
+      "U3O1-KK14"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Leilani is alpha testing a pay program for Bellbird Knoll Cherries in Wandin. The module `readPicks` reads each picker's number of buckets from `picks.csv`, `calculatePay` works out each picker's pay at $3.00 a bucket, and `writeSummary` writes the pay summary. For one picker, who picked 160 buckets, the summary shows $48.00 instead of $480.00.\n\nExplain how Leilani could use debugging output statements to find which module contains the error.",
+    "points": [
+      {
+        "text": "Adds a debugging output statement after `readPicks` that displays the number of buckets read for this picker",
+        "marks": 1
+      },
+      {
+        "text": "Adds a debugging output statement after `calculatePay` that displays the pay it worked out",
+        "marks": 1
+      },
+      {
+        "text": "Works out the correct values by hand to compare with: 160 buckets, and 160 × $3.00 = $480.00",
+        "marks": 1
+      },
+      {
+        "text": "Runs the program and finds the first displayed value that differs from the hand-worked value: wrong buckets point to `readPicks`; correct buckets but wrong pay point to `calculatePay`; both correct point to `writeSummary`",
+        "marks": 1
+      }
+    ],
+    "model": "Leilani should add debugging output statements between the modules: one after `readPicks` that displays the number of buckets read for the picker, and one after `calculatePay` that displays the pay it worked out.\n\nBefore running the program, she works out the correct values by hand: 160 buckets, and 160 × $3.00 = $480.00. She then runs the program and compares each displayed value with her own. The first value that differs shows where the error is. If the buckets display as 16, `readPicks` is reading the file wrongly; if the buckets are 160 but the pay displays as 48.00, the error is in `calculatePay`; and if the pay displays as 480.00, the error must be in `writeSummary`, for example in how it formats the amount.",
+    "mistake": "Describing what debugging output is earns little. Explain how the displayed values are compared with values worked out by hand to narrow down where the error is.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o1-kk07-001",
     "kk": [
       "U4O1-KK07"
@@ -438,6 +711,81 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o1-kk07-003",
+    "kk": [
+      "U4O1-KK07"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Isla is developing a booking app for Beeac Swim School near Colac. Parents will use it to book and pay for their children's swimming lessons. Eight parents beta tested the app, and Isla recorded the problems shown in the table. She has time to fix only two problems before the app is released next week, and she has chosen problems 1 and 4.\n\nJustify Isla's choice. Refer to the beta test results in your answer.",
+    "points": [
+      {
+        "text": "Problem 1 stops parents completing the app's main task: payment is refused, so the lesson can't be booked",
+        "marks": 1
+      },
+      {
+        "text": "Problem 4 also stops bookings and is the most widespread serious problem: 5 of 8 testers were affected and 4 of them gave up before choosing a lesson",
+        "marks": 1
+      },
+      {
+        "text": "The other problems didn't stop anyone booking: problems 2 and 3 are only cosmetic, and in problem 5 the booking had still been made",
+        "marks": 1
+      },
+      {
+        "text": "Links the choice to the release: fixing the problems that stop bookings protects the swim school's bookings and income and parents' trust at launch, while the minor problems can wait for a later update",
+        "marks": 1
+      }
+    ],
+    "model": "Problem 1 stops parents doing the one thing the app exists for. When a card number is typed with spaces, payment is refused and the lesson isn't booked. Three of the eight testers met it, so many parents would meet it after release.\n\nProblem 4 is the most widespread serious problem. Five of the eight testers had to wait about 20 seconds for the timetable, and four of them gave up before they had even chosen a lesson, so it also stops bookings.\n\nThe other problems don't stop anyone booking. Problems 2 and 3 were only noticed, and in problem 5 the booking had been made, even though the late email left parents unsure. With time for only two fixes, fixing the problems that stop parents booking protects the swim school's bookings and parents' trust when the app is released, and the minor problems can be fixed in a later update.",
+    "mistake": "Counting affected testers isn't enough on its own. Problem 2 affected all eight testers but stopped no one booking. Weigh how serious each problem is as well as how many testers met it.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "beeac-beta-problems",
+        "kind": "table",
+        "title": "Problems found in beta testing (8 testers)",
+        "columns": [
+          "Problem",
+          "Description",
+          "Testers affected",
+          "Effect on the tester"
+        ],
+        "rows": [
+          [
+            "1",
+            "Payment is refused when the card number is typed with spaces",
+            "3 of 8",
+            "Could not finish booking a lesson"
+          ],
+          [
+            "2",
+            "The Confirm button is a different blue from the school's logo",
+            "8 of 8",
+            "None; noticed it only"
+          ],
+          [
+            "3",
+            "A spelling error on the Help screen ('lesons')",
+            "1 of 8",
+            "None; noticed it only"
+          ],
+          [
+            "4",
+            "The lesson timetable takes about 20 seconds to load on older phones",
+            "5 of 8",
+            "Four gave up before choosing a lesson"
+          ],
+          [
+            "5",
+            "The booking confirmation email arrives up to an hour late",
+            "2 of 8",
+            "Booking was made, but they were unsure it had worked"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u4o1-kk08-001",
     "kk": [
       "U4O1-KK08",
@@ -486,6 +834,32 @@
       }
     ],
     "model": "In the first week, most clients will be using the kiosk for the first time, so they will be slower and more likely to ask staff for help than once they are familiar with it. Check-in times from that week would reflect the learning stage rather than normal use, so comparing them with the one-minute criterion would make the kiosk seem less efficient than it really is. Waiting several weeks gives data about everyday use.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk08-003",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "Iraak Table Grapes near Mildura is introducing a program that tracks each pallet of grapes from the packing shed to the truck. The program goes live in early October. Most of the year's packing happens in the harvest, from December to April. In October and November only a few permanent staff work in the shed, and extra packers are employed for the harvest from early December.\n\nThe manager, Declan, plans to collect the evaluation data in November. The developer, Ngoc, suggests collecting it in January and February instead.\n\nJustify Ngoc's suggestion.",
+    "points": [
+      {
+        "text": "In November only a few staff are working and few pallets are packed, so data from then wouldn't reflect how the program is normally used",
+        "marks": 1
+      },
+      {
+        "text": "January and February fall in the harvest, when the whole packing team uses the program at full volume, so the data shows how well it performs under its real workload",
+        "marks": 1
+      },
+      {
+        "text": "The extra packers start in early December, so by January they have had several weeks to learn the program, and the data reflects everyday use rather than the learning stage",
+        "marks": 1
+      }
+    ],
+    "model": "Collecting the data in November would give a misleading picture. Only a few permanent staff are in the shed then and few pallets are packed, so the data wouldn't show how the program performs in the season it was built for.\n\nJanuary and February are in the middle of the harvest, when the whole packing team is tracking pallets at full volume. Data from then shows whether the program meets its criteria under its real workload, such as when many pallets are being loaded onto trucks at once.\n\nThe extra packers start in early December. By January they have used the program for several weeks, so their data reflects everyday use, not the slower work of people still learning a new program.",
+    "mistake": "A justification must use the scenario. 'It is better to wait' earns little. Say why November's data would mislead here (few staff, few pallets) and why January and February suit (the full harvest workload, and packers who are past the learning stage).",
     "source": "textbook"
   },
   {
@@ -542,6 +916,81 @@
     ],
     "model": "The criterion is about residents, but the plan collects data only from council staff, who process applications rather than lodge them. Staff can only guess, or pass on what a few residents have told them, about whether residents needed help, so the data won't reliably show whether the criterion has been met.\n\nA better technique is a short online survey shown to residents as soon as they lodge an application, asking whether they needed help from council staff to complete it. This collects data directly from the people the criterion is about, and the responses can be totalled.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk09-003",
+    "kk": [
+      "U4O1-KK09"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Streatham Rural Supplies in Skipton launched an online ordering program in March. Two of its evaluation criteria are:\n\n1. At least 90% of online orders are dispatched within 24 hours of being placed.\n2. The average time for staff to process a return is under 4 minutes.\n\nThe program's logs for May and June show that 444 of the 480 online orders were dispatched within 24 hours. In June, staff timed 8 returns, as shown in the table.\n\nExplain whether each criterion has been met. Use the data in your answer.",
+    "points": [
+      {
+        "text": "Criterion 1: 444 ÷ 480 = 92.5% of orders were dispatched within 24 hours",
+        "marks": 1
+      },
+      {
+        "text": "92.5% is at least the 90% target, so criterion 1 is met",
+        "marks": 1
+      },
+      {
+        "text": "Criterion 2: the 8 times total 34.4 minutes, so the average is 34.4 ÷ 8 = 4.3 minutes",
+        "marks": 1
+      },
+      {
+        "text": "4.3 minutes is not under the 4-minute target, so criterion 2 is not met",
+        "marks": 1
+      }
+    ],
+    "model": "Criterion 1 is met. In May and June, 444 of the 480 online orders were dispatched within 24 hours, which is 444 ÷ 480 = 92.5%. That is above the target of at least 90%.\n\nCriterion 2 is not met. The eight return times total 34.4 minutes, so the average is 34.4 ÷ 8 = 4.3 minutes. The target was an average under 4 minutes, and 4.3 minutes is above it, even though three of the returns took less than 4 minutes.",
+    "mistake": "State the figure and the target side by side ('92.5% against a target of 90%: met'). A judgement such as 'most orders went out quickly' gives no evidence and earns little.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "streatham-return-times",
+        "kind": "table",
+        "title": "Return times, June",
+        "columns": [
+          "Return",
+          "Time (minutes)"
+        ],
+        "rows": [
+          [
+            "1",
+            "3.5"
+          ],
+          [
+            "2",
+            "4.0"
+          ],
+          [
+            "3",
+            "5.5"
+          ],
+          [
+            "4",
+            "3.0"
+          ],
+          [
+            "5",
+            "4.5"
+          ],
+          [
+            "6",
+            "6.0"
+          ],
+          [
+            "7",
+            "3.5"
+          ],
+          [
+            "8",
+            "4.4"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": "s-u4o1-kk10-001",
@@ -684,6 +1133,33 @@
     ]
   },
   {
+    "id": "s-u4o1-kk10-003",
+    "kk": [
+      "U4O1-KK10",
+      "U3O2-KK07"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Hazel is developing a membership program for the Ballangeich Junior Football League near Warrnambool. Halfway through coding, the league asks for two extra features.\n\n- **Request A:** an SMS reminder before each training night. Hazel estimates it will take 4 days. The league agrees to move the handover 4 days later, and Hazel adds the task to her plan.\n- **Request B:** a page showing each player's goal tally. Hazel thinks it will take only a day, so she adds it without changing her plan. It takes 3 days.\n\nExplain which request is an example of scope creep, and how each request affects the effectiveness of Hazel's project plan.",
+    "points": [
+      {
+        "text": "Identifies request B as scope creep: work added after the scope was agreed on a quick guess, with no change to the plan or the handover date agreed with the league",
+        "marks": 1
+      },
+      {
+        "text": "Explains that request A is a controlled change: it was estimated and agreed, and the task and the new handover date were added to the plan, so the plan still matches the work and remains a reliable guide",
+        "marks": 1
+      },
+      {
+        "text": "Explains the effect of request B: the plan has no time for its 3 days of work, so coding and the tasks after it slip, the handover is late or testing is squeezed to hold the date, and the plan no longer reflects what is really happening",
+        "marks": 1
+      }
+    ],
+    "model": "Request B is scope creep. The goal tally page was added after the scope had been agreed, on a quick guess of its size, with no change to the plan or the handover date agreed with the league.\n\nRequest A also adds work, but it is a controlled change. Hazel estimated it, the league agreed to a handover 4 days later, and the task was added to the plan. The plan still matches the work being done, so it remains a reliable guide to when the program will be ready.\n\nRequest B makes the plan less effective. Its 3 days of work aren't in the plan, so coding finishes later than planned and the tasks that depend on it slip. Either the handover is late, or Hazel squeezes testing to hold the date, which risks releasing a program with more errors. Either way, the plan no longer shows what is really happening.",
+    "mistake": "A request isn't scope creep just because it arrives late. It becomes scope creep when the work is added without being properly assessed and agreed, and without changing the plan.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o1-kk11-001",
     "kk": [
       "U4O1-KK11"
@@ -732,6 +1208,36 @@
       }
     ],
     "model": "By writing over the original dates, Nadia has lost the record of what she planned. If she had kept them beside the adjusted dates, she could compare planned and actual progress. That comparison is the evidence she needs when assessing her project plan: it would show that her coding estimate was a week short, which she could allow for in future plans.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk11-003",
+    "kk": [
+      "U4O1-KK11"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "Kanawinka Software in Hamilton has four developers building a stock program for a farm machinery dealer. Two work in the Hamilton office, and two work from home in Portland and Casterton. The project plan has more than 40 tasks, and many of them depend on each other. At present the project manager keeps the Gantt chart on a whiteboard in the Hamilton office and updates it by hand each Friday.\n\nRecommend a better way for the team to record its progress, and justify your recommendation.",
+    "points": [
+      {
+        "text": "Recommends shared online project management software that each developer updates as their tasks progress",
+        "marks": 1
+      },
+      {
+        "text": "Justification tied to the team's locations: the developers in Portland and Casterton can't see the whiteboard, but everyone can see and update the same current plan, at any time rather than only on Fridays",
+        "marks": 1
+      },
+      {
+        "text": "Justification tied to the dependencies: with more than 40 linked tasks, entering a task's actual dates makes the software move the tasks that depend on it and show whether the critical path and finish date have changed, which is slow and error-prone to do by hand",
+        "marks": 1
+      },
+      {
+        "text": "Alternative justification: the software keeps planned and actual dates side by side, giving evidence for assessing the plan at the end of the project",
+        "marks": 1
+      }
+    ],
+    "model": "I recommend that the team use shared online project management software, with each developer entering the actual progress of their own tasks as they go.\n\nTwo of the four developers work from Portland and Casterton, so they can't see a whiteboard in the Hamilton office. With shared software, everyone works from the same current plan at any time, not only after the Friday update.\n\nThe plan has more than 40 tasks that depend on each other. When a developer enters that a task has finished late, the software moves every task that depends on it and shows whether the critical path and the finish date have changed. Redrawing a whiteboard chart by hand is slow, and dependent tasks are easily missed.",
+    "mistake": "Naming the software isn't enough for a recommendation. The marks are for the reasons, and they must fit this team: developers in three towns and more than 40 dependent tasks.",
     "source": "textbook"
   },
   {
@@ -831,5 +1337,81 @@
     ],
     "model": "Patients' views are evidence about the solution: they help evaluate how effective the booking program is. The project plan is judged separately, by comparing what was planned with what actually happened. Here the project finished 3 days late because SMS reminders were added without changing the plan, so the plan was only partly effective, even though the program itself is popular.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk12-003",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK10"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Imogen managed the development of a loans and bookings program for Marnoo Community Library near St Arnaud. The program had to be running by 1 February, when the licence for the library's old system ran out. The tasks ran one after another. The table shows the planned and actual durations, with notes from Imogen's journal. The program went live 5 days late.\n\nRecommend two improvements to Imogen's next project plan. Justify each recommendation using the evidence in the table.",
+    "points": [
+      {
+        "text": "Recommendation 1: plan time to fix the problems found in beta testing and retest, for example as a separate task after beta testing",
+        "marks": 1
+      },
+      {
+        "text": "Justification 1: beta testing took 6 days instead of 3 because the 11 problems found had to be fixed and retested with no time planned for it, which caused 3 of the 5 days' delay",
+        "marks": 1
+      },
+      {
+        "text": "Recommendation 2: build some spare time into the plan before a date that can't move, for example by planning to finish several days before the old licence runs out (or: arrange a backup place to run and test the code if the server fails)",
+        "marks": 1
+      },
+      {
+        "text": "Justification 2: the 2-day server outage during coding couldn't have been predicted; with a few spare days before 1 February, a delay like this would have been absorbed instead of pushing go-live past the date (or a backup would have let coding and testing continue)",
+        "marks": 1
+      }
+    ],
+    "model": "First, Imogen should plan time to fix the problems that beta testing finds and to retest the fixes, for example as a separate task after beta testing. Her plan allowed 3 days for beta testing, but it took 6, because the testers found 11 problems and no time had been planned to fix them. That accounts for 3 of the 5 days the program was late.\n\nSecond, she should build some spare time into the plan before a date that can't move, by planning to finish a few days before the old system's licence runs out. The test server was down for 2 days during coding, which no one could have predicted. With a few spare days before 1 February, that delay would have been absorbed instead of pushing go-live past the date the old system stopped.",
+    "mistake": "A recommendation needs evidence behind it. 'Make better estimates' is too vague: say what to change in the plan and point to the figures that show why.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "marnoo-actuals",
+        "kind": "table",
+        "title": "Planned and actual durations",
+        "columns": [
+          "Task",
+          "Planned (days)",
+          "Actual (days)",
+          "Journal note"
+        ],
+        "rows": [
+          [
+            "Analyse requirements",
+            "4",
+            "4",
+            "–"
+          ],
+          [
+            "Design",
+            "5",
+            "5",
+            "–"
+          ],
+          [
+            "Code",
+            "12",
+            "14",
+            "Test server down for 2 days; couldn't run or test the code"
+          ],
+          [
+            "Beta test",
+            "3",
+            "6",
+            "Testers found 11 problems; no time was planned to fix them and retest"
+          ],
+          [
+            "Train staff",
+            "2",
+            "2",
+            "–"
+          ]
+        ]
+      }
+    ]
   }
 ]

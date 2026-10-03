@@ -56,6 +56,36 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o2-kk01-003",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Hollowgum Native Nursery in Leongatha takes orders from landscapers by email. Staff copy each order by hand onto a paper picking sheet, and about one order in twelve is picked with the wrong plants or quantities. Landscapers then send the plants back, and the nursery pays for a second delivery. The owner, Colleen, has asked Arjun to develop an ordering program.\n\nExplain **three** ways in which identifying this problem at the start of the project will guide Arjun's analysis.",
+    "points": [
+      {
+        "text": "Data collection: the problem tells Arjun whose work to study and what to ask about, e.g. observing staff as they copy emailed orders onto picking sheets and pick the plants, to see where the mistakes arise",
+        "marks": 1
+      },
+      {
+        "text": "Requirements: the problem shows which requirements matter most, e.g. each order is recorded once and the picking sheet is produced from that record, so nothing is copied by hand",
+        "marks": 1
+      },
+      {
+        "text": "Scope: the problem sets what the program must cover (taking orders and producing picking sheets), so features that don't address wrong picks, such as a public online shop, can be left out",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: the problem gives a measurable target to aim for and check against later, e.g. reducing wrongly picked orders from about 1 in 12",
+        "marks": 1
+      }
+    ],
+    "model": "First, the problem tells Arjun where to collect data. The mistakes happen when staff copy emailed orders onto picking sheets and pick the plants, so he should observe staff doing this and interview them about where errors creep in.\n\nSecond, it shows which requirements matter most. Copying by hand causes the errors, so a key functional requirement is that each order is recorded once and the picking sheet is produced from that record, with nothing retyped.\n\nThird, it helps set the scope. The program must cover taking orders and producing picking sheets; features that do nothing about wrong picks, such as a public online shop, can be left out of this project.",
+    "mistake": "Restating the problem earns nothing on its own. Each mark needs a way the problem shapes Arjun's analysis, applied to the nursery.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o2-kk02-001",
     "kk": [
       "U3O2-KK02"
@@ -109,6 +139,44 @@
       }
     ],
     "model": "A brief is prepared at the start of a project, before any data has been collected from stakeholders, so it states the problem and the intended outcome only in broad terms. To design a solution and test whether it works, developers need precise functional and non-functional requirements, constraints and scope. These come from analysis and are documented in the SRS.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk02-003",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Ravi is writing a brief for Yellow Robin Community Garden in Castlemaine. His draft reads:\n\n1. *The garden has 40 plots and a shared tool shed.*\n2. *Plots and tools are booked on a whiteboard in the shed, and bookings are often rubbed out or double-booked.*\n3. *The booking screen will use a drop-down list of tools and a calendar control.*\n4. *The app must be ready by 1 September and cost no more than $2500.*\n\nRecommend **two** changes to Ravi's draft brief, and justify each change.",
+    "points": [
+      {
+        "text": "Recommends removing statement 3 (the drop-down list and the calendar control)",
+        "marks": 1
+      },
+      {
+        "text": "Justifies the removal: screen controls are design decisions made after analysis; a brief says what is wanted and why, not how the app will work, and fixing them now could rule out a better design",
+        "marks": 1
+      },
+      {
+        "text": "Recommends adding the intended users and their characteristics, e.g. who books plots and tools, how many of them there are and what devices they use",
+        "marks": 1
+      },
+      {
+        "text": "Justifies the addition: knowing the users tells Ravi whom to collect data from and shapes requirements such as usability",
+        "marks": 1
+      },
+      {
+        "text": "Alternative second change: recommends adding what the app should achieve, e.g. members can see and book free plots and tools without double-bookings",
+        "marks": 1
+      },
+      {
+        "text": "Justifies the alternative: a stated goal gives analysis a clear target and a basis for judging the finished app",
+        "marks": 1
+      }
+    ],
+    "model": "First, Ravi should remove statement 3. A drop-down list and a calendar control are design decisions, made after analysis has worked out what the garden needs. A brief explains what is wanted and why, not how the app will work, and fixing the controls now could rule out a better design.\n\nSecond, Ravi should add who the intended users are: for example, the plot holders and volunteers who borrow tools, how many of them there are and what devices they use. The draft never says who will book plots and tools, and knowing the users tells Ravi whom to collect data from and shapes requirements such as usability.",
+    "mistake": "'Add more detail' earns nothing. A recommendation names exactly what to add or remove, and its justification says why that matters for this garden's brief.",
     "source": "textbook"
   },
   {
@@ -338,6 +406,112 @@
     ]
   },
   {
+    "id": "s-u3o2-kk03-003",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Ribbonwood Ferries in Paynesville is having a ticketing app developed. Rosa, the project manager, has drawn the Gantt chart shown, in days. The owner wants the app to go live sooner, and Rosa can afford only one of these changes:\n\n- **Option 1:** hire a contractor so that *Code fares database* takes 2 days instead of 5.\n- **Option 2:** hire a contractor so that *Code ticket screens* takes 3 days instead of 7.\n\nRecommend which option Rosa should choose. Justify your recommendation using the Gantt chart, and state the new minimum time before the app can go live.",
+    "points": [
+      {
+        "text": "Recommends Option 2",
+        "marks": 1
+      },
+      {
+        "text": "Code ticket screens is on the critical path (Gather requirements → Design ticket screens → Code ticket screens → Integrate and test → Staff training, 4 + 3 + 7 + 3 + 2 = 19 days), so shortening it brings go-live forward",
+        "marks": 1
+      },
+      {
+        "text": "Code fares database is not on the critical path: its chain (Gather requirements → Design fares database → Code fares database → Integrate and test → Staff training) totals 16 days, so Option 1 leaves go-live at 19 days",
+        "marks": 1
+      },
+      {
+        "text": "The new minimum time is 16 days, not 15, because the fares database chain (4 + 2 + 5 + 3 + 2 = 16 days) becomes the critical path once the ticket screens chain drops to 15 days",
+        "marks": 1
+      }
+    ],
+    "model": "Rosa should choose Option 2.\n\nThe critical path is Gather requirements (4) → Design ticket screens (3) → Code ticket screens (7) → Integrate and test (3) → Staff training (2), which takes 19 days. Code ticket screens is on it, so cutting that task from 7 days to 3 brings go-live forward. Code fares database is not on the critical path: its chain, Gather requirements → Design fares database → Code fares database → Integrate and test → Staff training, takes only 16 days, so Option 1 would leave go-live at 19 days.\n\nWith Option 2 the ticket screens chain drops to 15 days, but Integrate and test must still wait for Code fares database, so the fares database chain (16 days) becomes the critical path. The app can go live after 16 days, 3 days sooner, not 4.",
+    "mistake": "Cutting 4 days from a critical task doesn't always save 4 days. Once its chain is shorter than another chain, that other chain becomes the critical path and sets the finish.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "ribbonwood-gantt",
+        "kind": "gantt",
+        "title": "Ribbonwood Ferries ticketing app",
+        "caption": "Integrate and test starts when both coding tasks have finished.",
+        "unit": "day",
+        "tasks": [
+          {
+            "id": "A",
+            "name": "Gather requirements",
+            "duration": 4,
+            "dependsOn": []
+          },
+          {
+            "id": "B",
+            "name": "Design ticket screens",
+            "duration": 3,
+            "dependsOn": [
+              "A"
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Design fares database",
+            "duration": 2,
+            "dependsOn": [
+              "A"
+            ]
+          },
+          {
+            "id": "D",
+            "name": "Code ticket screens",
+            "duration": 7,
+            "dependsOn": [
+              "B"
+            ]
+          },
+          {
+            "id": "E",
+            "name": "Code fares database",
+            "duration": 5,
+            "dependsOn": [
+              "C"
+            ]
+          },
+          {
+            "id": "F",
+            "name": "Integrate and test",
+            "duration": 3,
+            "dependsOn": [
+              "D",
+              "E"
+            ]
+          },
+          {
+            "id": "G",
+            "name": "Staff training",
+            "duration": 2,
+            "dependsOn": [
+              "F"
+            ]
+          },
+          {
+            "id": "M",
+            "name": "Go live",
+            "duration": 0,
+            "dependsOn": [
+              "G"
+            ],
+            "milestone": true
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
     "id": "s-u3o2-kk04-001",
     "kk": [
       "U3O2-KK04"
@@ -415,6 +589,36 @@
       }
     ],
     "model": "An advantage is that the developer sees exactly how reception staff make appointments on busy mornings, including workarounds and hold-ups they might not think to mention in an interview.\n\nA disadvantage is that staff may work more carefully, or differently, while they are being watched, so the developer may not see how appointments are usually handled.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk04-003",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "A cycling association in western Victoria has six member clubs and about 4500 riders. It is planning a mobile app, and its developer, Hamish, needs to find out which features riders want most. He has chosen an online survey made up mostly of closed questions, such as rating each proposed feature from 1 to 5, with one open question at the end.\n\nJustify Hamish's choice of technique and question types for collecting data from the riders.",
+    "points": [
+      {
+        "text": "Technique: about 4500 riders spread across six clubs are far too many to interview or observe, and an online survey reaches them quickly and cheaply wherever they are",
+        "marks": 1
+      },
+      {
+        "text": "Closed questions: ratings give quantitative data that can be totalled quickly across thousands of responses, so the proposed features can be ranked",
+        "marks": 1
+      },
+      {
+        "text": "Open question: lets riders suggest features or give reasons that the closed questions didn't anticipate, adding qualitative detail",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: responses can be anonymous, so riders may answer more honestly",
+        "marks": 1
+      }
+    ],
+    "model": "An online survey suits the riders because there are about 4500 of them spread across six clubs. Interviewing or observing that many people would take far too long, while an online survey reaches all of them quickly and cheaply.\n\nClosed questions, such as rating each proposed feature from 1 to 5, produce numbers that can be totalled quickly across thousands of responses, so Hamish can rank the features riders want most.\n\nThe one open question lets riders suggest features, or explain needs, that Hamish's list didn't anticipate. It adds qualitative detail without making the survey slow to collate.",
+    "mistake": "A justification must use the scenario. 'Surveys reach many people' earns less than linking the choice to 4500 riders across six clubs.",
     "source": "textbook"
   },
   {
@@ -507,6 +711,36 @@
     ]
   },
   {
+    "id": "s-u3o2-kk05-003",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "An agricultural show society in north-east Victoria is having an app developed for its two-day show. Ring stewards, most of them volunteers aged over 60, will use the app on tablets to record the placings in each judging class as soon as the class is judged. The placings are announced to the crowd from the app, and the show runs for nine hours each day.\n\nRecommend **one** usability requirement and **one** reliability requirement for the app. State each so that it could be measured, and justify each using the scenario.",
+    "points": [
+      {
+        "text": "A measurable usability requirement, e.g. a steward who has not used the app before can record the placings for a class within one minute, after a ten-minute briefing",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it from the scenario, e.g. most stewards are volunteers over 60 with little time to learn the app, and placings must be entered at the ring before the next class",
+        "marks": 1
+      },
+      {
+        "text": "A measurable reliability requirement, e.g. the app runs for a full nine-hour show day without crashing, and no recorded placing is lost",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it from the scenario, e.g. placings are announced from the app, so a crash or a lost placing would hold up the announcements",
+        "marks": 1
+      }
+    ],
+    "model": "Usability: a steward who has not used the app before can record the placings for a class within one minute, after a ten-minute briefing. Most stewards are volunteers aged over 60 who will have little time to learn the app, and each class's placings must be entered at the ring before the next class is judged.\n\nReliability: the app runs for the full nine hours of each show day without crashing, and no recorded placing is lost. The placings are announced to the crowd from the app, so a crash or a lost placing would hold up the announcements.",
+    "mistake": "'The app must be easy to use' and 'the app must be reliable' can't be measured. Each requirement needs a target that could be checked, such as a time limit or a period without failure.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o2-kk06-001",
     "kk": [
       "U3O2-KK06"
@@ -559,6 +793,36 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o2-kk06-003",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Dylan is designing a scoring app for a volunteer-run junior netball association in Colac. The association has $1500 for the whole project, and umpires must enter scores on the eight Android tablets the association already owns, because it can't afford new ones. Dylan's first design:\n\n- streams every match live through a paid video service that costs $2000 a year\n- needs a newer version of Android than the association's tablets can run\n\nRecommend **two** changes to Dylan's design so that it works within the project's constraints. Justify each change.",
+    "points": [
+      {
+        "text": "Recommends removing live streaming from this version, or replacing the paid service with a free option",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: the service costs $2000 a year, more than the $1500 available for the whole project (an economic constraint)",
+        "marks": 1
+      },
+      {
+        "text": "Recommends designing the app for the version of Android the existing tablets run, and testing it on those tablets",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: the association can't buy new tablets, so an app the tablets can't run couldn't be used by the umpires at all (a technical constraint)",
+        "marks": 1
+      }
+    ],
+    "model": "First, Dylan should drop live streaming from this version of the app, or find a free way to share matches. The paid service costs $2000 a year, which is more than the $1500 the association has for the whole project, so the first design breaks the budget.\n\nSecond, Dylan should design the app for the version of Android that the association's eight tablets already run, and test it on those tablets. The association can't afford new tablets, so an app that needs a newer version of Android couldn't be used by the umpires at all.",
+    "mistake": "Naming a constraint isn't enough. Each change needs a reason that shows which constraint in the scenario the first design breaks, and how the change fixes it.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o2-kk07-001",
     "kk": [
       "U3O2-KK07",
@@ -606,6 +870,72 @@
     "model": "The app will allow members to book tennis courts online.\n\nThe app will not process court hire payments, which will continue to be made at the clubhouse.",
     "mistake": "'The app must be easy to use' isn't a scope statement. It describes a quality of the app (a non-functional requirement), not a boundary on what the app does.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk07-003",
+    "kk": [
+      "U3O2-KK07",
+      "U3O2-KK06"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "Pia is developing an app for a junior football club in Wodonga. Coaches take training attendance on paper, and the sheets are often lost, so the club can't tell which players have met its attendance rule for finals. Pia has 7 weeks to build the first version of the app. The committee's feature list is shown.\n\nPia's scope statement says that the first version will include features 1, 2 and 3, and will not include features 4 and 5.\n\nJustify Pia's scope, including her decision to state the features the app will not include.",
+    "points": [
+      {
+        "text": "The problem: features 1 and 2 record attendance in the app and total it, replacing the lost paper sheets and showing which players have met the attendance rule for finals; all three included features are the ones the committee rates essential",
+        "marks": 1
+      },
+      {
+        "text": "The time available: features 1 to 3 take 3 + 2 + 1 = 6 weeks, which fits within the 7 weeks, while adding the shop (3 weeks) or the gallery (2 weeks) would take the build beyond 7 weeks",
+        "marks": 1
+      },
+      {
+        "text": "Stating the exclusions: listing the uniform shop and the photo gallery as outside the scope tells the committee clearly that they won't be delivered in this version, so no one expects them at handover and requests to add them can be recognised as changes to the scope",
+        "marks": 1
+      }
+    ],
+    "model": "Features 1 and 2 deal directly with the club's problem. Recording attendance in the app, and totalling it for each player, replaces the paper sheets that keep being lost, so the club can see who has met the attendance rule for finals. Together with the reminders, they are the three features the committee rates essential.\n\nThe scope also fits the time Pia has. Features 1 to 3 take 3 + 2 + 1 = 6 weeks to build, within her 7 weeks, whereas adding the uniform shop (3 weeks) or the photo gallery (2 weeks) would take the build beyond 7 weeks.\n\nStating that the shop and the gallery are not included makes the boundary clear. The committee knows before work starts that they won't be in this version, so no one expects them at handover, and a later request to add them can be recognised and assessed as a change to the scope.",
+    "mistake": "A scope needs both sides of the boundary. Listing only what the app will do leaves the committee free to assume the shop and the gallery are coming.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "footy-features",
+        "kind": "table",
+        "title": "Committee's feature list",
+        "columns": [
+          "Feature",
+          "Committee priority",
+          "Estimated time to build"
+        ],
+        "rows": [
+          [
+            "1. Coaches record attendance at each training session",
+            "Essential",
+            "3 weeks"
+          ],
+          [
+            "2. The club sees each player’s attendance total for finals",
+            "Essential",
+            "2 weeks"
+          ],
+          [
+            "3. Parents receive a reminder before each session",
+            "Essential",
+            "1 week"
+          ],
+          [
+            "4. Parents buy club uniforms in an online shop",
+            "Desirable",
+            "3 weeks"
+          ],
+          [
+            "5. Members view a photo gallery of match days",
+            "Desirable",
+            "2 weeks"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": "s-u3o2-kk08-001",
@@ -867,6 +1197,118 @@
     ]
   },
   {
+    "id": "s-u3o2-kk08-003",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Grey Box Flat Campground near Mansfield is having a booking system developed. Guests request a booking and receive a confirmation and, later, an invoice. The DFD drawn for the system is shown. It contains two convention errors.\n\nIdentify **two** errors in the DFD and explain how each should be corrected.",
+    "points": [
+      {
+        "text": "Identifies that `booking_record` flows directly from *D1 Bookings* to *D2 Invoices*: data can't move between two data stores without a process",
+        "marks": 1
+      },
+      {
+        "text": "Explains the correction: a process must move the data, e.g. `booking_record` flows from *D1 Bookings* to process 2, which writes `invoice_details` to *D2 Invoices*",
+        "marks": 1
+      },
+      {
+        "text": "Identifies that the flow from process 1 to *Guest* is labelled `confirm_booking`, an action, rather than the data that moves",
+        "marks": 1
+      },
+      {
+        "text": "Explains the correction: rename the flow with a noun phrase naming the data, such as `booking_confirmation`",
+        "marks": 1
+      }
+    ],
+    "model": "First, `booking_record` flows directly from *D1 Bookings* to *D2 Invoices*. Data can't move between two data stores on its own; a process must read it from one store and write it to the other. The flow should be redrawn so that `booking_record` goes from *D1 Bookings* to process 2, which then writes `invoice_details` to *D2 Invoices* and sends the invoice to the guest.\n\nSecond, the flow from process 1 to *Guest* is labelled `confirm_booking`, which names an action. A data flow is labelled with the data that moves, so it should be renamed with a noun phrase such as `booking_confirmation`.",
+    "mistake": "Reversing the arrow doesn't fix a flow between two data stores. A process has to sit between the stores to read the data, work on it and write it.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "campground-dfd",
+        "kind": "dfd",
+        "title": "DFD: campground booking system",
+        "width": 720,
+        "height": 400,
+        "nodes": [
+          {
+            "id": "guest",
+            "type": "entity",
+            "label": "Guest",
+            "x": 104,
+            "y": 200
+          },
+          {
+            "id": "p1",
+            "type": "process",
+            "label": "Record booking",
+            "number": "1",
+            "x": 340,
+            "y": 90
+          },
+          {
+            "id": "d1",
+            "type": "store",
+            "label": "Bookings",
+            "number": "D1",
+            "x": 596,
+            "y": 90
+          },
+          {
+            "id": "d2",
+            "type": "store",
+            "label": "Invoices",
+            "number": "D2",
+            "x": 596,
+            "y": 310
+          },
+          {
+            "id": "p2",
+            "type": "process",
+            "label": "Send invoice",
+            "number": "2",
+            "x": 340,
+            "y": 310
+          }
+        ],
+        "flows": [
+          {
+            "from": "guest",
+            "to": "p1",
+            "label": "booking_request"
+          },
+          {
+            "from": "p1",
+            "to": "guest",
+            "label": "confirm_booking"
+          },
+          {
+            "from": "p1",
+            "to": "d1",
+            "label": "booking_details"
+          },
+          {
+            "from": "d1",
+            "to": "d2",
+            "label": "booking_record"
+          },
+          {
+            "from": "d2",
+            "to": "p2",
+            "label": "invoice_record"
+          },
+          {
+            "from": "p2",
+            "to": "guest",
+            "label": "invoice"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u3o2-kk09-001",
     "kk": [
       "U3O2-KK09"
@@ -919,6 +1361,32 @@
       }
     ],
     "model": "Describing the intended users tells designers who they are designing for, so the interface can match the users' abilities and experience. At Heron Bay Dental the users include patients over 90, some with low vision and little touchscreen experience, so the kiosk will need large text, strong contrast, large buttons and only a few simple steps to check in.\n\nThe description also guides testing. The developer can test the kiosk with patients from across the age range, including older patients, to check that they can check in without help.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk09-003",
+    "kk": [
+      "U3O2-KK09"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "Wen is developing a booking program for Lalbert Charter Coaches in Swan Hill. The SRS includes requirements such as calculating a quote from the distance and the number of passengers, and letting schools book excursions online. To save a week, Wen plans to start designing the screens as soon as the SRS is written, without asking the owner to review and approve it.\n\nJustify having the owner approve the SRS before design begins. Refer to the scenario in your answer.",
+    "points": [
+      {
+        "text": "Approval lets the owner confirm that the requirements are correct and complete before design, e.g. picking up a wrong or missing rule for how quotes are calculated",
+        "marks": 1
+      },
+      {
+        "text": "An error corrected in the SRS costs far less to fix than one found after the screens are designed or coded, so skipping approval could cost more than the week saved",
+        "marks": 1
+      },
+      {
+        "text": "An approved SRS is an agreed record of what will be built, so a later request from the owner (e.g. taking payments online) can be recognised as a change and assessed for time and cost",
+        "marks": 1
+      }
+    ],
+    "model": "Wen may have misunderstood a requirement, such as how a quote is worked out from the distance and the number of passengers. If the owner reviews and approves the SRS first, mistakes and missing requirements like this are found before any screens are designed around them.\n\nFixing a requirement at this point means editing a document. If the same mistake were found after the quote and booking screens had been designed and coded, they would have to be redesigned and recoded, which could easily take longer than the week Wen hoped to save.\n\nApproval also gives Wen and the owner an agreed record of what will be built. If the owner later asks for something new, such as taking payments online, Wen can show that it isn't in the approved SRS and treat it as a change to be costed and agreed before any work is done.",
+    "mistake": "Saying approval is 'good practice' earns nothing. Each reason needs to say what approval achieves for this project.",
     "source": "textbook"
   },
   {
@@ -978,6 +1446,32 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o2-kk10-003",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "Mallee Track Runners, a running club in Mildura, is having an app developed. Members record each training run in the app, including its route on a map and the time it started, so that the club's coaches can plan their training. The club president wants the app's public home page, which anyone can view, to show a weekly leaderboard that ranks members by distance run. It would give each member's full name and home suburb, and a map of each of their runs showing its route and start time.\n\nRecommend how the leaderboard should be designed to protect members' privacy. Justify your recommendation with reference to the scenario.",
+    "points": [
+      {
+        "text": "Recommends a specific design, e.g. members appear only if they choose to (opt in, with the setting off until they turn it on); members are shown by first name and initial with their distance only, without suburbs, routes or start times; or the leaderboard is shown only to signed-in members",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it with the purpose of collection: runs were recorded so the coaches could plan training, so publishing them to anyone is a different use that members haven't agreed to; good privacy practice is to use personal information only for the purpose it was collected for, unless the person consents",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it with the risk to members: names, suburbs, routes and start times on a public page could let a stranger work out where a member lives, when they usually run, and when they are likely to be away from home",
+        "marks": 1
+      }
+    ],
+    "model": "The leaderboard should show only members who choose to appear on it, with the setting off until a member turns it on. Members who opt in should be shown by first name and initial with their weekly distance, without their suburb, routes or start times, and the leaderboard should be visible only to signed-in members.\n\nMembers record their runs so that the coaches can plan their training. Showing their details to anyone who visits the home page is a different use that they haven't agreed to. Good privacy practice, reflected in the Australian Privacy Principles, is to use personal information only for the purpose it was collected for, unless the person consents.\n\nPublishing full names with suburbs, routes and start times would also put members at risk. Many runs start and finish at home, so a stranger could use the routes to work out where a member lives, and the start times to work out when they usually run and so when they are likely to be away from home.",
+    "mistake": "Taking the surname off isn't enough on its own. A first name with a suburb and a regular route can still identify a member, so it is still personal information.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o2-kk11-001",
     "kk": [
       "U3O2-KK11"
@@ -1031,6 +1525,36 @@
       }
     ],
     "model": "The USB drive holds the personal information of the hospital's clients: names, phone numbers and addresses. Testing is over, so this copy is no longer needed, and keeping it risks the drive being lost or reused and the information being seen or misused, breaching the clients' privacy. Simply deleting the files isn't enough, because deleted files can often be recovered with free tools.\n\nNikita should run data-wiping software that overwrites the entire drive, or physically destroy the drive, for example by shredding it, so that the data can't be recovered.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk11-003",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Lal Lal Games, a small game studio in Ballarat, keeps about 60 GB of code, art and sound files on its office server. Staff work Monday to Friday and change files every day, usually a few hundred megabytes in total. Backups go to cloud storage over the office internet connection. A full backup takes about 20 hours, but the connection is needed for work from 8 am to 6 pm, so a weeknight backup must finish within 14 hours. The office is closed at weekends.\n\nRecommend a backup routine for the studio, stating which type of backup to make and when. Justify your recommendation with reference to the scenario.",
+    "points": [
+      {
+        "text": "Recommends a full backup at the weekend, when the office is closed, e.g. starting on Friday evening after work",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: a full backup takes about 20 hours, too long for the 14-hour weeknight window, but it fits while the office is closed at the weekend",
+        "marks": 1
+      },
+      {
+        "text": "Recommends an incremental backup on the other weeknights, e.g. Monday to Thursday nights",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: files change every day, so nightly backups mean at most a day's work is lost; an incremental copies only the few hundred megabytes changed since the last backup, so it finishes well within 14 hours",
+        "marks": 1
+      }
+    ],
+    "model": "The studio should make a full backup of the server every weekend, starting on Friday evening after work. A full backup takes about 20 hours, which is too long to fit between 6 pm and 8 am on a weeknight, but the office is closed from Friday evening to Monday morning, so it can run without slowing anyone's work.\n\nOn Monday, Tuesday, Wednesday and Thursday nights, the studio should make an incremental backup. Staff change files every day, so backing up each night means that no more than one day's work could be lost. An incremental backup copies only the files changed since the previous backup, a few hundred megabytes, so it finishes well within the 14 hours available. To restore, the studio would use the latest full backup and then each incremental made since it, in order.",
+    "mistake": "'Back up regularly' earns little. Say which type of backup, when it runs, and why that suits this studio's time limits and how often its files change.",
     "source": "textbook"
   },
   {
@@ -1090,6 +1614,36 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o2-kk12-003",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Lucia is designing an app for Brimin Lane Cellars, a winery near Rutherglen, that lets visitors book tastings and buy wine. She has two tasks:\n\n1. The winery's six staff each have ideas about what the app should offer, and Lucia wants to gather as many ideas as possible in a single one-hour meeting.\n2. After the meeting she will have about 40 ideas in no particular order. Before she sketches any screens, she wants to work out what the main parts of the app should be and which ideas belong with each part.\n\nRecommend an ideation technique or tool for each task. Justify each recommendation with reference to the scenario.",
+    "points": [
+      {
+        "text": "Task 1: recommends brainstorming",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: staff call out ideas that are all recorded without being judged, so no one holds back and many ideas are gathered in the hour; the ideas are evaluated afterwards",
+        "marks": 1
+      },
+      {
+        "text": "Task 2: recommends a mind map",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: with the app at the centre, branches for the main parts (e.g. bookings, wine sales, events) and the ideas on sub-branches, Lucia can see how the 40 ideas group and connect, which shows the main parts the app needs",
+        "marks": 1
+      }
+    ],
+    "model": "For the first task, Lucia should run a brainstorm with the six staff. Everyone calls out ideas for the app, and Lucia records every one without judging it. Because no idea is criticised during the hour, staff don't hold back, so she collects as many ideas as possible in the time. The ideas are evaluated after the meeting.\n\nFor the second task, she should draw a mind map. She would put the app in the centre, add a branch for each main part, such as tasting bookings, wine sales and events, and place each of the 40 ideas on a sub-branch of the part it belongs to. The mind map shows how the ideas group and connect, so Lucia can see what the main parts of the app should be before she sketches any screens.",
+    "mistake": "A recommendation without a reason earns only half the marks. Tie each reason to the winery: the one-hour staff meeting, and the 40 unsorted ideas.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o2-kk13-001",
     "kk": [
       "U3O2-KK13"
@@ -1143,6 +1697,65 @@
     ],
     "model": "'Good' can't be measured, so two people evaluating the app could reach different conclusions, and neither could show that the criterion had been met. The criterion also doesn't say which requirement it tests, or whether it concerns efficiency or effectiveness. A better criterion is: 'A volunteer on patrol can log a found item, including a photo and a description, in under one minute.' This ties the criterion to the logging requirement, and it can be checked by timing volunteers as they log items.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk13-003",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Quartzburn Espresso, a café in Stawell, wants a self-ordering tablet on its counter. Kobe, the designer, has evaluated two design ideas against three criteria drawn from the café's requirements. His results are shown in the table below. The owner prefers Idea B, because she likes its large photos of the food.\n\nRecommend which design idea the café should develop. Justify your recommendation using the evaluation criteria.",
+    "points": [
+      {
+        "text": "Recommends Idea A",
+        "marks": 1
+      },
+      {
+        "text": "Uses the taps criterion: Idea A needs 3 taps, within the limit of 4, while Idea B needs 7 and fails it",
+        "marks": 1
+      },
+      {
+        "text": "Uses the discount criterion: Idea A applies the loyalty discount automatically, while Idea B leaves it to staff and fails, so totals could be wrong",
+        "marks": 1
+      },
+      {
+        "text": "Explains why the owner's preference doesn't change the choice: B's photos aren't one of the criteria, and both ideas meet the tablet criterion, so nothing offsets B failing two criteria",
+        "marks": 1
+      }
+    ],
+    "model": "The café should develop Idea A.\n\nIdea A meets all three criteria. A customer can order a standard coffee in 3 taps, within the limit of 4, whereas Idea B takes 7 taps and fails that criterion. Idea A also applies the loyalty discount to the order total automatically; Idea B leaves the discount to staff at the counter, so it fails the second criterion and some totals could be wrong.\n\nBoth ideas run on the café's existing 10-inch tablets, so that criterion doesn't separate them. The owner likes Idea B's food photos, but appearance isn't one of the criteria drawn from the café's requirements, so it can't outweigh Idea B failing two of them.",
+    "mistake": "Choosing the idea the client likes best isn't a justification. Refer to each criterion and to what the table shows for each idea.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "cafe-design-ideas",
+        "kind": "table",
+        "title": "Evaluation of design ideas",
+        "columns": [
+          "Evaluation criterion",
+          "Idea A: one order screen",
+          "Idea B: step-by-step screens"
+        ],
+        "rows": [
+          [
+            "A customer can order a standard coffee in no more than 4 taps",
+            "Met: 3 taps",
+            "Not met: 7 taps"
+          ],
+          [
+            "The loyalty discount is applied to the order total automatically",
+            "Met",
+            "Not met: staff apply it at the counter"
+          ],
+          [
+            "The design runs on the café's existing 10-inch tablets",
+            "Met",
+            "Met"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": "s-u3o2-kk14-001",
@@ -1259,6 +1872,126 @@
     ]
   },
   {
+    "id": "s-u3o2-kk14-003",
+    "kk": [
+      "U3O2-KK14"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Sienna has drawn the mock-up below for the hire screen of a program for Snowgrass Gap Ski Hire in Mount Beauty. Skis cost $45 a day and a snowboard costs $50 a day, a helmet adds $10 to a booking, and a hire lasts from 1 to 7 whole days. The mock-up has no annotations yet.\n\nExplain **two** annotations Sienna should add to the mock-up so that the developer can build the screen as intended.",
+    "points": [
+      {
+        "text": "Identifies a first annotation for a named element, e.g. the Calculate button multiplies the days by the daily rate for the chosen equipment, adds $10 if Helmet is ticked, and shows the result beside Total",
+        "marks": 1
+      },
+      {
+        "text": "Explains why the developer needs it, e.g. the drawing shows the button but not the processing it triggers, so without the note the developer would have to guess the pricing rules",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second, different annotation, e.g. the Days box accepts only whole numbers from 1 to 7 and shows an error message otherwise; the drop-down's options are Skis and Snowboard; or the fonts, colours and sizes to use",
+        "marks": 1
+      },
+      {
+        "text": "Explains why the developer needs it, e.g. without the valid range the developer could let a 10-day or half-day hire through",
+        "marks": 1
+      }
+    ],
+    "model": "First, Sienna should annotate the Calculate button: when it is clicked, the program multiplies the number of days by $45 for skis or $50 for a snowboard, adds $10 if Helmet is ticked, and shows the result beside Total. The drawing shows that the button exists, but not what it does, so without this note the developer would have to guess the pricing rules and could build the wrong calculation.\n\nSecond, she should annotate the Days text box: it accepts only whole numbers from 1 to 7, and any other entry shows the message \"Enter a whole number of days from 1 to 7\". An empty box in the drawing gives no hint of the allowed range, so without the note the developer might accept a 10-day or half-day hire that the business doesn't offer.",
+    "mistake": "Describing what a mock-up is earns nothing here. Name an element on this screen and say exactly what the annotation would tell the developer.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "ski-hire-mockup",
+        "kind": "mockup",
+        "title": "Mock-up: hire ski equipment",
+        "width": 640,
+        "height": 400,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 200,
+            "w": 592,
+            "h": 352,
+            "text": "Snowgrass Gap Ski Hire"
+          },
+          {
+            "type": "heading",
+            "x": 216,
+            "y": 76,
+            "w": 240,
+            "h": 32,
+            "text": "Hire equipment"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 132,
+            "w": 160,
+            "h": 24,
+            "text": "Equipment"
+          },
+          {
+            "type": "dropdown",
+            "x": 396,
+            "y": 132,
+            "w": 220,
+            "h": 28,
+            "text": "Skis"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 184,
+            "w": 160,
+            "h": 24,
+            "text": "Days"
+          },
+          {
+            "type": "textbox",
+            "x": 396,
+            "y": 184,
+            "w": 220,
+            "h": 28
+          },
+          {
+            "type": "checkbox",
+            "x": 396,
+            "y": 236,
+            "w": 220,
+            "h": 24,
+            "text": "Helmet"
+          },
+          {
+            "type": "button",
+            "x": 346,
+            "y": 292,
+            "w": 120,
+            "h": 36,
+            "text": "Calculate"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 344,
+            "w": 160,
+            "h": 24,
+            "text": "Total"
+          },
+          {
+            "type": "label",
+            "x": 396,
+            "y": 344,
+            "w": 220,
+            "h": 24,
+            "text": "$0.00"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u3o2-kk15-001",
     "kk": [
       "U3O2-KK15"
@@ -1312,6 +2045,119 @@
     ],
     "model": "Security would improve. Prescription details are sensitive health information, and requiring a one-time code as well as a password means someone who has stolen or guessed a customer's password still can't see or change their prescriptions. Usability would suffer, because customers must type a password and wait for a code every time they open the app, just to reorder a regular medicine. To balance these, the app could ask for the one-time code only when a customer signs in on a new phone, and allow fingerprint sign-in on a phone it already trusts.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk15-003",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Winton Lane Community Garden in Benalla is designing a phone app for its volunteers, many of whom are over 70. Each volunteer looks after one plot and records every time they water it. The mock-up below is the draft Record watering screen; the notes describe two of its elements.\n\nIdentify **two** problems with the user experience of this draft, each relating to a different characteristic. For each problem, explain a change that would fix it.",
+    "points": [
+      {
+        "text": "Identifies an affordance problem: Save is plain text with no border, shading or button shape, so volunteers may not realise that it can be tapped",
+        "marks": 1
+      },
+      {
+        "text": "Explains a fix: show Save as a large, clearly shaped and shaded button, so it looks tappable",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a usability problem: volunteers must type their plot number and the full date every time, although the app already knows their plot and today's date, which is slow and error-prone on a phone",
+        "marks": 1
+      },
+      {
+        "text": "Explains a fix: fill in the plot number and today's date automatically (the date can still be changed), so the volunteer usually enters only the litres used and saves",
+        "marks": 1
+      }
+    ],
+    "model": "The first problem is affordance. Save appears as plain text, with no border, shading or button shape, so nothing tells volunteers that they can tap it. Some may fill in the screen and never save their record. Save should be drawn as a large, shaded button labelled \"Save\", so it clearly looks like something to tap.\n\nThe second problem is usability. Every time they water, volunteers must type their plot number and the full date, although each volunteer's plot is already stored in their account and the phone knows today's date. Typing these on a phone is slow, and older volunteers may make mistakes. The app should fill in the plot number and today's date automatically, with the date still changeable for a watering done earlier, so a volunteer usually enters only the litres used and taps Save.",
+    "mistake": "Naming a characteristic isn't enough. Point to the element on the screen, say what goes wrong for these volunteers, then give the change.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "garden-watering-mockup",
+        "kind": "mockup",
+        "title": "Mock-up: draft Record watering screen",
+        "width": 640,
+        "height": 400,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 200,
+            "w": 592,
+            "h": 352,
+            "text": "Winton Lane Community Garden"
+          },
+          {
+            "type": "heading",
+            "x": 216,
+            "y": 76,
+            "w": 240,
+            "h": 32,
+            "text": "Record watering"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 132,
+            "w": 160,
+            "h": 24,
+            "text": "Plot number"
+          },
+          {
+            "type": "textbox",
+            "x": 420,
+            "y": 132,
+            "w": 220,
+            "h": 28,
+            "note": "Each volunteer's plot is already stored in their account"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 184,
+            "w": 160,
+            "h": 24,
+            "text": "Date watered"
+          },
+          {
+            "type": "textbox",
+            "x": 420,
+            "y": 184,
+            "w": 220,
+            "h": 28,
+            "text": "DD/MM/YYYY"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 236,
+            "w": 160,
+            "h": 24,
+            "text": "Litres used"
+          },
+          {
+            "type": "textbox",
+            "x": 420,
+            "y": 236,
+            "w": 220,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 510,
+            "y": 316,
+            "w": 40,
+            "h": 24,
+            "text": "Save",
+            "note": "Tapping this text saves the record"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "s-u3o2-kk16-001",
@@ -1462,6 +2308,141 @@
             "h": 36,
             "text": "Continue",
             "note": "Orange button"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk16-003",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Plumbers at Tarago Reach Plumbing in Warragul fill in a job sheet on a tablet at the end of each job. On the old screen, the labels and text boxes started at a different position on each row, and the Submit and Clear buttons were identical grey buttons side by side. Plumbers often skipped a field, and sometimes cleared a finished job sheet by mistake. The redesigned screen is shown below; the notes give the buttons' colours.\n\nJustify **two** changes made in the redesign. In each justification, refer to a design principle and to the plumbers' problems.",
+    "points": [
+      {
+        "text": "Identifies the first change and its principle: the labels and text boxes now line up in two columns (alignment)",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: the eye moves straight down each column, so plumbers see every field in turn and are less likely to skip one",
+        "marks": 1
+      },
+      {
+        "text": "Identifies the second change and its principle: Submit is now dark green with bold white text and Clear is a plain outlined button (contrast)",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: the two buttons now look clearly different, so plumbers are less likely to press Clear when they mean to submit and lose a finished job sheet",
+        "marks": 1
+      }
+    ],
+    "model": "First, the labels now share one left edge and the text boxes another, so the form reads as two straight columns. This applies alignment. On the old screen each row started somewhere different, which made it easy for a plumber's eye to jump past a field. Now the eye moves straight down the column of boxes, so plumbers see every field in turn and are less likely to skip one.\n\nSecond, Submit is now a dark green button with bold white text, while Clear is a plain white button with a thin grey outline. This applies contrast. On the old screen the two buttons were identical, so a tired plumber could easily press Clear and wipe out a finished job sheet. Now the main action stands out and the two buttons can't be mistaken for each other.",
+    "mistake": "Naming alignment and contrast earns only part of the marks. Each justification must say how the change fixes one of the plumbers' problems.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "plumbing-job-sheet-mockup",
+        "kind": "mockup",
+        "title": "Mock-up: redesigned job sheet",
+        "width": 640,
+        "height": 400,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 200,
+            "w": 592,
+            "h": 352,
+            "text": "Tarago Reach Plumbing"
+          },
+          {
+            "type": "heading",
+            "x": 216,
+            "y": 76,
+            "w": 240,
+            "h": 32,
+            "text": "Job sheet"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 128,
+            "w": 160,
+            "h": 24,
+            "text": "Job number"
+          },
+          {
+            "type": "textbox",
+            "x": 400,
+            "y": 128,
+            "w": 240,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 176,
+            "w": 160,
+            "h": 24,
+            "text": "Customer"
+          },
+          {
+            "type": "textbox",
+            "x": 400,
+            "y": 176,
+            "w": 240,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 224,
+            "w": 160,
+            "h": 24,
+            "text": "Work done"
+          },
+          {
+            "type": "textbox",
+            "x": 400,
+            "y": 224,
+            "w": 240,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 272,
+            "w": 160,
+            "h": 24,
+            "text": "Hours"
+          },
+          {
+            "type": "textbox",
+            "x": 400,
+            "y": 272,
+            "w": 240,
+            "h": 28
+          },
+          {
+            "type": "button",
+            "x": 336,
+            "y": 332,
+            "w": 112,
+            "h": 36,
+            "text": "Clear",
+            "note": "White with a thin grey outline and plain text"
+          },
+          {
+            "type": "button",
+            "x": 464,
+            "y": 332,
+            "w": 112,
+            "h": 36,
+            "text": "Submit",
+            "note": "Dark green with bold white text"
           }
         ]
       }

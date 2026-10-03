@@ -64,6 +64,41 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o1-kk01-003",
+    "kk": [
+      "U3O1-KK01",
+      "U3O1-KK14"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Leo maintains the nightly report module for Merri Bend Couriers in Warrnambool. The module sorts about 5 000 delivery records by suburb, and staff say the report takes too long. An AI assistant suggests a rewritten sorting function that it says is faster.\n\nExplain how Leo should check that the AI's function:\n\n1. still produces correct results\n2. is actually faster\n\nbefore it replaces his original function.",
+    "points": [
+      {
+        "text": "Correctness: runs the AI's function and the original on the same test data and compares them in a test table (expected output against actual output); every result must match",
+        "marks": 1
+      },
+      {
+        "text": "Correctness: explains that the test data must include cases likely to break a sort, e.g. several records for the same suburb, a list already in order or in reverse order, or an empty list, because typical data may not reveal an error",
+        "marks": 1
+      },
+      {
+        "text": "Speed: times both functions (or counts their comparisons) while they sort the same records, so the comparison is fair",
+        "marks": 1
+      },
+      {
+        "text": "Speed: explains that the timing needs a large data set, such as a full night's 5 000 delivery records, because with a few records both functions finish almost at once and a difference may not show",
+        "marks": 1
+      },
+      {
+        "text": "Alternative correctness point: reads the generated code until he understands how it sorts, so he can spot missed cases or calls to functions that don't exist",
+        "marks": 1
+      }
+    ],
+    "model": "To check that the results are still correct, Leo runs his original function and the AI's function on the same test data and records the expected and actual output of each test in a test table; every actual output must match. His test data includes cases that often break a sort, such as several deliveries to the same suburb, a list that is already in order, one in reverse order and an empty list, because typical data may not reveal an error.\n\nTo check that it is faster, he times both functions while they sort the same records, so the comparison is fair. He uses a large data set, such as a full night's 5 000 delivery records, because with only a few records both functions finish almost at once and a difference may not show. He replaces the original only if the AI's function passes every test and is measurably faster.",
+    "mistake": "Taking the AI's word that its code is faster, or checking only that it runs. Correctness and speed each need evidence: matching results on the same tests, and a timed comparison on the same large data set.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o1-kk02-001",
     "kk": [
       "U3O1-KK02",
@@ -123,6 +158,36 @@
       }
     ],
     "model": "The inputs are the number of adults and the number of children, each an Integer because passengers are counted in whole numbers. The fare is calculated as adults × 18.50 + children × 9.25 and stored as Floating point, because the rates include cents, then displayed to two decimal places; for example, 2 adults and 1 child gives $46.25. A range check rejects any booking with fewer than one adult, because the requirement says every booking must include an adult.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk02-003",
+    "kk": [
+      "U3O1-KK02"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Kalinda is coding the fees module for Wimmera Wave Swim School in Horsham. The functional requirement she has been given reads:\n\n*Regular swimmers get a discount on their monthly fee.*\n\nExplain why Kalinda can't code or test this requirement as it is written, and write a revised version of the requirement that she could code and test.",
+    "points": [
+      {
+        "text": "Explains that 'regular' isn't defined (how many sessions, over what period), so Kalinda can't write the condition that decides which swimmers get the discount",
+        "marks": 1
+      },
+      {
+        "text": "Explains that the size of the discount (a percentage or a dollar amount) isn't stated, so she can't write the calculation",
+        "marks": 1
+      },
+      {
+        "text": "Explains that, without a defined rule, no test case has a known expected output, so she can't show that the module meets the requirement",
+        "marks": 1
+      },
+      {
+        "text": "Writes a revised requirement with a measurable condition and an exact discount, e.g. 'Swimmers who attend 12 or more sessions in a calendar month receive 10% off the next month's fee'",
+        "marks": 1
+      }
+    ],
+    "model": "The requirement doesn't define 'regular'. It could mean a number of sessions a week, a month or a term, so Kalinda doesn't know what condition to code to decide who gets the discount. It also doesn't say how big the discount is, as a percentage or a dollar amount, so she can't write the calculation. Because neither the condition nor the amount is known, she can't work out the expected output of any test case, so she couldn't show that her module meets the requirement.\n\nRevised requirement: *Swimmers who attend 12 or more sessions in a calendar month receive 10% off the following month's fee.* Kalinda would confirm these figures with the swim school before coding.",
+    "mistake": "Rewriting a vague requirement in different vague words, such as 'frequent swimmers get a good discount'. A requirement that can be coded and tested states the exact condition and the exact amount, so every test has one expected output.",
     "source": "textbook"
   },
   {
@@ -231,6 +296,78 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o1-kk03-003",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Three developers at a Geelong software company are each coding one module of a stock program for a chain of hardware stores: sales, deliveries and reports. All three modules read and update the same stock records. Before coding starts, the team lead insists on a data dictionary. Part of it is shown below.\n\nJustify the team lead's decision, giving **two** reasons.",
+    "points": [
+      {
+        "text": "Reason 1: the data dictionary fixes one name for each data item (e.g. `qtyOnHand`), so all three developers use the same identifier",
+        "marks": 1
+      },
+      {
+        "text": "Explains the effect for this team: when one module (e.g. deliveries) updates a shared value, the other modules refer to and use that same value, with nothing missed or mismatched between modules",
+        "marks": 1
+      },
+      {
+        "text": "Reason 2: it fixes each item's data type and size or format (e.g. `unitPrice` as Floating point to 2 decimal places, `productCode` as a 7-character String)",
+        "marks": 1
+      },
+      {
+        "text": "Explains the effect for this team: a value stored by one module is read correctly by the others, avoiding type mismatch errors or lost cents when, for example, the reports module reads prices stored by the sales module",
+        "marks": 1
+      },
+      {
+        "text": "Alternative reason: it records each item's range or format (e.g. `qtyOnHand` from 0 to 9999), so all three modules validate the data the same way",
+        "marks": 1
+      },
+      {
+        "text": "Explains the effect of the alternative reason: no module stores a value that another module would reject or mishandle",
+        "marks": 1
+      }
+    ],
+    "model": "First, the data dictionary gives each data item one name. All three developers call the stock level `qtyOnHand`, rather than one using `stock` and another `quantity`, so when the deliveries module updates a product's stock, the sales and reports modules find and use that same value.\n\nSecond, it fixes each item's data type and size. Every module treats `unitPrice` as Floating point to two decimal places and `productCode` as a 7-character String, so a price stored by the sales module is read correctly by the reports module, without type mismatch errors or cents lost by a module that treats the price as an Integer. Because the modules are written separately but share the same stock records, agreeing on these details before coding avoids fixing mismatches later.",
+    "mistake": "Describing what a data dictionary contains without saying why it matters here. A justification ties each reason to the scenario: three developers, three modules and one shared set of stock records.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "stock-data-dictionary",
+        "kind": "table",
+        "title": "Data dictionary (extract)",
+        "columns": [
+          "Name",
+          "Data type",
+          "Size, format or range",
+          "Description"
+        ],
+        "rows": [
+          [
+            "productCode",
+            "String",
+            "7 characters, e.g. HW-0412",
+            "Unique code for each product"
+          ],
+          [
+            "unitPrice",
+            "Floating point",
+            "2 decimal places",
+            "Price in dollars, including GST"
+          ],
+          [
+            "qtyOnHand",
+            "Integer",
+            "0 to 9999",
+            "Units in stock at the store"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u3o1-kk04-001",
     "kk": [
       "U3O1-KK04"
@@ -308,6 +445,36 @@
       }
     ],
     "model": "Because the registration numbers are Strings, they are compared one character at a time from the left: \"1\", \"10\" and \"100\" all begin with 1, so they come before \"2\" and \"25\". If Jess stores the registration numbers as Integers, or converts them before sorting, they are compared by value and sort as 1, 2, 10, 25, 100.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk04-003",
+    "kk": [
+      "U3O1-KK04"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Tallarook Reach Rowing Club records each rower's attendance at every training session. Its program stores `attended` as a Boolean. The coach now wants to record whether each rower was present, late or absent.\n\nThe program also stores `distanceRowed` for each session as an Integer. The coach now wants distances recorded in kilometres to one decimal place, such as 12.5.\n\nRecommend a data type for the attendance status and for `distanceRowed`, and justify each recommendation.",
+    "points": [
+      {
+        "text": "Attendance status: Character (e.g. P, L or A) or String (e.g. present, late or absent)",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: a Boolean holds only two values (TRUE or FALSE), so it can't represent three statuses; a Character or String can hold any of the three",
+        "marks": 1
+      },
+      {
+        "text": "`distanceRowed`: Floating point",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it: distances such as 12.5 km have a fractional part that an Integer can't hold, and the distances are used in calculations such as each rower's total distance",
+        "marks": 1
+      }
+    ],
+    "model": "Attendance status: Character, storing P for present, L for late or A for absent. A Boolean can hold only TRUE or FALSE, which was enough for 'attended or not', but the coach now needs three statuses. A single-letter code holds any of them, and the program can test it with a condition such as `IF status = \"L\" THEN`.\n\n`distanceRowed`: Floating point. The coach wants distances such as 12.5 km, and an Integer can't store the .5. Floating point keeps the fractional part, so totals and averages of each rower's distance stay accurate.",
+    "mistake": "Keeping a Boolean because attendance sounds like a yes-or-no question. A Boolean has exactly two values, so once a third status is needed it can't be a Boolean.",
     "source": "textbook"
   },
   {
@@ -410,6 +577,32 @@
     ]
   },
   {
+    "id": "s-u3o1-kk05-003",
+    "kk": [
+      "U3O1-KK05"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "A solar farm in north-west Victoria records the energy generated, in kilowatt hours (e.g. 18.4), by each of its 12 rows of panels for each hour from 6 am to 8 pm (14 hours) every day. A developer plans to store each day's readings in a two-dimensional array, `energy[panelRow][hour]`.\n\nJustify the developer's choice of a two-dimensional array for this data.",
+    "points": [
+      {
+        "text": "Each reading is identified by two things, its panel row and its hour, which map to the array's row index and column index (12 rows by 14 columns, 168 readings)",
+        "marks": 1
+      },
+      {
+        "text": "Every reading has the same data type (Floating point kilowatt hours), which an array requires",
+        "marks": 1
+      },
+      {
+        "text": "The program can process the readings with loops over the indexes, e.g. fixing `hour` and looping over `panelRow` to total the farm's output for that hour, instead of using 168 separate variables or 12 separate arrays",
+        "marks": 1
+      }
+    ],
+    "model": "Each reading belongs to one panel row and one hour, so the readings form a table of 12 rows by 14 columns, and `energy[panelRow][hour]` reaches any reading from those two numbers. All 168 readings are kilowatt hours stored as Floating point, and an array holds elements of a single data type. Because every reading is reached by two integer indexes, the program can use loops instead of 168 separate variables or 12 separate arrays: fixing `hour` and looping through every `panelRow` totals the farm's output for that hour, and fixing `panelRow` while looping through every `hour` totals one row's output for the day.",
+    "mistake": "Justifying a two-dimensional array because there is 'a lot of data'. The reason is that each value is identified by two things, here the panel row and the hour, and every value has the same data type.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o1-kk06-001",
     "kk": [
       "U3O1-KK06"
@@ -454,6 +647,36 @@
       }
     ],
     "model": "With about two million readings a month, file size and processing speed matter. A CSV file stores each reading as one short line, such as `S14,2026-03-02 06:00,12.5`, with no repeated tags, so it is much smaller and quicker to read than XML, which would wrap every value in start and end tags. The readings are flat, each has the same three fields, and only the co-op's own program reads them, so XML's advantages (nesting, tags that describe the data for other systems, and extensibility) aren't needed.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk06-003",
+    "kk": [
+      "U3O1-KK06"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "A developer at an aquaculture company near Portland is adding a fault log to the program that runs the pumps in its fish tanks. Each time a fault occurs, the program adds a line to the log, such as:\n\n`06:14 Pump 3 not responding, restart attempted, pump running again`\n\nOnly the maintenance technician reads the log, in a text editor, to find out what went wrong overnight. The messages vary in length and wording.\n\nRecommend a data source for the fault log, and justify your recommendation.",
+    "points": [
+      {
+        "text": "Recommends a plain text file",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it from the scenario: each entry is a free-text message of varying length for a person to read in a text editor, not a record of fixed fields that a program splits apart, so the program only needs to add each message as a new line",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it against CSV: the messages have no fixed fields to split, and they contain commas (e.g. 'not responding, restart attempted') that a CSV reader would treat as delimiters unless every message were enclosed in quotes",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it against XML: tags around every message would make the log larger and harder for the technician to read, and no other program needs to interpret the data",
+        "marks": 1
+      }
+    ],
+    "model": "A plain text file. Each log entry is a message written for a person: the entries vary in length and wording, have no fixed fields, and are read line by line by the technician in a text editor, so the program only needs to add each new message as a line at the end of the file. A CSV file suits records with fixed fields, and these messages contain commas, such as 'not responding, restart attempted', which would split one message into several fields unless every message were enclosed in quotes. XML would wrap every message in tags, making the log larger and harder to read, when no other program needs to interpret it.",
+    "mistake": "Choosing CSV for anything saved one line at a time. CSV suits records with fixed fields that a program splits apart; free-text messages that a person reads suit plain text.",
     "source": "textbook"
   },
   {
@@ -548,6 +771,36 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o1-kk07-003",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Ngaire is designing the `Board` class for a surf school's hire program in Torquay. The program must record which boards are hired out and calculate each hire's fee from the board's hourly rate and the number of hours hired. Her draft class has the attributes `boardID`, `hourlyRate` and `isHiredOut`. The owner suggests also storing each board's colour and the name of the shop it was bought from.\n\nExplain how the principle of abstraction applies to the owner's suggestion.",
+    "points": [
+      {
+        "text": "States that abstraction means a class represents only the details that matter for the problem the program solves, leaving out the rest",
+        "marks": 1
+      },
+      {
+        "text": "Applies it: a board's colour and the shop it came from aren't used by the program's requirements (recording hires and calculating fees), so they should be left out of `Board`",
+        "marks": 1
+      },
+      {
+        "text": "Explains the benefit: the class stays simpler, so staff enter less data for each board and there are fewer attributes to code, validate and test",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: notes that a detail is added only when a requirement uses it, e.g. colour would be included if a new requirement needed staff to identify boards by colour",
+        "marks": 1
+      }
+    ],
+    "model": "Abstraction means a class models only the details that matter for the problem the program solves and leaves out everything else. Ngaire's program records which boards are hired out and calculates fees, so `boardID`, `hourlyRate` and `isHiredOut` are all needed. A board's colour and the shop it came from aren't used by either task, so by abstraction they are left out of `Board`. This keeps the class simpler: staff enter less data for each board, and there are fewer attributes to code, validate and test. If a later requirement needed one of these details, it could be added then.",
+    "mistake": "Arguing that storing more details makes a class better. Abstraction keeps only what the program's requirements use; extra attributes add data entry, code and testing for no benefit.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o1-kk08-001",
     "kk": [
       "U3O1-KK08"
@@ -596,6 +849,39 @@
     ],
     "model": "The kiosk can't check a PIN until the customer has entered one, so the request must happen at least once. A post-test loop such as `REPEAT ... UNTIL` runs its body before testing the condition, which guarantees the first request. Because the condition is tested after each entry, the loop keeps asking until a valid PIN is entered and then stops. A counted loop such as `FOR attempt ← 1 TO 3` repeats a fixed number of times, but nobody knows how many attempts a customer will need, so it could end before a valid PIN is entered or keep asking after one has been accepted.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk08-003",
+    "kk": [
+      "U3O1-KK08"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "The canteen committee of a Stawell junior football club saves the same amount each week towards a new pie warmer. Nikhil has written the function shown, which returns how many more weeks of saving are needed for the balance to reach the target. If the balance has already reached the target, it must return 0.\n\nJustify Nikhil's use of a pre-test loop rather than a post-test loop in this function.",
+    "points": [
+      {
+        "text": "The balance may already have reached the target, so the loop body must be able to run zero times.",
+        "marks": 1
+      },
+      {
+        "text": "A pre-test loop tests `balance < target` before each pass, so when the target is already met it skips the body and returns 0.",
+        "marks": 1
+      },
+      {
+        "text": "A post-test loop always runs its body at least once, so it would add a week and return 1 when no weeks are needed, e.g. `weeksToTarget(900, 50, 800)`.",
+        "marks": 1
+      }
+    ],
+    "model": "The committee's balance may already be at or above the target. Then no more weeks of saving are needed, so the function must be able to return 0 without running the loop body at all. A pre-test loop tests `balance < target` before each pass. When the target has already been reached, the test is false the first time, the body is skipped and 0 is returned. A post-test loop runs its body before its first test, so it would always add at least one week's saving: `weeksToTarget(900, 50, 800)` would return 1 instead of 0, telling the committee to keep saving when it already has enough. When saving is still needed, both kinds of loop give the same answer; for example, `weeksToTarget(620, 50, 800)` returns 4.",
+    "source": "textbook",
+    "mistake": "Saying only that a pre-test loop 'checks the condition first' doesn't justify the choice. Link it to this function: a balance that has already reached the target needs zero passes, which a post-test loop can't give.",
+    "figures": [
+      {
+        "id": "fig-weeks-to-target",
+        "kind": "pseudocode",
+        "code": "FUNCTION weeksToTarget(balance, weekly, target)\n    weeks ← 0\n    WHILE balance < target DO\n        balance ← balance + weekly\n        weeks ← weeks + 1\n    ENDWHILE\n    RETURN weeks\nENDFUNCTION"
+      }
+    ]
   },
   {
     "id": "s-u3o1-kk09-001",
@@ -682,6 +968,32 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o1-kk09-003",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "Bo is building the entry form for a Castlemaine fun run. The form has a text box where a runner types their age, a check box for a concession entry and a label that displays the entry fee. Bo's code also has variables that hold the age, once it is converted to an Integer, and the fee.\n\nRecommend a naming convention for the form's controls, and justify your recommendation with reference to Bo's form.",
+    "points": [
+      {
+        "text": "Recommends Hungarian notation for the controls: a prefix for the control type followed by camel case, e.g. `txtAge`, `chkConcession` and `lblFee`.",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it with the form: the prefix separates each control from the variable holding the same data, e.g. the text box `txtAge` from the Integer variable `age`, so the text box's String isn't used where the converted age is needed.",
+        "marks": 1
+      },
+      {
+        "text": "Justifies it with the form: the prefix shows what kind of control each name is (a text box the runner types into, a check box that is ticked or not, a label the program writes to), so a reader knows how each is used without opening the form.",
+        "marks": 1
+      }
+    ],
+    "model": "Bo should name the controls using Hungarian notation, with a prefix that shows the control type followed by camel case: `txtAge` for the age text box, `chkConcession` for the concession check box and `lblFee` for the fee label. The age appears twice in Bo's code, once in the text box and once as the Integer variable that holds the converted age. With the prefix, `txtAge` can't be confused with `age`, so Bo won't do arithmetic on the text box's String by mistake. The prefix also tells anyone reading the code what kind of control each name refers to, for example that `chkConcession` is either ticked or not and that `lblFee` only shows a value the program writes to it, so they don't need to open the form to find out.",
+    "source": "textbook",
+    "mistake": "Naming a convention without a reason tied to the form earns only the first mark. *Recommend* asks for a choice and why it suits this form."
+  },
+  {
     "id": "s-u3o1-kk10-001",
     "kk": [
       "U3O1-KK10"
@@ -733,6 +1045,36 @@
     "model": "```pseudo\nBEGIN\n    REPEAT\n        INPUT quantity\n        IF quantity < 1 OR quantity > 20 THEN\n            DISPLAY \"Enter a quantity from 1 to 20\"\n        ENDIF\n    UNTIL quantity ≥ 1 AND quantity ≤ 20\n    DISPLAY \"Quantity accepted: \" + quantity\nEND\n```\n\nThe post-test loop asks at least once and repeats until the quantity is from 1 to 20. A quantity outside the range triggers the error message and another request.",
     "mistake": "Writing the accepting condition as `quantity > 1 AND quantity < 20` wrongly rejects the boundary values 1 and 20. Check the condition with 0, 1, 20 and 21.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk10-003",
+    "kk": [
+      "U3O1-KK10"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Members of a Bairnsdale golf club book for the club's annual dinner using an online form with these fields:\n\n- member number (required)\n- number of guests (each member may bring from 0 to 3 guests)\n- dietary notes (optional; most members leave it blank)\n\nRecommend the validation checks the form should apply to the *number of guests* and *dietary notes* fields, and justify each recommendation.",
+    "points": [
+      {
+        "text": "Number of guests: an existence check, because a blank entry isn't the same as 0 guests and the club needs a definite number to cater for.",
+        "marks": 1
+      },
+      {
+        "text": "Number of guests: a type check that the entry is a whole number (rejecting e.g. `two` or `1.5`), because the value counts people.",
+        "marks": 1
+      },
+      {
+        "text": "Number of guests: a range check that accepts 0 to 3 inclusive, with a lower limit of 0, not 1, because a member may come without guests.",
+        "marks": 1
+      },
+      {
+        "text": "Dietary notes: no existence check, because the field is optional, and one would reject valid bookings from members with no dietary needs.",
+        "marks": 1
+      }
+    ],
+    "model": "*Number of guests*: The form should apply an existence check so that the field can't be left blank. A blank isn't the same as 0 guests, and the club needs a definite number to cater for. It should then apply a type check that the entry is a whole number, rejecting entries such as `two` or `1.5`, because the value counts people. Finally, a range check should accept 0 to 3 inclusive. The lower limit must be 0, not 1, because a member who comes alone brings no guests, and 3 is the most guests a member may bring.\n\n*Dietary notes*: The form should not apply an existence check. The field is optional and most members leave it blank, so an existence check would reject every booking from a member with no dietary needs.",
+    "source": "textbook",
+    "mistake": "Recommending all three checks for every field isn't a recommendation. Each check must suit the field's requirement: an optional field has to accept a blank, and a count that can be zero needs a lower limit of 0."
   },
   {
     "id": "s-u3o1-kk11-001",
@@ -794,6 +1136,51 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o1-kk11-003",
+    "kk": [
+      "U3O1-KK11"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "A Wodonga climbing gym charges $15 a session for climbers under 16 and $22 for everyone else, and members get 20% off. A new developer has inherited the function shown.\n\nIdentify **two** weaknesses in the function's internal documentation. For each, explain why it is a weakness and how it should be improved.",
+    "points": [
+      {
+        "text": "Line 3 says climbers under 18 pay the junior rate, but line 4 (and the gym's rule) uses under 16; a developer who trusts the comment may change the code or give staff the wrong age.",
+        "marks": 1
+      },
+      {
+        "text": "Improvement: correct line 3 to say that climbers under 16 pay the junior rate, and update comments whenever the code changes.",
+        "marks": 1
+      },
+      {
+        "text": "Line 10 only restates line 11, so it doesn't say what 0.8 means or why the fee is multiplied by it.",
+        "marks": 1
+      },
+      {
+        "text": "Improvement: give the reason instead, e.g. `// Members get 20% off, so they pay 80% of the fee`.",
+        "marks": 1
+      },
+      {
+        "text": "The header doesn't describe the parameters, e.g. that `member` is TRUE for a gym member, so a caller has to read the code to use the function.",
+        "marks": 1
+      },
+      {
+        "text": "Improvement: add a line to the header comment describing each parameter.",
+        "marks": 1
+      }
+    ],
+    "model": "First, line 3 says that climbers under 18 pay the junior rate, but line 4 gives the junior rate only to climbers under 16, which matches the gym's rule. A developer who trusts the comment might 'fix' line 4 to use 18, and every 16- and 17-year-old would then be undercharged. Line 3 should be corrected to say under 16, and comments should be updated whenever the code they describe changes.\n\nSecond, line 10 only repeats what line 11 does. It doesn't say what 0.8 means, so a developer can't tell whether the number is right or when it would need to change. It should give the reason instead, for example `// Members get 20% off, so they pay 80% of the fee`.",
+    "source": "textbook",
+    "mistake": "Saying a comment is 'not detailed enough' earns little. Name the line, say how it could mislead or fail to help the next developer, and give the improved comment.",
+    "figures": [
+      {
+        "id": "fig-session-fee",
+        "kind": "pseudocode",
+        "code": "FUNCTION sessionFee(age, member)\n    // Returns the fee in dollars for one climbing session.\n    // Climbers under 18 pay the junior rate.\n    IF age < 16 THEN\n        fee ← 15.00\n    ELSE\n        fee ← 22.00\n    ENDIF\n    IF member = TRUE THEN\n        // Multiply the fee by 0.8\n        fee ← fee * 0.8\n    ENDIF\n    RETURN fee\nENDFUNCTION"
+      }
+    ]
+  },
+  {
     "id": "s-u3o1-kk12-001",
     "kk": [
       "U3O1-KK12"
@@ -844,6 +1231,40 @@
     "model": "Selection sort scans the whole unsorted part of the list on every pass to find the next smallest customer number, so it makes n(n − 1)/2 comparisons: about 1.25 billion for 50 000 records, however the records start. Quick sort instead partitions the records around a pivot, so that smaller customer numbers go before it and larger ones after it, and then sorts each part the same way. On average the parts shrink quickly, so the sort needs in the order of a million comparisons, which is far less time. The advantage is lost if the pivot keeps being the smallest or largest value, for example if the first record is always chosen as the pivot and the records are already in customer-number order. Quick sort then makes about as many comparisons as selection sort.",
     "mistake": "Quick sort isn't guaranteed to be faster. An answer that claims it always is, without naming the poor-pivot case, misses the third mark.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk12-003",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "A Ballarat swimming club's program holds swimmers' registration numbers in the array `regos`, in the order the swimmers joined:\n\n`[205, 118, 377, 164, 290, 341, 452]`\n\nArrays are indexed from 0. Anika looks up registration 377 with the binary search function shown, and it returns −1, even though 377 is in the array.\n\nExplain why the search failed to find 377, and recommend a change so that lookups work correctly.",
+    "points": [
+      {
+        "text": "Binary search only works on sorted data, and `regos` is in the order swimmers joined, not in ascending order.",
+        "marks": 1
+      },
+      {
+        "text": "The first comparison is with the middle element, 164 (index 3); because 164 < 377, the search keeps only indexes 4 to 6 and discards index 2, where 377 is, then compares 341 and 452 and returns −1.",
+        "marks": 1
+      },
+      {
+        "text": "Recommends, with a reason, sorting `regos` into ascending order (and keeping it sorted as swimmers join) before binary searching, or using a linear search, which works on unsorted data and is fast enough for a short list.",
+        "marks": 1
+      }
+    ],
+    "model": "Binary search assumes the list is sorted: after each comparison with the middle element, it discards the half that can't hold the target. `regos` is in joining order, so that assumption is false. The search first compares 377 with the middle element, `regos[3]`, which is 164. Because 164 is less than 377, it keeps only indexes 4 to 6 and discards indexes 0 to 3, including index 2, where 377 is stored. It then compares 341 and 452, runs out of elements and returns −1.\n\nAnika should sort `regos` into ascending order, for example with quick sort, and keep it sorted as swimmers join, so that binary search's assumption holds. Alternatively, because the club's list is short, she could use a linear search, which works on unsorted data and would find 377 in only a few comparisons.",
+    "source": "textbook",
+    "mistake": "'The list isn't sorted' is only part of the answer. *Explain* also wants how that makes the search fail: the half holding 377 is discarded after the first comparison.",
+    "figures": [
+      {
+        "id": "fig-swim-binary-search",
+        "kind": "pseudocode",
+        "code": "FUNCTION binarySearch(list, target)\n    low ← 0\n    high ← LENGTH(list) - 1\n    WHILE low ≤ high DO\n        mid ← (low + high) DIV 2\n        IF list[mid] = target THEN\n            RETURN mid\n        ELSEIF list[mid] < target THEN\n            low ← mid + 1\n        ELSE\n            high ← mid - 1\n        ENDIF\n    ENDWHILE\n    RETURN -1\nENDFUNCTION",
+        "indexBase": 0
+      }
+    ]
   },
   {
     "id": "s-u3o1-kk13-001",
@@ -905,6 +1326,40 @@
     "model": "Typing \"ten\" caused a type mismatch, a runtime error, because the program tried to convert text that isn't a whole number to an Integer. As an extra check, the developer could test the entry before converting it: if it contains anything other than digits, the program displays \"Enter the number of bags as a whole number\" and asks again, so the conversion only runs on suitable data. The conversion could also be wrapped in error handling that catches the conversion error if it occurs, displays the same message and lets the staff member re-enter the quantity, so the program keeps running.",
     "mistake": "'Add validation' on its own earns little. Describe what is checked, when, and what the program does when the check fails.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk13-003",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "A Birchip farmers' group records each day's rainfall, in millimetres, in the array `readings`. Arrays are indexed from 1. The function shown should return the total rainfall for the `n` days recorded. For a week in which `readings` holds `[0, 12, 4, 0, 7, 3, 9]`, `totalRainfall(readings, 7)` returns 26 instead of 35, and no error message appears.\n\nExplain why the total is wrong but the program doesn't stop with an error, and state the correction.",
+    "points": [
+      {
+        "text": "The loop's end value is `n - 1` (6), so the last day's reading, `readings[7]` (9 mm), is never added, giving 26 instead of 35.",
+        "marks": 1
+      },
+      {
+        "text": "Every index the loop uses (1 to 6) is valid, so no runtime error occurs; the program runs to the end with wrong output, which is a logic error.",
+        "marks": 1
+      },
+      {
+        "text": "Correction: change line 3 to `FOR day ← 1 TO n`.",
+        "marks": 1
+      }
+    ],
+    "model": "With arrays indexed from 1, the week's readings are at indexes 1 to 7. Line 3 runs the loop from 1 to `n - 1`, which is 6, so `readings[7]`, the 9 mm that fell on the last day, is never added, and the function returns 26 instead of 35. Every index the loop does use, 1 to 6, exists, so the program never attempts anything impossible, such as reading past the end of the array. It therefore runs to the end and returns a wrong total: a logic error, which the program can't report itself and only testing against expected output reveals. Line 3 should be `FOR day ← 1 TO n`.",
+    "source": "textbook",
+    "mistake": "An off-by-one loop doesn't always crash. Going one past the end causes an index out of range runtime error, but stopping one short skips data silently, which is a logic error.",
+    "figures": [
+      {
+        "id": "fig-total-rainfall",
+        "kind": "pseudocode",
+        "code": "FUNCTION totalRainfall(readings, n)\n    total ← 0\n    FOR day ← 1 TO n - 1\n        total ← total + readings[day]\n    ENDFOR\n    RETURN total\nENDFUNCTION",
+        "indexBase": 1
+      }
+    ]
   },
   {
     "id": "s-u3o1-kk14-001",
@@ -999,5 +1454,44 @@
     "model": "Breakpoint: Ines sets a breakpoint on the line inside the loop that adds each price to `total`. Each time execution pauses, she inspects the price and `total`, stepping through until she sees the pass where `total` stops matching her own calculation. Debugging output statement: she adds a temporary `DISPLAY \"price = \" + price + \", total = \" + total` inside the loop and another after the discount, runs a faulty order, and compares the values displayed with those she worked out by hand. Commenting out: she comments out the discount line and reruns the same order. If the total now equals the correct total before discount, the loop is correct and the error is in the discount calculation; if not, the error is in the loop.",
     "mistake": "Describing what a breakpoint is earns less than applying it. Say where Ines would put it and what she would look for in the bakery's order total.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk14-003",
+    "kk": [
+      "U3O1-KK14",
+      "U3O1-KK12"
+    ],
+    "commandTerm": "recommend",
+    "marks": 4,
+    "prompt": "Farrah is testing `findMember`, a function that searches an unsorted array of member numbers for a target and returns the target's index, or −1 if it isn't there. Arrays are indexed from 0. Her test array is `[4107, 3321, 5890, 2045, 6612]`. So far her test table has one test: the target 5890, which returned 2, as expected.\n\nRecommend **two** further test cases Farrah should add, giving the input and expected output for each, and justify each choice.",
+    "points": [
+      {
+        "text": "A target that isn't in the array, e.g. 9999, with expected output −1.",
+        "marks": 1
+      },
+      {
+        "text": "Justification: it is the only test of the not-found path, checking that −1 is returned and that the search stops at the end of the array without an index out of range error.",
+        "marks": 1
+      },
+      {
+        "text": "The target in the last position, 6612, with expected output 4.",
+        "marks": 1
+      },
+      {
+        "text": "Justification: it checks that the loop reaches the final element; a loop whose end value is one short would miss it and wrongly return −1.",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: the target in the first position, 4107, with expected output 0.",
+        "marks": 1
+      },
+      {
+        "text": "Justification: it checks that the search starts at index 0; a loop that starts at 1 would miss it.",
+        "marks": 1
+      }
+    ],
+    "model": "First, Farrah should test a target that isn't in the array, such as 9999, with an expected output of −1. Her only test so far finds its target, so the not-found path is untested. This test checks that the function returns −1 rather than a wrong index, and that the search stops at the end of the array instead of reading past it and causing an index out of range error.\n\nSecond, she should test the last element, 6612, with an expected output of 4. A middle target can't reveal a loop whose end value is one short, but such a loop would never check index 4 and would wrongly return −1 for 6612.",
+    "source": "textbook",
+    "mistake": "Adding more targets from the middle of the array adds little. Good test cases go where errors hide: the ends of the array and the not-found case."
   }
 ]

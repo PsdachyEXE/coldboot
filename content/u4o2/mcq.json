@@ -93,6 +93,76 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o2-kk01-005",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "stem": "Budgeree Hills Community Health, a network of Gippsland clinics with 450 staff, has launched a program that sends each patient an SMS reminder two days before their appointment. Its objective is that no more than 8% of bookings are missed in the first 12 months after launch, down from 12% in the year before. Which data would best show whether this objective has been met?",
+    "options": [
+      "The number of reminder messages the program sent in the 12 months after launch",
+      "Missed appointments as a percentage of bookings in the 12 months after launch",
+      "Patients' ratings of the reminder messages in a survey run six months after launch",
+      "The total number of appointments missed in the 12 months after the launch"
+    ],
+    "answer": 1,
+    "explanation": "The objective is stated as a percentage of bookings over the first 12 months after launch, so the data must give that same measure for that same period. Comparing it with the 8% target shows whether the objective was met.",
+    "whyWrong": [
+      "Messages sent measure the program's activity, not whether fewer appointments were missed.",
+      "",
+      "Ratings show how patients feel about the messages, not how many appointments were missed.",
+      "A count can't be checked against a percentage target: if bookings grew, the count could rise while the rate fell."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk01-006",
+    "kk": [
+      "U4O2-KK01",
+      "U4O2-KK04"
+    ],
+    "stem": "Saltgrass Flat Energy, an electricity retailer in Morwell with 700 staff, has the goal of being the energy retailer its customers trust most. One objective is to launch a new billing app by 1 March. Three weeks before that date, the project manager proposes skipping code reviews so that the launch date can be met. Which response best serves the company's goal?",
+    "options": [
+      "Skip the reviews, because the launch date can be measured and customer trust can't",
+      "Skip the reviews for now, then review all of the code in one batch after the launch",
+      "Review only the code that junior developers have written in the last three weeks",
+      "Keep the reviews and move the date or cut features, since flaws could cost trust"
+    ],
+    "answer": 3,
+    "explanation": "An objective exists to serve a goal. Launching on time with unreviewed code risks releasing security flaws in an app that handles customers' billing details, and a breach would work directly against the goal of being the most trusted retailer. Moving the date or launching with fewer features keeps the reviews in place.",
+    "whyWrong": [
+      "Being measurable doesn't make the objective more important than the goal it is meant to serve.",
+      "Any flaws would be live, with customers' billing data exposed, until the batch review found them.",
+      "Experienced developers make mistakes too, so unreviewed code could still contain vulnerabilities.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk01-007",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "stem": "Treecreeper Mutual, a Warrnambool insurer with 1100 staff, has the goal of improving its customer service. Its objective was to answer 85% of phone calls within three minutes by 30 June. New call-routing software met this target in May, but over the same months, complaints about being transferred between departments doubled. Which conclusion is best supported?",
+    "options": [
+      "The objective was met, but it may not be moving the insurer towards its goal",
+      "The goal has been achieved, because its objective was met before the deadline",
+      "The objective has not been met, because customers are still making complaints",
+      "The software has failed, so the insurer should return to its old phone system"
+    ],
+    "answer": 0,
+    "explanation": "The target was measured and reached, so the objective was met. But an objective is only useful as evidence of progress towards the goal, and doubled complaints suggest customer service may not have improved. Treecreeper Mutual should review whether its objectives measure what the goal needs, for example by adding one about calls resolved without a transfer.",
+    "whyWrong": [
+      "",
+      "Meeting one objective doesn't by itself achieve a broad goal, and the rise in complaints suggests service hasn't improved.",
+      "The objective was about how quickly calls were answered, and that target was met; complaints are a separate measure.",
+      "The software met its target. The evidence points to reviewing the objectives, not to abandoning the system."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o2-kk02-001",
     "kk": [
       "U4O2-KK02"
@@ -180,6 +250,76 @@
       "This helps later maintenance but does nothing to protect data during development.",
       "",
       "Handing over the code secures ownership and maintenance after the project, not the data during it."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk02-005",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "stem": "Wombelano Transport, a Hamilton freight company with 350 staff, paid an external software firm to build a driver-rostering app. When the app was delivered, it rostered drivers in ways that broke the company's own rest-break rules. Every Wombelano Transport manager knows these rules, but no one thought to include them in the requirements. Which disadvantage of external development does this most directly show?",
+    "options": [
+      "The firm's staff may see company data under practices the company can't control",
+      "The firm doesn't know the company's processes, so unwritten rules are missed",
+      "The company must pay the firm again for each change it needs after delivery",
+      "The firm may keep the source code unless the contract says it must be handed over"
+    ],
+    "answer": 1,
+    "explanation": "An external firm starts without the organisation's knowledge of its own processes and builds what the requirements say. Rules that staff take for granted, like Wombelano Transport's rest-break rules, are easily left out, and the firm has no way of knowing they exist. Developers employed by the company are more likely to know them. The company can reduce this risk by having staff who know its processes check the requirements and test the app before accepting it.",
+    "whyWrong": [
+      "No company data was exposed here; the problem is that the app follows the wrong rules.",
+      "",
+      "Changes may cost extra later, but the scenario shows why the app went wrong: the firm didn't know the rules.",
+      "Nothing suggests a dispute over the source code; the app was delivered but follows the wrong rules."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk02-006",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "stem": "Cinnabar Gully Nurseries, a Monbulk plant wholesaler with 150 staff, had its ordering system built in-house by Dimitri, its only developer. He wrote no documentation, and no one else understands the code. Which risk does this create most directly?",
+    "options": [
+      "If Dimitri leaves, no one may be able to fix or patch the system quickly",
+      "Dimitri can't use version control, because no other developer shares the code",
+      "Customers' orders will have to be shared with a third-party developer",
+      "The nursery will be charged a fee each time the system needs to be changed"
+    ],
+    "answer": 0,
+    "explanation": "In-house development depends on the organisation's own staff. With one developer and no documentation, everything known about the code sits with Dimitri. If he leaves or is unavailable, faults and security flaws could stay unfixed while someone new learns the code.",
+    "whyWrong": [
+      "",
+      "Version control works for a single developer too; the problem is that only Dimitri understands the code.",
+      "Nothing is shared with a third party, because the system is built and maintained in-house.",
+      "Fees for changes are a disadvantage of external development; Dimitri is on staff."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk02-007",
+    "kk": [
+      "U4O2-KK02",
+      "U4O2-KK04"
+    ],
+    "stem": "Tuan Creek Hospital, a regional hospital with 900 staff, has engaged four developers from an external firm to rebuild its staff rostering system. They will need access to the hospital's systems for six months. Which arrangement best protects the hospital's systems and data?",
+    "options": [
+      "One shared account for the firm, limited to the test environment and closed at the end",
+      "An individual account each, with full access and a confidentiality agreement signed",
+      "An individual account each, limited to the test environment and reviewed after the end",
+      "An individual account each, limited to the test environment and closed at the end"
+    ],
+    "answer": 3,
+    "explanation": "Individual accounts mean every action can be traced to one person. Limiting them to the test environment keeps the contractors away from live systems and data the rebuild doesn't need, and closing them when the contract ends removes access as soon as it is no longer required.",
+    "whyWrong": [
+      "A shared account means no action can be traced to one developer, and one person's access can't be removed on its own.",
+      "Full access reaches live systems and data the rebuild doesn't need; an agreement doesn't limit what an account can reach.",
+      "The accounts would stay open after the work ends, until someone gets round to reviewing them.",
+      ""
     ],
     "difficulty": 3,
     "source": "textbook"
@@ -274,6 +414,75 @@
       "The records were exposed by the folder's settings, not by an error in the program's logic."
     ],
     "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-005",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "stem": "Mopoke Hill Ticketing, a Melbourne ticketing company with 120 staff, released its new booking website with the developers' detailed error messages still switched on. When a booking fails, the page shows the database's table names, the query that failed and the server's folder structure. Why is this a vulnerability?",
+    "options": [
+      "It shows attackers how the system is built, which helps them plan an attack",
+      "It lets customers see other customers' booking details whenever a booking fails",
+      "It slows the website down, so customers give up on their bookings before paying",
+      "It stops the developers from using version control to roll back the new release"
+    ],
+    "answer": 0,
+    "explanation": "Detailed error messages help while a program is being developed, but on the live site they reveal how the system is built. Attackers can use table names, queries and folder paths to craft attacks on the database. The live site should show a general message and record the detail where only the developers can see it.",
+    "whyWrong": [
+      "",
+      "The messages reveal how the system is built, not other customers' booking details.",
+      "Error messages don't slow the site, and speed is a performance problem rather than a security weakness.",
+      "Error messages have nothing to do with version control, which still records the release and can roll it back."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-006",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "stem": "Hana, a developer at Sheoak Rise Clinics, a Ballarat medical group with 300 staff, copies real patient records onto her work laptop so that she can keep testing at home. The laptop's drive is not encrypted. Which option describes the risk in this situation, rather than a threat, a vulnerability or a control?",
+    "options": [
+      "The laptop isn't encrypted, so anyone who holds it can open the patient files",
+      "A thief who breaks into her car and takes the laptop on her way home from work",
+      "Laptops are often lost or stolen, and exposed records would do serious harm",
+      "Encrypting the laptop's drive so that its files can't be read without the key"
+    ],
+    "answer": 2,
+    "explanation": "Risk combines how likely harm is with how severe it would be. Laptops are often lost or stolen, so exposure is likely, and patient records are sensitive, so exposure would cause serious harm. Together these make the risk high.",
+    "whyWrong": [
+      "This is the vulnerability: the weakness (an unencrypted laptop) that a threat could exploit.",
+      "This is a threat: a person who could exploit the weakness.",
+      "",
+      "This is a control: a measure that would reduce the risk."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-007",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "stem": "An audit of Hooded Plover Studios, a Collingwood game developer with 70 staff, found four weaknesses: every developer has administrator rights to the code repository, code reviews are optional, the office Wi-Fi password is two years old and the repository is backed up weekly. On his last day, a departing developer deleted the project's main repository. Which weakness most directly allowed him to do this?",
+    "options": [
+      "Code reviews are optional, so no one checked his changes first",
+      "Every developer holds administrator rights to the repository",
+      "The Wi-Fi password is two years old, so many people may know it",
+      "The repository is backed up only once a week, not every night"
+    ],
+    "answer": 1,
+    "explanation": "Deleting a whole repository needs administrator rights. Because every developer holds them, any one of them, including someone about to leave, can delete it. If only one or two trusted staff held these rights, the departing developer couldn't have done it.",
+    "whyWrong": [
+      "Code review checks changes to the code before they are merged; deleting the repository isn't a change that goes through review.",
+      "",
+      "He used his own staff account, so the Wi-Fi password played no part in the deletion.",
+      "Weekly backups affect how much work can be recovered, not whether he could delete the repository."
+    ],
+    "difficulty": 3,
     "source": "textbook"
   },
   {
@@ -377,6 +586,84 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk04-005",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "stem": "Mitta Flat Software, a Wodonga developer with 60 staff, runs a full set of test cases on every change before it is merged. Which problem is a code review most likely to find that these tests would miss?",
+    "options": [
+      "A discount that is calculated wrongly for orders over $100",
+      "A crash that happens when the quantity box is left empty",
+      "A total that is displayed with three decimal places, not two",
+      "A database password written as plain text in the code"
+    ],
+    "answer": 3,
+    "explanation": "Tests check what a program does with given inputs. A password written into the code doesn't change any output, so every test still passes, yet anyone who can read the code can use it. A reviewer reading the code will see it.",
+    "whyWrong": [
+      "A wrong discount changes the output, so a test with an order over $100 would reveal it.",
+      "A crash on an empty box is found by any test that leaves the box empty.",
+      "Wrongly formatted output shows up as a difference between expected and actual output.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk04-006",
+    "kk": [
+      "U4O2-KK04"
+    ],
+    "stem": "Manna Gum Bank, a Shepparton bank with 900 staff, is moving Mei, a developer, from its payments team to the team that maintains its public website. Under identity and access management, what should happen to Mei's access?",
+    "options": [
+      "She keeps her payments access and gains website access, in case she is needed",
+      "Her payments access is removed, and she gets only the website access she needs",
+      "She is given administrator rights, so that she can help either team if necessary",
+      "Her payments access stays until her next annual review, when it is checked again"
+    ],
+    "answer": 1,
+    "explanation": "Identity and access management updates a person's access whenever they join, change roles or leave. Mei no longer works on the payments systems, so keeping that access adds risk with no benefit: if her account were misused or taken over, it could still reach payment data.",
+    "whyWrong": [
+      "Access kept 'just in case' builds up over time, so a stolen account could reach systems she no longer works on.",
+      "",
+      "Administrator rights give far more access than either role needs, which increases the damage a stolen account could do.",
+      "She would keep access she no longer needs for months; access should change as soon as her role does."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk04-007",
+    "kk": [
+      "U4O2-KK04",
+      "U3O1-KK14"
+    ],
+    "stem": "Bettong Hill Apps' policy is that a change may be merged into its code only after a developer other than its author has approved it. Before each merge, its repository runs the function shown. Which call returns TRUE although the policy should refuse the merge?",
+    "options": [
+      "`canMerge(\"Ari\", \"Bea\", TRUE)`",
+      "`canMerge(\"Ari\", \"\", TRUE)`",
+      "`canMerge(\"Ari\", \"Ari\", TRUE)`",
+      "`canMerge(\"Ari\", \"Bea\", FALSE)`"
+    ],
+    "answer": 2,
+    "explanation": "Line 3 checks only that the change is approved and that a reviewer is named. It never compares the reviewer with the author, so Ari can approve their own change and the merge goes ahead. That defeats the point of a code review, which is a second person checking the code. Adding `AND reviewer ≠ author` to the condition on line 3 fixes it.",
+    "whyWrong": [
+      "Bea, a different developer, approved the change, so the policy allows it and TRUE is correct.",
+      "No reviewer is named, so the function returns FALSE, which is what the policy requires.",
+      "",
+      "The change isn't approved, so the function returns FALSE, which is correct."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "bettong-can-merge",
+        "kind": "pseudocode",
+        "title": "Merge check",
+        "code": "FUNCTION canMerge(author, reviewer, approved)\n    // Policy: merge only after a developer other than the author approves\n    IF approved = TRUE AND reviewer ≠ \"\" THEN\n        RETURN TRUE\n    ELSE\n        RETURN FALSE\n    ENDIF\nENDFUNCTION"
+      }
+    ]
   },
   {
     "id": "m-u4o2-kk05-001",
@@ -615,6 +902,184 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o2-kk05-005",
+    "kk": [
+      "U4O2-KK05",
+      "U3O2-KK08"
+    ],
+    "stem": "Dunnart Fitness, a Frankston gym chain with 260 staff, is threat modelling its class-booking app by working through the DFD shown one element at a time. Which threat applies most directly to data store D1, Members?",
+    "options": [
+      "`login_details` are intercepted as they travel to process 1, Log in",
+      "An attacker who reaches the database copies the stored member details",
+      "Someone poses as Head office to receive the `attendance_summary`",
+      "A member books classes in another member's name at process 2, Book class"
+    ],
+    "answer": 1,
+    "explanation": "A data store holds data at rest, so the threats to it are that the stored data is read, copied, changed or deleted by someone who shouldn't have it. Controls for D1 would include limiting which accounts can read it and encrypting the stored member details.",
+    "whyWrong": [
+      "Interception is a threat to data moving along a flow, `login_details`, not to data held in D1.",
+      "",
+      "This concerns the Head office entity and the `attendance_summary` flow, not the stored member details.",
+      "This is a threat to process 2, which records bookings; it doesn't read or change the member records in D1."
+    ],
+    "difficulty": 1,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "dunnart-dfd",
+        "kind": "dfd",
+        "title": "DFD (part): Dunnart Fitness class bookings",
+        "width": 640,
+        "height": 400,
+        "nodes": [
+          {
+            "id": "member",
+            "type": "entity",
+            "label": "Member",
+            "x": 104,
+            "y": 72
+          },
+          {
+            "id": "hq",
+            "type": "entity",
+            "label": "Head office",
+            "x": 536,
+            "y": 72
+          },
+          {
+            "id": "p1",
+            "type": "process",
+            "label": "Log in",
+            "number": "1",
+            "x": 104,
+            "y": 212
+          },
+          {
+            "id": "p2",
+            "type": "process",
+            "label": "Book class",
+            "number": "2",
+            "x": 320,
+            "y": 212
+          },
+          {
+            "id": "p3",
+            "type": "process",
+            "label": "Report attendance",
+            "number": "3",
+            "x": 536,
+            "y": 212,
+            "w": 112
+          },
+          {
+            "id": "d1",
+            "type": "store",
+            "label": "Members",
+            "number": "D1",
+            "x": 128,
+            "y": 344
+          },
+          {
+            "id": "d2",
+            "type": "store",
+            "label": "Bookings",
+            "number": "D2",
+            "x": 424,
+            "y": 344
+          }
+        ],
+        "flows": [
+          {
+            "from": "member",
+            "to": "p1",
+            "label": "login_details"
+          },
+          {
+            "from": "d1",
+            "to": "p1",
+            "label": "account_details"
+          },
+          {
+            "from": "p1",
+            "to": "p2",
+            "label": "member_id"
+          },
+          {
+            "from": "member",
+            "to": "p2",
+            "label": "class_choice"
+          },
+          {
+            "from": "p2",
+            "to": "d2",
+            "label": "booking_record",
+            "labelAt": {
+              "x": 356,
+              "y": 282
+            }
+          },
+          {
+            "from": "d2",
+            "to": "p3",
+            "label": "bookings"
+          },
+          {
+            "from": "p3",
+            "to": "hq",
+            "label": "attendance_summary"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o2-kk05-006",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "stem": "The threat model for a Melbourne tutoring company's online lesson portal lists the threat that an attacker could try thousands of passwords against a student's account. Which security requirement best addresses this threat?",
+    "options": [
+      "The portal must be secure and must protect students' personal details",
+      "Students must be able to join a booked lesson in three taps or fewer",
+      "Lesson records must be backed up to a second site every night",
+      "After five failed logins, an account must be locked for 15 minutes"
+    ],
+    "answer": 3,
+    "explanation": "A security requirement states, in a form that can be tested, what the solution must do to protect its data. Locking an account after five failed logins stops an attacker trying thousands of passwords, and a tester can check it by entering five wrong passwords.",
+    "whyWrong": [
+      "It is too vague to test, and it doesn't say what the portal must do about password guessing.",
+      "It is a usability requirement for joining lessons, not a control on password guessing.",
+      "Backups help recover lost records, but they do nothing to stop passwords being guessed.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk05-007",
+    "kk": [
+      "U4O2-KK05",
+      "U4O2-KK04"
+    ],
+    "stem": "Psyche Bend Accounting, a Mildura firm with 90 staff, develops its own client portal. Its threat model includes the threat that a developer accidentally releases a faulty change that takes the portal offline. Which control reduces the impact of this threat rather than its likelihood?",
+    "options": [
+      "Version control, so the last working version can be restored quickly",
+      "A code review by a second developer before every change is merged",
+      "Testing each change in a separate test environment before its release",
+      "Training every developer in the firm's coding standards once a year"
+    ],
+    "answer": 0,
+    "explanation": "Likelihood is how probable it is that a faulty change goes live; impact is how much harm it does once it has. Review, separate testing and training all make a faulty release less likely, but none of them helps once one is live. Version control keeps every earlier version, so the team can restore the last working version quickly, which shortens the outage and limits the harm to clients.",
+    "whyWrong": [
+      "",
+      "Review catches faults before release, so it makes a faulty release less likely; it doesn't shorten an outage.",
+      "Testing first catches faults before they go live, which reduces likelihood, not the harm once a fault is live.",
+      "Better coding practice means fewer faulty changes, which reduces likelihood rather than impact."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o2-kk06-001",
     "kk": [
       "U4O2-KK06"
@@ -737,6 +1202,77 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o2-kk06-005",
+    "kk": [
+      "U4O2-KK06",
+      "U4O2-KK09"
+    ],
+    "stem": "Nardoo Payroll Services in Mildura is evaluating its development practices against the criterion 'Access to the live payroll database follows the principle of least privilege.' The evaluator found that all nine developers can change the live database, each through an individual account protected by multi-factor authentication. Only the two developers who carry out releases need that access. Which conclusion does this evidence best support?",
+    "options": [
+      "Not met, because seven developers can change live data they have no need to change",
+      "Met, because each developer logs in with an individual account rather than a shared one",
+      "Met, because every account that can reach the live database uses multi-factor authentication",
+      "Not met, because even the two release developers should have no access to the live database"
+    ],
+    "answer": 0,
+    "explanation": "Least privilege means each account has only the access its owner's role needs. Seven of the nine developers can change live payroll data without needing to, so the criterion isn't met. Individual accounts and multi-factor authentication are worthwhile, but they are evidence for other criteria.",
+    "whyWrong": [
+      "",
+      "Individual accounts make actions traceable, but least privilege is about how much access each account has.",
+      "Multi-factor authentication confirms who is logging in; it doesn't limit what each account can do.",
+      "The two developers who carry out releases need that access for their role, so least privilege allows it."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk06-006",
+    "kk": [
+      "U4O2-KK06"
+    ],
+    "stem": "Glider Gully Games is a four-person Ballarat studio. Its developers work from home on company laptops, and the studio keeps its code in a cloud-hosted repository instead of on a server of its own. Which proposed criterion is **least** relevant to evaluating the security of Glider Gully Games' development practices?",
+    "options": [
+      "Every company laptop has its whole drive encrypted",
+      "Every repository account requires multi-factor authentication",
+      "Repository access is removed on each person's last day",
+      "Entry to the server room is logged by a swipe-card reader"
+    ],
+    "answer": 3,
+    "explanation": "A useful criterion is linked to a real risk for the organisation being evaluated. Glider Gully Games keeps its code in the cloud and has no server of its own, so there is no server room to protect. A criterion about logging entry to one can't be applied, and it says nothing about how securely the studio develops its code.",
+    "whyWrong": [
+      "Laptops used at home can be lost or stolen, so drive encryption protects the code stored on them.",
+      "A cloud repository can be reached from anywhere, so multi-factor authentication is highly relevant.",
+      "Former staff could still reach the cloud repository from home, so removing access promptly is relevant.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk06-007",
+    "kk": [
+      "U4O2-KK06",
+      "U4O2-KK03"
+    ],
+    "stem": "A Bendigo credit union is evaluating its development practices against the criterion 'No passwords or keys are stored in source code.' Which method of collecting evidence would give the most reliable result?",
+    "options": [
+      "Search the latest version of each file in the repository for passwords and keys",
+      "Search every version of each file in the version history for passwords and keys",
+      "Ask each developer to confirm in writing that they have never put a password in code",
+      "Check the account settings to confirm every repository account uses multi-factor authentication"
+    ],
+    "answer": 1,
+    "explanation": "Version control keeps every earlier version of each file, so a password removed from the latest code can still be read in the history by anyone with access to the repository. Only a search of the whole history shows whether a password or key is stored anywhere in the source code.",
+    "whyWrong": [
+      "A password deleted from the latest version is still stored in earlier versions, so this search could miss it.",
+      "",
+      "A written statement relies on each developer's memory and honesty; it isn't a check of what the code actually contains.",
+      "This is evidence for a different criterion, about logging in, not about secrets stored in code."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o2-kk07-001",
     "kk": [
       "U4O2-KK07"
@@ -830,6 +1366,53 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o2-kk07-005",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK09"
+    ],
+    "stem": "At a Swan Hill freight software company, developers can download and run any program on the build server. Last month a developer ran a free code-formatting tool that turned out to contain malware. Which Essential Eight strategy most directly prevents this from happening again?",
+    "options": [
+      "Regular backups, so that the build server can be restored",
+      "Patch operating systems, so that the server's known flaws are fixed",
+      "Multi-factor authentication, so that every login needs two factors",
+      "Application control, so that only approved programs can run"
+    ],
+    "answer": 3,
+    "explanation": "Application control lets only approved programs run on a computer. An unapproved tool downloaded from the internet would be blocked on the build server, whether or not it contained malware.",
+    "whyWrong": [
+      "Backups help the company recover after malware has run; they don't stop it running.",
+      "Patching closes known vulnerabilities, but here a logged-in developer ran the malicious tool themselves.",
+      "The developer was legitimately logged in, so a second factor wouldn't have stopped the tool running.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk07-006",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "stem": "Kooranga Hills Shire Council in regional Victoria runs a maternal and child health service. Its developers are building an app in which the service's nurses record each child's growth, immunisations and health checks. Which Act sets the privacy rules for how the council handles this information in the app?",
+    "options": [
+      "The Privacy and Data Protection Act 2014 (Vic), because the council is a Victorian public sector body",
+      "The Health Records Act 2001 (Vic), because the app holds health information about each child",
+      "The Privacy Act 1988 (Cth), because it covers health information held anywhere in Australia",
+      "The Copyright Act 1968 (Cth), because the council owns the records created in its app"
+    ],
+    "answer": 1,
+    "explanation": "Growth, immunisation and health check records are health information. The Health Records Act 2001 (Vic) regulates how both public and private sector organisations in Victoria handle health information, so its Health Privacy Principles set the rules for this information. The council's other personal information, such as ratepayers' details, falls under the Privacy and Data Protection Act 2014 (Vic).",
+    "whyWrong": [
+      "That Act's privacy principles cover the council's other personal information, such as ratepayers' details; health information is covered by the Health Records Act instead.",
+      "",
+      "The Privacy Act doesn't cover state public sector bodies, such as Victorian councils.",
+      "Copyright protects works such as program code; it doesn't set rules for handling health information."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o2-kk08-001",
     "kk": [
       "U4O2-KK08"
@@ -918,6 +1501,53 @@
       "Copyright protects works such as code; it doesn't give customers ownership of records about them.",
       "",
       "Real data doesn't make results unreliable; the concern is the harm to customers."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk08-005",
+    "kk": [
+      "U4O2-KK08",
+      "U3O1-KK01"
+    ],
+    "stem": "Four developers at a Shepparton software company use an AI coding assistant in different ways. Which use shows over-reliance on AI-generated code?",
+    "options": [
+      "Asking it to explain an error message, then writing and testing the fix herself",
+      "Accepting its encryption function unread, because it says the code is secure",
+      "Having it draft internal documentation, then correcting the draft against the code",
+      "Asking it to suggest test data, then checking each value against the requirements"
+    ],
+    "answer": 1,
+    "explanation": "Accepting code unread, on the assistant's own word that it is secure, hands the developer's judgement to the AI. Encryption code can look correct and still contain flaws that expose data, and the developer, not the assistant, is responsible for the code they commit.",
+    "whyWrong": [
+      "The developer writes and tests the fix herself, so she stays in control of the code.",
+      "",
+      "The draft is checked against the code before it is used, so the AI's output isn't trusted blindly.",
+      "Each suggested value is checked against the requirements, so the developer stays responsible for the test data."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk08-006",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "stem": "Ravi is building a bike-hire app for Moonah Bay Cycle Hire in Inverloch. His manager asks him to make the app record each user's location every five minutes, even when the app is closed, and to leave this out of the app's privacy notice so that the data can be used for marketing later. What is Ravi's most ethical response?",
+    "options": [
+      "Build the feature as asked, because the manager is responsible for the decision",
+      "Build the feature, but encrypt the stored locations so the hidden data is safe",
+      "Leave the feature out quietly, and tell the manager that it has been built",
+      "Explain his concerns, and propose telling users and letting them opt in"
+    ],
+    "answer": 3,
+    "explanation": "Recording users' locations without telling them takes personal data they haven't agreed to give, for a purpose they don't expect. Raising the concern openly, and proposing that users are told and can choose, respects the users and is honest with his employer.",
+    "whyWrong": [
+      "Ravi shares responsibility for what he builds, and following instructions doesn't remove the harm to users.",
+      "Encryption protects the stored data from outsiders, but users still wouldn't know they are being tracked.",
+      "Deceiving his manager is dishonest, and the feature could simply be added later by someone else.",
+      ""
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -1044,6 +1674,53 @@
     ]
   },
   {
+    "id": "m-u4o2-kk09-005",
+    "kk": [
+      "U4O2-KK09"
+    ],
+    "stem": "A Gippsland tour company's booking website connects to its database through an account with full administrator rights. An attacker who took control of the website could therefore delete any table or read the staff records stored in the same database. Which change would most directly limit what such an attacker could do to the database?",
+    "options": [
+      "Give the administrator account a longer and more complex password",
+      "Let the website's account only read tour times and handle bookings",
+      "Encrypt the connection between the website and the database server",
+      "Back up the database every night so that deleted tables can be restored"
+    ],
+    "answer": 1,
+    "explanation": "This applies the principle of least privilege, which covers programs as well as people: the website's database account gets only the access the website needs. If it can only read tour times and handle bookings, an attacker who takes control of the website can't delete tables or read staff records through it. The other changes leave the account's full rights in place.",
+    "whyWrong": [
+      "A stronger password makes the account harder to guess, but an attacker who controls the website still gets its full rights.",
+      "",
+      "Encrypting the connection protects data in transit; the website's account could still delete tables.",
+      "Backups let deleted tables be restored, but the attacker could still delete them and read the staff records."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk09-006",
+    "kk": [
+      "U4O2-KK09",
+      "U4O2-KK04"
+    ],
+    "stem": "The five developers at a Wangaratta company that builds stock-control software all log in to the code repository with one shared administrator account. When a change broke the stock count calculation last month, no one could tell who had made it. Which measure would let the company trace each future change to the developer who made it?",
+    "options": [
+      "Add multi-factor authentication to the shared administrator account",
+      "Encrypt the repository so the code can't be read if it is copied",
+      "Back up the repository every night so earlier versions can be restored",
+      "Give each developer their own account with only the rights they need"
+    ],
+    "answer": 3,
+    "explanation": "Version control records the account that made each change. With one account per developer, every change can be traced to one person, and giving each account only the rights its owner needs also limits the damage any one account can do.",
+    "whyWrong": [
+      "Multi-factor authentication makes the login harder to steal, but all five developers would still share it, so their changes couldn't be told apart.",
+      "Encryption protects the code if it is copied; it doesn't record who changed it.",
+      "Backups let a broken version be replaced, but they don't show who made the change.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o2-kk10-001",
     "kk": [
       "U4O2-KK10"
@@ -1134,5 +1811,105 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk10-005",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK09"
+    ],
+    "stem": "An evaluation at Striped Gum Media, a Bright video production company, found that a developer's laptop had been infected with malware. The malware used a flaw that an update released two months earlier had fixed, but the developer had switched off automatic updates because they restarted her laptop during work. Which recommendation best addresses the cause of this incident?",
+    "options": [
+      "Restore the developer's laptop from last week's backup, then carry on as before",
+      "Send all staff a reminder that switching off automatic updates is a security risk",
+      "Manage updates centrally so they install out of hours and can't be switched off",
+      "Require multi-factor authentication each time a developer logs in to a laptop"
+    ],
+    "answer": 2,
+    "explanation": "The cause was that updates restarted laptops during work, so the developer switched them off and a known flaw stayed open. Installing updates out of hours removes the reason to switch them off, and managing them centrally stops them being switched off, so the laptops stay patched.",
+    "whyWrong": [
+      "Restoring the laptop deals with this infection, but updates could be switched off again, leaving the same kind of flaw open.",
+      "A reminder doesn't remove the reason she switched updates off, so staff are likely to do it again.",
+      "",
+      "Multi-factor authentication confirms who logs in; it doesn't close the flaw the malware used."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk10-006",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "stem": "A Mornington real estate agency stores tenants' rental applications, including copies of their driver licences. An evaluation found that the live database password is written in the source code, which all 12 of the agency's contract developers can read. Lucas, the evaluator, recommends moving the password into a protected secrets store and changing it. Which justification best supports his recommendation?",
+    "options": [
+      "Any contractor could use it to read or change the tenants' driver licence copies",
+      "Keeping passwords out of source code is widely recommended as good security practice",
+      "Moving the password is a small task that a developer could finish within a single day",
+      "The password is written in source code that all 12 contract developers can read"
+    ],
+    "answer": 0,
+    "explanation": "A justification links the recommendation to the risk in the scenario. Anyone who can read the source code can use the password to reach the live database, so moving it out of the code and changing it stops 12 contractors, and anyone who steals their access, from reaching tenants' licence copies.",
+    "whyWrong": [
+      "",
+      "This is true of any organisation, so it doesn't link the recommendation to the agency's risk.",
+      "Being quick shows the recommendation is realistic, but it doesn't say which risk it reduces.",
+      "This restates the finding; it doesn't say why the change is needed."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk10-007",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK03"
+    ],
+    "stem": "An evaluation of a Traralgon energy retailer's development practices produced the findings shown. Which recommendation should the retailer act on first?",
+    "options": [
+      "Change the test database's default password and block access from the internet",
+      "Test a restore from the live database's backups, and then repeat the test regularly",
+      "Set developers' laptops to lock automatically after five minutes without use",
+      "Change the live database's default password and block access from the internet"
+    ],
+    "answer": 3,
+    "explanation": "Default administrator passwords are widely known, and anyone on the internet can try them, so an attack on either database is highly likely. Only the live database holds real customers' bank account details, so the impact of an attack on it is by far the highest. The retailer should secure the live database first.",
+    "whyWrong": [
+      "An attack on the test database is just as likely, but it holds only made-up records, so the impact is far lower.",
+      "Untested backups matter for recovery after an incident, but they don't make an attack any more likely.",
+      "Misusing an unlocked laptop needs someone at it in person within 30 minutes, so it is far less likely than an attack over the internet.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "traralgon-energy-findings",
+        "kind": "table",
+        "title": "Evaluation findings",
+        "columns": [
+          "Finding",
+          "Details"
+        ],
+        "rows": [
+          [
+            "1",
+            "The test database holds made-up customer records. It can be reached from the internet and still uses the default administrator password it was installed with."
+          ],
+          [
+            "2",
+            "Backups of the live database are kept in a locked safe, but no restore has been tested for a year."
+          ],
+          [
+            "3",
+            "Developers' laptops lock automatically after 30 minutes without use."
+          ],
+          [
+            "4",
+            "The live database holds customers' names, addresses and bank account details. It can be reached from the internet and still uses the default administrator password it was installed with."
+          ]
+        ]
+      }
+    ]
   }
 ]

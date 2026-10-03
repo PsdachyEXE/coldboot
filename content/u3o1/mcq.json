@@ -95,6 +95,102 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o1-kk01-005",
+    "kk": [
+      "U3O1-KK01",
+      "U3O1-KK14"
+    ],
+    "stem": "Imogen maintains the dispatch module for a Mildura dried-fruit packer. Each carton holds 12 bags of sultanas, and her function `bagsLoaded` returns the number of bags on a truck, given the number of cartons on each of its `n` pallets. She asks an AI assistant to optimise the function, and it suggests the version shown. Arrays are indexed from 0. Which response to the suggestion is best?",
+    "options": [
+      "Reject it, because line 6 multiplies only the last pallet's cartons by 12",
+      "Accept it once her tests still pass, as it gives the same total with less work",
+      "Reject it, because the loop still visits every pallet, so it saves no work",
+      "Accept it without retesting, as moving a step out of a loop can't change a result"
+    ],
+    "answer": 1,
+    "explanation": "Imogen's function multiplies each pallet's cartons by 12 inside the loop, so it does one multiplication per pallet. The AI's version adds up the cartons first and multiplies the sum by 12 once, on line 6. Because 12 × a + 12 × b + 12 × c = 12 × (a + b + c), both return the same total: for pallets of 30, 25 and 40 cartons, each returns 1140. The change is a sound optimisation, but it is still a change to working code, so Imogen should rerun her tests before she uses it.",
+    "whyWrong": [
+      "`total` holds the sum of every pallet's cartons when the loop ends, so line 6 multiplies all of them by 12.",
+      "",
+      "The loop still runs once per pallet, but there is now one multiplication in total instead of one for every pallet.",
+      "Moving a step out of a loop can change the result, e.g. when the step uses the loop counter, so every change an AI assistant suggests is retested."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "bags-loaded-original",
+        "kind": "pseudocode",
+        "title": "Imogen's function",
+        "code": "FUNCTION bagsLoaded(cartons, n)\n    total ← 0\n    FOR i ← 0 TO n - 1\n        total ← total + cartons[i] * 12\n    ENDFOR\n    RETURN total\nENDFUNCTION",
+        "indexBase": 0
+      },
+      {
+        "id": "bags-loaded-ai",
+        "kind": "pseudocode",
+        "title": "AI assistant's suggested version",
+        "code": "FUNCTION bagsLoaded(cartons, n)\n    total ← 0\n    FOR i ← 0 TO n - 1\n        total ← total + cartons[i]\n    ENDFOR\n    RETURN total * 12\nENDFUNCTION",
+        "indexBase": 0
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk01-006",
+    "kk": [
+      "U3O1-KK01",
+      "U3O1-KK14"
+    ],
+    "stem": "Hugo's function for a pony club's scoring program should return a rider's average score across their events. For the scores 7, 8 and 9 it returns 0 instead of 8. He decides to ask an AI assistant for help. Which prompt is most likely to lead to a useful diagnosis?",
+    "options": [
+      "My average function is broken. Please rewrite it from scratch so that it works properly.",
+      "Here are all 40 riders' names, phone numbers and scores. Find what is wrong with them.",
+      "Explain how to calculate an average in pseudocode, with a worked example of each step.",
+      "Here is my function. For scores 7, 8 and 9 it returns 0, not 8. What is causing this?"
+    ],
+    "answer": 3,
+    "explanation": "A useful debugging prompt gives the AI what it needs to find the fault: the code, the input that triggers the problem, and the expected and actual output. It also leaves out personal data. Hugo should still check the AI's explanation against his code and retest after any fix.",
+    "whyWrong": [
+      "Without the code, the input or the wrong output, the AI can only guess, and a rewrite may add errors Hugo doesn't understand.",
+      "It sends riders' personal information to an outside service, and it leaves out the function that contains the fault.",
+      "A general explanation of averages doesn't look at Hugo's code, so it can't show why his function returns 0.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk01-007",
+    "kk": [
+      "U3O1-KK01",
+      "U3O1-KK14"
+    ],
+    "stem": "Zara asks an AI assistant to write a pricing function for Paperbark Picture House, a cinema in Warragul. The requirement is:\n\n*Members get 10% off. On Tuesdays, everyone gets 20% off. The discounts don't combine: a member on a Tuesday gets 20% off only.*\n\nThe assistant generates the function below. Which test shows that the function doesn't meet the requirement?",
+    "options": [
+      "A non-member on a Tuesday, base price $20, expected $16.00",
+      "A member on a Monday, base price $20, expected $18.00",
+      "A member on a Tuesday, base price $20, expected $16.00",
+      "A non-member on a Monday, base price $20, expected $20.00"
+    ],
+    "answer": 2,
+    "explanation": "Under the requirement, a member on a Tuesday gets only the 20% discount, so the expected price is 20 × 0.8 = $16.00. The generated function applies both discounts in turn: line 4 gives 16.00, then line 7 gives 16.00 × 0.9 = 14.40. Only a test that combines both conditions exposes the error. Test data for generated code must cover each combination of the rules, not just each rule on its own.",
+    "whyWrong": [
+      "Only the Tuesday discount applies: 20 × 0.8 = 16.00, which matches the expected output.",
+      "Only the member discount applies: 20 × 0.9 = 18.00, which matches the expected output.",
+      "",
+      "Neither discount applies, so the function returns 20, which matches the expected output."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "ticket-price-ai",
+        "kind": "pseudocode",
+        "title": "AI-generated function: ticketPrice",
+        "code": "FUNCTION ticketPrice(basePrice, isMember, isTuesday)\n    price ← basePrice\n    IF isTuesday THEN\n        price ← price * 0.8\n    ENDIF\n    IF isMember THEN\n        price ← price * 0.9\n    ENDIF\n    RETURN price\nENDFUNCTION"
+      }
+    ]
+  },
+  {
     "id": "m-u3o1-kk02-002",
     "kk": [
       "U3O1-KK02",
@@ -165,6 +261,78 @@
       "An existence check confirms a value was entered, but it would accept 40.0 kg."
     ],
     "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk02-005",
+    "kk": [
+      "U3O1-KK02",
+      "U3O2-KK07"
+    ],
+    "stem": "Customers of a Lorne surf-hire shop pay a $20 deposit when they book. The SRS for the shop's booking program includes:\n\n- *R4: A customer can cancel a booking at any time before the hire starts.*\n- *R5: A customer who cancels at least 24 hours before the hire starts gets the deposit back. Otherwise, the shop keeps the deposit.*\n- *Scope: The program records bookings, cancellations and kept deposits. It doesn't take or refund payments; staff do this on the shop's card terminal.*\n\nJordan is coding the cancellation module. A customer cancels a booking 30 hours before the hire starts. What must the module do?",
+    "options": [
+      "Record the cancellation, and refund the $20 deposit to the customer's card",
+      "Record the cancellation, and leave the refund to staff on the card terminal",
+      "Record the cancellation, and record that the shop keeps the $20 deposit",
+      "Refuse to cancel the booking, because refunds are outside the program's scope"
+    ],
+    "answer": 1,
+    "explanation": "R4 allows the cancellation, so the module records it. The customer cancels 30 hours ahead, which is at least 24 hours, so under R5 the deposit goes back to the customer. The scope says the program doesn't refund payments, so the refund itself is left to staff on the card terminal. Each statement in the SRS sets part of what the module must, and must not, do.",
+    "whyWrong": [
+      "The scope says the program doesn't refund payments; staff refund the deposit on the card terminal.",
+      "",
+      "The shop keeps the deposit only when a booking is cancelled less than 24 hours ahead, and this one is cancelled 30 hours ahead.",
+      "R4 allows cancellation at any time before the hire; only the refund is outside the scope, not the cancellation."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk02-006",
+    "kk": [
+      "U3O1-KK02",
+      "U3O2-KK05"
+    ],
+    "stem": "A Bairnsdale butcher is having an online ordering program developed. Before coding starts, the developer checks these requirements for conflicts:\n\n1. Customers can place orders in the program until 2 pm for collection the next day.\n2. The butcher checks and approves each order before payment is taken.\n3. Payment is taken by card as soon as a customer submits an order.\n4. A customer can place an order in under three minutes.\n\nWhich two requirements conflict?",
+    "options": [
+      "1 and 3",
+      "1 and 4",
+      "2 and 3",
+      "3 and 4"
+    ],
+    "answer": 2,
+    "explanation": "Requirement 2 means the butcher must approve each order after it is submitted but before payment is taken. Requirement 3 takes payment the moment the order is submitted, which leaves no time for that approval, so the program can't meet both. The developer should ask the butcher which one to change before coding, rather than choose one.",
+    "whyWrong": [
+      "Taking payment when an order is submitted works at any time before the 2 pm cut-off, so both can be met.",
+      "A cut-off limits when orders are placed, not how long each one takes, so both can be met.",
+      "",
+      "Paying by card is part of placing an order and can easily fit within three minutes, so both can be met."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk02-007",
+    "kk": [
+      "U3O1-KK02",
+      "U3O2-KK05"
+    ],
+    "stem": "A non-functional requirement for the till program at Lyrebird Lane Gelato in Bright reads:\n\n*A casual staff member with no training can record a sale of up to five items in under 30 seconds.*\n\nWhich design decision most directly helps the program meet this requirement?",
+    "options": [
+      "Give each flavour and cup size its own labelled button to tap",
+      "Store every price as Floating point, shown to two decimal places",
+      "Add a range check that rejects any quantity outside 1 to 5",
+      "Save each day's sales in a CSV file that the owner can open"
+    ],
+    "answer": 0,
+    "explanation": "The requirement is about how quickly and easily an untrained person can use the till. Labelled buttons let staff recognise and tap each item instead of remembering and typing product codes, which cuts both the time a sale takes and the training needed.",
+    "whyWrong": [
+      "",
+      "Floating point prices keep totals accurate, but they don't make a sale faster to record or easier to learn.",
+      "Five items is the test condition, not a limit on quantities; a range check helps accuracy, not speed.",
+      "A sales file helps the owner analyse sales, but it doesn't change how quickly staff record a sale."
+    ],
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -322,6 +490,223 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o1-kk03-005",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "stem": "The mock-up and data dictionary below are part of the design for the class booking module of a Daylesford cooking school. Which data dictionary entry is inconsistent with the mock-up?",
+    "options": [
+      "`classType`, because a drop-down list can't be stored as a String",
+      "`sessions`, because a number of sessions should be Floating point",
+      "`participants`, because it allows more people than the mock-up",
+      "`vegetarian`, because a check box should be stored as a String"
+    ],
+    "answer": 2,
+    "explanation": "Design tools for one module must agree with each other. The mock-up's note allows no more than 6 people on a booking, but the data dictionary's range for `participants` is 1 to 8, so a range check coded from it would accept bookings the design says to reject. The validation should be 1 to 6.",
+    "whyWrong": [
+      "The drop-down offers the words Pasta, Thai and Baking, so String suits `classType`.",
+      "Classes are booked in whole sessions, so Integer suits `sessions`, and its range matches the note.",
+      "",
+      "A check box is either ticked or not, so Boolean suits `vegetarian` better than a String."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "cooking-class-mockup",
+        "kind": "mockup",
+        "title": "Mock-up: book a class",
+        "width": 640,
+        "height": 400,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 200,
+            "w": 592,
+            "h": 352,
+            "text": "Class bookings"
+          },
+          {
+            "type": "heading",
+            "x": 216,
+            "y": 76,
+            "w": 240,
+            "h": 32,
+            "text": "Book a class"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 128,
+            "w": 160,
+            "h": 24,
+            "text": "Class"
+          },
+          {
+            "type": "dropdown",
+            "x": 396,
+            "y": 128,
+            "w": 220,
+            "h": 28,
+            "text": "Pasta",
+            "note": "Options: Pasta, Thai, Baking"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 176,
+            "w": 160,
+            "h": 24,
+            "text": "Sessions"
+          },
+          {
+            "type": "textbox",
+            "x": 396,
+            "y": 176,
+            "w": 220,
+            "h": 28,
+            "note": "Whole sessions, 1 to 4"
+          },
+          {
+            "type": "label",
+            "x": 176,
+            "y": 224,
+            "w": 160,
+            "h": 24,
+            "text": "Participants"
+          },
+          {
+            "type": "textbox",
+            "x": 396,
+            "y": 224,
+            "w": 220,
+            "h": 28,
+            "note": "No more than 6 people on a booking"
+          },
+          {
+            "type": "checkbox",
+            "x": 396,
+            "y": 268,
+            "w": 220,
+            "h": 24,
+            "text": "Vegetarian menu"
+          },
+          {
+            "type": "button",
+            "x": 446,
+            "y": 328,
+            "w": 120,
+            "h": 40,
+            "text": "Check price"
+          }
+        ]
+      },
+      {
+        "id": "cooking-class-dd",
+        "kind": "table",
+        "title": "Data dictionary: class booking",
+        "columns": [
+          "Name",
+          "Data type",
+          "Validation"
+        ],
+        "rows": [
+          [
+            "classType",
+            "String",
+            "One of Pasta, Thai or Baking"
+          ],
+          [
+            "sessions",
+            "Integer",
+            "1 to 4"
+          ],
+          [
+            "participants",
+            "Integer",
+            "1 to 8"
+          ],
+          [
+            "vegetarian",
+            "Boolean",
+            "TRUE when the box is ticked"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk03-006",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "stem": "Tilly's draft data dictionary for the membership module of a Colac community choir is shown. When real members are entered, which entry is most likely to cause correct details to be rejected or cut short?",
+    "options": [
+      "`surname`, because many family names are longer than eight characters",
+      "`postcode`, because a String of size 4 would drop a leading zero",
+      "`mobile`, because 12 characters can't hold a mobile number with its spaces",
+      "`memberID`, because 6 characters can't hold two letters and four digits"
+    ],
+    "answer": 0,
+    "explanation": "For a String, the size is usually the maximum number of characters the item can hold. Eight characters is too few for many family names, such as Fitzgerald (10) or Papadopoulos (12), so these members' surnames would be rejected by validation or cut short. A size such as 30 suits a surname.",
+    "whyWrong": [
+      "",
+      "A String keeps every character, including a leading zero, and four characters hold a postcode such as 3250.",
+      "0412 345 678 is exactly 12 characters, spaces included, so it fits.",
+      "Two letters and four digits are exactly six characters, e.g. CC0427, so every ID fits."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "choir-member-dd",
+        "kind": "table",
+        "title": "Data dictionary: member",
+        "columns": [
+          "Name",
+          "Data type",
+          "Size",
+          "Description"
+        ],
+        "rows": [
+          [
+            "memberID",
+            "String",
+            "6",
+            "Two letters then four digits, e.g. CC0427"
+          ],
+          [
+            "surname",
+            "String",
+            "8",
+            "Member's family name"
+          ],
+          [
+            "postcode",
+            "String",
+            "4",
+            "e.g. 3250"
+          ],
+          [
+            "mobile",
+            "String",
+            "12",
+            "Includes spaces, e.g. 0412 345 678"
+          ],
+          [
+            "feePaid",
+            "Boolean",
+            "",
+            "TRUE once this year's fee is paid"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "m-u3o1-kk04-001",
     "kk": [
       "U3O1-KK04"
@@ -411,6 +796,62 @@
       ""
     ],
     "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk04-005",
+    "kk": [
+      "U3O1-KK04",
+      "U3O1-KK08"
+    ],
+    "stem": "A junior cricket club's program stores the runs a batter scored in each of four innings as Integers. Arrays are indexed from 0. What does the algorithm display, and which data type suits `average`?",
+    "options": [
+      "11.75, so `average` should be Floating point",
+      "11, as `runs` holds Integers, so `average` is an Integer too",
+      "47, so `average` should be an Integer",
+      "11.75, but `average` can still be stored as an Integer"
+    ],
+    "answer": 0,
+    "explanation": "The loop adds 14 + 3 + 22 + 8 = 47. In this pseudocode `/` gives a Floating point result, so line 7 sets `average` to 47 / 4 = 11.75. An average of whole numbers can have a fractional part, so `average` should be Floating point even though `runs` and `total` hold Integers.",
+    "whyWrong": [
+      "",
+      "11 is what `DIV` would give; `/` keeps the fractional part, and Integer inputs don't make the result whole.",
+      "47 is `total`, not the average; line 7 divides it by 4 before line 8 displays it.",
+      "An Integer can't hold the .75, so the stored average would be wrong; it needs to be Floating point."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "innings-average",
+        "kind": "pseudocode",
+        "title": "Average runs",
+        "code": "BEGIN\n    runs ← [14, 3, 22, 8]\n    total ← 0\n    FOR i ← 0 TO 3\n        total ← total + runs[i]\n    ENDFOR\n    average ← total / 4\n    DISPLAY average\nEND",
+        "indexBase": 0
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk04-006",
+    "kk": [
+      "U3O1-KK04"
+    ],
+    "stem": "A school uniform shop in Wonthaggi records the size of each polo shirt it sells as one of the codes S, M, L or XL. Which data type is most suitable for the size, and why?",
+    "options": [
+      "Character, because each size code is made of letters, not digits",
+      "String, because every value typed on a keyboard is stored as text",
+      "String, because the code XL is two characters long",
+      "Integer, because the sizes can be numbered from 1 to 4"
+    ],
+    "answer": 2,
+    "explanation": "A Character holds exactly one character. S, M and L would fit, but XL has two characters, so the size must be a String. The size is a code, not a quantity, so no numeric type suits it.",
+    "whyWrong": [
+      "S, M and L are single letters, but XL has two characters, which a Character can't hold.",
+      "String is right, but the reason isn't: a value typed as digits, such as a quantity, is converted to a numeric type when arithmetic is needed.",
+      "",
+      "The shop records letter codes; an Integer can't hold S or XL, and sizes aren't used in arithmetic."
+    ],
+    "difficulty": 3,
     "source": "textbook"
   },
   {
@@ -559,6 +1000,107 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o1-kk05-005",
+    "kk": [
+      "U3O1-KK05",
+      "U3O1-KK14"
+    ],
+    "stem": "A Wimmera grain farm records weekly rainfall, in millimetres, from three rain gauges over four weeks in the two-dimensional array `rain[gauge][week]`, shown below. Arrays are indexed from 1. What does the algorithm display?",
+    "options": [
+      "Gauge 3, week 1",
+      "Gauge 1, week 2",
+      "Gauge 3, week 2",
+      "Gauge 2, week 3"
+    ],
+    "answer": 3,
+    "explanation": "The outer loop takes each gauge in turn, and the inner loop checks that gauge's four weeks. `maxRain` rises to 12, then to 30 at gauge 1, week 2, then to 35 at gauge 2, week 3. No later reading is larger than 35 (gauge 3's largest is 33), so the algorithm displays Gauge 2, week 3.",
+    "whyWrong": [
+      "33 is the largest reading for gauge 3 only; `maxRain` isn't reset for each gauge, and 33 is less than 35.",
+      "30 is the largest reading for gauge 1 only; the loops go on to check gauges 2 and 3.",
+      "The first index is the gauge and the second is the week, so 35 is at gauge 2, week 3; gauge 3, week 2 holds 14.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "rain-array",
+        "kind": "table",
+        "title": "rain[gauge][week] (mm)",
+        "columns": [
+          "Gauge (row)",
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4"
+        ],
+        "rows": [
+          [
+            "1",
+            "12",
+            "30",
+            "8",
+            "25"
+          ],
+          [
+            "2",
+            "18",
+            "22",
+            "35",
+            "9"
+          ],
+          [
+            "3",
+            "33",
+            "14",
+            "27",
+            "31"
+          ]
+        ]
+      },
+      {
+        "id": "rain-max",
+        "kind": "pseudocode",
+        "title": "Wettest reading",
+        "code": "BEGIN\n    maxRain ← 0\n    bestGauge ← 0\n    bestWeek ← 0\n    FOR gauge ← 1 TO 3\n        FOR week ← 1 TO 4\n            IF rain[gauge][week] > maxRain THEN\n                maxRain ← rain[gauge][week]\n                bestGauge ← gauge\n                bestWeek ← week\n            ENDIF\n        ENDFOR\n    ENDFOR\n    DISPLAY \"Gauge \" + bestGauge + \", week \" + bestWeek\nEND",
+        "indexBase": 1
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk05-006",
+    "kk": [
+      "U3O1-KK05",
+      "U3O1-KK14"
+    ],
+    "stem": "Flourmill Row Bakery in Kerang stores the number of loaves on each of its five shelves in the array `stock`. Each morning, after the shelves are restocked, the algorithm below updates the array. Arrays are indexed from 0. What does `stock` contain after the algorithm runs?",
+    "options": [
+      "`[12, 20, 7, 23, 20]`",
+      "`[12, 20, 7, 3, 20]`",
+      "`[32, 20, 27, 23, 20]`",
+      "`[12, 20, 7, 23, 0]`"
+    ],
+    "answer": 0,
+    "explanation": "The loop visits indexes 0 to 4, so every shelf is checked. Only values below 5 have 20 added: index 1 (0 becomes 20), index 3 (3 becomes 23) and index 4 (0 becomes 20). 12 and 7 aren't below 5, so they are unchanged.",
+    "whyWrong": [
+      "",
+      "3 < 5 is TRUE, so index 3 also has 20 added and becomes 23.",
+      "Only elements below 5 are changed; 12 and 7 fail the test, so they stay the same.",
+      "With indexes from 0, `FOR i ← 0 TO 4` includes index 4, so the last shelf also has 20 added."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "bakery-restock",
+        "kind": "pseudocode",
+        "title": "Restock update",
+        "code": "BEGIN\n    stock ← [12, 0, 7, 3, 0]\n    FOR i ← 0 TO 4\n        IF stock[i] < 5 THEN\n            stock[i] ← stock[i] + 20\n        ENDIF\n    ENDFOR\nEND",
+        "indexBase": 0
+      }
+    ]
+  },
+  {
     "id": "m-u3o1-kk06-001",
     "kk": [
       "U3O1-KK06"
@@ -648,6 +1190,52 @@
       "The program splits at every comma, so the name doesn't stay together as one field."
     ],
     "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk06-005",
+    "kk": [
+      "U3O1-KK06"
+    ],
+    "stem": "A hardware store in Sale runs a reorder program on `stock.csv` each night. The program skips the header row, splits each line at the commas, and reads the third field as the number on hand and the fourth as the reorder level. It flags a product when the number on hand is below its reorder level. After an update to the store's sales system, the file now begins:\n\n```\ncode,name,reorderLevel,onHand\nTB-220,Trowel,10,4\n```\n\nWhat does the program do with the trowel's line?",
+    "options": [
+      "It flags the trowel, because it finds each field by its name in the header row",
+      "It doesn't flag the trowel, because it reads 10 as the number on hand",
+      "It stops with an error, because the columns of a CSV file can't be reordered",
+      "It flags the trowel, because it reads 4 as the number on hand"
+    ],
+    "answer": 1,
+    "explanation": "In a CSV file a field is identified only by its position. The program still reads field 3 as the number on hand and field 4 as the reorder level, so it compares 10 with 4. 10 isn't below 4, so the trowel isn't flagged, even though only 4 are on hand against a reorder level of 10. The header row shows the new order, but the program skips it.",
+    "whyWrong": [
+      "The program skips the header and reads each field by its position, so it doesn't notice the new order.",
+      "",
+      "Nothing in a CSV file fixes its column order; the program keeps running and reads the wrong values.",
+      "4 is now the fourth field, which the program reads as the reorder level, not the number on hand."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk06-006",
+    "kk": [
+      "U3O1-KK06"
+    ],
+    "stem": "A Kyneton bowls club stores its members in a CSV file with the header row `id,surname,mobile,suburb`. Member 2087, whose surname is Haddad, lives in Kyneton and has no mobile number. Which line stores this member so that a program reading each field by its position gets every field right?",
+    "options": [
+      "`2087,Haddad,Kyneton`",
+      "`2087,Haddad,Kyneton,`",
+      "`2087,Haddad,,Kyneton`",
+      "`2087,Haddad,none,Kyneton`"
+    ],
+    "answer": 2,
+    "explanation": "Each comma separates two fields, so a line holding four fields has three commas. Leaving nothing between the second and third commas stores an empty mobile field, and Kyneton stays in the fourth position, where the program reads the suburb.",
+    "whyWrong": [
+      "With only three fields, Kyneton is read as the mobile number and the suburb is missing.",
+      "Kyneton is in the third position, so it is read as the mobile number, and the suburb is empty.",
+      "",
+      "The program would read the word none as the member's mobile number; an empty field shows there is no value."
+    ],
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -807,6 +1395,105 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o1-kk07-005",
+    "kk": [
+      "U3O1-KK07",
+      "U3O1-KK03"
+    ],
+    "stem": "A Shepparton library's loans program has a `LibraryItem` class and a subclass, `AudioBook`. Their object descriptions are shown below, and all methods are public. Which statement about an `AudioBook` object is correct?",
+    "options": [
+      "It has only `narrator` and `lengthMinutes`, the properties listed for its own class",
+      "It has all five properties, but can use only the method listed for `AudioBook`",
+      "It has only `itemID`, `title` and `onLoan`, as a subclass can't add new properties",
+      "It has all five properties and can use the methods of both classes"
+    ],
+    "answer": 3,
+    "explanation": "Through inheritance, a subclass receives the properties and methods of its superclass and can add its own. Every `AudioBook` object therefore has `itemID`, `title` and `onLoan` from `LibraryItem` as well as `narrator` and `lengthMinutes`, and it can use `getTitle()` and `recordLoan()` as well as `getNarrator()`.",
+    "whyWrong": [
+      "A subclass object also has every property of its superclass, so `itemID`, `title` and `onLoan` are part of it too.",
+      "Public methods are inherited as well as properties, so an `AudioBook` object can use `getTitle()` and `recordLoan()`.",
+      "A subclass inherits its superclass's members and can add its own, which is why `narrator` and `lengthMinutes` are listed.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "library-item-object",
+        "kind": "object",
+        "title": "Object description: LibraryItem",
+        "name": "LibraryItem",
+        "properties": [
+          {
+            "name": "itemID",
+            "type": "String"
+          },
+          {
+            "name": "title",
+            "type": "String"
+          },
+          {
+            "name": "onLoan",
+            "type": "Boolean"
+          }
+        ],
+        "methods": [
+          {
+            "name": "getTitle()"
+          },
+          {
+            "name": "recordLoan(memberID)"
+          }
+        ]
+      },
+      {
+        "id": "audio-book-object",
+        "kind": "object",
+        "title": "Object description: AudioBook (subclass of LibraryItem)",
+        "name": "AudioBook",
+        "properties": [
+          {
+            "name": "narrator",
+            "type": "String"
+          },
+          {
+            "name": "lengthMinutes",
+            "type": "Integer",
+            "description": "e.g. 540"
+          }
+        ],
+        "methods": [
+          {
+            "name": "getNarrator()"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk07-006",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "stem": "In the ticketing program for Blackwood Hollow Wildlife Park in the Dandenong Ranges, the `Admission` class has a method `applyGroupDiscount()`. It is called only by the class's own `calculateTotal()` method, which the booking screen calls to get a price. `Admission` has no subclasses. Which access modifier best suits `applyGroupDiscount()`?",
+    "options": [
+      "Public, so that the booking screen can call it directly as well",
+      "Private, since only methods inside `Admission` need to call it",
+      "Protected, so that subclasses of `Admission` are able to call it",
+      "Default, so that classes in the same package are able to call it"
+    ],
+    "answer": 1,
+    "explanation": "A member should have no more access than it needs. Only `calculateTotal()`, inside `Admission`, calls `applyGroupDiscount()`, so making it private stops other code calling it on its own, for example applying the discount a second time, while the booking screen still gets the price through the public `calculateTotal()`.",
+    "whyWrong": [
+      "The booking screen only needs `calculateTotal()`; letting it call the discount step directly could apply the discount twice.",
+      "",
+      "`Admission` has no subclasses, so no subclass needs the method, and protected access gives more access than needed.",
+      "No other class needs the method, so opening it to other classes in the same package gives more access than needed."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o1-kk08-001",
     "kk": [
       "U3O1-KK08"
@@ -912,6 +1599,89 @@
         "code": "FUNCTION countDigits(n)\n    digits ← 0\n    REPEAT\n        n ← n DIV 10\n        digits ← digits + 1\n    UNTIL n = 0\n    RETURN digits\nENDFUNCTION"
       }
     ]
+  },
+  {
+    "id": "m-u3o1-kk08-005",
+    "kk": [
+      "U3O1-KK08"
+    ],
+    "stem": "Talia is writing a fixture program for a social netball competition in Horsham, in which every team plays every other team once. She runs the algorithm shown for 6 teams. How many matches does it display?",
+    "options": [
+      "5",
+      "15",
+      "20",
+      "30"
+    ],
+    "answer": 1,
+    "explanation": "The inner loop starts at `home + 1`, so each team is paired only with the teams numbered after it. Team 1 plays teams 2 to 6 (5 matches), team 2 plays teams 3 to 6 (4), and teams 3, 4 and 5 add 3, 2 and 1: 5 + 4 + 3 + 2 + 1 = 15. Each pair appears once, as the competition needs.",
+    "whyWrong": [
+      "5 is the number of passes of the outer loop, but the inner loop displays one or more matches on each pass.",
+      "",
+      "20 would result if the inner loop started at `home`, which would also pair each team with itself.",
+      "30 counts each pair twice, once each way round; starting the inner loop at `home + 1` lists each pair once."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-netball-fixtures",
+        "kind": "pseudocode",
+        "code": "BEGIN\n    numTeams ← 6\n    FOR home ← 1 TO numTeams - 1\n        FOR away ← home + 1 TO numTeams\n            DISPLAY \"Team \" + home + \" v Team \" + away\n        ENDFOR\n    ENDFOR\nEND"
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk08-006",
+    "kk": [
+      "U3O1-KK08"
+    ],
+    "stem": "Leilani's training log for a Warrnambool cycling club stores the length of each ride in minutes. The algorithm shown converts a ride's length to hours and minutes. What does it display?",
+    "options": [
+      "2.25 h 15 min",
+      "15 h 2 min",
+      "2 h 25 min",
+      "2 h 15 min"
+    ],
+    "answer": 3,
+    "explanation": "`DIV` gives the whole number of times 60 goes into 135, which is 2. `MOD` gives the remainder: 135 − 2 × 60 = 15. So the ride took 2 hours and 15 minutes.",
+    "whyWrong": [
+      "`DIV` rounds down to a whole number, so `hours` is 2, not 2.25; 2.25 would need `/`.",
+      "The hours come from `DIV` and the leftover minutes from `MOD`, not the other way round.",
+      "`MOD` gives the remainder in minutes (15), not the decimal part of 135 ÷ 60 (0.25).",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-ride-minutes",
+        "kind": "pseudocode",
+        "code": "BEGIN\n    minutes ← 135\n    hours ← minutes DIV 60\n    leftOver ← minutes MOD 60\n    DISPLAY hours + \" h \" + leftOver + \" min\"\nEND"
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk08-007",
+    "kk": [
+      "U3O1-KK08"
+    ],
+    "stem": "Omar is splitting the checkout code for a Beechworth bakery into modules. Which module should be written as a function rather than a procedure?",
+    "options": [
+      "`printReceipt`, which prints the items bought and the total on the receipt printer",
+      "`clearOrder`, which empties the order list so the next customer can be served",
+      "`calculateGst`, which works out the GST so the caller can add it to the total",
+      "`showSpecials`, which displays today's specials on the screen facing the counter"
+    ],
+    "answer": 2,
+    "explanation": "A function returns a value to the code that called it. The checkout needs the GST amount back so that it can add it to the total, so `calculateGst` should be a function that returns it, e.g. `gst ← calculateGst(subtotal)`. The other modules each carry out a task without handing a value back, so procedures suit them.",
+    "whyWrong": [
+      "Printing the receipt is a task; no value needs to come back to the caller, so a procedure suits.",
+      "Clearing the order is a task that returns nothing, so a procedure suits.",
+      "",
+      "Displaying the specials is a task that returns nothing, so a procedure suits."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
   },
   {
     "id": "m-u3o1-kk09-001",
@@ -1034,6 +1804,52 @@
     ]
   },
   {
+    "id": "m-u3o1-kk09-005",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "stem": "A Colac farm supplies store's program held prices in whole dollars in the variable `intPrice`. The store now needs dollars and cents, so Ravi changed the variable's data type to Floating point but kept its name. Which problem is most likely to follow?",
+    "options": [
+      "The program stops with a runtime error, because the name no longer matches the type",
+      "The translator rejects the variable, because the `int` prefix is kept for Integers",
+      "A developer who trusts the prefix treats the price as a whole number, losing cents",
+      "Prices are rounded to whole dollars when stored, because the prefix sets the type"
+    ],
+    "answer": 2,
+    "explanation": "Hungarian notation records a data type in the name, but nothing checks that the two agree. `intPrice` now tells readers the price is an Integer when it is Floating point, so a developer who trusts the prefix might, for example, copy it into an Integer variable and lose the cents. When a variable's type changes, it should be renamed everywhere it is used, e.g. to `fltPrice`.",
+    "whyWrong": [
+      "A name has no effect on how the program runs, so a misleading prefix can't cause a runtime error.",
+      "Prefixes are a convention for people, not a rule the translator enforces; `intPrice` is a valid name whatever it holds.",
+      "",
+      "The declaration sets the data type, not the name, so the Floating point variable keeps its cents."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk09-006",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "stem": "The style guide at a Traralgon software firm says that variables use snake case with no type prefix, and interface controls use a Hungarian prefix for the control type followed by camel case. Kaia needs names for a Floating point variable holding a delivery cost and for the button that calculates it. Which pair of names follows the guide?",
+    "options": [
+      "`delivery_cost` and `btnCalculateDelivery`",
+      "`fltDeliveryCost` and `btnCalculateDelivery`",
+      "`delivery_cost` and `btn_calculate_delivery`",
+      "`deliveryCost` and `calculateDeliveryBtn`"
+    ],
+    "answer": 0,
+    "explanation": "`delivery_cost` is lowercase words joined by underscores with no prefix, as the guide requires for variables. `btnCalculateDelivery` starts with a prefix for a button, `btn`, and continues in camel case, as the guide requires for controls.",
+    "whyWrong": [
+      "",
+      "`fltDeliveryCost` has a type prefix and is in camel case, but the guide wants variables in snake case without a prefix.",
+      "`btn_calculate_delivery` joins its words with underscores, but controls must continue in camel case after the prefix.",
+      "`deliveryCost` is camel case, and `calculateDeliveryBtn` puts the control type at the end instead of using a prefix."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o1-kk10-001",
     "kk": [
       "U3O1-KK10"
@@ -1131,6 +1947,52 @@
       "An existence check only confirms that a value was entered, so it would also accept 72."
     ],
     "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk10-005",
+    "kk": [
+      "U3O1-KK10"
+    ],
+    "stem": "A Lakes Entrance boat hire program asks how many hours a boat is hired for, which must be a whole number from 1 to 8. The current version applies only a type check, which confirms that the entry is an Integer. Which entry would it wrongly accept?",
+    "options": [
+      "`4.5`",
+      "`-2`",
+      "`two`",
+      "`3 hrs`"
+    ],
+    "answer": 1,
+    "explanation": "−2 is an Integer, so it passes the type check, yet a boat can't be hired for −2 hours. Only a range check that accepts 1 to 8 would reject it. A type check confirms the kind of data entered, not that its value makes sense.",
+    "whyWrong": [
+      "4.5 has a decimal part, so it isn't an Integer and the type check rejects it.",
+      "",
+      "`two` is written in letters, so it isn't an Integer and the type check rejects it.",
+      "`3 hrs` contains letters, so it isn't an Integer and the type check rejects it."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk10-006",
+    "kk": [
+      "U3O1-KK10"
+    ],
+    "stem": "A Portland beach clean-up group's sign-up form must accept any volunteer aged 16 or over; there is no upper age limit. The developer added a range check that accepts ages from 16 to 80, and an 83-year-old volunteer's sign-up is rejected. Which statement best describes the problem?",
+    "options": [
+      "The check is correct, because validation must reject values outside its set limits",
+      "Validation only checks that data is reasonable, so some valid ages will be rejected",
+      "An existence check should replace the range check, as the group has no upper limit",
+      "The check's upper limit doesn't match the requirement, so it rejects valid data"
+    ],
+    "answer": 3,
+    "explanation": "A range check's limits must come from the requirements. Any volunteer aged 16 or over is valid, so rejecting 83 turns away someone entitled to join. The upper limit should be raised well above any real volunteer's age, such as 120, so that every valid age is accepted but typing mistakes such as 830 are still rejected.",
+    "whyWrong": [
+      "The check does what it was coded to do, but its limits contradict the requirement, so it rejects a valid age.",
+      "Validation should reject only unreasonable data, and under the requirement an 83-year-old volunteer is valid.",
+      "An existence check only confirms that an age was entered, so it would also accept an age of 5 or 830.",
+      ""
+    ],
+    "difficulty": 3,
     "source": "textbook"
   },
   {
@@ -1233,6 +2095,60 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk11-005",
+    "kk": [
+      "U3O1-KK11"
+    ],
+    "stem": "Priya is documenting the stocktake program she wrote for a Mansfield outdoor gear shop. Which information belongs in the program's internal documentation rather than in the guide for shop staff?",
+    "options": [
+      "How to scan a barcode and correct a miscounted item on the stocktake screen",
+      "Why the report module rounds each stock value to cents before adding them up",
+      "What staff should do when the message 'Count saved offline' appears",
+      "Which keyboard shortcut prints the variance report at the end of a stocktake"
+    ],
+    "answer": 1,
+    "explanation": "Internal documentation is written in the source code, for programmers. The reason for a processing choice, such as rounding each stock value to cents before adding the values up, tells a later programmer why the module works that way, so they don't undo it. The other options tell staff how to use the program, which belongs in the staff guide.",
+    "whyWrong": [
+      "Scanning and correcting counts are steps for staff who use the program, so they belong in the staff guide.",
+      "",
+      "Explaining a message tells staff how to respond while using the program; programmers don't need it in the code.",
+      "A keyboard shortcut is part of operating the program, so it belongs in the staff guide."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk11-006",
+    "kk": [
+      "U3O1-KK11"
+    ],
+    "stem": "A Ballarat dance competition's scoring program uses the function shown. Arrays are indexed from 0. A developer calls `middleScore([8, 6, 9, 5, 7], 5)`. What is returned, and why?",
+    "options": [
+      "7, because the function finds the middle value whatever the order",
+      "6, because with indexes from 0, `scores[2]` is the second score",
+      "9, because the scores weren't sorted, as lines 3 and 4 require",
+      "No value, because line 3 stops the function if scores are unsorted"
+    ],
+    "answer": 2,
+    "explanation": "`5 DIV 2` is 2, so line 5 returns `scores[2]`, the third element, which is 9. The median of these scores is 7, but lines 3 and 4 state that the caller must sort the scores first, and this call didn't. A header comment that states an assumption like this tells other programmers how to call the module correctly, but it can't enforce it.",
+    "whyWrong": [
+      "Line 5 returns whatever is at index 2, so the result is the middle value only if the scores are sorted first.",
+      "With indexes from 0, `scores[2]` is the third element (9); the second element is `scores[1]`.",
+      "",
+      "Lines 2 to 4 are comments, which the translator ignores, so they can't stop the function or check the order."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-middle-score",
+        "kind": "pseudocode",
+        "code": "FUNCTION middleScore(scores, n)\n    // Returns the median of n judges' scores, where n is odd.\n    // The scores must already be sorted into ascending order;\n    // this function doesn't sort them.\n    RETURN scores[n DIV 2]\nENDFUNCTION",
+        "indexBase": 0
+      }
+    ]
   },
   {
     "id": "m-u3o1-kk12-001",
@@ -1343,6 +2259,83 @@
     ]
   },
   {
+    "id": "m-u3o1-kk12-005",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "stem": "A Shepparton cannery's program holds 30 000 grower delivery records, which are not in docket number order. Staff look up a record by its docket number about 2 000 times a day, and the records don't change during the day. Which approach is most efficient for the day's lookups?",
+    "options": [
+      "Use linear search for every lookup, because the records aren't sorted",
+      "Use binary search on the records in their stored order, to save time",
+      "Sort the records with selection sort before each lookup, then binary search",
+      "Sort the records once with quick sort, then binary search for each lookup"
+    ],
+    "answer": 3,
+    "explanation": "Sorting 30 000 records takes time, but it only has to be done once, because the records don't change during the day. Each binary search then needs at most 15 comparisons, instead of up to 30 000 for a linear search, so over 2 000 lookups the one sort soon pays for itself. Quick sort suits the sort because it is usually much faster than selection sort on a list this large.",
+    "whyWrong": [
+      "Linear search works on unsorted data, but 2 000 lookups of up to 30 000 comparisons each take far longer than one sort followed by fast searches.",
+      "Binary search needs sorted data; on these records it can report 'not found' for a docket that is there.",
+      "Sorting before every lookup repeats a slow sort 2 000 times, when one sort is enough because the records don't change.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk12-006",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "stem": "A Bendigo library's program sorts its 2 000 borrower records with selection sort. The library expects to have 4 000 borrowers in a few years. About how many comparisons will the sort make then, compared with today?",
+    "options": [
+      "About the same, since each pass compares the same number of values",
+      "About four times as many: twice the passes, each about twice as long",
+      "About twice as many, since there will be twice as many records to sort",
+      "About one more, since doubling the list adds only one extra comparison"
+    ],
+    "answer": 1,
+    "explanation": "Selection sort makes n(n − 1)/2 comparisons whatever order the records start in: 1 999 000 for 2 000 records and 7 998 000 for 4 000. Doubling the list doubles the number of passes and roughly doubles the length of each pass, so the number of comparisons grows about four times.",
+    "whyWrong": [
+      "Each pass scans the whole unsorted part of the list, so a longer list means longer passes, and more of them.",
+      "",
+      "Doubling the records doubles the number of passes and also lengthens each one, so the count grows by more than double.",
+      "One extra comparison per doubling describes binary search, which halves the list each step; selection sort scans it."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk12-007",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "stem": "A Hamilton bakery's till records the product code of each item sold, in order of sale, and uses the function shown to find a product in the day's sales. Arrays are indexed from 0. What does `findCode([315, 742, 108, 742, 560], 742)` return?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": 2,
+    "explanation": "The loop has no early exit, so it checks all five codes. `codes[1]` matches and line 5 sets `position` to 1, but `codes[3]` also matches and line 5 overwrites it with 3. The function returns the index of the *last* match. To return the first match and save comparisons, the search should stop as soon as the target is found.",
+    "whyWrong": [
+      "1 is the index of the first match, but the loop keeps going, and line 5 runs again when `i` is 3.",
+      "2 is how many times 742 appears; the function stores an index, not a count.",
+      "",
+      "742 is the fourth code, but with indexes from 0 its index is 3."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-find-code",
+        "kind": "pseudocode",
+        "code": "FUNCTION findCode(codes, target)\n    position ← -1\n    FOR i ← 0 TO LENGTH(codes) - 1\n        IF codes[i] = target THEN\n            position ← i\n        ENDIF\n    ENDFOR\n    RETURN position\nENDFUNCTION",
+        "indexBase": 0
+      }
+    ]
+  },
+  {
     "id": "m-u3o1-kk13-001",
     "kk": [
       "U3O1-KK13"
@@ -1447,6 +2440,114 @@
         "kind": "pseudocode",
         "indexBase": 1,
         "code": "FUNCTION averageScore(scores, count)\n    total ← 0\n    FOR i ← 1 TO count\n        total ← total + scores[i]\n    ENDFOR\n    RETURN total / count\nENDFUNCTION"
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk13-005",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "stem": "A tester logged the three faults shown in the online merchandise shop of a Seymour community radio station. Which option correctly classifies faults 1, 2 and 3, in that order?",
+    "options": [
+      "Runtime, logic, syntax",
+      "Syntax, runtime, logic",
+      "Logic, syntax, runtime",
+      "Logic, runtime, syntax"
+    ],
+    "answer": 3,
+    "explanation": "Fault 1 lets the program run to the end but gives wrong output: a logic error. Fault 2 stops the program while it is running: a runtime error. Fault 3 breaks the language's rules, so the code can't be translated and the program won't start: a syntax error.",
+    "whyWrong": [
+      "Fault 1 lets the program finish with wrong totals, which is a logic error, not a runtime error.",
+      "Fault 1 can't be a syntax error, because the program runs; fault 3, which stops translation, is the syntax error.",
+      "Fault 2 happens while the program is running, so it is a runtime error; a syntax error stops the code being translated.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-radio-shop-faults",
+        "kind": "table",
+        "columns": [
+          "Fault",
+          "What the tester saw"
+        ],
+        "rows": [
+          [
+            "1",
+            "Order totals never include the $7.50 postage, although every order should."
+          ],
+          [
+            "2",
+            "The program stops with an error message when the daily sales summary is opened on a day with no sales."
+          ],
+          [
+            "3",
+            "After the latest change, the program won't start: the translator reports an IF with no matching ENDIF on line 42."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk13-006",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "stem": "A Daylesford hotel's valet parking program stores the registration of the car in each bay in the array `bays`, and uses the function shown to find a car. Arrays are indexed from 0, and `bays` holds `[\"TQR418\", \"BKM207\", \"ZDA553\"]`. What happens when `findBay(bays, \"YPL900\")` is called?",
+    "options": [
+      "An index out of range error occurs at line 3 once `i` is 3",
+      "It returns −1, because the registration isn't in the array",
+      "It returns 3, the first index after the end of the array",
+      "The loop never ends, because `bays[i]` never equals the target"
+    ],
+    "answer": 0,
+    "explanation": "`YPL900` matches none of the three registrations, so line 4 increases `i` to 1, 2 and then 3. Line 3 then tries to read `bays[3]`, but the last valid index is 2, so an index out of range runtime error stops the program before anything is returned. The loop needs to stop, and return −1, once `i` passes the last index.",
+    "whyWrong": [
+      "",
+      "No line returns −1; the loop keeps increasing `i` until `bays[i]` can't be read.",
+      "To return 3 the loop must end, but its test on line 3 has to read `bays[3]` first, and that fails.",
+      "`i` grows by 1 on each pass, so after three passes the loop reads an invalid index instead of running forever."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-find-bay",
+        "kind": "pseudocode",
+        "code": "FUNCTION findBay(bays, rego)\n    i ← 0\n    WHILE bays[i] ≠ rego DO\n        i ← i + 1\n    ENDWHILE\n    RETURN i\nENDFUNCTION",
+        "indexBase": 0
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk13-007",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "stem": "A Mornington café's loyalty program should give the level Bronze below 500 points, Silver from 500 to 999 points and Gold from 1 000 points. It uses the function shown. What does `rewardLevel(1250)` return, and which type of error does this show?",
+    "options": [
+      "Gold, and no error, because 1 250 is at least 1 000",
+      "Silver, and a runtime error, because line 4 is never reached",
+      "Silver, and a logic error, because line 2 is tested first",
+      "No value, and a syntax error, because both conditions are true"
+    ],
+    "answer": 2,
+    "explanation": "IF and ELSEIF conditions are tested in order, and only the first true branch runs. `1250 ≥ 500` is true on line 2, so `level` becomes Silver and line 4 is never tested. The program runs without an error message but returns the wrong level, which is a logic error. Testing `points ≥ 1000` first would fix it.",
+    "whyWrong": [
+      "Line 4's condition is true, but line 2 is tested first and is also true, so the Gold branch never runs.",
+      "Skipping a branch doesn't stop the program; it runs to the end and returns the wrong level.",
+      "",
+      "Conditions that can both be true are valid syntax; only the first true branch runs."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-reward-level",
+        "kind": "pseudocode",
+        "code": "FUNCTION rewardLevel(points)\n    IF points ≥ 500 THEN\n        level ← \"Silver\"\n    ELSEIF points ≥ 1000 THEN\n        level ← \"Gold\"\n    ELSE\n        level ← \"Bronze\"\n    ENDIF\n    RETURN level\nENDFUNCTION"
       }
     ]
   },
@@ -1585,6 +2686,121 @@
         "id": "fig-laser-fee",
         "kind": "pseudocode",
         "code": "FUNCTION laserFee(hours, member)\n    IF hours > 4 THEN\n        fee ← 30 + (hours - 3) * 6\n    ELSE\n        fee ← hours * 10\n    ENDIF\n    IF member = TRUE THEN\n        fee ← fee - 4\n    ENDIF\n    RETURN fee\nENDFUNCTION"
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk14-005",
+    "kk": [
+      "U3O1-KK14"
+    ],
+    "stem": "Hamish is testing the fee calculator for a Kyneton dog grooming salon. He runs the program with each test's inputs, then copies what it displays into both the Expected output and the Actual output columns of his test table. What is the main problem with this approach?",
+    "options": [
+      "Actual output should be recorded before the program is run, so the columns are filled in the wrong order",
+      "Expected output must come from the salon's pricing rules, so these tests can't reveal a wrong fee",
+      "The inputs should be left out of the table, because only the two outputs need to be compared",
+      "Only invalid data should be tested, because valid data can't reveal errors in a fee calculation"
+    ],
+    "answer": 1,
+    "explanation": "Expected output is worked out by hand from the requirements (here, the salon's pricing rules) before the test is run. Copying the program's own output makes expected and actual output match every time, even when a fee is calculated wrongly, so the tests can't find errors.",
+    "whyWrong": [
+      "Actual output can only be recorded by running the program; it is expected output that is worked out first.",
+      "",
+      "Without the inputs, no one could repeat a test or see which data produced each output.",
+      "Valid data must be tested too, to check that it is processed correctly; many errors show up only with valid data."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk14-006",
+    "kk": [
+      "U3O1-KK14"
+    ],
+    "stem": "A Healesville squash centre charges $16 an hour for court hire, and members pay 25% less. The test table shows the results of testing the court hire function. Which is the most likely cause of the errors?",
+    "options": [
+      "The hourly rate is wrong in the calculation that every booking uses",
+      "The test for members uses the wrong comparison, so members aren't recognised",
+      "A runtime error stops the function whenever it processes a member's booking",
+      "The member calculation keeps 25% of the fee instead of taking 25% off it"
+    ],
+    "answer": 3,
+    "explanation": "Tests 1 and 2 pass, so the hourly rate and the calculation for non-members are correct. Both member tests fail, and each actual output is exactly a quarter of the full fee ($4 of $16, $12 of $48), which is the size of the discount. The member calculation most likely multiplies by 0.25 where it should multiply by 0.75.",
+    "whyWrong": [
+      "Tests 1 and 2 use the same hourly rate and pass, so the rate is correct.",
+      "If members weren't recognised, they would be charged the full fee ($16.00 and $48.00), not $4.00 and $12.00.",
+      "A runtime error would stop the function, but it returned a fee for every member test.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-squash-tests",
+        "kind": "table",
+        "columns": [
+          "Test number",
+          "Input(s)",
+          "Expected output",
+          "Actual output"
+        ],
+        "rows": [
+          [
+            "1",
+            "hours = 1, member = FALSE",
+            "$16.00",
+            "$16.00"
+          ],
+          [
+            "2",
+            "hours = 3, member = FALSE",
+            "$48.00",
+            "$48.00"
+          ],
+          [
+            "3",
+            "hours = 1, member = TRUE",
+            "$12.00",
+            "$4.00"
+          ],
+          [
+            "4",
+            "hours = 3, member = TRUE",
+            "$36.00",
+            "$12.00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk14-007",
+    "kk": [
+      "U3O1-KK14"
+    ],
+    "stem": "Arrays are indexed from 0. An Echuca café's order program displays an order total of 5 when it should be 40. To find the error, Zoe adds the debugging output statement on line 6 and runs the algorithm shown. Which conclusion does the debugging output best support?",
+    "options": [
+      "`total` is replaced on each pass, not added to, so line 5 is at fault",
+      "The loop stops after its first pass, so the end value on line 4 is at fault",
+      "`total` isn't set to 0 before the loop, so line 3 is at fault",
+      "The last price is read from beyond the array, so an index is out of range"
+    ],
+    "answer": 0,
+    "explanation": "The debugging output shows `total` as 12, 8, 15 and then 5, each just the price at that index. `total` never builds up, so line 5 overwrites it on every pass instead of adding to it. It should be `total ← total + prices[i]`, which gives 12, 20, 35 and 40.",
+    "whyWrong": [
+      "",
+      "Line 6 displays four lines, for i = 0 to 3, so the loop runs the right number of times.",
+      "Line 3 sets `total` to 0, and each value shown is a single price, so nothing is carried over from before the loop.",
+      "`i` only reaches 3, the last valid index, and the program runs to the end without an error."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-order-debug",
+        "kind": "pseudocode",
+        "code": "BEGIN\n    prices ← [12, 8, 15, 5]\n    total ← 0\n    FOR i ← 0 TO 3\n        total ← prices[i]\n        DISPLAY \"i = \" + i + \", total = \" + total\n    ENDFOR\n    DISPLAY \"Order total: \" + total\nEND",
+        "indexBase": 0
       }
     ]
   }
