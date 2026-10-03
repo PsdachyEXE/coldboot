@@ -140,7 +140,7 @@ export function rebuttal(w: Weakness, f: ScreenFacts): string {
     case 'flat-action':
       return f.buttons[0] ? `"${f.buttons[0]}" is drawn as a button, with a border.` : 'Every action here is drawn as a button.';
     case 'hidden-tap':
-      return f.photo ? `The ${f.photo.name} has a "${f.photo.cue}" button under it.` : 'No picture here works as a button.';
+      return f.photo ? `The ${f.photo.name} has ${article(f.photo.cue)} "${f.photo.cue}" button under it.` : 'No picture here works as a button.';
     case 'closed-export':
       return f.format?.direction === 'export' ? `It saves as ${f.format.open}, which other programs open.` : "This screen doesn't save any files.";
     case 'closed-import':
@@ -234,4 +234,9 @@ export function whyNot(chosen: Characteristic, w: Weakness, f: ScreenFacts): str
 
 function capital(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+/** "an" before a word that starts with a vowel ("an "Ingredients" button"), otherwise "a". */
+function article(word: string): string {
+  return /^[aeiou]/i.test(word) ? 'an' : 'a';
 }

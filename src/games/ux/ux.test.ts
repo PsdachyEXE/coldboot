@@ -16,7 +16,7 @@ import game from './index';
 import { CHARACTERISTIC_OPTIONS, fromUxInstance, generateUxItem, planUxRound, REASON_COUNT, reasonChoices, uxItem, uxScreen, whichItem, whyItem, type UxSpec } from './items';
 import { UX_MAN } from './meta';
 import { buildScreen, TEMPLATES } from './templates';
-import { CHARACTERISTIC_OF, CHARACTERISTICS, WEAKNESSES, type UxRole, type Weakness } from './weakness';
+import { CHARACTERISTIC_OF, CHARACTERISTICS, explanation, fixText, reasonText, rebuttal, WEAKNESSES, whyNot, type UxRole, type Weakness } from './weakness';
 
 const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 17);
 const LEVELS: Difficulty[] = ['easy', 'normal', 'hard'];
@@ -249,6 +249,21 @@ describe('ux items', () => {
           // Other characteristics are never repeated.
           const others = chosen.filter((w) => CHARACTERISTIC_OF[w] !== CHARACTERISTIC_OF[weakness]).map((w) => CHARACTERISTIC_OF[w]);
           expect(new Set(others).size).toBe(others.length);
+        }
+      }
+    }
+  });
+
+  it('writes "an" before a vowel in every reason, rebuttal, explanation and fix', () => {
+    expect(rebuttal('hidden-tap', uxScreen({ template: 'bakery', weakness: 'flat-action', seed: 1 }).facts)).toBe('The photo has an "Ingredients" button under it.');
+    expect(rebuttal('hidden-tap', uxScreen({ template: 'report', weakness: 'long-form', seed: 1 }).facts)).toBe('The photo area has an "Add a photo" button under it.');
+    for (const t of TEMPLATES) {
+      for (const weakness of t.weaknesses) {
+        for (const seed of SEEDS.slice(0, 10)) {
+          const { facts } = uxScreen({ template: t.id, weakness, seed });
+          const texts = [explanation(weakness, facts), fixText(weakness, facts), ...CHARACTERISTICS.map((c) => whyNot(c, weakness, facts))];
+          for (const w of WEAKNESSES) texts.push(reasonText(w, facts, w === weakness), rebuttal(w, facts));
+          for (const text of texts) expect(text, `${t.id} ${weakness}`).not.toMatch(/\ba "?[aeio]/i);
         }
       }
     }
