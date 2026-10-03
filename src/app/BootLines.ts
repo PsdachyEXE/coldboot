@@ -2,12 +2,13 @@
  * The boot sequence's POST-style lines, built only from real data: the build id, the KK map, the
  * content status, reviews due and the time to the exam. Nothing here is decorative filler.
  *
- * On exam day the exam line gives the hours and minutes left; during the exam it wishes the student
- * luck and drops the reviews line, so nothing asks for study; afterwards it says the exam is over
- * and the reviews line notes that the exam caps have lifted.
+ * On exam day the exam line gives the hours and minutes left, rounded down as Home and the status
+ * bar round them; during the exam it wishes the student luck and drops the reviews line, so nothing
+ * asks for study; afterwards it says the exam is over and the reviews line notes that the exam caps
+ * have lifted.
  */
 import { AREA_IDS, type AreaId } from '../content/schema';
-import { countdown, examDayState, formatCountdown } from '../lib/time';
+import { countdown, examDayState, formatCountdown, formatTimeLeftShort } from '../lib/time';
 
 export type BootMode = 'full' | 'condensed';
 
@@ -82,18 +83,11 @@ function contentLine(c: BootData['content'], narrow: boolean): BootLine {
   return { key: 'content', label: 'content', detail: 'loading' };
 }
 
-/** "4h 12m" or "45m" on exam day: the time left, rounded up to the minute. */
-function hoursLeft(now: number, examAt: number): string {
-  const minutes = Math.max(0, Math.ceil((examAt - now) / 60_000));
-  const h = Math.floor(minutes / 60);
-  return h > 0 ? `${h}h ${String(minutes % 60).padStart(2, '0')}m` : `${minutes}m`;
-}
-
 function examLines(d: BootData, narrow: boolean): BootLine[] {
   const state = examDayState(d.now, d.examAt);
   const when = { key: 'exam-at', label: '', detail: narrow ? formatExamTimeShort(d.examAt) : formatExamTime(d.examAt) };
   if (state === 'study') return [{ key: 'exam', label: 'exam', detail: `${formatCountdown(countdown(d.now, d.examAt))} to go` }, when];
-  if (state === 'exam-day') return [{ key: 'exam', label: 'exam', detail: `today, ${hoursLeft(d.now, d.examAt)} to go` }, when];
+  if (state === 'exam-day') return [{ key: 'exam', label: 'exam', detail: `today, ${formatTimeLeftShort(d.now, d.examAt)} to go` }, when];
   if (state === 'underway') return [{ key: 'exam', label: 'exam', detail: 'underway, good luck' }, when];
   return [{ key: 'exam', label: 'exam', detail: 'over, well done' }, when];
 }

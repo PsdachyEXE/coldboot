@@ -219,7 +219,10 @@ export function formatMelbourneClock(ts: number): string {
   return melbourneClockFormatter.format(new Date(ts)).replace(/\s+/g, ' ');
 }
 
-/** "4 hours and 12 minutes", "3 hours", "45 minutes" or "less than a minute" until an instant. */
+/**
+ * "4 hours and 12 minutes", "3 hours", "45 minutes" or "less than a minute" until an instant, in
+ * whole minutes rounded down, like the status bar's countdown.
+ */
 export function formatTimeLeft(now: number, until: number): string {
   const c = countdown(now, until);
   const hours = c.days * 24 + c.hours;
@@ -228,6 +231,15 @@ export function formatTimeLeft(now: number, until: number): string {
   if (hours > 0) return unit(hours, 'hour');
   if (c.minutes > 0) return unit(c.minutes, 'minute');
   return 'less than a minute';
+}
+
+/** formatTimeLeft's short form for the boot sequence: "4h 12m", "3h 00m", "45m" or "under 1m". */
+export function formatTimeLeftShort(now: number, until: number): string {
+  const c = countdown(now, until);
+  const hours = c.days * 24 + c.hours;
+  if (hours > 0) return `${hours}h ${pad(c.minutes)}m`;
+  if (c.minutes > 0) return `${c.minutes}m`;
+  return 'under 1m';
 }
 
 /** "Friday 13 November 2026, 3:00 pm" in the given IANA zone (defaults to Melbourne). */

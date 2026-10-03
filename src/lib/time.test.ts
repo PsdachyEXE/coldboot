@@ -9,6 +9,7 @@ import {
   formatCountdown,
   formatMelbourneClock,
   formatTimeLeft,
+  formatTimeLeftShort,
   isExamDay,
   localDate,
   melbourneDate,
@@ -145,5 +146,14 @@ describe('exam day', () => {
     expect(formatTimeLeft(t('2026-11-13T14:15:00+11:00'), EXAM)).toBe('45 minutes');
     expect(formatTimeLeft(t('2026-11-13T14:59:30+11:00'), EXAM)).toBe('less than a minute');
     expect(formatTimeLeft(EXAM + 1, EXAM)).toBe('less than a minute');
+  });
+
+  it('gives the short form of the time left for the boot sequence, rounded down the same way', () => {
+    expect(formatTimeLeftShort(t('2026-11-13T00:00:00+11:00'), EXAM)).toBe('15h 00m');
+    expect(formatTimeLeftShort(t('2026-11-13T10:48:30+11:00'), EXAM)).toBe('4h 11m');
+    expect(formatTimeLeftShort(t('2026-11-13T14:15:00+11:00'), EXAM)).toBe('45m');
+    expect(formatTimeLeftShort(t('2026-11-13T14:59:00+11:00'), EXAM)).toBe('1m');
+    expect(formatTimeLeftShort(t('2026-11-13T14:59:30+11:00'), EXAM)).toBe('under 1m');
+    expect(formatTimeLeftShort(EXAM, EXAM)).toBe('under 1m');
   });
 });
