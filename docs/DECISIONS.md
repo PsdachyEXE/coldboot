@@ -1420,3 +1420,67 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** This matches Section 6.4 and the Drill and Daily screens, so the same item teaches the same way in the terminal. The reviewer checked that the speech digest cap is rarely hit.
 
 **Rejected.** Keeping only the chosen option's line, which the mcq.ts header had documented but DECISIONS never recorded.
+
+## D-173 Games: ux asks about the four user experience characteristics only
+
+**Decision.** `ux` shows a mock-up with exactly one weakness and asks two questions about it: which user experience characteristic is weakest (affordance, interoperability, security or usability, answered by letter or name), then which reason explains why, from three, four or five reasons by difficulty. The wrong reasons are false claims about this screen, drawn from the other characteristics (and on hard one from the same characteristic), about elements the screen has where possible. A round is five mock-ups, each asked twice, and every characteristic is the answer at least once. Design principles are neither answers nor distractors, and the man page says why.
+
+**Reason.** Section 7.3 asks for "the UX characteristic or design principle" that is weakest, but U3O2-KK16's list of design principles is a verify entry, and the content holds back named principles until it is confirmed (`docs/CONTENT_NOTES.md`). The four characteristics are U3O2-KK15's own. Asking why as well as which tests the reasoning that "explain" questions want.
+
+**Rejected.** Using alignment, contrast and consistency as answers or distractors, which would teach a list the study design may not have. One question per mock-up, which rewards spotting the characteristic without the reason.
+
+## D-174 Games: ux mock-ups are hand-laid templates, checked by an independent reader
+
+**Decision.** Nine templates for invented organisations (six phone screens, three desktop windows) are drawn with the `mockup` figure kind. Each can show some of eight weaknesses (two per characteristic), and building one with a weakness changes only the elements that weakness is about. A seed varies the organisation, wording and details. The 500-seed tests read the drawing itself (element types, text and sizes) with a checker written apart from the game: a sound screen has no weakness, and every item's screen has exactly the one it asks about. They also check the layout (inside the window, no overlaps, text that fits, callouts clear of other elements). Phone screens are 288 units wide, so they fit the full-screen terminal at 360 px, which leaves a figure 294 px.
+
+**Reason.** A mock-up with two weaknesses would make a right answer look wrong. Figures never scale below their natural size, so labels stay at least 14 px (`docs/DESIGN.md`), and a phone mock-up has to fit the narrowest place it is drawn. At 320 units every phone mock-up scrolled sideways at 360 px and hid its right edge.
+
+**Rejected.** Generated layouts, which can't promise a single weakness. Letting mock-ups scale below 14 px text on phones.
+
+## D-175 Games: ux feeds the daily challenge and boss doesn't
+
+**Decision.** `ux` has `generate` and joins `DAILY_GENERATOR_GAMES` after the P1 games. A generated ux item is a which question seven times in ten, otherwise a why question, and either kind carries its own mock-up. `boss` has no `generate`, so it never feeds the daily challenge.
+
+**Reason.** Each ux item stands alone on the Daily screen and in the terminal. A boss round is a whole sitting, not one question. Days already begun keep their stored item ids (D-088), so the change is safe mid-day.
+
+**Rejected.** Keeping the daily set to the P0 and P1 games, which leaves the mock-ups out.
+
+## D-176 Games: The boss climb
+
+**Decision.** `boss` gives three lives and 15 questions, one from each generator game in the registry in a seeded order (each game once before any repeats): five easy, five normal and five hard. Each wrong answer costs a life; input that isn't an answer costs nothing. The climb ends after the 15th question or when the last life goes. The case study slice follows either way and costs no lives. The summary gives the questions survived, lives left, correct answers and the case study marks. It is a fixed-difficulty game (`play boss --hard` is refused), and it reads the registry, so a new generator game joins the climb without a change to boss.
+
+**Reason.** Section 7.3 asks for "three lives and an escalating mix drawn from every game, ending in a self-marked three-question case study slice". Fifteen is one question per generator game today, and thirds make the escalation plain. Ending the round at zero lives without the case study would drop the part that matches Section C, worth 60 of the exam's 100 marks.
+
+**Rejected.** A climb with no fixed end, which makes a round's length depend on luck. Drawing blitz, daily and psm into the climb: blitz is timed, daily is the day's shared set, and psm has no `generate` (D-113).
+
+## D-177 Games: The boss case study slice and self-marking
+
+**Decision.** The slice is three short answers from one case study that has at least three (chosen by seed, in id order), worth 9 to 15 marks together where possible (otherwise the three closest to 12), in the case study's order. The whole insert is printed once, then each question with the figures it uses. Each question takes two inputs. The student's answer reveals the model answer and the numbered marking points without recording anything (`AnswerResult.advanced`). Then the points earned are recorded as marks over marks available, capped as on the Written screen (`AnswerResult.selfMarked`, with no Correct or Incorrect verdict and no sound). The points parser takes "1 3", "1, 3", "1 and 3", "points 1 and 3", ranges such as "1-3", "13" when no point number has two digits, "none" or "0", and "all". It refuses "2/3", which looks like a mark.
+
+**Reason.** Section C answers are marked against points, as the Written screen and the exam simulator do. A question can rest on any part of the insert, and no rule for cutting it down was both safe and short. Not recording the reveal keeps one attempt per question, timed from when the question appeared.
+
+**Rejected.** Typing a mark total, which can't be checked against the points. Printing an excerpt of the insert. Marking the typed answer by keywords, which would grade prose the app can't judge.
+
+## D-178 App: Exam-day states on Home and in the boot sequence
+
+**Decision.** `examDayState(now, examAt)` is `study`, then `exam-day` from midnight in Melbourne on the exam's date until it starts, `underway` through reading and writing time (3:00 pm to 5:15 pm for the default exam), and `over` afterwards. On exam day Home replaces Today's run with the start time in Melbourne, the time left and a calm suggestion (a few cards or the mini paper), and the boot sequence gives the hours and minutes left. While the exam is underway Home shows only "The exam is underway. Good luck." with when reading and writing time end, and the boot sequence wishes luck and drops the reviews line. Afterwards Home says "The exam is over. Well done." with export, stats, the syllabus map and a note that the exam caps have lifted, and the boot sequence's reviews line says so too. Every time left is rounded down to the minute, as the status bar's countdown is, so Home and the boot sequence agree. The status bar keeps its exam segments (`[exam underway]`, `[exam finished]`) and its other segments.
+
+**Reason.** Section 13 lists exam-day states for the countdown (underway, finished) under Phase 3. On the morning of the exam a student needs the start time and reassurance, not a new run; during the exam nothing should ask for study; afterwards the progress is still worth keeping. The status bar is a status display rather than a call to action, and Home and the boot sequence are where study is asked for.
+
+**Rejected.** Blanking the rest of the app during the exam, which would hide a student's own records. Rounding the boot sequence's time left up, which disagreed with Home within the same launch.
+
+## D-179 Study: Today's run keeps its place in this tab
+
+**Decision.** Today's run saves its step, the finished steps' outcomes, the review's ratings so far, the drill's questions and answers, when the step began and the daily date in sessionStorage (`coldboot:v1:run`, `src/app/study/runState.ts`), for one study day. Leaving for the Daily screen or anywhere else, or reloading, carries on from the same place: a review with the cards still due, a drill at its first unanswered question. A finished run isn't kept. A saved run is Zod-checked on read and ignored when it is malformed or from another study day. Reset, import and a reset in another window remove it with the tab's other state (D-169), and a mounted run stops saving after such a clear.
+
+**Reason.** "Do it on screen instead" sends the student to the Daily screen, and coming back used to start a new run with a new drill. The place in a run belongs to one sitting in one tab, so it shouldn't follow a progress file or reach another tab.
+
+**Rejected.** localStorage, which would carry a half-finished run into other tabs and past a reset or an import. Keeping the run in memory only, which a reload loses.
+
+## D-180 Phase 3 finished and checked
+
+**Decision.** The Phase 3 branch was finished after its author stopped before the final checks. Every check passed: typecheck, lint, unit tests, content, contrast, installer lint, build and the end-to-end run. A production build was then driven in Chromium with seeded storage and a pinned clock at 1280 and 360 px: Home and the boot sequence at 10:48 am on exam day, in reading time, in writing time and after the exam; a boss round through its case study to the summary; and a ux round. No page scrolled sideways, and there were no console errors or CSP violations. Two things looked wrong and were fixed: ux phone mock-ups scrolled sideways at 360 px (D-174), and the boot sequence and Home gave different times left (D-178). Tests were added for the 3:15 pm boundary in the boot sequence, the boot overlay at pinned exam-day instants, and Today's run being cleared on reset, import and a reset in another window.
+
+**Reason.** Phases 1 and 2 closed with the same checks and a screenshot pass (`docs/DESIGN.md`).
+
+**Rejected.** Merging on the author's own tests alone.
