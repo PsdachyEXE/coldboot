@@ -269,6 +269,33 @@ describe('ux items', () => {
     }
   });
 
+  it("calls a library card's number what it is: a sign-in number, not the payment card the full-card claim is about", () => {
+    // The library sign-in screen shows the whole library card number, which is the member's
+    // login, not a weakness. On hard, the second security reason offered is the full-card claim,
+    // so both it and its rebuttal have to be about a payment card, or both would contradict the
+    // drawing.
+    let offered = 0;
+    for (const seed of SEEDS.slice(0, 200)) {
+      const spec: UxSpec = { template: 'library', weakness: 'secret-shown', seed };
+      const { facts, figure } = uxScreen(spec);
+      expect(figure.elements.some((e) => /^\d{4} \d{4} \d{4}$/.test(e.text ?? ''))).toBe(true);
+      if (!reasonChoices(spec, 'hard', facts).includes('full-card')) continue;
+      offered++;
+      const item = whyItem(spec, 'hard');
+      const options = choicesOf(item);
+      const at = options.findIndex((o) => /whole .*card number/.test(o));
+      expect(options[at], item.instance).toBe("It shows a customer's whole payment card number, so anyone who sees the screen could copy it.");
+      const result = item.check('ABCDE'[at]);
+      expect(result.correct).toBe(false);
+      expect(result.reason).toMatch(/^That isn't true of this screen: no payment card number appears on this screen\. /);
+    }
+    expect(offered).toBe(200);
+    // Where the screen does show a payment card, the specific wording stays.
+    const court = uxScreen({ template: 'court', weakness: 'tiny-targets', seed: 1 }).facts;
+    expect(reasonText('full-card', court, false)).toBe('It shows the whole card number, so anyone who sees the screen could copy it.');
+    expect(rebuttal('full-card', court)).toBe('Only the last four digits of the card show.');
+  });
+
   it('explains a wrong reason and gives a fix', () => {
     const spec: UxSpec = { template: 'clock-on', weakness: 'tiny-targets', seed: 3 };
     const item = whyItem(spec, 'hard');

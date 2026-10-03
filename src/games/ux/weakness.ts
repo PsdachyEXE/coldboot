@@ -124,7 +124,8 @@ export function reasonText(w: Weakness, f: ScreenFacts, isWeakness: boolean): st
         ? `The ${f.secret.label} box shows the ${f.secret.noun} as it is typed, so anyone who can see the screen can read it.`
         : 'It shows a password as it is typed, so anyone who can see the screen can read it.';
     case 'full-card':
-      return f.card ? 'It shows the whole card number, so anyone who sees the screen could copy it.' : "It shows a customer's whole card number, so anyone who sees the screen could copy it.";
+      // "Payment" card: a screen without one may still show a whole library or member card number, as a login.
+      return f.card ? 'It shows the whole card number, so anyone who sees the screen could copy it.' : "It shows a customer's whole payment card number, so anyone who sees the screen could copy it.";
     case 'tiny-targets':
       if (f.small) return isWeakness ? `${f.small.name} are only ${f.small.size} across, too small to tap accurately.` : `${f.small.name} are too small to tap accurately.`;
       return f.device === 'phone' ? 'Its buttons are too small to tap accurately with a finger.' : 'Its buttons are too small to click accurately.';
@@ -148,7 +149,7 @@ export function rebuttal(w: Weakness, f: ScreenFacts): string {
     case 'secret-shown':
       return f.secret ? `The ${f.secret.label} box shows dots, not the ${f.secret.noun}.` : "There's no password on this screen.";
     case 'full-card':
-      return f.card ? 'Only the last four digits of the card show.' : 'No card number appears on this screen.';
+      return f.card ? 'Only the last four digits of the card show.' : 'No payment card number appears on this screen.';
     case 'tiny-targets':
       return f.small ? `${f.small.name} are a comfortable size for a fingertip.` : 'Its buttons are a comfortable size.';
     case 'long-form':
