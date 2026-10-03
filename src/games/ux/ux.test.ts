@@ -164,6 +164,17 @@ describe('ux mock-ups', () => {
     }
   });
 
+  it('draws phone screens narrow enough for the terminal on a 360 px phone', () => {
+    // Figures never scale below their natural size, and the full-screen terminal at 360 px leaves
+    // 294 px: 360 less 16 px page gutters, the terminal's 1 px border and its 16 px padding.
+    const room = 360 - 2 * 16 - 2 * 1 - 2 * 16;
+    for (const t of TEMPLATES.filter((x) => x.device === 'phone')) {
+      for (const weakness of [null, ...t.weaknesses]) {
+        for (const seed of SEEDS.slice(0, 20)) expect(buildScreen(t, weakness, mulberry32(seed)).figure.width, t.id).toBeLessThanOrEqual(room);
+      }
+    }
+  });
+
   it('can show every weakness, each on more than one template except closed-import', () => {
     for (const w of WEAKNESSES) {
       const count = TEMPLATES.filter((t) => t.weaknesses.includes(w)).length;

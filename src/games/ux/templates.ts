@@ -7,8 +7,10 @@
  * standard format, and a form of several screens shows the user where they are.
  *
  * A seed varies the organisation, the wording and the details on each screen. Layouts are written
- * as left and top edges and converted to the centre points the schema uses. Phone screens are 320
- * units wide so they fit a 360 px phone without scrolling; desktop screens are 480 wide.
+ * as left and top edges and converted to the centre points the schema uses. Phone screens are 288
+ * units wide so they fit a 360 px phone without scrolling: figures never scale below their natural
+ * size (labels stay at least 14 px), and the full-screen terminal at 360 px leaves a figure 294 px
+ * (16 px page gutters, the terminal's border and its 16 px padding). Desktop screens are 480 wide.
  */
 import type { Mockup } from '../../content/schema';
 import { textWidth } from '../../figures/text';
@@ -54,11 +56,11 @@ export interface UxTemplate {
 // Layout helpers
 // ---------------------------------------------------------------------------
 
-const PHONE_W = 320;
+const PHONE_W = 288;
 const DESK_W = 480;
-/** Content edges: phone screens run from 24 to 296, desktop windows from 32 to 448. */
+/** Content edges: phone screens run from 24 to 272, desktop windows from 32 to 448. */
 const L = 24;
-const CW = 272;
+const CW = 248;
 const DL = 32;
 
 const ACTION: UxRole = { kind: 'action' };
@@ -142,7 +144,7 @@ const court: UxTemplate = {
       box('list', L, 180, CW, 72, times.join('\n'), { note: 'Only times still free are listed.' }),
       label('Players', L, 276),
       ...stepper(120, 286, '2', weakness === 'tiny-targets', 'The − and + buttons are about 3 mm across on the phone.'),
-      label(weakness === 'full-card' ? `Pay with card ${card.full}` : `Pay with card ${DOTS(4)} ${card.last4}`, L, 328, { role: { kind: 'card' } }),
+      label(weakness === 'full-card' ? `Pay by card ${card.full}` : `Pay by card ${DOTS(4)} ${card.last4}`, L, 328, { role: { kind: 'card' } }),
       action('Book now', L, 360, CW, 44, weakness === 'flat-action', 'Tapping this text books the court.'),
     ];
     return {
@@ -356,8 +358,8 @@ const signup: UxTemplate = {
       box('textbox', L, 204 + y, CW, 36),
       label('Date of birth', L, 252 + y),
       box('textbox', L, 274 + y, 160, 36, 'dd/mm/yyyy'),
-      box('button', L, 330 + y, 120, 44, 'Back', { role: ACTION }),
-      action('Next', 176, 330 + y, 120, 44, weakness === 'flat-action', 'Tapping this text opens the next screen.'),
+      box('button', L, 330 + y, 112, 44, 'Back', { role: ACTION }),
+      action('Next', 160, 330 + y, 112, 44, weakness === 'flat-action', 'Tapping this text opens the next screen.'),
     ];
     return {
       screen: 'Your details',
@@ -380,7 +382,7 @@ const clockOn: UxTemplate = {
     const pin = pick(rng, ['7302', '5918', '6047']);
     const tiny = weakness === 'tiny-targets';
     // Keys 1 to 9 in three rows, then 0 in the middle.
-    const size = tiny ? { w: 24, h: 20, gapX: 32, gapY: 28, top: 236 } : { w: 80, h: 40, gapX: 96, gapY: 48, top: 232 };
+    const size = tiny ? { w: 24, h: 20, gapX: 32, gapY: 28, top: 236 } : { w: 72, h: 40, gapX: 88, gapY: 48, top: 232 };
     const keys: Part[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map((digit, i) => {
       const row = i === 9 ? 3 : Math.floor(i / 3);
       const col = i === 9 ? 1 : i % 3;
@@ -432,13 +434,13 @@ const tickets: UxTemplate = {
       frame(org.app, PHONE_W, height),
       box('heading', L, 48, 220, 28, 'Order confirmed'),
       label(order, L, 88),
-      label(weakness === 'full-card' ? `Paid with card ${card.full}` : `Paid with card ${DOTS(4)} ${card.last4}`, L, 116, { role: { kind: 'card' } }),
+      label(weakness === 'full-card' ? `Paid by card ${card.full}` : `Paid by card ${DOTS(4)} ${card.last4}`, L, 116, { role: { kind: 'card' } }),
       label('Add to your calendar', L, 156),
-      box('dropdown', L, 178, 204, 36, closed ? `${org.app} file (${org.ext})` : 'Calendar file (.ics)', {
+      box('dropdown', L, 178, 180, 36, closed ? `${org.app} file (${org.ext})` : 'Calendar file (.ics)', {
         role: { kind: 'format', direction: 'export' },
         note: closed ? `${org.ext} files open only in the ${org.app} app.` : 'Calendar apps import .ics files.',
       }),
-      box('button', 240, 178, 56, 36, 'Add', { role: ACTION }),
+      box('button', 216, 178, 56, 36, 'Add', { role: ACTION }),
       action('Email my tickets', L, 250, CW, 44, weakness === 'flat-action', 'Tapping this text emails the tickets.'),
     ];
     return {
@@ -490,7 +492,7 @@ const report: UxTemplate = {
       box('textbox', L, 204 + y, CW, 36, 'Street address'),
       box('image', L, 252 + y, CW, 96, 'Photo', hidden ? { role: ACTION, note: 'Tapping the photo area opens the camera.' } : {}),
       ...(hidden ? [] : [box('button', L, 356 + y, 160, 40, 'Add a photo', { role: ACTION })]),
-      action('Next', 176, next, 120, 44, weakness === 'flat-action', 'Tapping this text opens the next screen.'),
+      action('Next', 152, next, 120, 44, weakness === 'flat-action', 'Tapping this text opens the next screen.'),
     ];
     return {
       screen: 'Report a problem',
