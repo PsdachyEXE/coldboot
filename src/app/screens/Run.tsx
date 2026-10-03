@@ -159,7 +159,12 @@ function restoreRun(content: ContentIndex): Omit<RunState, 'focus'> | null {
     const result = untimedResult(saved.drillAnswers);
     return advance(content, { ...base, drillResult: result.total ? result : null, outcomes: { ...base.outcomes, drill: drillOutcome(result) } }, 'drill');
   }
-  return { ...base, step: 'daily' };
+  // The study day rolls over at 4 am local time, but the daily challenge at midnight in Melbourne.
+  // Past that midnight the terminal and the Daily screen play the new date's set, so the step
+  // follows it, unless the saved date's challenge was finished (which completes the step below).
+  // stepAt stays, so a daily game that ended in the terminal meanwhile still counts.
+  const dailyDate = useSession.getState().daily[saved.dailyDate]?.completedAt ? saved.dailyDate : melbourneDate(now);
+  return { ...base, step: 'daily', dailyDate };
 }
 
 function RunSteps({ content }: { content: ContentIndex }) {

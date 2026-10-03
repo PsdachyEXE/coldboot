@@ -243,6 +243,59 @@ describe("Today's run keeps its place", () => {
     expect(window.sessionStorage.getItem(RUN_KEY)).toBeNull();
   });
 
+  it('follows the daily challenge to the new Melbourne date when the run is resumed after midnight there', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    try {
+      vi.setSystemTime(new Date('2026-10-20T23:50:00+11:00'));
+      oneOfEach();
+      const router = renderApp();
+      reachDaily();
+      // The Daily screen begins the 20 October challenge, and three are answered before midnight.
+      const ids = Array.from({ length: 10 }, (_, i) => `m-x-${i}`);
+      fireEvent.click(screen.getByRole('link', { name: 'Do it on screen instead' }));
+      useSession.getState().beginDaily('2026-10-20', ids);
+      for (let i = 0; i < 3; i++) useSession.getState().recordDaily('2026-10-20', i, true, Date.now());
+      expect(JSON.parse(window.sessionStorage.getItem(RUN_KEY)!)).toMatchObject({ step: 'daily', dailyDate: '2026-10-20', day: '2026-10-20' });
+
+      // Half an hour later: a new daily challenge in Melbourne, but still the same study day (before 4 am).
+      vi.setSystemTime(new Date('2026-10-21T00:20:00+11:00'));
+      await go(router, '/run');
+      // The terminal and the Daily screen now play the 21 October set, so the step describes that one.
+      expect(screen.getByRole('heading', { name: 'Step 3 of 3: Daily challenge' })).toBeInTheDocument();
+      expect(screen.getByText(/^Ten questions, the same for everyone today\./)).toBeInTheDocument();
+      expect(screen.queryByText(/You've answered 3 of 10/)).toBeNull();
+
+      // Finishing today's challenge on the Daily screen completes the run.
+      await go(router, '/daily');
+      useSession.getState().beginDaily('2026-10-21', ids);
+      for (let i = 0; i < 10; i++) useSession.getState().recordDaily('2026-10-21', i, i < 7, Date.now());
+      await go(router, '/run');
+      expect(screen.getByRole('heading', { name: 'Run complete' })).toBeInTheDocument();
+      expect(summary()[2]).toBe('Done: 7 of 10 correct.');
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("completes from the day before's record when that challenge was finished before midnight", async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    try {
+      vi.setSystemTime(new Date('2026-10-20T23:40:00+11:00'));
+      oneOfEach();
+      const router = renderApp();
+      reachDaily();
+      fireEvent.click(screen.getByRole('link', { name: 'Do it on screen instead' }));
+      useSession.getState().beginDaily('2026-10-20', Array.from({ length: 10 }, (_, i) => `m-x-${i}`));
+      for (let i = 0; i < 10; i++) useSession.getState().recordDaily('2026-10-20', i, i < 6, Date.now());
+      vi.setSystemTime(new Date('2026-10-21T00:20:00+11:00'));
+      await go(router, '/run');
+      expect(screen.getByRole('heading', { name: 'Run complete' })).toBeInTheDocument();
+      expect(summary()[2]).toBe('Done: 6 of 10 correct.');
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('carries a drill on at the first unanswered question, with the same questions and answers', async () => {
     provideContent(
       fixtureIndex({
