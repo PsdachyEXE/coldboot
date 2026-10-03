@@ -15,6 +15,7 @@ import { useAttempts } from '../../state/attempts';
 import { useTerminalSession } from '../../terminal/session';
 import { TerminalView } from '../../terminal/TerminalView';
 import { useTerminal } from '../../terminal/useTerminal';
+import { useReportDialog } from '../../ui/report';
 import { printed, resetStores } from '../../terminal/testing';
 import { typedAnswer, wrongAnswer } from '../daily-game/testing';
 import type { BossSession } from './index';
@@ -103,6 +104,10 @@ describe('boss in the terminal', () => {
     expect(printed()).toContain(q1.model);
     expect(printed()).toContain('Which points did your answer earn?');
     expect(container.querySelectorAll('ol li').length).toBeGreaterThanOrEqual(q1.points.length);
+    // report names the question whose model answer and marking points are showing, not the last climb item.
+    await user.type(input, 'report{Enter}');
+    expect(useReportDialog.getState().request).toMatchObject({ itemId: q1.id, where: 'terminal: play boss' });
+    expect(attempts()).toHaveLength(4);
     await user.type(input, 'lots{Enter}');
     expect(printed()).toContain(`The points run from 1 to ${q1.points.length}.`);
     expect(attempts()).toHaveLength(4);
@@ -116,6 +121,8 @@ describe('boss in the terminal', () => {
     // Question 2: skip straight to the marking, then none.
     await user.type(input, 'skip{Enter}');
     expect(printed()).toContain(q2.model);
+    await user.type(input, 'report{Enter}');
+    expect(useReportDialog.getState().request).toMatchObject({ itemId: q2.id });
     await user.type(input, 'none{Enter}');
     expect(attempts()[5]).toEqual(expect.arrayContaining([q2.id, 0]));
 

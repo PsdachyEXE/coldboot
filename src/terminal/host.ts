@@ -196,7 +196,9 @@ export function submitAnswer(input: string): AnswerResult | null {
     }
     // The game moved on without marking anything (a written answer before its marking points).
     // shownAt stays put, so the attempt recorded next is timed from when the question appeared.
+    // Nothing is recorded, but `report` now means this question: its model answer is on screen.
     term().print(result.followUp ?? []);
+    term().setLastAnswered({ itemId: result.itemId, kk: result.kk, instance: result.instance, where: game.where });
     if (session.done) finishGame();
     else {
       term().print(session.prompt());
