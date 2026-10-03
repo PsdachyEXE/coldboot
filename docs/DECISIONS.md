@@ -1484,3 +1484,67 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** Phases 1 and 2 closed with the same checks and a screenshot pass (`docs/DESIGN.md`).
 
 **Rejected.** Merging on the author's own tests alone.
+
+## D-181 Adversarial review of Phase 3
+
+**Decision.** Reviewers read the Phase 3 diff through a correctness lens and an experience lens, and skeptics tried to refute each finding. Eight findings were confirmed (two medium, six low; two were the same exam-day review problem), and each was fixed on `track/p-p2-fix` with a test that failed first (D-182 to D-188).
+
+**Reason.** Phases 1 and 2 had the same adversarial pass before handover (D-150), and the Phase 3 author stopped before its final checks.
+
+**Rejected.** Merging on the author's own tests and the finisher's screenshot pass (D-180) alone.
+
+## D-182 Review fixes: Games: the ux full-card claim names a payment card
+
+**Decision.** On a screen with no payment card, the full-card reason reads "It shows a customer's whole payment card number, ..." and its rebuttal "No payment card number appears on this screen." The wording for a screen that shows a payment card is unchanged.
+
+**Reason.** The library sign-in mock-up shows the whole library card number, which is the member's login. On hard, every library/secret-shown item offered the generic full-card claim, which was true of that drawing, and marked it wrong with a rebuttal the figure contradicted.
+
+**Rejected.** A checker in `ux.test.ts` that flags any run of 12 or more digits as full-card: it would flag the library login. Relabelling the library field, which changes a template that is otherwise sound.
+
+## D-183 Review fixes: Terminal: `report` names the boss case study question once its model answer shows
+
+**Decision.** For an `advanced` answer the host sets `lastAnswered` to that question, still recording no attempt.
+
+**Reason.** The model answer and marking points are the feedback on screen, and `report` reports the last question answered. It was reporting the last climb question instead, so a report on a case study's marking points was filed under the wrong id. D-177's one attempt per question holds.
+
+**Rejected.** Recording the reveal as an attempt.
+
+## D-184 Review fixes: Study: Today's run follows the daily challenge to the new Melbourne date
+
+**Decision.** Resuming a saved run at its daily step keeps the saved Melbourne date only when that day's challenge is finished; otherwise the step moves to today's Melbourne date. `stepAt` is kept.
+
+**Reason.** A saved run lasts one study day (4 am rollover), but the daily challenge rolls over at midnight in Melbourne. A run resumed after that midnight waited on the previous date's record while the terminal and the Daily screen played the new set. Keeping `stepAt` means a daily game that ended in the terminal while the run was left still counts.
+
+**Rejected.** Rebuilding the step through `advance()`, which resets `stepAt`.
+
+## D-185 Review fixes: App: the exam-day warm-up reviews due cards only
+
+**Decision.** `reviewPath({ due: true })` gives `/review?due=1`. That review offers no new cards (a new-card limit of 0 for the preview and for every start, so a restart keeps it), says "Only the cards that are due, with no new cards.", and with nothing due shows "No reviews due" without the note about raising the new-card limit. Home's exam-day "Review a few cards" links there.
+
+**Reason.** The panel says "a light warm-up, not new work", and the ordinary review followed the due cards with the day's whole allowance of new cards (25 by default). A card learnt that morning falls due after the exam.
+
+**Rejected.** `?new=0`, which the second report of the same problem suggested; one flag serves both. Capping the warm-up at ten cards, and making the mini paper the primary action when nothing is due: neither was needed to make the link do what the panel says.
+
+## D-186 Review fixes: Terminal: a block's `speech` replaces its text in the screen reader digest
+
+**Decision.** `text` and `markdown` TerminalBlocks may carry `speech`, which the digest says instead of the text (`''` leaves the block out). Boss speaks the case study insert as "The case study insert is in the terminal output, above the first question." and the model answer as "The model answer is in the terminal output.", and gives the instruction for marking with the "Marking points" heading, before the points. What the terminal shows is unchanged.
+
+**Reason.** The digest is capped at 1,500 characters (`SPEECH_MAX`). The insert alone is over 4,000, so a screen reader never heard the first question, and long model answers cut the marking digest before the points and the instruction. Over 300 seeds of real content the digest now always reaches "Case study question 1 of 3", and the case study's own prompts fit whole. A long feedback on the last climb answer (gantt's chart, read out line by line) can still push the end of that one digest past the cap, as it can in any game; the full text stays in the log.
+
+**Rejected.** Raising `SPEECH_MAX`, which lengthens every digest. Moving the points above the model answer on screen: the eight points of the longest question pass the cap on their own.
+
+## D-187 Review fixes: Terminal: answers in a game take up to 4,000 characters
+
+**Decision.** While a game runs, the terminal input and `submitLine` take `GAME_INPUT_MAX` (4,000) characters; commands keep to `HISTORY_ENTRY_MAX` (500). Boss's instruction line and man page say "up to 4,000 characters".
+
+**Reason.** Boss asks for one developed point per mark on questions worth up to 8 marks, which runs to 900 to 1,500 characters. The input stopped taking keystrokes at 500 with no message, and `submitLine` cut every line to 500 as well. In-game input stays in memory, so the persisted history's limit doesn't apply to it.
+
+**Rejected.** A per-session `inputMax()` on `GameSession`, a contract change for one game. Raising only the input's `maxLength`, which `submitLine` would still have cut.
+
+## D-188 Review fixes: Study: Home continues a run under way
+
+**Decision.** With a run saved in this tab for today's study day, Home lists the finished steps' outcomes, "Next:" the step to carry on with (with the drill's answers or the cards reviewed so far) and "Then:" the rest, and the primary action reads "Continue today's run". The step names live in `RUN_STEPS` in `runState.ts`.
+
+**Reason.** Home previewed a fresh run (new cards, a drill on today's weakest key knowledge) while the button opened the saved one at a different drill. Home ships in the shell, so it reads the names from `runState.ts` rather than from the Run screen's chunk.
+
+**Rejected.** Keeping "Start today's run" for both cases. Section 6.2 names that action for a new run.
