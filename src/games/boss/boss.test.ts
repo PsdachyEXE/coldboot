@@ -7,10 +7,11 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { loadAllContent, type ContentIndex } from '../../content/loader';
 import { FigureSchema, type CaseShort, type CaseStudy } from '../../content/schema';
 import type { TerminalBlock } from '../../terminal/blocks';
+import { blocksToSpeech } from '../../terminal/speech';
 import { typedAnswer, wrongAnswer } from '../daily-game/testing';
 import { mulberry32 } from '../prng';
 import { GAMES } from '../registry';
-import type { Difficulty, GameContext, QuizItem } from '../types';
+import type { AnswerResult, Difficulty, GameContext, QuizItem } from '../types';
 import { BOSS_LIVES, BOSS_QUESTIONS, difficultyAt, loadBossGenerators, planBoss, startBoss, survived, type BossGenerator, type BossSession } from './index';
 import { markedScore, parseMarkedPoints, pickCaseSlice, questionFigures, SLICE_MARKS } from './caseSlice';
 
@@ -341,4 +342,50 @@ describe('boss over 500 seeds with the real games and content', () => {
     const eligible = content.caseStudies.filter((cs) => cs.questions.filter((q) => 'points' in q).length >= 3).map((cs) => cs.id);
     expect([...casesSeen].sort()).toEqual([...eligible].sort());
   }, 300_000);
+
+  it("speaks each case study question and the marking instruction within the screen reader digest's cap", () => {
+    // What the host announces for a counted climb answer: the feedback, the follow-up, then the next prompt.
+    const climbDigest = (r: AnswerResult, next: readonly TerminalBlock[]) =>
+      blocksToSpeech([{ kind: 'feedback', correct: r.correct, expected: r.expected, reason: r.reason, markdown: r.markdown }, ...(r.followUp ?? []), ...next]);
+    const marksLine = (q: CaseShort) => `${q.commandTerm.charAt(0).toUpperCase()}${q.commandTerm.slice(1)}, ${q.marks} mark${q.marks === 1 ? '' : 's'}.`;
+    const cut = /The rest is in the terminal output\.$/;
+    const casesSeen = new Set<string>();
+    for (let s = 0; s < 300; s++) {
+      const seed = s * 104_729 + 7;
+      const session = startBoss(ctxWith(content), generators, seed);
+      session.prompt();
+      // Three wrong answers end the climb; a wrong answer's feedback is the longer kind.
+      let entering = '';
+      let first: TerminalBlock[] = [];
+      while (session.state.phase === 'climb') {
+        const r = session.answer(wrongAnswer(session.state.item!));
+        first = session.prompt();
+        entering = climbDigest(r, first);
+      }
+      const slice = session.state.slice!;
+      casesSeen.add(slice.caseStudy.id);
+      // The insert runs to thousands of characters, so the digest points to it and goes on to the question.
+      expect(entering, `seed ${seed}`).toContain('The case study insert is in the terminal output, above the first question. Case study question 1 of 3.');
+      // The case study's own blocks fit, with the question and its marks. (A long feedback on the last
+      // climb answer can still push the end of the digest past the cap, as it can in any game.)
+      const own = blocksToSpeech(first);
+      expect(own, `seed ${seed}`).not.toMatch(cut);
+      expect(own, `seed ${seed}`).toContain(marksLine(slice.questions[0]));
+      slice.questions.forEach((q, i) => {
+        if (i > 0) {
+          const next = blocksToSpeech(session.prompt());
+          expect(next, `seed ${seed} ${q.id}`).not.toMatch(cut);
+          expect(next, `seed ${seed} ${q.id}`).toContain(marksLine(q));
+        }
+        session.answer('An answer.');
+        const marking = blocksToSpeech(session.prompt());
+        // The model answer is a pointer, and the instruction comes before the points, which may still run past the cap.
+        expect(marking, `seed ${seed} ${q.id}`).toMatch(
+          new RegExp(`^The model answer is in the terminal output\\. Marking points 1 to ${q.points.length}\\. After them, type the numbers of the points your answer earned, such as 1 3, or none or all\\. 1: `),
+        );
+        session.answer('none');
+      });
+    }
+    expect(casesSeen.size).toBeGreaterThanOrEqual(2);
+  }, 120_000);
 });

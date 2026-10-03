@@ -181,7 +181,9 @@ export function startBoss(ctx: GameContext, generators: readonly BossGenerator[]
       text: `Three written questions worth ${plural(caseMarks(), 'mark')}. Read the insert, then for each question write your answer and mark it against the marking points.`,
       tone: 'muted',
     },
-    { kind: 'markdown', text: s.caseStudy.insert },
+    // The insert runs to thousands of characters, past the screen reader digest's cap (SPEECH_MAX), so
+    // the digest points to it and reaches the first question and its marks.
+    { kind: 'markdown', text: s.caseStudy.insert, speech: 'The case study insert is in the terminal output, above the first question.' },
   ];
 
   const casePrompt = (): TerminalBlock[] => {
@@ -189,14 +191,21 @@ export function startBoss(ctx: GameContext, generators: readonly BossGenerator[]
     const q = s.questions[caseIndex];
     if (marking) {
       const available = q.points.reduce((sum, p) => sum + p.marks, 0);
+      // Spoken, the model answer is a pointer and the instruction comes before the points: together
+      // they can run past the screen reader digest's cap, which would cut off what to type.
       return [
-        { kind: 'text', text: 'Model answer', tone: 'accent' },
-        { kind: 'markdown', text: q.model },
-        { kind: 'text', text: 'Marking points', tone: 'accent' },
+        { kind: 'text', text: 'Model answer', tone: 'accent', speech: '' },
+        { kind: 'markdown', text: q.model, speech: 'The model answer is in the terminal output.' },
+        {
+          kind: 'text',
+          text: 'Marking points',
+          tone: 'accent',
+          speech: `Marking points 1 to ${q.points.length}. After them, type the numbers of the points your answer earned, such as 1 3, or none or all.`,
+        },
         { kind: 'choices', options: q.points.map((p) => `${p.text} (${plural(p.marks, 'mark')})`), labels: 'numbers', markdown: true },
         ...(available > q.marks ? [capNote(q.marks)] : []),
         { kind: 'text', text: 'Which points did your answer earn?', tone: 'accent' },
-        { kind: 'text', text: MARK_HINT, tone: 'muted' },
+        { kind: 'text', text: MARK_HINT, tone: 'muted', speech: '' },
       ];
     }
     const blocks: TerminalBlock[] = [];

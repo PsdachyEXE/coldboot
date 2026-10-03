@@ -15,6 +15,7 @@ import { useAttempts } from '../../state/attempts';
 import { useTerminalSession } from '../../terminal/session';
 import { TerminalView } from '../../terminal/TerminalView';
 import { useTerminal } from '../../terminal/useTerminal';
+import { useAnnouncer } from '../../ui/announce';
 import { useReportDialog } from '../../ui/report';
 import { printed, resetStores } from '../../terminal/testing';
 import { typedAnswer, wrongAnswer } from '../daily-game/testing';
@@ -88,6 +89,9 @@ describe('boss in the terminal', () => {
 
     const { slice } = boss().state;
     expect(boss().state.phase).toBe('case');
+    // A screen reader hears a pointer to the insert, then the first question and its marks.
+    expect(useAnnouncer.getState().polite).toContain('The case study insert is in the terminal output, above the first question. Case study question 1 of 3.');
+    expect(useAnnouncer.getState().polite).not.toContain(slice!.caseStudy.insert.slice(0, 40));
     expect(printed()).toContain(`Case study: ${slice!.caseStudy.title}`);
     // The whole insert is printed, then the first question with its figures.
     expect(printed()).toContain(slice!.caseStudy.insert);
@@ -103,6 +107,7 @@ describe('boss in the terminal', () => {
     expect(boss().state.marking).toBe(true);
     expect(printed()).toContain(q1.model);
     expect(printed()).toContain('Which points did your answer earn?');
+    expect(useAnnouncer.getState().polite).toMatch(/^The model answer is in the terminal output\. Marking points 1 to \d+\. After them, type the numbers/);
     expect(container.querySelectorAll('ol li').length).toBeGreaterThanOrEqual(q1.points.length);
     // report names the question whose model answer and marking points are showing, not the last climb item.
     await user.type(input, 'report{Enter}');
