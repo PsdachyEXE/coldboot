@@ -69,6 +69,12 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 | S. Stats, Daily and e2e | `src/app/stats/**`, `src/app/daily/**`, `src/app/screens/{Stats,Daily}.tsx`, `e2e/**`, `playwright.config.ts`, the e2e job in `.github/workflows/ci.yml` |
 | Orchestrator | merging, case study 2 (`content/case-studies/cs-02.json`), `DAILY_GENERATOR_GAMES`, `docs/DECISIONS.md` |
 
+## Ownership (Phase 3, P2 track)
+
+| Track | Owns |
+|---|---|
+| P. P2 | `src/games/{boss,ux}/`, `AnswerResult.advanced` and `selfMarked` and their handling in `src/terminal/host.ts`, the exam-day helpers in `src/lib/time.ts` and the exam-day states in `src/app/screens/Home.tsx` and `src/app/BootLines.ts`, `src/app/study/runState.ts` and the run's resume in `Run.tsx`, `ReviewRunner.tsx` and `DrillRunner.tsx`, the sessionStorage helpers in `src/state/storage.ts`, `src/app/screens/settings/useExportProgress.tsx` |
+
 Shared files (`package.json`, `src/app/routes.tsx`, `src/app/paths.ts`, contract files): change only when the task needs it, keep the change minimal, and say so in the commit message.
 
 ## Rules the contracts rely on
