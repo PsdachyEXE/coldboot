@@ -1556,3 +1556,19 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** Section 13 asks for content growth above the floors, guided by `EXAM_INSIGHTS.md`. That file couldn't draw on the examiners' report (D-001), so the growth targets the exam's shape instead: applied Section A questions and Section B answers that must be developed to the marks.
 
 **Rejected.** Growing cards first (the cross-unit pass had just removed 62 duplicate cards), and growing only the KKs with the fewest items (every KK sat at the same low depth of 3 to 4 MCQs and 1 to 2 short answers).
+
+## D-190 No licence chosen; package marked UNLICENSED
+
+**Decision.** `package.json` (and the lockfile's matching entry) now says `"UNLICENSED"` instead of `"MIT"`, and the README says no licence has been chosen, so the code and content are all rights reserved by default. Third-party packages and the two OFL fonts keep their own licences.
+
+**Reason.** The scaffold set MIT without anyone choosing it, and no LICENSE file was ever added. Granting reuse rights over the owner's code and study content is the owner's call, not the build's.
+
+**Rejected.** Adding an MIT LICENSE file to match the old field.
+
+## D-191 Release readiness audit
+
+**Decision.** Before handover, an independent auditor checked every Section 14 item against fresh evidence: the test suite, e2e, a `/coldboot/` production build driven in Chromium (offline reload, the update prompt, installability), Lighthouse desktop on 11 routes, the countdown in 9 device timezones, and the installer lint and Windows CI. Items 2, 3, 4, 6 and 8 are met. Item 5 is met under the content checker's rule; the review against the study design itself waits on D-001. Items 1, 7 and 9 (live URL, live installer job, `v1.0.0` tag) wait on the merge to `main` (D-002), and their local equivalents pass.
+
+**Reason.** The handover report has to state accurately what is done and what the operator must still do.
+
+**Rejected.** Marking blocked items as done because their local equivalents pass.
