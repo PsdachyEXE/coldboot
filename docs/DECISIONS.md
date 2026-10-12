@@ -1621,3 +1621,17 @@ Home's 87 is a layout shift (CLS 0.137) on some runs: the body font sometimes ar
 **Rejected.**
 - Dropping the date, which Settings and content reports use.
 - A content hash as the id, which nobody can map back to a commit.
+
+## D-195 End-to-end tests run on the Pages base path
+
+**Decision.** Playwright builds and serves the app under `/coldboot/`, as GitHub Pages does, and every spec navigates relative to it. `e2e/pwa.spec.ts` adds two checks:
+- Once the status bar shows `[offline ready]`, a reload with the network off opens Home and a drill.
+- A changed `sw.js` brings up "Update ready. Reload now?", and Reload leaves no worker waiting.
+
+The test changes `dist/sw.js` on disk to stand in for a deploy, because `vite preview` reads files on every request.
+
+**Reason.** The base path, offline reload and update prompt had only been checked by hand (D-191), and a base-path mistake would break the deployed app while every test passed under `/`.
+
+**Rejected.**
+- A second build to stand in for the deploy. It's slower, and the prompt depends only on the worker script changing.
+- Keeping the existing specs under `/`, which would need a second server.

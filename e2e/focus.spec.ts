@@ -23,7 +23,7 @@ async function onboard(page: Page): Promise<void> {
 
 test('a date or time field shows the focus ring while its picker button has focus', async ({ page }) => {
   await page.clock.setFixedTime(FIXED_NOW);
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByRole('heading', { level: 1, name: 'Welcome to COLDBOOT' })).toBeVisible();
   await page.getByLabel('Display name').focus();
   const stops: { type: string; focusVisible: boolean; outline: string }[] = [];
@@ -54,7 +54,7 @@ for (const [width, height] of [
     await page.clock.install({ time: FIXED_NOW });
     await page.clock.pauseAt(FIXED_NOW.getTime() + 1_000);
     await onboard(page);
-    await page.goto('/#/exam?mini=1');
+    await page.goto('./#/exam?mini=1');
     await page.clock.runFor(2_000);
     await page.getByRole('button', { name: 'Start mini paper' }).click();
     // Past the mini paper's reading time, into writing time.
@@ -101,7 +101,7 @@ test('at phone width a focused terminal chip scrolls into view in its row', asyn
   await page.setViewportSize({ width: 360, height: 740 });
   await page.clock.setFixedTime(FIXED_NOW);
   await onboard(page);
-  await page.goto('/#/terminal');
+  await page.goto('./#/terminal');
   const chips = page.getByRole('group', { name: 'Suggested commands' });
   await expect(chips).toBeVisible();
   await page.getByRole('textbox', { name: 'Terminal command' }).focus();

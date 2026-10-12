@@ -62,7 +62,7 @@ async function answerSortQuestion(page: Page, input: Locator, log: Locator): Pro
 
 test('first run, review, terminal, sort and export', async ({ page }) => {
   await test.step('complete first run', async () => {
-    await page.goto('/');
+    await page.goto('./');
     await expect(page.getByRole('heading', { level: 1, name: 'Welcome to COLDBOOT' })).toBeVisible();
     await page.getByLabel('Display name').fill('Robin');
     await expect(page.getByLabel('New cards per day')).toHaveValue('25');
@@ -162,7 +162,7 @@ async function seedOnboarded(page: Page): Promise<void> {
 test('the daily challenge screen starts the same set the terminal plays', async ({ page }) => {
   await seedOnboarded(page);
 
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByRole('heading', { level: 1, name: 'Today' })).toBeVisible();
   await page.getByRole('link', { name: 'Daily challenge: Not done yet' }).click();
   await expect(page.getByRole('heading', { level: 1, name: 'Daily challenge' })).toBeVisible();
@@ -188,7 +188,7 @@ test('the daily challenge screen starts the same set the terminal plays', async 
 
 test("today's run keeps its place across the Daily screen and a reload", async ({ page }) => {
   await seedOnboarded(page);
-  await page.goto('/');
+  await page.goto('./');
   await page.getByRole('link', { name: "Start today's run" }).click();
   await expect(page.getByRole('heading', { level: 2, name: 'Step 1 of 3: Review cards' })).toBeVisible();
   await page.getByRole('button', { name: 'Finish review' }).click();
@@ -207,7 +207,7 @@ test("today's run keeps its place across the Daily screen and a reload", async (
   await expect(page.getByRole('list', { name: 'Steps' })).toContainText('Skipped: You ended the drill before answering.');
 
   // Home says where the run is up to, and carries it on rather than starting a new one.
-  await page.goto('/');
+  await page.goto('./');
   const place = page.getByRole('list', { name: "Today's run" });
   await expect(place).toContainText('Drill your weakest key knowledge. Skipped: You ended the drill before answering.');
   await expect(place).toContainText('Next: the daily challenge.');
@@ -221,7 +221,7 @@ test.describe('under reduced motion', () => {
 
   test('the backtick opens the terminal drawer with focus in its input', async ({ page }) => {
     await seedOnboarded(page);
-    await page.goto('/');
+    await page.goto('./');
     await expect(page.getByRole('heading', { level: 1, name: 'Today' })).toBeVisible();
     expect(await page.evaluate(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)).toBe(true);
 
