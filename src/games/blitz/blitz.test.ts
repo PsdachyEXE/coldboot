@@ -4,8 +4,9 @@ import { buildIndex, type ContentIndex } from '../../content/loader';
 import { CardSchema, type Card, type PsmFile } from '../../content/schema';
 import type { GameContext } from '../types';
 import { fixtureTerms } from './fixture';
-import game, { blitzItem, maskDefinition } from './index';
-import { matchTerm, normaliseTerm, tolerance, typoDistance } from './match';
+import { loadAllContent } from '../../content/loader';
+import game, { blitzItem, courseText, maskDefinition } from './index';
+import { matchTerm, normaliseTerm, phraseIndex, tolerance, typoDistance } from './match';
 import { BLITZ_MS } from './meta';
 
 const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 1);
@@ -74,6 +75,30 @@ describe('blitz tolerance rule', () => {
   });
 });
 
+describe('blitz and words from the course', () => {
+  const course = phraseIndex(['A constant never changes.', 'Classes and objects.', 'Treat input as hostile.', 'The code is reviewed.']);
+
+  it('rejects a two-edit slip that is a different word from the course', () => {
+    expect(matchTerm('constant', 'constraint', [], [], course)).toBe('other-word');
+    expect(matchTerm('code', 'scope', [], [], course)).toBe('other-word');
+    // The same slip is still a typo when the course never uses the word.
+    expect(matchTerm('constrent', 'constraint', [], [], course)).toBe('close');
+  });
+
+  it('keeps plurals and one-edit slips, even when they are words', () => {
+    expect(matchTerm('classes', 'class', [], [], course)).toBe('close');
+    expect(matchTerm('treat', 'threat', [], [], course)).toBe('close');
+    expect(matchTerm('constriant', 'constraint', [], [], course)).toBe('close');
+  });
+
+  it('matches whole words within one text, never across two', () => {
+    const index = phraseIndex(['the code', 'base was tested']);
+    expect(index('code')).toBe(true);
+    expect(index('code base')).toBe(false);
+    expect(index('cod')).toBe(false);
+  });
+});
+
 describe('blitz on the real glossary', () => {
   const glossary = CardSchema.array().parse(glossaryJson);
   const spellings = (c: Card) => [c.front, ...(c.aliases ?? [])];
@@ -92,6 +117,24 @@ describe('blitz on the real glossary', () => {
       }
     }
     expect(accepted).toEqual([]);
+  });
+
+  it('turns down real course words two edits from a term, and still takes every plural', async () => {
+    const isCourseText = courseText(await loadAllContent());
+    const card = (front: string) => glossary.find((c) => normaliseTerm(c.front) === normaliseTerm(front));
+    const others = (c: Card) => glossary.filter((g) => g !== c).flatMap(spellings);
+    const constraint = card('constraint');
+    expect(constraint).toBeDefined();
+    const item = blitzItem(constraint!, others(constraint!), isCourseText);
+    expect(item.check('constant')).toMatchObject({ correct: false, reason: 'constant is a different word, not a misspelling of constraint.' });
+    expect(item.check('constraints').correct).toBe(true);
+    const rejected: string[] = [];
+    for (const c of glossary) {
+      const plural = `${c.front}s`;
+      if (others(c).some((o) => normaliseTerm(o) === normaliseTerm(plural))) continue;
+      if (!blitzItem(c, others(c), isCourseText).check(plural).correct) rejected.push(plural);
+    }
+    expect(rejected).toEqual([]);
   });
 
   it('still accepts a one-letter slip in every term', () => {

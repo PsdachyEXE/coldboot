@@ -2,13 +2,15 @@
  * The `blitz` game (Section 7.3, P0): 60 seconds of glossary definitions; type the term. Each
  * definition comes from the glossary cards (content.terms: `back` is the paraphrased definition,
  * `front` the term, `aliases` other accepted spellings). Spelling slips within the tolerance in
- * ./match.ts count as correct. The score is the number correct before the time runs out.
+ * ./match.ts count as correct, unless the slip is a different word from the course content. The
+ * score is the number correct before the time runs out.
  */
+import type { ContentIndex } from '../../content/loader';
 import type { Card } from '../../content/schema';
 import { createQuizSession, unavailableSession } from '../engine';
 import { childSeed, mulberry32, shuffle } from '../prng';
 import type { Game, QuizItem } from '../types';
-import { matchTerm } from './match';
+import { matchTerm, phraseIndex } from './match';
 import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_MS, BLITZ_TITLE } from './meta';
 
 export const SKIP_WORDS = ['skip', 'pass'];
@@ -27,7 +29,26 @@ export function maskDefinition(definition: string, spellings: readonly string[])
   return out;
 }
 
-export function blitzItem(card: Card, otherTerms: readonly string[]): QuizItem {
+const courseTextCache = new WeakMap<ContentIndex, (phrase: string) => boolean>();
+
+/** Every string in the loaded content (cards, questions, case studies, the PSM), as a phraseIndex. Built once per content index. */
+export function courseText(content: ContentIndex): (phrase: string) => boolean {
+  let test = courseTextCache.get(content);
+  if (!test) {
+    const texts: string[] = [];
+    const walk = (v: unknown): void => {
+      if (typeof v === 'string') texts.push(v);
+      else if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === 'object') Object.values(v).forEach(walk);
+    };
+    walk([content.cards, content.mcq, content.short, content.caseStudies, content.psm]);
+    test = phraseIndex(texts);
+    courseTextCache.set(content, test);
+  }
+  return test;
+}
+
+export function blitzItem(card: Card, otherTerms: readonly string[], isCourseText?: (phrase: string) => boolean): QuizItem {
   const aliases = card.aliases ?? [];
   const term = card.front;
   const also = aliases.length ? `Also accepted: ${aliases.join(', ')}.` : '';
@@ -42,7 +63,7 @@ export function blitzItem(card: Card, otherTerms: readonly string[]): QuizItem {
     check(input) {
       const typed = input.trim();
       if (SKIP_WORDS.includes(typed.toLowerCase())) return { correct: false, expected: term, reason: `Skipped. ${also}`.trim() };
-      const match = matchTerm(typed, term, aliases, otherTerms);
+      const match = matchTerm(typed, term, aliases, otherTerms, isCourseText);
       switch (match) {
         case 'exact':
           return { correct: true, expected: term, reason: also };
@@ -50,6 +71,8 @@ export function blitzItem(card: Card, otherTerms: readonly string[]): QuizItem {
           return { correct: true, expected: term, reason: `Accepted, allowing for spelling. It is spelt ${term}.` };
         case 'other-term':
           return { correct: false, expected: term, reason: `${typed} is a different term in the glossary.` };
+        case 'other-word':
+          return { correct: false, expected: term, reason: `${typed} is a different word, not a misspelling of ${term}.` };
         case 'wrong':
           return { correct: false, expected: term, reason: `This definition is for ${term}.` };
       }
@@ -71,6 +94,9 @@ const game: Game = {
       ]);
     }
     const spellings = (c: Card) => [c.front, ...(c.aliases ?? [])];
+    // Built on first use: only a slip of two or more edits asks, so most rounds never need it.
+    const content = ctx.content;
+    const isCourseText = content ? (phrase: string) => courseText(content)(phrase) : undefined;
     const others = (c: Card) => terms.filter((t) => t !== c).flatMap(spellings);
     // Every term once in a seeded order, then again in a new order, never the same term twice running.
     const order: Card[] = [];
@@ -87,7 +113,7 @@ const game: Game = {
       now: ctx.now,
       generate: (i) => {
         const card = orderAt(i);
-        return blitzItem(card, others(card));
+        return blitzItem(card, others(card), isCourseText);
       },
       count: Infinity,
       deadline: ctx.now() + BLITZ_MS,

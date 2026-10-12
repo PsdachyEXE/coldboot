@@ -1635,3 +1635,19 @@ The test changes `dist/sw.js` on disk to stand in for a deploy, because `vite pr
 **Rejected.**
 - A second build to stand in for the deploy. It's slower, and the prompt depends only on the worker script changing.
 - Keeping the existing specs under `/`, which would need a second server.
+
+## D-196 blitz: a course word two edits from the term is a different word (amends D-086 and D-163)
+
+**Decision.** A typed answer within the term's tolerance is now marked wrong when all of these hold:
+- it is at least two edits from every accepted spelling;
+- it appears as whole words in the course content (cards, questions, case studies and the PSM);
+- it isn't a plural of the term or an alias (+s, +es, or y to ies).
+
+The feedback says "constant is a different word, not a misspelling of constraint." A one-edit slip still counts, even when it is a word.
+
+**Reason.** The glossary alone didn't stop real words passing as typos. "Constant" was accepted for constraint, "code" and "store" for solution scope (through its alias "scope"), "report" for record, "retesting" for testing, and "authenticator" for authentication. These are the near-misses a student actually types, and accepting them teaches the wrong term.
+
+**Rejected.**
+- A hand-kept list of confusable words, which misses words content adds later.
+- An English dictionary, which is a large download and mostly words the course never uses.
+- Rejecting one-edit slips that are words: "treat" for threat is far more likely a typo.
