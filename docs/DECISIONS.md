@@ -1572,3 +1572,11 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** The handover report has to state accurately what is done and what the operator must still do.
 
 **Rejected.** Marking blocked items as done because their local equivalents pass.
+
+## D-192 Sources, second attempt: still blocked
+
+**Decision.** On 12 October the build tried again to reach the Section 3 documents, by every route this session has. The sandbox proxy still refuses `vcaa.vic.edu.au` (403). The fetch tool resolves no host at all from this environment. Claude in Chrome isn't connected to this cloud session. No copy was available through the session's other connectors. Web search works, but it returns summaries of VCAA's teaching and assessment support pages, the same pages Section 4 was rebuilt from, not the study design's text. No Section 4 entry is corrected and D-001 stands.
+
+**Reason.** The brief makes the study design the source, and a search summary can't show a key knowledge list's exact wording, order or completeness. What the summaries did say (phone numbers as strings, arrays against records, the three naming conventions) agrees with Section 4.
+
+**Rejected.** Reconciling Section 4 against search summaries, and third-party copies of the study design, as in D-001.
