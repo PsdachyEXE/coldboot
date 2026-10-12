@@ -235,7 +235,8 @@ function Version() {
         </dd>
         {built && Number.isFinite(built.getTime()) ? (
           <>
-            <dt>Built</dt>
+            {/* When the app's code or content last changed (vite.config.ts), not when this copy was built. */}
+            <dt>Updated</dt>
             <dd>{built.toLocaleString('en-AU', { dateStyle: 'long', timeStyle: 'short' })}</dd>
           </>
         ) : null}

@@ -1611,3 +1611,13 @@ vite.config.ts imports `summarise` from the app's source, so that import and the
 - Starting the content load later, which would slow every screen that does need the content.
 
 Home's 87 is a layout shift (CLS 0.137) on some runs: the body font sometimes arrives after the first paint and moves the Coverage section. It happened under the local HTTP/1.1 server with throttling and is left open; `font-display: optional` with the app's own `@font-face` rules would remove it.
+
+## D-194 The build is named after the last commit that changed what ships
+
+**Decision.** vite.config.ts takes the build id's commit and the date Settings shows from `git log -1` over the shipped paths: `src` and `content` (without tests and the content README), `public`, `index.html`, `package.json`, the lockfile, `vite.config.ts` and `tsconfig.json`. If git history isn't available, it falls back to `GITHUB_SHA` and the current time. deploy.yml checks out full history for this. Settings labels the date "Updated".
+
+**Reason.** The build id held the deployed commit's SHA and the build time, so every push to `main`, docs-only ones included, rebuilt different files and a new service worker, and every open copy of the app showed "Update ready. Reload now?". Two builds of the same tree are now byte-identical, and the current docs-only head builds as `1.0.0+650de76`.
+
+**Rejected.**
+- Dropping the date, which Settings and content reports use.
+- A content hash as the id, which nobody can map back to a commit.

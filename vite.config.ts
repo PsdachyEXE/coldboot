@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -109,15 +110,53 @@ function contentSummaryPlugin(): Plugin {
   };
 }
 
+/**
+ * What the build calls itself: the last commit that changed anything the app ships, not the
+ * commit being deployed. A push that only changes docs, tests or CI then rebuilds byte-identical
+ * files, the service worker doesn't change, and nobody is asked to reload for nothing. deploy.yml
+ * checks out full history for this; without git history it falls back to GITHUB_SHA and now.
+ */
+const SHIPPED_PATHS = [
+  'src',
+  'content',
+  'public',
+  'index.html',
+  'package.json',
+  'package-lock.json',
+  'vite.config.ts',
+  'tsconfig.json',
+  ':(exclude,glob)**/*.test.ts',
+  ':(exclude,glob)**/*.test.tsx',
+  ':(exclude)content/README.md',
+];
+
+function sourceRevision(): { sha: string; time: string } {
+  try {
+    const out = execFileSync('git', ['log', '-1', '--format=%H %cI', '--', ...SHIPPED_PATHS], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    const [sha, time] = out.split(' ');
+    const date = new Date(time ?? '');
+    if (sha && Number.isFinite(date.getTime())) return { sha: sha.slice(0, 7), time: date.toISOString() };
+  } catch {
+    // Not a git checkout (a source archive): fall through.
+  }
+  return { sha: (process.env.GITHUB_SHA ?? 'local').slice(0, 7), time: new Date().toISOString() };
+}
+
 const base = resolveBase();
+const revision = sourceRevision();
+const version = (JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string }).version;
 
 export default defineConfig({
   base,
   define: {
-    __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? '1.0.0'),
-    // Identifies the exact deploy in content reports: version plus the commit CI built from.
-    __BUILD_ID__: JSON.stringify(`${process.env.npm_package_version ?? '1.0.0'}+${(process.env.GITHUB_SHA ?? 'local').slice(0, 7)}`),
-    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+    __APP_VERSION__: JSON.stringify(version),
+    // Identifies the shipped source in content reports: version plus the last commit that changed it.
+    __BUILD_ID__: JSON.stringify(`${version}+${revision.sha}`),
+    // When that commit was made (Settings shows it as "Updated").
+    __BUILD_TIME__: JSON.stringify(revision.time),
   },
   plugins: [
     react(),

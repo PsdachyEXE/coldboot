@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          # Full history: the build names itself after the last commit that changed shipped files
+          # (vite.config.ts), so a docs-only push deploys identical files and prompts nobody to reload.
+          fetch-depth: 0
       - uses: actions/setup-node@v5
         with:
           node-version: 22
