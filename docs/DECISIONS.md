@@ -1580,3 +1580,34 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** The brief makes the study design the source, and a search summary can't show a key knowledge list's exact wording, order or completeness. What the summaries did say (phone numbers as strings, arrays against records, the three naming conventions) agrees with Section 4.
 
 **Rejected.** Reconciling Section 4 against search summaries, and third-party copies of the study design, as in D-001.
+
+## D-193 Phone first visit: setup screens paint before the content arrives
+
+**Decision.** Five changes, for a phone opening a screen for the first time:
+1. The Drill and Written setup screens render from `useContentSummary()` (src/content/summary.ts): per-KK counts and case study sizes that the build computes from the content files into `virtual:coldboot-content-summary`. Once the content loads, the counts come from the index instead; a test checks the two agree.
+2. Each round is its own chunk (`DrillRound.tsx`, `WrittenPractice.tsx`), so the setup chunks no longer carry the Markdown renderer and the figures. The setup fetches its round when the browser is idle.
+3. `lazyComponent` (src/app/lazyComponent.tsx) renders an already-loaded screen directly. React.lazy suspends for a tick even on a loaded module, and React then holds the screen back until at least 300 ms after the fallback appeared; locally this delayed Drill's first paint from about 230 ms to 700 ms.
+4. main.tsx starts fetching the opening screen's chunk before the first render but doesn't wait for it.
+5. The idle prefetch of the other screens now waits until the study content has loaded, so it no longer competes for a slow connection with what the open screen needs.
+
+Mobile Lighthouse with applied throttling, on a `/coldboot/` build with a profile past first run:
+
+| Route | Before | After |
+|---|---|---|
+| Drill | 71 (LCP 7.7 s) | 89 (LCP 3.2 s) |
+| Written | 72 (LCP 7.8 s) | 91 (LCP 3.0 s) |
+| Review | 93 | 92 |
+| Home | 93 | 87 to 90 |
+
+Lighthouse's default simulated throttling still scores Drill in the low 70s. The simulation charges every request started before the observed paint, including the content requests Layout starts as soon as the shell paints, although the setup no longer waits for them.
+
+vite.config.ts imports `summarise` from the app's source, so that import and the one in summary.ts carry a `.ts` extension (`allowImportingTsExtensions`). Vite's native config loader, a planned default, resolves paths exactly as written.
+
+**Reason.** The first visit on a phone waited about 7 seconds on Drill, because its setup form was behind every outcome's questions (754 KB over 84 requests), although the form needs only counts.
+
+**Rejected.**
+- Waiting for the opening screen's chunk before the first render. Under applied throttling it raised Drill's first paint from 2.5 s to 4.3 s and Review's from 2.6 s to 3.7 s.
+- A top-level await in main.tsx. It made the bundler split about 30 shared modules out of the entry chunk, so that no chunk would import a module still waiting on it.
+- Starting the content load later, which would slow every screen that does need the content.
+
+Home's 87 is a layout shift (CLS 0.137) on some runs: the body font sometimes arrives after the first paint and moves the Coverage section. It happened under the local HTTP/1.1 server with throttling and is left open; `font-display: optional` with the app's own `@font-face` rules would remove it.

@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { useAttempts } from '../../state/attempts';
@@ -7,7 +7,7 @@ import { storageKey } from '../../state/storage';
 import { useSettings } from '../../state/settings';
 import { fixtureIndex, fxCaseStudy, fxShort, provideContent, resetStudyStores } from '../study/testing';
 import { markScore } from '../study/written';
-import Written from './Written';
+import Written, { CaseStudyScreen, WrittenRound } from './Written';
 
 function renderWritten(path: string) {
   const router = createMemoryRouter([{ path: '/written', element: <Written /> }], { initialEntries: [path] });
@@ -41,6 +41,8 @@ describe('markScore', () => {
 });
 
 describe('Written', () => {
+  // The practice screens are a lazy chunk; loaded up front, they render without suspending.
+  beforeAll(() => Promise.all([WrittenRound.load(), CaseStudyScreen.load()]));
   beforeEach(() => {
     resetStudyStores();
     window.sessionStorage.clear();

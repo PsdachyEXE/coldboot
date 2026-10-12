@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components -- route table module */
 /**
  * Route table (hash router). Home and first run ship with the shell. Every other screen is its own
  * chunk: the games (inside the terminal), the exam, stats and the daily screen as the brief asks,
@@ -7,12 +6,12 @@
  *
  * Navigation stays smooth two ways: the router updates in a transition and the Suspense boundary
  * round the Outlet (in Layout) is already showing, so the current page stays up while a chunk
- * loads; and prefetchScreens() fetches every lazy chunk once the shell is idle, so usually there
- * is nothing to wait for.
+ * loads; and prefetchScreens() fetches every lazy chunk once the shell is idle and the study
+ * content has loaded (main.tsx), so usually there is nothing to wait for.
  */
-import { lazy } from 'react';
 import { createHashRouter, type RouteObject } from 'react-router';
 import Layout from './Layout';
+import { lazyComponent } from './lazyComponent';
 import { paths } from './paths';
 import Home from './screens/Home';
 import FirstRun from './screens/FirstRun';
@@ -20,34 +19,51 @@ import NotFound from './screens/NotFound';
 import RouteError from './screens/RouteError';
 
 const screens = {
-  review: () => import('./screens/Review'),
-  drill: () => import('./screens/Drill'),
-  run: () => import('./screens/Run'),
-  written: () => import('./screens/Written'),
-  map: () => import('./screens/SyllabusMap'),
-  settings: () => import('./screens/Settings'),
-  about: () => import('./screens/About'),
-  terminal: () => import('../terminal/TerminalScreen'),
-  exam: () => import('../exam/ExamScreen'),
-  stats: () => import('./screens/Stats'),
-  daily: () => import('./screens/Daily'),
+  review: lazyComponent(() => import('./screens/Review')),
+  drill: lazyComponent(() => import('./screens/Drill')),
+  run: lazyComponent(() => import('./screens/Run')),
+  written: lazyComponent(() => import('./screens/Written')),
+  map: lazyComponent(() => import('./screens/SyllabusMap')),
+  settings: lazyComponent(() => import('./screens/Settings')),
+  about: lazyComponent(() => import('./screens/About')),
+  terminal: lazyComponent(() => import('../terminal/TerminalScreen')),
+  exam: lazyComponent(() => import('../exam/ExamScreen')),
+  stats: lazyComponent(() => import('./screens/Stats')),
+  daily: lazyComponent(() => import('./screens/Daily')),
 };
 
-const Review = lazy(screens.review);
-const Drill = lazy(screens.drill);
-const Run = lazy(screens.run);
-const Written = lazy(screens.written);
-const SyllabusMap = lazy(screens.map);
-const Settings = lazy(screens.settings);
-const About = lazy(screens.about);
-const TerminalScreen = lazy(screens.terminal);
-const ExamScreen = lazy(screens.exam);
-const Stats = lazy(screens.stats);
-const Daily = lazy(screens.daily);
+const Review = screens.review;
+const Drill = screens.drill;
+const Run = screens.run;
+const Written = screens.written;
+const SyllabusMap = screens.map;
+const Settings = screens.settings;
+const About = screens.about;
+const TerminalScreen = screens.terminal;
+const ExamScreen = screens.exam;
+const Stats = screens.stats;
+const Daily = screens.daily;
+
+/**
+ * Starts loading the chunk for the screen at `hashPath` (location.hash without the "#") when that
+ * screen is lazy. main.tsx calls it before the first render: if the chunk is in by the time React
+ * renders, the screen skips lazy() and its Suspense fallback (see lazyComponent). Never rejects; a
+ * screen whose chunk failed to load retries and reports the failure itself.
+ */
+export function preloadScreen(hashPath: string): Promise<void> {
+  let pathname = hashPath.split(/[?#]/)[0] ?? '';
+  if (pathname.length > 1 && pathname.endsWith('/')) pathname = pathname.slice(0, -1);
+  const name = (Object.keys(screens) as (keyof typeof screens)[]).find((k) => paths[k] === pathname);
+  if (!name) return Promise.resolve();
+  return screens[name].load().then(
+    () => undefined,
+    () => undefined,
+  );
+}
 
 /** Fetches every lazy screen, so the first visit to each doesn't wait on the network. */
 export function prefetchScreens(): void {
-  for (const load of Object.values(screens)) void load().catch(() => {});
+  for (const screen of Object.values(screens)) void screen.load().catch(() => {});
 }
 
 export const routes: RouteObject[] = [

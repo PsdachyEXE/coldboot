@@ -9,8 +9,9 @@ import '@fontsource-variable/atkinson-hyperlegible-next';
 import './ui/tokens.css';
 import './ui/global.css';
 import './ui/markdown.css';
-import { createAppRouter, prefetchScreens } from './app/routes';
+import { createAppRouter, prefetchScreens, preloadScreen } from './app/routes';
 import { startPwa } from './app/pwa';
+import { useContent } from './content/store';
 import { whenIdle } from './lib/idle';
 import { useSettings, type MotionPreference } from './state/settings';
 
@@ -32,6 +33,12 @@ if (import.meta.env.PROD) {
     });
 }
 
+// Start fetching the opening screen's chunk now, alongside the rest of start-up. When it arrives
+// before React's first render (from the cache on a repeat visit, or on a fast connection), the
+// screen renders directly instead of suspending on it (see lazyComponent). The render
+// doesn't wait for it: on a slow connection that would only hold back the first paint.
+void preloadScreen(window.location.hash.slice(1));
+
 const router = createAppRouter();
 
 createRoot(document.getElementById('root')!).render(
@@ -40,5 +47,13 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 );
 
-// Once the shell is idle, fetch the lazily loaded screens so the first visit to each is instant.
-whenIdle(prefetchScreens, 5000);
+// Once the shell is idle, make sure the study content is loading (Layout starts it; nearly every
+// screen needs it), then fetch the other screens so the first visit to each is instant. The
+// content goes first: on a slow phone connection the prefetch would otherwise compete with what
+// the open screen is waiting for.
+whenIdle(() => {
+  void useContent
+    .getState()
+    .load()
+    .finally(() => whenIdle(prefetchScreens, 5000));
+}, 5000);

@@ -3,10 +3,12 @@
  * the load. After a successful load, SRS records for cards that are no longer in the content are
  * pruned, so due counts match what Review can actually show.
  */
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { create } from 'zustand';
+import bundledSummary from 'virtual:coldboot-content-summary';
 import { useSrs } from '../state/srs';
 import { loadAllContent, type ContentIndex } from './loader';
+import { summarise, type ContentSummary } from './summary';
 
 export interface ContentState {
   index: ContentIndex | null;
@@ -46,4 +48,14 @@ export function useContentIndex(): ContentIndex | null {
     if (status === 'idle') void useContent.getState().load();
   }, [status]);
   return index;
+}
+
+/**
+ * Item counts per KK and the case studies' sizes. Starts the content load like `useContentIndex`,
+ * but answers at once: from the build's summary until the content has loaded, then from the
+ * loaded index (the same numbers in production; tests load their own fixtures).
+ */
+export function useContentSummary(): ContentSummary {
+  const index = useContentIndex();
+  return useMemo(() => (index ? summarise(index) : bundledSummary), [index]);
 }

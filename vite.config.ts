@@ -1,6 +1,11 @@
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig, type Plugin } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+// Extensions on purpose: Vite's native config loader (a future default) resolves files as written.
+import { summarise, type SummaryInput } from './src/content/summary.ts';
 
 /**
  * Base path. GitHub Pages serves a project site from /<repo>/, so CI derives the
@@ -60,6 +65,50 @@ function fontPreloadPlugin(base: string): Plugin {
   };
 }
 
+/**
+ * Builds `virtual:coldboot-content-summary` from the content files: per-KK item counts and the
+ * case studies' sizes (src/content/summary.ts). It lets the Drill and Written setup screens paint
+ * without waiting for the content chunks, which matters on a phone's first visit.
+ */
+function contentSummaryPlugin(): Plugin {
+  const id = 'virtual:coldboot-content-summary';
+  const resolved = `\0${id}`;
+  const root = fileURLToPath(new URL('./content', import.meta.url));
+  return {
+    name: 'coldboot-content-summary',
+    resolveId: (source) => (source === id ? resolved : undefined),
+    load(loadId) {
+      if (loadId !== resolved) return undefined;
+      const read = <T,>(file: string, fallback: T): T => {
+        const path = join(root, file);
+        this.addWatchFile(path);
+        return existsSync(path) ? (JSON.parse(readFileSync(path, 'utf8')) as T) : fallback;
+      };
+      type Items = SummaryInput['cards'];
+      const areas = ['u3o1', 'u3o2', 'u4o1', 'u4o2'].map((a) => ({
+        cards: read<Items>(`${a}/cards.json`, []),
+        mcq: read<Items>(`${a}/mcq.json`, []),
+        short: read<Items>(`${a}/short.json`, []),
+      }));
+      const terms = read<Items>('terms.json', []);
+      const psm = read<{ cards: Items; mcq: Items; short: Items }>('psm.json', { cards: [], mcq: [], short: [] });
+      // The loader sorts case study files by path, so they come out in id order.
+      const caseDir = join(root, 'case-studies');
+      const caseStudies = (existsSync(caseDir) ? readdirSync(caseDir) : [])
+        .filter((f) => f.endsWith('.json'))
+        .sort()
+        .map((f) => read<SummaryInput['caseStudies'][number]>(`case-studies/${f}`, { id: '', title: '', questions: [], totalMarks: 0 }));
+      const summary = summarise({
+        cards: [...areas.flatMap((a) => a.cards), ...terms, ...psm.cards],
+        mcq: [...areas.flatMap((a) => a.mcq), ...psm.mcq],
+        short: [...areas.flatMap((a) => a.short), ...psm.short],
+        caseStudies,
+      });
+      return `export default ${JSON.stringify(summary)};`;
+    },
+  };
+}
+
 const base = resolveBase();
 
 export default defineConfig({
@@ -72,6 +121,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    contentSummaryPlugin(),
     cspPlugin(),
     fontPreloadPlugin(base),
     VitePWA({

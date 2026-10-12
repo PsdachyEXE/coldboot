@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { useAttempts } from '../../state/attempts';
@@ -6,7 +6,7 @@ import { useSettings } from '../../state/settings';
 import { useAnnouncer } from '../../ui/announce';
 import { useReportDialog } from '../../ui/report';
 import { fixtureIndex, fxCard, fxMcq, provideContent, resetStudyStores } from '../study/testing';
-import Drill from './Drill';
+import Drill, { DrillRound } from './Drill';
 
 function renderDrill(path: string) {
   const router = createMemoryRouter(
@@ -34,6 +34,8 @@ const q1 = fxMcq('m-u3o1-kk04-001', ['U3O1-KK04'], {
 const q2 = fxMcq('m-u3o1-kk04-002', ['U3O1-KK04'], { stem: 'Second question?' });
 
 describe('Drill', () => {
+  // The round is a lazy chunk; loaded up front, it renders without suspending.
+  beforeAll(() => DrillRound.load());
   beforeEach(() => {
     resetStudyStores();
     useSettings.setState({ onboarded: true, motion: 'reduce' });

@@ -3,19 +3,20 @@
  * random mix. KKs and areas with nothing to practise are listed but can't be chosen.
  */
 import { useState, type FormEvent } from 'react';
-import type { ContentIndex } from '../../content/loader';
 import { AREA_IDS, type AreaId, type KkId } from '../../content/schema';
 import { ALL_KK_IDS, areaById, kkLabel, kksByArea } from '../../content/studyDesign';
+import { countFor, type ContentSummary } from '../../content/summary';
 import { Button } from '../../ui/Button';
 import { Checkbox, RadioGroup, Select } from '../../ui/Field';
 import { plural } from './format';
-import { mcqsFor, shortsFor, type ItemKind, type StudyScope } from './select';
+import type { ItemKind, StudyScope } from './select';
 import study from './study.module.css';
 
 type Mode = StudyScope['mode'];
 
 export interface ScopeFormProps {
-  content: ContentIndex;
+  /** Counts only, so the form can show before the content itself has loaded. */
+  summary: ContentSummary;
   kind: ItemKind;
   legend: string;
   submitLabel: string;
@@ -25,8 +26,8 @@ export interface ScopeFormProps {
   onSubmit(scope: StudyScope, timed: boolean): void;
 }
 
-export function ScopeForm({ content, kind, legend, submitLabel, timedOption = false, initialTimed = false, onSubmit }: ScopeFormProps) {
-  const count = (kk: KkId) => (kind === 'mcq' ? mcqsFor(content, kk) : shortsFor(content, kk)).length;
+export function ScopeForm({ summary, kind, legend, submitLabel, timedOption = false, initialTimed = false, onSubmit }: ScopeFormProps) {
+  const count = (kk: KkId) => countFor(summary, kk, kind);
   const noun = kind === 'mcq' ? 'question' : 'short answer';
   const kkOptions = ALL_KK_IDS.map((kk) => {
     const n = count(kk);
