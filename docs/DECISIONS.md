@@ -1651,3 +1651,16 @@ The feedback says "constant is a different word, not a misspelling of constraint
 - A hand-kept list of confusable words, which misses words content adds later.
 - An English dictionary, which is a large download and mostly words the course never uses.
 - Rejecting one-edit slips that are words: "treat" for threat is far more likely a typo.
+
+## D-197 Live on GitHub Pages; the tag waits on the operator
+
+**Decision.** With the operator's go-ahead on 12 October, `main` was fast-forwarded to the session branch at `e97d203`. The deploy run went green:
+- the check and build;
+- the Pages deployment, at https://psdachyexe.github.io/coldboot/;
+- the installer job, under Windows PowerShell 5.1 and PowerShell 7, against the live site.
+
+GitHub refused the push of the `v1.0.0` tag (HTTP 403), because this session may push branches but not tags. The operator creates the tag on `e97d203`.
+
+**Reason.** D-002 held the deploy and the tag until the operator approved updating `main`.
+
+**Rejected.** Creating the tag through the REST API after git was refused, which would get round the same refusal.
