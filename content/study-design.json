@@ -41,12 +41,12 @@
     {
       "id": "TERMS",
       "title": "Terms used in this study",
-      "summary": "The study design's glossary. Every term is examinable."
+      "summary": "The study design's Terms used in this study. The exam uses these definitions, and every term is examinable."
     },
     {
       "id": "PSM",
       "title": "Problem-solving methodology",
-      "summary": "The four stages (analysis, design, development, evaluation), their activities, and what each stage documents."
+      "summary": "The four stages (analysis, design, development, evaluation), their activities, and the problem-solving methodology specifications."
     }
   ],
   "kks": [
@@ -54,374 +54,371 @@
       "id": "U3O1-KK01",
       "area": "U3O1",
       "title": "AI in programming",
-      "summary": "Emerging uses of AI in programming: prompting to generate code, AI-assisted debugging, testing and optimisation, and using these tools responsibly and ethically.",
+      "summary": "Emerging uses of AI in programming: generating code from prompts, automated debugging and testing of modules, code optimisation, and using AI tools responsibly and ethically.",
       "examples": [
-        "Writing a prompt that states inputs, outputs and constraints",
-        "Checking AI-generated code before using it",
-        "Acknowledging AI assistance"
+        "A prompt that names the language, the inputs and the labelled outputs",
+        "An IDE tool that flags a likely error as code is typed",
+        "Reviewing AI-generated code before using it"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK02",
       "area": "U3O1",
-      "title": "Interpreting solution requirements",
-      "summary": "Reading functional and non-functional requirements, constraints and scope to decide what a module must do.",
+      "title": "Requirements, constraints and scope",
+      "summary": "The characteristics of functional and non-functional requirements, constraints and scope, as read from the requirements a module is built to.",
       "examples": [
-        "A requirement that totals are shown to two decimal places",
-        "A constraint that the program runs offline"
+        "Functional: the module calculates the total fee",
+        "Non-functional: results appear within two seconds",
+        "Constraint: the program must run offline"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK03",
       "area": "U3O1",
       "title": "Design tools for modules",
-      "summary": "Tools that represent a module's design before it is coded.",
+      "summary": "Data dictionaries, mock-ups, object descriptions, input-process-output (IPO) charts and pseudocode as ways to represent a module before it is coded.",
       "examples": [
-        "Data dictionary",
-        "Mock-up",
-        "Object description",
-        "Pseudocode",
-        "IPO chart"
+        "A data dictionary with each item's name and data type",
+        "An object description listing attributes and methods",
+        "An IPO chart with Input, Processes and Output columns"
       ],
-      "status": "provisional",
-      "verify": "Confirm the exact list of design tools named for U3O1."
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK04",
       "area": "U3O1",
       "title": "Data types",
-      "summary": "Choosing a data type for each item of data and justifying the choice.",
+      "summary": "The characteristics of text (character, string), numeric (integer, floating point, date/time) and Boolean data types, and choosing the right one for each item of data.",
       "examples": [
-        "Phone numbers stored as strings",
-        "Currency as floating point to two decimal places",
-        "Numbers stored as text sort as 1, 101, 15, 3, 5"
+        "A single-letter grade stored as a character",
+        "A phone number stored as a string",
+        "A date of birth stored as date/time"
       ],
-      "status": "provisional",
-      "verify": "Confirm the list of data types (character, string, integer, floating point, Boolean)."
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK05",
       "area": "U3O1",
       "title": "Data structures",
-      "summary": "One-dimensional arrays, two-dimensional arrays and records: how each is organised and when each suits.",
+      "summary": "One-dimensional arrays, two-dimensional arrays and records (fields of varying data types, reached by a field index): how each is organised and when each suits.",
       "examples": [
         "A 1D array of scores indexed by integer",
         "A 2D array indexed by row and column",
-        "A record with named fields of mixed types"
+        "A record with named fields of different types"
       ],
-      "status": "provisional",
-      "verify": "Confirm whether associative arrays or lists are also named."
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK06",
       "area": "U3O1",
       "title": "Data sources",
-      "summary": "Plain text, delimited (CSV) and XML files: their structure, when each suits, and why XML's self-describing tags make it extensible.",
+      "summary": "Plain text (TXT), delimited (CSV) and XML files: how each is structured and the reasons for using each.",
       "examples": [
         "A log written as plain text lines",
         "A CSV export from a spreadsheet",
-        "An XML file whose tags name each field"
+        "An XML file whose tags describe each value"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK07",
       "area": "U3O1",
-      "title": "Object-oriented programming",
-      "summary": "Abstraction, encapsulation, generalisation and inheritance; classes and objects; access modifiers.",
+      "title": "Principles of OOP",
+      "summary": "Abstraction, encapsulation, generalisation and inheritance as the principles of object-oriented programming.",
       "examples": [
         "A Vehicle superclass generalising Car and Truck",
-        "Private attributes reached through public methods",
-        "Public, private, protected and default access"
+        "Private attributes reached only through the class's methods",
+        "Showing other code only what it needs to use"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK08",
       "area": "U3O1",
       "title": "Features of a programming language",
-      "summary": "Variables and constants, scope, control structures, operators, functions, procedures, methods, classes, GUI elements and file operations.",
+      "summary": "Local and global variables and constants; data types; instructions and control structures (sequence, selection, iteration); arithmetic, logical and conditional operators; graphical user interfaces; functions and methods; classes and objects.",
       "examples": [
         "Local versus global scope",
         "Pre-test, post-test and counted loops",
-        "Arithmetic, logical and conditional operators"
+        "Integer division and modulus"
       ],
-      "status": "provisional",
-      "verify": "Confirm the list of language features."
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK09",
       "area": "U3O1",
       "title": "Naming conventions",
-      "summary": "Hungarian notation, camel case and snake case for variables, interface controls and code structures.",
+      "summary": "Why naming conventions are used, and how Hungarian notation, camel casing and snake casing name variables, interface controls and code structures.",
       "examples": [
         "strSurname",
         "txtSurname",
         "totalCost",
         "total_cost"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK10",
       "area": "U3O1",
       "title": "Validation",
-      "summary": "Existence, type and range checks on input data.",
+      "summary": "Existence (presence), type and range checking of data.",
       "examples": [
         "Rejecting an empty name field",
         "Rejecting letters in a quantity",
         "Rejecting an age of 250"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK11",
       "area": "U3O1",
       "title": "Internal documentation",
-      "summary": "Comments that state a module's purpose, its key features and why processing choices were made.",
+      "summary": "Why code carries internal documentation: to explain and justify data and code structures, to support code maintenance, and to leave placeholder comments (stubs) for future development.",
       "examples": [
-        "A header comment stating a function's purpose",
-        "A comment justifying a binary search over a linear one"
+        "A comment justifying a binary search over a linear one",
+        "Comments that help a later developer maintain a module",
+        "A stub marking a method still to be written"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK12",
       "area": "U3O1",
       "title": "Sorting and searching",
-      "summary": "Selection sort, quick sort, linear search and binary search; their relative efficiency; choosing a search from the data's order and the requirements.",
+      "summary": "Selection sort, quick sort, binary search and linear search: how each works and how they compare.",
       "examples": [
         "Binary search needs sorted data",
         "Quick sort is usually faster than selection sort on large lists"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK13",
       "area": "U3O1",
       "title": "Types of errors",
-      "summary": "Syntax, logic and runtime errors, including overflow, index out of range, type mismatch and divide by zero, and how error handling and extra checks reduce them.",
+      "summary": "Syntax, logic and runtime errors, including the runtime errors overflow, index out of range, type mismatch and divide by zero.",
       "examples": [
         "A missing closing bracket",
         "Using < where <= was needed",
         "Reading element 10 of a 10-element zero-based array"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O1-KK14",
       "area": "U3O1",
       "title": "Debugging and testing",
-      "summary": "Breakpoints, debugging output statements and commenting out code; test cases, test data and test tables with expected and actual output.",
+      "summary": "Breakpoints, debugging statements, constructing relevant test data, and test cases that compare expected and actual output in testing tables.",
       "examples": [
         "Setting a breakpoint inside a loop",
-        "Choosing boundary test data",
-        "A test table with expected and actual output"
+        "A debugging statement that prints a variable's value",
+        "Boundary test data in a testing table"
       ],
-      "status": "provisional",
-      "verify": "Confirm whether trace tables are named; otherwise treat tracing as desk-checking toward test tables."
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK01",
       "area": "U3O2",
       "title": "Why software projects happen",
-      "summary": "The reasons individuals and organisations commission software: solving a problem, meeting a need, taking an opportunity.",
+      "summary": "Why individuals and organisations undertake software development projects: to increase productivity and efficiency, reduce costs, address a gap in the market, or meet organisational objectives or needs.",
       "examples": [
-        "Replacing a paper booking system",
-        "Meeting a new legal reporting duty"
+        "Automating a paper booking process to save staff time",
+        "An app for a need no competitor serves"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK02",
       "area": "U3O2",
       "title": "The project brief",
-      "summary": "What a brief documents about the problem, need or opportunity.",
+      "summary": "What a brief documents: an outline of the problem, need or opportunity, the proposed users, the programming languages to be used, feasibility and originality.",
       "examples": [
-        "Background of the organisation",
-        "Who the users are",
-        "What the solution must achieve"
+        "Who will use the solution",
+        "Whether the project can be done with the time and skills available"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK03",
       "area": "U3O2",
       "title": "Gantt charts",
-      "summary": "Planning with Gantt charts: tasks, durations, sequencing, dependencies, milestones and the critical path.",
+      "summary": "Project management with Gantt charts: identifying, sequencing and allocating time to tasks, dependencies, milestones, the critical path, and monitoring and documenting progress.",
       "examples": [
         "A task that can't start until testing ends",
-        "The longest chain of dependent tasks"
+        "The longest chain of dependent tasks",
+        "Comparing planned and actual progress"
       ],
-      "status": "provisional",
-      "verify": "Confirm whether slack (float) is named."
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK04",
       "area": "U3O2",
-      "title": "Data collection techniques",
-      "summary": "Collecting data about needs and requirements, and choosing a technique to suit each stakeholder group.",
+      "title": "Data collection methods",
+      "summary": "Interviews, observations, surveys and reports as methods for collecting data to determine needs and requirements, and choosing one to suit the people and the detail needed.",
       "examples": [
         "Interviews",
-        "Surveys or questionnaires",
-        "Observation"
+        "Observations",
+        "Surveys",
+        "Reports"
       ],
-      "status": "provisional",
-      "verify": "Confirm the list of techniques."
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK05",
       "area": "U3O2",
       "title": "Functional and non-functional requirements",
-      "summary": "What the solution must do versus the qualities it must have.",
+      "summary": "What the solution must do, and the qualities it must have.",
       "examples": [
         "Functional: calculate the total fee",
         "Non-functional: reliability, usability, portability"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK06",
       "area": "U3O2",
       "title": "Constraints",
-      "summary": "Conditions that limit the solution.",
+      "summary": "Economic, legal, social and technical constraints that influence how a solution is developed.",
       "examples": [
-        "Economic: a fixed budget",
+        "Economic: a fixed budget or deadline",
         "Legal: privacy law",
+        "Social: users' level of expertise",
         "Technical: must run on existing tablets"
       ],
-      "status": "provisional",
-      "verify": "Confirm the list of constraint types."
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK07",
       "area": "U3O2",
       "title": "Scope",
-      "summary": "The boundaries of the solution: what it will and will not do.",
+      "summary": "The solution's scope: the boundaries of the solution or version, including what it will not do.",
       "examples": [
         "The app will take bookings but will not process payments"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK08",
       "area": "U3O2",
       "title": "Analytical tools",
-      "summary": "Context diagrams, data flow diagrams and use case diagrams, including their notation and common convention errors.",
+      "summary": "Context diagrams (Level 0), data flow diagrams (Level 1) and use case diagrams: their components and the rules for drawing them.",
       "examples": [
         "Entities versus actors",
-        "Data flows versus interactions",
+        "Data flows versus associations",
         "Includes versus extends"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK09",
       "area": "U3O2",
       "title": "Software requirements specification",
-      "summary": "The purpose and contents of an SRS.",
+      "summary": "The purpose and features of an SRS: requirements, constraints, scope, user characteristics, technical environments, and analytical tools that depict existing processes and systems.",
       "examples": [
-        "Requirements, constraints and scope",
-        "Intended users and operating environment"
+        "Functional and non-functional requirements",
+        "The users and their expertise",
+        "The hardware and software the solution must run on"
       ],
-      "status": "provisional",
-      "verify": "Confirm the listed contents of an SRS."
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK10",
       "area": "U3O2",
       "title": "Legal requirements",
-      "summary": "Key legal requirements for intellectual property, ownership and the privacy of data.",
+      "summary": "Key legal requirements for intellectual property and the ownership and privacy of data: the Copyright Act 1968, the Privacy Act 1988 (APPs 1, 3, 6, 8, 9 and 11) and the Privacy and Data Protection Act 2014 (IPPs 1, 2, 4, 5, 7, 9 and 10).",
       "examples": [
-        "Copyright in code",
-        "Handling personal information"
+        "Copyright in code and images",
+        "Collecting only the personal information needed",
+        "Keeping personal information secure"
       ],
-      "status": "provisional",
-      "verify": "Confirm which Acts are named."
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK11",
       "area": "U3O2",
       "title": "File management",
-      "summary": "Naming, versioning, backing up, archiving and securely disposing of project files.",
+      "summary": "Naming conventions, version control, backups (full, incremental, differential), security and disposal as techniques for managing project files.",
       "examples": [
         "A consistent file naming scheme",
-        "Keeping an off-site backup"
+        "A differential backup each night",
+        "Securely disposing of old drives"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK12",
       "area": "U3O2",
-      "title": "Generating design ideas",
-      "summary": "Ideation techniques and tools for generating design ideas.",
+      "title": "Ideation",
+      "summary": "Mood boards, brainstorming, mind maps, sketches and annotations as techniques and tools for generating design ideas.",
       "examples": [
+        "Mood boards",
         "Brainstorming",
         "Mind maps",
-        "Mood boards",
-        "Sketches"
+        "Sketches",
+        "Annotations"
       ],
-      "status": "provisional",
-      "verify": "Confirm the ideation techniques and tools named."
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK13",
       "area": "U3O2",
-      "title": "Efficiency, effectiveness and evaluation criteria",
-      "summary": "What makes a solution efficient and effective, and criteria for evaluating design ideas and solutions.",
+      "title": "Evaluation criteria",
+      "summary": "Criteria for evaluating design ideas and the efficiency and effectiveness of solutions.",
       "examples": [
-        "Efficiency: speed, cost, effort",
+        "Efficiency: time, cost, effort",
         "Effectiveness: accuracy, usability, completeness"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK14",
       "area": "U3O2",
-      "title": "Detailed design tools",
-      "summary": "Data dictionaries, mock-ups, object descriptions, IPO charts and pseudocode for detailed designs.",
+      "title": "Design tools for solutions",
+      "summary": "Data dictionaries, mock-ups, object descriptions, IPO charts and pseudocode for turning design ideas into detailed solution designs.",
       "examples": [
-        "A data dictionary listing name, type, size and description",
-        "An IPO chart for one module"
+        "A data dictionary for every variable and control",
+        "An annotated mock-up of each screen"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK15",
       "area": "U3O2",
-      "title": "User experience characteristics",
-      "summary": "Affordance, interoperability, security and usability as characteristics of a user experience.",
+      "title": "User experience",
+      "summary": "Affordance, interoperability, security (authentication and data protection) and usability as characteristics of user experience, and how each affects software design.",
       "examples": [
         "A button that looks pressable",
-        "Exporting to a format another system reads"
+        "Exporting to a format another system reads",
+        "A login before private data is shown"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U3O2-KK16",
       "area": "U3O2",
       "title": "Design principles",
-      "summary": "Principles that shape a solution's appearance and functionality.",
+      "summary": "Alignment, balance, contrast, space, text formatting, usability and navigation as principles that shape a user interface's appearance and functionality.",
       "examples": [
         "Alignment",
+        "Balance",
         "Contrast",
-        "Consistency"
+        "Navigation"
       ],
-      "status": "provisional",
-      "verify": "Confirm the list of design principles."
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK01",
       "area": "U4O1",
       "title": "Efficient and effective solutions",
-      "summary": "Qualities of efficient and effective solutions, and user-centred design.",
+      "summary": "What makes a solution efficient and effective, including user-centred design, clear and concise code, and detailed internal documentation.",
       "examples": [
-        "Fewer steps to complete a task",
-        "Designing with users' needs at the centre"
+        "Involving users at each stage",
+        "Code without needless steps",
+        "Comments that explain the processing"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK02",
@@ -430,245 +427,236 @@
       "summary": "Choosing data types, data structures and data sources for input, storage and output.",
       "examples": [
         "Reading a CSV into an array of records",
-        "Writing results to XML"
+        "Writing results to an XML file"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK03",
       "area": "U4O1",
       "title": "Language features in development",
-      "summary": "Using the features of a programming language to build the solution.",
+      "summary": "The programming language features used to build the solution (as in U3O1-KK08), plus access modifiers: public, protected and private.",
       "examples": [
-        "Functions with parameters",
-        "File operations",
-        "GUI controls"
+        "A private attribute only the class's own methods change",
+        "A protected attribute a subclass can use",
+        "Functions with parameters"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK04",
       "area": "U4O1",
       "title": "Established and innovative approaches",
-      "summary": "Code repositories, APIs and libraries (and the risk when one changes or access is revoked), and AI-based coding assistants.",
+      "summary": "Code repositories, application programming interfaces (APIs) and libraries, and AI-based assistants as approaches to developing software.",
       "examples": [
-        "A mapping API that changes its terms",
-        "A shared repository with commit history"
+        "A shared repository with commit history",
+        "A mapping API instead of writing map code",
+        "An AI assistant suggesting the next line"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK05",
       "area": "U4O1",
       "title": "Validation techniques",
-      "summary": "Applying validation to the developed solution.",
+      "summary": "Existence, type and range checking applied in the developed solution.",
       "examples": [
         "Existence, type and range checks on a booking form"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK06",
       "area": "U4O1",
       "title": "Debugging and alpha testing",
-      "summary": "Debugging techniques and alpha testing by the developers.",
+      "summary": "Breakpoints, commenting out code, relevant test data, and test cases comparing expected and actual output in testing tables, used to check that a solution meets requirements and works correctly.",
       "examples": [
-        "Testing each module against a test table",
-        "Using breakpoints to find a logic error"
+        "Commenting out a block to isolate a fault",
+        "Testing each module against a testing table"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK07",
       "area": "U4O1",
       "title": "Beta testing",
-      "summary": "Choosing a user group, writing test plans and scenarios, observing, and documenting results.",
+      "summary": "Strategies for beta testing: constructing a testing plan and test scenarios, observing users as they work through the scenarios, and documenting the results.",
       "examples": [
-        "Recruiting users who match the target audience",
-        "A scenario that walks through a booking"
+        "Choosing testers from the intended users",
+        "A scenario that walks through a booking",
+        "Recording what testers did and said"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK08",
       "area": "U4O1",
       "title": "Evaluation strategies",
-      "summary": "Features of an evaluation strategy: which criteria, when evaluation happens, and who is responsible.",
+      "summary": "The features of an evaluation strategy: the evaluation criteria, the time frame, and who is responsible.",
       "examples": [
-        "A survey of users two weeks after launch"
+        "Survey users two weeks after launch, run by the project manager"
       ],
-      "status": "provisional",
-      "verify": "Confirm the listed features of an evaluation strategy."
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK09",
       "area": "U4O1",
       "title": "Applying evaluation criteria",
-      "summary": "Techniques for applying evaluation criteria, including collecting evaluation data.",
+      "summary": "Techniques for applying evaluation criteria to judge a solution's efficiency and effectiveness.",
       "examples": [
         "Timing how long a task takes",
         "Counting errors in output"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK10",
       "area": "U4O1",
       "title": "Project plan disruptions",
-      "summary": "Factors that affect how well a project plan works: scope creep, personnel changes and technical issues.",
+      "summary": "Factors that affect how effective a project plan is: scope creep, personnel changes and technical issues.",
       "examples": [
         "The client adds a feature mid-project",
         "A developer leaves"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK11",
       "area": "U4O1",
       "title": "Recording progress",
-      "summary": "Annotations and adjustments, logs and journals, and project management software.",
+      "summary": "Recording a project's progress through adjustments to tasks and time frames, annotations to the project plan, and logs or journals.",
       "examples": [
         "Annotating a Gantt chart with actual dates",
-        "A daily development journal"
+        "A daily development log"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O1-KK12",
       "area": "U4O1",
       "title": "Assessing the project plan",
-      "summary": "Judging how effective a project plan was.",
+      "summary": "Assessing how effective a project plan was by reviewing how many changes were made, why they were needed, and how they affected completing the project.",
       "examples": [
-        "Comparing planned and actual durations",
+        "Counting the changes made to the plan",
         "Explaining why milestones slipped"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK01",
       "area": "U4O2",
       "title": "Organisational goals and objectives",
-      "summary": "The goals and objectives of medium and large organisations, and how software supports them.",
+      "summary": "The goals and objectives of medium and large organisations.",
       "examples": [
         "A goal to grow membership",
-        "An objective to cut processing time by 20%"
+        "An objective to cut processing time by 20% this year"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK02",
       "area": "U4O2",
       "title": "In-house versus external development",
-      "summary": "Advantages and disadvantages of developing software in-house or with an external developer.",
+      "summary": "Advantages and disadvantages of developing software in-house or externally.",
       "examples": [
         "In-house keeps control of the code",
         "External brings expertise but less control"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK03",
       "area": "U4O2",
-      "title": "Vulnerabilities in development environments",
-      "summary": "Vulnerabilities and risks in insecure software development environments.",
+      "title": "Vulnerabilities and risks",
+      "summary": "Vulnerabilities and risks in insecure development environments: APIs, malware, unpatched software, poor identity and access management, man-in-the-middle attacks, insider threats, cyber security incidents, software acquired from third parties, ineffective code review, and combined development, testing and production environments.",
       "examples": [
         "Development, testing and production sharing one environment",
         "An insider misconfiguration exposing code and data"
       ],
-      "status": "provisional",
-      "verify": "Confirm the listed vulnerabilities and risks."
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK04",
       "area": "U4O2",
       "title": "Security controls",
-      "summary": "Physical and software controls that protect development practices and data.",
+      "summary": "Controls that protect development practices and stored data: version control and code repositories, robust identity and access management, encryption, code review, regular updates and patches, and separate development, testing and production environments.",
       "examples": [
         "Identity and access management",
-        "Multi-factor authentication",
-        "Version control",
         "Encryption",
-        "Code reviews",
-        "Patching",
-        "Separate environments",
-        "Backups"
+        "Code review",
+        "Separate environments"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK05",
       "area": "U4O2",
       "title": "Threat modelling",
-      "summary": "Principles of threat modelling applied to software development.",
+      "summary": "The principles of threat modelling: defining security requirements, identifying and mitigating threats, and confirming the threats have been mitigated.",
       "examples": [
         "Define security requirements",
-        "Diagram the application",
-        "Identify threats",
-        "Mitigate threats",
-        "Validate mitigation"
+        "Identify and mitigate threats",
+        "Confirm the mitigation worked"
       ],
-      "status": "provisional",
-      "verify": "Confirm the threat modelling steps and their names."
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK06",
       "area": "U4O2",
       "title": "Evaluating security of development practices",
-      "summary": "Criteria for evaluating how secure an organisation's development practices are.",
+      "summary": "Criteria for evaluating how secure an organisation's software development practices are.",
       "examples": [
         "Are environments separated?",
-        "Is access granted by least privilege?"
+        "Is access limited to what each person needs?"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK07",
       "area": "U4O2",
       "title": "Legislation and frameworks",
-      "summary": "Laws and frameworks that govern data and security in software development.",
+      "summary": "The Copyright Act 1968, the Essential Eight, the Information Security Manual's Guidelines for Software Development, the Privacy Act 1988 (APPs 1, 6, 8, 9 and 11) and the Privacy and Data Protection Act 2014 (IPPs 1, 2, 4, 5 and 9).",
       "examples": [
-        "Privacy Act 1988 (Cth)",
-        "Privacy and Data Protection Act 2014 (Vic)",
-        "Health Records Act 2001 (Vic)",
-        "Copyright Act 1968 (Cth)",
-        "Essential Eight"
+        "Copyright Act 1968 (Cwlth)",
+        "Essential Eight",
+        "ISM Guidelines for Software Development"
       ],
-      "status": "provisional",
-      "verify": "Confirm the exact set of Acts and frameworks."
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK08",
       "area": "U4O2",
       "title": "Ethical issues",
-      "summary": "Ethical issues in software development.",
+      "summary": "Ethical issues that arise in software development: ineffective security practices, using AI during development, intellectual property and copyright.",
       "examples": [
         "Over-reliance on AI-generated code",
-        "Exposed personal data",
-        "Not acknowledging reused code"
+        "Shipping code with known weaknesses",
+        "Reusing code without permission"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK09",
       "area": "U4O2",
       "title": "Reducing threats and risks",
-      "summary": "Measures that reduce or remove threats and risks to development practices and data.",
+      "summary": "Measures that reduce or remove threats, vulnerabilities and risks in organisations and development environments.",
       "examples": [
         "Least-privilege access",
         "Separating development from production"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
       "id": "U4O2-KK10",
       "area": "U4O2",
-      "title": "Recommending improvements",
-      "summary": "Making recommendations to improve an organisation's software development practices.",
+      "title": "Strategies for improving security",
+      "summary": "Onboarding or induction and developer training focused on secure development, and risk management plans, as strategies for improving the security of development practices.",
       "examples": [
-        "Introduce mandatory code review before merging",
-        "Move secrets out of source code"
+        "Secure-coding training for every developer",
+        "Security in the induction for new staff",
+        "A risk management plan"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     }
   ],
   "glossary": [

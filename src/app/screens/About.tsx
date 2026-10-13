@@ -47,17 +47,18 @@ export default function About() {
         <h2 id="scope">Scope</h2>
         <ul>
           <li>
-            <strong>The key knowledge map is provisional.</strong> The study design couldn't be checked when this version was built, so the key
-            knowledge titles and numbering follow a reconstruction from the VCAA's support pages and the 2025 exam. They will be corrected against the study design, and items may be
-            renumbered or added when that happens.
+            <strong>The key knowledge map follows the 2025 study design.</strong> Each key knowledge point keeps the study design's order and
+            numbering. Its title and summary are COLDBOOT's own short wording, so check the study design for the exact text.
           </li>
           <li>
             <strong>Development models (agile, waterfall, spiral) are left out.</strong> They were part of the previous study design and still
-            fill a lot of revision material, but we couldn't find them in the 2025 key knowledge. They stay out until that is confirmed.
+            fill a lot of revision material. The 2025 study design only notes that the problem-solving methodology can be applied within an
+            agile process; the models themselves aren't key knowledge.
           </li>
           <li>
-            <strong>Exam tips are advice, not rules.</strong> Tips such as naming data types in full come from a Victorian school's teacher
-            advice, not from the VCAA. Your teacher's advice comes first.
+            <strong>Exam tips come from the VCAA's 2025 examination report or from teachers.</strong> Tips such as writing data types exactly
+            as the study design names them come from the report. A few, such as giving exactly one item when a question asks for one, are a
+            Victorian school's teacher advice, not VCAA rules. Your teacher's advice comes first.
           </li>
         </ul>
       </section>
