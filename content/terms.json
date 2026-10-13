@@ -608,7 +608,7 @@
     ],
     "type": "reverse",
     "front": "logic error",
-    "back": "An error in the program's reasoning, such as using `<` where `≤` was needed or applying the wrong formula, so the program runs without crashing but produces incorrect output.",
+    "back": "An error in the program's reasoning, such as using `<` where `<=` was needed or applying the wrong formula, so the program runs without crashing but produces incorrect output.",
     "mistake": "The translator can't detect a logic error because the code is valid. It is found by testing: comparing actual output with expected output.",
     "difficulty": 2,
     "source": "textbook",

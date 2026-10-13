@@ -263,12 +263,12 @@
         {
           "name": "onHire",
           "type": "Boolean",
-          "description": "TRUE while the item is out on hire"
+          "description": "True while the item is out on hire"
         },
         {
           "name": "passedInspection",
           "type": "Boolean",
-          "description": "TRUE if the item passed its most recent inspection"
+          "description": "True if the item passed its most recent inspection"
         },
         {
           "name": "meterHours",
@@ -289,15 +289,15 @@
       "methods": [
         {
           "name": "hireOut()",
-          "description": "Sets onHire to TRUE"
+          "description": "Sets onHire to True"
         },
         {
           "name": "recordReturn()",
-          "description": "Sets onHire to FALSE, and passedInspection to FALSE until the item is inspected"
+          "description": "Sets onHire to False, and passedInspection to False until the item is inspected"
         },
         {
           "name": "recordInspection(result)",
-          "description": "Sets passedInspection to result: TRUE for a pass, FALSE for a fail"
+          "description": "Sets passedInspection to result: True for a pass, False for a fail"
         },
         {
           "name": "recordMeterReading(reading)",
@@ -452,7 +452,7 @@
       ],
       "commandTerm": "write",
       "marks": 5,
-      "prompt": "Zainab must write the function isSafeToHire(passed, hoursSince, interval, days) for the counter app. It returns TRUE if an engine-powered item can be hired out for the given number of days under the rules in the insert, and FALSE otherwise.\n\n- passed is TRUE if the item passed its most recent inspection.\n- hoursSince is the number of hours the item has been used since its last service, from hoursSinceService() in Figure 3.\n- interval is the item's service interval, in hours.\n- days is the number of days of the hire.\n\nFor example, generator TV-GEN-00417 passed its most recent inspection, has been used for 180.5 hours since its last service and has a service interval of 250 hours. It can be hired out for 8 days, but not for 9.\n\nWrite pseudocode for the function.",
+      "prompt": "Zainab must write the function isSafeToHire(passed, hoursSince, interval, days) for the counter app. It returns True if an engine-powered item can be hired out for the given number of days under the rules in the insert, and False otherwise.\n\n- passed is True if the item passed its most recent inspection.\n- hoursSince is the number of hours the item has been used since its last service, from hoursSinceService() in Figure 3.\n- interval is the item's service interval, in hours.\n- days is the number of days of the hire.\n\nFor example, generator TV-GEN-00417 passed its most recent inspection, has been used for 180.5 hours since its last service and has a service interval of 250 hours. It can be hired out for 8 days, but not for 9.\n\nWrite pseudocode for the function.",
       "points": [
         {
           "text": "Calculates the hours of use for the hire as days × 8.",
@@ -467,16 +467,16 @@
           "marks": 1
         },
         {
-          "text": "Also requires passed to be TRUE, joining the two conditions with AND.",
+          "text": "Also requires passed to be True, joining the two conditions with AND.",
           "marks": 1
         },
         {
-          "text": "Returns TRUE only when both conditions hold and FALSE otherwise, inside FUNCTION ... ENDFUNCTION, using IF ... THEN ... ELSE ... ENDIF or by returning the value of the condition.",
+          "text": "Returns True only when both conditions hold and False otherwise, inside FUNCTION ... ENDFUNCTION, using IF ... THEN ... ELSE ... ENDIF or by returning the value of the condition.",
           "marks": 1
         }
       ],
-      "model": "```pseudo\nFUNCTION isSafeToHire(passed, hoursSince, interval, days)\n    // Allow 8 hours of use for each day of the hire\n    expectedHours ← days * 8\n    IF passed = TRUE AND hoursSince + expectedHours < interval THEN\n        RETURN TRUE\n    ELSE\n        RETURN FALSE\n    ENDIF\nENDFUNCTION\n```\n\nFor TV-GEN-00417, an 8-day hire gives 180.5 + 64 = 244.5 hours, which is less than 250, so the function returns TRUE. A 9-day hire gives 180.5 + 72 = 252.5 hours, which isn't less than 250, so it returns FALSE.",
-      "mistake": "Using ≤ instead of < would allow a hire that brings the item exactly to its service interval. The insert's rule says the total must be *less than* the interval.",
+      "model": "```pseudo\nFUNCTION isSafeToHire(passed, hoursSince, interval, days)\n    // Allow 8 hours of use for each day of the hire\n    expectedHours ← days * 8\n    IF passed = True AND hoursSince + expectedHours < interval THEN\n        RETURN True\n    ELSE\n        RETURN False\n    ENDIF\nENDFUNCTION\n```\n\nFor TV-GEN-00417, an 8-day hire gives 180.5 + 64 = 244.5 hours, which is less than 250, so the function returns True. A 9-day hire gives 180.5 + 72 = 252.5 hours, which isn't less than 250, so it returns False.",
+      "mistake": "Using <= instead of < would allow a hire that brings the item exactly to its service interval. The insert's rule says the total must be *less than* the interval.",
       "source": "textbook",
       "figureRefs": [
         "engine-item-object"
@@ -526,7 +526,7 @@
       ],
       "commandTerm": "describe",
       "marks": 6,
-      "prompt": "Kirra is alpha testing Zainab's isSafeToHire function. Tests 1 and 3 use generator TV-GEN-00417, which has been used for 180.5 hours since its last service and has a service interval of 250 hours. Part of her test table is shown below.\n\n| Test number | Inputs (passed, hoursSince, interval, days) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | TRUE, 180.5, 250, 8 | TRUE | TRUE |\n| 2 | FALSE, 20.0, 250, 2 | FALSE | FALSE |\n| 3 | TRUE, 180.5, 250, 9 | FALSE | TRUE |\n\nZainab's function first calculates expectedHours from days, then compares hoursSince + expectedHours with interval.\n\n1. Describe how Zainab could use a breakpoint to find the cause of the wrong result in test 3.\n2. Describe how Zainab could use debugging output statements to find the cause instead.\n3. When test 3 is run, expectedHours is 17. Identify the error in Zainab's code, and name the type of error it is.",
+      "prompt": "Kirra is alpha testing Zainab's isSafeToHire function. Tests 1 and 3 use generator TV-GEN-00417, which has been used for 180.5 hours since its last service and has a service interval of 250 hours. Part of her test table is shown below.\n\n| Test number | Inputs (passed, hoursSince, interval, days) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | True, 180.5, 250, 8 | True | True |\n| 2 | False, 20.0, 250, 2 | False | False |\n| 3 | True, 180.5, 250, 9 | False | True |\n\nZainab's function first calculates expectedHours from days, then compares hoursSince + expectedHours with interval.\n\n1. Describe how Zainab could use a breakpoint to find the cause of the wrong result in test 3.\n2. Describe how Zainab could use debugging output statements to find the cause instead.\n3. When test 3 is run, expectedHours is 17. Identify the error in Zainab's code, and name the type of error it is.",
       "points": [
         {
           "text": "Breakpoint: sets a breakpoint after expectedHours is calculated, for example on the line that compares hoursSince + expectedHours with interval, then runs the function with test 3's inputs so that it pauses there.",

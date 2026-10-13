@@ -367,9 +367,9 @@
       "U4O1-KK05"
     ],
     "type": "cloze",
-    "front": "For a quantity that must be from 1 to 20 inclusive, the value is valid when `qty ≥ 1` {{AND}} `qty ≤ 20`, and invalid when `qty < 1` {{OR}} `qty > 20`.",
+    "front": "For a quantity that must be from 1 to 20 inclusive, the value is valid when `qty >= 1` {{AND}} `qty <= 20`, and invalid when `qty < 1` {{OR}} `qty > 20`.",
     "back": "Swapping the operators breaks the check: `qty < 1 AND qty > 20` is never true, because no number is both below 1 and above 20, so every value would be accepted.",
-    "mistake": "Take care at the boundaries. Testing `qty ≤ 1 OR qty > 20` for invalid input would wrongly reject 1, which is valid.",
+    "mistake": "Take care at the boundaries. Testing `qty <= 1 OR qty > 20` for invalid input would wrongly reject 1, which is valid.",
     "difficulty": 2,
     "source": "textbook"
   },

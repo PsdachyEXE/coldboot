@@ -343,7 +343,7 @@
       "kind": "pseudocode",
       "title": "Figure 4: Pseudocode for the isAtRisk function",
       "caption": "Written by Arjun Pillai, developer. weeklyHours holds an apprentice's approved hours for each week, oldest first, so its last element is the most recent week. numWeeks is the number of weeks recorded.",
-      "code": "FUNCTION isAtRisk(weeklyHours, numWeeks)\n    // Returns TRUE if the three most recent weeks have no approved hours\n    // emptyStreak counts the weeks in a row with no approved hours\n    emptyStreak ← 0\n    FOR week ← 0 TO numWeeks\n        IF weeklyHours[week] = 0 THEN\n            emptyStreak ← emptyStreak + 1\n        ELSE\n            emptyStreak ← 0\n        ENDIF\n    ENDFOR\n    IF emptyStreak ≥ 3 THEN\n        RETURN TRUE\n    ELSE\n        RETURN FALSE\n    ENDIF\nENDFUNCTION",
+      "code": "FUNCTION isAtRisk(weeklyHours, numWeeks)\n    // Returns True if the three most recent weeks have no approved hours\n    // emptyStreak counts the weeks in a row with no approved hours\n    emptyStreak ← 0\n    FOR week ← 0 TO numWeeks\n        IF weeklyHours[week] = 0 THEN\n            emptyStreak ← emptyStreak + 1\n        ELSE\n            emptyStreak ← 0\n        ENDIF\n    ENDFOR\n    IF emptyStreak >= 3 THEN\n        RETURN True\n    ELSE\n        RETURN False\n    ENDIF\nENDFUNCTION",
       "indexBase": 0
     }
   ],
@@ -576,7 +576,7 @@
       ],
       "commandTerm": "complete",
       "marks": 7,
-      "prompt": "Arjun wrote the isAtRisk function (Figure 4) for the trainer dashboard. Yasmin is testing it against the requirement in the insert. Arrays are indexed from 0. Part of her test table is shown below.\n\n| Test number | Inputs (weeklyHours, numWeeks) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | [30, 24, 0, 0, 0], 5 | TRUE | Error at line 6 |\n| 2 | [0, 0, 0, 16, 0, 0], 6 | | |\n| 3 | [38, 0, 0, 0, 0, 0], 6 | | |\n\n1. Test 1 stopped with an error at line 6. State the type of error, and explain why it happened.\n2. Identify the line that must be changed to fix the error, and write the corrected line.\n3. Complete the expected output and the actual output for tests 2 and 3, using Figure 4 as it is written.",
+      "prompt": "Arjun wrote the isAtRisk function (Figure 4) for the trainer dashboard. Yasmin is testing it against the requirement in the insert. Arrays are indexed from 0. Part of her test table is shown below.\n\n| Test number | Inputs (weeklyHours, numWeeks) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | [30, 24, 0, 0, 0], 5 | True | Error at line 6 |\n| 2 | [0, 0, 0, 16, 0, 0], 6 | | |\n| 3 | [38, 0, 0, 0, 0, 0], 6 | | |\n\n1. Test 1 stopped with an error at line 6. State the type of error, and explain why it happened.\n2. Identify the line that must be changed to fix the error, and write the corrected line.\n3. Complete the expected output and the actual output for tests 2 and 3, using Figure 4 as it is written.",
       "points": [
         {
           "text": "States that it is a runtime error: an index out of range error.",
@@ -595,11 +595,11 @@
           "marks": 1
         },
         {
-          "text": "Test 2 expected output: FALSE. The 16 approved hours in the fourth week mean only the two most recent weeks have none.",
+          "text": "Test 2 expected output: False. The 16 approved hours in the fourth week mean only the two most recent weeks have none.",
           "marks": 1
         },
         {
-          "text": "Test 3 expected output: TRUE. The five most recent weeks have no approved hours.",
+          "text": "Test 3 expected output: True. The five most recent weeks have no approved hours.",
           "marks": 1
         },
         {
@@ -607,7 +607,7 @@
           "marks": 1
         }
       ],
-      "model": "1. It is a runtime error: index out of range. The loop on line 5 runs from week 0 up to and including numWeeks, which is 5 in test 1. weeklyHours holds five values, at indexes 0 to 4, so on the last pass line 6 tries to read weeklyHours[5], which doesn't exist, and the program stops.\n\n2. Line 5 must be changed to `FOR week ← 0 TO numWeeks - 1`.\n\n3. Test 2: expected output FALSE; actual output error at line 6. Test 3: expected output TRUE; actual output error at line 6.\n\nIn test 2, the apprentice had 16 approved hours in the fourth week, so only the two most recent weeks have none and the apprentice isn't at risk. In test 3, the five most recent weeks have no approved hours, so the apprentice is at risk. As Figure 4 is written, every test stops at line 6, because the loop always reads one element past the end of the array.",
+      "model": "1. It is a runtime error: index out of range. The loop on line 5 runs from week 0 up to and including numWeeks, which is 5 in test 1. weeklyHours holds five values, at indexes 0 to 4, so on the last pass line 6 tries to read weeklyHours[5], which doesn't exist, and the program stops.\n\n2. Line 5 must be changed to `FOR week ← 0 TO numWeeks - 1`.\n\n3. Test 2: expected output False; actual output error at line 6. Test 3: expected output True; actual output error at line 6.\n\nIn test 2, the apprentice had 16 approved hours in the fourth week, so only the two most recent weeks have none and the apprentice isn't at risk. In test 3, the five most recent weeks have no approved hours, so the apprentice is at risk. As Figure 4 is written, every test stops at line 6, because the loop always reads one element past the end of the array.",
       "mistake": "The program stops at line 6, but the cause is the loop's upper bound on line 5. Expected output comes from the requirement, so it is filled in even when the actual output is an error.",
       "source": "textbook",
       "figureRefs": [

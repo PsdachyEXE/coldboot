@@ -506,7 +506,7 @@
       "U4O2-KK07"
     ],
     "type": "basic",
-    "front": "What does the Privacy Act 1988 (Cth) regulate?",
+    "front": "What does the Privacy Act 1988 (Cwlth) regulate?",
     "back": "How personal information is collected, used, stored, disclosed and disposed of by Australian Government agencies and many private sector organisations. Its rules are set out in the Australian Privacy Principles.",
     "mistake": "The Privacy Act doesn't cover every organisation. Victorian public sector bodies, such as state departments and local councils, are covered by the Privacy and Data Protection Act 2014 (Vic) instead.",
     "difficulty": 1,
@@ -518,8 +518,8 @@
       "U4O2-KK07"
     ],
     "type": "compare",
-    "front": "Privacy Act 1988 (Cth) versus Privacy and Data Protection Act 2014 (Vic)",
-    "back": "| | Privacy Act 1988 (Cth) | Privacy and Data Protection Act 2014 (Vic) |\n|:--|:--|:--|\n| Binds | Australian Government agencies and many private organisations | Victorian public sector bodies, such as departments and councils, and contractors bound by their contracts |\n| Principles | Australian Privacy Principles | Information Privacy Principles |",
+    "front": "Privacy Act 1988 (Cwlth) versus Privacy and Data Protection Act 2014 (Vic)",
+    "back": "| | Privacy Act 1988 (Cwlth) | Privacy and Data Protection Act 2014 (Vic) |\n|:--|:--|:--|\n| Binds | Australian Government agencies and many private organisations | Victorian public sector bodies, such as departments and councils, and contractors bound by their contracts |\n| Principles | Australian Privacy Principles | Information Privacy Principles |",
     "mistake": "Being based in Victoria doesn't put a private business under the Victorian Act. It binds the Victorian public sector, and a contractor only when its contract with a public sector body says so.",
     "difficulty": 2,
     "source": "textbook"
@@ -587,7 +587,7 @@
     ],
     "type": "compare",
     "front": "Legislation versus a security framework",
-    "back": "| | Legislation | Framework |\n|:--|:--|:--|\n| Examples | Privacy Act 1988 (Cth), Health Records Act 2001 (Vic) | Essential Eight, Information Security Manual |\n| Made by | A parliament | A government agency or standards body |\n| Compliance | Compulsory for those it covers; breaches can bring penalties | Voluntary guidance, unless a contract or policy requires it |",
+    "back": "| | Legislation | Framework |\n|:--|:--|:--|\n| Examples | Privacy Act 1988 (Cwlth), Health Records Act 2001 (Vic) | Essential Eight, Information Security Manual |\n| Made by | A parliament | A government agency or standards body |\n| Compliance | Compulsory for those it covers; breaches can bring penalties | Voluntary guidance, unless a contract or policy requires it |",
     "mistake": "Following a framework doesn't by itself meet legal obligations, and meeting the law doesn't mean every control a framework recommends is in place.",
     "difficulty": 2,
     "source": "textbook"
@@ -599,7 +599,7 @@
       "U4O2-KK08"
     ],
     "type": "basic",
-    "front": "Under the Privacy Act 1988 (Cth), what must a covered organisation do after a data breach that is likely to cause serious harm?",
+    "front": "Under the Privacy Act 1988 (Cwlth), what must a covered organisation do after a data breach that is likely to cause serious harm?",
     "back": "Notify the individuals affected and the Office of the Australian Information Commissioner as soon as practicable, under the Notifiable Data Breaches scheme, so that people can act to protect themselves.",
     "mistake": "Fixing the vulnerability doesn't end the duty to notify. If serious harm is still likely, the people affected must be told.",
     "difficulty": 3,
@@ -699,7 +699,7 @@
     "type": "basic",
     "front": "Why is hiding a data breach from the people affected an ethical issue?",
     "back": "Without being told, people can't protect themselves, for example by changing passwords or watching their accounts. Hiding the breach also misleads them and damages their trust in the organisation.",
-    "mistake": "Hiding a breach isn't only an ethical issue. When serious harm is likely, organisations covered by the Privacy Act 1988 (Cth) must notify the people affected.",
+    "mistake": "Hiding a breach isn't only an ethical issue. When serious harm is likely, organisations covered by the Privacy Act 1988 (Cwlth) must notify the people affected.",
     "difficulty": 2,
     "source": "textbook"
   },

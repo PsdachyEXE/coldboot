@@ -2877,7 +2877,7 @@
       "This total leaves out one passenger; the loop runs from 0 to LENGTH(ages) - 1, which covers all five.",
       "This is the total before the discount; 160 is greater than 150, so 10 is subtracted.",
       "",
-      "This charges the 67-year-old the adult fare and skips the discount; 67 ≥ 65, so the fare is 30."
+      "This charges the 67-year-old the adult fare and skips the discount; 67 >= 65, so the fare is 30."
     ],
     "difficulty": 3,
     "source": "textbook",
@@ -2886,7 +2886,7 @@
         "id": "tour-fare-pseudocode",
         "kind": "pseudocode",
         "indexBase": 0,
-        "code": "BEGIN\n    ages ← [34, 12, 67, 8, 41]\n    total ← 0\n    FOR i ← 0 TO LENGTH(ages) - 1\n        IF ages[i] < 16 THEN\n            total ← total + 25\n        ELSEIF ages[i] ≥ 65 THEN\n            total ← total + 30\n        ELSE\n            total ← total + 40\n        ENDIF\n    ENDFOR\n    IF total > 150 THEN\n        total ← total - 10\n    ENDIF\n    DISPLAY total\nEND"
+        "code": "BEGIN\n    ages ← [34, 12, 67, 8, 41]\n    total ← 0\n    FOR i ← 0 TO LENGTH(ages) - 1\n        IF ages[i] < 16 THEN\n            total ← total + 25\n        ELSEIF ages[i] >= 65 THEN\n            total ← total + 30\n        ELSE\n            total ← total + 40\n        ENDIF\n    ENDFOR\n    IF total > 150 THEN\n        total ← total - 10\n    ENDIF\n    DISPLAY total\nEND"
       }
     ]
   },
@@ -2982,9 +2982,9 @@
       "Change the data type of totalCost to Integer"
     ],
     "answer": 2,
-    "explanation": "isMember is an input in the IPO chart but has no entry in the data dictionary, and every data item a module uses should appear there. A guest either is or isn't a member, and the processing tests whether isMember is TRUE, so Boolean suits it.",
+    "explanation": "isMember is an input in the IPO chart but has no entry in the data dictionary, and every data item a module uses should appear there. A guest either is or isn't a member, and the processing tests whether isMember is True, so Boolean suits it.",
     "whyWrong": [
-      "isMember is needed, but it has exactly two states and the processing tests it against TRUE, so Boolean suits it better than String.",
+      "isMember is needed, but it has exactly two states and the processing tests it against True, so Boolean suits it better than String.",
       "Calculating the cost is processing, not a data item, so it doesn't belong in the data dictionary.",
       "",
       "Costs can include cents: 3 nights for a member is $121.50, so totalCost must stay Floating point."
@@ -3009,7 +3009,7 @@
           ],
           [
             "nights",
-            "If isMember is TRUE, take 10% off totalCost",
+            "If isMember is True, take 10% off totalCost",
             ""
           ],
           [

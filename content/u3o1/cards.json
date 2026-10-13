@@ -200,7 +200,7 @@
     ],
     "type": "reverse",
     "front": "Boolean",
-    "back": "A data type that holds one of only two values: TRUE or FALSE.",
+    "back": "A data type that holds one of only two values: True or False.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -550,8 +550,8 @@
       "U3O1-KK08"
     ],
     "type": "basic",
-    "front": "Classify each operator as arithmetic, logical or comparison: `MOD`, `AND`, `≠`, `NOT`, `DIV`, `≤`.",
-    "back": "Arithmetic: `MOD` (remainder) and `DIV` (integer division). Logical: `AND` and `NOT`, which combine or reverse Boolean values. Comparison: `≠` and `≤`, which compare two values and give a Boolean result.",
+    "front": "Classify each operator as arithmetic, logical or comparison: `MOD`, `AND`, `<>`, `NOT`, `DIV`, `<=`.",
+    "back": "Arithmetic: `MOD` (remainder) and `DIV` (integer division). Logical: `AND` and `NOT`, which combine or reverse Boolean values. Comparison: `<>` and `<=`, which compare two values and give a Boolean result.",
     "mistake": "`MOD` gives the remainder, not the quotient: `17 MOD 5` is 2, while `17 DIV 5` is 3.",
     "difficulty": 2,
     "source": "textbook"
@@ -670,7 +670,7 @@
     ],
     "type": "basic",
     "front": "A range check should accept ages from 16 to 65 inclusive. Which four test values best check its boundaries?",
-    "back": "15, 16, 65 and 66: each limit and the value just outside it. These reveal errors such as writing `age < 65` where `age ≤ 65` was needed, which would wrongly reject 65.",
+    "back": "15, 16, 65 and 66: each limit and the value just outside it. These reveal errors such as writing `age < 65` where `age <= 65` was needed, which would wrongly reject 65.",
     "mistake": "Testing only a typical value such as 30 misses boundary errors. Most range-check faults show up at the limits.",
     "difficulty": 2,
     "source": "textbook"

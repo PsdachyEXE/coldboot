@@ -393,7 +393,7 @@
         "marks": 1
       }
     ],
-    "model": "`memberPhone` should be a String: 0412 345 678 starts with 0 and contains spaces, which an Integer can't keep, and no arithmetic is done on it. `monthlyFee` should be Floating point, because $54.95 includes cents and is used to calculate what members owe. `visitsThisMonth` should be an Integer, because visits are whole counts. `hasLocker` should be Boolean, because each member either has a locker or doesn't, so TRUE or FALSE is enough.",
+    "model": "`memberPhone` should be a String: 0412 345 678 starts with 0 and contains spaces, which an Integer can't keep, and no arithmetic is done on it. `monthlyFee` should be Floating point, because $54.95 includes cents and is used to calculate what members owe. `visitsThisMonth` should be an Integer, because visits are whole counts. `hasLocker` should be Boolean, because each member either has a locker or doesn't, so True or False is enough.",
     "mistake": "Naming the data type isn't enough for 'justify'. Each type needs a reason tied to that data item.",
     "source": "textbook",
     "figures": [
@@ -461,7 +461,7 @@
         "marks": 1
       },
       {
-        "text": "Justifies it: a Boolean holds only two values (TRUE or FALSE), so it can't represent three statuses; a Character or String can hold any of the three",
+        "text": "Justifies it: a Boolean holds only two values (True or False), so it can't represent three statuses; a Character or String can hold any of the three",
         "marks": 1
       },
       {
@@ -473,7 +473,7 @@
         "marks": 1
       }
     ],
-    "model": "Attendance status: Character, storing P for present, L for late or A for absent. A Boolean can hold only TRUE or FALSE, which was enough for 'attended or not', but the coach now needs three statuses. A single-letter code holds any of them, and the program can test it with a condition such as `IF status = \"L\" THEN`.\n\n`distanceRowed`: Floating point. The coach wants distances such as 12.5 km, and an Integer can't store the .5. Floating point keeps the fractional part, so totals and averages of each rower's distance stay accurate.",
+    "model": "Attendance status: Character, storing P for present, L for late or A for absent. A Boolean can hold only True or False, which was enough for 'attended or not', but the coach now needs three statuses. A single-letter code holds any of them, and the program can test it with a condition such as `IF status = \"L\" THEN`.\n\n`distanceRowed`: Floating point. The coach wants distances such as 12.5 km, and an Integer can't store the .5. Floating point keeps the fractional part, so totals and averages of each rower's distance stay accurate.",
     "mistake": "Keeping a Boolean because attendance sounds like a yes-or-no question. A Boolean has exactly two values, so once a third status is needed it can't be a Boolean.",
     "source": "textbook"
   },
@@ -514,7 +514,7 @@
     ],
     "commandTerm": "determine",
     "marks": 3,
-    "prompt": "Quillpoint Theatre in Ballarat stores its seating plan in the two-dimensional array `seats[row][col]` shown below, where TRUE means the seat is booked. Arrays are indexed from 0. Determine the output of the algorithm, and explain why row 2 is not the row displayed.",
+    "prompt": "Quillpoint Theatre in Ballarat stores its seating plan in the two-dimensional array `seats[row][col]` shown below, where True means the seat is booked. Arrays are indexed from 0. Determine the output of the algorithm, and explain why row 2 is not the row displayed.",
     "points": [
       {
         "text": "The output names row 1 (`bestRow` is 1)",
@@ -529,14 +529,14 @@
         "marks": 1
       }
     ],
-    "model": "Row 0 has 1 free seat; 1 > 0, so `bestFree` becomes 1 and `bestRow` becomes 0. Row 1 has 3 free seats; 3 > 1, so `bestFree` becomes 3 and `bestRow` becomes 1. Row 2 also has 3 free seats, but 3 > 3 is false, so nothing changes. The algorithm displays `Row 1: 3 free`. Row 2 isn't displayed because the condition uses > rather than ≥, so a later row that only equals the best count doesn't replace it.",
-    "mistake": "With >, the first row to reach the highest count is kept and a tie doesn't replace it. Changing > to ≥ on line 11 would make the algorithm display row 2.",
+    "model": "Row 0 has 1 free seat; 1 > 0, so `bestFree` becomes 1 and `bestRow` becomes 0. Row 1 has 3 free seats; 3 > 1, so `bestFree` becomes 3 and `bestRow` becomes 1. Row 2 also has 3 free seats, but 3 > 3 is false, so nothing changes. The algorithm displays `Row 1: 3 free`. Row 2 isn't displayed because the condition uses > rather than >=, so a later row that only equals the best count doesn't replace it.",
+    "mistake": "With >, the first row to reach the highest count is kept and a tie doesn't replace it. Changing > to >= on line 11 would make the algorithm display row 2.",
     "source": "exam-convention",
     "figures": [
       {
         "id": "seats-array",
         "kind": "table",
-        "title": "seats[row][col] (TRUE = booked)",
+        "title": "seats[row][col] (True = booked)",
         "columns": [
           "Row",
           "Col 0",
@@ -547,31 +547,31 @@
         "rows": [
           [
             "0",
-            "TRUE",
-            "TRUE",
-            "FALSE",
-            "TRUE"
+            "True",
+            "True",
+            "False",
+            "True"
           ],
           [
             "1",
-            "FALSE",
-            "FALSE",
-            "TRUE",
-            "FALSE"
+            "False",
+            "False",
+            "True",
+            "False"
           ],
           [
             "2",
-            "TRUE",
-            "FALSE",
-            "FALSE",
-            "FALSE"
+            "True",
+            "False",
+            "False",
+            "False"
           ]
         ]
       },
       {
         "id": "seats-best-row",
         "kind": "pseudocode",
-        "code": "BEGIN\n    bestRow ← 0\n    bestFree ← 0\n    FOR row ← 0 TO 2\n        free ← 0\n        FOR col ← 0 TO 3\n            IF seats[row][col] = FALSE THEN\n                free ← free + 1\n            ENDIF\n        ENDFOR\n        IF free > bestFree THEN\n            bestFree ← free\n            bestRow ← row\n        ENDIF\n    ENDFOR\n    DISPLAY \"Row \" + bestRow + \": \" + bestFree + \" free\"\nEND",
+        "code": "BEGIN\n    bestRow ← 0\n    bestFree ← 0\n    FOR row ← 0 TO 2\n        free ← 0\n        FOR col ← 0 TO 3\n            IF seats[row][col] = False THEN\n                free ← free + 1\n            ENDIF\n        ENDFOR\n        IF free > bestFree THEN\n            bestFree ← free\n            bestRow ← row\n        ENDIF\n    ENDFOR\n    DISPLAY \"Row \" + bestRow + \": \" + bestFree + \" free\"\nEND",
         "indexBase": 0
       }
     ]
@@ -839,7 +839,7 @@
         "marks": 1
       },
       {
-        "text": "The condition is checked after each entry, so the loop repeats until a valid PIN is entered and then stops (e.g. `UNTIL pinValid = TRUE`).",
+        "text": "The condition is checked after each entry, so the loop repeats until a valid PIN is entered and then stops (e.g. `UNTIL pinValid = True`).",
         "marks": 1
       },
       {
@@ -1034,7 +1034,7 @@
         "marks": 1
       },
       {
-        "text": "The condition accepts exactly 1 to 20 inclusive, e.g. `quantity ≥ 1 AND quantity ≤ 20`.",
+        "text": "The condition accepts exactly 1 to 20 inclusive, e.g. `quantity >= 1 AND quantity <= 20`.",
         "marks": 1
       },
       {
@@ -1042,7 +1042,7 @@
         "marks": 1
       }
     ],
-    "model": "```pseudo\nBEGIN\n    REPEAT\n        INPUT quantity\n        IF quantity < 1 OR quantity > 20 THEN\n            DISPLAY \"Enter a quantity from 1 to 20\"\n        ENDIF\n    UNTIL quantity ≥ 1 AND quantity ≤ 20\n    DISPLAY \"Quantity accepted: \" + quantity\nEND\n```\n\nThe post-test loop asks at least once and repeats until the quantity is from 1 to 20. A quantity outside the range triggers the error message and another request.",
+    "model": "```pseudo\nBEGIN\n    REPEAT\n        INPUT quantity\n        IF quantity < 1 OR quantity > 20 THEN\n            DISPLAY \"Enter a quantity from 1 to 20\"\n        ENDIF\n    UNTIL quantity >= 1 AND quantity <= 20\n    DISPLAY \"Quantity accepted: \" + quantity\nEND\n```\n\nThe post-test loop asks at least once and repeats until the quantity is from 1 to 20. A quantity outside the range triggers the error message and another request.",
     "mistake": "Writing the accepting condition as `quantity > 1 AND quantity < 20` wrongly rejects the boundary values 1 and 20. Check the condition with 0, 1, 20 and 21.",
     "source": "textbook"
   },
@@ -1094,18 +1094,18 @@
         "marks": 1
       },
       {
-        "text": "Justifies a processing choice with a reason linked to the park's rules, e.g. the discount is applied after the nightly total is calculated so that it covers the whole stay; or `≥ 7` is used so that a stay of exactly 7 nights gets the discount.",
+        "text": "Justifies a processing choice with a reason linked to the park's rules, e.g. the discount is applied after the nightly total is calculated so that it covers the whole stay; or `>= 7` is used so that a stay of exactly 7 nights gets the discount.",
         "marks": 1
       }
     ],
-    "model": "```pseudo\nFUNCTION stayFee(nights, powered)\n    // stayFee: returns the total fee in dollars for a stay at the park.\n    // Parameters: nights (Integer), powered (Boolean, TRUE for a powered site).\n    // Nightly rate is $48 for a powered site and $36 for an unpowered site.\n    // The discount is applied after the nightly total is calculated, so the 10%\n    // comes off the whole stay. The test uses ≥ 7 so that a stay of exactly\n    // 7 nights receives the discount.\n    IF powered = TRUE THEN\n        rate ← 48.00\n    ELSE\n        rate ← 36.00\n    ENDIF\n    fee ← nights * rate\n    IF nights ≥ 7 THEN\n        fee ← fee * 0.9\n    ENDIF\n    RETURN fee\nENDFUNCTION\n```",
+    "model": "```pseudo\nFUNCTION stayFee(nights, powered)\n    // stayFee: returns the total fee in dollars for a stay at the park.\n    // Parameters: nights (Integer), powered (Boolean, True for a powered site).\n    // Nightly rate is $48 for a powered site and $36 for an unpowered site.\n    // The discount is applied after the nightly total is calculated, so the 10%\n    // comes off the whole stay. The test uses >= 7 so that a stay of exactly\n    // 7 nights receives the discount.\n    IF powered = True THEN\n        rate ← 48.00\n    ELSE\n        rate ← 36.00\n    ENDIF\n    fee ← nights * rate\n    IF nights >= 7 THEN\n        fee ← fee * 0.9\n    ENDIF\n    RETURN fee\nENDFUNCTION\n```",
     "mistake": "A comment that only says what each line does ('multiplies nights by rate') earns no justification mark. The justification must give a reason linked to the park's rules.",
     "source": "textbook",
     "figures": [
       {
         "id": "fig-stay-fee",
         "kind": "pseudocode",
-        "code": "FUNCTION stayFee(nights, powered)\n    IF powered = TRUE THEN\n        rate ← 48.00\n    ELSE\n        rate ← 36.00\n    ENDIF\n    fee ← nights * rate\n    IF nights ≥ 7 THEN\n        fee ← fee * 0.9\n    ENDIF\n    RETURN fee\nENDFUNCTION"
+        "code": "FUNCTION stayFee(nights, powered)\n    IF powered = True THEN\n        rate ← 48.00\n    ELSE\n        rate ← 36.00\n    ENDIF\n    fee ← nights * rate\n    IF nights >= 7 THEN\n        fee ← fee * 0.9\n    ENDIF\n    RETURN fee\nENDFUNCTION"
       }
     ]
   },
@@ -1161,7 +1161,7 @@
         "marks": 1
       },
       {
-        "text": "The header doesn't describe the parameters, e.g. that `member` is TRUE for a gym member, so a caller has to read the code to use the function.",
+        "text": "The header doesn't describe the parameters, e.g. that `member` is True for a gym member, so a caller has to read the code to use the function.",
         "marks": 1
       },
       {
@@ -1176,7 +1176,7 @@
       {
         "id": "fig-session-fee",
         "kind": "pseudocode",
-        "code": "FUNCTION sessionFee(age, member)\n    // Returns the fee in dollars for one climbing session.\n    // Climbers under 18 pay the junior rate.\n    IF age < 16 THEN\n        fee ← 15.00\n    ELSE\n        fee ← 22.00\n    ENDIF\n    IF member = TRUE THEN\n        // Multiply the fee by 0.8\n        fee ← fee * 0.8\n    ENDIF\n    RETURN fee\nENDFUNCTION"
+        "code": "FUNCTION sessionFee(age, member)\n    // Returns the fee in dollars for one climbing session.\n    // Climbers under 18 pay the junior rate.\n    IF age < 16 THEN\n        fee ← 15.00\n    ELSE\n        fee ← 22.00\n    ENDIF\n    IF member = True THEN\n        // Multiply the fee by 0.8\n        fee ← fee * 0.8\n    ENDIF\n    RETURN fee\nENDFUNCTION"
       }
     ]
   },
@@ -1261,7 +1261,7 @@
       {
         "id": "fig-swim-binary-search",
         "kind": "pseudocode",
-        "code": "FUNCTION binarySearch(list, target)\n    low ← 0\n    high ← LENGTH(list) - 1\n    WHILE low ≤ high DO\n        mid ← (low + high) DIV 2\n        IF list[mid] = target THEN\n            RETURN mid\n        ELSEIF list[mid] < target THEN\n            low ← mid + 1\n        ELSE\n            high ← mid - 1\n        ENDIF\n    ENDWHILE\n    RETURN -1\nENDFUNCTION",
+        "code": "FUNCTION binarySearch(list, target)\n    low ← 0\n    high ← LENGTH(list) - 1\n    WHILE low <= high DO\n        mid ← (low + high) DIV 2\n        IF list[mid] = target THEN\n            RETURN mid\n        ELSEIF list[mid] < target THEN\n            low ← mid + 1\n        ELSE\n            high ← mid - 1\n        ENDIF\n    ENDWHILE\n    RETURN -1\nENDFUNCTION",
         "indexBase": 0
       }
     ]

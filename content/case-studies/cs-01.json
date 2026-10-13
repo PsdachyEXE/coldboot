@@ -342,7 +342,7 @@
       "kind": "pseudocode",
       "title": "Figure 4: Pseudocode for the deliveryCharge function",
       "caption": "Written by Tomas Kovac, developer.",
-      "code": "FUNCTION deliveryCharge(weightKg, zone, isExpress)\n    // Returns the charge in dollars for one consignment\n    IF zone = 1 THEN\n        rate ← 1.20\n    ELSEIF zone = 2 THEN\n        rate ← 1.80\n    ELSE\n        rate ← 2.50\n    ENDIF\n    charge ← 15.00 + weightKg * rate\n    IF weightKg > 30 THEN\n        charge ← charge + 25.00\n    ENDIF\n    IF isExpress = TRUE THEN\n        charge ← charge * 1.5\n    ENDIF\n    RETURN charge\nENDFUNCTION"
+      "code": "FUNCTION deliveryCharge(weightKg, zone, isExpress)\n    // Returns the charge in dollars for one consignment\n    IF zone = 1 THEN\n        rate ← 1.20\n    ELSEIF zone = 2 THEN\n        rate ← 1.80\n    ELSE\n        rate ← 2.50\n    ENDIF\n    charge ← 15.00 + weightKg * rate\n    IF weightKg > 30 THEN\n        charge ← charge + 25.00\n    ENDIF\n    IF isExpress = True THEN\n        charge ← charge * 1.5\n    ENDIF\n    RETURN charge\nENDFUNCTION"
     }
   ],
   "questions": [
@@ -554,7 +554,7 @@
       ],
       "commandTerm": "complete",
       "marks": 7,
-      "prompt": "Ben is alpha testing Tomas's deliveryCharge function (Figure 4) against the charging rules in the insert. Part of his test table is shown below.\n\n| Test number | Inputs (weightKg, zone, isExpress) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 12, 3, FALSE | 45.00 | 45.00 |\n| 2 | 30, 1, FALSE | | |\n| 3 | 40, 2, TRUE | | |\n\n1. Complete the expected output and actual output for tests 2 and 3.\n2. Identify the number of the line in Figure 4 that contains the error, and write the corrected line.\n3. State the type of error.",
+      "prompt": "Ben is alpha testing Tomas's deliveryCharge function (Figure 4) against the charging rules in the insert. Part of his test table is shown below.\n\n| Test number | Inputs (weightKg, zone, isExpress) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 12, 3, False | 45.00 | 45.00 |\n| 2 | 30, 1, False | | |\n| 3 | 40, 2, True | | |\n\n1. Complete the expected output and actual output for tests 2 and 3.\n2. Identify the number of the line in Figure 4 that contains the error, and write the corrected line.\n3. State the type of error.",
       "points": [
         {
           "text": "Test 2 expected output: 76.00 (15.00 + 30 × 1.20 = 51.00, plus the $25.00 surcharge, because a 30 kg consignment meets the rule of 30 kg or more).",
@@ -577,7 +577,7 @@
           "marks": 1
         },
         {
-          "text": "Corrected line: IF weightKg ≥ 30 THEN (also accept >= 30).",
+          "text": "Corrected line: IF weightKg >= 30 THEN (also accept >= 30).",
           "marks": 1
         },
         {
@@ -585,7 +585,7 @@
           "marks": 1
         }
       ],
-      "model": "1. Test 2: expected output 76.00, actual output 51.00. Test 3: expected output 168.00, actual output 168.00.\n\nFor test 2, the insert says consignments of 30 kg or more attract the surcharge, so the expected charge is 15.00 + 30 × 1.20 + 25.00 = 76.00. The function tests weightKg > 30, which is false for exactly 30 kg, so it returns 51.00. For test 3, (15.00 + 40 × 1.80 + 25.00) × 1.5 = 168.00, and the function gives the same result.\n\n2. Line 11 should be `IF weightKg ≥ 30 THEN`.\n\n3. It is a logic error: the function runs without crashing but gives the wrong result.",
+      "model": "1. Test 2: expected output 76.00, actual output 51.00. Test 3: expected output 168.00, actual output 168.00.\n\nFor test 2, the insert says consignments of 30 kg or more attract the surcharge, so the expected charge is 15.00 + 30 × 1.20 + 25.00 = 76.00. The function tests weightKg > 30, which is false for exactly 30 kg, so it returns 51.00. For test 3, (15.00 + 40 × 1.80 + 25.00) × 1.5 = 168.00, and the function gives the same result.\n\n2. Line 11 should be `IF weightKg >= 30 THEN`.\n\n3. It is a logic error: the function runs without crashing but gives the wrong result.",
       "mistake": "Expected output comes from the requirements (here, the insert's charging rules), never from running the code. Working it out by tracing the code copies the bug into the test.",
       "source": "textbook",
       "figureRefs": [

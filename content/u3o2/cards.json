@@ -768,7 +768,7 @@
       "U3O2-KK10"
     ],
     "type": "cloze",
-    "front": "In Australia, the {{Copyright Act 1968}} (Cth) protects program code as a literary work, and the {{Privacy Act 1988}} (Cth) sets rules for handling personal information through the Australian Privacy Principles.",
+    "front": "In Australia, the {{Copyright Act 1968}} (Cwlth) protects program code as a literary work, and the {{Privacy Act 1988}} (Cwlth) sets rules for handling personal information through the Australian Privacy Principles.",
     "back": "Copyright law covers who may copy and use code. Privacy law covers how personal information is collected, used, stored and disclosed. The Privacy Act applies to Australian Government agencies and many private organisations.",
     "difficulty": 2,
     "source": "textbook"

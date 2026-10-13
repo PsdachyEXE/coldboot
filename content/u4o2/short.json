@@ -711,7 +711,7 @@
     "prompt": "Bristlebird Allied Health, a private clinic in Warrnambool, has engaged Tawnyhill Apps, an external developer, to build a booking and treatment-notes app. The app will store patients' contact details and treatment notes. Tawnyhill Apps plans to include an open-source calendar library in the app.\n\nIdentify two Acts that apply to this project and explain how each affects the way Tawnyhill Apps develops the app.",
     "points": [
       {
-        "text": "Identifies a privacy Act that applies to patients' information: the Health Records Act 2001 (Vic) or the Privacy Act 1988 (Cth)",
+        "text": "Identifies a privacy Act that applies to patients' information: the Health Records Act 2001 (Vic) or the Privacy Act 1988 (Cwlth)",
         "marks": 1
       },
       {
@@ -719,7 +719,7 @@
         "marks": 1
       },
       {
-        "text": "Identifies a second Act: the Copyright Act 1968 (Cth) for the calendar library, or the other privacy Act",
+        "text": "Identifies a second Act: the Copyright Act 1968 (Cwlth) for the calendar library, or the other privacy Act",
         "marks": 1
       },
       {
@@ -727,7 +727,7 @@
         "marks": 1
       }
     ],
-    "model": "The Health Records Act 2001 (Vic) applies because the app stores treatment notes, which are health information held by a private Victorian clinic. The app must let the clinic meet the Act, so Tawnyhill Apps must build it to protect the notes from unauthorised access, for example by encrypting them and letting only authorised clinic staff view them, and it should test the app with made-up patient records rather than real ones.\n\nThe Copyright Act 1968 (Cth) applies to the open-source calendar library, which is protected by copyright even though it is freely available. Tawnyhill Apps must follow the library's licence conditions, such as keeping its copyright notice, and acknowledge the library in the app's documentation.",
+    "model": "The Health Records Act 2001 (Vic) applies because the app stores treatment notes, which are health information held by a private Victorian clinic. The app must let the clinic meet the Act, so Tawnyhill Apps must build it to protect the notes from unauthorised access, for example by encrypting them and letting only authorised clinic staff view them, and it should test the app with made-up patient records rather than real ones.\n\nThe Copyright Act 1968 (Cwlth) applies to the open-source calendar library, which is protected by copyright even though it is freely available. Tawnyhill Apps must follow the library's licence conditions, such as keeping its copyright notice, and acknowledge the library in the app's documentation.",
     "mistake": "Naming an Act without linking it to the app earns little. Say which data or code the Act covers and what Tawnyhill Apps must do because of it.",
     "source": "textbook"
   },
@@ -770,7 +770,7 @@
     ],
     "commandTerm": "justify",
     "marks": 4,
-    "prompt": "Riflebird Ticketing, a Melbourne company covered by the Privacy Act 1988 (Cth), sells concert tickets through its website and stores customers' names, email addresses, phone numbers and purchase histories. A review of its development practices found that:\n\n- administrator accounts on the web server are protected by a password only\n- the web server's operating system is missing nine months of security updates\n- the customer database is backed up weekly, but no one has ever tried restoring a backup.\n\nThe operations manager says there is no point adopting the Essential Eight, because it is not law. Justify why Riflebird Ticketing should adopt the Essential Eight, with reference to the review's findings.",
+    "prompt": "Riflebird Ticketing, a Melbourne company covered by the Privacy Act 1988 (Cwlth), sells concert tickets through its website and stores customers' names, email addresses, phone numbers and purchase histories. A review of its development practices found that:\n\n- administrator accounts on the web server are protected by a password only\n- the web server's operating system is missing nine months of security updates\n- the customer database is backed up weekly, but no one has ever tried restoring a backup.\n\nThe operations manager says there is no point adopting the Essential Eight, because it is not law. Justify why Riflebird Ticketing should adopt the Essential Eight, with reference to the review's findings.",
     "points": [
       {
         "text": "Although the Essential Eight is voluntary guidance, the Privacy Act requires Riflebird to take reasonable steps to protect the personal information it holds, and the Essential Eight gives it a recognised, prioritised set of strategies for taking those steps",
@@ -936,7 +936,7 @@
         "marks": 1
       }
     ],
-    "model": "The module displays **Welcome guest**. No staff member is called guest, so `found` stays FALSE, but line 11 also accepts the master password on its own. This is a hard-coded back door: anyone who knows Kookaburra99 can log in under any username, and anyone who can read the source code or the repository's history can find it on line 2.\n\nMeasure 1: delete line 2 and change line 11 to `IF found = TRUE THEN`, so that every login must match a real staff account. Any administrator who needs access should have their own account, protected by multi-factor authentication.\n\nMeasure 2: require a second developer to review every change before it is merged, so that back doors and hard-coded passwords like this one are caught before the module is released.",
+    "model": "The module displays **Welcome guest**. No staff member is called guest, so `found` stays False, but line 11 also accepts the master password on its own. This is a hard-coded back door: anyone who knows Kookaburra99 can log in under any username, and anyone who can read the source code or the repository's history can find it on line 2.\n\nMeasure 1: delete line 2 and change line 11 to `IF found = True THEN`, so that every login must match a real staff account. Any administrator who needs access should have their own account, protected by multi-factor authentication.\n\nMeasure 2: require a second developer to review every change before it is merged, so that back doors and hard-coded passwords like this one are caught before the module is released.",
     "mistake": "The weakness isn't only that a password can be read in the code. Line 11 accepts the master password with any username, so it bypasses the account check completely.",
     "source": "textbook",
     "figures": [
@@ -944,7 +944,7 @@
         "id": "ferncastle-login",
         "kind": "pseudocode",
         "title": "Login module",
-        "code": "BEGIN\n    masterPassword ← \"Kookaburra99\"\n    INPUT username\n    INPUT password\n    found ← FALSE\n    FOR i ← 0 TO LENGTH(users) - 1\n        IF users[i] = username AND passwords[i] = password THEN\n            found ← TRUE\n        ENDIF\n    ENDFOR\n    IF found = TRUE OR password = masterPassword THEN\n        DISPLAY \"Welcome \" + username\n    ELSE\n        DISPLAY \"Login failed\"\n    ENDIF\nEND",
+        "code": "BEGIN\n    masterPassword ← \"Kookaburra99\"\n    INPUT username\n    INPUT password\n    found ← False\n    FOR i ← 0 TO LENGTH(users) - 1\n        IF users[i] = username AND passwords[i] = password THEN\n            found ← True\n        ENDIF\n    ENDFOR\n    IF found = True OR password = masterPassword THEN\n        DISPLAY \"Welcome \" + username\n    ELSE\n        DISPLAY \"Login failed\"\n    ENDIF\nEND",
         "indexBase": 0
       }
     ]

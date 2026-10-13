@@ -233,7 +233,7 @@
           ],
           [
             "discontinued",
-            "FALSE"
+            "False"
           ]
         ]
       }
@@ -458,7 +458,7 @@
     "kk": [
       "U4O1-KK03"
     ],
-    "stem": "Tallowwood Hollow Nursery in Bairnsdale uses the function shown to calculate the cost of sending an online order. What does `shippingCost(8, TRUE)` return?",
+    "stem": "Tallowwood Hollow Nursery in Bairnsdale uses the function shown to calculate the cost of sending an online order. What does `shippingCost(8, True)` return?",
     "options": [
       "13.10",
       "26.20",
@@ -466,7 +466,7 @@
       "38.20"
     ],
     "answer": 1,
-    "explanation": "8 is greater than 5, so line 5 sets `cost` to 9.50 + 3 × 1.20 = 13.10. `express` is TRUE, so line 8 doubles it to 26.20, which is returned.",
+    "explanation": "8 is greater than 5, so line 5 sets `cost` to 9.50 + 3 × 1.20 = 13.10. `express` is True, so line 8 doubles it to 26.20, which is returned.",
     "whyWrong": [
       "13.10 is the cost before line 8 doubles it for express delivery.",
       "",
@@ -479,7 +479,7 @@
       {
         "id": "tallowwood-shipping",
         "kind": "pseudocode",
-        "code": "FUNCTION shippingCost(weight, express)\n    IF weight ≤ 5 THEN\n        cost ← 9.50\n    ELSE\n        cost ← 9.50 + (weight - 5) * 1.20\n    ENDIF\n    IF express = TRUE THEN\n        cost ← cost * 2\n    ENDIF\n    RETURN cost\nENDFUNCTION"
+        "code": "FUNCTION shippingCost(weight, express)\n    IF weight <= 5 THEN\n        cost ← 9.50\n    ELSE\n        cost ← 9.50 + (weight - 5) * 1.20\n    ENDIF\n    IF express = True THEN\n        cost ← cost * 2\n    ENDIF\n    RETURN cost\nENDFUNCTION"
       }
     ]
   },
@@ -522,9 +522,9 @@
     "explanation": "`lateFee(0)` returns 0, because neither condition is true. `lateFee(3)` returns 5. `lateFee(10)` returns 5 + 3 × 2 = 11. The total is 0 + 5 + 11 = 16.",
     "whyWrong": [
       "11 is only the fee for 10 days; the loop adds all three fees to `total`.",
-      "21 charges $5 for 0 days, but `days > 0` is FALSE when `days` is 0.",
+      "21 charges $5 for 0 days, but `days > 0` is False when `days` is 0.",
       "",
-      "10 charges the flat $5 for 10 days, but `days > 7` is checked first and is TRUE."
+      "10 charges the flat $5 for 10 days, but `days > 7` is checked first and is True."
     ],
     "difficulty": 3,
     "source": "textbook",
@@ -812,19 +812,19 @@
     "kk": [
       "U4O1-KK05"
     ],
-    "stem": "Redgum Flat Junior Cricket Club in Donald accepts players aged 5 to 17 inclusive. Which condition is TRUE exactly when an entered age is invalid?",
+    "stem": "Redgum Flat Junior Cricket Club in Donald accepts players aged 5 to 17 inclusive. Which condition is True exactly when an entered age is invalid?",
     "options": [
       "`age < 5 AND age > 17`",
-      "`age ≤ 5 OR age ≥ 17`",
+      "`age <= 5 OR age >= 17`",
       "`age > 5 OR age < 17`",
       "`age < 5 OR age > 17`"
     ],
     "answer": 3,
-    "explanation": "An age is invalid if it is below 5 or above 17. `OR` makes the condition TRUE when either is the case, and the strict `<` and `>` keep the boundary ages 5 and 17 valid.",
+    "explanation": "An age is invalid if it is below 5 or above 17. `OR` makes the condition True when either is the case, and the strict `<` and `>` keep the boundary ages 5 and 17 valid.",
     "whyWrong": [
-      "No age is both below 5 and above 17, so this is never TRUE and every age is accepted.",
-      "`≤` and `≥` make the valid boundary ages 5 and 17 count as invalid.",
-      "Every age is either above 5 or below 17, so this is always TRUE and every age is rejected.",
+      "No age is both below 5 and above 17, so this is never True and every age is accepted.",
+      "`<=` and `>=` make the valid boundary ages 5 and 17 count as invalid.",
+      "Every age is either above 5 or below 17, so this is always True and every age is rejected.",
       ""
     ],
     "difficulty": 2,
@@ -890,18 +890,18 @@
       "U4O1-KK05",
       "U3O1-KK08"
     ],
-    "stem": "Bilby Burrow Party Rooms in Wangaratta takes party bookings for 10 to 30 children. Parties are held in the small room or the large room, and the small room holds at most 15 children. The room is chosen with radio buttons, so `room` is always \"small\" or \"large\". Which condition is TRUE exactly when a booking is valid?",
+    "stem": "Bilby Burrow Party Rooms in Wangaratta takes party bookings for 10 to 30 children. Parties are held in the small room or the large room, and the small room holds at most 15 children. The room is chosen with radio buttons, so `room` is always \"small\" or \"large\". Which condition is True exactly when a booking is valid?",
     "options": [
-      "`(children ≥ 10 AND children ≤ 30) OR (room = \"small\" AND children ≤ 15)`",
-      "`(children ≥ 10 OR children ≤ 30) AND (room = \"large\" OR children ≤ 15)`",
-      "`(children ≥ 10 AND children ≤ 30) AND (room = \"small\" OR children ≤ 15)`",
-      "`(children ≥ 10 AND children ≤ 30) AND (room = \"large\" OR children ≤ 15)`"
+      "`(children >= 10 AND children <= 30) OR (room = \"small\" AND children <= 15)`",
+      "`(children >= 10 OR children <= 30) AND (room = \"large\" OR children <= 15)`",
+      "`(children >= 10 AND children <= 30) AND (room = \"small\" OR children <= 15)`",
+      "`(children >= 10 AND children <= 30) AND (room = \"large\" OR children <= 15)`"
     ],
     "answer": 3,
-    "explanation": "The first part is a range check: 10 to 30 children. The second part applies the small room's limit: it is TRUE when the room is large, or when there are no more than 15 children. A valid booking must pass both parts, so they are joined with AND.",
+    "explanation": "The first part is a range check: 10 to 30 children. The second part applies the small room's limit: it is True when the room is large, or when there are no more than 15 children. A valid booking must pass both parts, so they are joined with AND.",
     "whyWrong": [
       "With OR, passing either part is enough, so 25 children in the small room are accepted, and so are 5.",
-      "`children ≥ 10 OR children ≤ 30` is TRUE for every number, so a booking for 40 children in the large room is accepted.",
+      "`children >= 10 OR children <= 30` is True for every number, so a booking for 40 children in the large room is accepted.",
       "This applies the limit to the wrong room: 20 children are rejected in the large room but accepted in the small room.",
       ""
     ],
@@ -1069,12 +1069,12 @@
       "Test 4"
     ],
     "answer": 1,
-    "explanation": "Ten lessons should earn the discount, but line 3 tests `lessons > 10`, which is FALSE when `lessons` is 10. The function returns 180, not 162.00. The condition should be `lessons ≥ 10`.",
+    "explanation": "Ten lessons should earn the discount, but line 3 tests `lessons > 10`, which is False when `lessons` is 10. The function returns 180, not 162.00. The condition should be `lessons >= 10`.",
     "whyWrong": [
       "4 lessons get no discount, and the function correctly returns 4 × 18 = 72.",
       "",
-      "11 > 10 is TRUE, so the function correctly returns 198 × 0.9 = 178.20.",
-      "20 > 10 is TRUE, so the function correctly returns 360 × 0.9 = 324."
+      "11 > 10 is True, so the function correctly returns 198 × 0.9 = 178.20.",
+      "20 > 10 is True, so the function correctly returns 360 × 0.9 = 324."
     ],
     "difficulty": 2,
     "source": "textbook",

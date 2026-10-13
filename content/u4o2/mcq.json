@@ -560,7 +560,7 @@
         "kind": "pseudocode",
         "title": "Login function",
         "indexBase": 0,
-        "code": "FUNCTION checkLogin(attempts, correct)\n    failures ← 0\n    i ← 0\n    granted ← FALSE\n    WHILE granted = FALSE AND failures < 3 DO\n        IF attempts[i] = correct THEN\n            granted ← TRUE\n        ELSE\n            failures ← failures + 1\n        ENDIF\n        i ← i + 1\n    ENDWHILE\n    IF granted = TRUE THEN\n        RETURN \"Access granted\"\n    ELSE\n        RETURN \"Account locked\"\n    ENDIF\nENDFUNCTION"
+        "code": "FUNCTION checkLogin(attempts, correct)\n    failures ← 0\n    i ← 0\n    granted ← False\n    WHILE granted = False AND failures < 3 DO\n        IF attempts[i] = correct THEN\n            granted ← True\n        ELSE\n            failures ← failures + 1\n        ENDIF\n        i ← i + 1\n    ENDWHILE\n    IF granted = True THEN\n        RETURN \"Access granted\"\n    ELSE\n        RETURN \"Account locked\"\n    ENDIF\nENDFUNCTION"
       }
     ]
   },
@@ -639,20 +639,20 @@
       "U4O2-KK04",
       "U3O1-KK14"
     ],
-    "stem": "Bettong Hill Apps' policy is that a change may be merged into its code only after a developer other than its author has approved it. Before each merge, its repository runs the function shown. Which call returns TRUE although the policy should refuse the merge?",
+    "stem": "Bettong Hill Apps' policy is that a change may be merged into its code only after a developer other than its author has approved it. Before each merge, its repository runs the function shown. Which call returns True although the policy should refuse the merge?",
     "options": [
-      "`canMerge(\"Ari\", \"Bea\", TRUE)`",
-      "`canMerge(\"Ari\", \"\", TRUE)`",
-      "`canMerge(\"Ari\", \"Ari\", TRUE)`",
-      "`canMerge(\"Ari\", \"Bea\", FALSE)`"
+      "`canMerge(\"Ari\", \"Bea\", True)`",
+      "`canMerge(\"Ari\", \"\", True)`",
+      "`canMerge(\"Ari\", \"Ari\", True)`",
+      "`canMerge(\"Ari\", \"Bea\", False)`"
     ],
     "answer": 2,
-    "explanation": "Line 3 checks only that the change is approved and that a reviewer is named. It never compares the reviewer with the author, so Ari can approve their own change and the merge goes ahead. That defeats the point of a code review, which is a second person checking the code. Adding `AND reviewer ≠ author` to the condition on line 3 fixes it.",
+    "explanation": "Line 3 checks only that the change is approved and that a reviewer is named. It never compares the reviewer with the author, so Ari can approve their own change and the merge goes ahead. That defeats the point of a code review, which is a second person checking the code. Adding `AND reviewer <> author` to the condition on line 3 fixes it.",
     "whyWrong": [
-      "Bea, a different developer, approved the change, so the policy allows it and TRUE is correct.",
-      "No reviewer is named, so the function returns FALSE, which is what the policy requires.",
+      "Bea, a different developer, approved the change, so the policy allows it and True is correct.",
+      "No reviewer is named, so the function returns False, which is what the policy requires.",
       "",
-      "The change isn't approved, so the function returns FALSE, which is correct."
+      "The change isn't approved, so the function returns False, which is correct."
     ],
     "difficulty": 3,
     "source": "textbook",
@@ -661,7 +661,7 @@
         "id": "bettong-can-merge",
         "kind": "pseudocode",
         "title": "Merge check",
-        "code": "FUNCTION canMerge(author, reviewer, approved)\n    // Policy: merge only after a developer other than the author approves\n    IF approved = TRUE AND reviewer ≠ \"\" THEN\n        RETURN TRUE\n    ELSE\n        RETURN FALSE\n    ENDIF\nENDFUNCTION"
+        "code": "FUNCTION canMerge(author, reviewer, approved)\n    // Policy: merge only after a developer other than the author approves\n    IF approved = True AND reviewer <> \"\" THEN\n        RETURN True\n    ELSE\n        RETURN False\n    ENDIF\nENDFUNCTION"
       }
     ]
   },
@@ -1287,7 +1287,7 @@
     "answer": 1,
     "explanation": "The Essential Eight is a set of eight prioritised strategies from the Australian Cyber Security Centre, such as patching, multi-factor authentication and regular backups, that reduce cyber security risk.",
     "whyWrong": [
-      "Privacy principles for Australian Government agencies are the Australian Privacy Principles in the Privacy Act 1988 (Cth).",
+      "Privacy principles for Australian Government agencies are the Australian Privacy Principles in the Privacy Act 1988 (Cwlth).",
       "",
       "Standards for the Victorian public sector come from the Privacy and Data Protection Act 2014 (Vic), not the Essential Eight.",
       "The Essential Eight lists mitigation strategies; it isn't a threat modelling process."
@@ -1326,9 +1326,9 @@
     "stem": "Mount Corella Shire Council in regional Victoria is replacing its rates system. The new system will store ratepayers' names, addresses and payment histories. Which Act most directly governs how the council handles this personal information, and why?",
     "options": [
       "The Privacy and Data Protection Act 2014 (Vic), as councils are Victorian public sector bodies",
-      "The Privacy Act 1988 (Cth), as it covers every organisation that holds personal information",
+      "The Privacy Act 1988 (Cwlth), as it covers every organisation that holds personal information",
       "The Health Records Act 2001 (Vic), as payment histories are sensitive personal records",
-      "The Copyright Act 1968 (Cth), as the council owns the records stored in its system"
+      "The Copyright Act 1968 (Cwlth), as the council owns the records stored in its system"
     ],
     "answer": 0,
     "explanation": "A local council is part of the Victorian public sector, so its handling of personal information is governed by the Privacy and Data Protection Act 2014 (Vic) and its Information Privacy Principles.",
@@ -1347,7 +1347,7 @@
       "U4O2-KK07",
       "U4O2-KK08"
     ],
-    "stem": "A developer at Mulgara Outdoor Supplies, a Kerang retailer covered by the Privacy Act 1988 (Cth), leaves a customer database publicly accessible. An unknown party downloads customers' names, dates of birth and driver licence numbers, and serious harm to those customers is likely. What does the Act require the retailer to do?",
+    "stem": "A developer at Mulgara Outdoor Supplies, a Kerang retailer covered by the Privacy Act 1988 (Cwlth), leaves a customer database publicly accessible. An unknown party downloads customers' names, dates of birth and driver licence numbers, and serious harm to those customers is likely. What does the Act require the retailer to do?",
     "options": [
       "Notify the Victorian Information Commissioner, as the retailer is in Victoria",
       "Restore the database from a backup, which ends any duty to notify anyone",
@@ -1398,8 +1398,8 @@
     "options": [
       "The Privacy and Data Protection Act 2014 (Vic), because the council is a Victorian public sector body",
       "The Health Records Act 2001 (Vic), because the app holds health information about each child",
-      "The Privacy Act 1988 (Cth), because it covers health information held anywhere in Australia",
-      "The Copyright Act 1968 (Cth), because the council owns the records created in its app"
+      "The Privacy Act 1988 (Cwlth), because it covers health information held anywhere in Australia",
+      "The Copyright Act 1968 (Cwlth), because the council owns the records created in its app"
     ],
     "answer": 1,
     "explanation": "Growth, immunisation and health check records are health information. The Health Records Act 2001 (Vic) regulates how both public and private sector organisations in Victoria handle health information, so its Health Privacy Principles set the rules for this information. The council's other personal information, such as ratepayers' details, falls under the Privacy and Data Protection Act 2014 (Vic).",

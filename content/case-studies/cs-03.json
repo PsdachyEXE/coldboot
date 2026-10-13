@@ -179,8 +179,8 @@
         [
           "isRejected",
           "?",
-          "FALSE",
-          "TRUE if the delivery was rejected at goods-in"
+          "False",
+          "True if the delivery was rejected at goods-in"
         ]
       ]
     },
@@ -387,11 +387,11 @@
           "marks": 1
         },
         {
-          "text": "isRejected: Boolean, because a delivery is either rejected or not, so the field only ever needs two values, TRUE and FALSE.",
+          "text": "isRejected: Boolean, because a delivery is either rejected or not, so the field only ever needs two values, True and False.",
           "marks": 1
         }
       ],
-      "model": "supplierCode should be a String. Pardalote's supplier codes, such as 0371, can begin with a zero, which an Integer would drop: 0371 would be stored as 371 and no longer match the code on the supplier's paperwork. The code only identifies a supplier and is never used in a calculation, so there is no reason to store it as a number.\n\narrivalTemp should be Floating point. The probe measures temperatures to one decimal place, such as 4.6 °C, and an Integer can hold only whole numbers. A delivery at 5.3 °C must be rejected, but stored as an Integer it would become 5, pass the 5.0 °C check and be wrongly accepted.\n\nisRejected should be Boolean. A delivery is either rejected or it isn't, so the field only ever needs the two values TRUE and FALSE.",
+      "model": "supplierCode should be a String. Pardalote's supplier codes, such as 0371, can begin with a zero, which an Integer would drop: 0371 would be stored as 371 and no longer match the code on the supplier's paperwork. The code only identifies a supplier and is never used in a calculation, so there is no reason to store it as a number.\n\narrivalTemp should be Floating point. The probe measures temperatures to one decimal place, such as 4.6 °C, and an Integer can hold only whole numbers. A delivery at 5.3 °C must be rejected, but stored as an Integer it would become 5, pass the 5.0 °C check and be wrongly accepted.\n\nisRejected should be Boolean. A delivery is either rejected or it isn't, so the field only ever needs the two values True and False.",
       "mistake": "A code made of digits isn't automatically an Integer. If it can start with a zero and is never used in a calculation, it should be a String.",
       "source": "textbook",
       "figureRefs": [
@@ -516,12 +516,12 @@
           "marks": 1
         },
         {
-          "text": "Explains that 5.0 is where an error in the comparison would show: if the code tested arrivalTemp ≥ 5.0 instead of arrivalTemp > 5.0, a delivery at exactly 5.0 °C would be wrongly rejected, while the tests at 4.9 and 5.1 would still pass.",
+          "text": "Explains that 5.0 is where an error in the comparison would show: if the code tested arrivalTemp >= 5.0 instead of arrivalTemp > 5.0, a delivery at exactly 5.0 °C would be wrongly rejected, while the tests at 4.9 and 5.1 would still pass.",
           "marks": 1
         }
       ],
-      "model": "1.\n\n| Test number | Input (temperature entered) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 4.9 | Delivery accepted; lot label printed | |\n| 2 | 5.0 | Delivery accepted; lot label printed | |\n| 3 | 5.1 | Delivery rejected; no lot label printed | |\n| 4 | `five` | Error message asking for the temperature as a number; delivery not accepted or rejected | |\n\n2. Test 2 uses exactly 5.0 °C because the limit is where a mistake in the comparison would show. The rule rejects only deliveries warmer than 5.0 °C, so a delivery at 5.0 °C must be accepted. If the code tested arrivalTemp ≥ 5.0 instead of arrivalTemp > 5.0, test 2 would fail, while tests 1 and 3 would still pass.",
-      "mistake": "Temperatures far from the limit, such as 2.0 °C and 9.0 °C, give the right result whether the code uses > or ≥, so they can't reveal an error at the limit.",
+      "model": "1.\n\n| Test number | Input (temperature entered) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 4.9 | Delivery accepted; lot label printed | |\n| 2 | 5.0 | Delivery accepted; lot label printed | |\n| 3 | 5.1 | Delivery rejected; no lot label printed | |\n| 4 | `five` | Error message asking for the temperature as a number; delivery not accepted or rejected | |\n\n2. Test 2 uses exactly 5.0 °C because the limit is where a mistake in the comparison would show. The rule rejects only deliveries warmer than 5.0 °C, so a delivery at 5.0 °C must be accepted. If the code tested arrivalTemp >= 5.0 instead of arrivalTemp > 5.0, test 2 would fail, while tests 1 and 3 would still pass.",
+      "mistake": "Temperatures far from the limit, such as 2.0 °C and 9.0 °C, give the right result whether the code uses > or >=, so they can't reveal an error at the limit.",
       "source": "textbook"
     },
     {
