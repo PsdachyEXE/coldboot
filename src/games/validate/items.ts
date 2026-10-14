@@ -24,7 +24,8 @@ export interface ValidateSpec {
 }
 
 export const CHECK_KK: KkId[] = ['U3O1-KK10', 'U4O1-KK05'];
-export const BOUNDARY_KK: KkId[] = ['U3O1-KK10', 'U3O1-KK14'];
+/** Boundary values are relevant test data, which both units' testing key knowledge lists. */
+export const BOUNDARY_KK: KkId[] = ['U3O1-KK10', 'U3O1-KK14', 'U4O1-KK06'];
 export const BATCH_SIZE = 4;
 export const VERDICT_CHIPS = ['existence', 'type', 'range', 'valid'];
 
@@ -40,6 +41,8 @@ const VERDICT_WORDS: Record<string, Verdict> = {
   existence: 'existence',
   exist: 'existence',
   exists: 'existence',
+  // TERMS calls the existence check existence or presence checking.
+  presence: 'existence',
   e: 'existence',
   type: 'type',
   t: 'type',
@@ -49,11 +52,11 @@ const VERDICT_WORDS: Record<string, Verdict> = {
   v: 'valid',
 };
 
-/** "Range", "range check", "the type check" and "v" all parse. Null for anything else. */
+/** "Range", "range check", "the type check", "existence checking", "presence" and "v" all parse. Null for anything else. */
 export function parseVerdict(input: string): Verdict | null {
   const words = normaliseAnswer(input)
     .split(/\s+/)
-    .filter((w) => !['the', 'a', 'check', 'checks', 'it', 'is'].includes(w));
+    .filter((w) => !['the', 'a', 'check', 'checks', 'checking', 'it', 'is'].includes(w));
   return words.length === 1 ? (VERDICT_WORDS[words[0]] ?? null) : null;
 }
 
@@ -72,7 +75,7 @@ function specBlock(spec: FieldSpec): TerminalBlock {
 function rules(spec: FieldSpec): string {
   const extra = [
     spec.required ? '' : 'An optional field left blank is valid.',
-    spec.kind === 'text' ? 'For text, the range check tests the number of characters.' : '',
+    spec.kind === 'text' ? 'For a string, the range check tests the number of characters.' : '',
   ].filter(Boolean);
   return ['Checks run in this order: existence, then type, then range. The first check that fails rejects the input.', ...extra, 'Entered text is shown in quotes.'].join(' ');
 }

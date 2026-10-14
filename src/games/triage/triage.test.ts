@@ -168,7 +168,82 @@ describe('triage items', () => {
 
   it('offers chips for every answer', () => {
     expect(classifyItem('overflow', 3, 'normal').chips).toEqual(CLASSIFY_CHIPS);
-    expect(techniqueItem('overflow', 3, 'normal').chips).toEqual(['breakpoint', 'debugging output statement', 'commenting out code']);
+    expect(techniqueItem('overflow', 3, 'normal').chips).toEqual(['breakpoint', 'debugging statement', 'commenting out code']);
+  });
+
+  it("uses the study design's technique names and tags each technique question by its answer's unit", () => {
+    expect(parseTechnique('debugging statement')).toBe('output');
+    expect(parseTechnique('Debugging statements')).toBe('output');
+    expect(parseTechnique('debugging output statement')).toBe('output');
+    const want: Record<string, string[]> = {
+      Breakpoint: ['U3O1-KK14', 'U4O1-KK06'],
+      'Debugging statement': ['U3O1-KK14'],
+      'Commenting out code': ['U4O1-KK06'],
+    };
+    const seen = new Set<string>();
+    for (const id of TEMPLATE_IDS) {
+      for (const seed of SEEDS.slice(0, 50)) {
+        const item = techniqueItem(id, seed, 'normal');
+        const expected = item.check('?').expected;
+        seen.add(expected);
+        // Debugging statements are Unit 3 key knowledge only; commenting out code is Unit 4's.
+        expect(item.kk, `${id} ${seed}`).toEqual(want[expected]);
+      }
+    }
+    expect([...seen].sort()).toEqual(Object.keys(want).sort());
+  });
+});
+
+describe('triage agrees with the TERMS definitions of errors', () => {
+  it('words every reason as TERMS does, and never turns on an undefined variable', () => {
+    for (const level of LEVELS) {
+      for (const id of TEMPLATE_IDS) {
+        for (const seed of SEEDS.slice(0, 100)) {
+          const s = scenarioFor(id, seed, level);
+          const text = `${s.story} ${s.why} ${s.technique.need} ${s.code?.source ?? ''}`;
+          expect(text, id).not.toMatch(/undefined|undeclared|not (been )?defined|not declared/i);
+          // Comparisons are written as the 2025 examination writes them.
+          expect(text, id).not.toMatch(/[≤≥≠]/);
+          if (s.classification.type === 'syntax') expect(s.why, id).toMatch(/can.t be compiled and run: a syntax error\.$/);
+          if (s.classification.type === 'logic') expect(s.why, id).toMatch(/incorrect/);
+          if (s.classification.type === 'runtime') expect(s.why, id).toMatch(/: a runtime error, (overflow|index out of range|type mismatch|divide by zero)\.$/);
+        }
+      }
+    }
+  });
+
+  it('misspells only a keyword that closes a block, so the case never reads as an undefined name', () => {
+    const seen = new Set<string>();
+    for (const level of LEVELS) {
+      for (const seed of SEEDS) {
+        const s = scenarioFor('misspelt-keyword', seed, level);
+        const words = s.code!.source.split('\n').map((l) => l.trim().split(' ')[0]);
+        // DISPLAY, and every closing keyword but the misspelt one, is spelt correctly.
+        expect(words, `${seed} ${level}`).toContain('DISPLAY');
+        const block = /^(ENDIF|ENDFOR) is misspelt on line (\d+), so the (IF|FOR) block is never closed\. /.exec(s.why);
+        expect(block, s.why).not.toBeNull();
+        expect(block![3]).toBe(block![1].slice(3));
+        expect(words.filter((w) => w === block![1])).toHaveLength(0);
+        seen.add(block![1]);
+      }
+    }
+    expect([...seen].sort()).toEqual(['ENDFOR', 'ENDIF']);
+  });
+
+  it("includes the 2025 examination's framings of overflow and type mismatch", () => {
+    const stories = (id: string) => new Set(SEEDS.map((seed) => scenarioFor(id, seed, 'easy').story.replace(/^\w+'s /, '')));
+    const overflow = [...stories('plain-overflow')];
+    expect(overflow.some((t) => /no memory left/.test(t))).toBe(true);
+    expect(overflow.some((t) => /16-bit integer/.test(t))).toBe(true);
+    const type = [...stories('plain-type')];
+    expect(type.some((t) => /store the text DNF in the array/.test(t) && /array of integers/.test(t))).toBe(true);
+    // Each plain case's technique question is about that case.
+    for (const seed of SEEDS.slice(0, 50)) {
+      const s = scenarioFor('plain-overflow', seed, 'easy');
+      if (/memory/.test(s.story)) expect(s.technique.need).toMatch(/photos loaded/);
+      else if (/game/.test(s.story)) expect(s.technique.need).toMatch(/score/);
+      else expect(s.technique.need).toMatch(/count/);
+    }
   });
 });
 

@@ -5,6 +5,7 @@
 import { describe, expect, it } from 'vitest';
 import { binaryWorstCase, halvingChain } from './algorithms';
 import { SEARCH_ANSWERS, SEARCH_CHOICE, SEARCH_WHICH } from './concepts';
+import { SEARCH_MAN } from './meta';
 import game from './index';
 import { binarySpec, fromSearchInstance, generateSearchItem, linearSpec, maxSpec, planSearchRound, scenarioId, searchItem } from './items';
 import type { Difficulty } from '../types';
@@ -184,6 +185,19 @@ describe('search scenarios', () => {
       expect(item.check('abcd'[c.answer]).correct).toBe(true);
       expect(item.check('abcd'[(c.answer + 2) % 4]).correct).toBe(false);
     }
+  });
+
+  it('justifies a search by the requirements, the algorithm and whether the data is sorted', () => {
+    const justify = SEARCH_CHOICE.find((c) => c.id === 'justify-binary')!;
+    expect(justify.options[justify.answer]).toMatch(/^The data is sorted, and .* large list quickly and often$/);
+    expect(justify.options.filter((o) => /^The data is sorted/.test(o))).toHaveLength(1);
+    // The reason doesn't rule out sorting unsorted data first (sort-once-search-often answers binary search).
+    expect(justify.reason).not.toMatch(/unsorted lists suit linear/i);
+    expect(SEARCH_WHICH.find((c) => c.id === 'sort-once-search-often')?.answer).toBe('binary');
+    // Every scenario that answers binary search has sorted data or a step that sorts it first.
+    for (const c of SEARCH_WHICH.filter((x) => x.answer === 'binary')) expect(`${c.prompt} ${c.reason}`, c.id).toMatch(/sorted|in order|alphabetical/i);
+    expect(SEARCH_MAN).toMatch(/the solution requirements .*, how each algorithm works, and whether the data is sorted/);
+    expect(SEARCH_MAN).toMatch(/Big-O notation, such as O\(log n\), goes beyond the study design/);
   });
 });
 

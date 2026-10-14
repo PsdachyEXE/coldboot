@@ -5,8 +5,10 @@
  * claim about a screen that doesn't have that weakness, the explanation, the fix, and why another
  * characteristic isn't the answer.
  *
- * Design principles (U3O2-KK16) never appear: the study design's list is unconfirmed (a verify
- * entry), so they are neither answers nor distractors.
+ * The design principles of U3O2-KK16 are a separate list. Usability is on both lists; the other six
+ * principles are never user experience characteristics, so from normal difficulty one of them stands
+ * among the options as a trap, as contrast did in the 2025 examination. A principle is never the
+ * answer, and no word outside the two lists is offered as either.
  */
 
 export const CHARACTERISTICS = ['affordance', 'interoperability', 'security', 'usability'] as const;
@@ -35,6 +37,39 @@ export const CHARACTERISTIC_OF: Record<Weakness, Characteristic> = {
 
 export function weaknessesOf(c: Characteristic): Weakness[] {
   return WEAKNESSES.filter((w) => CHARACTERISTIC_OF[w] === c);
+}
+
+/** U3O2-KK16's design principles, in the study design's order. */
+export const DESIGN_PRINCIPLES = ['alignment', 'balance', 'contrast', 'space', 'text formatting', 'usability', 'navigation'] as const;
+export type DesignPrinciple = (typeof DESIGN_PRINCIPLES)[number];
+
+/** The principles that are not also user experience characteristics: every one but usability. */
+export type Trap = Exclude<DesignPrinciple, Characteristic>;
+export const TRAPS: readonly Trap[] = DESIGN_PRINCIPLES.filter((p): p is Trap => !(CHARACTERISTICS as readonly string[]).includes(p));
+
+/**
+ * The traps a student is most likely to reach for on a screen with each weakness, because the
+ * principle touches the same elements. This only chooses which trap to offer: the feedback never
+ * claims the principle is weak on the screen.
+ */
+export const TEMPTING_TRAPS: Record<Weakness, readonly Trap[]> = {
+  'flat-action': ['contrast', 'text formatting'],
+  'hidden-tap': ['contrast', 'navigation'],
+  'closed-export': TRAPS,
+  'closed-import': TRAPS,
+  'secret-shown': ['text formatting'],
+  'full-card': ['text formatting'],
+  'tiny-targets': ['space'],
+  'long-form': ['navigation'],
+};
+
+export function principleLabel(p: DesignPrinciple): string {
+  return capital(p);
+}
+
+/** Why a design principle is never the answer to a question about user experience characteristics. */
+export function principleNot(p: DesignPrinciple): string {
+  return `${principleLabel(p)} is one of the design principles, not a user experience characteristic. The study design lists the design principles as alignment, balance, contrast, space, text formatting, usability and navigation, and only usability is on both lists.`;
 }
 
 /**
@@ -86,8 +121,8 @@ const tap = (f: ScreenFacts) => (f.device === 'phone' ? 'tapped' : 'clicked');
 /** The characteristic's meaning, as the cards and glossary give it. */
 const MEANING: Record<Characteristic, string> = {
   affordance: "Affordance is whether an element's look shows how to use it.",
-  interoperability: 'Interoperability is how well a solution exchanges data with other systems.',
-  security: "Security is about protecting users' data and accounts, so they can trust the solution.",
+  interoperability: 'Interoperability is how well a solution exchanges data and works with other systems, programs and devices.',
+  security: "Security covers authentication, which checks who a user is, and data protection, which keeps users' data from people who shouldn't see it.",
   usability: 'Usability is how easily users can learn and use a solution to finish their tasks.',
 };
 
@@ -177,10 +212,10 @@ export function explanation(w: Weakness, f: ScreenFacts): string {
     }
     case 'secret-shown': {
       const secret = need(f.secret, 'secret');
-      return `${meaning} Anyone who can see the screen can read the ${secret.noun} and use the account.`;
+      return `${meaning} Anyone who can see the screen can read the ${secret.noun} and use it to get into someone else's account, which defeats authentication.`;
     }
     case 'full-card':
-      return `${meaning} Anyone who sees the screen could copy the whole card number and misuse it.`;
+      return `${meaning} Anyone who sees the screen could copy the whole card number and misuse it, so the customer's payment data isn't protected.`;
     case 'tiny-targets':
       return `${meaning} Buttons this small are hard to hit with a finger, so users tap the wrong one or have to try again.`;
     case 'long-form':

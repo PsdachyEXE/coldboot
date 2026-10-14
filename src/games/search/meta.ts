@@ -16,7 +16,7 @@ Linear search: give the indexes inspected, or the number of comparisons. It chec
 
 Counting: the most inspections each search can need.
 
-Scenarios: choose the search that suits the data (sorted or not, how large) and how often it runs.
+Scenarios: justify a choice of search from three things: the solution requirements (how much data there is and how often it is searched), how each algorithm works, and whether the data is sorted. Binary search only works on data sorted by the value being searched for. Big-O notation, such as O(log n), goes beyond the study design and appears here as extension.
 
 Type indexes as numbers separated by spaces or commas, such as 5 8 6.
 

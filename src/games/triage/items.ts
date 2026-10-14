@@ -24,7 +24,15 @@ export interface TriageSpec {
 }
 
 export const CLASSIFY_KK: KkId[] = ['U3O1-KK13'];
-export const TECHNIQUE_KK: KkId[] = ['U3O1-KK14', 'U4O1-KK06'];
+/**
+ * A technique question is tagged by its answer: breakpoints are in both units' lists, debugging
+ * statements only in Unit 3's (U3O1-KK14) and commenting out code only in Unit 4's (U4O1-KK06).
+ */
+export const TECHNIQUE_KK: Record<Technique, KkId[]> = {
+  breakpoint: ['U3O1-KK14', 'U4O1-KK06'],
+  output: ['U3O1-KK14'],
+  comment: ['U4O1-KK06'],
+};
 
 const DIFFICULTIES: readonly Difficulty[] = ['easy', 'normal', 'hard'];
 
@@ -50,6 +58,8 @@ const TECHNIQUE_OPTIONS: readonly { value: Technique; accept: readonly string[] 
   {
     value: 'output',
     accept: [
+      'debugging statement',
+      'debugging statements',
       'debugging output statement',
       'debugging output statements',
       'debugging output',
@@ -59,8 +69,8 @@ const TECHNIQUE_OPTIONS: readonly { value: Technique; accept: readonly string[] 
       'output statements',
       'print statement',
       'print statements',
-      'debugging statement',
-      'debugging statements',
+      'debug statement',
+      'debug statements',
       'display statement',
     ],
   },
@@ -138,7 +148,7 @@ export function classifyItem(template: string, seed: number, difficulty: Difficu
   };
 }
 
-const TECHNIQUE_HINT = 'Type breakpoint, debugging output statement or commenting out code.';
+const TECHNIQUE_HINT = 'Type breakpoint, debugging statement or commenting out code.';
 
 /**
  * A technique question. Standalone, it shows the whole case; as a follow-up in a round, the case
@@ -153,7 +163,7 @@ export function techniqueItem(template: string, seed: number, difficulty: Diffic
     : caseBlocks(s);
   return {
     id: 'gen-triage-technique',
-    kk: TECHNIQUE_KK,
+    kk: TECHNIQUE_KK[s.technique.answer],
     instance: `triage:${followUp ? 'follow-up' : 'technique'}:${template}:seed=${seed}:${difficulty}`,
     chips: TECHNIQUE_CHIPS,
     prompt: [

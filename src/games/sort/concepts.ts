@@ -1,8 +1,14 @@
 /**
- * Conceptual sort questions, written by hand. Every statement is standard textbook material:
- * selection sort always makes n(n - 1)/2 comparisons and at most n - 1 swaps; quick sort averages
- * O(n log n) and falls to O(n²) when partitions are lopsided, for example on already sorted data
- * with the last value as the pivot.
+ * Conceptual sort questions, written by hand. The core questions (SORT_CORE) ask for VCAA's own
+ * comparison from its teaching advice for U3O1-KK12: selection sort moves the smallest (or largest)
+ * value into its sorted position on each pass; quick sort splits the data around a pivot into two
+ * sub-lists and repeats; quick sort is more complex and more efficient. Every round asks one.
+ *
+ * The rest is standard textbook material that goes beyond that advice, which gives no Big-O
+ * notation, pivot rule or worst case: selection sort always makes n(n - 1)/2 comparisons and at
+ * most n - 1 swaps; quick sort averages O(n log n) and falls to O(n²) when partitions are lopsided,
+ * for example on already sorted data with the last value as the pivot. None of it contradicts the
+ * comparison: "more efficient" is quick sort's usual case.
  */
 import type { ChoiceConcept, NamedAnswer, WhichConcept } from '../concepts';
 
@@ -57,10 +63,16 @@ export const SORT_WHICH: readonly WhichConcept<SortName>[] = [
     reason: 'Quick sort sorts each sub-list with a recursive call after partitioning.',
   },
   {
-    id: 'front-fixed',
-    prompt: 'After each pass, which sort has one more value in its final place at the front of the list?',
+    id: 'one-per-pass',
+    prompt: 'On each pass, which sort finds the smallest (or largest) value still unsorted and puts that one value in its final place?',
     answer: 'selection',
-    reason: 'Each pass of selection sort swaps the smallest unsorted value into the next place at the front.',
+    reason: 'Selection sort places exactly one value per pass. Quick sort instead splits the data around a pivot into two sub-lists and repeats on each.',
+  },
+  {
+    id: 'more-efficient',
+    prompt: 'Which sort is more complex to write, but more efficient?',
+    answer: 'quick',
+    reason: 'Choosing a pivot and splitting the data into sub-lists again and again makes quick sort more complex than selection sort, but it usually needs fewer comparisons, and far fewer on long lists.',
   },
   {
     id: 'average-faster',
@@ -71,6 +83,18 @@ export const SORT_WHICH: readonly WhichConcept<SortName>[] = [
 ];
 
 export const SORT_CHOICE: readonly ChoiceConcept[] = [
+  {
+    id: 'compare',
+    prompt: 'Which statement compares selection sort and quick sort correctly?',
+    options: [
+      'Selection sort is more complex and more efficient',
+      'Quick sort is simpler and more efficient',
+      'Quick sort is more complex and more efficient',
+      'Selection sort is more complex but less efficient',
+    ],
+    answer: 2,
+    reason: 'Selection sort places one value on each pass: simple, but slow on large lists. Quick sort splits the data around a pivot into two sub-lists and repeats on each: more complex, and more efficient.',
+  },
   {
     id: 'quick-average',
     prompt: "What is quick sort's average time complexity?",
@@ -114,3 +138,6 @@ export const SORT_CHOICE: readonly ChoiceConcept[] = [
     reason: 'Every value before the pivot belongs before it and every value after it belongs after it, so the pivot never moves again.',
   },
 ];
+
+/** The questions on VCAA's comparison of the two sorts, one of which every round asks. */
+export const SORT_CORE: ReadonlySet<string> = new Set(['one-per-pass', 'pivot', 'more-efficient', 'small-simple', 'compare']);

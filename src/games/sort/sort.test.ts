@@ -3,7 +3,7 @@
  * ./algorithms.ts, over 500 seeds at each difficulty, through the item's own answer checker.
  */
 import { describe, expect, it } from 'vitest';
-import { SORT_ANSWERS, SORT_CHOICE, SORT_WHICH } from './concepts';
+import { SORT_ANSWERS, SORT_CHOICE, SORT_CORE, SORT_WHICH } from './concepts';
 import game from './index';
 import {
   countItem,
@@ -19,6 +19,7 @@ import {
   sortValues,
   sublistsItem,
 } from './items';
+import { SORT_MAN } from './meta';
 import { mulberry32 } from '../prng';
 import type { Difficulty } from '../types';
 
@@ -225,6 +226,28 @@ describe('sort concepts', () => {
     }
   });
 
+  it("asks VCAA's comparison: one value per pass for selection sort, a pivot and two sub-lists for quick sort, which is more complex and more efficient", () => {
+    const ids = [...SORT_WHICH, ...SORT_CHOICE].map((c) => c.id);
+    for (const id of SORT_CORE) expect(ids).toContain(id);
+    const which = (id: string) => SORT_WHICH.find((c) => c.id === id)!;
+    expect(which('one-per-pass')).toMatchObject({ answer: 'selection', prompt: expect.stringMatching(/smallest \(or largest\) value .* one value in its final place/) });
+    expect(which('pivot')).toMatchObject({ answer: 'quick', prompt: expect.stringMatching(/pivot/) });
+    expect(which('more-efficient')).toMatchObject({ answer: 'quick', prompt: expect.stringMatching(/more complex .* more efficient/) });
+    const compare = SORT_CHOICE.find((c) => c.id === 'compare')!;
+    expect(compare.options[compare.answer]).toBe('Quick sort is more complex and more efficient');
+    // Every other option gets the comparison wrong, and the answer isn't always the first letter.
+    expect(compare.options.filter((o) => /^Quick sort is more complex and more efficient$/.test(o))).toHaveLength(1);
+    expect(compare.answer).not.toBe(0);
+    // No concept says selection sort is the more efficient or the more complex of the two.
+    for (const c of [...SORT_WHICH, ...SORT_CHOICE]) {
+      const right = 'options' in c ? c.options[c.answer] : c.reason;
+      expect(right, c.id).not.toMatch(/selection sort is (more complex|more efficient)/i);
+    }
+    expect(SORT_MAN).toContain('Quick sort is more complex and more efficient.');
+    expect(SORT_MAN).toMatch(/selection sort finds the smallest \(or largest\) value .* Quick sort picks a pivot, splits the other values into two sub-lists/);
+    expect(SORT_MAN).toMatch(/Big-O notation, such as O\(n log n\), and quick sort's worst case go beyond the study design/);
+  });
+
   it('marks lettered concept questions', () => {
     for (const c of SORT_CHOICE) {
       let seed = 1;
@@ -240,7 +263,7 @@ describe('sort concepts', () => {
 
 describe('sort rounds and instances', () => {
   it('plans 10 items: 3 selection, 2 partition and sub-list pairs, 2 concepts, 1 count', () => {
-    for (const seed of SEEDS.slice(0, 100)) {
+    for (const seed of SEEDS.slice(0, 300)) {
       const plan = planSortRound(seed);
       expect(plan).toHaveLength(10);
       const kinds = plan.map((p) => p.kind);
@@ -252,8 +275,10 @@ describe('sort rounds and instances', () => {
       plan.forEach((p, i) => {
         if (p.kind === 'partition') expect(plan[i + 1]).toEqual({ kind: 'sublists', seed: p.seed });
       });
-      const concepts = plan.filter((p) => p.kind === 'concept').map((p) => conceptItem(p.seed, 'normal').instance);
-      expect(new Set(concepts.map((c) => c!.split(':id=')[1])).size).toBe(2);
+      const concepts = plan.filter((p) => p.kind === 'concept').map((p) => conceptItem(p.seed, 'normal').instance!.split(':id=')[1].replace(/:.*$/, ''));
+      expect(new Set(concepts).size).toBe(2);
+      // The first concept in every round is on VCAA's comparison of the two sorts.
+      expect(SORT_CORE.has(concepts[0]), `seed ${seed}`).toBe(true);
     }
   });
 

@@ -1,7 +1,8 @@
 /**
  * `ux` items. Each mock-up has exactly one weakness, and two questions ask about it:
  * - which: the user experience characteristic that is weakest (affordance, interoperability,
- *   security or usability), answered by letter or by name;
+ *   security or usability), answered by letter or by name. From normal difficulty one design
+ *   principle that isn't also a characteristic stands among the options as a trap;
  * - why: the reason, chosen from a short list. The other reasons are false claims about this
  *   screen, drawn from weaknesses of the other characteristics (and, on hard, one of the same
  *   characteristic), about elements the screen has wherever possible.
@@ -11,23 +12,31 @@
  * "ux:which:court:full-card:seed=12:normal" regenerate an item exactly through fromUxInstance.
  */
 import type { KkId } from '../../content/schema';
+import { normaliseAnswer } from '../../lib/text';
 import type { TerminalBlock } from '../../terminal/blocks';
 import { OPTION_LETTERS, parseOption } from '../answers';
-import { childSeed, mulberry32, pick, shuffle } from '../prng';
+import { childSeed, mulberry32, pick, randInt, shuffle } from '../prng';
 import type { Difficulty, QuizItem } from '../types';
 import { buildScreen, templateById, templatesFor, TEMPLATES, type UxScreen } from './templates';
 import {
   CHARACTERISTIC_LABELS,
   CHARACTERISTIC_OF,
   CHARACTERISTICS,
+  DESIGN_PRINCIPLES,
   explanation,
   fixText,
+  principleLabel,
+  principleNot,
   reasonText,
   rebuttal,
+  TEMPTING_TRAPS,
   weaknessesOf,
   whyNot,
   WEAKNESSES,
+  type Characteristic,
+  type DesignPrinciple,
   type ScreenFacts,
+  type Trap,
   type Weakness,
 } from './weakness';
 
@@ -64,29 +73,69 @@ function setting(screen: UxScreen): TerminalBlock[] {
 // ---------------------------------------------------------------------------
 
 export const CHARACTERISTIC_OPTIONS = CHARACTERISTICS.map((c) => CHARACTERISTIC_LABELS[c]);
-const WHICH_HINT = "Type a letter from A to D, or the characteristic's name.";
+
+export type WhichValue = Characteristic | Trap;
+
+/**
+ * The which question's options in display order: the four characteristics, and from normal
+ * difficulty one design principle (a trap that is never the answer) at a seeded place among them.
+ */
+export function whichValues(spec: UxSpec, difficulty: Difficulty): WhichValue[] {
+  const values: WhichValue[] = [...CHARACTERISTICS];
+  if (difficulty === 'easy') return values;
+  const rng = mulberry32(childSeed(spec.seed, 'trap'));
+  values.splice(randInt(rng, 0, values.length), 0, pick(rng, TEMPTING_TRAPS[spec.weakness]));
+  return values;
+}
+
+function isTrap(v: WhichValue): v is Trap {
+  return !(CHARACTERISTICS as readonly string[]).includes(v);
+}
+
+function valueLabel(v: WhichValue): string {
+  return isTrap(v) ? principleLabel(v) : CHARACTERISTIC_LABELS[v];
+}
+
+/** The design principle the input names, ignoring case, spaces, "the" and the words design and principle; null otherwise. */
+export function namedPrinciple(input: string): DesignPrinciple | null {
+  const key = normaliseAnswer(input)
+    .replace(/\b(the|design|principles?)\b/g, '')
+    .replace(/[\s_-]+/g, '');
+  return DESIGN_PRINCIPLES.find((p) => p.replace(/\s+/g, '') === key) ?? null;
+}
 
 export function whichItem(spec: UxSpec, difficulty: Difficulty): QuizItem {
   const screen = uxScreen(spec);
-  const answer = CHARACTERISTICS.indexOf(CHARACTERISTIC_OF[spec.weakness]);
-  const expected = `${OPTION_LETTERS[answer]}. ${CHARACTERISTIC_OPTIONS[answer]}`;
+  const values = whichValues(spec, difficulty);
+  const options = values.map(valueLabel);
+  const answer = values.indexOf(CHARACTERISTIC_OF[spec.weakness]);
+  const letters = OPTION_LETTERS.slice(0, options.length);
+  const expected = `${letters[answer]}. ${options[answer]}`;
+  const hint = `Type a letter from A to ${letters[letters.length - 1]}, or the characteristic's name.`;
   const why = explanation(spec.weakness, screen.facts);
   return {
     id: 'gen-ux-which',
     kk: UX_KK,
     instance: instanceOf('which', spec, difficulty),
-    chips: [...CHARACTERISTICS],
+    chips: [...values],
     prompt: [
       ...setting(screen),
       { kind: 'text', text: 'This design has one clear weakness. Which user experience characteristic is weakest?', tone: 'accent' },
-      { kind: 'choices', options: CHARACTERISTIC_OPTIONS, labels: 'letters' },
-      { kind: 'text', text: WHICH_HINT, tone: 'muted' },
+      { kind: 'choices', options, labels: 'letters' },
+      { kind: 'text', text: hint, tone: 'muted' },
     ],
     check(input) {
-      const chosen = parseOption(input, CHARACTERISTIC_OPTIONS);
-      if (chosen === null) return { correct: false, expected, reason: WHICH_HINT, counted: false };
+      const chosen = parseOption(input, options);
+      if (chosen === null) {
+        // A principle that isn't offered is answered with the lists, but not marked.
+        const principle = namedPrinciple(input);
+        const reason = principle ? `${principleNot(principle)} Choose one of the options.` : hint;
+        return { correct: false, expected, reason, counted: false };
+      }
       if (chosen === answer) return { correct: true, expected, reason: why };
-      return { correct: false, expected, reason: `${whyNot(CHARACTERISTICS[chosen], spec.weakness, screen.facts)} ${why}` };
+      const picked = values[chosen];
+      if (isTrap(picked)) return { correct: false, expected, reason: `${principleNot(picked)} ${why}` };
+      return { correct: false, expected, reason: `${whyNot(picked, spec.weakness, screen.facts)} ${why}` };
     },
   };
 }

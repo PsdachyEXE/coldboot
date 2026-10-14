@@ -8,6 +8,7 @@ import type { TerminalBlock } from '../../terminal/blocks';
 import type { Difficulty, QuizItem } from '../types';
 import { formatDate, parseDate } from './fields';
 import game from './index';
+import { VALIDATE_KK, VALIDATE_MAN } from './meta';
 import {
   BATCH_SIZE,
   boundaryItem,
@@ -51,11 +52,11 @@ function readSpec(item: QuizItem): Printed {
   const [, rest] = block.text.split(': ');
   const [need, what, bounds] = rest.replace(/\.$/, '').split(', ');
   const required = need === 'required';
-  if (what === 'whole number') {
+  if (what === 'integer') {
     const [lo, hi] = bounds.split(' to ').map(Number);
     return { required, kind: 'whole', places: 0, lo, hi };
   }
-  if (what.startsWith('number to ')) {
+  if (what.startsWith('floating point to ')) {
     const [lo, hi] = bounds.split(' to ').map(Number);
     return { required, kind: 'decimal', places: what.includes('one') ? 1 : 2, lo, hi };
   }
@@ -63,6 +64,7 @@ function readSpec(item: QuizItem): Printed {
     const [lo, hi] = bounds.split(' to ').map((d) => toDay(d)!);
     return { required, kind: 'date', places: 0, lo, hi };
   }
+  expect(what).toBe('string');
   const exactly = /^exactly (\d+) characters long$/.exec(bounds);
   if (exactly) return { required, kind: 'text', places: 0, lo: Number(exactly[1]), hi: Number(exactly[1]) };
   const m = /^(\d+) to (\d+) characters long$/.exec(bounds)!;
@@ -202,8 +204,62 @@ describe('validate answers and rounds', () => {
     expect(parseVerdict('the existence check')).toBe('existence');
     expect(parseVerdict('t')).toBe('type');
     expect(parseVerdict('Valid.')).toBe('valid');
-    expect(parseVerdict('presence')).toBeNull();
+    // TERMS: existence or presence checking.
+    expect(parseVerdict('presence')).toBe('existence');
+    expect(parseVerdict('presence check')).toBe('existence');
+    // The study design's own names: existence checking, type checking, range checking.
+    expect(parseVerdict('existence checking')).toBe('existence');
+    expect(parseVerdict('Type checking')).toBe('type');
+    expect(parseVerdict('range checking')).toBe('range');
+    expect(parseVerdict('presence checking')).toBe('existence');
+    expect(parseVerdict('length')).toBeNull();
     expect(parseVerdict('type range')).toBeNull();
+  });
+
+  it("names each field's data type with the study design's names", () => {
+    const seen = new Set<string>();
+    for (const level of LEVELS) {
+      for (const seed of SEEDS.slice(0, 200)) {
+        const item = checkItem(seed, 0, level);
+        const spec = item.prompt.find((b): b is Extract<TerminalBlock, { kind: 'pre' }> => b.kind === 'pre')!.text;
+        const type = spec.split(': ')[1].split(', ')[1];
+        seen.add(type.replace(/ to (one|two) decimal places?$/, ''));
+        expect(spec).not.toMatch(/whole number|\bnumber to\b|\btext\b|postcode|phone/i);
+      }
+    }
+    expect([...seen].sort()).toEqual(['date written DD/MM/YYYY', 'floating point', 'integer', 'string']);
+  });
+
+  it('explains type failures with the data type, and accepts presence for existence', () => {
+    let seed = 1;
+    const typeFail = (s: number) => {
+      const { spec, inputs } = fieldAndBatch(s, 'normal');
+      return inputs.findIndex((x) => x !== '' && spec.kind === 'whole' && !/^\d+$/.test(x));
+    };
+    while (typeFail(seed) < 0) seed++;
+    const item = checkItem(seed, typeFail(seed), 'normal');
+    const r = item.check('type');
+    expect(r.correct).toBe(true);
+    expect(r.reason).toMatch(/isn't an integer \(a whole number\), so the type check rejects it\.$/);
+    seed = 1;
+    const blank = (s: number) => {
+      const { spec, inputs } = fieldAndBatch(s, 'easy');
+      return spec.required ? inputs.indexOf('') : -1;
+    };
+    while (blank(seed) < 0) seed++;
+    expect(checkItem(seed, blank(seed), 'easy').check('presence check').correct).toBe(true);
+  });
+
+  it('describes validation as TERMS does: three techniques, reasonableness and completeness, not accuracy', () => {
+    expect(VALIDATE_MAN).toContain('existence checking, type checking and range checking');
+    expect(VALIDATE_MAN).toContain('existence (also called presence)');
+    expect(VALIDATE_MAN).toMatch(/reasonable and complete\. It can't tell whether data is accurate/);
+    expect(VALIDATE_MAN).toContain('Checking accuracy is verification.');
+    expect(VALIDATE_MAN).toContain('"Age in years: required, integer, 16 to 120."');
+    // Date/time is a numeric type in the study design, so dates are never called text.
+    expect(VALIDATE_MAN).not.toMatch(/whole number|dates? (written )?as text|\btext\b/i);
+    expect(VALIDATE_MAN).toContain('normal adds dates, typed as day/month/year,');
+    expect(VALIDATE_KK).toEqual(['U3O1-KK10', 'U4O1-KK05', 'U3O1-KK14', 'U4O1-KK06']);
   });
 
   it('plans two fields of four inputs and a boundary question each', () => {

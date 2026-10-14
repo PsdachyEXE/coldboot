@@ -9,7 +9,7 @@ import { choiceItem, whichItem } from '../concepts';
 import { childSeed, mulberry32, pick, randInt, sample, shuffle, type Rng } from '../prng';
 import type { Difficulty, QuizItem } from '../types';
 import { lomutoPartition, selectionComparisons, selectionSortPasses } from './algorithms';
-import { SORT_ANSWERS, SORT_CHOICE, SORT_WHICH } from './concepts';
+import { SORT_ANSWERS, SORT_CHOICE, SORT_CORE, SORT_WHICH } from './concepts';
 import { SORT_KK } from './meta';
 
 export const SORT_KINDS = ['selection', 'partition', 'sublists', 'concept', 'count'] as const;
@@ -366,8 +366,9 @@ const ROUND_UNITS: readonly Unit[] = ['selection', 'selection', 'selection', 'qu
 
 /**
  * A round of `count` items: three selection passes, two quick sort pairs (the partition, then the
- * sub-lists of the same array), two concepts and one counting question, in a seeded order.
- * Concepts never repeat within a round.
+ * sub-lists of the same array), two concepts and one counting question, in a seeded order. The
+ * first concept is always one on VCAA's comparison of the two sorts (SORT_CORE), and concepts
+ * never repeat within a round.
  */
 export function planSortRound(seed: number, count = 10): SortSpec[] {
   const rng = mulberry32(childSeed(seed, 'plan'));
@@ -375,13 +376,16 @@ export function planSortRound(seed: number, count = 10): SortSpec[] {
   const usedConcepts = new Set<string>();
   for (let cycle = 0; specs.length < count; cycle++) {
     const units = shuffle(rng, ROUND_UNITS);
+    let concepts = 0;
     units.forEach((unit, u) => {
       const unitSeed = childSeed(seed, `${cycle}:${u}`);
       if (unit === 'quick') {
         specs.push({ kind: 'partition', seed: unitSeed }, { kind: 'sublists', seed: unitSeed });
       } else if (unit === 'concept') {
+        const core = concepts++ === 0;
+        const fits = (id: string) => !usedConcepts.has(id) && (!core || SORT_CORE.has(id));
         let s = unitSeed;
-        for (let attempt = 1; attempt < 50 && usedConcepts.has(conceptId(s)); attempt++) s = childSeed(unitSeed, attempt);
+        for (let attempt = 1; attempt < 200 && !fits(conceptId(s)); attempt++) s = childSeed(unitSeed, attempt);
         usedConcepts.add(conceptId(s));
         specs.push({ kind: 'concept', seed: s });
       } else {

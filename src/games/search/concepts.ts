@@ -1,7 +1,10 @@
 /**
- * Search scenarios and concept questions, written by hand. Binary search needs values sorted by
- * the key being searched and makes at most floor(log2 n) + 1 inspections; linear search works on
- * any order and makes up to n comparisons.
+ * Search scenarios and concept questions, written by hand. Following VCAA's teaching advice for
+ * U3O1-KK12, each scenario is decided by the solution requirements (how much data, how often it is
+ * searched), how each algorithm works, and whether the data is sorted. Binary search needs values
+ * sorted by the key being searched and makes at most floor(log2 n) + 1 inspections; linear search
+ * works on any order and makes up to n comparisons. Big-O notation is textbook extension: the study
+ * design and VCAA's advice don't use it.
  */
 import type { ChoiceConcept, NamedAnswer, WhichConcept } from '../concepts';
 
@@ -59,7 +62,7 @@ export const SEARCH_WHICH: readonly WhichConcept<SearchName>[] = [
     id: 'middle-first',
     prompt: 'Which search inspects the middle value first and then discards half of the values left?',
     answer: 'binary',
-    reason: 'Each step of binary search inspects the middle of the range and keeps only the half that could hold the target.',
+    reason: 'Each step of binary search inspects the middle of the range and, because the values are sorted, keeps only the half that could hold the target.',
   },
   {
     id: 'grows-linearly',
@@ -71,7 +74,7 @@ export const SEARCH_WHICH: readonly WhichConcept<SearchName>[] = [
     id: 'doubling-one-more',
     prompt: 'Which search needs only one more inspection in the worst case when a sorted list doubles in size?',
     answer: 'binary',
-    reason: 'The first inspection of the doubled list halves it back to the original size.',
+    reason: 'The first inspection of the doubled sorted list halves it back to the original size.',
   },
 ];
 
@@ -96,6 +99,18 @@ export const SEARCH_CHOICE: readonly ChoiceConcept[] = [
     options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'],
     answer: 2,
     reason: 'When the target is last or missing, linear search compares every one of the n values.',
+  },
+  {
+    id: 'justify-binary',
+    prompt: 'Which facts justify building a module around binary search rather than linear search?',
+    options: [
+      'The data is unsorted, and the list is small',
+      'The data is stored in a CSV file with an even number of values',
+      'The data is sorted, and the module must search a large list quickly and often',
+      'The data is unsorted, and the target is usually near the start',
+    ],
+    answer: 2,
+    reason: 'Binary search only works on data sorted by the value searched for, and it pays off when the requirements call for many fast searches of a large list. A small list, or unsorted data searched only now and then, suits linear search.',
   },
   {
     id: 'linear-best',

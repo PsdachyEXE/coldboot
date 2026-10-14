@@ -3,6 +3,13 @@
  * short pseudocode listing or as a plain-language description, together with its classification,
  * a one-line reason and the debugging technique that suits it best.
  *
+ * Classifications follow the TERMS definitions: a syntax error breaks the language's rules so the
+ * program can't be compiled and run; a logic error gives incorrect output; a runtime error arises
+ * while the program runs and crashes it unless handled (overflow, index out of range, type
+ * mismatch, divide by zero). No case turns on an undefined variable, which languages treat
+ * differently. The plain overflow and type mismatch cases include the 2025 examination's framings:
+ * running out of memory, and text stored in an array of integers.
+ *
  * Listings are checked by the deskcheck interpreter (the tests run every seed): a syntax case
  * must fail to parse, a runtime case must stop with the named runtime error on the line the story
  * gives, and a logic case must run without error and display something different from its
@@ -54,15 +61,16 @@ export const RUNTIME_LABELS: Record<RuntimeKind, string> = {
   divide: 'divide by zero',
 };
 
+/** The study design's names: breakpoints and debugging statements (U3O1-KK14), and commenting out code (U4O1-KK06). */
 export const TECHNIQUE_LABELS: Record<Technique, string> = {
   breakpoint: 'breakpoint',
-  output: 'debugging output statement',
+  output: 'debugging statement',
   comment: 'commenting out code',
 };
 
 const TECHNIQUE_WHY: Record<Technique, string> = {
   breakpoint: 'A breakpoint pauses the program at a chosen line, so you can inspect the variables at that moment and step on line by line.',
-  output: 'Debugging output statements display values while the program keeps running, giving a record of how they change on every pass.',
+  output: 'Debugging statements display values while the program keeps running, giving a record of how they change on every pass.',
   comment: 'Commenting out code stops those lines running without deleting them, so you can see whether the problem goes away without them.',
 };
 
@@ -99,11 +107,14 @@ function range(a: number, b: number): number[] {
 // Syntax errors
 // ---------------------------------------------------------------------------
 
+/**
+ * Only keywords that close a block are misspelt, so the block is left open whatever the misspelt
+ * word is taken to be. A misspelt DISPLAY could be read as a call to an undefined name, which
+ * languages classify differently.
+ */
 const MISSPELT: Record<string, readonly string[]> = {
   ENDFOR: ['ENDFRO', 'ENFOR', 'ENDFR'],
   ENDIF: ['ENDFI', 'ENIDF', 'EDNIF'],
-  DISPLAY: ['DISPALY', 'DSIPLAY', 'DIPSLAY'],
-  ENDWHILE: ['ENDWHIEL', 'ENDWILE'],
 };
 
 /** A small correct listing, returned line by line so one line can be broken. */
@@ -134,14 +145,14 @@ function misspeltKeyword(rng: Rng, d: Difficulty): Scenario {
   const { i, word } = pick(rng, candidates);
   lines[i] = lines[i].replace(word, pick(rng, MISSPELT[word]));
   const who = pick(rng, PEOPLE);
-  const where = d === 'hard' ? '' : ` The translator reports a problem on line ${i + 1}.`;
+  const where = d === 'hard' ? '' : ` The compiler reports a problem on line ${i + 1}.`;
   return {
     template: 'misspelt-keyword',
     classification: { type: 'syntax' },
     story: `${who}'s program won't start at all.${where}`,
     code: { source: lines.join('\n'), indexBase: base },
-    why: `${word} is misspelt on line ${i + 1}, so the program breaks the rules of the language and can't be translated: a syntax error.`,
-    technique: technique('comment', 'you want to find which part of a long program stops it from being translated, by leaving sections out one at a time'),
+    why: `${word} is misspelt on line ${i + 1}, so the ${word === 'ENDIF' ? 'IF' : 'FOR'} block is never closed. The program breaks the rules of the language and can't be compiled and run: a syntax error.`,
+    technique: technique('comment', 'you want to find which part of a long program stops it from being compiled, by leaving sections out one at a time'),
   };
 }
 
@@ -155,10 +166,10 @@ function missingEnd(rng: Rng): Scenario {
   return {
     template: 'missing-end',
     classification: { type: 'syntax' },
-    story: `${who}'s program won't start. The translator says a block was never closed.`,
+    story: `${who}'s program won't start. The compiler says a block was never closed.`,
     code: { source: lines.join('\n'), indexBase: base },
-    why: `The ${target === 'ENDIF' ? 'IF' : 'FOR'} block has no ${target}, so the structure breaks the rules of the language: a syntax error.`,
-    technique: technique('comment', 'you want to find which block is left open by temporarily leaving blocks out until the program is translated again'),
+    why: `The ${target === 'ENDIF' ? 'IF' : 'FOR'} block has no ${target}, so the structure breaks the rules of the language and the program can't be compiled and run: a syntax error.`,
+    technique: technique('comment', 'you want to find which block is left open by temporarily leaving blocks out until the program compiles again'),
   };
 }
 
@@ -176,7 +187,7 @@ function unclosedString(rng: Rng, d: Difficulty): Scenario {
     classification: { type: 'syntax' },
     story: `${who}'s program won't run.${d === 'hard' ? '' : ` The editor highlights line ${line}.`}`,
     code: { source: L.code },
-    why: `The string on line ${line} opens with a quotation mark but never closes, which breaks the rules of the language: a syntax error.`,
+    why: `The string on line ${line} opens with a quotation mark but is missing the one that closes it. A missing symbol breaks the rules of the language, so the program can't be compiled and run: a syntax error.`,
     technique: technique('comment', 'you want to confirm the rest of the program runs by stopping the highlighted line from running, without deleting it'),
   };
 }
@@ -195,25 +206,25 @@ function unbalancedBracket(rng: Rng): Scenario {
   return {
     template: 'unbalanced-bracket',
     classification: { type: 'syntax' },
-    story: `${who}'s program won't start. The translator reports that line ${line} ends unexpectedly.`,
+    story: `${who}'s program won't start. The compiler reports that line ${line} ends unexpectedly.`,
     code: { source: L.code },
-    why: `Line ${line} opens a bracket that is never closed, so the statement isn't valid in the language: a syntax error.`,
-    technique: technique('comment', 'you want to check whether the rest of the program is translated once line ' + line + ' is stopped from running'),
+    why: `Line ${line} opens a bracket that is never closed. A missing symbol makes the statement invalid in the language, so the program can't be compiled and run: a syntax error.`,
+    technique: technique('comment', 'you want to check whether the rest of the program compiles once line ' + line + ' is stopped from running'),
   };
 }
 
 const PLAIN_SYNTAX: readonly ((who: string, n: number) => Pick<Scenario, 'story' | 'why'>)[] = [
   (who, n) => ({
-    story: `${who} typed retrun instead of return on line ${n}. The editor underlines it and the program won't run.`,
-    why: 'A misspelt keyword breaks the rules of the language, so the program can’t be translated: a syntax error.',
+    story: `${who} left out the closing quotation mark of a message on line ${n}. The editor highlights the line and the program won't run.`,
+    why: 'A missing symbol breaks the rules of the language, so the program can’t be compiled and run: a syntax error.',
   }),
   (who, n) => ({
     story: `${who}'s program won't start because a function call on line ${n} is missing its closing bracket.`,
-    why: 'A missing bracket makes the statement invalid in the language: a syntax error, found before the program runs.',
+    why: 'A missing bracket makes the statement invalid in the language, so the program can’t be compiled and run: a syntax error.',
   }),
   (who, n) => ({
-    story: `The translator stops at line ${n} of ${who}'s program because an IF statement has no matching ENDIF.`,
-    why: 'An unclosed block breaks the structure the language requires, so it is a syntax error.',
+    story: `The compiler stops at line ${n} of ${who}'s program because an IF statement has no matching ENDIF.`,
+    why: 'An unclosed block breaks the structure the language requires, so the program can’t be compiled and run: a syntax error.',
   }),
 ];
 
@@ -223,12 +234,12 @@ function plainSyntax(rng: Rng): Scenario {
     template: `plain-syntax-${PLAIN_SYNTAX.indexOf(make) + 1}`,
     classification: { type: 'syntax' },
     ...make(pick(rng, PEOPLE), randInt(rng, 5, 40)),
-    technique: technique('comment', 'you want to narrow down which section stops the program from being translated by temporarily switching sections off'),
+    technique: technique('comment', 'you want to narrow down which section stops the program from being compiled by temporarily switching sections off'),
   };
 }
 
 // ---------------------------------------------------------------------------
-// Logic errors (the listing runs, but gives the wrong result)
+// Logic errors (the listing runs, but gives incorrect output)
 // ---------------------------------------------------------------------------
 
 function wrongComparison(rng: Rng): Scenario {
@@ -247,14 +258,14 @@ function wrongComparison(rng: Rng): Scenario {
     return L.code;
   };
   const source = build('>');
-  const fixed = build('≥');
+  const fixed = build('>=');
   return {
     template: 'wrong-comparison',
     classification: { type: 'logic' },
     story: `A mark of ${pass} or more is a pass. The program runs without an error, but for a mark of exactly ${pass} it displays ${outputOf(source)} instead of ${outputOf(fixed)}.`,
     code: { source },
     fixed,
-    why: `The program runs but gives the wrong result, so it is a logic error: > leaves out a mark of exactly ${pass}, where ≥ was needed.`,
+    why: `The program runs but gives incorrect output, so it is a logic error: > leaves out a mark of exactly ${pass}, where >= was needed.`,
     technique: technique('breakpoint', `you want to pause the program at line ${test} when mark is ${pass} and check which branch it takes next`),
   };
 }
@@ -283,7 +294,7 @@ function shortLoop(rng: Rng): Scenario {
     story: `The program should display the total of all ${n} scores, ${outputOf(fixed, base)}. It runs without an error but displays ${outputOf(source, base)}.`,
     code: { source, indexBase: base },
     fixed,
-    why: `The loop stops one index early, so the last score is never added. The program runs but gives the wrong answer: a logic error.`,
+    why: `The loop stops one index early, so the last score is never added. The program runs but gives incorrect output: a logic error.`,
     technique: technique('output', 'you want i and total printed on every pass while the program runs, to compare with your desk check'),
   };
 }
@@ -315,7 +326,7 @@ function wrongStart(rng: Rng): Scenario {
     story: `The program should display the lowest temperature. It runs without an error, but it displays ${outputOf(source, base)} even though the lowest temperature is ${outputOf(fixed, base)}.`,
     code: { source, indexBase: base },
     fixed,
-    why: 'lowest starts at 0, which is below every temperature, so no temperature ever replaces it. The program runs but gives the wrong answer: a logic error.',
+    why: 'lowest starts at 0, which is below every temperature, so no temperature ever replaces it. The program runs but gives incorrect output: a logic error.',
     technique: technique('breakpoint', `you want to pause at line ${test} on the first pass and inspect temps[i] and lowest`),
   };
 }
@@ -342,7 +353,7 @@ function wrongOperator(rng: Rng): Scenario {
     story: `The program should display the cost of ${quantity} items at $${price} each, which is $${outputOf(fixed)}. It runs without an error but displays ${outputOf(source)}.`,
     code: { source },
     fixed,
-    why: `Line ${calc} adds where it should multiply. The program runs but calculates the wrong value: a logic error.`,
+    why: `Line ${calc} adds where it should multiply. The program runs but calculates an incorrect value: a logic error.`,
     technique: technique('output', `you want to display cost straight after line ${calc} while the program keeps running, to see what it holds`),
   };
 }
@@ -379,7 +390,7 @@ function countEverything(rng: Rng): Scenario {
     story: `The program should count the scores above ${t}, which is ${outputOf(fixed, base)}. It runs without an error, but it displays ${outputOf(source, base)}, the number of scores.`,
     code: { source, indexBase: base },
     fixed,
-    why: 'count goes up outside the IF, so every score is counted. The program runs but gives the wrong answer: a logic error.',
+    why: 'count goes up outside the IF, so every score is counted. The program runs but gives incorrect output: a logic error.',
     technique: technique('output', 'you want a line printed on every pass showing i, scores[i] and count while the program runs'),
   };
 }
@@ -387,15 +398,15 @@ function countEverything(rng: Rng): Scenario {
 const PLAIN_LOGIC: readonly ((who: string) => Pick<Scenario, 'story' | 'why'>)[] = [
   (who) => ({
     story: `${who}'s shopping program adds 10% GST to prices that already include GST, so customers are overcharged. It never crashes or shows an error.`,
-    why: 'The program runs to the end but calculates the wrong amount: a logic error.',
+    why: 'The program runs to the end but calculates an incorrect amount: a logic error.',
   }),
   (who) => ({
     story: `${who}'s program should list names in alphabetical order, but it lists them from Z to A. No error message appears.`,
-    why: 'The program runs but the result is wrong, so it is a logic error in the comparison.',
+    why: 'The program runs but gives incorrect output, so it is a logic error in the comparison.',
   }),
   (who) => ({
     story: `${who}'s quiz program gives a mark for every answer, including wrong ones. It runs without any error message.`,
-    why: 'Nothing stops the program; it just makes the wrong decision, so it is a logic error.',
+    why: 'Nothing stops the program, but a condition decides the wrong way and the output is incorrect, so it is a logic error.',
   }),
 ];
 
@@ -527,7 +538,9 @@ function overflow(rng: Rng): Scenario {
   };
 }
 
-const PLAIN_RUNTIME: readonly ((who: string, rng: Rng) => Pick<Scenario, 'story' | 'why' | 'classification'>)[] = [
+type PlainRuntime = Pick<Scenario, 'story' | 'why' | 'classification'> & { technique?: Scenario['technique'] };
+
+const PLAIN_RUNTIME: readonly ((who: string, rng: Rng) => PlainRuntime)[] = [
   (who) => ({
     classification: { type: 'runtime', kind: 'index' },
     story: `${who}'s program stores 12 monthly totals in an array indexed 0 to 11. It crashes when a user asks for the total at index 12.`,
@@ -551,8 +564,23 @@ const PLAIN_RUNTIME: readonly ((who: string, rng: Rng) => Pick<Scenario, 'story'
         ? `${who}'s game keeps the score in a 16-bit integer, which holds values up to 32,767. After a long session the score needs to go higher and the game crashes.`
         : `${who}'s counter is stored in a single byte, which holds values up to 255. It crashes when the count reaches 256.`,
       why: 'The value needs more than its data type can hold: a runtime error, overflow.',
+      technique: long
+        ? technique('output', 'you want the score displayed after every turn while the game runs, to see when it gets too large')
+        : technique('output', 'you want the count displayed each time it goes up while the program runs, to see when it gets too large'),
     };
   },
+  (who) => ({
+    classification: { type: 'runtime', kind: 'overflow' },
+    story: `${who}'s photo app loads every photo in an album into memory at full size. With a very large album there is no memory left for it, and the app crashes.`,
+    why: 'The program needs more memory than is available, so it crashes while running: a runtime error, overflow.',
+    technique: technique('output', 'you want the number of photos loaded displayed as the app runs, to see how far it gets before memory runs out'),
+  }),
+  (who) => ({
+    classification: { type: 'runtime', kind: 'type' },
+    story: `${who}'s program keeps race times in an array of integers. It crashes when it tries to store the text DNF in the array for a runner who didn't finish.`,
+    why: 'Text can’t be stored in an array of integers: a runtime error, type mismatch.',
+    technique: technique('breakpoint', 'you want to pause just before the value is stored and inspect what it holds'),
+  }),
 ];
 
 function plainRuntime(rng: Rng, kind?: RuntimeKind): Scenario {
@@ -563,9 +591,10 @@ function plainRuntime(rng: Rng, kind?: RuntimeKind): Scenario {
     index: technique('breakpoint', 'you want to pause the program just before the crash and inspect the index it is about to use'),
     divide: technique('comment', 'you want to confirm the crash comes from the division by running the program without that line'),
     type: technique('breakpoint', 'you want to pause just before the conversion and inspect exactly what text it received'),
-    overflow: technique('output', 'you want the score displayed after every turn while the game runs, to see when it gets too large'),
+    overflow: technique('output', 'you want the value displayed each time it changes while the program runs, to see when it gets too large'),
   };
-  return { template: `plain-runtime-${i + 1}`, ...made, technique: need[made.classification.kind!] };
+  const { technique: own, ...rest } = made;
+  return { template: `plain-runtime-${i + 1}`, ...rest, technique: own ?? need[made.classification.kind!] };
 }
 
 // ---------------------------------------------------------------------------

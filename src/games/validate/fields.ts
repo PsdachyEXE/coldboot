@@ -1,8 +1,10 @@
 /**
- * Field specifications and the validator for `validate`. A field has one data kind (whole number,
- * decimal, date written as text, or text with a length limit), is required or optional, and has a
- * range. Checks run in a fixed order, stated in every question: existence, then type, then range.
- * The first check that fails rejects the input; an input that passes all three is valid.
+ * Field specifications and the validator for `validate`. A field has one data type, named as the
+ * study design names it (integer, floating point, a date typed as DD/MM/YYYY, or a string with a
+ * length limit), is required or optional, and has a range. Checks run in a fixed order, stated in every
+ * question: existence, then type, then range, the three validation techniques of U3O1-KK10 and
+ * U4O1-KK05 as TERMS defines them. The first check that fails rejects the input; an input that
+ * passes all three is valid, which means reasonable and complete, not necessarily accurate.
  *
  * Every expected answer comes from `firstFailedCheck`, never from how an input was made. Inputs
  * are generated so that exactly one reading is possible: whole-number fields never see negative
@@ -67,19 +69,19 @@ export function formatBound(spec: FieldSpec, v: number): string {
   return String(v);
 }
 
-/** "Age in years: required, whole number, 16 to 120." */
+/** "Age in years: required, integer, 16 to 120." */
 export function specText(spec: FieldSpec): string {
   const need = spec.required ? 'required' : 'optional';
   const range = `${formatBound(spec, spec.min)} to ${formatBound(spec, spec.max)}`;
   switch (spec.kind) {
     case 'whole':
-      return `${spec.label}: ${need}, whole number, ${range}.`;
+      return `${spec.label}: ${need}, integer, ${range}.`;
     case 'decimal':
-      return `${spec.label}: ${need}, number to ${spec.places === 1 ? 'one decimal place' : 'two decimal places'}, ${range}.`;
+      return `${spec.label}: ${need}, floating point to ${spec.places === 1 ? 'one decimal place' : 'two decimal places'}, ${range}.`;
     case 'date':
       return `${spec.label}: ${need}, date written DD/MM/YYYY, ${range}.`;
     case 'text':
-      return `${spec.label}: ${need}, text, ${spec.min === spec.max ? `exactly ${spec.min}` : range} characters long.`;
+      return `${spec.label}: ${need}, string, ${spec.min === spec.max ? `exactly ${spec.min}` : range} characters long.`;
   }
 }
 
@@ -114,7 +116,7 @@ export function explain(spec: FieldSpec, input: string): string {
     case 'existence':
       return 'Nothing was entered and the field is required, so the existence check rejects it.';
     case 'type': {
-      const what = spec.kind === 'whole' ? 'a whole number' : spec.kind === 'decimal' ? 'a number' : 'a real date written DD/MM/YYYY';
+      const what = spec.kind === 'whole' ? 'an integer (a whole number)' : spec.kind === 'decimal' ? 'a floating point number' : 'a real date written DD/MM/YYYY';
       return `${shown} isn't ${what}, so the type check rejects it.`;
     }
     case 'range': {
@@ -137,8 +139,9 @@ const WHOLE: readonly Maker[] = [
   (rng) => ({ kind: 'whole', label: 'Age in years', required: true, min: randInt(rng, 12, 18), max: pick(rng, [99, 110, 120]), places: 0 }),
   (rng) => ({ kind: 'whole', label: 'Tickets in one booking', required: true, min: 1, max: randInt(rng, 6, 12), places: 0 }),
   () => ({ kind: 'whole', label: 'Year level', required: true, min: 7, max: 12, places: 0 }),
-  () => ({ kind: 'whole', label: 'Delivery postcode', required: true, min: 3000, max: 3999, places: 0 }),
-  () => ({ kind: 'whole', label: 'Phone extension', required: false, min: 100, max: 999, places: 0 }),
+  // Digits never used in arithmetic, such as postcodes and phone numbers, are strings, so they aren't here.
+  () => ({ kind: 'whole', label: 'Year of manufacture', required: true, min: 1950, max: 2026, places: 0 }),
+  () => ({ kind: 'whole', label: 'Height in centimetres', required: false, min: 100, max: 230, places: 0 }),
   (rng) => ({ kind: 'whole', label: 'Number of guests', required: false, min: 1, max: randInt(rng, 4, 10), places: 0 }),
   (rng) => ({ kind: 'whole', label: 'Quantity ordered', required: true, min: 1, max: pick(rng, [20, 50, 99]), places: 0 }),
 ];

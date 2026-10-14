@@ -13,15 +13,49 @@ import { typedAnswer, wrongAnswer } from '../daily-game/testing';
 import { mulberry32 } from '../prng';
 import type { Difficulty, GameContext, QuizItem } from '../types';
 import game from './index';
-import { CHARACTERISTIC_OPTIONS, fromUxInstance, generateUxItem, planUxRound, REASON_COUNT, reasonChoices, uxItem, uxScreen, whichItem, whyItem, type UxSpec } from './items';
+import {
+  CHARACTERISTIC_OPTIONS,
+  fromUxInstance,
+  generateUxItem,
+  namedPrinciple,
+  planUxRound,
+  REASON_COUNT,
+  reasonChoices,
+  uxItem,
+  uxScreen,
+  whichItem,
+  whichValues,
+  whyItem,
+  type UxSpec,
+} from './items';
 import { UX_MAN } from './meta';
 import { buildScreen, TEMPLATES } from './templates';
-import { CHARACTERISTIC_OF, CHARACTERISTICS, explanation, fixText, reasonText, rebuttal, WEAKNESSES, whyNot, type UxRole, type Weakness } from './weakness';
+import {
+  CHARACTERISTIC_OF,
+  CHARACTERISTICS,
+  DESIGN_PRINCIPLES,
+  explanation,
+  fixText,
+  reasonText,
+  rebuttal,
+  TEMPTING_TRAPS,
+  WEAKNESSES,
+  whyNot,
+  type UxRole,
+  type Weakness,
+} from './weakness';
 
 const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 17);
 const LEVELS: Difficulty[] = ['easy', 'normal', 'hard'];
 
 type El = Mockup['elements'][number];
+
+/** The two lists, written out here apart from the game: U3O2-KK15's characteristics and U3O2-KK16's principles. */
+const UX_LIST = ['affordance', 'interoperability', 'security', 'usability'];
+const PRINCIPLE_LIST = ['alignment', 'balance', 'contrast', 'space', 'text formatting', 'usability', 'navigation'];
+
+/** Words often taught as design principles that are on neither list. */
+const NOT_ON_EITHER_LIST = /\b(consistency|consistent|proximity|repetition|white space|hierarchy|portability|authentication is a)\b/i;
 
 /** Standard formats other programs read. Written out here, apart from the game. */
 const OPEN_FORMAT = /\b(csv|xml|json|pdf)\b|\.ics\b/i;
@@ -216,17 +250,80 @@ describe('ux items', () => {
 
   it('asks which characteristic, by letter or by name, and explains the answer', () => {
     const spec: UxSpec = { template: 'library', weakness: 'secret-shown', seed: 5 };
-    const item = whichItem(spec, 'normal');
+    const item = whichItem(spec, 'easy');
     expect(choicesOf(item)).toEqual(['Affordance', 'Interoperability', 'Security', 'Usability']);
     expect(item.chips).toEqual(['affordance', 'interoperability', 'security', 'usability']);
     for (const input of ['c', 'C', '3', 'security', ' Security ', 'C. Security']) expect(item.check(input).correct, input).toBe(true);
     const right = item.check('security');
     expect(right.expected).toBe('C. Security');
-    expect(right.reason).toMatch(/^Security is about protecting users' data and accounts/);
+    expect(right.reason).toMatch(/^Security covers authentication, which checks who a user is, and data protection/);
+    expect(right.reason).toMatch(/defeats authentication\.$/);
     const wrong = item.check('usability');
     expect(wrong.correct).toBe(false);
     expect(wrong.reason).toMatch(/^Showing the password doesn't make the screen harder to use/);
     expect(item.check('design').counted).toBe(false);
+    // A payment card shown in full is a data protection problem.
+    const card = whichItem({ template: 'court', weakness: 'full-card', seed: 5 }, 'easy').check('security');
+    expect(card.reason).toMatch(/payment data isn't protected\.$/);
+  });
+
+  it('offers one design principle as a trap from normal, never as the answer', () => {
+    const positions = new Set<number>();
+    const traps = new Set<string>();
+    for (const difficulty of LEVELS) {
+      for (const seed of SEEDS.slice(0, 200)) {
+        for (const t of TEMPLATES) {
+          const weakness = t.weaknesses[seed % t.weaknesses.length];
+          const spec: UxSpec = { template: t.id, weakness, seed };
+          const values = whichValues(spec, difficulty);
+          const item = whichItem(spec, difficulty);
+          const options = choicesOf(item).map((o) => o.toLowerCase());
+          expect(options).toEqual(values);
+          expect(item.chips).toEqual(values);
+          // All four characteristics, in their usual order, every time.
+          expect(options.filter((o) => UX_LIST.includes(o))).toEqual(UX_LIST);
+          const extra = options.filter((o) => !UX_LIST.includes(o));
+          if (difficulty === 'easy') {
+            expect(extra).toEqual([]);
+            continue;
+          }
+          expect(extra, item.instance).toHaveLength(1);
+          const trap = extra[0];
+          expect(PRINCIPLE_LIST).toContain(trap);
+          expect(TEMPTING_TRAPS[weakness]).toContain(trap);
+          traps.add(trap);
+          const at = options.indexOf(trap);
+          positions.add(at);
+          expect(item.prompt.some((b) => b.kind === 'text' && b.text === 'Type a letter from A to E, or the characteristic\'s name.')).toBe(true);
+          // The answer is the characteristic, never the principle.
+          expect(item.check(typedAnswer(item)).expected).toMatch(new RegExp(`^[A-E]\\. ${CHARACTERISTIC_OF[weakness].replace(/^./, (c) => c.toUpperCase())}$`));
+          const fell = item.check('ABCDE'[at]);
+          expect(fell.correct).toBe(false);
+          expect(fell.counted).not.toBe(false);
+          expect(fell.reason).toMatch(new RegExp(`^${trap.replace(/^./, (c) => c.toUpperCase())} is one of the design principles, not a user experience characteristic\\. `));
+          expect(fell.reason).toContain(`The study design lists the design principles as ${PRINCIPLE_LIST.slice(0, -1).join(', ')} and navigation, and only usability is on both lists.`);
+          expect(item.check(trap).correct).toBe(false);
+        }
+      }
+    }
+    expect(positions).toEqual(new Set([0, 1, 2, 3, 4]));
+    expect([...traps].sort()).toEqual(PRINCIPLE_LIST.filter((p) => p !== 'usability').sort());
+    expect(DESIGN_PRINCIPLES).toEqual(PRINCIPLE_LIST);
+  });
+
+  it('answers a design principle that is not offered without marking it', () => {
+    const item = whichItem({ template: 'bakery', weakness: 'flat-action', seed: 9 }, 'easy');
+    for (const input of ['contrast', 'Text formatting', 'the alignment principle', 'navigation design principle']) {
+      const r = item.check(input);
+      expect(r.counted, input).toBe(false);
+      expect(r.reason, input).toMatch(/is one of the design principles, not a user experience characteristic\. .* Choose one of the options\.$/);
+    }
+    // Usability is on both lists, so it is an answer, not a trap.
+    expect(namedPrinciple('usability')).toBe('usability');
+    expect(item.check('usability').counted).not.toBe(false);
+    // A word on neither list just gets the hint.
+    expect(item.check('consistency')).toMatchObject({ counted: false, reason: "Type a letter from A to D, or the characteristic's name." });
+    expect(namedPrinciple('white space')).toBeNull();
   });
 
   it('offers reasons that are true only for this screen, three, four or five by difficulty', () => {
@@ -309,17 +406,28 @@ describe('ux items', () => {
     expect(result.reason).toMatch(/^That isn't true of this screen: /);
   });
 
-  it('keeps design principles out of every question and answer', () => {
-    const principles = /\b(alignment|contrast|consistency|consistent|balance|proximity|repetition|white space|hierarchy|design principle)/i;
+  it('keeps design principles out of the reasons, and words on neither list out of everything', () => {
     for (const seed of SEEDS) {
       for (const difficulty of LEVELS) {
         const item = generateUxItem(seed, difficulty);
-        expect(allText(item)).not.toMatch(principles);
-        expect(item.check('a').reason).not.toMatch(principles);
+        const feedback = ['a', 'b', 'c', 'd', 'e'].map((l) => item.check(l).reason).join(' ');
+        expect(allText(item)).not.toMatch(NOT_ON_EITHER_LIST);
+        expect(feedback).not.toMatch(NOT_ON_EITHER_LIST);
+        if (item.id === 'gen-ux-why') {
+          // Reasons and fixes are about the screen; the lists only come up in the which question.
+          expect(allText(item) + feedback).not.toMatch(/design principle|\b(alignment|balance|contrast|text formatting|navigation)\b/i);
+        }
       }
     }
     expect(CHARACTERISTIC_OPTIONS).toEqual(CHARACTERISTICS.map((c) => c.charAt(0).toUpperCase() + c.slice(1)));
-    expect(UX_MAN).toMatch(/design principles still has to be checked against the source/);
+    // The man page gives both lists and says which word they share.
+    expect(UX_MAN).toContain('affordance:');
+    expect(UX_MAN).toContain('security: authentication, which checks who a user is, and data protection');
+    expect(UX_MAN).toContain('alignment, balance, contrast, space, text formatting, usability and navigation. Only usability is on both lists');
+    expect(UX_MAN).not.toMatch(/checked against the source/);
+    // The trap is offered at normal and hard alike, as whichValues does.
+    expect(UX_MAN).toContain('--easy offers just the four characteristics');
+    expect(UX_MAN).toContain('Normal and --hard add a design principle to the characteristics');
   });
 
   it('plans a round of five mock-ups, each asked twice, every characteristic at least once', () => {

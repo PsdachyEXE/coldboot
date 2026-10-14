@@ -8,15 +8,17 @@ export const SORT_SUMMARY = 'Trace selection sort passes and quick sort partitio
 
 export const SORT_MAN = `sort drills the two sorting algorithms in the study design: selection sort and quick sort.
 
+The comparison to give in an answer: on each pass, selection sort finds the smallest (or largest) value still unsorted and puts that one value in its final place. Quick sort picks a pivot, splits the other values into two sub-lists either side of it, and repeats on each sub-list. Quick sort is more complex and more efficient. Every round asks about this comparison at least once.
+
 A round has 10 questions of four kinds.
 
 Selection sort: give the array after pass k. Each pass finds the smallest value in the unsorted part and swaps it into the first unsorted place, even if it is already there.
 
-Quick sort: give the array after the first partition, then the two sub-lists left to sort. The pivot is the last value. Scanning left to right, each value less than or equal to the pivot swaps into the next place on the left, then the pivot swaps into the place just after them (Lomuto partitioning).
+Quick sort: give the array after the first partition, then the two sub-lists left to sort. The study design doesn't fix how the pivot is chosen; here it is the last value. Scanning left to right, each value less than or equal to the pivot swaps into the next place on the left, then the pivot swaps into the place just after them (Lomuto partitioning).
 
 Counting: comparisons, passes and swaps. Selection sort always makes n(n - 1)/2 comparisons and at most n - 1 swaps.
 
-Concepts: efficiency, complexity, and when each sort is the better choice.
+Concepts: efficiency, complexity, and when each sort is the better choice. Big-O notation, such as O(n log n), and quick sort's worst case go beyond the study design. They appear here as extension.
 
 Type arrays as numbers separated by spaces or commas, such as 4 1 3. Type sub-lists in brackets, such as [4, 1] [9, 7], with [] for an empty one. Every question states its rules, so read it before you answer.
 
