@@ -1,8 +1,10 @@
 /**
  * `types` items: choose a data type, a data structure or a data source for a scenario. Answers are
  * typed; the feedback gives the one-line justification the exam expects, plus a note on the
- * commonest wrong choice. Each item stands alone for the daily challenge; instances
- * ("types:structure:cinema:hard") regenerate an item exactly through fromTypesInstance.
+ * commonest wrong choice. Data types must be named as the study design names them (the 2025
+ * examination report gave no marks for Bool or Float), so short forms re-prompt without counting.
+ * Each item stands alone for the daily challenge; instances ("types:structure:cinema:hard")
+ * regenerate an item exactly through fromTypesInstance.
  */
 import type { KkId } from '../../content/schema';
 import { normaliseAnswer } from '../../lib/text';
@@ -38,30 +40,32 @@ const LEVELS: Record<Difficulty, readonly Level[]> = { easy: [1, 2], normal: [1,
 
 type Option<T extends string> = { value: T; label: string; accept: readonly string[] };
 
+/** The study design's names, in its order; matching ignores case, spaces and hyphens. */
 export const TYPE_OPTIONS: readonly Option<DataType>[] = [
-  { value: 'integer', label: 'Integer', accept: ['integer'] },
-  { value: 'floating', label: 'Floating point', accept: ['floating point', 'floating point number', 'floating'] },
-  { value: 'string', label: 'String', accept: ['string'] },
-  { value: 'character', label: 'Character', accept: ['character'] },
+  { value: 'character', label: 'character', accept: ['character'] },
+  { value: 'string', label: 'string', accept: ['string'] },
+  { value: 'integer', label: 'integer', accept: ['integer'] },
+  { value: 'floating', label: 'floating point', accept: ['floating point', 'floating point number'] },
+  { value: 'datetime', label: 'date/time', accept: ['date/time', 'date / time', 'date time', 'date and time'] },
   { value: 'boolean', label: 'Boolean', accept: ['boolean'] },
 ];
 
 export const STRUCTURE_OPTIONS: readonly Option<Structure>[] = [
   {
     value: 'one-d',
-    label: 'One-dimensional array',
+    label: 'one-dimensional array',
     accept: ['one-dimensional array', 'one-dimensional', '1d array', '1d', '1 dimensional array', 'single-dimensional array', 'one-d array'],
   },
   {
     value: 'two-d',
-    label: 'Two-dimensional array',
+    label: 'two-dimensional array',
     accept: ['two-dimensional array', 'two-dimensional', '2d array', '2d', '2 dimensional array', 'two-d array'],
   },
-  { value: 'record', label: 'Record', accept: ['record', 'records'] },
+  { value: 'record', label: 'record', accept: ['record', 'records'] },
 ];
 
 export const SOURCE_OPTIONS: readonly Option<Source>[] = [
-  { value: 'plain', label: 'Plain text', accept: ['plain text', 'plain text file', 'plain', 'text file', 'text', 'txt', 'txt file'] },
+  { value: 'plain', label: 'plain text', accept: ['plain text', 'plain text file', 'plain', 'text file', 'text', 'txt', 'txt file'] },
   {
     value: 'csv',
     label: 'CSV',
@@ -77,11 +81,20 @@ function tidy(input: string): string {
     .replace(/\s+(data\s+type|type|data\s+structure|structure|data\s+source|source)$/, '');
 }
 
-/** Short or informal names for a type: not counted, with a reminder to name the type in full. */
-const TYPE_SHORTHAND = new Set(['int', 'float', 'real', 'double', 'decimal', 'str', 'char', 'chr', 'bool', 'bln', 'flt', 'text', 'number', 'numeric', 'whole number', 'decimal number', 'long', 'single', 'date', 'currency']);
+/** Short, informal or language-specific names for a type: not counted, with a reminder to name the type in full. */
+const TYPE_SHORTHAND = new Set(['int', 'float', 'floating', 'real', 'double', 'decimal', 'str', 'char', 'chr', 'bool', 'bln', 'flt', 'dtm', 'whole number', 'decimal number', 'long', 'single', 'date', 'time', 'timestamp', 'currency', 'money']);
+
+/** The study design's groups of types, which aren't types themselves. */
+const TYPE_GROUPS = new Set(['text', 'numeric', 'number']);
+
+const TYPE_NAMES = 'character, string, integer, floating point, date/time or Boolean';
+const GROUP_HINT = `Text and numeric are groups of data types. Name the type itself: ${TYPE_NAMES}.`;
+
+/** The re-prompt for a type that isn't named in full; the `oop` game's data type gaps use it too. */
+export const TYPE_HINT = `Name the data type in full: ${TYPE_NAMES}.`;
 
 const HINTS: Record<TypesKind, string> = {
-  type: 'Name the data type in full: Integer, Floating point, String, Character or Boolean.',
+  type: TYPE_HINT,
   structure: 'Type one-dimensional array, two-dimensional array or record.',
   source: 'Type plain text, CSV or XML.',
 };
@@ -94,8 +107,8 @@ const QUESTIONS: Record<TypesKind, string> = {
 
 export const CHIPS: Record<TypesKind, string[]> = {
   type: TYPE_OPTIONS.map((o) => o.label),
-  structure: ['one-dimensional array', 'two-dimensional array', 'record'],
-  source: ['plain text', 'CSV', 'XML'],
+  structure: STRUCTURE_OPTIONS.map((o) => o.label),
+  source: SOURCE_OPTIONS.map((o) => o.label),
 };
 
 export type Parsed = { value: string } | { unparsed: string } | null;
@@ -106,6 +119,7 @@ export function parseAnswer(kind: TypesKind, input: string): Parsed {
   if (kind === 'type') {
     const value = matchOption(s, TYPE_OPTIONS);
     if (value) return { value };
+    if (TYPE_GROUPS.has(s)) return { unparsed: GROUP_HINT };
     return TYPE_SHORTHAND.has(s) ? { unparsed: HINTS.type } : null;
   }
   if (kind === 'structure') {
@@ -140,16 +154,25 @@ export function scenariosFor(kind: TypesKind, difficulty: Difficulty): readonly 
 function misconception(expected: string, chosen: string): string {
   const key = `${expected}<${chosen}`;
   const notes: Record<string, string> = {
-    'character<string': 'A String could hold it, but when the data is always exactly one character, Character is the precise choice.',
-    'string<integer': "Digits aren't automatically numeric: if you never calculate with them, store them as a String.",
-    'string<floating': "Digits aren't automatically numeric: if you never calculate with them, store them as a String.",
+    'character<string': 'A string could hold it, but data that is always exactly one symbol or letter is a character.',
+    'string<integer': "Digits aren't automatically numeric: if you never calculate with them, store them as a string.",
+    'string<floating': "Digits aren't automatically numeric: if you never calculate with them, store them as a string.",
+    'string<character': 'A character holds exactly one symbol, and this data is longer than that.',
+    'integer<string': "Numbers stored as text can't be calculated with directly, and they sort as text, so 101 comes before 15.",
+    'floating<string': "Numbers stored as text can't be calculated with directly, and they sort as text, so 101.5 comes before 15.5.",
     'boolean<string': 'Storing yes or no as text allows entries such as Y or yes that fail comparisons; a Boolean has only two values.',
-    'boolean<character': 'Storing Y or N as a Character allows other letters too; a Boolean has only two values.',
-    'floating<integer': 'An Integer would drop the fractional part.',
-    'integer<floating': 'The value is always whole, so Floating point adds nothing.',
+    'boolean<character': 'Storing Y or N as a character allows other letters too; a Boolean has only two values.',
+    'boolean<integer': 'Storing 1 or 0 as an integer allows every other number too; a Boolean has only two values.',
+    'floating<integer': 'An integer would drop the fractional part.',
+    'integer<floating': 'The value is always whole, so floating point adds nothing.',
+    'floating<datetime': 'This is an amount, not a date or a time of day.',
+    'integer<datetime': 'This is a whole number, not a date or a time of day.',
+    'datetime<string': "Stored as a string, a date can't be compared or calculated with as a date; date/time can.",
+    'datetime<integer': 'Dates and times have their own numeric data type, date/time, which can be compared and calculated with as dates.',
+    'datetime<floating': 'Dates and times have their own numeric data type, date/time, which can be compared and calculated with as dates.',
     'record<one-d': 'Every element of an array has the same data type, but these fields mix types.',
     'record<two-d': 'Every element of an array has the same data type, but these fields mix types.',
-    'two-d<one-d': 'Each value is identified by two things, so it needs two indexes: a row and a column.',
+    'two-d<one-d': 'Each value is identified by two things, so it needs two indices: a row and a column.',
     'one-d<two-d': 'Each value is identified by one thing only, so one index is enough.',
     'one-d<record': 'A record groups different fields of one item; here every value is the same kind of thing.',
     'two-d<record': 'A record groups different fields of one item; here every value is the same kind of thing, in a grid.',

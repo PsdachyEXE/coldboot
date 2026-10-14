@@ -1,25 +1,30 @@
 /**
- * The `oop` bank, written by hand: scenarios for the four principles, needs for the four access
- * modifiers, and object descriptions with gaps to complete. The rules the items rest on, at the
- * level of mainstream textbook meaning:
+ * The `oop` bank, written by hand: scenarios for the four principles, needs for the three access
+ * modifiers, and object descriptions with gaps to complete. The rules the items rest on, following
+ * the definitions and examples in VCAA's outcome-specific requirements:
  *
- * - Abstraction models only the details the problem needs. Encapsulation bundles attributes with
- *   the methods that act on them and hides the attributes (private, reached through public
- *   methods). Generalisation is the design step that moves features several classes share into one
- *   superclass. Inheritance is the mechanism that then gives a subclass its superclass's attributes
- *   and methods. Abstraction scenarios never lean on hiding how a method works, which overlaps
- *   encapsulation.
- * - public: any code in the program. private: only the class's own methods. protected: the class
- *   and its subclasses; in Java, also its package, so protected scenarios never name Java.
- *   default: the access given when no modifier is written, which depends on the language; the
- *   scenarios that describe package access say the program is written in Java.
- * - An object description lists the object's name, its properties with data types, and its
- *   methods (named with brackets). Data types follow the `types` game's rules.
+ * - Abstraction hides complex detail and exposes only what is needed and relevant, starting from
+ *   the attributes and behaviours the problem needs. Encapsulation bundles attributes with the
+ *   methods that act on them in one class and restricts direct access to the attributes (private,
+ *   reached through public get and set methods). Generalisation moves the attributes and methods two
+ *   or more classes share up into one superclass. Inheritance is the mechanism that gives a
+ *   subclass its superclass's attributes and methods, which it can reuse, extend and override.
+ *   Abstraction scenarios show the choice of what to model and expose, never hiding data behind
+ *   methods, which is encapsulation.
+ * - The access modifiers are public, protected and private (U4O1-KK03). public: any code in the
+ *   program. protected: the class and its subclasses; in Java, also its package, so protected
+ *   scenarios never name Java. private: only the class's own methods. "default" is not one of them:
+ *   it can be typed, as a distractor, but is never the answer.
+ * - An object description has three parts: the object's name, its properties/attributes with the
+ *   data type in brackets after each (`isPaid (Boolean)`), and its methods, with parameters where a
+ *   method needs them (`restock(quantity)`). Data types use the study design's names, as in the
+ *   `types` game.
  */
 
 export const PRINCIPLES = ['abstraction', 'encapsulation', 'generalisation', 'inheritance'] as const;
 export type Principle = (typeof PRINCIPLES)[number];
-export const MODIFIERS = ['public', 'private', 'protected', 'default'] as const;
+/** The study design's three, in its order. */
+export const MODIFIERS = ['public', 'protected', 'private'] as const;
 export type Modifier = (typeof MODIFIERS)[number];
 
 export type Level = 1 | 2 | 3;
@@ -64,22 +69,22 @@ export const PRINCIPLE_SCENARIOS: readonly PrincipleScenario[] = [
   },
   {
     id: 'game-enemy',
-    prompt: "A game's Enemy class models only the enemy's position, health and speed. Its made-up backstory is left out because it never affects play.",
+    prompt: "A game's Enemy class models only the enemy's position, health and speed, and the move() and attack() behaviours that play needs. Its made-up backstory is left out because it never affects play.",
     answer: 'abstraction',
-    why: 'Keeping only the details that affect the program, and leaving out the rest, is abstraction.',
+    why: 'Keeping only the attributes and behaviours that affect the program, and leaving out the rest, is abstraction.',
     level: 3,
   },
   // Encapsulation
   {
     id: 'bank-balance',
-    prompt: 'A BankAccount class makes its balance attribute private. Other code can change the balance only by calling deposit() and withdraw(), which check each amount first.',
+    prompt: 'A BankAccount class makes its balance attribute private. Other code can change the balance only by calling deposit(amount) and withdraw(amount), which check each amount first.',
     answer: 'encapsulation',
     why: "Hiding an attribute and allowing changes only through the class's own methods is encapsulation.",
     level: 1,
   },
   {
     id: 'student-mark',
-    prompt: "A Student class's mark attribute is private and can be changed only through setMark(), which rejects any value outside 0 to 100.",
+    prompt: "A Student class's mark attribute is private and can be changed only through setMark(newMark), which rejects any value outside 0 to 100.",
     answer: 'encapsulation',
     why: 'A private attribute reached only through a method that validates the new value is encapsulation.',
     level: 1,
@@ -100,7 +105,7 @@ export const PRINCIPLE_SCENARIOS: readonly PrincipleScenario[] = [
   },
   {
     id: 'group-size',
-    prompt: 'The Booking class keeps groupSize private and provides setGroupSize(), which refuses any number below 1, so no other code can store an impossible group size.',
+    prompt: 'The Booking class keeps groupSize private and provides setGroupSize(size), which refuses any number below 1, so no other code can store an impossible group size.',
     answer: 'encapsulation',
     why: "Protecting an attribute's value by hiding it behind a checking method is encapsulation.",
     level: 3,
@@ -110,7 +115,7 @@ export const PRINCIPLE_SCENARIOS: readonly PrincipleScenario[] = [
     id: 'vehicle-super',
     prompt: 'A designer notices that the Car and Truck classes both have registration and odometer attributes, so she moves them into a new Vehicle superclass.',
     answer: 'generalisation',
-    why: 'Finding what several classes share and moving it up into one more general superclass is generalisation.',
+    why: 'Taking what two or more classes share and moving it up into one more general superclass is generalisation.',
     level: 1,
   },
   {
@@ -129,7 +134,7 @@ export const PRINCIPLE_SCENARIOS: readonly PrincipleScenario[] = [
   },
   {
     id: 'account-super',
-    prompt: 'SavingsAccount and ChequeAccount have the same accountNumber, balance and deposit(). The designer gathers these shared members into one Account class above them.',
+    prompt: 'SavingsAccount and ChequeAccount have the same accountNumber, balance and deposit(amount). The designer gathers these shared members into one Account class above them.',
     answer: 'generalisation',
     why: 'Moving shared members up into a more general class is generalisation.',
     level: 2,
@@ -221,14 +226,14 @@ export const ACCESS_SCENARIOS: readonly AccessScenario[] = [
   // private
   {
     id: 'balance-attr',
-    prompt: "A BankAccount's balance attribute must be changed only by the class's own deposit() and withdraw() methods. Which access modifier suits balance?",
+    prompt: "A BankAccount's balance attribute must be changed only by the class's own deposit(amount) and withdraw(amount) methods. Which access modifier suits balance?",
     answer: 'private',
     why: "Private members can be used only by the class's own methods.",
     level: 1,
   },
   {
     id: 'mark-attr',
-    prompt: "No other class, not even a subclass, may read or change a Student's mark directly; other code must use getMark() and setMark(). Which access modifier suits mark?",
+    prompt: "No other class, not even a subclass, may read or change a Student's mark directly; other code must use getMark() and setMark(newMark). Which access modifier suits mark?",
     answer: 'private',
     why: 'Only private hides a member from every other class, including subclasses.',
     level: 2,
@@ -276,32 +281,11 @@ export const ACCESS_SCENARIOS: readonly AccessScenario[] = [
     why: 'Subclasses need direct access and unrelated classes must not have it, which is what protected gives.',
     level: 3,
   },
-  // default
-  {
-    id: 'no-modifier',
-    prompt: 'A programmer declares an attribute without writing any access modifier at all. What is that level of access called?',
-    answer: 'default',
-    why: "With no modifier written, the language's default access applies. What it allows depends on the language; in Java, it is access from the same package.",
-    level: 2,
-  },
-  {
-    id: 'java-package-method',
-    prompt: 'The program is written in Java. The formatDate() method must be callable by other classes in the same package, but by no class outside that package, including subclasses in other packages. Which access modifier suits formatDate()?',
-    answer: 'default',
-    why: 'In Java, default (package) access, written as no modifier, opens a member to its own package only. Protected would also open it to subclasses in other packages.',
-    level: 3,
-  },
-  {
-    id: 'java-package-class',
-    prompt: 'The program is written in Java. A helper class must be usable only by the other classes in its own package. Which access modifier suits the class?',
-    answer: 'default',
-    why: 'In Java, a class declared with no modifier has default (package) access, so only its own package can use it.',
-    level: 3,
-  },
 ];
 
 export interface ObjectProperty {
   name: string;
+  /** One of the `types` game's labels: character, string, integer, floating point, date/time or Boolean. */
   type: string;
   description: string;
 }
@@ -312,7 +296,7 @@ export interface MemberGap {
   kind: 'property' | 'method';
   /** Completes "The Booking object needs a property to ..." or "... a method that ...". */
   need: string;
-  /** The row as an option: "isPaid: Boolean" or "calculateTotal()". */
+  /** The row as an option, in the object description's layout: "isPaid (Boolean)" or "restock(quantity)". */
   answer: string;
   distractors: readonly [string, string, string];
   why: string;
@@ -322,6 +306,7 @@ export interface ObjectEntry {
   id: string;
   name: string;
   properties: readonly ObjectProperty[];
+  /** Each with its brackets and any parameters, as in "updatePrice(newPrice)". */
   methods: readonly string[];
   /** Properties whose data type is clear from the name and description, for type gaps. */
   typeGaps: readonly string[];
@@ -333,29 +318,30 @@ export const OBJECTS: readonly ObjectEntry[] = [
     id: 'booking',
     name: 'Booking',
     properties: [
-      { name: 'bookingId', type: 'Integer', description: 'Next number in sequence, e.g. 1047' },
-      { name: 'customerName', type: 'String', description: "The customer's full name" },
-      { name: 'kayakCount', type: 'Integer', description: 'Number of kayaks hired' },
-      { name: 'deposit', type: 'Floating point', description: 'Amount paid upfront, e.g. 45.50' },
+      { name: 'bookingId', type: 'integer', description: 'Next number in sequence, e.g. 1047' },
+      { name: 'customerName', type: 'string', description: "The customer's full name" },
+      { name: 'hireStart', type: 'date/time', description: 'The date and time the kayaks are collected, used to work out when they are due back' },
+      { name: 'kayakCount', type: 'integer', description: 'Number of kayaks hired' },
+      { name: 'deposit', type: 'floating point', description: 'Amount paid upfront, e.g. 45.50' },
       { name: 'isPaid', type: 'Boolean', description: 'Whether the full amount has been paid' },
     ],
-    methods: ['calculateTotal()', 'confirmBooking()', 'cancelBooking()'],
-    typeGaps: ['customerName', 'kayakCount', 'deposit', 'isPaid'],
+    methods: ['calculateTotal()', 'confirmBooking()', 'changeKayakCount(newCount)'],
+    typeGaps: ['customerName', 'hireStart', 'kayakCount', 'deposit', 'isPaid'],
     memberGaps: [
       {
         id: 'total',
         kind: 'method',
         need: 'works out the total cost of the booking',
         answer: 'calculateTotal()',
-        distractors: ['totalCost: Floating point', 'printReceipt()', 'refundDeposit()'],
+        distractors: ['totalCost (floating point)', 'printReceipt()', 'refundDeposit(amount)'],
         why: 'Working something out is an action, so it is a method, and calculateTotal() is the one that works out the cost.',
       },
       {
         id: 'paid',
         kind: 'property',
         need: 'record whether the full amount has been paid',
-        answer: 'isPaid: Boolean',
-        distractors: ['isPaid: String', 'payBooking()', 'amountPaid: Integer'],
+        answer: 'isPaid (Boolean)',
+        distractors: ['isPaid (string)', 'payBooking(amount)', 'amountPaid (integer)'],
         why: 'A value the object stores is a property, and paid or not paid is two states, so its type is Boolean.',
       },
     ],
@@ -364,14 +350,14 @@ export const OBJECTS: readonly ObjectEntry[] = [
     id: 'member',
     name: 'Member',
     properties: [
-      { name: 'memberId', type: 'String', description: 'Letters and digits, e.g. GM0412' },
-      { name: 'fullName', type: 'String', description: "The member's full name" },
-      { name: 'age', type: 'Integer', description: 'Age in whole years' },
-      { name: 'weeklyFee', type: 'Floating point', description: 'Charged each week, e.g. 14.95' },
+      { name: 'memberId', type: 'string', description: 'Letters and digits, e.g. GM0412' },
+      { name: 'fullName', type: 'string', description: "The member's full name" },
+      { name: 'age', type: 'integer', description: 'Age in whole years' },
+      { name: 'weeklyFee', type: 'floating point', description: 'Charged each week, e.g. 14.95' },
       { name: 'hasPaid', type: 'Boolean', description: "Whether this week's fee has been paid" },
-      { name: 'level', type: 'Character', description: 'Always one letter: B for basic or P for premium' },
+      { name: 'level', type: 'character', description: 'Always one letter: B for basic or P for premium' },
     ],
-    methods: ['renewMembership()', 'calculateFee()', 'printCard()'],
+    methods: ['renewMembership(weeks)', 'calculateFee()', 'printCard()'],
     typeGaps: ['memberId', 'age', 'weeklyFee', 'hasPaid', 'level'],
     memberGaps: [
       {
@@ -379,16 +365,16 @@ export const OBJECTS: readonly ObjectEntry[] = [
         kind: 'method',
         need: "prints the member's access card",
         answer: 'printCard()',
-        distractors: ['cardNumber: String', 'printReceipt()', 'cancelMembership()'],
+        distractors: ['cardNumber (string)', 'printReceipt()', 'cancelMembership(reason)'],
         why: 'Printing is an action, so it is a method, and printCard() is the one that prints the card.',
       },
       {
         id: 'fee',
         kind: 'property',
         need: 'store the fee charged each week, such as 14.95',
-        answer: 'weeklyFee: Floating point',
-        distractors: ['weeklyFee: Integer', 'chargeFee()', 'weeklyFee: Boolean'],
-        why: 'A stored value is a property, and a fee with cents needs Floating point.',
+        answer: 'weeklyFee (floating point)',
+        distractors: ['weeklyFee (integer)', 'chargeFee(amount)', 'weeklyFee (Boolean)'],
+        why: 'A stored value is a property, and money with cents is floating point.',
       },
     ],
   },
@@ -396,29 +382,30 @@ export const OBJECTS: readonly ObjectEntry[] = [
     id: 'ticket',
     name: 'Ticket',
     properties: [
-      { name: 'ticketId', type: 'String', description: 'Letters and digits, e.g. TK-20931' },
-      { name: 'fare', type: 'Floating point', description: 'Price paid, e.g. 12.40' },
+      { name: 'ticketId', type: 'string', description: 'Letters and digits, e.g. TK-20931' },
+      { name: 'sessionStart', type: 'date/time', description: 'The date and time the film starts, used to list the sessions in order' },
+      { name: 'fare', type: 'floating point', description: 'Price paid, e.g. 12.40' },
       { name: 'isConcession', type: 'Boolean', description: 'Whether a concession fare applies' },
-      { name: 'seatRow', type: 'Character', description: 'Always one letter from A to M' },
-      { name: 'seatNumber', type: 'Integer', description: 'Seat number within the row' },
+      { name: 'seatRow', type: 'character', description: 'Always one letter from A to M' },
+      { name: 'seatNumber', type: 'integer', description: 'Seat number within the row' },
     ],
-    methods: ['calculateFare()', 'printTicket()', 'cancelTicket()'],
-    typeGaps: ['ticketId', 'fare', 'isConcession', 'seatRow'],
+    methods: ['calculateFare()', 'printTicket()', 'changeSeat(newRow, newNumber)'],
+    typeGaps: ['ticketId', 'sessionStart', 'fare', 'isConcession', 'seatRow'],
     memberGaps: [
       {
         id: 'row',
         kind: 'property',
         need: "record the seat's row, which is always one letter from A to M",
-        answer: 'seatRow: Character',
-        distractors: ['seatRow: Integer', 'chooseRow()', 'seatRow: Boolean'],
-        why: 'A stored value is a property, and a value that is always exactly one letter is a Character.',
+        answer: 'seatRow (character)',
+        distractors: ['seatRow (string)', 'chooseRow(row)', 'seatRow (integer)'],
+        why: 'A stored value is a property, and a value that is always exactly one letter is a character, not a string.',
       },
       {
         id: 'fare',
         kind: 'method',
         need: 'works out the price of the ticket, applying the concession discount when it applies',
         answer: 'calculateFare()',
-        distractors: ['discountRate: Floating point', 'refundTicket()', 'printReceipt()'],
+        distractors: ['discountRate (floating point)', 'refundTicket()', 'printReceipt()'],
         why: 'Working out the price is an action, so it is a method, and calculateFare() is the one that does it.',
       },
     ],
@@ -427,31 +414,31 @@ export const OBJECTS: readonly ObjectEntry[] = [
     id: 'product',
     name: 'Product',
     properties: [
-      { name: 'productCode', type: 'String', description: 'Letters and digits, e.g. AB-2041' },
-      { name: 'description', type: 'String', description: 'A short description of the product' },
-      { name: 'price', type: 'Floating point', description: 'Price in dollars, e.g. 19.95' },
-      { name: 'stockLevel', type: 'Integer', description: 'Number of units held' },
-      { name: 'sizeCode', type: 'Character', description: 'Always one of the letters S, M or L' },
+      { name: 'productCode', type: 'string', description: 'Letters and digits, e.g. AB-2041' },
+      { name: 'description', type: 'string', description: 'A short description of the product' },
+      { name: 'price', type: 'floating point', description: 'Price in dollars, e.g. 19.95' },
+      { name: 'stockLevel', type: 'integer', description: 'Number of units held' },
+      { name: 'sizeCode', type: 'character', description: 'Always one of the letters S, M or L' },
       { name: 'onSale', type: 'Boolean', description: 'Whether the product is discounted right now' },
     ],
-    methods: ['restock()', 'applyDiscount()', 'updatePrice()'],
+    methods: ['restock(quantity)', 'applyDiscount(percentage)', 'updatePrice(newPrice)'],
     typeGaps: ['productCode', 'price', 'stockLevel', 'sizeCode', 'onSale'],
     memberGaps: [
       {
         id: 'restock',
         kind: 'method',
-        need: 'adds newly delivered units to the stock level',
-        answer: 'restock()',
-        distractors: ['deliveredUnits: Integer', 'sellProduct()', 'removeProduct()'],
-        why: 'Adding delivered units is an action, so it is a method, and restock() is the one that does it.',
+        need: 'adds a delivery of new units to the stock level',
+        answer: 'restock(quantity)',
+        distractors: ['deliveredUnits (integer)', 'sellProduct(quantity)', 'removeProduct()'],
+        why: 'Adding delivered units is an action, so it is a method, and restock(quantity) is the one that does it, with the number delivered as its parameter.',
       },
       {
         id: 'stock',
         kind: 'property',
         need: 'record how many units are held, a whole number that goes up and down',
-        answer: 'stockLevel: Integer',
-        distractors: ['stockLevel: Boolean', 'countStock()', 'stockLevel: Character'],
-        why: 'A stored count is a property, and a whole number used in arithmetic is an Integer.',
+        answer: 'stockLevel (integer)',
+        distractors: ['stockLevel (Boolean)', 'countStock()', 'stockLevel (character)'],
+        why: 'A stored count is a property, and a whole number used in arithmetic is an integer.',
       },
     ],
   },
@@ -459,30 +446,30 @@ export const OBJECTS: readonly ObjectEntry[] = [
     id: 'student',
     name: 'Student',
     properties: [
-      { name: 'studentId', type: 'String', description: 'Always starts with S, e.g. S0012345' },
-      { name: 'surname', type: 'String', description: "The student's surname" },
-      { name: 'yearLevel', type: 'Integer', description: 'From 7 to 12' },
-      { name: 'averageMark', type: 'Floating point', description: 'Mean of all marks, e.g. 72.5' },
-      { name: 'grade', type: 'Character', description: 'Always one letter from A to E' },
+      { name: 'studentId', type: 'string', description: 'Always starts with S, e.g. S0012345' },
+      { name: 'surname', type: 'string', description: "The student's surname" },
+      { name: 'dateOfBirth', type: 'date/time', description: "The student's date of birth, used to work out their age" },
+      { name: 'averageMark', type: 'floating point', description: 'Mean of all marks, e.g. 72.5' },
+      { name: 'grade', type: 'character', description: 'Always one letter from A to E' },
       { name: 'isEnrolled', type: 'Boolean', description: 'Whether the student is currently enrolled' },
     ],
-    methods: ['enrol()', 'calculateAverage()', 'printReport()'],
-    typeGaps: ['studentId', 'averageMark', 'grade', 'isEnrolled'],
+    methods: ['addMark(mark)', 'calculateAverage()', 'printReport()'],
+    typeGaps: ['studentId', 'dateOfBirth', 'averageMark', 'grade', 'isEnrolled'],
     memberGaps: [
       {
         id: 'average',
         kind: 'method',
         need: "works out the mean of the student's marks",
         answer: 'calculateAverage()',
-        distractors: ['meanMark: Floating point', 'withdraw()', 'printTimetable()'],
+        distractors: ['meanMark (floating point)', 'withdraw()', 'printTimetable()'],
         why: 'Working out the mean is an action, so it is a method, and calculateAverage() is the one that does it.',
       },
       {
         id: 'enrolled',
         kind: 'property',
         need: 'record whether the student is currently enrolled',
-        answer: 'isEnrolled: Boolean',
-        distractors: ['isEnrolled: String', 'enrolStudent()', 'enrolmentCount: Integer'],
+        answer: 'isEnrolled (Boolean)',
+        distractors: ['isEnrolled (string)', 'enrolStudent(yearLevel)', 'enrolmentCount (integer)'],
         why: 'A stored value is a property, and enrolled or not is two states, so its type is Boolean.',
       },
     ],
@@ -491,30 +478,31 @@ export const OBJECTS: readonly ObjectEntry[] = [
     id: 'pet',
     name: 'Pet',
     properties: [
-      { name: 'petName', type: 'String', description: "The pet's name" },
-      { name: 'species', type: 'String', description: 'For example dog or cat' },
-      { name: 'ageYears', type: 'Integer', description: 'Age in whole years' },
-      { name: 'weightKg', type: 'Floating point', description: 'Weight in kilograms, e.g. 4.25' },
+      { name: 'petName', type: 'string', description: "The pet's name" },
+      { name: 'species', type: 'string', description: 'For example dog or cat' },
+      { name: 'ageYears', type: 'integer', description: 'Age in whole years' },
+      { name: 'weightKg', type: 'floating point', description: 'Weight in kilograms, e.g. 4.25' },
+      { name: 'lastCheckUp', type: 'date/time', description: 'The date of its most recent check-up, used to send reminders' },
       { name: 'isDesexed', type: 'Boolean', description: 'Whether the pet has been desexed' },
     ],
-    methods: ['bookCheckUp()', 'updateWeight()', 'printHistory()'],
-    typeGaps: ['petName', 'ageYears', 'weightKg', 'isDesexed'],
+    methods: ['bookCheckUp(checkUpDate)', 'updateWeight(newWeight)', 'printHistory()'],
+    typeGaps: ['petName', 'ageYears', 'weightKg', 'lastCheckUp', 'isDesexed'],
     memberGaps: [
       {
         id: 'weight',
         kind: 'property',
         need: "store the pet's weight in kilograms, such as 4.25, used to work out medicine doses",
-        answer: 'weightKg: Floating point',
-        distractors: ['weightKg: Integer', 'weighPet()', 'weightKg: String'],
-        why: 'A stored value is a property, and a weight with a fractional part that is used in calculations needs Floating point.',
+        answer: 'weightKg (floating point)',
+        distractors: ['weightKg (integer)', 'weighPet()', 'weightKg (string)'],
+        why: 'A stored value is a property, and a weight with a fractional part that is used in calculations is floating point.',
       },
       {
         id: 'check-up',
         kind: 'method',
-        need: 'books the pet in for its next check-up',
-        answer: 'bookCheckUp()',
-        distractors: ['nextCheckUp: String', 'cancelVisit()', 'printInvoice()'],
-        why: 'Booking is an action, so it is a method, and bookCheckUp() is the one that books the visit.',
+        need: 'books the pet in for a check-up on a date the owner chooses',
+        answer: 'bookCheckUp(checkUpDate)',
+        distractors: ['nextCheckUp (date/time)', 'cancelVisit(visitDate)', 'printInvoice()'],
+        why: 'Booking is an action, so it is a method, and bookCheckUp(checkUpDate) is the one that books the visit, with the chosen date as its parameter.',
       },
     ],
   },

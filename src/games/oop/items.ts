@@ -2,8 +2,10 @@
  * `oop` items. Three kinds:
  * - principle: name the OOP principle a scenario shows;
  * - object: complete an object description drawn as an object figure with one blank row, either
- *   a property's data type (typed) or a whole member chosen from lettered options;
- * - access: choose the access modifier a stated need calls for.
+ *   a property's data type (typed, by its study design name) or a whole member chosen from
+ *   lettered options written in the object description's layout;
+ * - access: choose public, protected or private for a stated need. "default" is read as an answer
+ *   so it can be marked wrong with a note, as the 2025 examination used it as a distractor.
  *
  * Each item stands alone for the daily challenge. Instances ("oop:object:booking:member-paid:
  * seed=4:normal") regenerate an item exactly through fromOopInstance.
@@ -12,10 +14,11 @@ import type { KkId, ObjectDescription } from '../../content/schema';
 import type { TerminalBlock } from '../../terminal/blocks';
 import { matchOption, OPTION_LETTERS, parseOption } from '../answers';
 import { childSeed, mulberry32, pick, sample, shuffle } from '../prng';
-import { parseAnswer as parseTypeAnswer, TYPE_OPTIONS } from '../types-game/items';
+import { parseAnswer as parseTypeAnswer, TYPE_HINT, TYPE_OPTIONS } from '../types-game/items';
 import type { Difficulty, QuizItem } from '../types';
 import {
   ACCESS_SCENARIOS,
+  MODIFIERS,
   OBJECTS,
   PRINCIPLE_SCENARIOS,
   type AccessScenario,
@@ -27,9 +30,14 @@ import {
   type PrincipleScenario,
 } from './bank';
 
+/** Principles of OOP. */
 export const OOP_KK: KkId[] = ['U3O1-KK07'];
-/** Object descriptions are a design tool for modules as well as an OOP topic. */
-export const OBJECT_KK: KkId[] = ['U3O1-KK07', 'U3O1-KK03'];
+/** Access modifiers are a Unit 4 language feature, not a principle. */
+export const ACCESS_KK: KkId[] = ['U4O1-KK03'];
+/** Object descriptions are a design tool; a data type gap tests data types. */
+export const TYPE_GAP_KK: KkId[] = ['U3O1-KK03', 'U3O1-KK04'];
+/** Deciding what an object stores and what it does is the abstraction step of designing it. */
+export const MEMBER_GAP_KK: KkId[] = ['U3O1-KK03', 'U3O1-KK07'];
 
 export const OOP_KINDS = ['principle', 'object', 'access'] as const;
 export type OopKind = (typeof OOP_KINDS)[number];
@@ -71,8 +79,10 @@ export function parsePrinciple(input: string): Principle | null {
 }
 
 const PRINCIPLE_NOTES: Partial<Record<`${Principle}<${Principle}`, string>> = {
-  'abstraction<encapsulation': "Encapsulation hides an object's data behind its methods; here the point is which details are modelled at all.",
-  'encapsulation<abstraction': 'Abstraction decides which details to model; here the point is hiding the data and controlling access through methods.',
+  'abstraction<encapsulation': 'Encapsulation bundles the data with its methods and restricts direct access to it; here the point is which details are modelled and exposed at all.',
+  'encapsulation<abstraction': 'Abstraction decides which details to model and expose; here the point is keeping the data with its methods and restricting direct access to it.',
+  'abstraction<generalisation': 'Generalisation combines what several classes share into one superclass; here a single class is limited to the details that are needed.',
+  'generalisation<abstraction': 'Abstraction decides which details one class models and exposes; here the members that several classes share move up into a superclass.',
   'generalisation<inheritance': 'Inheritance passes features down to a subclass; here the designer is creating the superclass from features the classes share.',
   'inheritance<generalisation': 'Generalisation is the design step that creates the superclass; here a subclass is receiving what its superclass defines.',
 };
@@ -105,17 +115,20 @@ export function principleItem(id: string, difficulty: Difficulty): QuizItem {
 // Access modifiers
 // ---------------------------------------------------------------------------
 
-const MODIFIER_OPTIONS: readonly { value: Modifier; accept: readonly string[] }[] = [
+/** A typed answer: one of the three modifiers, or "default", which is never right. */
+export type ModifierAnswer = Modifier | 'default';
+
+const MODIFIER_OPTIONS: readonly { value: ModifierAnswer; accept: readonly string[] }[] = [
   { value: 'public', accept: ['public'] },
-  { value: 'private', accept: ['private'] },
   { value: 'protected', accept: ['protected'] },
+  { value: 'private', accept: ['private'] },
   { value: 'default', accept: ['default', 'default access', 'package', 'package private', 'package access', 'no modifier', 'no access modifier'] },
 ];
 
-export const ACCESS_CHIPS = ['public', 'private', 'protected', 'default'];
-const ACCESS_HINT = 'Type public, private, protected or default. Unless the question names a language, protected means the class and its subclasses.';
+export const ACCESS_CHIPS: readonly Modifier[] = [...MODIFIERS];
+const ACCESS_HINT = 'Type public, protected or private.';
 
-export function parseModifier(input: string): Modifier | null {
+export function parseModifier(input: string): ModifierAnswer | null {
   const s = input.trim().replace(/^the\s+/i, '');
   return matchOption(s, MODIFIER_OPTIONS) ?? matchOption(s.replace(/\s+(access\s+)?modifier$/i, ''), MODIFIER_OPTIONS);
 }
@@ -127,9 +140,13 @@ const ACCESS_NOTES: Partial<Record<`${Modifier}<${Modifier}`, string>> = {
   'protected<public': 'Public would open it to unrelated classes as well.',
   'public<private': 'Private would stop the other classes that need it from using it.',
   'public<protected': 'Protected would stop unrelated classes from using it.',
-  'default<protected': 'Protected would also open it to subclasses in other packages.',
-  'default<public': 'Public would open it to every class, not just its own package.',
 };
+
+const DEFAULT_NOTE = "Default isn't one of the study design's access modifiers, which are public, protected and private.";
+
+function accessNote(answer: Modifier, chosen: ModifierAnswer): string | undefined {
+  return chosen === 'default' ? DEFAULT_NOTE : ACCESS_NOTES[`${answer}<${chosen}`];
+}
 
 /** Splits a scenario into its need and the question at the end. */
 function splitQuestion(prompt: string): [string, string] {
@@ -147,15 +164,15 @@ export function accessItem(id: string, difficulty: Difficulty): QuizItem {
   prompt.push({ kind: 'text', text: question, tone: 'accent' }, { kind: 'text', text: ACCESS_HINT, tone: 'muted' });
   return {
     id: 'gen-oop-access',
-    kk: OOP_KK,
+    kk: ACCESS_KK,
     instance: `oop:access:${s.id}:${difficulty}`,
-    chips: ACCESS_CHIPS,
+    chips: [...ACCESS_CHIPS],
     prompt,
     check(input) {
       const chosen = parseModifier(input);
       if (!chosen) return { correct: false, expected, reason: ACCESS_HINT, counted: false };
       const correct = chosen === s.answer;
-      const note = correct ? undefined : ACCESS_NOTES[`${s.answer}<${chosen}`];
+      const note = correct ? undefined : accessNote(s.answer, chosen);
       return { correct, expected, reason: note ? `${s.why} ${note}` : s.why };
     },
   };
@@ -195,7 +212,7 @@ export function blankedFigure(obj: ObjectEntry, gap: string): ObjectDescription 
   }
   const member = memberGap(obj, gap);
   if (member.kind === 'property') {
-    const name = member.answer.split(':')[0].trim();
+    const name = member.answer.split(' (')[0];
     const i = figure.properties.findIndex((p) => p.name === name);
     if (i < 0) throw new Error(`gap ${gap} is not a property of ${obj.name}`);
     figure.properties[i] = { name: '?', type: '?' };
@@ -213,14 +230,13 @@ function memberGap(obj: ObjectEntry, gap: string): MemberGap {
   return g;
 }
 
-const TYPE_HINT = 'Name the type in full: Integer, Floating point, String, Character or Boolean.';
-
 /** Why a described property has its data type, completing "holds ...". */
 const TYPE_REASONS: Record<string, string> = {
-  Integer: 'a whole number',
-  'Floating point': 'a number with a fractional part',
-  String: 'text, and any digits in it are never used in arithmetic',
-  Character: 'exactly one character',
+  character: 'exactly one symbol or letter',
+  string: 'text, and any digits in it are never used in arithmetic',
+  integer: 'a whole number',
+  'floating point': 'a number with a fractional part',
+  'date/time': 'a date or a time that the program compares or calculates with',
   Boolean: 'one of only two values',
 };
 
@@ -231,7 +247,7 @@ function typeGapItem(obj: ObjectEntry, gap: string, seed: number, difficulty: Di
   const why = `${property.name}, described as "${described}", holds ${TYPE_REASONS[property.type] ?? 'this kind of value'}, so its data type is ${property.type}.`;
   return {
     id: 'gen-oop-object',
-    kk: OBJECT_KK,
+    kk: TYPE_GAP_KK,
     instance: `oop:object:${obj.id}:${gap}:seed=${seed}:${difficulty}`,
     chips: TYPE_OPTIONS.map((o) => o.label),
     prompt: [
@@ -250,6 +266,9 @@ function typeGapItem(obj: ObjectEntry, gap: string, seed: number, difficulty: Di
   };
 }
 
+/** How the options are written, as in an object description. */
+const OPTION_LAYOUT = 'Properties are written name (data type); methods are written with brackets holding any parameters.';
+
 /** The lettered options for a member gap: the answer and two (easy) or three distractors, shuffled by seed. */
 export function memberOptions(gap: MemberGap, seed: number, difficulty: Difficulty): string[] {
   const rng = mulberry32(childSeed(seed, 'options'));
@@ -267,13 +286,14 @@ function memberGapItem(obj: ObjectEntry, gap: string, seed: number, difficulty: 
   const hint = `Type a letter from A to ${letters[letters.length - 1]}.`;
   return {
     id: 'gen-oop-object',
-    kk: OBJECT_KK,
+    kk: MEMBER_GAP_KK,
     instance: `oop:object:${obj.id}:${gap}:seed=${seed}:${difficulty}`,
     chips: [...letters],
     prompt: [
       { kind: 'figure', figure: blankedFigure(obj, gap) },
       { kind: 'text', text: `The ${obj.name} object needs ${need}. Which belongs in the blank row, marked with a question mark?`, tone: 'accent' },
       { kind: 'choices', options, labels: 'letters' },
+      { kind: 'text', text: OPTION_LAYOUT, tone: 'muted' },
       { kind: 'text', text: hint, tone: 'muted' },
     ],
     check(input) {

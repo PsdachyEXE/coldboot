@@ -1,4 +1,4 @@
-/** The `naming` game (Section 7.3, P1): camel case, snake case and Hungarian notation. */
+/** The `naming` game (Section 7.3, P1): camel casing, snake casing and Hungarian notation. */
 import { createQuizSession } from '../engine';
 import type { Game } from '../types';
 import { generateNamingItem, namingItem, planNamingRound } from './items';

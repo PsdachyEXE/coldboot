@@ -1,8 +1,9 @@
 /**
  * oop: every scenario in the fixed banks accepts exactly one answer at every level and doesn't give
- * it away; every object description gap blanks exactly one row of a valid figure, and its options
- * hold exactly one member that belongs there; generated items over 500 seeds at each difficulty
- * accept their own expected answer and reject the rest.
+ * it away; the access modifiers are the study design's three, and "default" is always marked wrong;
+ * every object description is in VCAA's layout, every gap blanks exactly one row of a valid
+ * figure, and its options hold exactly one member that belongs there; generated items over 500
+ * seeds at each difficulty accept their own expected answer and reject the rest.
  */
 import { describe, expect, it } from 'vitest';
 import { ObjectDescriptionSchema } from '../../content/schema';
@@ -32,6 +33,9 @@ const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 7);
 const LEVELS: Difficulty[] = ['easy', 'normal', 'hard'];
 const ctx = { playerName: '', now: () => 1_000, content: null, mastery: () => null, today: '2026-10-01', daily: null };
 const LETTERS = ['A', 'B', 'C', 'D', 'E'];
+/** Object description rows: "name (data type)" and "methodName(parameters)". */
+const PROPERTY_ROW = /^([a-z][A-Za-z]*) \(([^()]+)\)$/;
+const METHOD_ROW = /^[a-z][A-Za-z]*\((?:[a-z][A-Za-z]*(?:, [a-z][A-Za-z]*)*)?\)$/;
 
 describe('oop banks', () => {
   it('has unique scenarios covering every principle and modifier at every level', () => {
@@ -40,20 +44,23 @@ describe('oop banks', () => {
       expect(new Set(bank.map((s) => s.prompt)).size).toBe(bank.length);
     }
     for (const p of PRINCIPLES) expect(PRINCIPLE_SCENARIOS.filter((s) => s.answer === p).length).toBeGreaterThanOrEqual(5);
+    // U4O1-KK03 names exactly three access modifiers.
+    expect([...MODIFIERS]).toEqual(['public', 'protected', 'private']);
+    expect([...ACCESS_CHIPS]).toEqual(['public', 'protected', 'private']);
     for (const m of MODIFIERS) expect(ACCESS_SCENARIOS.filter((s) => s.answer === m).length).toBeGreaterThanOrEqual(3);
+    expect(ACCESS_SCENARIOS.every((s) => (MODIFIERS as readonly string[]).includes(s.answer))).toBe(true);
     for (const level of LEVELS) {
       for (const p of PRINCIPLES) expect(principlesFor(level).some((s) => s.answer === p), `${p} ${level}`).toBe(true);
       for (const m of MODIFIERS) expect(accessFor(level).some((s) => s.answer === m), `${m} ${level}`).toBe(true);
     }
   });
 
-  it("never gives the answer away in a prompt, and keeps Java-only rules to questions that name Java", () => {
+  it('never gives the answer away in a prompt, and never leans on one language', () => {
     for (const s of PRINCIPLE_SCENARIOS) expect(s.prompt, s.id).not.toMatch(/\b(abstract\w*|encapsulat\w*|generali[sz]\w*|inherit\w*)\b/i);
     for (const s of ACCESS_SCENARIOS) {
       expect(s.prompt, s.id).not.toMatch(/\b(public|private|protected|default)\b/i);
       expect(s.prompt, s.id).toMatch(/\?$/);
-      if (s.answer === 'protected') expect(`${s.prompt} ${s.why}`, s.id).not.toMatch(/Java|package/);
-      if (/package/.test(s.prompt)) expect(s.prompt, s.id).toMatch(/^The program is written in Java\./);
+      expect(`${s.prompt} ${s.why}`, s.id).not.toMatch(/Java|package/);
     }
     for (const s of [...PRINCIPLE_SCENARIOS, ...ACCESS_SCENARIOS]) {
       expect(s.why.toLowerCase(), s.id).toContain(s.answer);
@@ -94,12 +101,30 @@ describe('oop banks', () => {
     expect(parseModifier('friend')).toBeNull();
   });
 
+  it.each(LEVELS)('marks default wrong on every access item, as the distractor it was in 2025 (%s)', (level) => {
+    for (const s of ACCESS_SCENARIOS) {
+      const item = accessItem(s.id, level);
+      expect(item.chips).not.toContain('default');
+      for (const typed of ['default', 'Default', 'default access modifier', 'no modifier']) {
+        const r = item.check(typed);
+        expect(r.correct, `${s.id} ${typed}`).toBe(false);
+        expect(r.counted).not.toBe(false);
+        expect(r.reason).toMatch(/Default isn't one of the study design's access modifiers, which are public, protected and private\./);
+      }
+      expect(item.prompt.map((b) => (b.kind === 'text' ? b.text : '')).join(' ')).not.toMatch(/\bdefault\b/i);
+    }
+  });
+
   it('explains the classic confusions', () => {
     expect(principleItem('vehicle-super', 'normal').check('inheritance').reason).toMatch(/creating the superclass/);
     expect(principleItem('truck-sub', 'normal').check('generalisation').reason).toMatch(/subclass is receiving/);
     expect(principleItem('patient-details', 'normal').check('encapsulation').reason).toMatch(/which details are modelled/);
+    // VCAA describes a superclass as a more abstract representation, so the two are easily mixed up.
+    expect(principleItem('vehicle-super', 'normal').check('abstraction').reason).toMatch(/move up into a superclass/);
+    expect(principleItem('forecast', 'normal').check('generalisation').reason).toMatch(/single class is limited to the details that are needed/);
     expect(accessItem('odometer', 'normal').check('private').reason).toMatch(/hide it from the subclasses too/);
-    expect(accessItem('java-package-method', 'hard').check('protected').reason).toMatch(/subclasses in other packages/);
+    // The 2025 examination's commonest wrong answer: protected for a member only its own class may use.
+    expect(accessItem('balance-attr', 'normal').check('protected').reason).toMatch(/only private keeps it to the class itself/);
   });
 });
 
@@ -109,18 +134,24 @@ describe('oop object descriptions', () => {
     const types = TYPE_OPTIONS.map((o) => o.label);
     for (const obj of OBJECTS) {
       for (const p of obj.properties) expect(types, `${obj.id}.${p.name}`).toContain(p.type);
-      for (const m of obj.methods) expect(m).toMatch(/^[a-z][A-Za-z]*\(\)$/);
+      for (const m of obj.methods) expect(m).toMatch(METHOD_ROW);
       for (const name of obj.typeGaps) expect(obj.properties.some((p) => p.name === name)).toBe(true);
       expect(obj.memberGaps.map((g) => g.kind).sort()).toEqual(['method', 'property']);
       for (const g of obj.memberGaps) {
         if (g.kind === 'method') expect(obj.methods).toContain(g.answer);
-        else expect(obj.properties.some((p) => `${p.name}: ${p.type}` === g.answer)).toBe(true);
+        else expect(obj.properties.some((p) => `${p.name} (${p.type})` === g.answer)).toBe(true);
         expect(new Set([g.answer, ...g.distractors]).size).toBe(4);
+        // Every option is a row in the object description's layout, with a study design data type.
+        for (const option of [g.answer, ...g.distractors]) {
+          const property = PROPERTY_ROW.exec(option);
+          if (property) expect(types, `${obj.id} ${g.id} ${option}`).toContain(property[2]);
+          else expect(option, `${obj.id} ${g.id}`).toMatch(METHOD_ROW);
+        }
         // No distractor is a row the figure still shows, so only the answer can belong in the blank.
-        const shown = [...obj.properties.map((p) => `${p.name}: ${p.type}`), ...obj.methods].filter((r) => r !== g.answer);
+        const shown = [...obj.properties.map((p) => `${p.name} (${p.type})`), ...obj.methods].filter((r) => r !== g.answer);
         for (const d of g.distractors) expect(shown, `${obj.id} ${g.id} ${d}`).not.toContain(d);
         // A method gap offers at least one property-shaped option; a property gap offers a method.
-        const methodShaped = g.distractors.filter((d) => d.endsWith('()'));
+        const methodShaped = g.distractors.filter((d) => METHOD_ROW.test(d));
         expect(methodShaped.length, `${obj.id} ${g.id}`).toBeGreaterThanOrEqual(1);
         if (g.kind === 'method') expect(methodShaped.length).toBeLessThan(3);
       }
@@ -133,6 +164,31 @@ describe('oop object descriptions', () => {
         expect(figure.methods.length).toBe(obj.methods.length);
       }
     }
+  });
+
+  it('covers every study design data type and gives methods parameters where they need them', () => {
+    const typed = new Set(OBJECTS.flatMap((o) => o.typeGaps.map((name) => o.properties.find((p) => p.name === name)!.type)));
+    expect([...typed].sort()).toEqual(TYPE_OPTIONS.map((o) => o.label).sort());
+    expect(OBJECTS.flatMap((o) => o.methods).filter((m) => !m.endsWith('()')).length).toBeGreaterThanOrEqual(OBJECTS.length);
+  });
+
+  it('marks a type gap by its study design name, and asks again for short forms', () => {
+    const item = objectItem('booking', 'type-deposit', 1, 'normal');
+    expect(item.check('floating point').correct).toBe(true);
+    expect(item.check('?').expected).toBe('floating point');
+    for (const short of ['Float', 'float', 'floating', 'real', 'double']) expect(item.check(short).counted, short).toBe(false);
+    const paid = objectItem('booking', 'type-isPaid', 1, 'normal');
+    expect(paid.check('Boolean').correct).toBe(true);
+    expect(paid.check('Bool').counted).toBe(false);
+    expect(objectItem('ticket', 'type-seatRow', 1, 'normal').check('string').correct).toBe(false);
+    expect(objectItem('booking', 'type-hireStart', 1, 'normal').check('date/time').correct).toBe(true);
+  });
+
+  it('describes every date/time property by what the program does with it', () => {
+    // The reason for date/time is that the program compares or calculates with the value, so the description must say how it is used.
+    const dates = OBJECTS.flatMap((o) => o.properties.filter((p) => p.type === 'date/time').map((p) => ({ o, p })));
+    expect(dates.length).toBeGreaterThanOrEqual(3);
+    for (const { o, p } of dates) expect(p.description, `${o.id}.${p.name}`).toMatch(/, used to /);
   });
 
   it.each(LEVELS)('every gap accepts exactly one answer over 500 seeds (%s)', (level) => {
@@ -219,7 +275,12 @@ describe('oop rounds', () => {
     }
     const summary = session.summary();
     expect(summary).toMatchObject({ gameId: 'oop', score: 10, total: 10 });
-    expect(summary.perKk['U3O1-KK07']).toEqual({ correct: 10, total: 10 });
+    // Principles and member gaps are U3O1-KK07; data type gaps U3O1-KK04; access modifiers U4O1-KK03.
+    const plan = planOopRound(13, level);
+    const memberGaps = plan.filter((p) => p.kind === 'object' && p.gap.startsWith('member-')).length;
+    expect(summary.perKk['U3O1-KK07']).toEqual({ correct: 4 + memberGaps, total: 4 + memberGaps });
     expect(summary.perKk['U3O1-KK03']).toEqual({ correct: 3, total: 3 });
+    expect(summary.perKk['U3O1-KK04']).toEqual({ correct: 3 - memberGaps, total: 3 - memberGaps });
+    expect(summary.perKk['U4O1-KK03']).toEqual({ correct: 3, total: 3 });
   });
 });

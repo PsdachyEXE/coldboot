@@ -1,11 +1,12 @@
 /**
- * The `naming` word bank: phrases to write in camel case or snake case, and the variables and
- * interface controls to name in Hungarian notation. Every phrase is lowercase words only, and none
- * of them written in camel case reads as Hungarian notation (the tests check each one).
+ * The `naming` word bank: phrases for variables and for functions (code structures) to write in
+ * camel casing or snake casing, and the variables and interface controls to name in Hungarian
+ * notation. Every phrase is lowercase words only, and none of them written in camel casing reads as
+ * Hungarian notation (the tests check each one).
  */
 import type { ControlPrefix, VariablePrefix } from './conventions';
 
-/** Plain phrases for camel case, snake case and the lookalikes, by number of words. */
+/** Plain phrases for variables in camel casing, snake casing and the lookalikes, by number of words. */
 export const PHRASES: readonly (readonly string[])[] = [
   ['total', 'cost'],
   ['first', 'name'],
@@ -34,6 +35,22 @@ export const PHRASES: readonly (readonly string[])[] = [
   ['average', 'daily', 'rainfall', 'total'],
 ];
 
+/** Function and method names, verb first, for the code structures in a module's names. */
+export const FUNCTIONS: readonly (readonly string[])[] = [
+  ['calculate', 'total'],
+  ['print', 'receipt'],
+  ['check', 'age'],
+  ['find', 'member'],
+  ['update', 'stock'],
+  ['send', 'reminder'],
+  ['apply', 'discount'],
+  ['save', 'booking'],
+  ['load', 'results'],
+  ['validate', 'email'],
+  ['count', 'late', 'returns'],
+  ['sort', 'by', 'surname'],
+];
+
 export interface VariableEntry {
   prefix: VariablePrefix;
   words: readonly string[];
@@ -52,9 +69,12 @@ export const VARIABLES: readonly VariableEntry[] = [
   { prefix: 'flt', words: ['unit', 'price'], data: 'the price of one item, such as 4.95' },
   { prefix: 'flt', words: ['average', 'mark'], data: "the average of a class's marks, such as 72.5" },
   { prefix: 'flt', words: ['hourly', 'rate'], data: "a worker's hourly pay rate, such as 28.50" },
-  { prefix: 'bln', words: ['has', 'paid'], data: 'whether a member has paid their fees' },
-  { prefix: 'bln', words: ['is', 'booked'], data: 'whether a seat is booked' },
-  { prefix: 'bln', words: ['wants', 'newsletter'], data: 'whether a customer wants the newsletter' },
+  { prefix: 'dtm', words: ['return', 'date'], data: 'the date a borrowed book is due back, used to check whether it is overdue' },
+  { prefix: 'dtm', words: ['appointment'], data: "the date and time of a patient's appointment" },
+  { prefix: 'dtm', words: ['birth', 'date'], data: "a member's date of birth, used to work out their age" },
+  { prefix: 'bool', words: ['has', 'paid'], data: 'whether a member has paid their fees' },
+  { prefix: 'bool', words: ['is', 'booked'], data: 'whether a seat is booked' },
+  { prefix: 'bool', words: ['wants', 'newsletter'], data: 'whether a customer wants the newsletter' },
   { prefix: 'chr', words: ['grade'], data: "a student's grade, which is always one letter from A to E" },
   { prefix: 'chr', words: ['row', 'letter'], data: "a seat's row, which is always one letter from A to M" },
   { prefix: 'chr', words: ['size', 'code'], data: 'a size code that is always one of the letters S, M or L' },

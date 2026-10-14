@@ -34,7 +34,7 @@ const BANKS: Record<TypesKind, { scenarios: readonly Scenario<string>[]; values:
 
 /** Words that would give the answer away if a prompt used them. */
 const GIVEAWAYS: Record<TypesKind, RegExp> = {
-  type: /\b(integer|floating point|string|character|boolean)\b/i,
+  type: /\b(integer|floating point|string|character|boolean)\b|date\/time/i,
   structure: /\b(array|record|two-dimensional|one-dimensional)\b/i,
   source: /\b(csv|xml|plain text|delimited)\b/i,
 };
@@ -76,13 +76,25 @@ describe('types banks', () => {
 });
 
 describe('types answers', () => {
-  it('reads data types in full, and asks again for short forms', () => {
+  it("offers the study design's six data types, in its order", () => {
+    expect(TYPE_OPTIONS.map((o) => o.label)).toEqual(['character', 'string', 'integer', 'floating point', 'date/time', 'Boolean']);
+    expect(CHIPS.type).toEqual(TYPE_OPTIONS.map((o) => o.label));
+  });
+
+  it('reads data types in full, and asks again for short forms and for the groups', () => {
     expect(parseAnswer('type', 'Floating point')).toEqual({ value: 'floating' });
     expect(parseAnswer('type', 'floating-point number')).toEqual({ value: 'floating' });
     expect(parseAnswer('type', 'a Boolean')).toEqual({ value: 'boolean' });
     expect(parseAnswer('type', 'String data type')).toEqual({ value: 'string' });
-    for (const short of ['int', 'float', 'char', 'bool', 'real', 'text', 'number']) {
+    for (const dt of ['date/time', 'Date/Time', 'date / time', 'date time', 'date-time', 'date and time', 'date/time data type']) {
+      expect(parseAnswer('type', dt), dt).toEqual({ value: 'datetime' });
+    }
+    // The 2025 examination report gave no marks for Bool or Float: short forms re-prompt.
+    for (const short of ['int', 'float', 'Float', 'floating', 'char', 'bool', 'Bool', 'real', 'str', 'date', 'time', 'money']) {
       expect(parseAnswer('type', short), short).toEqual({ unparsed: expect.stringMatching(/^Name the data type in full/) });
+    }
+    for (const group of ['text', 'numeric', 'number']) {
+      expect(parseAnswer('type', group), group).toEqual({ unparsed: expect.stringMatching(/^Text and numeric are groups of data types/) });
     }
     expect(parseAnswer('type', '')).toBeNull();
   });
@@ -102,11 +114,35 @@ describe('types answers', () => {
   });
 
   it('adds a note for the commonest wrong choice', () => {
-    expect(typesItem({ kind: 'type', id: 'grade' }, 'normal').check('String').reason).toMatch(/Character is the precise choice/);
-    expect(typesItem({ kind: 'type', id: 'mobile' }, 'normal').check('Integer').reason).toMatch(/aren't automatically numeric/);
+    // A single symbol is a character; the 2025 examination report gave no marks for string.
+    expect(typesItem({ kind: 'type', id: 'grade' }, 'normal').check('string').reason).toMatch(/exactly one symbol or letter is a character/);
+    expect(typesItem({ kind: 'type', id: 'player-symbol' }, 'normal').check('string').correct).toBe(false);
+    expect(typesItem({ kind: 'type', id: 'mobile' }, 'normal').check('integer').reason).toMatch(/aren't automatically numeric/);
+    expect(typesItem({ kind: 'type', id: 'due-back' }, 'normal').check('string').reason).toMatch(/can't be compared or calculated with as a date/);
+    expect(typesItem({ kind: 'type', id: 'sprint' }, 'normal').check('date/time').reason).toMatch(/not a date or a time of day/);
+    expect(typesItem({ kind: 'type', id: 'price' }, 'normal').check('floating point').reason).toMatch(/two decimal places/);
     expect(typesItem({ kind: 'structure', id: 'member' }, 'normal').check('1D array').reason).toMatch(/fields mix types/);
     expect(typesItem({ kind: 'source', id: 'exchange' }, 'normal').check('CSV').reason).toMatch(/position in the line/);
-    expect(typesItem({ kind: 'type', id: 'grade' }, 'normal').check('Character').reason).not.toMatch(/precise choice\. /);
+    const grade = TYPE_SCENARIOS.find((s) => s.id === 'grade')!;
+    expect(typesItem({ kind: 'type', id: 'grade' }, 'normal').check('character').reason).toBe(grade.why);
+    // Numbers kept as text sort as text, the study design's own example of why the type matters.
+    expect(typesItem({ kind: 'type', id: 'tickets' }, 'normal').check('string').reason).toMatch(/sort as text, so 101 comes before 15/);
+    expect(typesItem({ kind: 'type', id: 'paid' }, 'normal').check('integer').reason).toMatch(/a Boolean has only two values/);
+  });
+
+  it('words each note so it fits every scenario with that answer', () => {
+    // A note is keyed by answer and choice, so it must not describe one scenario's data.
+    for (const s of TYPE_SCENARIOS) {
+      const item = typesItem({ kind: 'type', id: s.id }, 'normal');
+      for (const o of TYPE_OPTIONS.filter((x) => x.value !== s.answer)) {
+        const note = item.check(o.label).reason.slice(s.why.length);
+        for (const word of ['seconds', 'years', 'price', 'phone']) {
+          if (!s.prompt.toLowerCase().includes(word)) expect(note, `${s.id} as ${o.label}`).not.toContain(word);
+        }
+      }
+    }
+    expect(typesItem({ kind: 'type', id: 'price' }, 'normal').check('date/time').reason).toMatch(/This is an amount, not a date or a time of day\.$/);
+    expect(typesItem({ kind: 'type', id: 'tickets' }, 'normal').check('date/time').reason).toMatch(/This is a whole number, not a date or a time of day\.$/);
   });
 });
 

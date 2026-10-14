@@ -3,8 +3,11 @@
  * classifier that reads an identifier's shape. The tests run every generated identifier through the
  * classifier, so an answer is always checked a second way.
  *
- * Hungarian prefixes are a convention, not a standard: teams choose their own. The game states this
- * table in every question that needs it, and the man page repeats it.
+ * The three conventions are the study design's: Hungarian notation, camel casing and snake casing
+ * (VCAA writes "casing"). Hungarian prefixes are a convention, not a standard: teams choose their
+ * own. The variable prefixes str, int and bool are the ones VCAA's own samples use; the rest follow
+ * common practice. The game states this table in every question that needs it, and the man page
+ * repeats it.
  */
 
 export type Convention = 'camel' | 'snake' | 'hungarian';
@@ -13,29 +16,31 @@ export type Lookalike = 'pascal' | 'kebab' | 'title-snake';
 export type Shape = Convention | Lookalike;
 
 export const CONVENTION_LABELS: Record<Convention, string> = {
-  camel: 'camel case',
-  snake: 'snake case',
+  camel: 'camel casing',
+  snake: 'snake casing',
   hungarian: 'Hungarian notation',
 };
 
 export const LOOKALIKE_LABELS: Record<Lookalike, string> = {
-  pascal: 'Pascal case',
-  kebab: 'kebab case',
+  pascal: 'Pascal casing',
+  kebab: 'kebab casing',
   'title-snake': 'capitalised words joined by underscores',
 };
 
 export interface Prefix<T extends string> {
   prefix: T;
-  /** What the prefix marks, e.g. "String" or "text box". */
+  /** What the prefix marks, e.g. "string" or "text box". Data types use the study design's names. */
   label: string;
 }
 
+/** One prefix per study design data type, in its order, then one for arrays. */
 export const VARIABLE_PREFIXES = [
-  { prefix: 'str', label: 'String' },
-  { prefix: 'int', label: 'Integer' },
-  { prefix: 'flt', label: 'Floating point' },
-  { prefix: 'bln', label: 'Boolean' },
-  { prefix: 'chr', label: 'Character' },
+  { prefix: 'chr', label: 'character' },
+  { prefix: 'str', label: 'string' },
+  { prefix: 'int', label: 'integer' },
+  { prefix: 'flt', label: 'floating point' },
+  { prefix: 'dtm', label: 'date/time' },
+  { prefix: 'bool', label: 'Boolean' },
   { prefix: 'arr', label: 'array' },
 ] as const satisfies readonly Prefix<string>[];
 
@@ -85,7 +90,7 @@ export function toTitleSnake(words: readonly string[]): string {
   return words.map((w) => capitalise(w.toLowerCase())).join('_');
 }
 
-/** The prefix in lowercase, then each word starting with a capital: strFirstName, btnSave. */
+/** The prefix in lowercase, then each word starting with a capital: strFirstName, btnSave, boolHasPaid. */
 export function toHungarian(prefix: HungarianPrefix, words: readonly string[]): string {
   return prefix + toPascal(words);
 }
@@ -119,9 +124,9 @@ const TITLE_SNAKE = new RegExp(`^${CAP}(_${CAP})+$`);
 
 /**
  * Reads an identifier's shape, independently of how it was built. A table prefix followed by a
- * capital letter makes it Hungarian notation, even though the rest looks like camel case. Every
+ * capital letter makes it Hungarian notation, even though the rest looks like camel casing. Every
  * shape needs at least two words (or a prefix and a word), since one lowercase word would be both
- * camel case and snake case. Null when the shape is none of these.
+ * camel casing and snake casing. Null when the shape is none of these.
  */
 export function classify(identifier: string): Shape | null {
   if (HUNGARIAN.test(identifier)) return 'hungarian';

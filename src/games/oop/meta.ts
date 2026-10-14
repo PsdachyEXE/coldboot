@@ -3,24 +3,24 @@ import type { KkId } from '../../content/schema';
 
 export const OOP_ID = 'oop';
 export const OOP_TITLE = 'Classes, objects and access';
-export const OOP_GAME_KK: KkId[] = ['U3O1-KK07', 'U3O1-KK03'];
+export const OOP_GAME_KK: KkId[] = ['U3O1-KK07', 'U3O1-KK03', 'U3O1-KK04', 'U4O1-KK03'];
 export const OOP_SUMMARY = 'Name OOP principles, complete object descriptions, choose access modifiers';
 
 export const OOP_MAN = `oop drills object-oriented programming: the four principles, object descriptions and access modifiers.
 
 Principles. Read a scenario and type the principle it shows:
-  abstraction: modelling only the details the problem needs;
-  encapsulation: bundling attributes with the methods that act on them, and hiding the attributes so other code goes through those methods;
-  generalisation: the design step that moves features several classes share up into one superclass;
-  inheritance: a subclass automatically receiving its superclass's attributes and methods.
+  abstraction: hiding complex detail and exposing only what is needed, starting from the attributes and behaviours the problem needs and leaving out the rest;
+  encapsulation: keeping attributes together with the methods that use them in one class, and restricting direct access to the attributes (private attributes, read and changed through public get and set methods);
+  generalisation: moving the attributes and methods that two or more classes share up into one more general superclass;
+  inheritance: a subclass receiving its superclass's attributes and methods, which it can reuse, add to and override.
 
-Object descriptions. An object description lists the object's name, its properties with their data types, and its methods. One row is blank, marked with a question mark. Either type the missing data type in full (Integer, Floating point, String, Character or Boolean), or choose the row that belongs there from lettered options. A value the object stores is a property; an action it performs is a method.
+Object descriptions. An object description has three parts: the object's name, its properties/attributes with each data type in brackets after the name, such as isPaid (Boolean), and its methods, with any parameters in the brackets, such as restock(quantity). One row is blank, marked with a question mark. Either type the missing data type by its study design name (character, string, integer, floating point, date/time or Boolean), or choose the row that belongs there from lettered options. A value the object stores is a property; an action it performs is a method.
 
-Access modifiers. Read what a member needs and type public, private, protected or default:
+Access modifiers. Read what a member needs and type public, protected or private:
   public: any code in the program can use it;
-  private: only the class's own methods can use it;
-  protected: the class and its subclasses can use it (in Java, its package can too, so these questions don't name Java);
-  default: the access a member gets when no modifier is written. What it allows depends on the language, so a question that asks about package access says the program is in Java.
+  protected: the class and its subclasses can use it;
+  private: only the class's own methods can use it.
+Default is not one of the three, so it is never the answer.
 
 Example: "Vehicle's odometer attribute must be usable directly by its subclasses Car and Truck, but hidden from unrelated classes. Which access modifier suits odometer?" Type protected.
 
