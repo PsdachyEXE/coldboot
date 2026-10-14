@@ -1,111 +1,34 @@
 [
   {
-    "id": "t-abstraction",
-    "kk": [
-      "TERMS",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "abstraction",
-    "back": "Reducing complexity by representing only the details that matter for the problem and hiding the rest. For example, a `Student` class stores a name and student ID but not shoe size, and other code can call its methods without knowing how they work inside.",
-    "mistake": "Abstraction isn't the same as encapsulation. Abstraction decides which details to show; encapsulation bundles data with its methods and restricts direct access to that data.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-access-modifier",
-    "kk": [
-      "TERMS",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "access modifier",
-    "back": "A keyword, such as `public`, `private` or `protected`, that sets which other code can see and use a class's attributes and methods.",
-    "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "access specifier"
-    ]
-  },
-  {
-    "id": "t-affordance",
-    "kk": [
-      "TERMS",
-      "U3O2-KK15"
-    ],
-    "type": "reverse",
-    "front": "affordance",
-    "back": "A property of an interface element that signals how it can be used, such as a raised button that looks pressable or underlined text that looks clickable.",
-    "mistake": "Affordance has nothing to do with cost ('affordable'). It is about how obvious an element's use is from the way it looks.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-algorithm",
-    "kk": [
-      "TERMS",
-      "U3O1-KK12"
-    ],
-    "type": "reverse",
-    "front": "algorithm",
-    "back": "A finite, ordered set of precise steps that solves a problem or completes a task. It can be written as pseudocode before it is coded in any programming language.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
     "id": "t-alpha-testing",
     "kk": [
       "TERMS",
       "U4O1-KK06"
     ],
     "type": "reverse",
-    "front": "alpha testing",
-    "back": "Testing carried out by the developers (or others on the development team) during development, before the solution is released to users, to find and fix errors.",
-    "mistake": "Alpha testing is done by the developers; beta testing is done by real or representative users. Who does the testing, and when, is what separates them.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-api",
-    "kk": [
-      "TERMS",
-      "U4O1-KK04"
-    ],
-    "type": "reverse",
-    "front": "API",
-    "back": "A defined set of rules and functions that lets one program request data or services from another program or service without needing to know how it works internally, such as a mapping service that returns travel times.",
-    "mistake": "Don't assume an external API will always stay the same or stay available. If the provider changes it, starts charging or revokes access, the features that depend on it can stop working.",
-    "difficulty": 2,
-    "source": "textbook",
+    "front": "Alpha testing",
     "aliases": [
-      "application programming interface"
-    ]
-  },
-  {
-    "id": "t-array",
-    "kk": [
-      "TERMS",
-      "U3O1-KK05"
+      "alpha test"
     ],
-    "type": "reverse",
-    "front": "array",
-    "back": "A data structure that stores a collection of elements of the same data type under one name, with each element reached by an integer index (in a two-dimensional array, by a row index and a column index).",
-    "mistake": "Don't assume the first index is 1. In an array of 10 elements indexed from 0, the indexes run from 0 to 9, so `scores[10]` is out of range. Always check the stated index base.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-authentication",
-    "kk": [
-      "TERMS",
-      "U4O2-KK04"
-    ],
-    "type": "reverse",
-    "front": "authentication",
-    "back": "Confirming that a user or device is who or what it claims to be, using something the user knows (a password), has (a phone or security key) or is (a biometric such as a fingerprint).",
-    "mistake": "Authentication confirms identity. Authorisation is the separate step that decides what an identified user is allowed to access.",
+    "back": "Testing done at every point in development to confirm that individual modules, or the whole solution, satisfy every requirement and work as intended. It takes place in an environment set up for development or testing, and can be done by the developers themselves, independent testers or high-level users.",
+    "mistake": "Alpha testing isn't only programmers checking their own code: independent testers and high-level users can do it too. Beta testing differs in that intended user groups take part, and it also checks stability and usability on hardware like the target's.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
+  },
+  {
+    "id": "t-archiving",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Archiving",
+    "aliases": [
+      "archive"
+    ],
+    "back": "Moving data that is rarely needed any more out of a working system and into storage that is accessed less often, where it is kept for possible later use or because rules require it to be kept. Held apart from the system for the long term, the data no longer adds to the system's storage load or slows its performance.",
+    "mistake": "Archiving isn't the same as a backup. A backup is an extra copy kept in case the original is lost; archiving moves the data itself out of the working system so it stops taking up space there.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "t-backup",
@@ -114,14 +37,15 @@
       "U3O2-KK11"
     ],
     "type": "reverse",
-    "front": "backup",
-    "back": "A copy of files or data kept separately from the originals, ideally off-site or in the cloud, so the data can be restored if the originals are lost, damaged or corrupted.",
-    "mistake": "A backup stored on the same device as the originals is lost along with them. Keep backups separate, and test that they can actually be restored.",
-    "difficulty": 1,
-    "source": "textbook",
+    "front": "Backup",
     "aliases": [
-      "back-up"
-    ]
+      "back-up",
+      "backups"
+    ],
+    "back": "Copying data and keeping the copy apart from the original, so it can be restored if the data is lost. A backup can be full (everything), differential (changes since the last full backup), incremental (changes since the last backup of any kind) or a mix of these. Backups run manually or automatically on a schedule, and are kept on a separate local drive, external storage or the cloud.",
+    "mistake": "Differential and incremental are easily swapped: differential counts from the last full backup, incremental from the last backup of any kind. Version control isn't a backup method either; the 2025 examiners' report called that an error.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "t-beta-testing",
@@ -130,233 +54,255 @@
       "U4O1-KK07"
     ],
     "type": "reverse",
-    "front": "beta testing",
-    "back": "Testing of a nearly finished solution by a selected group of real or representative users in realistic conditions, to find remaining errors and gather feedback before the final release.",
-    "mistake": "Beta testing isn't the developers running more tests near the end. The testers are real or representative users who didn't build the solution.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-binary-search",
-    "kk": [
-      "TERMS",
-      "U3O1-KK12"
-    ],
-    "type": "reverse",
-    "front": "binary search",
-    "back": "A search of sorted data that compares the target with the middle element, discards the half that can't contain the target, and repeats on the remaining half until the target is found or no elements remain.",
-    "mistake": "Binary search only works if the data is already sorted. On unsorted data, use a linear search or sort the data first.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-camel-case",
-    "kk": [
-      "TERMS",
-      "U3O1-KK09"
-    ],
-    "type": "reverse",
-    "front": "camel case",
-    "back": "A naming convention that joins words without spaces, writing the first word in lowercase and starting each later word with a capital letter, such as `totalCost`.",
-    "mistake": "`TotalCost`, with a capital first letter, is Pascal case (sometimes called upper camel case). Camel case in its usual sense starts in lowercase: `totalCost`.",
-    "difficulty": 1,
-    "source": "textbook",
+    "front": "Beta testing",
     "aliases": [
-      "camelCase",
-      "camel casing"
-    ]
-  },
-  {
-    "id": "t-class",
-    "kk": [
-      "TERMS",
-      "U3O1-KK07"
+      "beta test"
     ],
-    "type": "reverse",
-    "front": "class",
-    "back": "A template (blueprint) that defines the attributes and methods that every object of that type will have. Objects are created from it.",
-    "mistake": "A class isn't an object. `Dog` is the class; `rex` and `bella` are two objects (instances) of it, each holding its own attribute values.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-code-repository",
-    "kk": [
-      "TERMS",
-      "U4O1-KK04"
-    ],
-    "type": "reverse",
-    "front": "code repository",
-    "back": "A central storage location for a project's source code and its full history of changes, often hosted online, that lets a team share, track and manage code using version control.",
-    "mistake": "A repository isn't just a backup copy. It records each change with its author and a message, so a particular change can be reviewed or undone.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "repository",
-      "repo"
-    ]
-  },
-  {
-    "id": "t-code-review",
-    "kk": [
-      "TERMS",
-      "U4O2-KK04"
-    ],
-    "type": "reverse",
-    "front": "code review",
-    "back": "A systematic check of source code by developers other than its author, usually before it is merged or released, to find errors, security weaknesses and departures from coding standards.",
+    "back": "Testing in which intended user groups try a solution, to check that it meets every requirement, works as expected, is stable and is usable by them. The environment can be for development, testing or production, but the hardware is the same as (or close to) what users will run it on. What testers report can lead to suggested or actual changes to modules or the solution.",
+    "mistake": "Beta testers aren't hunting bugs or checking output values: they are intended users working through realistic scenarios while their behaviour is observed and recorded. The 2025 report gave no marks for saying participants would do bug testing or check the values a report outputs.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
-    "id": "t-constraint",
+    "id": "t-computational-thinking",
     "kk": [
-      "TERMS",
-      "U3O2-KK06",
-      "U3O1-KK02"
+      "TERMS"
     ],
     "type": "reverse",
-    "front": "constraint",
-    "back": "A condition or limit that the solution must be developed within, such as a fixed budget (economic), privacy law (legal) or having to run on existing hardware (technical).",
-    "mistake": "A constraint is a limit the solution must work within, such as a budget or a law, not a task the solution performs, so it doesn't belong in the functional requirements.",
+    "front": "Computational thinking",
+    "back": "Recognising where computation applies to a problem and reasoning about it in logical, algorithmic, recursive and inferential ways. It usually draws on decomposition (breaking a problem into smaller parts), pattern recognition, abstraction, modelling and algorithms, which together can be used to build digital solutions.",
     "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-context-diagram",
-    "kk": [
-      "TERMS",
-      "U3O2-KK08"
-    ],
-    "type": "reverse",
-    "front": "context diagram",
-    "back": "A top-level diagram that shows the whole system as a single process, the external entities that interact with it, and the labelled data flows between the entities and the system.",
-    "mistake": "A context diagram shows no data stores and no internal processes. Those belong in a data flow diagram.",
-    "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "t-control-structure",
     "kk": [
       "TERMS",
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "type": "reverse",
-    "front": "control structure",
-    "back": "A construct that sets the order in which a program's instructions run: sequence (one after another), selection (choosing a path, as with IF ... THEN ... ELSE) or iteration (repeating a block with a loop).",
-    "mistake": "A loop is iteration, not selection, even though it tests a condition. Selection chooses between paths once; iteration repeats a block while or until a condition holds.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-critical-path",
-    "kk": [
-      "TERMS",
-      "U3O2-KK03"
-    ],
-    "type": "reverse",
-    "front": "critical path",
-    "back": "The longest chain of dependent tasks, by total duration, from the start of a project to its end. Its length is the shortest time the project can take, so delaying any task on it delays the whole project.",
-    "mistake": "The critical path is the longest chain of dependent tasks, not the shortest one, and not simply the tasks that seem most important.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-csv",
-    "kk": [
-      "TERMS",
-      "U3O1-KK06"
-    ],
-    "type": "reverse",
-    "front": "CSV",
-    "back": "A delimited plain text file format that stores tabular data with one record per line and commas separating the fields. It is compact and can be opened by spreadsheets and most programs.",
-    "mistake": "A field that itself contains a comma, such as an address, will be split into extra fields unless it is enclosed in quotation marks.",
-    "difficulty": 1,
-    "source": "textbook",
+    "front": "Control structures",
     "aliases": [
-      "comma-separated values",
-      "comma separated values"
-    ]
-  },
-  {
-    "id": "t-data-dictionary",
-    "kk": [
-      "TERMS",
-      "U3O2-KK14",
-      "U3O1-KK03"
+      "control structure"
     ],
-    "type": "reverse",
-    "front": "data dictionary",
-    "back": "A table that describes each data item in a solution, typically giving its name, data type, size or format, and a description, and sometimes validation rules or an example value.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-data-flow-diagram",
-    "kk": [
-      "TERMS",
-      "U3O2-KK08"
-    ],
-    "type": "reverse",
-    "front": "data flow diagram",
-    "back": "A diagram that shows how data moves through a system, using external entities, numbered processes, data stores and the labelled data flows between them.",
-    "mistake": "Data can't flow directly between two data stores, between two external entities, or between an external entity and a data store. Each of these flows must pass through a process.",
+    "back": "The code structures that determine how a solution's algorithm behaves. Sequence: lines run one after another, in the order written. Selection (branching): a condition tested against the data decides which code runs (IF, IF…ELSE, IF…ELSEIF, SWITCH/CASE). Repetition (iteration): a condition makes code run again and again: pre-test (WHILE), post-test (DO…WHILE, REPEAT…UNTIL), or a set number of times decided by the context and data (FOR).",
+    "mistake": "An IF…ELSEIF chain is selection: it picks one path. It isn't repetition (a loop runs a block again) or a method (not a control structure at all); over a quarter of students chose one of those on the 2025 exam.",
     "difficulty": 2,
-    "source": "textbook",
+    "source": "study-design"
+  },
+  {
+    "id": "t-conventions",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Conventions",
     "aliases": [
-      "DFD"
-    ]
+      "convention"
+    ],
+    "back": "Generally agreed approaches to using digital systems or representing data, followed so that a solution stays consistent throughout: for example, aligning data the same way in spreadsheet cells, or keeping a chart's axis scale consistent. Some are enforced (a password must contain certain characters); others are only recommended (giving an email a subject line).",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-critical-and-creative-thinking",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Critical and creative thinking",
+    "aliases": [
+      "creative and critical thinking"
+    ],
+    "back": "Using a variety of techniques to develop ideas and designs. This includes forming, analysing and judging the questions asked, the data used and the decisions made; students apply these strategies to manage how they work through a problem.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-cyber-security",
+    "kk": [
+      "TERMS",
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Cyber security",
+    "aliases": [
+      "cybersecurity"
+    ],
+    "back": "A broad field with many sides, bringing together digital systems, how organisations operate, the threats facing data and systems, legal and ethical issues, and managing risk. Its measures aim to protect systems and data from many kinds of threat.",
+    "mistake": "Cyber security isn't only technical controls such as encryption: it also takes in organisational practice, law, ethics and risk management. In 2025, answers that described a security control when asked for a strategy to improve secure development (training, onboarding, a risk management plan) earned no marks.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-data-analytics",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Data analytics",
+    "back": "The methods and software that let organisations collect or extract data in many forms, correct data that is wrong or incomplete, analyse it for patterns, trends and relationships, reach inferences about it, and present the findings visually so the conclusions are clear and unambiguous.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-data-integrity",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Data integrity",
+    "back": "A way of describing how sound data is overall, judged by its accuracy, authenticity, correctness, reasonableness, relevance and timeliness. High-integrity data is dependable and trustworthy; data without it shouldn't feed calculations or be the basis for decisions.",
+    "mistake": "Passing validation doesn't prove integrity: validation only checks that data is reasonable and complete, so a wrong but sensible value still gets through. Integrity also takes in accuracy, correctness, authenticity, relevance and timeliness.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-data-sources",
+    "kk": [
+      "TERMS",
+      "U3O1-KK06",
+      "U4O1-KK02"
+    ],
+    "type": "reverse",
+    "front": "Data sources",
+    "aliases": [
+      "data source"
+    ],
+    "back": "Data that comes into a solution from an outside file or system, whether the solution fetches it or is given it. A source can be unstructured, such as a plain text (TXT) file, or structured, such as a delimited (CSV) file or an XML file.",
+    "mistake": "A CSV file is plain text underneath, but it counts as structured because delimiters split each line into fields. The study design classes plain text (TXT) files as unstructured, and delimited and XML files as structured.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "t-data-visualisations",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Data visualisations",
+    "aliases": [
+      "data visualisation",
+      "data visualization",
+      "data visualizations"
+    ],
+    "back": "Using software to present analysed data graphically, typically as a combination of charts, histograms, graphs, maps and network diagrams that is both appealing and informative. They help users explore large amounts of data to spot patterns and relationships. The graphics may be static or dynamic, and may include virtual and augmented reality.",
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "t-debugging",
     "kk": [
       "TERMS",
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "type": "reverse",
-    "front": "debugging",
-    "back": "Locating and fixing the cause of errors in code, using techniques such as breakpoints, debugging output statements and commenting out sections of code.",
+    "front": "Debugging",
+    "back": "Part of developing a solution in a programming language: finding the errors already in the code, fixing them, then testing that the changes work correctly. It happens during development, as the code is being written. Techniques include breakpoints, statements that display values as the code runs, and commenting out code.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
+  },
+  {
+    "id": "t-descriptive-statistics",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Descriptive statistics",
+    "back": "Measures that summarise a data set. They are grouped as measures of central tendency (average and median) and measures of variability and spread (maximum, minimum, range, frequency and standard deviation).",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "t-design-principles",
+    "kk": [
+      "TERMS",
+      "U3O2-KK16"
+    ],
+    "type": "reverse",
+    "front": "Design principles",
+    "aliases": [
+      "design principle"
+    ],
+    "back": "Recognised qualities that help a solution work well, be easy to use and look good. The study design groups them under functionality (interactivity, navigation), usability (ease of use, accessibility) and appearance (alignment, balance, contrast, image use, space, and text and table formatting).",
+    "mistake": "Contrast is a design principle, not a UX characteristic: when users can't tell what a control does, the problem is affordance (a quarter of students mixed these up in 2025). Proximity, repetition and hierarchy aren't study design principles.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-design-thinking",
+    "kk": [
+      "TERMS",
+      "U3O2-KK12",
+      "U3O2-KK13"
+    ],
+    "type": "reverse",
+    "front": "Design thinking",
+    "back": "Using critical and creative thought to come up with and judge new ideas, then defining the preferred solution precisely enough to build it with a digital system. It depends on understanding users' needs and finding ways to beat existing solutions on efficiency or effectiveness. Divergent thinking supports creativity by generating a wide range of ideas; convergent thinking selects the preferred solution and produces accurate, logical plans and instructions for building it.",
+    "mistake": "Divergent and convergent are easily swapped: divergent thinking spreads out into many possible ideas (brainstorming is an example), while convergent thinking narrows them to one preferred solution and its detailed plans.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-digital-system",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Digital system",
+    "aliases": [
+      "digital systems"
+    ],
+    "back": "The hardware, software and other elements, together with how they are interconnected, that are used to build digital solutions. Linking digital systems to one another creates a network.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "t-dynamic-data-visualisations",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Dynamic data visualisations",
+    "aliases": [
+      "dynamic data visualisation",
+      "dynamic data visualization",
+      "dynamic data visualizations"
+    ],
+    "back": "Graphical displays of complex information or data that users can explore interactively. Unlike a static visualisation or chart, the data shown can change, either when the user interacts with it or when live data is added.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "t-effectiveness",
     "kk": [
       "TERMS",
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "U4O1-KK01",
+      "U4O2-KK06"
     ],
     "type": "reverse",
-    "front": "effectiveness",
-    "back": "A measure of how well a solution achieves its intended purpose, for example how accurate, complete and usable its output and operation are.",
-    "mistake": "Effective doesn't mean efficient. A solution can produce accurate, complete results (effective) but take users more steps, or cost more to run, than it should (inefficient).",
-    "difficulty": 2,
-    "source": "textbook"
+    "front": "Effectiveness",
+    "back": "How well a solution, design, data and information security strategy or development practice works, and how far it achieves what it was meant to do. For solutions and designs, measures include accessibility, accuracy, attractiveness, clarity, communication of message, completeness, maintainability, readability, relevance, timeliness and usability. For security strategies: confidentiality, integrity and availability. For development practices: the security controls in place, exposure to vulnerabilities and risks, and legal compliance.",
+    "mistake": "Effective isn't the same as efficient: effectiveness is how well the result serves its purpose (fewer errors, clearer feedback), while efficiency is the time, cost and effort used to get there (a faster workflow, lower cost). The 2025 report expected a separate example of each.",
+    "difficulty": 3,
+    "source": "study-design"
   },
   {
     "id": "t-efficiency",
     "kk": [
       "TERMS",
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "U4O1-KK01"
     ],
     "type": "reverse",
-    "front": "efficiency",
-    "back": "A measure of how well a solution uses resources such as time, cost and effort to produce its results, for example how quickly it processes data or how few steps a user needs to complete a task.",
-    "mistake": "Efficiency is about the resources used, not whether the output is right. Correct, complete output is a matter of effectiveness.",
+    "front": "Efficiency",
+    "back": "The time, cost and effort it takes to achieve the intended results: the less used, the more efficient. For a solution, measures include the cost of manipulating data and files, its functionality and how fast it processes. For a network, measures include productivity, processing time, running costs and how much is automated.",
+    "mistake": "Efficiency examples are about time, cost and effort (a faster workflow, fewer steps, lower running costs); fewer errors or clearer output are effectiveness examples. Keep the two apart when an answer asks for both.",
     "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-encapsulation",
-    "kk": [
-      "TERMS",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "encapsulation",
-    "back": "Bundling an object's attributes and the methods that act on them into one class, and restricting direct access to the attributes (usually by making them private) so that other code must use the class's public methods.",
-    "mistake": "Encapsulation is more than putting code in a class. The key idea is protecting the data by controlling how it can be read and changed.",
-    "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "t-encryption",
@@ -365,501 +311,235 @@
       "U4O2-KK04"
     ],
     "type": "reverse",
-    "front": "encryption",
-    "back": "Converting readable data (plaintext) into an unreadable form (ciphertext) using an algorithm and a key, so that only someone with the correct key can decrypt and read it.",
-    "mistake": "Encryption doesn't stop data being stolen; it stops stolen data being read, as long as the key stays secret.",
+    "front": "Encryption",
+    "back": "Turning data and information from plain text into a coded form, to keep it from being compromised. It comes in two kinds. Symmetric encryption uses one key both to encrypt and to decrypt. Asymmetric encryption uses a public key to encrypt the data and information, and a matching private key to decrypt it.",
+    "mistake": "To protect sensitive data an application stores, encrypt it. A cloud backup only guards against losing the data, and making users log in with multi-factor authentication doesn't secure what is already stored; encrypted data that is stolen can't be read without the key.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
-    "id": "t-essential-eight",
+    "id": "t-errors-programming",
+    "kk": [
+      "TERMS",
+      "U3O1-KK13"
+    ],
+    "type": "reverse",
+    "front": "Errors (programming)",
+    "aliases": [
+      "programming errors",
+      "errors"
+    ],
+    "back": "Problems that stop a program working as expected. They are classed as syntax (the language's rules aren't followed, so the code can't be compiled and executed), logic (the program runs but produces incorrect output, such as a wrong calculation or a condition evaluated wrongly) or run-time (something fails during execution, such as overflow, index out of range, type mismatch or divide by zero, crashing the program unless handled).",
+    "mistake": "A syntax error is a broken language rule, such as a missing symbol, that stops the code compiling; dividing by zero isn't one. Dividing by zero crashes the program while it runs (run-time), and a wrong result without a crash is a logic error.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-ethics",
+    "kk": [
+      "TERMS",
+      "U4O2-KK08",
+      "U3O1-KK01"
+    ],
+    "type": "reverse",
+    "front": "Ethics",
+    "aliases": [
+      "ethical issues"
+    ],
+    "back": "Situations that call moral standards, principles or expectations into question, and that can affect individuals, organisations or both. The ones the study design lists for software development are ineffective security practices, use of artificial intelligence during development, intellectual property and copyright issues.",
+    "mistake": "Using AI to write code isn't unethical in itself. The issue is how it is used: for example, an organisation becoming too reliant on AI to write its code.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-format",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Format",
+    "back": "How data and information physically look when they are presented, for example as images, graphs, tables, text or web pages. A format sets characteristics such as the presentation style or arrangement, and the shape and size.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "t-ideation",
+    "kk": [
+      "TERMS",
+      "U3O2-KK12"
+    ],
+    "type": "reverse",
+    "front": "Ideation",
+    "back": "A process of coming up with ideas and building on them, cycling from a first concept through to a developed design. Ideas may be captured as text, images and drawings, or spoken aloud. Tools for it include mood boards, brainstorming, mind maps, sketches and annotations.",
+    "mistake": "Brainstorming and mind maps aren't the same tool. A brainstorm collects related ideas around a central theme without structure; a mind map is structured, with ideas branching further out from the first-level ideas.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-identity-and-access-management",
+    "kk": [
+      "TERMS",
+      "U4O2-KK04",
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Identity and access management",
+    "aliases": [
+      "IAM"
+    ],
+    "back": "The process of making sure each member of an organisation can reach only the data, modules and systems needed for their assigned duties. Done well, no one can get into data, modules or systems beyond what they need, staff receive administrator or other high-level privileges only when necessary, and the organisation's exposure to risk and security breaches is reduced.",
+    "mistake": "In a development environment, IAM isn't about confidential user data, which wouldn't be held there. It protects the code and development data by authenticating each developer and restricting what they can access.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "t-industry-frameworks",
     "kk": [
       "TERMS",
       "U4O2-KK07"
     ],
     "type": "reverse",
-    "front": "Essential Eight",
-    "back": "A set of eight prioritised mitigation strategies, including multi-factor authentication, patching and regular backups, published by the Australian Cyber Security Centre (ACSC) to help organisations protect their systems against cyber attacks.",
+    "front": "Industry frameworks",
+    "aliases": [
+      "industry framework"
+    ],
+    "back": "Guidelines written so that organisations and governments apply strategies that keep their data and information secure across networks, and uphold the highest ethical standards. Those relevant to this study are Australia's Artificial Intelligence (AI) Ethics Principles, the Essential Eight and the Information Security Manual (ISM).",
     "difficulty": 2,
-    "source": "textbook",
+    "source": "study-design"
+  },
+  {
+    "id": "t-infographics",
+    "kk": [
+      "TERMS"
+    ],
+    "type": "reverse",
+    "front": "Infographics",
     "aliases": [
-      "Essential 8"
-    ]
+      "infographic"
+    ],
+    "back": "Visual displays of complex data or information that summarise a topic or area of interest. They work by putting visual elements together so that patterns or trends in data come across quickly and clearly, or so that information is presented as data visualisations. Common features are complementary colour schemes, easy-to-read fonts, headings, multiple graphs, simple charts and statistics.",
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
-    "id": "t-evaluation-criteria",
+    "id": "t-legal-requirements",
     "kk": [
       "TERMS",
-      "U3O2-KK13"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "type": "reverse",
-    "front": "evaluation criteria",
-    "back": "Measurable statements, based on the solution requirements, used to judge how efficient and effective a design idea or a finished solution is.",
-    "mistake": "'The app is good' is not a criterion because it can't be measured. 'A new booking can be made in under one minute' can be checked against the solution.",
-    "difficulty": 2,
-    "source": "textbook",
+    "front": "Legal requirements",
     "aliases": [
-      "evaluation criterion"
-    ]
-  },
-  {
-    "id": "t-existence-check",
-    "kk": [
-      "TERMS",
-      "U3O1-KK10"
+      "legal requirement"
     ],
-    "type": "reverse",
-    "front": "existence check",
-    "back": "A validation check that a required field has not been left empty before the data is accepted.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "presence check"
-    ]
-  },
-  {
-    "id": "t-functional-requirement",
-    "kk": [
-      "TERMS",
-      "U3O2-KK05",
-      "U3O1-KK02"
-    ],
-    "type": "reverse",
-    "front": "functional requirement",
-    "back": "A statement of what a solution must do: a function or task it must perform, such as calculating a total fee or producing a monthly report.",
-    "mistake": "If a statement describes how well the solution must work (how fast, how easy to use), it is a non-functional requirement, not a functional one.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-gantt-chart",
-    "kk": [
-      "TERMS",
-      "U3O2-KK03"
-    ],
-    "type": "reverse",
-    "front": "Gantt chart",
-    "back": "A project management chart that shows each task as a horizontal bar against a timeline, so its start, duration and finish can be read off. It often also shows the dependencies between tasks, milestones and the critical path.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-generalisation",
-    "kk": [
-      "TERMS",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "generalisation",
-    "back": "Identifying the attributes and methods that several classes have in common and placing them in a more general superclass, which those classes then inherit from. For example, `Car` and `Truck` are generalised into `Vehicle`.",
-    "mistake": "Generalisation isn't another word for inheritance. Generalisation is the design step of moving shared features up into a superclass; inheritance is the mechanism by which the subclasses then receive them.",
+    "back": "The key Acts that individuals, organisations and governments need to comply with on intellectual property and the privacy of data and information. For this study they are the Copyright Act 1968 (Cwlth), the Health Records Act 2001 (Vic), the Privacy Act 1988 (Cwlth), including the Privacy Amendment (Enhancing Privacy Protection) Act 2012 and the Privacy Amendment (Notifiable Data Breaches) Act 2017, and the Privacy and Data Protection Act 2014 (Vic).",
+    "mistake": "Not every misuse of data breaches copyright. The Copyright Act is breached by copying or changing someone else's work, such as editing another author's code, without permission; storing personal information insecurely is a matter for the privacy Acts.",
     "difficulty": 3,
-    "source": "textbook",
+    "source": "study-design"
+  },
+  {
+    "id": "t-naming-conventions",
+    "kk": [
+      "TERMS",
+      "U3O1-KK09",
+      "U3O2-KK11"
+    ],
+    "type": "reverse",
+    "front": "Naming conventions",
     "aliases": [
-      "generalization"
-    ]
-  },
-  {
-    "id": "t-generative-ai",
-    "kk": [
-      "TERMS",
-      "U3O1-KK01"
+      "naming convention"
     ],
-    "type": "reverse",
-    "front": "generative AI",
-    "back": "Artificial intelligence that produces new content, such as text, images or program code, in response to a prompt, using patterns learned from large amounts of training data.",
-    "mistake": "AI-generated code isn't automatically correct: it can look right and still contain errors or security flaws. The programmer stays responsible for it, so read it, test it and acknowledge that AI was used.",
+    "back": "Guidelines that keep the names given to parts of a digital solution consistent while it is developed, including the names of programs, functions, interface controls, variables, tables and files. Consistent names make the solution and its code quicker and easier to read and understand. Hungarian notation, camel casing and snake casing are examples.",
+    "mistake": "Picking any convention isn't enough: the point is consistency. A new name must follow the convention the design already uses, so if the existing names use camel casing (totalCost), a new one does too (taxRate, not tax_rate).",
     "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "generative artificial intelligence",
-      "GenAI"
-    ]
+    "source": "study-design"
   },
   {
-    "id": "t-goal",
+    "id": "t-primary-data",
     "kk": [
       "TERMS",
-      "U4O2-KK01"
+      "U3O2-KK04"
     ],
     "type": "reverse",
-    "front": "goal",
-    "back": "A broad, long-term aim that states what an organisation wants to achieve, such as improving customer service or growing its membership.",
-    "mistake": "Goals are broad and long-term; objectives are specific, measurable targets with a time frame that work towards a goal.",
+    "front": "Primary data",
+    "back": "Data that researchers gather themselves, straight from its sources, for example through surveys, interviews or observations. It is raw: nobody has processed or summarised it yet.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
-    "id": "t-hungarian-notation",
-    "kk": [
-      "TERMS",
-      "U3O1-KK09"
-    ],
-    "type": "reverse",
-    "front": "Hungarian notation",
-    "back": "A naming convention that starts a name with a short prefix showing its data type or control type, such as `strSurname` for a String variable or `txtSurname` for a text box.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-inheritance",
-    "kk": [
-      "TERMS",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "inheritance",
-    "back": "The mechanism by which a subclass (child class) automatically receives the attributes and methods of its superclass (parent class), and can add its own or override inherited ones.",
-    "mistake": "Inheritance flows from superclass to subclass only. A `Car` subclass has everything `Vehicle` has, but `Vehicle` doesn't gain the extra attributes that `Car` adds.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-intellectual-property",
-    "kk": [
-      "TERMS",
-      "U3O2-KK10"
-    ],
-    "type": "reverse",
-    "front": "intellectual property",
-    "back": "Creations of the mind, such as software, designs, written works and brand names, that the law allows their creators or owners to control and profit from, for example through copyright.",
-    "mistake": "Code isn't free to reuse just because it is publicly visible online. It is still someone's intellectual property, so check its licence and acknowledge its source.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-internal-documentation",
-    "kk": [
-      "TERMS",
-      "U3O1-KK11"
-    ],
-    "type": "reverse",
-    "front": "internal documentation",
-    "back": "Comments written in the source code that explain the purpose of each module, its key features and the reasons for processing choices, so programmers can understand and maintain the code.",
-    "mistake": "Good comments explain why, not just what. `// post-test loop: the menu must be shown at least once` is more useful than `// loop until the user quits`.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-interoperability",
-    "kk": [
-      "TERMS",
-      "U3O2-KK15"
-    ],
-    "type": "reverse",
-    "front": "interoperability",
-    "back": "The ability of a solution to exchange data and work with other systems, programs or devices, often by using shared formats or standards such as CSV or XML.",
-    "mistake": "Interoperability (working with other systems) is not portability (running on different platforms with little or no change).",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-ipo-chart",
-    "kk": [
-      "TERMS",
-      "U3O2-KK14",
-      "U3O1-KK03"
-    ],
-    "type": "reverse",
-    "front": "IPO chart",
-    "back": "A table for one module or problem that lists its inputs, the processing that turns those inputs into results, and the outputs produced.",
-    "mistake": "Keep each column to its job: data items go in the input and output columns, and actions such as calculate, compare or sort go in the processing column.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "input-process-output chart",
-      "input process output chart"
-    ]
-  },
-  {
-    "id": "t-least-privilege",
-    "kk": [
-      "TERMS",
-      "U4O2-KK09"
-    ],
-    "type": "reverse",
-    "front": "least privilege",
-    "back": "The security principle that each user, program or process is given only the minimum access rights it needs to do its job, so a compromised or careless account can do less damage.",
-    "mistake": "Least privilege applies to developers too. A developer who needs to change code doesn't automatically need access to production data.",
-    "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "principle of least privilege"
-    ]
-  },
-  {
-    "id": "t-library",
-    "kk": [
-      "TERMS",
-      "U4O1-KK04"
-    ],
-    "type": "reverse",
-    "front": "library",
-    "back": "A collection of pre-written, reusable code, such as functions and classes, that programmers can include in their own programs instead of writing that code themselves.",
-    "mistake": "A library is still someone else's code. Check its licence, acknowledge it and keep it updated, because a vulnerable or abandoned library becomes a weakness in your solution.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-logic-error",
-    "kk": [
-      "TERMS",
-      "U3O1-KK13"
-    ],
-    "type": "reverse",
-    "front": "logic error",
-    "back": "An error in the program's reasoning, such as using `<` where `<=` was needed or applying the wrong formula, so the program runs without crashing but produces incorrect output.",
-    "mistake": "The translator can't detect a logic error because the code is valid. It is found by testing: comparing actual output with expected output.",
-    "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "logical error"
-    ]
-  },
-  {
-    "id": "t-method",
-    "kk": [
-      "TERMS",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "method",
-    "back": "A function or procedure defined inside a class that describes something its objects can do, such as calculating a value or changing an attribute.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-milestone",
+    "id": "t-project-management",
     "kk": [
       "TERMS",
       "U3O2-KK03"
     ],
     "type": "reverse",
-    "front": "milestone",
-    "back": "A significant point in a project, such as the end of a stage or the delivery of a product, used to mark progress. It has no duration and is usually drawn as a diamond on a Gantt chart.",
-    "mistake": "A milestone is an event, not a task: it takes no time and uses no resources.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-mock-up",
-    "kk": [
-      "TERMS",
-      "U3O2-KK14",
-      "U3O1-KK03"
-    ],
-    "type": "reverse",
-    "front": "mock-up",
-    "back": "A drawing of how a screen or user interface will look, showing the layout of elements such as headings, input controls and buttons, usually annotated with details such as fonts, colours and what each control does.",
-    "mistake": "A mock-up shows appearance and layout, not processing. The logic behind a button belongs in pseudocode or an IPO chart.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "mockup",
-      "mock up"
-    ]
-  },
-  {
-    "id": "t-multi-factor-authentication",
-    "kk": [
-      "TERMS",
-      "U4O2-KK04"
-    ],
-    "type": "reverse",
-    "front": "multi-factor authentication",
-    "back": "Authentication that requires two or more different types of factor, such as a password (something you know) plus a code sent to a phone (something you have), so a stolen password alone isn't enough.",
-    "mistake": "A password and a PIN are both something you know, so together they are not multi-factor authentication. The factors must be of different types.",
+    "front": "Project management",
+    "back": "A detailed proposal for how a project will be managed, taking its requirements and constraints into account. Its features include identifying tasks, sequencing them, allocating time, and setting out dependencies, milestones and the critical path. In this study it is carried out with Gantt charts, which are also used to monitor and document the project's progress.",
+    "mistake": "A milestone isn't a task with a duration. It marks a point in time, such as the end of a stage of the problem-solving methodology (design finished, so development can begin), against which progress is checked.",
     "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "MFA",
-      "multifactor authentication"
-    ]
-  },
-  {
-    "id": "t-non-functional-requirement",
-    "kk": [
-      "TERMS",
-      "U3O2-KK05",
-      "U3O1-KK02"
-    ],
-    "type": "reverse",
-    "front": "non-functional requirement",
-    "back": "A quality or characteristic a solution must have, describing how well it performs its functions rather than what it does, such as reliability, usability or portability.",
-    "mistake": "'A booking must load in under two seconds' is non-functional (a performance quality), even though it mentions a task the solution does.",
-    "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "nonfunctional requirement"
-    ]
-  },
-  {
-    "id": "t-object",
-    "kk": [
-      "TERMS",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "object",
-    "back": "A single instance of a class, created while the program runs, that holds its own values for the class's attributes and can carry out the class's methods.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-object-description",
-    "kk": [
-      "TERMS",
-      "U3O2-KK14",
-      "U3O1-KK03",
-      "U3O1-KK07"
-    ],
-    "type": "reverse",
-    "front": "object description",
-    "back": "A design tool that describes an object by its name, its properties (attributes) with their data types, and its methods (what it can do).",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-objective",
-    "kk": [
-      "TERMS",
-      "U4O2-KK01"
-    ],
-    "type": "reverse",
-    "front": "objective",
-    "back": "A specific, measurable target with a time frame that helps an organisation achieve a goal, such as cutting processing time by 20% within a year.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-patching",
-    "kk": [
-      "TERMS",
-      "U4O2-KK04"
-    ],
-    "type": "reverse",
-    "front": "patching",
-    "back": "Installing updates (patches) released by a software or hardware vendor to fix bugs and close security vulnerabilities. Applying patches promptly removes weaknesses that attackers may already know about.",
-    "mistake": "Patching isn't only for the finished product. The libraries, tools and operating systems a development team uses need patching too.",
-    "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "t-pseudocode",
     "kk": [
       "TERMS",
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "type": "reverse",
-    "front": "pseudocode",
-    "back": "A way of writing an algorithm as structured, English-like statements with keywords such as IF, WHILE and DISPLAY, independent of the syntax of any programming language.",
-    "difficulty": 1,
-    "source": "textbook",
+    "front": "Pseudocode",
     "aliases": [
       "pseudo-code"
-    ]
-  },
-  {
-    "id": "t-range-check",
-    "kk": [
-      "TERMS",
-      "U3O1-KK10"
     ],
-    "type": "reverse",
-    "front": "range check",
-    "back": "A validation check that a value falls within set lower and upper limits, for example a percentage from 0 to 100.",
+    "back": "English-like statements, written in order, that represent an algorithm for solving a problem. There is no single standard, but common conventions include START/BEGIN and FINISH/END to mark where a program starts and finishes, IF…ELSE and SELECT for decisions (selection), and REPEAT…UNTIL, WHILE…DO and FOR…NEXT for loops (repetition or iteration).",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
-    "id": "t-record",
+    "id": "t-secondary-data",
     "kk": [
       "TERMS",
-      "U3O1-KK05"
+      "U3O2-KK04"
     ],
     "type": "reverse",
-    "front": "record",
-    "back": "A data structure that groups related data items, which can be of different data types, under one name, with each item stored in a named field (for example, a member's name as a String and age as an Integer).",
-    "mistake": "Unlike an array, a record's fields can hold different data types and are reached by field name, not by an index.",
+    "front": "Secondary data",
+    "back": "Data that someone other than the researcher has already collected, summarised or analysed. It may be large in volume and kept in repositories or data sets, and reports and articles can count as secondary data too.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "t-security-controls",
+    "kk": [
+      "TERMS",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "Security controls",
+    "aliases": [
+      "security control"
+    ],
+    "back": "Measures that help protect individuals, systems, networks, organisations, and data as it is collected, communicated and stored. A control can be hardware, software, physical equipment, a procedure or an electronic measure. For software development, the study design lists version control and code repositories, robust identity and access management, encryption, code review, regular updates and patches to software, and separated development, testing and production environments.",
+    "mistake": "A control isn't a strategy. Asked for a strategy to improve secure development practice, give developer training, onboarding/induction or a risk management plan; describing controls such as encryption or code review earned no marks in 2025.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
-    "id": "t-risk",
+    "id": "t-security-threats",
     "kk": [
       "TERMS",
-      "U4O2-KK03"
+      "U4O2-KK03",
+      "U4O2-KK09"
     ],
     "type": "reverse",
-    "front": "risk",
-    "back": "The likelihood that a threat will exploit a vulnerability, considered together with the impact if it does. Risks are often rated by likelihood and impact to decide which to deal with first.",
+    "front": "Security threats",
+    "aliases": [
+      "security threat"
+    ],
+    "back": "Actions, devices and events that put at risk the security and integrity of data and information stored in, or exchanged between, digital systems. They can be accidental (deleting or overwriting data, misdelivering information, damaging equipment unintentionally), deliberate (insider threats, unauthorised access, stealing data or physical devices, malware, denial of service attacks, social engineering) or events-based (natural disasters and environmental factors, power or network outages, hardware failures, data corruption).",
+    "mistake": "A phishing email sent by outsiders isn't an insider threat, even if an employee clicks the link: that is social engineering. An insider threat comes from someone within the organisation, such as a developer whose change to the development environment makes its code and data public.",
     "difficulty": 3,
-    "source": "textbook"
-  },
-  {
-    "id": "t-runtime-error",
-    "kk": [
-      "TERMS",
-      "U3O1-KK13"
-    ],
-    "type": "reverse",
-    "front": "runtime error",
-    "back": "An error that occurs while the program is running, such as a division by zero, an index out of range or an overflow. Unless the error is handled, it usually makes the program stop unexpectedly (crash).",
-    "mistake": "A runtime error isn't a syntax error: the code is valid and translates, but an operation becomes impossible with particular data, such as dividing by a count of zero.",
-    "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "run-time error",
-      "run time error"
-    ]
-  },
-  {
-    "id": "t-scope",
-    "kk": [
-      "TERMS",
-      "U3O2-KK07",
-      "U3O1-KK02"
-    ],
-    "type": "reverse",
-    "front": "solution scope",
-    "back": "The boundaries of a solution: what it will and won't do or include, agreed during analysis so that everyone knows what will be delivered.",
-    "mistake": "Solution scope is not variable scope (whether a variable is local or global). Stating what the solution will *not* do is part of defining its scope.",
-    "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "scope",
-      "project scope"
-    ]
-  },
-  {
-    "id": "t-scope-creep",
-    "kk": [
-      "TERMS",
-      "U4O1-KK10",
-      "U3O2-KK07"
-    ],
-    "type": "reverse",
-    "front": "scope creep",
-    "back": "The gradual, uncontrolled growth of a project's requirements or features after its scope has been agreed, usually without matching extra time or budget, which can delay the project and raise its costs.",
-    "mistake": "Scope creep isn't caused only by clients. A developer who adds features nobody asked for causes it too.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-snake-case",
-    "kk": [
-      "TERMS",
-      "U3O1-KK09"
-    ],
-    "type": "reverse",
-    "front": "snake case",
-    "back": "A naming convention that writes names in lowercase with an underscore between words, such as `total_cost`.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "snake_case",
-      "snake casing"
-    ]
+    "source": "study-design"
   },
   {
     "id": "t-software-requirements-specification",
@@ -868,197 +548,65 @@
       "U3O2-KK09"
     ],
     "type": "reverse",
-    "front": "software requirements specification",
-    "back": "A document produced during analysis that sets out in detail what a proposed solution must do and the conditions it must meet, including its requirements, constraints and scope, as the agreed basis for design, development and evaluation.",
-    "difficulty": 2,
-    "source": "textbook",
+    "front": "Software requirements specification",
     "aliases": [
       "SRS"
-    ]
-  },
-  {
-    "id": "t-syntax-error",
-    "kk": [
-      "TERMS",
-      "U3O1-KK13"
     ],
-    "type": "reverse",
-    "front": "syntax error",
-    "back": "An error where code breaks the grammar rules of the programming language, such as a missing bracket or a misspelt keyword, so the code can't be translated and the program won't run until it is fixed.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-test-data",
-    "kk": [
-      "TERMS",
-      "U3O1-KK14"
-    ],
-    "type": "reverse",
-    "front": "test data",
-    "back": "Input values chosen to test a solution, including valid data, invalid data and boundary values at the edges of acceptable ranges, each with its expected output worked out in advance.",
-    "mistake": "Testing only valid data isn't enough. Errors often hide at the limits, so for an accepted range of 1 to 10, test 0, 1, 10 and 11 as well as a typical value.",
+    "back": "A document describing what a software solution is intended to do and the environment it will work in. It captures the main work of the analysis stage of the problem-solving methodology, and should describe the functional and non-functional requirements, constraints, scope, user characteristics and technical environments. It also includes analytical tools (context diagrams, data flow diagrams, use case diagrams) showing existing processes and systems.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
-    "id": "t-testing",
+    "id": "t-systems-thinking",
     "kk": [
-      "TERMS",
-      "U3O1-KK14"
+      "TERMS"
     ],
     "type": "reverse",
-    "front": "testing",
-    "back": "Running a solution with planned test data and comparing its actual output with the expected output, to check that it works correctly and meets its requirements.",
-    "mistake": "Testing shows that errors exist; debugging is the separate job of locating their cause and fixing them.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-threat",
-    "kk": [
-      "TERMS",
-      "U4O2-KK09"
-    ],
-    "type": "reverse",
-    "front": "threat",
-    "back": "Anything that could harm a system or its data by exploiting a vulnerability: a deliberate act (such as an attacker stealing passwords), an accident (such as an employee deleting files by mistake) or an event (such as a fire or power failure).",
+    "front": "Systems thinking",
+    "back": "An approach that looks at the whole picture when identifying and solving problems. It analyses how the components of each information system (data, processes, people and digital systems) interact and relate to one another, to work out how they influence the way the whole system functions. In Unit 4 it is applied when analysing and evaluating an organisation's software development security strategies and recommending improvements.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
-    "id": "t-threat-modelling",
-    "kk": [
-      "TERMS",
-      "U4O2-KK05"
-    ],
-    "type": "reverse",
-    "front": "threat modelling",
-    "back": "A structured process, begun during design and revisited as the system changes, for identifying the threats a system faces, deciding which matter most, and planning controls to reduce them.",
-    "mistake": "Threat modelling is done early, before code is written, not only after an attack. A security flaw built into the design costs far more to fix later.",
-    "difficulty": 3,
-    "source": "textbook",
-    "aliases": [
-      "threat modeling"
-    ]
-  },
-  {
-    "id": "t-type-check",
-    "kk": [
-      "TERMS",
-      "U3O1-KK10"
-    ],
-    "type": "reverse",
-    "front": "type check",
-    "back": "A validation check that input is of the expected data type, for example rejecting letters typed into a quantity field that must hold an Integer.",
-    "difficulty": 1,
-    "source": "textbook",
-    "aliases": [
-      "data type check"
-    ]
-  },
-  {
-    "id": "t-usability",
+    "id": "t-user-experience",
     "kk": [
       "TERMS",
       "U3O2-KK15"
     ],
     "type": "reverse",
-    "front": "usability",
-    "back": "How easily users can learn and operate a solution to complete their tasks, and how satisfied they are when using it.",
-    "difficulty": 1,
-    "source": "textbook"
-  },
-  {
-    "id": "t-use-case-diagram",
-    "kk": [
-      "TERMS",
-      "U3O2-KK08"
-    ],
-    "type": "reverse",
-    "front": "use case diagram",
-    "back": "A diagram that shows the actors who interact with a system, the use cases (goals) they carry out inside the system boundary, and the associations and <<includes>> or <<extends>> relationships between them.",
-    "mistake": "A use case diagram shows who does what with the system. It doesn't show the order of steps or the data that flows; actors sit outside the system boundary and use cases inside it.",
-    "difficulty": 2,
-    "source": "textbook",
+    "front": "User experience",
     "aliases": [
-      "use-case diagram"
-    ]
-  },
-  {
-    "id": "t-user-centred-design",
-    "kk": [
-      "TERMS",
-      "U4O1-KK01"
+      "UX"
     ],
-    "type": "reverse",
-    "front": "user-centred design",
-    "back": "An approach to designing a solution that puts the needs, abilities and goals of its users at the centre, involving users throughout and refining the design using their feedback and testing.",
-    "mistake": "User-centred design isn't one survey at the start of a project. Users are consulted repeatedly, and their feedback changes the design as development continues.",
+    "back": "Taking into account how users perceive a digital system and how they react as they interact with it. Its characteristics are affordance, interoperability, security (authentication and data protection) and usability.",
+    "mistake": "Contrast isn't a UX characteristic (it's a design principle), and neither is portability. Name one of the four: affordance, interoperability, security or usability; the 2025 report gave no marks for other qualities.",
     "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "user-centered design",
-      "user centred design"
-    ]
+    "source": "study-design"
   },
   {
     "id": "t-validation",
     "kk": [
       "TERMS",
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "type": "reverse",
-    "front": "validation",
-    "back": "Checking input data before it is processed or stored, to make sure it is reasonable and follows set rules, using techniques such as existence, type and range checks.",
-    "mistake": "Validation checks that data is reasonable, not that it is correct. An age of 34 passes a range check even if the person is really 43.",
+    "front": "Validation",
+    "back": "Checking, by hand or electronically, that data is reasonable and complete. It includes existence (presence) checks, which make sure a required field holds a value and isn't blank; type checks, which confirm data is of the expected type; and range checks, which make sure data falls within set limits. It can happen as data is input or after it has been stored.",
+    "mistake": "Validation checks that data is reasonable and complete, not that it is accurate (that's verification). An age of 34 passes a range check even if the person is really 43.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
-    "id": "t-version-control",
+    "id": "t-verification",
     "kk": [
-      "TERMS",
-      "U4O2-KK04",
-      "U3O2-KK11"
+      "TERMS"
     ],
     "type": "reverse",
-    "front": "version control",
-    "back": "A system that records each change made to files over time, including who made it and when, so developers can work on the same code together, compare versions and roll back to an earlier version.",
+    "front": "Verification",
+    "back": "Checking that data is accurate and consistent, from the moment it is acquired or entered and throughout its manipulation and analysis. Techniques include proofreading, comparing the data against other sources, and making sure any visualisation of the data matches what was acquired or collected.",
+    "mistake": "Verification isn't validation. Validation checks that data is reasonable and complete (existence, type and range checks); verification checks that it is accurate and consistent, for example by proofreading it or comparing it with its source.",
     "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "version control system",
-      "source control"
-    ]
-  },
-  {
-    "id": "t-vulnerability",
-    "kk": [
-      "TERMS",
-      "U4O2-KK03"
-    ],
-    "type": "reverse",
-    "front": "vulnerability",
-    "back": "A weakness in a system, program, process or environment that a threat could exploit to cause harm, such as unpatched software or an administrator password shared by the whole team.",
-    "mistake": "A vulnerability is the weakness itself. A threat is what might exploit it, and risk combines how likely that is with how much harm it would cause.",
-    "difficulty": 2,
-    "source": "textbook"
-  },
-  {
-    "id": "t-xml",
-    "kk": [
-      "TERMS",
-      "U3O1-KK06"
-    ],
-    "type": "reverse",
-    "front": "XML",
-    "back": "A plain text format that stores data between named opening and closing tags, such as `<surname>Nguyen</surname>`, nested in a hierarchy. The tags describe the data (self-describing), and new elements can be added without breaking the existing structure (extensible).",
-    "mistake": "XML tags aren't a fixed set like HTML's display tags: the author names them to describe the data they hold.",
-    "difficulty": 2,
-    "source": "textbook",
-    "aliases": [
-      "Extensible Markup Language"
-    ]
+    "source": "study-design"
   }
 ]

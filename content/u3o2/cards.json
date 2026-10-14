@@ -257,6 +257,44 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o2-kk03-009",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Critical path",
+    "back": "The longest chain of dependent tasks, by total duration, from a project's start to its finish. Its length is the shortest time the whole project can take, so a delay to any task on it pushes back the finish date unless the plan is adjusted.",
+    "mistake": "The critical path is the longest chain of dependent tasks, not the shortest one, and not simply the tasks that seem most important.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-010",
+    "kk": [
+      "U3O2-KK03",
+      "U4O1-KK11"
+    ],
+    "type": "reverse",
+    "front": "Gantt chart",
+    "back": "A project management chart that shows each task as a bar along a timeline, so its start, duration and finish can be read off. It also shows how tasks are sequenced, the dependencies between them, milestones and the critical path, and it is updated during the project to monitor and document progress.",
+    "mistake": "Asked how a Gantt chart monitors progress, don't describe what it looks like. Explain updating it with actual progress and comparing that with the plan, such as spotting a delay on the critical path.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-011",
+    "kk": [
+      "U3O2-KK03",
+      "U4O1-KK11"
+    ],
+    "type": "reverse",
+    "front": "Milestone",
+    "back": "A significant point in a project, such as the completion of a stage of the problem-solving methodology (design finished, so development can begin), used to check progress against the plan. It marks a moment rather than work, so it has no duration and is usually drawn as a diamond on a Gantt chart.",
+    "mistake": "A milestone isn't a task copied from the task list. In 2025, answers that named a task with a duration as a milestone earned no marks; name a checkpoint, such as finishing a stage, and say what reaching it shows.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o2-kk04-001",
     "kk": [
       "U3O2-KK04"
@@ -421,6 +459,35 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o2-kk05-009",
+    "kk": [
+      "U3O2-KK05",
+      "U3O1-KK02"
+    ],
+    "type": "reverse",
+    "front": "Functional requirement",
+    "back": "A requirement that states something the solution must do: accept particular inputs, produce particular outputs, or carry out a function such as calculating, sorting or validating data. For example, 'calculate each member's annual fee' or 'reject a booking date that has already passed'.",
+    "mistake": "A number doesn't make a requirement non-functional. 'Produce a report covering up to 10 years of bookings' is still something the solution does, so it is functional.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk05-010",
+    "kk": [
+      "U3O2-KK05",
+      "U3O1-KK02"
+    ],
+    "type": "reverse",
+    "front": "Non-functional requirement",
+    "aliases": [
+      "Nonfunctional requirement"
+    ],
+    "back": "A requirement describing a quality attribute of the solution (how well it works) rather than a task it performs. The study design's examples are usability, reliability, portability, robustness and maintainability; for example, 'a new receptionist can make a booking without any training'.",
+    "mistake": "A feature isn't non-functional just because it concerns users or the screen. 'Staff can print a receipt' is something the solution does (functional); non-functional requirements are qualities such as reliability or usability.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o2-kk06-003",
     "kk": [
       "U3O2-KK06"
@@ -487,6 +554,22 @@
     "back": "It rules options in or out. E.g. if the orchard's tablets often have no internet connection, the design must store records on the device and upload them later; a small budget may rule out a paid mapping library.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk06-009",
+    "kk": [
+      "U3O2-KK06",
+      "U3O1-KK02"
+    ],
+    "type": "reverse",
+    "front": "Constraint",
+    "aliases": [
+      "Solution constraint"
+    ],
+    "back": "A limit the solution has to be designed and built within. The study design's types are economic (cost and time), technical (e.g. processing speed, capacity, available equipment, compatibility, security), social (the users' level of expertise), legal (intellectual property, data ownership and privacy) and usability (accessibility, usefulness, ease of use).",
+    "mistake": "A constraint limits how the solution can be built; it isn't a task the solution performs. 'Development must cost under $5000' is a constraint, so it doesn't belong among the functional requirements.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk07-003",
@@ -564,6 +647,22 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o2-kk07-009",
+    "kk": [
+      "U3O2-KK07",
+      "U3O1-KK02"
+    ],
+    "type": "reverse",
+    "front": "Solution scope",
+    "aliases": [
+      "Scope"
+    ],
+    "back": "The limits of what a solution, or one version of it, will cover: the features and problems it will deal with and those it won't. These limits are settled during analysis and recorded in the software requirements specification, e.g. 'version 1 takes bookings; online payment waits for version 2'.",
+    "mistake": "Solution scope isn't variable scope (whether a variable is local or global). Stating what the solution will *not* do is part of defining its scope.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o2-kk08-004",
     "kk": [
       "U3O2-KK08"
@@ -621,6 +720,53 @@
     "back": "| | <<includes>> | <<extends>> |\n|:--|:--|:--|\n| When it runs | Every time the base use case runs | Only under a condition, as an optional addition |\n| Arrow direction | From the base use case to the included one | From the extending use case to the base one |\n| Example | *Place order* includes *Calculate total* | *Apply discount code* extends *Place order* |",
     "mistake": "The arrows point in opposite directions. An <<extends>> arrow points to the base use case, not away from it.",
     "difficulty": 3,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk08-009",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "Context diagram",
+    "aliases": [
+      "Level 0 diagram",
+      "Context diagram (Level 0)"
+    ],
+    "back": "A Level 0 diagram of how a system exchanges data with the outside world. The whole system is one circle, each external entity (a user or another system outside it) is a labelled rectangle, and each data flow between an entity and the system is a labelled one-way arrow. Flows never run directly between two entities, and they don't cross.",
+    "mistake": "A context diagram has no data stores and no internal processes: the system is a single circle. Stores and processes belong in the Level 1 data flow diagram.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk08-010",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "Data flow diagram",
+    "aliases": [
+      "DFD",
+      "Level 1 data flow diagram"
+    ],
+    "back": "A Level 1 diagram of how data moves within a system: where it comes from, how it is processed, where it is stored and where it goes. Processes are named circles, external entities are rectangles, data stores are two parallel lines with the store's name between them, and data flows are labelled one-way arrows. It should match the system's context diagram.",
+    "mistake": "Data can't flow straight from an external entity into a data store, or directly between two stores or two entities; a process must sit between them. Asked to find this error in a DFD on the 2025 exam, 81% of students scored zero.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk08-011",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "Use case diagram",
+    "aliases": [
+      "Use-case diagram"
+    ],
+    "back": "A UML diagram of how users interact with a system. Actors (roles, drawn as stick figures) stand outside a labelled system boundary; use cases (ellipses) sit inside it; associations (plain lines) link actors to use cases; and dashed arrows labelled <<includes>> or <<extends>> show relationships between use cases.",
+    "mistake": "An actor is a role that uses the system, such as a parking officer, not the organisation they work for, their device or the system itself. On the 2025 exam, 21% chose the organisation.",
+    "difficulty": 2,
     "source": "study-design"
   },
   {
@@ -791,6 +937,19 @@
     "type": "cloze",
     "front": "In Australia, the {{Copyright Act 1968}} (Cwlth) protects program code as a literary work, and the {{Privacy Act 1988}} (Cwlth) sets rules for handling personal information through the Australian Privacy Principles.",
     "back": "Copyright law covers who may copy and use code. Privacy law covers how personal information is collected, used, stored and disclosed. The Privacy Act applies to Australian Government agencies and many private organisations.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk10-009",
+    "kk": [
+      "U3O2-KK10",
+      "U4O2-KK08"
+    ],
+    "type": "reverse",
+    "front": "Intellectual property",
+    "back": "Creations of the mind, such as program code, designs, written works and brand names, that the law lets their creators or owners control and profit from. In Australia, program code is protected automatically by copyright under the Copyright Act 1968 (Cwlth).",
+    "mistake": "Code isn't free to reuse just because it is publicly visible online. It is still someone's intellectual property: check its licence and acknowledge its source.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -1063,6 +1222,22 @@
     "source": "study-design"
   },
   {
+    "id": "c-u3o2-kk13-009",
+    "kk": [
+      "U3O2-KK13",
+      "U4O1-KK08"
+    ],
+    "type": "reverse",
+    "front": "Evaluation criteria",
+    "aliases": [
+      "Evaluation criterion"
+    ],
+    "back": "Specific, measurable statements drawn from the solution requirements and used to judge efficiency and effectiveness. During design they are used to choose the preferred design idea; the same criteria are used again in the evaluation stage to judge how well the finished solution meets its requirements.",
+    "mistake": "'The app is good' isn't a criterion, because no evidence can show whether it has been met. 'A new booking can be made in under one minute' can be checked.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o2-kk14-001",
     "kk": [
       "U3O2-KK14",
@@ -1235,6 +1410,43 @@
     "back": "A standard, widely supported format lets data move between different programs without being retyped.",
     "difficulty": 1,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-009",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "Affordance",
+    "back": "A characteristic of user experience: how clearly an interface element's appearance shows what it does and how to use it. A raised, shaded button looks as though it can be pressed, underlined blue text looks clickable, and an empty box with a blinking cursor invites typing.",
+    "mistake": "When users can't tell what the fields and buttons on a screen are for, the UX characteristic to improve is affordance, not contrast. Contrast is a design principle; a quarter of students chose it on the 2025 exam.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-010",
+    "kk": [
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "Interoperability",
+    "back": "A characteristic of user experience: the solution's ability to exchange data and work with other systems, programs and devices, often through shared formats or standards such as CSV or XML. For example, a clinic's booking program passes each appointment to a text message service, which sends the patient a reminder.",
+    "mistake": "Interoperability isn't portability. Working with other systems and their data is interoperability; running on different platforms with little or no change is portability.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk15-011",
+    "kk": [
+      "U3O2-KK15",
+      "U3O2-KK16",
+      "U3O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "Usability",
+    "back": "How easily the intended users can learn and operate a solution to complete their tasks, and how satisfied they are using it; it includes ease of use and accessibility. The study design treats it as a characteristic of user experience and as a design principle, and it can also be a non-functional requirement or a constraint.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk16-001",

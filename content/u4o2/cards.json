@@ -70,6 +70,29 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o2-kk01-009",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "Goal",
+    "back": "A broad, long-term aim stating what an organisation wants to achieve, such as improving customer service or growing its membership. Because it usually can't be measured directly, the organisation sets objectives that work towards it.",
+    "mistake": "Goals and objectives aren't interchangeable. A goal is broad and long term; an objective is a specific, measurable target with a time frame that helps achieve a goal.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk01-010",
+    "kk": [
+      "U4O2-KK01"
+    ],
+    "type": "reverse",
+    "front": "Objective",
+    "back": "A specific, measurable target with a time frame, set to help an organisation achieve one of its goals, such as cutting the time taken to process an insurance claim by 20% within a year.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u4o2-kk02-001",
     "kk": [
       "U4O2-KK02"
@@ -246,6 +269,31 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o2-kk03-009",
+    "kk": [
+      "U4O2-KK03",
+      "U4O2-KK10"
+    ],
+    "type": "reverse",
+    "front": "Risk",
+    "back": "The chance that a threat will exploit a vulnerability, considered together with how much harm it would cause. Rating each one by likelihood and impact lets a management plan deal with the most serious first and propose controls for them.",
+    "mistake": "Risk isn't the same as a threat. A threat is what could cause harm; risk combines how likely that harm is with how severe it would be, so an unlikely threat with a severe impact can still be a high risk.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-010",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Vulnerability",
+    "back": "A weakness in a system, program, process or development environment that a threat could exploit to cause harm, such as unpatched software, an administrator password shared by the whole team, or development, testing and production combined in one environment.",
+    "mistake": "A vulnerability is the weakness itself. A threat is what might exploit it, and risk combines how likely that is with how much harm it would cause.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u4o2-kk04-001",
     "kk": [
       "U4O2-KK04"
@@ -325,6 +373,36 @@
     "back": "| | At rest | In transit |\n|:--|:--|:--|\n| Protects | Stored data: databases, backups, laptops | Data moving across a network |\n| Guards against | A stolen or copied drive being read | Data being intercepted on the way |",
     "mistake": "Encryption doesn't stop data being copied or intercepted; it makes the copy unreadable without the key. That is why sensitive data an application stores should be encrypted: a backup only guards against losing it.",
     "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-009",
+    "kk": [
+      "U4O2-KK04",
+      "U3O2-KK15"
+    ],
+    "type": "reverse",
+    "front": "Authentication",
+    "back": "Confirming that a user or device really is who or what it claims to be before access is given, using something the user knows (a password), has (a phone or security key) or is (a fingerprint). It is part of the security characteristic of user experience: login and logout features show users that their data is protected.",
+    "mistake": "Authentication confirms identity; it doesn't decide what the user may do. Authorisation is the separate step that sets what an identified user can access.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-010",
+    "kk": [
+      "U4O2-KK04",
+      "U4O2-KK03",
+      "U4O2-KK07"
+    ],
+    "type": "reverse",
+    "front": "Regular updates and patches to software",
+    "aliases": [
+      "Patching"
+    ],
+    "back": "A security control: promptly installing the fixes (patches) and updates that vendors release for software, including operating systems, applications, libraries and development tools. Each patch corrects bugs or closes a known vulnerability that attackers may already be trying to exploit in systems that haven't been updated.",
+    "mistake": "Patching isn't only for the finished product. The libraries, tools and operating systems the development team uses need patching too, and unpatched software is one of the study design's listed vulnerabilities.",
+    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -408,6 +486,21 @@
     "back": "A requirement stating what the solution must do to protect its data and functions, which can be tested like any other requirement. Example: only pharmacists can view a customer's prescription history.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk05-009",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "type": "reverse",
+    "front": "Threat modelling",
+    "aliases": [
+      "Threat modeling"
+    ],
+    "back": "A structured way of finding and dealing with the security threats to a system, begun during design and revisited whenever the system changes. The study design's principles are defining security requirements, identifying and mitigating threats, and confirming that the threats have been mitigated.",
+    "mistake": "Threat modelling doesn't end once the security requirements are defined: the next principles are identifying and mitigating threats, then confirming they have been mitigated. Asked for one of these on the 2025 exam, 83% of students scored zero.",
+    "difficulty": 3,
+    "source": "study-design"
   },
   {
     "id": "c-u4o2-kk06-001",
@@ -616,6 +709,38 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o2-kk07-009",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK09"
+    ],
+    "type": "reverse",
+    "front": "Essential Eight",
+    "aliases": [
+      "Essential 8"
+    ],
+    "back": "An industry framework from the Australian Cyber Security Centre: a prioritised set of eight mitigation strategies, such as patching applications, multi-factor authentication and regular backups, that makes an organisation's systems much harder to compromise and helps it recover after an attack. Organisations adopt it as guidance; it isn't legislation.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u4o2-kk07-010",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "Multi-factor authentication",
+    "aliases": [
+      "MFA",
+      "Multifactor authentication"
+    ],
+    "back": "Authentication that requires two or more factors of different types, such as a password (something you know) plus a code sent to a phone (something you have), so a stolen password alone isn't enough to get in. It is one of the Essential Eight mitigation strategies.",
+    "mistake": "A password and a PIN are both something you know, so together they aren't multi-factor authentication. The factors must be of different types.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u4o2-kk08-001",
     "kk": [
       "U4O2-KK08",
@@ -800,6 +925,22 @@
     "back": "Any two:\n- servers kept in a locked room with logged swipe-card access\n- backup drives stored in a locked, fire-resistant safe away from the main office\n- visitors signed in and escorted through development areas\n- old drives physically destroyed before disposal",
     "mistake": "Passwords and encryption are software measures. Physical measures control who can reach the equipment itself.",
     "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk09-009",
+    "kk": [
+      "U4O2-KK09",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "Least privilege",
+    "aliases": [
+      "Principle of least privilege"
+    ],
+    "back": "The security principle that each user, program or process gets only the access rights its duties require, and no administrator rights unless they are essential. It underpins robust identity and access management, and it limits what a careless, dishonest or stolen account can do.",
+    "mistake": "Least privilege applies to developers too. A developer who changes code in the development environment doesn't need access to production systems or live customer data.",
+    "difficulty": 2,
     "source": "textbook"
   },
   {

@@ -82,6 +82,22 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o1-kk01-009",
+    "kk": [
+      "U4O1-KK01"
+    ],
+    "type": "reverse",
+    "front": "User-centred design",
+    "aliases": [
+      "User-centered design",
+      "User centred design"
+    ],
+    "back": "An approach to developing a solution in which its actual users take part at every stage, for example through interviews in analysis, feedback on designs and beta testing. The interface evolves in response to their needs, which makes the solution more efficient and effective for the people who use it.",
+    "mistake": "Saying user-centred design 'meets the users' needs' doesn't describe it. In 2025, answers earned the mark only when they explained how real users are involved throughout development.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u4o1-kk02-001",
     "kk": [
       "U4O1-KK02",
@@ -280,6 +296,22 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o1-kk03-009",
+    "kk": [
+      "U4O1-KK03",
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "Access modifier",
+    "aliases": [
+      "Access specifier"
+    ],
+    "back": "A keyword written before an attribute or method that sets which code may use it. The study design names three: **public** (any code in the program), **protected** (the class itself and its subclasses) and **private** (only the class's own methods). Encapsulation relies on them: attributes are kept private and reached through public get and set methods.",
+    "mistake": "Protected doesn't lock an attribute inside its own class: subclasses can use it too. When only the class's own methods may use an attribute, it is private; 20% of students chose protected on the 2025 exam.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u4o1-kk04-004",
     "kk": [
       "U4O1-KK04"
@@ -337,6 +369,54 @@
     "back": "Each commit records its author, the date and a message describing the change.",
     "difficulty": 1,
     "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk04-009",
+    "kk": [
+      "U4O1-KK04",
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Application programming interface (API)",
+    "aliases": [
+      "API"
+    ],
+    "back": "A defined interface through which separate programs and systems communicate, requesting and exchanging data or services without either needing to know how the other works inside. For example, a booking app sends a request to a mapping service and gets travel times back.",
+    "mistake": "An external API isn't guaranteed to stay the same or stay available. If its provider changes it, starts charging or revokes access, the features that rely on it stop working; the use of APIs is one of the study design's listed development risks (U4O2-KK03).",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u4o1-kk04-010",
+    "kk": [
+      "U4O1-KK04",
+      "U4O2-KK04"
+    ],
+    "type": "reverse",
+    "front": "Code repository",
+    "aliases": [
+      "Repository",
+      "Repo"
+    ],
+    "back": "A shared store for a project's code and the full history of changes to it, e.g. Git, GitHub, Bitbucket or SourceForge. It supports version control and teamwork: a developer can build or extend a feature away from the main codebase, and the change is merged in only after it has been tested and reviewed.",
+    "mistake": "A repository isn't just a backup copy. It records each change with its author and a message, so a change can be reviewed, traced and rolled back.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u4o1-kk04-011",
+    "kk": [
+      "U4O1-KK04"
+    ],
+    "type": "reverse",
+    "front": "Library",
+    "aliases": [
+      "Code library"
+    ],
+    "back": "Ready-made code, such as functions and classes, packaged so developers can call it for common tasks rather than writing that code themselves. Languages ship with standard libraries (for reading input and writing output, for example), and third-party libraries, often open source, add more.",
+    "mistake": "A library is still someone else's code. Check its licence and keep it updated, because an outdated library can bring security vulnerabilities into the solution.",
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "c-u4o1-kk05-001",
@@ -814,6 +894,19 @@
     "difficulty": 2,
     "source": "textbook",
     "mistake": "Version control isn't a backup. It keeps the code's history so the team can roll back to a working version; code and data still need backups stored separately."
+  },
+  {
+    "id": "c-u4o1-kk10-010",
+    "kk": [
+      "U4O1-KK10",
+      "U3O2-KK07"
+    ],
+    "type": "reverse",
+    "front": "Scope creep",
+    "back": "The gradual, uncontrolled growth of a project's features or requirements after its scope has been agreed, usually without extra time or budget. It is one of the factors that make a project plan less effective, delaying tasks and raising costs.",
+    "mistake": "Unchecked scope creep doesn't buy a better product. It draws time and resources away from the agreed features, so the project's original objectives may not be met.",
+    "difficulty": 2,
+    "source": "textbook"
   },
   {
     "id": "c-u4o1-kk11-001",

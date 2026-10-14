@@ -3,118 +3,129 @@
     {
       "id": "analysis",
       "name": "Analysis",
-      "summary": "Working out what the solution must do and the conditions it must work within. The team studies the problem, need or opportunity, usually by collecting data from the people involved, and ends with documented requirements, constraints and scope. Analysis settles *what* the solution must do, not *how*.",
+      "summary": "Working out what the solution must do and the conditions it must work within. The team gathers data about the problem, need or opportunity, usually from the people involved, and from it identifies the solution requirements, constraints and scope; in Software Development these are documented in a software requirements specification (SRS). Analysis settles *what* the solution must do, not *how*.",
       "activities": [
         {
-          "id": "investigate-need",
-          "name": "Investigating the problem, need or opportunity",
-          "summary": "Collecting data from stakeholders, for example by interviews, surveys or observation, and representing the current or proposed system with tools such as context diagrams, data flow diagrams and use case diagrams."
-        },
-        {
           "id": "solution-requirements",
-          "name": "Determining solution requirements",
-          "summary": "Stating the functional requirements (what the solution must do) and the non-functional requirements (qualities it must have, such as reliability or usability)."
+          "name": "Solution requirements",
+          "summary": "Determining the functional requirements, which say what the solution must do (the input it needs, the output it produces and its functions, including how it manipulates and validates data), and the non-functional requirements, which are quality attributes such as usability, reliability, portability, robustness and maintainability. Context diagrams, data flow diagrams and use case diagrams help work them out."
         },
         {
           "id": "solution-constraints",
-          "name": "Identifying constraints",
-          "summary": "Recording the conditions that limit the solution, such as a fixed budget, a deadline, legal obligations or the devices it must run on."
+          "name": "Solution constraints",
+          "summary": "Identifying the conditions and limits the design must take into account: economic (cost and time), technical (such as processing speed, capacity, available equipment, compatibility and security), social (the users' level of expertise), legal (intellectual property, and the ownership and privacy of data) and usability (accessibility, usefulness and ease of use)."
         },
         {
           "id": "solution-scope",
-          "name": "Defining scope",
-          "summary": "Setting the boundaries of the solution: what it will do and, just as importantly, what it will not do."
+          "name": "Solution scope",
+          "summary": "Setting the boundaries of the solution by stating what it will address and what it will not, for example features left for a later version."
+        },
+        {
+          "id": "investigate-need",
+          "name": "Skills underpinning the analysis stage",
+          "summary": "Collecting data with a range of techniques, such as interviews, observations, surveys and reports, to find out and clarify what users need; judging how reliable, valid and relevant the data and its sources are; and drafting questions, with follow-up questions, that probe the problem, need or opportunity."
         }
       ]
     },
     {
       "id": "design",
       "name": "Design",
-      "summary": "Planning how the solution will work and look before any code is written. The team generates and compares different design ideas, develops the preferred one into a detailed design, and sets the criteria that will later be used to evaluate the finished solution.",
+      "summary": "Planning how the solution will work and look before any code is written. The team generates design ideas, develops evaluation criteria and uses them to choose a preferred idea, then develops that idea into detailed designs of the solution's data, functionality, appearance and user interface. The same criteria are later used to evaluate the finished solution.",
       "activities": [
         {
-          "id": "generate-design-ideas",
-          "name": "Generating design ideas",
-          "summary": "Producing a range of distinct ways the solution could look and work, using ideation techniques such as brainstorming and sketching."
-        },
-        {
-          "id": "evaluate-design-ideas",
-          "name": "Evaluating design ideas",
-          "summary": "Comparing the ideas against criteria drawn from the requirements and constraints, then choosing a preferred design and recording the reasons for the choice."
-        },
-        {
           "id": "detailed-design",
-          "name": "Producing a detailed design",
-          "summary": "Setting out the preferred design's appearance and functionality with design tools such as mock-ups, data dictionaries, object descriptions, IPO charts and pseudocode, in enough detail for a developer to code from."
+          "name": "Solution design",
+          "summary": "Developing design ideas into a preferred, detailed design using design principles and design tools. Ideation tools such as mood boards, brainstorming, mind maps, sketches and annotations generate the ideas; tools such as data dictionaries, mock-ups, object descriptions, IPO charts and pseudocode then set out the data the solution needs (its names, structure, validation and processing), its functionality and its appearance."
+        },
+        {
+          "id": "generate-design-ideas",
+          "name": "Skills underpinning the design stage",
+          "summary": "Investigating existing and possible solutions, generating design ideas and showing how they connect with text and diagrams, producing detailed annotated designs of appearance and functionality from those ideas, and planning contingencies for issues that could affect the design."
         },
         {
           "id": "evaluation-criteria",
-          "name": "Setting evaluation criteria",
-          "summary": "Deciding, from the requirements, the measurable criteria that will be used in the evaluation stage to judge how efficient and effective the finished solution is."
+          "name": "Evaluation criteria",
+          "summary": "Developing criteria, based on the requirements, that measure efficiency and effectiveness. They are first used to judge how well the design ideas meet the requirements, are refined as the solution develops, and are used again to judge the finished solution."
         }
       ]
     },
     {
       "id": "development",
       "name": "Development",
-      "summary": "Building the solution from the detailed design. The team codes it in a programming language, adds validation of input data, tests and debugs it until it works as intended, and documents it for developers and for users.",
+      "summary": "Building the solution from the requirements and designs. The team codes it in a programming language, validates its input data, tests and debugs it to make sure it meets the requirements, and writes internal documentation.",
       "activities": [
         {
           "id": "coding",
-          "name": "Coding the solution",
-          "summary": "Writing the program in a programming language, following the detailed design and using suitable data types, data structures and naming conventions."
+          "name": "Manipulation",
+          "summary": "Coding the solution to meet its specifications with suitable algorithms and features of the programming language, and applying formats and conventions that improve its appearance."
         },
         {
           "id": "validation",
-          "name": "Validating input data",
-          "summary": "Adding checks, such as existence, type and range checks, that reject unreasonable input before it is processed."
+          "name": "Validation",
+          "summary": "Checking that input data is reasonable and complete, for example with existence, type and range checks. Validation can be manual or electronic, and testing shows whether it works."
         },
         {
           "id": "testing",
-          "name": "Testing and debugging",
-          "summary": "Checking that the solution works as intended by running test data and comparing expected with actual output in test tables, then finding and fixing the errors this reveals."
+          "name": "Testing",
+          "summary": "Checking that the solution meets its requirements, works as expected and can be used by its intended users: using debugging techniques, planning a testing strategy (the features to test, the test data and the expected results), running the tests, comparing actual with expected results and correcting the errors found."
         },
         {
           "id": "documentation",
-          "name": "Documenting the solution",
-          "summary": "Writing internal documentation (comments that explain each module's purpose and the reasons for processing choices) for developers, and user documentation that shows users how to operate the solution."
+          "name": "Documentation",
+          "summary": "Writing internal documentation, such as comments in the code, that explains how the solution is built and how it behaves, so that it can be maintained and upgraded."
+        },
+        {
+          "id": "development-skills",
+          "name": "Skills underpinning the development stage",
+          "summary": "While the solution is being built: modifying and evolving the designs, refining the evaluation criteria, and planning contingencies for issues that arise along the way."
         }
       ]
     },
     {
       "id": "evaluation",
       "name": "Evaluation",
-      "summary": "Judging how well the finished solution meets the need it was built for, once it has been in use for a while. The team follows an evaluation strategy, planned before the solution goes live, collects the data, and reports on the solution's efficiency and effectiveness against the evaluation criteria.",
+      "summary": "Judging how well the finished solution meets its requirements once it has been developed and put into use. The team prepares an evaluation strategy, then applies the evaluation criteria to the data collected and discusses the solution's efficiency and effectiveness.",
       "activities": [
         {
           "id": "evaluation-strategy",
-          "name": "Planning the evaluation strategy",
-          "summary": "Deciding how the evaluation will run. A strategy typically says which criteria will be used, what data will be collected and how, when this will happen, and who is responsible."
-        },
-        {
-          "id": "collect-evaluation-data",
-          "name": "Collecting evaluation data",
-          "summary": "Gathering evidence from the solution in real use, for example by timing tasks, counting errors, examining logs, or surveying and interviewing users."
+          "name": "Evaluation strategy",
+          "summary": "Planning how the solution will be evaluated once it is developed and in use: the evaluation criteria, the time frame, the data to collect and the methods for collecting it, who is responsible for collecting it, and how the data relates to each criterion."
         },
         {
           "id": "evaluation-report",
-          "name": "Reporting the evaluation",
-          "summary": "Applying each evaluation criterion to the data collected and reporting, with evidence, how efficient and effective the solution is."
+          "name": "Solution evaluation",
+          "summary": "Applying the evaluation criteria to the data collected to decide how well the solution meets the requirements, needs or opportunities, and discussing its efficiency and effectiveness."
+        },
+        {
+          "id": "evaluation-skills",
+          "name": "Skills underpinning the evaluation stage",
+          "summary": "Looking back critically at how the analysis and design processes helped meet the requirements, and identifying improvements that a different approach to the problem-solving methodology could have brought."
         }
       ]
     }
   ],
   "specifications": [
-    "Analysis: the documentation states the problem, need or opportunity, records what was learnt from stakeholders, and sets out the functional and non-functional requirements, the constraints and the scope. Many projects gather these findings in a software requirements specification (SRS).",
-    "Analysis: analytical tools such as context diagrams, data flow diagrams and use case diagrams show the system's boundary, the data moving in and out of it, and how users interact with it.",
-    "Design: the documentation shows a range of distinct design ideas, how each idea was judged against criteria, and the reasons the preferred design was chosen.",
-    "Design: the detailed design describes the preferred design's appearance and functionality closely enough for a developer to code from it, using tools such as mock-ups, data dictionaries, object descriptions, IPO charts and pseudocode.",
-    "Design: the evaluation criteria for the finished solution are recorded, each based on the requirements and worded so that it can be measured or checked with data.",
-    "Development: the working solution is accompanied by internal documentation that explains the purpose of each module and the reasons for key processing choices.",
-    "Development: the documentation shows the validation applied to input data and the evidence of testing: test data (including valid, invalid and boundary values), test tables with expected and actual output, and the errors found and fixed.",
-    "Development: user documentation explains how to operate the solution, written for its intended users rather than for developers.",
-    "Evaluation: an evaluation strategy sets out how the solution will be judged, typically which criteria apply, what data will be collected and how, when the evaluation takes place, and who is responsible.",
-    "Evaluation: the report applies each evaluation criterion to the data collected and states, with evidence, how efficient and effective the solution is."
+    "Analysis: the functional requirements state what the solution must do: the input it needs, the output it produces and its functions, including how it manipulates and validates data.",
+    "Analysis: the non-functional requirements state the quality attributes the solution must have, such as usability, reliability, portability, robustness and maintainability.",
+    "Analysis: context diagrams, data flow diagrams and use case diagrams are used to help determine the solution requirements.",
+    "Analysis: the constraints set out what the design must take into account: economic (cost and time), technical (such as processing speed, capacity, equipment, compatibility and security), social (users' expertise), legal (intellectual property and the ownership and privacy of data) and usability (accessibility, usefulness and ease of use).",
+    "Analysis: the scope marks the boundaries of the solution, saying what it will address and what it will not.",
+    "Analysis: data is collected with a range of techniques, its sources are checked for reliability, validity and relevance, and questions and follow-up questions are prepared to clarify needs and requirements.",
+    "Analysis: the findings are documented in a software requirements specification (SRS) that describes the functional and non-functional requirements, constraints, scope, user characteristics and technical environments.",
+    "Design: the design lists the data the solution needs and plans its names, structure, validation and processing, showing how the solution will work and look.",
+    "Design: design ideas are generated with ideation tools such as mood boards, brainstorming, mind maps, sketches and annotations, and the preferred idea is developed into detailed designs using design principles.",
+    "Design: design tools such as data dictionaries, IPO charts, object descriptions and pseudocode show the solution's structure and functionality.",
+    "Design: annotated diagrams and mock-ups show how the solution's components relate and lay out its interface, giving the position and size of text and images, fonts and styles, colours and text enhancements.",
+    "Design: existing and possible solutions are investigated, ideas are connected with text and diagrams, detailed annotated designs are produced, and contingencies are planned for likely issues.",
+    "Design: evaluation criteria are developed to judge how well the designs meet the requirements; the same criteria are later used to judge the finished solution's efficiency and effectiveness.",
+    "Development: the solution is coded to meet its specifications with suitable algorithms and programming language features, and formats and conventions are applied to improve its appearance.",
+    "Development: validation, including existence, type and range checks, confirms that input data is reasonable and complete.",
+    "Development: a testing strategy lists the features to be tested, the test data and the expected results; the tests are run, actual results are recorded and compared with the expected results, and errors are debugged and corrected.",
+    "Development: internal documentation in the code explains how the solution works, so that it can be kept running, maintained and upgraded.",
+    "Development: while the solution is being built, the designs are modified and evolved, the evaluation criteria are refined, and contingencies are planned for issues that arise.",
+    "Evaluation: an evaluation strategy sets out how the solution will be evaluated once it is in use: the evaluation criteria, the time frame, the data to be collected and how, who is responsible for collecting it, and how the data relates to each criterion.",
+    "Evaluation: the solution evaluation applies the evaluation criteria to the data to judge how well the solution meets the requirements, and discusses its efficiency and effectiveness.",
+    "Evaluation: the analysis and design processes are critically reviewed for how well they helped meet the requirements, and improvements from approaching the problem-solving methodology differently are identified."
   ],
   "cards": [
     {

@@ -661,403 +661,253 @@
   ],
   "glossary": [
     {
-      "term": "abstraction",
-      "status": "provisional"
-    },
-    {
-      "term": "access modifier",
+      "term": "Alpha testing",
       "aliases": [
-        "access specifier"
+        "alpha test"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "affordance",
-      "status": "provisional"
-    },
-    {
-      "term": "algorithm",
-      "status": "provisional"
-    },
-    {
-      "term": "alpha testing",
-      "status": "provisional"
-    },
-    {
-      "term": "API",
+      "term": "Archiving",
       "aliases": [
-        "application programming interface"
+        "archive"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "array",
-      "status": "provisional"
-    },
-    {
-      "term": "authentication",
-      "status": "provisional"
-    },
-    {
-      "term": "backup",
+      "term": "Backup",
       "aliases": [
-        "back-up"
+        "back-up",
+        "backups"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "beta testing",
-      "status": "provisional"
-    },
-    {
-      "term": "binary search",
-      "status": "provisional"
-    },
-    {
-      "term": "camel case",
+      "term": "Beta testing",
       "aliases": [
-        "camelCase",
-        "camel casing"
+        "beta test"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "class",
-      "status": "provisional"
+      "term": "Computational thinking",
+      "status": "confirmed"
     },
     {
-      "term": "code repository",
+      "term": "Control structures",
       "aliases": [
-        "repository",
-        "repo"
+        "control structure"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "code review",
-      "status": "provisional"
-    },
-    {
-      "term": "constraint",
-      "status": "provisional"
-    },
-    {
-      "term": "context diagram",
-      "status": "provisional"
-    },
-    {
-      "term": "control structure",
-      "status": "provisional"
-    },
-    {
-      "term": "critical path",
-      "status": "provisional"
-    },
-    {
-      "term": "CSV",
+      "term": "Conventions",
       "aliases": [
-        "comma-separated values",
-        "comma separated values"
+        "convention"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "data dictionary",
-      "status": "provisional"
-    },
-    {
-      "term": "data flow diagram",
+      "term": "Critical and creative thinking",
       "aliases": [
-        "DFD"
+        "creative and critical thinking"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "debugging",
-      "status": "provisional"
-    },
-    {
-      "term": "effectiveness",
-      "status": "provisional"
-    },
-    {
-      "term": "efficiency",
-      "status": "provisional"
-    },
-    {
-      "term": "encapsulation",
-      "status": "provisional"
-    },
-    {
-      "term": "encryption",
-      "status": "provisional"
-    },
-    {
-      "term": "Essential Eight",
+      "term": "Cyber security",
       "aliases": [
-        "Essential 8"
+        "cybersecurity"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "evaluation criteria",
+      "term": "Data analytics",
+      "status": "confirmed"
+    },
+    {
+      "term": "Data integrity",
+      "status": "confirmed"
+    },
+    {
+      "term": "Data sources",
       "aliases": [
-        "evaluation criterion"
+        "data source"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "existence check",
+      "term": "Data visualisations",
       "aliases": [
-        "presence check"
+        "data visualisation",
+        "data visualization",
+        "data visualizations"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "functional requirement",
-      "status": "provisional"
+      "term": "Debugging",
+      "status": "confirmed"
     },
     {
-      "term": "Gantt chart",
-      "status": "provisional"
+      "term": "Descriptive statistics",
+      "status": "confirmed"
     },
     {
-      "term": "generalisation",
+      "term": "Design principles",
       "aliases": [
-        "generalization"
+        "design principle"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "generative AI",
+      "term": "Design thinking",
+      "status": "confirmed"
+    },
+    {
+      "term": "Digital system",
       "aliases": [
-        "generative artificial intelligence",
-        "GenAI"
+        "digital systems"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "goal",
-      "status": "provisional"
-    },
-    {
-      "term": "Hungarian notation",
-      "status": "provisional"
-    },
-    {
-      "term": "inheritance",
-      "status": "provisional"
-    },
-    {
-      "term": "intellectual property",
-      "status": "provisional"
-    },
-    {
-      "term": "internal documentation",
-      "status": "provisional"
-    },
-    {
-      "term": "interoperability",
-      "status": "provisional"
-    },
-    {
-      "term": "IPO chart",
+      "term": "Dynamic data visualisations",
       "aliases": [
-        "input-process-output chart",
-        "input process output chart"
+        "dynamic data visualisation",
+        "dynamic data visualization",
+        "dynamic data visualizations"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "least privilege",
+      "term": "Effectiveness",
+      "status": "confirmed"
+    },
+    {
+      "term": "Efficiency",
+      "status": "confirmed"
+    },
+    {
+      "term": "Encryption",
+      "status": "confirmed"
+    },
+    {
+      "term": "Errors (programming)",
       "aliases": [
-        "principle of least privilege"
+        "programming errors",
+        "errors"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "library",
-      "status": "provisional"
-    },
-    {
-      "term": "logic error",
+      "term": "Ethics",
       "aliases": [
-        "logical error"
+        "ethical issues"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "method",
-      "status": "provisional"
+      "term": "Format",
+      "status": "confirmed"
     },
     {
-      "term": "milestone",
-      "status": "provisional"
+      "term": "Ideation",
+      "status": "confirmed"
     },
     {
-      "term": "mock-up",
+      "term": "Identity and access management",
       "aliases": [
-        "mockup",
-        "mock up"
+        "IAM"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "multi-factor authentication",
+      "term": "Industry frameworks",
       "aliases": [
-        "MFA",
-        "multifactor authentication"
+        "industry framework"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "non-functional requirement",
+      "term": "Infographics",
       "aliases": [
-        "nonfunctional requirement"
+        "infographic"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "object",
-      "status": "provisional"
+      "term": "Legal requirements",
+      "aliases": [
+        "legal requirement"
+      ],
+      "status": "confirmed"
     },
     {
-      "term": "object description",
-      "status": "provisional"
+      "term": "Naming conventions",
+      "aliases": [
+        "naming convention"
+      ],
+      "status": "confirmed"
     },
     {
-      "term": "objective",
-      "status": "provisional"
+      "term": "Primary data",
+      "status": "confirmed"
     },
     {
-      "term": "patching",
-      "status": "provisional"
+      "term": "Project management",
+      "status": "confirmed"
     },
     {
-      "term": "pseudocode",
+      "term": "Pseudocode",
       "aliases": [
         "pseudo-code"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "range check",
-      "status": "provisional"
+      "term": "Secondary data",
+      "status": "confirmed"
     },
     {
-      "term": "record",
-      "status": "provisional"
-    },
-    {
-      "term": "risk",
-      "status": "provisional"
-    },
-    {
-      "term": "runtime error",
+      "term": "Security controls",
       "aliases": [
-        "run-time error",
-        "run time error"
+        "security control"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "scope",
+      "term": "Security threats",
       "aliases": [
-        "project scope",
-        "solution scope"
+        "security threat"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "scope creep",
-      "status": "provisional"
-    },
-    {
-      "term": "snake case",
-      "aliases": [
-        "snake_case",
-        "snake casing"
-      ],
-      "status": "provisional"
-    },
-    {
-      "term": "software requirements specification",
+      "term": "Software requirements specification",
       "aliases": [
         "SRS"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "syntax error",
-      "status": "provisional"
+      "term": "Systems thinking",
+      "status": "confirmed"
     },
     {
-      "term": "test data",
-      "status": "provisional"
-    },
-    {
-      "term": "testing",
-      "status": "provisional"
-    },
-    {
-      "term": "threat",
-      "status": "provisional"
-    },
-    {
-      "term": "threat modelling",
+      "term": "User experience",
       "aliases": [
-        "threat modeling"
+        "UX"
       ],
-      "status": "provisional"
+      "status": "confirmed"
     },
     {
-      "term": "type check",
-      "aliases": [
-        "data type check"
-      ],
-      "status": "provisional"
+      "term": "Validation",
+      "status": "confirmed"
     },
     {
-      "term": "usability",
-      "status": "provisional"
-    },
-    {
-      "term": "use case diagram",
-      "aliases": [
-        "use-case diagram"
-      ],
-      "status": "provisional"
-    },
-    {
-      "term": "user-centred design",
-      "aliases": [
-        "user-centered design",
-        "user centred design"
-      ],
-      "status": "provisional"
-    },
-    {
-      "term": "validation",
-      "status": "provisional"
-    },
-    {
-      "term": "version control",
-      "aliases": [
-        "version control system",
-        "source control"
-      ],
-      "status": "provisional"
-    },
-    {
-      "term": "vulnerability",
-      "status": "provisional"
-    },
-    {
-      "term": "XML",
-      "aliases": [
-        "Extensible Markup Language"
-      ],
-      "status": "provisional"
+      "term": "Verification",
+      "status": "confirmed"
     }
   ]
 }

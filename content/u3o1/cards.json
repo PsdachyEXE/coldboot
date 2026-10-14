@@ -88,6 +88,22 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o1-kk01-008",
+    "kk": [
+      "U3O1-KK01"
+    ],
+    "type": "reverse",
+    "front": "Generative AI",
+    "aliases": [
+      "Generative artificial intelligence",
+      "GenAI"
+    ],
+    "back": "Artificial intelligence that creates new content, such as text, images or program code, in response to a prompt, using patterns learned from large amounts of training data. In programming it can generate code from a prompt, help debug and test modules, and suggest optimisations.",
+    "mistake": "Generated code isn't automatically correct: it can look right and still contain errors or security flaws. The programmer stays responsible for it, so they read it, test it and acknowledge that AI was used.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o1-kk02-005",
     "kk": [
       "U3O1-KK02",
@@ -188,6 +204,65 @@
     "mistake": "Expecting a mock-up to set out the processing. Its annotations can say what a control does (\"saves the booking\"), but the steps behind that belong in pseudocode.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk03-009",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "Data dictionary",
+    "back": "A design tool, set out as a table, that plans the data a module needs, such as its interface controls, variables, constants and objects. Every entry gives at least a name and a data type; extra columns such as a description, field size, validation rules and a data sample can be added.",
+    "mistake": "\"Bool\" and \"Float\" aren't accepted names for data types: the 2025 examiners gave no marks for them. Write the study design's names, such as Boolean and floating point.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk03-010",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "IPO chart",
+    "aliases": [
+      "Input-process-output chart",
+      "Input-process-output (IPO) chart"
+    ],
+    "back": "A design tool that summarises one task in a table with three columns: the inputs, the processes that turn them into results, and the outputs. A module that performs several tasks needs a separate chart for each task.",
+    "mistake": "Keep each column to its job: data items go in the input and output columns, and actions such as calculate, compare or sort go in the processing column.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk03-011",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "Mock-up",
+    "aliases": [
+      "Mockup",
+      "Mock up"
+    ],
+    "back": "A detailed design drawing showing what a module's screen will look like. Its annotations describe its appearance (fonts, text colour and size, alignment, images) and its structure (which controls are needed, what each does, default values, control sizes), and can justify choices using design principles and user experience.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk03-012",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "type": "reverse",
+    "front": "Object description",
+    "back": "A design tool for planning an object, set out in three sections: Name; Properties/Attributes, the object's data, optionally with each data type, e.g. `partySize (integer)`; and Methods, its behaviours, with any parameters, e.g. `cancel(reason)`.",
+    "mistake": "Use VCAA's section names, not labels of your own: Name, Properties/Attributes and Methods. Asked to name two of them on the 2025 exam, half the students scored zero.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk04-001",
@@ -358,6 +433,34 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o1-kk05-009",
+    "kk": [
+      "U3O1-KK05"
+    ],
+    "type": "reverse",
+    "front": "One-dimensional array",
+    "aliases": [
+      "1D array",
+      "Array"
+    ],
+    "back": "A data structure that holds a list of values of a single data type under one name, each element reached by one integer index, e.g. `scores[3]`. It suits a set of like values, such as 30 test scores; values located by both a row and a column need two indexes instead.",
+    "mistake": "Don't assume the first index is 1. Indexed from 0, a 10-element array runs from `scores[0]` to `scores[9]`, so `scores[10]` is out of range; always check the stated index base.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk05-010",
+    "kk": [
+      "U3O1-KK05"
+    ],
+    "type": "reverse",
+    "front": "Record",
+    "back": "A data structure that groups related values of varying data types under one name. Each value is stored in its own field and reached by its field index (which field it is), such as `member.name` (a String) and `member.age` (an Integer).",
+    "mistake": "Unlike an array, which holds a single data type reached by an integer index, a record's fields can hold different data types, and each is reached by its field index.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o1-kk06-001",
     "kk": [
       "U3O1-KK06"
@@ -440,6 +543,23 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o1-kk06-009",
+    "kk": [
+      "U3O1-KK06",
+      "U4O1-KK02"
+    ],
+    "type": "reverse",
+    "front": "XML file",
+    "aliases": [
+      "XML",
+      "Extensible Markup Language"
+    ],
+    "back": "A structured text file that stores each value between named opening and closing tags, nested in a hierarchy, e.g. `<surname>Nguyen</surname>`. It is self-describing (the tags say what each value means), extensible (new elements can be added later without breaking programs that read it) and portable between systems.",
+    "mistake": "XML tags aren't a fixed set like HTML's: whoever designs the file names the tags to describe the data they hold.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o1-kk07-003",
     "kk": [
       "U3O1-KK07",
@@ -489,6 +609,57 @@
     "back": "Getters and setters are the class's get and set methods (also called accessor and mutator methods). For example, `setQuantity()` can reject a negative number before it reaches the private `quantity` attribute.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk07-009",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "Abstraction",
+    "back": "An OOP principle: a class hides the complicated details of how it works and exposes only what other code needs, so that code can use an object knowing what it does but not how. In design, keep only the attributes and methods relevant to the problem: a `Student` class stores a name and student ID, but not shoe size.",
+    "mistake": "Abstraction isn't the same as encapsulation. Abstraction decides which details are exposed and which are left out or hidden; encapsulation keeps the data together with its methods in one class and blocks direct access to that data.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk07-010",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "Encapsulation",
+    "back": "An OOP principle: a class keeps an object's attributes together with the methods that work on them, and stops other code reaching the attributes directly, usually by making them private with public get and set methods. Because every change must go through the class's own methods, the class can reject bad values and guard its data against accidental or deliberate misuse.",
+    "mistake": "Encapsulation is more than putting code in a class. The key idea is controlling access, so the data can be read and changed only through the class's own methods.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk07-011",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "Generalisation",
+    "aliases": [
+      "Generalization"
+    ],
+    "back": "An OOP principle: when two or more classes share attributes and methods, those shared features are moved up into a new, more general superclass that the classes then inherit from, so the code is written once rather than repeated. For example, `Car` and `Truck` both have a registration number and a `service()` method, so these go into a `Vehicle` superclass.",
+    "mistake": "Generalisation isn't another word for inheritance. Generalisation is the design step of moving shared features up into a superclass; inheritance is the mechanism by which the subclasses then receive them.",
+    "difficulty": 3,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk07-012",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "type": "reverse",
+    "front": "Inheritance",
+    "back": "An OOP principle: a subclass automatically receives the attributes and methods of an existing superclass, and can add its own or override inherited ones. Code is written once in the superclass and reused by every subclass, a fix made there reaches them all, and the classes form a hierarchy.",
+    "mistake": "An inheritance example needs a superclass with subclasses, such as `User` with `Tenant` and `Owner` subclasses. In 2025, citing a stand-alone class that merely had attributes earned no marks.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk08-001",
@@ -585,6 +756,34 @@
     "source": "study-design"
   },
   {
+    "id": "c-u3o1-kk08-009",
+    "kk": [
+      "U3O1-KK08",
+      "U4O1-KK03"
+    ],
+    "type": "reverse",
+    "front": "Class",
+    "back": "A template that defines the attributes (data) and methods (behaviours) shared by every object of one type. Objects are created from it while the program runs, each holding its own attribute values, so one `Dog` template can produce many dog objects.",
+    "mistake": "A class isn't an object. `Dog` is the class; `rex` and `bella` are two objects (instances) created from it, each with its own name and age.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk08-010",
+    "kk": [
+      "U3O1-KK08",
+      "U4O1-KK03"
+    ],
+    "type": "reverse",
+    "front": "Object",
+    "aliases": [
+      "Instance"
+    ],
+    "back": "A single instance of a class, created while the program runs. It holds its own values for the attributes the class defines and can carry out the class's methods, so two `Booking` objects can have different dates and party sizes.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o1-kk09-004",
     "kk": [
       "U3O1-KK09"
@@ -640,6 +839,49 @@
     "back": "Consistent, meaningful names make code easier for any team member to read, debug and maintain. A reader can tell an identifier's purpose (and, with Hungarian notation, its type or control) at a glance, and near-duplicates such as `totalCost` and `total_cost` are avoided.",
     "mistake": "A Hungarian prefix doesn't set or enforce a data type; the declaration does. Naming conventions help the people reading the code, not the compiler or interpreter.",
     "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk09-009",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "type": "reverse",
+    "front": "Camel casing",
+    "aliases": [
+      "Camel case",
+      "camelCase"
+    ],
+    "back": "A naming convention that joins the words of a name with no spaces, writing the first word in lower case and starting each later word with a capital letter, such as `totalCost` or `occupancyStatus`. It can be used for variables, interface controls and code structures, and combines with Hungarian prefixes, as in `strGivenName`.",
+    "mistake": "Mixing conventions costs marks. A new name must match the casing the design already uses; in 2025, new attribute names earned no marks unless they used camel casing like the rest of the object description.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk09-010",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "type": "reverse",
+    "front": "Hungarian notation",
+    "back": "A naming convention that begins each name with a short prefix showing what kind of element it is: the data type for a variable, such as `intAge` or `strSurname`, or the control type for an interface control, such as `txtSurname` or `btnSave`. The rest of the name usually follows camel casing.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk09-011",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "type": "reverse",
+    "front": "Snake casing",
+    "aliases": [
+      "Snake case",
+      "snake_case"
+    ],
+    "back": "A naming convention that writes every word of a name in lower case, with an underscore between words, such as `total_cost` or `monthly_income`. Like the other conventions, it helps only if every name of that kind in the solution follows it.",
+    "mistake": "A name such as `house_number` is snake casing, not Hungarian notation: Hungarian notation is marked by a prefix such as `str` or `txt`. This was the most common wrong answer to the 2025 exam's naming question.",
+    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -710,6 +952,55 @@
     "mistake": "Testing only a typical value such as 30 misses boundary errors. Most range-check faults show up at the limits.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk10-009",
+    "kk": [
+      "U3O1-KK10",
+      "U4O1-KK05"
+    ],
+    "type": "reverse",
+    "front": "Existence check",
+    "aliases": [
+      "Existence checking",
+      "Presence check"
+    ],
+    "back": "A validation check that confirms a required field actually holds a value, and rejects the input if the field has been left blank, for example a booking form submitted without a surname.",
+    "mistake": "An existence check covers only the field it tests. On the 2025 exam, a check that the age wasn't blank did nothing for the monthly income field, which needed a check of its own.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk10-010",
+    "kk": [
+      "U3O1-KK10",
+      "U4O1-KK05"
+    ],
+    "type": "reverse",
+    "front": "Range check",
+    "aliases": [
+      "Range checking"
+    ],
+    "back": "A validation check that accepts a value only if it lies between set lower and upper limits, such as a percentage from 0 to 100 or a party of 1 to 12 guests.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk10-011",
+    "kk": [
+      "U3O1-KK10",
+      "U4O1-KK05"
+    ],
+    "type": "reverse",
+    "front": "Type check",
+    "aliases": [
+      "Type checking",
+      "Data type check"
+    ],
+    "back": "A validation check that rejects data of the wrong type, for example `six` or `12kg` typed into a quantity field that must hold an Integer.",
+    "mistake": "An existence check doesn't confirm that an entry is a number. A numeric input used in a calculation or comparison needs a type check, or a non-number can cause a type mismatch error.",
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk11-002",
@@ -793,6 +1084,19 @@
     "back": "Whenever the code it describes changes. A comment that still says members get 10% off after the code was changed to 15% misleads the next programmer, who will trust the comment.",
     "difficulty": 1,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk11-009",
+    "kk": [
+      "U3O1-KK11",
+      "U4O1-KK01"
+    ],
+    "type": "reverse",
+    "front": "Internal documentation",
+    "back": "Comments written in the source code for programmers. They explain and justify the data and code structures used (what each module does and why it was written that way), make the code easier to maintain, and can mark placeholders (stubs) for parts still to be developed.",
+    "mistake": "Good comments explain why, not just what. `// post-test loop: the menu must show at least once` is more useful than `// loop until the user quits`.",
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk12-001",
@@ -889,6 +1193,30 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o1-kk12-009",
+    "kk": [
+      "U3O1-KK12",
+      "U3O1-KK03"
+    ],
+    "type": "reverse",
+    "front": "Algorithm",
+    "back": "A finite sequence of precise, ordered steps that solves a problem or completes a task, such as sorting a list or searching it for a value. It can be designed in pseudocode before it is coded in any programming language.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk12-010",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "type": "reverse",
+    "front": "Binary search",
+    "back": "A search of sorted data that compares the target with the middle element of the range still being searched. If they don't match, the half that can't hold the target is discarded and the search repeats on the other half, until the target is found or no elements are left.",
+    "mistake": "Binary search only works on data that is already sorted. On unsorted data it can report 'not found' for a value that is in the list, so sort the data first or use a linear search.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o1-kk13-004",
     "kk": [
       "U3O1-KK13"
@@ -945,6 +1273,49 @@
     "mistake": "Range-checking each score doesn't prevent this error. The problem is how many scores there are, not their values, so the check must be on `count` itself.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk13-009",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "type": "reverse",
+    "front": "Logic error",
+    "aliases": [
+      "Logical error"
+    ],
+    "back": "A mistake in the program's logic that makes it give incorrect output, such as a wrong calculation or a condition evaluated the wrong way (`<` written where `<=` was needed). The program still runs without crashing.",
+    "mistake": "The translator can't detect a logic error, because the code follows the language's rules. It is found by testing: comparing actual output with expected output.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk13-010",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "type": "reverse",
+    "front": "Runtime error",
+    "aliases": [
+      "Run-time error",
+      "Run time error"
+    ],
+    "back": "An error that occurs while the program is running and crashes it unless the program handles it. The study design's examples are overflow, index out of range, type mismatch and divide by zero.",
+    "mistake": "A runtime error isn't a syntax error: the code follows the language's rules and translates, but an operation fails with particular data, such as dividing by a count of zero.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk13-011",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "type": "reverse",
+    "front": "Syntax error",
+    "back": "Code that breaks the programming language's rules of syntax, such as a missing bracket or other required symbol, or a misspelt keyword. Until it is fixed, the code can't be compiled and run.",
+    "mistake": "Dividing by zero or a loop that never ends isn't a syntax error: that code follows the language's rules and fails only when run. When a compiler reports a syntax error, look first for a broken rule, such as a missing required symbol.",
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk14-001",
@@ -1041,6 +1412,19 @@
     "back": "| | Valid | Invalid |\n|:--|:--|:--|\n| Meaning | data the program should accept and process | data the program should reject |\n| Example (quantity 1 to 20) | 5 | −3, 25, \"abc\", left blank |\n| Checks | correct processing and output | validation and error messages |",
     "mistake": "Testing only with valid data never exercises the validation, so a check that lets bad data through goes unnoticed.",
     "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk14-009",
+    "kk": [
+      "U3O1-KK14",
+      "U4O1-KK06"
+    ],
+    "type": "reverse",
+    "front": "Test data",
+    "back": "Input values chosen to check that a module works, each with its expected output worked out from the requirements beforehand. A relevant set includes valid values, invalid values (blank, wrong type, out of range) and boundary values on and just beyond each limit, with each test using a different combination of inputs.",
+    "mistake": "Testing only valid data isn't enough. Errors often hide at the limits, so for an accepted range of 1 to 10, test 0, 1, 10 and 11 as well as a typical value.",
+    "difficulty": 2,
     "source": "textbook"
   }
 ]
