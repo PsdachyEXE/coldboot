@@ -331,6 +331,58 @@
       "back": "Analysis. The PSM lists them as tools for determining the solution requirements: they show the system's boundary, the data moving in and out of it, and how users interact with it. It also lists them among the design tools that show how a solution's components relate.",
       "difficulty": 2,
       "source": "study-design"
+    },
+    {
+      "id": "psm-c-020",
+      "kk": [
+        "PSM"
+      ],
+      "type": "basic",
+      "front": "Name the activities in each stage of the problem-solving methodology, using the study design's names.",
+      "back": "| Stage | Activities |\n|:--|:--|\n| Analysis | Solution requirements, solution constraints, solution scope |\n| Design | Solution design, evaluation criteria |\n| Development | Manipulation, validation, testing, documentation |\n| Evaluation | Evaluation strategy, solution evaluation |",
+      "mistake": "Manipulation isn't just changing data. In the development stage it means building the solution: coding it with suitable algorithms and programming language features, and applying formats and conventions.",
+      "difficulty": 2,
+      "source": "study-design"
+    },
+    {
+      "id": "psm-c-021",
+      "kk": [
+        "PSM",
+        "U3O2-KK04"
+      ],
+      "type": "cloze",
+      "front": "In the analysis stage, data and the sources it comes from are checked for {{reliability}}, {{validity}} and {{relevance}}, and {{follow-up questions}} are asked when answers need clarifying.",
+      "back": "Reliable: from a trustworthy source, and consistent if collected again. Valid: it actually shows what the developer needs to find out. Relevant: it relates to this problem and its users. Questions are drafted and reviewed beforehand so they probe the needs and requirements, and follow-up questions then clear up vague or unexpected answers.",
+      "mistake": "A large amount of data isn't automatically useful. Hundreds of customer survey responses about a task that only staff carry out are neither valid nor relevant evidence of what staff need.",
+      "difficulty": 2,
+      "source": "study-design"
+    },
+    {
+      "id": "psm-c-022",
+      "kk": [
+        "PSM",
+        "U3O2-KK13"
+      ],
+      "type": "basic",
+      "front": "According to the problem-solving methodology, which two things from the design stage can be changed while the solution is being developed, and in which stages are contingencies planned?",
+      "back": "The designs, which can be changed and developed further as the solution is built, and the evaluation criteria, which can be refined. Contingencies are planned in both the design and development stages: likely issues, such as an API the solution relies on being changed or withdrawn, are identified early with a plan to lessen their impact.",
+      "mistake": "Refining the evaluation criteria doesn't mean rewriting them to suit whatever was built. They are still based on the requirements and measure how well the solution meets them.",
+      "difficulty": 2,
+      "source": "study-design"
+    },
+    {
+      "id": "psm-c-023",
+      "kk": [
+        "PSM",
+        "U3O1-KK14",
+        "U4O1-KK06"
+      ],
+      "type": "cloze",
+      "front": "In the development stage, a testing strategy sets out the {{features to be tested}}, the {{test data}} and the {{expected results}}.",
+      "back": "The tests are then run, the actual results are recorded and compared with the expected results, and any errors found are corrected. In Software Development the test cases are set out in a testing table.",
+      "mistake": "A testing strategy isn't the evaluation strategy. The testing strategy plans tests of features against expected results while the solution is being built; the evaluation strategy plans how the finished solution will be judged against the evaluation criteria after it has been in use.",
+      "difficulty": 2,
+      "source": "study-design"
     }
   ],
   "mcq": [
@@ -647,6 +699,30 @@
       ],
       "difficulty": 2,
       "source": "textbook"
+    },
+    {
+      "id": "psm-m-014",
+      "kk": [
+        "PSM",
+        "U3O2-KK13"
+      ],
+      "stem": "Each option pairs an activity of the problem-solving methodology with a stage. Which pairing matches the study design's problem-solving methodology?",
+      "options": [
+        "Solution scope, in the design stage",
+        "Evaluation criteria, in the design stage",
+        "Manipulation, in the analysis stage",
+        "Documentation, in the evaluation stage"
+      ],
+      "answer": 1,
+      "explanation": "Evaluation criteria are a design activity. They are developed in the design stage to judge how well the design ideas meet the requirements, and the same criteria are used again in the evaluation stage to judge the finished solution.",
+      "whyWrong": [
+        "Solution scope is an analysis activity: the solution's boundaries are set before any design work begins.",
+        "",
+        "Manipulation is the development activity of coding the solution; analysis only records the data manipulation the solution must perform, as a functional requirement.",
+        "Documentation is a development activity: internal documentation is written while the solution is being built."
+      ],
+      "difficulty": 2,
+      "source": "study-design"
     }
   ],
   "short": [
@@ -711,6 +787,38 @@
       ],
       "model": "First, the test table only checks that the program produces the expected output, which Zara already confirmed during development. It says nothing about how efficient and effective the program is for the clinic, such as whether clients can book an appointment faster or with fewer errors than before, which is what the evaluation criteria measure. Second, on launch day the reception staff and clients haven't had time to become familiar with the program, so any data collected would mostly reflect their unfamiliarity. The evaluation should take place after the program has been in use for a few months, when there is enough real booking data to apply each criterion.",
       "mistake": "Testing and evaluation aren't interchangeable. Testing checks that the program works; evaluation judges how well it serves its users after a period of real use.",
+      "source": "textbook"
+    },
+    {
+      "id": "psm-s-003",
+      "kk": [
+        "PSM",
+        "U4O1-KK01",
+        "U3O2-KK04"
+      ],
+      "commandTerm": "evaluate",
+      "marks": 4,
+      "prompt": "Leila developed a program for a community food bank in Morwell. Volunteers use it to record each donation as it arrives, and the coordinator uses it to produce a monthly report for the food bank's funders.\n\n- In analysis, Leila interviewed the coordinator, who set two requirements: a complete monthly report, and volunteers able to record a donation at least as quickly as on the old paper form. Leila didn't collect any data from the volunteers.\n- In design, she produced a data dictionary and mock-ups of the donation entry screen and the monthly report. The coordinator approved them before coding began.\n\nThree months after the program was implemented, the evaluation found that every monthly report had been complete. However, volunteers took longer to record a donation than on the paper form, because the entry screen made them enter details, such as each item's weight and the donor's phone number, that they usually didn't have when a donation arrived.\n\nEvaluate how well Leila's analysis and design processes helped the program meet the food bank's requirements, and describe one change to how she carried out the problem-solving methodology that would have improved the program.",
+      "points": [
+        {
+          "text": "Analysis helped with the reporting requirement: interviewing the coordinator identified what the monthly report needed, and every report was complete.",
+          "marks": 1
+        },
+        {
+          "text": "Analysis fell short on the recording requirement: no data was collected from the volunteers who record donations, so the details they actually have when a donation arrives were never identified, and the speed requirement wasn't met.",
+          "marks": 1
+        },
+        {
+          "text": "Design: the coordinator's approval checked the mock-ups against her needs before coding, but no volunteer reviewed the donation entry screen, so the problem with its required fields wasn't found until the evaluation.",
+          "marks": 1
+        },
+        {
+          "text": "Change: collect data from volunteers in analysis (e.g. observe them recording donations, or interview them), or have volunteers review the entry screen mock-up in design, so that the screen asks only for details they have when a donation arrives.",
+          "marks": 1
+        }
+      ],
+      "model": "Leila's analysis helped meet the reporting requirement. Interviewing the coordinator identified what the monthly report needed, and the evaluation found every report was complete. However, the analysis collected no data from the volunteers, who record every donation, so it never found out which details they actually have when a donation arrives. As a result, the requirement to record a donation at least as quickly as on paper wasn't met. The design process had the same weakness. The coordinator approved the mock-ups before coding, which checked the design against her needs, but no volunteer reviewed the donation entry screen, so its required weight and phone number fields weren't questioned until the evaluation. Overall, the processes met the coordinator's reporting needs but not the volunteers' recording needs. One change would have improved the program: during analysis, Leila should have observed volunteers recording donations on the paper form, a more user-centred approach. She would then have seen which details volunteers actually have when a donation arrives, so the entry screen could have asked only for those, making each donation quicker to record.",
+      "mistake": "Evaluating the analysis and design processes isn't the same as evaluating the solution. Explain how what was done in each stage led to a requirement being met or missed, rather than only listing what the program does well or badly.",
       "source": "textbook"
     }
   ]

@@ -82,6 +82,34 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o1-kk01-004",
+    "kk": [
+      "U4O1-KK01",
+      "U3O2-KK13",
+      "TERMS"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Bettong Community Transport, a volunteer service in Benalla, drives older residents to medical appointments. At present, the booking coordinator writes each request in a paper diary and phones around the volunteer drivers to arrange it. A new app will replace the diary: residents will request rides on their phones, the coordinator will assign each ride to a driver, and drivers will see their pick-ups on a tablet in the car. Hamish, the developer, plans to use user-centred design.\n\nExplain how Hamish's use of user-centred design would help make the app both efficient and effective.",
+    "points": [
+      {
+        "text": "Explains that the actual users (residents, the booking coordinator and the volunteer drivers) are involved at every stage, for example interviewed during analysis, trying mock-ups during design and beta testing a near-finished version, so feedback is gathered early and the design is revised in response",
+        "marks": 1
+      },
+      {
+        "text": "Gives an efficiency example tied to the scenario that saves time, cost or effort and follows from involving users, e.g. watching the coordinator match rides to drivers leads to a screen that lists the drivers free for each ride, so a ride is assigned in a few taps instead of by phoning around, or drivers see changed pick-ups on the tablet without calling the office",
+        "marks": 1
+      },
+      {
+        "text": "Gives an effectiveness example tied to the scenario, e.g. booking screens tested by residents lead to fewer wrong dates or pick-up addresses, so fewer rides are missed, or residents get clear confirmation that a ride is booked",
+        "marks": 1
+      }
+    ],
+    "model": "User-centred design means the people who will actually use the app take part at every stage of its development. Hamish could interview residents, the booking coordinator and drivers during analysis, have each group try mock-ups of their screens during design, and beta test a near-finished version with them on their own phones and the car tablets. Their feedback arrives early, while changes are quick to make, and he revises the design in response.\n\nThis makes the app more efficient. By watching the coordinator arrange rides now, Hamish sees that arranging each ride starts with finding which drivers are free at the pick-up time. He can then design a screen that lists the free drivers for each request, so a ride can be assigned in a few taps instead of phoning around, saving time and effort on every booking.\n\nIt also makes the app more effective. Residents who try the booking screens can show Hamish where they enter the wrong date or pick-up address, so the final screens lead to fewer booking errors and missed rides, and each resident gets a clear confirmation that their ride is booked.",
+    "mistake": "Saying only that user-centred design 'meets the users' needs', without describing how users take part, earned no marks in 2025. Show how the users named in the scenario take part at each stage, then give a separate efficiency example (time, cost or effort saved) and effectiveness example (fewer errors, clearer feedback).",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o1-kk02-001",
     "kk": [
       "U4O1-KK02",
@@ -267,6 +295,90 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o1-kk03-004",
+    "kk": [
+      "U4O1-KK03",
+      "U3O1-KK07"
+    ],
+    "commandTerm": "justify",
+    "marks": 5,
+    "prompt": "Fergus is developing the check-in program for Feathertail Bouldering, a climbing gym in Stawell. Climbers buy a pass that holds a number of visits. The `VisitPass` class is described below, with no access modifiers yet. Fergus's notes on the class say:\n\n- No code outside `VisitPass` may change `visitsLeft`. It changes only when the front-desk screen records a visit or sells extra visits.\n- The front-desk screen displays the holder's name and the visits left, and staff can correct a misspelt name.\n- `passID` and `expiryDate` are used only by the methods of `VisitPass`.\n- `isExpired()` is called only by `recordVisit()`.\n- A subclass, `SchoolPass (extends VisitPass)`, has a method that works out a school group's price, and it must use `pricePerVisit` directly. No other class may use `pricePerVisit`.\n\nComplete the object description by writing an access modifier (public, protected or private) before each property and each method. Justify your choices for `visitsLeft`, `isExpired()` and `pricePerVisit`.",
+    "points": [
+      {
+        "text": "Writes private before `passID`, `holderName`, `visitsLeft` and `expiryDate`.",
+        "marks": 1
+      },
+      {
+        "text": "Writes public before `getHolderName()`, `setHolderName(name)`, `getVisitsLeft()`, `recordVisit()` and `buyVisits(extraVisits)`, because the front-desk screen calls them.",
+        "marks": 1
+      },
+      {
+        "text": "Justifies private for `visitsLeft`: only the methods of `VisitPass` can change it, so other code can't, for example, add visits without a sale; every change goes through `recordVisit()` or `buyVisits(extraVisits)`, which can check it first. (Protected would also let the methods of `SchoolPass` change it.)",
+        "marks": 1
+      },
+      {
+        "text": "Justifies private for `isExpired()`: it is called only by `recordVisit()`, a method of the same class, so no other class needs it, and hiding it keeps the class's public methods to those other code uses.",
+        "marks": 1
+      },
+      {
+        "text": "Justifies protected for `pricePerVisit`: the methods of the subclass `SchoolPass` can use it directly while unrelated classes can't; private would block `SchoolPass`, and public would let any class read or change it.",
+        "marks": 1
+      }
+    ],
+    "model": "**Name:** VisitPass\n\n**Properties/Attributes:**\n\n- `private passID (string)`\n- `private holderName (string)`\n- `private visitsLeft (integer)`\n- `private expiryDate (date/time)`\n- `protected pricePerVisit (floating point)`\n\n**Methods:**\n\n- `public getHolderName()`\n- `public setHolderName(name)`\n- `public getVisitsLeft()`\n- `public recordVisit()`\n- `public buyVisits(extraVisits)`\n- `private isExpired()`\n\n`visitsLeft` is private, so only the methods of `VisitPass` can change it. The front-desk screen can't set it directly, for example to add visits without a sale. It must call `recordVisit()` or `buyVisits(extraVisits)`, which can check each change before it is stored, and it reads the value through `getVisitsLeft()`. Protected wouldn't meet Fergus's note, because the methods of `SchoolPass` could then change it.\n\n`isExpired()` is private because only `recordVisit()`, inside the same class, calls it. No other class needs it, so hiding it keeps the public methods to those the front-desk screen uses, and Fergus can change it later without affecting other classes.\n\n`pricePerVisit` is protected because the method in the `SchoolPass` subclass must use it directly. Protected lets `VisitPass` and its subclasses use it while hiding it from unrelated classes. Private would stop `SchoolPass` using it, and public would let any class read or change the price.",
+    "mistake": "Protected doesn't keep a member inside its own class: subclasses can use it too. On the 2025 exam, a fifth of students chose protected for an attribute that only its own class's methods could use, which needs private.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "fig-visitpass",
+        "kind": "object",
+        "name": "VisitPass",
+        "properties": [
+          {
+            "name": "passID",
+            "type": "string"
+          },
+          {
+            "name": "holderName",
+            "type": "string"
+          },
+          {
+            "name": "visitsLeft",
+            "type": "integer"
+          },
+          {
+            "name": "expiryDate",
+            "type": "date/time"
+          },
+          {
+            "name": "pricePerVisit",
+            "type": "floating point"
+          }
+        ],
+        "methods": [
+          {
+            "name": "getHolderName()"
+          },
+          {
+            "name": "setHolderName(name)"
+          },
+          {
+            "name": "getVisitsLeft()"
+          },
+          {
+            "name": "recordVisit()"
+          },
+          {
+            "name": "buyVisits(extraVisits)"
+          },
+          {
+            "name": "isExpired()"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u4o1-kk04-001",
     "kk": [
       "U4O1-KK04",
@@ -349,6 +461,37 @@
     ],
     "model": "Mei should use the library. Writing her own barcode module would take four of her ten weeks, leaving little time for the app's other modules and for testing; the library lets her spend that time on the parts only she can build.\n\nThe library is also likely to be more reliable than her own module. Thousands of developers use it and it is updated regularly, so errors are more likely to have been found and fixed than in code she writes under time pressure.\n\nShe must meet the licence's condition by acknowledging the library's authors, for example in the app's documentation. To manage the risk of a future version changing how it works, she should keep using the version she has tested, and re-test the app before upgrading.",
     "mistake": "Using a library doesn't remove the developer's responsibilities. Its licence conditions must be met, and each new version must be tested before the program uses it.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk04-004",
+    "kk": [
+      "U4O1-KK04",
+      "U3O1-KK01"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Rhiannon works for Kangaroo Grass Beef, a cattle producer near Hamilton. She has been asked to write code that calculates each steer's average daily weight gain from its weigh-in records. Each record holds the date of the weigh-in and the steer's weight in kilograms, and a missed weigh-in is recorded with a weight of 0. Rhiannon has never calculated weight gain before, so she asks an AI-based assistant to generate the code, typing only *average daily weight gain for cattle*.\n\nExplain **two** reasons why the code the assistant generates may not be reliable.",
+    "points": [
+      {
+        "text": "Outlines a first reason. For example: the assistant lacks context, because it knows only Rhiannon's short prompt and not how the producer's weigh-in records are stored.",
+        "marks": 1
+      },
+      {
+        "text": "Relates the first reason to Rhiannon's task. For example: the assistant doesn't know that 0 means a missed weigh-in, so the code may treat 0 as a real weight and show a steer that missed its latest weigh-in as losing hundreds of kilograms; or it may assume a different unit or record layout.",
+        "marks": 1
+      },
+      {
+        "text": "Outlines a second, different reason. For example: generated code can look correct and run without errors but still contain logic errors or miss cases (lack of accuracy); or it may call a function that doesn't exist in the language Rhiannon uses.",
+        "marks": 1
+      },
+      {
+        "text": "Relates the second reason to Rhiannon's task. For example: the code might divide the gain by the number of weigh-ins instead of the number of days between the first and last weigh-in, or fail for a steer with only one weigh-in; because Rhiannon has never done this calculation, she may not notice unless she checks the results against gains worked out by hand.",
+        "marks": 1
+      }
+    ],
+    "model": "First, the assistant lacks context about Rhiannon's data. Her prompt didn't say that each record holds a date and a weight in kilograms, or that a weight of 0 means the steer missed a weigh-in. The generated code may therefore treat 0 as a real weight, so a steer that missed its latest weigh-in would appear to have lost hundreds of kilograms, and its average daily gain would be badly wrong even though the code runs.\n\nSecond, the generated code may be inaccurate even if it looks correct and runs without errors. It could, for example, divide the total gain by the number of weigh-ins rather than by the number of days between the first and last weigh-in, or fail for a steer with only one weigh-in. Because Rhiannon has never calculated weight gain, she may not be able to spot these errors by reading the code, so wrong figures could be reported unless she tests the code against gains she has worked out by hand.",
+    "mistake": "A reason that fits any program, such as 'AI can make mistakes', earns little. Say what the assistant didn't know or could get wrong in this task and what wrong result that would give. Reliability is about whether the code gives correct results, not about privacy or whether using AI is allowed.",
     "source": "textbook"
   },
   {
@@ -1012,6 +1155,67 @@
     ]
   },
   {
+    "id": "s-u4o1-kk09-004",
+    "kk": [
+      "U4O1-KK09",
+      "PSM",
+      "TERMS"
+    ],
+    "commandTerm": "evaluate",
+    "marks": 5,
+    "prompt": "Tyntynder Coachlines in Swan Hill has replaced phone bookings with an online booking program for its coach services. The table shows three of the program's evaluation criteria and the data collected in weeks 5 to 12 after launch.\n\nEvaluate the efficiency and effectiveness of the booking program. Use the data in your answer.",
+    "points": [
+      {
+        "text": "Criterion 1: an average booking time of 2 minutes 10 seconds is under the 3-minute target, so it is met",
+        "marks": 1
+      },
+      {
+        "text": "Criterion 2: 14 passengers with an online booking were missing from the passenger list, but every booking must appear, so it is not met",
+        "marks": 1
+      },
+      {
+        "text": "Criterion 3: 172 ÷ 200 = 86% rated the program 4 or 5, which reaches the target of at least 80%, so it is met",
+        "marks": 1
+      },
+      {
+        "text": "Efficiency: criterion 1 measures the time and effort customers spend booking, so meeting it shows the program is efficient",
+        "marks": 1
+      },
+      {
+        "text": "Effectiveness: criteria 2 and 3 measure how well the program achieves its purpose; it is easy to use (usability) but its passenger lists are incomplete (completeness), so it is only partly effective, e.g. drivers may not expect passengers who have booked",
+        "marks": 1
+      }
+    ],
+    "model": "Criterion 1 is met. The average booking time was 2 minutes 10 seconds, which is under the 3-minute target. Criterion 2 is not met. Drivers found 14 passengers holding an online booking who weren't on the passenger list, and the criterion requires every booking to appear. Criterion 3 is met. 172 of the 200 customers surveyed (86%) rated the program 4 or 5 for ease of use, above the 80% target.\n\nCriterion 1 measures the time and effort customers spend making a booking, so meeting it shows that the program is efficient.\n\nCriteria 2 and 3 measure how well the program achieves its purpose, so they show its effectiveness. It does well on usability, because customers find it easy to use, but it falls short on completeness, because its passenger lists leave out some bookings, so drivers may not be expecting passengers who have booked. The program is therefore only partly effective. Overall it is efficient, but it won't be fully effective until the fault that leaves bookings off the passenger lists is fixed.",
+    "mistake": "Stopping at 'met' or 'not met' leaves the evaluation unfinished: say what the results show. Time, cost and effort are measures of efficiency; how well the program achieves its purpose (such as accuracy, completeness and usability) is effectiveness. A program can be quick to use and still not be fully effective.",
+    "source": "study-design",
+    "figures": [
+      {
+        "id": "tyntynder-criteria",
+        "kind": "table",
+        "title": "Tyntynder Coachlines booking program: evaluation data, weeks 5 to 12",
+        "columns": [
+          "Criterion",
+          "Data collected"
+        ],
+        "rows": [
+          [
+            "1. The average time for a customer to complete a booking is under 3 minutes.",
+            "System log of 1 240 bookings: average time 2 minutes 10 seconds"
+          ],
+          [
+            "2. Every booking appears on the driver's passenger list for that trip.",
+            "Drivers' records: 14 passengers showed an online booking but were not on the passenger list"
+          ],
+          [
+            "3. At least 80% of surveyed customers rate the program 4 or 5 out of 5 for ease of use.",
+            "Survey of 200 customers chosen at random: 172 gave a rating of 4 or 5"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u4o1-kk10-001",
     "kk": [
       "U4O1-KK10"
@@ -1180,6 +1384,37 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o1-kk10-004",
+    "kk": [
+      "U4O1-KK10",
+      "U3O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Gherang Gap Software in Geelong is building a court-booking and membership program for the Moorabool Flats Croquet Club. The task *Code booking module*, which is on the critical path, is running a week behind. To catch up, the project manager, Teodora, plans to move Bashir, a developer who has been working on another client's project, onto the task for its last two weeks.\n\nExplain why this change could reduce the effectiveness of Gherang Gap Software's project plans.",
+    "points": [
+      {
+        "text": "Bashir is new to the project, so he needs time to learn its requirements, design and existing code before he can contribute (and may make errors that need fixing), so the task won't speed up as much as Teodora expects",
+        "marks": 1
+      },
+      {
+        "text": "The developers already on the task must spend time explaining the code to him and checking his work, which takes time away from their own coding, so the task can fall further behind",
+        "marks": 1
+      },
+      {
+        "text": "Code booking module is on the critical path, so if the move slows the task further instead of recovering the week, the delay passes to the tasks that depend on it and to the handover, and the plan has to be revised again, making it a less reliable guide",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: moving Bashir leaves the other client's project a developer short, so its tasks slip and its plan has to be changed too",
+        "marks": 1
+      }
+    ],
+    "model": "Bashir hasn't worked on the croquet club's program, so before he can help he needs time to learn its requirements, its design and the code already written, and while he is learning he may make mistakes that need fixing. His first days add little, so the task won't catch up as quickly as Teodora expects.\n\nThe developers already on the task also have to stop and explain the code to him and check his work. That time comes out of their own coding, so the task can fall even further behind.\n\nCode booking module is on the critical path. If the move slows the task further instead of recovering the week, the tasks that depend on it and the handover are delayed. Teodora would then have to revise the plan again, so it becomes a less reliable guide to when the program will be finished.",
+    "mistake": "Moving a developer across is itself a personnel change, one of the three factors. Adding a person to a late task doesn't recover time straight away: Bashir must first learn the project, and the developers already on it give up coding time to help him.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o1-kk11-001",
     "kk": [
       "U4O1-KK11",
@@ -1274,6 +1509,75 @@
     "model": "I recommend that the team use shared online project management software, with each developer entering the actual progress of their own tasks as they go.\n\nTwo of the four developers work from Portland and Casterton, so they can't see a whiteboard in the Hamilton office. With shared software, everyone works from the same current plan at any time, not only after the Friday update.\n\nThe plan has more than 40 tasks that depend on each other. When a developer enters that a task has finished late, the software moves every task that depends on it and shows whether the critical path and the finish date have changed. Redrawing a whiteboard chart by hand is slow, and dependent tasks are easily missed.",
     "mistake": "Naming the software isn't enough for a recommendation. The marks are for the reasons, and they must fit this team: developers in three towns and more than 40 dependent tasks.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u4o1-kk11-004",
+    "kk": [
+      "U4O1-KK11",
+      "U4O1-KK12"
+    ],
+    "commandTerm": "recommend",
+    "marks": 3,
+    "prompt": "Josie and Anil are developing an orders and stock program for Bena Hills Olive Oil in Korumburra. Their project plan is a Gantt chart. The table shows an excerpt from their project log.\n\nDescribe one problem caused by how these entries record changes to the plan. Then recommend two different improvements to the way Josie and Anil record their progress.",
+    "points": [
+      {
+        "text": "Problem: the entries say only that a task is late, on schedule or early, with no reason for the change and no effect on later tasks or the completion date, so the team can't judge how each change affects the plan, either while the project runs or when the plan is assessed (e.g. whether the order screen's four-day delay moved the handover)",
+        "marks": 1
+      },
+      {
+        "text": "Recommendation: record the reason each change was necessary, e.g. what caused the order screen to fall four days behind",
+        "marks": 1
+      },
+      {
+        "text": "Recommendation: record the impact of each change on the tasks that depend on it, the critical path and the completion date",
+        "marks": 1
+      },
+      {
+        "text": "Alternative recommendation: record the adjustment made in response, i.e. which tasks or time frames were changed and to what, beside the original dates",
+        "marks": 1
+      },
+      {
+        "text": "Alternative recommendation: annotate each change on the Gantt chart and keep a count of the changes, so the number of changes made to the plan can be reviewed when the plan is assessed",
+        "marks": 1
+      }
+    ],
+    "model": "**Problem:** The entries record only that a task was late, on schedule or early. They don't say why the order screen fell four days behind, or whether that delay (or the stock report finishing early) moved the tasks that depend on it and the handover date. Josie and Anil therefore can't tell how each change affects the rest of the plan while the work goes on, and when the plan is assessed they won't be able to explain the delay.\n\n**Recommendation 1:** For every change, record the reason it was necessary, such as the cause of the order screen's four-day delay.\n\n**Recommendation 2:** For every change, record its impact on the tasks that depend on it, the critical path and the completion date, for example whether the order screen's delay pushes back testing and the handover.",
+    "mistake": "Recommendations that fix the project itself, such as adding a developer to the order screen or estimating coding better, earn nothing: the question asks how progress is recorded. Two wordings of one idea, such as 'give reasons' and 'explain why it happened', score only once.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "bena-hills-log",
+        "kind": "table",
+        "title": "Project log (excerpt)",
+        "columns": [
+          "Date",
+          "Author",
+          "Entry"
+        ],
+        "rows": [
+          [
+            "02/03/2026",
+            "Josie P.",
+            "Coding of the order screen is now four days behind."
+          ],
+          [
+            "04/03/2026",
+            "Josie P.",
+            "Order screen finished."
+          ],
+          [
+            "06/03/2026",
+            "Anil T.",
+            "Stock report on schedule."
+          ],
+          [
+            "10/03/2026",
+            "Anil T.",
+            "Stock report finished two days early."
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": "s-u4o1-kk12-001",

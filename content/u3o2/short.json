@@ -91,6 +91,36 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o2-kk01-004",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "commandTerm": "state",
+    "marks": 3,
+    "prompt": "Coolabah Valley Netball Association runs Saturday competitions for 140 teams from 22 clubs around Shepparton. After each round, every club scans its paper score sheets and emails them to the association. A casual administrator, paid $38 an hour, spends about 10 hours each week typing the scores into a spreadsheet, and about one ladder in five must be corrected after a club spots a typing mistake. The association's board has set the objective that ladders are published within two hours of the last match each Saturday; at present they appear on the following Tuesday. The board has asked a developer to build an app that lets each team's scorer enter the result courtside.\n\nState **three** reasons the association has for undertaking this software development project.",
+    "points": [
+      {
+        "text": "Increasing productivity and efficiency, from the case: scorers enter each result once, courtside, so the 10 hours a week of retyping is no longer needed and the ladders can be produced automatically",
+        "marks": 1
+      },
+      {
+        "text": "Reducing costs, from the case: the association would no longer pay the administrator about $380 a week ($38 an hour for about 10 hours) to type scores",
+        "marks": 1
+      },
+      {
+        "text": "Meeting organisational objectives or needs, from the case: with results entered courtside, ladders can be published within two hours of the last match, as the board's objective requires, rather than on the Tuesday",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: reducing human error, from the case: no scores are retyped, so fewer ladders need correcting than the one in five that do now",
+        "marks": 1
+      }
+    ],
+    "model": "1. Increasing productivity and efficiency: scorers enter each result once, courtside, so the administrator's 10 hours a week of typing scores is no longer needed and the ladders are produced automatically.\n2. Reducing costs: the association would no longer pay about $380 a week for that typing.\n3. Meeting an organisational objective: with each result in the app as soon as the match ends, ladders can be published within two hours of the last match, as the board wants, rather than on the Tuesday.",
+    "mistake": "A gap in the market doesn't fit this case: the app serves the association's own competition rather than offering customers something no product provides. Give three different reasons, each backed by a detail from the case.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o2-kk02-001",
     "kk": [
       "U3O2-KK02"
@@ -186,6 +216,36 @@
     ],
     "model": "First, Ravi should remove statement 3. A drop-down list and a calendar control are detailed design decisions, made after analysis has worked out what the garden needs. A brief outlines the proposed solution only in broad terms, and fixing the controls now could rule out a better design.\n\nSecond, Ravi should add the proposed users: for example, the plot holders and volunteers who borrow tools, how many of them there are and what devices they use. The draft never says who will book plots and tools, and knowing the users tells Ravi whom to collect data from and shapes requirements such as usability.",
     "mistake": "'Add more detail' earns nothing. A recommendation names exactly what to add or remove, and its justification says why that matters for this garden's brief.",
+    "source": "study-design"
+  },
+  {
+    "id": "s-u3o2-kk02-004",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Banksia Bay Rowing Club in Paynesville keeps boat bookings in a paper diary in its boatshed. Members often arrive to find their boat already taken, or booked by someone who never turns up. The committee wants the club's 90 members to book boats on their own phones, which are a mix of iPhones and Android phones. It has $3000 to spend, and the app must be ready before the season starts in ten weeks. Ellie, a local developer who writes web apps in JavaScript, estimates that the app will take six weeks and cost $2400. She is now writing the brief.\n\nFor each of the following features of the brief, state what Ellie's brief should say about this project, and explain why the feature belongs in a brief.\n\n- programming languages to be used\n- feasibility",
+    "points": [
+      {
+        "text": "Programming languages, applied: e.g. JavaScript, for a web app that runs in the browser of both the iPhones and the Android phones members already own",
+        "marks": 1
+      },
+      {
+        "text": "Why the language belongs in a brief: e.g. it decides which devices the solution can run on and whether the developer has the skills to build it, so stating it at the start lets the client agree to the approach before analysis and planning begin",
+        "marks": 1
+      },
+      {
+        "text": "Feasibility, applied: e.g. Ellie's estimate of six weeks and $2400 fits within the ten weeks before the season and the $3000 budget, and members already own the phones the app needs",
+        "marks": 1
+      },
+      {
+        "text": "Why feasibility belongs in a brief: e.g. it shows the project is achievable with the time, money, skills and equipment available, so the client can decide whether to go ahead before more time and money are spent on analysis and design",
+        "marks": 1
+      }
+    ],
+    "model": "Programming languages to be used: the app will be written in JavaScript as a web app, so it runs in the browser of both the iPhones and the Android phones members already own. This belongs in a brief because the language decides which devices the solution can run on and whether the developer has the skills to build it. Stating it at the start lets the committee agree to the approach before analysis and planning begin.\n\nFeasibility: Ellie estimates six weeks and $2400, which fits within the ten weeks before the season and the $3000 budget, and members already own the phones the app needs. This belongs in a brief because it shows the project is achievable with the time, money, skills and equipment available, so the committee can decide whether to go ahead before more time and money are spent on analysis and design.",
+    "mistake": "Saying what the brief contains and saying why that feature belongs there earn separate marks. Give the club's details first, then what the feature lets the client and developer decide before analysis begins.",
     "source": "study-design"
   },
   {
@@ -521,6 +581,135 @@
     ]
   },
   {
+    "id": "s-u3o2-kk03-004",
+    "kk": [
+      "U3O2-KK03",
+      "U4O1-KK11"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Marlee leads a team of three developers building a booking program for Sugarloaf Community Transport in Seymour, whose volunteer drivers take older residents to medical appointments. She manages the project with a Gantt chart that shows each task's planned start and finish, the dependencies between tasks, the milestones and the critical path. The program must be ready by 1 July, when the service expands to two more towns.\n\nOnce work begins, describe how Marlee can use her Gantt chart to record the project's progress and to keep track of whether it is on schedule.",
+    "points": [
+      {
+        "text": "Documents progress by updating the chart as work is done: the actual start and finish dates, how much of each task is complete and the dates milestones are reached, while keeping the planned dates visible",
+        "marks": 1
+      },
+      {
+        "text": "Monitors progress by regularly comparing actual progress with the planned bars (e.g. at each weekly team meeting), to see which tasks, and the project as a whole, are ahead of or behind schedule",
+        "marks": 1
+      },
+      {
+        "text": "Checks whether a task that is running late is on the critical path: if it is, the tasks that depend on it and the finish date move back, putting 1 July at risk, so she reschedules the dependent tasks and acts early to recover (e.g. moves a developer onto the late task); a late task off the critical path may not move the finish date",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: annotates the chart with the reason for each delay or change and its effect on later tasks, giving a record the team can use later to assess the plan",
+        "marks": 1
+      }
+    ],
+    "model": "Marlee documents progress by updating the Gantt chart as the team works. Each week she records the actual date each task started or finished, how much of each task in progress is complete and the date each milestone was reached, while keeping the planned bars so the original plan stays visible.\n\nShe monitors progress by comparing these actual dates with the planned bars. This shows which tasks are ahead of schedule or behind it, and whether the project as a whole is on track.\n\nWhen a task is behind, she checks whether it is on the critical path. If it is, the delay pushes back the tasks that depend on it and the finish date, putting 1 July at risk. Because she sees this early, she can reschedule the dependent tasks on the chart and act while there is still time to recover, such as moving a developer onto the late task. A late task off the critical path may not move the finish date at all.",
+    "mistake": "Describing what a Gantt chart shows (tasks as bars, dependencies, milestones) earns nothing here. Say how it is used: updated with actual progress, then compared with the plan to see whether the project is ahead or behind and whether the critical path has slipped.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk03-005",
+    "kk": [
+      "U3O2-KK03",
+      "PSM"
+    ],
+    "commandTerm": "explain",
+    "marks": 2,
+    "prompt": "Ruben is planning the development of a class-booking program for Moyston Ridge Pottery Studio in Ararat. His Gantt chart is shown, in weeks. The finished program will be handed over to the studio at the end of week 13.\n\nApart from the handover, identify **one** milestone Ruben could add to his Gantt chart, and explain how it would help him monitor whether the project is on track.",
+    "points": [
+      {
+        "text": "Identifies a milestone: a point in time, not a task from the chart, e.g. the SRS approved by the studio (end of week 3, the end of analysis), the detailed designs approved (end of week 7, the end of design) or coding complete (end of week 11). Naming a listed task, such as Write SRS or Alpha testing, earns no mark",
+        "marks": 1
+      },
+      {
+        "text": "Explains its significance for monitoring: it marks the completion of a stage or key piece of work, so checking whether it is reached on its planned date shows whether the project is on schedule; if it is late, the tasks after it and the handover are at risk and Ruben can adjust the plan early (e.g. coding can't begin until the designs are approved)",
+        "marks": 1
+      }
+    ],
+    "model": "Milestone: the studio approves the detailed designs, at the end of week 7.\n\nThis marks the end of the design stage of the problem-solving methodology, and coding can't begin until it is reached. If Ruben checks at the end of week 7 and the designs haven't been approved, he knows straight away that every coding and testing task after it will start late and the week 13 handover is at risk, so he can adjust the plan while there is still time.",
+    "mistake": "A task copied from the chart, such as Write SRS, isn't a milestone: it is work with a duration. A milestone is the moment a stage or key piece of work is complete, such as the SRS being approved, and its significance is what reaching it, or missing it, tells you about the whole project.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "moyston-gantt",
+        "kind": "gantt",
+        "title": "Moyston Ridge Pottery Studio class-booking program",
+        "caption": "Alpha testing starts when both coding tasks have finished.",
+        "unit": "week",
+        "tasks": [
+          {
+            "id": "A",
+            "name": "Interview owner and survey students",
+            "duration": 2,
+            "dependsOn": []
+          },
+          {
+            "id": "B",
+            "name": "Write SRS",
+            "duration": 1,
+            "dependsOn": [
+              "A"
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Generate design ideas",
+            "duration": 2,
+            "dependsOn": [
+              "B"
+            ]
+          },
+          {
+            "id": "D",
+            "name": "Produce detailed designs",
+            "duration": 2,
+            "dependsOn": [
+              "C"
+            ]
+          },
+          {
+            "id": "E",
+            "name": "Code booking module",
+            "duration": 4,
+            "dependsOn": [
+              "D"
+            ]
+          },
+          {
+            "id": "F",
+            "name": "Code payments module",
+            "duration": 3,
+            "dependsOn": [
+              "D"
+            ]
+          },
+          {
+            "id": "G",
+            "name": "Alpha testing",
+            "duration": 1,
+            "dependsOn": [
+              "E",
+              "F"
+            ]
+          },
+          {
+            "id": "H",
+            "name": "Beta testing with students",
+            "duration": 1,
+            "dependsOn": [
+              "G"
+            ]
+          }
+        ],
+        "showCriticalPath": false
+      }
+    ]
+  },
+  {
     "id": "s-u3o2-kk04-001",
     "kk": [
       "U3O2-KK04"
@@ -751,6 +940,66 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o2-kk05-004",
+    "kk": [
+      "U3O2-KK05",
+      "U3O1-KK02"
+    ],
+    "commandTerm": "classify",
+    "marks": 4,
+    "prompt": "A rural shire council in north-east Victoria is having an app built so that residents can book kerbside collections of hard rubbish. The table lists four of the app's requirements.\n\nClassify each requirement as functional or non-functional. For each non-functional requirement, name the quality it describes.",
+    "points": [
+      {
+        "text": "Requirement 1: functional (rejecting a booking over the limit is a validation check the app performs)",
+        "marks": 1
+      },
+      {
+        "text": "Requirement 2: non-functional, usability",
+        "marks": 1
+      },
+      {
+        "text": "Requirement 3: functional",
+        "marks": 1
+      },
+      {
+        "text": "Requirement 4: non-functional, maintainability",
+        "marks": 1
+      }
+    ],
+    "model": "1. Functional: checking the amount of rubbish and rejecting a booking over 3 cubic metres is validation the app carries out; the figure only sets the limit.\n2. Non-functional (usability): it sets a measurable target for how easily a first-time resident can use the app.\n3. Functional: showing a resident their past collections is an output the app produces; five years only sets how far back it goes.\n4. Non-functional (maintainability): it sets how easily developers can change and extend the app after it is built; adding a collection type is work on the app's code, not something the app does for residents.",
+    "mistake": "A number or a limit doesn't make a requirement non-functional. Requirements 1 and 3 both contain figures, but each states something the app does (a validation check and an output), so both are functional.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "hard-rubbish-requirements",
+        "kind": "table",
+        "title": "Hard rubbish collection app",
+        "columns": [
+          "Requirement",
+          "Description"
+        ],
+        "rows": [
+          [
+            "1",
+            "The app rejects any booking for more than 3 cubic metres of rubbish."
+          ],
+          [
+            "2",
+            "A resident who has never used the app can book a collection within three minutes, without help."
+          ],
+          [
+            "3",
+            "The app shows each resident every collection they have booked in the past five years."
+          ],
+          [
+            "4",
+            "A developer who is new to the app's code can add a new type of collection, such as green waste, within two working days."
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u3o2-kk06-001",
     "kk": [
       "U3O2-KK06"
@@ -832,6 +1081,45 @@
     "model": "First, Dylan should drop live streaming from this version of the app, or find a free way to share matches. The paid service costs $2000 a year, which is more than the $1500 the association has for the whole project, so the first design breaks the budget.\n\nSecond, Dylan should design the app for the version of Android that the association's eight tablets already run, and test it on those tablets. The association can't afford new tablets, so an app that needs a newer version of Android couldn't be used by the umpires at all.",
     "mistake": "Naming a constraint isn't enough. Each change needs a reason that shows which constraint in the scenario the first design breaks, and how the change fixes it.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk06-004",
+    "kk": [
+      "U3O2-KK06",
+      "U3O1-KK02"
+    ],
+    "commandTerm": "explain",
+    "marks": 6,
+    "prompt": "A volunteer-run family history society in Port Fairy wants a program to record members' research requests and the records its volunteers find for them. The society has a $2500 grant from a local community fund, and the program must be ready for its open day on 14 March. It must run on the society's one desktop computer, which runs an old version of Windows that can't be upgraded. Most of the volunteers who will use the program are in their seventies, and several have used nothing on a computer except email. Each research request holds the member's name and address and details of their living relatives, and the society is bound by the Privacy Act 1988 (Cwlth).\n\nIdentify **three** constraints on this project, each of a different type, including the social constraint. For each, name its type, state the constraint from the scenario, and explain how it could affect the design of the program.",
+    "points": [
+      {
+        "text": "Names the social constraint and states it from the scenario: most volunteers are in their seventies and several have used nothing but email, so their level of computer expertise is low",
+        "marks": 1
+      },
+      {
+        "text": "Explains how the social constraint affects the design, e.g. a simple interface with large, clearly labelled buttons, drop-down lists instead of typing, one task per screen and plain-language messages, so volunteers can use it after a short demonstration",
+        "marks": 1
+      },
+      {
+        "text": "Names a second type and states that constraint from the scenario: economic (the $2500 grant, or the 14 March deadline), technical (the one desktop computer with an old version of Windows that can't be upgraded) or legal (each request holds personal information about members and their living relatives, which the society must protect under the Privacy Act 1988 (Cwlth))",
+        "marks": 1
+      },
+      {
+        "text": "Explains how the second constraint affects the design, e.g. economic: free development tools and only the essential features, so the program is ready by 14 March within $2500; technical: a language and tools whose programs run on that version of Windows, tested on that computer; legal: collect only the personal details the research needs, and require volunteers to log in before they can view requests",
+        "marks": 1
+      },
+      {
+        "text": "Names a third type, different from the first two, from those the scenario gives (economic, technical or legal), and states that constraint from the scenario",
+        "marks": 1
+      },
+      {
+        "text": "Explains how the third constraint affects the design",
+        "marks": 1
+      }
+    ],
+    "model": "Social: most of the volunteers who will use the program are in their seventies, and several have used nothing on a computer except email, so their level of expertise is low. The design needs a simple interface with large, clearly labelled buttons, drop-down lists in place of typing where possible, one task per screen and plain-language messages, so volunteers can use it after a short demonstration.\n\nTechnical: the program must run on the society's one desktop computer, which runs an old version of Windows that can't be upgraded. The developer must choose a language and tools whose programs run on that version, avoid features that need newer software, and test the program on that computer.\n\nLegal: each request holds the names and addresses of members and details of their living relatives, which is personal information, and the society is bound by the Privacy Act 1988 (Cwlth). The design should collect only the details the research needs and require each volunteer to log in with a password before viewing requests.",
+    "mistake": "Users with little computer experience are a social constraint, not a technical one: technical constraints come from the technology, such as processing speed, capacity, available equipment and compatibility. Each constraint also needs its detail from the scenario, not just its type.",
+    "source": "study-design"
   },
   {
     "id": "s-u3o2-kk07-001",
@@ -1316,6 +1604,217 @@
     ]
   },
   {
+    "id": "s-u3o2-kk08-004",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "commandTerm": "complete",
+    "marks": 6,
+    "prompt": "Koonwarra Bike Repairs in South Gippsland is having a repair booking system developed. Ruby drew the context diagram for the system, and Theo then drew the Level 1 DFD from it. Four labels on Theo's DFD, A to D, are missing.\n\na. Using the context diagram, write the labels A, B, C and D. (4 marks)\n\nb. Theo's DFD breaks one DFD rule. Identify the error and explain how Theo should correct it. (2 marks)",
+    "points": [
+      {
+        "text": "a. A: *Mechanic*, the entity that receives `job_sheet` and sends `repair_notes`",
+        "marks": 1
+      },
+      {
+        "text": "a. B: `booking_confirmation`, written exactly as on the context diagram, underscore included (the customer's other incoming flow, `repair_invoice`, already comes from *Finish repair*)",
+        "marks": 1
+      },
+      {
+        "text": "a. C: *Supplier system*, the only entity left on the context diagram, which receives the parts order",
+        "marks": 1
+      },
+      {
+        "text": "a. D: `parts_order`, written exactly as on the context diagram, underscore included",
+        "marks": 1
+      },
+      {
+        "text": "b. Identifies the error: `repair_notes` flows directly from the external entity *Mechanic* (A) into the *Repairs* data store",
+        "marks": 1
+      },
+      {
+        "text": "b. Explains the correction: data from an external entity must pass through a process before it is stored, so `repair_notes` should go from *Mechanic* to a process (a new one such as *Record repair notes*, or an existing one), which then writes the notes to *Repairs* under a new name such as `repair_record`",
+        "marks": 1
+      }
+    ],
+    "model": "a. A: Mechanic; B: `booking_confirmation`; C: Supplier system; D: `parts_order`\n\nb. The `repair_notes` flow goes straight from the external entity *Mechanic* into the *Repairs* data store. An external entity can't write to a data store itself: the data has to pass through a process, which handles it and then stores it. Theo should redraw `repair_notes` so that it goes from *Mechanic* to a new process, *Record repair notes*, which then writes a flow such as `repair_record` to *Repairs*.",
+    "mistake": "Copy each name exactly as the context diagram writes it, underscore included: 'booking confirmation' is not the same label. And an external entity never sends data straight to a data store; a process must sit between them.",
+    "source": "study-design",
+    "figures": [
+      {
+        "id": "bike-repair-context",
+        "kind": "context",
+        "title": "Context diagram: repair booking system",
+        "width": 680,
+        "height": 400,
+        "system": {
+          "label": "Repair booking system",
+          "x": 380,
+          "y": 200
+        },
+        "entities": [
+          {
+            "id": "customer",
+            "label": "Customer",
+            "x": 96,
+            "y": 200
+          },
+          {
+            "id": "mechanic",
+            "label": "Mechanic",
+            "x": 592,
+            "y": 80
+          },
+          {
+            "id": "supplier",
+            "label": "Supplier system",
+            "x": 584,
+            "y": 320,
+            "w": 144
+          }
+        ],
+        "flows": [
+          {
+            "from": "system",
+            "to": "customer",
+            "label": "booking_confirmation"
+          },
+          {
+            "from": "customer",
+            "to": "system",
+            "label": "repair_request"
+          },
+          {
+            "from": "system",
+            "to": "customer",
+            "label": "repair_invoice"
+          },
+          {
+            "from": "system",
+            "to": "mechanic",
+            "label": "job_sheet"
+          },
+          {
+            "from": "mechanic",
+            "to": "system",
+            "label": "repair_notes"
+          },
+          {
+            "from": "system",
+            "to": "supplier",
+            "label": "parts_order"
+          }
+        ]
+      },
+      {
+        "id": "bike-repair-dfd",
+        "kind": "dfd",
+        "title": "Level 1 DFD: repair booking system, with labels A to D missing",
+        "level": 1,
+        "width": 800,
+        "height": 480,
+        "nodes": [
+          {
+            "id": "customer",
+            "type": "entity",
+            "label": "Customer",
+            "x": 100,
+            "y": 80
+          },
+          {
+            "id": "book",
+            "type": "process",
+            "label": "Book repair",
+            "x": 380,
+            "y": 80
+          },
+          {
+            "id": "a",
+            "type": "entity",
+            "label": "A",
+            "x": 660,
+            "y": 80
+          },
+          {
+            "id": "repairs",
+            "type": "store",
+            "label": "Repairs",
+            "x": 380,
+            "y": 240
+          },
+          {
+            "id": "finish",
+            "type": "process",
+            "label": "Finish repair",
+            "x": 200,
+            "y": 400
+          },
+          {
+            "id": "order",
+            "type": "process",
+            "label": "Order parts",
+            "x": 520,
+            "y": 400
+          },
+          {
+            "id": "c",
+            "type": "entity",
+            "label": "C",
+            "x": 700,
+            "y": 400
+          }
+        ],
+        "flows": [
+          {
+            "from": "customer",
+            "to": "book",
+            "label": "repair_request"
+          },
+          {
+            "from": "book",
+            "to": "customer",
+            "label": "B"
+          },
+          {
+            "from": "book",
+            "to": "a",
+            "label": "job_sheet"
+          },
+          {
+            "from": "book",
+            "to": "repairs",
+            "label": "repair_booking"
+          },
+          {
+            "from": "a",
+            "to": "repairs",
+            "label": "repair_notes"
+          },
+          {
+            "from": "repairs",
+            "to": "finish",
+            "label": "completed_repair"
+          },
+          {
+            "from": "repairs",
+            "to": "order",
+            "label": "parts_needed"
+          },
+          {
+            "from": "order",
+            "to": "c",
+            "label": "D"
+          },
+          {
+            "from": "finish",
+            "to": "customer",
+            "label": "repair_invoice"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u3o2-kk09-001",
     "kk": [
       "U3O2-KK09"
@@ -1395,6 +1894,84 @@
     "model": "Wen may have misunderstood a requirement, such as how a quote is worked out from the distance and the number of passengers. If the owner reviews and approves the SRS first, mistakes and missing requirements like this are found before any screens are designed around them.\n\nFixing a requirement at this point means editing a document. If the same mistake were found after the quote and booking screens had been designed and coded, they would have to be redesigned and recoded, which could easily take longer than the week Wen hoped to save.\n\nApproval also gives Wen and the owner an agreed record of what will be built. If the owner later asks for something new, such as taking payments online, Wen can show that it isn't in the approved SRS and treat it as a change to be costed and agreed before any work is done.",
     "mistake": "Saying approval is 'good practice' earns nothing. Each reason needs to say what approval achieves for this project.",
     "source": "textbook"
+  },
+  {
+    "id": "s-u3o2-kk09-004",
+    "kk": [
+      "U3O2-KK09",
+      "U3O2-KK05",
+      "U3O2-KK06",
+      "U3O2-KK07"
+    ],
+    "commandTerm": "classify",
+    "marks": 6,
+    "prompt": "Tarik is writing the SRS for a service booking program for Spokeshave Cycles, a bicycle repair workshop in Shepparton. The table shows six statements from his notes of conversations with the owner and staff.\n\nClassify each statement by the section of the SRS it belongs in: functional requirements, non-functional requirements, constraints, scope, user characteristics or technical environment. A section may be used more than once, or not at all.",
+    "points": [
+      {
+        "text": "Statement 1: constraints (the deadline and budget are economic constraints of time and cost)",
+        "marks": 1
+      },
+      {
+        "text": "Statement 2: user characteristics (who uses the program, where and how often)",
+        "marks": 1
+      },
+      {
+        "text": "Statement 3: functional requirements (booking a service and showing when a bike will be ready are things the program does)",
+        "marks": 1
+      },
+      {
+        "text": "Statement 4: constraints (a legal constraint: privacy of data)",
+        "marks": 1
+      },
+      {
+        "text": "Statement 5: scope (what this version will not address)",
+        "marks": 1
+      },
+      {
+        "text": "Statement 6: non-functional requirements (reliability)",
+        "marks": 1
+      }
+    ],
+    "model": "1. Constraints: the deadline and the budget are economic constraints (time and cost) that limit the project. They aren't qualities of the finished program.\n2. User characteristics: it describes who will use the program, where they use it and how often.\n3. Functional requirements: booking a service and showing when a bike will be ready are things the program does.\n4. Constraints: meeting privacy law is a legal constraint on how customers' personal information is handled.\n5. Scope: it sets a boundary by stating what this version will not do.\n6. Non-functional requirements: it sets how reliable the booking page must be, not what it does.",
+    "mistake": "A deadline, a budget or a legal obligation is a constraint, not a non-functional requirement. It limits how the solution can be built, while a non-functional requirement describes a quality of the finished program, such as its reliability.",
+    "source": "study-design",
+    "figures": [
+      {
+        "id": "spokeshave-srs-notes",
+        "kind": "table",
+        "title": "Spokeshave Cycles: notes for the SRS",
+        "columns": [
+          "Statement",
+          "Note"
+        ],
+        "rows": [
+          [
+            "1",
+            "The program must be ready by 1 August, before the spring rush, and cost no more than $8000 to build."
+          ],
+          [
+            "2",
+            "Two mechanics will use the program on the workshop floor between jobs; the owner will use it each evening to plan the next day's work."
+          ],
+          [
+            "3",
+            "Customers can book a service online and see when their bike will be ready."
+          ],
+          [
+            "4",
+            "Customers' names and phone numbers must be collected, stored and used in line with privacy law."
+          ],
+          [
+            "5",
+            "This version won't handle ordering parts; staff will keep ordering through the supplier's website."
+          ],
+          [
+            "6",
+            "The online booking page must be available at any hour, with no more than one hour of unplanned outage a month."
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": "s-u3o2-kk10-001",
@@ -1653,6 +2230,36 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o2-kk12-004",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "commandTerm": "complete",
+    "marks": 4,
+    "prompt": "Oksana is designing an app for the couriers of a pharmacy group in Bairnsdale, who deliver medicines to patients' homes. The pharmacy has named three key considerations for the app: **fast delivery recording**, **offline use** (many rural roads have no mobile coverage) and **proof of delivery**.\n\nAt a planning meeting, staff suggested six ideas:\n\n- one-tap delivered button\n- photo of parcel at the door\n- day's run downloaded each morning\n- large buttons, no typing\n- receiver signs on screen\n- deliveries stored until coverage returns\n\nOksana has started a mind map:\n\n- **Courier app** (centre)\n  - Proof of delivery\n  - *(blank branch)*\n  - *(blank branch)*\n\nComplete Oksana's mind map: name the two blank branches, then attach each idea as a sub-branch of the key consideration it supports. You may draw the mind map or write it as an indented list.",
+    "points": [
+      {
+        "text": "Labels the two blank first-level branches with the other key considerations: fast delivery recording and offline use",
+        "marks": 1
+      },
+      {
+        "text": "Proof of delivery has both of its sub-branches: receiver signs on screen; photo of parcel at the door",
+        "marks": 1
+      },
+      {
+        "text": "Fast delivery recording has both of its sub-branches: one-tap delivered button; large buttons, no typing",
+        "marks": 1
+      },
+      {
+        "text": "Offline use has both of its sub-branches: day's run downloaded each morning; deliveries stored until coverage returns",
+        "marks": 1
+      }
+    ],
+    "model": "- **Courier app** (centre)\n  - Proof of delivery\n    - receiver signs on screen\n    - photo of parcel at the door\n  - Fast delivery recording\n    - one-tap delivered button\n    - large buttons, no typing\n  - Offline use\n    - day's run downloaded each morning\n    - deliveries stored until coverage returns\n\nEach key consideration is a first-level branch from the centre, and each idea sits on a sub-branch of the consideration it supports.",
+    "mistake": "The key considerations are the first-level branches, and each idea goes one level below the consideration it supports. Joining all nine labels straight to the centre gives a brainstorm, not a mind map, and an idea placed under the wrong consideration loses that branch's mark.",
+    "source": "study-design"
+  },
+  {
     "id": "s-u3o2-kk13-001",
     "kk": [
       "U3O2-KK13",
@@ -1766,6 +2373,46 @@
         ]
       }
     ]
+  },
+  {
+    "id": "s-u3o2-kk13-004",
+    "kk": [
+      "U3O2-KK13",
+      "U3O2-KK15",
+      "PSM"
+    ],
+    "commandTerm": "propose",
+    "marks": 6,
+    "prompt": "Anouk is designing an ordering program for the canteen at Thornbill Junior Football Club in Yea. Parent volunteers run the canteen, and each is rostered on only a few times a season, so most have used the program rarely, if at all. Long queues form at quarter time and half time. The program must run on the canteen's one Windows laptop and be ready for the start of the season, four weeks away. Anouk has written desktop programs before but has never built a website.\n\nShe has two design ideas:\n\n- **Idea A:** a program on the canteen laptop. Each menu item is a large button showing its name and price. The volunteer clicks the items ordered, and the total appears in large text.\n- **Idea B:** a website. Families log in on their phones to order ahead. At the counter, a volunteer logs in, searches for each order by surname, and adds orders from the queue by choosing items from a drop-down list of the canteen's 40 items.\n\n1. Propose three evaluation criteria Anouk could use to choose between the ideas: one about feasibility, one about the effect on user experience and one about how well an idea meets the users' needs.\n2. Rate each idea as high, medium or low against each of your criteria, and recommend which idea Anouk should develop into her preferred design.",
+    "points": [
+      {
+        "text": "Proposes a feasibility criterion that can be checked in this scenario, e.g. Anouk can build and test the idea within four weeks, with the skills she already has, to run on the canteen's laptop",
+        "marks": 1
+      },
+      {
+        "text": "Proposes a user experience criterion that can be checked, e.g. a volunteer who has never used the program can take an order without help, because it is obvious what each control does",
+        "marks": 1
+      },
+      {
+        "text": "Proposes a criterion on the users' needs drawn from the scenario, e.g. at quarter time and half time, every customer is served within five minutes of joining the queue",
+        "marks": 1
+      },
+      {
+        "text": "Rates Idea A against all three criteria, each rating following from the scenario, e.g. high on each: a desktop program of the kind Anouk has built before, one large labelled button per item, and an order recorded in a few clicks, so the queue keeps moving",
+        "marks": 1
+      },
+      {
+        "text": "Rates Idea B against all three criteria, each rating following from the scenario, e.g. low on feasibility (no website experience, yet logins and online ordering are needed in four weeks), low on user experience (logging in, searching by surname and choosing from a 40-item drop-down) and medium on users' needs (orders placed ahead skip the queue, but each order taken at the counter is slow to enter)",
+        "marks": 1
+      },
+      {
+        "text": "Recommends the idea the ratings favour and justifies it from the ratings, e.g. Idea A, rated high on every criterion, while Idea B fails on feasibility however useful ordering ahead might be",
+        "marks": 1
+      }
+    ],
+    "model": "1.\n\n- **Feasibility:** Anouk can build and test the idea within four weeks, using skills she already has, to run on the canteen's laptop.\n- **Effect on user experience:** a volunteer who has never used the program can take an order without help, because it is obvious what each control does.\n- **Users' needs:** at quarter time and half time, every customer is served within five minutes of joining the queue.\n\n2.\n\n| Criterion | Idea A | Idea B |\n|:--|:--|:--|\n| Feasibility | High: a desktop program, which Anouk has built before | Low: she has never built a website, and this one needs logins and online ordering within four weeks |\n| User experience | High: one large button per item, labelled with its name and price | Low: logging in, searching by surname and choosing from a 40-item drop-down |\n| Users' needs | High: three clicks record a three-item order, so the queue keeps moving | Medium: orders placed ahead skip the queue, but each order taken at the counter means picking items from a 40-item drop-down, which slows the line |\n\nAnouk should develop Idea A, which rates high against all three criteria. Idea B's ordering ahead could shorten the queues, but it rates low on feasibility: Anouk can't be expected to build a website with logins and online ordering in four weeks when she has never built one, so it isn't a sound basis for the preferred design.",
+    "mistake": "Choosing the idea that offers the most. Each idea is rated against criteria drawn from what its users need, and an idea that can't be built with the time, skills and equipment available fails on feasibility, whatever it offers. Each criterion must also be checkable: 'Idea A is better' isn't a criterion.",
+    "source": "textbook"
   },
   {
     "id": "s-u3o2-kk14-001",
@@ -2162,6 +2809,263 @@
     ]
   },
   {
+    "id": "s-u3o2-kk15-004",
+    "kk": [
+      "U3O2-KK15",
+      "U3O2-KK12"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Calder Rise Music School in Kyneton is designing a phone app that parents will use to book music lessons for their children. Each family's record holds the children's names and ages, the home address and a parent's mobile number. The designer has drawn two sketches of the first screen parents see when they open the app.\n\nWhich characteristic of user experience does each sketch show better than the other one? Name one characteristic for each sketch, and justify each by referring to features of both sketches.",
+    "points": [
+      {
+        "text": "Sketch 1, security: the \"Signed in as\" line and the Log out button show that the parent has been authenticated and can end the session",
+        "marks": 1
+      },
+      {
+        "text": "Compares with Sketch 2: it has no sign-in or Log out, and shows the children's names and ages, the home address and the parent's mobile number to anyone who opens the app, so the family's data isn't protected",
+        "marks": 1
+      },
+      {
+        "text": "Sketch 2, affordance: Book lesson is drawn as a button, and the arrows on the Child, Instrument and Lesson date fields show that each opens to a set of choices; or usability: the child, instrument and date are picked from lists and a calendar instead of being typed",
+        "marks": 1
+      },
+      {
+        "text": "Compares with Sketch 1: its Book is plain text with no border or shape, so parents may not realise it can be tapped; or parents must type the child's name, instrument and date, which is slower on a phone and invites misspelt names and wrongly formatted dates",
+        "marks": 1
+      }
+    ],
+    "model": "Sketch 1 shows security better. Its \"Signed in as: G. Marchetti\" line shows that the parent has been authenticated before any booking is made, and its Log out button lets the parent end the session, for example on a phone the family shares. Sketch 2 has neither: as soon as the app opens, it shows the children's names and ages, the home address and the parent's mobile number, so anyone who picks up the phone can see where the children live and how to contact the family.\n\nSketch 2 shows affordance better. Book lesson is drawn as a button with a clear border, so it plainly looks like something to tap, and the arrows on the Child, Instrument and Lesson date fields show that each one opens to a set of choices. In Sketch 1, Book is plain text with no border or shape, so a parent may fill in every box and never realise that this word must be tapped to make the booking.",
+    "mistake": "Name one of the study design's four characteristics of user experience (affordance, interoperability, security, usability) for each sketch; words such as 'clean' or 'user-friendly' earn nothing. A screen that shows a family's private details with no sign-in is a security weakness, so Sketch 1 is better for security even though Sketch 2 is easier to use.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "music-sketch-1",
+        "kind": "mockup",
+        "title": "Sketch 1",
+        "width": 640,
+        "height": 440,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 220,
+            "w": 592,
+            "h": 392,
+            "text": "Calder Rise Music School"
+          },
+          {
+            "type": "label",
+            "x": 164,
+            "y": 84,
+            "w": 232,
+            "h": 24,
+            "text": "Signed in as: G. Marchetti"
+          },
+          {
+            "type": "button",
+            "x": 536,
+            "y": 84,
+            "w": 112,
+            "h": 32,
+            "text": "Log out"
+          },
+          {
+            "type": "divider",
+            "x": 320,
+            "y": 120,
+            "w": 544,
+            "h": 2
+          },
+          {
+            "type": "heading",
+            "x": 168,
+            "y": 156,
+            "w": 240,
+            "h": 32,
+            "text": "Book a lesson"
+          },
+          {
+            "type": "label",
+            "x": 128,
+            "y": 212,
+            "w": 160,
+            "h": 24,
+            "text": "Child's name"
+          },
+          {
+            "type": "textbox",
+            "x": 380,
+            "y": 212,
+            "w": 280,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 128,
+            "y": 264,
+            "w": 160,
+            "h": 24,
+            "text": "Instrument"
+          },
+          {
+            "type": "textbox",
+            "x": 380,
+            "y": 264,
+            "w": 280,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 128,
+            "y": 316,
+            "w": 160,
+            "h": 24,
+            "text": "Lesson date"
+          },
+          {
+            "type": "textbox",
+            "x": 380,
+            "y": 316,
+            "w": 280,
+            "h": 28,
+            "text": "DD/MM/YYYY"
+          },
+          {
+            "type": "label",
+            "x": 548,
+            "y": 376,
+            "w": 64,
+            "h": 24,
+            "text": "Book",
+            "note": "Tapping this word books the lesson"
+          }
+        ]
+      },
+      {
+        "id": "music-sketch-2",
+        "kind": "mockup",
+        "title": "Sketch 2",
+        "width": 640,
+        "height": 440,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 220,
+            "w": 592,
+            "h": 392,
+            "text": "Calder Rise Music School"
+          },
+          {
+            "type": "heading",
+            "x": 148,
+            "y": 84,
+            "w": 200,
+            "h": 32,
+            "text": "Your family"
+          },
+          {
+            "type": "label",
+            "x": 248,
+            "y": 124,
+            "w": 400,
+            "h": 24,
+            "text": "Sofia Marchetti (age 9), Luca Marchetti (age 12)"
+          },
+          {
+            "type": "label",
+            "x": 248,
+            "y": 152,
+            "w": 400,
+            "h": 24,
+            "text": "Home address: (address)"
+          },
+          {
+            "type": "label",
+            "x": 248,
+            "y": 180,
+            "w": 400,
+            "h": 24,
+            "text": "Parent's mobile: (number)"
+          },
+          {
+            "type": "divider",
+            "x": 320,
+            "y": 208,
+            "w": 544,
+            "h": 2
+          },
+          {
+            "type": "heading",
+            "x": 168,
+            "y": 240,
+            "w": 240,
+            "h": 32,
+            "text": "Book a lesson"
+          },
+          {
+            "type": "label",
+            "x": 108,
+            "y": 288,
+            "w": 120,
+            "h": 24,
+            "text": "Child"
+          },
+          {
+            "type": "dropdown",
+            "x": 320,
+            "y": 288,
+            "w": 240,
+            "h": 28,
+            "text": "Sofia"
+          },
+          {
+            "type": "label",
+            "x": 108,
+            "y": 328,
+            "w": 120,
+            "h": 24,
+            "text": "Instrument"
+          },
+          {
+            "type": "dropdown",
+            "x": 320,
+            "y": 328,
+            "w": 240,
+            "h": 28,
+            "text": "Piano"
+          },
+          {
+            "type": "label",
+            "x": 108,
+            "y": 368,
+            "w": 120,
+            "h": 24,
+            "text": "Lesson date"
+          },
+          {
+            "type": "dropdown",
+            "x": 320,
+            "y": 368,
+            "w": 240,
+            "h": 28,
+            "text": "Choose a date",
+            "note": "Opens a calendar to pick the date"
+          },
+          {
+            "type": "button",
+            "x": 528,
+            "y": 368,
+            "w": 136,
+            "h": 36,
+            "text": "Book lesson"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u3o2-kk16-001",
     "kk": [
       "U3O2-KK16"
@@ -2446,6 +3350,140 @@
             "h": 36,
             "text": "Submit",
             "note": "Dark green with bold white text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o2-kk16-004",
+    "kk": [
+      "U3O2-KK16",
+      "U3O2-KK14"
+    ],
+    "commandTerm": "annotate",
+    "marks": 4,
+    "prompt": "Saltbush Junior Cricket Club in Swan Hill will set up a tablet at its registration day so that parents can sign their children up for the season. The registration area is crowded and noisy, and most parents use the screen only once a year. The mock-up below is the designer's Sign up screen.\n\nAnnotate the mock-up by writing **two** annotations: one explaining how balance has been incorporated, and one explaining how space has been incorporated. Each annotation should justify the choice for the parents using the screen.",
+    "points": [
+      {
+        "text": "Balance: identifies how it is incorporated, e.g. the large photo on the left is offset by the labels, text boxes and Sign up button grouped on the right, so neither half looks heavier (asymmetrical balance)",
+        "marks": 1
+      },
+      {
+        "text": "Justifies balance for the parents, e.g. the screen looks settled and orderly and doesn't pull attention to one side, so parents glancing at it in a busy room notice the form as well as the photo",
+        "marks": 1
+      },
+      {
+        "text": "Space: identifies how it is incorporated, e.g. margins around the edge, a clear gap between the photo and the form, and a wider gap between the child's details and the parent's details than between the fields within each group",
+        "marks": 1
+      },
+      {
+        "text": "Justifies space for the parents, e.g. the gaps show which fields belong together and keep the screen uncluttered, so parents in a crowded room can scan it quickly, are less likely to type a detail into the wrong box, and have room to tap Sign up",
+        "marks": 1
+      }
+    ],
+    "model": "Annotation 1 (balance): The large photo of a junior match on the left is balanced by the form on the right, where the labels, text boxes and Sign up button together carry about the same visual weight. This asymmetrical balance makes the screen look settled and orderly and doesn't pull attention to one side, so parents glancing at the tablet in a busy room see the form as well as the photo.\n\nAnnotation 2 (space): Margins are left around the edge of the screen, a clear gap separates the photo from the form, and the gap between the child's details and the parent's details is wider than the gaps between fields within each group. The gaps show which fields belong together and keep the screen uncluttered, so parents who use it only once a year can scan it quickly in a noisy, crowded room, are less likely to type a detail into the wrong box, and have room to tap Sign up without hitting another control.",
+    "mistake": "An annotation that only names a principle earns little. Point to the elements on this screen that show it, then say how it helps these parents.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "cricket-signup-mockup",
+        "kind": "mockup",
+        "title": "Mock-up: Sign up screen",
+        "width": 640,
+        "height": 500,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 250,
+            "w": 592,
+            "h": 452,
+            "text": "Saltbush Junior Cricket Club"
+          },
+          {
+            "type": "heading",
+            "x": 224,
+            "y": 84,
+            "w": 320,
+            "h": 32,
+            "text": "Sign up for the season"
+          },
+          {
+            "type": "image",
+            "x": 184,
+            "y": 281,
+            "w": 240,
+            "h": 330,
+            "text": "Photo of a junior match"
+          },
+          {
+            "type": "label",
+            "x": 432,
+            "y": 128,
+            "w": 160,
+            "h": 24,
+            "text": "Child's name"
+          },
+          {
+            "type": "textbox",
+            "x": 468,
+            "y": 154,
+            "w": 232,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 432,
+            "y": 192,
+            "w": 160,
+            "h": 24,
+            "text": "Age"
+          },
+          {
+            "type": "textbox",
+            "x": 392,
+            "y": 218,
+            "w": 80,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 432,
+            "y": 284,
+            "w": 160,
+            "h": 24,
+            "text": "Parent's name"
+          },
+          {
+            "type": "textbox",
+            "x": 468,
+            "y": 310,
+            "w": 232,
+            "h": 28
+          },
+          {
+            "type": "label",
+            "x": 432,
+            "y": 348,
+            "w": 160,
+            "h": 24,
+            "text": "Parent's mobile"
+          },
+          {
+            "type": "textbox",
+            "x": 468,
+            "y": 374,
+            "w": 232,
+            "h": 28
+          },
+          {
+            "type": "button",
+            "x": 524,
+            "y": 428,
+            "w": 120,
+            "h": 36,
+            "text": "Sign up"
           }
         ]
       }

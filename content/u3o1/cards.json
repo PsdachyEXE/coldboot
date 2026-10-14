@@ -88,6 +88,30 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o1-kk01-009",
+    "kk": [
+      "U3O1-KK01"
+    ],
+    "type": "compare",
+    "front": "Benefits versus disadvantages of generating code from prompts",
+    "back": "| Benefits | Disadvantages |\n|:--|:--|\n| higher productivity: faster coding and debugging | possible bugs and errors |\n| lower development costs | possible security vulnerabilities |\n| non-developers can generate working code | copyright concerns |\n| less need for deep expertise in many languages | limited grasp of context |\n| automatic documentation, better code quality | reliance on trial and error and precise prompts |\n| possible support for problem-solving and innovation | dependence on human oversight |\n\nCode can be refined over a series of prompts.",
+    "mistake": "Letting non-developers generate working code doesn't remove the need for expertise. Someone still has to read, test and take responsibility for the code, which is why dependence on human oversight is a disadvantage.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk01-010",
+    "kk": [
+      "U3O1-KK01"
+    ],
+    "type": "basic",
+    "front": "What types of code optimisation can an AI tool perform?",
+    "back": "- **Resource optimisation**: use less CPU time and memory\n- **Algorithm optimisation**: replace an algorithm with a more efficient one\n- **Code simplification**: remove repeated or unnecessary code\n- **Standardisation**: make code follow the organisation's or industry's rules\n- **Security optimisation**: replace code that attackers could exploit with safer code\n- **Automated comment generation and summarisation**: document what the code does",
+    "mistake": "Optimisation isn't only about speed. Making code simpler, more secure, consistent with the organisation's standards or better documented are all optimisations an AI tool can suggest.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o1-kk01-011",
     "kk": [
       "U3O1-KK01"
@@ -265,6 +289,19 @@
     "source": "study-design"
   },
   {
+    "id": "c-u3o1-kk03-013",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "type": "basic",
+    "front": "Which conventions does VCAA set out for a pseudocode block's layout, assignment, input and output?",
+    "back": "- Start with `BEGIN`, finish with `END`\n- Reserved words in capitals (bold in print)\n- Indent to show which statements sit inside each control structure\n- Assign with `←` or `SET`\n- Input with `INPUT` or `READ`\n- Output with `PRINT`, `OUTPUT` or `RETURN`\n\nThe 2025 exam wrote output as `DISPLAY`, which isn't on VCAA's list; this app uses `←`, `INPUT` and `DISPLAY`.",
+    "mistake": "Lining up the statements inside a loop or IF with the line that opens it. Indentation is how pseudocode shows which statements a control structure contains, so a misaligned line changes what the algorithm appears to do.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o1-kk04-001",
     "kk": [
       "U3O1-KK04"
@@ -358,6 +395,18 @@
     "mistake": "Storing \"Yes\" or \"No\" as a String allows inconsistent entries such as \"Y\" or \"yes\", which then fail comparisons.",
     "difficulty": 1,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk04-009",
+    "kk": [
+      "U3O1-KK04"
+    ],
+    "type": "basic",
+    "front": "Which group of data types does date/time belong to, and why does it suit a value such as a guest's arrival date?",
+    "back": "Numeric, with integer and floating point. Stored as date/time, an arrival date can be compared with other dates, sorted in time order and used in calculations, such as the number of nights between arrival and departure.",
+    "mistake": "Storing a date as a string such as \"05/03/2025\". Strings are compared character by character, so \"05/03/2025\" sorts before \"12/01/2024\" even though it is the later date, and two strings can't be subtracted to find the days between them.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk05-002",
@@ -458,6 +507,17 @@
     "back": "A data structure that groups related values of varying data types under one name. Each value is stored in its own field and reached by its field index (which field it is), such as `member.name` (a String) and `member.age` (an Integer).",
     "mistake": "Unlike an array, which holds a single data type reached by an integer index, a record's fields can hold different data types, and each is reached by its field index.",
     "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk05-011",
+    "kk": [
+      "U3O1-KK05"
+    ],
+    "type": "basic",
+    "front": "Which three data structures does the study design name, and how does each hold and reach its values?",
+    "back": "| Structure | Holds | One value is reached by |\n|:--|:--|:--|\n| one-dimensional array | values of a single data type | one integer index, e.g. `temps[3]` |\n| two-dimensional array | values of a single data type | two integer indexes, row then column, e.g. `seats[2][5]` |\n| record | fields of varying data types | its field index (which field), e.g. `guest.surname` |",
+    "difficulty": 1,
     "source": "study-design"
   },
   {
@@ -662,6 +722,32 @@
     "source": "study-design"
   },
   {
+    "id": "c-u3o1-kk07-013",
+    "kk": [
+      "U3O1-KK07",
+      "U3O1-KK03"
+    ],
+    "type": "basic",
+    "front": "In an object description set out as in VCAA's examples, the Name row of one column reads `Kayak (extends Watercraft)`. What does this mean, and which attributes and methods does a `Kayak` object have?",
+    "back": "`Kayak` is a subclass of the superclass `Watercraft`. Members the two classes share are listed once, under `Watercraft`, and the `Kayak` column lists only what it adds or overrides, such as `seats (integer)` and `fitRudder()`. A `Kayak` object has every attribute and method of `Watercraft` as well as its own.",
+    "mistake": "Reading the subclass column as the whole class. A subclass object also has everything listed under its superclass, even though those members aren't repeated in its own column.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk07-014",
+    "kk": [
+      "U3O1-KK07",
+      "U3O1-KK03"
+    ],
+    "type": "basic",
+    "front": "What does it mean for a subclass to override an inherited method, and how do VCAA's object descriptions show it?",
+    "back": "The subclass replaces a method it inherits with its own version, which runs whenever that method is called on one of the subclass's objects. For example, `GroupBooking` overrides the `calcFee(people)` it inherits from `Booking` to apply a group discount. VCAA lists the subclass's own method with a line such as `overrides calcFee(people)` below it.",
+    "mistake": "Thinking an override changes the superclass. Objects of `Booking`, and of any other subclass that doesn't override `calcFee(people)`, still use the original version.",
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o1-kk08-001",
     "kk": [
       "U3O1-KK08",
@@ -782,6 +868,55 @@
     "back": "A single instance of a class, created while the program runs. It holds its own values for the attributes the class defines and can carry out the class's methods, so two `Booking` objects can have different dates and party sizes.",
     "difficulty": 1,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk08-011",
+    "kk": [
+      "U3O1-KK08",
+      "U4O1-KK03"
+    ],
+    "type": "compare",
+    "front": "CASE versus IF…ELSEIF",
+    "back": "Both are selection. CASE suits testing one value against a list of fixed values, such as a menu choice:\n\n```pseudo\nBEGIN\n    INPUT choice\n    CASE choice OF\n        1: DISPLAY \"New booking\"\n        2: DISPLAY \"Cancel booking\"\n        OTHERWISE: DISPLAY \"Invalid choice\"\n    ENDCASE\nEND\n```\n\nIF…ELSEIF suits ranges such as `age >= 65`, and conditions that test different variables or join tests with `AND` or `OR`.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk08-012",
+    "kk": [
+      "U3O1-KK08",
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "VCAA's programming requirements say the chosen OOP language must let students build a graphical user interface (GUI) in at least one of three ways. What are the three ways?",
+    "back": "- An IDE's drag-and-drop (WYSIWYG) designer: controls are placed on a form, and the IDE generates the code or markup behind them\n- Code in the same language as the rest of the program, which creates and positions each control\n- Code in a supporting language, such as HTML and CSS for a web page, with the logic still in the OOP language",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk08-013",
+    "kk": [
+      "U3O1-KK08",
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "Which arithmetic operators do VCAA's programming requirements list, and what do unary minus and increment do?",
+    "back": "Addition, subtraction, multiplication, division, integer division (`23 DIV 4` is 5), modulus (`23 MOD 4` is 3), unary plus/minus, and increment/decrement. Unary minus takes a single operand and reverses its sign: if `x` is 4, `-x` is -4. Increment adds 1 to a variable and decrement subtracts 1, as in `count ← count + 1` (`count++` in C# or Java).",
+    "mistake": "Writing `count + 1` on its own and expecting `count` to go up. The result has to be stored back in the variable (`count ← count + 1`) for the increment to happen.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk08-014",
+    "kk": [
+      "U3O1-KK08",
+      "U4O1-KK03"
+    ],
+    "type": "basic",
+    "front": "Which features of a programming language does the study design list for Unit 3 Outcome 1?",
+    "back": "- Local and global variables, and constants\n- Data types\n- Instructions and control structures (sequence, selection, iteration/repetition)\n- Arithmetic, logical and conditional operators\n- Graphical user interfaces (GUIs)\n- Functions and methods\n- Classes and objects\n\nUnit 4's list has the same features and adds access modifiers (public, protected and private).",
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk09-004",
@@ -1097,6 +1232,18 @@
     "mistake": "Good comments explain why, not just what. `// post-test loop: the menu must show at least once` is more useful than `// loop until the user quits`.",
     "difficulty": 1,
     "source": "study-design"
+  },
+  {
+    "id": "c-u3o1-kk11-010",
+    "kk": [
+      "U3O1-KK11"
+    ],
+    "type": "basic",
+    "front": "What is a stub, and why does it carry a placeholder comment?",
+    "back": "A function or method with its name and parameters in place but its body not yet written: for now it might just return a fixed value or display 'not yet written'. Other code can call it, so the program runs and can be tested. Its placeholder comment says what it will do, so the next developer knows what is left to build.",
+    "mistake": "A stub isn't a mistake or dead code to delete. Without its placeholder comment, though, its fixed return value (such as 0) looks like a finished result and can be mistaken for correct output.",
+    "difficulty": 2,
+    "source": "textbook"
   },
   {
     "id": "c-u3o1-kk12-001",
@@ -1424,6 +1571,19 @@
     "front": "Test data",
     "back": "Input values chosen to check that a module works, each with its expected output worked out from the requirements beforehand. A relevant set includes valid values, invalid values (blank, wrong type, out of range) and boundary values on and just beyond each limit, with each test using a different combination of inputs.",
     "mistake": "Testing only valid data isn't enough. Errors often hide at the limits, so for an accepted range of 1 to 10, test 0, 1, 10 and 11 as well as a typical value.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o1-kk14-010",
+    "kk": [
+      "U3O1-KK14",
+      "U3O1-KK08"
+    ],
+    "type": "basic",
+    "front": "How can debugging statements show which branch of an IF … ELSEIF … ELSE ran, and what can this reveal?",
+    "back": "Add a temporary DISPLAY at the start of each branch that names it, such as `DISPLAY \"branch: weight > 5\"`, then run the tests. If a 12 kg parcel shows the `weight > 5` branch instead of the `weight > 10` one, the conditions are in the wrong order: `weight > 5` is tested first and is already true.",
+    "mistake": "Only the first true condition in an IF … ELSEIF chain runs its branch. Tested before `weight > 10`, the condition `weight > 5` catches every parcel over 10 kg, so the narrower condition must come first.",
     "difficulty": 2,
     "source": "textbook"
   }

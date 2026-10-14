@@ -188,6 +188,18 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o2-kk02-009",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "type": "basic",
+    "front": "Why is communication usually easier when software is developed in-house rather than by an external team?",
+    "back": "In-house developers work alongside the staff who know the business, so they can ask questions, show early versions and sort out misunderstandings as they go. An external team works through the contract and a few contact people, so requirements are more easily misunderstood, and the mistakes may not show up until the software is delivered.",
+    "mistake": "Easier communication is only half a justification for building in-house. Pair it with the drawback of the external option: requirements that pass through a contract and a few contacts are easily misunderstood.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u4o2-kk03-002",
     "kk": [
       "U4O2-KK03"
@@ -290,6 +302,46 @@
     "front": "Vulnerability",
     "back": "A weakness in a system, program, process or development environment that a threat could exploit to cause harm, such as unpatched software, an administrator password shared by the whole team, or development, testing and production combined in one environment.",
     "mistake": "A vulnerability is the weakness itself. A threat is what might exploit it, and risk combines how likely that is with how much harm it would cause.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-011",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "basic",
+    "front": "How can malware put a development environment at risk?",
+    "back": "Malware can reach a developer's computer or the build server through a downloaded tool, an infected library or an email attachment. It can steal the source code and any passwords or keys stored there, slip malicious code into the program being built so that it reaches every user, or encrypt the code and data (ransomware) so that development stops.",
+    "mistake": "Malware in a development environment doesn't harm only one computer. Code it changes can be released to every customer who installs the software.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-012",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "type": "reverse",
+    "front": "Cyber security incident",
+    "aliases": [
+      "Cybersecurity incident"
+    ],
+    "back": "An unwanted or unexpected event that has harmed, or is likely to harm, an organisation's systems, code or data, such as a ransomware attack, a data breach or someone getting into the code repository without authorisation. The risk can outlast the event: stolen passwords and leaked source code can be used in later attacks.",
+    "mistake": "An incident is the event itself, not the weakness behind it. An unpatched build server is a vulnerability; an attack that uses it to copy the source code is a cyber security incident.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk03-013",
+    "kk": [
+      "U4O2-KK03",
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "What makes code review practices ineffective, and why is that a vulnerability?",
+    "back": "Reviews that are optional or skipped under deadline pressure, authors approving their own changes, code (including AI-generated code) approved without being read, or reviewers who don't look for security problems such as hard-coded passwords. Flaws, and malicious code added by an insider or an attacker, can then reach the live software unnoticed.",
+    "mistake": "Having a review step on paper isn't enough. If changes can be merged without one, or approved without being read, the code is effectively unreviewed.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -402,6 +454,19 @@
     ],
     "back": "A security control: promptly installing the fixes (patches) and updates that vendors release for software, including operating systems, applications, libraries and development tools. Each patch corrects bugs or closes a known vulnerability that attackers may already be trying to exploit in systems that haven't been updated.",
     "mistake": "Patching isn't only for the finished product. The libraries, tools and operating systems the development team uses need patching too, and unpatched software is one of the study design's listed vulnerabilities.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk04-011",
+    "kk": [
+      "U4O2-KK04",
+      "U4O2-KK03"
+    ],
+    "type": "compare",
+    "front": "Development versus testing versus production environment",
+    "back": "| | Development | Testing | Production |\n|:--|:--|:--|:--|\n| Used for | Writing and changing code | Checking changes before release | Running the live system |\n| Used by | Developers | Testers | Staff and customers |\n| Data it should hold | Made-up | Made-up or de-identified | Real, including personal information |\n\nKept separate, a change reaches production only after passing testing.",
+    "mistake": "The production environment isn't where the software is produced. It is the live system that staff and customers rely on, holding real data; code is written in the development environment.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -600,6 +665,19 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o2-kk06-009",
+    "kk": [
+      "U4O2-KK06",
+      "TERMS"
+    ],
+    "type": "basic",
+    "front": "Which three effectiveness measures does the study design give for development practices? Give a security criterion based on each.",
+    "back": "| Measure | Example criterion |\n|:--|:--|\n| Security controls in place | Every change is reviewed by a second developer before merging |\n| Exposure to vulnerability and risk | No real customer data is held in development or test environments |\n| Legal compliance | The team's handling of personal information meets APP 11 (Security of personal information) |\n\nFor data and information security strategies, the measures are confidentiality, integrity and availability.",
+    "mistake": "Criteria don't only check that a control exists. A strong set also judges how exposed the practices leave code and data, and whether they meet the law that binds the organisation: APP 11 for an organisation the Privacy Act covers, or IPP 4 (Data security) for a Victorian public sector body.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u4o2-kk07-001",
     "kk": [
       "U4O2-KK07",
@@ -741,6 +819,56 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o2-kk07-011",
+    "kk": [
+      "U4O2-KK07",
+      "U3O2-KK10"
+    ],
+    "type": "basic",
+    "front": "What is the Copyright Act 1968 (Cwlth), what is its purpose, and what does it apply to?",
+    "back": "A Commonwealth law that gives the owner of an original work exclusive rights, such as to copy, adapt (change), publish and share it online. Its purpose is to let creators control and benefit from their work, so others generally need the owner's permission, usually a licence. It applies to program code and documentation (as literary works), images, music, sound recordings and video.",
+    "mistake": "Free to download doesn't mean free to reuse. Code, images and sounds found online are still protected, and their licence sets what you may do with them.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk07-012",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "type": "basic",
+    "front": "Which five Australian Privacy Principles (APPs) does the Unit 4 key knowledge list, and what does each mean for a program that handles personal information?",
+    "back": "- **APP 1** Open and transparent management of personal information: a clear, current privacy policy\n- **APP 6** Use or disclosure of personal information: only for the purpose it was collected for, unless consent or another exception applies\n- **APP 8** Cross-border disclosure of personal information: before sending it overseas, take reasonable steps so the recipient handles it as the APPs require\n- **APP 9** Adoption, use or disclosure of government related identifiers: don't make a Medicare or driver licence number the customer ID\n- **APP 11** Security of personal information: protect it, and destroy or de-identify it when no longer needed",
+    "mistake": "APP 11 isn't only about keeping attackers out. Personal information that is no longer needed must be destroyed or de-identified, not kept just in case.",
+    "difficulty": 3,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u4o2-kk07-013",
+    "kk": [
+      "U4O2-KK07"
+    ],
+    "type": "basic",
+    "front": "Which five Information Privacy Principles (IPPs) of the Privacy and Data Protection Act 2014 (Vic) does the Unit 4 key knowledge list, and what does each require?",
+    "back": "- **IPP 1** Collection: only what is necessary, collected fairly, telling people why\n- **IPP 2** Use and disclosure: only for the purpose it was collected for, or a related one people would expect, unless an exception such as consent applies\n- **IPP 4** Data security: protect it from misuse, loss and unauthorised access, and destroy or de-identify it when no longer needed\n- **IPP 5** Openness: a clearly expressed policy on managing personal information, available on request\n- **IPP 9** Transborder data flows: send it outside Victoria only if it will be protected to a similar standard, or an exception such as consent applies",
+    "mistake": "The IPPs bind Victorian public sector bodies, such as councils and state departments. A private business follows the Privacy Act's APPs instead, when that Act covers it.",
+    "difficulty": 3,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u4o2-kk07-014",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "What are the four ISM Guidelines for Software Development, and what does each ask a development team to do?",
+    "back": "Purpose: to keep vulnerabilities and malicious code out of the software an organisation builds.\n\n- **Development, testing, staging and production environments**: keep them separate, change code only in development, and keep production data in production unless another environment is secured to the same level\n- **Authoritative source for software**: one trusted, access-controlled repository for all development work\n- **Secure software development**: build security in from the design stage, for example by threat modelling\n- **Software security testing**: test for security vulnerabilities before each release",
+    "mistake": "Don't copy real customer data into development to make tests realistic: use made-up data. Production data belongs only in environments secured to the same level as production, which development environments rarely are.",
+    "difficulty": 3,
+    "source": "study-design"
+  },
+  {
     "id": "c-u4o2-kk08-001",
     "kk": [
       "U4O2-KK08",
@@ -836,6 +964,18 @@
     "front": "Why is hiding a data breach from the people affected an ethical issue?",
     "back": "Without being told, people can't protect themselves, for example by changing passwords or watching their accounts. Hiding the breach also misleads them and damages their trust in the organisation.",
     "mistake": "Hiding a breach isn't only an ethical issue. When serious harm is likely, organisations covered by the Privacy Act 1988 (Cwlth) must notify the people affected.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk08-009",
+    "kk": [
+      "U4O2-KK08"
+    ],
+    "type": "basic",
+    "front": "Apart from failing to acknowledge reused code, which development practices raise intellectual property issues?",
+    "back": "- Using pirated (unlicensed) software or development tools\n- Sharing or selling a program or its code without the owner's permission\n- Ignoring the conditions of an open-source licence\n- Reverse engineering proprietary software to copy or change its code\n- Taking code owned by an employer or client to reuse elsewhere\n\nEach uses someone's work without permission or outside the terms they allow, and can cost them income.",
+    "mistake": "Crediting the author doesn't make every use acceptable. Using or sharing code without the owner's permission, or outside its licence, is still wrong and can infringe copyright.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -1040,6 +1180,42 @@
     "type": "basic",
     "front": "How can an organisation check whether a recommendation has improved its development practices?",
     "back": "Evaluate the practices again against the same criteria used before the change, with the same kinds of evidence, and compare the results, for example the number of accounts holding administrator rights they don't need.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-009",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK04"
+    ],
+    "type": "basic",
+    "front": "Which two strategies for improving the security of software development practices does the study design list?",
+    "back": "- Onboarding/induction practices and developer training focused on secure development\n- Development of risk management plans\n\nEach improves how the whole team works. Security controls, such as code review, encryption and separated environments, are a separate list.",
+    "mistake": "A security control, such as code review or encryption, isn't a strategy. In 2025, answers that described a security control when a strategy was asked for earned no marks.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u4o2-kk10-010",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "type": "cloze",
+    "front": "A risk management plan lists the potential {{risks}} to a project, rates each one's {{likelihood}} and {{impact}}, and proposes {{security controls}} to reduce them.",
+    "back": "The ratings show which risks to deal with first. Developing the plan is one of the study design's strategies for improving secure development practices; the controls it proposes are not strategies in their own right.",
+    "mistake": "A list of risks on its own isn't a risk management plan. Without likelihood and impact ratings and a proposed control for each risk, it can't show what to fix first or how.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o2-kk10-011",
+    "kk": [
+      "U4O2-KK10"
+    ],
+    "type": "compare",
+    "front": "Onboarding/induction and developer training versus a risk management plan",
+    "back": "| | Onboarding/induction and training | Risk management plan |\n|:--|:--|:--|\n| Advantage | Every developer learns secure habits from the start, so fewer weaknesses are created | Ranks risks by likelihood and impact, so time and money go to the most serious first |\n| Disadvantage | Costs time and money, and must be repeated as staff and threats change | Takes effort to prepare, and goes out of date unless it is reviewed |",
     "difficulty": 2,
     "source": "textbook"
   }

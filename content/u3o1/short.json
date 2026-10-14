@@ -373,6 +373,100 @@
     ]
   },
   {
+    "id": "s-u3o1-kk03-004",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14",
+      "U3O1-KK04",
+      "U3O1-KK09"
+    ],
+    "commandTerm": "complete",
+    "marks": 6,
+    "prompt": "Marlee is designing the booking module for a holiday park in Marysville. Each `Booking` object must record a booking ID, the guest's name, the site number, the arrival date, the number of nights, whether the guest has paid the deposit, and the total cost of the stay in dollars and cents.\n\nHer object description is shown below. The headings of two sections (**A** and **B**) and two properties/attributes (**C** and **D**) are missing.\n\nState the headings for sections **A** and **B**. Then complete **C** and **D**, giving each property/attribute a name and a data type.",
+    "points": [
+      {
+        "text": "A: Name",
+        "marks": 1
+      },
+      {
+        "text": "B: Methods",
+        "marks": 1
+      },
+      {
+        "text": "C name: describes whether the deposit has been paid and follows the description's camel casing, e.g. `depositPaid` or `hasPaidDeposit` (a name such as `deposit_paid` doesn't earn the mark)",
+        "marks": 1
+      },
+      {
+        "text": "C data type: Boolean (\"Bool\" doesn't earn the mark)",
+        "marks": 1
+      },
+      {
+        "text": "D name: describes the total cost and follows the description's camel casing, e.g. `totalCost`",
+        "marks": 1
+      },
+      {
+        "text": "D data type: floating point (\"Float\" doesn't earn the mark)",
+        "marks": 1
+      }
+    ],
+    "model": "**A** is Name and **B** is Methods.\n\n| | Property/attribute name | Data type |\n|:--|:--|:--|\n| C | depositPaid | Boolean |\n| D | totalCost | floating point |\n\nBoth names follow the camel casing of the existing properties, such as `guestName`. Whether the deposit is paid has only two states, so it is Boolean, and the total cost is in dollars and cents, so it is floating point.",
+    "mistake": "Writing \"Bool\" or \"Float\", or a name in another style such as `deposit_paid`: the 2025 examiners gave no marks for either. Use the study design's data type names in full, and match the casing the object description already uses.",
+    "source": "study-design",
+    "figures": [
+      {
+        "id": "holiday-booking-object",
+        "kind": "table",
+        "title": "Object description: Booking (draft)",
+        "columns": [
+          "A",
+          "Booking"
+        ],
+        "rows": [
+          [
+            "Properties/Attributes",
+            "bookingID (string)"
+          ],
+          [
+            "",
+            "guestName (string)"
+          ],
+          [
+            "",
+            "siteNumber (integer)"
+          ],
+          [
+            "",
+            "arrivalDate (date/time)"
+          ],
+          [
+            "",
+            "numNights (integer)"
+          ],
+          [
+            "",
+            "**C**"
+          ],
+          [
+            "",
+            "**D**"
+          ],
+          [
+            "B",
+            "calculateTotal(nightlyRate)"
+          ],
+          [
+            "",
+            "recordDeposit()"
+          ],
+          [
+            "",
+            "changeSite(newSiteNumber)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u3o1-kk04-001",
     "kk": [
       "U3O1-KK04"
@@ -689,6 +783,33 @@
     "source": "textbook"
   },
   {
+    "id": "s-u3o1-kk06-004",
+    "kk": [
+      "U3O1-KK06",
+      "U4O1-KK02"
+    ],
+    "commandTerm": "describe",
+    "marks": 2,
+    "prompt": "Kenji is writing a timing app for an orienteering club near Creswick. Each time a runner reaches a checkpoint, the app sends a result holding the runner's number, the checkpoint code and the time to the club's results program, formatted as XML. Volunteers run the app on their own phones and tablets, which use several different operating systems. Next season the club plans to add each runner's heart rate to every result.\n\nDescribe **two** benefits of formatting the checkpoint results as XML.",
+    "points": [
+      {
+        "text": "Describes XML's extensible structure in the scenario: a new element such as `<heartRate>` can be added to every result next season without changing the existing elements, so a results program that finds values by their tag names still reads the runner number, checkpoint code and time.",
+        "marks": 1
+      },
+      {
+        "text": "Describes XML's hierarchical structure, in which tags describe each value, in the scenario: each result element holds child elements named for their values, such as `<runnerNumber>`, `<checkpoint>` and `<time>`, so the results program can tell what each value means.",
+        "marks": 1
+      },
+      {
+        "text": "Describes XML as portable and interoperable, in the scenario: it is an open, text-based standard that any operating system can create and read, so results sent from phones and tablets running different operating systems can all be read by the results program.",
+        "marks": 1
+      }
+    ],
+    "model": "XML's structure is extensible. Next season the club can add a `<heartRate>` element to every result without changing the existing elements, so a results program that finds each value by its tag name keeps reading the runner number, checkpoint code and time as before. XML is also portable and interoperable: it is an open, text-based standard that any operating system can create and read, so the results sent from volunteers' phones and tablets, whatever operating system each one runs, can all be read by the results program.",
+    "mistake": "Answering with a comparison, such as 'XML is better than CSV because ...'. In 2025, answers to a question about XML's benefits that compared it with CSV earned no marks. Describe XML's own features (an extensible structure, tags in a hierarchy that describe each value, portability and interoperability) and apply each one to the scenario.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o1-kk07-001",
     "kk": [
       "U3O1-KK07",
@@ -808,6 +929,33 @@
     ],
     "model": "Abstraction means a class models only the details that matter for the problem the program solves and leaves out everything else. Ngaire's program records which boards are hired out and calculates fees, so `boardID`, `hourlyRate` and `isHiredOut` are all needed. A board's colour and the shop it came from aren't used by either task, so by abstraction they are left out of `Board`. This keeps the class simpler: staff enter less data for each board, and there are fewer attributes to code, validate and test. If a later requirement needed one of these details, it could be added then.",
     "mistake": "Arguing that storing more details makes a class better. Abstraction keeps only what the program's requirements use; extra attributes add data entry, code and testing for no benefit.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u3o1-kk07-004",
+    "kk": [
+      "U3O1-KK07",
+      "U3O1-KK08"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Maeve is developing the booking program for a swim school in Traralgon. Each `Lesson` object holds the bookings for one weekly lesson group. The reception screen cancels a booking with a single line of code, `lesson.cancelBooking(bookingID)`. Inside the method, the `Lesson` class finds the booking in its list, removes it, records a credit for the family and offers the freed place to the first child on the waiting list.\n\nDescribe how `cancelBooking(bookingID)` is an example of abstraction.",
+    "points": [
+      {
+        "text": "States that abstraction hides how a class carries out a task and exposes only what other code needs in order to use it.",
+        "marks": 1
+      },
+      {
+        "text": "Applies it: the reception screen's code only calls `cancelBooking(bookingID)` with the booking's ID. It knows what the method does but not how, because finding and removing the booking, recording the credit and offering the place to the waiting list all happen inside `Lesson`.",
+        "marks": 1
+      },
+      {
+        "text": "Gives a benefit: the calling code stays simple, or the steps inside the method can change (e.g. a new credit rule) without any change to the code that calls it.",
+        "marks": 1
+      }
+    ],
+    "model": "Abstraction hides the details of how a class carries out a task and exposes only what other code needs, so other code can use an object by knowing what a method achieves without knowing the steps it takes. The reception screen only needs to know that `cancelBooking(bookingID)` cancels a booking and that it must be given the booking's ID. It doesn't need to know that `Lesson` searches its bookings, removes the right one, records a credit for the family and offers the place to the first child on the waiting list, because all of that happens inside the method. As a result, the screen's code is a single call, and if the swim school changes how credits work, only `cancelBooking` is changed; the code that calls it stays the same.",
+    "mistake": "Describing private attributes or get and set methods answers a different principle: that is encapsulation. Abstraction is about the calling code using a method knowing what it does but not the steps inside it.",
     "source": "textbook"
   },
   {
@@ -1009,6 +1157,91 @@
     "mistake": "Naming a convention without a reason tied to the form earns only the first mark. *Recommend* asks for a choice and why it suits this form."
   },
   {
+    "id": "s-u3o1-kk09-004",
+    "kk": [
+      "U3O1-KK09",
+      "U3O1-KK03",
+      "U3O1-KK04"
+    ],
+    "commandTerm": "explain",
+    "marks": 5,
+    "prompt": "Bluebush Fitness Centre in Robinvale is adding guest passes to its membership module. Part of Mei's data dictionary for the module is shown below. Two new variables, **C** and **D**, still need names.\n\n1. Write a name for **C** and a name for **D** that follow the naming convention the data dictionary already uses.\n2. Mei's teammate wants to add a variable named `joining_fee` to hold the one-off fee, in dollars and cents, that a new member pays. Explain why this name doesn't suit the module, and rewrite it so that it does.",
+    "points": [
+      {
+        "text": "C: the prefix the data dictionary uses for Integer variables (`int`), followed by camel casing and describing the guest passes left, e.g. `intGuestPassesLeft`. A name with no prefix, such as `guestPassesLeft`, or in snake casing earns no mark.",
+        "marks": 1
+      },
+      {
+        "text": "D: the prefix the data dictionary uses for Boolean variables (`bool`), followed by camel casing and describing whether the waiver is signed, e.g. `boolSignedWaiver` or `boolHasSignedWaiver`.",
+        "marks": 1
+      },
+      {
+        "text": "Explains that `joining_fee` uses snake casing with no type prefix, while every name in the data dictionary uses Hungarian notation (a type prefix) followed by camel casing, so it breaks the module's convention.",
+        "marks": 1
+      },
+      {
+        "text": "Explains the effect: mixing conventions makes the module harder to read and maintain, and a developer can't tell this variable's data type from its name as they can for every other variable.",
+        "marks": 1
+      },
+      {
+        "text": "Rewrites it with the prefix the dictionary uses for Floating point (`flt`) followed by camel casing, e.g. `fltJoiningFee`, because a fee in dollars and cents is Floating point.",
+        "marks": 1
+      }
+    ],
+    "model": "1. **C**: `intGuestPassesLeft`. **D**: `boolSignedWaiver`. Each starts with the prefix the data dictionary uses for its data type (`int` for Integer, `bool` for Boolean) and continues in camel casing, like `intVisitsThisMonth` and `boolIsConcession`.\n\n2. `joining_fee` is written in snake casing with no type prefix, but every other name in the data dictionary uses Hungarian notation followed by camel casing. Mixing the two makes the module harder to read and maintain: a developer can tell the data type of every other variable from its name, but not this one. The fee is in dollars and cents, so it is Floating point, and the name should be `fltJoiningFee`, to match `fltMonthlyFee`.",
+    "mistake": "Naming a new element in your own preferred style, or leaving out the prefix. A new name must follow the convention the design already uses, here a type prefix followed by camel casing; in 2025, new names that didn't match the casing of the existing design earned no marks.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "bluebush-data-dictionary",
+        "kind": "table",
+        "title": "Data dictionary: membership module (part)",
+        "columns": [
+          "Name",
+          "Data type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "strMemberID",
+            "String",
+            "Member's ID, e.g. BF0457"
+          ],
+          [
+            "strMemberName",
+            "String",
+            "Member's full name"
+          ],
+          [
+            "intVisitsThisMonth",
+            "Integer",
+            "Number of times the member has visited this month"
+          ],
+          [
+            "fltMonthlyFee",
+            "Floating point",
+            "Monthly fee in dollars and cents"
+          ],
+          [
+            "boolIsConcession",
+            "Boolean",
+            "Whether the member pays the concession rate"
+          ],
+          [
+            "**C**",
+            "Integer",
+            "Number of guest passes the member has left this month"
+          ],
+          [
+            "**D**",
+            "Boolean",
+            "Whether the member has signed the safety waiver"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "s-u3o1-kk10-001",
     "kk": [
       "U3O1-KK10",
@@ -1093,6 +1326,45 @@
     "model": "*Number of guests*: The form should apply an existence check so that the field can't be left blank. A blank isn't the same as 0 guests, and the club needs a definite number to cater for. It should then apply a type check that the entry is a whole number, rejecting entries such as `two` or `1.5`, because the value counts people. Finally, a range check should accept 0 to 3 inclusive. The lower limit must be 0, not 1, because a member who comes alone brings no guests, and 3 is the most guests a member may bring.\n\n*Dietary notes*: The form should not apply an existence check. The field is optional and most members leave it blank, so an existence check would reject every booking from a member with no dietary needs.",
     "source": "textbook",
     "mistake": "Recommending all three checks for every field isn't a recommendation. Each check must suit the field's requirement: an optional field has to accept a blank, and a count that can be zero needs a lower limit of 0."
+  },
+  {
+    "id": "s-u3o1-kk10-004",
+    "kk": [
+      "U3O1-KK10",
+      "U4O1-KK05"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Snowy Daisy Canoe Hire in Tocumwal takes bookings for groups of 1 to 6 people and hires canoes by the whole hour, for 1 to 4 hours. Staff type the group size and the number of hours into a booking module, designed in the pseudocode shown.\n\n1. Identify the validation technique applied on line 4 and the one applied on line 5.\n2. Identify **one** further validation check the module should apply, name the input it applies to, and explain why the check is needed.",
+    "points": [
+      {
+        "text": "Line 4: an existence check (it tests that `group_size` isn't blank).",
+        "marks": 1
+      },
+      {
+        "text": "Line 5: a range check (it tests that `group_size` is from 1 to 6).",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a further check and its input: a type check on `group_size` or on `hours`, or an existence check on `hours`. An existence check on `group_size`, or a range check on either input, earns no mark, because the module already applies them.",
+        "marks": 1
+      },
+      {
+        "text": "Explains why, matching the check chosen. Type check: the input is compared with numbers (line 5 or line 7), so an entry that isn't a number, such as `two`, can cause a type mismatch error instead of being rejected with a message; for `hours`, a type check also rejects a part hour such as 2.5, which the range check accepts. Existence check on `hours`: line 4 tests only `group_size`, so a booking with the hours left blank is never caught and the blank reaches the comparison on line 7.",
+        "marks": 1
+      }
+    ],
+    "model": "1. Line 4 applies an existence check: it confirms that `group_size` isn't blank before it is used. Line 5 applies a range check: it confirms that `group_size` is from 1 to 6.\n\n2. The module should apply a type check to `hours`. On line 7, `hours` is compared with the numbers 1 and 4, but nothing first confirms that it is a whole number. If a staff member types `two`, the comparison can cause a type mismatch error that crashes the module instead of showing a message, and a part hour such as 2.5 passes the range check even though canoes are hired only by the whole hour.",
+    "mistake": "Calling the not-blank test on line 4 a type check, or assuming it covers every input. A test that a value isn't blank is an existence check, and line 4 applies it to `group_size` only, so `hours` is never checked for a value and neither input is confirmed to be a number before it is compared with one.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "canoe-booking-validation",
+        "kind": "pseudocode",
+        "title": "Pseudocode: booking check",
+        "code": "BEGIN\n    INPUT group_size\n    INPUT hours\n    IF group_size <> \"\" THEN\n        IF group_size < 1 OR group_size > 6 THEN\n            DISPLAY \"Groups must have 1 to 6 people.\"\n        ELSEIF hours < 1 OR hours > 4 THEN\n            DISPLAY \"Canoes are hired for 1 to 4 hours.\"\n        ELSE\n            DISPLAY \"Booking accepted.\"\n        ENDIF\n    ELSE\n        DISPLAY \"Enter the number of people in the group.\"\n    ENDIF\nEND"
+      }
+    ]
   },
   {
     "id": "s-u3o1-kk11-001",
@@ -1286,6 +1558,36 @@
     ]
   },
   {
+    "id": "s-u3o1-kk12-004",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "commandTerm": "compare",
+    "marks": 4,
+    "prompt": "Dev is writing a module for the Rivergum Sports Association in Sale that sorts its 3 000 player registrations by registration number. A teammate suggests selection sort because it is easier to write; Dev prefers quick sort.\n\nCompare selection sort and quick sort, referring to how each orders the data, its efficiency and its complexity.",
+    "points": [
+      {
+        "text": "Selection sort places one value per pass: it finds the smallest (or largest) value in the unsorted part of the list and swaps it into the next position.",
+        "marks": 1
+      },
+      {
+        "text": "Quick sort chooses a pivot and splits the data into two sub-lists, values smaller than the pivot and values larger, then splits each sub-list the same way until each holds one value or none.",
+        "marks": 1
+      },
+      {
+        "text": "Efficiency: quick sort is more efficient, usually needing far fewer comparisons on a large list, whereas selection sort always makes n(n − 1)/2 comparisons whatever order the data starts in (about 4.5 million for 3 000 registrations).",
+        "marks": 1
+      },
+      {
+        "text": "Complexity: quick sort is more complex to write and debug, because the split must be repeated on every sub-list (usually by recursion), whereas selection sort uses two simple nested loops.",
+        "marks": 1
+      }
+    ],
+    "model": "Both put the registrations into order, but they work differently. Selection sort places one registration per pass: it scans the unsorted part of the list for the smallest registration number and swaps it into the next position. Quick sort chooses a pivot and splits the registrations into two sub-lists, those smaller than the pivot and those larger, then splits each sub-list the same way until each holds one registration or none.\n\nQuick sort is the more efficient of the two. Selection sort makes n(n − 1)/2 comparisons whatever order the data starts in, about 4.5 million for 3 000 registrations, while quick sort usually needs far fewer on a list this large. However, quick sort is more complex to write and debug, because the split has to be repeated on every sub-list, usually by recursion, whereas selection sort is two simple nested loops. The teammate is right that selection sort is easier to write, and on a short list the difference in speed would hardly matter, but with 3 000 registrations quick sort's efficiency is worth its extra complexity.",
+    "mistake": "Writing about one sort and then the other misses the comparison. For efficiency and complexity, say which sort does better and how the other differs, and don't call quick sort better in every way: it is harder to write and debug.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u3o1-kk13-001",
     "kk": [
       "U3O1-KK13"
@@ -1378,6 +1680,105 @@
         "kind": "pseudocode",
         "code": "FUNCTION totalRainfall(readings, n)\n    total ← 0\n    FOR day ← 1 TO n - 1\n        total ← total + readings[day]\n    ENDFOR\n    RETURN total\nENDFUNCTION",
         "indexBase": 1
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk13-004",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "commandTerm": "classify",
+    "marks": 4,
+    "prompt": "Callan is developing a step-tracking program for Wilga Ridge Walkers, a Bendigo walking club. Arrays are indexed from 0. The table describes four faults found while the program was being developed.\n\nClassify each fault by writing the type of error it is, chosen from this list: logic, overflow, index out of range, type mismatch, divide by zero. Each type is used at most once, and one type isn't used.",
+    "points": [
+      {
+        "text": "Fault 1: type mismatch (the text heading is stored in an array that holds only integers)",
+        "marks": 1
+      },
+      {
+        "text": "Fault 2: overflow (the total has grown too large for its data type)",
+        "marks": 1
+      },
+      {
+        "text": "Fault 3: divide by zero (the number of days walked is 0)",
+        "marks": 1
+      },
+      {
+        "text": "Fault 4: logic (the program runs to the end but gives wrong output)",
+        "marks": 1
+      }
+    ],
+    "model": "Fault 1: type mismatch, because the program tries to store the text \"Steps\" in an array that holds only integers. Fault 2: overflow, because the all-time total has become too large for its data type. Fault 3: divide by zero, because a member who didn't walk has 0 days to divide by. Fault 4: logic, because the program runs to the end but displays wrong totals. Index out of range isn't used: fault 4's loop stops short, so every index it uses exists.",
+    "mistake": "Fault 4 isn't an index out of range error. A loop that stops one element early uses only indexes that exist, so nothing crashes and the totals are simply wrong; index out of range needs an index beyond the end (or before the start) of the array.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "wilga-faults",
+        "kind": "table",
+        "title": "Faults found during development",
+        "columns": [
+          "Fault",
+          "Description",
+          "Type of error"
+        ],
+        "rows": [
+          [
+            "1",
+            "The program reads members' daily step counts from a file into an array of integers. The file's first line is the heading \"Steps\", and the program stops when it tries to store that text in the array.",
+            ""
+          ],
+          [
+            "2",
+            "The club's all-time step total, stored as an integer, keeps growing until it is larger than the biggest value an integer of that size can hold, and the program crashes.",
+            ""
+          ],
+          [
+            "3",
+            "A member's daily average is the week's steps divided by the number of days they walked. For a member who didn't walk at all that week, the program stops with an error.",
+            ""
+          ],
+          [
+            "4",
+            "The loop that adds up a member's step counts for the week stops one day early, so the last day is never included. The program runs to the end but displays weekly totals that are too low.",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-u3o1-kk13-005",
+    "kk": [
+      "U3O1-KK13",
+      "U3O1-KK05"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Tess is writing a program for Sandhill Almonds, an orchard near Robinvale. It stores the kilograms of almonds harvested from each of 4 blocks on each of 3 days in the two-dimensional array `harvest[block][day]`, which has one row for each block and one column for each day. Arrays are indexed from 0. The loops shown fill the array, and line 8 should then display the first block's harvest on the last day. When Tess runs the program, it stops at line 8 with an index out of range error.\n\nExplain why line 8 causes this error. In your answer, say what an index out of range error is.",
+    "points": [
+      {
+        "text": "An index out of range error is a runtime error: the program tries to use an array element at an index that doesn't exist (outside the array's valid indexes), and it crashes unless the error is handled.",
+        "marks": 1
+      },
+      {
+        "text": "Links the valid indexes to the loops: the outer loop fills rows 0 to 3 and the inner loop fills columns 0 to 2, so the last valid day index is 2.",
+        "marks": 1
+      },
+      {
+        "text": "Line 8 reads `harvest[0][3]`: the block index 0 is valid, but the day index 3 is one past the last column, so no such element exists and the error occurs when line 8 runs (the last day is `harvest[0][2]`).",
+        "marks": 1
+      }
+    ],
+    "model": "An index out of range error is a runtime error: while the program is running, it tries to read or change an array element at an index that doesn't exist, and the program crashes unless the error is handled. Here, the outer loop fills rows 0 to 3, one for each block, and the inner loop fills columns 0 to 2, one for each day, so the only valid day indexes are 0, 1 and 2. Line 8 reads `harvest[0][3]`. Its block index, 0, is valid, but its day index, 3, is one past the last column, so there is no such element and the error occurs when line 8 runs. Tess has used the number of days, 3, as the index of the last day; with indexes from 0, the last day is index 2, so line 8 should read `harvest[0][2]`.",
+    "mistake": "With indexes from 0, the number of columns is never a valid column index: 3 days are columns 0, 1 and 2. Work out each index's valid range from the loops that fill the array, then check every index on the failing line against it.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "sandhill-harvest",
+        "kind": "pseudocode",
+        "code": "BEGIN\n    FOR block ← 0 TO 3\n        FOR day ← 0 TO 2\n            INPUT kg\n            harvest[block][day] ← kg\n        ENDFOR\n    ENDFOR\n    DISPLAY \"First block, last day: \" + harvest[0][3] + \" kg\"\nEND",
+        "indexBase": 0
       }
     ]
   },
@@ -1517,5 +1918,93 @@
     "model": "First, Farrah should test a target that isn't in the array, such as 9999, with an expected output of −1. Her only test so far finds its target, so the not-found path is untested. This test checks that the function returns −1 rather than a wrong index, and that the search stops at the end of the array instead of reading past it and causing an index out of range error.\n\nSecond, she should test the last element, 6612, with an expected output of 4. A middle target can't reveal a loop whose end value is one short, but such a loop would never check index 4 and would wrongly return −1 for 6612.",
     "source": "textbook",
     "mistake": "Adding more targets from the middle of the array adds little. Good test cases go where errors hide: the ends of the array and the not-found case."
+  },
+  {
+    "id": "s-u3o1-kk14-004",
+    "kk": [
+      "U3O1-KK14",
+      "U4O1-KK06"
+    ],
+    "commandTerm": "complete",
+    "marks": 6,
+    "prompt": "Pelican Reach Kayaks in Lakes Entrance has two rules for hiring a kayak:\n\n- A hire can last at most 4 hours.\n- The hirer must be at least 16 years old.\n\nThe design says the hours rule is checked first, so a hire that breaks both rules shows only the hours message. Hours and ages are whole numbers. Bao wrote the function shown, and the booking screen displays the message it returns. He has completed test 1 of the testing table.\n\nComplete tests 2 to 4. Together with test 1, the four tests must cover every combination of the two rules being met or broken, and each input must be either its rule's limit or the nearest whole number that breaks the rule, as in test 1. Desk-check the function to find each actual output, and write every output in full.",
+    "points": [
+      {
+        "text": "A test that breaks both rules: 5 hours, age 15.",
+        "marks": 1
+      },
+      {
+        "text": "For that test, expected output and actual output both \"Hires are limited to 4 hours.\", written in full.",
+        "marks": 1
+      },
+      {
+        "text": "A test that meets the hours rule and breaks the age rule: 4 hours, age 15.",
+        "marks": 1
+      },
+      {
+        "text": "For that test, expected output \"Hirer must be 16 or older.\" and actual output \"Hires are limited to 4 hours.\", each written in full.",
+        "marks": 1
+      },
+      {
+        "text": "A test that meets both rules: 4 hours, age 16.",
+        "marks": 1
+      },
+      {
+        "text": "For that test, expected output \"Hire approved.\" and actual output \"Hires are limited to 4 hours.\", each written in full.",
+        "marks": 1
+      }
+    ],
+    "model": "| Test number | Hours | Age | Expected output | Actual output |\n|:--|:--|:--|:--|:--|\n| 2 | 5 | 15 | Hires are limited to 4 hours. | Hires are limited to 4 hours. |\n| 3 | 4 | 15 | Hirer must be 16 or older. | Hires are limited to 4 hours. |\n| 4 | 4 | 16 | Hire approved. | Hires are limited to 4 hours. |\n\nThe expected outputs come from the two rules and the design's order of checks. The actual outputs come from desk-checking the function: line 2 tests `hours >= 4`, which is true for a 4-hour hire, so tests 3 and 4 show the hours message. Their mismatches reveal that line 2 should test `hours > 4`.",
+    "mistake": "In 2025, rows that repeated a combination of inputs already tested, and outputs that were shortened, earned nothing. Two rows may show the same message, but each needs a new combination of the rules met or broken. Actual output is what the code produces (here, found by desk-checking it), so it is never copied from the expected output.",
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "pelican-hire-message",
+        "kind": "pseudocode",
+        "code": "FUNCTION hireMessage(hours, age)\n    IF hours >= 4 THEN\n        message ← \"Hires are limited to 4 hours.\"\n    ELSEIF age < 16 THEN\n        message ← \"Hirer must be 16 or older.\"\n    ELSE\n        message ← \"Hire approved.\"\n    ENDIF\n    RETURN message\nENDFUNCTION"
+      },
+      {
+        "id": "pelican-tests",
+        "kind": "table",
+        "title": "Testing table",
+        "columns": [
+          "Test number",
+          "Hours",
+          "Age",
+          "Expected output",
+          "Actual output"
+        ],
+        "rows": [
+          [
+            "1",
+            "5",
+            "16",
+            "Hires are limited to 4 hours.",
+            "Hires are limited to 4 hours."
+          ],
+          [
+            "2",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "3",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "4",
+            "",
+            "",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
   }
 ]

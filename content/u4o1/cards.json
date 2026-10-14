@@ -98,6 +98,19 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o1-kk01-010",
+    "kk": [
+      "U4O1-KK01",
+      "TERMS"
+    ],
+    "type": "basic",
+    "front": "How does clear and concise code make a solution more efficient and more effective?",
+    "back": "Clear code has meaningful names and consistent indenting. Concise code has no repeated or unneeded lines: repeated work sits in one function or loop. Such code takes less time and effort to read, change and test, which is an efficiency gain. It is also more readable and maintainable, two measures of effectiveness, so later changes are less likely to introduce errors.",
+    "mistake": "Concise doesn't mean as short as possible. Single-letter names and several steps crammed onto one line make code shorter but harder to read and change. Remove repetition and unneeded code, and keep the names and layout clear.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u4o1-kk02-001",
     "kk": [
       "U4O1-KK02",
@@ -193,6 +206,19 @@
     "type": "basic",
     "front": "Why is a CSV file a better output than a plain text report when the results will be analysed in a spreadsheet?",
     "back": "A CSV file keeps the data's structure: one record per line and a delimiter between fields, so a spreadsheet can import each field into its own column. Sentences in a plain text report can't be split into fields reliably.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk02-009",
+    "kk": [
+      "U4O1-KK02",
+      "TERMS"
+    ],
+    "type": "basic",
+    "front": "Bilby Ridge Rural Supplies has stores in Horsham, Stawell and Nhill, and staff at all three use the same stock program. Why might the program read and write stock levels in a cloud-based database rather than in a CSV file kept on the Horsham store's computer?",
+    "back": "Like a file, a database is an external data source that the program reads from and writes changes back to. A cloud-based one is reached over the internet, so staff at all three stores read and update the same, current stock levels. A file on the Horsham computer is hard to reach from the other stores, and separate copies at each store would soon disagree.",
+    "mistake": "Data sources aren't only TXT, CSV and XML files. A program can also read from and write to a database, kept locally (on the same computer or network) or in the cloud (reached over the internet).",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -419,6 +445,44 @@
     "source": "study-design"
   },
   {
+    "id": "c-u4o1-kk04-012",
+    "kk": [
+      "U4O1-KK04",
+      "U3O1-KK01"
+    ],
+    "type": "basic",
+    "front": "What benefits of AI-based assistants in software development does VCAA list?",
+    "back": "- Greater productivity and efficiency\n- Support for solving problems and trying new ideas\n- Lower development costs\n- Code generated or suggested as the developer works\n- Automated debugging and testing, including generated test data and test cases\n- Internal documentation generated, kept up to date and improved",
+    "mistake": "Using an AI-based assistant isn't wrong in itself, but its benefits depend on the developer checking what it produces: generated code, test cases and comments can all be wrong.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u4o1-kk04-013",
+    "kk": [
+      "U4O1-KK04",
+      "U4O2-KK08"
+    ],
+    "type": "basic",
+    "front": "What challenges of using AI-based assistants does VCAA list?",
+    "back": "- Lack of accuracy and context awareness\n- Over-reliance on AI-based assistants\n- Cost of integration\n- Accidental introduction of security vulnerabilities\n- Copyright and intellectual property theft\n- Bias in training data\n- Environmental impact\n\nEach is a reason to manage and check how an assistant is used.",
+    "mistake": "Over-reliance means trusting an assistant's output without checking it, not using an assistant at all. On the 2025 exam, 16% of students treated any use of AI as unethical.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u4o1-kk04-014",
+    "kk": [
+      "U4O1-KK04",
+      "U4O2-KK03"
+    ],
+    "type": "basic",
+    "front": "What challenges of using APIs and libraries does VCAA list?",
+    "back": "- **Complexity**: learning an API or library and fitting it into the program takes time and skill\n- **Dependencies**: the program relies on code or a service the developer doesn't control\n- **Security risks** from APIs and from outdated libraries\n- **Versioning and compatibility**: a new version can change how it works and break the program",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
     "id": "c-u4o1-kk05-001",
     "kk": [
       "U4O1-KK05",
@@ -527,6 +591,20 @@
     "mistake": "Each test should use a combination of inputs not already tested. Two tests may give the same message, but repeating a combination tests nothing new.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk05-009",
+    "kk": [
+      "U4O1-KK05",
+      "U3O1-KK10",
+      "TERMS"
+    ],
+    "type": "basic",
+    "front": "A tennis club's booking program checks that the member number typed in matches one stored in the club's member list. Is this an existence check?",
+    "back": "No. An existence check only confirms that a required field holds a value and isn't blank. Comparing the entry with the stored member numbers is a different check: an entry of 4417 passes the existence check whether or not any member has that number. A blank entry should still fail an existence check before any comparison is made.",
+    "mistake": "A check isn't an existence check just because it asks whether a value \"exists\" somewhere. In the study design, an existence (presence) check asks only whether something has been entered in a required field; whether the entry matches stored data is a separate question.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "c-u4o1-kk06-002",
@@ -755,6 +833,20 @@
     "source": "textbook"
   },
   {
+    "id": "c-u4o1-kk08-009",
+    "kk": [
+      "U4O1-KK08",
+      "U4O1-KK09",
+      "PSM"
+    ],
+    "type": "compare",
+    "front": "Evaluation strategy versus solution evaluation",
+    "back": "| | Evaluation strategy | Solution evaluation |\n|:--|:--|:--|\n| Is | The plan | The judgement |\n| Covers | Criteria, time frame and responsibility, plus what data is collected and how | Applies the criteria to that data to judge efficiency and effectiveness |\n| When | Before the evaluation, so data is gathered as planned | After implementation and a period of normal use |\n\nBoth are evaluation-stage activities in the PSM.",
+    "mistake": "Writing the strategy isn't evaluating the solution. A plan that names criteria, dates and people reaches no judgement; the solution evaluation uses the data gathered to say how efficient and effective the solution is.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u4o1-kk09-001",
     "kk": [
       "U4O1-KK09"
@@ -907,6 +999,18 @@
     "mistake": "Unchecked scope creep doesn't buy a better product. It draws time and resources away from the agreed features, so the project's original objectives may not be met.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk10-011",
+    "kk": [
+      "U4O1-KK10"
+    ],
+    "type": "basic",
+    "front": "Which three factors does the study design list as influencing the effectiveness of project plans?",
+    "back": "**Scope creep** (uncontrolled growth in features or requirements after the scope is agreed), **personnel changes** (someone leaves, joins or is moved to other work) and **technical issues** (problems with hardware, software or tools, such as a failed server or a changed API). Each adds unplanned work or removes time or people the plan relied on.",
+    "mistake": "An outside provider changing its API, so that code must be rewritten, is a technical issue, not scope creep. Scope creep is growth in what the solution must do; after an API change the requirements are the same and only the work needed to meet them has grown.",
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "c-u4o1-kk11-001",
@@ -1097,6 +1201,19 @@
     "front": "Why is it worth assessing a project plan once the project is over?",
     "back": "It shows which estimates and dependencies were wrong and which adjustments worked, so the next project's plan can be more realistic.",
     "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u4o1-kk12-009",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK11"
+    ],
+    "type": "basic",
+    "front": "What three columns make a change record useful for assessing a project plan, and how is the record then used?",
+    "back": "One row per change, with three columns: the change made to the plan, the reason it was necessary, and its impact on completing the project. To assess the plan, count the rows (and how many are of one kind), judge whether each reason could have been foreseen, and work out how far the changes moved the completion date.",
+    "mistake": "A row that records only the change ('Testing moved back 3 days') can't be assessed. Without the reason and the impact, no one can tell whether the plan was at fault or what the change cost the project.",
+    "difficulty": 2,
     "source": "textbook"
   }
 ]

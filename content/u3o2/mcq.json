@@ -146,6 +146,29 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk01-007",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "stem": "Kurrajong Regional Library has four branches around Horsham. Its four-year plan commits the library to letting members reserve and renew items online by the end of 2027. At present, members reserve and renew items by phoning a branch. Staff handle these calls quickly, and the library doesn't expect an online service to save staff time or money. The library engages a developer to build an online system for reserving and renewing items.\n\nThe study design lists four reasons why individuals and organisations undertake software development projects. Which of them does this project mainly show?",
+    "options": [
+      "Increasing productivity and efficiency",
+      "Reducing costs",
+      "Identifying opportunities to address gaps in the market",
+      "Meeting organisational objectives or needs"
+    ],
+    "answer": 3,
+    "explanation": "The library's own plan sets a target it hasn't yet met: online reservations and renewals by the end of 2027. The phone process works, and no savings of time or money are expected, so the project is undertaken to meet an organisational objective.",
+    "whyWrong": [
+      "Staff already handle the calls quickly, and the library doesn't expect the system to save staff time.",
+      "The library doesn't expect the system to save money, so lower costs aren't driving the project.",
+      "The library isn't creating a product for users that no existing product serves; it is meeting a target in its own plan.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "m-u3o2-kk02-001",
     "kk": [
       "U3O2-KK02"
@@ -972,6 +995,29 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk04-007",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "stem": "Kiewa Gums Cabins near Mount Beauty is replacing its booking system, which lets staff book the same cabin twice for the same night. Before writing the SRS, the developer wants to know how often this has happened over the past two years, and in which months. The office has kept the current system's monthly reports, which list every booking made, by cabin and date. Which data collection method best suits this purpose?",
+    "options": [
+      "Interviews with the office staff, because they take the bookings and handle clashes",
+      "A survey of past guests, because many of them were affected by double bookings",
+      "Reports from the current system, because they hold every booking made in that time",
+      "Observation of the office for a fortnight, because it shows how clashes really occur"
+    ],
+    "answer": 2,
+    "explanation": "The developer needs a count over a long period. The monthly reports list every booking made, by cabin and date, so two bookings for the same cabin on the same night can be counted month by month, without relying on anyone's memory or waiting for a clash to happen. Reports show how often the problem occurred, not why; interviews or observation could then find the cause.",
+    "whyWrong": [
+      "Staff can explain how clashes happen, but their memories can't give a reliable count, month by month, over two years.",
+      "Guests know only about their own stays, so they can't say how often clashes happened across all the cabins.",
+      "",
+      "A fortnight may include no clashes at all, and watching now can't show how often they happened in the past."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o2-kk05-001",
     "kk": [
       "U3O2-KK05",
@@ -1109,6 +1155,78 @@
       "The developers already know the app well, so their times say little about a parent who has never used it.",
       "Code that compiles can still be hard to use; this says nothing about how long a new parent takes to enrol.",
       ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk05-007",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "stem": "A Warrnambool driving school has listed four requirements for its new lesson booking program. Which one is a robustness requirement?",
+    "options": [
+      "The program runs through every business day without failing and gives correct totals.",
+      "A new receptionist can book a lesson within two minutes without any help.",
+      "Unexpected or invalid data entered on any screen never makes the program crash.",
+      "The program rejects a lesson shorter than 30 minutes or longer than 120 minutes."
+    ],
+    "answer": 2,
+    "explanation": "Robustness is how well a program copes with unexpected or invalid input, and unusual conditions, without crashing. This requirement covers any unexpected data on any screen, so it sets a quality of the whole program rather than describing a particular check.",
+    "whyWrong": [
+      "Working correctly, without failing, through normal days of use is reliability; robustness is about coping with the unexpected.",
+      "How quickly a new user can learn and use the program is usability.",
+      "",
+      "This is a particular validation check that the program carries out, so it is a functional requirement."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk05-008",
+    "kk": [
+      "U3O2-KK05",
+      "U3O1-KK02",
+      "U3O1-KK10"
+    ],
+    "stem": "The SRS for a Benalla kindergarten's enrolment program includes this requirement:\n\n*The program rejects an enrolment form that has no emergency contact phone number.*\n\nHow is this requirement best classified?",
+    "options": [
+      "Non-functional (robustness), because it stops missing data crashing the program",
+      "Functional, because checking input data is something the program must do",
+      "Non-functional (reliability), because it keeps the enrolment records correct",
+      "A constraint, because it limits the data that parents are able to enter"
+    ],
+    "answer": 1,
+    "explanation": "Functional requirements state what a program does with its inputs, outputs and processing, and the problem-solving methodology counts validating data among them. Rejecting a form with no emergency contact number is an existence check the program carries out, so the requirement is functional.",
+    "whyWrong": [
+      "Robustness is a general quality of coping with unexpected input without crashing; a particular check on one field is something the program does.",
+      "",
+      "Reliability is about the program working correctly and consistently over time; this statement describes a check the program performs.",
+      "A constraint limits how the solution can be developed, such as its budget or the equipment available; rejecting an incomplete form is a task the program performs."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "m-u3o2-kk05-009",
+    "kk": [
+      "U3O2-KK05",
+      "U3O1-KK02"
+    ],
+    "stem": "Two statements from the requirements section of the SRS for an electrician's job-tracking app in Wangaratta are shown.\n\n1. *Office staff can search every job the business has completed in the past eight years.*\n2. *The app doesn't need to run on Windows laptops.*\n\nWhich option correctly classifies the two statements?",
+    "options": [
+      "Statement 1 is functional; statement 2 is non-functional",
+      "Statement 1 is non-functional; statement 2 is functional",
+      "Statement 1 is functional; statement 2 is functional",
+      "Statement 1 is non-functional; statement 2 is non-functional"
+    ],
+    "answer": 0,
+    "explanation": "Searching completed jobs is something the app does, so statement 1 is functional; the eight-year figure only sets how far back the search reaches. Statement 2 describes nothing the app does. It concerns which platforms the app runs on, a quality of the solution, so it is non-functional.",
+    "whyWrong": [
+      "",
+      "A number doesn't make a requirement non-functional: searching jobs is still a task the app performs, and statement 2 describes no task at all.",
+      "Statement 2 describes no task; which platforms the app need not run on concerns where it works, which is non-functional.",
+      "Statement 1 states a task the app performs, a search; the eight-year figure only sets its range, so it remains functional."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -1260,6 +1378,30 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk06-007",
+    "kk": [
+      "U3O2-KK06",
+      "U3O1-KK02"
+    ],
+    "stem": "A volunteer-run op shop in Stawell is having a rostering and sales program built. Two statements from the constraints section of its SRS are shown.\n\n1. *The program must be in use before the busy pre-Christmas period starts on 1 November.*\n2. *Many of the volunteers have never used a computer program at work, and some have never used a computer at all.*\n\nWhich option gives the type of each constraint?",
+    "options": [
+      "Statement 1 is technical; statement 2 is social",
+      "Statement 1 is economic; statement 2 is technical",
+      "Statement 1 is technical; statement 2 is economic",
+      "Statement 1 is economic; statement 2 is social"
+    ],
+    "answer": 3,
+    "explanation": "The problem-solving methodology treats time, as well as cost, as an economic constraint, so a date by which the program must be in use is economic. Social constraints concern the users' level of expertise, so volunteers with little or no computer experience are a social constraint.",
+    "whyWrong": [
+      "A deadline limits the time available, which makes it economic; technical constraints come from the technology, such as processing speed, capacity or equipment.",
+      "The users' level of expertise is a social constraint; technical constraints concern the technology, not the skills of the people using it.",
+      "A deadline is economic, not technical, and the users' expertise is social: it isn't a limit on money or time.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "m-u3o2-kk07-001",
     "kk": [
       "U3O2-KK07",
@@ -1398,6 +1540,70 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk07-008",
+    "kk": [
+      "U3O2-KK07",
+      "U3O2-KK05",
+      "U3O2-KK06"
+    ],
+    "stem": "Corella Clay Studio in Castlemaine wants an app for its pottery classes. Its developer, Mei, has 9 weeks to build and test the first version of the app, and the studio's budget for it is $6500. The studio's feature list is shown. Which statement best sets the boundary for the first version?",
+    "options": [
+      "Version 1 must be finished within 9 weeks and must cost the studio no more than $6500",
+      "Version 1 will include bookings, online payment and reminders; the waiting list and the gallery wait for version 2",
+      "Version 1 will include bookings, the waiting list and reminders; online payment and the gallery wait for version 2",
+      "Version 1 will be reliable and easy to use, so that students of all ages can use it on any phone"
+    ],
+    "answer": 2,
+    "explanation": "A version boundary says which features a version will include and which it leaves for later. The three essential features take 4 + 2 + 1 = 7 weeks, within Mei's 9, and neither desirable feature (4 or 3 weeks) fits in the 2 weeks left. Stating that online payment and the gallery wait for version 2 makes clear what this release won't address.",
+    "whyWrong": [
+      "A deadline and a budget are constraints: they limit the project, but they don't say which features version 1 includes.",
+      "These features take 4 + 4 + 1 = 9 weeks, so they fit, but the waiting list, which the studio rates essential, is pushed back to make room for a desirable feature.",
+      "",
+      "Reliability and ease of use are non-functional requirements, qualities of the app; they don't say which features are in or out."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "pottery-features",
+        "kind": "table",
+        "title": "Corella Clay Studio's feature list",
+        "columns": [
+          "Feature",
+          "Studio's priority",
+          "Estimated time to build and test"
+        ],
+        "rows": [
+          [
+            "1. Students book a place in a class",
+            "Essential",
+            "4 weeks"
+          ],
+          [
+            "2. Students join a waiting list when a class is full",
+            "Essential",
+            "2 weeks"
+          ],
+          [
+            "3. Students receive an SMS reminder the day before a class",
+            "Essential",
+            "1 week"
+          ],
+          [
+            "4. Students pay class fees in the app",
+            "Desirable",
+            "4 weeks"
+          ],
+          [
+            "5. Visitors browse a gallery of students' work",
+            "Desirable",
+            "3 weeks"
+          ]
+        ]
+      }
+    ]
   },
   {
     "id": "m-u3o2-kk08-001",
@@ -1990,6 +2196,222 @@
     ]
   },
   {
+    "id": "m-u3o2-kk08-009",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "stem": "Gannet Island Ferries, based in San Remo, is having a ticketing app developed. Passengers buy tickets and check the timetable on their phones. Deckhands employed by the company use a handheld scanner to scan each ticket as passengers board, and they report the number of passengers on each crossing. What does the actor marked X in the use case diagram shown represent?",
+    "options": [
+      "The company, Gannet Island Ferries",
+      "The handheld ticket scanner",
+      "The ferry ticketing app",
+      "A deckhand on the ferry"
+    ],
+    "answer": 3,
+    "explanation": "An actor stands for the role of a user who interacts with the system to achieve a goal. Deckhands scan tickets and report passenger numbers, so actor X represents a deckhand and should be labelled *Deckhand*, just as the other actor is labelled with the passenger's role.",
+    "whyWrong": [
+      "The company employs the deckhands, but it doesn't use the app itself; an actor names the role of the person who does.",
+      "The scanner is the device the deckhand uses to reach the app, not the role of the person interacting with it.",
+      "The ticketing app is the system itself, shown by the boundary; actors always sit outside it.",
+      ""
+    ],
+    "difficulty": 1,
+    "source": "study-design",
+    "figures": [
+      {
+        "id": "ferry-usecase",
+        "kind": "usecase",
+        "title": "Use case diagram: ferry ticketing app",
+        "width": 640,
+        "height": 400,
+        "system": {
+          "label": "Ferry ticketing app",
+          "x": 320,
+          "y": 200,
+          "w": 300,
+          "h": 352
+        },
+        "actors": [
+          {
+            "id": "passenger",
+            "label": "Passenger",
+            "x": 80,
+            "y": 140
+          },
+          {
+            "id": "x",
+            "label": "X",
+            "x": 560,
+            "y": 260
+          }
+        ],
+        "useCases": [
+          {
+            "id": "buy",
+            "label": "Buy ticket",
+            "x": 320,
+            "y": 90
+          },
+          {
+            "id": "timetable",
+            "label": "Check timetable",
+            "x": 320,
+            "y": 170
+          },
+          {
+            "id": "scan",
+            "label": "Scan ticket",
+            "x": 320,
+            "y": 250
+          },
+          {
+            "id": "report",
+            "label": "Report passenger count",
+            "x": 320,
+            "y": 330,
+            "rx": 100
+          }
+        ],
+        "links": [
+          {
+            "from": "passenger",
+            "to": "buy",
+            "type": "association"
+          },
+          {
+            "from": "passenger",
+            "to": "timetable",
+            "type": "association"
+          },
+          {
+            "from": "x",
+            "to": "scan",
+            "type": "association"
+          },
+          {
+            "from": "x",
+            "to": "report",
+            "type": "association"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u3o2-kk08-010",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "stem": "Wattle Flat Community Garden in Kyneton is having a system developed to allocate its garden plots. People apply for a plot; when no plot is free, they are put on a waiting list. The coordinator receives a summary of each plot that is allocated. Which statement identifies a convention error in the DFD shown?",
+    "options": [
+      "*Coordinator* only receives data and sends none, but every external entity must both send and receive data",
+      "*Check application* reads one data store and writes to another, but a process can be linked to only one data store",
+      "The *Waiting list* data store receives data but sends none, so no process ever uses the applicants stored in it",
+      "*Check application* names its output flows differently from its inputs, but a process should pass data on under the same name"
+    ],
+    "answer": 2,
+    "explanation": "Every data store needs at least one flow coming in and at least one going out. *Waiting list* receives `waitlist_entry` from *Check application*, but no flow leaves it, so the waiting applicants are stored and never used: no one can be offered a plot from the list. A flow such as `waiting_applicants` from *Waiting list* to *Allocate plot* would fix it.",
+    "whyWrong": [
+      "An external entity must send at least one flow or receive at least one; *Coordinator* receives `allocation_summary`, which is enough.",
+      "A process can read from and write to as many data stores as it needs.",
+      "",
+      "The rule is the reverse: a process changes the data it receives, so the flow it sends out should have a different name from the flow that came in."
+    ],
+    "difficulty": 2,
+    "source": "study-design",
+    "figures": [
+      {
+        "id": "garden-dfd",
+        "kind": "dfd",
+        "title": "DFD: garden plot allocation system",
+        "level": 1,
+        "width": 720,
+        "height": 400,
+        "nodes": [
+          {
+            "id": "applicant",
+            "type": "entity",
+            "label": "Applicant",
+            "x": 92,
+            "y": 200
+          },
+          {
+            "id": "check",
+            "type": "process",
+            "label": "Check application",
+            "x": 350,
+            "y": 200
+          },
+          {
+            "id": "waitlist",
+            "type": "store",
+            "label": "Waiting list",
+            "x": 350,
+            "y": 60
+          },
+          {
+            "id": "plots",
+            "type": "store",
+            "label": "Plots",
+            "x": 350,
+            "y": 340
+          },
+          {
+            "id": "allocate",
+            "type": "process",
+            "label": "Allocate plot",
+            "x": 610,
+            "y": 200
+          },
+          {
+            "id": "coordinator",
+            "type": "entity",
+            "label": "Coordinator",
+            "x": 610,
+            "y": 340
+          }
+        ],
+        "flows": [
+          {
+            "from": "applicant",
+            "to": "check",
+            "label": "plot_application"
+          },
+          {
+            "from": "check",
+            "to": "applicant",
+            "label": "application_receipt"
+          },
+          {
+            "from": "plots",
+            "to": "check",
+            "label": "free_plots"
+          },
+          {
+            "from": "check",
+            "to": "waitlist",
+            "label": "waitlist_entry"
+          },
+          {
+            "from": "check",
+            "to": "allocate",
+            "label": "approved_application"
+          },
+          {
+            "from": "allocate",
+            "to": "plots",
+            "label": "plot_allocation"
+          },
+          {
+            "from": "allocate",
+            "to": "coordinator",
+            "label": "allocation_summary"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "m-u3o2-kk09-001",
     "kk": [
       "U3O2-KK09",
@@ -2154,6 +2576,30 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk09-008",
+    "kk": [
+      "U3O2-KK09",
+      "U3O2-KK02"
+    ],
+    "stem": "Marisol is writing the SRS for a booking program for Kurrajong Paws Grooming in Kyneton. Her draft has sections for functional and non-functional requirements, constraints, scope and the technical environment. It also includes a context diagram, a data flow diagram and a use case diagram of the salon's current booking process. Which feature that the study design lists for an SRS is missing from her draft?",
+    "options": [
+      "The programming languages that will be used to build it",
+      "An assessment of whether the project is feasible",
+      "Mock-ups of the main booking and payment screens",
+      "The characteristics of the staff and clients who will use it"
+    ],
+    "answer": 3,
+    "explanation": "The study design lists six features of an SRS: defining requirements, constraints, scope, user characteristics, technical environments, and analytical tools depicting existing processes and systems. Marisol's draft has all of them except the user characteristics, such as who the users are, their level of expertise and how often they will use the program.",
+    "whyWrong": [
+      "The programming languages to be used are a feature the study design lists for a brief, not for an SRS.",
+      "Feasibility is a feature of a brief, which shows at the start that the project is achievable.",
+      "Mock-ups are a design tool for the design stage; they aren't one of the features the study design lists for an SRS.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "m-u3o2-kk10-001",
     "kk": [
       "U3O2-KK10",
@@ -2294,6 +2740,53 @@
       ""
     ],
     "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk10-007",
+    "kk": [
+      "U3O2-KK10",
+      "U4O2-KK07"
+    ],
+    "stem": "Ironwood Driver Training, a driving school business covered by the Privacy Act 1988 (Cwlth), is having a booking program built. The developer plans to make each learner's learner permit number their learner ID: the key that identifies their record and is printed on receipts and lesson reminders. Which design best follows APP 9 (Adoption, use or disclosure of government related identifiers)?",
+    "options": [
+      "Keep the permit number as each learner's ID, but encrypt it wherever it is stored",
+      "Keep the permit number as each learner's ID, but show only its last four digits",
+      "Give each learner a program-generated ID, using the permit number only to verify identity",
+      "Use each learner's Medicare number as their ID instead of their learner permit number"
+    ],
+    "answer": 2,
+    "explanation": "A learner permit number is a government related identifier: a number a government body has given the person. APP 9 stops an organisation adopting one as its own identifier for that person, so the program should create its own learner IDs. The school may still use the permit number where that is reasonably necessary to verify a learner's identity. A Victorian public sector body faces a similar limit under IPP 7 (Unique identifiers).",
+    "whyWrong": [
+      "Encryption protects the stored number, which is APP 11's concern, but the school would still be adopting a government related identifier as its own ID.",
+      "Masking the number on screen still leaves it as the school's ID for each learner, which is what APP 9 restricts.",
+      "",
+      "A Medicare number is also a government related identifier, so adopting it as the ID breaks the same principle."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk10-008",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "stem": "Yarrabee Shire Council in Victoria is designing an online application form for its youth leadership camp. Which proposed field would collect sensitive information under IPP 10 (Sensitive information)?",
+    "options": [
+      "The applicant's religious beliefs, to plan activities around religious holidays",
+      "The applicant's date of birth, to check that they are aged 15 to 18",
+      "The applicant's school and year level, to place them in a camp group",
+      "The applicant's mobile number, to send reminders before the camp starts"
+    ],
+    "answer": 0,
+    "explanation": "Sensitive information is a narrower set of personal information: a person's racial or ethnic origin, political opinions or membership of a political association, religious or philosophical beliefs, membership of a professional or trade association or a union, sexual preferences or practices, or criminal record. IPP 10 lets the council collect it only in limited cases, such as with the applicant's consent or where a law requires it. The form should leave the field out unless it is really needed; if it is needed, the field should be optional and say why it is asked.",
+    "whyWrong": [
+      "",
+      "A date of birth is personal information, but not one of the sensitive categories; IPP 1 (Collection) still limits it to what the camp needs.",
+      "School and year level are personal information, but neither is in a sensitive category.",
+      "A mobile number is personal contact information, not sensitive information."
+    ],
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -2438,6 +2931,29 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk11-007",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "stem": "A two-person app studio in Kyabram backs up its project files to an external drive: a full backup every Saturday night and a differential backup on Monday to Friday nights. On Thursday morning, the main drive of the studio's computer fails. What is the smallest set of backups that will restore the files as they were on Wednesday night?",
+    "options": [
+      "Wednesday night's differential backup on its own",
+      "Saturday night's full backup on its own",
+      "Saturday's full backup, then Wednesday's differential",
+      "Saturday's full backup, then all three differentials in order"
+    ],
+    "answer": 2,
+    "explanation": "A differential backup holds every file changed since the last full backup, so Wednesday's differential already contains Monday's and Tuesday's changes as well as Wednesday's. Restoring Saturday's full backup and then Wednesday's differential returns every file to its state on Wednesday night.",
+    "whyWrong": [
+      "The differential holds only the files changed since Saturday; files that haven't changed since then exist only in the full backup.",
+      "The full backup alone loses every change made on Monday, Tuesday and Wednesday.",
+      "",
+      "This restores the files, but it isn't the smallest set: Wednesday's differential already includes Monday's and Tuesday's changes. Restoring a whole chain in order is what incremental backups need."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o2-kk12-001",
     "kk": [
       "U3O2-KK12"
@@ -2576,6 +3092,29 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk12-007",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "stem": "Mei has sketched two possible home screens for an app that lets members of a Warragul community garden book plots and tools. Before showing them to the garden's committee, she wants to write beside parts of each sketch why she made each choice, such as putting the plot map at the top of Sketch 1 because members check it most often, and to suggest that Sketch 2's tool-booking button could be added to Sketch 1. Which ideation technique or tool should Mei use?",
+    "options": [
+      "A mind map linking the two sketches' ideas",
+      "Annotations added to each sketch",
+      "A mood board of garden photos and colours",
+      "A brainstorm with the garden's committee"
+    ],
+    "answer": 1,
+    "explanation": "Annotations are notes written on design ideas. Mei's notes would give the reason for a design choice, such as why the plot map sits at the top, and suggest a link between her two design ideas, such as moving a button from one sketch to the other.",
+    "whyWrong": [
+      "A mind map shows how a set of ideas relate, branching out from a central theme; it doesn't put Mei's reasons on the sketches she has already drawn.",
+      "",
+      "A mood board collects images, colours and fonts to set the design's direction; it doesn't explain the choices in a sketch.",
+      "A brainstorm gathers many new ideas without judging them; Mei is explaining and linking ideas she already has."
+    ],
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "m-u3o2-kk13-001",
@@ -2717,6 +3256,55 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk13-007",
+    "kk": [
+      "U3O2-KK13",
+      "TERMS"
+    ],
+    "stem": "Saltpan Freight in Laverton has a new program that produces a weekly report of late deliveries. The depot managers discuss the report at a meeting at 9 am every Monday. Which evaluation criterion measures the report's effectiveness rather than its efficiency?",
+    "options": [
+      "The report is generated in 3 seconds, down from 40 seconds",
+      "The office manager spends 2 minutes a week on it, down from 20",
+      "Running the report costs under $2 a week in server charges",
+      "Every depot manager has the report before the Monday meeting"
+    ],
+    "answer": 3,
+    "explanation": "Timeliness is one of the study design's measures of effectiveness: the report is timely when it is available by the time it is needed, here the Monday meeting. How fast it is generated, how much staff time it takes and what it costs to run are the time, effort and cost used to produce it, which are measures of efficiency.",
+    "whyWrong": [
+      "Speed of processing is a measure of efficiency. A report generated in 3 seconds on Monday afternoon would be fast but still too late for the meeting.",
+      "Less of the office manager's time spent on the report is a saving in time and effort, which makes it more efficient, not more effective.",
+      "The cost of running the report is a measure of efficiency, not of how well the report serves the managers.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "m-u3o2-kk13-008",
+    "kk": [
+      "U3O2-KK13",
+      "PSM",
+      "U4O1-KK09"
+    ],
+    "stem": "Oren is building a lesson booking program for Sandspit Surf School in Inverloch. In the design stage, he wrote evaluation criteria based on the requirements and used them to choose his preferred design idea. While coding, he reworded one criterion so that it could be measured more precisely. The program has now been in use for two months. How should Oren evaluate it, following the problem-solving methodology?",
+    "options": [
+      "Write new criteria that match the features the finished program turned out to have",
+      "Apply the criteria from design, including the reworded one, to judge efficiency and effectiveness",
+      "Apply the criteria exactly as first written in design, undoing the change made while coding",
+      "Re-run the testing table from development, since passing every test shows the requirements are met"
+    ],
+    "answer": 1,
+    "explanation": "The problem-solving methodology uses one set of criteria throughout. They are developed in the design stage from the requirements and used to choose the preferred design, they can be adjusted while the program is being built, and the same criteria are then applied in the evaluation stage to judge how efficient and effective the finished program is.",
+    "whyWrong": [
+      "Criteria written to fit the finished program would only confirm what it already does. The program is judged against the criteria based on its requirements.",
+      "",
+      "Criteria may be sharpened during development, so the more measurable wording should be kept, not undone.",
+      "Testing checks during development that the program works as expected. Evaluation applies the criteria to data from the program in use to judge its efficiency and effectiveness."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "m-u3o2-kk14-001",
@@ -3213,6 +3801,82 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o2-kk15-008",
+    "kk": [
+      "U3O2-KK15",
+      "U3O2-KK16",
+      "U3O2-KK14"
+    ],
+    "stem": "The mock-up below shows the draft Hire a bike screen for a self-service kiosk at Spotted Gum Bike Hire in Bright. Customers have already signed in on the previous screen. When customers tried a prototype, many couldn't work out what to type in each box or what the button would do. Which characteristic of user experience most needs improving?",
+    "options": [
+      "Affordance",
+      "Contrast",
+      "Security",
+      "Portability"
+    ],
+    "answer": 0,
+    "explanation": "Affordance is how clearly an element's appearance shows what it is for and how to use it. Boxes with no label or hint text, and a button showing only a symbol, give customers no cue about what to enter or what will happen. Labelling the boxes (for example \"Bike number\" and \"Hours of hire\") and naming the button \"Hire this bike\" would improve affordance.",
+    "whyWrong": [
+      "",
+      "Contrast is a design principle, not a characteristic of user experience. Making the boxes and button stand out more still wouldn't tell customers what they are for.",
+      "Customers have already signed in, and their problem is working out what each control is for, not protecting their account or data.",
+      "Portability is a non-functional requirement about running on different platforms, not one of the four characteristics of user experience."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "bike-hire-mockup",
+        "kind": "mockup",
+        "title": "Mock-up: draft Hire a bike screen",
+        "width": 640,
+        "height": 400,
+        "elements": [
+          {
+            "type": "window",
+            "x": 320,
+            "y": 200,
+            "w": 592,
+            "h": 352,
+            "text": "Spotted Gum Bike Hire"
+          },
+          {
+            "type": "heading",
+            "x": 176,
+            "y": 88,
+            "w": 240,
+            "h": 32,
+            "text": "Hire a bike"
+          },
+          {
+            "type": "textbox",
+            "x": 320,
+            "y": 156,
+            "w": 320,
+            "h": 32,
+            "note": "Neither box has a label or hint text"
+          },
+          {
+            "type": "textbox",
+            "x": 320,
+            "y": 216,
+            "w": 320,
+            "h": 32
+          },
+          {
+            "type": "button",
+            "x": 320,
+            "y": 296,
+            "w": 120,
+            "h": 40,
+            "text": "»",
+            "note": "The button shows only the » symbol"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "m-u3o2-kk16-001",
     "kk": [
       "U3O2-KK16"
@@ -3444,5 +4108,52 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk16-007",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "stem": "Guests book a powered site at Lowan Springs Caravan Park near Dimboola through a five-screen online form. In testing, guests couldn't tell how many screens were left. When one guest reached the third screen and wanted to change her dates, the form gave her no way back to the first screen, so she had to start again. Which design principle has been applied poorly?",
+    "options": [
+      "Alignment",
+      "Balance",
+      "Navigation",
+      "Text formatting"
+    ],
+    "answer": 2,
+    "explanation": "Navigation is how users find their way around a solution and move between its screens. A step indicator such as \"Step 3 of 5\" would show guests where they are, and a Back button on every screen would let them return to an earlier step without losing what they have entered.",
+    "whyWrong": [
+      "Alignment lines elements up along shared edges; the guests' problems are knowing where they are and getting back, not where elements sit.",
+      "Balance spreads visual weight evenly across a screen; an even layout wouldn't show guests how many screens are left or let them go back.",
+      "",
+      "Text formatting makes text readable and shows what matters; the guests could read each screen but couldn't move between the screens."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o2-kk16-008",
+    "kk": [
+      "U3O2-KK16",
+      "TERMS"
+    ],
+    "stem": "The study design relates each of its design principles to a solution's functionality, its usability or its appearance. Which of these is one of the principles it relates to appearance?",
+    "options": [
+      "Balance",
+      "Navigation",
+      "Proximity",
+      "Affordance"
+    ],
+    "answer": 0,
+    "explanation": "The study design relates alignment, balance, contrast, image use, space, and text and table formatting to appearance. Balance is about spreading visual weight evenly across a screen.",
+    "whyWrong": [
+      "",
+      "Navigation is a design principle, but the study design relates it, with interactivity, to functionality rather than appearance.",
+      "Proximity isn't one of the study design's design principles; keeping related items together and separating groups is part of applying space.",
+      "Affordance is a characteristic of user experience, not a design principle."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
   }
 ]

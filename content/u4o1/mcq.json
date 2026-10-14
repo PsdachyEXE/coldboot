@@ -162,6 +162,31 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o1-kk01-008",
+    "kk": [
+      "U4O1-KK01",
+      "U3O1-KK11",
+      "TERMS"
+    ],
+    "stem": "Wirraway Plumbing Supplies in Wangaratta has an ordering program with detailed internal documentation throughout its code. A developer who didn't write the program must now change how it calculates freight charges. Which statement correctly pairs an efficiency gain and an effectiveness gain that the documentation gives the solution?",
+    "options": [
+      "Efficiency: freight is calculated faster, as each step is explained. Effectiveness: the code is more readable and maintainable.",
+      "Efficiency: the code is more readable and maintainable. Effectiveness: the change takes less time, as the freight code is easy to find.",
+      "Efficiency: the change takes less time, as the freight code is easy to find. Effectiveness: the code is more readable and maintainable.",
+      "Efficiency: freight is calculated faster, as each step is explained. Effectiveness: staff see an explanation of each freight charge."
+    ],
+    "answer": 2,
+    "explanation": "The study design measures efficiency by the time, cost and effort used, and lists readability and maintainability among the measures of effectiveness. Detailed comments let the new developer find and understand the freight code quickly, so the change takes less time and effort. They also make the code more readable and maintainable, so this change and later ones are less likely to introduce errors.",
+    "whyWrong": [
+      "Comments are ignored when the program runs, so they can't make any calculation faster.",
+      "The two are swapped: time and effort measure efficiency, while readability and maintainability are measures of effectiveness.",
+      "",
+      "Internal documentation is for developers: it is ignored when the program runs, so it can't speed up the calculation, and staff using the program never see it."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "m-u4o1-kk02-001",
     "kk": [
       "U4O1-KK02"
@@ -428,6 +453,30 @@
       "This changes only how the data is organised; a two-dimensional array written into the code still has to be edited by a developer.",
       "Typing a fee for every order adds time and effort, and fees typed from memory can be wrong or inconsistent.",
       ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk02-008",
+    "kk": [
+      "U4O1-KK02",
+      "U3O1-KK04"
+    ],
+    "stem": "Corella Creek Vet Clinic in Kyneton exports its appointments to a CSV file, with each date written as day/month/year, such as `15/02/2025`. Saskia's program reads the file, keeps each date as a String and sorts the appointments by date, from earliest to latest. For three appointments, it outputs the dates in the order `03/11/2025`, `15/02/2025`, `28/06/2025`. Which statement best explains this order and how to fix it?",
+    "options": [
+      "The dates are compared as Strings, so the day decides the order; store each date as an Integer, such as 15022025",
+      "The dates are compared as Strings, so the day decides the order; convert each date to date/time before sorting",
+      "The slashes stop the sort from reading past the day; remove the slashes and keep each date as a String",
+      "The sort runs from latest to earliest; reverse the comparison so that the earliest date comes first"
+    ],
+    "answer": 1,
+    "explanation": "Strings are compared character by character from the left, so `03/11/2025` comes before `15/02/2025` because the character 0 comes before 1, whatever the months are. The day decides the order. Converting each date to date/time as it is read lets the program compare dates by their actual value, so 15 February comes first, and also calculate with them, such as the number of days until an appointment.",
+    "whyWrong": [
+      "As an Integer, 3 November becomes 3112025, which is still smaller than 15022025 because the day still leads, so the order wouldn't change.",
+      "",
+      "Without slashes, `03112025` still comes before `15022025`, because the comparison still starts with the day.",
+      "From latest to earliest would give `03/11/2025`, `28/06/2025`, `15/02/2025`, which isn't the order shown; reversing the comparison would still order the dates by their day."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -794,6 +843,54 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o1-kk04-008",
+    "kk": [
+      "U4O1-KK04",
+      "U3O1-KK01"
+    ],
+    "stem": "Marcus maintains the yard program for Peppermint Flat Timber in Heyfield. The program stores each truckload's volume, in cubic metres, in an array indexed from 1, and its variable names use snake casing. Marcus asks an AI-based assistant for a function that totals a day's loads, describing the task in one sentence. The function runs, but it assumes the array is indexed from 0, so its total is wrong, and its variable names use camel casing. Marcus finds both problems when he reviews and tests the function before adding it to the program. Which challenge of using AI-based assistants does this show?",
+    "options": [
+      "Over-reliance on AI-based assistants",
+      "Accidental introduction of security vulnerabilities",
+      "Lack of accuracy and context awareness",
+      "Copyright and intellectual property theft"
+    ],
+    "answer": 2,
+    "explanation": "The assistant knew only Marcus's one-sentence description, not how the program stores its data or names its variables, so it produced code that runs but doesn't fit the program. Code that looks reasonable but gives a wrong result and ignores the project's conventions shows the assistant's lack of accuracy and context awareness. Reviewing and testing the function before using it is what caught both problems.",
+    "whyWrong": [
+      "Marcus reviewed and tested the function before using it, so he didn't hand his judgement over to the assistant.",
+      "The faults give a wrong total and break the naming convention; nothing in the function exposes data or opens a way to attack the program.",
+      "",
+      "Nothing suggests that the function copies someone else's code."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "m-u4o1-kk04-009",
+    "kk": [
+      "U4O1-KK04",
+      "U4O2-KK03"
+    ],
+    "stem": "Bettina is building a review page for Scarlet Robin Cafés, a chain of five cafés in Gippsland. Before a review is published, the page will send it, together with the customer's name and email address, to a free third-party API that flags offensive language. Which of these is a privacy risk of using the API?",
+    "options": [
+      "The provider could change the format of its replies, so the page can no longer read them",
+      "Customers' names, emails and reviews go to a provider that may store or reuse them",
+      "The provider could withdraw the free API, so new reviews could no longer be checked",
+      "Learning how to send requests to the API and read its replies could delay the page"
+    ],
+    "answer": 1,
+    "explanation": "Privacy is about what happens to personal information. Once the page sends customers' names, email addresses and reviews to the API, they are held by a provider the café chain doesn't control, which may store, reuse or disclose them. The other options are real challenges of using APIs (versioning and compatibility, dependency on the API, and complexity), but they affect whether the feature works, not what happens to customers' personal information. Sending only the review text would reduce the risk.",
+    "whyWrong": [
+      "A change to the reply format would stop the check working (a versioning and compatibility challenge), but it exposes no personal information.",
+      "",
+      "Losing the free API is a dependency challenge: new reviews couldn't be checked, but no personal information would be exposed.",
+      "The time needed to learn the API is a complexity challenge for the schedule, not a risk to customers' personal information."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o1-kk05-001",
     "kk": [
       "U4O1-KK05",
@@ -1056,6 +1153,30 @@
         ]
       }
     ]
+  },
+  {
+    "id": "m-u4o1-kk05-008",
+    "kk": [
+      "U4O1-KK05",
+      "U3O1-KK10"
+    ],
+    "stem": "Shingleback Reptile Rescue in Wycheproof keeps the warm end of each enclosure between 26.0 °C and 34.0 °C. Twice a day, a volunteer reads each enclosure's thermometer, which can show any temperature from −10.0 °C to 60.0 °C, and types the reading into a text box in a new care program. The program must record every reading and alert the head keeper whenever one is below 26.0 °C or above 34.0 °C. Which validation of the temperature entry best suits these requirements?",
+    "options": [
+      "Existence and type checks, then a range check accepting −10.0 to 60.0",
+      "Existence and type checks, then a range check accepting 26.0 to 34.0",
+      "Existence and type checks, with no range check, as any number could be real",
+      "An existence check, then a range check accepting −10.0 to 60.0"
+    ],
+    "answer": 0,
+    "explanation": "Validation should reject only entries that can't be real readings, so the range check's limits come from what the thermometer can show: an entry of 300, typed by mistake for 30.0, is rejected and the volunteer is asked again. A reading of 38.5 °C is reasonable data. The program must accept and record it, then compare it with 26.0 °C and 34.0 °C to decide whether to alert the head keeper. The existence and type checks come first, so the range check only ever compares a number.",
+    "whyWrong": [
+      "",
+      "The 26.0 to 34.0 band is the rule for raising an alert, not a limit on what can be entered. A genuine reading of 38.5 °C would be refused as an entry error, so it would never be recorded and the head keeper would never be alerted.",
+      "Without a range check, a slip such as 300 for 30.0 is stored as a genuine reading, although the thermometer can't show it, and it sets off a false alert.",
+      "A range check compares the entry with numbers. Without a type check first, an entry such as `thirty` or `29.5c` reaches that comparison and can cause a type mismatch error."
+    ],
+    "difficulty": 3,
+    "source": "textbook"
   },
   {
     "id": "m-u4o1-kk06-001",
@@ -1503,6 +1624,121 @@
     ]
   },
   {
+    "id": "m-u4o1-kk07-008",
+    "kk": [
+      "U4O1-KK07",
+      "U3O2-KK08"
+    ],
+    "stem": "Gumleaf Kindergarten Group runs five kindergartens around Bairnsdale and is having an enrolment system built. The context diagram shows the system. Alpha testing is finished, and the developers now plan to beta test the function that retrieves the class list for a chosen kindergarten group. Which user group should beta test this function?",
+    "options": [
+      "Enrolment officers, because their group allocations decide each class list",
+      "Teachers, because each class list is sent to the teacher of that group",
+      "Parents, because their enrolment forms supply every child's details",
+      "Some of each group, because every user group appears in the diagram"
+    ],
+    "answer": 1,
+    "explanation": "Beta testers come from the intended users of the function being tested. In the context diagram, the class_list data flow goes from the system to Teacher, so teachers are the people who will use this function. They should carry out scenarios with it, such as finding the class list for their own group.",
+    "whyWrong": [
+      "Enrolment officers supply data the function uses, but class lists aren't sent to them, so they won't use this function.",
+      "",
+      "Parents supply the children's details, but class lists aren't sent to them, so they would never use this function.",
+      "Testers for one function come from the users it serves. Only teachers receive class lists, so parents and officers can't show how its users get on."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "gumleaf-context",
+        "kind": "context",
+        "title": "Context diagram: kindergarten enrolment system",
+        "width": 640,
+        "height": 400,
+        "system": {
+          "label": "Kindergarten enrolment system",
+          "x": 304,
+          "y": 200
+        },
+        "entities": [
+          {
+            "id": "parent",
+            "label": "Parent",
+            "x": 104,
+            "y": 88
+          },
+          {
+            "id": "officer",
+            "label": "Enrolment officer",
+            "x": 112,
+            "y": 312,
+            "w": 160
+          },
+          {
+            "id": "teacher",
+            "label": "Teacher",
+            "x": 548,
+            "y": 200
+          }
+        ],
+        "flows": [
+          {
+            "from": "parent",
+            "to": "system",
+            "label": "enrolment_form"
+          },
+          {
+            "from": "system",
+            "to": "parent",
+            "label": "place_offer"
+          },
+          {
+            "from": "officer",
+            "to": "system",
+            "label": "group_allocation"
+          },
+          {
+            "from": "system",
+            "to": "officer",
+            "label": "waiting_list"
+          },
+          {
+            "from": "system",
+            "to": "teacher",
+            "label": "class_list"
+          },
+          {
+            "from": "teacher",
+            "to": "system",
+            "label": "attendance"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk07-009",
+    "kk": [
+      "U4O1-KK07",
+      "U4O1-KK06"
+    ],
+    "stem": "Bluegum Valley Netball Association is having an app built so that team managers can enter match scores at the courts and check where their team sits on the competition ladder. Alpha testing is finished. Mei's draft beta testing strategy contains the four statements below. Which statement should Mei rewrite?",
+    "options": [
+      "Eight team managers are chosen at random, two from each of the association's four grades.",
+      "Each manager enters the final score of a practice match on their own phone at the courts.",
+      "Each manager checks that the ladder points the app calculates are correct and reports any bugs.",
+      "An observer records each manager's screen and notes the time taken and any hesitation at each step."
+    ],
+    "answer": 2,
+    "explanation": "Beta testers are intended users carrying out realistic scenarios while they are observed, and what they do is recorded. Checking that calculated values are correct and hunting for bugs belong to alpha testing, where developers or testers work from test data and expected outputs. A problem with the output may still show up and be recorded, but the managers' job is to carry out a task, such as entering a score and then finding their team's place on the ladder.",
+    "whyWrong": [
+      "Choosing managers at random from every grade gives testers who represent the app's intended users.",
+      "A realistic task, done on the managers' own phones at the courts, is a suitable test scenario.",
+      "",
+      "Recording the screen and noting time and hesitation documents how intended users got on, which is what beta testing records."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o1-kk08-001",
     "kk": [
       "U4O1-KK08"
@@ -1716,6 +1952,29 @@
         ]
       }
     ]
+  },
+  {
+    "id": "m-u4o1-kk08-007",
+    "kk": [
+      "U4O1-KK08"
+    ],
+    "stem": "Ruby is writing the evaluation strategy for the new booking app at Wattlebird Kayak Hire on Lake Tyers. Which of these belongs in her strategy as one of the features of an evaluation strategy listed in the study design?",
+    "options": [
+      "Who will export the booking logs and who will survey customers",
+      "The date by which each development task must be completed",
+      "The scenarios customers will carry out before the app's release",
+      "The chain of tasks that sets the earliest possible launch date"
+    ],
+    "answer": 0,
+    "explanation": "The study design lists three features of an evaluation strategy: the evaluation criteria, the time frame and responsibility. Saying who will export the booking logs and who will survey customers sets out responsibility: who collects or provides the data for each criterion.",
+    "whyWrong": [
+      "",
+      "Deadlines for development tasks belong in the project plan. A strategy's time frame is when the evaluation data is collected and the evaluation takes place.",
+      "Scenarios that users carry out before release belong in a beta testing plan, not an evaluation strategy.",
+      "The chain of dependent tasks that sets the earliest finish date is the critical path in a Gantt chart."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "m-u4o1-kk09-001",
@@ -2338,6 +2597,30 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o1-kk10-008",
+    "kk": [
+      "U4O1-KK10",
+      "U3O2-KK07"
+    ],
+    "stem": "Warrion Hill Stock Agents in Colac is having a program developed to run its livestock sales. Throughout development, the agency's manager keeps asking for extra reports and screens, and the developers add each one without changing the project plan, the budget or the handover date. If this continues, which outcome is most likely by the end of the project?",
+    "options": [
+      "It runs late and over budget, but the agency ends up with a higher-quality program",
+      "Its plan stays on track, because each extra is small enough to fit in the existing tasks",
+      "The extras draw effort from the agreed work, so its original objectives may not be met",
+      "It is handed over late, but every requirement in the original SRS is still delivered"
+    ],
+    "answer": 2,
+    "explanation": "Each extra takes time and people that the plan had set aside for the agreed requirements. Because the plan, budget and handover date are never adjusted, that effort is taken from the original work, so over time the project may not deliver what it set out to achieve. This is the main long-term risk of unchecked scope creep.",
+    "whyWrong": [
+      "Unplanned extras don't buy a better program. They pull time and effort from the agreed features and often squeeze testing, so quality is more likely to suffer than improve.",
+      "Small extras add up, and none of them is in the plan, so tasks run over and the plan stops matching the work actually being done.",
+      "",
+      "Nothing guarantees the agreed requirements survive. With no time or budget added, the extras compete with them for the same effort, so some may be cut or left unfinished."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o1-kk11-001",
     "kk": [
       "U4O1-KK11"
@@ -2649,6 +2932,30 @@
       "",
       "A test table records test results, not progress against the plan.",
       "The SRS states what the portal must do; it doesn't record progress."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o1-kk11-008",
+    "kk": [
+      "U4O1-KK11",
+      "U3O2-KK03"
+    ],
+    "stem": "Noor is managing the development of a loans program for Tarnagulla Tool Library. At the weekly check she finds that Code loans screen, a task on the critical path, is running three days behind. Which response best records and handles this delay in the project plan?",
+    "options": [
+      "Cut three days from Write help pages, which isn't on the critical path",
+      "Drop Write help pages, which isn't on the critical path, from the plan",
+      "Keep the plan's dates and ask the team to work extra hours to catch up",
+      "Extend Code loans screen by three days and move its dependent tasks"
+    ],
+    "answer": 3,
+    "explanation": "A late task on the critical path pushes back the tasks that depend on it and, unless time is recovered later, the finish date. Extending its time frame and rescheduling the dependent tasks keeps the plan realistic and shows the effect on go-live straight away. Annotating the change with its cause, while keeping the original dates, records it for when the plan is assessed.",
+    "whyWrong": [
+      "Write help pages isn't on the critical path, so shortening it doesn't bring forward any critical task, and go-live still moves.",
+      "Removing a task off the critical path recovers no time on the critical path, and it drops work the library still needs.",
+      "Nothing in the plan records the delay or its cause, and the dependent tasks keep start dates that may no longer be realistic.",
+      ""
     ],
     "difficulty": 1,
     "source": "textbook"
@@ -3056,6 +3363,59 @@
           }
         ],
         "showCriticalPath": false
+      }
+    ]
+  },
+  {
+    "id": "m-u4o1-kk12-007",
+    "kk": [
+      "U4O1-KK12",
+      "U4O1-KK11"
+    ],
+    "stem": "Ingrid managed the development of an online ordering program for Harrow Creek Saddlery in Coleraine. To assess the project plan, she grouped the changes recorded in her change log, as shown in the table. After these adjustments, the program was handed over two days after the planned date. Based on a review of the number of changes made to the plan, which conclusion is best supported?",
+    "options": [
+      "Eight changes is too many, so all of the plan's estimates were unreliable",
+      "The gift voucher task shows that scope creep was the plan's main weakness",
+      "Six changes of one kind show the coding estimates were consistently too short",
+      "Handover was only 2 days late, so the plan was effective despite the changes"
+    ],
+    "answer": 2,
+    "explanation": "Counting the changes is most telling when they are grouped by kind. Six of the eight changes extended a coding task, one for each coding task in the plan, and every time the work was bigger than estimated, so the plan's coding estimates were consistently too short. That pattern is the weakness to fix in the next plan, for example by basing coding estimates on this project's actual durations. The other two changes had one-off causes.",
+    "whyWrong": [
+      "The count alone doesn't condemn every estimate: no non-coding task needed more time, and two of the changes had one-off causes.",
+      "The voucher task was agreed and added to the plan, so it was a controlled change rather than scope creep, and it is one change against six coding extensions.",
+      "",
+      "Finishing close to the date doesn't make the plan effective: it needed six coding extensions to stay usable and was still late."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "harrow-creek-changes",
+        "kind": "table",
+        "title": "Changes made to the project plan (grouped)",
+        "columns": [
+          "Kind of change",
+          "Number of changes",
+          "Reason recorded"
+        ],
+        "rows": [
+          [
+            "Extended the time frame of a coding task",
+            "6",
+            "Each of the plan's six coding tasks needed more code than estimated"
+          ],
+          [
+            "Added a task",
+            "1",
+            "The owner asked for gift vouchers; agreed with her and added to the plan"
+          ],
+          [
+            "Moved a beta testing session",
+            "1",
+            "Two of the shop's staff testers were away on the planned day"
+          ]
+        ]
       }
     ]
   }

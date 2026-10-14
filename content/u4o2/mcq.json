@@ -329,6 +329,30 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o2-kk02-008",
+    "kk": [
+      "U4O2-KK02",
+      "U4O2-KK07"
+    ],
+    "stem": "Lilly Pilly Furniture, a Pakenham furniture retailer with 450 staff, is bound by the Privacy Act 1988 (Cwlth). It is deciding whether its own IT team or a cheaper software firm based overseas should build its new online store. The overseas firm has asked for copies of real customers' names, addresses and order histories to test the store. Which statement best describes a legal disadvantage of choosing the overseas firm?",
+    "options": [
+      "Once the overseas firm held the details, it alone would be accountable for any misuse of them under the APPs",
+      "Under APP 9, the company couldn't give any developer its customers' names, addresses or order histories",
+      "Under APP 8, the company must take reasonable steps to ensure the firm handles the details as the APPs require",
+      "The Privacy Act would forbid the company from sending any of its customers' personal information outside Australia"
+    ],
+    "answer": 2,
+    "explanation": "Giving the firm real customers' details would disclose personal information to an overseas recipient, which APP 8 (Cross-border disclosure of personal information) covers. Before disclosing, Lilly Pilly Furniture must take reasonable steps to ensure the firm handles the details as the APPs require, and it can still be held accountable if the firm mishandles them: APP 8 isn't a ban on sending information overseas, and engaging an overseas developer doesn't pass the legal responsibility to it. Having its own IT team build the store in Australia avoids this obligation, and so would giving the overseas firm invented test data instead of real records. A Victorian public sector body sending personal information outside Victoria would face a similar obligation under IPP 9 Transborder data flows of the Privacy and Data Protection Act 2014.",
+    "whyWrong": [
+      "Outsourcing the work doesn't outsource the responsibility: the company that disclosed the details can still be held accountable for how the overseas firm handles them.",
+      "APP 9 deals with government related identifiers, such as Medicare numbers, not names, addresses or order histories.",
+      "",
+      "APP 8 doesn't ban sending personal information overseas; it allows it when the company takes reasonable steps to make sure the recipient handles it as the APPs require."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o2-kk03-001",
     "kk": [
       "U4O2-KK03"
@@ -489,6 +513,54 @@
     ],
     "difficulty": 3,
     "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-008",
+    "kk": [
+      "U4O2-KK03",
+      "U4O1-KK04"
+    ],
+    "stem": "A Seymour company that runs online writing courses for adults is adding a spelling and grammar checker to its app. To save development time, the app will send each learner's draft, with the learner's name and email address, to a free API run by another company. Which risk to learners' privacy does using this API create?",
+    "options": [
+      "The API's provider could change or withdraw it, so the checker stops working",
+      "Learners' details go to another company, which could keep, use or share them",
+      "The API could flag correct words as errors, so learners make changes that weren't needed",
+      "Each request to the API adds a delay, so learners wait longer to see their corrections"
+    ],
+    "answer": 1,
+    "explanation": "Calling the API discloses learners' personal information (their names, email addresses and writing) to an organisation outside the company's control. The company can't be sure how the provider stores, uses or shares it, and a free service may keep what it receives. Sending only the text to be checked, with no name or email address, would reduce the risk.",
+    "whyWrong": [
+      "A change or withdrawal is a real risk of relying on an API, but it stops the checker working; it doesn't expose learners' information.",
+      "",
+      "Wrong suggestions are a problem with the accuracy of the output, not a risk to learners' privacy.",
+      "A delay affects efficiency, not who can see learners' information."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk03-009",
+    "kk": [
+      "U4O2-KK03",
+      "U4O2-KK04"
+    ],
+    "stem": "The study design's key knowledge lists types of vulnerabilities and risks within insecure development environments. Which of these is on that list?",
+    "options": [
+      "Robust identity and access management",
+      "Onboarding/induction practices and developer training",
+      "Confirming threats have been mitigated",
+      "Poor identity and access management practices"
+    ],
+    "answer": 3,
+    "explanation": "Poor identity and access management practices are on the list, with use of APIs, malware, unpatched software, man-in-the-middle attacks, insider threats, cyber security incidents, risks present from software acquired by third parties, ineffective code review practices, and combined development, testing and production environments.",
+    "whyWrong": [
+      "Robust identity and access management is one of the listed security controls (U4O2-KK04); the listed vulnerability is its weak form, poor identity and access management practices.",
+      "Onboarding/induction practices and developer training are a strategy for improving secure development (U4O2-KK10), not a vulnerability or risk.",
+      "Confirming threats have been mitigated is a threat modelling principle (U4O2-KK05), not a vulnerability or risk.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "m-u4o2-kk04-001",
@@ -675,6 +747,55 @@
         "code": "FUNCTION canMerge(author, reviewer, approved)\n    // Policy: merge only after a developer other than the author approves\n    IF approved = True AND reviewer <> \"\" THEN\n        RETURN True\n    ELSE\n        RETURN False\n    ENDIF\nENDFUNCTION"
       }
     ]
+  },
+  {
+    "id": "m-u4o2-kk04-008",
+    "kk": [
+      "U4O2-KK04",
+      "TERMS"
+    ],
+    "stem": "A Colac building company's staff app lets each new worker enter their bank account details, which the app sends to the payroll server. The app uses asymmetric encryption: before sending the details, it encrypts them with the payroll server's public key. Which statement about decrypting the details is correct?",
+    "options": [
+      "Only the payroll server's private key, paired with that public key, can decrypt them",
+      "The payroll server's public key decrypts them, because one key both encrypts and decrypts",
+      "Any device holding the public key can decrypt them, so the public key must be kept secret",
+      "The public key and the private key must be used together to decrypt them"
+    ],
+    "answer": 0,
+    "explanation": "In asymmetric encryption, data encrypted with a public key can be decrypted only with the matching private key. The payroll server keeps its private key secret, so anyone who intercepts the bank details, or who holds the public key, still can't read them. A common slip is to treat the public key as able to decrypt too; one key that both encrypts and decrypts is symmetric encryption.",
+    "whyWrong": [
+      "",
+      "One key that both encrypts and decrypts describes symmetric encryption. In asymmetric encryption, the public key only encrypts.",
+      "The public key can't decrypt, which is why it can be shared openly; it is the private key that must be kept secret.",
+      "Only the private key is needed to decrypt; the public key's work is done once the data is encrypted."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "m-u4o2-kk04-009",
+    "kk": [
+      "U4O2-KK04",
+      "U4O2-KK07",
+      "U4O2-KK10"
+    ],
+    "stem": "The study design's key knowledge lists security controls used to protect software development practices and data stored within applications. Which of these is on that list?",
+    "options": [
+      "Regular backups",
+      "Application control",
+      "Version control and code repositories",
+      "Developer training focused on secure development"
+    ],
+    "answer": 2,
+    "explanation": "Version control and code repositories is one of the six listed controls. The others are robust identity and access management, encryption, code review, regular updates and patches to software, and separated development, testing and production environments.",
+    "whyWrong": [
+      "Regular backups is an Essential Eight strategy (U4O2-KK07), not one of the six listed controls; and version control, which is listed, isn't a backup.",
+      "Application control is an Essential Eight strategy (U4O2-KK07), not one of the six listed controls.",
+      "",
+      "Developer training is a strategy for improving secure development (U4O2-KK10); the study design lists strategies and controls separately."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "m-u4o2-kk05-001",
@@ -1098,6 +1219,29 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o2-kk05-008",
+    "kk": [
+      "U4O2-KK05"
+    ],
+    "stem": "A Benalla secondary college's IT team will apply the study design's threat modelling principles while it designs an online enrolment system. Which of these is one of those principles?",
+    "options": [
+      "Allocating time to each task and identifying the critical path",
+      "Separating the development, testing and production environments",
+      "Defining the security requirements the system must meet",
+      "Complying with the Privacy and Data Protection Act 2014"
+    ],
+    "answer": 2,
+    "explanation": "The key knowledge names three threat modelling principles: defining security requirements, identifying and mitigating threats, and confirming threats have been mitigated. Defining the security requirements comes first, because it sets out what the enrolment system must protect, so the team can then identify the threats to each requirement.",
+    "whyWrong": [
+      "Allocating time and finding the critical path are Gantt chart features for planning a project, not principles for modelling threats.",
+      "Separating environments is a security control. Threat modelling may choose it to mitigate a threat, but it isn't one of the principles.",
+      "",
+      "Complying with an Act is a legal requirement that can shape the security requirements, but it isn't a threat modelling principle."
+    ],
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
     "id": "m-u4o2-kk06-001",
     "kk": [
       "U4O2-KK06"
@@ -1293,6 +1437,31 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o2-kk06-008",
+    "kk": [
+      "U4O2-KK06",
+      "U4O2-KK07",
+      "TERMS"
+    ],
+    "stem": "A Gisborne online bicycle-parts retailer with 300 staff is bound by the Privacy Act 1988 (Cwlth). Its eight developers can read customers' names, addresses and order histories in the live database when they fix faults. An evaluator is writing criteria to judge the security of the retailer's development practices, and needs one that measures legal compliance. Which criterion is most suitable?",
+    "options": [
+      "To what degree do developers reach the live database only through individual accounts that use multi-factor authentication?",
+      "To what degree are known vulnerabilities in the third-party libraries the developers use patched soon after each fix is released?",
+      "To what degree are the customer details developers can read protected as required by APP 11 (Security of personal information)?",
+      "To what degree are the customer details developers can read protected as required by IPP 4 (Data security)?"
+    ],
+    "answer": 2,
+    "explanation": "Legal compliance is one of the effectiveness measures the study design gives for development practices, beside the security controls in place and exposure to vulnerability and risk. The retailer is bound by the Privacy Act, so under APP 11 (Security of personal information) it must take reasonable steps to keep the personal information it holds, including the customer details its developers can read, safe from misuse, loss and unauthorised access or disclosure. Judging the protection against APP 11 measures whether the practices comply with the law.",
+    "whyWrong": [
+      "This checks that a security control is in place. Multi-factor authentication helps protect the details, but meeting this criterion wouldn't show that the retailer complies with the law.",
+      "Prompt patching reduces the practices' exposure to known vulnerabilities, but meeting this criterion wouldn't show whether the retailer meets its obligations under the Privacy Act.",
+      "",
+      "The Information Privacy Principles of the Privacy and Data Protection Act 2014 bind Victorian public sector organisations such as councils, not a private retailer that the Privacy Act covers."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o2-kk07-001",
     "kk": [
       "U4O2-KK07"
@@ -1437,6 +1606,80 @@
     "source": "textbook"
   },
   {
+    "id": "m-u4o2-kk07-007",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK08",
+      "U3O2-KK10"
+    ],
+    "stem": "A Maryborough transport company uses a route-planning program built by another software firm. The firm supplied the program's source code under a licence that lets the company install and run the program, but not change it or pass it on. Which action by Zeynep, the company's developer, would breach the Copyright Act 1968 (Cwlth)?",
+    "options": [
+      "Backing up the program's customer address data to an unencrypted USB drive",
+      "Writing her own program from scratch with the same features as the firm's",
+      "Changing the firm's code to add a fuel report, without the firm's permission",
+      "Giving the company's customer contact list to a marketing firm without consent"
+    ],
+    "answer": 2,
+    "explanation": "The firm owns the copyright in its code, which gives it the exclusive right to copy and adapt it. The licence lets the company only install and run the program, so changing the code without the firm's permission infringes the firm's copyright. The other actions may be poor security or breach privacy law, but the Copyright Act protects creators' works; it doesn't deal with how data is secured or shared.",
+    "whyWrong": [
+      "An unencrypted backup is a security weakness that puts customers' privacy at risk, but the data isn't anyone else's protected work, so copyright isn't involved.",
+      "Copyright protects the firm's code, not the ideas or features behind it, so writing original code for the same features doesn't infringe it.",
+      "",
+      "Sharing customers' details without consent is a privacy issue, not a copyright one: no one's code or other creative work is copied."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk07-008",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK04"
+    ],
+    "stem": "Bilal leads a development team at a Kyneton software company. He is checking which of the team's security measures come from the Essential Eight. Which of these measures is one of the Essential Eight's mitigation strategies?",
+    "options": [
+      "Restricting administrative privileges",
+      "Encrypting stored and transmitted data",
+      "Reviewing code before it is merged",
+      "Keeping code in a version control repository"
+    ],
+    "answer": 0,
+    "explanation": "Restrict administrative privileges is one of the eight strategies, with patch applications, patch operating systems, multi-factor authentication, application control, restrict Microsoft Office macros, user application hardening and regular backups. Encryption, code review, and version control and code repositories are on the study design's separate list of security controls for protecting development practices and stored data; none of them is an Essential Eight strategy.",
+    "whyWrong": [
+      "",
+      "Encryption is one of the study design's security controls for development practices and stored data, not an Essential Eight strategy.",
+      "Code review is one of the study design's security controls, not one of the eight strategies.",
+      "Version control and code repositories is one of the study design's security controls, not an Essential Eight strategy, and version control is no substitute for regular backups."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "m-u4o2-kk07-009",
+    "kk": [
+      "U4O2-KK07",
+      "U4O2-KK03",
+      "U4O2-KK09"
+    ],
+    "stem": "A security review of the development team at a Colac company that builds farm management software finds that:\n\n1. developers use administrator accounts for their everyday work on their laptops and on the build server\n2. the code editor and web browser on every laptop are a year out of date, although their makers have released security updates\n3. the code repository on the build server holds the only copy of the source code.\n\nWhich option matches each finding to the Essential Eight strategy that most directly addresses it?",
+    "options": [
+      "1: Multi-factor authentication; 2: Patch applications; 3: Regular backups",
+      "1: Multi-factor authentication; 2: Patch operating systems; 3: Regular backups",
+      "1: Restrict administrative privileges; 2: Patch operating systems; 3: Application control",
+      "1: Restrict administrative privileges; 2: Patch applications; 3: Regular backups"
+    ],
+    "answer": 3,
+    "explanation": "With administrator rights in everyday accounts, malware or a stolen login gets full control, so restrict administrative privileges to the tasks that need them. A code editor and a web browser are applications, so patch applications. A repository with no other copy can't be recovered after ransomware or a disk failure, so make regular backups, kept apart from the server and tested. Version control on the same server isn't a backup.",
+    "whyWrong": [
+      "Multi-factor authentication makes a stolen password less useful, but developers would still do everyday work with administrator rights, so malware they run would have those rights too.",
+      "Multi-factor authentication leaves administrator rights in everyday accounts, and the editor and browser are applications, so finding 2 needs patch applications, not patch operating systems.",
+      "The editor and browser are applications, not the operating system, and application control only limits which programs can run; it makes no copy of the code.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u4o2-kk08-001",
     "kk": [
       "U4O2-KK08"
@@ -1572,6 +1815,31 @@
       "Encryption protects the stored data from outsiders, but users still wouldn't know they are being tracked.",
       "Deceiving his manager is dishonest, and the feature could simply be added later by someone else.",
       ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk08-007",
+    "kk": [
+      "U4O2-KK08",
+      "U3O1-KK01",
+      "U4O1-KK04"
+    ],
+    "stem": "Developers at a Warragul company are using an AI coding assistant to build an online enrolment form for a community college. Which situation shows the AI tool introducing bias?",
+    "options": [
+      "Dmitri tells the college the code is all his own, though the assistant wrote most of it",
+      "The assistant reproduces an open-source function without the licence notice it requires",
+      "The assistant suggests a name check that rejects names such as O'Neill and José",
+      "Mirela commits the assistant's date-checking function unread, as it says the code works"
+    ],
+    "answer": 2,
+    "explanation": "AI tools learn from existing code and data, which represent some groups of people far more than others. A name check that accepts only plain English letters carries that bias into the form, and would stop people whose names have apostrophes or accents from enrolling. Developers should check AI suggestions for unfair assumptions and test them with data from many backgrounds.",
+    "whyWrong": [
+      "This is a lack of transparency about AI use: Dmitri hides that the assistant wrote the code.",
+      "This is a copyright and intellectual property problem: the code is used without meeting its licence conditions.",
+      "",
+      "This is over-reliance on AI: Mirela trusts code she hasn't read or tested."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -1746,6 +2014,31 @@
       "Encryption protects the code if it is copied; it doesn't record who changed it.",
       "Backups let a broken version be replaced, but they don't show who made the change.",
       ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u4o2-kk09-007",
+    "kk": [
+      "U4O2-KK09",
+      "U4O2-KK03",
+      "U4O1-KK04"
+    ],
+    "stem": "A Port Campbell fishing-charter company is adding automatic translation to the support chat in its booking app, because many of its customers are overseas tourists. As designed, the app sends each chat message, together with the customer's name, phone number and booking number, to a free translation API run by another company. The company is worried that the API's provider could keep, reuse or share the personal information it receives. Which measure would most directly reduce this risk?",
+    "options": [
+      "Remove the name, phone number and booking number before each message is sent",
+      "Send each message to the translation API over an encrypted connection",
+      "Encrypt the chat messages stored in the company's own support database",
+      "Arrange a second translation API to use if the first one is withdrawn"
+    ],
+    "answer": 0,
+    "explanation": "The privacy risk is that customers' personal information goes to another company, which may keep, reuse or share it. The API needs only the words to translate, so removing the identifying details before sending means much less personal information leaves the company. Customers may still type personal details into a message, so the company should also check the provider's terms on storing and reusing data, or consider translating in-house.",
+    "whyWrong": [
+      "",
+      "An encrypted connection stops others reading messages on the way, but the API's provider still receives every detail and could keep it.",
+      "This protects the messages the company stores itself; it doesn't change what is sent to the API's provider.",
+      "A second API guards against the service being withdrawn, which is a reliability risk; customers' details would still be sent."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -1947,5 +2240,29 @@
         ]
       }
     ]
+  },
+  {
+    "id": "m-u4o2-kk10-008",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK04"
+    ],
+    "stem": "A Wonthaggi company that builds point-of-sale software for cafés has had two security incidents caused by its developers' insecure habits. The manager wants one of the study design's strategies for improving the security of software development practices. Which suggestion is such a strategy, rather than a security control?",
+    "options": [
+      "Require a second developer to approve every change before it is merged",
+      "Give every developer induction and ongoing training in secure development",
+      "Encrypt the source code and test data stored on the development server",
+      "Keep separate development, testing and production environments"
+    ],
+    "answer": 1,
+    "explanation": "The study design lists two strategies for improving the security of software development practices: onboarding/induction practices and developer training focused on secure development, and development of risk management plans. Induction and ongoing training in secure development is the first. Code review, encryption and separated environments are on its separate list of security controls. In 2025, answers that described a control when a strategy was asked for earned no marks.",
+    "whyWrong": [
+      "Code review is one of the study design's listed security controls, not one of its strategies.",
+      "",
+      "Encryption is a listed security control that protects stored data; it isn't a strategy for improving practices.",
+      "Separated development, testing and production environments are a listed security control, not a strategy."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
   }
 ]

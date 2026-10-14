@@ -191,6 +191,54 @@
     ]
   },
   {
+    "id": "m-u3o1-kk01-008",
+    "kk": [
+      "U3O1-KK01",
+      "U3O1-KK14"
+    ],
+    "stem": "Anika is coding the loyalty-points module for a Traralgon pharmacy. Her IDE includes an AI-based tool that tests and debugs code as she types, and it reports no issues. The requirement gives bonus points for any purchase of $50.00 or more, but when Anika runs a test purchase of exactly $50.00, no bonus is awarded. What does this show about AI-based debugging and testing tools?",
+    "options": [
+      "They can miss subtle issues, so Anika still needs her own tests at boundaries",
+      "They identify issues before they occur, so the fault must lie in the requirement",
+      "They flag errors as code is typed, so any fault they miss must be a runtime error",
+      "They test consistently, so running the tool again will find the fault next time"
+    ],
+    "answer": 0,
+    "explanation": "The module runs but gives the wrong output at the boundary: a subtle logic error, such as `>` written where `>=` was needed. One challenge VCAA names for AI-based debugging and testing tools is that they can wrongly report errors in correct code or miss subtle faults; another is their dependence on training data. The benefits of automated debugging and testing tools, such as real-time identification of issues, suggested fixes and rapid feedback, don't replace the developer's own test cases, which compare expected and actual output at each boundary.",
+    "whyWrong": [
+      "",
+      "Identifying issues early is an improvement AI can bring, not a guarantee. The requirement is clear; the code doesn't meet it.",
+      "A runtime error arises while the program runs and crashes it if it isn't handled. This module ran to the end and gave a wrong result, which is a logic error.",
+      "A consistent tool applies the same checks every time, so rerunning it on unchanged code gives the same result."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "m-u3o1-kk01-009",
+    "kk": [
+      "U3O1-KK01",
+      "U4O2-KK08"
+    ],
+    "stem": "Rhea leads a small team building a patient check-in program for a community health centre in Dandenong. She reviews how each team member used AI tools during the past week. Which action is the best example of responsible and ethical use of AI tools?",
+    "options": [
+      "Generating 30 versions of the same function to compare styles, since each request is free",
+      "Pasting in generated code that copies an open-source library, as open-source code is free",
+      "Checking the tool's advice on a new library update, since its training data may predate it",
+      "Leaving generated functions unmarked in the code, since the team has already tested them"
+    ],
+    "answer": 2,
+    "explanation": "An AI tool learns from data gathered up to a certain date, so it may know nothing about a library update released since then, yet still answer confidently. Checking its advice against the library's documentation shows the developer understands this technical limitation. Using an AI tool isn't unethical in itself: each responsible practice concerns how the tool is used. VCAA lists seven practices for using AI tools responsibly and ethically: understanding a tool's technical limitations, being transparent about using it, thoroughly reviewing all generated code, being aware that it can introduce bias, avoiding over-reliance, understanding its environmental impact, and respecting intellectual property, copyright and licensing agreements. Each of the other actions ignores one of them.",
+    "whyWrong": [
+      "A request may cost the developer nothing, but each one uses energy in the provider's data centres, so generating output nobody needs ignores the environmental impact of AI tools.",
+      "Open-source code is still protected by copyright, and its licence sets conditions, such as keeping the copyright notice; ignoring them fails to respect intellectual property and licensing agreements.",
+      "",
+      "Testing the functions is good practice, but hiding which code a tool generated isn't transparent: reviewers and later maintainers need to know where the code came from."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "m-u3o1-kk02-002",
     "kk": [
       "U3O1-KK02",
@@ -334,6 +382,31 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk02-008",
+    "kk": [
+      "U3O1-KK02",
+      "U3O2-KK05",
+      "U3O1-KK08"
+    ],
+    "stem": "Darcy is coding the fees module for a Wodonga netball club's registration program. The SRS includes two non-functional requirements:\n\n- *R1: The module never crashes, whatever a user types into any field.*\n- *R2: When the club changes its fees, a developer who has never seen the code can find and update every fee in under 15 minutes.*\n\nWhich coding decision most directly helps the module meet R2?",
+    "options": [
+      "Type each fee into every calculation that uses it, so each line shows its value",
+      "Declare all the fees together as named constants, and use them in calculations",
+      "Check each entry's type before converting it, and display a message if it fails",
+      "Give each registration type a labelled button, so staff can choose it in one tap"
+    ],
+    "answer": 1,
+    "explanation": "R2 describes maintainability: how easily developers can change or correct the code. With every fee declared once, in one place, as a clearly named constant, a developer finds the fees quickly and changes each value once, in its declaration (the program can't change a constant while it runs), and every calculation then uses the new amount. R1 describes robustness: the module copes with unexpected or invalid input without crashing. Robustness and maintainability are two of the quality attributes the PSM lists for non-functional requirements, alongside usability, reliability and portability.",
+    "whyWrong": [
+      "Repeating the values means finding and changing every copy, and missing one leaves the module charging two different amounts for the same fee.",
+      "",
+      "Handling an invalid entry without crashing helps meet R1, which describes robustness; it doesn't make the fees quicker to find or change.",
+      "Labelled buttons make the program quicker for staff to use (usability); they don't help a developer change the fees."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "m-u3o1-kk03-001",
@@ -711,6 +784,83 @@
     ]
   },
   {
+    "id": "m-u3o1-kk03-007",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "stem": "Odette is annotating the mock-up of the lesson booking screen for a riding school in Bunyip. She has written four annotations:\n\n1. *Book button: 160 × 48 pixels*\n2. *Book button text: Arial 14pt, bold, white*\n3. *Lesson level drop-down: shows Beginner until the user changes it*\n4. *Photo of the arena: to be sourced from the school*\n\nMock-up annotations can describe a screen's appearance or its structure. Which **two** of Odette's annotations describe the screen's structure?",
+    "options": [
+      "1 and 2",
+      "2 and 3",
+      "3 and 4",
+      "1 and 3"
+    ],
+    "answer": 3,
+    "explanation": "Structure annotations set out the controls a screen needs, what each one does, its default value and its size: the button's size (1) and the drop-down's default value (3). Appearance annotations set out fonts, text colour and size, alignment and the images to be sourced (2 and 4). Annotations can also justify a choice by a design principle or a characteristic of user experience.",
+    "whyWrong": [
+      "The button's size (1) is structure, but the font, size and colour of its text (2) are appearance.",
+      "The drop-down's default value (3) is structure, but the font, size and colour of the button text (2) are appearance.",
+      "The drop-down's default value (3) is structure, but an image to be sourced (4) is appearance.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "study-design"
+  },
+  {
+    "id": "m-u3o1-kk03-008",
+    "kk": [
+      "U3O1-KK03",
+      "U3O2-KK14"
+    ],
+    "stem": "Darcy is designing a module for a bike hire shop in Yackandandah. The module receives the type of bike, the number of hours it is hired and whether the customer is a club member. It looks up the hourly rate for that type of bike, calculates the hire cost, takes 15% off the cost for club members, and displays the cost. Which entry completes the Process column of his IPO chart?",
+    "options": [
+      "Look up the hourly rate for the bike type; multiply the hours by the rate to get the hire cost; then subtract 15% from the hire cost",
+      "Look up the hourly rate for the bike type; multiply the hours by the rate to get the hire cost; if the customer is a club member, subtract 15% from it",
+      "Look up the hourly rate for the bike type; if the customer is a club member, subtract 15% from the hire cost; display the hire cost on screen",
+      "Enter the bike type, the hours and the member status; multiply the hours by the hourly rate; if the customer is a club member, subtract 15% from it"
+    ],
+    "answer": 1,
+    "explanation": "Only club members get the discount, so the process has to state that condition; without it, the chart takes 15% off every hire and never uses the member status input. An IPO chart can show a condition inside a process; what it leaves out is the full step-by-step algorithm, which pseudocode gives.",
+    "whyWrong": [
+      "It leaves out the condition, so the chart takes 15% off every hire: non-members would be undercharged and the member status input would never be used.",
+      "",
+      "It never multiplies the hours by the rate, so no hire cost is calculated, and displaying the cost is output, not processing.",
+      "Entering data is input, not processing, and the hourly rate is never looked up for the type of bike."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "bike-hire-ipo",
+        "kind": "table",
+        "title": "IPO chart: hire cost",
+        "columns": [
+          "Input",
+          "Process",
+          "Output"
+        ],
+        "rows": [
+          [
+            "bike type",
+            "?",
+            "hire cost"
+          ],
+          [
+            "hours",
+            "",
+            ""
+          ],
+          [
+            "member status",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "m-u3o1-kk04-001",
     "kk": [
       "U3O1-KK04"
@@ -857,6 +1007,29 @@
     ],
     "difficulty": 3,
     "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk04-007",
+    "kk": [
+      "U3O1-KK04"
+    ],
+    "stem": "The study design groups data types as text, numeric and Boolean. Which list contains **only** numeric data types?",
+    "options": [
+      "character, integer, floating point",
+      "integer, floating point, date/time",
+      "integer, floating point, Boolean",
+      "string, integer, date/time"
+    ],
+    "answer": 1,
+    "explanation": "The study design's groups are text (character, string), numeric (integer, floating point, date/time) and Boolean. Date/time is numeric: dates and times can be compared, put in time order and used in calculations, such as the number of days between two dates.",
+    "whyWrong": [
+      "A character is a text type, like a string, even when the one symbol it holds is a digit.",
+      "",
+      "Boolean is a group of its own, for values that can only be true or false.",
+      "A string is a text type, even when it holds only digits, such as a phone number."
+    ],
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "m-u3o1-kk05-001",
@@ -1105,6 +1278,116 @@
     ]
   },
   {
+    "id": "m-u3o1-kk05-007",
+    "kk": [
+      "U3O1-KK05"
+    ],
+    "stem": "Tobias's program for a grain receival site near Hopetoun holds the moisture content, as a percentage, of each of the last five truckloads of wheat. The figure shows how the values are stored, with each value's index, counting from 0, above it. Which data structure is shown?",
+    "options": [
+      "A two-dimensional array, because the values are laid out in numbered columns",
+      "A one-dimensional array, because one integer index reaches each value",
+      "A record, because each of the five values is stored in its own numbered field",
+      "A two-dimensional array, because it has a row of indexes and a row of values"
+    ],
+    "answer": 1,
+    "explanation": "The five readings are all floating point values of the same kind, set out in a single row, and each is reached by one integer index: the reading at index 3 is 13.4. That makes the structure a one-dimensional array. The row of indexes above the values only numbers their positions; it holds no data. Count the indexes needed to reach one value: a two-dimensional array needs two, a row index and a column index, so a single row of numbered boxes is still one-dimensional.",
+    "whyWrong": [
+      "Numbered columns in a single row need only one index each; a two-dimensional array needs both a row index and a column index to reach a value.",
+      "",
+      "A record groups related fields of varying data types, reached by field index; these are five like floating point values reached by an integer index.",
+      "The top row only numbers the positions and holds no data. The values fill a single row, and one index reaches each of them, so the array is one-dimensional."
+    ],
+    "difficulty": 1,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "moisture-array",
+        "kind": "table",
+        "title": "Moisture content of the last five truckloads",
+        "columns": [
+          "Index",
+          "0",
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "rows": [
+          [
+            "Moisture (%)",
+            "11.2",
+            "12.8",
+            "10.9",
+            "13.4",
+            "11.7"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk05-008",
+    "kk": [
+      "U3O1-KK05"
+    ],
+    "stem": "A hockey club in Corryong keeps its members in `members`, an array of records. Each record has three fields: `name` (string), `age` (integer) and `financial` (Boolean). The club's program reaches a field by writing the field's name after a dot, as in `player.age`. Arrays are indexed from 0. The first four records are shown. Which expression gives Amara Diallo's age?",
+    "options": [
+      "`members[3].age`",
+      "`members[2][1]`",
+      "`members[2].age`",
+      "`members.age[2]`"
+    ],
+    "answer": 2,
+    "explanation": "Two indexes do two different jobs. The array's integer index picks the record: indexed from 0, Amara Diallo's record is `members[2]`. The record's field index then picks the value inside it: `.age` reaches her `age` field, which holds 16. A two-dimensional array can't stand in for this data, because its elements all share one data type, while these fields mix string, integer and Boolean values.",
+    "whyWrong": [
+      "This counts the records from 1: with indexes from 0, `members[3]` is the fourth record, Matilda Byrne's, so it gives 14.",
+      "This treats the array of records as a two-dimensional array with a numbered column; in this program a field is reached by its name after a dot, `.age`.",
+      "",
+      "This names the field before choosing a record. `members` is the array, so its index comes first to pick the record, and then the field is named."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "hockey-members",
+        "kind": "table",
+        "title": "The first four records in members",
+        "columns": [
+          "Index",
+          "name",
+          "age",
+          "financial"
+        ],
+        "rows": [
+          [
+            "0",
+            "Bodhi Lim",
+            "15",
+            "True"
+          ],
+          [
+            "1",
+            "Lachie Fong",
+            "17",
+            "False"
+          ],
+          [
+            "2",
+            "Amara Diallo",
+            "16",
+            "True"
+          ],
+          [
+            "3",
+            "Matilda Byrne",
+            "14",
+            "True"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "m-u3o1-kk06-001",
     "kk": [
       "U3O1-KK06"
@@ -1242,6 +1525,54 @@
     ],
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk06-007",
+    "kk": [
+      "U3O1-KK06",
+      "U4O1-KK02"
+    ],
+    "stem": "Kaito is writing a booking program for a farm stay near Tallangatta. The program writes each booking to an XML file, and the farm stay's reporting program reads the file and finds each value by its tag name. Which extract stores Nell Varga's booking for 3 nights correctly?",
+    "options": [
+      "`<booking><guest>Nell Varga<nights>3</guest></nights></booking>`",
+      "`<booking><guest>Nell Varga<guest><nights>3<nights></booking>`",
+      "`<booking><details>Nell Varga, 3 nights</details></booking>`",
+      "`<booking><guest>Nell Varga</guest><nights>3</nights></booking>`"
+    ],
+    "answer": 3,
+    "explanation": "Each value sits in its own element, between a start tag and a matching end tag that adds a slash (`<nights>3</nights>`), and both elements sit wholly inside `<booking>`. Elements nest like boxes inside boxes: the last element opened is the first one closed. The reporting program can then find `guest` and `nights` by name.",
+    "whyWrong": [
+      "The tags overlap: `<nights>` opens inside `<guest>` but closes after it. An element opened inside another must close before the outer one does.",
+      "An end tag needs a slash. Here the second `<guest>` and `<nights>` open new elements instead of closing the first ones, so those elements are never closed and the file can't be read as XML.",
+      "The tags here are correctly formed, but the name and the nights share one element, so neither value can be found by its own tag name; each value needs its own element.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk06-008",
+    "kk": [
+      "U3O1-KK06",
+      "TERMS"
+    ],
+    "stem": "A day spa in Hepburn Springs has a program that reads three files: `clients.csv`, with one client per line and the fields separated by commas; `treatments.xml`, with each treatment's details in tagged elements; and `handover.txt`, with notes that staff write to each other in sentences at the end of each shift. Which statement correctly classifies these data sources?",
+    "options": [
+      "CSV and XML are structured, so the program can pick out each field; the TXT notes are unstructured",
+      "Only the XML file is structured, as only XML names each value; the CSV and TXT files are unstructured",
+      "All three are unstructured, because each is a text file that can be opened in any text editor",
+      "The CSV and TXT files are structured, as both store one entry per line; the XML file is unstructured"
+    ],
+    "answer": 0,
+    "explanation": "The study design classes delimited (CSV) files and XML as structured data sources, and plain text (TXT) files as unstructured. In a structured source every value sits in a defined field, marked off by a delimiter or by tags, so a program can pick each one out. The handover notes are just characters and lines, so the program can display or search them but has no fields to pick out.",
+    "whyWrong": [
+      "",
+      "A CSV file is structured too: its delimiters split every line into fields, which a program finds by position rather than by name.",
+      "Being text doesn't make a file unstructured. Delimiters give the CSV file fields and tags give the XML file fields; only the notes have none.",
+      "A line of free text has no fields, so the notes are unstructured; the tagged elements in the XML file make it structured."
+    ],
+    "difficulty": 1,
+    "source": "study-design"
   },
   {
     "id": "m-u3o1-kk07-001",
@@ -1503,6 +1834,52 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o1-kk07-007",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "stem": "Teagan is designing the booking app for a sports ground in Geelong. Her design includes:\n\n- a `Member` superclass with the subclasses `Player`, `Coach` and `Volunteer`, each of which adds its own attributes\n- a `Ground` class, whose attributes record the ground's name, its surface and whether it has lights\n- a `Booking` class, whose `confirm()` method calls methods of `Member` and `Ground`\n\nWhich part of the design is an example of inheritance, and what benefit does it give?",
+    "options": [
+      "`Ground`, as every booking reuses one ground's attributes rather than storing them again",
+      "`Member` and its subclasses, as each subclass's own attributes are hidden from other classes",
+      "`Member` and its subclasses, as a fix to a method in `Member` reaches all three subclasses",
+      "`Booking`, as its `confirm()` method reuses methods that belong to two other classes"
+    ],
+    "answer": 2,
+    "explanation": "Inheritance needs a superclass with subclasses: `Player`, `Coach` and `Volunteer` receive the attributes and methods of `Member`. Code they share, such as a login method, is written once in `Member`, so a fix made there applies to every user group without any subclass being changed.",
+    "whyWrong": [
+      "`Ground` is a stand-alone class with no superclass or subclasses; many bookings using one object isn't inheritance.",
+      "The part is right but the benefit isn't: hiding a class's attributes from other classes is encapsulation, not something inheritance gives.",
+      "",
+      "One class calling another class's methods isn't inheritance; `Booking` has no superclass or subclasses."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk07-008",
+    "kk": [
+      "U3O1-KK07"
+    ],
+    "stem": "The water-ordering program for an irrigation scheme near Mildura has a `Channel` class with the public method `scheduleDelivery(farmID, megalitres)`. Inside the method, the class checks the channel's spare capacity, works out when the farm's gate should open and close, and adds the delivery to the roster. The developer of the ordering screen only needs to know what the method does and what to pass to it, so the screen's code is a single call to `scheduleDelivery()`. Which OOP principle does this show most directly?",
+    "options": [
+      "Abstraction",
+      "Encapsulation",
+      "Generalisation",
+      "Inheritance"
+    ],
+    "answer": 0,
+    "explanation": "Abstraction hides how a class carries out a task and exposes only what other code needs to use it. The screen's code relies on what `scheduleDelivery()` does, not on how the capacity check, the gate times and the roster update are done, so those steps can change without any change to the screen.",
+    "whyWrong": [
+      "",
+      "Encapsulation keeps a class's data with its methods and stops other code reaching that data directly; the stem is about using a method without knowing how it works.",
+      "Generalisation moves the features several classes share into a superclass; only one class is described.",
+      "Inheritance gives a subclass the members of its superclass; no subclass is involved."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o1-kk08-001",
     "kk": [
       "U3O1-KK08",
@@ -1701,6 +2078,61 @@
     "source": "textbook"
   },
   {
+    "id": "m-u3o1-kk08-008",
+    "kk": [
+      "U3O1-KK08",
+      "U4O1-KK03"
+    ],
+    "stem": "The quoting program for a houseboat hire business at Lake Eildon contains:\n\n- a constant `CLEANING_FEE` with the value 150\n- a global variable `fuelPrice`, the current price of a litre of fuel\n- a local variable `nights`, declared in the function `calculateQuote`\n\nWhich statement about these three is **incorrect**?",
+    "options": [
+      "`CLEANING_FEE` can be changed only by editing the program's code",
+      "A statement in any function can give `fuelPrice` a new value while the program runs",
+      "`nights` can't be used in another function, such as `printQuote`, unless its value is passed to it",
+      "`nights` can be used only inside the IF statement in `calculateQuote` that tests its value"
+    ],
+    "answer": 3,
+    "explanation": "A local variable's scope is the whole function that declares it, so `nights` can be used in any statement in `calculateQuote`, including inside its IF statements and loops, but not in other functions. The other three statements are correct: a global variable can be changed by any function while the program runs, and only a constant needs an edit to the code to change.",
+    "whyWrong": [
+      "This is correct: a constant's value can't change while the program runs, so changing it means editing the code.",
+      "This is correct: any part of the program can read or change a global variable while it runs; only a constant is fixed.",
+      "This is correct: a local variable exists only inside the function that declares it, so `printQuote` needs the value passed in.",
+      ""
+    ],
+    "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk08-009",
+    "kk": [
+      "U3O1-KK08",
+      "U4O1-KK03"
+    ],
+    "stem": "A Colac courier company's program uses the function shown to work out the cost of sending a parcel. Which control structure does the function use to decide which cost is returned?",
+    "options": [
+      "Selection",
+      "Repetition",
+      "Sequence",
+      "Method"
+    ],
+    "answer": 0,
+    "explanation": "The IF…ELSEIF…ELSE structure tests conditions on `weight` in order and runs only the first branch whose condition is true (or the ELSE branch when none is), so exactly one cost is returned. Choosing which code runs by testing a condition is selection.",
+    "whyWrong": [
+      "",
+      "Repetition runs a block again and again; nothing here loops, and only one branch runs.",
+      "In sequence every line runs in the order written, but here the conditions decide which `RETURN` runs and the other branches are skipped.",
+      "A method is a function that belongs to a class, not a control structure; the structure inside `parcelCost` is selection."
+    ],
+    "difficulty": 1,
+    "source": "study-design",
+    "figures": [
+      {
+        "id": "fig-parcel-cost",
+        "kind": "pseudocode",
+        "code": "FUNCTION parcelCost(weight)\n    IF weight <= 1 THEN\n        RETURN 9\n    ELSEIF weight <= 5 THEN\n        RETURN 9 + (weight - 1) * 2\n    ELSE\n        RETURN 17 + (weight - 5) * 3\n    ENDIF\nENDFUNCTION"
+      }
+    ]
+  },
+  {
     "id": "m-u3o1-kk09-001",
     "kk": [
       "U3O1-KK09"
@@ -1862,6 +2294,29 @@
       "`fltDeliveryCost` has a type prefix and uses camel casing, but the guide wants variables in snake casing without a prefix.",
       "`btn_calculate_delivery` joins its words with underscores, but controls must continue in camel casing after the prefix.",
       "`deliveryCost` uses camel casing, and `calculateDeliveryBtn` puts the control type at the end instead of using a prefix."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk09-007",
+    "kk": [
+      "U3O1-KK09"
+    ],
+    "stem": "Grevillea Hall Players, a community theatre group in Heathcote, sells tickets through a booking program. Three identifiers from the program's code are:\n\n1. `seats_left`, a variable holding the number of seats still available\n2. `txtPromoCode`, the text box where a customer types a promotion code\n3. `ticketPrice`, a variable holding the price of one ticket\n\nWhich option correctly identifies the naming convention used by each identifier, in the order listed?",
+    "options": [
+      "1: Hungarian notation; 2: camel casing; 3: snake casing",
+      "1: snake casing; 2: camel casing; 3: Hungarian notation",
+      "1: Hungarian notation; 2: Hungarian notation; 3: camel casing",
+      "1: snake casing; 2: Hungarian notation; 3: camel casing"
+    ],
+    "answer": 3,
+    "explanation": "`seats_left` is written in lower case with an underscore between the words, which is snake casing. `txtPromoCode` begins with the prefix `txt`, showing that it names a text box, which is Hungarian notation (the rest of the name follows camel casing). `ticketPrice` has no prefix and starts each word after the first with a capital letter, which is camel casing.",
+    "whyWrong": [
+      "`seats_left` has no prefix showing a data type or control type, so it isn't Hungarian notation, and `ticketPrice` has no underscores, so it isn't snake casing.",
+      "`ticketPrice` has no type prefix, so it isn't Hungarian notation; `txtPromoCode` is, because its `txt` prefix marks the control type, even though camel casing follows it.",
+      "`seats_left` is lower-case words joined by an underscore, which is snake casing. Hungarian notation is marked by a prefix such as `txt` or `str`, not by underscores.",
+      ""
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -2177,6 +2632,53 @@
     ]
   },
   {
+    "id": "m-u3o1-kk11-007",
+    "kk": [
+      "U3O1-KK11"
+    ],
+    "stem": "Mirela is building the checkout module for Quillwood Books, a Kyneton bookshop. The owner hasn't yet decided how customers will earn loyalty points, so Mirela writes the function `calcPoints(total)` with a body that only returns 0. This lets her run and test the checkout now. Which comment should she put at the start of `calcPoints`?",
+    "options": [
+      "`// Returns the loyalty points a customer earns on this purchase`",
+      "`// Returns 0 because the bookshop doesn't offer loyalty points`",
+      "`// Points are an integer because customers earn only whole points`",
+      "`// To do: calculate points once the owner sets rules; returns 0 now`"
+    ],
+    "answer": 3,
+    "explanation": "`calcPoints` is a stub: its name and parameter are in place so the checkout can call it, but its real body is still to be written. Its placeholder comment should flag that the function is unfinished and say what it will do and what it does for now, so the next developer (or Mirela later) knows the 0 is temporary and the function must be completed.",
+    "whyWrong": [
+      "It describes the finished function, so a developer would think `calcPoints` already works and that 0 points is a correct result.",
+      "It presents the temporary 0 as a final rule of the business, so no one would know the function still has to be written.",
+      "It justifies a data type for rules the owner hasn't set yet, and it doesn't flag that the function is unfinished.",
+      ""
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "m-u3o1-kk11-008",
+    "kk": [
+      "U3O1-KK11",
+      "U3O1-KK05"
+    ],
+    "stem": "Tariana is writing a seat-booking program for the Mallowbank Theatre, a Swan Hill community theatre with 12 rows of 20 seats. She stores the seats in a two-dimensional array `seats`, where `seats[row][seat]` is True if that seat is booked. Arrays are indexed from 0. Which comment best justifies her choice of data structure?",
+    "options": [
+      "`// 2D array: seats are in 12 rows of 20, so index by row, then seat`",
+      "`// 2D array: each booking holds a name, phone number and paid status`",
+      "`// True means the seat is booked and False means it is still free`",
+      "`// 2D array: it holds 240 Boolean values, one for each seat`"
+    ],
+    "answer": 0,
+    "explanation": "A justification gives the reason for a choice. The theatre's seats are laid out in rows, so a two-dimensional array matches that layout: each seat is reached directly by its row index and its seat index, instead of working out where it sits in one list of 240.",
+    "whyWrong": [
+      "",
+      "An array holds one data type. A name and phone number (strings) and a paid status (Boolean) mix data types, which calls for a record, and `seats` holds only Boolean values, so the comment misstates the array.",
+      "It explains what the stored values mean, which is useful, but gives no reason for choosing a two-dimensional array.",
+      "It describes the array's contents. A one-dimensional array could also hold 240 values, so it doesn't say why two dimensions were chosen."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "m-u3o1-kk12-001",
     "kk": [
       "U3O1-KK12"
@@ -2360,6 +2862,29 @@
         "indexBase": 0
       }
     ]
+  },
+  {
+    "id": "m-u3o1-kk12-008",
+    "kk": [
+      "U3O1-KK12"
+    ],
+    "stem": "A Year 12 class in Kerang acts out sorting and searching algorithms. Each student holds a card with a number on it. The teacher reads out four sets of instructions. Which set acts out a quick sort?",
+    "options": [
+      "Pick one student as the pivot; smaller numbers move to its left, larger ones to its right, and each group then repeats this on its own",
+      "Swap the student with the smallest number into first place, then swap the smallest of the rest into second place, and so on down the line",
+      "In a line already in order, compare the wanted number with the middle card, sit down the half that can't hold it and repeat on the rest",
+      "Each student compares cards with the neighbour on their right and they swap if out of order; repeat along the line until no one swaps"
+    ],
+    "answer": 0,
+    "explanation": "Quick sort chooses a pivot and splits the data into two sub-lists: the values smaller than the pivot and the values larger than it. Each sub-list is then split the same way, until every sub-list holds one value or none and the whole list is in order. In the role-play, the pivot student ends up between the two groups, already in the right place, and each group repeats the process.",
+    "whyWrong": [
+      "",
+      "Placing one value per pass by swapping the smallest remaining value into the next position is selection sort.",
+      "Halving the part still to be searched to find one number in sorted data is binary search, which doesn't sort anything.",
+      "Swapping out-of-order neighbours pass after pass is a different sorting method; quick sort splits the data around a pivot instead."
+    ],
+    "difficulty": 1,
+    "source": "textbook"
   },
   {
     "id": "m-u3o1-kk13-001",
@@ -2579,6 +3104,29 @@
         "code": "FUNCTION rewardLevel(points)\n    IF points >= 500 THEN\n        level ← \"Silver\"\n    ELSEIF points >= 1000 THEN\n        level ← \"Gold\"\n    ELSE\n        level ← \"Bronze\"\n    ENDIF\n    RETURN level\nENDFUNCTION"
       }
     ]
+  },
+  {
+    "id": "m-u3o1-kk13-008",
+    "kk": [
+      "U3O1-KK13"
+    ],
+    "stem": "Hamza is updating the booking program for Southern Swell Tours, a whale-watching business in Warrnambool, and makes several edits. When he next tries to run the program, the compiler reports a syntax error and the program doesn't start. Which of these edits most likely caused the syntax error?",
+    "options": [
+      "Changing the seat calculation so that it divides by `groupSize`, which can be 0",
+      "Leaving out the closing quotation mark of a message in a `DISPLAY` instruction",
+      "Changing a `WHILE` loop's condition so that it can never become false",
+      "Typing `+` instead of `*` in the formula that works out each fare"
+    ],
+    "answer": 1,
+    "explanation": "A syntax error breaks the language's rules, so the compiler can't translate the code and the program can't be executed. A message that opens with a quotation mark but never closes it is missing a required symbol: the compiler can't tell where the string ends. The other three edits follow the language's rules, so the program compiles, and their faults show up only when it runs.",
+    "whyWrong": [
+      "Dividing by a variable is valid code. If `groupSize` is 0 when the program runs, the division fails then: a divide by zero runtime error.",
+      "",
+      "A `WHILE` condition that never becomes false is still valid code. The program compiles, then the loop runs without end: a fault in its logic, not its syntax.",
+      "`+` is a valid operator, so the code compiles. Every fare is then calculated wrongly, which is a logic error."
+    ],
+    "difficulty": 2,
+    "source": "textbook"
   },
   {
     "id": "m-u3o1-kk14-001",
@@ -2849,6 +3397,69 @@
         "kind": "pseudocode",
         "code": "BEGIN\n    prices ← [12, 8, 15, 5]\n    total ← 0\n    FOR i ← 0 TO 3\n        total ← prices[i]\n        DISPLAY \"i = \" + i + \", total = \" + total\n    ENDFOR\n    DISPLAY \"Order total: \" + total\nEND",
         "indexBase": 0
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk14-008",
+    "kk": [
+      "U3O1-KK14"
+    ],
+    "stem": "Arrays are indexed from 0. Hollyburn Nursery in Bairnsdale totals each seedling order with the algorithm shown, where `qty[i]` is the number of trays of seedling kind `i` and `price[i]` is the price per tray. Orders of 20 or more trays get 10% off. For one order of 12 trays, the total displayed is wrong. Mehdi wants to set a single breakpoint that will let him find which seedling kind makes the total go wrong. On which line should he set it?",
+    "options": [
+      "Line 2, where `total` is set to 0 before the loop",
+      "Line 5, where each kind's cost is added to `total`",
+      "Line 9, where the 10% discount is taken off the total",
+      "Line 11, where the final order total is displayed"
+    ],
+    "answer": 1,
+    "explanation": "A breakpoint pauses the program each time its line is about to run. Line 5 is inside the loop, so the program pauses there once for each of the five kinds, and each time Mehdi can inspect `i`, `qty[i]`, `price[i]` and `total` before that kind's cost is added. Comparing these values with his own working shows the first kind whose cost makes the total go wrong.",
+    "whyWrong": [
+      "Line 2 runs once, before any cost is added, so the only value it can show is a `total` of 0.",
+      "",
+      "A 12-tray order doesn't get the discount, so line 9 never runs and the program never pauses there.",
+      "Line 11 runs once, after the loop, so it shows only the final wrong total, not which kind caused it."
+    ],
+    "difficulty": 2,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "hollyburn-order-total",
+        "kind": "pseudocode",
+        "title": "Order total",
+        "code": "BEGIN\n    total ← 0\n    trays ← 0\n    FOR i ← 0 TO 4\n        total ← total + qty[i] * price[i]\n        trays ← trays + qty[i]\n    ENDFOR\n    IF trays >= 20 THEN\n        total ← total * 0.9\n    ENDIF\n    DISPLAY \"Order total: $\" + total\nEND",
+        "indexBase": 0
+      }
+    ]
+  },
+  {
+    "id": "m-u3o1-kk14-009",
+    "kk": [
+      "U3O1-KK14",
+      "U3O1-KK08"
+    ],
+    "stem": "Gidgee Flat Grapes, near Red Cliffs, pays each picker a daily bonus in dollars, worked out by the function shown from the number of crates the picker fills that day. Before the scheme starts, the manager desk-checks the function at values on either side of each tier's limit. Which statement is correct?",
+    "options": [
+      "A picker who fills 20 crates earns a bigger bonus than one who fills 21",
+      "A picker who fills 40 crates earns a smaller bonus than one who fills 39",
+      "A picker who fills 39 crates earns a bigger bonus than one who fills 41",
+      "A picker who fills 41 crates earns a bigger bonus than one who fills 39"
+    ],
+    "answer": 2,
+    "explanation": "Work each value through its own branch. For 39 crates, `39 <= 20` is false and `39 <= 40` is true, so line 5 returns 40 + 19 × 3 = $97. For 41 crates, `41 <= 20` and `41 <= 40` are both false, so line 7 returns 90 + 1 × 4 = $94. The top tier starts from $90, less than the $100 that 40 crates earns, so a picker who fills 41 crates earns less than one who fills 39. A desk check at the tier limits shows the manager that the scheme needs fixing before it starts.",
+    "whyWrong": [
+      "20 crates uses line 3: 20 × 2 = $40. 21 crates uses line 5: 40 + 1 × 3 = $43, which is bigger.",
+      "`40 <= 40` is true, so 40 crates uses line 5: 40 + 20 × 3 = $100, more than the $97 for 39 crates. Only 41 or more crates reach line 7.",
+      "",
+      "41 crates uses line 7: 90 + 1 × 4 = $94, less than the $97 for 39 crates. More crates don't always earn more when a new tier starts lower."
+    ],
+    "difficulty": 3,
+    "source": "textbook",
+    "figures": [
+      {
+        "id": "gidgee-crate-bonus",
+        "kind": "pseudocode",
+        "code": "FUNCTION crateBonus(crates)\n    IF crates <= 20 THEN\n        RETURN crates * 2\n    ELSEIF crates <= 40 THEN\n        RETURN 40 + (crates - 20) * 3\n    ELSE\n        RETURN 90 + (crates - 40) * 4\n    ENDIF\nENDFUNCTION"
       }
     ]
   }

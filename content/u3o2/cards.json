@@ -98,6 +98,31 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o2-kk01-009",
+    "kk": [
+      "U3O2-KK01"
+    ],
+    "type": "basic",
+    "front": "As a reason for a software project, what does *identifying opportunities to address gaps in the market* mean?",
+    "back": "Spotting something users want that no existing product provides, then building software to provide it. For example, a small developer makes a phone app showing which playgrounds in a region have wheelchair-accessible equipment, because no current app does. Games, phone apps and virtual reality experiences are often made for this reason.",
+    "mistake": "It isn't a reason for every project. Software that only speeds up an organisation's own work, such as collating reports, fills no gap in a market, so give the reasons the scenario supports instead.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk01-010",
+    "kk": [
+      "U3O2-KK01",
+      "U4O2-KK01"
+    ],
+    "type": "basic",
+    "front": "As a reason for a software project, what does *meeting organisational objectives or needs* mean? Give an example.",
+    "back": "Building software because it helps an organisation reach a target it has set, or meet a requirement it has, even when its current system isn't failing. For example, a TAFE whose plan sets the objective that every enrolment is completed online by 2028 commissions an online enrolment system.",
+    "mistake": "Writing only 'to meet the organisation's needs' could describe any project. Name the objective or need the scenario gives, such as the TAFE's target for online enrolments, and say how the software meets it.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o2-kk02-001",
     "kk": [
       "U3O2-KK02"
@@ -190,6 +215,30 @@
     "type": "basic",
     "front": "Why should a brief identify the proposed users?",
     "back": "The users' characteristics, such as their skills, age, devices and working conditions, shape which data is collected from them and later requirements such as usability.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-009",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "type": "basic",
+    "front": "What does the feasibility part of a brief show?",
+    "back": "That the project is achievable: the solution can be built with the time, money, skills and equipment available. For example: 'Starting in early January, eight weeks of work has the app ready before the season opens in March. It costs $3500 of the $4000 budget, the developer knows the language, and it runs on the club's own tablets.'",
+    "mistake": "Writing 'the project is feasible' proves nothing. Back it with evidence: an estimate of time and cost set against the deadline and budget, and the skills and equipment available.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk02-010",
+    "kk": [
+      "U3O2-KK02"
+    ],
+    "type": "basic",
+    "front": "What does the originality part of a brief show?",
+    "back": "How the proposed solution differs from what already exists: what it will offer that existing products, or the current way of working, don't. For example: 'None of the rostering apps the animal shelter has tried lets volunteers swap shifts with each other; this app will.'",
+    "mistake": "Originality doesn't mean nothing similar exists anywhere. It means explaining what this solution gives these users that existing options don't, which also shows why it is worth building rather than buying.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -295,6 +344,31 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o2-kk03-012",
+    "kk": [
+      "U3O2-KK03"
+    ],
+    "type": "basic",
+    "front": "When a Gantt chart is drawn up, how are the tasks identified and their time allocated?",
+    "back": "List the work every stage of the problem-solving methodology needs, broken into tasks small enough to estimate: for example, surveying users and writing the SRS (analysis), designing screens (design), coding and testing modules (development) and evaluating the solution (evaluation). Then allocate each task a realistic duration, based on how much work it involves and who will do it.",
+    "mistake": "A plan that lists only the coding is incomplete. The Gantt chart needs tasks from every PSM stage, from collecting data in analysis through to evaluation, or the time those stages take is never allowed for.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk03-013",
+    "kk": [
+      "U3O2-KK03",
+      "PSM"
+    ],
+    "type": "basic",
+    "front": "Is project planning one of the stages of the problem-solving methodology?",
+    "back": "No. The PSM's four stages are analysis, design, development and evaluation. The project plan, a Gantt chart, runs alongside them: it schedules tasks from all four stages, and it is monitored and modified until the project is finished.",
+    "mistake": "The Gantt chart doesn't belong to the analysis stage just because it is drawn up early. It plans and tracks the whole project, and its milestones often mark the end of a PSM stage.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o2-kk04-001",
     "kk": [
       "U3O2-KK04"
@@ -384,6 +458,30 @@
     "front": "A large group spread across many locations suits {{a survey}}; a few people with detailed knowledge suit {{interviews}}; staff carrying out a routine process suit {{observation}}.",
     "back": "Match the technique to the stakeholder group: its size, where its members are, and whether you need opinions, detail or evidence of how a task is really done.",
     "mistake": "Naming the right technique is not enough. The reason has to come from the case: how many people are in the group, where they are, and whether follow-up questions or first-hand evidence are needed.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk04-009",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "basic",
+    "front": "Which four methods for collecting data to determine needs and requirements does the study design list?",
+    "back": "Interviews, observations, surveys and reports. Interviews, observations and surveys gather primary data straight from the people involved; reports are secondary data that someone else has already collected or summarised.",
+    "mistake": "A questionnaire is a kind of survey, not a separate method, and focus groups aren't one of the listed methods.",
+    "difficulty": 1,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk04-010",
+    "kk": [
+      "U3O2-KK04"
+    ],
+    "type": "basic",
+    "front": "What can existing reports tell a developer about needs and requirements, and what are their limits?",
+    "back": "Reports from the current system or organisation, such as monthly booking summaries, sales reports or complaint records, show what has happened over a long period: volumes, trends and recurring problems, without taking up users' time. But they show what happened, not why or what users want, and they may be incomplete, out of date or made for another purpose.",
+    "mistake": "As a data collection method, reports are existing documents the developer studies, not the reports the new program will produce. They are secondary data, so check how complete and current they are.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -488,6 +586,31 @@
     "source": "study-design"
   },
   {
+    "id": "c-u3o2-kk05-011",
+    "kk": [
+      "U3O2-KK05"
+    ],
+    "type": "basic",
+    "front": "What does robustness mean as a non-functional requirement? Give a measurable example.",
+    "back": "How well the solution copes with unexpected or invalid input, and unusual conditions, without crashing. E.g. in testing, typing letters, symbols, blanks and extreme values into every field of the booking program never makes it crash; it rejects each invalid entry with a message and carries on.",
+    "mistake": "Robustness isn't reliability. Reliability is working correctly and consistently whenever the solution is needed in normal use; robustness is not failing when something unexpected happens. A particular check, such as rejecting a date that has passed, is a functional requirement.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk05-012",
+    "kk": [
+      "U3O2-KK05",
+      "U3O1-KK11"
+    ],
+    "type": "basic",
+    "front": "What does maintainability mean as a non-functional requirement? Give a measurable example.",
+    "back": "How easily the solution can be corrected, updated or extended after it is built. E.g. a developer who didn't write the program can find, fix and retest a reported fault in any module within one working day. Clear code, consistent naming and internal documentation all help.",
+    "mistake": "Maintainability concerns how easily developers can change the program, not how easily users change data. 'Staff can update a customer's address' is something the program does, so it is a functional requirement.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o2-kk06-003",
     "kk": [
       "U3O2-KK06"
@@ -568,6 +691,18 @@
     ],
     "back": "A limit the solution has to be designed and built within. The study design's types are economic (cost and time), technical (e.g. processing speed, capacity, available equipment, compatibility, security), social (the users' level of expertise), legal (intellectual property, data ownership and privacy) and usability (accessibility, usefulness, ease of use).",
     "mistake": "A constraint limits how the solution can be built; it isn't a task the solution performs. 'Development must cost under $5000' is a constraint, so it doesn't belong among the functional requirements.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk06-010",
+    "kk": [
+      "U3O2-KK06"
+    ],
+    "type": "basic",
+    "front": "What is a social constraint on a software project? Give an example and say how it could shape the design.",
+    "back": "A limit set by the users' level of expertise. E.g. most staff at a small country motel have never used a booking program, so the design uses large, clearly labelled buttons, one task per screen and plain-language messages, and staff can learn it from a short demonstration.",
+    "mistake": "Users' lack of computer skills isn't a technical constraint. Technical constraints come from the technology, such as processing speed, capacity, available equipment and compatibility; the users' level of expertise is a social constraint.",
     "difficulty": 2,
     "source": "study-design"
   },
@@ -770,6 +905,18 @@
     "source": "study-design"
   },
   {
+    "id": "c-u3o2-kk08-012",
+    "kk": [
+      "U3O2-KK08"
+    ],
+    "type": "basic",
+    "front": "On a context diagram or a data flow diagram, how is an external entity drawn when it appears more than once, and why might it be drawn twice?",
+    "back": "Every copy is the usual square or rectangle with the entity's name inside, plus a short diagonal line cutting off its top-left corner. A second copy is drawn only when it is needed, usually so that the entity's data flows don't have to cross other flows, which the rules forbid.",
+    "mistake": "A duplicated entity is still one entity. Give every copy the same name and the corner mark, so no one reads it as a second source or destination of data.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o2-kk09-002",
     "kk": [
       "U3O2-KK09",
@@ -851,6 +998,31 @@
     "back": "It doesn't say how well the solution must perform (non-functional requirements such as usability or reliability) or what limits it must work within (constraints such as budget or existing hardware). A design could provide every function yet still be unacceptable.",
     "mistake": "Non-functional requirements aren't optional extras. A solution that works but is too slow or too hard to use doesn't meet its requirements.",
     "difficulty": 3,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk09-009",
+    "kk": [
+      "U3O2-KK09",
+      "U3O2-KK08"
+    ],
+    "type": "basic",
+    "front": "The study design lists \"analytical tools depicting existing processes and systems\" as a feature of an SRS. Why does an SRS show how things are done now?",
+    "back": "Context diagrams, data flow diagrams and use case diagrams of the current system show who interacts with it, what data passes between them and where data is stored. Analysts use this picture to see where the current way falls short and to work out the new solution's requirements, constraints and scope. The same tools can also model the proposed solution.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk09-010",
+    "kk": [
+      "U3O2-KK09",
+      "U3O2-KK06"
+    ],
+    "type": "basic",
+    "front": "What do the user characteristics in an SRS describe, and how do they shape the design?",
+    "back": "Who will use the solution: their roles, age range, level of expertise, any accessibility needs and how often they use it. Designers match the interface to them, e.g. guided steps for occasional users, and large, high-contrast text for users with low vision. The users' level of expertise is also what the PSM calls a social constraint.",
+    "mistake": "A user characteristic describes the users; it isn't a requirement. 'Most members are over 70' is a user characteristic, while 'members can renew in three taps' is a requirement written to suit them.",
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -954,6 +1126,42 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o2-kk10-010",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "basic",
+    "front": "Which six Australian Privacy Principles from the Privacy Act 1988 (Cwlth) does the study design list for Unit 3?",
+    "back": "- APP 1 Open and transparent management of personal information\n- APP 3 Collection of solicited personal information\n- APP 6 Use or disclosure of personal information\n- APP 8 Cross-border disclosure of personal information\n- APP 9 Adoption, use or disclosure of government related identifiers\n- APP 11 Security of personal information\n\nUnit 4 lists the same principles except APP 3.",
+    "mistake": "APPs and IPPs are different sets. Australian Privacy Principles come from the Privacy Act 1988 (Cwlth); Information Privacy Principles come from Victoria's Privacy and Data Protection Act 2014.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk10-011",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "basic",
+    "front": "Which seven Information Privacy Principles from the Privacy and Data Protection Act 2014 does the study design list for Unit 3?",
+    "back": "- IPP 1 Collection\n- IPP 2 Use and disclosure\n- IPP 4 Data security\n- IPP 5 Openness\n- IPP 7 Unique identifiers\n- IPP 9 Transborder data flows\n- IPP 10 Sensitive information\n\nThe Act covers Victoria's public sector, such as councils and state departments. Unit 4 lists the same principles except IPP 7 and IPP 10.",
+    "mistake": "Transborder doesn't only mean overseas. IPP 9 limits sending personal information to anyone outside Victoria, including in another Australian state.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk10-012",
+    "kk": [
+      "U3O2-KK10"
+    ],
+    "type": "basic",
+    "front": "Residents post photos and comments on Lena's community noticeboard app. Who owns this content, and what decides what the app's owner may do with it?",
+    "back": "Residents usually keep the copyright in the photos and comments they create. The terms of use they agree to at sign-up can give the app's owner a licence to store, display and reuse them. For personal information in posts, APP 1 requires organisations the Privacy Act covers to have a clear, current privacy policy saying how it is used and shared.",
+    "mistake": "Posting a photo doesn't hand its copyright to the platform. The platform may use it only as far as the licence in its terms, and privacy law, allow.",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o2-kk11-001",
     "kk": [
       "U3O2-KK11"
@@ -1048,6 +1256,31 @@
     "back": "Destroying data so that it can't be recovered, such as by overwriting storage with data-wiping software, physically destroying drives, or shredding paper records.",
     "mistake": "Deleting a file or emptying the recycle bin doesn't reliably destroy the data. It can remain on the drive and be recovered with free tools.",
     "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk11-009",
+    "kk": [
+      "U3O2-KK11",
+      "TERMS"
+    ],
+    "type": "compare",
+    "front": "Differential backup versus incremental backup",
+    "back": "| | Differential | Incremental |\n|:--|:--|:--|\n| Copies | Everything changed since the last **full** backup | Everything changed since the last backup of **any** kind |\n| Size between full backups | Usually grows with each one, as changes since the full backup build up | Stays small: each holds only the changes since the previous backup |\n| To restore | The full backup plus the latest differential | The full backup plus every incremental since it, in order |",
+    "mistake": "The two are easily swapped. Ask what each counts back to: a differential always counts back to the last full backup, so the latest one already holds every change the earlier ones held; an incremental counts back only to the previous backup, so every one in the chain is needed.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk11-010",
+    "kk": [
+      "U3O2-KK11"
+    ],
+    "type": "basic",
+    "front": "Three developers share one cloud folder of project files. How can they keep the files secure?",
+    "back": "- Each developer has their own account and a strong password, never a shared login\n- Folder permissions give each person only the access they need, and are removed when someone leaves the team\n- Laptops that sync the folder are encrypted and lock automatically, so a lost one doesn't expose the files\n- Backup copies are encrypted or password-protected too",
+    "mistake": "Securing files isn't the same as backing them up. Security controls who can open or change the files; a backup is a separate copy for restoring them after a loss, and it needs protecting as well.",
+    "difficulty": 1,
     "source": "textbook"
   },
   {
@@ -1147,6 +1380,18 @@
     "source": "textbook"
   },
   {
+    "id": "c-u3o2-kk12-009",
+    "kk": [
+      "U3O2-KK12"
+    ],
+    "type": "basic",
+    "front": "How are annotations used as an ideation tool?",
+    "back": "They are notes added to design ideas, such as sketches and mood board samples, to:\n- organise the designer's thinking\n- point out or justify the design considerations behind a choice\n- suggest or record links between different design ideas\n\nOn a mood board, a note can say whether a sample suits the solution, which features to use or avoid, and why.",
+    "mistake": "An annotation can note a link between two design ideas, but when a question asks for the tool that shows how a set of ideas relate to each other, the answer is a mind map. Annotations are notes written on a design idea itself, such as a sketch or a mood board sample, to explain or justify it.",
+    "difficulty": 2,
+    "source": "study-design"
+  },
+  {
     "id": "c-u3o2-kk13-003",
     "kk": [
       "U3O2-KK13",
@@ -1236,6 +1481,18 @@
     "mistake": "'The app is good' isn't a criterion, because no evidence can show whether it has been met. 'A new booking can be made in under one minute' can be checked.",
     "difficulty": 2,
     "source": "study-design"
+  },
+  {
+    "id": "c-u3o2-kk13-010",
+    "kk": [
+      "U3O2-KK13"
+    ],
+    "type": "basic",
+    "front": "A library's self-service kiosk must let borrowers check out books without help. Write one evaluation criterion for this as a statement, as a question and as a dot point.",
+    "back": "- **Statement:** Borrowers can check out three books at the kiosk in under one minute without help.\n- **Question:** To what degree can borrowers check out three books at the kiosk in under one minute without help?\n- **Dot point:** three books checked out in under a minute, unaided\n\nThe form changes; the measurable target stays the same.",
+    "mistake": "A criterion written as a question still needs a target that can be checked. 'Is the kiosk easy to use?' can't be judged any better than 'The kiosk is easy to use'; give a time, a count or a condition in every form.",
+    "difficulty": 1,
+    "source": "textbook"
   },
   {
     "id": "c-u3o2-kk14-001",
@@ -1337,6 +1594,20 @@
     "back": "The data each input control captures should appear as a data item or property, with a data type that matches the control. For example, a check box is ticked or not, so it maps to a Boolean.",
     "difficulty": 2,
     "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk14-009",
+    "kk": [
+      "U3O2-KK14",
+      "U3O1-KK03",
+      "U3O1-KK08"
+    ],
+    "type": "basic",
+    "front": "Linh's booking module uses a variable for the number of guests, a GST rate that never changes, a drop-down for choosing the room type and a Booking object. Which of these need an entry in the module's data dictionary?",
+    "back": "All four. A data dictionary plans all the data a module uses, not only its variables. Each entry needs at least a name and a data type:\n\n| Name | Data type | Description |\n|:--|:--|:--|\n| guestCount | integer | Number of guests (variable) |\n| gstRate | floating point | Always 0.1 (constant) |\n| roomTypeDropDown | string | Room type chosen (interface control) |\n| currentBooking | Booking | Booking being made (object) |",
+    "mistake": "Listing only the variables. Constants, interface controls and objects hold data the module uses too, so each needs its own entry with a name and a data type.",
+    "difficulty": 2,
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk15-001",
@@ -1449,6 +1720,19 @@
     "source": "study-design"
   },
   {
+    "id": "c-u3o2-kk15-012",
+    "kk": [
+      "U3O2-KK15",
+      "U3O2-KK13"
+    ],
+    "type": "basic",
+    "front": "How can each characteristic of user experience affect a solution's efficiency and effectiveness?",
+    "back": "| | Efficiency (time, cost, effort) | Effectiveness (how well it does its job) |\n|:--|:--|:--|\n| Affordance | Users find the right control at once | Fewer wrong taps, so data is more accurate |\n| Interoperability | Data isn't retyped into another system | No copying errors, so data stays accurate and complete |\n| Security | Usually adds steps, so keep them few | Only authorised users see or change data |\n| Usability | Tasks take fewer steps and less effort | More users complete their tasks correctly |",
+    "mistake": "Naming a characteristic isn't enough. Say what it changes: time, cost or effort (efficiency), or accuracy, completeness and how well the solution serves its users (effectiveness).",
+    "difficulty": 2,
+    "source": "textbook"
+  },
+  {
     "id": "c-u3o2-kk16-001",
     "kk": [
       "U3O2-KK16"
@@ -1539,6 +1823,42 @@
     "front": "Why should the labels and text boxes on a data entry form be aligned?",
     "back": "Shared edges create clear columns, so the eye moves in a straight line down the form. Users find each field faster and can tell which label belongs to which box, and the form looks orderly.",
     "difficulty": 2,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-009",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "reverse",
+    "front": "Balance",
+    "back": "A design principle: spreading the visual weight of elements, such as images, blocks of text and buttons, evenly across a screen. It can be symmetrical (mirrored halves) or asymmetrical (one large element offset by several smaller ones). A screen with everything crowded on one side looks lopsided and unfinished, and pulls users' attention away from the other side.",
+    "mistake": "Balance doesn't mean centring everything or making both halves identical. An asymmetrical layout is balanced when each side carries about the same visual weight.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-010",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "reverse",
+    "front": "Space",
+    "back": "A design principle: the empty areas around and between elements, such as margins, gaps between groups of controls and room around buttons. Space shows which items belong together (wider gaps between groups than within them), avoids clutter, makes a screen quicker to scan and leaves room to tap the right control.",
+    "mistake": "Space is the study design's name for this principle. \"White space\" means the same thing (the gaps needn't be white), not a separate principle, and \"proximity\" isn't a study design principle: grouping related controls, with gaps between the groups, is applying space.",
+    "difficulty": 1,
+    "source": "textbook"
+  },
+  {
+    "id": "c-u3o2-kk16-011",
+    "kk": [
+      "U3O2-KK16"
+    ],
+    "type": "reverse",
+    "front": "Text formatting",
+    "back": "A design principle: choosing the font, size and colour of text and enhancements such as bold and italics, so that text is easy to read and the most important information stands out. Larger headings show how a screen is organised, and tables are formatted too, for example with bold column headings. Mock-up annotations record these choices.",
+    "mistake": "Text formatting isn't decoration. Several fonts, colours or effects on one screen make it harder to read; keep to one or two fonts and use each enhancement for a reason, such as bold for a warning.",
+    "difficulty": 1,
     "source": "textbook"
   }
 ]

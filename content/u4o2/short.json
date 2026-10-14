@@ -157,6 +157,36 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o2-kk02-004",
+    "kk": [
+      "U4O2-KK02"
+    ],
+    "commandTerm": "justify",
+    "marks": 4,
+    "prompt": "Mintbush Naturals, a Drouin skincare maker with 320 staff, sells its creams and soaps to pharmacies across Australia. Its product formulas are its most valuable asset, and it has never shared them with anyone outside the company. It needs a production system that uses each product's formula to work out how much of each ingredient to weigh out for a batch, and that works with the stock system the company already uses.\n\nThe company's IT team of eight built the stock system, and the team works on the factory site beside the production supervisors who will use the new system. Mintbush Naturals has decided that its IT team, rather than an external software developer, will build the production system.\n\nJustify this decision.",
+    "points": [
+      {
+        "text": "States an advantage of developing in-house, e.g. confidential information stays within the company; the developers already know its systems and processes; communication with the people who will use the system is easier",
+        "marks": 1
+      },
+      {
+        "text": "Applies that advantage to Mintbush Naturals, e.g. the formulas are seen only by the company's own staff; the IT team built the stock system the new system must work with; the team can check how batches are made with the supervisors who work beside it",
+        "marks": 1
+      },
+      {
+        "text": "States a disadvantage of using an external developer, e.g. confidential information is shared with a third party; the developer is unfamiliar with the business's operations; requirements are more easily miscommunicated",
+        "marks": 1
+      },
+      {
+        "text": "Applies that disadvantage to Mintbush Naturals, e.g. the developer's staff would be likely to see the formulas while building, testing and supporting a system that stores them, so the company's most valuable asset would leave its control; the developer would first have to learn the stock system; a misunderstood requirement could give wrong ingredient quantities",
+        "marks": 1
+      }
+    ],
+    "model": "Building the system in-house keeps Mintbush Naturals' formulas, its most valuable asset, inside the company. Only its own IT staff, working under the company's own security controls, would handle them while the batch calculations are built and tested. An external developer's staff would be likely to see the formulas while building, testing and supporting a system that stores them, so the formulas would pass to a third party whose staff and systems Mintbush Naturals can't control, and a leak to a competitor could cost the company the products that set it apart.\n\nThe IT team also built the stock system that the new system must work with, and it works beside the supervisors who will use the new system, so it can check directly how batches are made. An external developer would first have to learn the stock system, and its understanding of how batches are made would come through the contract and a few contacts, so a misunderstood requirement could lead to wrong ingredient quantities.",
+    "mistake": "Many answers give an advantage of building in-house and stop there. A justification also needs the matching drawback of the external option, and both should use the scenario's details (the formulas, the stock system, the supervisors on site) rather than points that would fit any company.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o2-kk03-001",
     "kk": [
       "U4O2-KK03"
@@ -263,6 +293,63 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o2-kk03-004",
+    "kk": [
+      "U4O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 3,
+    "prompt": "Odette runs a paddleboard and snorkelling hire business in Port Fairy. Customers book on her website: they log in with an email address and password, then enter their phone number and home address. The website was built several years ago and sends its pages, and everything customers type, without encryption. Many customers book on the free Wi-Fi at beachside cafés.\n\nA customer books a paddleboard over a café's free Wi-Fi. Explain how a man-in-the-middle attack during this booking could compromise the confidentiality and the integrity of the customer's data.",
+    "points": [
+      {
+        "text": "Describes the attack: an attacker secretly places themselves between the customer's device and the website, for example by running a fake hotspot named like the café's Wi-Fi, so the booking data passes through the attacker while the customer and the website each believe they are communicating directly",
+        "marks": 1
+      },
+      {
+        "text": "Confidentiality: because nothing is encrypted, the attacker can read the customer's email address, password, phone number and home address, and can use the login details to sign in as the customer or try the same password on the customer's other accounts",
+        "marks": 1
+      },
+      {
+        "text": "Integrity: the attacker can change data on its way without either side noticing, for example altering the booking's date or details, or changing the page the customer receives to add a fake link asking for card details",
+        "marks": 1
+      }
+    ],
+    "model": "In a man-in-the-middle attack, the attacker secretly places themselves between the customer's device and Odette's website, for example by setting up a fake hotspot with a name like the café's Wi-Fi. Everything the customer sends and receives passes through the attacker, while the customer and the website each believe they are communicating directly.\n\nConfidentiality: Odette's website doesn't encrypt anything, so the attacker can read the customer's email address, password, phone number and home address as they pass. With the login details, the attacker can sign in to the customer's account, or try the same password on the customer's email and other accounts.\n\nIntegrity: the attacker can also change data on its way without either side noticing. They could alter the booking so that it no longer matches what the customer chose, or change the page the customer receives to add a fake link asking for card details.",
+    "mistake": "A man-in-the-middle attack isn't a break-in to the web server or a staff member misusing their access. It targets data while it travels between two parties, so say what the attacker reads or changes on the way.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk03-005",
+    "kk": [
+      "U4O2-KK03",
+      "U4O2-KK04"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Kofi is a developer at a Cobram fruit-packing company with 150 staff. Its dispatch program prints the label for each pallet and records which orders leave on each truck. The company develops, tests and runs this program in one combined development, testing and production environment. Kofi has finished a change that adds a new label layout for a supermarket customer, and he plans to install it at 10 am on a weekday, while packing staff are using the program.\n\nIdentify two risks of going ahead with this change, and explain each risk for the company.",
+    "points": [
+      {
+        "text": "Identifies a first risk of going ahead with the change, e.g. it can't be tested apart from the live program; it brings new bugs or vulnerabilities into the live program; it corrupts the live dispatch records; or it makes the program fail, causing downtime",
+        "marks": 1
+      },
+      {
+        "text": "Explains the first risk for the company in the context of this change, e.g. with no separate testing environment, a fault in the new label layout is first found by packing staff, so wrong labels could be printed and pallets sent to the wrong stores",
+        "marks": 1
+      },
+      {
+        "text": "Identifies a second, different risk of going ahead with the change (from the list in the first point)",
+        "marks": 1
+      },
+      {
+        "text": "Explains the second risk in context, e.g. installing while staff are recording loads could leave records half-written, so the company no longer knows which orders have left; or if the program crashes, no labels can be printed and trucks wait, delaying deliveries",
+        "marks": 1
+      }
+    ],
+    "model": "Risk 1: the change goes live untested. Because development, testing and the live dispatch program share one environment, Kofi can't try the new label layout away from the program the staff are using. Any bug in it is found by the packing staff instead, so labels with wrong details could be printed and pallets sent to the wrong supermarket stores before anyone notices.\n\nRisk 2: the live data could be corrupted. Staff are recording loads while the change is installed, so if the installation fails partway, or the new code writes records incorrectly, some dispatch records could be lost or wrong. The company would no longer know which orders have left on which truck, and could miss or double up deliveries.",
+    "mistake": "Two ways to lose marks: writing about the dangers of not updating, or listing the general drawbacks of a combined environment. Each risk must come from going ahead with this change when it can't be tested apart from the live program.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o2-kk04-001",
     "kk": [
       "U4O2-KK04"
@@ -345,6 +432,37 @@
     ],
     "model": "1. If every merge needed a code review, a second developer would have had to read and approve the attacker's change before it reached the live store. Code that sends customers' card details to an outside server is unusual and would very likely have been spotted. The attacker held only one developer's account, so they couldn't approve their own change, and it would have been blocked before any card details were copied.\n\n2. The version control system recorded the change. Its history shows exactly which lines were added, from which developer's account and when, so the team can find every part of the attacker's code, lock the compromised account and work out which week of orders was exposed. The team can also roll the web store back to the last version before the change, or revert that change, removing the malicious code quickly.",
     "mistake": "Version control doesn't stop a malicious change, and it isn't a backup: it records each change. Credit comes from saying what the history shows and what rolling back to the last working version achieves.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk04-004",
+    "kk": [
+      "U4O2-KK04",
+      "U4O2-KK03"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "An Ararat company that runs wind farms has nine in-house developers and two contract testers building an app that its technicians use to log turbine repairs. Everyone logs in to the code repository and the build server with one shared username and password, and that login can change or delete any of the code. The development environment holds only made-up repair records, not real data.\n\nExplain how robust identity and access management would protect the company's development environment.",
+    "points": [
+      {
+        "text": "Authentication: each developer and tester has their own account and must prove who they are, e.g. with multi-factor authentication, before reaching the repository or build server",
+        "marks": 1
+      },
+      {
+        "text": "Explains how authentication protects the environment, e.g. one leaked password no longer opens the repository for everyone, a stolen password alone isn't enough when a second factor is required, and every change can be traced to the person who made it",
+        "marks": 1
+      },
+      {
+        "text": "Restricting access: each account gets only the access its role needs, e.g. the contract testers can run test builds but can't change the code, only one senior developer has administrator rights, and the testers' access ends when their contracts end",
+        "marks": 1
+      },
+      {
+        "text": "Explains how restricting access protects the environment, e.g. a tester's account that is misused or taken over can't change or delete the code, and nobody can reach the code after leaving",
+        "marks": 1
+      }
+    ],
+    "model": "First, identity and access management would authenticate each person. Every developer and tester would have their own account and prove who they are when logging in, for example with a password and a code from an authenticator app. Someone who learns or guesses a password could no longer get into the repository or build server with it alone, and every change to the code could be traced to the person who made it.\n\nSecond, it would restrict each account to what that person's role needs. The two contract testers could run test builds but not change the code, only one senior developer would have administrator rights, and the testers' accounts would be closed when their contracts end. If a tester's account were misused or taken over, it couldn't be used to change or delete the repair app's code, and no one could reach the code after leaving.",
+    "mistake": "This environment holds only made-up repair records, so answers about protecting customers' personal data miss the point. Identity and access management protects the code and development data by authenticating each person and limiting what each can reach.",
     "source": "textbook"
   },
   {
@@ -613,6 +731,69 @@
     ]
   },
   {
+    "id": "s-u4o2-kk05-004",
+    "kk": [
+      "U4O2-KK05",
+      "U4O2-KK04",
+      "U4O2-KK03"
+    ],
+    "commandTerm": "describe",
+    "marks": 5,
+    "prompt": "Esther is the IT security officer at a Robinvale company with 45 staff that builds irrigation-scheduling software for farms. She is threat modelling the company's development practices, and has defined this security requirement:\n\n*Only developers who currently work on the software can log in to the development server.*\n\nHer notes on the development environment say:\n\n- The accounts of two developers who left the company in May can still log in to the development server.\n- Developers log in to the development server from home with a password only.\n- The development server holds the software's source code and made-up test data, but no real customer data.\n\n1. State the threat modelling principle Esther should apply next.\n2. Describe one threat to this security requirement that her notes reveal, and a security control that would mitigate it.\n3. Once the control is in place, state the threat modelling principle Esther should then apply, and describe how she could apply it.",
+    "points": [
+      {
+        "text": "Part 1: states identifying and mitigating threats (identifying threats or mitigating threats alone is accepted). Defining security requirements, which Esther has already done, earns no mark, and nor does confirming threats have been mitigated, which can only follow a mitigation.",
+        "marks": 1
+      },
+      {
+        "text": "Part 2: describes a threat from the notes that would let someone other than a current developer log in, and what they could do. For example: a former developer, or anyone who has learnt a former developer's password, logs in and copies or changes the source code; or someone who steals or guesses a developer's password logs in from anywhere as that developer and adds malicious code. A threat to customer data earns no mark, because the notes say the server holds none.",
+        "marks": 1
+      },
+      {
+        "text": "Part 2: describes a security control that mitigates that threat. For example: disable both former developers' accounts now and remove each person's access on their last day (robust identity and access management); or require multi-factor authentication for every login to the development server, so a password alone isn't enough.",
+        "marks": 1
+      },
+      {
+        "text": "Part 3: states confirming threats have been mitigated.",
+        "marks": 1
+      },
+      {
+        "text": "Part 3: describes a test that tries the threat against the control, and the result that shows it is mitigated. For example: try to log in with each former developer's account and confirm both attempts are refused, then check that every active account on the server belongs to a current developer; or log in to a test account with the correct password but no second factor, confirm access is refused, and confirm a developer with both factors can still log in.",
+        "marks": 1
+      }
+    ],
+    "model": "1. Esther should next identify and mitigate threats.\n\n2. The accounts of the two developers who left in May still work. Either former developer, or anyone who has learnt one of their passwords, could log in to the development server and copy the company's source code, or change it, for example by adding a back door to the irrigation-scheduling software. To mitigate this, Esther should have both accounts disabled now and make removing each person's access on their last day part of the company's identity and access management, so only current developers have working accounts.\n\n3. Once the accounts are disabled, Esther applies the principle of confirming threats have been mitigated. She could try to log in to the development server with each former developer's account and confirm that both attempts are refused. She could then compare the server's list of active accounts with the list of current developers, to check that no other former staff member can still log in.",
+    "mistake": "On the 2025 exam, 83% of students scored zero when asked for a threat modelling principle that follows defining security requirements. Know all three: defining security requirements, identifying and mitigating threats, and confirming threats have been mitigated, which means testing that each threat is now blocked.",
+    "source": "study-design"
+  },
+  {
+    "id": "s-u4o2-kk05-005",
+    "kk": [
+      "U4O2-KK05",
+      "U4O2-KK03"
+    ],
+    "commandTerm": "justify",
+    "marks": 3,
+    "prompt": "A Hamilton home-care provider with 600 staff is reviewing the threat model for its client portal, where clients and their families check care plans and the times of carers' visits. The portal's web server software has a publicly announced flaw that lets an attacker read any file on the server, including the database of every client's name, home address, care plan and visit times. The software's maker released a patch six weeks ago, but the provider hasn't installed it, because installing it takes the portal offline for an hour. Anyone on the internet can reach the portal.\n\nJustify the priority (low, medium or high) that the provider should give to mitigating the threat that an attacker uses this flaw.",
+    "points": [
+      {
+        "text": "Judges the likelihood with evidence from the scenario, e.g. likely: the flaw has been publicly announced, anyone on the internet can reach the portal, and the patch has gone uninstalled for six weeks, so attackers' automated tools that search for unpatched servers can find and use the flaw without any special access",
+        "marks": 1
+      },
+      {
+        "text": "Judges the impact with evidence from the scenario, e.g. severe: an attacker could read every client's name, home address, care plan and visit times, which is sensitive health information about people receiving care at home; clients could be harmed, for example by criminals learning who is frail and when no carer is there, and the provider would lose trust and could face legal consequences for failing to protect clients' information",
+        "marks": 1
+      },
+      {
+        "text": "Concludes that the threat is a high priority because it is both likely and severely harmful, e.g. the patch should be installed straight away, during a planned hour offline overnight",
+        "marks": 1
+      }
+    ],
+    "model": "The threat should be a high priority.\n\nIt is likely to happen. The flaw has been publicly announced, so attackers know about it, and anyone on the internet can reach the portal. Attackers use automated tools to search the internet for servers that haven't installed a patch, and this server has been left unpatched for six weeks.\n\nIts impact would be severe. An attacker could read every client's name, home address, care plan and visit times. This is sensitive health information about people receiving care at home, and it would show criminals who is frail and when no carer is there. The provider would lose clients' trust and could face legal consequences for failing to protect their information.\n\nBecause the threat is both likely and severely harmful, the provider should mitigate it first, by installing the patch straight away during a planned hour offline, such as overnight.",
+    "mistake": "Rating a threat on impact alone ('it's health information, so it's high') justifies only half of its priority. Judge how likely the threat is and how much harm it would cause, each with details from the scenario, then give the rating that follows from both.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o2-kk06-001",
     "kk": [
       "U4O2-KK06"
@@ -807,6 +988,76 @@
     "source": "textbook"
   },
   {
+    "id": "s-u4o2-kk07-004",
+    "kk": [
+      "U4O2-KK07",
+      "U3O2-KK10"
+    ],
+    "commandTerm": "explain",
+    "marks": 6,
+    "prompt": "Tevita is a developer at a Stawell company that sells garden supplies online. The company is covered by the Privacy Act 1988 (Cwlth). While building a new loyalty feature for the company's website, Tevita:\n\n- emailed a spreadsheet of 6,000 real customers' names, addresses, phone numbers and order histories to a freelance tester outside the company, to use as test data, with no agreement on how the tester must protect or delete it\n- copied the code of an open-source charting library into the website and deleted its licence notice, which the library's licence requires to be kept.\n\nFor each practice, identify the Act it may breach (for the Privacy Act, also name the Australian Privacy Principle involved), explain a possible legal consequence for the company, and describe how the company could resolve the problem.",
+    "points": [
+      {
+        "text": "Identifies the Privacy Act 1988 (Cwlth) for the emailed spreadsheet, with a relevant principle: APP 6 (use or disclosure of personal information), because customers gave their details to buy goods, not to be passed to an outside tester; or APP 11 (security of personal information), because emailing an unprotected spreadsheet outside the company isn't a reasonable step to protect it",
+        "marks": 1
+      },
+      {
+        "text": "Explains a legal consequence for the company, e.g. customers could complain to the Australian Information Commissioner, who can investigate and require the company to change its practices or compensate them; a serious breach can lead to court-ordered penalties",
+        "marks": 1
+      },
+      {
+        "text": "Describes a resolution, e.g. ask the tester to delete every copy and confirm in writing, and from now on test with made-up or de-identified data so real customer records never leave the live system",
+        "marks": 1
+      },
+      {
+        "text": "Identifies the Copyright Act 1968 (Cwlth) for the library: the licence is the company's only permission to copy the code, so breaking its conditions by deleting the notice means the copying infringes the owner's copyright",
+        "marks": 1
+      },
+      {
+        "text": "Explains a legal consequence for the company, e.g. the library's copyright owner could take legal action to have the code removed or to claim damages, and the company may have to take the feature offline",
+        "marks": 1
+      },
+      {
+        "text": "Describes a resolution, e.g. restore the licence notice and meet every other condition of the licence, or replace the library with the company's own code, and record where any reused code comes from",
+        "marks": 1
+      }
+    ],
+    "model": "**Emailed spreadsheet.** This may breach the Privacy Act 1988 (Cwlth). Customers gave their details so the company could fill their orders, not so they could be passed to an outside tester, so disclosing them for testing may breach APP 6 (use or disclosure of personal information). Emailing an unprotected spreadsheet, with no agreement on how the tester must protect or delete it, also isn't a reasonable step to protect the information under APP 11 (security of personal information). Customers could complain to the Australian Information Commissioner, who can investigate and require the company to change its practices or compensate them, and a serious breach can lead to court-ordered penalties. The company should ask the tester to delete every copy and confirm this in writing, and from now on test with made-up or de-identified data, so real customer records never leave the live system.\n\n**Copied library.** This may breach the Copyright Act 1968 (Cwlth). The library's code is protected by copyright, and its licence is the company's only permission to copy it. Deleting the licence notice breaks a condition of that licence, so copying the code into the website infringes the owner's copyright. The owner could take legal action, for example to have the code removed or to claim damages, and the company might have to take the loyalty feature offline. The company should restore the licence notice and meet every other condition of the licence, or replace the library with its own code, and record where any reused code comes from.",
+    "mistake": "Deleting a licence notice isn't just bad manners. The licence is the only permission to copy the code, so breaking its conditions turns permitted use into copyright infringement.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk07-005",
+    "kk": [
+      "U4O2-KK07",
+      "U3O2-KK10"
+    ],
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Ngaio is building a booking app for a Geelong removalist company that is covered by the Privacy Act 1988 (Cwlth). To send reminder text messages, the app will use an API run by a company whose servers are overseas. Ngaio's design sends each customer's full name, mobile number, the addresses they are moving from and to, and the moving date to the API with every reminder.\n\n1. Identify the Australian Privacy Principle that most directly applies to sending this information to the overseas API, and explain what it requires the removalist company to do.\n2. Describe one change to Ngaio's design that would reduce the privacy risk.\n3. Ngaio later uses the same overseas API in a reminder feature for a Victorian shire council's swimming pool season passes. Identify the Information Privacy Principle that applies to the council sending residents' details to the API.",
+    "points": [
+      {
+        "text": "Identifies APP 8 Cross-border disclosure of personal information",
+        "marks": 1
+      },
+      {
+        "text": "Explains what it requires: before sending the information overseas, the company must take reasonable steps, such as a contract with the API's provider, to make sure the provider handles it in line with the Australian Privacy Principles; the company can be held accountable if the provider mishandles it",
+        "marks": 1
+      },
+      {
+        "text": "Describes a design change that sends less personal information overseas, e.g. send only the mobile number and a short message with the moving date and time, without the full name or addresses; or use a reminder service hosted in Australia",
+        "marks": 1
+      },
+      {
+        "text": "Identifies IPP 9 Transborder data flows (Privacy and Data Protection Act 2014 (Vic)), because the council is a Victorian public sector body sending personal information outside Victoria",
+        "marks": 1
+      }
+    ],
+    "model": "1. APP 8 Cross-border disclosure of personal information applies, because the app sends customers' personal information to a company overseas. Before any information is sent, the removalist company must take reasonable steps, such as a contract with the API's provider, to make sure the provider handles it in line with the Australian Privacy Principles. If the provider mishandles it, the removalist company can be held accountable.\n\n2. The app should send only what each reminder needs: the customer's mobile number and a short message with the moving date and time, without the customer's full name or addresses. Less personal information then goes overseas, so less can be misused or exposed.\n\n3. IPP 9 Transborder data flows, in the Privacy and Data Protection Act 2014 (Vic), applies, because the council is a Victorian public sector body sending residents' personal information outside Victoria.",
+    "mistake": "APP 8 doesn't ban sending personal information overseas. It requires reasonable steps to protect the information first, and the Australian organisation stays responsible for what happens to it.",
+    "source": "textbook"
+  },
+  {
     "id": "s-u4o2-kk08-001",
     "kk": [
       "U4O2-KK08"
@@ -886,6 +1137,41 @@
     ],
     "model": "Fixing the fault stops it happening again, but it doesn't undo what has already happened: 40 customers' names, addresses, phone numbers and purchase histories are in other people's inboxes. Those customers are the ones at risk, and only if they are told can they protect themselves, for example by being wary of scam calls or emails that quote their details.\n\nSaying nothing would also be dishonest. The customers trusted the business with their details, and if they later found out that the business had hidden the mistake, they would lose far more trust in it than if they had been told openly.",
     "mistake": "Saying 'it is the right thing to do' doesn't justify the decision, and neither does 'the law says so', because the scenario doesn't say whether a notification law covers this business. Give reasons tied to the scenario: the details are already exposed, and only customers who are told can protect themselves.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk08-004",
+    "kk": [
+      "U4O2-KK08",
+      "U4O2-KK07"
+    ],
+    "commandTerm": "discuss",
+    "marks": 5,
+    "prompt": "Saoirse is a developer at a regional Victorian shire council. To test changes to the council's online planning permit system, she copied the live database, holding the names, home addresses, phone numbers and email addresses of 9,000 residents who had applied for permits, onto a development server. Three weeks later she realised that anyone on the internet could reach the development server without logging in.\n\nDiscuss the legal and ethical consequences this practice could have for the council, and how the council should respond.",
+    "points": [
+      {
+        "text": "Identifies the legal issue: the council, as a Victorian public sector body, is bound by the Privacy and Data Protection Act 2014 (Vic), and leaving residents' personal information open to anyone fails IPP 4 Data security (reasonable steps to protect it from unauthorised access); copying it for testing may also breach IPP 2 Use and disclosure",
+        "marks": 1
+      },
+      {
+        "text": "Explains a legal consequence: residents could complain to the Office of the Victorian Information Commissioner, which can investigate, and the council could be required to change its practices or pay compensation",
+        "marks": 1
+      },
+      {
+        "text": "Explains an ethical consequence, applied to the residents: they did nothing wrong and weren't told their details had been copied, anyone could have taken their names, addresses and phone numbers for scams or to find their homes, and their trust in the council is broken",
+        "marks": 1
+      },
+      {
+        "text": "Describes an immediate resolution: remove public access to the development server at once, check its logs to find out whether the data was taken, and tell the affected residents honestly so they can protect themselves",
+        "marks": 1
+      },
+      {
+        "text": "Describes how to stop it happening again: develop and test with made-up data only, and keep development, testing and production environments separate, with logins controlling access, so real residents' data stays in production",
+        "marks": 1
+      }
+    ],
+    "model": "**Legal consequences.** As a Victorian public sector body, the council must follow the Information Privacy Principles of the Privacy and Data Protection Act 2014 (Vic). IPP 4 Data security requires it to take reasonable steps to protect personal information from unauthorised access, and leaving 9,000 residents' details on a server anyone could reach for three weeks fails that test. Copying the details for testing may also breach IPP 2 Use and disclosure, because residents gave them only to apply for permits. Residents could complain to the Office of the Victorian Information Commissioner, which can investigate, and the council could be required to change its practices or pay compensation.\n\n**Ethical consequences.** This is an ineffective security practice, and the residents carry its risk. They did nothing wrong and weren't told their details had been copied. Anyone could have taken their names, addresses and phone numbers and used them for scams or to find their homes. Residents had to give the council this information to apply for a permit, trusting it to be protected, and that trust is now broken.\n\n**Resolution.** The council should remove public access to the development server immediately, check its logs to find out whether anyone took the data, and tell the affected residents honestly so they can watch for scams. To stop it happening again, development and testing should use made-up data only, and the development, testing and production environments should be kept separate, with logins controlling access, so real residents' data stays in production.",
+    "mistake": "A council follows the Privacy and Data Protection Act 2014 (Vic) and its IPPs, not the Privacy Act's APPs. And locking down the development server isn't the whole fix: real residents' data shouldn't be in a development environment at all.",
     "source": "textbook"
   },
   {
@@ -1112,6 +1398,73 @@
     ],
     "model": "Sittella Insurance should allow AI coding assistants, with rules. The flaw didn't happen simply because an assistant was used. It happened because a junior developer committed code without reading it, and nobody reviewed it before release. A ban wouldn't fix that, because a developer's own code could contain the same flaw.\n\nThe rules should require every AI-generated function to be marked in a comment, read and understood by the developer who commits it, and tested and approved by a second developer before it is merged, with extra care for code that controls which customers can see which claims. Developers must also never paste customer data into the assistant.\n\nAllowing the assistant with these rules keeps the several hours a week each developer saves, which the team needs while it is behind schedule on the claims app, and it closes the gap that let the flaw reach customers.",
     "mistake": "Listing both options without choosing, or choosing without a reason, doesn't answer a 'recommend' question. Commit to one option and tie each reason to the incident and to the schedule.",
+    "source": "textbook"
+  },
+  {
+    "id": "s-u4o2-kk10-004",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK04"
+    ],
+    "commandTerm": "describe",
+    "marks": 3,
+    "prompt": "Potoroo Games, a Bendigo studio with 40 staff, has doubled its development team this year. The team leader has found that several of the new developers:\n\n- write API keys into code that they push to the shared repository\n- approve their own changes, without a second developer's review, when a deadline is close\n- copy real players' account details into the test database.\n\nDescribe one strategy for improving the security of software development practices that would suit the studio, and explain how it would deal with the team leader's findings.",
+    "points": [
+      {
+        "text": "Names a strategy for improving the security of development practices: onboarding/induction practices and developer training focused on secure development, or developing a risk management plan. A security control on its own (such as code review, encryption or a secrets store) earns no marks",
+        "marks": 1
+      },
+      {
+        "text": "Describes what the strategy involves, e.g. every new developer completes an induction on the studio's secure development rules before getting repository access, with training suited to their role, clear written expectations and regular refresher training to keep up with new threats; or a plan that identifies each risk, rates its likelihood and impact, and proposes a control for each",
+        "marks": 1
+      },
+      {
+        "text": "Explains how it addresses the team leader's findings, e.g. developers would learn to keep API keys out of the code, that every change needs a second developer's approval even near a deadline, and to test only with made-up player data; or the plan would rate the exposed API keys and real player data as likely and harmful, and propose controls for them",
+        "marks": 1
+      }
+    ],
+    "model": "Strategy: onboarding/induction practices with developer training focused on secure development.\n\nBefore a new developer is given access to the repository, they would complete an induction on the studio's secure development rules, with training suited to their role and written expectations that they agree to follow. All developers would then have refresher training each year, so that they keep up with new threats and tools.\n\nThis addresses what the team leader found. The training would show developers how to keep API keys out of the code, for example in a protected configuration file that is never committed, make clear that every change needs a second developer's approval even when a deadline is close, and teach them to test only with made-up player data. Because every new developer goes through the same induction, the practices stay secure as the team keeps growing.",
+    "mistake": "Describing a control, such as code review or encryption, doesn't answer a strategy question; in 2025 such answers earned no marks. Describe developer training, onboarding/induction or a risk management plan, and mention controls only as what the training teaches or the plan proposes.",
+    "source": "study-design"
+  },
+  {
+    "id": "s-u4o2-kk10-005",
+    "kk": [
+      "U4O2-KK10",
+      "U4O2-KK03",
+      "U4O2-KK04"
+    ],
+    "commandTerm": "complete",
+    "marks": 6,
+    "prompt": "Thuy is the project manager at a Hastings company with 30 staff that hires out shipping containers. Before its four developers start building an online booking system, she is preparing a risk management plan for the project. Her notes on the development environment say:\n\n- The four developers will share one administrator account on the cloud code repository, protected only by a password.\n- The test database, which all four developers will use every day, will be loaded with a full copy of the live customer records, including customers' names, home addresses and phone numbers.\n- Each developer keeps a full copy of the code on an unencrypted laptop that they take home each night.\n\nComplete the risk management plan below for two of the risks in Thuy's notes. Rate each likelihood and impact as low, medium or high, with a reason from the notes for each rating.\n\n| Risk to the company | Likelihood and reason | Impact and reason | Proposed security control and how it reduces the risk |\n|:--|:--|:--|:--|\n| 1. | | | |\n| 2. | | | |",
+    "points": [
+      {
+        "text": "Risk 1 identified from any of the three notes, with what could happen to the company, e.g. if the shared administrator password is phished, guessed or leaked, anyone holding it could change or delete all of the code, and no change could be traced to the developer who made it",
+        "marks": 1
+      },
+      {
+        "text": "Risk 1 likelihood and impact each rated with a reason from the notes (any rating is accepted when its reason fits), e.g. likelihood high because one password with no second factor, shared by four people, opens the repository from anywhere; impact high because the account has administrator rights over all the code",
+        "marks": 1
+      },
+      {
+        "text": "Risk 1 control and how it reduces the risk, e.g. individual accounts with multi-factor authentication and only the rights each developer needs (robust identity and access management), so a stolen password alone no longer logs in and every change is traced to one person",
+        "marks": 1
+      },
+      {
+        "text": "Risk 2 identified from a different note, with what could happen to the company, e.g. customers' personal information exposed through the test system, which every developer uses; or a lost or stolen laptop exposing the whole source code and any passwords or keys in it",
+        "marks": 1
+      },
+      {
+        "text": "Risk 2 likelihood and impact each rated with a reason from the notes, e.g. real test data: likelihood medium because all four developers will query, copy and change the real records every day throughout development, giving many chances for them to leak, impact high because every customer's name, address and phone number is in it; laptops: likelihood medium because they leave the office every night, impact medium to high because the whole code base is on each one",
+        "marks": 1
+      },
+      {
+        "text": "Risk 2 control and how it reduces the risk, e.g. load the test database with made-up records, so a breach of the test system exposes no real customer; or encrypt each laptop's whole drive, so a thief can't read the code without the key",
+        "marks": 1
+      }
+    ],
+    "model": "**Risk 1: the shared administrator account.** If the one password is phished, guessed or leaked, anyone holding it could change or delete all of the booking system's code, and no change could be traced to the developer who made it.\n\n- Likelihood: high. One password with no second factor opens the repository from anywhere on the internet, and four people share it, so it can easily leak.\n- Impact: high. The account has administrator rights over all the code, so harmful changes could be built into the booking system and released to customers.\n- Control: give each developer their own account with multi-factor authentication and only the rights their work needs. A stolen password alone would no longer log in, and every change would be traced to one person.\n\n**Risk 2: real customer records in the test database.** Customers' personal information could be exposed through the test system, which all four developers use every day.\n\n- Likelihood: medium. All four developers will query, copy and change the real records every day throughout development, which gives many chances for them to be exported, shared or left exposed.\n- Impact: high. Every customer's name, home address and phone number could be exposed, harming customers and the company's reputation.\n- Control: load the test database with made-up records instead. If the test system were breached, no real customer's details would be exposed.",
+    "mistake": "A plan entry needs both ratings, each with a reason from the scenario; rating only how harmful a risk would be leaves out how likely it is. 'Tell the developers to be careful' isn't a control: propose a specific measure and say how it reduces the risk.",
     "source": "textbook"
   }
 ]
