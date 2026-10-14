@@ -123,11 +123,11 @@ describe('blitz on the real glossary', () => {
     const isCourseText = courseText(await loadAllContent());
     const card = (front: string) => glossary.find((c) => normaliseTerm(c.front) === normaliseTerm(front));
     const others = (c: Card) => glossary.filter((g) => g !== c).flatMap(spellings);
-    const constraint = card('constraint');
-    expect(constraint).toBeDefined();
-    const item = blitzItem(constraint!, others(constraint!), isCourseText);
-    expect(item.check('constant')).toMatchObject({ correct: false, reason: 'constant is a different word, not a misspelling of constraint.' });
-    expect(item.check('constraints').correct).toBe(true);
+    const ethics = card('Ethics');
+    expect(ethics).toBeDefined();
+    const item = blitzItem(ethics!, others(ethics!), isCourseText);
+    expect(item.check('ethical')).toMatchObject({ correct: false, reason: 'ethical is a different word, not a misspelling of Ethics.' });
+    expect(item.check('ethic').correct).toBe(true);
     const rejected: string[] = [];
     for (const c of glossary) {
       const plural = `${c.front}s`;
