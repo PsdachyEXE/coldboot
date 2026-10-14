@@ -19,6 +19,21 @@ export function modalDialogOpen(): boolean {
   return typeof document !== 'undefined' && document.querySelector('dialog[open]') !== null;
 }
 
+let drawerListening = false;
+
+/**
+ * Set while the loaded drawer listens for the backtick itself. Until then the shell's stand-in
+ * listener (TerminalDrawerSlot) opens it, and it steps aside only once this is set, so no keypress
+ * falls between the two.
+ */
+export function setDrawerListening(on: boolean): void {
+  drawerListening = on;
+}
+
+export function drawerIsListening(): boolean {
+  return drawerListening;
+}
+
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function focusablesIn(container: HTMLElement): HTMLElement[] {

@@ -9,7 +9,7 @@ import { useLocation } from 'react-router';
 import { paths } from '../app/paths';
 import { Kbd } from '../ui/Kbd';
 import { useReducedMotion } from '../ui/motion';
-import { isEditable, modalDialogOpen, trapTab } from './dom';
+import { isEditable, modalDialogOpen, setDrawerListening, trapTab } from './dom';
 import { focusRouteInput } from './routeFocus';
 import { submitLine } from './shell';
 import { TerminalView } from './TerminalView';
@@ -44,7 +44,11 @@ export function TerminalDrawer() {
       else useTerminal.getState().toggle();
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    setDrawerListening(true);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      setDrawerListening(false);
+    };
   }, [onRoute]);
 
   // Focus moves in when the drawer opens and back to where it was when it closes, or to main when
