@@ -4,57 +4,59 @@ Every item left out, dropped in review, or held back, with the reason. Ids liste
 
 ## Scope
 
-- The VCAA source documents were unavailable while this content was written (`DECISIONS.md` D-001). Every item is grounded in the mainstream textbook meaning of what its KK names. Items whose correctness would depend on the exact contents of a list the study design gives (the Section 4 "verify" entries) were held back, and each is listed below.
-- Development models (agile, waterfall, spiral) are excluded: the build brief could not find them in the 2025 key knowledge.
-- The glossary in `content/study-design.json` is provisional, built from the terms the key knowledge names. It must be reconciled with the study design's "Terms used in this study" list when the source is available.
+- The content was first written while the VCAA source documents were unavailable (`DECISIONS.md` D-001 and D-192). Each item rested on the mainstream textbook meaning of what its KK names, and items whose correctness would depend on the exact contents of a list the study design gives (the Section 4 "verify" entries) were held back.
+- The sources are now available, and every item has been reconciled against them: the 2025 study design with its Terms and PSM specifications, the 2026 outcome-specific requirements, the examination specifications, the sample questions, the 2025 examination and its report, and VCAA's Planning and Teaching and Learning pages. The section "Source reconciliation (October 2026)" at the end records how, and what changed.
+- The held-back entries in the part sections below were written against the reconstruction. Where the Source reconciliation section releases, settles or restates a topic, its entry supersedes the older one, and older lines whose reason the sources have overturned end with "(superseded: see Source reconciliation)".
+- Development models (agile, waterfall, spiral) are excluded. No key knowledge, Terms entry or PSM specification names them; the study design mentions an agile process once, in a note on applying the PSM.
+- The glossary is the study design's "Terms used in this study": 42 confirmed terms in `content/study-design.json`, each with one card in `content/terms.json`. It replaced a provisional glossary of 75 terms (see Source reconciliation).
 - Authoring: 13 units, each written by one agent and then reviewed by a different agent against the rules in `content/README.md`. The reviewers recomputed every trace, sort, search, calculation and critical path. In total 851 items were reviewed, 171 fixed in place, 9 dropped and 3 replaced.
 
 ## U3O1 KK01 to KK05 (part u3o1-a)
 
 Review pass: no items dropped. Every item was fixed in place or kept.
 
-- Which design tools the study design lists (U3O1-KK03): held back. The list is marked verify, so no item asks which tools are listed or which one is *not* a design tool; items test only what each expected tool shows and when it suits.
-- Flowcharts, structure charts, Nassi-Shneiderman diagrams, storyboards and site maps (U3O1-KK03): held back. Whether any of them is on the unconfirmed list of design tools can't be checked.
-- The complete set of data types, and "which is not a data type" items (U3O1-KK04): held back. The list of data types is marked verify; items name only Integer, Floating point, String, Character and Boolean, in full.
-- Date/time, decimal, fixed-point and currency types, long and short integers, and storage sizes in bytes (U3O1-KK04): held back. They depend on the unconfirmed list or on the language; currency follows the brief's Floating point to two decimal places convention.
+- Which design tools the study design lists (U3O1-KK03): held back. The list is marked verify, so no item asks which tools are listed or which one is *not* a design tool; items test only what each expected tool shows and when it suits. (superseded: see Source reconciliation)
+- Flowcharts, structure charts, Nassi-Shneiderman diagrams, storyboards and site maps (U3O1-KK03): held back. Whether any of them is on the unconfirmed list of design tools can't be checked. (superseded: see Source reconciliation)
+- The complete set of data types, and "which is not a data type" items (U3O1-KK04): held back. The list of data types is marked verify; items name only Integer, Floating point, String, Character and Boolean, in full. (superseded: see Source reconciliation)
+- Date/time, decimal, fixed-point and currency types, long and short integers, and storage sizes in bytes (U3O1-KK04): held back. They depend on the unconfirmed list or on the language; currency follows the brief's Floating point to two decimal places convention. (superseded: see Source reconciliation)
 - Padding numeric Strings with leading zeros as a sorting fix (U3O1-KK04): held back. Padding changes what is displayed (001, 002, 010), so it doesn't produce the 1, 2, 10, 25, 100 order that s-u3o1-kk04-002 asks for; that marking point was removed.
-- Associative arrays, dictionaries, lists, stacks and queues (U3O1-KK05): held back. Whether associative arrays or lists are named is marked verify, and no item claims arrays and records are the only structures.
+- Associative arrays, dictionaries, lists, stacks and queues (U3O1-KK05): held back. Whether associative arrays or lists are named is marked verify, and no item claims arrays and records are the only structures. (superseded: see Source reconciliation)
 - Arrays as fixed-size structures (U3O1-KK05): held back. Whether an array's size is fixed depends on the language.
 - Pseudocode notation for record fields (U3O1-KK05): held back. docs/PSEUDOCODE.md doesn't define field access, so no trace uses record fields; the Record card shows dot notation only as an example.
-- Sorting a constraint into a type (economic, legal, social, technical, usability) (U3O1-KK02, U3O2-KK06): held back. The list of constraint types is marked verify; constraint items use only budget, deadline and legal compliance as generic examples.
+- Sorting a constraint into a type (economic, legal, social, technical, usability) (U3O1-KK02, U3O2-KK06): held back. The list of constraint types is marked verify; constraint items use only budget, deadline and legal compliance as generic examples. (superseded: see Source reconciliation)
 - Portability versus technical constraint side by side (U3O1-KK02, U3O2-KK05): held back. A statement that the program must run on particular existing hardware can be read either way, so the portability example in m-u3o1-kk02-003 is written as working across devices whatever their operating system.
-- Contents of a software requirements specification (U3O1-KK02, U3O2-KK09): held back. The SRS contents are marked verify.
+- Contents of a software requirements specification (U3O1-KK02, U3O2-KK09): held back. The SRS contents are marked verify. (superseded: see Source reconciliation)
 - Classifying a call to a non-existent library function as a syntax, runtime or compile-time error (U3O1-KK01, U3O1-KK13): held back. The classification depends on the language, so m-u3o1-kk01-002 asks only for the most appropriate response.
-- Real AI products, school or VCAA policy on AI use, and copyright ownership of AI-generated code (U3O1-KK01): held back. Policies can't be checked, the law is unsettled, and the U4O2-KK07 Acts are marked verify.
-- Naming the working for pseudocode items a trace table (U3O1-KK05, U3O1-KK14): held back. Whether trace tables are named is marked verify; the items ask only for an algorithm's output.
+- Real AI products, school or VCAA policy on AI use, and copyright ownership of AI-generated code (U3O1-KK01): held back. Policies can't be checked, the law is unsettled, and the U4O2-KK07 Acts are marked verify. (superseded: see Source reconciliation)
+- Naming the working for pseudocode items a trace table (U3O1-KK05, U3O1-KK14): held back. Whether trace tables are named is marked verify; the items ask only for an algorithm's output. (superseded: see Source reconciliation)
 - Development models (U3O1-KK01 to KK05): held back. They are outside the 2025 key knowledge as mapped.
 
 ## U3O1 KK06 to KK10 (part u3o1-b)
 
 Review pass: every item was checked and every trace recomputed; no items were dropped.
 
-- Which language features the study design lists (U3O1-KK08): held back. The KK carries a verify note on its list of features, so no item asks which features are listed or which one is *not*; items test only what a feature is and when it suits.
-- Definition of "conditional operator" (U3O1-KK08): held back. The term can mean a comparison operator or the ternary `?:` operator and the study design's usage can't be checked, so items say "comparison operator" instead.
-- Named GUI elements (U3O1-KK08): held back. Which GUI elements count as language features depends on the unconfirmed list.
-- Polymorphism, constructors and interfaces (U3O1-KK07): held back. The KK names abstraction, encapsulation, generalisation, inheritance, classes, objects and access modifiers only.
+- Which language features the study design lists (U3O1-KK08): held back. The KK carries a verify note on its list of features, so no item asks which features are listed or which one is *not*; items test only what a feature is and when it suits. (superseded: see Source reconciliation)
+- Definition of "conditional operator" (U3O1-KK08): held back. The term can mean a comparison operator or the ternary `?:` operator and the study design's usage can't be checked, so items say "comparison operator" instead. (superseded: see Source reconciliation)
+- Named GUI elements (U3O1-KK08): held back. Which GUI elements count as language features depends on the unconfirmed list. (superseded: see Source reconciliation)
+- Polymorphism, constructors and interfaces (U3O1-KK07): held back. The KK names abstraction, encapsulation, generalisation, inheritance, classes, objects and access modifiers only. (superseded: see Source reconciliation)
 - Pascal case as a tested convention (U3O1-KK09): held back. The KK names Hungarian notation, camel case and snake case; Pascal case appears only in one `mistake` note that corrects `NumberOfSeats`.
 - A fixed list of Hungarian prefixes presented as a standard (U3O1-KK09): held back. Prefix sets vary between teams, so items say "common" prefixes and never mark one set as the only correct one.
 - XML schemas and DTDs, JSON, and attributes versus elements (U3O1-KK06): held back. They go beyond the KK's plain text, CSV and XML structure.
-- Format, length and lookup checks, and verification such as double entry (U3O1-KK10): held back. The KK names existence, type and range checks only.
+- Format, length and lookup checks, and verification such as double entry (U3O1-KK10): held back. The KK names existence, type and range checks only. (superseded: see Source reconciliation)
 
 ## U3O1 KK11 to KK14 (part u3o1-c)
 
 Review pass: no items dropped. Fixes were made in place; the topics below are held back.
 
-- Trace tables (U3O1-KK14): held back. The KK's verify note asks whether trace tables are named, so no item names, defines or asks students to complete one; tracing items ask directly for the values compared, the array contents or the outcome, and test tables use the house columns (test number, input(s), expected output, actual output).
+- Trace tables (U3O1-KK14): held back. The KK's verify note asks whether trace tables are named, so no item names, defines or asks students to complete one; tracing items ask directly for the values compared, the array contents or the outcome, and test tables use the house columns (test number, input(s), expected output, actual output). (superseded: see Source reconciliation)
 - Definition of "boundary" test data (U3O1-KK14): held back. Textbooks differ on whether boundary data means only the limits or also the values just beyond them, so no item depends on the definition; the boundary MCQ's answer (7, 8, 16, 17) is best under either reading.
 - Extreme and exceptional test-data categories (U3O1-KK14): held back. The category names and their meanings vary between textbooks and aren't in the KK summary.
 - Quick sort partition traces (U3O1-KK12): held back. The order after a partition depends on the partition scheme and pivot rule, which vary between textbooks and languages; quick sort items cover only the pivot-and-partition idea, average-case speed and the poor-pivot worst case.
 - Big O notation (U3O1-KK12): held back. Efficiency is given as comparison counts (n(n − 1)/2 for selection sort; at most floor(log2 n) + 1 for binary search, e.g. 10 for 1 000 items, 16 for 40 000 and 20 for 1 000 000).
 - Bubble sort and insertion sort by name (U3O1-KK12): held back. They are outside the KK's named algorithms; one selection sort distractor comes from swapping neighbouring pairs, but the item doesn't name that algorithm.
 - Compile-time type mismatch (U3O1-KK13): held back. Whether a type mismatch is caught at compile time depends on the language, so type mismatch is taught only as the runtime case of converting user input.
-- Floating point division by zero (U3O1-KK13): held back. Many languages return infinity or NaN rather than stopping, so no item claims that it crashes; the one MCQ that turns on a divide-by-zero error states in its stem that the language raises a runtime error.
-- Overflow behaviour (U3O1-KK13): held back. Whether overflow stops the program or wraps the value depends on the language, so the overflow card names both outcomes and commits to neither.
+- Floating point division by zero (U3O1-KK13): held back. Many languages return infinity or NaN rather than stopping, so no item claims that it crashes; the one MCQ that turns on a divide-by-zero error states in its stem that the language raises a runtime error. (superseded: see Source reconciliation)
+- Overflow behaviour (U3O1-KK13): held back. Whether overflow stops the program or wraps the value depends on the language, so the overflow card names both outcomes and commits to neither. (superseded: see Source reconciliation)
 - try/catch pseudocode (U3O1-KK13): held back. The house pseudocode style has no construct for it, so error handling is described in words only.
 - Fixed header-comment fields (U3O1-KK11): held back. Conventions for author, date and version fields vary between teams, so no fixed list is taught as a standard.
 - "Justification comment" as a named term (U3O1-KK11): held back. It isn't a standard textbook term, so c-u3o1-kk11-004 now asks what it means for a comment to justify a processing choice.
@@ -68,12 +70,12 @@ No item was dropped in review. Items that had a defensible core were fixed in pl
 
 ### Held back
 
-- Slack or float (U3O2-KK03): held back. The KK map asks to confirm whether slack is named, so no item names, defines or calculates slack; items on non-critical tasks ask only whether a stated delay moves the finish date, which follows from the critical path itself.
-- Which data collection techniques the study design lists (U3O2-KK04): held back. The list is unverified, so items use only interviews, surveys or questionnaires, and observation, and none asks which technique is or isn't listed; focus groups, document analysis and other techniques are left out.
-- Social and usability constraints, and the type of a deadline (U3O2-KK06): held back. The list of constraint types is unverified, so classification items use only economic, technical and legal constraints (the KK map's examples); a deadline appears only as "a constraint" with no type, and no item asks which type is *not* listed.
-- Named Acts in legal constraints (U3O2-KK06, U3O2-KK10): held back. Which Acts are named is unverified, so legal-constraint items say "privacy law" and name no Act; the privacy MCQ uses a dental clinic, a health service provider, because small organisations may fall under the small business exemption from federal privacy law.
-- The full contents of an SRS (U3O2-KK02, U3O2-KK09): held back. The SRS contents list is unverified, so brief-versus-SRS items describe the SRS only as the detailed statement of requirements, constraints and scope.
-- Robustness, maintainability and security as non-functional requirements (U3O2-KK05): held back. Items use only reliability, usability and portability (the KK map's examples) plus response time as a performance target, and no item states which qualities the study design lists.
+- Slack or float (U3O2-KK03): held back. The KK map asks to confirm whether slack is named, so no item names, defines or calculates slack; items on non-critical tasks ask only whether a stated delay moves the finish date, which follows from the critical path itself. (superseded: see Source reconciliation)
+- Which data collection techniques the study design lists (U3O2-KK04): held back. The list is unverified, so items use only interviews, surveys or questionnaires, and observation, and none asks which technique is or isn't listed; focus groups, document analysis and other techniques are left out. (superseded: see Source reconciliation)
+- Social and usability constraints, and the type of a deadline (U3O2-KK06): held back. The list of constraint types is unverified, so classification items use only economic, technical and legal constraints (the KK map's examples); a deadline appears only as "a constraint" with no type, and no item asks which type is *not* listed. (superseded: see Source reconciliation)
+- Named Acts in legal constraints (U3O2-KK06, U3O2-KK10): held back. Which Acts are named is unverified, so legal-constraint items say "privacy law" and name no Act; the privacy MCQ uses a dental clinic, a health service provider, because small organisations may fall under the small business exemption from federal privacy law. (superseded: see Source reconciliation)
+- The full contents of an SRS (U3O2-KK02, U3O2-KK09): held back. The SRS contents list is unverified, so brief-versus-SRS items describe the SRS only as the detailed statement of requirements, constraints and scope. (superseded: see Source reconciliation)
+- Robustness, maintainability and security as non-functional requirements (U3O2-KK05): held back. Items use only reliability, usability and portability (the KK map's examples) plus response time as a performance target, and no item states which qualities the study design lists. (superseded: see Source reconciliation)
 - Whether a requirement with a response-time target is "only non-functional" or "functional and non-functional combined" (U3O2-KK05): held back. Textbooks differ: many treat a statement such as "display the total within one second" as a performance (non-functional) requirement, while others split it into a functional part and a non-functional part. m-u3o2-kk05-004 was rewritten so that its answer (the time limit is a non-functional target) holds under both readings.
 - Portability versus a technical constraint for a statement naming the platforms a solution runs on (U3O2-KK05, U3O2-KK06): held back. "Must run on the existing tablets" can be read either way, so no MCQ offers both readings as options; the classification MCQ offers only constraint types and "functional requirement".
 - Connectivity limits as a reliability requirement versus a technical constraint (U3O2-KK05, U3O2-KK06): held back. "Must keep working when the Wi-Fi drops out" can be read as either, so no MCQ uses it as a distractor. The option in m-u3o2-kk06-004 that did was replaced with an unambiguous usability requirement.
@@ -85,20 +87,20 @@ Review pass: no items dropped. Twelve items were fixed in place (see the review 
 
 - Formal change control process or change control board (U3O2-KK07): held back. The KK names only scope, so scope-change items say only that a request is recorded, assessed for time and cost, and agreed before work starts.
 - Project scope versus product scope (U3O2-KK07): held back. This is a project-management distinction the KK summary doesn't name.
-- DFD symbol shapes as a rule (U3O2-KK08): held back. The house notation (circle process, open-ended data store) hasn't been checked against a VCAA paper, so the reviewer also removed "drawn as a circle" from m-u3o2-kk08-001; only c-u3o2-kk08-006 mentions shapes, to tell a rectangle entity from a stick-figure actor.
-- DFD levels, decomposition, balancing and process numbering rules (U3O2-KK08): held back. The KK summary doesn't name them.
-- Arrowheads on use case associations (U3O2-KK08): held back. Conventions vary, so items say only that associations carry no data labels.
-- Required sections of an SRS, "what is missing from this SRS" and "which is not part of an SRS" items (U3O2-KK09): held back. The listed contents of an SRS carry a verify note; c-u3o2-kk09-008 relies only on non-functional requirements and constraints belonging in an SRS, which holds under the mainstream meaning whatever the study design lists.
-- Context diagrams, DFDs and use case diagrams as SRS components (U3O2-KK09): held back. Whether they belong in the SRS depends on the unverified list.
+- DFD symbol shapes as a rule (U3O2-KK08): held back. The house notation (circle process, open-ended data store) hasn't been checked against a VCAA paper, so the reviewer also removed "drawn as a circle" from m-u3o2-kk08-001; only c-u3o2-kk08-006 mentions shapes, to tell a rectangle entity from a stick-figure actor. (superseded: see Source reconciliation)
+- DFD levels, decomposition, balancing and process numbering rules (U3O2-KK08): held back. The KK summary doesn't name them. (superseded: see Source reconciliation)
+- Arrowheads on use case associations (U3O2-KK08): held back. Conventions vary, so items say only that associations carry no data labels. (superseded: see Source reconciliation)
+- Required sections of an SRS, "what is missing from this SRS" and "which is not part of an SRS" items (U3O2-KK09): held back. The listed contents of an SRS carry a verify note; c-u3o2-kk09-008 relies only on non-functional requirements and constraints belonging in an SRS, which holds under the mainstream meaning whatever the study design lists. (superseded: see Source reconciliation)
+- Context diagrams, DFDs and use case diagrams as SRS components (U3O2-KK09): held back. Whether they belong in the SRS depends on the unverified list. (superseded: see Source reconciliation)
 - Claims that mock-ups or data dictionaries never appear in an SRS (U3O2-KK09): held back. SRS templates differ, so the what-versus-how items use pseudocode, algorithm choice, function names and button placement as the design-side examples.
-- Naming constraint categories such as "economic" in KK09 items (U3O2-KK09): held back. U3O2-KK06's list of constraint types carries a verify note, so the reviewer reworded the m-u3o2-kk09-004 whyWrong line to call a budget simply a constraint.
-- Which Act applies to a given organisation or scenario (U3O2-KK10): held back. Which Acts the study design names carries a verify note; only c-u3o2-kk10-008 names Acts (Copyright Act 1968 and Privacy Act 1988, both Cth), stating only what each covers.
-- Privacy and Data Protection Act 2014 (Vic) and Health Records Act 2001 (Vic) (U3O2-KK10): held back. Which Acts are named carries a verify note, and U4O2-KK07 covers them; scenarios avoid health information.
+- Naming constraint categories such as "economic" in KK09 items (U3O2-KK09): held back. U3O2-KK06's list of constraint types carries a verify note, so the reviewer reworded the m-u3o2-kk09-004 whyWrong line to call a budget simply a constraint. (superseded: see Source reconciliation)
+- Which Act applies to a given organisation or scenario (U3O2-KK10): held back. Which Acts the study design names carries a verify note; only c-u3o2-kk10-008 names Acts (Copyright Act 1968 and Privacy Act 1988, both Cth), stating only what each covers. (superseded: see Source reconciliation)
+- Privacy and Data Protection Act 2014 (Vic) and Health Records Act 2001 (Vic) (U3O2-KK10): held back. Which Acts are named carries a verify note, and U4O2-KK07 covers them; scenarios avoid health information. (superseded: see Source reconciliation)
 - Privacy Act small business exemption and turnover threshold (U3O2-KK10): held back. It is subject to law reform, so privacy items are framed as good practice reflected in the Australian Privacy Principles, not as a claim that a small organisation is bound by the Act.
-- APP numbers, the notifiable data breaches scheme, copyright duration, fair dealing, patents and trade marks (U3O2-KK10): held back. They go beyond the key legal requirements the KK summary names.
+- APP numbers, the notifiable data breaches scheme, copyright duration, fair dealing, patents and trade marks (U3O2-KK10): held back. They go beyond the key legal requirements the KK summary names. (superseded: see Source reconciliation)
 - Ownership of AI-generated code (U3O2-KK10): held back. The law is unsettled.
 - Implied licences for commissioned code (U3O2-KK10): held back. Ownership items rest only on the default rules (author owns unless an employee writes it as part of the job, or copyright is assigned in writing).
-- Differential backups and the named "3-2-1" rule (U3O2-KK11): held back. Backup types are limited to full and incremental, the mainstream core of "backup".
+- Differential backups and the named "3-2-1" rule (U3O2-KK11): held back. Backup types are limited to full and incremental, the mainstream core of "backup". (superseded: see Source reconciliation)
 - One wiping method being enough for every drive type (U3O2-KK11): held back. Overwriting is less reliable on solid-state drives, so secure disposal items always offer "overwrite or physically destroy" together.
 
 ## U3O2 KK12 to KK16 (part u3o2-c)
@@ -109,22 +111,22 @@ No items were dropped in review. All 70 items (40 cards, 20 MCQs, 10 short answe
 
 ### Held back
 
-- Which ideation techniques and tools the study design names (U3O2-KK12): held back. The list is a verify entry; items use only brainstorming, mind maps, mood boards and sketches, test what each is and when it suits, and never ask which techniques are (or are not) named.
-- SCAMPER, storyboards, word association and role play (U3O2-KK12): held back. Not in the KK map's examples, and whether the study design names them can't be checked.
-- A fixed order for using ideation techniques (U3O2-KK12): held back. Textbooks don't agree on one, and it would depend on the unconfirmed list.
-- Classifying usability, timeliness or functionality as efficiency or effectiveness in an MCQ (U3O2-KK13): held back. Textbooks place these differently; cards follow the KK map (usability under effectiveness) and no MCQ turns on the classification.
-- One identical set of criteria for judging design ideas and the finished solution (U3O2-KK13): held back. Items say only that both sets of criteria are drawn from the requirements.
-- Tracing evaluation criteria to named SRS sections (U3O2-KK13): held back. U3O2-KK09 is a verify entry, so criteria are traced to "the requirements" only.
-- Naming the PSM stage or activity in which design ideas are generated or evaluated (U3O2-KK13): held back. The PSM activity names are unconfirmed.
-- A required set of data dictionary columns, including validation or format columns (U3O2-KK14): held back. Textbooks vary; items use name, data type, size and description, marked "typically".
+- Which ideation techniques and tools the study design names (U3O2-KK12): held back. The list is a verify entry; items use only brainstorming, mind maps, mood boards and sketches, test what each is and when it suits, and never ask which techniques are (or are not) named. (superseded: see Source reconciliation)
+- SCAMPER, storyboards, word association and role play (U3O2-KK12): held back. Not in the KK map's examples, and whether the study design names them can't be checked. (superseded: see Source reconciliation)
+- A fixed order for using ideation techniques (U3O2-KK12): held back. Textbooks don't agree on one, and it would depend on the unconfirmed list. (superseded: see Source reconciliation)
+- Classifying usability, timeliness or functionality as efficiency or effectiveness in an MCQ (U3O2-KK13): held back. Textbooks place these differently; cards follow the KK map (usability under effectiveness) and no MCQ turns on the classification. (superseded: see Source reconciliation)
+- One identical set of criteria for judging design ideas and the finished solution (U3O2-KK13): held back. Items say only that both sets of criteria are drawn from the requirements. (superseded: see Source reconciliation)
+- Tracing evaluation criteria to named SRS sections (U3O2-KK13): held back. U3O2-KK09 is a verify entry, so criteria are traced to "the requirements" only. (superseded: see Source reconciliation)
+- Naming the PSM stage or activity in which design ideas are generated or evaluated (U3O2-KK13): held back. The PSM activity names are unconfirmed. (superseded: see Source reconciliation)
+- A required set of data dictionary columns, including validation or format columns (U3O2-KK14): held back. Textbooks vary; items use name, data type, size and description, marked "typically". (superseded: see Source reconciliation)
 - The unit of Size for numeric data types in a data dictionary (U3O2-KK14): held back. Textbooks give digits or bytes; c-u3o2-kk14-004 now describes Size for Strings only.
 - Choosing a design tool for a need, and property-versus-method errors in object descriptions (U3O2-KK14): held back. Part u3o1-a covers these under U3O1-KK03.
 - Specific security controls such as MFA types and encryption methods (U3O2-KK15): held back. They belong to U4O2-KK04; KK15 treats security as user trust and the balance with usability.
 - Perceived versus actual affordance (U3O2-KK15): held back. Not needed at this level, and textbook usage varies.
-- Which design principles the study design lists (U3O2-KK16): held back. The list is a verify entry; items use only alignment, contrast and consistency, and never ask which principles are listed.
-- Balance, proximity, repetition, white space and hierarchy (U3O2-KK16): held back. Not in the KK map's examples; not taught or used as distractors.
-- Sorting design principles into appearance and functionality groups (U3O2-KK16): held back. The split depends on the study design's wording.
-- Whether affordance or interoperability count as design principles (U3O2-KK16): held back. They appear only as distractors whose whyWrong lines explain what they are, never as claims about which list they belong to.
+- Which design principles the study design lists (U3O2-KK16): held back. The list is a verify entry; items use only alignment, contrast and consistency, and never ask which principles are listed. (superseded: see Source reconciliation)
+- Balance, proximity, repetition, white space and hierarchy (U3O2-KK16): held back. Not in the KK map's examples; not taught or used as distractors. (superseded: see Source reconciliation)
+- Sorting design principles into appearance and functionality groups (U3O2-KK16): held back. The split depends on the study design's wording. (superseded: see Source reconciliation)
+- Whether affordance or interoperability count as design principles (U3O2-KK16): held back. They appear only as distractors whose whyWrong lines explain what they are, never as claims about which list they belong to. (superseded: see Source reconciliation)
 
 ### Review fixes
 
@@ -152,12 +154,12 @@ No items were dropped in review. All 70 items (40 cards, 20 MCQs, 10 short answe
 
 ## U4O1 KK01 to KK06 (part u4o1-a)
 
-- None of these KKs carries a `verify` note, but several overlap U3O1 entries that do. No item asks which data types, data structures, language features or GUI elements the study design lists, or which one is *not* listed. Data types are limited to Integer, Floating point, String, Character and Boolean; data structures to one-dimensional arrays, two-dimensional arrays, records and arrays of records. Associative arrays, lists, dates and JSON are left out (U3O1-KK04 and U3O1-KK05 verify notes).
+- None of these KKs carries a `verify` note, but several overlap U3O1 entries that do. No item asks which data types, data structures, language features or GUI elements the study design lists, or which one is *not* listed. Data types are limited to Integer, Floating point, String, Character and Boolean; data structures to one-dimensional arrays, two-dimensional arrays, records and arrays of records. Associative arrays, lists, dates and JSON are left out (U3O1-KK04 and U3O1-KK05 verify notes). (superseded: see Source reconciliation)
 - Scope split with U3O1. Part u3o1-a/b/c already defines the data types, data structures, file types, language features, validation checks, error types and debugging techniques. These items take the development-stage angle instead: converting fields read from a file, holding a file in an array of records, persistence, choosing an output format, modules with parameters, choosing GUI controls, placing and testing validation, alpha testing and the test-fix-retest cycle. Examples already used in U3O1 (phone numbers as Strings, "twelve" in a quantity box, write versus append) are not reused.
-- U4O1-KK01. Efficiency is taught through time, cost and effort; effectiveness through accuracy and completeness, following part u3o2-c. No MCQ turns on classifying usability or timeliness. User-centred design is taught as involving real users throughout development and revising the design from their feedback. Personas, accessibility standards and any named UCD standard are left out; the KK names none of them.
-- U4O1-KK04. No item sorts code repositories, APIs, libraries and AI assistants into "established" and "innovative", because that split depends on the study design's wording. Repository items use only commit, history and roll back; branching, pull requests and named tools (Git, GitHub) are left out. The licence MCQ names no Act (U3O2-KK10 and U4O2-KK07 are verify entries). AI assistants appear in one compare card only; prompting and hallucination stay with U3O1-KK01.
-- U4O1-KK05. Items use existence, type and range checks only. Format, length and lookup checks, verification, and client-side versus server-side validation are left out, as in part u3o1-b.
-- U4O1-KK06. Unit, integration, system and regression testing are not named as terms; the ideas appear in plain words (test each module, then the modules together; re-run earlier tests after a fix). Trace tables are not named (U3O1-KK14 verify); hand tracing is called desk checking. Conditional breakpoints, watches and stepping are left out.
+- U4O1-KK01. Efficiency is taught through time, cost and effort; effectiveness through accuracy and completeness, following part u3o2-c. No MCQ turns on classifying usability or timeliness. User-centred design is taught as involving real users throughout development and revising the design from their feedback. Personas, accessibility standards and any named UCD standard are left out; the KK names none of them. (superseded: see Source reconciliation)
+- U4O1-KK04. No item sorts code repositories, APIs, libraries and AI assistants into "established" and "innovative", because that split depends on the study design's wording. Repository items use only commit, history and roll back; branching, pull requests and named tools (Git, GitHub) are left out. The licence MCQ names no Act (U3O2-KK10 and U4O2-KK07 are verify entries). AI assistants appear in one compare card only; prompting and hallucination stay with U3O1-KK01. (superseded: see Source reconciliation)
+- U4O1-KK05. Items use existence, type and range checks only. Format, length and lookup checks, verification, and client-side versus server-side validation are left out, as in part u3o1-b. (superseded: see Source reconciliation)
+- U4O1-KK06. Unit, integration, system and regression testing are not named as terms; the ideas appear in plain words (test each module, then the modules together; re-run earlier tests after a fix). Trace tables are not named (U3O1-KK14 verify); hand tracing is called desk checking. Conditional breakpoints, watches and stepping are left out. (superseded: see Source reconciliation)
 - Pseudocode. There are no file operations in the pseudocode, because docs/PSEUDOCODE.md defines no syntax for them. File reading is described in prose, or simulated with an array literal (m-u4o1-kk02-003).
 - Every computed answer was traced by hand and checked by running it in node:
   - m-u4o1-kk02-003: `"12" + "5"` joins to 125. The distractors are 17 (values converted to Integer), `12 5` (a space wrongly added) and BK-20412 (indexes read as if from 1).
@@ -210,10 +212,10 @@ Fixed:
 
 ### Held back
 
-- The study design's list of evaluation strategy features (U4O1-KK08): held back. The list is a `verify` entry, so no item asks for it, how many features it has, or which feature is *not* on it; c-u4o1-kk08-001 says only that a strategy *typically* covers criteria, data and methods, timing and responsibility.
-- Which PSM stage the evaluation criteria and the evaluation strategy belong to (U4O1-KK08): held back. PSM stage and activity names are unconfirmed, so criteria are tied only to the requirements, and no item says the strategy must be written before release.
-- Classifying usability, accessibility or satisfaction as efficiency or effectiveness (U4O1-KK08): held back. The glossary is unconfirmed, so only time (efficiency) and accuracy (effectiveness) are classified; the low-vision criterion in s-u4o1-kk08-001 is left unlabelled.
-- Slack or float (U3O2-KK03): held back. It is a `verify` entry, so the five Gantt MCQs and the Gantt short answer recompute finish dates and speak only of time a path "had to spare".
+- The study design's list of evaluation strategy features (U4O1-KK08): held back. The list is a `verify` entry, so no item asks for it, how many features it has, or which feature is *not* on it; c-u4o1-kk08-001 says only that a strategy *typically* covers criteria, data and methods, timing and responsibility. (superseded: see Source reconciliation)
+- Which PSM stage the evaluation criteria and the evaluation strategy belong to (U4O1-KK08): held back. PSM stage and activity names are unconfirmed, so criteria are tied only to the requirements, and no item says the strategy must be written before release. (superseded: see Source reconciliation)
+- Classifying usability, accessibility or satisfaction as efficiency or effectiveness (U4O1-KK08): held back. The glossary is unconfirmed, so only time (efficiency) and accuracy (effectiveness) are classified; the low-vision criterion in s-u4o1-kk08-001 is left unlabelled. (superseded: see Source reconciliation)
+- Slack or float (U3O2-KK03): held back. It is a `verify` entry, so the five Gantt MCQs and the Gantt short answer recompute finish dates and speak only of time a path "had to spare". (superseded: see Source reconciliation)
 - A distinction between a log and a journal (U4O1-KK11): held back. Textbooks use the two terms loosely.
 - Named project management products (U4O1-KK11): held back. No real product is named.
 - Acceptance testing, user acceptance testing and think-aloud protocols as terms (U4O1-KK07): held back. The KK names user group selection, test plans, scenarios, observation and documenting results only.
@@ -248,13 +250,13 @@ No item was dropped in review. Every item had a defensible core, so the weak poi
 
 ### Held back
 
-- The steps of threat modelling, their names, order and number (U4O2-KK05): held back. The KK map marks the steps "verify", so no item names, numbers, orders or counts them (including the five-step sequence in the build brief), and none asks for the next or missing step; items teach the purpose of threat modelling, doing it during design, using a DFD, prioritising by likelihood and impact, mitigating with controls, testing mitigations and security requirements as general principles.
+- The steps of threat modelling, their names, order and number (U4O2-KK05): held back. The KK map marks the steps "verify", so no item names, numbers, orders or counts them (including the five-step sequence in the build brief), and none asks for the next or missing step; items teach the purpose of threat modelling, doing it during design, using a DFD, prioritising by likelihood and impact, mitigating with controls, testing mitigations and security requirements as general principles. (superseded: see Source reconciliation)
 - STRIDE, DREAD, attack trees and trust boundaries (U4O2-KK05): held back. The KK map names none of them.
 - Effort or cost of a fix as a factor in prioritising threats (U4O2-KK05): held back. Textbooks differ on whether ease of mitigation should affect priority, so items prioritise by likelihood and impact only, and no item claims that effort never matters.
 - The name "insecure direct object reference" (U4O2-KK05): held back. The term is above Year 12 textbook level; m-u4o2-kk05-004 describes the attack in plain words only.
-- Which vulnerabilities and risks the study design lists (U4O2-KK03): held back. The list is marked "verify", so no item asks which vulnerability or risk is or isn't listed; each item describes a specific weakness in a scenario.
-- Named Acts, the Australian Privacy Principles, the Essential Eight and the Information Security Manual (U4O2-KK07, U3O2-KK10): held back. Which Acts and frameworks the study design names is unverified, so no item in this part names one.
-- The legal default owner of code written by an external developer (U4O2-KK02, U4O2-KK07): held back. It depends on copyright law the study design may or may not name, so items say only that the contract should settle ownership and require the source code to be handed over.
+- Which vulnerabilities and risks the study design lists (U4O2-KK03): held back. The list is marked "verify", so no item asks which vulnerability or risk is or isn't listed; each item describes a specific weakness in a scenario. (superseded: see Source reconciliation)
+- Named Acts, the Australian Privacy Principles, the Essential Eight and the Information Security Manual (U4O2-KK07, U3O2-KK10): held back. Which Acts and frameworks the study design names is unverified, so no item in this part names one. (superseded: see Source reconciliation)
+- The legal default owner of code written by an external developer (U4O2-KK02, U4O2-KK07): held back. It depends on copyright law the study design may or may not name, so items say only that the contract should settle ownership and require the source code to be handed over. (superseded: see Source reconciliation)
 - Buying off-the-shelf software (U4O2-KK02): held back. It isn't development, so external development means software built to order under a contract.
 - Firewalls, antivirus, penetration testing, and password hashing and salting (U4O2-KK04): held back. The KK map's examples of controls don't include them.
 - Least privilege as a standalone control (U4O2-KK04): held back. U4O2-KK09 covers it; here it appears only inside identity and access management items and one marking point.
@@ -275,9 +277,9 @@ No item was dropped in review. Every item had a defensible core, so the weak poi
 
 ### Held back
 
-- Which Acts and frameworks the study design names (U4O2-KK07): held back. The list carries a verify note, so no item asks which Acts or frameworks the study design names, how many there are, or which is not among them. Items say only what each Act or framework covers, which holds whatever the list says. If the confirmed list drops one of the Privacy Act 1988 (Cth), the Privacy and Data Protection Act 2014 (Vic), the Health Records Act 2001 (Vic), the Copyright Act 1968 (Cth), the Essential Eight or the Information Security Manual, drop the items that name it: c-u4o2-kk07-001 to -008, m-u4o2-kk07-001 to -004, s-u4o2-kk07-001 and -002, and the secondary mentions in c-u4o2-kk08-003, c-u4o2-kk08-008 and m-u4o2-kk08-004.
+- Which Acts and frameworks the study design names (U4O2-KK07): held back. The list carries a verify note, so no item asks which Acts or frameworks the study design names, how many there are, or which is not among them. Items say only what each Act or framework covers, which holds whatever the list says. If the confirmed list drops one of the Privacy Act 1988 (Cth), the Privacy and Data Protection Act 2014 (Vic), the Health Records Act 2001 (Vic), the Copyright Act 1968 (Cth), the Essential Eight or the Information Security Manual, drop the items that name it: c-u4o2-kk07-001 to -008, m-u4o2-kk07-001 to -004, s-u4o2-kk07-001 and -002, and the secondary mentions in c-u4o2-kk08-003, c-u4o2-kk08-008 and m-u4o2-kk08-004. (superseded: see Source reconciliation)
 - The Privacy Act small business exemption and turnover threshold (U4O2-KK07): held back. They are subject to law reform, so items say "many private organisations" and state coverage in the scenario when it matters.
-- APP, IPP and HPP numbers or counts, penalty amounts, the 2024 privacy amendments and ransomware payment reporting (U4O2-KK07): held back. They change often or go beyond the KK.
+- APP, IPP and HPP numbers or counts, penalty amounts, the 2024 privacy amendments and ransomware payment reporting (U4O2-KK07): held back. They change often or go beyond the KK. (superseded: see Source reconciliation)
 - Essential Eight maturity levels, the Commonwealth policy that mandates the Essential Eight for some agencies, and ISM control numbers (U4O2-KK07): held back. They change often or go beyond the KK.
 - Exceptions to the Privacy Act's exclusion of state bodies, such as tax file number rules and state-owned corporations (U4O2-KK07): held back. Items say only that Victorian public sector bodies such as departments and councils fall under the Victorian Act.
 - Whether the Health Records Act or the Privacy Act binds an external developer that builds a clinic's app (U4O2-KK07): held back. s-u4o2-kk07-001 now says the app must let the clinic meet the Act, and doesn't claim the developer itself is bound.
@@ -285,15 +287,15 @@ No item was dropped in review. Every item had a defensible core, so the weak poi
 - Notifiable Data Breaches detail: the 30-day assessment period, the remedial-action exception's wording and the contents of the statement (U4O2-KK07): held back. c-u4o2-kk07-008 and m-u4o2-kk07-004 cover only the duty to notify affected people and the Commissioner as soon as practicable, for an organisation stated to be covered and a breach stated as likely to cause serious harm.
 - Copyright ownership of commissioned code (U4O2-KK07): held back. U3O2-KK10 covers it; here copyright appears only as licence conditions and acknowledging reused code.
 - Moral rights, including the right of attribution (U4O2-KK07, U4O2-KK08): held back. They can make uncredited reuse a legal issue too, so no item claims that reusing code without credit is legal; c-u4o2-kk08-001's legal-versus-ethical example now uses unchecked AI-generated code.
-- Reverse (definition) cards for Essential Eight and least privilege (U4O2-KK07, U4O2-KK09): held back. The glossary part already defines both (t-essential-eight, t-least-privilege), so c-u4o2-kk07-004 now asks why a team would apply the Essential Eight and c-u4o2-kk09-001 asks how least privilege limits damage.
+- Reverse (definition) cards for Essential Eight and least privilege (U4O2-KK07, U4O2-KK09): held back. The glossary part already defines both (t-essential-eight, t-least-privilege), so c-u4o2-kk07-004 now asks why a team would apply the Essential Eight and c-u4o2-kk09-001 asks how least privilege limits damage. (superseded: see Source reconciliation)
 - A fixed set of criteria for evaluating development security (U4O2-KK06): held back. Criteria are given as examples ("any three"), and no item claims the study design lists particular criteria. The invented term "security evaluation criterion" is no longer a reverse card (c-u4o2-kk06-001 is now a basic card).
-- Algorithmic bias, accessibility and the effect of automation on jobs (U4O2-KK08): held back. The KK's examples don't name them.
+- Algorithmic bias, accessibility and the effect of automation on jobs (U4O2-KK08): held back. The KK's examples don't name them. (superseded: see Source reconciliation)
 - Transferring and accepting risk (U4O2-KK09): held back. The KK names only reducing and eliminating.
 - Named products (version control products, secrets managers, scanners), and password hashing and salting (U4O2-KK09): held back. They go beyond the KK map.
 - "Defence in depth" as a term to recall (U4O2-KK09): held back. The KK map doesn't name it, so c-u4o2-kk09-007 teaches layering measures and gives the name only in passing, and no reverse card asks for it.
 - Definitions of threat, vulnerability and risk (U4O2-KK09): held back. U4O2-KK03 in part u4o2-a covers them.
-- Threat modelling steps or a named threat modelling model (U4O2-KK05): held back. The steps carry a verify note, and no item in this part refers to them.
-- How recommendations are marked (U4O2-KK10): held back. The one exam-convention card (c-u4o2-kk10-005) states only what the command term *recommend* asks for, as docs/EXAM_INSIGHTS.md describes it.
+- Threat modelling steps or a named threat modelling model (U4O2-KK05): held back. The steps carry a verify note, and no item in this part refers to them. (superseded: see Source reconciliation)
+- How recommendations are marked (U4O2-KK10): held back. The one exam-convention card (c-u4o2-kk10-005) states only what the command term *recommend* asks for, as docs/EXAM_INSIGHTS.md describes it. (superseded: see Source reconciliation)
 
 ### Checks
 
@@ -304,32 +306,32 @@ No item was dropped in review. Every item had a defensible core, so the weak poi
 
 Review pass: no items dropped. All 75 entries were kept, and 10 cards were fixed in place (t-generative-ai, t-array, t-csv, t-validation, t-runtime-error, t-gantt-chart, t-constraint, t-effectiveness, t-api, t-threat).
 
-The real "Terms used in this study" list couldn't be checked (DECISIONS D-001). The 75 entries are a provisional glossary drawn from the KK titles, summaries and examples in `study-design.json` and Sections 4 and 5 of the brief. Every entry is `provisional`, every card is `source: textbook`, and no card claims that a term is in the study design's glossary. Aliases hold accepted alternative forms for `blitz` (abbreviations, expansions and US spellings); card fronts use Australian spelling.
+The real "Terms used in this study" list couldn't be checked (DECISIONS D-001). The 75 entries are a provisional glossary drawn from the KK titles, summaries and examples in `study-design.json` and Sections 4 and 5 of the brief. Every entry is `provisional`, every card is `source: textbook`, and no card claims that a term is in the study design's glossary. Aliases hold accepted alternative forms for `blitz` (abbreviations, expansions and US spellings); card fronts use Australian spelling. (superseded: see Source reconciliation)
 
-- The full "Terms used in this study" list (TERMS): held back. It can't be checked, so the merge makes the glossary exactly these 75 provisional terms; recheck the whole list against the source when it is available.
-- Individual data types (character, string, integer, floating point, Boolean) and "data type" itself (U3O1-KK04): held back. The list of data types is marked verify.
-- Associative arrays and lists (U3O1-KK05): held back. Whether they are named is marked verify.
-- Trace tables and desk checking (U3O1-KK14): held back. Whether trace tables are named is marked verify.
-- Slack and float (U3O2-KK03): held back. Whether slack is named is marked verify.
-- Named data collection techniques such as interviews, surveys and observation (U3O2-KK04): held back. The list of techniques is marked verify.
-- Constraint types other than economic, legal and technical, such as social and usability (U3O2-KK06): held back. The list of constraint types is marked verify, so t-constraint gives only the three KK map examples and doesn't claim they are the full set.
-- The contents of an SRS (U3O2-KK09): held back. The listed contents are marked verify, so t-software-requirements-specification says only "including its requirements, constraints and scope".
-- Named Acts, the Australian Privacy Principles and the Information Security Manual (U3O2-KK10, U4O2-KK07): held back. Which Acts and frameworks are named is marked verify. Kept: t-essential-eight, because its definition is correct whatever the study design names and part u4o2-b already teaches the Essential Eight; it makes no claim that the study design lists it.
-- Ideation techniques and tools such as brainstorming, mind maps, mood boards and sketches (U3O2-KK12): held back. The list is marked verify.
-- Named design principles such as alignment, contrast and consistency (U3O2-KK16): held back. The list is marked verify.
-- Evaluation strategy (U4O1-KK08): held back. Any definition amounts to the features list, which is marked verify.
-- Threat modelling steps (U4O2-KK05): held back. The steps and their names are marked verify, so t-threat-modelling names, orders and counts no steps.
+- The full "Terms used in this study" list (TERMS): held back. It can't be checked, so the merge makes the glossary exactly these 75 provisional terms; recheck the whole list against the source when it is available. (superseded: see Source reconciliation)
+- Individual data types (character, string, integer, floating point, Boolean) and "data type" itself (U3O1-KK04): held back. The list of data types is marked verify. (superseded: see Source reconciliation)
+- Associative arrays and lists (U3O1-KK05): held back. Whether they are named is marked verify. (superseded: see Source reconciliation)
+- Trace tables and desk checking (U3O1-KK14): held back. Whether trace tables are named is marked verify. (superseded: see Source reconciliation)
+- Slack and float (U3O2-KK03): held back. Whether slack is named is marked verify. (superseded: see Source reconciliation)
+- Named data collection techniques such as interviews, surveys and observation (U3O2-KK04): held back. The list of techniques is marked verify. (superseded: see Source reconciliation)
+- Constraint types other than economic, legal and technical, such as social and usability (U3O2-KK06): held back. The list of constraint types is marked verify, so t-constraint gives only the three KK map examples and doesn't claim they are the full set. (superseded: see Source reconciliation)
+- The contents of an SRS (U3O2-KK09): held back. The listed contents are marked verify, so t-software-requirements-specification says only "including its requirements, constraints and scope". (superseded: see Source reconciliation)
+- Named Acts, the Australian Privacy Principles and the Information Security Manual (U3O2-KK10, U4O2-KK07): held back. Which Acts and frameworks are named is marked verify. Kept: t-essential-eight, because its definition is correct whatever the study design names and part u4o2-b already teaches the Essential Eight; it makes no claim that the study design lists it. (superseded: see Source reconciliation)
+- Ideation techniques and tools such as brainstorming, mind maps, mood boards and sketches (U3O2-KK12): held back. The list is marked verify. (superseded: see Source reconciliation)
+- Named design principles such as alignment, contrast and consistency (U3O2-KK16): held back. The list is marked verify. (superseded: see Source reconciliation)
+- Evaluation strategy (U4O1-KK08): held back. Any definition amounts to the features list, which is marked verify. (superseded: see Source reconciliation)
+- Threat modelling steps (U4O2-KK05): held back. The steps and their names are marked verify, so t-threat-modelling names, orders and counts no steps. (superseded: see Source reconciliation)
 - Problem-solving methodology and its stage names (PSM): held back from TERMS. The PSM group covers them, and each TERMS card needs a Unit 3/4 KK.
 - Development models (agile, waterfall, spiral), polymorphism, firewalls, penetration testing and social engineering (all areas): held back. The KK map doesn't name them.
 - Authorisation (U4O2-KK04): held back as a separate entry. It appears only in the t-authentication mistake note.
 - Selection sort, quick sort and linear search (U3O1-KK12): held back from the glossary. Part u3o1-c defines them, and t-binary-search contrasts with linear search in its mistake note.
 - Local and global variables, function versus procedure, constant and two-dimensional array (U3O1-KK05, U3O1-KK08): held back from the glossary. Per-KK cards cover them, and t-array covers two-dimensional indexing.
 - Plain text file, attribute, error handling, breakpoint and test table (U3O1-KK06, U3O1-KK07, U3O1-KK13, U3O1-KK14): held back from the glossary as near-duplicates of per-KK cards.
-- Stakeholder, user experience, portability and reliability (U3O2-KK04, U3O2-KK05, U3O2-KK15): held back from the glossary as near-duplicates of per-KK cards.
-- Copyright, personal information, archiving, task dependency, external entity, data store, actor, `<<includes>>` and `<<extends>>` (U3O2-KK03, U3O2-KK08, U3O2-KK10, U3O2-KK11): held back from the glossary. Per-KK cards cover them.
-- Identity and access management, insider threat, security control and production environment (U4O2-KK03, U4O2-KK04): held back from the glossary. Part u4o2-a covers them.
-- Type mismatch as a runtime error (U3O1-KK13): held back from t-runtime-error. Whether it is caught before or during running depends on the language's typing, so the card names only division by zero, index out of range and overflow, and doesn't claim a full list.
-- "Timely" as an effectiveness measure (U3O2-KK13): held back from t-effectiveness. It sat awkwardly beside speed as an efficiency measure, so the card now uses the KK map's accurate, complete and usable, matching part u3o2-c.
+- Stakeholder, user experience, portability and reliability (U3O2-KK04, U3O2-KK05, U3O2-KK15): held back from the glossary as near-duplicates of per-KK cards. (superseded: see Source reconciliation)
+- Copyright, personal information, archiving, task dependency, external entity, data store, actor, `<<includes>>` and `<<extends>>` (U3O2-KK03, U3O2-KK08, U3O2-KK10, U3O2-KK11): held back from the glossary. Per-KK cards cover them. (superseded: see Source reconciliation)
+- Identity and access management, insider threat, security control and production environment (U4O2-KK03, U4O2-KK04): held back from the glossary. Part u4o2-a covers them. (superseded: see Source reconciliation)
+- Type mismatch as a runtime error (U3O1-KK13): held back from t-runtime-error. Whether it is caught before or during running depends on the language's typing, so the card names only division by zero, index out of range and overflow, and doesn't claim a full list. (superseded: see Source reconciliation)
+- "Timely" as an effectiveness measure (U3O2-KK13): held back from t-effectiveness. It sat awkwardly beside speed as an efficiency measure, so the card now uses the KK map's accurate, complete and usable, matching part u3o2-c. (superseded: see Source reconciliation)
 
 ## PSM (part psm)
 
@@ -344,16 +346,16 @@ Review pass: 34 items reviewed (19 cards, 13 MCQs, 2 short answers), plus the 4 
 
 ### Held back
 
-- The study design's own names for the activities in each PSM stage (PSM): held back. The wording can't be checked (D-001), so activity names in `stages` are general descriptions (for example "Coding the solution", not "manipulation"). No item asks for a stage's list of activities, how many a stage has, or which activity is *not* in the PSM. Reconcile `stages` with the source first when it is available.
-- Moving any activity to a different stage (PSM): held back. Items follow mainstream textbook placement: evaluation criteria in design (psm-c-004, psm-c-010, psm-m-006), validation, testing and internal and user documentation in development (psm-c-005, psm-m-012), and the evaluation strategy in evaluation (psm-c-006, psm-m-010). Part u4o1-b holds back naming these stages, so recheck these items first if the source places an activity elsewhere.
-- The listed features of an evaluation strategy (U4O1-KK08): held back. It is a verify entry. The activity summary and specification note say only that a strategy *typically* covers criteria, data and methods, timing and responsibility. psm-m-010 asks only which activity a plan of data, method and timing is, and no item says the strategy must be written before release.
-- The contents of an SRS (U3O2-KK09): held back. It is a verify entry. The SRS appears only as the usual place analysis findings are gathered. When the SRS is produced is left to part u3o2-b (m-u3o2-kk09-001, c-u3o2-kk09-002).
-- Constraint types (U3O2-KK06): held back. It is a verify entry. Constraints appear only as examples (a fixed budget, a deadline), and no item names or classifies a type.
-- Named data collection and ideation techniques (U3O2-KK04, U3O2-KK12): held back. Both are verify entries, so techniques appear only as "for example" or "such as" examples, and no item depends on which techniques the study design lists.
+- The study design's own names for the activities in each PSM stage (PSM): held back. The wording can't be checked (D-001), so activity names in `stages` are general descriptions (for example "Coding the solution", not "manipulation"). No item asks for a stage's list of activities, how many a stage has, or which activity is *not* in the PSM. Reconcile `stages` with the source first when it is available. (superseded: see Source reconciliation)
+- Moving any activity to a different stage (PSM): held back. Items follow mainstream textbook placement: evaluation criteria in design (psm-c-004, psm-c-010, psm-m-006), validation, testing and internal and user documentation in development (psm-c-005, psm-m-012), and the evaluation strategy in evaluation (psm-c-006, psm-m-010). Part u4o1-b holds back naming these stages, so recheck these items first if the source places an activity elsewhere. (superseded: see Source reconciliation)
+- The listed features of an evaluation strategy (U4O1-KK08): held back. It is a verify entry. The activity summary and specification note say only that a strategy *typically* covers criteria, data and methods, timing and responsibility. psm-m-010 asks only which activity a plan of data, method and timing is, and no item says the strategy must be written before release. (superseded: see Source reconciliation)
+- The contents of an SRS (U3O2-KK09): held back. It is a verify entry. The SRS appears only as the usual place analysis findings are gathered. When the SRS is produced is left to part u3o2-b (m-u3o2-kk09-001, c-u3o2-kk09-002). (superseded: see Source reconciliation)
+- Constraint types (U3O2-KK06): held back. It is a verify entry. Constraints appear only as examples (a fixed budget, a deadline), and no item names or classifies a type. (superseded: see Source reconciliation)
+- Named data collection and ideation techniques (U3O2-KK04, U3O2-KK12): held back. Both are verify entries, so techniques appear only as "for example" or "such as" examples, and no item depends on which techniques the study design lists. (superseded: see Source reconciliation)
 - Beta testing (U4O1-KK07): held back from the PSM items. Textbooks differ on whether it is part of development testing or sits apart from it, so no PSM item places it in a stage.
-- Project planning with Gantt charts, logs and journals (U3O2-KK03, U4O1-KK11): held back. No item says which PSM stage planning belongs to, or whether it is part of the PSM.
+- Project planning with Gantt charts, logs and journals (U3O2-KK03, U4O1-KK11): held back. No item says which PSM stage planning belongs to, or whether it is part of the PSM. (superseded: see Source reconciliation)
 - Iteration, meaning a return to an earlier stage (PSM): held back. Textbooks present it differently. The only rework covered is debugging within development.
-- One identical set of criteria for judging design ideas and the finished solution (U3O2-KK13): held back. No item says whether the two sets of criteria are the same.
+- One identical set of criteria for judging design ideas and the finished solution (U3O2-KK13): held back. No item says whether the two sets of criteria are the same. (superseded: see Source reconciliation)
 - Development models such as agile, waterfall and spiral (PSM): held back. They are out of scope.
 
 ### Review fixes (kept items)
@@ -373,17 +375,17 @@ Review pass: 34 items reviewed (19 cards, 13 MCQs, 2 short answers), plus the 4 
 
 - Invented organisation: Kestrel Bay Freight, a Geelong freight company with 480 staff. The insert ends with a line saying the organisation and everyone named are fictional. The insert runs to about 695 words, with 13 questions worth 60 marks and no MCQs. It has four figures: a context diagram, a Gantt chart, an object description and pseudocode.
 - Two figures contain a deliberate error, and the insert labels both as drafts. Figure 1 (context diagram) has one convention error, the `delivery_instructions` flow from Customer to Driver (q03). Figure 3 (object description) types `consignmentId` as Integer (q05). Every other element of both figures follows the conventions, so each question has exactly one answer.
-- U4O2-KK07 and U3O2-KK10 (verify: which Acts and frameworks). No question names an Act, the Australian Privacy Principles, the Essential Eight or the Information Security Manual, and there is no legislation question. Privacy appears only as an ethical issue (q11) and a security risk (q13).
-- U4O2-KK05 (verify: threat modelling steps). q12 asks why to threat model during design and for threats and controls on named flows in Figure 1. It doesn't name, number or order any threat modelling steps.
-- U4O2-KK03 (verify: listed vulnerabilities). q13 asks students to find weaknesses in the insert's own description of the environment. It never asks which vulnerabilities the study design lists.
+- U4O2-KK07 and U3O2-KK10 (verify: which Acts and frameworks). No question names an Act, the Australian Privacy Principles, the Essential Eight or the Information Security Manual, and there is no legislation question. Privacy appears only as an ethical issue (q11) and a security risk (q13). (superseded: see Source reconciliation)
+- U4O2-KK05 (verify: threat modelling steps). q12 asks why to threat model during design and for threats and controls on named flows in Figure 1. It doesn't name, number or order any threat modelling steps. (superseded: see Source reconciliation)
+- U4O2-KK03 (verify: listed vulnerabilities). q13 asks students to find weaknesses in the insert's own description of the environment. It never asks which vulnerabilities the study design lists. (superseded: see Source reconciliation)
 - U4O2-KK06 isn't tagged. q13 asks for weaknesses and controls, not for evaluation criteria, because the criteria would be given as a fixed set.
-- U3O2-KK03 (verify: whether slack is named). q04 never names slack or float. It says only that the portal task "still finishes two weeks before it is needed", worked out from the dependencies.
-- U4O1-KK08 (verify: features of an evaluation strategy). q09 is tagged U4O1-KK09 only and asks for data collection techniques matched to Kestrel Bay's objectives. It doesn't list the features of a strategy, or say who evaluates or when as required features.
-- U3O2-KK04 (verify: data collection techniques) and U3O2-KK06 (verify: constraint types). There is no data collection or constraint question. The q02 mistake note calls the budget "a constraint" without giving a constraint type.
-- U3O1-KK04 (verify: data types). Only String, Integer, Floating point and Boolean appear, with no date or time types. U3O1-KK14 (verify: trace tables). q07 uses a test table with the house columns and never mentions a trace table.
+- U3O2-KK03 (verify: whether slack is named). q04 never names slack or float. It says only that the portal task "still finishes two weeks before it is needed", worked out from the dependencies. (superseded: see Source reconciliation)
+- U4O1-KK08 (verify: features of an evaluation strategy). q09 is tagged U4O1-KK09 only and asks for data collection techniques matched to Kestrel Bay's objectives. It doesn't list the features of a strategy, or say who evaluates or when as required features. (superseded: see Source reconciliation)
+- U3O2-KK04 (verify: data collection techniques) and U3O2-KK06 (verify: constraint types). There is no data collection or constraint question. The q02 mistake note calls the budget "a constraint" without giving a constraint type. (superseded: see Source reconciliation)
+- U3O1-KK04 (verify: data types). Only String, Integer, Floating point and Boolean appear, with no date or time types. U3O1-KK14 (verify: trace tables). q07 uses a test table with the house columns and never mentions a trace table. (superseded: see Source reconciliation)
 - U3O2-KK05. The non-functional examples are the 99.5 per cent availability target (reliability) and the 30-second recording target. The offline store-and-upload feature isn't offered as an example of either kind of requirement, because it could be read either way.
-- OOP (q06). Inheritance adds a property and a method in a subclass. Overriding and polymorphism are left out because the KK map doesn't name them.
-- PSM stage names are unconfirmed, so no model answer says which PSM stage an activity belongs to.
+- OOP (q06). Inheritance adds a property and a method in a subclass. Overriding and polymorphism are left out because the KK map doesn't name them. (superseded: see Source reconciliation)
+- PSM stage names are unconfirmed, so no model answer says which PSM stage an activity belongs to. (superseded: see Source reconciliation)
 - Computed answers were checked by running them in node (a direct transcription of Figure 4 and a forward and backward pass over Figure 2):
   - q07: `deliveryCharge(12, 3, FALSE)` = 45.00 (given). `deliveryCharge(30, 1, FALSE)` returns 51.00; the insert's rule (surcharge at 30 kg or more) expects 76.00. `deliveryCharge(40, 2, TRUE)` = (15 + 72 + 25) × 1.5 = 168.00, both expected and actual. The error is on line 11 (`>` should be `≥`), counting lines from 1 with the comment as line 2.
   - q04: the critical path is Analyse requirements and write SRS (3), Design driver app screens (3), Develop driver app (5), Connect mapping service (2), Alpha testing (2), Beta testing at Ballarat depot (2), Train drivers and depot staff (2), then Go-live. That is 19 weeks, with only one critical path, because Design driver app screens (3) is longer than Design database and classes (2). Develop portal and charging module runs from week 5 to week 9 and could finish four weeks later without delaying Alpha testing. With six weeks it ends at week 11, so go-live stays at 19. Adding two weeks to Develop driver app moves go-live to week 21. Security review runs from week 15 to week 16 and doesn't affect go-live.
@@ -405,21 +407,21 @@ Fixes:
 - `parceltrack-context` figure: The delivery_instructions labelAt moves from x 588 to x 580, so the label box ends 31 units from the right edge instead of 23.
 
 Held back:
-- Legislation and frameworks: Acts, Australian Privacy Principles, Essential Eight, Information Security Manual (U4O2-KK07, U3O2-KK10): held back. The set of Acts and frameworks is marked verify. Privacy appears only as an ethical issue (q11) and a risk (q13).
-- Threat modelling steps, by name or in order (U4O2-KK05): held back. The step list is marked verify. q12 asks only for a benefit of threat modelling early and for threats and controls on named flows.
-- Slack or float by name (U3O2-KK03): held back. Whether slack is named is marked verify. q04 reasons from dependencies only.
-- Features of an evaluation strategy (U4O1-KK08): held back. The listed features are marked verify. q09 is tagged U4O1-KK09 only.
-- Choosing a data collection technique per stakeholder group (U3O2-KK04): held back. The technique list is marked verify.
-- Classifying constraints by type (U3O2-KK06): held back. The constraint types are marked verify. The q02 mistake note calls the budget "a constraint" with no type.
-- Vulnerabilities "the study design lists" (U4O2-KK03): held back. The list is marked verify. q13 uses only weaknesses described in the insert.
-- Date and time data types (U3O1-KK04): held back. The data type list is marked verify. Figure 3 uses String, Integer, Floating point and Boolean only.
-- Trace tables (U3O1-KK14): held back. Whether trace tables are named is marked verify. q07 uses a test table only.
+- Legislation and frameworks: Acts, Australian Privacy Principles, Essential Eight, Information Security Manual (U4O2-KK07, U3O2-KK10): held back. The set of Acts and frameworks is marked verify. Privacy appears only as an ethical issue (q11) and a risk (q13). (superseded: see Source reconciliation)
+- Threat modelling steps, by name or in order (U4O2-KK05): held back. The step list is marked verify. q12 asks only for a benefit of threat modelling early and for threats and controls on named flows. (superseded: see Source reconciliation)
+- Slack or float by name (U3O2-KK03): held back. Whether slack is named is marked verify. q04 reasons from dependencies only. (superseded: see Source reconciliation)
+- Features of an evaluation strategy (U4O1-KK08): held back. The listed features are marked verify. q09 is tagged U4O1-KK09 only. (superseded: see Source reconciliation)
+- Choosing a data collection technique per stakeholder group (U3O2-KK04): held back. The technique list is marked verify. (superseded: see Source reconciliation)
+- Classifying constraints by type (U3O2-KK06): held back. The constraint types are marked verify. The q02 mistake note calls the budget "a constraint" with no type. (superseded: see Source reconciliation)
+- Vulnerabilities "the study design lists" (U4O2-KK03): held back. The list is marked verify. q13 uses only weaknesses described in the insert. (superseded: see Source reconciliation)
+- Date and time data types (U3O1-KK04): held back. The data type list is marked verify. Figure 3 uses String, Integer, Floating point and Boolean only. (superseded: see Source reconciliation)
+- Trace tables (U3O1-KK14): held back. Whether trace tables are named is marked verify. q07 uses a test table only. (superseded: see Source reconciliation)
 - Security evaluation criteria as a question (U4O2-KK06): held back. The case study is at 13 questions, and q13 asks for weaknesses and controls instead.
-- Overriding and polymorphism (U3O1-KK07): held back. The KK map doesn't name them.
+- Overriding and polymorphism (U3O1-KK07): held back. The KK map doesn't name them. (superseded: see Source reconciliation)
 - Validation (U3O1-KK10, U4O1-KK05) and API change risk (U4O1-KK04): held back to stay within 13 questions.
 - Naming the quality of the 30-second recording target (U3O2-KK05): held back. It could be classed as usability or as performance or efficiency, so it is accepted as non-functional without naming its quality. The model uses the 99.5 per cent availability (reliability) example.
 - The offline store-and-upload feature as a requirement example (U3O2-KK05): held back. It could be read as functional or as a reliability requirement.
-- PSM stage names (PSM): held back. They are unconfirmed, so no model answer assigns an activity to a named stage.
+- PSM stage names (PSM): held back. They are unconfirmed, so no model answer assigns an activity to a named stage. (superseded: see Source reconciliation)
 
 ## Cross-unit consistency pass
 
@@ -510,7 +512,7 @@ After the units were merged, four finders read all content across units: duplica
 
 - Invented organisation: Neilborough Trade College, a private registered training organisation in Bendigo with campuses in Echuca and Swan Hill. SignOff replaces paper apprentice logbooks with an apprentice phone app (built by an external firm, Kilnworth Apps), a supervisor web page, a trainer dashboard that flags apprentices at risk, and a nightly CSV or XML export to a state records system. The insert runs to about 697 words and ends with a line saying the organisation and everyone named are fictional.
 - 13 questions worth 60 marks: 1 MCQ and 12 short answers of 3 to 8 marks, covering all four areas. Four figures, none of a kind cs-01 uses: a draft use case diagram, the project plan as a task table (weeks), a draft phone mock-up of the Log a task screen, and pseudocode for `isAtRisk` (arrays indexed from 0) with a deliberate index-out-of-range error.
-- Held back as in cs-01: no Act, framework, threat modelling step, trace table, slack, float or constraint type is named, and only the house data type names appear. q13 is the first case study question on U4O2-KK06 (criteria for evaluating security); it builds its criteria from the insert's own weaknesses.
+- Held back as in cs-01: no Act, framework, threat modelling step, trace table, slack, float or constraint type is named, and only the house data type names appear. q13 is the first case study question on U4O2-KK06 (criteria for evaluating security); it builds its criteria from the insert's own weaknesses. (superseded: see Source reconciliation)
 
 ### Review pass (cs-02)
 
@@ -526,15 +528,15 @@ Fixes:
 - `cs-02-q09`: kk reordered to U4O1-KK09 then U3O2-KK13. Evaluating the solution after go-live and collecting data for it is U4O1 work, and before this change no question had a U4O1 primary KK.
 - `cs-02-q11` (U4O2-KK08): the model and marking point said the apprentices weren't asked about the use of their data, but the insert never said so. The insert now says the spreadsheet was emailed "without telling the apprentices", and the answer matches that.
 
-Held back (confirmed): no Act, framework, threat modelling step, trace table, slack or float or constraint type is named. Only house data type names are used. q13 (U4O2-KK06) asks for criteria built from the insert's own weaknesses. KK06 has no verify note, and no listed set of criteria is assumed.
+Held back (confirmed): no Act, framework, threat modelling step, trace table, slack or float or constraint type is named. Only house data type names are used. q13 (U4O2-KK06) asks for criteria built from the insert's own weaknesses. KK06 has no verify note, and no listed set of criteria is assumed. (superseded: see Source reconciliation)
 
 Noted, not changed: the mock-up renderer's `window` element always draws desktop minimise, maximise and close controls, so the phone screen in Figure 3 has them. No question refers to them.
 
 ## Games that go further than the holdbacks (law, threat)
 
-- The law game and threat's Essential Eight round teach, at textbook level, which of the Privacy Act 1988 (Cth), the Privacy and Data Protection Act 2014 (Vic), the Health Records Act 2001 (Vic) and the Copyright Act 1968 (Cth) applies to a scenario, including the Privacy Act's $3 million turnover threshold, and they name the eight strategies. That goes further than the U4O2-KK07 and U3O2-KK10 holdbacks above, because the brief asks for these games (`DECISIONS.md` D-148). The study content keeps its holdbacks.
-- When the study design can be read (D-001), check both games against it: which Acts and frameworks it names, the ACSC's current name for the Office macro strategy, and any reform of the small business exemption. If the confirmed list drops an Act or the Essential Eight, change or retire the matching scenarios in `src/games/law/` and `src/games/threat/`.
-- The threat game's round that orders the threat modelling steps is not built, in line with the U4O2-KK05 holdback; its man page says why.
+- The law game and threat's Essential Eight round teach, at textbook level, which of the Privacy Act 1988 (Cth), the Privacy and Data Protection Act 2014 (Vic), the Health Records Act 2001 (Vic) and the Copyright Act 1968 (Cth) applies to a scenario, including the Privacy Act's $3 million turnover threshold, and they name the eight strategies. That goes further than the U4O2-KK07 and U3O2-KK10 holdbacks above, because the brief asks for these games (`DECISIONS.md` D-148). The study content keeps its holdbacks. (superseded: see Source reconciliation)
+- When the study design can be read (D-001), check both games against it: which Acts and frameworks it names, the ACSC's current name for the Office macro strategy, and any reform of the small business exemption. If the confirmed list drops an Act or the Essential Eight, change or retire the matching scenarios in `src/games/law/` and `src/games/threat/`. (superseded: see Source reconciliation)
+- The threat game's round that orders the threat modelling steps is not built, in line with the U4O2-KK05 holdback; its man page says why. (superseded: see Source reconciliation)
 
 
 ## Phase 3: case studies 3 and 4, and growth above the floors
@@ -575,10 +577,10 @@ Fixes:
 - `cs-03-q13` (U4O2-KK10): the prompt said Imogen's budget covered only two fixes, but removing a public link costs nothing. It is now framed as advising Harriet which weaknesses to deal with first. The likelihood-and-impact prioritisation keeps it distinct from cs-01-q13 and cs-02-q12.
 
 Held back (confirmed):
-- No Act, framework, threat modelling step, trace table, slack or float, constraint type or development model is named. q07 never uses the word "boundary". Only house data type names are used (String, Floating point, Character, Boolean).
-- U3O2-KK04 (verify: the list of techniques). q02 accepts any suitable technique justified from the group's features, with interviews, observation and surveys given only as examples. Nothing depends on which techniques the study design lists.
-- U4O2-KK05 (verify: the steps). q11 uses a DFD to find threats and prioritises by likelihood and impact (q13). It never names, numbers or orders the steps.
-- U4O2-KK08. q12's issue is data collected for food safety being reused to rank named workers, without telling them, on a public screen. This follows the KK's "exposed personal data" example; algorithmic bias and automation's effect on jobs stay held back.
+- No Act, framework, threat modelling step, trace table, slack or float, constraint type or development model is named. q07 never uses the word "boundary". Only house data type names are used (String, Floating point, Character, Boolean). (superseded: see Source reconciliation)
+- U3O2-KK04 (verify: the list of techniques). q02 accepts any suitable technique justified from the group's features, with interviews, observation and surveys given only as examples. Nothing depends on which techniques the study design lists. (superseded: see Source reconciliation)
+- U4O2-KK05 (verify: the steps). q11 uses a DFD to find threats and prioritises by likelihood and impact (q13). It never names, numbers or orders the steps. (superseded: see Source reconciliation)
+- U4O2-KK08. q12's issue is data collected for food safety being reused to rank named workers, without telling them, on a public screen. This follows the KK's "exposed personal data" example; algorithmic bias and automation's effect on jobs stay held back. (superseded: see Source reconciliation)
 
 Noted, not changed: q01, q08 and the U3O2-KK04 short answer follow common exam patterns that also appear in bank items (m-u4o2-kk01-001, m-u4o1-kk04-002, s-u3o2-kk04-001). Each was checked. The scenario, the distractors and the key reasoning differ, so none repeats a bank item.
 
@@ -604,11 +606,11 @@ All 13 questions (60 marks), the insert and the 3 figures were reviewed. `conten
 
 ### Held back
 
-- Threat modelling steps, by name, number or order (U4O2-KK05): held back. q11 asks only for likelihood and impact, a control, and a test of the control.
+- Threat modelling steps, by name, number or order (U4O2-KK05): held back. q11 asks only for likelihood and impact, a control, and a test of the control. (superseded: see Source reconciliation)
 - Slack or float by name (U3O2-KK03): held back. q08 and q09 say only that training "had two weeks to spare", and q09 says that a delay to a task off the critical path didn't move go-live. No item computes how far a task could slip.
 - Contingency as a term (U4O1-KK10): held back. q09 says "spare time".
-- Acts, the Australian Privacy Principles, the Essential Eight and the ISM (U3O2-KK10, U4O2-KK07): held back. None is named.
-- Vulnerabilities "the study design lists" (U4O2-KK03): held back. q12 uses only the weaknesses in Joel's notes and three criteria given in the prompt.
+- Acts, the Australian Privacy Principles, the Essential Eight and the ISM (U3O2-KK10, U4O2-KK07): held back. None is named. (superseded: see Source reconciliation)
+- Vulnerabilities "the study design lists" (U4O2-KK03): held back. q12 uses only the weaknesses in Joel's notes and three criteria given in the prompt. (superseded: see Source reconciliation)
 - Trace tables (U3O1-KK14): held back. q07 uses a test table with the house columns.
 - The insurer's requirement as a problem (U3O2-KK01): held back. It is a need, as described under Fixes.
 
@@ -650,10 +652,10 @@ All 23 items (16 MCQs, 7 short answers) were reviewed. `content-parts.ts check` 
 
 ### Held back
 
-- Which design tools, data types or data structures the study design lists (U3O1-KK03, KK04, KK05): held back. These are verify entries. No item asks which tool or type is, or isn't, listed. Types are limited to Integer, Floating point, String, Character and Boolean, and structures to one-dimensional arrays, two-dimensional arrays and records.
+- Which design tools, data types or data structures the study design lists (U3O1-KK03, KK04, KK05): held back. These are verify entries. No item asks which tool or type is, or isn't, listed. Types are limited to Integer, Floating point, String, Character and Boolean, and structures to one-dimensional arrays, two-dimensional arrays and records. (superseded: see Source reconciliation)
 - Trace tables (U3O1-KK14): held back. The trace items ask only for the output or the final array contents.
 - Real AI products, and policy or law on AI-generated code (U3O1-KK01): held back. The AI items cover prompting for a diagnosis, judging an optimisation, and testing generated code.
-- Polymorphism and overriding (U3O1-KK07): held back. m-u3o1-kk07-005 covers inheriting properties and public methods only.
+- Polymorphism and overriding (U3O1-KK07): held back. m-u3o1-kk07-005 covers inheriting properties and public methods only. (superseded: see Source reconciliation)
 
 ### Checks
 
@@ -710,7 +712,7 @@ All 25 items (18 MCQs, 7 short answers) were reviewed against the existing MCQs,
 ### Held back (confirmed in this part)
 
 - Trace tables, boundary, extreme and exceptional test data by name (U3O1-KK14): held back. s-u3o1-kk14-003 asks for the last element, the first element and a target that isn't there, and names no category.
-- Which language features the study design lists (U3O1-KK08): held back. m-u3o1-kk08-007 tests only the difference between a function and a procedure.
+- Which language features the study design lists (U3O1-KK08): held back. m-u3o1-kk08-007 tests only the difference between a function and a procedure. (superseded: see Source reconciliation)
 - Overflow, try/catch, Big O, bubble and insertion sort, "conditional operator", Pascal case, and format, length or lookup checks: none appears.
 
 ### g-u3o2-a
@@ -736,9 +738,9 @@ All 27 items (19 MCQs, 8 short answers) were reviewed against the existing items
 ### Held back
 
 - Slack or float, by name or by calculation (U3O2-KK03): held back. Nothing in this part asks how far a task could slip. The Gantt items ask for the critical path, the effect of a dependency change, and the effect of shortening one of two tasks.
-- Which data collection techniques or constraint types the study design lists (U3O2-KK04, U3O2-KK06): held back. Items use only interviews, surveys and observation, and only economic, technical and legal constraints. None asks which technique or type is or isn't listed.
-- Named Acts (U3O2-KK06, U3O2-KK10): held back. The photo copyright MCQ (`m-u3o2-kk06-005`) names no Act.
-- Non-functional qualities beyond reliability, usability and portability (U3O2-KK05): held back.
+- Which data collection techniques or constraint types the study design lists (U3O2-KK04, U3O2-KK06): held back. Items use only interviews, surveys and observation, and only economic, technical and legal constraints. None asks which technique or type is or isn't listed. (superseded: see Source reconciliation)
+- Named Acts (U3O2-KK06, U3O2-KK10): held back. The photo copyright MCQ (`m-u3o2-kk06-005`) names no Act. (superseded: see Source reconciliation)
+- Non-functional qualities beyond reliability, usability and portability (U3O2-KK05): held back. (superseded: see Source reconciliation)
 
 ### Checks
 
@@ -773,7 +775,7 @@ All 25 items were reviewed (17 MCQs, 8 short answers). One MCQ was dropped and r
 
 - `s-u3o2-kk09-003` asks the same question as the card c-u3o2-kk09-005 (why the client approves the SRS before design). It was kept as scenario practice, as s-u3o2-kk12-002 sits beside c-u3o2-kk12-007.
 - `m-u3o2-kk12-005` shares the "only one idea" theme with s-u3o2-kk12-002. It was kept because its key also tests that sketches are quick and rough, and that detail comes later.
-- `s-u3o2-kk16-003` shares the destructive-button contrast idea with m-u3o2-kk16-004. It was kept because KK16 items are limited to alignment, contrast and consistency, and here the task is to justify a redesign from a mock-up.
+- `s-u3o2-kk16-003` shares the destructive-button contrast idea with m-u3o2-kk16-004. It was kept because KK16 items are limited to alignment, contrast and consistency, and here the task is to justify a redesign from a mock-up. (superseded: see Source reconciliation)
 
 ### Checks
 
@@ -801,7 +803,7 @@ All 24 items (18 MCQs, 6 short answers) were reviewed. `content-parts.ts check` 
 
 ### Held back
 
-- Which data types, data structures, language features or validation checks the study design lists (U3O1-KK04, KK05, KK08): held back. These are verify entries or overlap them. Types are limited to Integer, Floating point, String and Boolean. Structures are limited to one-dimensional and two-dimensional arrays and arrays of records. Checks are limited to existence, type and range.
+- Which data types, data structures, language features or validation checks the study design lists (U3O1-KK04, KK05, KK08): held back. These are verify entries or overlap them. Types are limited to Integer, Floating point, String and Boolean. Structures are limited to one-dimensional and two-dimensional arrays and arrays of records. Checks are limited to existence, type and range. (superseded: see Source reconciliation)
 - Trace tables (U3O1-KK14): held back. The breakpoint table in m-u4o1-kk06-005 is titled "Values at each pause on line 6".
 - File operations in pseudocode: held back. docs/PSEUDOCODE.md has no syntax for them, so s-u4o1-kk03-003 is in prose. Its scenario states that the program stopped with an error, so the item doesn't depend on any one language's behaviour.
 - Integration testing as a named term (U4O1-KK06): held back. m-u4o1-kk06-006 says only that modules must also be tested together.
@@ -892,9 +894,9 @@ All 20 items (15 MCQs, 5 short answers) were reviewed. `content-parts.ts check` 
 
 ### Held back (confirmed)
 
-- No item names, numbers, orders or counts the threat modelling steps, or names STRIDE, DREAD, attack trees or trust boundaries (U4O2-KK05). m-u4o2-kk05-006 teaches security requirements as a general principle, and s-u4o2-kk05-003 teaches revisiting a threat model when a feature is added.
-- No item asks which vulnerabilities or risks the study design lists (U4O2-KK03). Each KK03 item describes a specific weakness in a scenario.
-- No Act or framework is named. Least privilege appears only inside identity and access management (m-u4o2-kk04-006, m-u4o2-kk02-007). No firewall, antivirus, penetration testing, hashing or salting appears. There are no development models, no slack or float, and no SMART, mission or vision statements.
+- No item names, numbers, orders or counts the threat modelling steps, or names STRIDE, DREAD, attack trees or trust boundaries (U4O2-KK05). m-u4o2-kk05-006 teaches security requirements as a general principle, and s-u4o2-kk05-003 teaches revisiting a threat model when a feature is added. (superseded: see Source reconciliation)
+- No item asks which vulnerabilities or risks the study design lists (U4O2-KK03). Each KK03 item describes a specific weakness in a scenario. (superseded: see Source reconciliation)
+- No Act or framework is named. Least privilege appears only inside identity and access management (m-u4o2-kk04-006, m-u4o2-kk02-007). No firewall, antivirus, penetration testing, hashing or salting appears. There are no development models, no slack or float, and no SMART, mission or vision statements. (superseded: see Source reconciliation)
 
 ### Checks
 
@@ -950,7 +952,7 @@ None.
 
 ### Follow-up for docs/CONTENT_NOTES.md (U4O2-KK07 drop list)
 
-These items name an Act or an Essential Eight strategy. If the confirmed set of Acts and frameworks drops the one named, drop the item: `m-u4o2-kk07-005` (Essential Eight, application control), `m-u4o2-kk07-006` (Health Records Act 2001 (Vic), Privacy and Data Protection Act 2014 (Vic), Privacy Act 1988 (Cth), Copyright Act 1968 (Cth)) and `s-u4o2-kk07-003` (Essential Eight, Privacy Act 1988 (Cth)).
+These items name an Act or an Essential Eight strategy. If the confirmed set of Acts and frameworks drops the one named, drop the item: `m-u4o2-kk07-005` (Essential Eight, application control), `m-u4o2-kk07-006` (Health Records Act 2001 (Vic), Privacy and Data Protection Act 2014 (Vic), Privacy Act 1988 (Cth), Copyright Act 1968 (Cth)) and `s-u4o2-kk07-003` (Essential Eight, Privacy Act 1988 (Cth)). (superseded: see Source reconciliation)
 
 ### Checks
 
@@ -960,3 +962,438 @@ These items name an Act or an Essential Eight strategy. If the confirmed set of 
 - No US spellings were found. "Licence" is used as a noun throughout ("driver licence").
 - Names. The web search budget for this session ran out after one search ("Nardoo Payroll" found no payroll business), so no new organisation name was introduced. The three renamed organisations are now unnamed. The new person names, Petra and Sunita, appear nowhere else in the content or the other parts. The authoring agent reported web-searching the other organisation names.
 - `content-parts.ts check` prints ok.
+
+## Source reconciliation (October 2026)
+
+The VCAA documents were read from copies the operator supplied and digested on 13 October 2026, and every item, the glossary and the PSM were then reconciled against them. Where the study design and the content disagreed, the study design won. The run outputs (a fixes file for each review batch, and the gap list, notes file and new items for each gap-fill batch) are in the gitignored `reference/` folder.
+
+### How the review worked
+
+- The sources were digested first. The KK map matched the study design's 52 key knowledge points in order and count, so no KK id changed (3bea951). Pseudocode comparisons and Booleans were then written as the 2025 exam writes them (`<=`, `>=`, `<>`, `True`, `False`), and Commonwealth Acts were tagged (Cwlth) (2e6eb09).
+- The items were split into 31 batches: 26 of two KKs each, the PSM items and the four case studies. In each batch a reviewer read every item against the sources and recorded fixes by id, gaps and notes. A second agent then checked each proposed fix adversarially against the same sources, amending, rejecting or adding fixes and logging every decision in the batch's verification list, before the fixes were applied by id (aeaa7be).
+- The glossary was rebuilt from the official Terms and the PSM from the specifications table (ce0648a). The games and figures were checked against the sources in separate commits.
+- For the gaps, an author in each batch wrote one item per real gap and noted which old holdbacks the sources release, which existing items already cover a gap, and which topics stay held back. A verifier corrected or rewrote items before the merge (9dc814f).
+- After the gap fill, data type names were written as the key knowledge writes them: character, string, integer and floating point in lower case mid-sentence, Boolean with its capital (144a6cb, 358 places).
+
+### Counts
+
+- Items changed: 494, and none dropped (aeaa7be). That is 492 item fixes (U3O1 116, U3O2 135, U4O1 105, U4O2 84, PSM 11, case study questions 41) plus figure patches to cs-02 and cs-03.
+- Verifier decisions: the reviewers proposed 458 fixes. The verifiers amended 119, rejected 3 and added 37.
+- Gaps listed: 206 (`reference/gaps/`). They cover list items no item taught, holdbacks the sources now settle, and question forms on which the 2025 report shows students losing marks.
+- New items: 170 (9dc814f). By area: U3O1 43, U3O2 57, U4O1 26, U4O2 38 and PSM 6. By type: 66 cards, 65 MCQs and 39 short answers. The gap-fill verifiers removed none.
+
+### Last content pass
+
+- Testing tables (f3f4439): nine items whose tables were headed "Test number" or "Input (...)" now follow the 2025 exam's layout (Test, each input by name, Expected output, Actual output) and give outputs exactly as the program displays them: m-u3o1-kk14-003, m-u3o1-kk14-006, s-u3o1-kk14-001, s-u3o1-kk14-004, m-u4o1-kk05-006, m-u4o1-kk06-002, s-u4o1-kk06-001, cs-03-q07 and cs-04-q07. cs-03-q07's prompt now lists the module's three messages, so its expected outputs can be written in full.
+- Flagged items (f3f4439): m-u3o2-kk05-004 no longer classifies a response-time limit one way, because the PSM specifications list speed of processing as a technical constraint. c-u3o2-kk05-003, m-u3o2-kk05-002, s-u3o2-kk05-001 and s-u3o2-kk05-003 use availability as the reliability example, so none overlaps robustness. m-u3o2-kk09-004 calls a budget an economic constraint. cs-03-q02 credits only the four U3O2-KK04 methods, each with a reason from the case. c-u3o1-kk10-009 and c-u3o1-kk10-011 paraphrase the Terms definition of validation.
+- Checked and kept: the "Lesson database" actor in m-u3o2-kk08-004 and the calculateCost() property in s-u3o1-kk03-001 are the errors those questions ask students to find.
+
+### Glossary (TERMS)
+
+- TERMS has one card per term in the study design's "Terms used in this study", 42 in all, each paraphrasing the official definition with source `study-design`.
+- Kept ids: 11 reconstructed cards matched an official term and keep their ids: t-alpha-testing, t-backup, t-beta-testing, t-control-structure, t-debugging, t-effectiveness, t-efficiency, t-encryption, t-pseudocode, t-software-requirements-specification and t-validation. The other 31 terms have new t- ids.
+- Moved: the other 64 reconstructed cards weren't official terms. 58 of them moved to the KK they teach as ordinary cards with new ids, and were reviewed against the sources on the way:
+
+| Old id | New id | Old id | New id |
+|---|---|---|---|
+| `t-abstraction` | `c-u3o1-kk07-009` | `t-interoperability` | `c-u3o2-kk15-010` |
+| `t-access-modifier` | `c-u4o1-kk03-009` | `t-ipo-chart` | `c-u3o1-kk03-010` |
+| `t-affordance` | `c-u3o2-kk15-009` | `t-least-privilege` | `c-u4o2-kk09-009` |
+| `t-algorithm` | `c-u3o1-kk12-009` | `t-library` | `c-u4o1-kk04-011` |
+| `t-api` | `c-u4o1-kk04-009` | `t-logic-error` | `c-u3o1-kk13-009` |
+| `t-array` | `c-u3o1-kk05-009` | `t-milestone` | `c-u3o2-kk03-011` |
+| `t-authentication` | `c-u4o2-kk04-009` | `t-mock-up` | `c-u3o1-kk03-011` |
+| `t-binary-search` | `c-u3o1-kk12-010` | `t-multi-factor-authentication` | `c-u4o2-kk07-010` |
+| `t-camel-case` | `c-u3o1-kk09-009` | `t-non-functional-requirement` | `c-u3o2-kk05-010` |
+| `t-class` | `c-u3o1-kk08-009` | `t-object` | `c-u3o1-kk08-010` |
+| `t-code-repository` | `c-u4o1-kk04-010` | `t-object-description` | `c-u3o1-kk03-012` |
+| `t-constraint` | `c-u3o2-kk06-009` | `t-objective` | `c-u4o2-kk01-010` |
+| `t-context-diagram` | `c-u3o2-kk08-009` | `t-patching` | `c-u4o2-kk04-010` |
+| `t-critical-path` | `c-u3o2-kk03-009` | `t-range-check` | `c-u3o1-kk10-010` |
+| `t-data-dictionary` | `c-u3o1-kk03-009` | `t-record` | `c-u3o1-kk05-010` |
+| `t-data-flow-diagram` | `c-u3o2-kk08-010` | `t-risk` | `c-u4o2-kk03-009` |
+| `t-encapsulation` | `c-u3o1-kk07-010` | `t-runtime-error` | `c-u3o1-kk13-010` |
+| `t-essential-eight` | `c-u4o2-kk07-009` | `t-scope` | `c-u3o2-kk07-009` |
+| `t-evaluation-criteria` | `c-u3o2-kk13-009` | `t-scope-creep` | `c-u4o1-kk10-010` |
+| `t-existence-check` | `c-u3o1-kk10-009` | `t-snake-case` | `c-u3o1-kk09-011` |
+| `t-functional-requirement` | `c-u3o2-kk05-009` | `t-syntax-error` | `c-u3o1-kk13-011` |
+| `t-gantt-chart` | `c-u3o2-kk03-010` | `t-test-data` | `c-u3o1-kk14-009` |
+| `t-generalisation` | `c-u3o1-kk07-011` | `t-threat-modelling` | `c-u4o2-kk05-009` |
+| `t-generative-ai` | `c-u3o1-kk01-011` | `t-type-check` | `c-u3o1-kk10-011` |
+| `t-goal` | `c-u4o2-kk01-009` | `t-usability` | `c-u3o2-kk15-011` |
+| `t-hungarian-notation` | `c-u3o1-kk09-010` | `t-use-case-diagram` | `c-u3o2-kk08-011` |
+| `t-inheritance` | `c-u3o1-kk07-012` | `t-user-centred-design` | `c-u4o1-kk01-009` |
+| `t-intellectual-property` | `c-u3o2-kk10-009` | `t-vulnerability` | `c-u4o2-kk03-010` |
+| `t-internal-documentation` | `c-u3o1-kk11-009` | `t-xml` | `c-u3o1-kk06-009` |
+
+- Dropped: the remaining 6 repeated a unit card that already taught the term. Each is listed with the card that covers it: t-code-review (c-u4o2-kk04-007), t-csv (c-u3o1-kk06-001), t-method (c-u3o1-kk08-005), t-testing (c-u3o1-kk10-005), t-threat (c-u4o2-kk03-002) and t-version-control (c-u4o2-kk04-006).
+- The 64 retired t- ids are never reused, like any dropped id.
+- t-generative-ai was first moved to c-u3o1-kk01-008. That id had been dropped in the cross-unit consistency pass (above), so the card was renumbered c-u3o1-kk01-011 (e357241).
+- The holdbacks in part terms are settled by the official list. Topics that are Terms entries now have their own cards (for example t-archiving, t-user-experience, t-identity-and-access-management and t-security-controls). Topics that aren't, such as the individual data types, two-dimensional arrays, desk checking, stakeholders and the separate ideation tools and design principles, stay with their KKs; the batch entries below say which are taught and which stay held back.
+
+### PSM
+
+- `content/psm.json` follows the PSM table and the rows ticked for Software Development Units 3 and 4. It still has 15 activities, now 4 in analysis, 3 in design, 5 in development and 3 in evaluation (they were 4, 4, 4 and 3). The 13 surviving ids are kept.
+- Renamed:
+
+| Stage | Id | Was | Now |
+|---|---|---|---|
+| Analysis | solution-requirements | Determining solution requirements | Solution requirements |
+| Analysis | solution-constraints | Identifying constraints | Solution constraints |
+| Analysis | solution-scope | Defining scope | Solution scope |
+| Analysis | investigate-need | Investigating the problem, need or opportunity | Skills underpinning the analysis stage |
+| Design | detailed-design | Producing a detailed design | Solution design |
+| Design | generate-design-ideas | Generating design ideas | Skills underpinning the design stage |
+| Design | evaluation-criteria | Setting evaluation criteria | Evaluation criteria |
+| Development | coding | Coding the solution | Manipulation |
+| Development | validation | Validating input data | Validation |
+| Development | testing | Testing and debugging | Testing |
+| Development | documentation | Documenting the solution | Documentation |
+| Evaluation | evaluation-strategy | Planning the evaluation strategy | Evaluation strategy |
+| Evaluation | evaluation-report | Reporting the evaluation | Solution evaluation |
+
+- Removed: evaluate-design-ideas (Evaluating design ideas) and collect-evaluation-data (Collecting evaluation data), because neither is a PSM activity. Applying the criteria to design ideas is now part of Evaluation criteria, and planning what data to collect, how, when and by whom is part of Evaluation strategy.
+- Added: development-skills (Skills underpinning the development stage) and evaluation-skills (Skills underpinning the evaluation stage).
+- Documentation now means internal documentation only, the one documentation row ticked for Software Development, so user documentation left the activity and stage summaries. The 10 specification notes became 21, at least one for each ticked row.
+- In the psm game, which-stage questions describe rather than name the activities whose names give away their stage (1000c55).
+
+### Games (law, threat)
+
+- Both games were checked against the sources (80ef4a3). The law game writes the Commonwealth Acts with (Cwlth), uses the APPs and IPPs the outcome-specific requirements list for each unit, and, for a Privacy Act or Privacy and Data Protection Act scenario, names in its feedback a principle that both units list. Its Health Records Act scenarios count towards TERMS, because only Terms names that Act. It still teaches the Privacy Act's $3 million turnover threshold at textbook level, with every turnover set far from it (D-148), while the study content keeps the threshold held back (U4O2 KK07 and KK08 below).
+- The threat game's answers are the six U4O2-KK04 controls, its feedback names the U4O2-KK03 risk a weakness shows where there is one, and its Essential Eight lists use the strategy names the outcome-specific requirements give, including restrict Microsoft Office macros. Its man page names the three threat modelling principles. No round asks about them yet: that would be a new item kind, built on three principles rather than ordered steps.
+
+### Case studies
+
+- New questions in the case study inserts (cs-01 to cs-04): still held back. Each case study already has 13 questions for 60 marks, and the gap-fill batches wrote bank items, not inserts. Gaps raised against an insert (reasons for the project, data collection, constraint types, requirement types, a Level 1 DFD, a mind map, UX sketches, user-centred design, beta testing, object descriptions, validation, test data, in-house development, legislation, threat modelling and security strategies) are met by bank items, named under their KKs below.
+
+### U3O1 KK01 and KK02
+
+- Benefits and disadvantages of generating code from prompts, including refining it over a series of prompts (U3O1-KK01): released (c-u3o1-kk01-009).
+- AI in automated debugging and testing tools: benefits, improvements and challenges (U3O1-KK01): released (m-u3o1-kk01-008).
+- Types of code optimisation AI can perform (U3O1-KK01): released (c-u3o1-kk01-010).
+- Responsible and ethical AI practices beyond over-reliance, such as bias, environmental impact, licensing and a tool's technical limitations (U3O1-KK01, U4O2-KK08): released (m-u3o1-kk01-009).
+- Robustness and maintainability requirements applied while coding (U3O1-KK02, U3O2-KK05): released (m-u3o1-kk02-008).
+- Classifying a call to a non-existent library function as a syntax, runtime or compile-time error (U3O1-KK01, U3O1-KK13): still held back. Terms defines the three error types but doesn't place an undefined name, and languages differ on when they catch it.
+- Real AI products, school or VCAA policy on AI use, and ownership of AI-generated code (U3O1-KK01, U3O2-KK10, U4O2-KK07): still held back. The outcome-specific requirements name products only as examples, the policies aren't among the sources, and who owns generated code is unsettled law. The risk that AI output copies other people's work is taught (c-u3o1-kk01-009, m-u4o2-kk08-007).
+
+### U3O1 KK03 and KK04
+
+- Date/time as a numeric data type, and the three groups of data types (text, numeric, Boolean) (U3O1-KK04): released (c-u3o1-kk04-009, m-u3o1-kk04-007). This settles the data type holdbacks in parts u3o1-a, u4o1-a, g-u3o1-a, g-u4o1-a and cs-01.
+- Mock-up annotations sorted into appearance and structure (U3O1-KK03, U3O2-KK14): released (m-u3o1-kk03-007).
+- An object description in VCAA's layout, with section names to supply and typed properties in its casing (U3O1-KK03, U3O2-KK14): released (s-u3o1-kk03-004).
+- An IPO chart process that states its condition (U3O1-KK03): released (m-u3o1-kk03-008).
+- The outcome-specific requirements' pseudocode conventions for layout, assignment, input and output, beside the house choices (U3O1-KK03): released (c-u3o1-kk03-013).
+- Which design tools the study design lists (U3O1-KK03): settled. The KK lists exactly data dictionaries, mock-ups, object descriptions, IPO charts and pseudocode, and c-u3o1-kk03-008 matches each to its use.
+- Flowcharts, structure charts, Nassi-Shneiderman diagrams, storyboards and site maps, and "which is not a design tool" items (U3O1-KK03): still held back. The two design tool KKs list only the five tools, but the PSM specifications name flowcharts, storyboards and site maps as design tools, so an item could neither teach them under these KKs nor rule them out. The other two appear in no source.
+- Decimal, fixed-point and currency types, long and short integers, and storage sizes (U3O1-KK04): still held back. The KK names only character, string, integer, floating point, date/time and Boolean; money stays floating point to two decimal places.
+- Padding numeric strings with leading zeros as a sorting fix (U3O1-KK04): still held back. No source gives it.
+
+### U3O1 KK05 and KK06
+
+- Which data structures the study design names (U3O1-KK05): released (c-u3o1-kk05-011). They are one-dimensional arrays, two-dimensional arrays and records.
+- Reaching a record's value by field index (U3O1-KK05): released (m-u3o1-kk05-008).
+- Naming a one-dimensional array from an indexed figure (U3O1-KK05): released (m-u3o1-kk05-007).
+- Benefits of XML on their own, not compared with CSV (U3O1-KK06): released (s-u3o1-kk06-004).
+- Writing a program's data to well-formed XML (U3O1-KK06): released (m-u3o1-kk06-007).
+- Structured (CSV, XML) and unstructured (TXT) data sources, as the Terms entry classes them (U3O1-KK06): released (m-u3o1-kk06-008).
+- Associative arrays, dictionaries, lists, stacks and queues (U3O1-KK05, U4O1-KK02): still held back. The KK names only the three structures above; the study design names lists only in Unit 1, and no source names the others.
+- Arrays as fixed-size structures (U3O1-KK05): still held back. No source says so, and it depends on the language.
+- Pseudocode traces through record fields (U3O1-KK05): still held back. No source gives a field notation, so m-u3o1-kk05-008 states its notation in the stem and has no trace.
+- XML schemas and DTDs, JSON, and attributes versus elements (U3O1-KK06, U4O1-KK02): still held back. The KK, the outcome-specific requirements and Terms name only plain text, delimited and XML files.
+
+### U3O1 KK07 and KK08
+
+- The language features U3O1-KK08 lists, with the access modifiers U4O1-KK03 adds (U3O1-KK08): released (c-u3o1-kk08-014).
+- Constants, global variables and local variables in one scenario (U3O1-KK08): released (m-u3o1-kk08-008).
+- Selection as the control structure of an IF … ELSEIF … ELSE (U3O1-KK08): released (m-u3o1-kk08-009).
+- CASE versus IF … ELSEIF (U3O1-KK08): released (c-u3o1-kk08-011).
+- The three ways the outcome-specific requirements allow a GUI to be built (U3O1-KK08): released (c-u3o1-kk08-012).
+- The full arithmetic operator list, with DIV and MOD worked (U3O1-KK08): released (c-u3o1-kk08-013).
+- Abstraction through a method other code calls without knowing its steps (U3O1-KK07): released (s-u3o1-kk07-004, m-u3o1-kk07-008).
+- Recognising inheritance in a design and its benefit (U3O1-KK07): released (m-u3o1-kk07-007).
+- VCAA's inheritance notation in object descriptions (U3O1-KK07): released (c-u3o1-kk07-013).
+- Overriding (U3O1-KK07): released (c-u3o1-kk07-014). VCAA's own inheritance examples mark subclass methods that override, so it is in scope; the card doesn't claim an overriding method must share its name.
+- "Conditional operator" (U3O1-KK08): settled. The outcome-specific requirements group conditional and comparison operators together, which is how the items already use the term.
+- Named GUI controls as study design content (U3O1-KK08, U4O1-KK03): still held back. Neither KK nor the outcome-specific requirements names a control, so choosing controls stays a textbook topic.
+- Polymorphism, constructors and interfaces (U3O1-KK07): still held back. The KK lists four principles, and none of these appears in any source.
+- Function versus procedure (U3O1-KK08): still held back. The KKs list functions and methods only; procedures belong to Unit 1.
+
+### U3O1 KK09 and KK10
+
+- Naming the validation check a pseudocode line applies, then adding and justifying a further check (U3O1-KK10, U4O1-KK05): released (s-u3o1-kk10-004).
+- Naming new elements to match an existing design's conventions (U3O1-KK09): released (s-u3o1-kk09-004).
+- Naming the convention an identifier uses (U3O1-KK09): released (m-u3o1-kk09-007).
+- Which validation checks the study design lists (U3O1-KK10, U4O1-KK05): settled. They are existence, type and range checking, as t-validation states.
+- Verification (U3O1-KK10, U4O1-KK05): settled. Terms defines it, and t-verification, c-u3o1-kk10-004 and m-u3o1-kk10-004 separate it from validation.
+- Pascal case (U3O1-KK09): still held back. The KK names Hungarian notation, camel casing and snake casing, and no source names Pascal case.
+- A fixed list of Hungarian prefixes (U3O1-KK09): still held back. Neither the study design nor the outcome-specific requirements gives one.
+- Format, length and lookup checks (U3O1-KK10, U4O1-KK05): still held back. The KKs, Terms and the PSM specifications name only existence, type and range checks.
+- Double entry as a verification technique (U3O1-KK10): still held back. The Terms entry for verification doesn't name it.
+
+### U3O1 KK11 and KK12
+
+- Placeholder comments and stubs (U3O1-KK11): released (c-u3o1-kk11-010, m-u3o1-kk11-007).
+- A comment that justifies a data structure choice (U3O1-KK11): released (m-u3o1-kk11-008).
+- How quick sort orders data, without a partition trace (U3O1-KK12): released (m-u3o1-kk12-008).
+- Selection sort versus quick sort on method, efficiency and complexity (U3O1-KK12): released (s-u3o1-kk12-004).
+- Quick sort partition traces (U3O1-KK12): still held back. VCAA describes only a pivot and two sub-lists, and no source fixes a partition scheme.
+- Big O notation (U3O1-KK12): still held back. No source uses it.
+- Bubble sort and insertion sort by name (U3O1-KK12): still held back. The KK names exactly four algorithms, and neither sort appears in any source.
+- Fixed header-comment fields (U3O1-KK11): still held back. No source lists them.
+- "Justification comment" as a term (U3O1-KK11): still held back. No source uses the label, so the idea is taught without it.
+- User documentation (U3O1-KK11): still held back. The KK and the PSM row ticked for Software Development cover internal documentation only.
+
+### U3O1 KK13 and KK14
+
+- The likely cause of a syntax error the compiler reports (U3O1-KK13): released (m-u3o1-kk13-008).
+- Matching fault descriptions to a logic error and the four runtime errors (U3O1-KK13): released (s-u3o1-kk13-004).
+- Index out of range in a two-dimensional array (U3O1-KK13): released (s-u3o1-kk13-005).
+- Where to set a breakpoint (U3O1-KK14): released (m-u3o1-kk14-008).
+- A debugging statement in each branch of a selection (U3O1-KK14): released (c-u3o1-kk14-010).
+- Completing a testing table for a two-input function (U3O1-KK14, U4O1-KK06): released (s-u3o1-kk14-004).
+- Desk-checking a tiered IF … ELSEIF either side of a limit (U3O1-KK14): released (m-u3o1-kk14-009).
+- Divide by zero, overflow and type mismatch as runtime errors (U3O1-KK13): settled. Terms lists overflow, index out of range, type mismatch and divide by zero as runtime errors that stop a program unless handled, and c-u3o1-kk13-010 names all four. What a particular language returns stays out.
+- Trace tables, by name or as the working for tracing items (U3O1-KK05, U3O1-KK14, U4O1-KK06, cs-01 to cs-04): still held back. No KK, Terms entry or exam source names them, so hand tracing stays desk checking.
+- A definition of boundary test data, and extreme or exceptional data as categories (U3O1-KK14): still held back. No source names test data categories.
+- A type mismatch caught at compile time (U3O1-KK13): still held back. Terms lists type mismatch only as a runtime error.
+- try/catch pseudocode (U3O1-KK13): still held back. The pseudocode conventions have no error-handling construct.
+
+### U3O2 KK01 and KK02
+
+- Reasons for undertaking a project, read from a case, raised for cs-01, cs-02 and cs-03 (U3O2-KK01): released as one stand-alone item (s-u3o2-kk01-004).
+- Which of the four listed reasons a scenario shows (U3O2-KK01): released (m-u3o2-kk01-007).
+- Gaps in the market, and organisational objectives or needs, each with an example (U3O2-KK01): released (c-u3o2-kk01-009, c-u3o2-kk01-010).
+- Feasibility and originality in a brief, and documenting a need with a brief (U3O2-KK02): released (c-u3o2-kk02-009, c-u3o2-kk02-010, s-u3o2-kk02-004).
+- Real laws and regulators in need scenarios (U3O2-KK01): still held back. The KK lists reasons for projects, not legal duties, and the only laws the study design names are the U3O2-KK10 Acts.
+- The insurer's requirement in cs-04 as a problem (U3O2-KK01): still held back. A new obligation that working records can't yet meet is a need, so cs-04-q01 credits only the overdue-hire problem.
+
+### U3O2 KK03 and KK04
+
+- Using a Gantt chart to monitor and document progress (U3O2-KK03): released (s-u3o2-kk03-004).
+- A milestone other than completion, and its significance (U3O2-KK03): released (s-u3o2-kk03-005).
+- Identifying tasks and allocating time (U3O2-KK03): released (c-u3o2-kk03-012).
+- Project planning and the PSM (U3O2-KK03, U4O1-KK11, PSM): released (c-u3o2-kk03-013). Planning isn't a PSM stage or activity; the Gantt chart schedules tasks from all four stages.
+- The four listed data collection methods (interviews, observations, surveys, reports), with primary and secondary data, and reports as a method (U3O2-KK04): released (c-u3o2-kk04-009, c-u3o2-kk04-010, m-u3o2-kk04-007).
+- Choosing a technique for each stakeholder group (U3O2-KK04): settled. Every example technique in cs-03-q02 is on the confirmed list, and the bank drills the skill (s-u3o2-kk04-001, s-u3o2-kk04-003).
+- Slack or float, by name or by calculation (U3O2-KK03): still held back. The KK lists the critical path but neither term, and the Terms entry for Project management doesn't name them; items ask only whether a stated delay moves the finish.
+- Stakeholder as a definition card (U3O2-KK04): still held back. It isn't a Terms entry or in any KK, so items use it only in context.
+
+### U3O2 KK05 and KK06
+
+- Classifying case-study statements as functional or non-functional, raised for cs-03 and cs-04 (U3O2-KK05): released as one stand-alone item (s-u3o2-kk05-004).
+- Robustness and maintainability as non-functional requirements, and robustness versus reliability (U3O2-KK05): released (c-u3o2-kk05-011, c-u3o2-kk05-012, m-u3o2-kk05-007). The PSM lists both among its quality attributes.
+- Validation as a functional requirement (U3O2-KK05): released (m-u3o2-kk05-008).
+- A platform the solution need not run on, offered only as functional or non-functional (U3O2-KK05): released (m-u3o2-kk05-009).
+- Social constraints, a deadline as an economic (time) constraint, and sorting constraints into the five types (U3O1-KK02, U3O2-KK06): released (c-u3o2-kk06-010, m-u3o2-kk06-007, s-u3o2-kk06-004). The PSM specifications give economic, technical, social, legal and usability constraints, as c-u3o2-kk06-009 states; the same items meet the cs-01 and cs-03 constraint gaps.
+- Usability as a constraint type (U3O2-KK06): settled. The PSM lists it as both a constraint and a quality attribute, and c-u3o1-kk02-006 teaches both.
+- Named Acts behind legal constraints (U3O2-KK06): settled. The Acts are U3O2-KK10 knowledge, so KK06 items keep to the PSM's legal areas: intellectual property, and ownership and privacy of data.
+- Security as a non-functional requirement (U3O2-KK05): still held back. The PSM puts security among the technical constraints and Terms makes it a UX characteristic, so a security statement could be keyed either way.
+- A response-time requirement as non-functional only, or as a function with a non-functional target (U3O2-KK05): still held back. The PSM's quality attributes include no performance entry and Terms treats speed of processing as an efficiency measure. For the same reason cs-01's 30-second target is credited without naming its quality.
+- Portability versus a technical constraint for a statement naming platforms or existing devices (U3O1-KK02, U3O2-KK05, U3O2-KK06): still held back. VCAA reads such statements both ways, so no item offers both readings.
+- A connectivity limit as reliability or as a technical constraint (U3O2-KK05, U3O2-KK06): still held back. It fits a PSM quality attribute and a PSM constraint equally; cs-01's offline store-and-upload feature stays unkeyed for the same reason.
+
+### U3O2 KK07 and KK08
+
+- Version/solution boundaries applied to a client's feature list (U3O2-KK07): released (m-u3o2-kk07-008).
+- Completing a Level 1 DFD from a context diagram, and an entity sending data straight to a store, raised for all four case studies (U3O2-KK08): released as one stand-alone item (s-u3o2-kk08-004). It also covers balancing, since the outcome-specific requirements say a DFD should match its context diagram.
+- Identifying the actor for an unlabelled stick figure (U3O2-KK08): released (m-u3o2-kk08-009).
+- A data store with an input but no output, as a DFD error (U3O2-KK08): released (m-u3o2-kk08-010).
+- The duplicated external entity (U3O2-KK08): released (c-u3o2-kk08-012).
+- DFD levels, symbol shapes and use case arrowheads (U3O2-KK08): settled. The KK names the context diagram as Level 0 and the data flow diagram as Level 1, and the outcome-specific requirements fix the shapes and draw associations as plain lines (c-u3o2-kk08-009, c-u3o2-kk08-010, c-u3o2-kk08-011).
+- Decomposition below Level 1 and process numbering (U3O2-KK08): still held back. The KK names Levels 0 and 1 only, and VCAA's 2025 diagrams carry no process numbers or store ids.
+- A flow carrying more than one set of information, as a spot-the-error item (U3O2-KK08): still held back. The outcome-specific requirements set the rule, but the 2025 exam's own DFD labels some flows with several items.
+- A change control process or board, and project versus product scope (U3O2-KK07): still held back. The KK lists only version/solution boundaries, and the study design names neither.
+
+### U3O2 KK09 and KK10
+
+- The features the study design lists for an SRS, including "what is missing" items (U3O2-KK09): released (m-u3o2-kk09-008, s-u3o2-kk09-004). t-software-requirements-specification states the list.
+- Analytical tools in an SRS (context diagrams, data flow diagrams and use case diagrams of the current system) (U3O2-KK09): released (c-u3o2-kk09-009).
+- User characteristics (U3O2-KK09): released (c-u3o2-kk09-010).
+- Constraint types in KK09 items (U3O2-KK09): settled. m-u3o2-kk09-004 now calls a budget an economic constraint, and s-u3o2-kk09-004 keys economic and legal constraints.
+- The Unit 3 APPs and IPPs with their numbers and titles (U3O2-KK10): released (c-u3o2-kk10-010, c-u3o2-kk10-011).
+- Government related and unique identifiers (APP 9, IPP 7) (U3O2-KK10): released (m-u3o2-kk10-007).
+- Sensitive information (IPP 10) (U3O2-KK10): released (m-u3o2-kk10-008).
+- Ownership of data users post, through copyright and the licence in the terms of use (U3O2-KK10): released (c-u3o2-kk10-012).
+- Named Acts, including the Privacy and Data Protection Act 2014, and which Act applies to an organisation (U3O2-KK10): released. The KK names the Copyright Act 1968 (Cwlth), the Privacy Act 1988 (Cwlth) and the Privacy and Data Protection Act 2014 (c-u3o2-kk10-008, c-u3o2-kk10-011, m-u3o2-kk10-008), and c-u4o2-kk07-001, c-u4o2-kk07-002 and m-u4o2-kk07-003, tagged U3O2-KK10, teach whom each binds.
+- Claims that mock-ups or data dictionaries never appear in an SRS (U3O2-KK09): still held back. The study design lists what an SRS includes, not what it leaves out.
+- The Health Records Act 2001 (Vic) in U3O2-KK10 items: still held back. Only Terms names it (under Legal requirements); neither KK does.
+- The notifiable data breaches scheme, copyright duration, fair dealing, patents and trade marks (U3O2-KK10): still held back. The outcome-specific requirements ask only what the Copyright Act is, its purpose and what it applies to, and the scheme appears only in Terms, through the amending Act's name.
+- Implied licences for commissioned code (U3O2-KK10): still held back. Ownership items rest on the default rules.
+- The Essential Eight and the ISM in U3O2-KK10 items: still held back. Only U4O2-KK07 lists them.
+
+### U3O2 KK11 and KK12
+
+- Differential backups, and restoring from them (U3O2-KK11): released (c-u3o2-kk11-009, m-u3o2-kk11-007). The KK lists full, incremental and differential backups, and Terms defines all three.
+- Security of project files (U3O2-KK11): released (c-u3o2-kk11-010).
+- Annotations as an ideation tool (U3O2-KK12): released (c-u3o2-kk12-009, m-u3o2-kk12-007).
+- Completing a partly drawn mind map, raised for cs-01 (U3O2-KK12): released (s-u3o2-kk12-004).
+- Which ideation tools the study design names (U3O2-KK12): settled. They are mood boards, brainstorming, mind maps, sketches and annotations, as t-ideation states.
+- The named 3-2-1 backup rule (U3O2-KK11): still held back. Neither the KK nor Terms names it.
+- One wiping method being enough for every drive type (U3O2-KK11): still held back. Neither the KK, Terms nor the outcome-specific requirements names a disposal method.
+- SCAMPER, storyboards, word association and role play as ideation tools (U3O2-KK12): still held back. None is on the KK's or Terms' list, and the PSM names storyboards only as a design tool.
+- A fixed order for the ideation tools (U3O2-KK12): still held back. No source gives one.
+
+### U3O2 KK13 and KK14
+
+- Evaluating design ideas against criteria and recommending one (U3O2-KK13): released (s-u3o2-kk13-004).
+- One criterion written as a statement, a question and a dot point (U3O2-KK13): released (c-u3o2-kk13-010).
+- Timeliness versus speed of processing, and classifying usability and timeliness (U3O2-KK13, TERMS): released (m-u3o2-kk13-007). Terms counts usability, accessibility and timeliness among the effectiveness measures, and treats efficiency as time, cost and effort, with speed of processing among its measures. No MCQ keys functionality, which Terms lists under efficiency without saying what it measures.
+- One set of criteria for the design ideas and the finished solution (U3O2-KK13): released (m-u3o2-kk13-008). The study design says the same criteria are used in both.
+- What a data dictionary covers: interface controls, constants and objects as well as variables (U3O2-KK14): released (c-u3o2-kk14-009).
+- Tracing criteria to named SRS sections (U3O2-KK13): settled. The PSM ties criteria to the requirements, which the SRS defines (m-u3o2-kk13-005, c-u3o2-kk13-006); no source ties them to its other features.
+- The PSM stage in which design ideas are generated and judged (U3O2-KK13): settled. It is the design stage (psm-c-004, psm-m-014).
+- Data dictionary columns (U3O2-KK14): settled. The outcome-specific requirements set name and data type as the minimum, with description, field size, validation rules and a data sample optional (c-u3o1-kk03-009, c-u3o2-kk14-007).
+- The unit of size for numeric data types in a data dictionary (U3O2-KK14): still held back. The outcome-specific requirements make field size optional and give no unit.
+
+### U3O2 KK15 and KK16
+
+- The UX characteristic a mock-up most needs (U3O2-KK15): released (m-u3o2-kk15-008).
+- Comparing two sketches for UX characteristics, raised for cs-01 and cs-04 (U3O2-KK15): released (s-u3o2-kk15-004).
+- How each UX characteristic affects efficiency and effectiveness (U3O2-KK15): released (c-u3o2-kk15-012).
+- Which design principles the study design lists, and the Terms grouping into functionality, usability and appearance (U3O2-KK16): released (m-u3o2-kk16-008). The KK lists alignment, balance, contrast, space, text formatting, usability and navigation.
+- Balance, space and text formatting (U3O2-KK16): released (c-u3o2-kk16-009, c-u3o2-kk16-010, c-u3o2-kk16-011, s-u3o2-kk16-004). White space is taught under the study design's name, space.
+- Navigation in a scenario (U3O2-KK16): released (m-u3o2-kk16-007).
+- Consistency (U3O2-KK16): settled. It isn't a study design principle. The review re-keyed the nine KK16 items that used it to the listed principle each described, most often navigation, and c-u3o2-kk16-003's mistake note corrects it.
+- Affordance and interoperability as design principles (U3O2-KK16): settled. Both are UX characteristics (c-u3o2-kk16-006, m-u3o2-kk16-001, m-u3o2-kk16-003).
+- Proximity, repetition and hierarchy (U3O2-KK16): still held back. None is in the KK or Terms; proximity appears only as a distractor.
+- Specific security controls such as MFA types and encryption methods (U3O2-KK15): still held back from KK15. The KK and Terms name security only as authentication and data protection; how controls work belongs to U4O2-KK04 and U4O2-KK07.
+- Perceived versus actual affordance (U3O2-KK15): still held back. No source makes the distinction.
+
+### U4O1 KK01 and KK02
+
+- Clear and concise code, and detailed internal documentation, as characteristics of an efficient and effective solution (U4O1-KK01): released (c-u4o1-kk01-010, m-u4o1-kk01-008).
+- How user-centred design makes a solution efficient and effective, raised for cs-01, cs-02 and cs-04 (U4O1-KK01): released as a bank item (s-u4o1-kk01-004).
+- Databases, local or cloud-based, as data sources (U4O1-KK02): released (c-u4o1-kk02-009).
+- Dates read from a file converted to date/time (U4O1-KK02): released (m-u4o1-kk02-008).
+- The claims that fewer steps leave effectiveness unchanged and that a calendar control is quicker than typing (U4O1-KK01): still held back. Terms counts usability as an effectiveness measure, which makes the first false, and no source settles typing speed.
+- Personas, accessibility standards and named user-centred design standards (U4O1-KK01): still held back. Neither the KK nor Terms names them.
+- The claim that every field read from a text file is a string (U4O1-KK02): still held back. It depends on the language.
+- File operations in pseudocode (U4O1-KK02, U4O1-KK03): still held back. The pseudocode conventions have input and output keywords but nothing for opening, reading or writing a file.
+
+### U4O1 KK03 and KK04
+
+- Choosing and writing an access modifier for each class member (U4O1-KK03): released (s-u4o1-kk03-004).
+- Benefits and challenges of AI-based assistants as the outcome-specific requirements list them (U4O1-KK04): released (c-u4o1-kk04-012, c-u4o1-kk04-013, m-u4o1-kk04-008, s-u4o1-kk04-004).
+- The four listed challenges of APIs and libraries, against a privacy risk (U4O1-KK04): released (c-u4o1-kk04-014, m-u4o1-kk04-009).
+- Branching and named repository tools (U4O1-KK04): settled. The outcome-specific requirements describe building a feature apart from the main codebase and merging it after testing and review, and name Git, GitHub, Bitbucket and SourceForge as examples (c-u4o1-kk04-010).
+- The Act behind a library's licence (U4O1-KK04): settled. c-u3o2-kk10-008 names the Copyright Act 1968 (Cwlth).
+- Sorting repositories, APIs, libraries and AI-based assistants into "established" or "innovative" (U4O1-KK04): still held back. The KK and the outcome-specific requirements present them together and never label one.
+- Pull requests, branch commands and how particular tools merge (U4O1-KK04): still held back. The outcome-specific requirements say only that changes are merged after testing and review.
+- List-membership items on U4O1-KK03's language features (U4O1-KK03): still held back. The list is shared with U3O1-KK08, where c-u3o1-kk08-014 asks it; c-u4o1-kk03-009 names the access modifiers Unit 4 adds.
+
+### U4O1 KK05 and KK06
+
+- Keeping a range check's limits apart from a requirement's rule (U4O1-KK05): released (m-u4o1-kk05-008).
+- An existence check confirms only that a field isn't blank (U4O1-KK05): released (c-u4o1-kk05-009).
+- Client-side versus server-side validation (U4O1-KK05): still held back. Neither the KK, Terms nor the PSM specifications say where validation runs.
+- Language-specific results of a failed string-to-number conversion (U4O1-KK05): still held back. They depend on the language.
+- Unit, integration, system and regression testing as terms (U4O1-KK06): still held back. Neither the KK nor Terms names testing levels.
+- Conditional breakpoints, watches and stepping (U4O1-KK06): still held back. The only debugger feature the KK names is breakpoints.
+
+### U4O1 KK07 and KK08
+
+- Choosing the beta testing user group from a context diagram (U4O1-KK07): released (m-u4o1-kk07-008).
+- What beta testers do (U4O1-KK07): released (m-u4o1-kk07-009).
+- The listed features of an evaluation strategy (U4O1-KK08): released (m-u4o1-kk08-007). The KK lists evaluation criteria, time frame and responsibility.
+- Evaluation strategy versus solution evaluation (U4O1-KK08): released (c-u4o1-kk08-009).
+- The PSM stage of the criteria and the strategy (U4O1-KK08): settled. Criteria are developed in design and refined during development, and the strategy is an evaluation activity (psm-c-006, psm-m-010, c-u4o1-kk08-009).
+- Classifying usability, accessibility or satisfaction (U4O1-KK08): settled. Terms lists usability and accessibility as effectiveness measures, and s-u4o1-kk08-001 now labels its low-vision criterion as accessibility; satisfaction isn't a listed measure, so no item classifies it.
+- Evaluation strategy as a defined term (U4O1-KK08): settled. It isn't a Terms entry, so c-u4o1-kk08-001 defines it with the confirmed features.
+- Acceptance testing, user acceptance testing and think-aloud protocols (U4O1-KK07): still held back. Neither the KK nor Terms names them.
+- Placing beta testing in a PSM stage (U4O1-KK07, PSM): still held back. The PSM specifications never name alpha or beta testing.
+
+### U4O1 KK09 and KK10
+
+- The long-term effect of unmanaged scope creep (U4O1-KK10): released (m-u4o1-kk10-008).
+- How a personnel change can reduce a plan's effectiveness (U4O1-KK10): released (s-u4o1-kk10-004).
+- The three listed factors: scope creep, personnel changes and technical issues (U4O1-KK10): released (c-u4o1-kk10-011).
+- Solution evaluation from given data (U4O1-KK09): released (s-u4o1-kk09-004).
+- Contingency as a defined term (U4O1-KK10): still held back. The KK and Terms don't name it, and the PSM uses contingencies only as a design and development skill (psm-c-022), so time allowances stay "spare time".
+
+### U4O1 KK11 and KK12
+
+- Recording changes in a project log (U4O1-KK11): released (s-u4o1-kk11-004).
+- Extending a late critical task and moving its dependent tasks (U4O1-KK11): released (m-u4o1-kk11-008).
+- Reviewing the number of changes made to a plan (U4O1-KK12): released (m-u4o1-kk12-007).
+- A change record of the change, its reason and its impact on completion (U4O1-KK12): released (c-u4o1-kk12-009).
+- A distinction between a log and a journal (U4O1-KK11): still held back. The KK names "logs/journals" as one technique, and Terms defines neither.
+- Named project management products (U4O1-KK11): still held back. Students use such a tool without studying it, and no Units 3 and 4 source names one.
+
+### U4O2 KK01 and KK02
+
+- Justifying in-house development, raised for cs-03 (U4O2-KK02): released (s-u4o2-kk02-004).
+- Communication as an advantage of in-house development (U4O2-KK02): released (c-u4o2-kk02-009).
+- An overseas external developer that would handle personal information (U4O2-KK02, U4O2-KK07): released (m-u4o2-kk02-008).
+- The default owner of code an external developer writes (U4O2-KK02, U4O2-KK07): settled. The Copyright Act is confirmed, and U3O2-KK10 items tagged U4O2-KK07 teach that a contractor keeps copyright unless the contract assigns it in writing (m-u3o2-kk10-002, c-u3o2-kk10-004, s-u3o2-kk10-002).
+- Buying off-the-shelf software (U4O2-KK02): still held back. It isn't development, and the source places the risks of bought software under U4O2-KK03.
+- Mission and vision statements, SMART, strategic, tactical and operational levels, and types of goals (U4O2-KK01): still held back. The KK names only goals and objectives, and no source uses these frameworks.
+
+### U4O2 KK03 and KK04
+
+- Which vulnerabilities and risks the study design lists (U4O2-KK03): released (m-u4o2-kk03-009).
+- Man-in-the-middle attacks (U4O2-KK03): released (s-u4o2-kk03-004).
+- Risks of going ahead with an update in a combined development, testing and production environment (U4O2-KK03): released (s-u4o2-kk03-005).
+- Use of APIs as a privacy risk (U4O2-KK03): released (m-u4o2-kk03-008).
+- Malware, cyber security incidents and ineffective code review practices (U4O2-KK03): released (c-u4o2-kk03-011, c-u4o2-kk03-012, c-u4o2-kk03-013).
+- Which security controls the study design lists (U4O2-KK04): released (m-u4o2-kk04-009).
+- Symmetric versus asymmetric encryption (U4O2-KK04): released (m-u4o2-kk04-008).
+- Separated development, testing and production environments (U4O2-KK04): released (c-u4o2-kk04-011).
+- How robust identity and access management protects a development environment (U4O2-KK04): released (s-u4o2-kk04-004).
+- Least privilege (U4O2-KK04, U4O2-KK09): settled. The Terms entry for identity and access management defines it through least privilege, so KK04 teaches it inside IAM, and KK09 as a mitigation measure (c-u4o2-kk09-009).
+- Firewalls, antivirus, penetration testing, and hashing and salting (U4O2-KK04, U4O2-KK09): still held back. None is in the KK04 list, Terms or the outcome-specific requirements.
+- Biometrics on a registered device as single-factor authentication, and factors beyond know, have and are (U4O2-KK04): still held back. No source says how factors are counted or names their categories.
+
+### U4O2 KK05 and KK06
+
+- The three threat modelling principles by name: defining security requirements, identifying and mitigating threats, and confirming threats have been mitigated (U4O2-KK05): released (m-u4o2-kk05-008, s-u4o2-kk05-004). c-u4o2-kk05-009 names them. The five-step sequence in the old build brief stays out, because the study design gives three principles and no steps.
+- Threat modelling a development environment from a stated requirement, raised for cs-01 and cs-02 (U4O2-KK05): released (s-u4o2-kk05-004).
+- Justifying a mitigation priority from likelihood and impact (U4O2-KK05): released (s-u4o2-kk05-005).
+- The Terms effectiveness measures for development practices as a basis for security criteria (U4O2-KK06): released (c-u4o2-kk06-009).
+- A criterion that measures legal compliance (U4O2-KK06): released (m-u4o2-kk06-008).
+- Threat modelling principles in the case studies (U4O2-KK05): settled. cs-03-q11 marks the principle that follows defining security requirements, and cs-04-q11 asks how to confirm that a threat has been mitigated.
+- STRIDE, DREAD, attack trees and trust boundaries (U4O2-KK05): still held back. No source names them.
+- Effort or cost of a fix as a factor in prioritising threats (U4O2-KK05): still held back. The sources rank threats by likelihood and impact only.
+- The name "insecure direct object reference" (U4O2-KK05): still held back. No source uses it.
+- A fixed set of criteria for evaluating development security (U4O2-KK06): still held back. The KK lists none, and students propose their own.
+
+### U4O2 KK07 and KK08
+
+- The Acts and frameworks U4O2-KK07 names: the Copyright Act 1968 (Cwlth), the Privacy Act 1988 (Cwlth) with APPs 1, 6, 8, 9 and 11, the Privacy and Data Protection Act 2014 with IPPs 1, 2, 4, 5 and 9, the Essential Eight and the ISM Guidelines for Software Development (U4O2-KK07): released (c-u4o2-kk07-011, c-u4o2-kk07-012, c-u4o2-kk07-013, c-u4o2-kk07-014, m-u4o2-kk07-008). The conditional drop lists in parts u4o2-b and g-u4o2-b don't apply: the confirmed list keeps every Act and framework they name except the Health Records Act 2001 (Vic), which only Terms names, so the items that rely on it now carry a TERMS tag and were kept.
+- What breaches the Copyright Act during development (U4O2-KK07): released (m-u4o2-kk07-007).
+- Matching weaknesses to Essential Eight strategies, raised for cs-01 and cs-03 (U4O2-KK07): released (m-u4o2-kk07-009).
+- Legal consequences of mishandled test data and copied library code, raised for cs-02 (U4O2-KK07): released (s-u4o2-kk07-004).
+- Cross-border disclosure (APP 8) and transborder data flows (IPP 9) (U4O2-KK07, U3O2-KK10): released (s-u4o2-kk07-005).
+- Intellectual property as an ethical issue beyond acknowledgement (U4O2-KK08): released (c-u4o2-kk08-009).
+- Algorithmic bias and transparency in the use of AI (U4O2-KK08): released (m-u4o2-kk08-007). The outcome-specific requirements name bias in training data.
+- Legal and ethical consequences of an ineffective development practice (U4O2-KK08): released (s-u4o2-kk08-004).
+- Reverse cards for the Essential Eight and least privilege (U4O2-KK07, U4O2-KK09): settled. The moved glossary cards c-u4o2-kk07-009 and c-u4o2-kk09-009 do this job.
+- The Privacy Act small business exemption and its turnover threshold (U3O2-KK10, U4O2-KK07): still held back. No source gives it and the exemption is under reform, so items state in the scenario that the organisation is covered.
+- HPP numbers, penalty amounts, the 2024 privacy amendments and ransomware payment reporting (U4O2-KK07): still held back. None is in the KK or the outcome-specific requirements.
+- Essential Eight maturity levels, the policy that mandates it for some agencies, and ISM control numbers (U4O2-KK07): still held back. The sources ask only what each framework is, its purpose, and its strategies or guidelines.
+- Exceptions to the Privacy Act's exclusion of state bodies, and whether an external developer or a contractor is itself bound (U4O2-KK07): still held back. They go beyond the outcome-specific requirements.
+- Notifiable Data Breaches detail (U3O2-KK10, U4O2-KK07): still held back. The scheme appears only in Terms, so items keep to the duty to notify.
+- Moral rights (U4O2-KK07, U4O2-KK08): still held back. The KK, Terms and the outcome-specific requirements don't name them.
+- Accessibility and the effect of automation on jobs as ethical issues (U4O2-KK08): still held back. Neither is in the KK or the outcome-specific requirements.
+
+### U4O2 KK09 and KK10
+
+- A strategy to improve secure development practice, raised for cs-01, cs-02 and cs-04 (U4O2-KK10): released (s-u4o2-kk10-004).
+- The two listed strategies, and a strategy versus a security control (U4O2-KK10): released (c-u4o2-kk10-009, m-u4o2-kk10-008).
+- What a risk management plan contains, and writing its entries (U4O2-KK10): released (c-u4o2-kk10-010, s-u4o2-kk10-005).
+- Advantages and disadvantages of each strategy (U4O2-KK10): released (c-u4o2-kk10-011).
+- Mitigating the privacy risk of a free third-party API (U4O2-KK09): released (m-u4o2-kk09-007).
+- How recommendations are marked (U4O2-KK10): settled. The 2025 report confirms that a recommendation given twice scores once (c-u4o2-kk10-005).
+- Transferring and accepting risk (U4O2-KK09): still held back. The KK names only reducing and eliminating.
+- Named products such as secrets managers and scanners (U4O2-KK09): still held back. Neither appears in any source, and the repositories the outcome-specific requirements name are U4O1-KK04 examples, not mitigation measures.
+- "Defence in depth" as a term to recall (U4O2-KK09): still held back. No source names it.
+
+### PSM
+
+- The study design's activity names, and which stage an activity belongs to (PSM): released (psm-c-020, psm-m-014).
+- Skills underpinning the analysis stage: judging data for reliability, validity and relevance, and follow-up questions (PSM, U3O2-KK04): released (psm-c-021).
+- Designs and criteria changed during development, and contingencies (PSM): released (psm-c-022).
+- A testing strategy in the development stage (PSM, U3O1-KK14, U4O1-KK06): released (psm-c-023).
+- Evaluating how the analysis and design processes served the requirements (PSM, U4O1-KK01): released (psm-s-003).
+- Moving an activity between stages, the evaluation strategy's features, SRS contents, constraint types, and named data collection and ideation techniques (PSM): settled. The specifications confirm every placement the items used (psm-c-004, psm-c-005, psm-c-006), and each list is stated by the cards named under its KK above.
+- Development models (agile, waterfall, spiral), and running the PSM within each agile iteration (all areas): still held back. No KK, Terms entry or specification row names or defines them, and `content/README.md` keeps them out of scope.
+- Iteration as a return to an earlier stage (PSM): still held back. The specifications describe none.

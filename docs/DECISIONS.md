@@ -10,6 +10,8 @@ Every call made without asking the operator, with the reason and the alternative
 
 **Rejected.** Fetching copies of the VCAA documents from third-party mirrors: provenance can't be checked and it would route around an access policy rather than fix it.
 
+Superseded by D-198.
+
 ## D-002 Branch, deploy and release
 
 **Decision.** Work is committed and pushed to the session branch `claude/confident-dijkstra-m541dc`. `deploy.yml` deploys from `main` exactly as briefed; a separate `ci.yml` runs the same checks and build on every other branch and on pull requests. The early placeholder deploy, Pages enablement and the `v1.0.0` tag wait until the branch is merged into `main` and a deploy runs green.
@@ -339,6 +341,8 @@ Every call made without asking the operator, with the reason and the alternative
 
 **Rejected.** An SVG box diagram, which would need manual text wrapping and a sideways scroll on phones, and would be less accessible.
 
+Amended by D-206: the table is now three rows headed Name, Properties/Attributes and Methods, with each property written `name (type)`, so there is no Data type column.
+
 ## D-042 Figures: Scroll container with a label-size floor
 
 **Decision.** Each canvas sits in an overflow-x:auto box (width: fit-content, max-width: 100%, --void background). Inside it, a stage has min-width: min-content, and a hidden zero-height sizer SVG is width x 12/14 wide. The SVG shows at its natural size where there is room and scales down to fit, but never below the sizer width, so 14-unit labels stay at 12 px or more. The box becomes a focusable role=group tab stop, with a 'Scroll sideways to see the whole figure.' hint, only while it actually overflows (checked with a ResizeObserver).
@@ -389,6 +393,8 @@ Unknown ids are ignored.
 
 **Rejected.** Always listing slack, as the brief's list suggests, which would reveal the critical path on charts that deliberately hide it.
 
+Amended by D-204: without showCriticalPath the summary says 'The critical path is not marked.', and with it each task reads 'critical' or 'N days spare'; slack is never named.
+
 ## D-047 Figures: Schedule semantics
 
 **Decision.** An explicit start means 'starts no earlier than', so earliest start = max(start, latest dependency finish). Slack is total float, LS - ES. critical is slack == 0. criticalPaths returns every maximal chain of critical tasks joined by tight links (each dependant starts exactly when its predecessor finishes), from a task whose start isn't set by a dependency to a task that finishes at the project duration, sorted by input position. Zero-duration milestones stay on the path. Cycles, unknown or self dependencies, duplicate ids and negative durations throw a ScheduleError that names the problem, e.g. 'Gantt tasks form a dependency cycle: B → C → A → B.'
@@ -404,6 +410,8 @@ Unknown ids are ignored.
 **Reason.** Exam-style Gantt charts number their columns from 1, and a 'Depends on' column shows dependencies without cluttering the chart with connector arrows.
 
 **Rejected.** A 0..T boundary axis and dependency connector arrows (busy, and they collided with the 'critical' labels).
+
+Amended by D-204: the legend calls the dashed line 'Spare time, to the latest finish'.
 
 ## D-049 Figures: ASCII Gantt format
 
@@ -520,6 +528,8 @@ Bar characters: '#' for critical tasks, '=' for other tasks, '.' for slack up to
 **Reason.** The study design couldn't be downloaded (D-001), so the README must not claim it has been checked. The wording matches the About screen.
 
 **Rejected.** Stating outright that the 2025 study design excludes development models.
+
+Amended by D-198: the study design has been checked, so the README says outright that the development models aren't key knowledge and no longer points to About for anything still being checked.
 
 ## D-062 Study: The interval uses the updated ease
 
@@ -648,6 +658,8 @@ Bar characters: '#' for critical tasks, '=' for other tasks, '.' for slack up to
 **Reason.** A generator that relied on short-circuiting or on a loop variable's value after the loop would teach something that depends on the language. The strictness makes the 500-seed tests catch that, and keeps listings in the house style.
 
 **Rejected.** Short-circuit evaluation and loose parsing.
+
+Amended by D-199: the comparisons are now `=`, `<>`, `<`, `<=`, `>` and `>=`, so `<=` is the house form; `<-`, `!=` and `==` are still syntax errors, and snake_case names are accepted.
 
 ## D-078 Games: Whole-number and floating point answers
 
@@ -928,6 +940,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** Dropping that error from usecase, or adding an opt-in flag field to the figure schema.
 
+Amended by D-204: the dfd game no longer teaches an unlabelled flow, which isn't in VCAA's rule lists; the schema still accepts one so a content question (m-u3o2-kk08-008) can show it.
+
 ## D-112 Games: Non-functional requirement types in reqs
 
 **Decision.** Used reliability, usability and portability (the support material's examples), plus efficiency (response time) and maintainability. Security is excluded.
@@ -935,6 +949,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** A security statement reads too easily as a function (a login, encryption) or as a legal constraint (privacy law), so it can't be kept unambiguous. Efficiency and maintainability have clear textbook meanings. Easy rounds use only the three support-material types.
 
 **Rejected.** Including security, performance/capacity and accessibility as separate types.
+
+Amended by D-204: the types are the PSM's five quality attributes, so efficiency is gone and robustness is in; easy still uses reliability, usability and portability, and security is still left out.
 
 ## D-113 Games: psm has no generate()
 
@@ -952,6 +968,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** A second DFD topology per business, which doubles the hand-written labels, and any auto-layout.
 
+Amended by D-204: two added flows give every store an input and an output, and elements are named, never numbered.
+
 ## D-115 Games: Only part of a DFD is shown
 
 **Decision.** Error-round DFDs are captioned "Only part of the diagram is shown." A process loses its inputs or outputs only when every other element keeps a flow and every other process keeps an input and an output.
@@ -959,6 +977,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** Some stores are only read or only written in the layout, and removing flows can make that more visible. The caption stops a student treating it as a seventh error, and the injection filter keeps the injected error the only one.
 
 **Rejected.** Adding a store-must-be-read-and-written rule, which the brief doesn't list.
+
+Amended by D-204: error diagrams have no caption, because every store in the layout is now read and written; the injection filter also keeps every other store's input and output.
 
 ## D-116 Games: dfd noun names and word bank
 
@@ -968,6 +988,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** Distractor labels in the word bank, which would need case-by-case proof that they fit no blank.
 
+Amended by D-204: the noun-name error is gone, since VCAA's rule lists don't include it; the word bank is unchanged.
+
 ## D-117 Games: dfd round shape and chips
 
 **Decision.** A round is three error diagrams (letter, then rule, each a different rule and business) plus one labelling diagram with four blanks, placed at a seeded position. Easy draws a context diagram for errors that can appear on one 60% of the time, normal 35% and hard 15%; hard marks five elements instead of four. Rule chips are the numbers 1 to 6.
@@ -975,6 +997,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** This gives exactly 10 questions and covers both round types in every round. The rules are printed as a numbered list just above, and six phrase chips took five rows at 360 px.
 
 **Rejected.** A mode flag for round type, which the terminal has no way to pass, and phrase chips.
+
+Amended by D-204: rule chips are 1 to 10 on a data flow diagram and 1 to 3 on a context diagram, and --easy breaks only rules 1, 2, 3, 6 and 8.
 
 ## D-118 Games: The dfd rule question follows the element question
 
@@ -992,6 +1016,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** Hiding the spare-days column altogether, or keeping "Depends on" with a clipped table on phones.
 
+Amended by D-204: U3O2-KK03 is confirmed without slack or float, so the man page no longer mentions slack at all.
+
 ## D-120 Games: gantt plan generation and questions
 
 **Decision.** Five project templates for invented organisations. Each is cut to 5 to 9 tasks, keeping the first task, the main coding task, testing and the last task; a dropped task's dependants inherit its dependencies, with implied ones pruned. Durations are re-rolled until there is exactly one critical path of 3 or more tasks, at least two tasks with time to spare, and a length of 45 days or less. "Finishes n days later than planned" is the delay question, and its answer is recomputed rather than assumed. The milestone question is four options: the right event on the right day, the same event on its start day, a task with a duration, and "halfway through" a task.
@@ -999,6 +1025,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** A single critical path makes "the critical path" one answer, and plans keep a sensible order. Recomputing the shift keeps the answer tied to computeSchedule.
 
 **Rejected.** Random dependency graphs with arbitrary task names, and accepting any of several tied critical paths.
+
+Amended by D-204: the delay question is framed as monitoring progress, and a milestone that ends a PSM stage says so.
 
 ## D-121 Games: gantt and reqs KK tags
 
@@ -1008,6 +1036,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** One fixed KK list for every item in a game.
 
+Amended by D-204: reqs quality items are tagged U3O2-KK05 and PSM, the new constraint-kind items U3O2-KK06 (and PSM for usability), and the gantt delay question U4O1-KK11 as well.
+
 ## D-122 Games: usecase item design
 
 **Decision.** Actors are chosen by typing their numbers from a list: every actor, in any order. Every non-actor candidate is mentioned in the scenario: the system itself, data, hardware, or a party with no contact with the system. Spot-the-error marks four elements (five on hard), favouring the same kind as the faulty one, and each scenario states which step always happens and which only sometimes. Arrows follow the content's convention: includes from the base, extends into the base.
@@ -1015,6 +1045,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** Typed actor names can't be matched reliably. Marking elements of the same kind makes students read the scenario, and the direction rule matches the existing content.
 
 **Rejected.** Typing actor names freely, and asking what is wrong with a diagram in free text.
+
+Amended by D-204: actors are roles only, with no payment gateway or messaging service; non-actor candidates include a device and an organisation; and a reversed <<includes>> or <<extends>> arrow is a new error.
 
 ## D-123 Games: P1 registry order and its test
 
@@ -1056,6 +1088,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** Accepting two answers with an explanation. Asking which Act applies to a small non-health business under $3 million, where arguably none of the four does.
 
+Amended by D-202: Commonwealth Acts are tagged (Cwlth) and the Privacy and Data Protection Act 2014 is untagged; Health Records Act scenarios count towards TERMS only; each privacy feedback names an APP or IPP both units list; and two scenarios cover the 2025 A18 copyright misconception.
+
 ## D-128 Games: The Office macro strategy's name
 
 **Decision.** The option reads "Restrict Microsoft Office macros", matching content card c-u4o2-kk07-005. The man page adds that it is also described as configuring Microsoft Office macro settings.
@@ -1063,6 +1097,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** The name matches the app's own cards, and a student who learned the older name the brief uses is not misled.
 
 **Rejected.** Using only "Configure Microsoft Office macro settings", which would clash with the cards.
+
+Amended by D-202: the man page no longer gives the older name, because the outcome-specific requirements use Restrict Microsoft Office macros.
 
 ## D-129 Games: threat distractors
 
@@ -1072,6 +1108,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** Drawing distractors at random from all controls, which would sometimes offer a defensible second answer.
 
+Amended by D-204: the category-wide ALSO_HELPS table is gone; each scenario names at most one arguable control, and the Essential Eight distractors include the study design's own controls and U4O2-KK10 strategies.
+
 ## D-130 Games: naming rules
 
 **Decision.** A prefix from the stated table followed by a capital letter makes an identifier Hungarian notation, even though the rest looks like camel case. Pascal case, kebab case and capitalised snake count as "none of the three", and typing `pascal` or `kebab` for those also counts. A Hungarian name is the lowercase prefix followed by each word capitalised. Rewrites must match exactly and are case-sensitive; only whitespace and wrapping quotes or backticks are stripped. Hungarian variables name their type below hard, and on hard are described by their data only.
@@ -1079,6 +1117,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** strFirstName is both Hungarian and camel-shaped, so a stated priority rule is needed for one answer. Accepting the lookalike's own name rewards correct knowledge.
 
 **Rejected.** Treating prefixed identifiers as camel case. Accepting case-insensitive rewrites.
+
+Amended by D-204: the wording is camel casing and snake casing (Pascal and kebab casing for the lookalikes), the Hungarian prefixes cover the six data types and arrays (`bool` replaces `bln`, and `dtm` is new), and a new rewrite asks for a name in the convention already in use.
 
 ## D-131 Games: How types and oop treat informal answers
 
@@ -1088,6 +1128,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** Marking short forms as incorrect. Showing a Description column, which scrolled sideways on phones.
 
+Amended by D-204: there are six types, date/time included, written in lower case except Boolean; 'floating' and 'numeric' re-prompt too; and oop's object options are written `name (type)`, as VCAA lays them out. The object figure itself is now VCAA's three-row layout, not two columns (D-206).
+
 ## D-132 Games: Access modifiers stay language-neutral
 
 **Decision.** protected means the class and its subclasses, and no protected question names Java. Questions that depend on package access say "The program is written in Java". "default" is also asked language-neutrally as the name for the access a member gets when no modifier is written.
@@ -1095,6 +1137,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** The brief asks for accuracy about protected and default without Java-only rules unless the language is stated. Tests enforce both rules.
 
 **Rejected.** Java semantics everywhere (protected includes the package), which would make the neutral protected scenarios ambiguous.
+
+Amended by D-204: the access modifiers are public, protected and private only; 'default' is marked wrong with a note, and the Java package-access scenarios are gone.
 
 ## D-133 Games: Item ids and round shapes for threat, law, naming, types and oop
 
@@ -1108,6 +1152,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** This matches the existing games' id style, and generated items never count toward content floors. The instance can regenerate any reported item.
 
 **Rejected.** Per-scenario item ids, which would scatter attempt statistics.
+
+Amended by D-204: a naming round's six rewrites are camel, snake, a Hungarian variable, a Hungarian control and two in the convention already in use; threat's seven weaknesses cover all six controls, so one control comes up twice.
 
 ## D-134 Stats: The chart window is calendar study days
 
@@ -1228,6 +1274,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** The brief asks for these games by name, and neither can be built without naming the Acts and the strategies. Each law scenario is built to have one best answer and turnovers sit far from the threshold (D-127), so a small business reform would not flip an answer.
 
 **Rejected.** Holding back the law game and the Essential Eight round until the sources are confirmed, which would leave two of the brief's games unbuilt. Loosening the content holdbacks to match the games, which would widen what the study content claims before the source check.
+
+Amended by D-202: the Acts, APPs, IPPs and Essential Eight names are checked against the sources, and the content now teaches them too; only the $3 million turnover threshold still goes further than the content, which holds it back while the small business exemption is reformed.
 
 ## D-149 Zod is configured wherever a schema is built
 
@@ -1429,6 +1477,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** Using alignment, contrast and consistency as answers or distractors, which would teach a list the study design may not have. One question per mock-up, which rewards spotting the characteristic without the reason.
 
+Amended by D-204: U3O2-KK16's list is confirmed, so from normal difficulty the which question also offers one design principle as a distractor; a principle is still never the answer.
+
 ## D-174 Games: ux mock-ups are hand-laid templates, checked by an independent reader
 
 **Decision.** Nine templates for invented organisations (six phone screens, three desktop windows) are drawn with the `mockup` figure kind. Each can show some of eight weaknesses (two per characteristic), and building one with a weakness changes only the elements that weakness is about. A seed varies the organisation, wording and details. The 500-seed tests read the drawing itself (element types, text and sizes) with a checker written apart from the game: a sound screen has no weakness, and every item's screen has exactly the one it asks about. They also check the layout (inside the window, no overlaps, text that fits, callouts clear of other elements). Phone screens are 288 units wide, so they fit the full-screen terminal at 360 px, which leaves a figure 294 px.
@@ -1573,6 +1623,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 
 **Rejected.** Marking blocked items as done because their local equivalents pass.
 
+Amended by D-203: the review against the study design was done in October 2026.
+
 ## D-192 Sources, second attempt: still blocked
 
 **Decision.** On 12 October the build tried again to reach the Section 3 documents, by every route this session has. The sandbox proxy still refuses `vcaa.vic.edu.au` (403). The fetch tool resolves no host at all from this environment. Claude in Chrome isn't connected to this cloud session. No copy was available through the session's other connectors. Web search works, but it returns summaries of VCAA's teaching and assessment support pages, the same pages Section 4 was rebuilt from, not the study design's text. No Section 4 entry is corrected and D-001 stands.
@@ -1580,6 +1632,8 @@ After the fixes, axe reports 0 violations and Lighthouse accessibility is 100 on
 **Reason.** The brief makes the study design the source, and a search summary can't show a key knowledge list's exact wording, order or completeness. What the summaries did say (phone numbers as strings, arrays against records, the three naming conventions) agrees with Section 4.
 
 **Rejected.** Reconciling Section 4 against search summaries, and third-party copies of the study design, as in D-001.
+
+Superseded by D-198.
 
 ## D-193 Phone first visit: setup screens paint before the content arrives
 
@@ -1652,6 +1706,8 @@ The feedback says "constant is a different word, not a misspelling of constraint
 - An English dictionary, which is a large download and mostly words the course never uses.
 - Rejecting one-edit slips that are words: "treat" for threat is far more likely a typo.
 
+Amended by D-201: the glossary no longer has a constraint card, so the test now checks 'ethical' against Ethics.
+
 ## D-197 Live on GitHub Pages; the tag waits on the operator
 
 **Decision.** With the operator's go-ahead on 12 October, `main` was fast-forwarded to the session branch at `e97d203`. The deploy run went green:
@@ -1664,3 +1720,132 @@ GitHub refused the push of the `v1.0.0` tag (HTTP 403), because this session may
 **Reason.** D-002 held the deploy and the tag until the operator approved updating `main`.
 
 **Rejected.** Creating the tag through the REST API after git was refused, which would get round the same refusal.
+
+## D-198 Sources obtained; the key knowledge map is confirmed without renumbering (supersedes D-001 and D-192)
+
+**Decision.** On 13 October the operator uploaded the eight Section 3 documents to Google Drive, and the session read them through the Drive connector into `reference/` (gitignored), with sizes matching Drive exactly. Text was extracted locally (python-docx for the Word files, pdfplumber for the PDFs), and the exam and the scanned sample questions were rendered to page images. Six readers digested the 2025 exam, the sample questions, the examination report, the 2026 outcome-specific requirements and the two support pages. Adversarial checkers re-verified the exam, sample question and requirements digests against the originals (21, 16 and 25 corrections), and a second reader digested the report independently. `reference/SOURCE_DIGEST.md` holds the verbatim key knowledge, key skills, Terms used in this study, PSM specifications and exam specifications.
+
+The study design has 14, 16, 12 and 10 key knowledge points in the four outcomes, in the same order as the reconstruction, so every KK id stands, `kkMapVersion` stays 1 and no progress migrates. All 52 entries in `content/study-design.json` are now `confirmed`, with titles, summaries and examples rewritten to the real lists (still in our words); the `verify` notes are gone. The boot sequence shows the map as checked. About and the README no longer call it provisional, and both now say the development models aren't key knowledge in the 2025 study design.
+
+**Reason.** The brief makes the study design the source and asks for Section 4 to be reconciled against it. The reconstruction had the right shape but wrong detail in places: date/time was missing from the data types, access modifiers were filed under the OOP principles (they belong to U4O1-KK03 and don't include "default"), internal documentation lacked stubs, the reasons for projects and the contents of a brief didn't match the study design's lists, the data collection list missed reports, "consistency" was listed as a design principle, threat modelling had five steps instead of three principles, the Health Records Act was listed under U4O2-KK07, and the U4O2-KK10 improvement strategies were described as controls.
+
+**Rejected.** Copying the study design's wording into the map's titles and summaries, which would reproduce its text; and reading the documents through search summaries (D-192).
+
+## D-199 Pseudocode house style after the source check (amends D-077)
+
+**Decision.** COLDBOOT writes comparisons as `=`, `<>`, `<`, `<=`, `>`, `>=` and Booleans as `True` and `False`, as the 2025 exam does, and keeps upper-case keywords, `BEGIN`/`END`, `←`, `DISPLAY`, `IF … THEN`/`ELSEIF`/`ELSE`/`ENDIF`, `FOR … TO … ENDFOR`, `WHILE … DO … ENDWHILE`, `REPEAT … UNTIL` and numbered lines. Content was converted mechanically (2e6eb09), and the deskcheck generator, its interpreter's output and its prompts follow (7764180). The interpreter still reads `≠`, `≤`, `≥` and `TRUE`/`FALSE`, so an older listing keeps running; it rejects `!=`, `==`, `<-`, `PRINT`, `OUTPUT` and `SET` with the house form to use, and accepts snake_case names. In prose, true and false are lower case. `docs/PSEUDOCODE.md` now marks each rule as following the exam, the outcome-specific requirements or house style, and lays testing tables out as the exam does: Test, one column per input, Expected output and Actual output.
+
+**Reason.** The 2025 exam printed `<`, `<=`, `>` and `True`/`False`; VCAA's outcome-specific requirements allow `←` or SET, READ or INPUT, PRINT, RETURN or OUTPUT, and capitalised reserved words; the sample questions use yet another style (`Begin`, `For … From … To … End For`, `Print`). The study design's Terms entry for pseudocode says no standard exists. Following the exam where it shows a form, and VCAA's requirements elsewhere, gives students what they'll see.
+
+**Rejected.** Switching to the sample questions' style, with only the first letter of each keyword capitalised (the exam didn't use it), and `!=` or `≠` for not equal (no VCAA document shows a not-equal symbol; `<>` matches the exam's ASCII forms and Visual Basic, a listed language).
+
+## D-200 Data flow diagrams drop process numbers and store ids
+
+**Decision.** DFD processes are circles with a name and no number, and data stores are two parallel lines, open at both ends, with the name between them and no id. The renderer draws them that way (dcc6efc), the text description names processes and stores, and content and the dfd game refer to them by name, never "process 2" or "D1". The DFD fixture is a full Level 1 diagram that agrees with the context diagram fixture, with its store placed so every flow meets one of the store's lines.
+
+**Reason.** VCAA's outcome-specific requirements describe exactly these symbols, and the 2025 exam's Level 1 DFD has unnumbered processes and id-free stores.
+
+**Rejected.** Keeping the numbers as a study aid: students would learn a notation the exam doesn't use.
+
+## D-201 The glossary is the study design's Terms used in this study
+
+**Decision.** TERMS now has one card per official term (42), each a reverse card that paraphrases the official definition, with `source: study-design` and the term written as the study design writes it ("Control structures", with the old singular kept as an alias). The 11 reconstructed cards for official terms keep their ids. Of the other 64 reconstructed glossary cards, 58 moved to their key knowledge point as ordinary reverse cards with new ids (`reference/fixes/terms-moved-ids.json` maps old to new), and 6 were dropped because a unit card already defines the term (CSV, method, testing, threat, code review and version control). Their `t-` ids are retired and never reused (D-211). Each of the three batches (two of official terms, one of re-homed cards) had an adversarial check before the merge (ce0648a). Review records for retired ids are pruned at the next full content load (`src/content/store.ts`), so anyone who studied those cards since the 12 October deploy meets the moved ones again as new cards. `blitz` now asks the official terms, so D-196's example is now tested as "ethical" against Ethics.
+
+**Reason.** The exam specifications make the Terms examinable and say exam wording follows their definitions. The reconstructed glossary (75 entries) mixed real terms with key knowledge vocabulary and missed 31 official terms, among them Data Analytics terms such as infographics and descriptive statistics, which the Software Development exam can still use.
+
+**Rejected.** Keeping all 75 under TERMS (it would misstate the official list), and dropping the vocabulary cards outright (they teach key knowledge).
+
+## D-202 Legislation as the study design scopes it (amends D-127, D-128 and D-148)
+
+**Decision.** Commonwealth Acts are tagged "(Cwlth)", as VCAA writes them. Items name the APPs and IPPs with the numbers and titles the outcome-specific requirements give: Unit 3 lists APPs 1, 3, 6, 8, 9 and 11 and IPPs 1, 2, 4, 5, 7, 9 and 10; Unit 4 lists APPs 1, 6, 8, 9 and 11 and IPPs 1, 2, 4, 5 and 9. The Health Records Act 2001 (Vic) may appear as a distractor or an accepted alternative, but an item whose answer rests on it also carries the TERMS tag, because the Act appears in the Terms definition of legal requirements and in neither KK list. The Essential Eight strategies (among them "Restrict Microsoft Office macros") and the four ISM Guidelines for Software Development use VCAA's names.
+
+The `law` game follows (80ef4a3). It names the Privacy and Data Protection Act 2014 without a tag, as both KKs do, and counts its Health Records Act scenarios towards TERMS only. Each privacy feedback names one APP or IPP that both units list, and two new scenarios target the 2025 A18 misconception: changing licensed code without permission is the copyright breach, and an insecure backup isn't. The game still uses the $3 million turnover threshold, which the content keeps held back while the Privacy Act's small business exemption is being reformed.
+
+**Reason.** The outcome-specific requirements list the exact APPs and IPPs for each unit and say students should know who the Privacy Act applies to; the Terms list the Health Records Act among the relevant Acts.
+
+**Rejected.** Dropping the Health Records Act items, which still teach part of a Terms definition.
+
+## D-203 Content reconciled item by item against the sources
+
+**Decision.** Every item outside the glossary (D-201) was reviewed in 31 batches: 26 pairs of key knowledge points, the PSM items and the four case studies. A reviewer checked each item against the source digests, following `reference/digest/RECONCILE_BRIEF.md` (the study design, the 2026 outcome-specific requirements, the 2025 exam and its report, the sample questions and the support pages), and an adversarial verifier then checked every proposed fix. Reviewers proposed 458 fixes; verifiers rejected 3, amended 119 and added 37 of their own. The resulting 492 item fixes (188 cards, 161 MCQs, 91 short answers, 41 case study questions and 11 PSM items), plus figure patches for cs-02 and cs-03, were applied by id with `scripts/content-review.ts`: 494 items changed and none was dropped (aeaa7be). cs-02's use case diagram lost an external system drawn as an actor, cs-03's DFD lost its process numbers and store ids, both case studies' mock-ups gained notes, and cs-03's data dictionary renamed two column headings. The fixes correct facts and claims about what the study design lists, terminology, secondary KK tags and `source` fields, and add mistake notes drawn from the 2025 report.
+
+`content/psm.json` was rebuilt from the PSM table and the columns ticked for Software Development Units 3 and 4 (ce0648a): the official activity names, a "Skills underpinning the … stage" entry for each stage, and 21 specification notes in place of 10. Evaluating design ideas and collecting evaluation data, which aren't PSM activities, were removed, and the 13 surviving activity ids are kept. Documentation means internal documentation only, and the design tools note leaves out flowcharts, which neither design tools KK lists.
+
+A last pass (f3f4439) changed 18 more items. Nine testing tables now use the 2025 exam's layout, and nine items the checkers flagged were corrected: a response-time limit classified one way, reliability examples that overlapped robustness, a budget not called economic, cs-03-q02's accepted collection methods, and the existence and type check cards.
+
+**Reason.** The brief makes the study design the source, and D-191 left this review waiting on it. Fixing items in place keeps every id, so review schedules and attempt history carry over.
+
+**Rejected.** Dropping a contradicted item and writing its replacement under a new id, which would reset every student's progress on it.
+
+## D-204 Games reconciled against the sources
+
+**Decision.** Amends D-046, D-048, D-111, D-112, D-114 to D-117, D-119 to D-122, D-129 to D-133 and D-173. Each game below was checked against the sources by one agent and then by an adversarial verifier (4f8b7be, 5928679, 28b200b, 80ef4a3, 7764180, 6f9aba1):
+- `reqs`: the non-functional qualities are the PSM's five (usability, reliability, portability, robustness and maintainability). Efficiency is gone, because the PSM lists speed of processing as a technical constraint. A new follow-up asks a constraint's kind (economic, technical, social, legal or usability), and the feedback explains that usability can be a requirement or a constraint.
+- `dfd`: the rules are the outcome-specific requirements' ten for data flow diagrams and three for context diagrams, so the noun-name and unlabelled-flow errors are gone. Two added flows give every store an input and an output, and the "Only part of the diagram is shown" caption is gone with them.
+- `usecase`: actors are roles. Payment gateways and messaging services are gone, and a reversed <<includes>> or <<extends>> arrow is a new error.
+- `gantt`: slack and float are never named, in the game or in a Gantt figure's legend ("Spare time") and text description. A milestone is a point in time, such as the end of a PSM stage, and the late-task question is framed as monitoring progress.
+- `oop`, `types` and `naming`: the four OOP principles as VCAA defines them; public, protected and private only, with "default" marked wrong; the six data types, date/time included, in lower case except Boolean, with Float, Bool and other short forms re-prompting; object options written `name (type)`; "casing" throughout, the `bool` and `dtm` prefixes, and a new task that names something in the convention already in use.
+- `threat`: the six U4O2-KK04 controls and the ten U4O2-KK03 vulnerabilities and risks, word for word. Multi-factor authentication and backups are Essential Eight strategies, not controls, and version control is never a backup. Each scenario lists at most one arguable second control.
+- `ux`: from normal difficulty, the which question offers one design principle as a trap, as the 2025 exam's A6 did (25% of students chose contrast). Security means authentication and data protection.
+- `validate`, `triage`, `sort` and `search`: validation follows the Terms (existence or presence, type and range checks, for reasonableness and completeness, not accuracy); error types follow the Terms definitions, and debugging techniques are tagged by the unit that lists them; quick sort is more complex and more efficient than selection sort; a search is justified by the requirements, the algorithm and whether the data is sorted.
+- `law` is in D-202, `deskcheck` in D-199 and `psm` in D-210.
+
+**Reason.** Several games rested on the reconstruction's guesses (efficiency as a quality, a noun-name rule, a default access modifier, five data types, controls the study design doesn't list), and a game repeats its answer key every round.
+
+**Rejected.** New question kinds for the threat modelling principles and for the APPs and IPPs, which would need new item ids and round shapes. The threat and law man pages state them instead.
+
+## D-205 New items for key knowledge the reconstruction couldn't cover
+
+**Decision.** Once its verifiers had finished, the D-203 review held 206 gaps (199 filed under the KK pairs, including those the case study reviewers found, and 7 under the PSM): list items no item taught, topics held back while the study design's lists couldn't be checked, and question shapes the 2025 report showed students losing marks on. In each of 27 batches (26 KK pairs and the PSM), an author settled every gap and every earlier holdback as released (a new item teaches it), covered (an existing item already does) or still held back, with the reason; the batch notes record 212, 114 and 133, and some new items release more than one. A verifier then checked every new item, corrected or rewrote some, removed none and added two (c-u4o1-kk04-013 and c-u4o1-kk04-014). The merge added 170 items (66 cards, 65 MCQs and 39 short answers, 6 of them PSM items) and left every existing item unchanged (9dc814f, whose message says 178 because that count took in 8 figure ids as well).
+
+**Reason.** The reconstruction held back whatever depended on an unconfirmed list, and the sources now settle most of those lists. Writing new items only where a source shows a gap ties the growth to the sources.
+
+**Rejected.** Releasing every holdback at once. Some still aren't settled: the Privacy Act's small business exemption is being reformed, and the outcome-specific requirements name AI products only as examples.
+
+## D-206 Figures: Object descriptions in VCAA's layout (amends D-041)
+
+**Decision.** ObjectDescription is a bordered table of three rows headed Name, Properties/Attributes and Methods. Each property is written `name (type)`, or by name alone, because the schema now makes the type optional. Methods keep their brackets and parameters, and a long signature may wrap before a parameter. A member's optional description sits on its own line beneath it. The text description uses the same headings (6f9aba1). It is still a semantic HTML table, so it wraps on a phone instead of scrolling.
+
+**Reason.** The outcome-specific requirements and the 2025 exam lay object descriptions out this way, and the requirements allow the data type to be left out. The old Properties table, with Name and Data type columns, matched neither. The 9 object descriptions then in content, and the fixture, were checked in Chromium at 320 and 900 px, with no sideways overflow.
+
+**Rejected.** Keeping the two-column table, which would leave the figure and the oop game's `name (type)` options in different layouts.
+
+## D-207 Figures: <<includes>> and <<extends>> are dashed lines with a filled arrowhead
+
+**Decision.** A use case relationship is a dashed line from `from` to `to`, with a filled arrowhead at `to` and its stereotype as the label; an association is a plain line with no arrowhead. <<includes>> points from the base use case to the included one, and <<extends>> from the extending use case to the base. The connector type dropped its open-chevron head and gained `dashed` (6f9aba1). The use case fixture's actors are all roles: a Manager replaced a payment gateway.
+
+**Reason.** The outcome-specific requirements' symbol table, their sample diagram and the 2025 exam all draw relationships this way.
+
+**Rejected.** Also drawing relationship lines heavier than associations, as the 2025 exam does. The requirements ask only for a dashed line.
+
+## D-208 Figures: DFD nodes have no number, and a DFD is Level 1
+
+**Decision.** DfdNodeSchema has no `number` field. The object is strict, so the schema and the content checker reject one. DfdSchema's `level` may only be 1; Level 0 is the context diagram, a figure kind of its own (6f9aba1).
+
+**Reason.** Once D-200 stopped drawing numbers, an ignored field would only invite authors to write a number and then refer to it. The study design and the outcome-specific requirements call the context diagram Level 0 and the DFD Level 1 and name no lower levels, and content used only level 1 or none.
+
+**Rejected.** Keeping `number` as an optional field the renderer ignores, as the first pass did.
+
+## D-209 Data type names in sentence case
+
+**Decision.** Mid-sentence, content writes character, string, integer and floating point in lower case, as the key knowledge does, and Boolean keeps its capital. A name that starts a sentence, list item, table cell or option keeps its capital, and object description property types are always lower case. 358 names changed case and nothing else changed (144a6cb). The games and the figure fixtures already wrote them this way.
+
+**Reason.** The reconstruction capitalised every type (Integer, Floating point), which the study design doesn't, and the games had moved to lower case, so students saw two styles. The 2025 report marks the name, not its case: it gave nothing for Bool or Float, and its own answers write Floating Point.
+
+**Rejected.** Capitalising every type name, as the reconstruction did.
+
+## D-210 psm: An activity's name never gives away its stage
+
+**Decision.** Seven PSM activities have names that contain their own stage: the four "Skills underpinning the … stage" entries, Solution design, Evaluation strategy and Solution evaluation. A which-stage question always describes one of these by its summary instead of naming it, and first and order questions show it by its summary. The two specification notes that name such an activity of their own stage (the evaluation strategy and solution evaluation notes) are left out of spec questions, so 19 of the 21 are used. Evaluation criteria keeps its name, because it is the trap: criteria are set in design. The man page uses the official activity names (1000c55).
+
+**Reason.** After the PSM rebuild (D-203), a question that shows "Skills underpinning the analysis stage" answers itself.
+
+**Rejected.** Leaving these activities out of first and order questions. The evaluation stage has no other activity, so evaluation would never appear in them.
+
+## D-211 Ids are never reused, even ids dropped before the first deploy
+
+**Decision.** A new card, MCQ or short answer takes the number one above the highest its KK has ever used for that kind of item: in git history, in the content now and in parts waiting to merge. A helper in the gitignored `reference/tools/next-ids.ts` works it out. The rule covers ids dropped before the 12 October deploy as well as shipped ones, and the 64 retired glossary ids (D-201). The glossary rebuild had given the re-homed generative AI card c-u3o1-kk01-008, an id the cross-unit consistency pass dropped on 30 September; the card is now c-u3o1-kk01-011 (e357241), above the gap fill's -009 and -010.
+
+**Reason.** `docs/CONTENT_NOTES.md` logs c-u3o1-kk01-008 as dropped for duplicating c-u4o2-kk08-002, and the content review notes cite items by id, so a reused id would make those notes describe a different card. One rule for every dropped id is also simpler than tracking which drops shipped.
+
+**Rejected.** Reusing ids that were dropped before they shipped, on the grounds that no student can have studied them.

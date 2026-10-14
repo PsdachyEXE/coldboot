@@ -19,8 +19,8 @@ It runs in the browser and works offline after your first visit. When a new vers
 
 The games, by build priority:
 
-- **P0:** `deskcheck` (trace pseudocode and build test tables), `sort` (selection sort and quick sort), `search` (linear and binary search), `triage` (error types and debugging), `validate` (validation checks and boundary values), `blitz` (glossary terms against a 60-second clock) and `daily` (the daily challenge).
-- **P1:** `dfd` (data flow diagram conventions), `usecase` (use case diagrams), `reqs` (requirements, constraints and scope), `gantt` (critical path and slack), `threat` (security weaknesses and controls), `law` (which Act applies), `naming` (naming conventions), `types` (data types, structures and sources), `oop` (classes, objects and access modifiers) and `psm` (the problem-solving methodology).
+- **P0:** `deskcheck` (trace pseudocode and build testing tables), `sort` (selection sort and quick sort), `search` (linear and binary search), `triage` (error types and debugging), `validate` (validation checks and boundary values), `blitz` (glossary terms against a 60-second clock) and `daily` (the daily challenge).
+- **P1:** `dfd` (data flow diagram conventions), `usecase` (use case diagrams), `reqs` (requirements, constraints and scope), `gantt` (critical path and delays), `threat` (security weaknesses and controls), `law` (which Act applies), `naming` (naming conventions), `types` (data types, structures and sources), `oop` (classes, objects and access modifiers) and `psm` (the problem-solving methodology).
 - **P2:** `boss` (three lives and 15 questions mixed from the other games, getting harder, then a case study you mark yourself) and `ux` (the weakest user experience characteristic in a mock-up).
 
 Everything works from the keyboard. The status bar along the bottom counts down to the exam, and on exam day Home swaps Today's run for the start time and a light warm-up.
@@ -85,9 +85,9 @@ A wrong card teaches a wrong answer, so please report anything that looks off. E
 
 COLDBOOT covers the key knowledge of the VCE Applied Computing Study Design (accredited from 2025) for Software Development Units 3 and 4, the study design's glossary (Terms used in this study) and the problem-solving methodology. It doesn't cover anything else.
 
-- Development models such as agile, waterfall and spiral are left out. They were part of the previous study design and still fill a lot of revision material, but they weren't found in the 2025 key knowledge.
-- Exam tips, such as naming data types in full, are a Victorian school's teacher advice, not VCAA rules. Your own teacher's advice comes first.
-- The About screen in the app has the full scope note, including anything still waiting to be checked against the study design.
+- Development models such as agile, waterfall and spiral are left out. They were part of the previous study design and still fill a lot of revision material, but they aren't key knowledge in the 2025 study design, which mentions agile only as one way to apply the problem-solving methodology.
+- Exam tips such as naming data types exactly as the study design does come from the VCAA's 2025 examination report. A few others are a Victorian school's teacher advice, not VCAA rules. Your own teacher's advice comes first.
+- The About screen in the app has the full scope note.
 
 ## Not affiliated with the VCAA
 
@@ -95,7 +95,7 @@ COLDBOOT is not affiliated with or endorsed by the Victorian Curriculum and Asse
 
 ## Status
 
-- **The key knowledge map is provisional.** The VCAA's documents couldn't be downloaded while COLDBOOT was built, so the key knowledge titles and numbering follow a reconstruction. Every key knowledge point in `content/study-design.json` stays marked provisional until it has been checked against the study design, and items may be renumbered or added then (D-001 in `docs/DECISIONS.md`).
+- **Checked against the study design in October 2026.** COLDBOOT was first built from a reconstruction, because the VCAA's documents couldn't be downloaded. In October 2026 the key knowledge map, the glossary and every card, question and case study were checked against the 2025 study design and the VCAA's support material: the 2026 outcome-specific requirements, the 2025 examination and its report, the sample questions and the planning and teaching pages (D-198 onwards in `docs/DECISIONS.md`). The key knowledge numbering matched, so nothing was renumbered. Titles and summaries are COLDBOOT's own short wording, so check the study design for the exact text, and topics the sources don't settle are still held back (`docs/CONTENT_NOTES.md`).
 - **The install commands need the `v1.0.0` tag.** The site deploys from `main`, and `v1.0.0` is tagged after the first green deploy. Until that tag exists, the Windows install and uninstall commands above won't work (D-002).
 
 ## Licence
