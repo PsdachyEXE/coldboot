@@ -73,20 +73,23 @@ Figures have no auto-layout. Coordinates are in SVG user units on a canvas of `w
 
 | Element | Shape | Default size |
 |---|---|---|
-| Context diagram system | circle | `r` 64 |
-| External entity (context diagram and DFD) | rectangle | `w` 128, `h` 48 |
-| DFD process | circle, number above the label | `r` 48 (from `w`/2 when given) |
-| DFD data store | open-ended rectangle, id (`D1`) at the left | `w` 160, `h` 36 |
+| Context diagram system | circle, the system's name inside | `r` 64 |
+| External entity (context diagram and DFD) | rectangle, name inside | `w` 128, `h` 48 |
+| DFD process | circle, its name inside and nothing else | `r` 48 (from `w`/2 when given) |
+| DFD data store | two horizontal parallel lines, open at both ends, the name between them | `w` 160 (the length of the lines), `h` 36 (the gap between them) |
 | Use case | ellipse | `rx` 84, `ry` 28 |
 | Actor | stick figure about 64 tall, label below | fixed |
 | Use case system boundary | rectangle, name at top-left | `w`, `h` required |
 
-Flows are straight arrows from the edge of one element to the edge of the other. `via` points add bends, and `labelAt` pins the label (by default it sits at the midpoint). Leave at least 40 units between elements so labels fit, and keep labels short: DFD and context diagram flow labels are snake_case (`booking_details`). Gantt figures need no coordinates: give tasks, durations and dependencies, and the renderer computes start times and the critical path.
+Flows are straight one-way arrows, each with a single arrowhead, from the edge of one element to the edge of the other. `via` points add bends, and `labelAt` pins the label (by default it sits at the midpoint). Leave at least 40 units between elements so labels fit, and keep labels short: DFD and context diagram flow labels are snake_case (`booking_details`). Gantt figures need no coordinates: give tasks, durations and dependencies, and the renderer computes start times and the critical path.
 
 Renderer behaviour worth knowing when you lay out a figure:
 
-- Two straight flows between the same pair of elements (a request and its reply) are spread apart automatically, with their labels on the outer sides. You don't need `via` points for them.
+- DFD nodes carry no `number`. As in VCAA's diagrams, processes and data stores are known by name alone: the renderer never draws a process number or a store id (D1, D2), and the text description never mentions one. Leave `number` out of figure JSON (the renderer ignores it if present), and refer to processes and stores by name in questions ("the process *Take payment*", "the *Bookings* data store"), never "process 2" or "D1".
+- A data store's name sits on one line between its two lines, which run the full `w`. Widen `w` for a long name rather than letting it wrap. Flows meet the store at the edge of its `w` by `h` box, so a flow from the side would point into an open end. Place a store above or below the processes it connects to, so its flows meet one of its lines as they do in VCAA's diagrams (`dfdFixture` in `src/figures/fixtures.ts` shows the layout).
+- A two-way exchange is two flows, never one double-headed arrow. Two straight flows between the same pair of elements (a request and its reply) are spread apart automatically, with their labels on the outer sides. You don't need `via` points for them.
+- An external entity is drawn once. The renderer has no duplicated-entity mark (the diagonal across a top-left corner), so lay a figure out with each entity in one place.
 - A label on a line too short to hold it moves beside the line, and every label is kept on the canvas. `labelAt` always wins.
-- Gantt task ids appear in the chart and in its "Depends on" column, so use short ids (`A`, `B`, `C`). A milestone is a task with duration 0, or `milestone: true` to add a diamond at its finish. Plans longer than about 30 days read better in weeks.
+- Gantt task ids appear in the chart and in its "Depends on" column, so use short ids (`A`, `B`, `C`). A milestone is a point in time, not a task with a duration: write it as a task with duration 0, or set `milestone: true` on a task to put a milestone diamond at its finish. Plans longer than about 30 days read better in weeks.
 - Mock-up `list` items are separated by newlines in `text`.
-- Questions can mark elements on a figure (the renderer's `highlight`): use context diagram entity ids or `system`, DFD node ids, use case actor and use case ids, and Gantt task ids.
+- Questions can mark elements on a figure (the renderer's `highlight`): use context diagram entity ids or `system`, DFD node ids, flow ids on either (a flow's `id`, or `from->to` when it has none), use case actor and use case ids, and Gantt task ids.

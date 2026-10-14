@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import type { Figure, Gantt } from '../content/schema';
-import { describeFigure, plainInline } from './describe';
+import type { Dfd, Figure, Gantt } from '../content/schema';
+import { describeFigure, dfdNodeName, plainInline } from './describe';
 import { contextFixture, dfdFixture, ganttFixture, mockupFixture, objectFixture, pseudocodeFixture, tableFixture, useCaseFixture } from './fixtures';
 
 function text(figure: Figure): string {
@@ -22,16 +22,33 @@ describe('describeFigure lists every element', () => {
     expect(t).toContain('weekly_report from Kayak booking system (the system) to Manager (external entity)');
   });
 
-  it('DFD: processes with numbers, stores with ids, entities and flows', () => {
-    expect(items(dfdFixture, 'Processes')).toEqual(['1 Check availability', '2 Record booking', '3 Take payment']);
-    expect(items(dfdFixture, 'Data stores')).toEqual(['D1 Kayaks', 'D2 Bookings']);
-    expect(items(dfdFixture, 'External entities')).toEqual(['Customer', 'Payment gateway']);
+  it('DFD: processes and stores by name alone, entities and flows', () => {
+    expect(items(dfdFixture, 'Processes')).toEqual(['Make booking', 'Take payment', 'Produce reports']);
+    expect(items(dfdFixture, 'Data stores')).toEqual(['Bookings']);
+    expect(items(dfdFixture, 'External entities')).toEqual(['Customer', 'Payment gateway', 'Manager', 'Hire staff']);
     const flows = items(dfdFixture, 'Data flows');
     expect(flows).toHaveLength(dfdFixture.flows.length);
     for (const f of dfdFixture.flows) expect(flows.some((line) => line.startsWith(`${f.label} from `))).toBe(true);
+    expect(flows).toContain('booking_request from Customer (external entity) to Make booking (process)');
+    expect(flows).toContain('new_booking from Make booking (process) to Bookings (data store)');
     expect(describeFigure(dfdFixture).summary).toBe(
-      'Level 1 data flow diagram with 3 processes, 2 data stores, 2 external entities and 7 data flows.',
+      'Level 1 data flow diagram with 3 processes, 1 data store, 4 external entities and 11 data flows.',
     );
+  });
+
+  it('DFD: never mentions a process number or a store id, even when a node carries one', () => {
+    const numbered: Dfd = {
+      ...dfdFixture,
+      nodes: dfdFixture.nodes.map((n, i) => (n.type === 'entity' ? n : { ...n, number: n.type === 'store' ? `D${i}` : `${i}.1` })),
+    };
+    expect(text(numbered)).toBe(text(dfdFixture));
+    expect(text(numbered)).not.toMatch(/\bD\d|\d\.1\b|process \d/);
+    const marks = new Map([['book', 'A'], ['bookings', 'B']]);
+    expect(describeFigure(numbered, marks).sections[0]).toEqual({
+      heading: 'Marked on the figure',
+      items: ['A: Make booking (process)', 'B: Bookings (data store)'],
+    });
+    expect(dfdNodeName({ id: 'p', type: 'process', number: '2', label: 'Check availability', x: 0, y: 0 })).toBe('Check availability (process)');
   });
 
   it('use case diagram: boundary, actors, use cases, associations, includes and extends', () => {
@@ -62,9 +79,11 @@ describe('describeFigure lists every element', () => {
     expect(text(plain)).not.toMatch(/slack \d|critical,|Critical path:/);
   });
 
-  it('Gantt chart: explicit starts and plans that cannot be scheduled', () => {
+  it("Gantt chart: explicit starts, a milestone at a task's finish, and plans that cannot be scheduled", () => {
     const booked: Gantt = { ...ganttFixture, tasks: [{ id: 'A', name: 'Venue booked', duration: 2, dependsOn: [], start: 4 }] };
     expect(items(booked, 'Tasks')[0]).toBe('A Venue booked: 2 days, no dependencies, not before day 5, runs in days 5 to 6, slack 0 days, critical');
+    const handover: Gantt = { ...ganttFixture, tasks: [{ id: 'A', name: 'Beta test', duration: 3, dependsOn: [], milestone: true }] };
+    expect(items(handover, 'Tasks')[0]).toBe('A Beta test: 3 days, no dependencies, runs in days 1 to 3, milestone at the end of day 3, slack 0 days, critical');
     const loop: Gantt = { ...ganttFixture, tasks: [{ id: 'A', name: 'Loop', duration: 1, dependsOn: ['A'] }] };
     expect(describeFigure(loop).summary).toMatch(/can't be drawn\. Gantt tasks form a dependency cycle/);
     expect(items(loop, 'Tasks')[0]).toBe('A Loop: 1 day, after A');

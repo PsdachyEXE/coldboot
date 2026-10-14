@@ -76,16 +76,19 @@ function describeContext(f: ContextDiagram, names: Names): FigureDescription {
   };
 }
 
+const DFD_NODE_KINDS: Record<DfdNode['type'], string> = { process: 'process', store: 'data store', entity: 'external entity' };
+
+/**
+ * A DFD node by name and kind, e.g. "Record booking (process)". Processes and stores are known by
+ * name alone, as in VCAA diagrams: a node's optional `number` is never mentioned.
+ */
 export function dfdNodeName(n: DfdNode): string {
-  if (n.type === 'process') return n.number ? `process ${n.number}, ${n.label}` : `process ${n.label}`;
-  if (n.type === 'store') return n.number ? `data store ${n.number}, ${n.label}` : `data store ${n.label}`;
-  return `${n.label} (external entity)`;
+  return `${n.label} (${DFD_NODE_KINDS[n.type]})`;
 }
 
 function describeDfd(f: Dfd, names: Names): FigureDescription {
   for (const n of f.nodes) names.set(n.id, dfdNodeName(n));
   const of = (type: DfdNode['type']) => f.nodes.filter((n) => n.type === type);
-  const numbered = (n: DfdNode) => (n.number ? `${n.number} ${n.label}` : n.label);
   const flows = f.flows.map((fl) => {
     const text = flowText(fl.label, names.get(fl.from) ?? fl.from, names.get(fl.to) ?? fl.to);
     names.set(connectorKey(fl), text);
@@ -100,8 +103,8 @@ function describeDfd(f: Dfd, names: Names): FigureDescription {
   return {
     summary: `${f.level === undefined ? 'Data flow diagram' : `Level ${f.level} data flow diagram`} with ${listWords(parts)}.`,
     sections: [
-      ...section('Processes', of('process').map(numbered)),
-      ...section('Data stores', of('store').map(numbered)),
+      ...section('Processes', of('process').map((n) => n.label)),
+      ...section('Data stores', of('store').map((n) => n.label)),
       ...section('External entities', of('entity').map((n) => n.label)),
       ...section('Data flows', flows),
     ],
@@ -159,7 +162,9 @@ function describeGantt(f: Gantt, names: Names): FigureDescription {
         parts.push(timing.earliestStart === 0 ? 'milestone at the start' : `milestone at the end of ${f.unit} ${timing.earliestStart}`);
       } else {
         const runs = t.duration === 1 ? `${f.unit} ${timing.earliestFinish}` : `${f.unit}s ${timing.earliestStart + 1} to ${timing.earliestFinish}`;
-        parts.push(`${t.milestone ? 'milestone, ' : ''}runs in ${runs}`);
+        parts.push(`runs in ${runs}`);
+        // A milestone is a point in time, so it is the task's finish, not the task itself.
+        if (t.milestone) parts.push(`milestone at the end of ${f.unit} ${timing.earliestFinish}`);
       }
       if (f.showCriticalPath) parts.push(`slack ${unitWord(f.unit, timing.slack)}${timing.critical ? ', critical' : ''}`);
     }

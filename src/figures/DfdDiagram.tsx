@@ -1,15 +1,16 @@
 /**
- * Data flow diagram. Processes are circles with their number above the label, data stores are
- * open-ended rectangles with the store id in a left compartment, and external entities are
- * rectangles. Flows are labelled arrows drawn edge to edge; an unlabelled flow still draws (the
- * `dfd` game teaches that error).
+ * Data flow diagram, drawn the VCAA way: a process is a circle holding its name, a data store is
+ * two horizontal parallel lines, open at both ends, with its name between them, and an external
+ * entity is a rectangle. Processes and stores are known by name alone: a node's optional `number`
+ * is never drawn. Flows are labelled one-way arrows drawn edge to edge; an unlabelled flow still
+ * draws (the `dfd` game teaches that error).
  */
 import { useMemo } from 'react';
 import type { Dfd, DfdNode } from '../content/schema';
 import { connectorKey, routeConnectors, type Connector } from './flows';
 import { r1, type Shape } from './geometry';
 import { Canvas, ConnectorLabel, ConnectorLine, Highlights, ShapeOutline, TextLines } from './svg';
-import { LINE_HEIGHT, textWidth, wrapText } from './text';
+import { wrapText } from './text';
 import { DEFAULTS, INSET, type BodyProps } from './types';
 import styles from './Figure.module.css';
 
@@ -25,37 +26,29 @@ function shapeOf(n: DfdNode): Shape {
 }
 
 function Process({ node, shape }: { node: DfdNode; shape: Extract<Shape, { kind: 'circle' }> }) {
-  const lines = wrapText(node.label, shape.r * 1.5);
-  const total = lines.length + (node.number ? 1 : 0);
-  const top = node.y - ((total - 1) * LINE_HEIGHT) / 2;
   return (
     <>
       <ShapeOutline shape={shape} />
-      {node.number && <TextLines lines={[node.number]} x={node.x} y={top} className={styles.bold} />}
-      <TextLines lines={lines} x={node.x} y={node.number ? top + LINE_HEIGHT + ((lines.length - 1) * LINE_HEIGHT) / 2 : node.y} />
+      <TextLines lines={wrapText(node.label, shape.r * 1.5)} x={node.x} y={node.y} />
     </>
   );
 }
 
+/**
+ * Two lines along the top and bottom of the store's box, with no ends drawn. Flows still meet the
+ * box's edge, so one arriving from the side points into the open end. The --void backing keeps
+ * the name clear of anything drawn beneath it.
+ */
 function Store({ node, shape }: { node: DfdNode; shape: Extract<Shape, { kind: 'rect' }> }) {
   const left = shape.cx - shape.w / 2;
   const right = shape.cx + shape.w / 2;
   const top = shape.cy - shape.h / 2;
   const bottom = shape.cy + shape.h / 2;
-  const compartment = node.number ? Math.max(36, textWidth(node.number, 14, true) + 2 * INSET) : 0;
-  const divider = left + compartment;
-  const lines = wrapText(node.label, right - divider - 2 * INSET);
   return (
     <>
       <rect className={styles.fillVoid} x={r1(left)} y={r1(top)} width={r1(shape.w)} height={r1(shape.h)} />
-      <path className={styles.line} d={`M${r1(right)} ${r1(top)} H${r1(left)} V${r1(bottom)} H${r1(right)}`} />
-      {node.number && (
-        <>
-          <path className={styles.line} d={`M${r1(divider)} ${r1(top)} V${r1(bottom)}`} />
-          <TextLines lines={[node.number]} x={left + compartment / 2} y={node.y} className={styles.bold} />
-        </>
-      )}
-      <TextLines lines={lines} x={(divider + right) / 2} y={node.y} />
+      <path className={styles.line} d={`M${r1(left)} ${r1(top)} H${r1(right)} M${r1(left)} ${r1(bottom)} H${r1(right)}`} />
+      <TextLines lines={wrapText(node.label, shape.w - 2 * INSET)} x={node.x} y={node.y} />
     </>
   );
 }

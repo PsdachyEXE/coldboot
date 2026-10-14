@@ -1,6 +1,8 @@
 /**
- * Context diagram: the system as one circle labelled with its name, external entities as
- * rectangles, and labelled data flows between them drawn edge to edge.
+ * Context diagram (Level 0), drawn the VCAA way: the system as one circle labelled with its name,
+ * external entities as rectangles, and labelled one-way data flows between them drawn edge to
+ * edge. A two-way exchange is two flows, each with its own arrowhead, never one double-headed
+ * line.
  */
 import { useMemo } from 'react';
 import type { ContextDiagram } from '../content/schema';

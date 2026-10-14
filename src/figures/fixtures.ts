@@ -28,30 +28,42 @@ export const contextFixture: ContextDiagram = {
   ],
 };
 
+/**
+ * The Level 1 DFD of the system in `contextFixture`, consistent with it: the same entities, and the
+ * same flows to and from them. It keeps every VCAA rule (every process and store has an input and
+ * an output, every flow joins a process, no flows cross), and its nodes carry no `number`. The
+ * store sits between the processes above and below it, so its flows meet its lines rather than its
+ * open ends, as in VCAA's diagrams.
+ */
 export const dfdFixture: Dfd = {
   id: 'fx-dfd',
   kind: 'dfd',
   level: 1,
-  width: 720,
-  height: 460,
-  caption: 'Part of the Level 1 DFD for the booking system.',
+  width: 800,
+  height: 490,
+  caption: 'Level 1 DFD for the Kayak booking system.',
   nodes: [
-    { id: 'customer', type: 'entity', label: 'Customer', x: 96, y: 96 },
-    { id: 'p1', type: 'process', number: '1', label: 'Check availability', x: 336, y: 96 },
-    { id: 'p2', type: 'process', number: '2', label: 'Record booking', x: 336, y: 300 },
-    { id: 'p3', type: 'process', number: '3', label: 'Take payment', x: 600, y: 300 },
-    { id: 'd1', type: 'store', number: 'D1', label: 'Kayaks', x: 600, y: 96 },
-    { id: 'd2', type: 'store', number: 'D2', label: 'Bookings', x: 96, y: 300 },
-    { id: 'gateway', type: 'entity', label: 'Payment gateway', x: 600, y: 424, w: 160, h: 40 },
+    { id: 'customer', type: 'entity', label: 'Customer', x: 88, y: 80 },
+    { id: 'book', type: 'process', label: 'Make booking', x: 370, y: 80 },
+    { id: 'bookings', type: 'store', label: 'Bookings', x: 370, y: 250 },
+    { id: 'pay', type: 'process', label: 'Take payment', x: 660, y: 80 },
+    { id: 'gateway', type: 'entity', label: 'Payment gateway', x: 660, y: 250, w: 160 },
+    { id: 'report', type: 'process', label: 'Produce reports', x: 370, y: 410 },
+    { id: 'manager', type: 'entity', label: 'Manager', x: 88, y: 410 },
+    { id: 'staff', type: 'entity', label: 'Hire staff', x: 660, y: 410 },
   ],
   flows: [
-    { id: 'f1', from: 'customer', to: 'p1', label: 'hire_request' },
-    { id: 'f2', from: 'd1', to: 'p1', label: 'kayak_details' },
-    { id: 'f3', from: 'p1', to: 'customer', label: 'available_kayaks' },
-    { id: 'f4', from: 'customer', to: 'p2', label: 'booking_details', via: [{ x: 96, y: 200 }, { x: 250, y: 220 }] },
-    { id: 'f5', from: 'p2', to: 'd2', label: 'booking_record' },
-    { id: 'f6', from: 'p2', to: 'p3', label: 'amount_due' },
-    { id: 'f7', from: 'p3', to: 'gateway', label: 'payment_request', labelAt: { x: 530, y: 374 } },
+    { id: 'f1', from: 'customer', to: 'book', label: 'booking_request' },
+    { id: 'f2', from: 'bookings', to: 'book', label: 'current_bookings' },
+    { id: 'f3', from: 'book', to: 'pay', label: 'amount_due' },
+    { id: 'f4', from: 'pay', to: 'gateway', label: 'payment_request' },
+    { id: 'f5', from: 'gateway', to: 'pay', label: 'payment_result' },
+    { id: 'f6', from: 'pay', to: 'book', label: 'payment_receipt' },
+    { id: 'f7', from: 'book', to: 'bookings', label: 'new_booking' },
+    { id: 'f8', from: 'book', to: 'customer', label: 'booking_confirmation' },
+    { id: 'f9', from: 'bookings', to: 'report', label: 'booking_list' },
+    { id: 'f10', from: 'report', to: 'staff', label: 'daily_hire_list' },
+    { id: 'f11', from: 'report', to: 'manager', label: 'weekly_report' },
   ],
 };
 
