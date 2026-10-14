@@ -51,6 +51,29 @@ describe('markdown', () => {
     expect(renderPseudo('a < b')).toContain('&lt;');
   });
 
+  it('leaves True and False in regular weight, as the exam prints them', () => {
+    const html = renderPseudo('IF found = False THEN\n    RETURN True\nENDIF');
+    expect(html).toContain('<span class="ps-kw">RETURN</span>');
+    expect(html).toContain('<span class="ps-kw">IF</span>');
+    expect(html).toMatch(/= False <span class="ps-kw">THEN<\/span>/);
+    expect(html).not.toMatch(/<span class="ps-kw">(True|False|TRUE|FALSE)<\/span>/);
+    // Older listings that still write TRUE and FALSE aren't bolded either.
+    expect(renderPseudo('done ← TRUE')).not.toContain('ps-kw');
+    expect(renderPseudo('SET total TO 0')).toContain('<span class="ps-kw">SET</span>');
+    // Every reserved word the interpreter knows is upper case and bold, LENGTH included.
+    expect(renderPseudo('n ← LENGTH(name) MOD 2')).toContain('<span class="ps-kw">LENGTH</span>(name) <span class="ps-kw">MOD</span>');
+  });
+
+  it('renders the ASCII comparisons =, <>, <, <=, >, >= as typed', () => {
+    const html = renderPseudo('IF a <> b AND c <= 4 AND d >= 5 AND e < 6 AND f > 7 AND g = 8 THEN');
+    for (const op of ['&lt;&gt;', '&lt;=', '&gt;=', '&lt;', '&gt;', ' = ']) expect(html).toContain(op);
+    expect(html).not.toMatch(/<(?!\/?span\b|\/?pre\b|\/?code\b)/);
+    const text = html.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/^\s*1/, '');
+    expect(text).toBe('IF a <> b AND c <= 4 AND d >= 5 AND e < 6 AND f > 7 AND g = 8 THEN');
+    const fenced = renderMarkdown('```pseudo\nWHILE count <> 0 DO\n    count ← count - 1\nENDWHILE\n```');
+    expect(fenced).toContain('count &lt;&gt; <span class="ps-num">0</span>');
+  });
+
   it('hides and reveals cloze gaps', () => {
     expect(renderCloze('A {{binary search}} needs sorted data.', false)).toBe('A [ ... ] needs sorted data.');
     expect(renderCloze('A {{binary search}} needs sorted data.', true)).toBe('A **binary search** needs sorted data.');

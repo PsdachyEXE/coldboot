@@ -11,12 +11,17 @@
  *   `IF ... THEN` / `ELSEIF ... THEN` / `ELSE` / `ENDIF`, `FOR v ← a TO b [STEP s]` / `ENDFOR`
  *   (bounds inclusive, evaluated once), `WHILE cond DO` / `ENDWHILE`, `REPEAT` / `UNTIL cond` and
  *   `RETURN expr`. `//` starts a comment.
- * - Expressions: whole and decimal numbers, "strings", TRUE and FALSE, array literals `[1, 2]`
+ * - Expressions: whole and decimal numbers, "strings", True and False, array literals `[1, 2]`
  *   (nested for two dimensions), `a[i]` and `grid[r][c]` with a configurable index base, calls
  *   to the listing's functions and to `LENGTH(x)`, `+ - * /`, `MOD`, `DIV` (rounds down),
- *   `= ≠ < ≤ > ≥`, `AND`, `OR`, `NOT` and brackets. `+` joins strings, turning a number into its
- *   text. `/` always gives a floating point result. `AND` and `OR` evaluate both sides, so a
+ *   `= <> < <= > >=`, `AND`, `OR`, `NOT` and brackets. `+` joins strings, turning a number into
+ *   its text. `/` always gives a floating point result. `AND` and `OR` evaluate both sides, so a
  *   listing never relies on short-circuiting.
+ * - Names are camelCase or snake_case.
+ * - Older listings still run: `≠ ≤ ≥` read as `<> <= >=`, and TRUE and FALSE (in any case) as
+ *   True and False.
+ * - Not run, though valid pseudocode: `INPUT`, `READ` and `CASE`/`SWITCH`. `PRINT`, `OUTPUT` and
+ *   `SET` are rejected with the house form (`DISPLAY`, `←`).
  *
  * Anything else is a `PseudoError` of kind 'syntax' with the line number. Running raises
  * 'name', 'type', 'index', 'divide-by-zero', 'overflow', 'return' or 'limit' errors. The step
@@ -53,12 +58,31 @@ export type Value = number | Real | string | boolean | Value[];
 
 const KEYWORDS = new Set([
   'BEGIN', 'END', 'IF', 'THEN', 'ELSEIF', 'ELSE', 'ENDIF', 'FOR', 'TO', 'STEP', 'ENDFOR', 'WHILE', 'DO', 'ENDWHILE',
-  'REPEAT', 'UNTIL', 'FUNCTION', 'RETURN', 'ENDFUNCTION', 'DISPLAY', 'AND', 'OR', 'NOT', 'MOD', 'DIV', 'TRUE', 'FALSE', 'LENGTH',
+  'REPEAT', 'UNTIL', 'FUNCTION', 'RETURN', 'ENDFUNCTION', 'DISPLAY', 'AND', 'OR', 'NOT', 'MOD', 'DIV', 'LENGTH',
 ]);
 
-const ASCII_OPERATORS: Record<string, string> = { '<-': '←', '<=': '≤', '>=': '≥', '<>': '≠', '!=': '≠', '==': '=' };
+/** The symbols older listings used, read as the exam's ASCII forms. */
+const OLD_OPERATORS: Record<string, string> = { '≠': '<>', '≤': '<=', '≥': '>=' };
 
-type Token = { t: 'num'; v: string } | { t: 'str'; v: string } | { t: 'id'; v: string } | { t: 'kw'; v: string } | { t: 'op'; v: string };
+/** Forms from other languages, rejected with the house form to use instead. */
+const FOREIGN_OPERATORS: Record<string, string> = { '<-': '←', '!=': '<>', '==': '=' };
+
+/** Keywords the outcome-specific requirements allow where the house style picks another form. */
+const HOUSE_KEYWORDS: Record<string, string> = { PRINT: 'DISPLAY', OUTPUT: 'DISPLAY', SET: '←' };
+
+/** Valid pseudocode (docs/PSEUDOCODE.md) that this interpreter doesn't run, so traced listings avoid it. */
+const NOT_RUN = new Set(['INPUT', 'READ', 'CASE', 'SWITCH', 'OF', 'OTHERWISE', 'ENDCASE']);
+
+/** camelCase (totalScore) or snake_case (total_score). */
+const NAME = /^[a-z][A-Za-z0-9]*$|^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$/;
+
+type Token =
+  | { t: 'num'; v: string }
+  | { t: 'str'; v: string }
+  | { t: 'id'; v: string }
+  | { t: 'kw'; v: string }
+  | { t: 'op'; v: string }
+  | { t: 'bool'; v: 'True' | 'False' };
 
 const TOKEN = /\s*(?:(\/\/.*)|(\d+(?:\.\d+)?)(?![\w.])|("[^"]*")|([A-Za-z_][A-Za-z0-9_]*)|(<-|<=|>=|<>|!=|==|[←+\-*/=≠<≤>≥()[\],])|(\S+))/y;
 
@@ -74,12 +98,15 @@ function tokenise(text: string, line: number): Token[] {
     else if (str !== undefined) tokens.push({ t: 'str', v: str.slice(1, -1) });
     else if (word !== undefined) {
       if (KEYWORDS.has(word)) tokens.push({ t: 'kw', v: word });
+      else if (/^(?:true|false)$/i.test(word)) tokens.push({ t: 'bool', v: word.toLowerCase() === 'true' ? 'True' : 'False' });
+      else if (HOUSE_KEYWORDS[word]) throw new PseudoError('syntax', `Write ${HOUSE_KEYWORDS[word]} rather than ${word}.`, line);
+      else if (NOT_RUN.has(word)) throw new PseudoError('syntax', `${word} is valid pseudocode, but this interpreter doesn't run it.`, line);
       else if (/^[A-Z][A-Z0-9_]+$/.test(word)) throw new PseudoError('syntax', `${word} isn't a keyword in this pseudocode.`, line);
-      else if (!/^[a-z][A-Za-z0-9]*$/.test(word)) throw new PseudoError('syntax', `${word} isn't a valid name. Names are camelCase, such as totalScore.`, line);
+      else if (!NAME.test(word)) throw new PseudoError('syntax', `${word} isn't a valid name. Names are camelCase or snake_case, such as totalScore or total_score.`, line);
       else tokens.push({ t: 'id', v: word });
     } else if (op !== undefined) {
-      if (ASCII_OPERATORS[op]) throw new PseudoError('syntax', `Write ${ASCII_OPERATORS[op]} rather than ${op}.`, line);
-      tokens.push({ t: 'op', v: op });
+      if (FOREIGN_OPERATORS[op]) throw new PseudoError('syntax', `Write ${FOREIGN_OPERATORS[op]} rather than ${op}.`, line);
+      tokens.push({ t: 'op', v: OLD_OPERATORS[op] ?? op });
     } else if (other !== undefined) {
       if (other.startsWith('"')) throw new PseudoError('syntax', 'A string is missing its closing quote.', line);
       throw new PseudoError('syntax', `Unexpected ${other}.`, line);
@@ -148,11 +175,11 @@ const BINARY_PRECEDENCE: Record<string, number> = {
   OR: 1,
   AND: 2,
   '=': 4,
-  '≠': 4,
+  '<>': 4,
   '<': 4,
-  '≤': 4,
+  '<=': 4,
   '>': 4,
-  '≥': 4,
+  '>=': 4,
   '+': 5,
   '-': 5,
   '*': 6,
@@ -278,11 +305,12 @@ class ExprParser {
         return { k: 'lit', v: t.v.includes('.') ? new Real(Number(t.v)) : Number(t.v) };
       case 'str':
         return { k: 'lit', v: t.v };
+      case 'bool':
+        return { k: 'lit', v: t.v === 'True' };
       case 'id':
         if (this.isOp('(')) return { k: 'call', name: t.v, args: this.args() };
         return { k: 'var', name: t.v };
       case 'kw':
-        if (t.v === 'TRUE' || t.v === 'FALSE') return { k: 'lit', v: t.v === 'TRUE' };
         if (t.v === 'LENGTH') return { k: 'call', name: 'LENGTH', args: this.args() };
         throw this.error(`Unexpected ${t.v}.`);
       case 'op':
@@ -573,11 +601,11 @@ export function formatReal(x: number): string {
   return s.endsWith('.') ? `${s}0` : s;
 }
 
-/** How DISPLAY shows a value: integers plainly, floating point with a decimal point, TRUE/FALSE, arrays in brackets. */
+/** How DISPLAY shows a value: integers plainly, floating point with a decimal point, True/False, arrays in brackets. */
 export function formatValue(v: Value): string {
   if (typeof v === 'number') return String(v);
   if (v instanceof Real) return formatReal(v.value);
-  if (typeof v === 'boolean') return v ? 'TRUE' : 'FALSE';
+  if (typeof v === 'boolean') return v ? 'True' : 'False';
   if (typeof v === 'string') return v;
   return `[${v.map((x) => (typeof x === 'string' ? `"${x}"` : formatValue(x))).join(', ')}]`;
 }
@@ -827,7 +855,7 @@ class Machine {
 
   private bool(e: Expr, frame: Frame, line: number, what: string): boolean {
     const v = this.eval(e, frame, line);
-    if (typeof v !== 'boolean') throw new PseudoError('type', `${what} needs a TRUE or FALSE condition, not ${typeName(v)}.`, line);
+    if (typeof v !== 'boolean') throw new PseudoError('type', `${what} needs a condition that is true or false, not ${typeName(v)}.`, line);
     return v;
   }
 
@@ -851,7 +879,7 @@ class Machine {
       case 'unary': {
         const v = this.eval(e.e, frame, line);
         if (e.op === 'NOT') {
-          if (typeof v !== 'boolean') throw new PseudoError('type', `NOT needs TRUE or FALSE, not ${typeName(v)}.`, line);
+          if (typeof v !== 'boolean') throw new PseudoError('type', `NOT needs a value that is true or false, not ${typeName(v)}.`, line);
           return !v;
         }
         if (typeof v === 'number') return this.checkInt(-v, line);
@@ -892,7 +920,7 @@ class Machine {
         if (r === 0) throw new PseudoError('divide-by-zero', `${op} by zero.`, line);
         return op === 'DIV' ? this.checkInt(Math.floor(l / r), line) : this.checkInt(l - r * Math.floor(l / r), line);
       case '=':
-      case '≠': {
+      case '<>': {
         if (Array.isArray(l) || Array.isArray(r)) throw new PseudoError('type', 'Compare arrays one element at a time.', line);
         const comparable = (isNumber(l) && isNumber(r)) || typeof l === typeof r;
         if (!comparable) throw mismatch(op);
@@ -900,13 +928,13 @@ class Machine {
         return op === '=' ? equal : !equal;
       }
       case '<':
-      case '≤':
+      case '<=':
       case '>':
-      case '≥': {
+      case '>=': {
         if (!isNumber(l) || !isNumber(r)) throw mismatch(op);
         const a = num(l);
         const b = num(r);
-        return op === '<' ? a < b : op === '≤' ? a <= b : op === '>' ? a > b : a >= b;
+        return op === '<' ? a < b : op === '<=' ? a <= b : op === '>' ? a > b : a >= b;
       }
       default:
         throw new PseudoError('syntax', `Unknown operator ${op}.`, line);

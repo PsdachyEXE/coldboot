@@ -38,7 +38,7 @@ function matchScalar(token: string, expected: Value): { ok: boolean; note?: stri
     return m;
   }
   if (typeof expected === 'boolean') {
-    if (token !== 'true' && token !== 'false') return { unparsed: 'Type TRUE or FALSE.' };
+    if (token !== 'true' && token !== 'false') return { unparsed: 'Type True or False.' };
     return { ok: (token === 'true') === expected };
   }
   if (typeof expected === 'string') return { ok: token === normaliseAnswer(expected) };
@@ -108,6 +108,6 @@ export function answerHint(answer: DeskAnswer): string {
   if (Array.isArray(v)) return 'Type the values in order, separated by spaces or commas.';
   if (typeof v === 'number') return 'Type a whole number.';
   if (isReal(v)) return 'The answer is a floating point number: type it with a decimal point, such as 2.5.';
-  if (typeof v === 'boolean') return 'Type TRUE or FALSE.';
+  if (typeof v === 'boolean') return 'Type True or False.';
   return 'Type the text, without quotes.';
 }

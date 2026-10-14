@@ -7,12 +7,15 @@ import MarkdownIt from 'markdown-it';
 
 type MarkdownRenderer = InstanceType<typeof MarkdownIt>;
 
-/** Uppercase pseudocode keywords highlighted in `pseudo` blocks. */
+/**
+ * Uppercase pseudocode keywords highlighted in `pseudo` blocks. True and False are values, not
+ * keywords: the exam prints them in regular weight, so they (and older TRUE and FALSE) stay plain.
+ */
 export const PSEUDO_KEYWORDS = [
   'BEGIN', 'END', 'IF', 'THEN', 'ELSEIF', 'ELSE', 'ENDIF', 'WHILE', 'DO', 'ENDWHILE', 'FOR', 'TO', 'STEP',
   'NEXT', 'ENDFOR', 'REPEAT', 'UNTIL', 'RETURN', 'DISPLAY', 'INPUT', 'OUTPUT', 'PRINT', 'FUNCTION',
-  'ENDFUNCTION', 'PROCEDURE', 'ENDPROCEDURE', 'CALL', 'AND', 'OR', 'NOT', 'MOD', 'DIV', 'TRUE', 'FALSE',
-  'CASE', 'OF', 'OTHERWISE', 'ENDCASE', 'OPEN', 'CLOSE', 'READ', 'WRITE', 'FROM', 'EACH', 'IN', 'CLASS',
+  'ENDFUNCTION', 'PROCEDURE', 'ENDPROCEDURE', 'CALL', 'AND', 'OR', 'NOT', 'MOD', 'DIV', 'LENGTH', 'SET',
+  'CASE', 'SWITCH', 'OF', 'OTHERWISE', 'ENDCASE', 'OPEN', 'CLOSE', 'READ', 'WRITE', 'FROM', 'EACH', 'IN', 'CLASS',
   'ENDCLASS', 'METHOD', 'ENDMETHOD', 'NEW', 'RETURNS',
 ] as const;
 

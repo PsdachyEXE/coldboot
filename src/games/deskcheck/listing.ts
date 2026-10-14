@@ -1,7 +1,7 @@
 /**
- * Builds pseudocode listings in the house style (docs/PSEUDOCODE.md): uppercase keywords, four
- * spaces a level, no blank lines. Each `line` call returns the 1-based line number it wrote, so
- * templates can ask about "line 7" without counting by hand.
+ * Builds pseudocode listings in the house style (docs/PSEUDOCODE.md): uppercase keywords, the
+ * exam's ASCII comparisons, True and False, four spaces a level, no blank lines. Each `line` call
+ * returns the 1-based line number it wrote, so templates can ask about "line 7" without counting.
  */
 import { formatReal, Real, type Value } from './interpreter';
 
@@ -41,11 +41,11 @@ export class Listing {
   }
 }
 
-/** A value written as a pseudocode literal: 12, 2.5, "Mia", TRUE, [4, 8, 15]. */
+/** A value written as a pseudocode literal: 12, 2.5, "Mia", True, [4, 8, 15]. */
 export function literal(v: Value): string {
   if (typeof v === 'number') return String(v);
   if (v instanceof Real) return formatReal(v.value);
-  if (typeof v === 'boolean') return v ? 'TRUE' : 'FALSE';
+  if (typeof v === 'boolean') return v ? 'True' : 'False';
   if (typeof v === 'string') return `"${v}"`;
   return `[${v.map(literal).join(', ')}]`;
 }

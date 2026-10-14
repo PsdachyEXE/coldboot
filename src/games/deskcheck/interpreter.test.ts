@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   afterIteration,
@@ -45,9 +47,9 @@ describe('statements', () => {
     expect(output(main('total ← 4', 'total ← total + 3', 'DISPLAY total', 'DISPLAY "Total is " + total'))).toEqual(['7', 'Total is 7']);
   });
 
-  it('runs IF, ELSEIF and ELSE branches in order and only the first TRUE one', () => {
+  it('runs IF, ELSEIF and ELSE branches in order and only the first true one', () => {
     const src = (x: number) =>
-      main(`x ← ${x}`, 'IF x ≥ 80 THEN', '    DISPLAY "A"', 'ELSEIF x > 64 THEN', '    DISPLAY "B"', 'ELSEIF x ≥ 60 THEN', '    DISPLAY "C"', 'ELSE', '    DISPLAY "D"', 'ENDIF');
+      main(`x ← ${x}`, 'IF x >= 80 THEN', '    DISPLAY "A"', 'ELSEIF x > 64 THEN', '    DISPLAY "B"', 'ELSEIF x >= 60 THEN', '    DISPLAY "C"', 'ELSE', '    DISPLAY "D"', 'ENDIF');
     expect([80, 79, 65, 64, 60, 59].map((x) => output(src(x))[0])).toEqual(['A', 'B', 'B', 'C', 'C', 'D']);
     expect(output(main('x ← 1', 'IF x = 2 THEN', '    DISPLAY "two"', 'ENDIF', 'DISPLAY "done"'))).toEqual(['done']);
   });
@@ -98,6 +100,11 @@ describe('statements', () => {
     expect(fails(leaky, 'name').message).toContain('Inside a function');
   });
 
+  it('accepts snake_case names as well as camelCase', () => {
+    expect(output(main('weekly_pay ← 900', 'rent_due ← 400', 'IF weekly_pay < (rent_due * 2) THEN', '    DISPLAY "Short"', 'ELSE', '    DISPLAY "Covered"', 'ENDIF'))).toEqual(['Covered']);
+    expect(output(main('totalScore ← 3', 'DISPLAY totalScore'))).toEqual(['3']);
+  });
+
   it('ignores comments but still numbers their lines', () => {
     const src = ['BEGIN', '    // the running total', '    total ← 5', 'END'].join('\n');
     const r = run(src, { ...base0, trace: true });
@@ -126,10 +133,24 @@ describe('expressions', () => {
     expect(formatReal(3.125)).toBe('3.125');
   });
 
-  it('compares with = ≠ < ≤ > ≥ and combines with AND, OR and NOT', () => {
-    const lines = ['DISPLAY 3 = 3', 'DISPLAY 3 ≠ 3', 'DISPLAY 2 < 3', 'DISPLAY 3 ≤ 3', 'DISPLAY 3 > 3', 'DISPLAY 3 ≥ 3', 'DISPLAY "a" = "a"', 'DISPLAY 2.0 = 2'];
-    expect(output(main(...lines))).toEqual(['TRUE', 'FALSE', 'TRUE', 'TRUE', 'FALSE', 'TRUE', 'TRUE', 'TRUE']);
-    expect(output(main('DISPLAY 1 < 2 AND 2 < 1', 'DISPLAY 1 < 2 OR 2 < 1', 'DISPLAY NOT 1 = 2', 'DISPLAY NOT TRUE OR TRUE'))).toEqual(['FALSE', 'TRUE', 'TRUE', 'TRUE']);
+  it('compares with = <> < <= > >= and combines with AND, OR and NOT', () => {
+    const lines = ['DISPLAY 3 = 3', 'DISPLAY 3 <> 3', 'DISPLAY 2 < 3', 'DISPLAY 3 <= 3', 'DISPLAY 3 > 3', 'DISPLAY 3 >= 3', 'DISPLAY "a" = "a"', 'DISPLAY 2.0 = 2', 'DISPLAY "a" <> "b"'];
+    expect(output(main(...lines))).toEqual(['True', 'False', 'True', 'True', 'False', 'True', 'True', 'True', 'True']);
+    expect(output(main('DISPLAY 1 < 2 AND 2 < 1', 'DISPLAY 1 < 2 OR 2 < 1', 'DISPLAY NOT 1 = 2', 'DISPLAY NOT True OR True'))).toEqual(['False', 'True', 'True', 'True']);
+  });
+
+  it('writes and displays Booleans as True and False', () => {
+    expect(output(main('found ← False', 'IF found = False THEN', '    found ← True', 'ENDIF', 'DISPLAY found'))).toEqual(['True']);
+    const r = run(main('done ← 4 <> 4'), { ...base0, trace: true });
+    expect(afterLine(r, 2)?.vars.done).toBe(false);
+  });
+
+  it('still reads the older symbols ≠ ≤ ≥ and TRUE and FALSE', () => {
+    const lines = ['DISPLAY 3 ≠ 3', 'DISPLAY 3 ≤ 3', 'DISPLAY 2 ≥ 3', 'DISPLAY TRUE', 'DISPLAY NOT FALSE', 'DISPLAY true AND false'];
+    expect(output(main(...lines))).toEqual(['False', 'True', 'False', 'True', 'True', 'False']);
+    // Old and new forms mean the same, so a listing may mix them while it is converted.
+    expect(output(main('x ← 5', 'IF x ≥ 5 AND x <= 9 AND x ≠ 7 AND TRUE = True THEN', '    DISPLAY "in"', 'ENDIF'))).toEqual(['in']);
+    expect(fails(main('x ← 1 ≤ 2 < 3'), 'syntax').message).toContain('Join two comparisons');
   });
 
   it('evaluates both sides of AND and OR, so listings never rely on short-circuiting', () => {
@@ -217,9 +238,13 @@ describe('snapshots and line counts', () => {
 describe('errors outside the subset', () => {
   it.each([
     ['an unknown keyword', main('x ← 1', 'ENDFRO'), "ENDFRO isn't a keyword"],
-    ['INPUT', main('INPUT age'), "INPUT isn't a keyword"],
+    ['INPUT, which the house style allows but the interpreter does not run', main('INPUT age'), "INPUT is valid pseudocode, but this interpreter doesn't run it"],
+    ['CASE', main('CASE choice OF'), "CASE is valid pseudocode, but this interpreter doesn't run it"],
+    ['PRINT, where the house style writes DISPLAY', main('PRINT total'), 'Write DISPLAY rather than PRINT'],
+    ['SET, where the house style writes ←', main('SET total TO 0'), 'Write ← rather than SET'],
     ['an ASCII arrow', main('x <- 1'), 'Write ← rather than <-'],
-    ['an ASCII comparison', main('IF 1 <= 2 THEN', '    x ← 1', 'ENDIF'), 'Write ≤ rather than <='],
+    ['!= for not equal', main('IF 1 != 2 THEN', '    x ← 1', 'ENDIF'), 'Write <> rather than !='],
+    ['== for equal', main('IF 1 == 2 THEN', '    x ← 1', 'ENDIF'), 'Write = rather than =='],
     ['a missing ENDIF', main('IF 1 < 2 THEN', '    x ← 1'), 'ENDIF is missing: the IF must close before this END'],
     ['a stray ENDFOR', main('x ← 1', 'ENDFOR'), "ENDFOR doesn't match an open FOR"],
     ['a missing closing quote', main('DISPLAY "hi'), 'missing its closing quote'],
@@ -228,7 +253,8 @@ describe('errors outside the subset', () => {
     ['wrong indentation', 'BEGIN\n  x ← 1\nEND', 'indented 4 spaces'],
     ['a tab', 'BEGIN\n\tx ← 1\nEND', 'not tabs'],
     ['trailing spaces', 'BEGIN\n    x ← 1 \nEND', 'trailing spaces'],
-    ['a name that is not camelCase', main('Total ← 1'), 'camelCase'],
+    ['a name that is neither camelCase nor snake_case', main('Total ← 1'), 'camelCase or snake_case'],
+    ['a name with a capital after an underscore', main('total_Score ← 1'), 'camelCase or snake_case'],
     ['assigning to a literal', main('0 ← total'), "can't start with 0"],
     ['a bare function call', main('f(1)'), 'does nothing'],
     ['a statement outside BEGIN', 'x ← 1', 'starts with BEGIN or FUNCTION'],
@@ -246,7 +272,8 @@ describe('errors outside the subset', () => {
     fails(main('quantity ← "ten"', 'DISPLAY quantity * 2'), 'type');
     fails(main('IF 1 THEN', '    x ← 1', 'ENDIF'), 'type');
     fails(main('DISPLAY "5" > 3'), 'type');
-    fails(main('DISPLAY TRUE + 1'), 'type');
+    fails(main('DISPLAY True + 1'), 'type');
+    expect(fails(main('IF 1 THEN', '    x ← 1', 'ENDIF'), 'type').message).toContain('needs a condition that is true or false');
     fails(main('DISPLAY 7.5 DIV 2'), 'type');
     fails(main('count ← 0', 'DISPLAY 10 / count'), 'divide-by-zero');
     fails(main('DISPLAY 10 DIV 0'), 'divide-by-zero');
@@ -279,13 +306,25 @@ describe('errors outside the subset', () => {
   });
 });
 
+describe('the house style', () => {
+  it('runs the example in docs/PSEUDOCODE.md and gives the output the doc states', () => {
+    const doc = readFileSync(resolve(import.meta.dirname, '../../../docs/PSEUDOCODE.md'), 'utf8');
+    const blocks = [...doc.matchAll(/```pseudo\n([\s\S]*?)\n```/g)].map((m) => m[1]);
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0]).not.toMatch(/[≠≤≥]|\bTRUE\b|\bFALSE\b/);
+    expect(output(blocks[0])).toEqual(['Passed: 3', 'False']);
+    expect(doc).toContain('It displays `Passed: 3`, then `False`.');
+  });
+});
+
 describe('values', () => {
   it('formats values the way DISPLAY shows them', () => {
     const cases: [Value, string][] = [
       [7, '7'],
       [new Real(7), '7.0'],
       [new Real(2.5), '2.5'],
-      [true, 'TRUE'],
+      [true, 'True'],
+      [false, 'False'],
       ['Mia', 'Mia'],
       [[1, 2], '[1, 2]'],
       [['a', 'b'], '["a", "b"]'],

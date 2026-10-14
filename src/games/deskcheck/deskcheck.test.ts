@@ -6,8 +6,9 @@
 import { describe, expect, it } from 'vitest';
 import type { TerminalBlock } from '../../terminal/blocks';
 import type { Difficulty, QuizItem } from '../types';
-import { checkDeskAnswer, formatDeskAnswer } from './answers';
+import { answerHint, checkDeskAnswer, formatDeskAnswer } from './answers';
 import game from './index';
+import { DESKCHECK_SUMMARY } from './meta';
 import {
   afterIteration,
   afterLine,
@@ -21,10 +22,12 @@ import {
 } from './interpreter';
 import { buildTrace, deskcheckItem, fromDeskcheckInstance, generateDeskcheckItem, planDeskcheckRound, TRACE_ROWS_MAX, traceItem } from './items';
 import { TRACE_FAMILIES } from './templates';
-import { minimalInputs, tableSpec, TEST_TABLE_COLUMNS, testTableItem } from './testtable';
+import { minimalInputs, tableSpec, testTableColumns, testTableItem } from './testtable';
 
 const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 1);
 const LEVELS: Difficulty[] = ['easy', 'normal', 'hard'];
+/** The older symbols and capitals that the exam's ASCII comparisons and True and False replace. */
+const OLD_STYLE = /[≠≤≥]|\bTRUE\b|\bFALSE\b/;
 
 type Pseudo = Extract<TerminalBlock, { kind: 'pseudo' }>;
 type Table = Extract<TerminalBlock, { kind: 'table' }>;
@@ -103,7 +106,7 @@ function typed(v: Value): string {
 function wrongFor(v: Value): string {
   if (typeof v === 'number') return String(v + 1);
   if (isReal(v)) return formatValue(v.value + 1).includes('.') ? String(v.value + 1) : `${v.value + 1}.5`;
-  if (typeof v === 'boolean') return v ? 'FALSE' : 'TRUE';
+  if (typeof v === 'boolean') return v ? 'False' : 'True';
   if (typeof v === 'string') return `${v}x`;
   return typed([...v].reverse()) === typed(v) ? typed(v.map((x) => (typeof x === 'number' ? x + 1 : x))) : typed([...v].reverse());
 }
@@ -119,6 +122,9 @@ describe('deskcheck trace questions against the interpreter', () => {
         // Every emitted listing parses, has no blank lines and uses the house indentation.
         expect(() => parseProgram(code), label).not.toThrow();
         expect(code.split('\n').every((l) => l.trim() && (l.length - l.trimStart().length) % 4 === 0), label).toBe(true);
+        // The exam's ASCII comparisons and True and False, never the older symbols or TRUE and FALSE.
+        expect(code, label).not.toMatch(OLD_STYLE);
+        expect(item.prompt.map((b) => (b.kind === 'text' ? b.text : '')).join(' '), label).not.toMatch(OLD_STYLE);
 
         // Every question with an array states its index base.
         const usesArrays = /\[/.test(code) || item.prompt.some((b) => b.kind === 'table');
@@ -139,13 +145,22 @@ describe('deskcheck trace questions against the interpreter', () => {
           const wrong = item.check([...words.slice(0, -1), changed].join(' '));
           expect(wrong.correct, label).toBe(false);
           expect(wrong.counted, label).not.toBe(false);
+          // Feedback and the trace table it shows are in the house style too.
+          expect(`${wrong.reason} ${JSON.stringify(wrong.followUp)}`, label).not.toMatch(OLD_STYLE);
         } else {
           const v = ind.value!;
           expect(v, label).toBeDefined();
           expect(expected, label).toBe(formatDeskAnswer({ kind: 'value', value: v }));
           expect(item.check(typed(v)).correct, label).toBe(true);
+          if (typeof v === 'boolean') {
+            // Written True or False, but typed in any case.
+            expect(expected, label).toBe(v ? 'True' : 'False');
+            expect(item.check(typed(v).toUpperCase()).correct, label).toBe(true);
+            expect(item.check(typed(v).toLowerCase()).correct, label).toBe(true);
+          }
           const wrong = item.check(wrongFor(v));
           expect(wrong.correct, `${label}: ${wrongFor(v)}`).toBe(false);
+          expect(`${wrong.reason} ${JSON.stringify(wrong.followUp)}`, label).not.toMatch(OLD_STYLE);
           // A floating point answer is never a whole number, so 7 versus 7.0 never decides it.
           if (isReal(v)) expect(Number.isInteger(v.value), label).toBe(false);
         }
@@ -192,6 +207,29 @@ describe('deskcheck trace questions against the interpreter', () => {
     expect([...kinds].sort()).toEqual(['line', 'output', 'pass', 'return']);
   });
 
+  it('writes comparisons and Booleans in the exam style, and asks for Boolean answers', () => {
+    const codes: string[] = [];
+    let booleanAsked = false;
+    for (const level of LEVELS) {
+      for (const family of TRACE_FAMILIES) {
+        for (const seed of SEEDS.slice(0, 100)) {
+          const built = buildTrace(family, seed, level);
+          codes.push(built.tc.code);
+          if (built.answer.kind === 'value' && typeof built.answer.value === 'boolean') {
+            booleanAsked = true;
+            expect(traceItem(family, seed, level).prompt.at(-1)).toMatchObject({ kind: 'text', text: 'Type True or False.' });
+          }
+        }
+      }
+    }
+    const all = codes.join('\n');
+    for (const op of [' <= ', ' >= ', ' < ', ' > ', ' = ']) expect(all).toContain(op);
+    expect(all).toContain('found ← False');
+    expect(all).toContain('found ← True');
+    expect(all).toContain('WHILE found = False AND');
+    expect(booleanAsked).toBe(true);
+  });
+
   it('shows a trace table after a wrong answer, from the same run', () => {
     const item = traceItem('accumulate', 11, 'easy');
     const answer = item.check('').expected;
@@ -233,6 +271,10 @@ describe('deskcheck answers', () => {
     expect(checkDeskAnswer('3,5, 8', { kind: 'output', lines: ['3', '5', '8'] }).status).toBe('right');
     expect(checkDeskAnswer('[3 5 8]', { kind: 'value', value: [3, 5, 8] }).status).toBe('right');
     expect(checkDeskAnswer('true', { kind: 'value', value: true }).status).toBe('right');
+    expect(checkDeskAnswer('TRUE', { kind: 'value', value: true }).status).toBe('right');
+    expect(checkDeskAnswer('False', { kind: 'value', value: false }).status).toBe('right');
+    expect(checkDeskAnswer('True', { kind: 'value', value: false }).status).toBe('wrong');
+    expect(checkDeskAnswer('FALSE', { kind: 'output', lines: ['False'] }).status).toBe('right');
     expect(checkDeskAnswer('yes', { kind: 'value', value: true }).status).toBe('unparsed');
     expect(checkDeskAnswer('3 5', { kind: 'value', value: [3, 5, 8] }).status).toBe('unparsed');
     expect(checkDeskAnswer('3 5', { kind: 'output', lines: ['3', '5', '8'] }).status).toBe('wrong');
@@ -243,9 +285,17 @@ describe('deskcheck answers', () => {
     expect(formatDeskAnswer({ kind: 'output', lines: ['47', '3'] })).toBe('47, 3 (one per line)');
     expect(formatDeskAnswer({ kind: 'output', lines: ['Room 204', '8'] })).toBe('Room 204, then 8');
   });
+
+  it('writes Booleans as True and False and asks for them that way', () => {
+    expect(formatDeskAnswer({ kind: 'value', value: true })).toBe('True');
+    expect(formatDeskAnswer({ kind: 'value', value: [true, false] })).toBe('True, False');
+    expect(answerHint({ kind: 'value', value: false })).toBe('Type True or False.');
+    const unparsed = checkDeskAnswer('yes', { kind: 'value', value: false });
+    expect(unparsed.status === 'unparsed' && unparsed.message).toBe('Type True or False.');
+  });
 });
 
-describe('deskcheck test tables', () => {
+describe('deskcheck testing tables', () => {
   /** The requirements as printed: [from, to, output] per row, plus the invalid rule. */
   function bandsOf(item: QuizItem): { bands: [number, number, string][]; invalid: boolean } {
     const table = item.prompt.find((b): b is Table => b.kind === 'table')!;
@@ -293,11 +343,16 @@ describe('deskcheck test tables', () => {
         expect(partial.counted).not.toBe(false);
         expect(partial.reason).toContain(String(drop));
       }
-      // The test table uses the exam's columns and leaves Actual output blank.
+      // The listing and the feedback use the exam's ASCII comparisons.
+      expect(code, label).not.toMatch(OLD_STYLE);
+      expect(right.reason, label).not.toMatch(OLD_STYLE);
+      // The testing table uses the exam's columns (one for the input, named for it) and leaves Actual output blank.
       const table = right.followUp?.[0];
       expect(table?.kind).toBe('table');
       if (table?.kind === 'table') {
-        expect(table.columns).toEqual(TEST_TABLE_COLUMNS);
+        expect(table.caption).toMatch(/^Testing table /);
+        expect(table.columns).toEqual(['Test', spec.context.heading, 'Expected output', 'Actual output']);
+        expect(table.columns).toEqual(testTableColumns(spec.context.heading));
         expect(table.rows.map((r) => r[0])).toEqual(needed.map((_, i) => String(i + 1)));
         expect(table.rows.every((r) => r[3] === '')).toBe(true);
         for (const row of table.rows) {
@@ -307,6 +362,16 @@ describe('deskcheck test tables', () => {
         }
       }
     }
+  });
+
+  it('calls them testing tables, as the study design and the exam do', () => {
+    for (const text of [game.title, game.man, DESKCHECK_SUMMARY]) {
+      expect(text).toMatch(/testing table/);
+      expect(text).not.toMatch(/\btest tables?\b/i);
+    }
+    const prompt = testTableItem(5, 'normal').prompt.map((b) => (b.kind === 'text' ? b.text : '')).join(' ');
+    expect(prompt).toContain('belong in a testing table');
+    expect(prompt).not.toMatch(/\btest tables?\b/i);
   });
 
   it('explains a missing branch as well as missing boundaries', () => {

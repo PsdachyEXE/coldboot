@@ -75,7 +75,7 @@ function ints(rng: Rng, n: number, lo: number, hi: number): number[] {
   return Array.from({ length: n }, () => randInt(rng, lo, hi));
 }
 
-const INCLUDES_EQUAL = new Set(['≥', '≤']);
+const INCLUDES_EQUAL = new Set(['>=', '<=']);
 
 function lastIndex(n: number, base: Base): number {
   return n - 1 + base;
@@ -148,7 +148,7 @@ function arrayFilter(rng: Rng, d: Difficulty): TraceCase {
   const t = randInt(rng, 8, 20);
   const values = ints(rng, n, 2, 30);
   if (d !== 'easy') values[randInt(rng, 0, n - 1)] = t;
-  const op = pick(rng, d === 'easy' ? ['≥', '>'] : ['≥', '>', '<', '≤']);
+  const op = pick(rng, d === 'easy' ? ['>=', '>'] : ['>=', '>', '<', '<=']);
   const shows = pick(rng, ['total', 'count', 'both'] as const);
   const L = new Listing();
   L.open('BEGIN');
@@ -178,7 +178,7 @@ function arrayFilter(rng: Rng, d: Difficulty): TraceCase {
       ...(d === 'hard' ? [{ kind: 'line', line: countLine, occurrence: 2, variable: 'total' } as Ask] : []),
       { kind: 'output' },
     ],
-    reason: () => `The loop checks every value, but only values where ${name}[i] ${op} ${t} is TRUE are added to total and counted. A value equal to ${t} ${equal} included, because the condition uses ${op}.`,
+    reason: () => `The loop checks every value, but only values where ${name}[i] ${op} ${t} is true are added to total and counted. A value equal to ${t} ${equal} included, because the condition uses ${op}.`,
   };
 }
 
@@ -254,15 +254,15 @@ function cutPoints(rng: Rng, ctx: BandContext, count: number): number[] {
 }
 
 /**
- * Writes an IF/ELSEIF/ELSE chain. `desc` tests the highest band first with ≥ or >; otherwise
- * the lowest band first with < or ≤. `emit` writes each branch's body.
+ * Writes an IF/ELSEIF/ELSE chain. `desc` tests the highest band first with >= or >; otherwise
+ * the lowest band first with < or <=. `emit` writes each branch's body.
  */
 function writeChain(L: Listing, rng: Rng, subject: string, cuts: number[], desc: boolean, emit: (band: number) => number): Chain {
   const k = cuts.length + 1;
   const conds: Chain['conds'] = [];
   const order = desc ? range(1, k - 1).reverse() : range(0, k - 2);
   order.forEach((band, i) => {
-    const op = desc ? pick(rng, ['≥', '>']) : pick(rng, ['<', '≤']);
+    const op = desc ? pick(rng, ['>=', '>']) : pick(rng, ['<', '<=']);
     const cut = desc ? cuts[band - 1] : cuts[band];
     const text = `${subject} ${op} ${cut}`;
     const line = i === 0 ? L.open(`IF ${text} THEN`) : L.middle(`ELSEIF ${text} THEN`);
@@ -274,17 +274,17 @@ function writeChain(L: Listing, rng: Rng, subject: string, cuts: number[], desc:
   return { conds, elseBody };
 }
 
-/** "For speed = 80: speed > 110 is FALSE and speed ≥ 80 is TRUE, so line 6 runs." */
+/** "For speed = 80: speed > 110 is false and speed >= 80 is true, so line 6 runs." */
 function chainReason(r: RunResult, chain: Chain, subject: string, probe: number): string {
   const parts: string[] = [];
   for (const c of chain.conds) {
     if (timesRun(r, c.body) > 0) {
-      parts.push(`${c.text} is TRUE`);
+      parts.push(`${c.text} is true`);
       return `For ${subject} = ${probe}: ${joinAnd(parts)}, so line ${c.body} runs.`;
     }
-    parts.push(`${c.text} is FALSE`);
+    parts.push(`${c.text} is false`);
   }
-  return `For ${subject} = ${probe}, none of the conditions is TRUE (${parts.join(', ')}), so the ELSE branch on line ${chain.elseBody} runs.`;
+  return `For ${subject} = ${probe}, none of the conditions is true (${parts.join(', ')}), so the ELSE branch on line ${chain.elseBody} runs.`;
 }
 
 function joinAnd(parts: string[]): string {
@@ -319,7 +319,7 @@ function branch(rng: Rng, d: Difficulty): TraceCase {
       indexBase: base,
       usesArrays: true,
       asks: [{ kind: 'output' }],
-      reason: () => 'Each reading goes through the conditions in order and the first TRUE one decides what is displayed. A reading equal to a boundary only matches a condition that uses ≥ or ≤.',
+      reason: () => 'Each reading goes through the conditions in order and the first true one decides what is displayed. A reading equal to a boundary only matches a condition that uses >= or <=.',
     };
   }
 
@@ -370,14 +370,14 @@ function loop(rng: Rng, d: Difficulty): TraceCase {
     const findMax = rng() < 0.6;
     const values = sample(rng, range(10, 40), n);
     if (d !== 'easy') {
-      // Repeat the extreme value later, so > versus ≥ decides which position is kept.
+      // Repeat the extreme value later, so > versus >= decides which position is kept.
       const extreme = findMax ? Math.max(...values) : Math.min(...values);
       const at = values.indexOf(extreme);
       const later = range(at + 1, n - 1).filter((i) => i > at);
       if (later.length) values[pick(rng, later)] = extreme;
       else values[randInt(rng, 0, at - 1)] = extreme;
     }
-    const op = findMax ? pick(rng, ['>', '≥']) : pick(rng, ['<', '≤']);
+    const op = findMax ? pick(rng, ['>', '>=']) : pick(rng, ['<', '<=']);
     const best = findMax ? 'highest' : 'lowest';
     L.line(`${name} ← ${literal(values)}`);
     L.line(`${best} ← ${name}[${base}]`);
@@ -421,11 +421,11 @@ function loop(rng: Rng, d: Difficulty): TraceCase {
     }
     L.line(`codes ← ${literal(values)}`);
     L.line(`target ← ${target}`);
-    L.line('found ← FALSE');
+    L.line(`found ← ${literal(false)}`);
     L.line(`i ← ${base}`);
-    const head = L.open(`WHILE found = FALSE AND i ≤ ${last} DO`);
+    const head = L.open(`WHILE found = ${literal(false)} AND i <= ${last} DO`);
     L.open('IF codes[i] = target THEN');
-    L.line('found ← TRUE');
+    L.line(`found ← ${literal(true)}`);
     L.middle('ELSE');
     L.line('i ← i + 1');
     L.close('ENDIF');
@@ -447,7 +447,7 @@ function loop(rng: Rng, d: Difficulty): TraceCase {
       reason: (r) =>
         r.output[0] === String(last + 1)
           ? `${target} isn't in codes, so the loop only stops when i passes the last index, ${last}: i ends one past it.`
-          : `The WHILE test runs before every pass. The loop stops at the first index holding ${target}, because found becomes TRUE and i isn't increased again.`,
+          : `The WHILE test runs before every pass. The loop stops at the first index holding ${target}, because found becomes True and i isn't increased again.`,
     };
   }
 
@@ -459,7 +459,7 @@ function loop(rng: Rng, d: Difficulty): TraceCase {
     L.line(`sales ← ${literal(values)}`);
     L.line('total ← 0');
     L.line(`i ← ${base}`);
-    const head = L.open(`WHILE total < ${limit} AND i ≤ ${last} DO`);
+    const head = L.open(`WHILE total < ${limit} AND i <= ${last} DO`);
     L.line('total ← total + sales[i]');
     L.line('i ← i + 1');
     L.close('ENDWHILE');
@@ -513,7 +513,7 @@ function loop(rng: Rng, d: Difficulty): TraceCase {
     usesArrays: true,
     asks: [...(d !== 'easy' ? [{ kind: 'pass', loopLine: head, pass: randInt(rng, 2, n - 1), variable: pick(rng, ['count', 'i']) } as Ask] : []), { kind: 'output' }],
     reason: () =>
-      `REPEAT tests its condition after each pass, so the body runs for every index from ${base} to ${last}. count goes up only when ${cond} is TRUE${test === 'above' ? `, and a value equal to ${t} isn't greater than ${t}` : ''}.`,
+      `REPEAT tests its condition after each pass, so the body runs for every index from ${base} to ${last}. count goes up only when ${cond} is true${test === 'above' ? `, and a value equal to ${t} isn't greater than ${t}` : ''}.`,
   };
 }
 
@@ -699,14 +699,14 @@ function stringCase(rng: Rng, d: Difficulty): TraceCase {
       indexBase: 0,
       usesArrays: false,
       asks: [{ kind: 'pass', loopLine: head, pass: randInt(rng, 2, n - 1), variable: 'line' }, { kind: 'output' }],
-      reason: () => `i MOD ${m} = 0 is TRUE when i is a multiple of ${m}, so those passes add ${a} and the others add ${b}.`,
+      reason: () => `i MOD ${m} = 0 is true when i is a multiple of ${m}, so those passes add ${a} and the others add ${b}.`,
     };
   }
 
   if (variant === 'longest') {
     const n = d === 'hard' ? 5 : 4;
     const words = sample(rng, WORDS, n);
-    const op = d === 'hard' ? pick(rng, ['>', '≥']) : '>';
+    const op = d === 'hard' ? pick(rng, ['>', '>=']) : '>';
     L.line(`words ← ${literal(words)}`);
     L.line(`longest ← words[${base}]`);
     const head = L.open(`FOR i ← ${base + 1} TO ${lastIndex(n, base)}`);
@@ -728,7 +728,7 @@ function stringCase(rng: Rng, d: Difficulty): TraceCase {
       reason: () =>
         op === '>'
           ? 'longest only changes when a word has more characters than it; a later word of the same length doesn’t replace it.'
-          : 'Because the test uses ≥, a later word of the same length also replaces longest.',
+          : 'Because the test uses >=, a later word of the same length also replaces longest.',
     };
   }
 
@@ -793,9 +793,9 @@ function functionCase(rng: Rng, d: Difficulty): TraceCase {
     const value = pick(rng, [low, high, low - randInt(rng, 1, 9), high + randInt(rng, 1, 9), low + randInt(rng, 1, 9)]);
     const strict = rng() < 0.5;
     L.open('FUNCTION clamp(value, low, high)');
-    L.open(strict ? 'IF value < low THEN' : 'IF value ≤ low THEN');
+    L.open(strict ? 'IF value < low THEN' : 'IF value <= low THEN');
     L.line('RETURN low');
-    L.middle(strict ? 'ELSEIF value > high THEN' : 'ELSEIF value ≥ high THEN');
+    L.middle(strict ? 'ELSEIF value > high THEN' : 'ELSEIF value >= high THEN');
     L.line('RETURN high');
     L.close('ENDIF');
     L.line('RETURN value');
@@ -822,7 +822,7 @@ function functionCase(rng: Rng, d: Difficulty): TraceCase {
     const limit = randInt(rng, 5, 15);
     const values = ints(rng, n, 1, 20);
     values[randInt(rng, 0, n - 1)] = limit;
-    const op = pick(rng, ['>', '≥']);
+    const op = pick(rng, ['>', '>=']);
     L.open('FUNCTION countAbove(values, limit)');
     L.line('count ← 0');
     const head = L.open(loopHead);
@@ -842,7 +842,7 @@ function functionCase(rng: Rng, d: Difficulty): TraceCase {
       usesArrays: true,
       call: { name: 'countAbove', args: [values, limit] },
       asks: [...(d === 'hard' ? [{ kind: 'pass', loopLine: head, pass: randInt(rng, 2, n - 1), variable: 'count' } as Ask] : []), { kind: 'return' }],
-      reason: () => `values holds the array in the call and limit is ${limit}. A value equal to ${limit} ${op === '≥' ? 'is' : "isn't"} counted, because the test uses ${op}.`,
+      reason: () => `values holds the array in the call and limit is ${limit}. A value equal to ${limit} ${op === '>=' ? 'is' : "isn't"} counted, because the test uses ${op}.`,
     };
   }
 
@@ -1001,7 +1001,7 @@ function offByOne(rng: Rng): TraceCase {
     const start = randInt(rng, 0, 4);
     const passes = randInt(rng, 3, 6);
     const end = start + step * passes;
-    const op = pick(rng, ['<', '≤']);
+    const op = pick(rng, ['<', '<=']);
     L.line(`i ← ${start}`);
     L.line('count ← 0');
     L.open(`WHILE i ${op} ${end} DO`);
@@ -1021,8 +1021,8 @@ function offByOne(rng: Rng): TraceCase {
       asks: [{ kind: 'output' }],
       reason: () =>
         op === '<'
-          ? `i reaches exactly ${end}, but ${end} < ${end} is FALSE, so the loop stops without a pass for i = ${end}.`
-          : `i reaches exactly ${end}, and ${end} ≤ ${end} is TRUE, so the loop runs one more pass before stopping.`,
+          ? `i reaches exactly ${end}, but ${end} < ${end} is false, so the loop stops without a pass for i = ${end}.`
+          : `i reaches exactly ${end}, and ${end} <= ${end} is true, so the loop runs one more pass before stopping.`,
     };
   }
 
@@ -1035,7 +1035,7 @@ function offByOne(rng: Rng): TraceCase {
     L.open('REPEAT');
     L.line(`balance ← balance + ${add}`);
     L.line('years ← years + 1');
-    L.close(`UNTIL balance ≥ ${limit}`);
+    L.close(`UNTIL balance >= ${limit}`);
     L.line(pick(rng, ['DISPLAY years', 'DISPLAY balance']));
     L.close('END');
     return {

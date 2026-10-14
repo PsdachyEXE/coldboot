@@ -1,8 +1,9 @@
 /**
- * `deskcheck` test tables: a function, its requirements, and a request for test inputs. The checker
- * runs the interpreter on every input to confirm that the inputs reach every branch and test every
- * boundary from both sides, then prints the test table (Test number, Input(s), Expected output,
- * Actual output) with Actual output left blank for the student to fill in when they run the code.
+ * `deskcheck` testing tables: a function, its requirements, and a request for test inputs. The
+ * checker runs the interpreter on every input to confirm that the inputs reach every branch and test
+ * every boundary from both sides, then prints the testing table in the 2025 exam's layout (Test, a
+ * column named for the input, Expected output, Actual output) with Actual output left blank for the
+ * student to fill in when they run the code.
  *
  * Boundaries, as the item states them: for each band, its lowest value and the value just below it
  * (so a band starting at 65 needs 65 and 64). Hard items also validate the input, which adds the
@@ -17,15 +18,19 @@ import { callFunction, formatValue, parseProgram, timesRun, type Program } from 
 import { Listing, literal } from './listing';
 
 export const TESTTABLE_KK: KkId[] = ['U3O1-KK14', 'U4O1-KK06'];
-export const TEST_TABLE_COLUMNS = ['Test number', 'Input(s)', 'Expected output', 'Actual output'];
 const MAX_INPUTS = 20;
 const INVALID = 'Invalid';
+
+/** The exam's testing table columns: the test number, one column per input, then expected and actual output. */
+export function testTableColumns(inputHeading: string): string[] {
+  return ['Test', inputHeading, 'Expected output', 'Actual output'];
+}
 
 interface TableContext {
   fn: string;
   param: string;
   out: string;
-  /** Column heading for the input in the requirements table. */
+  /** Column heading for the input in the requirements table and the testing table. */
   heading: string;
   /** "a mark", "an age in years". */
   noun: string;
@@ -106,10 +111,10 @@ export function tableSpec(seed: number, difficulty: Difficulty): TableSpec {
   const order = desc ? range(1, k - 1).reverse() : range(0, k - 2);
   for (const band of order) {
     // Band j covers cuts[j - 1] up to cuts[j] - 1.
-    if (style === 'desc-ge') cond(`${param} ≥ ${cuts[band - 1]}`);
+    if (style === 'desc-ge') cond(`${param} >= ${cuts[band - 1]}`);
     else if (style === 'desc-gt') cond(`${param} > ${cuts[band - 1] - 1}`);
     else if (style === 'asc-lt') cond(`${param} < ${cuts[band]}`);
-    else cond(`${param} ≤ ${cuts[band] - 1}`);
+    else cond(`${param} <= ${cuts[band] - 1}`);
     body(outputs[band]);
   }
   L.middle('ELSE');
@@ -156,11 +161,11 @@ export function evaluateInputs(spec: TableSpec, program: Program, inputs: readon
   return { inputs: [...inputs], outputs, missingBoundaries, missingBranches };
 }
 
-export function testTable(result: Pick<TestTableResult, 'inputs' | 'outputs'>): TerminalBlock {
+export function testTable(spec: TableSpec, result: Pick<TestTableResult, 'inputs' | 'outputs'>): TerminalBlock {
   return {
     kind: 'table',
-    caption: 'Test table (fill in Actual output when you run the code)',
-    columns: TEST_TABLE_COLUMNS,
+    caption: 'Testing table (fill in Actual output when you run the code)',
+    columns: testTableColumns(spec.context.heading),
     rows: result.inputs.map((x, i) => [String(i + 1), String(x), result.outputs[i], '']),
   };
 }
@@ -186,7 +191,7 @@ export function testTableItem(seed: number, difficulty: Difficulty): QuizItem {
     { kind: 'text', text: `Requirements: ${context.fn}(${context.param}) takes ${context.noun} and returns the value in the table.${validRule}` },
     requirementsTable(spec),
     { kind: 'pseudo', code: spec.code },
-    { kind: 'text', text: 'Which test inputs belong in a test table for this function?', tone: 'accent' },
+    { kind: 'text', text: 'Which test inputs belong in a testing table for this function?', tone: 'accent' },
     { kind: 'text', text: `Include an input for every branch. ${boundaryRule}`, tone: 'muted' },
     { kind: 'text', text: 'Type whole numbers separated by spaces or commas, in any order.', tone: 'muted' },
   ];
@@ -200,7 +205,7 @@ export function testTableItem(seed: number, difficulty: Difficulty): QuizItem {
       const typed = parseIntList(input);
       if (!typed) return { correct: false, expected, reason: 'Type the test inputs as whole numbers separated by spaces or commas, for example 3 10 25.', counted: false };
       const inputs = [...new Set(typed)];
-      if (inputs.length > MAX_INPUTS) return { correct: false, expected, reason: `Keep the test table to ${MAX_INPUTS} inputs or fewer.`, counted: false };
+      if (inputs.length > MAX_INPUTS) return { correct: false, expected, reason: `Keep the testing table to ${MAX_INPUTS} inputs or fewer.`, counted: false };
       if (!spec.validates) {
         const outside = inputs.find((x) => x < context.lo || x > context.hi);
         if (outside !== undefined) {
@@ -225,7 +230,7 @@ export function testTableItem(seed: number, difficulty: Difficulty): QuizItem {
       const reason = correct
         ? `Your inputs reach every branch and test both sides of every boundary (${spec.boundaries.map((b) => `${b.below} and ${b.at}`).join('; ')}).`
         : problems.join(' ');
-      return { correct, expected, reason, followUp: [testTable(result)] };
+      return { correct, expected, reason, followUp: [testTable(spec, result)] };
     },
   };
 }
