@@ -282,25 +282,25 @@
       "properties": [
         {
           "name": "consignmentId",
-          "type": "Integer",
+          "type": "integer",
           "description": "Number printed on the label, e.g. KBF-0042817"
         },
         {
           "name": "recipientName",
-          "type": "String"
+          "type": "string"
         },
         {
           "name": "deliveryAddress",
-          "type": "String"
+          "type": "string"
         },
         {
           "name": "weightKg",
-          "type": "Floating point",
+          "type": "floating point",
           "description": "Weight in kilograms"
         },
         {
           "name": "zone",
-          "type": "Integer",
+          "type": "integer",
           "description": "Delivery zone: 1, 2 or 3"
         },
         {
@@ -309,12 +309,12 @@
         },
         {
           "name": "status",
-          "type": "String",
+          "type": "string",
           "description": "Booked, In transit, Out for delivery or Delivered"
         },
         {
           "name": "signedBy",
-          "type": "String",
+          "type": "string",
           "description": "Name of the person who signed for the consignment"
         }
       ],
@@ -482,23 +482,23 @@
       ],
       "commandTerm": "justify",
       "marks": 3,
-      "prompt": "In Leila's draft object description (Figure 3), consignmentId has the data type Integer. Justify a more suitable data type for consignmentId.",
+      "prompt": "In Leila's draft object description (Figure 3), consignmentId has the data type integer. Justify a more suitable data type for consignmentId.",
       "points": [
         {
-          "text": "States String (the type name in full; 'Str' is not accepted).",
+          "text": "States string (the type name in full; 'Str' is not accepted).",
           "marks": 1
         },
         {
-          "text": "Explains that consignment numbers such as KBF-0042817 contain letters and a hyphen, which an Integer can't store.",
+          "text": "Explains that consignment numbers such as KBF-0042817 contain letters and a hyphen, which an integer can't store.",
           "marks": 1
         },
         {
-          "text": "Explains that an Integer would drop the leading zeros of the digits (0042817 would become 42817), or that the number is used only to identify a consignment, never in calculations.",
+          "text": "Explains that an integer would drop the leading zeros of the digits (0042817 would become 42817), or that the number is used only to identify a consignment, never in calculations.",
           "marks": 1
         }
       ],
-      "model": "consignmentId should be a String. Kestrel Bay's consignment numbers, such as KBF-0042817, contain the letters KBF and a hyphen, and an Integer can hold only whole numbers. Even the digits on their own would lose their leading zeros as an Integer, so 0042817 would become 42817 and no longer match the label. The number is only used to identify and look up a consignment, never in a calculation, so there's no reason to store it as a number.",
-      "mistake": "Calling it a consignment *number* doesn't make it numeric: KBF-0042817 contains letters, a hyphen and leading zeros and is never used in a calculation, so it is a String, not an Integer. Write the study design's type name in full, as the 2025 examiners gave no marks for shortened names such as Bool and Float.",
+      "model": "consignmentId should be a string. Kestrel Bay's consignment numbers, such as KBF-0042817, contain the letters KBF and a hyphen, and an integer can hold only whole numbers. Even the digits on their own would lose their leading zeros as an integer, so 0042817 would become 42817 and no longer match the label. The number is only used to identify and look up a consignment, never in a calculation, so there's no reason to store it as a number.",
+      "mistake": "Calling it a consignment *number* doesn't make it numeric: KBF-0042817 contains letters, a hyphen and leading zeros and is never used in a calculation, so it is a string, not an integer. Write the study design's type name in full, as the 2025 examiners gave no marks for shortened names such as Bool and Float.",
       "source": "textbook",
       "figureRefs": [
         "consignment-object"
@@ -531,7 +531,7 @@
           "marks": 1
         },
         {
-          "text": "The subclass adds only what chilled goods need, for example a maxTemperature property (Floating point) and a recordTemperature(reading) method.",
+          "text": "The subclass adds only what chilled goods need, for example a maxTemperature property (floating point) and a recordTemperature(reading) method.",
           "marks": 1
         },
         {
@@ -539,7 +539,7 @@
           "marks": 1
         }
       ],
-      "model": "1. Because status is private, no code outside the Consignment class can change it directly. The only way to change it is through the public methods updateStatus(newStatus), which accepts only the four allowed values, and recordDelivery(signerName), which sets it to Delivered. Because of this, a misspelt or made-up status such as \"Delivred\" can never be stored, and status stays valid.\n\n2. Leila could create a ChilledConsignment subclass that inherits from Consignment. Every ChilledConsignment object would have Consignment's properties and methods, such as consignmentId, weightKg, updateStatus() and calculateCharge(), without them being written again. Because those properties are private, the subclass's own methods would work with them through the inherited public methods (or Leila could make them protected). It would add only what chilled goods need, such as a maxTemperature property (Floating point) and a recordTemperature(reading) method. Because the shared code is written once, any fix to Consignment also applies to chilled consignments.",
+      "model": "1. Because status is private, no code outside the Consignment class can change it directly. The only way to change it is through the public methods updateStatus(newStatus), which accepts only the four allowed values, and recordDelivery(signerName), which sets it to Delivered. Because of this, a misspelt or made-up status such as \"Delivred\" can never be stored, and status stays valid.\n\n2. Leila could create a ChilledConsignment subclass that inherits from Consignment. Every ChilledConsignment object would have Consignment's properties and methods, such as consignmentId, weightKg, updateStatus() and calculateCharge(), without them being written again. Because those properties are private, the subclass's own methods would work with them through the inherited public methods (or Leila could make them protected). It would add only what chilled goods need, such as a maxTemperature property (floating point) and a recordTemperature(reading) method. Because the shared code is written once, any fix to Consignment also applies to chilled consignments.",
       "mistake": "Encapsulation isn't encryption: it bundles data with the methods that act on it and stops other code changing that data directly. For inheritance, name a benefit and show how the subclass gets it from the superclass; a single class with its own properties, such as Consignment by itself, doesn't show inheritance.",
       "source": "textbook",
       "figureRefs": [

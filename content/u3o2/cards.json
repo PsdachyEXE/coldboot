@@ -1539,7 +1539,7 @@
     ],
     "type": "basic",
     "front": "What does the Field size column of a data dictionary record?",
-    "back": "How large a data item can be. For a String, this is usually the maximum number of characters, e.g. 30 for a surname. It guides the width of input fields and the limits a validation check enforces. Field size is optional: every data dictionary gives at least a name and data type.",
+    "back": "How large a data item can be. For a string, this is usually the maximum number of characters, e.g. 30 for a surname. It guides the width of input fields and the limits a validation check enforces. Field size is optional: every data dictionary gives at least a name and data type.",
     "difficulty": 1,
     "source": "textbook"
   },

@@ -162,7 +162,7 @@
     ],
     "type": "basic",
     "front": "How does a requirement shape the design of a module? Give an example.",
-    "back": "Its wording sets the module's inputs, processing, outputs, data types and validation. For example, 'totals are displayed to two decimal places' means the total is a Floating point value, formatted to two decimal places when it is output.",
+    "back": "Its wording sets the module's inputs, processing, outputs, data types and validation. For example, 'totals are displayed to two decimal places' means the total is a floating point value, formatted to two decimal places when it is output.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -211,7 +211,7 @@
       "U3O2-KK14"
     ],
     "type": "cloze",
-    "front": "To show how a data entry screen will look, a developer uses a {{mock-up}}; to record that `postcode` is a String of exactly four digits, they use a {{data dictionary}}.",
+    "front": "To show how a data entry screen will look, a developer uses a {{mock-up}}; to record that `postcode` is a string of exactly four digits, they use a {{data dictionary}}.",
     "back": "A mock-up shows how the screen will look. A data dictionary records each data item's name and data type, and can add fields such as size, validation rules and a description.",
     "difficulty": 1,
     "source": "textbook"
@@ -307,9 +307,9 @@
       "U3O1-KK04"
     ],
     "type": "basic",
-    "front": "Why is a mobile phone number such as 0412 345 678 stored as a String rather than an Integer?",
-    "back": "It begins with 0, which an Integer would drop; it can contain spaces or a + sign; and it is never used in arithmetic.",
-    "mistake": "Data made of digits isn't automatically numeric. If you never calculate with it, store it as a String.",
+    "front": "Why is a mobile phone number such as 0412 345 678 stored as a string rather than an integer?",
+    "back": "It begins with 0, which an integer would drop; it can contain spaces or a + sign; and it is never used in arithmetic.",
+    "mistake": "Data made of digits isn't automatically numeric. If you never calculate with it, store it as a string.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -343,9 +343,9 @@
       "U3O1-KK04"
     ],
     "type": "compare",
-    "front": "Character versus String",
-    "back": "A **Character** holds exactly one letter, digit or symbol, e.g. a grade of `A`. A **String** holds a sequence of characters, e.g. a suburb name such as `Wendouree`.",
-    "mistake": "Choosing String for a value that is always exactly one symbol, such as a single-letter grade. That value is a Character: the 2025 examiners didn't accept string for single-letter symbols, and the reason they wanted was that only one symbol has to be stored.",
+    "front": "Character versus string",
+    "back": "A **character** holds exactly one letter, digit or symbol, e.g. a grade of `A`. A **string** holds a sequence of characters, e.g. a suburb name such as `Wendouree`.",
+    "mistake": "Choosing string for a value that is always exactly one symbol, such as a single-letter grade. That value is a character: the 2025 examiners didn't accept string for single-letter symbols, and the reason they wanted was that only one symbol has to be stored.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -355,9 +355,9 @@
       "U3O1-KK04"
     ],
     "type": "basic",
-    "front": "Invoice numbers stored as Strings sort as 1, 101, 15, 3, 5. Why?",
-    "back": "Strings are compared one character at a time from the left, so \"101\" comes before \"15\" (0 comes before 5) and \"15\" comes before \"3\" (1 comes before 3). Stored as Integers, they would sort as 1, 3, 5, 15, 101.",
-    "mistake": "A sort doesn't look at a String's numeric value. Numbers that must sort numerically should be stored as Integers or Floating point.",
+    "front": "Invoice numbers stored as strings sort as 1, 101, 15, 3, 5. Why?",
+    "back": "Strings are compared one character at a time from the left, so \"101\" comes before \"15\" (0 comes before 5) and \"15\" comes before \"3\" (1 comes before 3). Stored as integers, they would sort as 1, 3, 5, 15, 101.",
+    "mistake": "A sort doesn't look at a string's numeric value. Numbers that must sort numerically should be stored as integers or floating point.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -367,7 +367,7 @@
       "U3O1-KK04"
     ],
     "type": "cloze",
-    "front": "A price of $19.95 is stored as {{Floating point}} and displayed to two decimal places; the number of items in an order is stored as an {{Integer}}.",
+    "front": "A price of $19.95 is stored as {{floating point}} and displayed to two decimal places; the number of items in an order is stored as an {{integer}}.",
     "back": "Prices have a fractional part (the cents); items are counted in whole numbers.",
     "difficulty": 1,
     "source": "textbook"
@@ -380,7 +380,7 @@
     ],
     "type": "basic",
     "front": "Why does choosing the right data type matter?",
-    "back": "The data type decides which operations work (arithmetic on numbers, joining on Strings) and how values compare and sort, and in many languages how much memory each value uses. It also lets a type check reject input that doesn't match.",
+    "back": "The data type decides which operations work (arithmetic on numbers, joining on strings) and how values compare and sort, and in many languages how much memory each value uses. It also lets a type check reject input that doesn't match.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -392,7 +392,7 @@
     "type": "basic",
     "front": "Which data type suits recording whether a member has paid their fees, and why?",
     "back": "Boolean. There are only two states (paid or not paid), the value can be used directly in a condition such as `IF hasPaid THEN`, and it can't hold an invalid value.",
-    "mistake": "Storing \"Yes\" or \"No\" as a String allows inconsistent entries such as \"Y\" or \"yes\", which then fail comparisons.",
+    "mistake": "Storing \"Yes\" or \"No\" as a string allows inconsistent entries such as \"Y\" or \"yes\", which then fail comparisons.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -465,7 +465,7 @@
     ],
     "type": "basic",
     "front": "What is an array of records, and when does it suit?",
-    "back": "An array in which every element is a record with the same fields. It suits many items that each have several fields of different types, e.g. 200 members, each with a name (String), age (Integer) and paid status (Boolean).",
+    "back": "An array in which every element is a record with the same fields. It suits many items that each have several fields of different types, e.g. 200 members, each with a name (string), age (integer) and paid status (Boolean).",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -476,7 +476,7 @@
     ],
     "type": "basic",
     "front": "Why doesn't a two-dimensional array suit a table of members' names and ages?",
-    "back": "Every element of an array has the same data type, but names are Strings and ages are Integers. An array of records suits this data, because the fields of a record can differ in type.",
+    "back": "Every element of an array has the same data type, but names are strings and ages are integers. An array of records suits this data, because the fields of a record can differ in type.",
     "mistake": "A two-dimensional array isn't the same as a spreadsheet: a spreadsheet can mix text and numbers, but an array holds one data type.",
     "difficulty": 3,
     "source": "textbook"
@@ -504,7 +504,7 @@
     ],
     "type": "reverse",
     "front": "Record",
-    "back": "A data structure that groups related values of varying data types under one name. Each value is stored in its own field and reached by its field index (which field it is), such as `member.name` (a String) and `member.age` (an Integer).",
+    "back": "A data structure that groups related values of varying data types under one name. Each value is stored in its own field and reached by its field index (which field it is), such as `member.name` (a string) and `member.age` (an integer).",
     "mistake": "Unlike an array, which holds a single data type reached by an integer index, a record's fields can hold different data types, and each is reached by its field index.",
     "difficulty": 2,
     "source": "study-design"
@@ -587,7 +587,7 @@
     "type": "cloze",
     "front": "In a CSV file, each {{record}} is stored on its own line, each {{field}} is separated by a comma, and an optional {{header row}} at the top names the fields.",
     "back": "For example, `id,surname,points` followed by `1042,Tran,380`. The program splits each line at the commas to get the fields.",
-    "mistake": "A CSV file doesn't store data types: every field is text until the program converts it, e.g. turning `380` into an Integer.",
+    "mistake": "A CSV file doesn't store data types: every field is text until the program converts it, e.g. turning `380` into an integer.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -948,7 +948,7 @@
     ],
     "type": "compare",
     "front": "`txtQuantity` versus `intQuantity`",
-    "back": "`txtQuantity` names a text box control on the form; whatever the user types into it is a String. `intQuantity` names an Integer variable that holds the quantity after the program converts that String to an Integer.",
+    "back": "`txtQuantity` names a text box control on the form; whatever the user types into it is a string. `intQuantity` names an integer variable that holds the quantity after the program converts that string to an integer.",
     "mistake": "Naming a text box `intQuantity` misleads the reader: a text box holds text, and its contents must still be converted before any arithmetic.",
     "difficulty": 2,
     "source": "textbook"
@@ -960,7 +960,7 @@
     ],
     "type": "cloze",
     "front": "The identifier `strFirstName` uses {{Hungarian notation}}, shown by the `str` prefix, combined with {{camel casing}}, shown by the capital letter that starts each later word.",
-    "back": "The prefix tells a reader the variable holds a String, and the capitals make the separate words easy to pick out.",
+    "back": "The prefix tells a reader the variable holds a string, and the capitals make the separate words easy to pick out.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -1132,7 +1132,7 @@
       "Type checking",
       "Data type check"
     ],
-    "back": "A validation check that rejects data of the wrong type, for example `six` or `12kg` typed into a quantity field that must hold an Integer.",
+    "back": "A validation check that rejects data of the wrong type, for example `six` or `12kg` typed into a quantity field that must hold an integer.",
     "mistake": "An existence check doesn't confirm that an entry is a number. A numeric input used in a calculation or comparison needs a type check, or a non-number can cause a type mismatch error.",
     "difficulty": 1,
     "source": "study-design"
@@ -1381,7 +1381,7 @@
     ],
     "type": "basic",
     "front": "What causes an overflow error? Give an example.",
-    "back": "A runtime error that occurs when a value or data needs more memory than is available for it. For example, a 16-bit signed Integer holds at most 32 767, so adding 1 to 32 767 overflows; a program can also run out of memory altogether. Unless the error is handled, the program crashes.",
+    "back": "A runtime error that occurs when a value or data needs more memory than is available for it. For example, a 16-bit signed integer holds at most 32 767, so adding 1 to 32 767 overflows; a program can also run out of memory altogether. Unless the error is handled, the program crashes.",
     "difficulty": 2,
     "source": "textbook",
     "mistake": "Overflow is about size, not type. A number too large for its data type causes an overflow; text where a number is expected causes a type mismatch."
@@ -1393,8 +1393,8 @@
     ],
     "type": "basic",
     "front": "What causes a type mismatch error while a program runs? Give an example.",
-    "back": "An operation receives data of a type it can't work with. For example, the program tries to convert the text \"twelve\", typed into a quantity box, to an Integer.",
-    "mistake": "Type mismatches often come from user input, not a programming slip: input usually arrives as a String and must be converted before arithmetic.",
+    "back": "An operation receives data of a type it can't work with. For example, the program tries to convert the text \"twelve\", typed into a quantity box, to an integer.",
+    "mistake": "Type mismatches often come from user input, not a programming slip: input usually arrives as a string and must be converted before arithmetic.",
     "difficulty": 2,
     "source": "textbook"
   },

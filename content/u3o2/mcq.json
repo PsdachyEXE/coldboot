@@ -201,7 +201,7 @@
       "The booking form will use a date picker and a drop-down list of kayak types.",
       "Test 4: a hire date of 31/02/2027 should be rejected as an invalid date.",
       "Phone bookings are often lost, so kayaks sit unused on the busiest days.",
-      "Store kayakType as a String of up to 20 characters in the bookings file."
+      "Store kayakType as a string of up to 20 characters in the bookings file."
     ],
     "answer": 2,
     "explanation": "A brief describes the current situation and the problem the business faces. Lost phone bookings that leave kayaks idle are exactly that.",
@@ -3315,17 +3315,17 @@
     ],
     "stem": "Jarrah is preparing the data dictionary below for a registration program for Kulkyne Netball Club in Mildura. Which entry has the least suitable data type?",
     "options": [
-      "playerName, because a name should be stored as a Character",
-      "teamGrade, because a grade should be stored as an Integer",
-      "hasPaid, because a payment status should be stored as a String",
-      "gamesPlayed, because a count of games should be stored as an Integer"
+      "playerName, because a name should be stored as a character",
+      "teamGrade, because a grade should be stored as an integer",
+      "hasPaid, because a payment status should be stored as a string",
+      "gamesPlayed, because a count of games should be stored as an integer"
     ],
     "answer": 3,
-    "explanation": "A count of games is always a whole number, so Integer suits it. Floating point is for values that can have a fractional part, such as a fee in dollars and cents.",
+    "explanation": "A count of games is always a whole number, so integer suits it. Floating point is for values that can have a fractional part, such as a fee in dollars and cents.",
     "whyWrong": [
-      "A Character holds a single character; a full name needs a String, which is what the entry uses.",
-      "A grade from A to D is a single letter that isn't used in arithmetic, so Character suits it.",
-      "Paid or not paid has exactly two states, so Boolean suits it better than a String.",
+      "A character holds a single character; a full name needs a string, which is what the entry uses.",
+      "A grade from A to D is a single letter that isn't used in arithmetic, so character suits it.",
+      "Paid or not paid has exactly two states, so Boolean suits it better than a string.",
       ""
     ],
     "difficulty": 1,
@@ -3374,15 +3374,15 @@
     ],
     "stem": "The mock-up below is part of the detailed design for a class booking program at Stonebridge Fitness in Bendigo. The developer is writing the object description for a Booking object. Which property would best store the data captured by the \"Hire a towel\" control?",
     "options": [
-      "towelHire, with the data type String",
+      "towelHire, with the data type string",
       "towelHire, with the data type Boolean",
       "towelHire(), listed as a method",
-      "towelHire, with the data type Floating point"
+      "towelHire, with the data type floating point"
     ],
     "answer": 1,
     "explanation": "A check box is either ticked or not, so the data it captures has exactly two states. Boolean is the most suitable data type for a property that stores it.",
     "whyWrong": [
-      "A String could hold \"yes\" or \"no\" but allows other values too; Boolean matches the two states of a check box.",
+      "A string could hold \"yes\" or \"no\" but allows other values too; Boolean matches the two states of a check box.",
       "",
       "The check box captures data to be stored, so it belongs in a property, not a method.",
       "The check box records whether a towel is hired, not an amount; the $3 fee is fixed and needn't be captured."
@@ -3589,18 +3589,18 @@
     ],
     "stem": "The IPO chart and data dictionary below are part of the detailed design for a module at Dollarbird Flat Caravan Park in Robinvale. The module calculates the cost of a stay. Which change should be made to the data dictionary?",
     "options": [
-      "Add isMember, with the data type String",
-      "Add calculateCost, with the data type Floating point",
+      "Add isMember, with the data type string",
+      "Add calculateCost, with the data type floating point",
       "Add isMember, with the data type Boolean",
-      "Change the data type of totalCost to Integer"
+      "Change the data type of totalCost to integer"
     ],
     "answer": 2,
     "explanation": "isMember is an input in the IPO chart but has no entry in the data dictionary, and every data item a module uses should appear there. A guest either is or isn't a member, and the process tests whether isMember is true, so Boolean suits it.",
     "whyWrong": [
-      "isMember is needed, but it has exactly two states and the process tests whether it is true, so Boolean suits it better than String.",
+      "isMember is needed, but it has exactly two states and the process tests whether it is true, so Boolean suits it better than string.",
       "Calculating the cost is processing, not a data item, so it doesn't belong in the data dictionary.",
       "",
-      "Costs can include cents: 3 nights for a member is $121.50, so totalCost must stay Floating point."
+      "Costs can include cents: 3 nights for a member is $121.50, so totalCost must stay floating point."
     ],
     "difficulty": 2,
     "source": "textbook",

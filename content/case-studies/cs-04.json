@@ -242,22 +242,22 @@
       "properties": [
         {
           "name": "itemCode",
-          "type": "String",
+          "type": "string",
           "description": "Code on the item's barcode label, e.g. TV-GEN-00417"
         },
         {
           "name": "description",
-          "type": "String",
+          "type": "string",
           "description": "e.g. 8 kVA generator"
         },
         {
           "name": "dailyRate",
-          "type": "Floating point",
+          "type": "floating point",
           "description": "Hire charge per day, in dollars"
         },
         {
           "name": "homeBranch",
-          "type": "String",
+          "type": "string",
           "description": "Branch that owns the item"
         },
         {
@@ -272,17 +272,17 @@
         },
         {
           "name": "meterHours",
-          "type": "Floating point",
+          "type": "floating point",
           "description": "Hour meter reading when the item was last returned"
         },
         {
           "name": "hoursAtLastService",
-          "type": "Floating point",
+          "type": "floating point",
           "description": "Hour meter reading at the item's last service"
         },
         {
           "name": "serviceInterval",
-          "type": "Integer",
+          "type": "integer",
           "description": "Hours of use allowed between services, e.g. 250"
         }
       ],
@@ -392,18 +392,18 @@
       ],
       "stem": "Pauline wants PlantPass to report how many times items in each of Tarwin Valley's 60 item categories (such as generators and scissor lifts) were hired at each of its 15 branches last month. Which data structure is best for holding these counts while the report is produced?",
       "options": [
-        "A one-dimensional array of 15 Integers, with one element holding each branch's count",
-        "A record with 60 Integer fields, with one field holding each item category's count",
-        "A two-dimensional array of Integers, with one row per branch and one column per category",
-        "A two-dimensional array of Strings, with one row per branch and one column per item category"
+        "A one-dimensional array of 15 integers, with one element holding each branch's count",
+        "A record with 60 integer fields, with one field holding each item category's count",
+        "A two-dimensional array of integers, with one row per branch and one column per category",
+        "A two-dimensional array of strings, with one row per branch and one column per item category"
       ],
       "answer": 2,
-      "explanation": "Each count depends on two things, the branch and the item category, so a two-dimensional array fits: the element in a branch's row and a category's column holds the count for that branch and category, 15 × 60 = 900 counts in all. Every element holds the same kind of data, a whole number that is added to as hires are counted, so Integer is the right data type.",
+      "explanation": "Each count depends on two things, the branch and the item category, so a two-dimensional array fits: the element in a branch's row and a category's column holds the count for that branch and category, 15 × 60 = 900 counts in all. Every element holds the same kind of data, a whole number that is added to as hires are counted, so integer is the right data type.",
       "whyWrong": [
         "A one-dimensional array holds only one count for each branch, so the split between item categories is lost.",
         "One record holds one set of 60 counts, so it can't keep separate counts for each of the 15 branches.",
         "",
-        "The counts are added to as hires are counted, and String elements can't be used in arithmetic without converting them first."
+        "The counts are added to as hires are counted, and string elements can't be used in arithmetic without converting them first."
       ],
       "difficulty": 2,
       "source": "textbook"

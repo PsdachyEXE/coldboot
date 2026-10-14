@@ -21,11 +21,11 @@
         "marks": 1
       },
       {
-        "text": "Explains how including the second piece improves the generated code (e.g. stating the inputs, a Boolean membership status and a Floating point cost shown to two decimal places means the function fits Jarrah's module and meets the display requirement)",
+        "text": "Explains how including the second piece improves the generated code (e.g. stating the inputs, a Boolean membership status and a floating point cost shown to two decimal places means the function fits Jarrah's module and meets the display requirement)",
         "marks": 1
       }
     ],
-    "model": "The prompt doesn't state the pricing rules. Including '$4.50 per hour, with a 20% discount for members' means the AI calculates the cost Quartzline actually charges, rather than guessing a rate or leaving out the member discount.\n\nThe prompt also doesn't state the inputs and outputs or their data types. Specifying the number of hours and a Boolean membership status as inputs, and a Floating point cost displayed to two decimal places as the output, means the generated function accepts the data Jarrah's module holds and meets the display requirement without rework.",
+    "model": "The prompt doesn't state the pricing rules. Including '$4.50 per hour, with a 20% discount for members' means the AI calculates the cost Quartzline actually charges, rather than guessing a rate or leaving out the member discount.\n\nThe prompt also doesn't state the inputs and outputs or their data types. Specifying the number of hours and a Boolean membership status as inputs, and a floating point cost displayed to two decimal places as the output, means the generated function accepts the data Jarrah's module holds and meets the display requirement without rework.",
     "mistake": "Listing missing items isn't enough for 'explain'. Each one needs a statement of how including it would change the code the AI generates.",
     "source": "textbook"
   },
@@ -143,7 +143,7 @@
     "prompt": "Nhu is writing a module for Pinnacle Loop Shuttles, a Halls Gap bus company. One functional requirement states:\n\n*The program calculates the fare for a booking at $18.50 per adult and $9.25 per child, and displays the total to two decimal places. Every booking must include at least one adult.*\n\nExplain **three** decisions this requirement sets for the design of Nhu's module.",
     "points": [
       {
-        "text": "Inputs: the number of adults and the number of children, each stored as an Integer because passengers are counted in whole numbers",
+        "text": "Inputs: the number of adults and the number of children, each stored as an integer because passengers are counted in whole numbers",
         "marks": 1
       },
       {
@@ -151,7 +151,7 @@
         "marks": 1
       },
       {
-        "text": "Output: the total is stored as Floating point, because it includes cents, and displayed to two decimal places",
+        "text": "Output: the total is stored as floating point, because it includes cents, and displayed to two decimal places",
         "marks": 1
       },
       {
@@ -159,7 +159,7 @@
         "marks": 1
       }
     ],
-    "model": "The inputs are the number of adults and the number of children, each an Integer because passengers are counted in whole numbers. The fare is calculated as adults × 18.50 + children × 9.25 and stored as Floating point, because the rates include cents, then displayed to two decimal places; for example, 2 adults and 1 child gives $46.25. A range check rejects any booking with fewer than one adult, because the requirement says every booking must include an adult.",
+    "model": "The inputs are the number of adults and the number of children, each an integer because passengers are counted in whole numbers. The fare is calculated as adults × 18.50 + children × 9.25 and stored as floating point, because the rates include cents, then displayed to two decimal places; for example, 2 adults and 1 child gives $46.25. A range check rejects any booking with fewer than one adult, because the requirement says every booking must include an adult.",
     "source": "textbook"
   },
   {
@@ -206,11 +206,11 @@
     "prompt": "Oscar has drafted the object description below for the job-tracking module at Sprocketworks Cycle Repairs in Shepparton. Identify **two** errors in the object description and explain how each should be corrected.",
     "points": [
       {
-        "text": "Identifies that `customerPhone` has the wrong data type (Integer)",
+        "text": "Identifies that `customerPhone` has the wrong data type (integer)",
         "marks": 1
       },
       {
-        "text": "Explains that it should be a String, because a number such as 0412 345 678 starts with 0 and contains spaces, and is never used in calculations",
+        "text": "Explains that it should be a string, because a number such as 0412 345 678 starts with 0 and contains spaces, and is never used in calculations",
         "marks": 1
       },
       {
@@ -222,7 +222,7 @@
         "marks": 1
       }
     ],
-    "model": "`customerPhone` is given the data type Integer. It should be a String, because a number such as 0412 345 678 begins with 0, which an Integer would drop, contains spaces, and is never used in arithmetic.\n\n`calculateCost()` is listed under properties. It should be moved to the methods, because it is an action the Job object performs (working out the cost of the job), not a value the object stores.",
+    "model": "`customerPhone` is given the data type integer. It should be a string, because a number such as 0412 345 678 begins with 0, which an integer would drop, contains spaces, and is never used in arithmetic.\n\n`calculateCost()` is listed under properties. It should be moved to the methods, because it is an action the Job object performs (working out the cost of the job), not a value the object stores.",
     "source": "textbook",
     "figures": [
       {
@@ -233,21 +233,21 @@
         "properties": [
           {
             "name": "jobNumber",
-            "type": "Integer",
+            "type": "integer",
             "description": "Next number in sequence, e.g. 1047"
           },
           {
             "name": "customerName",
-            "type": "String"
+            "type": "string"
           },
           {
             "name": "customerPhone",
-            "type": "Integer",
+            "type": "integer",
             "description": "Mobile number, e.g. 0412 345 678"
           },
           {
             "name": "labourHours",
-            "type": "Floating point"
+            "type": "floating point"
           },
           {
             "name": "isComplete",
@@ -255,7 +255,7 @@
           },
           {
             "name": "calculateCost()",
-            "type": "Floating point"
+            "type": "floating point"
           }
         ],
         "methods": [
@@ -319,7 +319,7 @@
         "marks": 1
       },
       {
-        "text": "Reason 2: it fixes each item's data type and size or format (e.g. `unitPrice` as Floating point to 2 decimal places, `productCode` as a 7-character String)",
+        "text": "Reason 2: it fixes each item's data type and size or format (e.g. `unitPrice` as floating point to 2 decimal places, `productCode` as a 7-character string)",
         "marks": 1
       },
       {
@@ -335,7 +335,7 @@
         "marks": 1
       }
     ],
-    "model": "First, the data dictionary gives each data item one name. All three developers call the stock level `qtyOnHand`, rather than one using `stock` and another `quantity`, so when the deliveries module updates a product's stock, the sales and reports modules find and use that same value.\n\nSecond, it fixes each item's data type and size. Every module treats `unitPrice` as Floating point to two decimal places and `productCode` as a 7-character String, so a price stored by the sales module is read correctly by the reports module, without type mismatch errors or cents lost by a module that treats the price as an Integer. Because the modules are written separately but share the same stock records, agreeing on these details before coding avoids fixing mismatches later.",
+    "model": "First, the data dictionary gives each data item one name. All three developers call the stock level `qtyOnHand`, rather than one using `stock` and another `quantity`, so when the deliveries module updates a product's stock, the sales and reports modules find and use that same value.\n\nSecond, it fixes each item's data type and size. Every module treats `unitPrice` as floating point to two decimal places and `productCode` as a 7-character string, so a price stored by the sales module is read correctly by the reports module, without type mismatch errors or cents lost by a module that treats the price as an integer. Because the modules are written separately but share the same stock records, agreeing on these details before coding avoids fixing mismatches later.",
     "mistake": "Describing what a data dictionary contains without saying why it matters here. A justification ties each reason to the scenario: three developers, three modules and one shared set of stock records.",
     "source": "textbook",
     "figures": [
@@ -476,15 +476,15 @@
     "prompt": "Stonecutter Fitness, a Bendigo gym, is building a membership module that stores the data items below. Justify an appropriate data type for each data item.",
     "points": [
       {
-        "text": "`memberPhone`: String, because it starts with 0 and contains spaces, and is never used in calculations",
+        "text": "`memberPhone`: string, because it starts with 0 and contains spaces, and is never used in calculations",
         "marks": 1
       },
       {
-        "text": "`monthlyFee`: Floating point, because the fee includes cents and is used in calculations",
+        "text": "`monthlyFee`: floating point, because the fee includes cents and is used in calculations",
         "marks": 1
       },
       {
-        "text": "`visitsThisMonth`: Integer, because visits are counted in whole numbers",
+        "text": "`visitsThisMonth`: integer, because visits are counted in whole numbers",
         "marks": 1
       },
       {
@@ -492,7 +492,7 @@
         "marks": 1
       }
     ],
-    "model": "`memberPhone` should be a String: 0412 345 678 starts with 0 and contains spaces, which an Integer can't keep, and no arithmetic is done on it. `monthlyFee` should be Floating point, because $54.95 includes cents and is used to calculate what members owe. `visitsThisMonth` should be an Integer, because visits are whole counts. `hasLocker` should be Boolean, because each member either has a locker or doesn't, so true or false is enough.",
+    "model": "`memberPhone` should be a string: 0412 345 678 starts with 0 and contains spaces, which an integer can't keep, and no arithmetic is done on it. `monthlyFee` should be floating point, because $54.95 includes cents and is used to calculate what members owe. `visitsThisMonth` should be an integer, because visits are whole counts. `hasLocker` should be Boolean, because each member either has a locker or doesn't, so true or false is enough.",
     "mistake": "Naming a type without a reason tied to that data item, or writing an abbreviation such as Float or Bool, which the 2025 examiners didn't accept. Give each type's full name (floating point, Boolean) and a reason drawn from the example value.",
     "source": "textbook",
     "figures": [
@@ -532,18 +532,18 @@
     ],
     "commandTerm": "explain",
     "marks": 2,
-    "prompt": "Jess's program for Twin Rivers Netball League in Wodonga stores player registration numbers as Strings. When the coach sorts the players by registration number, the list shows 1, 10, 100, 2, 25. Explain why the list is in this order, and how Jess could make it sort as 1, 2, 10, 25, 100.",
+    "prompt": "Jess's program for Twin Rivers Netball League in Wodonga stores player registration numbers as strings. When the coach sorts the players by registration number, the list shows 1, 10, 100, 2, 25. Explain why the list is in this order, and how Jess could make it sort as 1, 2, 10, 25, 100.",
     "points": [
       {
         "text": "Strings are compared character by character from the left, so every number beginning with 1 (1, 10, 100) comes before those beginning with 2",
         "marks": 1
       },
       {
-        "text": "Store the registration numbers as Integers (or convert them to Integers before sorting), so they are compared by numeric value",
+        "text": "Store the registration numbers as integers (or convert them to integers before sorting), so they are compared by numeric value",
         "marks": 1
       }
     ],
-    "model": "Because the registration numbers are Strings, they are compared one character at a time from the left: \"1\", \"10\" and \"100\" all begin with 1, so they come before \"2\" and \"25\". If Jess stores the registration numbers as Integers, or converts them before sorting, they are compared by value and sort as 1, 2, 10, 25, 100.",
+    "model": "Because the registration numbers are strings, they are compared one character at a time from the left: \"1\", \"10\" and \"100\" all begin with 1, so they come before \"2\" and \"25\". If Jess stores the registration numbers as integers, or converts them before sorting, they are compared by value and sort as 1, 2, 10, 25, 100.",
     "source": "textbook"
   },
   {
@@ -553,26 +553,26 @@
     ],
     "commandTerm": "recommend",
     "marks": 4,
-    "prompt": "Tallarook Reach Rowing Club records each rower's attendance at every training session. Its program stores `attended` as a Boolean. The coach now wants to record whether each rower was present, late or absent.\n\nThe program also stores `distanceRowed` for each session as an Integer. The coach now wants distances recorded in kilometres to one decimal place, such as 12.5.\n\nRecommend a data type for the attendance status and for `distanceRowed`, and justify each recommendation.",
+    "prompt": "Tallarook Reach Rowing Club records each rower's attendance at every training session. Its program stores `attended` as a Boolean. The coach now wants to record whether each rower was present, late or absent.\n\nThe program also stores `distanceRowed` for each session as an integer. The coach now wants distances recorded in kilometres to one decimal place, such as 12.5.\n\nRecommend a data type for the attendance status and for `distanceRowed`, and justify each recommendation.",
     "points": [
       {
-        "text": "Attendance status: Character (e.g. P, L or A) or String (e.g. present, late or absent)",
+        "text": "Attendance status: character (e.g. P, L or A) or string (e.g. present, late or absent)",
         "marks": 1
       },
       {
-        "text": "Justifies it: a Boolean holds only two values (true or false), so it can't represent three statuses; a Character or String can hold any of the three",
+        "text": "Justifies it: a Boolean holds only two values (true or false), so it can't represent three statuses; a character or string can hold any of the three",
         "marks": 1
       },
       {
-        "text": "`distanceRowed`: Floating point",
+        "text": "`distanceRowed`: floating point",
         "marks": 1
       },
       {
-        "text": "Justifies it: distances such as 12.5 km have a fractional part that an Integer can't hold, and the distances are used in calculations such as each rower's total distance",
+        "text": "Justifies it: distances such as 12.5 km have a fractional part that an integer can't hold, and the distances are used in calculations such as each rower's total distance",
         "marks": 1
       }
     ],
-    "model": "Attendance status: Character, storing P for present, L for late or A for absent. A Boolean can hold only true or false, which was enough for 'attended or not', but the coach now needs three statuses. A single-letter code holds any of them, and the program can test it with a condition such as `IF status = \"L\" THEN`.\n\n`distanceRowed`: Floating point. The coach wants distances such as 12.5 km, and an Integer can't store the .5. Floating point keeps the fractional part, so totals and averages of each rower's distance stay accurate.",
+    "model": "Attendance status: character, storing P for present, L for late or A for absent. A Boolean can hold only true or false, which was enough for 'attended or not', but the coach now needs three statuses. A single-letter code holds any of them, and the program can test it with a condition such as `IF status = \"L\" THEN`.\n\n`distanceRowed`: floating point. The coach wants distances such as 12.5 km, and an integer can't store the .5. Floating point keeps the fractional part, so totals and averages of each rower's distance stay accurate.",
     "mistake": "Keeping a Boolean because attendance sounds like a yes-or-no question. A Boolean has exactly two values, so once a third status is needed it can't be a Boolean.",
     "source": "textbook"
   },
@@ -590,7 +590,7 @@
         "marks": 1
       },
       {
-        "text": "Each record holds fields of different data types: team name (String), wins (Integer), percentage (Floating point), qualified (Boolean)",
+        "text": "Each record holds fields of different data types: team name (string), wins (integer), percentage (floating point), qualified (Boolean)",
         "marks": 1
       },
       {
@@ -602,7 +602,7 @@
         "marks": 1
       }
     ],
-    "model": "An array of 18 records, one per team. Each record has named fields of different data types: `teamName` (String), `wins` (Integer), `percentage` (Floating point) and `qualified` (Boolean), which a two-dimensional array couldn't hold because all its elements share one data type. Storing the records in an array lets the module loop through all 18 teams by index, for example to sort the ladder by wins, and each team's details move together when records are swapped.",
+    "model": "An array of 18 records, one per team. Each record has named fields of different data types: `teamName` (string), `wins` (integer), `percentage` (floating point) and `qualified` (Boolean), which a two-dimensional array couldn't hold because all its elements share one data type. Storing the records in an array lets the module loop through all 18 teams by index, for example to sort the ladder by wins, and each team's details move together when records are swapped.",
     "source": "textbook"
   },
   {
@@ -690,7 +690,7 @@
         "marks": 1
       },
       {
-        "text": "Every reading has the same data type (Floating point kilowatt hours), which an array requires",
+        "text": "Every reading has the same data type (floating point kilowatt hours), which an array requires",
         "marks": 1
       },
       {
@@ -698,7 +698,7 @@
         "marks": 1
       }
     ],
-    "model": "Each reading belongs to one panel row and one hour, so the readings form a table of 12 rows by 14 columns, and `energy[panelRow][hour]` reaches any reading from those two numbers. All 168 readings are kilowatt hours stored as Floating point, and an array holds elements of a single data type. Because every reading is reached by two integer indexes, the program can use loops instead of 168 separate variables or 12 separate arrays: fixing `hour` and looping through every `panelRow` totals the farm's output for that hour, and fixing `panelRow` while looping through every `hour` totals one row's output for the day.",
+    "model": "Each reading belongs to one panel row and one hour, so the readings form a table of 12 rows by 14 columns, and `energy[panelRow][hour]` reaches any reading from those two numbers. All 168 readings are kilowatt hours stored as floating point, and an array holds elements of a single data type. Because every reading is reached by two integer indexes, the program can use loops instead of 168 separate variables or 12 separate arrays: fixing `hour` and looping through every `panelRow` totals the farm's output for that hour, and fixing `panelRow` while looping through every `hour` totals one row's output for the day.",
     "mistake": "Justifying a two-dimensional array because there is 'a lot of data'. The reason is that each value is identified by two things, here the panel row and the hour, and every value has the same data type.",
     "source": "textbook"
   },
@@ -842,19 +842,19 @@
         "properties": [
           {
             "name": "productCode",
-            "type": "String"
+            "type": "string"
           },
           {
             "name": "description",
-            "type": "String"
+            "type": "string"
           },
           {
             "name": "price",
-            "type": "Floating point"
+            "type": "floating point"
           },
           {
             "name": "stockLevel",
-            "type": "Integer",
+            "type": "integer",
             "description": "Number of units held"
           }
         ],
@@ -1137,14 +1137,14 @@
     ],
     "commandTerm": "recommend",
     "marks": 3,
-    "prompt": "Bo is building the entry form for a Castlemaine fun run. The form has a text box where a runner types their age, a check box for a concession entry and a label that displays the entry fee. Bo's code also has variables that hold the age, once it is converted to an Integer, and the fee.\n\nRecommend a naming convention for the form's controls, and justify your recommendation with reference to Bo's form.",
+    "prompt": "Bo is building the entry form for a Castlemaine fun run. The form has a text box where a runner types their age, a check box for a concession entry and a label that displays the entry fee. Bo's code also has variables that hold the age, once it is converted to an integer, and the fee.\n\nRecommend a naming convention for the form's controls, and justify your recommendation with reference to Bo's form.",
     "points": [
       {
         "text": "Recommends Hungarian notation for the controls: a prefix for the control type followed by camel casing, e.g. `txtAge`, `chkConcession` and `lblFee`.",
         "marks": 1
       },
       {
-        "text": "Justifies it with the form: the prefix separates each control from the variable holding the same data, e.g. the text box `txtAge` from the Integer variable `age`, so the text box's String isn't used where the converted age is needed.",
+        "text": "Justifies it with the form: the prefix separates each control from the variable holding the same data, e.g. the text box `txtAge` from the integer variable `age`, so the text box's string isn't used where the converted age is needed.",
         "marks": 1
       },
       {
@@ -1152,7 +1152,7 @@
         "marks": 1
       }
     ],
-    "model": "Bo should name the controls using Hungarian notation, with a prefix that shows the control type followed by camel casing: `txtAge` for the age text box, `chkConcession` for the concession check box and `lblFee` for the fee label. The age appears twice in Bo's code, once in the text box and once as the Integer variable that holds the converted age. With the prefix, `txtAge` can't be confused with `age`, so Bo won't do arithmetic on the text box's String by mistake. The prefix also tells anyone reading the code what kind of control each name refers to, for example that `chkConcession` is either ticked or not and that `lblFee` only shows a value the program writes to it, so they don't need to open the form to find out.",
+    "model": "Bo should name the controls using Hungarian notation, with a prefix that shows the control type followed by camel casing: `txtAge` for the age text box, `chkConcession` for the concession check box and `lblFee` for the fee label. The age appears twice in Bo's code, once in the text box and once as the integer variable that holds the converted age. With the prefix, `txtAge` can't be confused with `age`, so Bo won't do arithmetic on the text box's string by mistake. The prefix also tells anyone reading the code what kind of control each name refers to, for example that `chkConcession` is either ticked or not and that `lblFee` only shows a value the program writes to it, so they don't need to open the form to find out.",
     "source": "textbook",
     "mistake": "Naming a convention without a reason tied to the form earns only the first mark. *Recommend* asks for a choice and why it suits this form."
   },
@@ -1168,7 +1168,7 @@
     "prompt": "Bluebush Fitness Centre in Robinvale is adding guest passes to its membership module. Part of Mei's data dictionary for the module is shown below. Two new variables, **C** and **D**, still need names.\n\n1. Write a name for **C** and a name for **D** that follow the naming convention the data dictionary already uses.\n2. Mei's teammate wants to add a variable named `joining_fee` to hold the one-off fee, in dollars and cents, that a new member pays. Explain why this name doesn't suit the module, and rewrite it so that it does.",
     "points": [
       {
-        "text": "C: the prefix the data dictionary uses for Integer variables (`int`), followed by camel casing and describing the guest passes left, e.g. `intGuestPassesLeft`. A name with no prefix, such as `guestPassesLeft`, or in snake casing earns no mark.",
+        "text": "C: the prefix the data dictionary uses for integer variables (`int`), followed by camel casing and describing the guest passes left, e.g. `intGuestPassesLeft`. A name with no prefix, such as `guestPassesLeft`, or in snake casing earns no mark.",
         "marks": 1
       },
       {
@@ -1184,11 +1184,11 @@
         "marks": 1
       },
       {
-        "text": "Rewrites it with the prefix the dictionary uses for Floating point (`flt`) followed by camel casing, e.g. `fltJoiningFee`, because a fee in dollars and cents is Floating point.",
+        "text": "Rewrites it with the prefix the dictionary uses for floating point (`flt`) followed by camel casing, e.g. `fltJoiningFee`, because a fee in dollars and cents is floating point.",
         "marks": 1
       }
     ],
-    "model": "1. **C**: `intGuestPassesLeft`. **D**: `boolSignedWaiver`. Each starts with the prefix the data dictionary uses for its data type (`int` for Integer, `bool` for Boolean) and continues in camel casing, like `intVisitsThisMonth` and `boolIsConcession`.\n\n2. `joining_fee` is written in snake casing with no type prefix, but every other name in the data dictionary uses Hungarian notation followed by camel casing. Mixing the two makes the module harder to read and maintain: a developer can tell the data type of every other variable from its name, but not this one. The fee is in dollars and cents, so it is Floating point, and the name should be `fltJoiningFee`, to match `fltMonthlyFee`.",
+    "model": "1. **C**: `intGuestPassesLeft`. **D**: `boolSignedWaiver`. Each starts with the prefix the data dictionary uses for its data type (`int` for integer, `bool` for Boolean) and continues in camel casing, like `intVisitsThisMonth` and `boolIsConcession`.\n\n2. `joining_fee` is written in snake casing with no type prefix, but every other name in the data dictionary uses Hungarian notation followed by camel casing. Mixing the two makes the module harder to read and maintain: a developer can tell the data type of every other variable from its name, but not this one. The fee is in dollars and cents, so it is floating point, and the name should be `fltJoiningFee`, to match `fltMonthlyFee`.",
     "mistake": "Naming a new element in your own preferred style, or leaving out the prefix. A new name must follow the convention the design already uses, here a type prefix followed by camel casing; in 2025, new names that didn't match the casing of the existing design earned no marks.",
     "source": "textbook",
     "figures": [
@@ -1630,10 +1630,10 @@
     ],
     "commandTerm": "describe",
     "marks": 3,
-    "prompt": "Chaffline Stockfeeds in Benalla has an ordering program. Staff type the number of bags of feed into a text box, and the program converts the entry to an Integer. When a staff member typed \"ten\", the program crashed. Identify the type of error that occurred, and describe how the developer could use an extra check and error handling to stop this input crashing the program.",
+    "prompt": "Chaffline Stockfeeds in Benalla has an ordering program. Staff type the number of bags of feed into a text box, and the program converts the entry to an integer. When a staff member typed \"ten\", the program crashed. Identify the type of error that occurred, and describe how the developer could use an extra check and error handling to stop this input crashing the program.",
     "points": [
       {
-        "text": "Identifies a type mismatch (a runtime error): the text \"ten\" can't be converted to an Integer.",
+        "text": "Identifies a type mismatch (a runtime error): the text \"ten\" can't be converted to an integer.",
         "marks": 1
       },
       {
@@ -1645,7 +1645,7 @@
         "marks": 1
       }
     ],
-    "model": "Typing \"ten\" caused a type mismatch, a runtime error, because the program tried to convert text that isn't a whole number to an Integer. As an extra check, the developer could add a type check that tests the entry before converting it: if it contains anything other than digits, the program displays \"Enter the number of bags as a whole number\" and asks again, so the conversion only runs on suitable data. The conversion could also be wrapped in error handling that catches the conversion error if it occurs, displays the same message and lets the staff member re-enter the quantity, so the program keeps running.",
+    "model": "Typing \"ten\" caused a type mismatch, a runtime error, because the program tried to convert text that isn't a whole number to an integer. As an extra check, the developer could add a type check that tests the entry before converting it: if it contains anything other than digits, the program displays \"Enter the number of bags as a whole number\" and asks again, so the conversion only runs on suitable data. The conversion could also be wrapped in error handling that catches the conversion error if it occurs, displays the same message and lets the staff member re-enter the quantity, so the program keeps running.",
     "mistake": "A vague 'add validation' earns little. A number typed into a text box needs a type check before it is converted or used in a calculation, because text there is what causes the error; say what the check tests and what the program does when it fails.",
     "source": "textbook"
   },

@@ -195,7 +195,7 @@
     "options": [
       "The bookings were saved in a CSV file instead of an XML file",
       "The bookings were held only in the array and never written to a file",
-      "The booking dates were stored as Strings instead of as date/time values",
+      "The booking dates were stored as strings instead of as date/time values",
       "The array held records instead of a two-dimensional array of values"
     ],
     "answer": 1,
@@ -217,18 +217,18 @@
     ],
     "stem": "Pickaxe Lane Hardware in Maldon keeps its stock list in `stock.csv`. The table shows the fields in each line, with an example value. When the program reads a line, it stores the fields in a record. Which data types best suit `onHand`, `price` and `discontinued`, in that order?",
     "options": [
-      "Integer, Integer, Character",
-      "Floating point, Floating point, String",
-      "Integer, Floating point, Boolean",
-      "String, Floating point, Boolean"
+      "Integer, integer, character",
+      "Floating point, floating point, string",
+      "Integer, floating point, Boolean",
+      "String, floating point, Boolean"
     ],
     "answer": 2,
-    "explanation": "`onHand` counts whole items, so Integer suits. `price` includes cents, so Floating point suits. `discontinued` has only two possible states, so Boolean suits.",
+    "explanation": "`onHand` counts whole items, so integer suits. `price` includes cents, so floating point suits. `discontinued` has only two possible states, so Boolean suits.",
     "whyWrong": [
-      "An Integer can't hold cents, and a two-state value suits Boolean rather than Character.",
-      "A stock count is a whole number, and a String can't be tested directly as true or false.",
+      "An integer can't hold cents, and a two-state value suits Boolean rather than character.",
+      "A stock count is a whole number, and a string can't be tested directly as true or false.",
       "",
-      "A stock count stored as a String can't be added to or subtracted from without conversion."
+      "A stock count stored as a string can't be added to or subtracted from without conversion."
     ],
     "difficulty": 2,
     "source": "textbook",
@@ -272,7 +272,7 @@
       "U4O1-KK02",
       "U3O1-KK04"
     ],
-    "stem": "Ovens Bend Outdoor Supplies in Bright stores its stock in a CSV file. A program reads one line of the file and splits it into the array `fields`; the algorithm shown sets `fields` to the result. Every value read from the file is a String. Arrays are indexed from 0. What does the algorithm display?",
+    "stem": "Ovens Bend Outdoor Supplies in Bright stores its stock in a CSV file. A program reads one line of the file and splits it into the array `fields`; the algorithm shown sets `fields` to the result. Every value read from the file is a string. Arrays are indexed from 0. What does the algorithm display?",
     "options": [
       "17",
       "12 5",
@@ -280,10 +280,10 @@
       "125"
     ],
     "answer": 3,
-    "explanation": "`onShelf` holds the String \"12\" and `inStoreroom` holds the String \"5\". With Strings, `+` joins the values, so the algorithm displays 125. Converting both to Integer first would display 17.",
+    "explanation": "`onShelf` holds the string \"12\" and `inStoreroom` holds the string \"5\". With strings, `+` joins the values, so the algorithm displays 125. Converting both to integer first would display 17.",
     "whyWrong": [
-      "17 would be displayed only if both values were converted to Integer before being added.",
-      "Joining Strings with `+` doesn't insert a space between them.",
+      "17 would be displayed only if both values were converted to integer before being added.",
+      "Joining strings with `+` doesn't insert a space between them.",
       "This joins `fields[0]` and `fields[1]`, treating the array as if it were indexed from 1.",
       ""
     ],
@@ -328,7 +328,7 @@
       "U4O1-KK02",
       "U3O1-KK05"
     ],
-    "stem": "Blue Loam Potatoes, a grower near Thorpdale, keeps its yields in `yields.csv`, shown below. Each line holds one paddock's yields, in tonnes, for four seasons, and there is no header row. The program reads line 1 into row 0 of the two-dimensional array `yields[paddock][season]`, line 2 into row 1, and so on, converting each field to Integer. Arrays are indexed from 0. Which element holds the value 29?",
+    "stem": "Blue Loam Potatoes, a grower near Thorpdale, keeps its yields in `yields.csv`, shown below. Each line holds one paddock's yields, in tonnes, for four seasons, and there is no header row. The program reads line 1 into row 0 of the two-dimensional array `yields[paddock][season]`, line 2 into row 1, and so on, converting each field to integer. Arrays are indexed from 0. Which element holds the value 29?",
     "options": [
       "`yields[2][1]`",
       "`yields[2][3]`",
@@ -379,17 +379,17 @@
     ],
     "stem": "The data dictionary shown is part of the design for a harvest report at Spinifex Bend Almonds in Robinvale. The program reads each block's details from a file, calculates the average harvest per tree, and outputs a report. Which change should be made to the data dictionary?",
     "options": [
-      "Change `avgKg` to Floating point",
-      "Change `totalKg` to Integer",
-      "Change `treeCount` to Floating point",
-      "Change `irrigated` to String"
+      "Change `avgKg` to floating point",
+      "Change `totalKg` to integer",
+      "Change `treeCount` to floating point",
+      "Change `irrigated` to string"
     ],
     "answer": 0,
-    "explanation": "`avgKg` is calculated by division, so it usually has a fractional part: 18462.5 ÷ 640 is about 28.8. An Integer can't hold that value or report it to one decimal place, so `avgKg` should be Floating point.",
+    "explanation": "`avgKg` is calculated by division, so it usually has a fractional part: 18462.5 ÷ 640 is about 28.8. An integer can't hold that value or report it to one decimal place, so `avgKg` should be floating point.",
     "whyWrong": [
       "",
-      "Harvest weights such as 18462.5 kg include part kilograms, so Floating point suits `totalKg`.",
-      "Trees are counted in whole numbers, so Integer suits `treeCount`.",
+      "Harvest weights such as 18462.5 kg include part kilograms, so floating point suits `totalKg`.",
+      "Trees are counted in whole numbers, so integer suits `treeCount`.",
       "Whether a block is irrigated has only two states, so Boolean suits `irrigated`."
     ],
     "difficulty": 2,
@@ -463,17 +463,17 @@
       "U4O1-KK02",
       "U3O1-KK04"
     ],
-    "stem": "Corella Creek Vet Clinic in Kyneton exports its appointments to a CSV file, with each date written as day/month/year, such as `15/02/2025`. Saskia's program reads the file, keeps each date as a String and sorts the appointments by date, from earliest to latest. For three appointments, it outputs the dates in the order `03/11/2025`, `15/02/2025`, `28/06/2025`. Which statement best explains this order and how to fix it?",
+    "stem": "Corella Creek Vet Clinic in Kyneton exports its appointments to a CSV file, with each date written as day/month/year, such as `15/02/2025`. Saskia's program reads the file, keeps each date as a string and sorts the appointments by date, from earliest to latest. For three appointments, it outputs the dates in the order `03/11/2025`, `15/02/2025`, `28/06/2025`. Which statement best explains this order and how to fix it?",
     "options": [
-      "The dates are compared as Strings, so the day decides the order; store each date as an Integer, such as 15022025",
-      "The dates are compared as Strings, so the day decides the order; convert each date to date/time before sorting",
-      "The slashes stop the sort from reading past the day; remove the slashes and keep each date as a String",
+      "The dates are compared as strings, so the day decides the order; store each date as an integer, such as 15022025",
+      "The dates are compared as strings, so the day decides the order; convert each date to date/time before sorting",
+      "The slashes stop the sort from reading past the day; remove the slashes and keep each date as a string",
       "The sort runs from latest to earliest; reverse the comparison so that the earliest date comes first"
     ],
     "answer": 1,
     "explanation": "Strings are compared character by character from the left, so `03/11/2025` comes before `15/02/2025` because the character 0 comes before 1, whatever the months are. The day decides the order. Converting each date to date/time as it is read lets the program compare dates by their actual value, so 15 February comes first, and also calculate with them, such as the number of days until an appointment.",
     "whyWrong": [
-      "As an Integer, 3 November becomes 3112025, which is still smaller than 15022025 because the day still leads, so the order wouldn't change.",
+      "As an integer, 3 November becomes 3112025, which is still smaller than 15022025 because the day still leads, so the order wouldn't change.",
       "",
       "Without slashes, `03112025` still comes before `15022025`, because the comparison still starts with the day.",
       "From latest to earliest would give `03/11/2025`, `28/06/2025`, `15/02/2025`, which isn't the order shown; reversing the comparison would still order the dates by their day."
@@ -899,7 +899,7 @@
     ],
     "stem": "An online order form for Seedpod Nursery in Kyneton asks customers to type their state or territory into a text box. Many entries are misspelt. Which change would most reduce the validation this field needs?",
     "options": [
-      "Storing the state in a Character variable instead of a String variable",
+      "Storing the state in a character variable instead of a string variable",
       "Replacing the text box with a drop-down list of the states and territories",
       "Adding a debugging output statement that displays the state after entry",
       "Making the text box wider so that longer state names are fully visible"
@@ -907,7 +907,7 @@
     "answer": 1,
     "explanation": "A drop-down list offers only valid states and territories, so misspelt or invalid entries can't be made. Only an existence check, confirming that a state has been chosen, is still needed.",
     "whyWrong": [
-      "A Character holds a single character, so it can't store a state name, and it wouldn't stop misspellings.",
+      "A character holds a single character, so it can't store a state name, and it wouldn't stop misspellings.",
       "",
       "Debugging output helps a developer find errors; it doesn't stop users entering invalid data.",
       "A wider box changes the layout, not what the user can type."
@@ -982,7 +982,7 @@
     "stem": "Kooyoora Rainfall Group in Wedderburn imports members' daily readings from a CSV file. One line holds `ERR` in the rainfall field instead of a number, and the import program crashes when it converts that field. Which technique would best prevent this?",
     "options": [
       "Setting a breakpoint on the line of code that reads each record from the file",
-      "Storing every rainfall reading as a String so that any value can be read in",
+      "Storing every rainfall reading as a string so that any value can be read in",
       "Type checking each rainfall field as it is read, and reporting invalid lines",
       "Range checking each rainfall reading after the monthly totals are calculated"
     ],
@@ -990,7 +990,7 @@
     "explanation": "A type check applied as each line is read finds the non-numeric field before it is converted, so the program can skip and report that line instead of crashing.",
     "whyWrong": [
       "A breakpoint helps a developer inspect the program during testing; it doesn't stop the crash when the program is used.",
-      "Readings stored as Strings can't be totalled, so the problem simply moves to the calculation.",
+      "Readings stored as strings can't be totalled, so the problem simply moves to the calculation.",
       "",
       "The crash happens when the field is converted, before any totals exist, and a range check doesn't detect text."
     ],

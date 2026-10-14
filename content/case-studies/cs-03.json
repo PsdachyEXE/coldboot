@@ -369,19 +369,19 @@
       "prompt": "Farid hasn't yet chosen the data types for three fields in his draft data dictionary (Figure 2). Justify a suitable data type for each of supplierCode, arrivalTemp and isRejected.",
       "points": [
         {
-          "text": "supplierCode: String.",
+          "text": "supplierCode: string.",
           "marks": 1
         },
         {
-          "text": "Justifies String: supplier codes such as 0371 begin with a zero, which an Integer would drop (0371 would be stored as 371 and no longer match the supplier's code); or the code only identifies a supplier and is never used in a calculation.",
+          "text": "Justifies string: supplier codes such as 0371 begin with a zero, which an integer would drop (0371 would be stored as 371 and no longer match the supplier's code); or the code only identifies a supplier and is never used in a calculation.",
           "marks": 1
         },
         {
-          "text": "arrivalTemp: Floating point, written in full (Float earns no mark).",
+          "text": "arrivalTemp: floating point, written in full (Float earns no mark).",
           "marks": 1
         },
         {
-          "text": "Justifies Floating point: the probe gives temperatures to one decimal place, such as 4.6, and an Integer can't store the decimal part. A chilled delivery at 5.3 °C must be rejected, but stored as an Integer it would become 5 and pass the 5.0 °C check.",
+          "text": "Justifies floating point: the probe gives temperatures to one decimal place, such as 4.6, and an integer can't store the decimal part. A chilled delivery at 5.3 °C must be rejected, but stored as an integer it would become 5 and pass the 5.0 °C check.",
           "marks": 1
         },
         {
@@ -389,8 +389,8 @@
           "marks": 1
         }
       ],
-      "model": "supplierCode should be a String. Pardalote's supplier codes, such as 0371, can begin with a zero, which an Integer would drop: 0371 would be stored as 371 and no longer match the code on the supplier's paperwork. The code only identifies a supplier and is never used in a calculation, so there is no reason to store it as a number.\n\narrivalTemp should be Floating point. The probe measures temperatures to one decimal place, such as 4.6 °C, and an Integer can hold only whole numbers. A delivery at 5.3 °C must be rejected, but stored as an Integer it would become 5, pass the 5.0 °C check and be wrongly accepted.\n\nisRejected should be Boolean. A delivery is either rejected or it isn't, so the field only ever needs the two values True and False.",
-      "mistake": "Bool and Float earned no marks in 2025: write the study design's names, Boolean and floating point. A code made only of digits, such as 0371, is a String when it can start with a zero and is never used in a calculation.",
+      "model": "supplierCode should be a string. Pardalote's supplier codes, such as 0371, can begin with a zero, which an integer would drop: 0371 would be stored as 371 and no longer match the code on the supplier's paperwork. The code only identifies a supplier and is never used in a calculation, so there is no reason to store it as a number.\n\narrivalTemp should be floating point. The probe measures temperatures to one decimal place, such as 4.6 °C, and an integer can hold only whole numbers. A delivery at 5.3 °C must be rejected, but stored as an integer it would become 5, pass the 5.0 °C check and be wrongly accepted.\n\nisRejected should be Boolean. A delivery is either rejected or it isn't, so the field only ever needs the two values True and False.",
+      "mistake": "Bool and Float earned no marks in 2025: write the study design's names, Boolean and floating point. A code made only of digits, such as 0371, is a string when it can start with a zero and is never used in a calculation.",
       "source": "textbook",
       "figureRefs": [
         "lot-dictionary"
@@ -412,7 +412,7 @@
           "marks": 1
         },
         {
-          "text": "strProductName uses Hungarian notation: the prefix str shows that the field holds a String (the rest of the name is in camel casing).",
+          "text": "strProductName uses Hungarian notation: the prefix str shows that the field holds a string (the rest of the name is in camel casing).",
           "marks": 1
         },
         {
@@ -420,11 +420,11 @@
           "marks": 1
         },
         {
-          "text": "Explains that every element of a two-dimensional array has the same data type, but a lot's fields have different types: in Figure 2, lotNumber is a String, quantity_kg is Floating point and storageArea is a Character.",
+          "text": "Explains that every element of a two-dimensional array has the same data type, but a lot's fields have different types: in Figure 2, lotNumber is a string, quantity_kg is floating point and storageArea is a character.",
           "marks": 1
         },
         {
-          "text": "Explains the cost of forcing the fields into a two-dimensional array: every value would have to be stored as a String and converted back before it is compared or used in a calculation (such as a quantity), which adds code and risks type errors.",
+          "text": "Explains the cost of forcing the fields into a two-dimensional array: every value would have to be stored as a string and converted back before it is compared or used in a calculation (such as a quantity), which adds code and risks type errors.",
           "marks": 1
         },
         {
@@ -432,7 +432,7 @@
           "marks": 1
         }
       ],
-      "model": "1. quantity_kg uses snake casing: lower-case words joined by an underscore. strProductName uses Hungarian notation: the prefix str shows that it holds a String. Rewritten in plain camel casing to match lotNumber and the other fields, they become quantityKg and productName.\n\n2. Every element of a two-dimensional array must have the same data type, but a lot's fields have different types: in Figure 2, lotNumber is a String, quantity_kg is Floating point and storageArea is a Character. To fit them into a two-dimensional array, Jack would have to store every value as a String and convert it back before comparing or calculating with it, which adds code and risks type errors. A record keeps all of one lot's fields together, each with its own data type, so a quantity stays a Floating point value, and each field is reached by its field index (such as the field name quantityKg) rather than by an integer column index, which makes the code clearer and harder to get wrong. An array of these records then holds every lot, so the module can search them by lotNumber.",
+      "model": "1. quantity_kg uses snake casing: lower-case words joined by an underscore. strProductName uses Hungarian notation: the prefix str shows that it holds a string. Rewritten in plain camel casing to match lotNumber and the other fields, they become quantityKg and productName.\n\n2. Every element of a two-dimensional array must have the same data type, but a lot's fields have different types: in Figure 2, lotNumber is a string, quantity_kg is floating point and storageArea is a character. To fit them into a two-dimensional array, Jack would have to store every value as a string and convert it back before comparing or calculating with it, which adds code and risks type errors. A record keeps all of one lot's fields together, each with its own data type, so a quantity stays a floating point value, and each field is reached by its field index (such as the field name quantityKg) rather than by an integer column index, which makes the code clearer and harder to get wrong. An array of these records then holds every lot, so the module can search them by lotNumber.",
       "mistake": "Hungarian notation is a prefix that shows the data type or control type, as str does in strProductName, and it is often combined with camel casing. A renamed field must follow the convention the rest of the design uses: in 2025, new names that broke the design's camel casing earned no marks.",
       "source": "textbook",
       "figureRefs": [
@@ -467,7 +467,7 @@
           "marks": 1
         },
         {
-          "text": "Describes a first detail for the prompt. For example: the inputs and output (an array of lot records sorted by lot number and indexed from 0, the number of records and the lot number to find, returning the index of the matching record, or a value such as −1 when there is no match); the programming language LotTrail is written in; that lot numbers are Strings such as L0048213; or the team's naming convention (camel casing).",
+          "text": "Describes a first detail for the prompt. For example: the inputs and output (an array of lot records sorted by lot number and indexed from 0, the number of records and the lot number to find, returning the index of the matching record, or a value such as −1 when there is no match); the programming language LotTrail is written in; that lot numbers are strings such as L0048213; or the team's naming convention (camel casing).",
           "marks": 1
         },
         {
@@ -479,7 +479,7 @@
           "marks": 1
         }
       ],
-      "model": "1. The binary search compares the recalled lot number with the lot number of the middle record. If they match, the lot has been found. If the recalled lot number is larger, the lot can only be in the upper half, so the lower half is discarded; if it is smaller, the upper half is discarded. The search repeats on the remaining half, halving it each time, until the lot is found or no records are left. It can be used because the lot records are stored in order of lot number: only in sorted data does comparing with the middle record show which half the lot must be in.\n\n2. A binary search needs at most 17 comparisons. A linear search could need up to 120 000.\n\n3. Jack's prompt should state the function's inputs and output: an array of lot records sorted by lot number and indexed from 0, the number of records and the lot number to find, with the function returning the index of the matching record, or −1 if there is none. It should also name the programming language LotTrail is written in and say that lot numbers are Strings such as L0048213. Before adding the code, Jack should test it with a testing table that includes lots at the start, middle and end of the array and a lot number that doesn't exist, checking each actual output against the expected output.",
+      "model": "1. The binary search compares the recalled lot number with the lot number of the middle record. If they match, the lot has been found. If the recalled lot number is larger, the lot can only be in the upper half, so the lower half is discarded; if it is smaller, the upper half is discarded. The search repeats on the remaining half, halving it each time, until the lot is found or no records are left. It can be used because the lot records are stored in order of lot number: only in sorted data does comparing with the middle record show which half the lot must be in.\n\n2. A binary search needs at most 17 comparisons. A linear search could need up to 120 000.\n\n3. Jack's prompt should state the function's inputs and output: an array of lot records sorted by lot number and indexed from 0, the number of records and the lot number to find, with the function returning the index of the matching record, or −1 if there is none. It should also name the programming language LotTrail is written in and say that lot numbers are strings such as L0048213. Before adding the code, Jack should test it with a testing table that includes lots at the start, middle and end of the array and a lot number that doesn't exist, checking each actual output against the expected output.",
       "mistake": "A binary search doesn't need a short list; it needs a sorted one. On unsorted data it can discard the half that holds the lot and wrongly report that the lot isn't there.",
       "source": "textbook",
       "figureRefs": [

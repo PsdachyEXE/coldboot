@@ -129,16 +129,16 @@
         "marks": 1
       },
       {
-        "text": "Quantity on hand as Integer, because it is a whole number of plants that is added to and subtracted from",
+        "text": "Quantity on hand as integer, because it is a whole number of plants that is added to and subtracted from",
         "marks": 1
       },
       {
-        "text": "Price as Floating point, to two decimal places, because it is in dollars and cents and is used in calculations",
+        "text": "Price as floating point, to two decimal places, because it is in dollars and cents and is used in calculations",
         "marks": 1
       }
     ],
-    "model": "An array of records suits the stock list. Each record holds one plant's code, name, quantity and price together, even though these have different data types, and each field can be referred to by name. Holding one record per plant in an array lets the program loop through every plant to find or update one.\n\nQuantity on hand should be an Integer, because the nursery counts whole plants and the quantity is added to and subtracted from as stock arrives and sells. Price should be Floating point, to two decimal places, because prices such as $14.95 are in dollars and cents and are used in calculations, such as the value of stock.",
-    "mistake": "Shortened type names such as Float or Bool earned no marks in 2025, so write them in full: Integer, Floating point. Tie each justification to the data in the scenario rather than giving a general definition.",
+    "model": "An array of records suits the stock list. Each record holds one plant's code, name, quantity and price together, even though these have different data types, and each field can be referred to by name. Holding one record per plant in an array lets the program loop through every plant to find or update one.\n\nQuantity on hand should be an integer, because the nursery counts whole plants and the quantity is added to and subtracted from as stock arrives and sells. Price should be floating point, to two decimal places, because prices such as $14.95 are in dollars and cents and are used in calculations, such as the value of stock.",
+    "mistake": "Shortened type names such as Float or Bool earned no marks in 2025, so write them in full: integer, floating point. Tie each justification to the data in the scenario rather than giving a general definition.",
     "source": "textbook"
   },
   {
@@ -157,7 +157,7 @@
         "marks": 1
       },
       {
-        "text": "Converts the days to Integer and the rate to Floating point, because the fields split from the line are Strings",
+        "text": "Converts the days to integer and the rate to floating point, because the fields split from the line are strings",
         "marks": 1
       },
       {
@@ -169,8 +169,8 @@
         "marks": 1
       }
     ],
-    "model": "First, the program splits the line at each comma, separating the name (Dimitri Pappas), the days (3) and the rate (42.50) into three fields. Second, because the fields split from a line of text are Strings, it converts the days to an Integer and the rate to Floating point; without this, \"3\" and \"42.50\" can't be multiplied. Third, it multiplies the days by the rate (3 × 42.50 = 127.50) and adds the result to the running total for the day.",
-    "mistake": "The conversion step is the one most often left out. Fields split from a line of text stay Strings until the program converts them.",
+    "model": "First, the program splits the line at each comma, separating the name (Dimitri Pappas), the days (3) and the rate (42.50) into three fields. Second, because the fields split from a line of text are strings, it converts the days to an integer and the rate to floating point; without this, \"3\" and \"42.50\" can't be multiplied. Third, it multiplies the days by the rate (3 × 42.50 = 127.50) and adds the result to the running total for the day.",
+    "mistake": "The conversion step is the one most often left out. Fields split from a line of text stay strings until the program converts them.",
     "source": "textbook"
   },
   {
@@ -192,7 +192,7 @@
         "marks": 1
       },
       {
-        "text": "When the program starts: reads the file line by line, splits each line at the commas, converts the grade to Integer and the certificate field to Boolean, and stores each leader as a record in an array",
+        "text": "When the program starts: reads the file line by line, splits each line at the commas, converts the grade to integer and the certificate field to Boolean, and stores each leader as a record in an array",
         "marks": 1
       },
       {
@@ -200,7 +200,7 @@
         "marks": 1
       }
     ],
-    "model": "The list should be stored in a CSV file, with one leader per line and the name, grade and certificate fields separated by commas, for example `Mara Quinlan,2,True`. Every leader has the same three fields, so a flat file suits the data, and the secretary can open a CSV file directly in a spreadsheet, with each field in its own column, to check certificates each month.\n\nWhen the program starts, it reads the file line by line. It splits each line at the commas, converts the grade to an Integer and the certificate field to a Boolean, since each field is read from the file as text, and stores each leader as a record in an array. When the program closes, or straight after each change, it writes every record back to the file, one line per leader. Data held in the array is lost when the program closes, so without this step any new leaders or updated certificates would be lost.",
+    "model": "The list should be stored in a CSV file, with one leader per line and the name, grade and certificate fields separated by commas, for example `Mara Quinlan,2,True`. Every leader has the same three fields, so a flat file suits the data, and the secretary can open a CSV file directly in a spreadsheet, with each field in its own column, to check certificates each month.\n\nWhen the program starts, it reads the file line by line. It splits each line at the commas, converts the grade to an integer and the certificate field to a Boolean, since each field is read from the file as text, and stores each leader as a record in an array. When the program closes, or straight after each change, it writes every record back to the file, one line per leader. Data held in the array is lost when the program closes, so without this step any new leaders or updated certificates would be lost.",
     "mistake": "Data held in an array isn't kept between runs. The program must write the list back to the file, or every change made since it started is lost.",
     "source": "textbook"
   },
@@ -509,7 +509,7 @@
         "marks": 1
       },
       {
-        "text": "Type check: the entry is a whole number, applied before it is converted to Integer, which prevents the crash when letters are typed",
+        "text": "Type check: the entry is a whole number, applied before it is converted to integer, which prevents the crash when letters are typed",
         "marks": 1
       },
       {
@@ -521,7 +521,7 @@
         "marks": 1
       }
     ],
-    "model": "The program first applies an existence check, rejecting the entry if the hire length is blank. Next it applies a type check, confirming that the entry is a whole number before converting it to an Integer; this stops the crash when a staff member types letters. Finally, a range check confirms that the hire length is from 1 to 8 hours inclusive, which rejects entries such as 0 and 40.\n\nIf any check fails, the program displays a message that says what is accepted, such as \"Enter a whole number of hours from 1 to 8\", and asks again. It doesn't calculate or save the hire until the entry passes all three checks.",
+    "model": "The program first applies an existence check, rejecting the entry if the hire length is blank. Next it applies a type check, confirming that the entry is a whole number before converting it to an integer; this stops the crash when a staff member types letters. Finally, a range check confirms that the hire length is from 1 to 8 hours inclusive, which rejects entries such as 0 and 40.\n\nIf any check fails, the program displays a message that says what is accepted, such as \"Enter a whole number of hours from 1 to 8\", and asks again. It doesn't calculate or save the hire until the entry passes all three checks.",
     "mistake": "Each check catches a different problem. A blank entry fails the existence check; letters pass it but fail the type check; 40 passes the type check but fails the range check. One check can't stand in for the others.",
     "source": "textbook"
   },

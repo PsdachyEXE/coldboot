@@ -118,7 +118,7 @@
     ],
     "type": "basic",
     "front": "Why must numeric fields read from a CSV file be converted before they are used in calculations?",
-    "back": "When a program reads a line of a CSV file and splits it at the commas, every field is a String. A quantity such as \"12\" must be converted to Integer, and a price such as \"12.50\" to Floating point, before it can be used in arithmetic or compared as a number.",
+    "back": "When a program reads a line of a CSV file and splits it at the commas, every field is a string. A quantity such as \"12\" must be converted to integer, and a price such as \"12.50\" to floating point, before it can be used in arithmetic or compared as a number.",
     "mistake": "A CSV file doesn't store data types. The characters `42` in a file are text until the program converts them.",
     "difficulty": 2,
     "source": "textbook"
@@ -167,8 +167,8 @@
       "U3O1-KK04"
     ],
     "type": "basic",
-    "front": "Why should a program store a price such as $12.50 as a Floating point value, and add the $ sign only when the price is output?",
-    "back": "Stored as Floating point, to two decimal places, the price can be totalled and compared. The $ sign belongs to how the price is displayed, so it is added at output, along with formatting such as always showing two decimal places. Storing \"$12.50\" as a String would mean converting it back to a number before every calculation.",
+    "front": "Why should a program store a price such as $12.50 as a floating point value, and add the $ sign only when the price is output?",
+    "back": "Stored as floating point, to two decimal places, the price can be totalled and compared. The $ sign belongs to how the price is displayed, so it is added at output, along with formatting such as always showing two decimal places. Storing \"$12.50\" as a string would mean converting it back to a number before every calculation.",
     "mistake": "A value that looks right on screen isn't necessarily stored in a usable type. Keep how data is stored separate from how it is displayed.",
     "difficulty": 2,
     "source": "textbook"
@@ -180,7 +180,7 @@
       "U3O1-KK04"
     ],
     "type": "cloze",
-    "front": "A program reads the line `BK-204,3,18.50` (product code, quantity, unit price). It splits the line at each {{comma}}, keeps the product code as a {{String}}, and converts the quantity to {{Integer}} and the price to {{Floating point}} before storing them in a record.",
+    "front": "A program reads the line `BK-204,3,18.50` (product code, quantity, unit price). It splits the line at each {{comma}}, keeps the product code as a {{string}}, and converts the quantity to {{integer}} and the price to {{floating point}} before storing them in a record.",
     "back": "Only fields used as numbers are converted. The product code contains letters and a hyphen, and is never used in arithmetic.",
     "difficulty": 2,
     "source": "textbook"
@@ -571,7 +571,7 @@
       "U3O1-KK10"
     ],
     "type": "basic",
-    "front": "A form checks that the weight field isn't empty, then converts the entry to Floating point. What happens if the user types \"12kg\", and which check prevents it?",
+    "front": "A form checks that the weight field isn't empty, then converts the entry to floating point. What happens if the user types \"12kg\", and which check prevents it?",
     "back": "In most languages the conversion fails while the program runs (a type mismatch), which can crash the program. A type check before the conversion rejects the entry because it isn't a number, and shows an error message instead.",
     "mistake": "An existence check only shows that something was entered. \"12kg\" passes it, so a separate type check is needed before the value is converted or used in a calculation or comparison.",
     "difficulty": 2,
