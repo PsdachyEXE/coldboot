@@ -1053,7 +1053,7 @@
         "kind": "table",
         "title": "Testing table",
         "columns": [
-          "Test number",
+          "Test",
           "Name",
           "Guests",
           "Expected output",
@@ -1235,7 +1235,7 @@
         "kind": "table",
         "title": "Testing table",
         "columns": [
-          "Test number",
+          "Test",
           "Lessons",
           "Expected output",
           "Actual output"

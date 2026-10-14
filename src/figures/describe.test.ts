@@ -122,7 +122,7 @@ describe('describeFigure lists every element', () => {
 
   it('table: every column and every cell, as plain text', () => {
     expect(items(tableFixture, 'Columns')).toEqual(tableFixture.columns);
-    expect(items(tableFixture, 'Rows')[2]).toBe('Row 3: Test number 3; Input 7; Expected output Error: enter 1 to 6 kayaks; Actual output (empty)');
+    expect(items(tableFixture, 'Rows')[2]).toBe('Row 3: Test 3; Kayaks 7; Expected output Error: enter 1 to 6 kayaks; Actual output (empty)');
   });
 
   it('mock-up: every element in reading order and every note', () => {

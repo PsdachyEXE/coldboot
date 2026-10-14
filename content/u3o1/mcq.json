@@ -3206,7 +3206,7 @@
         "id": "fig-bike-hire-tests",
         "kind": "table",
         "columns": [
-          "Test number",
+          "Test",
           "Hours",
           "Member",
           "Expected output",
@@ -3329,7 +3329,7 @@
         "id": "fig-squash-tests",
         "kind": "table",
         "columns": [
-          "Test number",
+          "Test",
           "Hours",
           "Member",
           "Expected output",

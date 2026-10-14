@@ -692,18 +692,18 @@
     ],
     "commandTerm": "complete",
     "marks": 4,
-    "prompt": "Mirrim Parking in Traralgon charges $3 for each hour or part of an hour, up to a maximum of $15. Stays of 15 minutes or less are free. During alpha testing, Keira runs the function shown with the test data in the testing table.\n\nComplete the expected output and actual output for tests 2 and 3, and identify the cause of any difference between them.",
+    "prompt": "Mirrim Parking in Traralgon charges $3 for each hour or part of an hour, up to a maximum of $15. Stays of 15 minutes or less are free. During alpha testing, Keira runs the function shown with the test data in the testing table. The function returns the fee in dollars.\n\nComplete the expected output and actual output for tests 2 and 3, and identify the cause of any difference between them.",
     "points": [
       {
-        "text": "Test 2 expected output: $6, because 90 minutes is one hour and part of another",
+        "text": "Test 2 expected output: 6 ($6), because 90 minutes is one hour and part of another",
         "marks": 1
       },
       {
-        "text": "Test 2 actual output: $3",
+        "text": "Test 2 actual output: 3",
         "marks": 1
       },
       {
-        "text": "Test 3 expected output and actual output: both $15, because the maximum applies",
+        "text": "Test 3 expected output and actual output: both 15, because the $15 maximum applies",
         "marks": 1
       },
       {
@@ -711,7 +711,7 @@
         "marks": 1
       }
     ],
-    "model": "Test 2: expected output $6, because 90 minutes is one full hour plus part of a second hour. Actual output $3, because line 5 calculates 90 DIV 60 = 1, so only one hour is charged.\n\nTest 3: expected output $15 and actual output $15. 600 minutes is 10 hours, which would cost $30, so the $15 maximum applies, and lines 7 to 9 cap the fee correctly.\n\nThe difference in test 2 is caused by line 5: DIV rounds down, so any part hour is ignored. The number of hours should be rounded up instead, for example `hours ← (minutes + 59) DIV 60`.",
+    "model": "Test 2: expected output 6, because 90 minutes is one full hour plus part of a second hour, which costs $6. Actual output 3, because line 5 calculates 90 DIV 60 = 1, so only one hour ($3) is charged.\n\nTest 3: expected output 15 and actual output 15. 600 minutes is 10 hours, which would cost $30, so the $15 maximum applies, and lines 7 to 9 cap the fee correctly.\n\nThe difference in test 2 is caused by line 5: DIV rounds down, so any part hour is ignored. The number of hours should be rounded up instead, for example `hours ← (minutes + 59) DIV 60`.",
     "mistake": "Work out the expected output from the charging rules, not by tracing the code. Tracing the code gives the actual output.",
     "source": "textbook",
     "figures": [
@@ -725,7 +725,7 @@
         "kind": "table",
         "title": "Testing table",
         "columns": [
-          "Test number",
+          "Test",
           "Minutes",
           "Expected output",
           "Actual output"
@@ -734,8 +734,8 @@
           [
             "1",
             "10",
-            "$0",
-            "$0"
+            "0",
+            "0"
           ],
           [
             "2",

@@ -841,11 +841,11 @@
         "marks": 1
       },
       {
-        "text": "A second, different measurable non-functional requirement, e.g. portability: the program works in a web browser on the laptops and on Android and iOS phones; or reliability: no visit records are lost when the Wi-Fi drops out",
+        "text": "A second, different measurable non-functional requirement, e.g. portability: the program works in a web browser on the laptops and on Android and iOS phones; robustness: in testing, turning the Wi-Fi off while a visit is being recorded never makes the program crash or lose that visit; or reliability: the program is available for the whole of every session the pantry is open",
         "marks": 1
       }
     ],
-    "model": "Functional requirements:\n- The program must record each client visit, including the date and the items in the food parcel.\n- The program must produce a weekly report totalling the visits and items given out, for funding reports.\n\nNon-functional requirements:\n- Usability: a volunteer who has never used the program can record a visit within two minutes after a five-minute demonstration.\n- Reliability: no visit record a volunteer enters is ever lost, even when the pantry's Wi-Fi drops out.",
+    "model": "Functional requirements:\n- The program must record each client visit, including the date and the items in the food parcel.\n- The program must produce a weekly report totalling the visits and items given out, for funding reports.\n\nNon-functional requirements:\n- Usability: a volunteer who has never used the program can record a visit within two minutes after a five-minute demonstration.\n- Robustness: in testing, turning the Wi-Fi off while a volunteer is recording a visit never makes the program crash or lose that visit.",
     "mistake": "A non-functional requirement such as 'easy to use' earns less than one with a target that could be checked, such as a time limit for new volunteers.",
     "source": "textbook"
   },
@@ -927,16 +927,16 @@
         "marks": 1
       },
       {
-        "text": "A measurable reliability requirement, e.g. the app runs for a full nine-hour show day without crashing, and no recorded placing is lost",
+        "text": "A measurable reliability requirement, e.g. the app is available for all nine hours of each show day with no unplanned outage, and every placing a steward records is stored exactly as entered",
         "marks": 1
       },
       {
-        "text": "Justifies it from the scenario, e.g. placings are announced from the app, so a crash or a lost placing would hold up the announcements",
+        "text": "Justifies it from the scenario, e.g. placings are announced to the crowd from the app, so an outage or a wrong placing would hold up or spoil the announcements",
         "marks": 1
       }
     ],
-    "model": "Usability: a steward who has not used the app before can record the placings for a class within one minute, after a ten-minute briefing. Most stewards are volunteers aged over 60 who will have little time to learn the app, and each class's placings must be entered at the ring before the next class is judged.\n\nReliability: the app runs for the full nine hours of each show day without crashing, and no recorded placing is lost. The placings are announced to the crowd from the app, so a crash or a lost placing would hold up the announcements.",
-    "mistake": "'The app must be easy to use' and 'the app must be reliable' can't be measured. Each requirement needs a target that could be checked, such as a time limit or a period without failure.",
+    "model": "Usability: a steward who has not used the app before can record the placings for a class within one minute, after a ten-minute briefing. Most stewards are volunteers aged over 60 who will have little time to learn the app, and each class's placings must be entered at the ring before the next class is judged.\n\nReliability: the app is available for all nine hours of each show day with no unplanned outage, and every placing a steward records is stored exactly as entered. The placings are announced to the crowd from the app, so an outage or a wrong placing would hold up or spoil the announcements.",
+    "mistake": "'The app must be easy to use' and 'the app must be reliable' can't be measured. Each requirement needs a target that could be checked, such as a time limit or hours of availability. A target about coping with something unexpected, such as invalid input or a dropped connection, describes robustness, not reliability.",
     "source": "textbook"
   },
   {

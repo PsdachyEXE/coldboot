@@ -1052,10 +1052,10 @@
       "Clients can book on phones, tablets and laptops through a web browser.",
       "A new receptionist can make a booking within three minutes without help.",
       "The system texts each client a reminder the day before their appointment.",
-      "The system runs all through clinic hours without crashing or losing data."
+      "The system is available throughout clinic hours on every day the clinic opens."
     ],
     "answer": 3,
-    "explanation": "Reliability means the system performs consistently whenever it is needed. Staying available through clinic hours without crashing or losing data is a reliability target.",
+    "explanation": "Reliability means the system performs its functions correctly and consistently whenever it is needed in normal use. Being available throughout clinic hours, on every day the clinic opens, is a reliability target. Coping with something unexpected, such as invalid input or a dropped connection, without crashing would be robustness.",
     "whyWrong": [
       "Working across devices through a browser is portability.",
       "How quickly new staff can learn and use the system is usability.",
@@ -1092,22 +1092,23 @@
     "id": "m-u3o2-kk05-004",
     "kk": [
       "U3O2-KK05",
-      "U3O1-KK02"
+      "U3O1-KK02",
+      "U3O2-KK06"
     ],
     "stem": "A requirement for a checkout program at Pellow's Grocer in Echuca states:\n\n*The program must display the customer's total, including GST, within one second of the last item being scanned.*\n\nWhich statement about this requirement is correct?",
     "options": [
       "It is functional only, because it states what the program must display.",
-      "It is a usability requirement, because it lets customers see their total.",
-      "Its one-second limit is a non-functional target for response time.",
+      "Its one-second limit is an economic constraint, because it limits time.",
+      "Showing the total is functional; the one-second limit is not a function.",
       "Its one-second limit is a functional requirement, because it can be tested."
     ],
     "answer": 2,
-    "explanation": "Displaying the total, including GST, is something the program does. The one-second limit sets how quickly it must do it. That is a performance target, a quality of the program rather than a function, so it is non-functional. A number alone doesn't decide this: 'the program can reprint a receipt for any sale in the last 90 days' is functional, because its number sets what the program does.",
+    "explanation": "Displaying the total, including GST, is something the program does, so that part is functional. The one-second limit adds no task: it sets how quickly the program must do one. Many textbooks class a speed target like this as a non-functional (performance) requirement, while the PSM specifications list speed of processing among the technical constraints; on either reading, it isn't a function. A number alone doesn't decide this: 'the program can reprint a receipt for any sale in the last 90 days' is functional, because its number sets what the program does.",
     "whyWrong": [
-      "The one-second limit sets how well the program performs, which is non-functional, so the statement isn't functional only.",
-      "Showing a total is something the program does; the one-second limit concerns speed, not how easily users learn and use the program.",
+      "The one-second limit sets how quickly the program works, not what it does, so the statement isn't functional only.",
+      "Economic constraints cover the project's cost and the time available to build it; the PSM specifications list speed of processing as a technical constraint.",
       "",
-      "Being testable doesn't make a requirement functional; a well-written non-functional requirement, like this time limit, is testable too."
+      "Being testable doesn't make something a function; the time limit sets how fast the total appears, not what the program does."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -2495,7 +2496,7 @@
       "The system must be delivered within a budget of $15 000."
     ],
     "answer": 1,
-    "explanation": "The technical environment is the hardware, operating system and network the solution will run on, and the office's Windows 11 laptops and network are exactly that. The other three statements belong in the SRS too: they describe user characteristics, scope and a constraint, which the study design also lists as features of an SRS.",
+    "explanation": "The technical environment is the hardware, operating system and network the solution will run on, and the office's Windows 11 laptops and network are exactly that. The other three statements belong in the SRS too: they describe user characteristics, scope and an economic constraint, which the study design also lists as features of an SRS.",
     "whyWrong": [
       "This describes user characteristics (the users' level of computer skill), not where the system will run.",
       "",

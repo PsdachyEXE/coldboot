@@ -492,9 +492,10 @@
     ],
     "type": "basic",
     "front": "What does reliability mean as a non-functional requirement?",
-    "back": "The solution performs its functions consistently and correctly whenever it is needed, without crashing or losing data. E.g. the booking system stays available throughout clinic hours.",
+    "back": "The solution performs its functions correctly and consistently whenever it is needed in normal use. E.g. the booking system is available throughout clinic hours on every day the clinic opens.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Reliability isn't robustness. Not crashing or losing data when something unexpected happens, such as invalid input or a dropped connection, is robustness; reliability is working correctly and consistently in normal use."
   },
   {
     "id": "c-u3o2-kk05-004",

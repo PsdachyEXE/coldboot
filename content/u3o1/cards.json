@@ -1100,8 +1100,8 @@
       "Existence checking",
       "Presence check"
     ],
-    "back": "A validation check that confirms a required field actually holds a value, and rejects the input if the field has been left blank, for example a booking form submitted without a surname.",
-    "mistake": "An existence check covers only the field it tests. On the 2025 exam, a check that the age wasn't blank did nothing for the monthly income field, which needed a check of its own.",
+    "back": "A validation check on a required field: it confirms that a value has been entered and that the field isn't empty or blank. It tests whether data is complete, not whether it is correct. E.g. a booking form submitted with no surname fails the check.",
+    "mistake": "An existence (presence) check covers only the field it tests. On the 2025 exam, a check that the age wasn't blank did nothing for the monthly income field, which needed a check of its own.",
     "difficulty": 1,
     "source": "study-design"
   },
@@ -1132,7 +1132,7 @@
       "Type checking",
       "Data type check"
     ],
-    "back": "A validation check that rejects data of the wrong type, for example `six` or `12kg` typed into a quantity field that must hold an integer.",
+    "back": "A validation check that makes sure an entry is of the data type the field expects. E.g. if a quantity field must hold an integer, an entry of `six` or `12kg` fails the check.",
     "mistake": "An existence check doesn't confirm that an entry is a number. A numeric input used in a calculation or comparison needs a type check, or a non-number can cause a type mismatch error.",
     "difficulty": 1,
     "source": "study-design"

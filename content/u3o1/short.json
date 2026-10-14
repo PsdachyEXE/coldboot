@@ -1817,7 +1817,7 @@
         "id": "fig-library-fine-tests",
         "kind": "table",
         "columns": [
-          "Test number",
+          "Test",
           "Days overdue",
           "Expected output",
           "Actual output"
@@ -1954,7 +1954,7 @@
         "marks": 1
       }
     ],
-    "model": "| Test number | Hours | Age | Expected output | Actual output |\n|:--|:--|:--|:--|:--|\n| 2 | 5 | 15 | Hires are limited to 4 hours. | Hires are limited to 4 hours. |\n| 3 | 4 | 15 | Hirer must be 16 or older. | Hires are limited to 4 hours. |\n| 4 | 4 | 16 | Hire approved. | Hires are limited to 4 hours. |\n\nThe expected outputs come from the two rules and the design's order of checks. The actual outputs come from desk-checking the function: line 2 tests `hours >= 4`, which is true for a 4-hour hire, so tests 3 and 4 show the hours message. Their mismatches reveal that line 2 should test `hours > 4`.",
+    "model": "| Test | Hours | Age | Expected output | Actual output |\n|:--|:--|:--|:--|:--|\n| 2 | 5 | 15 | Hires are limited to 4 hours. | Hires are limited to 4 hours. |\n| 3 | 4 | 15 | Hirer must be 16 or older. | Hires are limited to 4 hours. |\n| 4 | 4 | 16 | Hire approved. | Hires are limited to 4 hours. |\n\nThe expected outputs come from the two rules and the design's order of checks. The actual outputs come from desk-checking the function: line 2 tests `hours >= 4`, which is true for a 4-hour hire, so tests 3 and 4 show the hours message. Their mismatches reveal that line 2 should test `hours > 4`.",
     "mistake": "In 2025, rows that repeated a combination of inputs already tested, and outputs that were shortened, earned nothing. Two rows may show the same message, but each needs a new combination of the rules met or broken. Actual output is what the code produces (here, found by desk-checking it), so it is never copied from the expected output.",
     "source": "textbook",
     "figures": [
@@ -1968,7 +1968,7 @@
         "kind": "table",
         "title": "Testing table",
         "columns": [
-          "Test number",
+          "Test",
           "Hours",
           "Age",
           "Expected output",

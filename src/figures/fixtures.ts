@@ -149,7 +149,7 @@ export const tableFixture: TableFigure = {
   id: 'fx-table',
   kind: 'table',
   title: 'Test table for the kayak count',
-  columns: ['Test number', 'Input', 'Expected output', 'Actual output'],
+  columns: ['Test', 'Kayaks', 'Expected output', 'Actual output'],
   rows: [
     ['1', '`0`', 'Error: enter 1 to 6 kayaks', ''],
     ['2', '`1`', 'Accepted', ''],
