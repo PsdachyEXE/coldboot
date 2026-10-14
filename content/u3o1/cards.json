@@ -41,7 +41,8 @@
   {
     "id": "c-u3o1-kk01-004",
     "kk": [
-      "U3O1-KK01"
+      "U3O1-KK01",
+      "U4O2-KK08"
     ],
     "type": "cloze",
     "front": "Before submitting code or data to a public AI tool, a developer removes {{personal and confidential data}}, such as customer records and passwords, because the provider may {{store or reuse}} whatever is submitted.",
@@ -76,23 +77,26 @@
   {
     "id": "c-u3o1-kk01-007",
     "kk": [
-      "U3O1-KK01"
+      "U3O1-KK01",
+      "U4O2-KK08"
     ],
     "type": "basic",
     "front": "Why should a developer acknowledge AI assistance in their code or documentation?",
     "back": "Presenting AI-generated code as entirely your own misrepresents who wrote it, and in school work it can breach academic integrity rules. Acknowledging it also tells reviewers which code to scrutinise closely.",
+    "mistake": "Using AI to help write code isn't unethical in itself, so acknowledging it isn't admitting to wrongdoing. The ethical problems come from how it is used, such as hiding that use or relying on the code without checking it.",
     "difficulty": 1,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk02-005",
     "kk": [
-      "U3O1-KK02"
+      "U3O1-KK02",
+      "U3O2-KK05"
     ],
     "type": "cloze",
-    "front": "'The program calculates the GST-inclusive price of each order' is a {{functional}} requirement; 'each screen loads in under two seconds' is a {{non-functional}} requirement.",
-    "back": "Calculating GST is a task the program performs. Loading speed is a quality of how well it performs.",
-    "mistake": "A requirement that contains a number isn't automatically non-functional. Ask whether it describes a task (functional) or a quality (non-functional).",
+    "front": "'The program produces a sales report covering up to five years of orders' is a {{functional}} requirement; 'a new staff member can produce that report without any training' is a {{non-functional}} requirement.",
+    "back": "Producing the report is a task the program performs, even though the statement contains a number. Being usable without training is a quality of how well it performs (usability).",
+    "mistake": "A requirement that contains a number isn't automatically non-functional: a report covering five years of data is still a task the program performs. Ask whether the statement describes a task (functional) or a quality such as usability or reliability (non-functional).",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -105,10 +109,10 @@
     ],
     "type": "compare",
     "front": "Non-functional requirement versus constraint",
-    "back": "A **non-functional requirement** is a quality the solution must achieve, e.g. staff can learn it in one training session. A **constraint** limits the options for meeting the requirements, e.g. a $5000 budget or a 30 June deadline.",
+    "back": "A **non-functional requirement** is a quality the solution must have, e.g. staff can learn it in one training session (usability). A **constraint** is a limit the solution has to be designed and built within, e.g. a $5000 budget or a 30 June deadline (economic). Usability can be both: the PSM also lists it as a type of constraint.",
     "mistake": "A budget or deadline isn't a non-functional requirement. It doesn't describe a quality of the solution; it limits how the solution can be built.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk02-007",
@@ -125,7 +129,8 @@
   {
     "id": "c-u3o1-kk02-008",
     "kk": [
-      "U3O1-KK02"
+      "U3O1-KK02",
+      "U3O2-KK07"
     ],
     "type": "basic",
     "front": "Why should a developer confirm what is out of scope before coding a module?",
@@ -136,7 +141,8 @@
   {
     "id": "c-u3o1-kk03-005",
     "kk": [
-      "U3O1-KK03"
+      "U3O1-KK03",
+      "U3O2-KK14"
     ],
     "type": "basic",
     "front": "What does pseudocode show, and why is it written before coding?",
@@ -148,12 +154,13 @@
   {
     "id": "c-u3o1-kk03-006",
     "kk": [
-      "U3O1-KK03"
+      "U3O1-KK03",
+      "U3O2-KK14"
     ],
     "type": "compare",
     "front": "IPO chart versus pseudocode",
-    "back": "An **IPO chart** shows *what* a module involves: its inputs, the processing required and its outputs. **Pseudocode** shows *how*: the exact sequence of steps, decisions and loops that turns the inputs into the outputs.",
-    "mistake": "An IPO chart doesn't show the order of steps or the conditions for decisions. That detail belongs in pseudocode.",
+    "back": "An **IPO chart** gives a brief overview of a module: *what* goes in, the processes that transform it and *what* comes out. **Pseudocode** shows *how*: every step of the algorithm in order, with its decisions and loops written as control structures.",
+    "mistake": "Thinking an IPO chart can't mention a condition. A process that applies only sometimes should say so (\"if a concession is claimed, halve the fare\"); what the chart leaves out is the full ordered algorithm with its control structures, which pseudocode gives.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -161,23 +168,24 @@
     "id": "c-u3o1-kk03-007",
     "kk": [
       "U3O1-KK03",
-      "U3O1-KK04"
+      "U3O2-KK14"
     ],
     "type": "cloze",
     "front": "To show how a data entry screen will look, a developer uses a {{mock-up}}; to record that `postcode` is a String of exactly four digits, they use a {{data dictionary}}.",
-    "back": "A mock-up shows appearance. A data dictionary records each data item's name, data type, size and validation.",
+    "back": "A mock-up shows how the screen will look. A data dictionary records each data item's name and data type, and can add fields such as size, validation rules and a description.",
     "difficulty": 1,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk03-008",
     "kk": [
-      "U3O1-KK03"
+      "U3O1-KK03",
+      "U3O2-KK14"
     ],
     "type": "basic",
     "front": "Which design tool suits each need?",
-    "back": "| Need | Tool |\n|:--|:--|\n| Layout of a screen | Mock-up |\n| Step-by-step logic | Pseudocode |\n| Each variable's type, size and validation | Data dictionary |\n| A class's properties and methods | Object description |\n| A module's inputs, processing and outputs | IPO chart |",
-    "mistake": "A mock-up shows what the user sees, not how the data is processed or stored.",
+    "back": "| Need | Tool |\n|:--|:--|\n| How a module's screen will look | Mock-up |\n| Step-by-step logic of an algorithm | Pseudocode |\n| Each data item's name and data type, often with size and validation rules | Data dictionary |\n| An object's properties (attributes) and methods | Object description |\n| A module's inputs, processes and outputs | IPO chart |",
+    "mistake": "Expecting a mock-up to set out the processing. Its annotations can say what a control does (\"saves the booking\"), but the steps behind that belong in pseudocode.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -200,9 +208,10 @@
     ],
     "type": "reverse",
     "front": "Boolean",
-    "back": "A data type that holds one of only two values: True or False.",
+    "back": "A data type that holds one of only two values: true or false.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Writing \"Bool\" in an exam answer. The 2025 examiners gave no marks for it; use the study design's full name, Boolean."
   },
   {
     "id": "c-u3o1-kk04-003",
@@ -213,7 +222,8 @@
     "front": "Floating point",
     "back": "A numeric data type for numbers with a fractional part, such as 72.5 or 19.95.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Writing \"Float\" in an exam answer. The 2025 examiners gave no marks for it; write the study design's full name, floating point."
   },
   {
     "id": "c-u3o1-kk04-004",
@@ -223,7 +233,7 @@
     "type": "compare",
     "front": "Character versus String",
     "back": "A **Character** holds exactly one letter, digit or symbol, e.g. a grade of `A`. A **String** holds a sequence of characters, e.g. a suburb name such as `Wendouree`.",
-    "mistake": "A String can hold a single character too, but when the data is always exactly one character, such as a grade, Character is the more precise choice.",
+    "mistake": "Choosing String for a value that is always exactly one symbol, such as a single-letter grade. That value is a Character: the 2025 examiners didn't accept string for single-letter symbols, and the reason they wanted was that only one symbol has to be stored.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -296,7 +306,7 @@
     ],
     "type": "compare",
     "front": "One-dimensional array versus record",
-    "back": "| | Array | Record |\n|:--|:--|:--|\n| Data types | all the same | can differ |\n| Access | integer index | field name |\n| Example | 30 test scores | one student's name, age and enrolment status |",
+    "back": "| | Array | Record |\n|:--|:--|:--|\n| Data types | one data type for every element | fields of varying data types |\n| Element reached by | an integer index, e.g. `scores[i]` | a field index (which field), e.g. `student.age` |\n| Example | 30 test scores | one student's name, age and enrolment status |",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -354,7 +364,7 @@
     ],
     "type": "reverse",
     "front": "Delimited file",
-    "back": "A text file that stores one record per line, with each field separated from the next by a set character (the delimiter), such as a comma in a CSV file or a tab.",
+    "back": "A structured text file that stores one record per line, with each field separated from the next by a set character (the delimiter), such as a comma in a CSV file or a tab.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -391,7 +401,8 @@
     "front": "CSV file versus XML file",
     "back": "| Feature | CSV | XML |\n|:--|:--|:--|\n| A field is identified by | its position in the line | its tag name |\n| Structure | flat, one record per line | hierarchical, nested elements |\n| File size | compact | larger, as tags repeat in every record |\n| Suits | large tables of uniform records | data shared between systems, or with nested or changing fields |",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Answering a question on the benefits of XML with this comparison: in 2025, answers that set XML against CSV earned no marks. Give XML's own features applied to the scenario, such as its extensible structure, tags that describe each value, and portability between systems."
   },
   {
     "id": "c-u3o1-kk06-006",
@@ -400,7 +411,7 @@
     ],
     "type": "compare",
     "front": "Plain text file versus delimited file",
-    "back": "Plain text: characters and lines with no defined fields, suited to logs, notes and messages. Delimited: every line is a record split into fields by a delimiter, so a program can pick out each field, suiting tabular data such as a spreadsheet export.",
+    "back": "Plain text is unstructured: characters and lines with no defined fields, suited to logs, notes and messages that people read. Delimited is structured: every line is a record split into fields by a delimiter, so a program can pick out each field, suiting tabular data such as a spreadsheet export.",
     "mistake": "A CSV file isn't a special binary format: it opens in any text editor. What makes it delimited is its consistent record-and-field structure.",
     "difficulty": 1,
     "source": "textbook"
@@ -431,18 +442,22 @@
   {
     "id": "c-u3o1-kk07-003",
     "kk": [
-      "U3O1-KK07"
+      "U3O1-KK07",
+      "U4O1-KK03"
     ],
     "type": "basic",
     "front": "Can a subclass directly use its superclass's private attributes?",
     "back": "No. Only the superclass's own methods can use a private attribute directly, even though every subclass object still has it. If `Manager` is a subclass of `Employee`, a `Manager` method reaches the private `payRate` through inherited public or protected methods such as `getPayRate()`, or `payRate` is declared protected.",
+    "mistake": "Choosing protected to keep an attribute inside its own class doesn't work: subclasses can still use a protected attribute. Only private limits it to the class's own methods.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk07-006",
     "kk": [
-      "U3O1-KK07"
+      "U3O1-KK07",
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "type": "compare",
     "front": "Class versus object",
@@ -453,58 +468,63 @@
   {
     "id": "c-u3o1-kk07-007",
     "kk": [
-      "U3O1-KK07"
+      "U3O1-KK07",
+      "U4O1-KK03"
     ],
     "type": "compare",
-    "front": "Public versus private versus protected versus default access",
-    "back": "| Modifier | Member can be used by |\n|:--|:--|\n| public | any code in the program |\n| private | only the class's own methods |\n| protected | the class and its subclasses (in Java, also its package) |\n| default (no modifier) | set by the language; in Java, classes in the same package |",
-    "mistake": "Private doesn't make an attribute read-only or constant. The class's own methods can still change it; only code outside the class is blocked.",
+    "front": "Public versus protected versus private access",
+    "back": "| Modifier | Member can be used by |\n|:--|:--|\n| public | any code in the program |\n| protected | the class's own methods and its subclasses (in Java, also classes in the same package) |\n| private | only the class's own methods |",
+    "mistake": "Protected doesn't lock a member to its own class: subclasses can use it too, so only private does that. Private also doesn't make an attribute read-only; the class's own methods can still change it.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk07-008",
     "kk": [
-      "U3O1-KK07"
+      "U3O1-KK07",
+      "U4O1-KK03"
     ],
     "type": "cloze",
     "front": "Under encapsulation, a private attribute is read through a public {{getter}} method and changed through a public {{setter}} method, which can {{validate}} the new value before storing it.",
-    "back": "Getters and setters are also called accessor and mutator methods. For example, `setQuantity()` can reject a negative number before it reaches the private `quantity` attribute.",
+    "back": "Getters and setters are the class's get and set methods (also called accessor and mutator methods). For example, `setQuantity()` can reject a negative number before it reaches the private `quantity` attribute.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk08-001",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "type": "basic",
     "front": "What is a constant, and why use one instead of typing its value wherever it is needed?",
     "back": "A constant is a named value that is set once and can't change while the program runs, e.g. a GST rate of 0.1. The name makes the code clearer, and if the value changes it is updated in one place instead of everywhere it appears.",
-    "mistake": "A global variable isn't a substitute for a constant. Any module can change a global variable while the program runs; a constant can't be changed.",
+    "mistake": "A global variable's value isn't fixed: any module can change it while the program runs. Only a constant keeps its value, and changing a constant means editing the code.",
     "difficulty": 1,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk08-002",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "type": "compare",
     "front": "Local variable versus global variable",
-    "back": "Local: declared inside a function, procedure or method; it can be used only there and exists only while that module runs. Global: declared outside every module; any part of the program can read or change it for as long as the program runs.",
-    "mistake": "Global variables aren't safer because they are always available. Any module can change them, which makes errors hard to trace. Keep variables local and pass values between modules as parameters.",
+    "back": "Local: declared inside a function or method; it can be used anywhere in that module but nowhere else, and exists only while the module runs. Global: declared outside every module; any part of the program can read or change it while the program runs.",
+    "mistake": "A local variable isn't confined to the IF or loop where it is used: it can be used anywhere in the module that declares it. Globals aren't safer for being available everywhere; any module can change them, which makes errors hard to trace.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk08-003",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "type": "compare",
     "front": "Pre-test loop versus post-test loop",
-    "back": "Pre-test (`WHILE ... DO`): the condition is checked before each pass, so the body may run zero times. Post-test (`REPEAT ... UNTIL`): the condition is checked after each pass, so the body always runs at least once.",
+    "back": "Pre-test (`WHILE ... DO`): the condition is checked before each pass, so the body may run zero times. Post-test (`REPEAT ... UNTIL`, or `DO ... WHILE`): the condition is checked after each pass, so the body always runs at least once.",
     "mistake": "`REPEAT ... UNTIL` doesn't repeat while its condition is true, as `WHILE` does. It repeats until the condition becomes true, and stops when the condition is true at the end of a pass.",
     "difficulty": 2,
     "source": "textbook"
@@ -512,30 +532,37 @@
   {
     "id": "c-u3o1-kk08-004",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "type": "reverse",
-    "front": "Counted loop",
-    "back": "A loop that runs a set number of times, controlled by a counter that steps from a start value to an end value, e.g. `FOR i ← 1 TO 10` runs ten times.",
+    "front": "FOR loop",
+    "back": "A loop that repeats its body a set number of times, using a counter that steps from a start value to an end value; for example, a counter going from 1 to 10 runs the body ten times.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "aliases": [
+      "counted loop",
+      "count-controlled loop"
+    ]
   },
   {
     "id": "c-u3o1-kk08-005",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "type": "basic",
-    "front": "How does a function differ from a procedure, and what is a method?",
-    "back": "A function returns a value to the code that called it, e.g. `fee ← calculateFee(nights)`. A procedure carries out a task, such as displaying a receipt, without returning a value. A method is a function or procedure that belongs to a class.",
-    "mistake": "Python writes both with `def`, so students often think it has no procedures. A `def` that returns no value still does the job of a procedure: the distinction is whether a value is returned.",
+    "front": "What is a function, and how does a method differ from one?",
+    "back": "A function is a named block of code that can take parameters and can return a value to the code that called it, e.g. `fee ← calculateFee(nights)`. A method is a function that belongs to a class and works on the attributes of the object it is called on, e.g. `room.calculateFee(nights)` uses that room's nightly rate.",
+    "mistake": "Displaying a result isn't the same as returning it. If `calculateFee` only displays the fee, the calling code has nothing to store in `fee` or add to a total.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk08-007",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U3O1-KK06"
     ],
     "type": "cloze",
     "front": "Opening an existing file to {{write}} replaces its contents, while opening it to {{append}} adds new data to the end and keeps what is already there.",
@@ -547,14 +574,15 @@
   {
     "id": "c-u3o1-kk08-008",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "type": "basic",
-    "front": "Classify each operator as arithmetic, logical or comparison: `MOD`, `AND`, `<>`, `NOT`, `DIV`, `<=`.",
-    "back": "Arithmetic: `MOD` (remainder) and `DIV` (integer division). Logical: `AND` and `NOT`, which combine or reverse Boolean values. Comparison: `<>` and `<=`, which compare two values and give a Boolean result.",
+    "front": "Classify each operator as arithmetic, logical or conditional (comparison): `MOD`, `AND`, `<>`, `NOT`, `DIV`, `<=`.",
+    "back": "Arithmetic: `MOD` (modulus, the remainder) and `DIV` (integer division). Logical: `AND` and `NOT`, which combine or reverse Boolean values. Conditional (comparison): `<>` (inequality) and `<=` (less than or equal to), which compare two values and give a Boolean result.",
     "mistake": "`MOD` gives the remainder, not the quotient: `17 MOD 5` is 2, while `17 DIV 5` is 3.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk09-004",
@@ -562,9 +590,9 @@
       "U3O1-KK09"
     ],
     "type": "basic",
-    "front": "Write the variable name *number of seats* in camel case and in snake case.",
-    "back": "Camel case: `numberOfSeats`. Snake case: `number_of_seats`. Neither contains spaces, because an identifier must be one unbroken name.",
-    "mistake": "Camel case normally starts with a lowercase letter. `NumberOfSeats`, with a capital first letter, is Pascal case (upper camel case), which many languages keep for class names.",
+    "front": "Write the variable name *number of seats* using camel casing and using snake casing.",
+    "back": "Camel casing: `numberOfSeats`. Snake casing: `number_of_seats`. Neither contains spaces, because an identifier must be one unbroken name.",
+    "mistake": "Camel casing normally starts with a lowercase letter. `NumberOfSeats`, with a capital first letter, is Pascal case (upper camel case), which many languages keep for class names.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -597,7 +625,7 @@
       "U3O1-KK09"
     ],
     "type": "cloze",
-    "front": "The identifier `strFirstName` uses {{Hungarian notation}}, shown by the `str` prefix, combined with {{camel case}}, shown by the capital letter that starts each later word.",
+    "front": "The identifier `strFirstName` uses {{Hungarian notation}}, shown by the `str` prefix, combined with {{camel casing}}, shown by the capital letter that starts each later word.",
     "back": "The prefix tells a reader the variable holds a String, and the capitals make the separate words easy to pick out.",
     "difficulty": 2,
     "source": "textbook"
@@ -617,24 +645,27 @@
   {
     "id": "c-u3o1-kk10-004",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "type": "basic",
     "front": "What does validation check about input, and what can't it check?",
-    "back": "It checks that data is reasonable: present, of the expected type and within the allowed limits. It can't check that data is correct. A quantity of 5 passes a 1 to 20 range check even if the customer wanted 3.",
-    "mistake": "Passing validation doesn't make data accurate. Valid data can still be wrong; validation only rejects data that is clearly unreasonable.",
+    "back": "It checks that data is reasonable and complete: a required value is present, of the expected type and within the allowed limits. It can't check that data is accurate; checking accuracy is verification. A quantity of 5 passes a 1 to 20 range check even if the customer wanted 3.",
+    "mistake": "Passing validation doesn't make data accurate. Valid data can still be wrong; validation only rejects data that is missing or clearly unreasonable.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o1-kk10-005",
     "kk": [
       "U3O1-KK10",
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK05",
+      "U4O1-KK06"
     ],
     "type": "compare",
     "front": "Validation versus testing",
-    "back": "Validation: code in the solution that checks each input while the program is in use and rejects unreasonable data. Testing: the developer runs the program with planned test data before release to check that it, including its validation, gives the expected output.",
+    "back": "Validation: checks, usually built into the solution, that run while it is in use (as data is entered or once it is stored) and reject data that is missing or unreasonable. Testing: the developer runs the program with planned test data before release to check that it, including its validation, gives the expected output.",
     "mistake": "Choosing boundary test data isn't validation. Test data is how the developer checks that the validation code works.",
     "difficulty": 2,
     "source": "textbook"
@@ -643,18 +674,21 @@
     "id": "c-u3o1-kk10-006",
     "kk": [
       "U3O1-KK10",
-      "U3O1-KK13"
+      "U3O1-KK13",
+      "U4O1-KK05"
     ],
     "type": "basic",
     "front": "Why is a type check applied before a range check on a numeric field?",
     "back": "A range check compares the input with numeric limits. If the input isn't a number, e.g. `ten`, converting or comparing it can cause a runtime error such as a type mismatch. Checking existence, then type, then range means each check only receives data it can handle.",
     "difficulty": 3,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "A range check alone does not make a numeric comparison safe. If a non-numeric entry reaches the comparison, the program can crash, so any numeric input used in a condition needs a type check first."
   },
   {
     "id": "c-u3o1-kk10-007",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "type": "cloze",
     "front": "For a guest count that must be a whole number from 1 to 12, rejecting an empty field is an {{existence}} check, rejecting `six` is a {{type}} check, and rejecting `40` is a {{range}} check.",
@@ -666,7 +700,9 @@
     "id": "c-u3o1-kk10-008",
     "kk": [
       "U3O1-KK10",
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK05",
+      "U4O1-KK06"
     ],
     "type": "basic",
     "front": "A range check should accept ages from 16 to 65 inclusive. Which four test values best check its boundaries?",
@@ -702,18 +738,20 @@
     "id": "c-u3o1-kk11-004",
     "kk": [
       "U3O1-KK11",
-      "U3O1-KK12"
+      "U3O1-KK12",
+      "U3O1-KK05"
     ],
     "type": "basic",
-    "front": "What does it mean for a comment to justify a processing choice? Give an example.",
-    "back": "The comment states why the code processes data the way it does, so a later programmer doesn't undo the choice. For example: `// Binary search: member IDs are kept sorted and there are about 20 000 of them`.",
+    "front": "What does it mean for a comment to justify a data structure or a code structure? Give an example of each.",
+    "back": "The comment gives the reason the structure was chosen, so a later programmer doesn't undo a deliberate choice. Code structure: `// Binary search: member IDs are kept sorted and there are about 20 000 of them`. Data structure: `// Record, not an array: each member's name, age and paid status are different data types`.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u3o1-kk11-005",
     "kk": [
-      "U3O1-KK11"
+      "U3O1-KK11",
+      "U4O1-KK01"
     ],
     "type": "basic",
     "front": "How does internal documentation make a program easier to maintain?",
@@ -822,8 +860,8 @@
     ],
     "type": "compare",
     "front": "Selection sort versus quick sort",
-    "back": "| | Selection sort | Quick sort |\n|:--|:--|:--|\n| Comparisons | n(n − 1)/2 whatever the order, e.g. 4 950 for 100 items | far fewer on average for large lists |\n| Worst case | the same, n(n − 1)/2 | about as many as selection sort, when the pivot keeps being the smallest or largest value |\n| Code | short, simple nested loops | recursive and more complex |",
-    "mistake": "Quick sort is not always faster. Choosing the first item as the pivot on data that is already sorted gives its worst case.",
+    "back": "| | Selection sort | Quick sort |\n|:--|:--|:--|\n| Method | swaps the smallest remaining value into place on each pass | splits the list around a pivot into smaller and larger parts, then sorts each part the same way |\n| Efficiency | n(n − 1)/2 comparisons in every case, e.g. 4 950 for 100 items | far fewer on average for large lists |\n| Complexity | simple nested loops | recursive and more complex |",
+    "mistake": "Quick sort is not always faster. If the pivot keeps being the smallest or largest value, such as the first item of a list that is already sorted, it makes about as many comparisons as selection sort.",
     "difficulty": 3,
     "source": "textbook"
   },
@@ -868,9 +906,10 @@
     ],
     "type": "basic",
     "front": "What causes an overflow error? Give an example.",
-    "back": "A value becomes too large for the data type or memory set aside to store it. For example, a 16-bit signed Integer holds at most 32 767, so adding 1 to 32 767 overflows. Depending on the language, the program stops or the value wraps round to a wrong number.",
+    "back": "A runtime error that occurs when a value or data needs more memory than is available for it. For example, a 16-bit signed Integer holds at most 32 767, so adding 1 to 32 767 overflows; a program can also run out of memory altogether. Unless the error is handled, the program crashes.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Overflow is about size, not type. A number too large for its data type causes an overflow; text where a number is expected causes a type mismatch."
   },
   {
     "id": "c-u3o1-kk13-006",
@@ -910,7 +949,8 @@
   {
     "id": "c-u3o1-kk14-001",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "type": "reverse",
     "front": "Breakpoint",
@@ -927,19 +967,22 @@
       "U3O1-KK14"
     ],
     "type": "reverse",
-    "front": "Debugging output statement",
+    "front": "Debugging statement",
     "back": "A temporary statement, e.g. `DISPLAY \"i = \" + i + \", total = \" + total`, added to show variable values, or which path the code took, as the program runs. It is removed once the error is fixed.",
     "mistake": "These statements aren't part of the finished program. Left in, they show users values that mean nothing to them.",
     "difficulty": 1,
     "source": "textbook",
     "aliases": [
-      "Debug output statement"
+      "Debugging output statement",
+      "Debug output statement",
+      "Debug statement"
     ]
   },
   {
     "id": "c-u3o1-kk14-003",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "type": "basic",
     "front": "How does commenting out code help locate an error?",
@@ -962,31 +1005,36 @@
   {
     "id": "c-u3o1-kk14-005",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "type": "basic",
-    "front": "What is a test case, and what columns record it in a test table?",
-    "back": "A test case is one planned test: specific input data and the output the requirements say should result. Each is a row of a test table with columns for test number, input(s), expected output and actual output.",
-    "mistake": "Expected output is worked out from the requirements before the test is run. Copying it from what the program actually did hides every error.",
+    "front": "What is a test case, and how is it recorded in a testing table?",
+    "back": "A test case is one planned test: particular input values and the output the requirements say should result. Each test case is one row of the testing table, with columns for the test number, each input (one column per input), the expected output and the actual output.",
+    "mistake": "Repeating an earlier row's combination of inputs, or shortening the output, earns nothing. Each row needs a new combination of input values (two rows may still give the same output), and both outputs are written in full, exactly as displayed.",
     "difficulty": 1,
     "source": "exam-convention"
   },
   {
     "id": "c-u3o1-kk14-006",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "type": "compare",
     "front": "Expected output versus actual output",
     "back": "| | Expected output | Actual output |\n|:--|:--|:--|\n| Comes from | the requirements | running the program with the test's inputs |\n| Recorded | before the test is run | when the test is run |\n\nA test passes when the two match. A mismatch shows an error to find and fix.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Copying the program's output into the expected column makes every test pass and hides every error. Expected output is worked out from the requirements before the test is run."
   },
   {
     "id": "c-u3o1-kk14-008",
     "kk": [
       "U3O1-KK14",
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK06",
+      "U4O1-KK05"
     ],
     "type": "compare",
     "front": "Valid test data versus invalid test data",

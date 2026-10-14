@@ -2,7 +2,8 @@
   {
     "id": "m-u3o2-kk01-001",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "stem": "Larkspur Lane Bakery in Castlemaine takes wholesale orders by phone and writes them on paper. Orders are often misread, and each week some cafés receive the wrong quantities. The owner decides to have an ordering program developed. Which option best describes the reason for this project?",
     "options": [
@@ -25,7 +26,8 @@
   {
     "id": "m-u3o2-kk01-002",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "stem": "Wombat Hollow Early Learning in Ararat keeps paper sign-in sheets that staff find quick and accurate. Under a new government rule, the centre must now submit its attendance records electronically every week. The director decides to have attendance software developed. Which option best describes the reason for this project?",
     "options": [
@@ -48,7 +50,8 @@
   {
     "id": "m-u3o2-kk01-003",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "stem": "Quenby's Café in Warragul serves customers quickly at the counter and has no complaints about its service. The owner notices that most customers carry smartphones and that no nearby café lets customers order ahead, so she commissions an order-ahead app. Which option best describes the reason for this project?",
     "options": [
@@ -73,7 +76,8 @@
     "kk": [
       "U3O2-KK01",
       "U3O2-KK05",
-      "U3O2-KK06"
+      "U3O2-KK06",
+      "U3O2-KK02"
     ],
     "stem": "A manager at Firetail Heating and Cooling in Traralgon wrote four statements about a planned dispatch program. Which statement describes the reason for the project, rather than a requirement or a constraint?",
     "options": [
@@ -120,9 +124,10 @@
   {
     "id": "m-u3o2-kk01-006",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
-    "stem": "Two florists, one in Kyneton and one in Sale, commission the same online ordering app. At the Kyneton florist, paper order slips are often lost, so some bouquets are never made. At the Sale florist, orders are recorded reliably, but the owner wants to reach customers who would rather order online. Which statement is correct?",
+    "stem": "Two florists, one in Kyneton and one in Sale, commission the same online ordering app. At the Kyneton florist, paper order slips are often lost, so some bouquets are never made. At the Sale florist, orders are recorded reliably, but the owner wants to reach customers who would rather order online. Each project is classified as responding to a problem, a need or an opportunity. Which statement is correct?",
     "options": [
       "Both projects fix a problem, because both apps replace the old process",
       "Both projects take an opportunity, because both use new technology",
@@ -135,7 +140,7 @@
       "Sale's orders are recorded reliably, so nothing is failing there; replacing a process that works isn't fixing a problem.",
       "Kyneton's order slips are being lost, so its project is about fixing a failing process, not gaining an advantage.",
       "",
-      "Nothing new requires Kyneton to change; its current process is producing errors, which makes the reason a problem, not a need."
+      "Nothing new requires Kyneton to change; its current process is failing (order slips are lost), which makes the reason a problem, not a need."
     ],
     "difficulty": 3,
     "source": "textbook"
@@ -214,23 +219,23 @@
     "kk": [
       "U3O2-KK02"
     ],
-    "stem": "A developer receives this brief from Kanyana Valley Junior Football League:\n\n*The league's 40 volunteer coaches record training attendance on paper and email it to the registrar each week. Records often arrive late or incomplete, and the registrar spends hours chasing them. The league wants coaches to record attendance on their phones at training. The solution must be ready before the season starts in April and must cost less than $5000.*\n\nWhich statement about this brief is correct?",
+    "stem": "Tahlia, a developer, has drafted this brief for Kanyana Valley Junior Football League:\n\n*The league's 40 volunteer coaches record training attendance on paper and email it to the registrar each week. Records often arrive late or incomplete, and the registrar spends hours chasing them. The proposed users are the coaches, who will record attendance on their phones at training, and the registrar, who will check it on the office computer. None of the free team apps the league has tried sends attendance straight to the registrar. Tahlia estimates the app will take eight weeks and cost $4200, so it can be ready before the season starts in April, within the league's $5000 budget.*\n\nWhich statement about this brief is correct?",
     "options": [
-      "It is a suitable brief: it gives the context, the problem and known constraints.",
+      "It is incomplete, because it doesn't state the programming language to be used.",
       "It is incomplete, because a brief must include a data dictionary for attendance.",
-      "It is incomplete, because a brief must include mock-ups of the coaches' screens.",
-      "It is really an SRS, because it states a deadline and a budget for the solution."
+      "It is incomplete, because it doesn't explain what makes the app original.",
+      "It is really an SRS, because it states a cost and a delivery date for the app."
     ],
     "answer": 0,
-    "explanation": "The brief describes the league and its current process, the problem (late and incomplete records), the users, what the solution should achieve and two known constraints. Detailed design comes later.",
+    "explanation": "The study design lists these features of a brief: an outline of the problem, need or opportunity, the proposed users, the programming languages to be used, feasibility and originality. Tahlia's brief outlines the problem (late and incomplete records), names the proposed users (the coaches and the registrar), shows feasibility (her estimate fits the budget and the time before April) and originality (no app the league has tried does this). It never says which programming language will be used.",
     "whyWrong": [
       "",
       "A data dictionary is a design tool, produced after analysis; a brief doesn't need one.",
-      "Mock-ups are design tools; putting them in a brief would jump ahead of analysis.",
-      "A brief can mention known constraints; an SRS is the detailed specification produced after analysis."
+      "The brief says no free team app the league has tried sends attendance straight to the registrar; that is how it covers originality.",
+      "The estimate and the April date show the project is feasible, which is a feature of a brief; an SRS is the detailed specification produced by analysis."
     ],
     "difficulty": 3,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u3o2-kk02-005",
@@ -246,11 +251,11 @@
       "It shows who to collect data from and points to key usability requirements"
     ],
     "answer": 3,
-    "explanation": "A brief identifies the intended users and their characteristics. Knowing that most members are older, with poor eyesight or little experience with apps, tells the developer which group to collect data from, and how, and points to usability requirements, such as large text and few steps, that analysis will make measurable.",
+    "explanation": "A brief identifies the proposed users and their characteristics. Knowing that most members are older, with poor eyesight or little experience with apps, tells the developer which group to collect data from, and how, and points to usability requirements, such as large text and few steps, that analysis will make measurable.",
     "whyWrong": [
       "Scope is agreed during analysis from what the club needs; the members' ages alone don't settle which features are included.",
       "User details don't replace data collection. The developer still has to find out what members need, and criteria come from those requirements.",
-      "The programming language is a development decision; the users' characteristics shape the requirements, not the language.",
+      "The members' age and eyesight shape usability requirements, such as large text; they don't decide which programming language the brief names.",
       ""
     ],
     "difficulty": 2,
@@ -969,7 +974,8 @@
   {
     "id": "m-u3o2-kk05-001",
     "kk": [
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "stem": "Strongbark Gym in Bendigo is having a membership program developed. Which of the following is a functional requirement?",
     "options": [
@@ -981,7 +987,7 @@
     "answer": 1,
     "explanation": "Calculating each member's fee is something the program must do with its input data, so it is a functional requirement.",
     "whyWrong": [
-      "A deadline limits the project; it is a constraint, not a requirement of the program.",
+      "A deadline limits the time for the project; it is an economic constraint, not a requirement of the program.",
       "",
       "A response time describes how well the program performs, so it is non-functional.",
       "Ease of learning is a usability quality, so it is a non-functional requirement."
@@ -992,7 +998,8 @@
   {
     "id": "m-u3o2-kk05-002",
     "kk": [
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "stem": "Lindenvale Physiotherapy in Ballarat has listed four requirements for a new booking system. Which one is a reliability requirement?",
     "options": [
@@ -1038,7 +1045,8 @@
   {
     "id": "m-u3o2-kk05-004",
     "kk": [
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "stem": "A requirement for a checkout program at Pellow's Grocer in Echuca states:\n\n*The program must display the customer's total, including GST, within one second of the last item being scanned.*\n\nWhich statement about this requirement is correct?",
     "options": [
@@ -1048,7 +1056,7 @@
       "Its one-second limit is a functional requirement, because it can be tested."
     ],
     "answer": 2,
-    "explanation": "Displaying the total, including GST, is something the program does. The one-second limit sets how quickly it must do it. That is a performance target, a quality of the program rather than a function, so it is non-functional.",
+    "explanation": "Displaying the total, including GST, is something the program does. The one-second limit sets how quickly it must do it. That is a performance target, a quality of the program rather than a function, so it is non-functional. A number alone doesn't decide this: 'the program can reprint a receipt for any sale in the last 90 days' is functional, because its number sets what the program does.",
     "whyWrong": [
       "The one-second limit sets how well the program performs, which is non-functional, so the statement isn't functional only.",
       "Showing a total is something the program does; the one-second limit concerns speed, not how easily users learn and use the program.",
@@ -1108,7 +1116,8 @@
   {
     "id": "m-u3o2-kk06-001",
     "kk": [
-      "U3O2-KK06"
+      "U3O2-KK06",
+      "U3O1-KK02"
     ],
     "stem": "Which of the following is a constraint on a software project?",
     "options": [
@@ -1131,7 +1140,8 @@
   {
     "id": "m-u3o2-kk06-002",
     "kk": [
-      "U3O2-KK06"
+      "U3O2-KK06",
+      "U3O1-KK02"
     ],
     "stem": "The manager of Wanderlea Community Library in Shepparton says the new loans program must run on the three Android tablets already used at the front desk. How is this statement best classified?",
     "options": [
@@ -1144,7 +1154,7 @@
     "explanation": "The program is limited by the hardware it must run on: the existing Android tablets. A limit set by the technology available is a technical constraint.",
     "whyWrong": [
       "",
-      "Nothing in the statement limits money or cost; it limits the hardware.",
+      "Nothing in the statement limits cost or time; it limits the hardware the program must run on.",
       "No law is involved; the limit comes from the existing tablets.",
       "It doesn't state something the program does; it limits the platform the program must run on."
     ],
@@ -1154,7 +1164,8 @@
   {
     "id": "m-u3o2-kk06-003",
     "kk": [
-      "U3O2-KK06"
+      "U3O2-KK06",
+      "U3O1-KK02"
     ],
     "stem": "Brookhollow Dental in Mildura is having a patient portal developed. The portal will store patients' names, contact details and treatment histories. Which constraint does storing this data place on the project?",
     "options": [
@@ -1179,7 +1190,8 @@
     "kk": [
       "U3O2-KK06",
       "U3O2-KK07",
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "stem": "Tallis Creek Bowls Club in Seymour wrote four statements about its planned rink booking app. Which statement is a constraint?",
     "options": [
@@ -1189,7 +1201,7 @@
       "The app must show which rinks are free at a time the member chooses."
     ],
     "answer": 1,
-    "explanation": "A fixed deadline limits when the solution must be delivered. It restricts the project rather than describing what the app does or a quality it has, so it is a constraint.",
+    "explanation": "A fixed deadline limits when the solution must be delivered. It restricts the project rather than describing what the app does or a quality it has, so it is a constraint: an economic one, because economic constraints cover time as well as cost.",
     "whyWrong": [
       "This sets the scope: what the app will and won't do.",
       "",
@@ -1392,23 +1404,23 @@
     "kk": [
       "U3O2-KK08"
     ],
-    "stem": "Which element can appear in a data flow diagram but never in a context diagram?",
+    "stem": "Which component can appear in a data flow diagram (Level 1) but never in a context diagram (Level 0)?",
     "options": [
       "An external entity outside the system, such as *Customer*",
-      "A data store that holds data, such as *D1 Bookings*",
+      "A data store that holds data, such as *Bookings*",
       "A labelled data flow, such as `booking_details`",
-      "A process that transforms data, such as *Calculate fee*"
+      "A circle that names the whole system, such as *Booking system*"
     ],
     "answer": 1,
-    "explanation": "A context diagram shows the whole system as one process, so stored data stays hidden inside it. Data stores appear only when the system is broken into processes on a DFD.",
+    "explanation": "The study design gives a context diagram three components: the system, external entities and data flows. Stored data stays hidden inside the system. A Level 1 DFD opens the system up into processes and adds the data stores they use, so a data store can appear only on the DFD.",
     "whyWrong": [
       "External entities appear on both diagrams, outside the system.",
       "",
       "Labelled data flows appear on both diagrams.",
-      "Both diagrams contain processes; a context diagram has exactly one, representing the whole system."
+      "The circle naming the whole system belongs to the context diagram; a DFD replaces it with processes."
     ],
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u3o2-kk08-002",
@@ -1417,13 +1429,13 @@
     ],
     "stem": "Sandpiper Cycle Hire in Geelong is having a hire system developed. The DFD for the system is shown. Which data flow breaks a DFD convention?",
     "options": [
-      "`hire_request`, from *Customer* to process 1",
-      "`hire_details`, from process 1 to *D1 Hires*",
-      "`invoice`, from process 2 to *Customer*",
-      "`hire_report`, from *D1 Hires* to *Manager*"
+      "`hire_request`, from *Customer* to *Record hire*",
+      "`hire_details`, from *Record hire* to the *Hires* data store",
+      "`invoice`, from *Calculate charge* to *Customer*",
+      "`hire_report`, from the *Hires* data store to *Manager*"
     ],
     "answer": 3,
-    "explanation": "An external entity can't take data straight from a data store. A process must read *D1 Hires* and produce the report, for example a new process *Produce hire report* that sends `hire_report` to *Manager*.",
+    "explanation": "An external entity can't take data straight from a data store. A process must read the *Hires* data store and produce the report, for example a new process *Produce hire report* that sends `hire_report` to *Manager*.",
     "whyWrong": [
       "An external entity may send data to a process, so this flow is correct.",
       "A process may write data to a data store, so this flow is correct.",
@@ -1451,7 +1463,6 @@
             "id": "p1",
             "type": "process",
             "label": "Record hire",
-            "number": "1",
             "x": 320,
             "y": 120
           },
@@ -1459,7 +1470,6 @@
             "id": "p2",
             "type": "process",
             "label": "Calculate charge",
-            "number": "2",
             "x": 320,
             "y": 300
           },
@@ -1467,7 +1477,6 @@
             "id": "d1",
             "type": "store",
             "label": "Hires",
-            "number": "D1",
             "x": 520,
             "y": 200
           },
@@ -1545,7 +1554,7 @@
       "*Record progress* should be linked to *Parent*, because parents read the results"
     ],
     "answer": 2,
-    "explanation": "Actors are people, organisations or other systems outside the system that interact with it. The app's own database is part of the system, so it shouldn't be drawn as an actor.",
+    "explanation": "An actor is the role of a user outside the system who interacts with it, such as *Parent* or *Instructor*. Lesson and progress records are stored within the app, so *Lesson database* is part of the system and shouldn't be drawn as an actor.",
     "whyWrong": [
       "Actors always sit outside the system boundary, even when they are staff of the organisation.",
       "Associations show who takes part in a use case; data labels belong on DFD data flows.",
@@ -1645,13 +1654,13 @@
     ],
     "stem": "A primary school canteen in Werribee is having an online lunch ordering system developed. The DFD drawn for the system is shown. Which statement identifies a convention error in the DFD?",
     "options": [
-      "Process 1 sends data to *Parent* and to *D1 Orders*, but a process can have only one output",
-      "*D1 Orders* sends data to processes 2 and 3, but a data store can be read by only one process",
-      "*Canteen staff* gets `order_list` from process 2, but should read *D1 Orders* directly",
-      "Process 3 takes in `order_history` but sends no data to anything, so it produces nothing"
+      "*Take order* sends data to *Parent* and to the *Orders* data store, but a process can have only one output",
+      "The *Orders* data store sends data to two processes, but a data store can be read by only one process",
+      "*Canteen staff* gets `order_list` from *Prepare order list*, but should read the *Orders* data store directly",
+      "*Calculate term charges* takes in `order_history` but sends no data to anything, so it produces nothing"
     ],
     "answer": 3,
-    "explanation": "Every process must turn its inputs into at least one output. Process 3 takes in `order_history` but sends nothing to an external entity or a data store, so the term charges it calculates go nowhere. It needs an output flow, such as `term_statement` sent to *Parent*.",
+    "explanation": "Every process must turn its inputs into at least one output. *Calculate term charges* takes in `order_history` but sends nothing to an external entity, a data store or another process, so the term charges it calculates go nowhere. It needs an output flow, such as `term_statement` sent to *Parent*.",
     "whyWrong": [
       "A process can have several outputs. Sending a confirmation to the parent and storing the order is correct.",
       "A data store can be read by any number of processes.",
@@ -1679,7 +1688,6 @@
             "id": "p1",
             "type": "process",
             "label": "Take order",
-            "number": "1",
             "x": 380,
             "y": 96
           },
@@ -1687,7 +1695,6 @@
             "id": "d1",
             "type": "store",
             "label": "Orders",
-            "number": "D1",
             "x": 600,
             "y": 200
           },
@@ -1695,7 +1702,6 @@
             "id": "p2",
             "type": "process",
             "label": "Prepare order list",
-            "number": "2",
             "x": 380,
             "y": 304
           },
@@ -1710,7 +1716,6 @@
             "id": "p3",
             "type": "process",
             "label": "Calculate term charges",
-            "number": "3",
             "x": 600,
             "y": 324
           }
@@ -1755,19 +1760,19 @@
     "kk": [
       "U3O2-KK08"
     ],
-    "stem": "A Ballarat gym is having a member app developed. Members book classes and pay their fees, which are processed by an external payment service, and trainers record workout plans in the app. Which statement identifies a convention error in the use case diagram shown?",
+    "stem": "A Ballarat gym is having a member app developed. Members book classes and pay their fees in the app, receptionists use it to book classes for members who phone the gym, and trainers record workout plans. Which statement identifies a convention error in the use case diagram shown?",
     "options": [
       "The line joining *Member* to *Trainer* links two actors, not an actor and a use case",
-      "*Payment service* is drawn as an actor, but an actor has to be a person using the app",
-      "*Payment service* should sit inside the boundary, because the app depends on it",
+      "*Book class* is linked to two actors, but a use case can be linked to only one actor",
+      "*Receptionist* should be drawn as an external entity, because it sends booking data to the app",
       "Use case names such as *Book class* should be nouns, like the labels on data flows"
     ],
     "answer": 0,
-    "explanation": "An association shows that an actor takes part in a use case, so it always joins an actor to a use case. Members and trainers may talk to each other, but that happens outside the app, so the line between *Member* and *Trainer* should be removed.",
+    "explanation": "An association joins an actor to a use case the actor takes part in. Members and trainers may talk to each other, but that happens outside the app, so the line between *Member* and *Trainer* should be removed.",
     "whyWrong": [
       "",
-      "Actors can be other systems as well as people. The external payment service interacts with the app, so it is correctly drawn as an actor.",
-      "The payment service is a separate system outside the app. External systems that interact with the app are actors, drawn outside the boundary.",
+      "A use case is linked to every actor who takes part in it; here both members and receptionists book classes.",
+      "Sources and destinations of data are external entities on context diagrams and DFDs. On a use case diagram, a user role that interacts with the app is an actor.",
       "A use case is named as an action, such as *Book class*, because it is a goal an actor achieves; noun labels belong on DFD data flows."
     ],
     "difficulty": 2,
@@ -1800,10 +1805,10 @@
             "y": 290
           },
           {
-            "id": "payment",
-            "label": "Payment service",
+            "id": "receptionist",
+            "label": "Receptionist",
             "x": 552,
-            "y": 200
+            "y": 100
           }
         ],
         "useCases": [
@@ -1838,8 +1843,8 @@
             "type": "association"
           },
           {
-            "from": "pay",
-            "to": "payment",
+            "from": "receptionist",
+            "to": "book",
             "type": "association"
           },
           {
@@ -1899,15 +1904,15 @@
       "*Bank* should be removed, because every external entity must be a person",
       "The flow from the system to *Regional league* has no label naming its data",
       "The system should be split into two processes, one for results and one for fees",
-      "A data store, *D1 Athletes*, should be added, because the system stores details"
+      "A data store, *Athletes*, should be added, because the system stores details"
     ],
     "answer": 1,
-    "explanation": "Every data flow is labelled with the data it carries, using a noun such as `meet_results`. The flow from the system to *Regional league* has no label, so the diagram doesn't show what data the league receives.",
+    "explanation": "Every data flow is a labelled one-way arrow, named for the data it carries, such as `meet_results`. The flow from the system to *Regional league* has no label, so the diagram doesn't show what data the league receives.",
     "whyWrong": [
-      "External entities can be organisations or other systems, such as a bank, as well as people.",
+      "External entities are users or other systems outside the system; the bank's system that processes payments is one.",
       "",
-      "A context diagram shows the whole system as a single process; separate processes appear only on a DFD.",
-      "A context diagram shows no data stores; stored data stays hidden inside the single process."
+      "A context diagram shows the whole system as one circle; processes appear only on a DFD.",
+      "A context diagram has no data stores; stored data stays hidden inside the system."
     ],
     "difficulty": 2,
     "source": "textbook",
@@ -2060,7 +2065,7 @@
     "kk": [
       "U3O2-KK09"
     ],
-    "stem": "Blackbox Bend Caravan Park in Swan Hill is having a booking system developed. Which statement from its SRS describes the solution's operating environment?",
+    "stem": "Blackbox Bend Caravan Park in Swan Hill is having a booking system developed. Which statement from its SRS describes the solution's technical environment?",
     "options": [
       "Most office staff are casual workers with basic computer skills.",
       "The system will run on the office's Windows 11 laptops and network.",
@@ -2068,15 +2073,15 @@
       "The system must be delivered within a budget of $15 000."
     ],
     "answer": 1,
-    "explanation": "The operating environment is the hardware, operating system and network the solution will run on. The office's Windows 11 laptops and network are exactly that.",
+    "explanation": "The technical environment is the hardware, operating system and network the solution will run on, and the office's Windows 11 laptops and network are exactly that. The other three statements belong in the SRS too: they describe user characteristics, scope and a constraint, which the study design also lists as features of an SRS.",
     "whyWrong": [
-      "This describes the intended users and their skills, not where the system will run.",
+      "This describes user characteristics (the users' level of computer skill), not where the system will run.",
       "",
       "This sets the scope: what the system will and won't do.",
-      "A budget is a constraint on the project, not the environment the system runs in."
+      "A budget is an economic constraint on the project, not the environment the system runs in."
     ],
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u3o2-kk09-005",
@@ -2106,7 +2111,7 @@
     "kk": [
       "U3O2-KK09"
     ],
-    "stem": "The SRS for a stocktake program at Gelliondale Hardware & Timber in Yarram says the program will run on the store's existing tablets, which staff operate by touch alone, with no keyboard or mouse. Which design decision does this operating environment rule out?",
+    "stem": "The SRS for a stocktake program at Gelliondale Hardware & Timber in Yarram says the program will run on the store's existing tablets, which staff operate by touch alone, with no keyboard or mouse. Which design decision does this technical environment rule out?",
     "options": [
       "Showing a product's details only when the pointer hovers over it",
       "Buttons large enough for staff to tap them accurately with a finger",
@@ -2114,7 +2119,7 @@
       "Saving each count as soon as staff tap the Next product button"
     ],
     "answer": 0,
-    "explanation": "The operating environment is the hardware and software a solution will run on, and the design must work there. With touch alone there is no mouse pointer to hover, so details that appear only on hover could never be seen. They would need to open with a tap instead.",
+    "explanation": "The technical environment is the hardware and software a solution will run on, and the design must work there. With touch alone there is no mouse pointer to hover, so details that appear only on hover could never be seen. They would need to open with a tap instead.",
     "whyWrong": [
       "",
       "Large buttons suit finger taps, so they fit the tablets the SRS describes.",
@@ -2151,7 +2156,8 @@
   {
     "id": "m-u3o2-kk10-001",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "stem": "When is the source code of a newly written program protected by copyright in Australia?",
     "options": [
@@ -2174,7 +2180,8 @@
   {
     "id": "m-u3o2-kk10-002",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "stem": "Jarrah, a freelance developer, writes a stock program for Cobblestone Pottery in Daylesford. The pottery pays for the program, but the contract says nothing about who owns the code. Who owns the copyright in the code?",
     "options": [
@@ -2207,12 +2214,12 @@
       "Share players' details with sponsors, since players agreed to join the association"
     ],
     "answer": 2,
-    "explanation": "Good privacy practice, reflected in the Australian Privacy Principles, is to collect only the personal information needed for the purpose and to tell people why it is collected and how it will be used.",
+    "explanation": "Good privacy practice is to collect only the personal information needed for the purpose and to tell people why it is collected and how it will be used. Collecting only what is needed reflects APP 3 (Collection of solicited personal information), which limits collection to what is reasonably necessary.",
     "whyWrong": [
-      "Collecting data just in case goes beyond what the purpose needs and adds to the harm of any breach.",
-      "Once players leave, their details aren't needed for registration; keeping them adds risk, so they should be deleted or de-identified.",
+      "Collecting data just in case goes beyond what is reasonably necessary, the limit APP 3 sets, and adds to the harm of any breach.",
+      "Once players leave, their details aren't needed for registration; APP 11 (Security of personal information) expects information no longer needed to be destroyed or de-identified.",
       "",
-      "Joining the association isn't consent to passing details to sponsors, which is a different purpose."
+      "Joining isn't consent to passing details to sponsors; APP 6 (Use or disclosure of personal information) limits disclosing personal information for a purpose other than the one it was collected for."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -2220,7 +2227,8 @@
   {
     "id": "m-u3o2-kk10-004",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "stem": "Mei studies a rival's booking app, then builds her own booking app for her family's dog grooming salon in Bendigo. She writes all of the code herself and designs her own screens and graphics, but her app has similar features. Which statement is most accurate?",
     "options": [
@@ -2243,7 +2251,8 @@
   {
     "id": "m-u3o2-kk10-005",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "stem": "Anika is employed full-time as a developer by Wangoom Freight Lines in Warrnambool. As part of her job, she writes a program that plans delivery routes. She later resigns and wants to sell the program to other freight companies. Her employment contract says nothing about copyright. Who owns the copyright in the program's code?",
     "options": [
@@ -2266,7 +2275,8 @@
   {
     "id": "m-u3o2-kk10-006",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "stem": "Ines, a freelance developer in Geelong, wrote a booking module for Moolap Reach Sailing School. Her contract assigned the copyright in the module's code to the sailing school. A year later, a kayak hire business asks Ines for a booking module with similar features. The sailing school hasn't given permission for its code to be reused. Which statement is most accurate?",
     "options": [
@@ -2373,7 +2383,7 @@
     "whyWrong": [
       "Thursday's incremental holds only Thursday's changes; the unchanged files and earlier changes are missing.",
       "The full backup alone loses every change made from Monday to Thursday.",
-      "Changes made on Monday, Tuesday and Wednesday are held only in those nights' incrementals, so they would be lost.",
+      "Changes made on Monday, Tuesday and Wednesday are held only in those nights' incrementals, so they would be lost. The full backup and the latest one alone would be enough only if the nightly backups were differential.",
       ""
     ],
     "difficulty": 3,
@@ -2406,7 +2416,8 @@
   {
     "id": "m-u3o2-kk11-006",
     "kk": [
-      "U3O2-KK11"
+      "U3O2-KK11",
+      "TERMS"
     ],
     "stem": "Elliminyt Web Studio in Colac finished a website for a football club three years ago. Nobody works on the project's files any more, but the studio's contract says they must be kept for seven years. The files take up space on the shared drive and clutter searches for current work. Which practice best suits these files?",
     "options": [
@@ -2485,11 +2496,11 @@
       "A mind map"
     ],
     "answer": 3,
-    "explanation": "A mind map puts a central topic in the middle, with branches for groups of ideas and sub-branches for individual ideas, so it shows how the features group and connect.",
+    "explanation": "A mind map is a structured diagram: the central topic sits in the middle, branches carry the groups of ideas, and further branches carry the individual ideas, so it shows how the features group and connect.",
     "whyWrong": [
       "A mood board captures visual style, not how features group together.",
       "A sketch explores a screen layout, not the relationships between features.",
-      "A brainstorm generates ideas; Dev already has his list and needs to organise it.",
+      "A brainstorm is an unstructured collection of ideas; Dev already has his list and needs to give it structure by grouping it.",
       ""
     ],
     "difficulty": 2,
@@ -2499,7 +2510,8 @@
     "id": "m-u3o2-kk12-004",
     "kk": [
       "U3O2-KK12",
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "PSM"
     ],
     "stem": "Kasey has sketched three alternative home screens for a click-and-collect app for Ridgeline Hardware in Wodonga. Before she produces a detailed design, what should she do next?",
     "options": [
@@ -2568,7 +2580,8 @@
   {
     "id": "m-u3o2-kk13-001",
     "kk": [
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "TERMS"
     ],
     "stem": "Which of the following is a measure of the efficiency of a solution?",
     "options": [
@@ -2586,7 +2599,7 @@
       "Readability measures effectiveness: how clearly the output communicates."
     ],
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u3o2-kk13-002",
@@ -2596,7 +2609,7 @@
     "stem": "Yabby Creek Pool Care in Shepparton replaced its paper service log with a tablet app. Before the change, about one service record in twenty had a wrong address or time. Since the change, staff take the same time as before to log a pool service, but the records have been error-free for three months. Which statement best describes the change?",
     "options": [
       "The solution is more efficient because records are logged faster",
-      "The solution is less efficient because drivers now use a tablet",
+      "The solution is less efficient because staff now use a tablet",
       "The solution is more efficient because errors are now avoided",
       "The solution is more effective because records are more accurate"
     ],
@@ -2674,7 +2687,7 @@
     "explanation": "The requirement is about calculating fees correctly, including the sibling discount. Checking every fee in a sample that includes siblings against a hand calculation is specific and measurable, and it checks exactly what the requirement asks for.",
     "whyWrong": [
       "Speed is worth measuring, but it doesn't show whether the fees, including the sibling discount, are correct.",
-      "Opinions about appearance can't be measured objectively, and they say nothing about the fee calculation.",
+      "Clarity and attractiveness are effectiveness measures, but this criterion says nothing about whether the fees, including the sibling discount, are calculated correctly.",
       "",
       "This describes how the program is built, not how well it meets the requirement."
     ],
@@ -2684,7 +2697,8 @@
   {
     "id": "m-u3o2-kk13-006",
     "kk": [
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "U4O1-KK09"
     ],
     "stem": "Campaspe Crust Bakery in Kyneton trades seven days a week. Its new program produces a weekly report listing each day's sales, and the office manager produces it in about 20 seconds without help. When the owner checks the first report against the till receipts, every figure in it is correct, but Saturday and Sunday are missing. Which evaluation criterion does the report fail?",
     "options": [
@@ -2708,7 +2722,8 @@
     "id": "m-u3o2-kk14-001",
     "kk": [
       "U3O2-KK14",
-      "U3O1-KK04"
+      "U3O1-KK04",
+      "U3O1-KK03"
     ],
     "stem": "Jarrah is preparing the data dictionary below for a registration program for Kulkyne Netball Club in Mildura. Which entry has the least suitable data type?",
     "options": [
@@ -2765,7 +2780,9 @@
   {
     "id": "m-u3o2-kk14-002",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03",
+      "U3O1-KK04"
     ],
     "stem": "The mock-up below is part of the detailed design for a class booking program at Stonebridge Fitness in Bendigo. The developer is writing the object description for a Booking object. Which property would best store the data captured by the \"Hire a towel\" control?",
     "options": [
@@ -2862,7 +2879,10 @@
   {
     "id": "m-u3o2-kk14-003",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03",
+      "U3O1-KK08",
+      "U3O1-KK05"
     ],
     "stem": "The pseudocode below is part of the detailed design for Blowhole Bay Tours in Warrnambool. It calculates the total fare for a booking group. Arrays are indexed from 0. What value is displayed?",
     "options": [
@@ -2893,7 +2913,8 @@
   {
     "id": "m-u3o2-kk14-004",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "stem": "Hamish drew the IPO chart below for a module that calculates a casual worker's pay for one shift at Quillmoor Café in Ballarat. The chart is missing an input. Which input should be added?",
     "options": [
@@ -2907,7 +2928,7 @@
     "whyWrong": [
       "",
       "Shift pay is the result the module produces, so it belongs in the Output column.",
-      "Calculating the loading is an action, so it belongs in the Processing column, not the Input column.",
+      "Calculating the loading is an action, so it belongs in the Process column, not the Input column.",
       "Weekly pay isn't used to calculate one shift's pay, so it isn't an input to this module."
     ],
     "difficulty": 2,
@@ -2919,7 +2940,7 @@
         "title": "IPO chart: shift pay",
         "columns": [
           "Input",
-          "Processing",
+          "Process",
           "Output"
         ],
         "rows": [
@@ -2940,7 +2961,10 @@
   {
     "id": "m-u3o2-kk14-005",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03",
+      "U3O1-KK08",
+      "U3O1-KK05"
     ],
     "stem": "The pseudocode below is part of the detailed design for Yapeen Ridge Firewood in Castlemaine. It works out how many truck trips are needed to deliver a day's orders, in the order they were placed. Each order is measured in cubic metres, and the truck carries at most 10 cubic metres. Arrays are indexed from 0. What value is displayed?",
     "options": [
@@ -2972,7 +2996,8 @@
     "id": "m-u3o2-kk14-006",
     "kk": [
       "U3O2-KK14",
-      "U3O1-KK04"
+      "U3O1-KK04",
+      "U3O1-KK03"
     ],
     "stem": "The IPO chart and data dictionary below are part of the detailed design for a module at Dollarbird Flat Caravan Park in Robinvale. The module calculates the cost of a stay. Which change should be made to the data dictionary?",
     "options": [
@@ -2982,9 +3007,9 @@
       "Change the data type of totalCost to Integer"
     ],
     "answer": 2,
-    "explanation": "isMember is an input in the IPO chart but has no entry in the data dictionary, and every data item a module uses should appear there. A guest either is or isn't a member, and the processing tests whether isMember is True, so Boolean suits it.",
+    "explanation": "isMember is an input in the IPO chart but has no entry in the data dictionary, and every data item a module uses should appear there. A guest either is or isn't a member, and the process tests whether isMember is true, so Boolean suits it.",
     "whyWrong": [
-      "isMember is needed, but it has exactly two states and the processing tests it against True, so Boolean suits it better than String.",
+      "isMember is needed, but it has exactly two states and the process tests whether it is true, so Boolean suits it better than String.",
       "Calculating the cost is processing, not a data item, so it doesn't belong in the data dictionary.",
       "",
       "Costs can include cents: 3 nights for a member is $121.50, so totalCost must stay Floating point."
@@ -2998,7 +3023,7 @@
         "title": "IPO chart: cost of a stay",
         "columns": [
           "Input",
-          "Processing",
+          "Process",
           "Output"
         ],
         "rows": [
@@ -3009,7 +3034,7 @@
           ],
           [
             "nights",
-            "If isMember is True, take 10% off totalCost",
+            "If isMember is true, take 10% off totalCost",
             ""
           ],
           [
@@ -3066,7 +3091,7 @@
       "",
       "Affordance is about an element's appearance suggesting how to use it, not about exchanging data with other programs.",
       "Security protects data and accounts; sharing an appointment with the calendar doesn't make anything more secure.",
-      "Portability means running on different platforms; this feature exchanges data with another program."
+      "Portability means running on different platforms and isn't one of the four UX characteristics; this feature exchanges data with another program."
     ],
     "difficulty": 1,
     "source": "textbook"
@@ -3120,7 +3145,8 @@
   {
     "id": "m-u3o2-kk15-004",
     "kk": [
-      "U3O2-KK15"
+      "U3O2-KK15",
+      "U3O2-KK16"
     ],
     "stem": "Passengers aged over 70 who use a booking app for Tarwin Community Transport in Leongatha report that the text is too small to read and that booking a seat takes seven screens. Which change most directly addresses these reports?",
     "options": [
@@ -3195,16 +3221,16 @@
     "options": [
       "Alignment",
       "Contrast",
-      "Consistency",
+      "Usability",
       "Affordance"
     ],
     "answer": 2,
-    "explanation": "The same action appears with a different colour and label on each screen, so volunteers can't learn what to look for. Consistency means one purpose has one appearance and label throughout.",
+    "explanation": "The same action has a different colour and label on each screen, so volunteers can't learn what to look for and must search every time, which makes the app harder to use. Usability (ease of use) is a design principle as well as a UX characteristic; here, applying it means giving the confirm button one colour and one label on every screen.",
     "whyWrong": [
       "Alignment is about lining elements up; the problem is that the same button changes colour and wording.",
       "Contrast makes important elements stand out; each button is a strong colour, and the problem is that one action looks different on each screen.",
       "",
-      "Each version is still a button that looks pressable; the problem is that it changes between screens."
+      "Affordance is a characteristic of user experience, not a design principle, and each version still looks like a button that can be pressed."
     ],
     "difficulty": 1,
     "source": "textbook"
@@ -3240,7 +3266,7 @@
     "stem": "The mock-up below shows a membership form for Whipstick Chess Club in Bendigo. Which design principle is most clearly not applied?",
     "options": [
       "Alignment",
-      "Consistency",
+      "Text formatting",
       "Interoperability",
       "Contrast"
     ],
@@ -3248,8 +3274,8 @@
     "explanation": "The labels and text boxes start at a different horizontal position on each row, so there is no shared edge. Lining them up in two columns would make the form faster to scan and complete.",
     "whyWrong": [
       "",
-      "Every field uses the same type and size of control, so the form is consistent; the problem is where the fields sit.",
-      "Interoperability concerns exchanging data with other systems, which a form's layout doesn't show.",
+      "Nothing on the form points to a text formatting problem; the heading and labels are readable. The problem is where each row starts.",
+      "Interoperability is a characteristic of user experience about exchanging data with other systems, not a design principle, and a form's layout doesn't show it.",
       "Contrast concerns making elements distinct; the problem is that the fields don't line up."
     ],
     "difficulty": 2,
@@ -3355,19 +3381,19 @@
     "kk": [
       "U3O2-KK16"
     ],
-    "stem": "Farida is designing a document editor for Lindqvist Legal in Mildura. For consistency, she gives the \"Delete document\" button exactly the same colour, size and style as the \"Save\" button, and places the two side by side. Why is this a poor design decision?",
+    "stem": "Farida is designing a document editor for Lindqvist Legal in Mildura. To keep the toolbar looking uniform, she gives the \"Delete document\" button exactly the same colour, size and style as the \"Save\" button, and places the two side by side. Why is this a poor design decision?",
     "options": [
       "Two buttons can't share a row without breaking alignment",
       "Delete does another job, so it should contrast with Save",
-      "Consistency requires every button to have its own colour",
+      "Text formatting needs each button label in its own font",
       "Matching styles stops the buttons from looking pressable"
     ],
     "answer": 1,
-    "explanation": "Consistency applies to elements with the same purpose. Delete and Save do different things, and a deleted document may be hard to recover, so Delete should contrast with Save to stop it being pressed by mistake.",
+    "explanation": "Delete and Save do different things, and a deleted document may be hard to recover. Making Delete contrast with Save, for example with a different colour or an outlined style, lets users tell them apart at a glance, so Delete isn't pressed by mistake. Matching styles suit buttons that do the same job, not these two.",
     "whyWrong": [
       "Buttons can share a row and still be aligned; alignment isn't the issue here.",
       "",
-      "Consistency gives the same purpose the same appearance; a unique colour for every button would break it.",
+      "Text formatting doesn't call for a different font on each label; one font for every button label is normal. The risk is that Delete can't be told apart from Save.",
       "Both still look like buttons, so their affordance is unchanged; the issue is telling them apart."
     ],
     "difficulty": 3,
@@ -3413,7 +3439,7 @@
     "whyWrong": [
       "Bold type adds contrast with the item names, but centred prices still don't line up by place value.",
       "",
-      "Consistency across screens doesn't change how the prices line up within this column.",
+      "Matching the font and colour across screens is a text formatting choice, but it doesn't change how the prices line up within this column.",
       "Centring the heading leaves the prices centred, so their digits still don't line up."
     ],
     "difficulty": 2,

@@ -36,7 +36,8 @@
   {
     "id": "c-u4o2-kk01-006",
     "kk": [
-      "U4O2-KK01"
+      "U4O2-KK01",
+      "U3O2-KK01"
     ],
     "type": "basic",
     "front": "How does a software development project support an organisation's goals?",
@@ -130,7 +131,8 @@
   {
     "id": "c-u4o2-kk02-006",
     "kk": [
-      "U4O2-KK02"
+      "U4O2-KK02",
+      "U4O2-KK03"
     ],
     "type": "basic",
     "front": "What security risk does external development create for an organisation's data?",
@@ -142,7 +144,8 @@
   {
     "id": "c-u4o2-kk02-007",
     "kk": [
-      "U4O2-KK02"
+      "U4O2-KK02",
+      "U4O2-KK09"
     ],
     "type": "basic",
     "front": "How can an organisation reduce the risks of external development?",
@@ -168,8 +171,8 @@
     ],
     "type": "compare",
     "front": "Vulnerability versus threat versus risk",
-    "back": "| | Meaning | Example |\n|:--|:--|:--|\n| Vulnerability | A weakness | A former developer's account is still active |\n| Threat | A person or event that could exploit a weakness | The former developer, or an attacker who learns the password |\n| Risk | How likely harm is, combined with how severe it would be | High: the account can still change live code |",
-    "mistake": "A hacker is a threat, not a vulnerability. The vulnerability is the weakness they exploit, such as the account that was never disabled.",
+    "back": "| | Meaning | Example |\n|:--|:--|:--|\n| Vulnerability | A weakness that could be exploited | A former developer's account is still active |\n| Threat | An action, device or event that could harm data or systems, often by exploiting a weakness | The former developer, or an attacker who learns the password, logging in to change code |\n| Risk | How likely harm is, combined with how severe it would be | High: the account can still change live code |",
+    "mistake": "A hacker's attack is the threat, not the vulnerability. The vulnerability is the weakness the attack exploits, such as the account that was never disabled.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -180,8 +183,8 @@
     ],
     "type": "basic",
     "front": "Why is it a vulnerability for development, testing and production to share one environment?",
-    "back": "Untested code and developers' experiments run beside the live system, so one faulty change or misconfiguration can break the live service or expose real data. Developers also end up with access to production data they don't need.",
-    "mistake": "The danger isn't only deliberate misuse. In a shared environment, an honest mistake reaches live users before anyone has tested it.",
+    "back": "Untested code and developers' experiments run on the live system, so one faulty change, such as an update, can bring in bugs or vulnerabilities, corrupt real data or take the service down. Developers also end up with access to production data they don't need.",
+    "mistake": "The danger comes from the change itself reaching live users untested, even an honest one. Asked about going ahead with an update in a combined environment, explain the risks of that update, not the risks of leaving software un-updated.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -203,8 +206,8 @@
     ],
     "type": "reverse",
     "front": "Insider threat",
-    "back": "A threat from someone with legitimate access, such as an employee or contractor, who harms the organisation deliberately or by accident.",
-    "mistake": "Insider threats aren't only malicious staff. A trusted developer who makes a storage folder public by mistake is an insider threat too.",
+    "back": "A threat that comes from inside the organisation: an action by someone with legitimate access, such as an employee or contractor, that could harm its systems, code or data.",
+    "mistake": "A phishing campaign run by outsiders isn't an insider threat just because an employee clicks the link. An insider threat comes from someone with legitimate access, such as a developer whose change to the development environment's settings makes its code and data public.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -222,7 +225,8 @@
   {
     "id": "c-u4o2-kk03-007",
     "kk": [
-      "U4O2-KK03"
+      "U4O2-KK03",
+      "U4O1-KK04"
     ],
     "type": "basic",
     "front": "Why do unpatched development tools and third-party libraries put an organisation at risk?",
@@ -258,14 +262,11 @@
     "kk": [
       "U4O2-KK04"
     ],
-    "type": "reverse",
-    "front": "Identity and access management (IAM)",
-    "back": "The policies and tools that give each person their own account, confirm who they are when they log in, and control what each account may access, updating that access as people join, change roles or leave.",
-    "aliases": [
-      "IAM",
-      "Identity and access management"
-    ],
-    "difficulty": 1,
+    "type": "basic",
+    "front": "How does robust identity and access management protect a development environment?",
+    "back": "It confirms each developer's identity when they log in to their own account, so only authorised people reach the code. It then limits each account to the code, modules and data that person's duties need, with administrator rights only for the few who need them, and changes access as soon as someone changes role or leaves.",
+    "mistake": "Answers about protecting confidential customer data miss the point: that data shouldn't be in a development environment at all. There, identity and access management protects the code and development data by authenticating developers and limiting what each can reach.",
+    "difficulty": 2,
     "source": "textbook"
   },
   {
@@ -298,9 +299,10 @@
     ],
     "type": "basic",
     "front": "How does version control act as a security control in software development?",
-    "back": "It records every change with who made it and when, so unauthorised or faulty changes can be traced and reviewed, and the code can be rolled back to a known good version.",
+    "back": "It records every change with who made it and when, so unauthorised or faulty changes can be traced and reviewed, everyone works from the current version, and the code can be rolled back to a working version when errors can't be fixed.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Version control isn't a backup. It keeps the code's history so changes can be traced and undone; protecting data against loss is the job of backups."
   },
   {
     "id": "c-u4o2-kk04-007",
@@ -321,7 +323,7 @@
     "type": "compare",
     "front": "Encryption at rest versus encryption in transit",
     "back": "| | At rest | In transit |\n|:--|:--|:--|\n| Protects | Stored data: databases, backups, laptops | Data moving across a network |\n| Guards against | A stolen or copied drive being read | Data being intercepted on the way |",
-    "mistake": "Encryption doesn't stop data being stolen. It makes stolen data unreadable to anyone without the key.",
+    "mistake": "Encryption doesn't stop data being copied or intercepted; it makes the copy unreadable without the key. That is why sensitive data an application stores should be encrypted: a backup only guards against losing it.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -352,7 +354,8 @@
   {
     "id": "c-u4o2-kk05-004",
     "kk": [
-      "U4O2-KK05"
+      "U4O2-KK05",
+      "U4O2-KK10"
     ],
     "type": "basic",
     "front": "How are threats prioritised in threat modelling?",
@@ -364,11 +367,12 @@
   {
     "id": "c-u4o2-kk05-005",
     "kk": [
-      "U4O2-KK05"
+      "U4O2-KK05",
+      "U4O2-KK09"
     ],
     "type": "reverse",
     "front": "Threat mitigation",
-    "back": "Reducing a threat's likelihood or impact by applying a control, such as encrypting a data flow that could be intercepted, or requiring multi-factor authentication on accounts whose passwords could be guessed.",
+    "back": "Applying controls that reduce a threat's likelihood or impact, or eliminate the threat, such as encrypting a data flow that could be intercepted, or requiring multi-factor authentication on accounts whose passwords could be guessed.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -412,7 +416,7 @@
     ],
     "type": "basic",
     "front": "What is a criterion for evaluating the security of development practices?",
-    "back": "A specific, checkable standard used to judge how well an organisation's software development practices protect its code, data and systems, such as 'Every code repository account requires multi-factor authentication'.",
+    "back": "A statement or question used to judge how well an organisation's software development practices protect its code, data and systems. It must be specific enough for evidence to show how far it is met, and may be set out as dot points. Examples: 'Every code repository account requires multi-factor authentication'; 'How consistently is each change reviewed before it is merged?'",
     "mistake": "A criterion isn't a vague goal such as 'the code is secure'. It must be specific enough that evidence can show whether it is met.",
     "difficulty": 1,
     "source": "textbook"
@@ -424,7 +428,7 @@
     ],
     "type": "basic",
     "front": "What makes a criterion for evaluating the security of development practices useful?",
-    "back": "It is:\n- **specific**: it names one practice\n- **measurable**: evidence can show whether it is met\n- **relevant**: it is linked to a real risk to the organisation's code or data\n- **realistic** for the organisation to meet",
+    "back": "It is:\n- **specific**: it names the practice or security controls being judged\n- **measurable**: evidence can show whether, or how far, it is met\n- **relevant**: it is linked to a real risk to the organisation's code or data\n- **realistic** for the organisation to meet",
     "mistake": "'Developers follow good security' can't be tested. 'Access is removed on each leaver's last day' can be checked against records.",
     "difficulty": 2,
     "source": "textbook"
@@ -437,7 +441,7 @@
     ],
     "type": "compare",
     "front": "Security control versus security evaluation criterion",
-    "back": "| | Control | Criterion |\n|:--|:--|:--|\n| What it is | A measure that protects code or data | A standard used to judge whether practices are secure |\n| Example | Multi-factor authentication | All repository accounts require multi-factor authentication |\n| Used when | Securing the practices | Evaluating the practices |",
+    "back": "| | Control | Criterion |\n|:--|:--|:--|\n| What it is | Hardware, software, equipment or a procedure that helps protect people, systems and data | A standard used to judge whether practices are secure |\n| Example | Multi-factor authentication | All repository accounts require multi-factor authentication |\n| Used when | Securing the practices | Evaluating the practices |",
     "mistake": "Listing a control ('MFA') doesn't answer a question that asks for a criterion. A criterion states the standard a practice must meet, so the practice can be judged against it.",
     "difficulty": 2,
     "source": "textbook"
@@ -457,7 +461,8 @@
   {
     "id": "c-u4o2-kk06-005",
     "kk": [
-      "U4O2-KK06"
+      "U4O2-KK06",
+      "U4O2-KK04"
     ],
     "type": "basic",
     "front": "State three criteria for evaluating how securely an organisation handles its source code.",
@@ -468,12 +473,13 @@
   {
     "id": "c-u4o2-kk06-006",
     "kk": [
-      "U4O2-KK06"
+      "U4O2-KK06",
+      "U4O2-KK04"
     ],
     "type": "basic",
-    "front": "State two criteria for evaluating how well an organisation separates its development environments.",
+    "front": "State two criteria for evaluating how well an organisation separates its development, testing and production environments.",
     "back": "Any two:\n- development, testing and production run in separate environments\n- developers can't change production directly; changes reach it only through a controlled release\n- test environments use made-up or de-identified data, not live personal data",
-    "mistake": "Having a separate test server isn't enough if it holds a full copy of live customer data. The data in it must be protected too.",
+    "mistake": "A separate test server isn't enough if it holds a copy of live customer data. Real personal information shouldn't be in development or test environments at all; they should use made-up or de-identified data.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -503,7 +509,8 @@
   {
     "id": "c-u4o2-kk07-001",
     "kk": [
-      "U4O2-KK07"
+      "U4O2-KK07",
+      "U3O2-KK10"
     ],
     "type": "basic",
     "front": "What does the Privacy Act 1988 (Cwlth) regulate?",
@@ -515,7 +522,8 @@
   {
     "id": "c-u4o2-kk07-002",
     "kk": [
-      "U4O2-KK07"
+      "U4O2-KK07",
+      "U3O2-KK10"
     ],
     "type": "compare",
     "front": "Privacy Act 1988 (Cwlth) versus Privacy and Data Protection Act 2014 (Vic)",
@@ -527,7 +535,8 @@
   {
     "id": "c-u4o2-kk07-003",
     "kk": [
-      "U4O2-KK07"
+      "U4O2-KK07",
+      "TERMS"
     ],
     "type": "reverse",
     "front": "Health Records Act 2001 (Vic)",
@@ -562,7 +571,7 @@
     "back": "- Patch applications\n- Patch operating systems\n- Multi-factor authentication\n- Restrict administrative privileges\n- Application control\n- Restrict Microsoft Office macros\n- User application hardening\n- Regular backups",
     "mistake": "Encryption, firewalls and antivirus software are useful controls, but none of them is one of the eight strategies.",
     "difficulty": 3,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u4o2-kk07-006",
@@ -583,11 +592,12 @@
   {
     "id": "c-u4o2-kk07-007",
     "kk": [
-      "U4O2-KK07"
+      "U4O2-KK07",
+      "TERMS"
     ],
     "type": "compare",
-    "front": "Legislation versus a security framework",
-    "back": "| | Legislation | Framework |\n|:--|:--|:--|\n| Examples | Privacy Act 1988 (Cwlth), Health Records Act 2001 (Vic) | Essential Eight, Information Security Manual |\n| Made by | A parliament | A government agency or standards body |\n| Compliance | Compulsory for those it covers; breaches can bring penalties | Voluntary guidance, unless a contract or policy requires it |",
+    "front": "Legislation versus an industry framework",
+    "back": "| | Legislation | Industry framework |\n|:--|:--|:--|\n| Examples | Copyright Act 1968 (Cwlth), Privacy Act 1988 (Cwlth) | Essential Eight, Information Security Manual (ISM) |\n| Made by | A parliament | A government agency or standards body |\n| Compliance | Compulsory for those it covers; breaches can bring penalties | Voluntary guidelines, unless a contract or policy requires them |",
     "mistake": "Following a framework doesn't by itself meet legal obligations, and meeting the law doesn't mean every control a framework recommends is in place.",
     "difficulty": 2,
     "source": "textbook"
@@ -596,7 +606,7 @@
     "id": "c-u4o2-kk07-008",
     "kk": [
       "U4O2-KK07",
-      "U4O2-KK08"
+      "TERMS"
     ],
     "type": "basic",
     "front": "Under the Privacy Act 1988 (Cwlth), what must a covered organisation do after a data breach that is likely to cause serious harm?",
@@ -608,11 +618,12 @@
   {
     "id": "c-u4o2-kk08-001",
     "kk": [
-      "U4O2-KK08"
+      "U4O2-KK08",
+      "TERMS"
     ],
     "type": "compare",
     "front": "Legal issue versus ethical issue",
-    "back": "| | Legal issue | Ethical issue |\n|:--|:--|:--|\n| Question | Does this break a law? | Is this the right thing to do? |\n| Judged against | Legislation | Values such as honesty, fairness and care for others |\n| Consequence | Penalties or legal action | Harm to stakeholders and loss of trust |",
+    "back": "| | Legal issue | Ethical issue |\n|:--|:--|:--|\n| Question | Does this break a law? | Does this go against moral standards, principles or what people reasonably expect? |\n| Judged against | Legislation | Values such as honesty, fairness and care for others |\n| Consequence | Penalties or legal action | Harm to the individuals or organisations affected, and loss of trust |",
     "mistake": "Legal doesn't mean ethical. No law stops a developer committing AI-generated code they haven't checked, yet doing so knowingly puts users at risk.",
     "difficulty": 1,
     "source": "textbook"
@@ -626,15 +637,14 @@
     "type": "basic",
     "front": "Why is over-reliance on AI-generated code an ethical issue for a developer?",
     "back": "The developer stays responsible for the code they commit. AI output can contain errors, security vulnerabilities or copied code, so using it unchecked puts users and their data at risk without their knowledge.",
-    "mistake": "'The AI wrote it' is no defence. The developer and organisation that release the code are accountable for its flaws.",
+    "mistake": "Using AI to write code isn't unethical in itself. The issue is relying on it without checking, and 'the AI wrote it' is no defence: the developer and organisation that release the code are accountable for its flaws.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u4o2-kk08-003",
     "kk": [
-      "U4O2-KK08",
-      "U4O2-KK07"
+      "U4O2-KK08"
     ],
     "type": "basic",
     "front": "Why is failing to acknowledge reused code an ethical issue?",
@@ -670,13 +680,14 @@
   {
     "id": "c-u4o2-kk08-006",
     "kk": [
-      "U4O2-KK08"
+      "U4O2-KK08",
+      "TERMS"
     ],
     "type": "cloze",
-    "front": "An ethical issue arises when a development decision could {{harm stakeholders}} or treat them unfairly, even when {{no law is broken}}.",
-    "back": "Ethics asks whether a choice is right for everyone affected, such as users, clients, colleagues and the public, not only whether it is legal.",
+    "front": "An ethical issue arises when a development decision conflicts with {{moral standards}}, principles or what people reasonably expect, and could affect individuals or organisations, even when {{no law is broken}}.",
+    "back": "Ethics asks whether a choice is right for everyone it affects, such as users, clients, colleagues, the organisation and the public, not only whether it is legal.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u4o2-kk08-007",
@@ -706,7 +717,8 @@
   {
     "id": "c-u4o2-kk09-001",
     "kk": [
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04"
     ],
     "type": "basic",
     "front": "How does least privilege limit the damage when a developer's account is stolen?",
@@ -755,7 +767,9 @@
   {
     "id": "c-u4o2-kk09-006",
     "kk": [
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK07",
+      "U3O2-KK11"
     ],
     "type": "cloze",
     "front": "Backups don't stop an attack, but they reduce its {{impact}} by letting code and data be {{restored}}, provided restores are {{tested}} regularly.",
@@ -819,7 +833,7 @@
     ],
     "type": "basic",
     "front": "How should an organisation prioritise several security recommendations?",
-    "back": "By the risk each one addresses: deal first with the weaknesses that have the highest likelihood and impact, favouring quick, low-cost fixes for serious risks, such as turning on multi-factor authentication that is already available.",
+    "back": "By the risk each one addresses, as a risk management plan does: rate each weakness by its likelihood and impact, and deal first with the highest. Among serious risks, favour quick, low-cost fixes, such as turning on multi-factor authentication that is already available.",
     "mistake": "The most expensive recommendation isn't automatically the most important. A free setting change can remove a serious risk.",
     "difficulty": 2,
     "source": "textbook"
@@ -828,13 +842,15 @@
     "id": "c-u4o2-kk10-004",
     "kk": [
       "U4O2-KK10",
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04"
     ],
     "type": "basic",
     "front": "What should a recommendation to introduce mandatory code review specify?",
     "back": "That every change is approved by a developer other than its author before it is merged, that the repository blocks unapproved merges, what reviewers check (such as secrets, validation and AI-generated code), and which risk this reduces.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Code review is a security control, not a strategy. In 2025, describing a control when the question asked for a strategy to improve secure development practice earned no marks; give developer training, onboarding/induction or a risk management plan instead."
   },
   {
     "id": "c-u4o2-kk10-005",
@@ -843,7 +859,7 @@
     ],
     "type": "cloze",
     "front": "When a question asks you to {{recommend}}, choose a course of action and give a {{reason}} that links it to the scenario.",
-    "back": "A list of options with no choice made, or a choice with no reason, doesn't do what the command term asks. If the question asks for two recommendations, give two, each with its own reason.",
+    "back": "A list of options with no choice made, or a choice with no reason, doesn't do what the command term asks. If the question asks for two recommendations, give two different ones, each with its own reason: the same idea reworded scores only once.",
     "mistake": "Listing several options without choosing between them doesn't answer a 'recommend' question. Commit to a choice and give its reason.",
     "difficulty": 1,
     "source": "exam-convention"
@@ -864,7 +880,9 @@
     "id": "c-u4o2-kk10-007",
     "kk": [
       "U4O2-KK10",
-      "U4O2-KK08"
+      "U4O2-KK08",
+      "U3O1-KK01",
+      "U4O1-KK04"
     ],
     "type": "basic",
     "front": "State four rules a development team could set for its use of AI coding assistants.",

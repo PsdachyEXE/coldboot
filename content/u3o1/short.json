@@ -102,11 +102,13 @@
     "id": "s-u3o1-kk02-001",
     "kk": [
       "U3O1-KK02",
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O2-KK06",
+      "U3O2-KK07"
     ],
     "commandTerm": "classify",
     "marks": 4,
-    "prompt": "Wattlebank Physio, a Ballarat clinic, has listed these statements for its new booking program.\n\n1. The program sends each client an SMS reminder the day before their appointment.\n2. Reception staff can book an appointment in no more than four clicks.\n3. The program must be ready before the new financial year begins on 1 July.\n4. The program will handle bookings for the Ballarat clinic only, not the planned Ararat branch.\n\nClassify each statement as a functional requirement, a non-functional requirement, a constraint or scope.",
+    "prompt": "Wattlebank Physio, a Ballarat clinic, has listed these statements for its new booking program.\n\n1. The program sends each client an SMS reminder 24 hours before their appointment.\n2. The program keeps running, without crashing or losing bookings, throughout clinic opening hours.\n3. The program must be ready before the new financial year begins on 1 July.\n4. The program will handle bookings for the Ballarat clinic only, not the planned Ararat branch.\n\nClassify each statement as a functional requirement, a non-functional requirement, a constraint or scope.",
     "points": [
       {
         "text": "Statement 1: functional requirement",
@@ -125,8 +127,8 @@
         "marks": 1
       }
     ],
-    "model": "1. Functional requirement: sending reminders is a task the program performs.\n2. Non-functional requirement: it describes how easy the program is to use (usability).\n3. Constraint: the deadline limits the time available to develop the program.\n4. Scope: it sets a boundary on what the program will cover.",
-    "mistake": "Statement 2 contains a number, but it describes a quality of the program (ease of use), not a task, so it is non-functional.",
+    "model": "1. Functional requirement: sending the reminder is a task the program performs; the 24-hour timing is part of that task.\n2. Non-functional requirement: it describes how dependably the program works (reliability), not a task it performs.\n3. Constraint: the deadline limits the time available to develop the program (an economic constraint).\n4. Scope: it sets a boundary on what the program will cover.",
+    "mistake": "A number doesn't make a statement non-functional. Statement 1 includes a time (24 hours), but sending the reminder is still a task the program performs, so it is functional.",
     "source": "textbook"
   },
   {
@@ -163,7 +165,8 @@
   {
     "id": "s-u3o1-kk02-003",
     "kk": [
-      "U3O1-KK02"
+      "U3O1-KK02",
+      "U3O2-KK05"
     ],
     "commandTerm": "explain",
     "marks": 4,
@@ -194,8 +197,9 @@
     "id": "s-u3o1-kk03-001",
     "kk": [
       "U3O1-KK03",
+      "U3O2-KK14",
       "U3O1-KK04",
-      "U3O1-KK07"
+      "U3O1-KK08"
     ],
     "commandTerm": "explain",
     "marks": 4,
@@ -268,7 +272,8 @@
   {
     "id": "s-u3o1-kk03-002",
     "kk": [
-      "U3O1-KK03"
+      "U3O1-KK03",
+      "U3O2-KK14"
     ],
     "commandTerm": "recommend",
     "marks": 4,
@@ -292,7 +297,7 @@
       }
     ],
     "model": "1. A mock-up. It shows how the entry screen will look, with the placement of each label, text box and button, so the weighbridge operators can suggest changes before any coding effort is spent.\n2. Pseudocode. It sets out the exact sequence of steps for calculating the payment, including the selection that adds the bonus only when the protein level is above 11.5%, so the programmer can code it directly and the logic can be checked by hand first.",
-    "mistake": "An IPO chart would list the payment calculation as processing, but it wouldn't show the order of the steps or the condition for the bonus.",
+    "mistake": "Recommending an IPO chart for need 2. It could note that the bonus applies above 11.5% protein, but it gives only an overview of the processing, not the exact sequence of steps the programmer needs.",
     "source": "textbook"
   },
   {
@@ -393,8 +398,8 @@
         "marks": 1
       }
     ],
-    "model": "`memberPhone` should be a String: 0412 345 678 starts with 0 and contains spaces, which an Integer can't keep, and no arithmetic is done on it. `monthlyFee` should be Floating point, because $54.95 includes cents and is used to calculate what members owe. `visitsThisMonth` should be an Integer, because visits are whole counts. `hasLocker` should be Boolean, because each member either has a locker or doesn't, so True or False is enough.",
-    "mistake": "Naming the data type isn't enough for 'justify'. Each type needs a reason tied to that data item.",
+    "model": "`memberPhone` should be a String: 0412 345 678 starts with 0 and contains spaces, which an Integer can't keep, and no arithmetic is done on it. `monthlyFee` should be Floating point, because $54.95 includes cents and is used to calculate what members owe. `visitsThisMonth` should be an Integer, because visits are whole counts. `hasLocker` should be Boolean, because each member either has a locker or doesn't, so true or false is enough.",
+    "mistake": "Naming a type without a reason tied to that data item, or writing an abbreviation such as Float or Bool, which the 2025 examiners didn't accept. Give each type's full name (floating point, Boolean) and a reason drawn from the example value.",
     "source": "textbook",
     "figures": [
       {
@@ -461,7 +466,7 @@
         "marks": 1
       },
       {
-        "text": "Justifies it: a Boolean holds only two values (True or False), so it can't represent three statuses; a Character or String can hold any of the three",
+        "text": "Justifies it: a Boolean holds only two values (true or false), so it can't represent three statuses; a Character or String can hold any of the three",
         "marks": 1
       },
       {
@@ -473,7 +478,7 @@
         "marks": 1
       }
     ],
-    "model": "Attendance status: Character, storing P for present, L for late or A for absent. A Boolean can hold only True or False, which was enough for 'attended or not', but the coach now needs three statuses. A single-letter code holds any of them, and the program can test it with a condition such as `IF status = \"L\" THEN`.\n\n`distanceRowed`: Floating point. The coach wants distances such as 12.5 km, and an Integer can't store the .5. Floating point keeps the fractional part, so totals and averages of each rower's distance stay accurate.",
+    "model": "Attendance status: Character, storing P for present, L for late or A for absent. A Boolean can hold only true or false, which was enough for 'attended or not', but the coach now needs three statuses. A single-letter code holds any of them, and the program can test it with a condition such as `IF status = \"L\" THEN`.\n\n`distanceRowed`: Floating point. The coach wants distances such as 12.5 km, and an Integer can't store the .5. Floating point keeps the fractional part, so totals and averages of each rower's distance stay accurate.",
     "mistake": "Keeping a Boolean because attendance sounds like a yes-or-no question. A Boolean has exactly two values, so once a third status is needed it can't be a Boolean.",
     "source": "textbook"
   },
@@ -510,11 +515,12 @@
     "id": "s-u3o1-kk05-002",
     "kk": [
       "U3O1-KK05",
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U3O1-KK08"
     ],
     "commandTerm": "determine",
     "marks": 3,
-    "prompt": "Quillpoint Theatre in Ballarat stores its seating plan in the two-dimensional array `seats[row][col]` shown below, where True means the seat is booked. Arrays are indexed from 0. Determine the output of the algorithm, and explain why row 2 is not the row displayed.",
+    "prompt": "Quillpoint Theatre in Ballarat stores its seating plan in the two-dimensional array `seats[row][col]` shown below, where `True` means the seat is booked. Arrays are indexed from 0. Determine the output of the algorithm, and explain why row 2 is not the row displayed.",
     "points": [
       {
         "text": "The output names row 1 (`bestRow` is 1)",
@@ -531,7 +537,7 @@
     ],
     "model": "Row 0 has 1 free seat; 1 > 0, so `bestFree` becomes 1 and `bestRow` becomes 0. Row 1 has 3 free seats; 3 > 1, so `bestFree` becomes 3 and `bestRow` becomes 1. Row 2 also has 3 free seats, but 3 > 3 is false, so nothing changes. The algorithm displays `Row 1: 3 free`. Row 2 isn't displayed because the condition uses > rather than >=, so a later row that only equals the best count doesn't replace it.",
     "mistake": "With >, the first row to reach the highest count is kept and a tie doesn't replace it. Changing > to >= on line 11 would make the algorithm display row 2.",
-    "source": "exam-convention",
+    "source": "textbook",
     "figures": [
       {
         "id": "seats-array",
@@ -583,7 +589,7 @@
     ],
     "commandTerm": "justify",
     "marks": 3,
-    "prompt": "A solar farm in north-west Victoria records the energy generated, in kilowatt hours (e.g. 18.4), by each of its 12 rows of panels for each hour from 6 am to 8 pm (14 hours) every day. A developer plans to store each day's readings in a two-dimensional array, `energy[panelRow][hour]`.\n\nJustify the developer's choice of a two-dimensional array for this data.",
+    "prompt": "A solar farm in north-west Victoria records the energy generated, in kilowatt hours (e.g. 18.4), by each of its 12 rows of panels for each hour from 6 am to 8 pm (14 hours) every day. A developer plans to store each day's readings in a two-dimensional array, `energy[panelRow][hour]`. Arrays are indexed from 0, so `hour` 0 holds the reading for 6 am to 7 am.\n\nJustify the developer's choice of a two-dimensional array for this data.",
     "points": [
       {
         "text": "Each reading is identified by two things, its panel row and its hour, which map to the array's row index and column index (12 rows by 14 columns, 168 readings)",
@@ -605,7 +611,8 @@
   {
     "id": "s-u3o1-kk06-001",
     "kk": [
-      "U3O1-KK06"
+      "U3O1-KK06",
+      "U4O1-KK02"
     ],
     "commandTerm": "justify",
     "marks": 3,
@@ -631,7 +638,8 @@
   {
     "id": "s-u3o1-kk06-002",
     "kk": [
-      "U3O1-KK06"
+      "U3O1-KK06",
+      "U4O1-KK02"
     ],
     "commandTerm": "explain",
     "marks": 2,
@@ -652,7 +660,8 @@
   {
     "id": "s-u3o1-kk06-003",
     "kk": [
-      "U3O1-KK06"
+      "U3O1-KK06",
+      "U4O1-KK02"
     ],
     "commandTerm": "recommend",
     "marks": 3,
@@ -663,7 +672,7 @@
         "marks": 1
       },
       {
-        "text": "Justifies it from the scenario: each entry is a free-text message of varying length for a person to read in a text editor, not a record of fixed fields that a program splits apart, so the program only needs to add each message as a new line",
+        "text": "Justifies it from the scenario: plain text is unstructured, which suits free-text messages of varying length that a person reads in a text editor; there are no fixed fields for a program to split, so the program only needs to add each message as a new line",
         "marks": 1
       },
       {
@@ -675,14 +684,15 @@
         "marks": 1
       }
     ],
-    "model": "A plain text file. Each log entry is a message written for a person: the entries vary in length and wording, have no fixed fields, and are read line by line by the technician in a text editor, so the program only needs to add each new message as a line at the end of the file. A CSV file suits records with fixed fields, and these messages contain commas, such as 'not responding, restart attempted', which would split one message into several fields unless every message were enclosed in quotes. XML would wrap every message in tags, making the log larger and harder to read, when no other program needs to interpret it.",
+    "model": "A plain text file. Plain text is an unstructured data source, which suits this log: each entry is a message written for a person, the entries vary in length and wording, have no fixed fields, and are read line by line by the technician in a text editor, so the program only needs to add each new message as a line at the end of the file. A CSV file is a structured source, suited to records with fixed fields, and these messages contain commas, such as 'not responding, restart attempted', which would split one message into several fields unless every message were enclosed in quotes. XML would wrap every message in tags, making the log larger and harder to read, when no other program needs to interpret it.",
     "mistake": "Choosing CSV for anything saved one line at a time. CSV suits records with fixed fields that a program splits apart; free-text messages that a person reads suit plain text.",
     "source": "textbook"
   },
   {
     "id": "s-u3o1-kk07-001",
     "kk": [
-      "U3O1-KK07"
+      "U3O1-KK07",
+      "U4O1-KK03"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -803,7 +813,8 @@
   {
     "id": "s-u3o1-kk08-001",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -823,16 +834,18 @@
       }
     ],
     "model": "If the surcharge changes, for example to 15%, the developer currently has to find and edit all six copies of `0.1`, and missing one would give inconsistent totals. With a constant such as `surchargeRate` set once, the change is made in one place. The name also tells anyone reading the code what the value is for, whereas a bare `0.1` could mean anything. A global variable would also be available everywhere, but any module could change its value while the program runs, and then every surcharge calculation would be wrong. A constant's value can't be changed at runtime, so the rate is protected.",
+    "mistake": "Treating a global variable as fixed because every module shares it. Any module can change a global while the program runs; only a constant's value can't change without editing the code.",
     "source": "textbook"
   },
   {
     "id": "s-u3o1-kk08-002",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "commandTerm": "justify",
     "marks": 3,
-    "prompt": "Breakwater Parking in Warrnambool is building a kiosk program. The kiosk must ask a customer to choose a four-digit PIN for their parking session and keep asking until a valid four-digit PIN is entered. The number of attempts a customer will need is not known in advance. Justify the use of a post-test loop for this task rather than a counted loop.",
+    "prompt": "Breakwater Parking in Warrnambool is building a kiosk program. The kiosk must ask a customer to choose a four-digit PIN for their parking session and keep asking until a valid four-digit PIN is entered. The number of attempts a customer will need is not known in advance. Justify the use of a post-test loop for this task rather than a FOR loop.",
     "points": [
       {
         "text": "The customer must be asked at least once before there is a PIN to check, and a post-test loop always runs its body at least once.",
@@ -843,17 +856,18 @@
         "marks": 1
       },
       {
-        "text": "A counted loop runs a fixed number of times, but the number of attempts isn't known in advance, so it could stop before a valid PIN is entered or keep asking after one is entered.",
+        "text": "A FOR loop repeats a set number of times, but the number of attempts isn't known in advance, so it could stop before a valid PIN is entered or keep asking after one is entered.",
         "marks": 1
       }
     ],
-    "model": "The kiosk can't check a PIN until the customer has entered one, so the request must happen at least once. A post-test loop such as `REPEAT ... UNTIL` runs its body before testing the condition, which guarantees the first request. Because the condition is tested after each entry, the loop keeps asking until a valid PIN is entered and then stops. A counted loop such as `FOR attempt ← 1 TO 3` repeats a fixed number of times, but nobody knows how many attempts a customer will need, so it could end before a valid PIN is entered or keep asking after one has been accepted.",
+    "model": "The kiosk can't check a PIN until the customer has entered one, so the request must happen at least once. A post-test loop such as `REPEAT ... UNTIL` runs its body before testing the condition, which guarantees the first request. Because the condition is tested after each entry, the loop keeps asking until a valid PIN is entered and then stops. A FOR loop such as `FOR attempt ← 1 TO 3` repeats a set number of times, but nobody knows how many attempts a customer will need, so it could end before a valid PIN is entered or keep asking after one has been accepted.",
     "source": "textbook"
   },
   {
     "id": "s-u3o1-kk08-003",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "commandTerm": "justify",
     "marks": 3,
@@ -890,14 +904,14 @@
     ],
     "commandTerm": "complete",
     "marks": 4,
-    "prompt": "Spokesmith Bike Hire in Bright is building a hire program. Complete the table by writing a suitable identifier for each item, using the convention given.",
+    "prompt": "Spokesmith Bike Hire in Bright is building a hire program. The team's style guide sets one naming convention for each kind of solution element, shown in the table. Complete the table by writing a suitable identifier for each item, using the convention given.",
     "points": [
       {
-        "text": "Postcode text box: a control prefix such as `txt` followed by camel case, e.g. `txtPostcode`.",
+        "text": "Postcode text box: a control prefix such as `txt` followed by camel casing, e.g. `txtPostcode`.",
         "marks": 1
       },
       {
-        "text": "Helmet variable: a Boolean prefix such as `bln` or `bool` followed by camel case, e.g. `blnHelmetHired`.",
+        "text": "Helmet check box: a control prefix such as `chk` followed by camel casing, e.g. `chkHelmet`.",
         "marks": 1
       },
       {
@@ -905,12 +919,12 @@
         "marks": 1
       },
       {
-        "text": "Late fee function: camel case starting with a lowercase letter, e.g. `calculateLateFee`.",
+        "text": "Late fee function: camel casing starting with a lowercase letter, e.g. `calculateLateFee`.",
         "marks": 1
       }
     ],
-    "model": "- Postcode text box: `txtPostcode`\n- Helmet hired: `blnHelmetHired`\n- Total hire cost: `total_hire_cost`\n- Late-return fee function: `calculateLateFee`",
-    "mistake": "A text box is a control, so it takes a control prefix (`txt`), not a data type prefix such as `str`.",
+    "model": "- Postcode text box: `txtPostcode`\n- Helmet check box: `chkHelmet`\n- Total hire cost: `total_hire_cost`\n- Late-return fee function: `calculateLateFee`",
+    "mistake": "A text box or check box is a control, so it takes a control prefix (`txt`, `chk`), not a data type prefix such as `str` or `bln`, even though a check box holds a true or false value.",
     "source": "textbook",
     "figures": [
       {
@@ -924,22 +938,22 @@
         "rows": [
           [
             "Text box where the customer types their postcode",
-            "Hungarian notation with camel case",
+            "Interface controls: Hungarian notation with camel casing",
             ""
           ],
           [
-            "Boolean variable recording whether a helmet is hired",
-            "Hungarian notation with camel case",
+            "Check box the customer ticks to hire a helmet",
+            "Interface controls: Hungarian notation with camel casing",
             ""
           ],
           [
             "Floating point variable holding the total hire cost",
-            "Snake case",
+            "Variables: snake casing",
             ""
           ],
           [
             "Function that calculates the late-return fee",
-            "Camel case",
+            "Functions: camel casing",
             ""
           ]
         ]
@@ -953,7 +967,7 @@
     ],
     "commandTerm": "explain",
     "marks": 2,
-    "prompt": "Three developers at Otway Ridge Software share the code for a club membership program. One names variables in snake case, one in camel case, and one uses Hungarian notation, and the code now contains both `memberCount` and `member_count`. Explain one problem this causes and how an agreed naming convention would address it.",
+    "prompt": "Three developers at Otway Ridge Software share the code for a club membership program. One names variables using snake casing, one using camel casing, and one using Hungarian notation, and the code now contains both `memberCount` and `member_count`. Explain one problem this causes and how an agreed naming convention would address it.",
     "points": [
       {
         "text": "Problem: the mixed styles make the code harder to read and maintain, and near-identical names such as `memberCount` and `member_count` can be confused, so a developer may update one while the program uses the other, causing a logic error.",
@@ -964,8 +978,9 @@
         "marks": 1
       }
     ],
-    "model": "Because `memberCount` and `member_count` both exist, a developer can easily update one while the program displays the other, giving a wrong member total that is hard to trace. The mix of styles also slows anyone reading a colleague's code. If the team agrees on one convention, such as camel case for variables and Hungarian prefixes for controls, each item has a single predictable name, duplicates like these are avoided, and any of the three developers can read and debug the others' modules.",
-    "source": "textbook"
+    "model": "Because `memberCount` and `member_count` both exist, a developer can easily update one while the program displays the other, giving a wrong member total that is hard to trace. The mix of styles also slows anyone reading a colleague's code. If the team agrees on one convention, such as camel casing for variables and Hungarian prefixes for controls, each item has a single predictable name, duplicates like these are avoided, and any of the three developers can read and debug the others' modules.",
+    "source": "textbook",
+    "mistake": "Naming a new identifier in your own preferred style undoes the convention. Once a team agrees on one, every name follows it, including names added later: with camel casing agreed, a new variable is `renewalDate`, not `renewal_date`."
   },
   {
     "id": "s-u3o1-kk09-003",
@@ -977,7 +992,7 @@
     "prompt": "Bo is building the entry form for a Castlemaine fun run. The form has a text box where a runner types their age, a check box for a concession entry and a label that displays the entry fee. Bo's code also has variables that hold the age, once it is converted to an Integer, and the fee.\n\nRecommend a naming convention for the form's controls, and justify your recommendation with reference to Bo's form.",
     "points": [
       {
-        "text": "Recommends Hungarian notation for the controls: a prefix for the control type followed by camel case, e.g. `txtAge`, `chkConcession` and `lblFee`.",
+        "text": "Recommends Hungarian notation for the controls: a prefix for the control type followed by camel casing, e.g. `txtAge`, `chkConcession` and `lblFee`.",
         "marks": 1
       },
       {
@@ -989,14 +1004,15 @@
         "marks": 1
       }
     ],
-    "model": "Bo should name the controls using Hungarian notation, with a prefix that shows the control type followed by camel case: `txtAge` for the age text box, `chkConcession` for the concession check box and `lblFee` for the fee label. The age appears twice in Bo's code, once in the text box and once as the Integer variable that holds the converted age. With the prefix, `txtAge` can't be confused with `age`, so Bo won't do arithmetic on the text box's String by mistake. The prefix also tells anyone reading the code what kind of control each name refers to, for example that `chkConcession` is either ticked or not and that `lblFee` only shows a value the program writes to it, so they don't need to open the form to find out.",
+    "model": "Bo should name the controls using Hungarian notation, with a prefix that shows the control type followed by camel casing: `txtAge` for the age text box, `chkConcession` for the concession check box and `lblFee` for the fee label. The age appears twice in Bo's code, once in the text box and once as the Integer variable that holds the converted age. With the prefix, `txtAge` can't be confused with `age`, so Bo won't do arithmetic on the text box's String by mistake. The prefix also tells anyone reading the code what kind of control each name refers to, for example that `chkConcession` is either ticked or not and that `lblFee` only shows a value the program writes to it, so they don't need to open the form to find out.",
     "source": "textbook",
     "mistake": "Naming a convention without a reason tied to the form earns only the first mark. *Recommend* asks for a choice and why it suits this form."
   },
   {
     "id": "s-u3o1-kk10-001",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "commandTerm": "describe",
     "marks": 3,
@@ -1023,7 +1039,8 @@
     "id": "s-u3o1-kk10-002",
     "kk": [
       "U3O1-KK10",
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK05"
     ],
     "commandTerm": "write",
     "marks": 3,
@@ -1049,7 +1066,8 @@
   {
     "id": "s-u3o1-kk10-003",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "commandTerm": "recommend",
     "marks": 4,
@@ -1083,7 +1101,7 @@
     ],
     "commandTerm": "write",
     "marks": 3,
-    "prompt": "Mai is writing the fee module for Pinebark Caravan Park in Bright. A powered site costs $48 a night and an unpowered site $36 a night. Stays of 7 nights or more get 10% off the whole stay. Her function is shown. Write a header comment for the function that states its purpose, describes one key feature and justifies one processing choice.",
+    "prompt": "Mai is writing the fee module for Pinebark Caravan Park in Bright. A powered site costs $48 a night and an unpowered site $36 a night. Stays of 7 nights or more get 10% off the whole stay. Her function is shown. Write a header comment for the function that states its purpose, describes one key feature and justifies one choice made in the code.",
     "points": [
       {
         "text": "States the purpose: calculates and returns the total fee, in dollars, for a stay, from the number of nights and whether the site is powered.",
@@ -1094,11 +1112,11 @@
         "marks": 1
       },
       {
-        "text": "Justifies a processing choice with a reason linked to the park's rules, e.g. the discount is applied after the nightly total is calculated so that it covers the whole stay; or `>= 7` is used so that a stay of exactly 7 nights gets the discount.",
+        "text": "Justifies a choice in the code with a reason linked to the park's rules, e.g. `>= 7` is used rather than `> 7` so that a stay of exactly 7 nights gets the discount; or the fee is floating point because 10% off can leave cents (7 unpowered nights cost $226.80).",
         "marks": 1
       }
     ],
-    "model": "```pseudo\nFUNCTION stayFee(nights, powered)\n    // stayFee: returns the total fee in dollars for a stay at the park.\n    // Parameters: nights (Integer), powered (Boolean, True for a powered site).\n    // Nightly rate is $48 for a powered site and $36 for an unpowered site.\n    // The discount is applied after the nightly total is calculated, so the 10%\n    // comes off the whole stay. The test uses >= 7 so that a stay of exactly\n    // 7 nights receives the discount.\n    IF powered = True THEN\n        rate ← 48.00\n    ELSE\n        rate ← 36.00\n    ENDIF\n    fee ← nights * rate\n    IF nights >= 7 THEN\n        fee ← fee * 0.9\n    ENDIF\n    RETURN fee\nENDFUNCTION\n```",
+    "model": "```pseudo\nFUNCTION stayFee(nights, powered)\n    // stayFee: returns the total fee in dollars for a stay at the park.\n    // Parameters: nights (Integer), powered (Boolean, True for a powered site).\n    // Nightly rate is $48 for a powered site and $36 for an unpowered site.\n    // The test uses >= 7 so that a stay of exactly 7 nights gets 10% off.\n    // The fee is floating point because 10% off can leave cents, e.g. $226.80.\n    IF powered = True THEN\n        rate ← 48.00\n    ELSE\n        rate ← 36.00\n    ENDIF\n    fee ← nights * rate\n    IF nights >= 7 THEN\n        fee ← fee * 0.9\n    ENDIF\n    RETURN fee\nENDFUNCTION\n```",
     "mistake": "A comment that only says what each line does ('multiplies nights by rate') earns no justification mark. The justification must give a reason linked to the park's rules.",
     "source": "textbook",
     "figures": [
@@ -1112,7 +1130,8 @@
   {
     "id": "s-u3o1-kk11-002",
     "kk": [
-      "U3O1-KK11"
+      "U3O1-KK11",
+      "U4O1-KK01"
     ],
     "commandTerm": "explain",
     "marks": 2,
@@ -1161,7 +1180,7 @@
         "marks": 1
       },
       {
-        "text": "The header doesn't describe the parameters, e.g. that `member` is True for a gym member, so a caller has to read the code to use the function.",
+        "text": "The header doesn't describe the parameters, e.g. that `member` is true for a gym member, so a caller has to read the code to use the function.",
         "marks": 1
       },
       {
@@ -1304,7 +1323,8 @@
     "id": "s-u3o1-kk13-002",
     "kk": [
       "U3O1-KK13",
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "commandTerm": "describe",
     "marks": 3,
@@ -1315,7 +1335,7 @@
         "marks": 1
       },
       {
-        "text": "Extra check: before converting, test that the entry contains only digits; if it doesn't, display a message and ask again, so the conversion is never attempted on bad data.",
+        "text": "Extra check: a type check before converting, testing that the entry contains only digits; if it doesn't, display a message and ask again, so the conversion is never attempted on bad data.",
         "marks": 1
       },
       {
@@ -1323,8 +1343,8 @@
         "marks": 1
       }
     ],
-    "model": "Typing \"ten\" caused a type mismatch, a runtime error, because the program tried to convert text that isn't a whole number to an Integer. As an extra check, the developer could test the entry before converting it: if it contains anything other than digits, the program displays \"Enter the number of bags as a whole number\" and asks again, so the conversion only runs on suitable data. The conversion could also be wrapped in error handling that catches the conversion error if it occurs, displays the same message and lets the staff member re-enter the quantity, so the program keeps running.",
-    "mistake": "'Add validation' on its own earns little. Describe what is checked, when, and what the program does when the check fails.",
+    "model": "Typing \"ten\" caused a type mismatch, a runtime error, because the program tried to convert text that isn't a whole number to an Integer. As an extra check, the developer could add a type check that tests the entry before converting it: if it contains anything other than digits, the program displays \"Enter the number of bags as a whole number\" and asks again, so the conversion only runs on suitable data. The conversion could also be wrapped in error handling that catches the conversion error if it occurs, displays the same message and lets the staff member re-enter the quantity, so the program keeps running.",
+    "mistake": "A vague 'add validation' earns little. A number typed into a text box needs a type check before it is converted or used in a calculation, because text there is what causes the error; say what the check tests and what the program does when it fails.",
     "source": "textbook"
   },
   {
@@ -1364,11 +1384,12 @@
   {
     "id": "s-u3o1-kk14-001",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "commandTerm": "complete",
     "marks": 4,
-    "prompt": "Snowgum Lane Library in Kyneton charges an overdue fine of $0.50 per day, up to a maximum fine of $10.00. A book returned on time (0 days overdue) has no fine. Complete the test table shown by writing the expected output for (a), (b) and (c), and a suitable input for (d).",
+    "prompt": "Snowgum Lane Library in Kyneton charges an overdue fine of $0.50 per day, up to a maximum fine of $10.00. A book returned on time (0 days overdue) has no fine. Complete the testing table shown by writing the expected output for (a), (b) and (c), and a suitable input for (d).",
     "points": [
       {
         "text": "(a) $0.00",
@@ -1383,11 +1404,11 @@
         "marks": 1
       },
       {
-        "text": "(d) daysOverdue = 19",
+        "text": "(d) 19 days overdue",
         "marks": 1
       }
     ],
-    "model": "(a) $0.00: a book with no days overdue has no fine. (b) $6.00: 12 × $0.50. (c) $10.00: 25 × $0.50 is $12.50, which is capped at the $10.00 maximum. (d) daysOverdue = 19, because 19 × $0.50 = $9.50, which is below the maximum.",
+    "model": "(a) $0.00: a book with no days overdue has no fine. (b) $6.00: 12 × $0.50. (c) $10.00: 25 × $0.50 is $12.50, which is capped at the $10.00 maximum. (d) 19 days overdue, because 19 × $0.50 = $9.50, which is below the maximum.",
     "mistake": "Expected outputs come from the library's rules, not from running the program. Writing $12.50 for (c) ignores the maximum fine.",
     "source": "textbook",
     "figures": [
@@ -1396,26 +1417,26 @@
         "kind": "table",
         "columns": [
           "Test number",
-          "Input(s)",
+          "Days overdue",
           "Expected output",
           "Actual output"
         ],
         "rows": [
           [
             "1",
-            "daysOverdue = 0",
+            "0",
             "(a)",
             ""
           ],
           [
             "2",
-            "daysOverdue = 12",
+            "12",
             "(b)",
             ""
           ],
           [
             "3",
-            "daysOverdue = 25",
+            "25",
             "(c)",
             ""
           ],
@@ -1425,14 +1446,16 @@
             "$9.50",
             ""
           ]
-        ]
+        ],
+        "title": "Testing table"
       }
     ]
   },
   {
     "id": "s-u3o1-kk14-002",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "commandTerm": "describe",
     "marks": 3,
@@ -1459,7 +1482,8 @@
     "id": "s-u3o1-kk14-003",
     "kk": [
       "U3O1-KK14",
-      "U3O1-KK12"
+      "U3O1-KK12",
+      "U4O1-KK06"
     ],
     "commandTerm": "recommend",
     "marks": 4,

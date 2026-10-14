@@ -8,7 +8,7 @@
     "options": [
       "Write a Python function about temperatures that is efficient, readable and has helpful comments throughout.",
       "Write a function that averages some temperatures, and check carefully that it contains no syntax errors.",
-      "Write a Python function that returns the mean of a list of Floating point readings, to one decimal place.",
+      "Write a Python function that returns the mean of an array of Floating point readings, to one decimal place.",
       "Write a temperature program in whichever language suits best, using any inputs and outputs you think fit."
     ],
     "answer": 2,
@@ -40,7 +40,7 @@
     "whyWrong": [
       "",
       "A logic error produces wrong output without halting, and there is no `dailyMedian()` code to step through.",
-      "The call is written validly, and resubmitting the prompt unchecked may just produce another invented function.",
+      "Regenerating code until it runs skips checking what the library actually provides, and may just produce another invented function.",
       "Nothing points to a data type problem; the error says the function is missing."
     ],
     "difficulty": 2,
@@ -338,7 +338,8 @@
   {
     "id": "m-u3o1-kk03-001",
     "kk": [
-      "U3O1-KK03"
+      "U3O1-KK03",
+      "U3O2-KK14"
     ],
     "stem": "A developer needs to record the name, data type, size and validation rule for every variable in a module. Which design tool is most suitable?",
     "options": [
@@ -348,10 +349,10 @@
       "A data dictionary"
     ],
     "answer": 3,
-    "explanation": "A data dictionary lists each data item with its name, data type, size and validation rules.",
+    "explanation": "A data dictionary lists each data item's name and data type, and can add fields such as size and validation rules, which is exactly what the developer needs to record.",
     "whyWrong": [
       "An IPO chart lists inputs, processing and outputs, but not sizes or validation rules.",
-      "A mock-up shows how the interface looks, not the data behind it.",
+      "A mock-up shows how the interface will look and what its controls do, not each variable's data type, size or validation rule.",
       "An object description lists one object's properties and methods, not the size and validation of every variable.",
       ""
     ],
@@ -362,7 +363,8 @@
     "id": "m-u3o1-kk03-002",
     "kk": [
       "U3O1-KK03",
-      "U3O1-KK07"
+      "U3O2-KK14",
+      "U3O1-KK08"
     ],
     "stem": "The object description below is part of the design for Kelpwater Ferries' ticketing module in Geelong. A requirement states that a concession ticket costs half the standard fare. Which part of the object would carry out this processing?",
     "options": [
@@ -372,7 +374,7 @@
       "The `printTicket()` method, because it outputs the price paid"
     ],
     "answer": 1,
-    "explanation": "Methods are the actions an object performs. `calculateFare()` would check `isConcession`, halve the standard fare when it is True, and store the result in `fare`.",
+    "explanation": "Methods are the actions an object performs. `calculateFare()` would check `isConcession`, halve the standard fare when it is true, and store the result in `fare`.",
     "whyWrong": [
       "A property holds a value; `fare` stores the result but doesn't calculate it.",
       "",
@@ -422,9 +424,10 @@
   {
     "id": "m-u3o1-kk03-003",
     "kk": [
-      "U3O1-KK03"
+      "U3O1-KK03",
+      "U3O2-KK14"
     ],
-    "stem": "Sam is designing a module that totals orders at a Mildura school canteen. His IPO chart is shown below. Which entry belongs in the Processing column?",
+    "stem": "Sam is designing a module that totals orders at a Mildura school canteen. His IPO chart is shown below. Which entry belongs in the Process column?",
     "options": [
       "Order total displayed to two decimal places on screen",
       "Prices and quantities entered by the canteen manager",
@@ -432,7 +435,7 @@
       "A Floating point variable named `orderTotal` to hold the total"
     ],
     "answer": 2,
-    "explanation": "The Processing column describes what is done to the inputs to produce the output. Multiplying each price by its quantity and adding the results produces the order total.",
+    "explanation": "The Process column describes what is done to the inputs to produce the output. Multiplying each price by its quantity and adding the results produces the order total.",
     "whyWrong": [
       "This describes the output and its format, which belong in the Output column.",
       "This is data entering the module, which belongs in the Input column.",
@@ -448,7 +451,7 @@
         "title": "IPO chart: order total",
         "columns": [
           "Input",
-          "Processing",
+          "Process",
           "Output"
         ],
         "rows": [
@@ -469,7 +472,8 @@
   {
     "id": "m-u3o1-kk03-004",
     "kk": [
-      "U3O1-KK03"
+      "U3O1-KK03",
+      "U3O2-KK14"
     ],
     "stem": "Kiri is designing a module for Mossgate Vets in Warragul. It asks for a pet's weight, rejects any weight outside 0.1 to 100 kg, then calculates and displays a medicine dose. She has finished a mock-up of the input screen. Which pair of design tools best documents the rest of the module before it is coded?",
     "options": [
@@ -631,7 +635,7 @@
           [
             "vegetarian",
             "Boolean",
-            "True when the box is ticked"
+            "true when the box is ticked"
           ]
         ]
       }
@@ -700,7 +704,7 @@
             "feePaid",
             "Boolean",
             "",
-            "True once this year's fee is paid"
+            "true once this year's fee is paid"
           ]
         ]
       }
@@ -719,7 +723,7 @@
       "String"
     ],
     "answer": 0,
-    "explanation": "An item is either on loan or not, so the value has exactly two states: True or False.",
+    "explanation": "An item is either on loan or not, so the value has exactly two states: true or false.",
     "whyWrong": [
       "",
       "A Character could hold \"Y\" or \"N\", but it also allows any other symbol.",
@@ -899,7 +903,7 @@
       "5 is the number of times the loop runs, not the number of times the condition is true."
     ],
     "difficulty": 2,
-    "source": "exam-convention",
+    "source": "textbook",
     "figures": [
       {
         "id": "temps-rises",
@@ -931,7 +935,7 @@
       ""
     ],
     "difficulty": 3,
-    "source": "exam-convention",
+    "source": "textbook",
     "figures": [
       {
         "id": "litres-array",
@@ -992,7 +996,7 @@
     "explanation": "Each member's details mix data types (a String name, a Floating point fee, a Boolean junior status), which a record's fields can hold; an array of 120 such records lets a loop process every member.",
     "whyWrong": [
       "",
-      "A two-dimensional array holds one data type, but these fields mix text, numbers and True/False values.",
+      "A two-dimensional array holds one data type, but these fields mix text, numbers and true or false values.",
       "A record holds one member's details; one field per member leaves nowhere to store each member's four separate details.",
       "A one-dimensional array holds one data type, and spreading each member over four elements is error-prone."
     ],
@@ -1084,7 +1088,7 @@
     "explanation": "The loop visits indexes 0 to 4, so every shelf is checked. Only values below 5 have 20 added: index 1 (0 becomes 20), index 3 (3 becomes 23) and index 4 (0 becomes 20). 12 and 7 aren't below 5, so they are unchanged.",
     "whyWrong": [
       "",
-      "3 < 5 is True, so index 3 also has 20 added and becomes 23.",
+      "3 < 5 is true, so index 3 also has 20 added and becomes 23.",
       "Only elements below 5 are changed; 12 and 7 fail the test, so they stay the same.",
       "With indexes from 0, `FOR i ← 0 TO 4` includes index 4, so the last shelf also has 20 added."
     ],
@@ -1126,7 +1130,8 @@
   {
     "id": "m-u3o1-kk06-002",
     "kk": [
-      "U3O1-KK06"
+      "U3O1-KK06",
+      "U4O1-KK02"
     ],
     "stem": "Wattleseed Pharmacies, a group of 30 pharmacies across western Victoria, sends its daily sales records to a supplier's reporting program. There are about 40 000 records a day, every record has the same six fields, the field order never changes, and file size must be kept small. Which data source best suits this?",
     "options": [
@@ -1351,7 +1356,8 @@
   {
     "id": "m-u3o1-kk07-003",
     "kk": [
-      "U3O1-KK07"
+      "U3O1-KK07",
+      "U4O1-KK03"
     ],
     "stem": "Driftwood Aquatic Centre in Frankston has a membership program with a `Member` class. Its `concessionRate` attribute must be usable by the methods of `Member` and of its subclass `JuniorMember`, but hidden from the program's unrelated classes. Which access modifier is designed for this?",
     "options": [
@@ -1366,7 +1372,7 @@
       "",
       "Public would expose `concessionRate` to every class in the program.",
       "Private would hide `concessionRate` from `JuniorMember` too, because a subclass can't directly use private members.",
-      "Default access is set by the language (in Java, the same package), not by whether a class is a subclass."
+      "Default isn't one of the study design's access modifiers (public, protected, private); in Java it opens a member to the same package, whether or not a class is a subclass."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -1374,7 +1380,9 @@
   {
     "id": "m-u3o1-kk07-004",
     "kk": [
-      "U3O1-KK07"
+      "U3O1-KK07",
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "stem": "Tidewrack Kayak Tours in Apollo Bay has a booking program with a `Booking` class. When a customer books, the program creates `booking3071` from the class and stores that booking's own date and group size in it. What is `booking3071`?",
     "options": [
@@ -1473,7 +1481,8 @@
   {
     "id": "m-u3o1-kk07-006",
     "kk": [
-      "U3O1-KK07"
+      "U3O1-KK07",
+      "U4O1-KK03"
     ],
     "stem": "In the ticketing program for Blackwood Hollow Wildlife Park in the Dandenong Ranges, the `Admission` class has a method `applyGroupDiscount()`. It is called only by the class's own `calculateTotal()` method, which the booking screen calls to get a price. `Admission` has no subclasses. Which access modifier best suits `applyGroupDiscount()`?",
     "options": [
@@ -1488,7 +1497,7 @@
       "The booking screen only needs `calculateTotal()`; letting it call the discount step directly could apply the discount twice.",
       "",
       "`Admission` has no subclasses, so no subclass needs the method, and protected access gives more access than needed.",
-      "No other class needs the method, so opening it to other classes in the same package gives more access than needed."
+      "Default isn't one of the study design's access modifiers, and opening the method to other classes in the same package gives more access than needed."
     ],
     "difficulty": 3,
     "source": "textbook"
@@ -1496,30 +1505,33 @@
   {
     "id": "m-u3o1-kk08-001",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "stem": "Starlight Lane Cinema in Echuca has a booking program that uses the condition `(age >= 18) AND (hasTicket = True)`. What type of operator is `AND`?",
     "options": [
       "An arithmetic operator",
-      "A comparison operator",
+      "A conditional operator",
       "An assignment operator",
       "A logical operator"
     ],
     "answer": 3,
-    "explanation": "`AND` combines two Boolean values and is true only when both are true, so it is a logical operator. The `>=` and `=` in the condition are comparison operators.",
+    "explanation": "`AND` combines two Boolean values and is true only when both are true. The study design groups `AND`, `OR` and `NOT` as logical operators, and comparisons such as the `>=` and `=` in this condition as conditional (comparison) operators.",
     "whyWrong": [
       "Arithmetic operators such as `+`, `*` and `MOD` calculate numeric results.",
-      "Comparison operators such as `>=` and `=` compare two values; `AND` combines their Boolean results.",
+      "Conditional (comparison) operators such as `>=` and `=` compare two values; although some languages' documentation calls `&&` a conditional operator, the study design lists `AND` as a logical operator.",
       "Assignment (`←`) stores a value in a variable; nothing is assigned in this condition.",
       ""
     ],
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u3o1-kk08-002",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U3O1-KK05",
+      "U4O1-KK03"
     ],
     "stem": "A Swan Hill school's weather project uses the algorithm shown. Arrays are indexed from 0. What does the algorithm display?",
     "options": [
@@ -1550,21 +1562,22 @@
   {
     "id": "m-u3o1-kk08-003",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
-    "stem": "In the Forest Street Library's fines program in Castlemaine, the variable `fineTotal` is declared inside the procedure `calculateFines`. No global variable has that name. Another procedure, `printReceipt`, tries to display `fineTotal`. Which statement is correct?",
+    "stem": "In the fines program for Forest Street Library in Castlemaine, the variable `fineTotal` is declared inside the function `calculateFines`. No global variable has that name. Another function, `printReceipt`, tries to display `fineTotal`. Which statement is correct?",
     "options": [
       "An error occurs, because `fineTotal` exists only within `calculateFines`",
-      "The total is displayed, because a variable keeps its value after its procedure ends",
-      "The total is displayed, because variables declared in a procedure are global",
+      "The total is displayed, because a variable keeps its value after its function ends",
+      "The total is displayed, because variables declared in a function are global",
       "Zero is displayed, because `printReceipt` resets every variable before it runs"
     ],
     "answer": 0,
-    "explanation": "A variable declared inside a procedure has local scope: it can be used only inside that procedure and exists only while it runs. `printReceipt` can't see it, so referring to it causes an error. `calculateFines` could instead be a function that returns the total, which is then passed to `printReceipt` as a parameter.",
+    "explanation": "A variable declared inside a function has local scope: it can be used anywhere inside that function, not just in one IF or loop, but nowhere else, and it exists only while the function runs. `printReceipt` can't see it, so referring to it causes an error. `calculateFines` could instead return the total, which is then passed to `printReceipt` as a parameter.",
     "whyWrong": [
       "",
-      "A local variable is released when its procedure ends, and it was never visible to other procedures.",
-      "Declaring a variable inside a procedure makes it local, not global.",
+      "A local variable is released when its function ends, and it was never visible to other functions.",
+      "Declaring a variable inside a function makes it local, not global.",
       "`printReceipt` doesn't reset variables; `fineTotal` simply isn't in its scope."
     ],
     "difficulty": 2,
@@ -1573,7 +1586,8 @@
   {
     "id": "m-u3o1-kk08-004",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "stem": "The function shown counts the digits in a whole number that is 0 or more. What does `countDigits(0)` return, and why?",
     "options": [
@@ -1603,7 +1617,8 @@
   {
     "id": "m-u3o1-kk08-005",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "stem": "Talia is writing a fixture program for a social netball competition in Horsham, in which every team plays every other team once. She runs the algorithm shown for 6 teams. How many matches does it display?",
     "options": [
@@ -1633,7 +1648,8 @@
   {
     "id": "m-u3o1-kk08-006",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
     "stem": "Leilani's training log for a Warrnambool cycling club stores the length of each ride in minutes. The algorithm shown converts a ride's length to hours and minutes. What does it display?",
     "options": [
@@ -1663,9 +1679,10 @@
   {
     "id": "m-u3o1-kk08-007",
     "kk": [
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U4O1-KK03"
     ],
-    "stem": "Omar is splitting the checkout code for a Beechworth bakery into modules. Which module should be written as a function rather than a procedure?",
+    "stem": "Omar is splitting the checkout code for a Beechworth bakery into functions. Which function needs to return a value to the code that calls it?",
     "options": [
       "`printReceipt`, which prints the items bought and the total on the receipt printer",
       "`clearOrder`, which empties the order list so the next customer can be served",
@@ -1673,12 +1690,12 @@
       "`showSpecials`, which displays today's specials on the screen facing the counter"
     ],
     "answer": 2,
-    "explanation": "A function returns a value to the code that called it. The checkout needs the GST amount back so that it can add it to the total, so `calculateGst` should be a function that returns it, e.g. `gst ← calculateGst(subtotal)`. The other modules each carry out a task without handing a value back, so procedures suit them.",
+    "explanation": "A function hands a result back to its caller with `RETURN`. The checkout needs the GST amount so that it can add it to the total, so `calculateGst` must return it, e.g. `gst ← calculateGst(subtotal)`. The other functions each carry out a task, and the caller doesn't need a value back from them.",
     "whyWrong": [
-      "Printing the receipt is a task; no value needs to come back to the caller, so a procedure suits.",
-      "Clearing the order is a task that returns nothing, so a procedure suits.",
+      "Printing the receipt is a task carried out on the printer; the caller doesn't need a value back.",
+      "Clearing the order changes the order list; no value needs to come back to the caller.",
       "",
-      "Displaying the specials is a task that returns nothing, so a procedure suits."
+      "Displaying the specials is a task carried out on the screen; the caller doesn't need a value back."
     ],
     "difficulty": 1,
     "source": "textbook"
@@ -1688,7 +1705,7 @@
     "kk": [
       "U3O1-KK09"
     ],
-    "stem": "Which identifier combines Hungarian notation with camel case?",
+    "stem": "Which identifier combines Hungarian notation with camel casing?",
     "options": [
       "`is_member`",
       "`isMember`",
@@ -1696,11 +1713,11 @@
       "`blnIsMember`"
     ],
     "answer": 3,
-    "explanation": "`blnIsMember` starts with the prefix `bln`, showing a Boolean, then joins the words with a capital letter at the start of each later word, which is camel case.",
+    "explanation": "`blnIsMember` starts with the prefix `bln`, showing a Boolean, then joins the words with a capital letter at the start of each later word, which is camel casing.",
     "whyWrong": [
-      "`is_member` is snake case with no type prefix.",
-      "`isMember` is camel case, but it has no Hungarian prefix.",
-      "`bln_is_member` has a Hungarian prefix but joins the words with underscores, which is snake case.",
+      "`is_member` uses snake casing and has no type prefix.",
+      "`isMember` uses camel casing, but it has no Hungarian prefix.",
+      "`bln_is_member` has a Hungarian prefix but joins the words with underscores, which is snake casing.",
       ""
     ],
     "difficulty": 1,
@@ -1724,7 +1741,7 @@
       "`str` and `flt` are data type prefixes for variables, but the surname box and fee label are controls.",
       "The fee is shown in a label, so `txtFee` wrongly suggests a text box the user types into.",
       "",
-      "These names put the control type at the end in snake case; Hungarian notation uses a prefix."
+      "These names put the control type at the end and use snake casing; Hungarian notation uses a prefix."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -1757,7 +1774,7 @@
     "kk": [
       "U3O1-KK09"
     ],
-    "stem": "Saltmarsh Surf School in Torquay sets this rule for its booking program: variables and functions use camel case, and interface controls use a Hungarian prefix for the control type followed by camel case. The table lists four identifiers from the program. Which identifier breaks the rule?",
+    "stem": "Saltmarsh Surf School in Torquay sets this rule for its booking program: variables and functions use camel casing, and interface controls use a Hungarian prefix for the control type followed by camel casing. The table lists four identifiers from the program. Which identifier breaks the rule?",
     "options": [
       "`lessonFee`",
       "`lblStudentName`",
@@ -1767,10 +1784,10 @@
     "answer": 1,
     "explanation": "`lblStudentName` names a text box, but `lbl` is the prefix for a label, so it should be `txtStudentName`. A wrong prefix misleads anyone reading the code about what the control is.",
     "whyWrong": [
-      "`lessonFee` is a variable name in camel case, as the rule requires.",
+      "`lessonFee` is a variable name that uses camel casing, as the rule requires.",
       "",
-      "`btnBook` names a button with the `btn` prefix followed by camel case, as the rule requires.",
-      "`calculateDiscount` is a function name in camel case, as the rule requires."
+      "`btnBook` names a button with the `btn` prefix followed by camel casing, as the rule requires.",
+      "`calculateDiscount` is a function name that uses camel casing, as the rule requires."
     ],
     "difficulty": 3,
     "source": "textbook",
@@ -1831,7 +1848,7 @@
     "kk": [
       "U3O1-KK09"
     ],
-    "stem": "The style guide at a Traralgon software firm says that variables use snake case with no type prefix, and interface controls use a Hungarian prefix for the control type followed by camel case. Kaia needs names for a Floating point variable holding a delivery cost and for the button that calculates it. Which pair of names follows the guide?",
+    "stem": "The style guide at a Traralgon software firm says that variables use snake casing with no type prefix, and interface controls use a Hungarian prefix for the control type followed by camel casing. Kaia needs names for a Floating point variable holding a delivery cost and for the button that calculates it. Which pair of names follows the guide?",
     "options": [
       "`delivery_cost` and `btnCalculateDelivery`",
       "`fltDeliveryCost` and `btnCalculateDelivery`",
@@ -1839,12 +1856,12 @@
       "`deliveryCost` and `calculateDeliveryBtn`"
     ],
     "answer": 0,
-    "explanation": "`delivery_cost` is lowercase words joined by underscores with no prefix, as the guide requires for variables. `btnCalculateDelivery` starts with a prefix for a button, `btn`, and continues in camel case, as the guide requires for controls.",
+    "explanation": "`delivery_cost` is lowercase words joined by underscores with no prefix, as the guide requires for variables. `btnCalculateDelivery` starts with a prefix for a button, `btn`, and continues in camel casing, as the guide requires for controls.",
     "whyWrong": [
       "",
-      "`fltDeliveryCost` has a type prefix and is in camel case, but the guide wants variables in snake case without a prefix.",
-      "`btn_calculate_delivery` joins its words with underscores, but controls must continue in camel case after the prefix.",
-      "`deliveryCost` is camel case, and `calculateDeliveryBtn` puts the control type at the end instead of using a prefix."
+      "`fltDeliveryCost` has a type prefix and uses camel casing, but the guide wants variables in snake casing without a prefix.",
+      "`btn_calculate_delivery` joins its words with underscores, but controls must continue in camel casing after the prefix.",
+      "`deliveryCost` uses camel casing, and `calculateDeliveryBtn` puts the control type at the end instead of using a prefix."
     ],
     "difficulty": 2,
     "source": "textbook"
@@ -1852,7 +1869,8 @@
   {
     "id": "m-u3o1-kk10-001",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "stem": "The group booking form for Treetop Hollow Adventure Park in Gippsland rejects a group size of 0 and a group size of 45, because groups must have 1 to 30 people. Which validation check is this?",
     "options": [
@@ -1875,7 +1893,8 @@
   {
     "id": "m-u3o1-kk10-002",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "stem": "Seacliff Lane Holiday Units in Lorne has a booking program. The *nights* field must hold a whole number from 1 to 14. In which order should the program apply its validation checks?",
     "options": [
@@ -1899,7 +1918,10 @@
     "id": "m-u3o1-kk10-003",
     "kk": [
       "U3O1-KK10",
-      "U3O1-KK13"
+      "U3O1-KK13",
+      "U3O1-KK14",
+      "U4O1-KK05",
+      "U4O1-KK06"
     ],
     "stem": "The function shown validates the *nights* field for a Lorne holiday-unit booking, which must be from 1 to 14 inclusive. The input has already passed existence and type checks. For which input does `nightsValid` return the wrong result?",
     "options": [
@@ -1909,7 +1931,7 @@
       "15"
     ],
     "answer": 2,
-    "explanation": "Line 2 treats 14 as invalid because `14 >= 14` is true, so `nightsValid(14)` returns False even though 14 nights is allowed. The condition should use `nights > 14`. 0 and 15 are correctly rejected, and 1 is correctly accepted.",
+    "explanation": "Line 2 treats 14 as invalid because `14 >= 14` is true, so `nightsValid(14)` returns `False` even though 14 nights is allowed. The condition should use `nights > 14`. 0 and 15 are correctly rejected, and 1 is correctly accepted.",
     "whyWrong": [
       "`0 < 1` is true, so 0 is rejected, which is correct.",
       "1 is neither below 1 nor 14 or more, so it is accepted, which is correct.",
@@ -1929,7 +1951,8 @@
   {
     "id": "m-u3o1-kk10-004",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "stem": "At Karadoc Family Clinic in Mildura, a receptionist enters a patient's weight as 72 kg instead of 27 kg. The program's range check allows weights from 2 to 250 kg, so 72 is accepted. What does this show?",
     "options": [
@@ -1939,7 +1962,7 @@
       "An existence check should replace the range check for weight fields"
     ],
     "answer": 1,
-    "explanation": "72 is present, numeric and within 2 to 250, so it passes validation. Validation can only reject data that is unreasonable; it can't tell that a reasonable value is wrong.",
+    "explanation": "72 is present, numeric and within 2 to 250, so it passes validation. Validation checks only that data is complete and reasonable, so it can't tell that a reasonable value is wrong. Checking data for accuracy is verification.",
     "whyWrong": [
       "The check worked as designed: 72 lies within 2 to 250, so accepting it is not a logic error.",
       "",
@@ -1947,12 +1970,13 @@
       "An existence check only confirms that a value was entered, so it would also accept 72."
     ],
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u3o1-kk10-005",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "stem": "A Lakes Entrance boat hire program asks how many hours a boat is hired for, which must be a whole number from 1 to 8. The current version applies only a type check, which confirms that the entry is an Integer. Which entry would it wrongly accept?",
     "options": [
@@ -1975,7 +1999,8 @@
   {
     "id": "m-u3o1-kk10-006",
     "kk": [
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "stem": "A Portland beach clean-up group's sign-up form must accept any volunteer aged 16 or over; there is no upper age limit. The developer added a range check that accepts ages from 16 to 80, and an 83-year-old volunteer's sign-up is rejected. Which statement best describes the problem?",
     "options": [
@@ -2076,7 +2101,8 @@
     "id": "m-u3o1-kk11-004",
     "kk": [
       "U3O1-KK11",
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U3O1-KK06"
     ],
     "stem": "Sami is writing a module for Gullrock Cheese in Wonthaggi that records the cool room's temperature every hour. Food safety inspectors can ask to see any reading from the past year. The module opens the log file in append mode. Which comment best justifies this choice?",
     "options": [
@@ -2392,7 +2418,9 @@
   {
     "id": "m-u3o1-kk13-003",
     "kk": [
-      "U3O1-KK13"
+      "U3O1-KK13",
+      "U3O1-KK10",
+      "U4O1-KK05"
     ],
     "stem": "Kelpline Storage in Portland has a billing program that asks each customer how many monthly instalments they want, then divides the annual fee by that number. When a customer enters 0, the program crashes. Which change best prevents the crash?",
     "options": [
@@ -2417,7 +2445,7 @@
     "kk": [
       "U3O1-KK13"
     ],
-    "stem": "Arrays are indexed from 1. A counted loop whose start value is greater than its end value doesn't run at all, and in this language dividing by zero causes a runtime error. The function shown is called with an empty array and a `count` of 0. What happens?",
+    "stem": "Arrays are indexed from 1. A FOR loop whose start value is greater than its end value doesn't run at all, and in this language dividing by zero causes a runtime error. The function shown is called with an empty array and a `count` of 0. What happens?",
     "options": [
       "An index out of range error at line 4, because `scores[1]` doesn't exist",
       "A logic error: the function returns 0 as the average of no scores",
@@ -2524,7 +2552,8 @@
   {
     "id": "m-u3o1-kk13-007",
     "kk": [
-      "U3O1-KK13"
+      "U3O1-KK13",
+      "U3O1-KK08"
     ],
     "stem": "A Mornington café's loyalty program should give the level Bronze below 500 points, Silver from 500 to 999 points and Gold from 1 000 points. It uses the function shown. What does `rewardLevel(1250)` return, and which type of error does this show?",
     "options": [
@@ -2554,7 +2583,8 @@
   {
     "id": "m-u3o1-kk14-001",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "stem": "A developer wants her program to pause each time it reaches a line inside a loop, so that she can inspect the values of her variables at that point. Which technique should she use?",
     "options": [
@@ -2578,7 +2608,9 @@
     "id": "m-u3o1-kk14-002",
     "kk": [
       "U3O1-KK14",
-      "U3O1-KK10"
+      "U3O1-KK10",
+      "U4O1-KK06",
+      "U4O1-KK05"
     ],
     "stem": "The entry form for Quillhaven Pony Club in Whittlesea accepts rider ages from 8 to 16 inclusive. Which set of test data best checks the boundaries of this range?",
     "options": [
@@ -2601,9 +2633,10 @@
   {
     "id": "m-u3o1-kk14-003",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
-    "stem": "Gannet Point Bike Hire in Inverloch charges $12 an hour for the first 4 hours and $8 for each hour after that. Members get $5 off the total. Rosa has written the expected outputs in the test table shown. Which test's expected output is incorrect?",
+    "stem": "Gannet Point Bike Hire in Inverloch charges $12 an hour for the first 4 hours and $8 for each hour after that. Members get $5 off the total. Rosa has written the expected outputs in the testing table shown. Which test's expected output is incorrect?",
     "options": [
       "Test 1",
       "Test 2",
@@ -2626,43 +2659,50 @@
         "kind": "table",
         "columns": [
           "Test number",
-          "Input(s)",
+          "Hours",
+          "Member",
           "Expected output",
           "Actual output"
         ],
         "rows": [
           [
             "1",
-            "hours = 3, member = False",
+            "3",
+            "False",
             "$36",
             ""
           ],
           [
             "2",
-            "hours = 4, member = True",
+            "4",
+            "True",
             "$43",
             ""
           ],
           [
             "3",
-            "hours = 6, member = False",
+            "6",
+            "False",
             "$72",
             ""
           ],
           [
             "4",
-            "hours = 7, member = True",
+            "7",
+            "True",
             "$67",
             ""
           ]
-        ]
+        ],
+        "title": "Testing table"
       }
     ]
   },
   {
     "id": "m-u3o1-kk14-004",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "stem": "Kilnworks Makerspace in Wangaratta charges for laser cutter time: $10 an hour for the first 3 hours and $6 for each hour after that, with $4 off the total for members. Hours are whole numbers. The function shown contains an error. Which test would reveal it?",
     "options": [
@@ -2692,7 +2732,8 @@
   {
     "id": "m-u3o1-kk14-005",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
     "stem": "Hamish is testing the fee calculator for a Kyneton dog grooming salon. He runs the program with each test's inputs, then copies what it displays into both the Expected output and the Actual output columns of his test table. What is the main problem with this approach?",
     "options": [
@@ -2715,9 +2756,10 @@
   {
     "id": "m-u3o1-kk14-006",
     "kk": [
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O1-KK06"
     ],
-    "stem": "A Healesville squash centre charges $16 an hour for court hire, and members pay 25% less. The test table shows the results of testing the court hire function. Which is the most likely cause of the errors?",
+    "stem": "A Healesville squash centre charges $16 an hour for court hire, and members pay 25% less. The testing table shows the results of testing the court hire function. Which is the most likely cause of the errors?",
     "options": [
       "The hourly rate is wrong in the calculation that every booking uses",
       "The test for members uses the wrong comparison, so members aren't recognised",
@@ -2740,36 +2782,42 @@
         "kind": "table",
         "columns": [
           "Test number",
-          "Input(s)",
+          "Hours",
+          "Member",
           "Expected output",
           "Actual output"
         ],
         "rows": [
           [
             "1",
-            "hours = 1, member = False",
+            "1",
+            "False",
             "$16.00",
             "$16.00"
           ],
           [
             "2",
-            "hours = 3, member = False",
+            "3",
+            "False",
             "$48.00",
             "$48.00"
           ],
           [
             "3",
-            "hours = 1, member = True",
+            "1",
+            "True",
             "$12.00",
             "$4.00"
           ],
           [
             "4",
-            "hours = 3, member = True",
+            "3",
+            "True",
             "$36.00",
             "$12.00"
           ]
-        ]
+        ],
+        "title": "Testing table"
       }
     ]
   },

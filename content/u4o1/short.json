@@ -22,7 +22,7 @@
       }
     ],
     "model": "Tamsin should involve the people who will actually use the app: the volunteer presenters, many of them retirees using phones, not only the station manager. She could give a small group an early version and watch them claim and swap shifts, noting where they hesitate or make mistakes, and ask what they found difficult. She would then change the design in response, for example by enlarging buttons or reducing the steps needed to swap a shift, and have the volunteers try the revised version, repeating this until the app suits them.",
-    "mistake": "A general description of user-centred design earns little. Name the actual users in the scenario and the tasks they perform.",
+    "mistake": "Saying that user-centred design meets users' needs earns nothing on its own. Describe how the actual users, named from the scenario, are involved at each stage and how their feedback changes the design.",
     "source": "textbook"
   },
   {
@@ -52,7 +52,8 @@
       }
     ],
     "model": "Change 1 improves efficiency. Picking a date from a calendar control replaces typing it in full, so each booking needs fewer keystrokes and less effort from the receptionist.\n\nChange 2 improves effectiveness. Checking for an existing appointment before saving prevents two patients being booked with the same physiotherapist at the same time, so the appointment records are accurate and the program better achieves its purpose of scheduling patients correctly.",
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Blurring the two qualities loses marks: efficiency is the time, cost and effort used, while effectiveness is how well the program achieves its purpose, such as keeping accurate records. Name the quality each change improves and give a separate reason for each."
   },
   {
     "id": "s-u4o1-kk01-003",
@@ -84,7 +85,8 @@
     "id": "s-u4o1-kk02-001",
     "kk": [
       "U4O1-KK02",
-      "U3O1-KK05"
+      "U3O1-KK05",
+      "U3O1-KK04"
     ],
     "commandTerm": "justify",
     "marks": 4,
@@ -103,19 +105,20 @@
         "marks": 1
       },
       {
-        "text": "Price as Floating point, because it includes cents and is used in calculations (displayed to two decimal places)",
+        "text": "Price as Floating point, to two decimal places, because it is in dollars and cents and is used in calculations",
         "marks": 1
       }
     ],
-    "model": "An array of records suits the stock list. Each record holds one plant's code, name, quantity and price together, even though these have different data types, and each field can be referred to by name. Holding one record per plant in an array lets the program loop through every plant to find or update one.\n\nQuantity on hand should be an Integer, because the nursery counts whole plants and the quantity is added to and subtracted from as stock arrives and sells. Price should be Floating point, because prices such as $14.95 include cents and are used in calculations, such as the value of stock; it is displayed to two decimal places.",
-    "mistake": "Name data types in full (Integer, Floating point), and tie each justification to the data in the scenario rather than giving a general definition.",
+    "model": "An array of records suits the stock list. Each record holds one plant's code, name, quantity and price together, even though these have different data types, and each field can be referred to by name. Holding one record per plant in an array lets the program loop through every plant to find or update one.\n\nQuantity on hand should be an Integer, because the nursery counts whole plants and the quantity is added to and subtracted from as stock arrives and sells. Price should be Floating point, to two decimal places, because prices such as $14.95 are in dollars and cents and are used in calculations, such as the value of stock.",
+    "mistake": "Shortened type names such as Float or Bool earned no marks in 2025, so write them in full: Integer, Floating point. Tie each justification to the data in the scenario rather than giving a general definition.",
     "source": "textbook"
   },
   {
     "id": "s-u4o1-kk02-002",
     "kk": [
       "U4O1-KK02",
-      "U3O1-KK06"
+      "U3O1-KK06",
+      "U3O1-KK04"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -126,7 +129,7 @@
         "marks": 1
       },
       {
-        "text": "Converts the days to Integer and the rate to Floating point, because every field read from the file is a String",
+        "text": "Converts the days to Integer and the rate to Floating point, because the fields split from the line are Strings",
         "marks": 1
       },
       {
@@ -138,8 +141,8 @@
         "marks": 1
       }
     ],
-    "model": "First, the program splits the line at each comma, separating the name (Dimitri Pappas), the days (3) and the rate (42.50) into three fields. Second, because every field read from a CSV file is a String, it converts the days to an Integer and the rate to Floating point; without this, \"3\" and \"42.50\" can't be multiplied. Third, it multiplies the days by the rate (3 × 42.50 = 127.50) and adds the result to the running total for the day.",
-    "mistake": "The conversion step is the one most often left out. Values read from a text file stay Strings until the program converts them.",
+    "model": "First, the program splits the line at each comma, separating the name (Dimitri Pappas), the days (3) and the rate (42.50) into three fields. Second, because the fields split from a line of text are Strings, it converts the days to an Integer and the rate to Floating point; without this, \"3\" and \"42.50\" can't be multiplied. Third, it multiplies the days by the rate (3 × 42.50 = 127.50) and adds the result to the running total for the day.",
+    "mistake": "The conversion step is the one most often left out. Fields split from a line of text stay Strings until the program converts them.",
     "source": "textbook"
   },
   {
@@ -177,6 +180,7 @@
     "id": "s-u4o1-kk03-001",
     "kk": [
       "U4O1-KK03",
+      "U3O1-KK08",
       "U4O1-KK05"
     ],
     "commandTerm": "recommend",
@@ -206,7 +210,8 @@
   {
     "id": "s-u4o1-kk03-002",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "commandTerm": "write",
     "marks": 3,
@@ -233,7 +238,8 @@
     "id": "s-u4o1-kk03-003",
     "kk": [
       "U4O1-KK03",
-      "U3O1-KK13"
+      "U3O1-KK13",
+      "U4O1-KK02"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -263,7 +269,8 @@
   {
     "id": "s-u4o1-kk04-001",
     "kk": [
-      "U4O1-KK04"
+      "U4O1-KK04",
+      "U4O2-KK03"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -347,7 +354,8 @@
   {
     "id": "s-u4o1-kk05-001",
     "kk": [
-      "U4O1-KK05"
+      "U4O1-KK05",
+      "U3O1-KK10"
     ],
     "commandTerm": "describe",
     "marks": 4,
@@ -371,12 +379,15 @@
       }
     ],
     "model": "The program first applies an existence check, rejecting the entry if the hire length is blank. Next it applies a type check, confirming that the entry is a whole number before converting it to an Integer; this stops the crash when a staff member types letters. Finally, a range check confirms that the hire length is from 1 to 8 hours inclusive, which rejects entries such as 0 and 40.\n\nIf any check fails, the program displays a message that says what is accepted, such as \"Enter a whole number of hours from 1 to 8\", and asks again. It doesn't calculate or save the hire until the entry passes all three checks.",
+    "mistake": "Each check catches a different problem. A blank entry fails the existence check; letters pass it but fail the type check; 40 passes the type check but fails the range check. One check can't stand in for the others.",
     "source": "textbook"
   },
   {
     "id": "s-u4o1-kk05-002",
     "kk": [
-      "U4O1-KK05"
+      "U4O1-KK05",
+      "U3O1-KK10",
+      "U4O1-KK03"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -409,7 +420,8 @@
     "id": "s-u4o1-kk05-003",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK10"
     ],
     "commandTerm": "justify",
     "marks": 5,
@@ -437,7 +449,7 @@
       }
     ],
     "model": "**Name.** An existence check is needed. Every booking needs a name, and a text box can be left empty, so the program must reject a blank name.\n\n**Passengers.** This is a text box, so the user can type anything. The program needs an existence check, then a type check that the entry is a whole number before it is converted, because an entry such as \"two\" can't be converted and would otherwise cause an error. It then needs a range check that the number is from 1 to 12 inclusive, because a booking can't be for 0 passengers or for more than the 12 allowed.\n\n**Pick-up stop.** The drop-down list offers only the real stops, so a misspelt or invalid stop can't be entered, and type and range checks aren't needed. The list starts on \"Choose a stop\", though, so an existence check must confirm that a stop has been chosen.\n\n**Return trip.** No check is needed. A check box is either ticked or not, so it always holds a valid yes or no.",
-    "mistake": "Not every input needs every check. A check box can only be ticked or not ticked, so it can't hold an invalid value and needs no type or range check.",
+    "mistake": "Justify each input on its own. An existence check on one field doesn't cover the others, a number typed into a text box also needs a type check, and a check box can only be ticked or not, so it needs no check.",
     "source": "textbook",
     "figures": [
       {
@@ -537,7 +549,7 @@
     ],
     "commandTerm": "complete",
     "marks": 4,
-    "prompt": "Mirrim Parking in Traralgon charges $3 for each hour or part of an hour, up to a maximum of $15. Stays of 15 minutes or less are free. During alpha testing, Keira runs the function shown with the test data in the test table.\n\nComplete the expected output and actual output for tests 2 and 3, and identify the cause of any difference between them.",
+    "prompt": "Mirrim Parking in Traralgon charges $3 for each hour or part of an hour, up to a maximum of $15. Stays of 15 minutes or less are free. During alpha testing, Keira runs the function shown with the test data in the testing table.\n\nComplete the expected output and actual output for tests 2 and 3, and identify the cause of any difference between them.",
     "points": [
       {
         "text": "Test 2 expected output: $6, because 90 minutes is one hour and part of another",
@@ -568,29 +580,29 @@
       {
         "id": "mirrim-tests",
         "kind": "table",
-        "title": "Test table",
+        "title": "Testing table",
         "columns": [
           "Test number",
-          "Input(s)",
+          "Minutes",
           "Expected output",
           "Actual output"
         ],
         "rows": [
           [
             "1",
-            "minutes = 10",
+            "10",
             "$0",
             "$0"
           ],
           [
             "2",
-            "minutes = 90",
+            "90",
             "",
             ""
           ],
           [
             "3",
-            "minutes = 600",
+            "600",
             "",
             ""
           ]
@@ -601,7 +613,8 @@
   {
     "id": "s-u4o1-kk06-002",
     "kk": [
-      "U4O1-KK06"
+      "U4O1-KK06",
+      "U3O1-KK14"
     ],
     "commandTerm": "describe",
     "marks": 3,
@@ -612,15 +625,16 @@
         "marks": 1
       },
       {
-        "text": "Records each test in a test table with the test number, input(s), expected output (worked out from the hall's rules) and actual output",
+        "text": "Records each test in a testing table with columns for the test number, each input (hours and membership), the expected output (worked out from the hall's rules) and the actual output",
         "marks": 1
       },
       {
-        "text": "Where actual output differs from expected output, locates the error with a debugging technique such as a breakpoint or debugging output, fixes it and re-runs the tests",
+        "text": "Where actual output differs from expected output, locates the error with a debugging technique such as a breakpoint or commenting out code, fixes it and re-runs the tests",
         "marks": 1
       }
     ],
-    "model": "Wren should prepare test data that covers every requirement: a valid length such as 3 hours; the boundary values 1 and 6 hours and the values just outside them, 0 and 7; invalid entries such as text; and bookings by both a member and a non-member, to check the 20% discount. For each test she records the test number, the inputs and the expected output, calculated by hand from the hall's rules, in a test table, then runs the module and records the actual output. Where the actual output differs from the expected output, she uses a breakpoint or debugging output statements to locate the error, fixes it, and re-runs that test and the earlier tests.",
+    "model": "Wren should prepare test data that covers every requirement: a valid length such as 3 hours; the boundary values 1 and 6 hours and the values just outside them, 0 and 7; invalid entries such as text; and bookings by both a member and a non-member, to check the 20% discount. Each test uses a combination of inputs not already tested. She records each test in a testing table, with the test number, a column for each input (hours and membership) and the expected output, calculated by hand from the hall's rules, then runs the module and records the actual output in full. Where the actual output differs from the expected output, she sets a breakpoint, or comments out sections of code, to locate the error, fixes it, and re-runs that test and the earlier tests.",
+    "mistake": "Each test needs a combination of inputs not already used. Two tests may give the same output, but a repeated combination earns no marks. Write the expected and actual output in full, never shortened.",
     "source": "textbook"
   },
   {
@@ -664,7 +678,7 @@
     "prompt": "Hopbush Community Nursing in Maryborough has had a visit-recording app developed for its 30 community nurses, who use it on work tablets to record each home visit, including the client's observations, the care given and any follow-up needed. The app is nearly complete.\n\nDescribe how Hopbush Community Nursing should conduct beta testing of the app. Refer to the user group, scenarios, observation and the recording of results.",
     "points": [
       {
-        "text": "User group: a small group of Hopbush nurses who represent the range of nurses (experience, age, confidence with technology, kinds of visit), not the developers",
+        "text": "User group: how testers are chosen, e.g. a small group of Hopbush nurses selected to represent the range of nurses (experience, age, confidence with technology, kinds of visit), not the developers",
         "marks": 1
       },
       {
@@ -676,12 +690,12 @@
         "marks": 1
       },
       {
-        "text": "Recording: each problem logged with the scenario, nurse, what should have happened, what actually happened and its severity, so it can be fixed before release",
+        "text": "Documenting results: what is recorded for each nurse and scenario, e.g. a screen recording and the observer's notes on whether it was completed without help, the time taken for each step, where the nurse hesitated or made errors and their comments, used to recommend changes before release",
         "marks": 1
       }
     ],
-    "model": "Hopbush Community Nursing should choose about five nurses who reflect the range of its 30 nurses, such as new and experienced nurses, nurses who are more and less confident with technology, and nurses who make different kinds of visits. The developers shouldn't be the testers, because they already know how the app works.\n\nEach nurse should be given realistic scenarios written as goals, such as 'Record a visit where you changed a wound dressing, and book a follow-up visit for next week', and carry them out on their work tablet in realistic conditions, such as in the car between visits, using test client records rather than real ones.\n\nA developer should watch without helping, noting where nurses hesitate, make errors or take a long time, for example while entering the client's observations.\n\nEvery problem should be recorded in a log with the date, nurse, scenario, what should have happened, what actually happened and how serious it is, so the developers can reproduce and fix the most serious problems before the app is released.",
-    "mistake": "Generic answers ('choose some users and give them tasks') earn little. Each part should name something specific to the nurses and their home visits.",
+    "model": "Hopbush Community Nursing should choose about five nurses who reflect the range of its 30 nurses, such as new and experienced nurses, nurses who are more and less confident with technology, and nurses who make different kinds of visits. The developers shouldn't be the testers, because they already know how the app works.\n\nEach nurse should be given realistic scenarios written as goals, such as 'Record a visit where you changed a wound dressing, and book a follow-up visit for next week', and carry them out on their work tablet in realistic conditions, such as in the car between visits, using test client records rather than real ones.\n\nAn observer, such as a developer, should watch each nurse work through the scenarios without helping or prompting, so the results show what nurses can do on their own.\n\nThe observer should document the results for each nurse and scenario: whether the nurse finished it without help, how long each step took (from a screen recording of the tablet), where they hesitated or made errors, for example while entering the client's observations, and what they said. These results are then used to decide which changes to recommend before the app is released.",
+    "mistake": "Testers don't check the values the app produces or hunt for bugs; that belongs to alpha testing. Say how the nurses are chosen, what scenario they carry out and what is recorded as they do it, each tied to the nurses' home visits.",
     "source": "textbook"
   },
   {
@@ -789,18 +803,19 @@
     "id": "s-u4o1-kk08-001",
     "kk": [
       "U4O1-KK08",
-      "U4O1-KK09"
+      "U4O1-KK09",
+      "U3O2-KK13"
     ],
     "commandTerm": "describe",
-    "marks": 4,
-    "prompt": "Tarrone Community Health in Warrnambool will launch a new check-in kiosk program in February. The software requirements specification states that clients must be able to check in within one minute, and that clients with low vision must be able to check in without help.\n\nDescribe an evaluation strategy for the kiosk program. Refer to two evaluation criteria, the data to be collected for each, and when the evaluation would take place.",
+    "marks": 5,
+    "prompt": "Tarrone Community Health in Warrnambool will launch a new check-in kiosk program at the start of February. The software requirements specification states that clients must be able to check in within one minute, and that clients with low vision must be able to check in without help.\n\nDescribe an evaluation strategy for the kiosk program. Refer to two evaluation criteria and the data to be collected for each, the time frame, and who is responsible.",
     "points": [
       {
-        "text": "A measurable criterion based on the one-minute requirement, e.g. at least 90% of check-ins are completed in under one minute",
+        "text": "A measurable efficiency criterion based on the one-minute requirement, e.g. at least 90% of check-ins are completed in under one minute",
         "marks": 1
       },
       {
-        "text": "A measurable criterion based on the low-vision requirement, e.g. at least 9 of 10 low-vision clients observed check in without staff help",
+        "text": "A measurable effectiveness (accessibility) criterion based on the low-vision requirement, e.g. at least 9 of 10 low-vision clients observed check in without staff help",
         "marks": 1
       },
       {
@@ -808,11 +823,15 @@
         "marks": 1
       },
       {
-        "text": "Timing: after the kiosk has been in normal use for several weeks (e.g. data collected in March and April, reported in May), so clients are past the learning stage",
+        "text": "Time frame: after the kiosk has been in normal use for several weeks (e.g. data collected in March and April, reported in May), so clients are past the learning stage",
+        "marks": 1
+      },
+      {
+        "text": "Responsibility: who collects or provides the data and who reports, e.g. the IT officer exports the kiosk log, reception staff record the observations, and the practice manager compares the results with the criteria",
         "marks": 1
       }
     ],
-    "model": "Criterion 1 (efficiency): at least 90% of check-ins are completed in under one minute. The kiosk program would log the start and finish time of every check-in, so the percentage completed within one minute can be calculated.\n\nCriterion 2: at least 9 of 10 clients with low vision can check in without help from staff. A staff member would observe a sample of low-vision clients as they check in and record whether each one needed help.\n\nTiming: data would be collected from the start of March, once clients have had several weeks to get used to the kiosk, until the end of April. The practice manager would then compare the results with the criteria and report in May.",
+    "model": "Criterion 1 (efficiency): at least 90% of check-ins are completed in under one minute. The kiosk program would log the start and finish time of every check-in, so the percentage completed within one minute can be calculated.\n\nCriterion 2 (effectiveness, accessibility): at least 9 of 10 clients with low vision can check in without help from staff. Reception staff would observe a sample of low-vision clients as they check in and record whether each one needed help.\n\nTime frame: data would be collected from the start of March, once clients have had several weeks to get used to the kiosk, until the end of April, and the results would be reported in May.\n\nResponsibility: the clinic's IT officer would export the kiosk's check-in log at the end of each month, the reception staff would record the observations, and the practice manager would compare the results with both criteria and write the report.",
     "source": "textbook"
   },
   {
@@ -1006,7 +1025,7 @@
         "marks": 1
       },
       {
-        "text": "Effect of the scope creep: the Gantt chart has no time for designing, coding and testing the feature, so coding runs over, later tasks and milestones slip, or testing time is squeezed",
+        "text": "Effect of the scope creep: the Gantt chart has no time for designing, coding and testing the feature, so coding runs over, later tasks and milestones slip, testing time is squeezed, or effort is drawn away from the agreed requirements so they may not all be met",
         "marks": 1
       },
       {
@@ -1018,8 +1037,9 @@
         "marks": 1
       }
     ],
-    "model": "The event-booking feature is scope creep, because it adds work after the scope was agreed in the SRS and the plan hasn't been changed to allow for it. The Gantt chart has no time for designing, coding and testing the feature, so coding will run over, the tasks that depend on it will start late, and testing time may be cut to hold the deadline, which risks releasing a program with more errors.\n\nThe lead developer's move is a change in personnel. Their unfinished tasks must be given to other developers, who need time to understand code they didn't write. Those tasks will take longer than estimated, and if they are on the critical path, the program will be handed over to the club later than planned.",
-    "source": "textbook"
+    "model": "The event-booking feature is scope creep, because it adds work after the scope was agreed in the SRS and the plan hasn't been changed to allow for it. The Gantt chart has no time for designing, coding and testing the feature, so coding will run over, the tasks that depend on it will start late, and testing time may be cut to hold the deadline, which risks releasing a program with more errors. The time spent on the extra feature is also taken from the membership features the club asked for, which may not all be finished.\n\nThe lead developer's move is a change in personnel. Their unfinished tasks must be given to other developers, who need time to understand code they didn't write. Those tasks will take longer than estimated, and if they are on the critical path, the program will be handed over to the club later than planned.",
+    "source": "textbook",
+    "mistake": "Scope creep doesn't give the client a better product. Unplanned extras draw time and effort away from the agreed requirements, which may not all be met."
   },
   {
     "id": "s-u4o1-kk10-002",
@@ -1162,7 +1182,8 @@
   {
     "id": "s-u4o1-kk11-001",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "commandTerm": "describe",
     "marks": 4,
@@ -1183,10 +1204,19 @@
       {
         "text": "How it helps: shows planned against actual progress at a glance, so she can see early whether a delay threatens the start of the season and adjust dependent tasks",
         "marks": 1
+      },
+      {
+        "text": "Alternative technique: adjusting the plan's time frames and tasks as work runs late or early (for example, extending a task and moving the tasks that depend on it), while keeping the original dates",
+        "marks": 1
+      },
+      {
+        "text": "How it helps: the plan stays realistic, so she can see whether the program will still be ready for the season and which later tasks need to change",
+        "marks": 1
       }
     ],
-    "model": "Nadia could keep a development journal, writing a dated entry each session that records the tasks she worked on, how long they took, any problems and how she solved them, and decisions with her reasons. Because she works alone, this explains later why tasks took longer than planned, and it gives her evidence when she assesses her project plan.\n\nShe could also annotate her Gantt chart as she goes, adding actual start and finish dates, the percentage of each task complete and short notes on any changes, while keeping the original dates visible. This lets her compare planned and actual progress at a glance and see early whether a delay will push the program past the start of the season, so she can adjust later tasks in time.",
-    "source": "textbook"
+    "model": "Nadia could keep a development journal, writing a dated entry each session that records the tasks she worked on, how long they took, any problems and how she solved them, and decisions with her reasons. Because she works alone, this explains later why tasks took longer than planned, and it gives her evidence when she assesses her project plan.\n\nShe could also annotate her Gantt chart as she goes, adding actual start and finish dates, the percentage of each task complete and short notes giving the reason for each change and its effect on later tasks, while keeping the original dates visible. This lets her compare planned and actual progress at a glance and see early whether a delay will push the program past the start of the season, so she can adjust later tasks in time.",
+    "source": "textbook",
+    "mistake": "Describing what a Gantt chart looks like earns nothing here. Say how Nadia would update it and compare actual with planned progress to see whether she is ahead or behind."
   },
   {
     "id": "s-u4o1-kk11-002",
@@ -1205,6 +1235,10 @@
       {
         "text": "That comparison is the evidence needed to assess the effectiveness of her project plan, e.g. it shows her coding estimate was a week short, so future plans can be more realistic",
         "marks": 1
+      },
+      {
+        "text": "Alternative for the second mark: the original dates record that a change was made, so the number of changes to the plan and their impact on completion can be reviewed when the plan is assessed",
+        "marks": 1
       }
     ],
     "model": "By writing over the original dates, Nadia has lost the record of what she planned. If she had kept them beside the adjusted dates, she could compare planned and actual progress. That comparison is the evidence she needs when assessing her project plan: it would show that her coding estimate was a week short, which she could allow for in future plans.",
@@ -1213,7 +1247,8 @@
   {
     "id": "s-u4o1-kk11-003",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "commandTerm": "recommend",
     "marks": 3,
@@ -1320,7 +1355,7 @@
     "id": "s-u4o1-kk12-002",
     "kk": [
       "U4O1-KK12",
-      "U4O1-KK08"
+      "U4O1-KK09"
     ],
     "commandTerm": "explain",
     "marks": 2,
@@ -1366,7 +1401,7 @@
       }
     ],
     "model": "First, Imogen should plan time to fix the problems that beta testing finds and to retest the fixes, for example as a separate task after beta testing. Her plan allowed 3 days for beta testing, but it took 6, because the testers found 11 problems and no time had been planned to fix them. That accounts for 3 of the 5 days the program was late.\n\nSecond, she should build some spare time into the plan before a date that can't move, by planning to finish a few days before the old system's licence runs out. The test server was down for 2 days during coding, which no one could have predicted. With a few spare days before 1 February, that delay would have been absorbed instead of pushing go-live past the date the old system stopped.",
-    "mistake": "A recommendation needs evidence behind it. 'Make better estimates' is too vague: say what to change in the plan and point to the figures that show why.",
+    "mistake": "'Make better estimates' is too vague, and two versions of one idea earn only one mark. Give two different changes to the plan, each backed by the figures in the table.",
     "source": "textbook",
     "figures": [
       {

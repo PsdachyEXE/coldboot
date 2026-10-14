@@ -20,7 +20,8 @@
     "front": "Give three practices that make the development of a solution user-centred.",
     "back": "- Find out who the users are, what tasks they perform and where they work\n- Have users try mock-ups or early versions and give feedback\n- Revise the solution in response to that feedback, then check it with users again",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Saying only that user-centred design meets users' needs doesn't describe it. Describe how the actual users take part at each stage, for example in interviews, by trying mock-ups and early versions, and in beta testing."
   },
   {
     "id": "c-u4o1-kk01-004",
@@ -83,7 +84,8 @@
   {
     "id": "c-u4o1-kk02-001",
     "kk": [
-      "U4O1-KK02"
+      "U4O1-KK02",
+      "U3O1-KK04"
     ],
     "type": "basic",
     "front": "Why must numeric fields read from a CSV file be converted before they are used in calculations?",
@@ -95,7 +97,8 @@
   {
     "id": "c-u4o1-kk02-002",
     "kk": [
-      "U4O1-KK02"
+      "U4O1-KK02",
+      "U3O1-KK05"
     ],
     "type": "basic",
     "front": "A CSV file holds one customer per line: name, postcode and account balance. Which data structure suits holding the file while the program runs, and why?",
@@ -125,16 +128,18 @@
     "front": "A program must send each event's results, with a different number of competitors in each event, to another organisation's system. Why does XML suit this output better than CSV?",
     "back": "XML elements can be nested, so each event element can hold any number of competitor elements, and the tags name every field so the receiving system can read it. CSV suits flat records that all have the same fields.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "When a question asks only for the benefits of XML, an answer framed as a comparison with CSV earned no marks in 2025. Describe XML's own features in the scenario: an extensible structure, tags that describe what each value means, and portability between systems."
   },
   {
     "id": "c-u4o1-kk02-005",
     "kk": [
-      "U4O1-KK02"
+      "U4O1-KK02",
+      "U3O1-KK04"
     ],
     "type": "basic",
-    "front": "Why should a program store a price as a number, and add the $ sign and two decimal places only when the price is output?",
-    "back": "Stored as Floating point, the price can be totalled and compared. The $ sign and decimal places are a matter of display, so they are applied at output; storing \"$12.50\" as a String would need converting back before every calculation.",
+    "front": "Why should a program store a price such as $12.50 as a Floating point value, and add the $ sign only when the price is output?",
+    "back": "Stored as Floating point, to two decimal places, the price can be totalled and compared. The $ sign belongs to how the price is displayed, so it is added at output, along with formatting such as always showing two decimal places. Storing \"$12.50\" as a String would mean converting it back to a number before every calculation.",
     "mistake": "A value that looks right on screen isn't necessarily stored in a usable type. Keep how data is stored separate from how it is displayed.",
     "difficulty": 2,
     "source": "textbook"
@@ -142,7 +147,8 @@
   {
     "id": "c-u4o1-kk02-006",
     "kk": [
-      "U4O1-KK02"
+      "U4O1-KK02",
+      "U3O1-KK04"
     ],
     "type": "cloze",
     "front": "A program reads the line `BK-204,3,18.50` (product code, quantity, unit price). It splits the line at each {{comma}}, keeps the product code as a {{String}}, and converts the quantity to {{Integer}} and the price to {{Floating point}} before storing them in a record.",
@@ -177,10 +183,11 @@
   {
     "id": "c-u4o1-kk03-001",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "type": "basic",
-    "front": "Why is a solution built from functions and procedures with parameters easier to develop and maintain?",
+    "front": "Why is a solution built from functions and methods with parameters easier to develop and maintain?",
     "back": "Each module does one job and can be tested on its own. Parameters let one module work on different data, so code is reused instead of copied, and a fix made in one place corrects every call.",
     "difficulty": 1,
     "source": "textbook"
@@ -188,19 +195,21 @@
   {
     "id": "c-u4o1-kk03-002",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "type": "compare",
     "front": "Parameter versus return value",
     "back": "| | Parameter | Return value |\n|:--|:--|:--|\n| Direction | Into the function when it is called | Out of the function, back to the caller |\n| Example | `weight` in `shippingCost(weight)` | `RETURN cost` |",
-    "mistake": "Displaying a result inside a function isn't the same as returning it. The calling code can use only a value that the function returns.",
+    "mistake": "Displaying a result inside a function isn't the same as returning it. A displayed value only appears on the screen; for the calling code to store or reuse the result, the function should return it.",
     "difficulty": 1,
     "source": "textbook"
   },
   {
     "id": "c-u4o1-kk03-003",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "type": "basic",
     "front": "Which GUI control suits each input?\n\n- Whether a customer wants a printed receipt\n- One of three delivery options\n- One of 80 suburbs\n- A customer's surname",
@@ -212,18 +221,20 @@
   {
     "id": "c-u4o1-kk03-004",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "type": "cloze",
     "front": "To read a file whose number of lines is unknown and may be zero, a {{pre-test}} loop suits, because its condition is checked {{before}} the first line is read.",
-    "back": "A post-test loop always runs at least once, so it would try to read a line from an empty file. A counted loop needs the number of lines in advance.",
+    "back": "A post-test loop always runs at least once, so it would try to read a line from an empty file. A FOR loop repeats a set number of times, so it needs the number of lines in advance.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u4o1-kk03-005",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U4O1-KK02"
     ],
     "type": "basic",
     "front": "Why should a program close a file once it has finished reading or writing it?",
@@ -234,23 +245,25 @@
   {
     "id": "c-u4o1-kk03-006",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "type": "basic",
     "front": "In a GUI program, what is an event, and how does the program respond to one?",
-    "back": "An event is an action such as clicking a button or changing a selection. The program runs the procedure linked to that event (its event handler); for example, clicking *Calculate* runs the code that works out the fee.",
+    "back": "An event is an action such as clicking a button or changing a selection. The program runs the method linked to that event (its event handler); for example, clicking *Calculate* runs the code that works out the fee.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u4o1-kk03-007",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "type": "basic",
     "front": "Why should variables be declared locally inside a module where possible?",
     "back": "A local variable exists only while its module runs, so other modules can't change it by accident. Modules stay independent and errors are easier to trace. Data a module needs is passed in as parameters.",
-    "mistake": "Making every variable global to avoid passing parameters lets any module change any value, which makes logic errors hard to find.",
+    "mistake": "A local variable isn't confined to the IF or loop where it is first used: it can be used anywhere in the module that declares it, just not outside that module. Making every variable global instead lets any module change any value, which makes logic errors hard to find.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -258,7 +271,7 @@
     "id": "c-u4o1-kk03-008",
     "kk": [
       "U4O1-KK03",
-      "U3O1-KK07"
+      "U3O1-KK08"
     ],
     "type": "basic",
     "front": "In an object-oriented solution, how does calling a method differ from calling a standalone function?",
@@ -281,7 +294,8 @@
   {
     "id": "c-u4o1-kk04-005",
     "kk": [
-      "U4O1-KK04"
+      "U4O1-KK04",
+      "U4O2-KK03"
     ],
     "type": "basic",
     "front": "Give three risks of building a feature on a third-party API.",
@@ -327,11 +341,12 @@
   {
     "id": "c-u4o1-kk05-001",
     "kk": [
-      "U4O1-KK05"
+      "U4O1-KK05",
+      "U3O1-KK10"
     ],
     "type": "basic",
     "front": "At what point should a program validate input, and why?",
-    "back": "As soon as the data is entered or read, before it is processed or stored. Invalid data is then rejected before it can cause a runtime error, produce wrong output or be saved into stored records.",
+    "back": "Usually as the data is entered or read in, before it is processed or stored, so invalid data is rejected before it can cause a runtime error, produce wrong output or be saved. Validation can also be run on data after it has been stored, for example to find incomplete records.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -339,7 +354,8 @@
     "id": "c-u4o1-kk05-002",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK01"
+      "U4O1-KK01",
+      "U3O2-KK15"
     ],
     "type": "basic",
     "front": "What makes a validation error message useful?",
@@ -352,19 +368,22 @@
     "id": "c-u4o1-kk05-003",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK10"
     ],
     "type": "basic",
     "front": "How does a drop-down list or check box reduce the validation a program needs?",
     "back": "It offers only valid values, so the user can't enter the wrong type of data or a value out of range. Type and range checks on that field become unnecessary, but an existence check is still needed if the control can be left with nothing selected.",
-    "mistake": "Restricting input with a control doesn't remove every check. The program must still confirm that a choice was made.",
+    "mistake": "A restricting control doesn't always remove every check. If it can be left with nothing chosen, such as a drop-down list that starts on \"Choose one\", the program must still confirm that a choice was made. A check box is always either ticked or not, so it needs no check.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u4o1-kk05-004",
     "kk": [
-      "U4O1-KK05"
+      "U4O1-KK05",
+      "U3O1-KK10",
+      "U4O1-KK03"
     ],
     "type": "cloze",
     "front": "For a quantity that must be from 1 to 20 inclusive, the value is valid when `qty >= 1` {{AND}} `qty <= 20`, and invalid when `qty < 1` {{OR}} `qty > 20`.",
@@ -377,7 +396,8 @@
     "id": "c-u4o1-kk05-005",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK02"
+      "U4O1-KK02",
+      "U3O1-KK10"
     ],
     "type": "basic",
     "front": "Why should data read from a file be validated, not just data typed by a user?",
@@ -388,7 +408,9 @@
   {
     "id": "c-u4o1-kk05-006",
     "kk": [
-      "U4O1-KK05"
+      "U4O1-KK05",
+      "U3O1-KK10",
+      "U4O1-KK03"
     ],
     "type": "basic",
     "front": "Why is validation often placed inside a loop?",
@@ -401,11 +423,13 @@
     "id": "c-u4o1-kk05-007",
     "kk": [
       "U4O1-KK05",
-      "U3O1-KK13"
+      "U3O1-KK13",
+      "U3O1-KK10"
     ],
     "type": "basic",
     "front": "A form checks that the weight field isn't empty, then converts the entry to Floating point. What happens if the user types \"12kg\", and which check prevents it?",
     "back": "In most languages the conversion fails while the program runs (a type mismatch), which can crash the program. A type check before the conversion rejects the entry because it isn't a number, and shows an error message instead.",
+    "mistake": "An existence check only shows that something was entered. \"12kg\" passes it, so a separate type check is needed before the value is converted or used in a calculation or comparison.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -413,11 +437,14 @@
     "id": "c-u4o1-kk05-008",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK06"
+      "U4O1-KK06",
+      "U3O1-KK10",
+      "U3O1-KK14"
     ],
     "type": "basic",
     "front": "How should a module's validation be tested during alpha testing?",
-    "back": "With test data for every check: valid values, each kind of invalid value (blank, wrong type, out of range), and boundary values on and just outside each limit. Each test's expected and actual output is recorded in a test table.",
+    "back": "With test data for every check: valid values, each kind of invalid value (blank, wrong type, out of range), and boundary values on and just outside each limit. Each test's expected and actual output is recorded in a testing table.",
+    "mistake": "Each test should use a combination of inputs not already tested. Two tests may give the same message, but repeating a combination tests nothing new.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -429,18 +456,20 @@
     ],
     "type": "compare",
     "front": "Alpha testing versus beta testing",
-    "back": "| | Alpha testing | Beta testing |\n|:--|:--|:--|\n| Who | Developers or in-house testers | A selected group of real users |\n| When | During development, before release | After alpha testing, on a near-final version |\n| Focus | Correct processing against the design, using test data | How the solution works for users in their own setting |",
+    "back": "| | Alpha testing | Beta testing |\n|:--|:--|:--|\n| Who | Developers, independent testers or high-level users | Intended users of the solution |\n| Where and when | A development or testing environment, throughout development | After alpha testing, in a development, testing or production environment, on hardware like the users' |\n| Checks | Requirements are met and the solution functions as expected | The same, plus stability and usability for the intended users |",
+    "mistake": "Beta testers don't hunt for bugs or check output values themselves. They are intended users carrying out planned scenarios while they are observed, and what they do is recorded.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u4o1-kk06-003",
     "kk": [
-      "U4O1-KK06"
+      "U4O1-KK06",
+      "U3O1-KK14"
     ],
     "type": "basic",
     "front": "When a test's actual output doesn't match its expected output, what should the developer do?",
-    "back": "Record the result in the test table, locate the cause (for example with a breakpoint or debugging output), fix the code, then run that test again, along with earlier tests, to check that the fix hasn't broken anything else.",
+    "back": "Record the result in the testing table, locate the cause (for example with a breakpoint or by commenting out code), fix the code, then run that test again, along with earlier tests, to check that the fix hasn't broken anything else.",
     "mistake": "Re-running only the failed test isn't enough. A fix can break something that passed before, so the earlier tests are run again too.",
     "difficulty": 2,
     "source": "textbook"
@@ -460,10 +489,11 @@
     "id": "c-u4o1-kk06-005",
     "kk": [
       "U4O1-KK06",
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U3O1-KK13"
     ],
     "type": "cloze",
-    "front": "Working through an algorithm by hand with test data, recording each variable's value as each line runs, is called {{desk checking}}; it can find {{logic errors}} before the code is run.",
+    "front": "Following an algorithm by hand, line by line, with test data and recording each variable's value as it changes, is called {{desk checking}}; it can find {{logic errors}} before the code is run.",
     "back": "Desk checking follows the algorithm exactly as written, so it shows what the code actually does rather than what the developer intended.",
     "difficulty": 2,
     "source": "textbook"
@@ -471,7 +501,8 @@
   {
     "id": "c-u4o1-kk06-006",
     "kk": [
-      "U4O1-KK06"
+      "U4O1-KK06",
+      "U3O1-KK14"
     ],
     "type": "basic",
     "front": "Why should debugging output statements be removed before a solution is released?",
@@ -498,7 +529,7 @@
     ],
     "type": "basic",
     "front": "Besides checking that calculations are correct, what should alpha testing check?",
-    "back": "- Each functional requirement is met\n- Invalid input is handled without crashing\n- Files are read and written correctly\n- Modules work together, passing data between them correctly",
+    "back": "- Every requirement is met, non-functional as well as functional\n- Invalid input is rejected with a message, not a crash\n- Files are read and written correctly\n- Modules work together, passing data between them correctly",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -510,8 +541,8 @@
     ],
     "type": "cloze",
     "front": "Beta testing takes place {{after alpha testing}}, when the solution is {{nearly complete}}, and before it is released to all its users.",
-    "back": "By then the developers have found and fixed the main errors, so beta testers can show how well the solution works for real users in real conditions.",
-    "mistake": "Beta testing doesn't replace alpha testing. Skipping alpha testing leaves beta testers meeting errors the developers should have found first.",
+    "back": "By then the main errors found in alpha testing have been fixed. Intended users can work through realistic scenarios on hardware like the hardware it will run on, showing whether it meets its requirements, works as intended, runs reliably and is usable by them.",
+    "mistake": "Beta testing doesn't replace alpha testing. Skipping alpha testing leaves beta testers meeting errors that alpha testing should have found first.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -522,8 +553,8 @@
     ],
     "type": "basic",
     "front": "What should guide the choice of a beta test user group?",
-    "back": "The group should represent the intended users: their roles, range of skills and experience, ages, devices and any accessibility needs. It should not include developers or others who already know how the solution works.",
-    "mistake": "Picking only the most confident users, or friends of the developer, gives smoother results than real users will get. The group must match the real user base.",
+    "back": "Testers come from the intended users of the feature being tested and should represent them: their roles, range of skills and experience, ages, devices and any accessibility needs. Choosing them at random from each site or group helps. Developers, and others who already know how the solution works, shouldn't be testers.",
+    "mistake": "Picking testers who never use the feature, or only the most confident users, gives results real users won't get. Testers come from the user group the feature serves; a context diagram shows which entity receives the feature's output.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -557,8 +588,8 @@
       "U4O1-KK07"
     ],
     "type": "cloze",
-    "front": "A beta test plan names the {{user group}}, the {{scenarios}} they will carry out, when and where testing happens, and how {{results}} will be recorded.",
-    "back": "The plan is written before testing so that every tester works through the same tasks under similar conditions and the results can be compared.",
+    "front": "A beta testing plan says how testers are chosen from the {{user group}}, which {{scenarios}} they will carry out, when and where testing happens, and how their {{results}} will be documented.",
+    "back": "The plan is written before testing so that testers in each user group work through the same tasks under similar conditions, and their results can be compared.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -568,10 +599,11 @@
       "U4O1-KK07"
     ],
     "type": "basic",
-    "front": "What should be recorded for each problem found in a beta test?",
-    "back": "The date, tester and scenario; what the tester did; what should have happened; what actually happened; and how serious the problem is. This lets developers reproduce the problem and decide which fixes come first.",
+    "front": "What should be documented as each beta tester works through a scenario?",
+    "back": "The tester and their user group, the scenario, whether they finished it without help, the time taken for each step, where they hesitated or made errors, anything that failed or crashed, and their comments. A screen recording and the observer's notes capture this, and the results guide which changes to recommend first.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Beta testers aren't there to check output values or hunt for bugs; that belongs to alpha testing. The results record how intended users got on with each scenario."
   },
   {
     "id": "c-u4o1-kk07-008",
@@ -581,7 +613,7 @@
     ],
     "type": "compare",
     "front": "Beta testing versus evaluation",
-    "back": "Beta testing happens before release, to find problems that must be fixed. Evaluation happens after the solution has been in use for some time, to judge its efficiency and effectiveness against evaluation criteria.",
+    "back": "Beta testing happens before the full release: intended users carry out realistic scenarios while they are observed, showing whether the solution meets its requirements, is stable and is usable, and the results lead to changes. Evaluation happens once the solution has been implemented and used for some time, to judge its efficiency and effectiveness against the evaluation criteria.",
     "mistake": "Asking users for their opinions doesn't make an activity an evaluation. If it happens before release to find problems, it's testing.",
     "difficulty": 2,
     "source": "textbook"
@@ -593,9 +625,9 @@
     ],
     "type": "reverse",
     "front": "Evaluation strategy",
-    "back": "A plan for judging a solution once it is in use. It typically sets out the evaluation criteria, what data will be collected for each and how, when collection and evaluation happen, and who is responsible for each task.",
+    "back": "A plan for judging how well a solution meets its requirements once it has been implemented. The study design lists its features as the evaluation criteria, the time frame (when data is gathered and the evaluation happens) and responsibility (who collects or provides the data). It also sets out what data is collected for each criterion, and how.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u4o1-kk08-002",
@@ -626,8 +658,8 @@
       "U4O1-KK08"
     ],
     "type": "basic",
-    "front": "What does a timeline in an evaluation strategy show? Give an example.",
-    "back": "When each evaluation activity happens, e.g. booking times logged from launch, a staff survey in week 6, and the results compared with the criteria and reported in week 8.",
+    "front": "What does the time frame (timeline) in an evaluation strategy set out? Give an example.",
+    "back": "When each evaluation activity happens, e.g. booking times logged in weeks 5 to 8 after launch, a staff survey in week 6, and the results compared with the criteria and reported in week 9.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -672,8 +704,8 @@
     ],
     "type": "basic",
     "front": "How is an evaluation criterion applied once the data has been collected?",
-    "back": "Compare the data with the criterion's target, decide whether it has been met, and support the judgement with the evidence, e.g. 'Average booking time was 95 seconds against a target of 120 seconds: met.'",
-    "mistake": "A judgement without the figures earns little. State the data, the target and the result.",
+    "back": "Compare the data with the criterion's target, decide whether it has been met, and support the judgement with the evidence. Then say what the result shows about the solution's efficiency or effectiveness, e.g. 'Average booking time was 95 seconds against a target of 120 seconds: met, so booking is efficient.'",
+    "mistake": "A judgement without the figures is only an opinion. State the data, the target and the result.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -718,9 +750,10 @@
     ],
     "type": "basic",
     "front": "How can scope creep affect a project plan?",
-    "back": "The added work takes time the plan didn't allow for, so tasks and milestones slip, costs rise, and time for testing is often squeezed, which can lower the quality of the solution.",
+    "back": "The added work takes time and people the plan didn't allow for, so tasks and milestones slip and costs rise. Effort is drawn away from the original requirements, which may then not be met, and testing time is often squeezed, which can lower the quality of the solution.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Scope creep doesn't buy a better product. Unchecked extras draw time and effort away from the features the project set out to deliver, so its original goals may be missed."
   },
   {
     "id": "c-u4o1-kk10-004",
@@ -729,9 +762,10 @@
     ],
     "type": "basic",
     "front": "How can a change in personnel disrupt a project plan?",
-    "back": "The departing person's tasks are delayed or reassigned, knowledge of their work may be lost, and a replacement needs time to learn the project, so tasks take longer than planned.",
+    "back": "When someone leaves, their tasks are delayed or reassigned and knowledge of their work may be lost. Anyone who joins or is moved onto the project needs time to learn its requirements and code, and others lose time helping them, so tasks take longer than planned.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Moving another developer onto a late task won't necessarily make it finish sooner: they first need time to learn the project, and the team loses time bringing them up to speed."
   },
   {
     "id": "c-u4o1-kk10-005",
@@ -770,13 +804,16 @@
   {
     "id": "c-u4o1-kk10-009",
     "kk": [
-      "U4O1-KK10"
+      "U4O1-KK10",
+      "U3O2-KK11",
+      "U4O1-KK04"
     ],
     "type": "basic",
     "front": "What can a development team do to reduce the effect of technical issues on a project plan?",
-    "back": "Back up code and data regularly, for example in a shared repository; test on the client's actual devices early; check that any library or API the solution relies on is stable, and have an alternative in mind; and allow some spare time for faults that can't be predicted.",
+    "back": "Back up code and data regularly to separate storage; keep code under version control in a shared repository so the team can roll back to a working version; test early on the client's devices; check that any library or API used is stable, with an alternative in mind; and allow spare time for faults that can't be predicted.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "Version control isn't a backup. It keeps the code's history so the team can roll back to a working version; code and data still need backups stored separately."
   },
   {
     "id": "c-u4o1-kk11-001",
@@ -793,35 +830,38 @@
   {
     "id": "c-u4o1-kk11-002",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "type": "basic",
     "front": "What annotations might be added to a Gantt chart during a project?",
-    "back": "Actual start and finish dates, the percentage of each task completed, the dates milestones were actually reached, and brief notes explaining delays or changes.",
+    "back": "Actual start and finish dates, the percentage of each task completed, the dates milestones were actually reached, and brief notes giving the reason for each delay or change and its effect on later tasks and the finish date.",
     "difficulty": 1,
     "source": "textbook"
   },
   {
     "id": "c-u4o1-kk11-003",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "type": "basic",
     "front": "When a task runs late, what adjustments might be made to the project plan?",
-    "back": "Move dependent tasks to later dates, reassign people to critical tasks, run tasks side by side where dependencies allow, reduce scope with the client's agreement, or agree a new deadline.",
-    "mistake": "Don't overwrite the original plan when adjusting it. Keep the planned dates alongside the changes so planned and actual progress can be compared.",
+    "back": "Adjust time frames: extend the late task, move every task that depends on it, run tasks side by side where dependencies allow and, if needed, agree a new deadline. Adjust tasks: reassign people to critical tasks or, with the client's agreement, drop a feature whose tasks are on the critical path.",
+    "mistake": "Shortening or removing non-critical tasks doesn't recover a delay on the critical path. Extend the late task's time frame, reschedule the tasks that depend on it, and keep the original dates so planned and actual can be compared.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u4o1-kk11-004",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U4O1-KK12"
     ],
     "type": "basic",
-    "front": "What should a development journal entry contain?",
-    "back": "The date, the tasks worked on and time spent, problems met and how they were solved, decisions made and the reasons for them, any changes to the plan, and the next steps.",
-    "mistake": "'Worked on the program' is not a useful entry. Without specific tasks, problems and reasons, the journal gives no evidence later.",
+    "front": "What should an entry in a project log or development journal contain?",
+    "back": "The date and author, the tasks worked on and time spent, problems met and how they were solved, decisions made and the reasons for them, any change to the plan with its reason and its impact on later tasks and the completion date, and the next steps.",
+    "mistake": "An entry that only says a task ran late or finished early, with no reason or impact, doesn't let anyone judge its effect on the plan. Record why it happened and how it affects later tasks and the completion date.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -840,7 +880,8 @@
   {
     "id": "c-u4o1-kk11-006",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "type": "basic",
     "front": "What can project management software do that a Gantt chart drawn by hand can't easily do?",
@@ -856,7 +897,7 @@
     ],
     "type": "compare",
     "front": "Annotation versus adjustment on a project plan",
-    "back": "An annotation records what happened, e.g. 'Coding finished 2 days late: test server down.' An adjustment changes the plan in response, e.g. moving testing 2 days later or adding a second developer.",
+    "back": "An annotation records what happened, why, and its effect, e.g. 'Coding finished 2 days late: test server down. Testing starts 2 days late, so go-live is at risk.' An adjustment changes the plan in response, to a time frame (moving testing 2 days later) or to a task (adding a second developer to testing).",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -878,19 +919,19 @@
     ],
     "type": "basic",
     "front": "What does assessing the effectiveness of a project plan involve?",
-    "back": "Comparing what was planned with what happened, such as task durations, start and finish dates, milestones and the final deadline, then explaining the causes of any differences and judging how well the plan guided the project.",
+    "back": "The study design names three techniques: reviewing the number of changes made to the plan during the project, the reason each change was necessary, and the impact of the changes on completing the project. Planned versus actual dates, milestones, annotations and logs provide the evidence.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u4o1-kk12-002",
     "kk": [
       "U4O1-KK12",
-      "U4O1-KK08"
+      "U4O1-KK09"
     ],
     "type": "compare",
     "front": "Evaluating the solution versus assessing the project plan",
-    "back": "Evaluating the solution judges the product: how efficiently and effectively it meets its requirements. Assessing the project plan judges the process: whether the tasks, durations and dependencies were realistic and how well the plan was managed.",
+    "back": "Evaluating the solution applies the evaluation criteria to judge the product: how efficiently and effectively it meets its requirements. Assessing the project plan judges the process: how many changes the plan needed, why they were necessary and how they affected completion, which shows whether its tasks, durations and dependencies were realistic.",
     "mistake": "A project can deliver an effective solution even though its plan was poor, and a well-run plan can still deliver a weak solution. Keep the two judgements separate.",
     "difficulty": 2,
     "source": "textbook"
@@ -914,14 +955,15 @@
     ],
     "type": "basic",
     "front": "Give three questions to ask when assessing a project plan.",
-    "back": "Any three: Were all the necessary tasks included? Were the time estimates realistic? Were the dependencies correct? Were milestones reached on time? Was the deadline met? Were disruptions handled well by adjusting the plan?",
+    "back": "Any three: How many changes were made to the plan? Why was each change necessary? How did each change affect completion? Were all the necessary tasks and dependencies included? Were the time estimates realistic? Were milestones and the deadline met? Were disruptions handled by prompt adjustments?",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u4o1-kk12-005",
     "kk": [
-      "U4O1-KK12"
+      "U4O1-KK12",
+      "U3O2-KK03"
     ],
     "type": "cloze",
     "front": "If most tasks took longer than planned for reasons that could have been foreseen, the plan's {{time estimates}} were unrealistic.",
@@ -944,7 +986,8 @@
   {
     "id": "c-u4o1-kk12-007",
     "kk": [
-      "U4O1-KK12"
+      "U4O1-KK12",
+      "U3O2-KK03"
     ],
     "type": "basic",
     "front": "How does a missing task show up when a project plan is assessed?",

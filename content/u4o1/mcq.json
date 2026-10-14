@@ -94,7 +94,8 @@
   {
     "id": "m-u4o1-kk01-005",
     "kk": [
-      "U4O1-KK01"
+      "U4O1-KK01",
+      "U4O1-KK09"
     ],
     "stem": "Priya updates the order-entry module used by phone staff at Goldfinch Lane Produce, a fruit and vegetable wholesaler in Shepparton. Staff used to type each product name in full; now the module suggests matching products once the first three letters are typed. The owner wants to know whether the change has made the module more *effective*, by comparing a measurement taken before and after the change. Which measurement should be compared?",
     "options": [
@@ -129,7 +130,7 @@
     "answer": 3,
     "explanation": "User-centred design begins by finding out who the users are, what tasks they do and where they do them. Watching workers in the vineyard before designing would have shown the bright sunlight and the patchy mobile coverage, so the screens, and the way records are saved, could have been designed for those conditions from the start.",
     "whyWrong": [
-      "Alpha testing is done by the developers, usually away from the vineyard, so it checks the app's processing rather than the conditions it is used in.",
+      "Alpha testing happens in a development or testing environment, run by developers, testers or high-level users, so it checks the app against its requirements, not in the sunlight and patchy coverage of the vineyard.",
       "Beta testing with the workers would probably reveal the problems, but only once the app is nearly finished, when redesigning it takes much more work.",
       "A survey after release finds the problems only once the app is in use, which is when Ruby found them.",
       ""
@@ -169,7 +170,7 @@
     "options": [
       "The bookings were saved in a CSV file instead of an XML file",
       "The bookings were held only in the array and never written to a file",
-      "The booking dates were stored as Strings instead of as Integers",
+      "The booking dates were stored as Strings instead of as date/time values",
       "The array held records instead of a two-dimensional array of values"
     ],
     "answer": 1,
@@ -186,7 +187,8 @@
   {
     "id": "m-u4o1-kk02-002",
     "kk": [
-      "U4O1-KK02"
+      "U4O1-KK02",
+      "U3O1-KK04"
     ],
     "stem": "Pickaxe Lane Hardware in Maldon keeps its stock list in `stock.csv`. The table shows the fields in each line, with an example value. When the program reads a line, it stores the fields in a record. Which data types best suit `onHand`, `price` and `discontinued`, in that order?",
     "options": [
@@ -433,7 +435,8 @@
   {
     "id": "m-u4o1-kk03-001",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "stem": "A booking form must let a customer choose exactly one of three fixed delivery methods. Which GUI control is most suitable?",
     "options": [
@@ -456,7 +459,8 @@
   {
     "id": "m-u4o1-kk03-002",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "stem": "Tallowwood Hollow Nursery in Bairnsdale uses the function shown to calculate the cost of sending an online order. What does `shippingCost(8, True)` return?",
     "options": [
@@ -466,7 +470,7 @@
       "38.20"
     ],
     "answer": 1,
-    "explanation": "8 is greater than 5, so line 5 sets `cost` to 9.50 + 3 × 1.20 = 13.10. `express` is True, so line 8 doubles it to 26.20, which is returned.",
+    "explanation": "8 is greater than 5, so line 5 sets `cost` to 9.50 + 3 × 1.20 = 13.10. `express` is true, so line 8 doubles it to 26.20, which is returned.",
     "whyWrong": [
       "13.10 is the cost before line 8 doubles it for express delivery.",
       "",
@@ -486,7 +490,9 @@
   {
     "id": "m-u4o1-kk03-003",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08",
+      "U4O1-KK01"
     ],
     "stem": "Juniper is developing an ordering program for Mudlark Deliveries in Echuca. She copied the same 12 lines that calculate a delivery fee into four event handlers. When the fee rule changed to include a $10 minimum, she updated three of the copies but missed the fourth, so some customers were undercharged. Which approach would best have prevented this error?",
     "options": [
@@ -509,7 +515,8 @@
   {
     "id": "m-u4o1-kk03-004",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "stem": "Wattle Wagon Toy Library in Hamilton calculates late fees with the function `lateFee` and the algorithm shown. Arrays are indexed from 0. What does the algorithm display?",
     "options": [
@@ -522,9 +529,9 @@
     "explanation": "`lateFee(0)` returns 0, because neither condition is true. `lateFee(3)` returns 5. `lateFee(10)` returns 5 + 3 × 2 = 11. The total is 0 + 5 + 11 = 16.",
     "whyWrong": [
       "11 is only the fee for 10 days; the loop adds all three fees to `total`.",
-      "21 charges $5 for 0 days, but `days > 0` is False when `days` is 0.",
+      "21 charges $5 for 0 days, but `days > 0` is false when `days` is 0.",
       "",
-      "10 charges the flat $5 for 10 days, but `days > 7` is checked first and is True."
+      "10 charges the flat $5 for 10 days, but `days > 7` is checked first and is true."
     ],
     "difficulty": 3,
     "source": "textbook",
@@ -579,7 +586,8 @@
     "id": "m-u4o1-kk03-006",
     "kk": [
       "U4O1-KK03",
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U3O1-KK05"
     ],
     "stem": "The weather station at Pelican Point Sailing Club on Lake Boga records the wind speed every half hour. At the end of each day, the array `wind` holds that day's 48 readings, oldest first. Arrays are indexed from 0. An end-of-day summary must show the day's last six readings, newest first. The body of each loop below is `DISPLAY wind[i]`. Which loop is correct?",
     "options": [
@@ -602,17 +610,18 @@
   {
     "id": "m-u4o1-kk03-007",
     "kk": [
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK08"
     ],
     "stem": "On the online order form for Woodfire Wren Pizza in Myrtleford, the price shown must update as soon as the customer picks a different pizza size from a drop-down list. Which is the most suitable way to program this?",
     "options": [
       "Run a loop that checks the drop-down list over and over for a new size",
-      "Link a procedure that recalculates the price to the list's change event",
-      "Store the chosen size in a global variable that every procedure can read",
+      "Link a method that recalculates the price to the list's change event",
+      "Store the chosen size in a global variable that every module can read",
       "Recalculate the price only when the customer clicks the Order button"
     ],
     "answer": 1,
-    "explanation": "GUI programs are event-driven. Choosing a new size raises the drop-down list's change event, and the procedure linked to that event (its event handler) recalculates and displays the price straight away.",
+    "explanation": "GUI programs are event-driven. Choosing a new size raises the drop-down list's change event, and the method linked to that event (its event handler) recalculates and displays the price straight away.",
     "whyWrong": [
       "Checking the list over and over wastes processing; a GUI program runs code when an event happens instead.",
       "",
@@ -671,7 +680,8 @@
   {
     "id": "m-u4o1-kk04-003",
     "kk": [
-      "U4O1-KK04"
+      "U4O1-KK04",
+      "U4O2-KK08"
     ],
     "stem": "Dan finds an open-source charting library he could use in a reporting program for Hopkins Flats Dairy Co-op in Warrnambool. Which check is most important before he includes it in the program?",
     "options": [
@@ -681,7 +691,7 @@
       "That it reads its data from XML files rather than from CSV files"
     ],
     "answer": 0,
-    "explanation": "A library's licence sets the conditions for using it, such as whether it may be included in the co-op's program and how its authors must be acknowledged. Ignoring the licence can infringe the authors' rights.",
+    "explanation": "A library's licence sets the conditions for using it, such as whether it may be included in the co-op's program and how its authors must be acknowledged. Using it without meeting those conditions can infringe the authors' copyright.",
     "whyWrong": [
       "",
       "Naming conventions affect readability; they aren't a condition of using the library.",
@@ -787,7 +797,8 @@
     "id": "m-u4o1-kk05-001",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK03"
+      "U4O1-KK03",
+      "U3O1-KK10"
     ],
     "stem": "An online order form for Seedpod Nursery in Kyneton asks customers to type their state or territory into a text box. Many entries are misspelt. Which change would most reduce the validation this field needs?",
     "options": [
@@ -810,9 +821,11 @@
   {
     "id": "m-u4o1-kk05-002",
     "kk": [
-      "U4O1-KK05"
+      "U4O1-KK05",
+      "U3O1-KK10",
+      "U4O1-KK03"
     ],
-    "stem": "Redgum Flat Junior Cricket Club in Donald accepts players aged 5 to 17 inclusive. Which condition is True exactly when an entered age is invalid?",
+    "stem": "Redgum Flat Junior Cricket Club in Donald accepts players aged 5 to 17 inclusive. Which condition is true exactly when an entered age is invalid?",
     "options": [
       "`age < 5 AND age > 17`",
       "`age <= 5 OR age >= 17`",
@@ -820,11 +833,11 @@
       "`age < 5 OR age > 17`"
     ],
     "answer": 3,
-    "explanation": "An age is invalid if it is below 5 or above 17. `OR` makes the condition True when either is the case, and the strict `<` and `>` keep the boundary ages 5 and 17 valid.",
+    "explanation": "An age is invalid if it is below 5 or above 17. `OR` makes the condition true when either is the case, and the strict `<` and `>` keep the boundary ages 5 and 17 valid.",
     "whyWrong": [
-      "No age is both below 5 and above 17, so this is never True and every age is accepted.",
+      "No age is both below 5 and above 17, so this is never true and every age is accepted.",
       "`<=` and `>=` make the valid boundary ages 5 and 17 count as invalid.",
-      "Every age is either above 5 or below 17, so this is always True and every age is rejected.",
+      "Every age is either above 5 or below 17, so this is always true and every age is rejected.",
       ""
     ],
     "difficulty": 2,
@@ -833,7 +846,9 @@
   {
     "id": "m-u4o1-kk05-003",
     "kk": [
-      "U4O1-KK05"
+      "U4O1-KK05",
+      "U3O1-KK10",
+      "U4O1-KK03"
     ],
     "stem": "Tarwin Tide Egg Farm in Tarwin Lower sells eggs online in orders of 1 to 12 trays. The algorithm shown checks the number of trays. A customer enters 13, then 0, then 12, then 5. How many times is the message on line 4 displayed, and what does line 7 display?",
     "options": [
@@ -864,7 +879,8 @@
     "id": "m-u4o1-kk05-004",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK02"
+      "U4O1-KK02",
+      "U3O1-KK10"
     ],
     "stem": "Kooyoora Rainfall Group in Wedderburn imports members' daily readings from a CSV file. One line holds `ERR` in the rainfall field instead of a number, and the import program crashes when it converts that field. Which technique would best prevent this?",
     "options": [
@@ -888,9 +904,10 @@
     "id": "m-u4o1-kk05-005",
     "kk": [
       "U4O1-KK05",
-      "U3O1-KK08"
+      "U3O1-KK08",
+      "U3O1-KK10"
     ],
-    "stem": "Bilby Burrow Party Rooms in Wangaratta takes party bookings for 10 to 30 children. Parties are held in the small room or the large room, and the small room holds at most 15 children. The room is chosen with radio buttons, so `room` is always \"small\" or \"large\". Which condition is True exactly when a booking is valid?",
+    "stem": "Bilby Burrow Party Rooms in Wangaratta takes party bookings for 10 to 30 children. Parties are held in the small room or the large room, and the small room holds at most 15 children. The room is chosen with radio buttons, so `room` is always \"small\" or \"large\". Which condition is true exactly when a booking is valid?",
     "options": [
       "`(children >= 10 AND children <= 30) OR (room = \"small\" AND children <= 15)`",
       "`(children >= 10 OR children <= 30) AND (room = \"large\" OR children <= 15)`",
@@ -898,10 +915,10 @@
       "`(children >= 10 AND children <= 30) AND (room = \"large\" OR children <= 15)`"
     ],
     "answer": 3,
-    "explanation": "The first part is a range check: 10 to 30 children. The second part applies the small room's limit: it is True when the room is large, or when there are no more than 15 children. A valid booking must pass both parts, so they are joined with AND.",
+    "explanation": "The first part is a range check: 10 to 30 children. The second part applies the small room's limit: it is true when the room is large, or when there are no more than 15 children. A valid booking must pass both parts, so they are joined with AND.",
     "whyWrong": [
       "With OR, passing either part is enough, so 25 children in the small room are accepted, and so are 5.",
-      "`children >= 10 OR children <= 30` is True for every number, so a booking for 40 children in the large room is accepted.",
+      "`children >= 10 OR children <= 30` is true for every number, so a booking for 40 children in the large room is accepted.",
       "This applies the limit to the wrong room: 20 children are rejected in the large room but accepted in the small room.",
       ""
     ],
@@ -912,7 +929,9 @@
     "id": "m-u4o1-kk05-006",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK06"
+      "U4O1-KK06",
+      "U3O1-KK10",
+      "U3O1-KK14"
     ],
     "stem": "The online booking form at Tussock Lane Kitchen in Colac has two fields: the customer's name, which is required, and the number of guests, a whole number from 1 to 10. During alpha testing, the developer recorded the results shown. Which validation check do the results show is missing?",
     "options": [
@@ -935,35 +954,40 @@
       {
         "id": "tussock-lane-tests",
         "kind": "table",
-        "title": "Test table",
+        "title": "Testing table",
         "columns": [
           "Test number",
-          "Input(s)",
+          "Name",
+          "Guests",
           "Expected output",
           "Actual output"
         ],
         "rows": [
           [
             "1",
-            "name = Ari Nguyen, guests = 3",
+            "Ari Nguyen",
+            "3",
             "Booking saved",
             "Booking saved"
           ],
           [
             "2",
-            "name left blank, guests = 4",
+            "(left blank)",
+            "4",
             "Enter your name",
             "Booking saved"
           ],
           [
             "3",
-            "name = Li Wei, guests = three",
+            "Li Wei",
+            "three",
             "Guests must be a whole number",
             "Guests must be a whole number"
           ],
           [
             "4",
-            "name = Li Wei, guests = 12",
+            "Li Wei",
+            "12",
             "Guests must be from 1 to 10",
             "Guests must be from 1 to 10"
           ]
@@ -975,7 +999,8 @@
     "id": "m-u4o1-kk05-007",
     "kk": [
       "U4O1-KK05",
-      "U4O1-KK02"
+      "U4O1-KK02",
+      "U3O1-KK10"
     ],
     "stem": "Silvereye Singers, a community choir in Sale, takes concert bookings on paper forms, which a volunteer types into `bookings.csv`. Each line holds a name and a number of tickets. The booking program imports the file and applies three checks to each line: an existence check on the name, a type check that the number of tickets is a whole number, and a range check that it is from 1 to 10 inclusive. A line that fails any check is rejected and listed for the volunteer to correct. Which lines in the file shown are rejected?",
     "options": [
@@ -1039,21 +1064,21 @@
     ],
     "stem": "Which statement best describes alpha testing?",
     "options": [
-      "Testing by a selected group of real users in their own setting",
-      "Checking that data entered is reasonable before it is processed",
+      "Testing by intended users, on hardware like the hardware they will use",
+      "Checking that the data users enter is reasonable and complete",
       "Judging the finished solution against evaluation criteria after release",
-      "Testing by the developers before the solution is released to users"
+      "Testing throughout development, in a development or testing environment"
     ],
     "answer": 3,
-    "explanation": "Alpha testing is done by the developers, or an in-house team, during development, to check that the solution works as designed before users see it.",
+    "explanation": "Alpha testing goes on while the solution is being built, in a development or testing environment, to confirm that each module and the whole solution satisfy the requirements and work as intended. The testers can be the developers themselves, independent testers or high-level users.",
     "whyWrong": [
-      "This describes beta testing, which follows alpha testing.",
-      "This describes validation.",
+      "This describes beta testing, which is carried out by intended users on the same or similar hardware to the hardware they will use.",
+      "This describes validation, which checks data, not the solution.",
       "This describes evaluation, which takes place once the solution is in use.",
       ""
     ],
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u4o1-kk06-002",
@@ -1061,7 +1086,7 @@
       "U4O1-KK06",
       "U3O1-KK14"
     ],
-    "stem": "Kurrajong Kids Swim School in Horsham charges $18 per lesson, with 10% off the total when a family books 10 or more lessons. During alpha testing, the function shown is run with the test data in the test table. Which test's actual output will differ from its expected output?",
+    "stem": "Kurrajong Kids Swim School in Horsham charges $18 per lesson, with 10% off the total when a family books 10 or more lessons. During alpha testing, the function shown is run with the test data in the testing table. Which test's actual output will differ from its expected output?",
     "options": [
       "Test 1",
       "Test 2",
@@ -1069,12 +1094,12 @@
       "Test 4"
     ],
     "answer": 1,
-    "explanation": "Ten lessons should earn the discount, but line 3 tests `lessons > 10`, which is False when `lessons` is 10. The function returns 180, not 162.00. The condition should be `lessons >= 10`.",
+    "explanation": "Ten lessons should earn the discount, but line 3 tests `lessons > 10`, which is false when `lessons` is 10. The function returns 180, not 162.00. The condition should be `lessons >= 10`.",
     "whyWrong": [
       "4 lessons get no discount, and the function correctly returns 4 × 18 = 72.",
       "",
-      "11 > 10 is True, so the function correctly returns 198 × 0.9 = 178.20.",
-      "20 > 10 is True, so the function correctly returns 360 × 0.9 = 324."
+      "11 > 10 is true, so the function correctly returns 198 × 0.9 = 178.20.",
+      "20 > 10 is true, so the function correctly returns 360 × 0.9 = 324."
     ],
     "difficulty": 2,
     "source": "textbook",
@@ -1087,35 +1112,35 @@
       {
         "id": "kurrajong-tests",
         "kind": "table",
-        "title": "Test table",
+        "title": "Testing table",
         "columns": [
           "Test number",
-          "Input(s)",
+          "Lessons",
           "Expected output",
           "Actual output"
         ],
         "rows": [
           [
             "1",
-            "lessons = 4",
+            "4",
             "72.00",
             ""
           ],
           [
             "2",
-            "lessons = 10",
+            "10",
             "162.00",
             ""
           ],
           [
             "3",
-            "lessons = 11",
+            "11",
             "178.20",
             ""
           ],
           [
             "4",
-            "lessons = 20",
+            "20",
             "324.00",
             ""
           ]
@@ -1150,7 +1175,8 @@
   {
     "id": "m-u4o1-kk06-004",
     "kk": [
-      "U4O1-KK06"
+      "U4O1-KK06",
+      "U3O1-KK14"
     ],
     "stem": "Wedgetail Archery Club in Seymour uses the function shown to find a competitor's highest score. Arrays are indexed from 0, and all scores are positive. Test 1, `highestScore([12, 18, 7, 15])`, returned 18, as expected. Which input for a second test would reveal the logic error in the function?",
     "options": [
@@ -1262,7 +1288,7 @@
     "id": "m-u4o1-kk06-007",
     "kk": [
       "U4O1-KK06",
-      "U3O1-KK14"
+      "U3O1-KK13"
     ],
     "stem": "Since a loyalty-points feature was added to the till program at Grey Fantail Café in Heathcote, the program crashes every time it prints a receipt. Kim comments out the single line that calls `addPoints(order)`, and receipts then print without a crash. What is the most reasonable conclusion?",
     "options": [
@@ -1295,7 +1321,7 @@
       "Testers check that each value entered falls within an acceptable range."
     ],
     "answer": 1,
-    "explanation": "Beta testing puts a nearly finished solution in the hands of people who match its intended users, in the conditions where it will be used, to find problems before release.",
+    "explanation": "Beta testing puts a nearly finished solution in the hands of people from its intended user groups, on hardware like the hardware they will use, to confirm before release that it meets its requirements, works as intended, runs reliably and is usable by them.",
     "whyWrong": [
       "Developers testing modules with test data during coding is alpha testing.",
       "",
@@ -1303,7 +1329,7 @@
       "Checking that values fall within an acceptable range describes a range check, a validation technique."
     ],
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u4o1-kk07-002",
@@ -1502,7 +1528,8 @@
   {
     "id": "m-u4o1-kk08-002",
     "kk": [
-      "U4O1-KK08"
+      "U4O1-KK08",
+      "U3O2-KK13"
     ],
     "stem": "Harcourt Road Vets in Bendigo is planning how to evaluate its new online booking program. Which is the most suitable evaluation criterion?",
     "options": [
@@ -1516,7 +1543,7 @@
     "whyWrong": [
       "",
       "This describes how the program is built, not how well it performs for the clinic and its clients.",
-      "This is part of the timeline and data collection method, not a criterion to judge the program against.",
+      "This is part of the strategy's time frame and data collection method, not a criterion to judge the program against.",
       "'Fast and easy' has no measurable target, so the data can't show whether it has been met."
     ],
     "difficulty": 2,
@@ -1535,15 +1562,15 @@
       "To plan the test data used to check the outputs of each module"
     ],
     "answer": 2,
-    "explanation": "An evaluation strategy plans the evaluation of the solution in use. It typically sets out the criteria, the data and how it is collected, the timing and who is responsible.",
+    "explanation": "An evaluation strategy sets out how the solution will be judged once it is in use. Its features are the evaluation criteria, the time frame and responsibility (who collects or provides the data), along with the data to be collected and how it will be collected.",
     "whyWrong": [
       "Tasks, durations and dependencies make up the project plan, such as a Gantt chart.",
       "Scenarios for beta testers belong in a beta test plan, which is carried out before release.",
       "",
-      "Test data for checking module outputs belongs in a test table used during alpha testing."
+      "Test data for checking module outputs belongs in a testing table used during alpha testing."
     ],
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "m-u4o1-kk08-004",
@@ -1577,8 +1604,8 @@
           "Criterion",
           "Data collected",
           "Method",
-          "When",
-          "Responsible"
+          "Time frame",
+          "Responsibility"
         ],
         "rows": [
           [
@@ -1661,8 +1688,8 @@
           "Criterion",
           "Data collected",
           "Method",
-          "When",
-          "Responsible"
+          "Time frame",
+          "Responsibility"
         ],
         "rows": [
           [
@@ -2061,13 +2088,13 @@
     ],
     "stem": "Murray Bend Pharmacy in Echuca is having a stock program developed. The Gantt chart shows the plan, in days. Which event, on its own, would delay the handover?",
     "options": [
-      "Design stock screens takes 1 more day than planned",
-      "Code report module takes 3 more days than planned",
-      "Design reports takes 2 more days than planned",
-      "The two report tasks take 3 more days between them"
+      "A developer's illness adds 1 day to Design stock screens",
+      "A faulty library adds 3 days to Code report module",
+      "A new report request adds 2 days to Design reports",
+      "Staff changes add 3 days across the two report tasks"
     ],
     "answer": 0,
-    "explanation": "The critical path is Gather requirements → Design stock screens → Code stock module → Alpha testing → Beta testing, taking 18 days, so any delay to a task on it delays the handover. The report tasks are due to finish on day 10, but Alpha testing can't start until Code stock module finishes on day 13, so up to 3 extra days on the report path don't move the handover.",
+    "explanation": "The critical path is Gather requirements → Design stock screens → Code stock module → Alpha testing → Beta testing, taking 18 days, so a delay to any task on it delays the handover, whatever caused it. The report tasks are due to finish on day 10, but Alpha testing can't start until Code stock module finishes on day 13, so up to 3 extra days on the report path don't move the handover. How much a personnel change, technical issue or scope creep affects the plan depends on where it strikes.",
     "whyWrong": [
       "",
       "Code report module would finish on day 13, the same day as Code stock module, so Alpha testing still starts on time.",
@@ -2300,11 +2327,11 @@
       "Problems that families and teachers would have found appear after launch"
     ],
     "answer": 3,
-    "explanation": "Cutting beta testing keeps the date, but the time lost to scope creep is taken from quality. Problems that only real users in real conditions would reveal are found after launch, when families and teachers already depend on the program.",
+    "explanation": "In beta testing, intended users, here families and teachers, work through realistic scenarios while they are observed, which shows whether the program meets its requirements, runs reliably and is usable by them. Cutting it holds the date, but the time lost to scope creep is taken from that testing, so problems the scenarios would have revealed surface after launch, when families and teachers already depend on the program.",
     "whyWrong": [
       "Cutting a task shortens the path it is on; it can't make the critical path longer.",
       "Cutting a test doesn't remove the features that were added; that work has already been done.",
-      "Alpha testing checks modules against test data; it can't show how real users manage with the program.",
+      "Alpha testing checks that modules work as expected, mostly by developers and testers; it can't show whether families and teachers can use the program.",
       ""
     ],
     "difficulty": 2,
@@ -2336,7 +2363,8 @@
   {
     "id": "m-u4o1-kk11-002",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "stem": "Ashleigh manages the development of a stock program for Tidewater Seafoods in Portland. Coding has finished 3 days late because the client's price data arrived late. How should she record this on the project's Gantt chart?",
     "options": [
@@ -2359,7 +2387,8 @@
   {
     "id": "m-u4o1-kk11-003",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "stem": "Which feature of project management software is most useful when a task runs late?",
     "options": [
@@ -2498,7 +2527,7 @@
       "It has no date or time spent, and 'some problems' doesn't say what went wrong or why.",
       "It records the task and time spent but no problems, decisions or next steps.",
       "",
-      "It gives no time spent, and a feeling about progress isn't evidence of what happened."
+      "It says the PDF finished early but not why or how that affects later tasks, and a feeling about progress isn't evidence."
     ],
     "difficulty": 2,
     "source": "textbook",
@@ -2603,7 +2632,8 @@
   {
     "id": "m-u4o1-kk11-007",
     "kk": [
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "stem": "Tariq is developing a client portal for Wareek Accounting in Maryborough. At a weekly meeting, the practice manager wants to see at a glance which tasks are on schedule and which are running late. Which record should Tariq show her?",
     "options": [
@@ -2846,7 +2876,8 @@
   {
     "id": "m-u4o1-kk12-004",
     "kk": [
-      "U4O1-KK12"
+      "U4O1-KK12",
+      "U3O2-KK03"
     ],
     "stem": "When Gembrook Lane Legal in Traralgon assessed the project plan for its new client-records program, the journals showed that 9 days had been spent transferring client records from the old system. This task wasn't in the plan. Which improvement to future project plans does this most directly support?",
     "options": [
@@ -2870,7 +2901,8 @@
     "id": "m-u4o1-kk12-005",
     "kk": [
       "U4O1-KK12",
-      "U4O1-KK11"
+      "U4O1-KK11",
+      "U3O2-KK03"
     ],
     "stem": "Carapook Wool Studio in Casterton had an online shop and stock program developed. The tasks ran one after another, and the table compares their planned and actual durations. Which improvement to the next project plan does this evidence most directly support?",
     "options": [

@@ -2,7 +2,8 @@
   {
     "id": "c-u3o2-kk01-001",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "type": "reverse",
     "front": "Problem",
@@ -14,7 +15,8 @@
   {
     "id": "c-u3o2-kk01-002",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "type": "reverse",
     "front": "Need",
@@ -26,7 +28,8 @@
   {
     "id": "c-u3o2-kk01-003",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "type": "reverse",
     "front": "Opportunity",
@@ -40,10 +43,11 @@
       "U3O2-KK01"
     ],
     "type": "basic",
-    "front": "Give four reasons an organisation might undertake a software development project.",
-    "back": "Any four of:\n- to fix a problem with a current system, such as errors or delays\n- to meet a need, such as a new legal obligation\n- to take an opportunity, such as a service that new technology makes possible\n- to make processes more efficient or more effective\n- to replace an outdated system that is no longer supported",
+    "front": "What four reasons for undertaking a software development project does the study design list?",
+    "back": "- increasing productivity and efficiency\n- reducing costs\n- identifying opportunities to address gaps in the market\n- meeting organisational objectives or needs\n\nThey apply to individuals as well as organisations.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design",
+    "mistake": "The list isn't the only accepted answer. On the 2025 case study, examiners also credited fewer human errors and better communication, which the case raised, so read each reason from the scenario."
   },
   {
     "id": "c-u3o2-kk01-005",
@@ -59,7 +63,8 @@
   {
     "id": "c-u3o2-kk01-006",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "type": "compare",
     "front": "Problem versus opportunity",
@@ -70,7 +75,8 @@
   {
     "id": "c-u3o2-kk01-007",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "type": "cloze",
     "front": "A café whose handwritten orders are often misread by kitchen staff has {{a problem}}; a café that could sell meal subscriptions online, which no local rival offers, has {{an opportunity}}.",
@@ -81,12 +87,13 @@
   {
     "id": "c-u3o2-kk01-008",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "type": "basic",
     "front": "Why should a software project start by identifying the problem, need or opportunity?",
     "back": "It states why the solution is being built. That purpose shapes the brief, guides which data is collected and which requirements matter, and gives criteria for judging later whether the solution succeeded.",
-    "mistake": "The reason for a project isn't 'to build an app'. The app is the means; the reason is the problem, need or opportunity it addresses.",
+    "mistake": "The reason for a project isn't 'to build an app'. The app is the means; the reason is what the organisation or individual gains from it, such as fixing a problem, cutting costs or meeting a need.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -97,7 +104,7 @@
     ],
     "type": "reverse",
     "front": "Brief",
-    "back": "A short document that sets out the context of a project and the problem, need or opportunity it responds to, and outlines what the solution should achieve. It is the starting point for analysis.",
+    "back": "A short document, written at the start of a project, that outlines the problem, need or opportunity and the proposed solution. It names the proposed users and the programming languages to be used, and shows that the project is feasible and original.",
     "difficulty": 1,
     "source": "textbook",
     "aliases": [
@@ -110,10 +117,11 @@
       "U3O2-KK02"
     ],
     "type": "basic",
-    "front": "What does a brief typically document?",
-    "back": "- background: the organisation and its current situation\n- the problem, need or opportunity\n- the stakeholders and intended users\n- what the solution is expected to achieve\n- known constraints, such as a budget or deadline",
+    "front": "Which features of a brief does the study design list?",
+    "back": "- problem/need/opportunity outline\n- proposed users\n- programming languages to be used\n- feasibility (whether the project is achievable with the time, skills and resources available)\n- originality (how the idea differs from existing solutions)",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design",
+    "mistake": "Stopping at the problem and the users misses three features: the list also includes the programming languages to be used, feasibility and originality."
   },
   {
     "id": "c-u3o2-kk02-003",
@@ -135,7 +143,7 @@
     ],
     "type": "basic",
     "front": "Why is a brief usually written in plain, non-technical language?",
-    "back": "Its readers include the client and other stakeholders, not only developers. They need to be able to confirm that it describes their situation and goals correctly before analysis begins.",
+    "back": "Its readers include the client and other stakeholders, not only developers, and they must be able to confirm that it describes their situation and goals correctly before analysis begins. It still names technical choices such as the programming language to be used.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -146,8 +154,8 @@
     ],
     "type": "basic",
     "front": "What kind of content doesn't belong in a brief?",
-    "back": "Design and development detail, such as mock-ups, pseudocode, data dictionaries, test tables and a full list of requirements. These are produced later, once analysis has worked out what the solution must do.",
-    "mistake": "Suggesting screen layouts or code in a brief jumps ahead of analysis. A brief says what is wanted and why, not how it will be built.",
+    "back": "Design and development detail, such as mock-ups, pseudocode, data dictionaries, testing tables and a full list of requirements. These are produced later, once analysis has worked out what the solution must do.",
+    "mistake": "Putting screen layouts or code in a brief jumps ahead of analysis. A brief outlines the proposed solution and names the programming language to be used, but the detailed design comes after analysis.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -157,8 +165,8 @@
       "U3O2-KK02"
     ],
     "type": "cloze",
-    "front": "A brief explains {{why}} a solution is wanted and what it should achieve; it does not explain {{how}} the solution will work.",
-    "back": "How the solution works is decided in the design stage, after analysis.",
+    "front": "A brief explains {{why}} a solution is wanted and outlines the proposed solution; the detail of {{how}} the solution will work is decided after analysis.",
+    "back": "A brief can name the programming language to be used, but screen layouts, algorithms and data structures belong to the design stage.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -180,7 +188,7 @@
       "U3O2-KK02"
     ],
     "type": "basic",
-    "front": "Why should a brief identify the intended users?",
+    "front": "Why should a brief identify the proposed users?",
     "back": "The users' characteristics, such as their skills, age, devices and working conditions, shape which data is collected from them and later requirements such as usability.",
     "difficulty": 2,
     "source": "textbook"
@@ -208,6 +216,7 @@
     "type": "basic",
     "front": "A task on the critical path finishes two days late. What happens to the project's finish date, and why?",
     "back": "The project finishes two days late, unless later critical tasks are shortened. The task is part of the longest chain, so the delay pushes back every later task in that chain and the finish date.",
+    "mistake": "Shortening or removing a task that is not on the critical path does not win back a critical-path delay. Record the delay by extending the late task's time frame and rescheduling every task that depends on it.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -219,6 +228,7 @@
     "type": "cloze",
     "front": "Tasks that don't depend on each other can run {{concurrently}}, which can shorten the project; tasks linked by a dependency must run in {{sequence}}.",
     "back": "Concurrent tasks overlap on the timeline. Sequenced tasks run one after another because each needs the previous one finished.",
+    "mistake": "Tasks are not sequenced by the order they happen to be listed in, or by a guess at what comes first. Each task is placed after the tasks it depends on: a successor starts only once its predecessor has finished.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -335,6 +345,7 @@
     "type": "cloze",
     "front": "A large group spread across many locations suits {{a survey}}; a few people with detailed knowledge suit {{interviews}}; staff carrying out a routine process suit {{observation}}.",
     "back": "Match the technique to the stakeholder group: its size, where its members are, and whether you need opinions, detail or evidence of how a task is really done.",
+    "mistake": "Naming the right technique is not enough. The reason has to come from the case: how many people are in the group, where they are, and whether follow-up questions or first-hand evidence are needed.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -369,7 +380,8 @@
     "front": "What does portability mean as a non-functional requirement?",
     "back": "The solution can run on different devices, operating systems or platforms with little or no change. E.g. the app works on Android and iOS phones and in a web browser.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "A platform statement such as 'the app doesn't have to run on tablets' isn't a functional requirement, because it doesn't describe something the app does. It concerns where the app works, which is portability, so it is non-functional."
   },
   {
     "id": "c-u3o2-kk05-006",
@@ -379,9 +391,10 @@
     ],
     "type": "compare",
     "front": "Functional requirement versus non-functional requirement",
-    "back": "| | Functional | Non-functional |\n|:--|:--|:--|\n| Describes | What the solution does | How well it does it |\n| Example | Calculate each member's annual fee | A new user can pay a fee in under two minutes |\n| Checked by | Testing that outputs are correct | Measuring against a stated target |",
+    "back": "| | Functional | Non-functional |\n|:--|:--|:--|\n| Describes | What the solution does: its inputs, outputs, processing and validation | Qualities it must have: how well it works |\n| Example | Calculate each member's annual fee | A new user can pay a fee in under two minutes |\n| Checked by | Testing that outputs are correct | Measuring against a stated target |",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "A number doesn't make a requirement non-functional. 'Staff can search orders from the past three years' still says what the solution does, so it is functional; a requirement is non-functional when it describes a quality, such as reliability or usability."
   },
   {
     "id": "c-u3o2-kk05-007",
@@ -414,9 +427,10 @@
     ],
     "type": "basic",
     "front": "Give an example of an economic constraint on a software project.",
-    "back": "A limit on the money available, e.g. the club can spend no more than $6000 on development, which may rule out paid libraries or hiring a second developer.",
+    "back": "A limit on cost or time; the problem-solving methodology counts both as economic. E.g. the club can spend no more than $6000 on development, which may rule out paid libraries or a second developer; or the program must be ready before the season starts.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design",
+    "mistake": "Economic constraints aren't only about money. A deadline limits the time available, and time is an economic constraint too."
   },
   {
     "id": "c-u3o2-kk06-004",
@@ -454,11 +468,12 @@
   {
     "id": "c-u3o2-kk06-007",
     "kk": [
-      "U3O2-KK06"
+      "U3O2-KK06",
+      "U3O1-KK02"
     ],
     "type": "cloze",
     "front": "'The app must run on the school's existing Chromebooks' is {{a technical}} constraint; 'development must cost no more than $4000' is {{an economic}} constraint.",
-    "back": "Technical constraints come from the hardware, software and networks available; economic constraints come from the money available.",
+    "back": "Technical constraints come from the hardware, software and networks available; economic constraints come from the money and time available.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -491,7 +506,8 @@
     "id": "c-u3o2-kk07-004",
     "kk": [
       "U3O2-KK07",
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "type": "compare",
     "front": "Scope versus functional requirements",
@@ -510,7 +526,7 @@
     "front": "The scope of a solution is determined in the {{analysis}} stage of the problem-solving methodology and recorded in the {{software requirements specification}} (SRS).",
     "back": "Scope must be settled before design, so designers know which features to plan for and which to leave out.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk07-006",
@@ -532,7 +548,7 @@
     "type": "basic",
     "front": "How should a project team handle a request for a feature outside the agreed scope?",
     "back": "Treat it as a change to the scope. Record the request, assess its effect on time, cost and other tasks, and add it only if the client agrees to the change. Otherwise, leave it for a later version.",
-    "mistake": "Adding a 'small' extra without assessing it is how scope creep starts. Many small additions can delay the whole project.",
+    "mistake": "Adding a 'small' extra without assessing it is how scope creep starts. Unchecked extras draw time and effort away from the original objectives, which may then not be met; they don't simply give the client a better product.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -566,10 +582,10 @@
     ],
     "type": "basic",
     "front": "State four convention errors to check for in a DFD.",
-    "back": "Any four:\n- data flowing directly between two data stores\n- an external entity connected directly to a data store\n- data flowing directly between two external entities\n- a process with inputs but no output, or outputs but no input\n- a data flow with no label, or labelled with an action",
+    "back": "Any four:\n- a flow between two data stores\n- a flow between an external entity and a data store\n- a flow between two external entities\n- two flows that cross\n- a process with no input or no output\n- a data store with no input or no output\n- an unlabelled flow, or one named with an action instead of data",
     "mistake": "An external entity never reads from or writes to a data store directly. A process must sit between them to handle the data.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk08-006",
@@ -578,10 +594,10 @@
     ],
     "type": "compare",
     "front": "External entity versus actor",
-    "back": "| | External entity | Actor |\n|:--|:--|:--|\n| Diagram | Context diagram and DFD | Use case diagram |\n| Drawn as | Rectangle | Stick figure |\n| Role | A source or destination of data outside the system | A person, organisation or other system that interacts with the system to reach a goal |",
-    "mistake": "Entities and actors aren't only people. A payment service that the system sends card details to is an external entity on a DFD and an actor on a use case diagram.",
+    "back": "| | External entity | Actor |\n|:--|:--|:--|\n| Diagram | Context diagram and DFD | Use case diagram |\n| Drawn as | A square or rectangle with its name inside | A stick figure or person icon with the role written above or below |\n| What it is | A user or another system, outside the system, that sends or receives data | The role of a user who interacts with the system to achieve a goal |",
+    "mistake": "An actor is named for a role, such as *Ticket inspector*, not for the organisation the person works for, the device they use or the system being modelled.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk08-007",
@@ -605,7 +621,7 @@
     "back": "| | <<includes>> | <<extends>> |\n|:--|:--|:--|\n| When it runs | Every time the base use case runs | Only under a condition, as an optional addition |\n| Arrow direction | From the base use case to the included one | From the extending use case to the base one |\n| Example | *Place order* includes *Calculate total* | *Apply discount code* extends *Place order* |",
     "mistake": "The arrows point in opposite directions. An <<extends>> arrow points to the base use case, not away from it.",
     "difficulty": 3,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk09-002",
@@ -660,8 +676,8 @@
       "U3O2-KK09"
     ],
     "type": "basic",
-    "front": "What is a solution's operating environment, and why is it described during analysis?",
-    "back": "The hardware, operating system, network and other software the solution will run on or alongside, such as an office's existing Windows laptops. Describing it early lets designers and developers choose tools and designs that will work there.",
+    "front": "What is a solution's technical environment, and why does the SRS describe it?",
+    "back": "The hardware, operating system, network and other software the solution will run on or work alongside, such as an office's existing Windows laptops. Describing it in the SRS lets designers and developers choose tools and designs that will work there.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -694,7 +710,8 @@
   {
     "id": "c-u3o2-kk10-002",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "type": "basic",
     "front": "In Australia, when does program code become protected by copyright?",
@@ -706,7 +723,8 @@
   {
     "id": "c-u3o2-kk10-003",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "type": "basic",
     "front": "Does copyright protect the idea behind a program, or the program's code?",
@@ -718,7 +736,8 @@
   {
     "id": "c-u3o2-kk10-004",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "type": "compare",
     "front": "Code written by an employee versus code written by a contractor",
@@ -730,7 +749,8 @@
   {
     "id": "c-u3o2-kk10-005",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "type": "basic",
     "front": "A developer adds an open-source library to a client's program. What must they do?",
@@ -765,7 +785,8 @@
   {
     "id": "c-u3o2-kk10-008",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "type": "cloze",
     "front": "In Australia, the {{Copyright Act 1968}} (Cwlth) protects program code as a literary work, and the {{Privacy Act 1988}} (Cwlth) sets rules for handling personal information through the Australian Privacy Principles.",
@@ -805,7 +826,7 @@
     "type": "compare",
     "front": "Version numbers in file names versus a version control system",
     "back": "| | Version numbers in file names | Version control system |\n|:--|:--|:--|\n| How versions are kept | Manually, by saving a new copy, e.g. `booking_v1.3.py` | Recorded each time a change is committed |\n| Records | Only the order of versions | Every change, with its author, date and message |\n| Allows | Going back to a saved copy | Comparing versions, combining developers' work and rolling back |",
-    "mistake": "Numbered file names aren't a version control system. They depend on people remembering to save a new copy, and they can't show who changed what or combine two developers' work.",
+    "mistake": "Numbered file names are a simple, manual form of version control, but they rely on people remembering to save a new copy, and they can't show who changed what or combine two developers' work. A version control system records each committed change with its author and can merge developers' work.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -816,22 +837,23 @@
     ],
     "type": "basic",
     "front": "Why should a software project keep versions of its files?",
-    "back": "- A working earlier version can be restored if a change breaks the program\n- Versions can be compared to find when a bug appeared\n- Everyone knows which version is current\n- Developers don't overwrite each other's work",
-    "mistake": "Saving over the same file each time isn't versioning. Once it is overwritten, the earlier working copy is gone.",
+    "back": "- The team can roll back to an earlier working version if a change breaks the program\n- Versions can be compared to find when a bug appeared\n- Everyone knows which version is current\n- Developers don't overwrite each other's work",
+    "mistake": "Saving over the same file each time isn't versioning: the earlier working copy is gone. Keeping versions isn't a backup either; it lets the team roll back to a working version, while a backup is a separate copy kept in case the data is lost.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u3o2-kk11-005",
     "kk": [
-      "U3O2-KK11"
+      "U3O2-KK11",
+      "TERMS"
     ],
     "type": "compare",
     "front": "Backup versus archive",
-    "back": "| | Backup | Archive |\n|:--|:--|:--|\n| What it is | A copy of current files | Files no longer in active use, moved to long-term storage |\n| Purpose | Restore files after loss or damage | Keep records without cluttering working storage |\n| Originals | Stay in place | Usually removed from the working location |",
+    "back": "| | Backup | Archive |\n|:--|:--|:--|\n| What it is | A copy of data, stored apart from the original | Data no longer used regularly, moved to storage that is accessed less often |\n| Purpose | Restore the data if the original is lost | Keep it for later use or because rules require it, without slowing or filling the working system |\n| Originals | Stay in place | Moved out of the working system |",
     "mistake": "An archive isn't a backup. Archived files are often the only copy, so the archive itself needs backing up.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk11-006",
@@ -853,7 +875,7 @@
     "type": "compare",
     "front": "Full backup versus incremental backup",
     "back": "| | Full | Incremental |\n|:--|:--|:--|\n| Copies | Every selected file | Only files changed since the last backup |\n| Time and space | Slowest, largest | Fastest, smallest |\n| To restore | The latest full backup alone | The latest full backup plus every incremental since it, in order |",
-    "mistake": "An incremental backup can't restore files on its own. It holds only recent changes, so it needs the full backup and every earlier incremental in the chain.",
+    "mistake": "An incremental backup can't restore files on its own: it needs the full backup and every incremental after it, in order. Don't confuse it with a differential backup, which holds everything changed since the last full backup, so a restore needs only the full backup and the latest differential.",
     "difficulty": 3,
     "source": "textbook"
   },
@@ -876,10 +898,10 @@
     ],
     "type": "reverse",
     "front": "Brainstorming",
-    "back": "An ideation technique, usually run in a group, in which people suggest as many ideas as possible in a short time and every idea is recorded without being judged. The ideas are evaluated afterwards.",
+    "back": "An ideation technique that gathers ideas connected to one central theme or concept without arranging them into any structure. It is written as a list, or drawn with the theme in the middle and each idea linked to it by a straight line. Ideas are gathered freely and judged only afterwards.",
     "mistake": "Criticising or discarding ideas during the session defeats the purpose. Judging comes afterwards, when the ideas are evaluated against criteria.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk12-002",
@@ -888,10 +910,10 @@
     ],
     "type": "reverse",
     "front": "Mind map",
-    "back": "A diagram with a central topic and branches radiating out to related ideas and sub-ideas, showing how the ideas group together and connect.",
-    "mistake": "A mind map doesn't show a sequence of steps. Its branches group related ideas; no order is implied.",
+    "back": "A diagram that organises ideas into a structure around one central theme or concept. The theme sits in the middle, the main ideas branch from it on straight lines, and these branch out further into more specific ideas as needed, showing how the ideas group and connect.",
+    "mistake": "A mind map isn't a flat list of ideas or a sequence of steps. The main considerations go on the first-level branches, and each detailed idea sits one level below the consideration it belongs to.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk12-003",
@@ -900,10 +922,10 @@
     ],
     "type": "reverse",
     "front": "Mood board",
-    "back": "A collection of images, colour swatches, fonts and textures arranged together to capture the intended look and feel of a solution.",
-    "mistake": "A mood board sets visual style only. It doesn't show where controls go on a screen or how the solution works; sketches and, later, mock-ups do that.",
+    "back": "A collection of images, colours, typography and code samples, gathered to explore possibilities for a solution and give its design a direction. Samples can be annotated to show which elements suit the solution and why.",
+    "mistake": "A mood board sets the direction and style, but it doesn't lay out the solution's own screens or show where controls go. Sketches and, later, mock-ups do that.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk12-004",
@@ -912,9 +934,9 @@
     ],
     "type": "basic",
     "front": "How are sketches used when generating design ideas?",
-    "back": "Quick, rough drawings of possible screen layouts let a designer explore several alternatives cheaply and show them to others for feedback before committing to one.",
+    "back": "Sketches are quick, unrefined drawings, on paper or with drawing software, of how an interface could look or how parts of the solution could connect and work together. A designer can sketch several alternatives cheaply and show them to others for feedback before committing to one.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk12-005",
@@ -935,15 +957,17 @@
     ],
     "type": "compare",
     "front": "Brainstorming versus mind map",
-    "back": "**Brainstorming** produces ideas: the aim is quantity, recorded without judgement, often as an unordered list. A **mind map** organises ideas around a central topic to show how they group and connect. A brainstorm's output is often sorted into a mind map.",
+    "back": "| | Brainstorming | Mind map |\n|:--|:--|:--|\n| Structure | Unstructured: ideas gathered around a central theme | Structured: ideas branch from the theme, then branch further |\n| Recorded as | A list, or a diagram with each idea joined straight to the theme | A diagram |\n| Shows | The range of ideas | How the ideas group and connect |\n\nA brainstorm's ideas are often sorted into a mind map afterwards.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design",
+    "mistake": "Drawing it as a diagram doesn't make it a mind map: a brainstorm can be drawn too, with each idea joined straight to the central theme. A mind map groups the ideas under main branches that branch out further."
   },
   {
     "id": "c-u3o2-kk12-007",
     "kk": [
       "U3O2-KK12",
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "PSM"
     ],
     "type": "basic",
     "front": "Why should a designer generate several design ideas rather than developing the first one?",
@@ -967,36 +991,39 @@
     "id": "c-u3o2-kk13-003",
     "kk": [
       "U3O2-KK13",
-      "U4O1-KK01"
+      "U4O1-KK01",
+      "TERMS"
     ],
     "type": "compare",
     "front": "Efficiency versus effectiveness",
     "back": "| | Efficiency | Effectiveness |\n|:--|:--|:--|\n| Asks | How much time, cost and effort? | How well is the purpose achieved? |\n| Measures | Speed, cost, effort | Accuracy, completeness, usability |\n| Example | A report runs in 2 seconds, not 40 | Every total in the report is correct |",
     "mistake": "The two are independent. A solution can be efficient but ineffective (fast but inaccurate), or effective but inefficient (correct but slow).",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk13-004",
     "kk": [
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "TERMS"
     ],
     "type": "basic",
     "front": "Give three measures of the efficiency of a solution.",
-    "back": "- Speed: how long processing or a task takes\n- Cost: how much it costs to run or maintain\n- Effort: how many steps a user needs to complete a task",
+    "back": "- Speed: how long processing or a task takes\n- Cost: how much it costs to run, such as the cost of handling its data and files\n- Effort: how many steps a user needs to complete a task",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk13-005",
     "kk": [
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "TERMS"
     ],
     "type": "basic",
     "front": "Give three measures of the effectiveness of a solution.",
-    "back": "- Accuracy: the output is correct\n- Completeness: the output includes everything required\n- Usability: users can achieve their goals easily\n\nReadability of the output is another common measure.",
+    "back": "- Accuracy: the output is correct\n- Completeness: the output includes everything required\n- Usability: users can achieve their goals easily\n\nOthers in the study design's list include readability, relevance and timeliness.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk13-006",
@@ -1018,7 +1045,7 @@
     ],
     "type": "basic",
     "front": "What makes an evaluation criterion well written?",
-    "back": "It is specific and measurable, is tied to one requirement, and says what will be checked. For example, 'A new user can complete a booking in under two minutes without help' rather than 'The app is easy to use'.",
+    "back": "It is specific and measurable, is linked to a requirement, and says what will be checked. For example, 'A new user can complete a booking in under two minutes without help' rather than 'The app is easy to use'.",
     "mistake": "Vague criteria such as 'the program is fast' can't be judged objectively, so the evaluation becomes a matter of opinion.",
     "difficulty": 2,
     "source": "textbook"
@@ -1026,25 +1053,27 @@
   {
     "id": "c-u3o2-kk13-008",
     "kk": [
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "PSM"
     ],
     "type": "cloze",
-    "front": "During design, evaluation criteria are used to {{choose between design ideas}}; after development, they are used to judge the solution's {{efficiency and effectiveness}}.",
-    "back": "Both sets of criteria are drawn from the requirements, so the preferred design and the finished solution are both judged against what the client needs.",
+    "front": "During design, evaluation criteria are used to {{choose between design ideas}}; in the evaluation stage, the same criteria are used to judge the finished solution's {{efficiency and effectiveness}}.",
+    "back": "The criteria are developed in the design stage from the requirements and refined as the solution develops. They are not replaced by a new set: the finished solution is judged against the criteria used to choose its design.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk14-001",
     "kk": [
       "U3O2-KK14",
-      "U3O2-KK12"
+      "U3O2-KK12",
+      "PSM"
     ],
     "type": "basic",
     "front": "How does a detailed design differ from a design idea?",
-    "back": "A design idea is a broad alternative, often sketched, used to compare approaches. A detailed design documents the chosen idea precisely, with tools such as mock-ups, data dictionaries, object descriptions, IPO charts and pseudocode, so developers can build it.",
+    "back": "A design idea is a broad alternative, often sketched, used to compare approaches. A detailed design develops the chosen idea with design tools such as mock-ups, data dictionaries, object descriptions, IPO charts and pseudocode, setting out how it looks, how it is structured and how it works, so developers can build it.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk14-002",
@@ -1060,33 +1089,37 @@
   {
     "id": "c-u3o2-kk14-003",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK09"
     ],
     "type": "basic",
     "front": "Why should the names in a data dictionary match those used in the pseudocode and object descriptions?",
     "back": "So every design tool refers to each data item in the same way. Developers then use one agreed identifier and data type, which avoids confusion and errors when modules are combined.",
+    "mistake": "Thinking a new name only has to say the right thing. It must also follow the design's existing convention: the 2025 examiners gave no marks for an attribute that broke the object description's camel casing.",
     "difficulty": 2,
     "source": "textbook"
   },
   {
     "id": "c-u3o2-kk14-004",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "type": "basic",
-    "front": "What does the Size column of a data dictionary record?",
-    "back": "How large a data item can be. For a String, this is usually the maximum number of characters, e.g. 30 for a surname. It guides the width of input fields and the limits a validation check enforces.",
+    "front": "What does the Field size column of a data dictionary record?",
+    "back": "How large a data item can be. For a String, this is usually the maximum number of characters, e.g. 30 for a surname. It guides the width of input fields and the limits a validation check enforces. Field size is optional: every data dictionary gives at least a name and data type.",
     "difficulty": 1,
     "source": "textbook"
   },
   {
     "id": "c-u3o2-kk14-005",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "type": "cloze",
-    "front": "In an IPO chart, the {{Processing}} column describes actions such as 'calculate the delivery fee', while the Input and Output columns list {{data}}.",
-    "back": "Inputs and outputs are data items, such as `parcelWeight` and `deliveryFee`. Processing describes what is done to the inputs to produce the outputs.",
+    "front": "In an IPO chart, the {{Process}} column describes actions such as 'calculate the delivery fee', while the Input and Output columns list {{data}}.",
+    "back": "Inputs and outputs are data items, such as `parcelWeight` and `deliveryFee`. The Process column (sometimes headed Processes) describes what is done to the inputs to produce the outputs.",
     "mistake": "An action such as 'calculate total' doesn't belong in the Output column. The output is the total itself; calculating it is processing.",
     "difficulty": 1,
     "source": "textbook"
@@ -1094,32 +1127,35 @@
   {
     "id": "c-u3o2-kk14-006",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "type": "cloze",
     "front": "A mock-up shows the {{layout and appearance}} of a screen, but it is a drawing, not a {{working}} interface.",
-    "back": "Annotations add details such as fonts, colours, control types and what each button does, so developers know exactly what to build.",
+    "back": "Annotations add details of its appearance, such as fonts and colours, and of its structure, such as control types, default values and what each button does, so developers know exactly what to build.",
     "mistake": "A mock-up doesn't show how data moves through a system; that is the job of a data flow diagram.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk14-007",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "type": "compare",
     "front": "Data dictionary versus object description",
-    "back": "A **data dictionary** lists the data items in a solution, typically each with its name, data type, size and description. An **object description** describes one object: its name, its properties (each with a data type) and its methods, the actions it can perform.",
+    "back": "A **data dictionary** plans the data a module uses (such as variables, constants, objects and interface controls), giving at least each item's name and data type, often with a description, field size, validation rules or a sample. An **object description** plans one object in three sections: Name, Properties/Attributes (its data, data types optional) and Methods (its behaviours, with any parameters).",
     "mistake": "A data dictionary has no methods. Actions belong in an object description or in pseudocode.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk14-008",
     "kk": [
       "U3O2-KK14",
-      "U3O1-KK04"
+      "U3O1-KK04",
+      "U3O1-KK03"
     ],
     "type": "basic",
     "front": "How should an input control on a mock-up relate to the data dictionary or object description?",
@@ -1146,9 +1182,10 @@
     ],
     "type": "basic",
     "front": "How does security form part of a user's experience?",
-    "back": "Users need to trust that their data and accounts are protected, through features such as sign-in, multi-factor authentication and clear privacy settings. These features also add steps, so they must protect users without making the solution frustrating to use.",
+    "back": "The study design's security characteristic has two parts: authentication (confirming who the user is, e.g. sign-in or a one-time code; a logout button ends the session) and data protection (keeping users' data private, e.g. no personal details shown before sign-in, encrypted storage). Users trust a solution that visibly protects them, but extra steps shouldn't make it frustrating to use.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design",
+    "mistake": "A screen that shows private details to anyone who opens it is a security weakness, however easy it is to use. Login and logout features are what show users that their account and data are protected."
   },
   {
     "id": "c-u3o2-kk15-005",
@@ -1159,7 +1196,7 @@
     "type": "compare",
     "front": "Interoperability versus portability",
     "back": "**Interoperability**: the solution exchanges data with other systems, e.g. its bookings can be imported into a calendar app. **Portability**: the solution runs on different platforms, e.g. on Android, on iOS and in a web browser.",
-    "mistake": "Running on both Android and iOS is portability, not interoperability. Interoperability is about working with other systems and their data.",
+    "mistake": "Running on both Android and iOS is portability, not interoperability. Portability is a non-functional requirement, not one of the four UX characteristics (affordance, interoperability, security, usability), so it earns nothing as a UX answer.",
     "difficulty": 2,
     "source": "textbook"
   },
@@ -1172,7 +1209,8 @@
     "front": "A \"Next\" option shown as flat grey text, with no border or shading, has poor {{affordance}}, because nothing in its appearance suggests it can be clicked.",
     "back": "Borders, shading, button shapes and changes on hover all signal that an element is interactive.",
     "difficulty": 1,
-    "source": "textbook"
+    "source": "textbook",
+    "mistake": "When users can't tell that an element can be clicked, or what it is for, the UX characteristic to improve is affordance. Contrast is a design principle, not a UX characteristic, although a quarter of students chose it for this on the 2025 exam."
   },
   {
     "id": "c-u3o2-kk15-007",
@@ -1206,7 +1244,7 @@
     "type": "reverse",
     "front": "Alignment",
     "back": "Placing elements so their edges or centres line up along shared lines. It gives a screen a clear, ordered structure and makes related items easier to scan.",
-    "mistake": "Alignment doesn't mean centring everything. Centred labels and fields create ragged edges; a shared left edge is usually easier to scan on a form.",
+    "mistake": "Alignment doesn't mean centring everything. Centred labels and fields leave ragged edges; give the labels a shared edge (left, or right so each sits against its box) and line the boxes up as well.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -1228,9 +1266,9 @@
       "U3O2-KK16"
     ],
     "type": "reverse",
-    "front": "Consistency",
-    "back": "Using the same layout, colours, controls, wording and behaviour for the same purpose throughout a solution, so users can predict how each part works.",
-    "mistake": "Consistency doesn't mean making everything look the same. It applies to elements with the same purpose; elements with different purposes should look different.",
+    "front": "Navigation",
+    "back": "How users find their way around a solution and move between its screens, using menus, tabs, links and Back and Next buttons. It works best when it is clear and predictable: each control keeps the same place, label and look on every screen, so users know where they are and how to move on or go back.",
+    "mistake": "Consistency isn't one of the study design's design principles. Keeping the Back and Next buttons in the same place, with the same labels, on every screen is part of applying navigation.",
     "difficulty": 1,
     "source": "textbook"
   },
@@ -1241,9 +1279,9 @@
     ],
     "type": "basic",
     "front": "How do design principles affect a solution's functionality, not just its appearance?",
-    "back": "They change how quickly and accurately people can use it. Consistent controls mean users learn once and make fewer mistakes; strong contrast makes text readable; aligned form fields are faster to scan and complete.",
+    "back": "The study design groups its principles under functionality (interactivity, navigation), usability (ease of use, accessibility) and appearance. Clear navigation lets users reach each screen and move on without getting lost, and easy, accessible controls cut mistakes. Appearance principles help too: strong contrast keeps text readable, and aligned fields are faster to complete.",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "c-u3o2-kk16-005",
@@ -1259,13 +1297,15 @@
   {
     "id": "c-u3o2-kk16-006",
     "kk": [
-      "U3O2-KK16"
+      "U3O2-KK16",
+      "U3O2-KK15"
     ],
     "type": "compare",
-    "front": "Consistency versus contrast",
-    "back": "**Consistency**: things with the same purpose look and behave the same, e.g. every Save button has the same colour and position. **Contrast**: things that differ, especially in importance, look different, e.g. a Delete button stands out from Save. Good designs use both.",
+    "front": "Contrast versus affordance",
+    "back": "| | Contrast | Affordance |\n|:--|:--|:--|\n| Belongs to | Design principles | Characteristics of user experience |\n| About | How clearly elements differ in colour, size, weight or shape, so key items stand out and text is readable | Whether an element's appearance shows what it does and how to use it |\n| Poor example | Pale grey text on a white background | Text that can be tapped but doesn't look like a button |",
     "difficulty": 2,
-    "source": "textbook"
+    "source": "study-design",
+    "mistake": "When users can't tell what a field or button is for, the problem is affordance, not contrast. A control can stand out strongly and still give no cue about how to use it."
   },
   {
     "id": "c-u3o2-kk16-007",
@@ -1273,8 +1313,8 @@
       "U3O2-KK16"
     ],
     "type": "basic",
-    "front": "Give an example of inconsistency in an interface and its effect on users.",
-    "back": "The \"Next\" button sits bottom right on one screen and top left on the next, or is labelled \"Continue\" elsewhere. Users must search for it each time, which slows them down and causes mistakes.",
+    "front": "Give an example of poor navigation in an interface and its effect on users.",
+    "back": "The \"Next\" button sits bottom right on one screen and top left on the next, or is labelled \"Continue\" elsewhere. Users must search for the way forward on each screen, which slows them down and causes mistakes.",
     "difficulty": 1,
     "source": "textbook"
   },

@@ -36,7 +36,7 @@
     "prompt": "Tall Timber Outdoor, a Wodonga camping retailer with 300 staff and an online store, has the goal of becoming the most trusted outdoor retailer in north-east Victoria. Its developers keep the online store's source code, and a copy of the customer database, on a shared network drive that every employee can open.\n\nExplain how this practice could stop Tall Timber Outdoor achieving its goal.",
     "points": [
       {
-        "text": "Identifies the vulnerability: every employee, not only the developers, can read, copy or change the source code and customer data",
+        "text": "Identifies the vulnerability: poor identity and access management, because every employee, not only the developers, can read, copy or change the source code and customer data",
         "marks": 1
       },
       {
@@ -48,13 +48,14 @@
         "marks": 1
       }
     ],
-    "model": "Because the shared drive is open to every employee, anyone in the company, not just the developers, can read, copy or change the online store's source code and customers' personal details. An employee could leak customer records or alter the code, deliberately or by mistake, and an attacker who took over any single staff account would gain the same access. If customer data were exposed, customers would stop trusting Tall Timber Outdoor with their details, which works directly against its goal of being the most trusted outdoor retailer in north-east Victoria.",
+    "model": "The shared drive is open to every employee, which is poor identity and access management: anyone in the company, not just the developers, can read, copy or change the online store's source code and customers' personal details. An employee could leak customer records or alter the code, deliberately or by mistake, and an attacker who took over any single staff account would gain the same access. If customer data were exposed, customers would stop trusting Tall Timber Outdoor with their details, which works directly against its goal of being the most trusted outdoor retailer in north-east Victoria.",
     "source": "textbook"
   },
   {
     "id": "s-u4o2-kk01-003",
     "kk": [
-      "U4O2-KK01"
+      "U4O2-KK01",
+      "U3O2-KK01"
     ],
     "commandTerm": "recommend",
     "marks": 3,
@@ -110,7 +111,8 @@
   {
     "id": "s-u4o2-kk02-002",
     "kk": [
-      "U4O2-KK02"
+      "U4O2-KK02",
+      "U4O2-KK03"
     ],
     "commandTerm": "explain",
     "marks": 2,
@@ -151,7 +153,7 @@
       }
     ],
     "model": "The fund's six developers built the membership system, so they already understand the system the new module must work with. An external firm would have to learn it first, which adds time and cost.\n\nThe benefit rules change every April. In-house developers can update the module each time the rules change, as soon as the change is needed, instead of the fund negotiating and paying for new work under a contract every year.\n\nThe module will hold members' claims, which show the health services they have used, and their bank account details. Developing it in-house means only the fund's own staff handle that data, under its own security controls, so it isn't exposed to a third party's staff or systems.",
-    "mistake": "Justify needs reasons tied to the scenario. 'In-house gives more control' earns little unless it says what the fund controls, such as the April rule changes or members' claims and bank details, and why that matters here.",
+    "mistake": "Many answers list in-house advantages only. Each reason should pair an in-house advantage with the matching drawback of an external firm (it would first have to learn the membership system; every April change would mean new contract work) and tie it to Bushwren Health Fund's situation.",
     "source": "textbook"
   },
   {
@@ -270,15 +272,15 @@
     "prompt": "Mallee Rise Water, a regional water corporation with 350 staff, has eight in-house developers. They log in to every system with a username and password, and every developer has administrator access to the live billing system, which stores customers' names, addresses and bank account details.\n\nRecommend two software security controls that would better protect the billing data, and explain how each would protect it.",
     "points": [
       {
-        "text": "Recommends a first software control, e.g. multi-factor authentication for developer logins; least privilege through identity and access management; encryption of the stored billing data; or separate development, testing and production environments",
+        "text": "Recommends a first control, e.g. robust identity and access management (each developer has their own account with multi-factor authentication, and administrator access to the live billing system only for those who need it); encryption of the stored billing data; or separated development, testing and production environments",
         "marks": 1
       },
       {
-        "text": "Explains how the first control protects the billing data, e.g. a stolen password alone no longer reaches the system; fewer accounts can read or change bank details; copied bank details can't be read without the key; or developers work with invented data and don't need live access",
+        "text": "Explains how the first control protects the billing data, e.g. a stolen password alone no longer reaches the system and far fewer accounts can read or change bank details; copied bank details can't be read without the key; or developers work with invented test data and don't need access to the live system",
         "marks": 1
       },
       {
-        "text": "Recommends a second, different control",
+        "text": "Recommends a second, different control (multi-factor authentication and least privilege are both part of identity and access management)",
         "marks": 1
       },
       {
@@ -286,8 +288,8 @@
         "marks": 1
       }
     ],
-    "model": "First, Mallee Rise Water should require multi-factor authentication, such as a password plus a code from an authenticator app, for every developer login. A developer's stolen or guessed password would then not be enough on its own to reach customers' bank details. Second, it should apply least privilege through identity and access management, giving each developer only the access their role needs. Most developers would lose administrator access to the live billing system, so far fewer accounts could read or change customers' bank details, whether through misuse, error or a compromised account.",
-    "mistake": "Recommending 'strong passwords' adds little here: Mallee Rise already uses passwords. Recommend a control that changes the current situation, and say what it protects.",
+    "model": "First, Mallee Rise Water should apply robust identity and access management. Each developer should log in to their own account with multi-factor authentication, such as a password plus a code from an authenticator app, and only the one or two staff who must support the live billing system should keep administrator access to it. A stolen or guessed password would then not be enough on its own, and far fewer accounts could read or change customers' bank details. Second, it should encrypt the billing data stored in the database. If the stored records were copied out of the database, for example by an attacker or from a stolen backup, customers' names, addresses and bank account details couldn't be read without the key.",
+    "mistake": "Recommending 'strong passwords' adds little here: Mallee Rise already uses passwords. Multi-factor authentication and least privilege are both part of identity and access management, so if you recommend it, pair it with a different control, such as encryption, and say what each one protects.",
     "source": "textbook"
   },
   {
@@ -342,14 +344,15 @@
       }
     ],
     "model": "1. If every merge needed a code review, a second developer would have had to read and approve the attacker's change before it reached the live store. Code that sends customers' card details to an outside server is unusual and would very likely have been spotted. The attacker held only one developer's account, so they couldn't approve their own change, and it would have been blocked before any card details were copied.\n\n2. The version control system recorded the change. Its history shows exactly which lines were added, from which developer's account and when, so the team can find every part of the attacker's code, lock the compromised account and work out which week of orders was exposed. The team can also roll the web store back to the last version before the change, or revert that change, removing the malicious code quickly.",
-    "mistake": "Version control doesn't stop a malicious change; it records it. Credit comes from saying what the history shows and what rolling back achieves.",
+    "mistake": "Version control doesn't stop a malicious change, and it isn't a backup: it records each change. Credit comes from saying what the history shows and what rolling back to the last working version achieves.",
     "source": "textbook"
   },
   {
     "id": "s-u4o2-kk05-001",
     "kk": [
       "U4O2-KK05",
-      "U4O2-KK04"
+      "U4O2-KK04",
+      "U3O2-KK08"
     ],
     "commandTerm": "explain",
     "marks": 4,
@@ -372,7 +375,7 @@
         "marks": 1
       }
     ],
-    "model": "One threat is that someone who has stolen a vet's password could pose as that vet and send false `treatment_notes` to process 2, altering pets' records in the Medical records store. Wrong treatment records could lead to a pet being given the wrong medication. The developers should mitigate this by requiring multi-factor authentication for vets, so a password alone can't be used to record a treatment. To test the mitigation, they would try to log in as a test vet with the correct password but without the second factor, and confirm that the app refuses to accept any treatment notes.",
+    "model": "One threat is that someone who has stolen a vet's password could pose as that vet and send false `treatment_notes` to the *Record treatment* process, altering pets' records in the Medical records store. Wrong treatment records could lead to a pet being given the wrong medication. The developers should mitigate this by requiring multi-factor authentication for vets, so a password alone can't be used to record a treatment. To test the mitigation, they would try to log in as a test vet with the correct password but without the second factor, and confirm that the app refuses to accept any treatment notes.",
     "mistake": "A threat that isn't tied to the diagram, such as 'hackers', earns little. Name the flow, process or store at risk and what could happen to it.",
     "source": "textbook",
     "figures": [
@@ -381,7 +384,7 @@
         "kind": "dfd",
         "title": "DFD (part): Pepper Creek Vets app",
         "width": 640,
-        "height": 400,
+        "height": 440,
         "nodes": [
           {
             "id": "owner",
@@ -401,7 +404,6 @@
             "id": "p1",
             "type": "process",
             "label": "Book appointment",
-            "number": "1",
             "x": 200,
             "y": 220
           },
@@ -409,7 +411,6 @@
             "id": "p2",
             "type": "process",
             "label": "Record treatment",
-            "number": "2",
             "x": 440,
             "y": 220
           },
@@ -417,17 +418,15 @@
             "id": "d1",
             "type": "store",
             "label": "Appointments",
-            "number": "D1",
             "x": 200,
-            "y": 344
+            "y": 384
           },
           {
             "id": "d2",
             "type": "store",
             "label": "Medical records",
-            "number": "D2",
             "x": 440,
-            "y": 344
+            "y": 384
           }
         ],
         "flows": [
@@ -446,7 +445,7 @@
             "label": "booking_details",
             "labelAt": {
               "x": 128,
-              "y": 297
+              "y": 317
             }
           },
           {
@@ -464,12 +463,21 @@
             }
           },
           {
+            "from": "d2",
+            "to": "p2",
+            "label": "treatment_history",
+            "labelAt": {
+              "x": 366,
+              "y": 342
+            }
+          },
+          {
             "from": "p2",
             "to": "d2",
             "label": "treatment_record",
             "labelAt": {
-              "x": 514,
-              "y": 297
+              "x": 522,
+              "y": 317
             }
           }
         ]
@@ -501,18 +509,19 @@
     "id": "s-u4o2-kk05-003",
     "kk": [
       "U4O2-KK05",
-      "U3O2-KK08"
+      "U3O2-KK08",
+      "U4O2-KK04"
     ],
     "commandTerm": "explain",
     "marks": 3,
-    "prompt": "The Shire of Wandarrie, a council with 380 staff, has an app that residents use to register their pets. The council now wants the app to update each pet's record held by an outside microchip registry, sending the owner's name, address and phone number. This new feature is process 2 and its flows in the DFD. The development team completed a threat model for the app last year.\n\nExplain why the team must update its threat model before building this feature. In your answer, identify one new threat the feature introduces and a control that would mitigate it.",
+    "prompt": "The Shire of Wandarrie, a council with 380 staff, has an app that residents use to register their pets. The council now wants the app to update each pet's record held by an outside microchip registry, sending the owner's name, address and phone number. This new feature is the process *Update chip record* and its flows in the DFD. The development team completed a threat model for the app last year.\n\nExplain why the team must update its threat model before building this feature. In your answer, identify one new threat the feature introduces and a control that would mitigate it.",
     "points": [
       {
         "text": "Explains why the model must be updated, e.g. the feature adds a new process and new flows, including owners' personal details leaving the council for an outside organisation, which last year's threat model never considered; or updating it before building lets controls be designed in, which is cheaper than changing finished code",
         "marks": 1
       },
       {
-        "text": "Identifies a new threat tied to process 2 or its flows, e.g. owner_details intercepted on the way to the registry; an attacker posing as the registry to collect owners' details or return a false update_status",
+        "text": "Identifies a new threat tied to the *Update chip record* process or its flows, e.g. owner_details intercepted on the way to the registry; an attacker posing as the registry to collect owners' details or return a false update_status",
         "marks": 1
       },
       {
@@ -520,7 +529,7 @@
         "marks": 1
       }
     ],
-    "model": "Last year's threat model covered only the elements the app had then. The new feature adds process 2, the microchip registry as a new external entity, and three new flows. For the first time residents' names, addresses and phone numbers leave the council for an outside organisation. The existing model never considered these elements, so their threats have not been identified or mitigated. Updating the model before building means any controls can be designed in, rather than added to finished code.\n\nOne new threat is that `owner_details` could be intercepted as they travel over the internet to the microchip registry, exposing pet owners' personal details. The team should mitigate this by encrypting `owner_details` in transit, so intercepted details can't be read.",
+    "model": "Last year's threat model covered only the elements the app had then. The new feature adds the *Update chip record* process, the microchip registry as a new external entity, and three new flows. For the first time residents' names, addresses and phone numbers leave the council for an outside organisation. The existing model never considered these elements, so their threats have not been identified or mitigated. Updating the model before building means any controls can be designed in, rather than added to finished code.\n\nOne new threat is that `owner_details` could be intercepted as they travel over the internet to the microchip registry, exposing pet owners' personal details. The team should mitigate this by encrypting `owner_details` in transit, so intercepted details can't be read.",
     "mistake": "A threat that isn't tied to the new feature, such as 'hackers could attack the app', earns little. Name the new flow, process or entity and what could happen to it.",
     "source": "textbook",
     "figures": [
@@ -528,7 +537,7 @@
         "id": "wandarrie-dfd",
         "kind": "dfd",
         "title": "DFD (part): Shire of Wandarrie pet registration",
-        "caption": "Process 2 and its flows are the new feature.",
+        "caption": "The process Update chip record and its flows are the new feature.",
         "width": 640,
         "height": 400,
         "nodes": [
@@ -550,7 +559,6 @@
             "id": "p1",
             "type": "process",
             "label": "Register pet",
-            "number": "1",
             "x": 176,
             "y": 224
           },
@@ -558,7 +566,6 @@
             "id": "p2",
             "type": "process",
             "label": "Update chip record",
-            "number": "2",
             "x": 472,
             "y": 224,
             "w": 112
@@ -567,7 +574,6 @@
             "id": "d1",
             "type": "store",
             "label": "Registrations",
-            "number": "D1",
             "x": 176,
             "y": 348
           }
@@ -616,7 +622,7 @@
     "prompt": "Keelback Logistics, a Bendigo freight company, employs six developers who maintain its parcel-tracking system. The system stores customers' names, addresses and phone numbers. Management wants to evaluate how secure the team's development practices are.\n\nPropose two criteria Keelback Logistics could use to evaluate the security of its development practices. For each criterion, describe the evidence that would show whether it is met.",
     "points": [
       {
-        "text": "Criterion 1: a specific, checkable standard for one development practice, e.g. every change to the tracking system is approved by a second developer before it is merged",
+        "text": "Criterion 1: a checkable statement or question about a development practice or the security controls protecting it, e.g. every change to the tracking system is approved by a second developer before it is merged",
         "marks": 1
       },
       {
@@ -624,7 +630,7 @@
         "marks": 1
       },
       {
-        "text": "Criterion 2: a specific, checkable standard for a different practice, e.g. test environments contain no identifiable customer names, addresses or phone numbers",
+        "text": "Criterion 2: a checkable statement or question about a different practice or control, e.g. test environments contain no identifiable customer names, addresses or phone numbers",
         "marks": 1
       },
       {
@@ -704,18 +710,19 @@
   {
     "id": "s-u4o2-kk07-001",
     "kk": [
-      "U4O2-KK07"
+      "U4O2-KK07",
+      "U3O2-KK10"
     ],
     "commandTerm": "explain",
     "marks": 4,
-    "prompt": "Bristlebird Allied Health, a private clinic in Warrnambool, has engaged Tawnyhill Apps, an external developer, to build a booking and treatment-notes app. The app will store patients' contact details and treatment notes. Tawnyhill Apps plans to include an open-source calendar library in the app.\n\nIdentify two Acts that apply to this project and explain how each affects the way Tawnyhill Apps develops the app.",
+    "prompt": "Bristlebird Allied Health, a private clinic in Warrnambool that is covered by Commonwealth privacy law, has engaged Tawnyhill Apps, an external developer, to build a booking and treatment-notes app. The app will store patients' contact details and treatment notes. Tawnyhill Apps plans to include an open-source calendar library in the app.\n\nIdentify two Acts that apply to this project and explain how each affects the way Tawnyhill Apps develops the app.",
     "points": [
       {
-        "text": "Identifies a privacy Act that applies to patients' information: the Health Records Act 2001 (Vic) or the Privacy Act 1988 (Cwlth)",
+        "text": "Identifies the Privacy Act 1988 (Cwlth), which applies to the patients' personal information (the Health Records Act 2001 (Vic) is also accepted for the treatment notes)",
         "marks": 1
       },
       {
-        "text": "Explains its effect on development, applied to the app, e.g. the app must protect treatment notes from unauthorised access (such as by encrypting them and letting only authorised clinic staff view them), collect only the information the clinic needs, and be tested without real patient records",
+        "text": "Explains its effect on development, applied to the app, e.g. under APP 11 (security of personal information) the app must protect treatment notes from misuse and unauthorised access, such as by encrypting them and letting only authorised clinic staff view them; or under APP 6 (use or disclosure of personal information) real patient records shouldn't be used to test the app",
         "marks": 1
       },
       {
@@ -723,11 +730,11 @@
         "marks": 1
       },
       {
-        "text": "Explains its effect on development, e.g. Tawnyhill Apps follows the library's licence conditions, such as keeping its copyright notice, and acknowledges it in the documentation",
+        "text": "Explains its effect on development, e.g. the library is protected by copyright even though it is free to use, so Tawnyhill Apps follows its licence conditions, such as keeping its copyright notice, and acknowledges it in the documentation",
         "marks": 1
       }
     ],
-    "model": "The Health Records Act 2001 (Vic) applies because the app stores treatment notes, which are health information held by a private Victorian clinic. The app must let the clinic meet the Act, so Tawnyhill Apps must build it to protect the notes from unauthorised access, for example by encrypting them and letting only authorised clinic staff view them, and it should test the app with made-up patient records rather than real ones.\n\nThe Copyright Act 1968 (Cwlth) applies to the open-source calendar library, which is protected by copyright even though it is freely available. Tawnyhill Apps must follow the library's licence conditions, such as keeping its copyright notice, and acknowledge the library in the app's documentation.",
+    "model": "The Privacy Act 1988 (Cwlth) applies because the app stores patients' personal information, including treatment notes, for a clinic the Act covers. The app must let the clinic meet the Australian Privacy Principles. Under APP 11 (security of personal information), Tawnyhill Apps must build the app to protect the notes from misuse and unauthorised access, for example by encrypting them and letting only authorised clinic staff view them. APP 6 limits using or disclosing patients' information for purposes other than the one it was collected for, so the app should be tested with made-up patient records rather than real ones.\n\nThe Copyright Act 1968 (Cwlth) applies to the open-source calendar library, which is protected by copyright even though it is freely available. Tawnyhill Apps must follow the library's licence conditions, such as keeping its copyright notice, and acknowledge the library in the app's documentation.",
     "mistake": "Naming an Act without linking it to the app earns little. Say which data or code the Act covers and what Tawnyhill Apps must do because of it.",
     "source": "textbook"
   },
@@ -735,7 +742,8 @@
     "id": "s-u4o2-kk07-002",
     "kk": [
       "U4O2-KK07",
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK03"
     ],
     "commandTerm": "explain",
     "marks": 4,
@@ -766,14 +774,15 @@
     "id": "s-u4o2-kk07-003",
     "kk": [
       "U4O2-KK07",
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK03"
     ],
     "commandTerm": "justify",
     "marks": 4,
     "prompt": "Riflebird Ticketing, a Melbourne company covered by the Privacy Act 1988 (Cwlth), sells concert tickets through its website and stores customers' names, email addresses, phone numbers and purchase histories. A review of its development practices found that:\n\n- administrator accounts on the web server are protected by a password only\n- the web server's operating system is missing nine months of security updates\n- the customer database is backed up weekly, but no one has ever tried restoring a backup.\n\nThe operations manager says there is no point adopting the Essential Eight, because it is not law. Justify why Riflebird Ticketing should adopt the Essential Eight, with reference to the review's findings.",
     "points": [
       {
-        "text": "Although the Essential Eight is voluntary guidance, the Privacy Act requires Riflebird to take reasonable steps to protect the personal information it holds, and the Essential Eight gives it a recognised, prioritised set of strategies for taking those steps",
+        "text": "Although the Essential Eight is an industry framework rather than law, APP 11 (security of personal information) in the Privacy Act requires Riflebird to take reasonable steps to protect the personal information it holds, and the Essential Eight gives it a recognised, prioritised set of strategies for taking those steps",
         "marks": 1
       },
       {
@@ -793,7 +802,7 @@
         "marks": 1
       }
     ],
-    "model": "The Essential Eight isn't law, but the Privacy Act requires Riflebird to take reasonable steps to protect the customers' personal information it holds. The Act doesn't list which controls to use, and the Essential Eight gives a recognised, prioritised set of strategies that match the weaknesses the review found.\n\nMulti-factor authentication would protect the administrator accounts, so a stolen or guessed password alone could no longer be used to reach the web server and the customer database. Patching operating systems would close the known vulnerabilities that have built up in the nine months since the web server was last updated, which attackers look for. Regular backups, with restores tested, would mean that customer data could actually be recovered after ransomware or an accidental deletion; at present no one knows whether the weekly backups work.\n\nTogether these make a breach of customers' details much less likely. A breach likely to cause serious harm would have to be reported to the affected customers and the Australian Information Commissioner, which would damage their trust in Riflebird.",
+    "model": "The Essential Eight isn't law, but APP 11 (security of personal information) in the Privacy Act requires Riflebird to take reasonable steps to protect the customers' personal information it holds. The Act doesn't list which controls to use, and the Essential Eight gives a recognised, prioritised set of strategies that match the weaknesses the review found.\n\nMulti-factor authentication would protect the administrator accounts, so a stolen or guessed password alone could no longer be used to reach the web server and the customer database. Patching operating systems would close the known vulnerabilities that have built up in the nine months since the web server was last updated, which attackers look for. Regular backups, with restores tested, would mean that customer data could actually be recovered after ransomware or an accidental deletion; at present no one knows whether the weekly backups work.\n\nTogether these make a breach of customers' details much less likely. A breach likely to cause serious harm would have to be reported to the affected customers and the Australian Information Commissioner, which would damage their trust in Riflebird.",
     "mistake": "Calling the Essential Eight 'best practice' doesn't justify adopting it. Name each strategy, the finding at Riflebird it fixes, and the harm it prevents.",
     "source": "textbook"
   },
@@ -882,7 +891,9 @@
   {
     "id": "s-u4o2-kk09-001",
     "kk": [
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04",
+      "U4O2-KK07"
     ],
     "commandTerm": "propose",
     "marks": 4,
@@ -913,7 +924,9 @@
     "id": "s-u4o2-kk09-002",
     "kk": [
       "U4O2-KK09",
-      "U4O2-KK03"
+      "U4O2-KK03",
+      "U3O1-KK08",
+      "U4O2-KK04"
     ],
     "commandTerm": "explain",
     "marks": 4,
@@ -952,7 +965,9 @@
   {
     "id": "s-u4o2-kk09-003",
     "kk": [
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04",
+      "U4O2-KK07"
     ],
     "commandTerm": "explain",
     "marks": 4,
@@ -983,7 +998,8 @@
     "id": "s-u4o2-kk10-001",
     "kk": [
       "U4O2-KK10",
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04"
     ],
     "commandTerm": "recommend",
     "marks": 4,
@@ -998,7 +1014,7 @@
         "marks": 1
       },
       {
-        "text": "Recommendation 2: a specific action that addresses a different finding, e.g. disable the former developers' accounts and review access regularly; move the database password into a protected secrets store and change it; or use made-up staff records for testing",
+        "text": "Recommendation 2: a specific action that addresses a different finding, e.g. disable the former developers' accounts and review access regularly; move the database password into a protected secrets store and change it; use made-up staff records for testing; or train every developer in secure development, starting at induction, including keeping passwords out of source code",
         "marks": 1
       },
       {
@@ -1070,7 +1086,8 @@
     "id": "s-u4o2-kk10-003",
     "kk": [
       "U4O2-KK10",
-      "U4O2-KK08"
+      "U4O2-KK08",
+      "U4O1-KK04"
     ],
     "commandTerm": "recommend",
     "marks": 4,

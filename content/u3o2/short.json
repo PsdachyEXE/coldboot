@@ -9,11 +9,11 @@
     "prompt": "Kellbrook Physiotherapy in Ballarat records appointments in a paper diary at reception. Clients can book only by phone during opening hours, and the diary is sometimes double-booked when two receptionists take calls at once. Receptionists also spend about an hour each day phoning clients to remind them of appointments. A physiotherapy clinic across town has recently started taking bookings online.\n\nExplain **two** reasons why Kellbrook Physiotherapy would undertake a software development project. Refer to the scenario in your answer.",
     "points": [
       {
-        "text": "Identifies a first reason, e.g. to fix a problem with the paper diary (double-bookings), to save reception time spent phoning reminders, or to take an opportunity (online bookings outside opening hours)",
+        "text": "Identifies a first reason, e.g. increasing productivity and efficiency, reducing costs, meeting the clinic's objectives or needs, or reducing errors",
         "marks": 1
       },
       {
-        "text": "Explains the first reason with reference to Kellbrook, e.g. a shared booking program that checks availability stops two receptionists booking the same slot, so appointments are recorded accurately",
+        "text": "Explains the first reason with reference to Kellbrook, e.g. sending reminders automatically would free the hour receptionists spend phoning clients each day, so they can do other work",
         "marks": 1
       },
       {
@@ -21,18 +21,19 @@
         "marks": 1
       },
       {
-        "text": "Explains the second reason with reference to Kellbrook, e.g. automatic reminders free about an hour of reception time each day, or online booking lets clients book after hours so the clinic doesn't lose them to the rival clinic",
+        "text": "Explains the second reason with reference to Kellbrook, e.g. a shared booking program that checks whether a slot is free would stop double-bookings, or online booking would let clients book after hours so the clinic keeps clients who might move to the rival clinic",
         "marks": 1
       }
     ],
-    "model": "First, the clinic has a problem with its current system. Two receptionists write in one paper diary while taking separate calls, so the same time slot is sometimes booked twice. A booking program that checks whether a slot is free before saving a booking would stop double-bookings, so appointments would be recorded accurately.\n\nSecond, the clinic can take an opportunity. Clients can book only by phone during opening hours, while a nearby clinic now takes bookings online. An online booking system would let Kellbrook's clients book at any time, so the clinic could keep clients who might otherwise book with its rival.",
-    "mistake": "Naming 'problem' or 'opportunity' earns little on its own. Each reason needs the scenario detail that shows it, and what the software would change.",
+    "model": "First, the project would increase productivity and efficiency. Receptionists spend about an hour each day phoning clients to remind them of appointments. A program that sends reminders automatically would free that hour for other reception work.\n\nSecond, it would help the clinic meet its objective of keeping its clients. At present clients can book only by phone during opening hours, and a clinic across town now takes bookings online. An online booking system would let Kellbrook's clients book at any time, so fewer of them would move to the rival clinic.",
+    "mistake": "A label such as 'efficiency' or 'reducing costs' earns little on its own. Take each reason from the scenario, such as the hour of reminder calls or the double-bookings, and say what the software would change.",
     "source": "textbook"
   },
   {
     "id": "s-u3o2-kk01-002",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02"
     ],
     "commandTerm": "classify",
     "marks": 3,
@@ -58,7 +59,11 @@
   {
     "id": "s-u3o2-kk01-003",
     "kk": [
-      "U3O2-KK01"
+      "U3O2-KK01",
+      "U3O2-KK02",
+      "U3O2-KK04",
+      "U3O2-KK05",
+      "U3O2-KK07"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -92,32 +97,36 @@
     ],
     "commandTerm": "describe",
     "marks": 3,
-    "prompt": "Quollby Pet Supplies has two shops in Wodonga. Stock levels are kept in a spreadsheet that each shop updates at closing time, so products often sell out during the day without anyone noticing. The owner, Declan, wants staff at both shops to see current stock levels on the shop tablets, and has a budget of $8000. Before analysis begins, the developer, Minh, will prepare a brief.\n\nDescribe **three** features that Minh's brief should document, applying each to Quollby Pet Supplies.",
+    "prompt": "Quollby Pet Supplies has two shops in Wodonga. Stock levels are kept in a spreadsheet that each shop updates at closing time, so products often sell out during the day without anyone noticing. The owner, Declan, wants staff at both shops to see current stock levels on the shop tablets, and has a budget of $8000. Before analysis begins, the developer, Minh, who builds web apps in JavaScript, will prepare a brief.\n\nDescribe **three** features that Minh's brief should document, applying each to Quollby Pet Supplies.",
     "points": [
       {
-        "text": "Background or current situation, applied (e.g. two shops in Wodonga; stock kept in a spreadsheet updated only at closing time)",
+        "text": "Problem/need/opportunity outline, applied (e.g. stock levels are updated only at closing time, so products sell out during the day without staff at either shop noticing)",
         "marks": 1
       },
       {
-        "text": "The problem, need or opportunity, applied (e.g. products sell out during the day unnoticed because stock levels aren't current)",
+        "text": "Proposed users, applied (e.g. staff at both shops, who will check stock on the tablets, and the owner, Declan)",
         "marks": 1
       },
       {
-        "text": "The users or stakeholders, applied (e.g. staff at both shops, who will check stock, and the owner, Declan)",
+        "text": "Programming languages to be used, applied (e.g. JavaScript, for a web app that runs in the browsers of the shops' existing tablets)",
         "marks": 1
       },
       {
-        "text": "What the solution should achieve, applied (e.g. staff at both shops can see current stock levels on the shop tablets)",
+        "text": "Feasibility, applied (e.g. whether Minh can build the app within Declan's $8000 budget, using the tablets the shops already have)",
         "marks": 1
       },
       {
-        "text": "Known constraints, applied (e.g. a budget of $8000; the solution must run on the existing shop tablets)",
+        "text": "Originality, applied (e.g. what the app offers that the current end-of-day spreadsheet doesn't, such as both shops' stock levels updated as each sale is made)",
+        "marks": 1
+      },
+      {
+        "text": "Alternative: an outline of the proposed solution, applied (e.g. staff at both shops will see current stock levels on the shop tablets during the day)",
         "marks": 1
       }
     ],
-    "model": "The brief should describe the background: Quollby Pet Supplies runs two shops in Wodonga and records stock in a spreadsheet that each shop updates only at closing time.\n\nIt should state the problem: because stock levels aren't current during the day, products sell out without staff at either shop noticing.\n\nIt should state known constraints: the solution must cost no more than $8000 and must run on the tablets the shops already use.",
-    "mistake": "Listing headings such as 'background' and 'constraints' isn't describing them. Each feature needs the Quollby details it would contain.",
-    "source": "textbook"
+    "model": "The brief should outline the problem: each shop updates the stock spreadsheet only at closing time, so during the day products sell out without staff at either shop noticing.\n\nIt should name the proposed users: staff at both shops, who will check current stock levels on the shop tablets, and Declan, the owner.\n\nIt should address feasibility: whether Minh can build the app within Declan's $8000 budget, using the tablets the shops already have.",
+    "mistake": "Listing headings such as 'proposed users' and 'feasibility' isn't describing them. Each feature needs the Quollby details it would contain.",
+    "source": "study-design"
   },
   {
     "id": "s-u3o2-kk02-002",
@@ -155,29 +164,29 @@
         "marks": 1
       },
       {
-        "text": "Justifies the removal: screen controls are design decisions made after analysis; a brief says what is wanted and why, not how the app will work, and fixing them now could rule out a better design",
+        "text": "Justifies the removal: choosing screen controls is detailed design, done after analysis; a brief outlines the proposed solution only in broad terms, and fixing the controls now could rule out a better design",
         "marks": 1
       },
       {
-        "text": "Recommends adding the intended users and their characteristics, e.g. who books plots and tools, how many of them there are and what devices they use",
+        "text": "Recommends adding a brief feature the draft lacks, e.g. the proposed users (who books plots and tools, how many of them there are and what devices they use), the programming language to be used, what makes the app original, or a broad outline of the proposed solution (members can see and book free plots and tools without double-bookings)",
         "marks": 1
       },
       {
-        "text": "Justifies the addition: knowing the users tells Ravi whom to collect data from and shapes requirements such as usability",
+        "text": "Justifies the addition, e.g. knowing the proposed users tells Ravi whom to collect data from and shapes requirements such as usability; a broad outline of the solution gives analysis a clear target in place of statement 3's screen detail",
         "marks": 1
       },
       {
-        "text": "Alternative second change: recommends adding what the app should achieve, e.g. members can see and book free plots and tools without double-bookings",
+        "text": "Alternative second change: recommends adding a statement of feasibility, e.g. whether the app can be built by 1 September for no more than $2500 with the skills available",
         "marks": 1
       },
       {
-        "text": "Justifies the alternative: a stated goal gives analysis a clear target and a basis for judging the finished app",
+        "text": "Justifies the alternative: the brief should show the project is achievable before planning and analysis begin",
         "marks": 1
       }
     ],
-    "model": "First, Ravi should remove statement 3. A drop-down list and a calendar control are design decisions, made after analysis has worked out what the garden needs. A brief explains what is wanted and why, not how the app will work, and fixing the controls now could rule out a better design.\n\nSecond, Ravi should add who the intended users are: for example, the plot holders and volunteers who borrow tools, how many of them there are and what devices they use. The draft never says who will book plots and tools, and knowing the users tells Ravi whom to collect data from and shapes requirements such as usability.",
+    "model": "First, Ravi should remove statement 3. A drop-down list and a calendar control are detailed design decisions, made after analysis has worked out what the garden needs. A brief outlines the proposed solution only in broad terms, and fixing the controls now could rule out a better design.\n\nSecond, Ravi should add the proposed users: for example, the plot holders and volunteers who borrow tools, how many of them there are and what devices they use. The draft never says who will book plots and tools, and knowing the users tells Ravi whom to collect data from and shapes requirements such as usability.",
     "mistake": "'Add more detail' earns nothing. A recommendation names exactly what to add or remove, and its justification says why that matters for this garden's brief.",
-    "source": "textbook"
+    "source": "study-design"
   },
   {
     "id": "s-u3o2-kk03-001",
@@ -647,14 +656,15 @@
         "marks": 1
       }
     ],
-    "model": "Functional requirements:\n- The program must record each client visit, including the date and the items in the food parcel.\n- The program must produce a weekly report totalling the visits and items given out, for funding reports.\n\nNon-functional requirements:\n- Usability: a volunteer who has never used the program can record a visit within two minutes after a five-minute demonstration.\n- Reliability: no visit records are lost when the pantry's Wi-Fi drops out; records entered offline are saved once the connection returns.",
+    "model": "Functional requirements:\n- The program must record each client visit, including the date and the items in the food parcel.\n- The program must produce a weekly report totalling the visits and items given out, for funding reports.\n\nNon-functional requirements:\n- Usability: a volunteer who has never used the program can record a visit within two minutes after a five-minute demonstration.\n- Reliability: no visit record a volunteer enters is ever lost, even when the pantry's Wi-Fi drops out.",
     "mistake": "A non-functional requirement such as 'easy to use' earns less than one with a target that could be checked, such as a time limit for new volunteers.",
     "source": "textbook"
   },
   {
     "id": "s-u3o2-kk05-002",
     "kk": [
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "commandTerm": "classify",
     "marks": 4,
@@ -677,8 +687,8 @@
         "marks": 1
       }
     ],
-    "model": "1. Functional: booking a court is something the app does.\n2. Non-functional (portability): it describes the range of platforms the app runs on.\n3. Functional: sending a reminder is something the app does.\n4. Non-functional (usability): it sets a measurable target for how easily a new member can use the app.",
-    "mistake": "For a non-functional requirement, 'non-functional' alone isn't the full answer here. Name the quality: portability, usability or reliability.",
+    "model": "1. Functional: booking a court is something the app does; the seven-day limit only sets how far ahead it can be done.\n2. Non-functional (portability): it describes the range of platforms the app runs on.\n3. Functional: sending a reminder is something the app does.\n4. Non-functional (usability): it sets a measurable target for how easily a new member can use the app.",
+    "mistake": "A number doesn't make a requirement non-functional: booking up to seven days ahead is still something the app does, so requirement 1 is functional. For each non-functional requirement, also name the quality it describes.",
     "source": "textbook",
     "figures": [
       {
@@ -774,14 +784,15 @@
     "id": "s-u3o2-kk06-002",
     "kk": [
       "U3O2-KK06",
-      "U3O2-KK05"
+      "U3O2-KK05",
+      "U3O1-KK02"
     ],
     "commandTerm": "explain",
     "marks": 2,
     "prompt": "Sienna's client wants the statement 'the app must cost no more than $3000 to develop' listed with the app's non-functional requirements.\n\nExplain why this statement is a constraint rather than a non-functional requirement.",
     "points": [
       {
-        "text": "A constraint limits the project or the options available to the developer; here it limits the money available for development",
+        "text": "A constraint limits the project or the options available to the developer; here it limits the money available for development (an economic constraint)",
         "marks": 1
       },
       {
@@ -789,7 +800,7 @@
         "marks": 1
       }
     ],
-    "model": "The $3000 limit restricts the project: it limits the money Sienna has, and so the tools, hosting and time she can use to build the app. A non-functional requirement describes a quality the finished app must have, such as how reliable or usable it is, and can be tested in the app itself. The development cost isn't a quality of the app, so the statement is a constraint.",
+    "model": "The $3000 limit is an economic constraint: it restricts the project by limiting the money Sienna has, and so the tools, hosting and time she can use to build the app. A non-functional requirement describes a quality the finished app must have, such as how reliable or usable it is, and can be tested in the app itself. The development cost isn't a quality of the app, so the statement is a constraint.",
     "source": "textbook"
   },
   {
@@ -951,7 +962,7 @@
         "marks": 1
       },
       {
-        "text": "Explains the correction: remove *Stock records* and the `stock_update` flow, because a context diagram shows no data stores; stored data sits inside the single process",
+        "text": "Explains the correction: remove *Stock records* and the `stock_update` flow, because a context diagram shows no data stores; stored data stays inside the system",
         "marks": 1
       },
       {
@@ -963,7 +974,7 @@
         "marks": 1
       }
     ],
-    "model": "First, *Stock records* is drawn as an external entity. The stock records will be stored within the new system, so they are a data store inside the system, not a source or destination of data outside it. The *Stock records* box and its `stock_update` flow should be removed, because a context diagram shows no data stores; stored data is hidden inside the single process.\n\nSecond, `delivery_roster` flows directly from *Supplier* to *Volunteer*. That data passes between two external entities without going through the food parcel system, so it is outside the system's boundary. The flow should be removed from the diagram.",
+    "model": "First, *Stock records* is drawn as an external entity. The stock records will be stored within the new system, so they are a data store inside the system, not a source or destination of data outside it. The *Stock records* box and its `stock_update` flow should be removed, because a context diagram shows no data stores; stored data is hidden inside the system.\n\nSecond, `delivery_roster` flows directly from *Supplier* to *Volunteer*. That data passes between two external entities without going through the food parcel system, so it is outside the system's boundary. The flow should be removed from the diagram.",
     "mistake": "Saying 'the arrow is wrong' earns nothing. Name the element or flow, say which convention it breaks, and say how to fix it.",
     "source": "textbook",
     "figures": [
@@ -1206,15 +1217,15 @@
     "prompt": "Grey Box Flat Campground near Mansfield is having a booking system developed. Guests request a booking and receive a confirmation and, later, an invoice. The DFD drawn for the system is shown. It contains two convention errors.\n\nIdentify **two** errors in the DFD and explain how each should be corrected.",
     "points": [
       {
-        "text": "Identifies that `booking_record` flows directly from *D1 Bookings* to *D2 Invoices*: data can't move between two data stores without a process",
+        "text": "Identifies that `booking_record` flows directly from the *Bookings* data store to the *Invoices* data store: data can't move between two data stores without a process",
         "marks": 1
       },
       {
-        "text": "Explains the correction: a process must move the data, e.g. `booking_record` flows from *D1 Bookings* to process 2, which writes `invoice_details` to *D2 Invoices*",
+        "text": "Explains the correction: a process must move the data, e.g. `booking_record` flows from *Bookings* to the process *Send invoice*, which writes `invoice_details` to *Invoices*",
         "marks": 1
       },
       {
-        "text": "Identifies that the flow from process 1 to *Guest* is labelled `confirm_booking`, an action, rather than the data that moves",
+        "text": "Identifies that the flow from the process *Record booking* to *Guest* is labelled `confirm_booking`, an action, rather than the data that moves",
         "marks": 1
       },
       {
@@ -1222,7 +1233,7 @@
         "marks": 1
       }
     ],
-    "model": "First, `booking_record` flows directly from *D1 Bookings* to *D2 Invoices*. Data can't move between two data stores on its own; a process must read it from one store and write it to the other. The flow should be redrawn so that `booking_record` goes from *D1 Bookings* to process 2, which then writes `invoice_details` to *D2 Invoices* and sends the invoice to the guest.\n\nSecond, the flow from process 1 to *Guest* is labelled `confirm_booking`, which names an action. A data flow is labelled with the data that moves, so it should be renamed with a noun phrase such as `booking_confirmation`.",
+    "model": "First, `booking_record` flows directly from the *Bookings* data store to the *Invoices* data store. Data can't move between two data stores on its own; a process must read it from one store and write it to the other. The flow should be redrawn so that `booking_record` goes from *Bookings* to the process *Send invoice*, which then writes `invoice_details` to *Invoices* and sends the invoice to the guest.\n\nSecond, the flow from the process *Record booking* to *Guest* is labelled `confirm_booking`, which names an action. A data flow is labelled with the data that moves, so it should be renamed with a noun phrase such as `booking_confirmation`.",
     "mistake": "Reversing the arrow doesn't fix a flow between two data stores. A process has to sit between the stores to read the data, work on it and write it.",
     "source": "textbook",
     "figures": [
@@ -1244,7 +1255,6 @@
             "id": "p1",
             "type": "process",
             "label": "Record booking",
-            "number": "1",
             "x": 340,
             "y": 90
           },
@@ -1252,7 +1262,6 @@
             "id": "d1",
             "type": "store",
             "label": "Bookings",
-            "number": "D1",
             "x": 596,
             "y": 90
           },
@@ -1260,7 +1269,6 @@
             "id": "d2",
             "type": "store",
             "label": "Invoices",
-            "number": "D2",
             "x": 596,
             "y": 310
           },
@@ -1268,7 +1276,6 @@
             "id": "p2",
             "type": "process",
             "label": "Send invoice",
-            "number": "2",
             "x": 340,
             "y": 310
           }
@@ -1345,10 +1352,10 @@
     ],
     "commandTerm": "explain",
     "marks": 3,
-    "prompt": "Heron Bay Dental in Bairnsdale is having a self check-in kiosk developed for its waiting room. Patients range in age from 18 to over 90, and some have low vision or have rarely used a touchscreen. Reception staff will use the same system to see who has arrived.\n\nExplain why the SRS should describe the intended users of the kiosk. Refer to the clinic in your answer.",
+    "prompt": "Heron Bay Dental in Bairnsdale is having a self check-in kiosk developed for its waiting room. Patients range in age from 18 to over 90, and some have low vision or have rarely used a touchscreen. Reception staff will use the same system to see who has arrived.\n\nExplain why the SRS should describe the kiosk's user characteristics. Refer to the clinic in your answer.",
     "points": [
       {
-        "text": "States that describing the users lets designers match the interface to the users' abilities, experience and needs",
+        "text": "States that describing the user characteristics lets designers match the interface to the users' abilities, experience and needs",
         "marks": 1
       },
       {
@@ -1360,7 +1367,7 @@
         "marks": 1
       }
     ],
-    "model": "Describing the intended users tells designers who they are designing for, so the interface can match the users' abilities and experience. At Heron Bay Dental the users include patients over 90, some with low vision and little touchscreen experience, so the kiosk will need large text, strong contrast, large buttons and only a few simple steps to check in.\n\nThe description also guides testing. The developer can test the kiosk with patients from across the age range, including older patients, to check that they can check in without help.",
+    "model": "Describing the user characteristics tells designers who they are designing for, so the interface can match the users' abilities and experience. At Heron Bay Dental the users include patients over 90, some with low vision and little touchscreen experience, so the kiosk will need large text, strong contrast, large buttons and only a few simple steps to check in.\n\nThe description also guides testing. The developer can test the kiosk with patients from across the age range, including older patients, to check that they can check in without help.",
     "source": "textbook"
   },
   {
@@ -1422,7 +1429,8 @@
   {
     "id": "s-u3o2-kk10-002",
     "kk": [
-      "U3O2-KK10"
+      "U3O2-KK10",
+      "U4O2-KK07"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -1467,7 +1475,7 @@
         "marks": 1
       }
     ],
-    "model": "The leaderboard should show only members who choose to appear on it, with the setting off until a member turns it on. Members who opt in should be shown by first name and initial with their weekly distance, without their suburb, routes or start times, and the leaderboard should be visible only to signed-in members.\n\nMembers record their runs so that the coaches can plan their training. Showing their details to anyone who visits the home page is a different use that they haven't agreed to. Good privacy practice, reflected in the Australian Privacy Principles, is to use personal information only for the purpose it was collected for, unless the person consents.\n\nPublishing full names with suburbs, routes and start times would also put members at risk. Many runs start and finish at home, so a stranger could use the routes to work out where a member lives, and the start times to work out when they usually run and so when they are likely to be away from home.",
+    "model": "The leaderboard should show only members who choose to appear on it, with the setting off until a member turns it on. Members who opt in should be shown by first name and initial with their weekly distance, without their suburb, routes or start times, and the leaderboard should be visible only to signed-in members.\n\nMembers record their runs so that the coaches can plan their training. Showing their details to anyone who visits the home page is a different use that they haven't agreed to. Good privacy practice, reflected in APP 6 (Use or disclosure of personal information), is to use personal information only for the purpose it was collected for, unless the person consents.\n\nPublishing full names with suburbs, routes and start times would also put members at risk. Many runs start and finish at home, so a stranger could use the routes to work out where a member lives, and the start times to work out when they usually run and so when they are likely to be away from home.",
     "mistake": "Taking the surname off isn't enough on its own. A first name with a suburb and a regular route can still identify a member, so it is still personal information.",
     "source": "textbook"
   },
@@ -1498,7 +1506,7 @@
       }
     ],
     "model": "First, the team should keep its code in a version control system, or at least save each change as a new numbered version such as `booking_v1.3.py` instead of names like `app_final2.py`. At the moment neither developer can tell which file is current, and when Sione saved over the working code there was no earlier version to go back to. With every change kept, they could restore the last working version, and a version control system would also show what changed and who changed it.\n\nSecond, they should back up the project every day and keep at least one copy away from Ari's laptop, such as in cloud storage or on a drive kept at another location. All of the dive school's project files are on one laptop, so if it failed, was lost or was stolen, the whole project would be gone.",
-    "mistake": "Recommending 'back up the files' without saying where the copy is kept, or how it solves this team's problem, earns only part of the marks.",
+    "mistake": "Version control isn't a backup method (the 2025 examiners' report called that an error): it keeps the code's history so the team can roll back after an overwrite like Sione's. Make the backup a separate recommendation that says where the copy is kept and how it protects this team's files; 'back up the files' alone earns only part of the marks.",
     "source": "textbook"
   },
   {
@@ -1545,11 +1553,11 @@
         "marks": 1
       },
       {
-        "text": "Recommends an incremental backup on the other weeknights, e.g. Monday to Thursday nights",
+        "text": "Recommends an incremental backup on the other weeknights, e.g. Monday to Thursday nights (a differential backup on those nights is also accepted)",
         "marks": 1
       },
       {
-        "text": "Justifies it: files change every day, so nightly backups mean at most a day's work is lost; an incremental copies only the few hundred megabytes changed since the last backup, so it finishes well within 14 hours",
+        "text": "Justifies it: files change every day, so nightly backups mean at most a day's work is lost; an incremental copies only the few hundred megabytes changed since the previous backup (a differential, everything changed since the weekend's full backup, is still a small part of the 60 GB), so it finishes well within 14 hours",
         "marks": 1
       }
     ],
@@ -1567,7 +1575,7 @@
     "prompt": "Ngaire is generating design ideas for a ticketing app for Redgum Youth Theatre in Warrnambool. The app must let families choose a show and buy tickets, and the theatre wants the app to reflect its bold, playful posters.\n\nDescribe how Ngaire could use **two** different ideation techniques or tools to generate design ideas for the app.",
     "points": [
       {
-        "text": "Names a first ideation technique or tool (e.g. brainstorming, mind map, mood board or sketches)",
+        "text": "Names a first ideation technique or tool (brainstorming, a mind map, a mood board, sketches or annotations)",
         "marks": 1
       },
       {
@@ -1591,7 +1599,8 @@
     "id": "s-u3o2-kk12-002",
     "kk": [
       "U3O2-KK12",
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "PSM"
     ],
     "commandTerm": "explain",
     "marks": 3,
@@ -1646,7 +1655,8 @@
   {
     "id": "s-u3o2-kk13-001",
     "kk": [
-      "U3O2-KK13"
+      "U3O2-KK13",
+      "U4O1-KK09"
     ],
     "commandTerm": "propose",
     "marks": 4,
@@ -1670,7 +1680,7 @@
       }
     ],
     "model": "Efficiency: a patient can complete check-in at the kiosk in under 60 seconds. This could be measured by timing a sample of patients as they check in over a week and comparing the times with how long patients previously spent queuing at reception.\n\nEffectiveness: every check-in is matched to the correct patient's appointment. This could be measured by comparing a week of kiosk check-ins with the clinic's appointment records and counting any check-ins matched to the wrong appointment, with a target of none.",
-    "mistake": "Criteria such as 'the kiosk is fast' or 'the kiosk works well' can't be measured. Give a figure or a condition that can be checked.",
+    "mistake": "Criteria such as 'the kiosk is fast' or 'the kiosk works well' can't be measured: give a figure or a condition that can be checked. Keep the two kinds apart, too: time, cost and effort are efficiency; correct and complete results are effectiveness.",
     "source": "textbook"
   },
   {
@@ -1760,7 +1770,8 @@
   {
     "id": "s-u3o2-kk14-001",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "commandTerm": "complete",
     "marks": 4,
@@ -1771,11 +1782,11 @@
         "marks": 1
       },
       {
-        "text": "Processing: multiply the hours parked by $4.50",
+        "text": "Process: multiply the hours parked by $4.50",
         "marks": 1
       },
       {
-        "text": "Processing: if the result is more than $22.00, set the fee to $22.00",
+        "text": "Process: if the result is more than $22.00, set the fee to $22.00",
         "marks": 1
       },
       {
@@ -1783,8 +1794,8 @@
         "marks": 1
       }
     ],
-    "model": "| Input | Processing | Output |\n|:--|:--|:--|\n| hoursParked | Multiply hoursParked by 4.50 to get parkingFee. If parkingFee is more than 22.00, set parkingFee to 22.00. | parkingFee (displayed) |",
-    "mistake": "The $4.50 rate, the $22.00 cap and 'calculate fee' don't belong in the Output column. The output is the fee itself; the calculation and the cap are processing.",
+    "model": "| Input | Process | Output |\n|:--|:--|:--|\n| hoursParked | Multiply hoursParked by 4.50 to get parkingFee. If parkingFee is more than 22.00, set parkingFee to 22.00. | parkingFee (displayed) |",
+    "mistake": "The $4.50 rate, the $22.00 cap and 'calculate fee' don't belong in the Output column. The output is the fee itself; the calculation and the cap belong in the Process column.",
     "source": "textbook",
     "figures": [
       {
@@ -1793,7 +1804,7 @@
         "title": "IPO chart: parking fee",
         "columns": [
           "Input",
-          "Processing",
+          "Process",
           "Output"
         ],
         "rows": [
@@ -1810,31 +1821,33 @@
     "id": "s-u3o2-kk14-002",
     "kk": [
       "U3O2-KK14",
-      "U3O1-KK07"
+      "U3O1-KK03",
+      "U3O1-KK04",
+      "U3O1-KK08"
     ],
     "commandTerm": "complete",
     "marks": 4,
-    "prompt": "Tran is designing a car-share program for Lowan Car Share in Traralgon. For each car, the program must record its registration, its hourly hire rate and whether it is currently available. When a member books a car for a number of hours, the program must work out the cost of the booking.\n\nComplete the object description below for a `Car` object. Include **three** properties, each with a suitable data type, and **one** method.",
+    "prompt": "Tran is designing a car-share program for Lowan Car Share in Traralgon. For each car, the program must record its registration, its hourly hire rate and whether it is currently available. When a member books a car for a number of hours, the program must work out the cost of the booking.\n\nComplete the object description below for a `Car` object. Include **three** properties/attributes, each with a suitable data type, and **one** method.",
     "points": [
       {
-        "text": "A property for the registration with a suitable data type, e.g. registration: String",
+        "text": "A property/attribute for the registration with a suitable data type, e.g. registration (string)",
         "marks": 1
       },
       {
-        "text": "A property for the hourly rate with a suitable data type, e.g. hourlyRate: Floating point",
+        "text": "A property/attribute for the hourly rate with a suitable data type, e.g. hourlyRate (floating point)",
         "marks": 1
       },
       {
-        "text": "A property for availability with a suitable data type, e.g. isAvailable: Boolean",
+        "text": "A property/attribute for availability with a suitable data type, e.g. isAvailable (Boolean)",
         "marks": 1
       },
       {
-        "text": "A suitable method that is an action on the car, e.g. calculateCost(hours) returning hours multiplied by hourlyRate",
+        "text": "A suitable method under Methods that is an action on the car, with any parameter it needs, e.g. calculateCost(hours), which returns hours multiplied by hourlyRate",
         "marks": 1
       }
     ],
-    "model": "| Element | Name | Data type or description |\n|:--|:--|:--|\n| Property | registration | String |\n| Property | hourlyRate | Floating point |\n| Property | isAvailable | Boolean |\n| Method | calculateCost(hours) | Returns hours multiplied by hourlyRate |",
-    "mistake": "An action such as `calculateCost` isn't a property, and every property needs a data type. Properties are data; methods are actions.",
+    "model": "| Name | Car |\n|:--|:--|\n| Properties/Attributes | registration (string), hourlyRate (floating point), isAvailable (Boolean) |\n| Methods | calculateCost(hours) |\n\n`calculateCost(hours)` returns the number of hours multiplied by `hourlyRate`.",
+    "mistake": "An action such as `calculateCost` belongs under Methods, not Properties/Attributes. Write data types in full (floating point, Boolean): the 2025 examiners gave no marks for 'Float' or 'Bool'.",
     "source": "textbook",
     "figures": [
       {
@@ -1842,29 +1855,16 @@
         "kind": "table",
         "title": "Object description: Car",
         "columns": [
-          "Element",
           "Name",
-          "Data type or description"
+          "Car"
         ],
         "rows": [
           [
-            "Property",
-            "",
+            "Properties/Attributes",
             ""
           ],
           [
-            "Property",
-            "",
-            ""
-          ],
-          [
-            "Property",
-            "",
-            ""
-          ],
-          [
-            "Method",
-            "",
+            "Methods",
             ""
           ]
         ]
@@ -1874,7 +1874,8 @@
   {
     "id": "s-u3o2-kk14-003",
     "kk": [
-      "U3O2-KK14"
+      "U3O2-KK14",
+      "U3O1-KK03"
     ],
     "commandTerm": "explain",
     "marks": 4,
@@ -2044,6 +2045,7 @@
       }
     ],
     "model": "Security would improve. Prescription details are sensitive health information, and requiring a one-time code as well as a password means someone who has stolen or guessed a customer's password still can't see or change their prescriptions. Usability would suffer, because customers must type a password and wait for a code every time they open the app, just to reorder a regular medicine. To balance these, the app could ask for the one-time code only when a customer signs in on a new phone, and allow fingerprint sign-in on a phone it already trusts.",
+    "mistake": "Use the study design's names for the UX characteristics (here security and usability), not general qualities such as 'convenient' or 'safe'; on the 2025 exam, answers that didn't name one earned no marks. Then say how the decision changes each one for these customers.",
     "source": "textbook"
   },
   {
@@ -2073,7 +2075,7 @@
       }
     ],
     "model": "The first problem is affordance. Save appears as plain text, with no border, shading or button shape, so nothing tells volunteers that they can tap it. Some may fill in the screen and never save their record. Save should be drawn as a large, shaded button labelled \"Save\", so it clearly looks like something to tap.\n\nThe second problem is usability. Every time they water, volunteers must type their plot number and the full date, although each volunteer's plot is already stored in their account and the phone knows today's date. Typing these on a phone is slow, and older volunteers may make mistakes. The app should fill in the plot number and today's date automatically, with the date still changeable for a watering done earlier, so a volunteer usually enters only the litres used and taps Save.",
-    "mistake": "Naming a characteristic isn't enough. Point to the element on the screen, say what goes wrong for these volunteers, then give the change.",
+    "mistake": "Name one of the four UX characteristics (affordance, interoperability, security, usability), not a design principle such as contrast or a general quality such as 'clear'. Then point to the element on the screen, say what goes wrong for these volunteers and give the change.",
     "source": "textbook",
     "figures": [
       {
@@ -2166,7 +2168,7 @@
     ],
     "commandTerm": "explain",
     "marks": 4,
-    "prompt": "Hollis Library in Horsham is designing a self-checkout kiosk. Borrowers range from young children to older adults, and the kiosk will sit beside a large, bright window.\n\nExplain how the designer could apply **contrast** and **consistency** in the kiosk's interface. Refer to the scenario in your answer.",
+    "prompt": "Hollis Library in Horsham is designing a self-checkout kiosk. Borrowers range from young children to older adults, and the kiosk will sit beside a large, bright window.\n\nExplain how the designer could apply **contrast** and **navigation** in the kiosk's interface. Refer to the scenario in your answer.",
     "points": [
       {
         "text": "Contrast: a specific application, e.g. dark text on a light background, or a large \"Check out\" button in a strong colour that stands out from other controls",
@@ -2177,16 +2179,16 @@
         "marks": 1
       },
       {
-        "text": "Consistency: a specific application, e.g. the \"Back\" and \"Finish\" buttons keep the same position, label and colour on every screen",
+        "text": "Navigation: a specific application, e.g. checking out as a short series of clearly labelled steps, with \"Back\" and \"Finish\" buttons that keep the same position, label and colour on every screen",
         "marks": 1
       },
       {
-        "text": "Explains why it suits the scenario, e.g. occasional users of all ages can predict where to tap on each screen instead of searching, so they make fewer mistakes",
+        "text": "Explains why it suits the scenario, e.g. occasional users of all ages can see where they are and predict where to tap to move on or go back, instead of searching, so they make fewer mistakes",
         "marks": 1
       }
     ],
-    "model": "Contrast: the kiosk should use dark text on a light background, and make the main action, \"Check out\", a large button in a strong colour that stands apart from everything else on the screen. Beside a bright window, low-contrast text would be washed out by glare, and older borrowers with weaker eyesight need text that stands out clearly, while children can see at once which button to press.\n\nConsistency: the \"Back\" and \"Finish\" buttons should sit in the same place, with the same labels and colours, on every screen, and the same wording should be used throughout. Children and older adults who use the kiosk only occasionally can then predict where to tap on each screen instead of searching, so they finish checking out quickly and with fewer mistakes.",
-    "mistake": "Defining contrast and consistency without applying them to the kiosk earns few marks. Name a specific design choice and link it to the borrowers or the bright window.",
+    "model": "Contrast: the kiosk should use dark text on a light background, and make the main action, \"Check out\", a large button in a strong colour that stands apart from everything else on the screen. Beside a bright window, low-contrast text would be washed out by glare, and older borrowers with weaker eyesight need text that stands out clearly, while children can see at once which button to press.\n\nNavigation: checking out should be a short series of clearly labelled steps, and the \"Back\" and \"Finish\" buttons should sit in the same place, with the same labels and colours, on every screen. Children and older adults who use the kiosk only occasionally can then see where they are and predict where to tap to move on or go back, instead of searching, so they finish checking out quickly and with fewer mistakes.",
+    "mistake": "Defining contrast and navigation without applying them to the kiosk earns few marks. Name a specific design choice and link it to the borrowers or the bright window.",
     "source": "textbook"
   },
   {
@@ -2199,11 +2201,11 @@
     "prompt": "The mock-up below shows two consecutive screens from a booking app for Corella Kayak Tours in Echuca. Annotations give each button's colour.\n\nIdentify the design principle that the two screens most clearly fail to apply, and explain one change that would fix the problem.",
     "points": [
       {
-        "text": "Identifies consistency",
+        "text": "Identifies navigation (or usability, as ease of use, when linked to the changing move-forward button)",
         "marks": 1
       },
       {
-        "text": "Describes a change, e.g. use the same label, colour and position (such as a green \"Next\" button at bottom right) for the move-forward button on every screen",
+        "text": "Describes a change, e.g. give the move-forward button the same label, colour and position on every screen (such as a green \"Next\" button at bottom right)",
         "marks": 1
       },
       {
@@ -2211,7 +2213,7 @@
         "marks": 1
       }
     ],
-    "model": "The screens fail to apply consistency. The button that moves to the next step is a green \"Next\" button at the bottom right of Screen 1, but an orange \"Continue\" button at the bottom left of Screen 2. The designer should use the same button on every screen, for example a green \"Next\" button at the bottom right. Users then learn once where to tap to move forward, so they don't have to search for the button on each new screen and are less likely to tap the wrong control.",
+    "model": "The screens fail to apply navigation. The button that moves the user to the next step is a green \"Next\" button at the bottom right of Screen 1, but an orange \"Continue\" button at the bottom left of Screen 2. The designer should give this navigation control the same label, colour and position on every screen, for example a green \"Next\" button at the bottom right. Users then learn once where to tap to move forward, so they don't have to search for the button on each new screen and are less likely to tap the wrong control.",
     "source": "textbook",
     "figures": [
       {
@@ -2311,7 +2313,8 @@
           }
         ]
       }
-    ]
+    ],
+    "mistake": "Consistency isn't one of the study design's design principles. The button that moves users on is a navigation control, so name navigation and say how the change helps users move through the screens."
   },
   {
     "id": "s-u3o2-kk16-003",

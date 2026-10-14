@@ -318,7 +318,8 @@
     {
       "id": "cs-04-q01",
       "kk": [
-        "U3O2-KK01"
+        "U3O2-KK01",
+        "U3O2-KK02"
       ],
       "commandTerm": "explain",
       "marks": 4,
@@ -329,7 +330,7 @@
           "marks": 1
         },
         {
-          "text": "Explains why it is a problem for Tarwin Valley: an overdue machine can fail and hurt someone, as when the mini excavator's hydraulic hose burst and injured its operator in March, and Tarwin Valley can't meet its objective of hiring out no item that is due for a service.",
+          "text": "Explains why it matters to Tarwin Valley: an overdue machine can fail and hurt someone, as when the mini excavator's hydraulic hose burst and injured its operator in March, and without a new system Tarwin Valley can't meet its objective of hiring out no item that is due for a service from 1 July 2027, so the project is undertaken to meet an organisational objective.",
           "marks": 1
         },
         {
@@ -337,12 +338,12 @@
           "marks": 1
         },
         {
-          "text": "Explains why it is an opportunity: phone bookings still work, but offering online booking through the trade portal is a chance to win more trade customers and to meet the objective of trade customers making 40 per cent of their bookings online.",
+          "text": "Explains why it is an opportunity rather than a problem: phone bookings still work, but online booking through the trade portal, which trade customers want and Tarwin Valley doesn't yet offer, is a chance to win more trade customers and to meet the objective of trade customers making 40 per cent of their bookings online.",
           "marks": 1
         }
       ],
-      "model": "One problem is that items overdue for a service are being hired out. Counter staff are meant to check each item's paper tag and service card before every hire, but at busy times they don't, and last year 212 hires were of items overdue for a service. This is a problem because an overdue machine can fail and hurt someone, as happened in March when a hydraulic hose burst on an overdue mini excavator and injured its operator. PlantPass addresses it by refusing to hire out any item that isn't safe to hire.\n\nOne opportunity is online booking. Trade customers, who make about 70 per cent of Tarwin Valley's hires, can book only by phone, and many have asked to book online. Phone bookings still work, but offering online booking through the trade portal is a chance to win more trade customers, and it supports the objective of having trade customers make 40 per cent of their bookings online.",
-      "mistake": "A problem is something going wrong now; an opportunity is a chance to do better even though nothing is broken. Online booking is an opportunity, because phone bookings still work. The insurer's new requirement is best described as a need, a new obligation, not a problem.",
+      "model": "One problem is that items overdue for a service are being hired out. Counter staff are meant to check each item's paper tag and service card before every hire, but at busy times they don't, and last year 212 hires were of items overdue for a service. This matters because an overdue machine can fail and hurt someone, as happened in March when a hydraulic hose burst on an overdue mini excavator and injured its operator. It also means Tarwin Valley can't meet its objective of hiring out no item that is due for a service from 1 July 2027, so it is developing PlantPass to meet that organisational objective: PlantPass will refuse to hire out any item that isn't safe to hire.\n\nOne opportunity is online booking. Trade customers, who make about 70 per cent of Tarwin Valley's hires, can book only by phone, and many have asked to book online. Nothing is broken, because phone bookings still work, but offering online booking through the trade portal gives trade customers something they want that Tarwin Valley doesn't yet offer, which is a chance to win more of them. It also supports the objective of having trade customers make 40 per cent of their bookings online.",
+      "mistake": "A problem is something going wrong now (212 overdue hires); an opportunity is a chance to do better when nothing is broken (online booking, while phone bookings still work); the insurer's new requirement is a need, a new obligation. Tie each point to facts from the insert, as 2025 Section C answers that didn't refer to the case study missed out on full marks.",
       "source": "textbook"
     },
     {
@@ -372,13 +373,13 @@
           "marks": 1
         },
         {
-          "text": "Explains that *Record hour meter reading* correctly extends *Return item*, because staff enter a reading only when the returned item is engine-powered: it is extra behaviour added to some returns under a condition.",
+          "text": "Explains that *Record hour meter reading* correctly extends *Return item*, because staff enter a reading only when the returned item is engine-powered: it is extra behaviour added to some returns under a condition, and its arrow correctly points from the extending use case to the base use case.",
           "marks": 1
         }
       ],
-      "model": "1. *Pay invoice online* is outside the scope. The insert says payments and invoices stay in Tarwin Valley's accounts system and are outside PlantPass's scope, so Callum should remove this use case and the Trade customer's association with it.\n\n2. The relationship between *Check item is safe to hire* and *Hire out item* should be <<includes>>. PlantPass refuses to hire out any item that isn't safe to hire, so it runs the check every time an item is hired out. The check is always part of hiring out, not something that happens only under a condition. Callum should redraw it as a dashed arrow from *Hire out item* to *Check item is safe to hire*, labelled <<includes>>.\n\n3. *Record hour meter reading* correctly extends *Return item*. Staff enter a reading only when the item that comes back is engine-powered, so recording the reading is extra behaviour added to some returns under a condition, not to every return.",
-      "mistake": "Changing the label isn't enough. An <<includes>> arrow points from the base use case to the one it includes, but an <<extends>> arrow points from the extending use case to the base, so Callum must also reverse the arrow.",
-      "source": "exam-convention",
+      "model": "1. *Pay invoice online* is outside the scope. The insert says payments and invoices stay in Tarwin Valley's accounts system and are outside PlantPass's scope, so Callum should remove this use case and the Trade customer's association with it.\n\n2. The relationship between *Check item is safe to hire* and *Hire out item* should be <<includes>>. PlantPass refuses to hire out any item that isn't safe to hire, so it runs the check every time an item is hired out. The check is always part of hiring out, not something that happens only under a condition. Callum should redraw it as a dashed arrow from *Hire out item* to *Check item is safe to hire*, labelled <<includes>>.\n\n3. *Record hour meter reading* correctly extends *Return item*. Staff enter a reading only when the item that comes back is engine-powered, so recording the reading is extra behaviour added to some returns under a condition, not to every return. Its arrow also points the right way, from the extending use case to the base use case.",
+      "mistake": "Use <<includes>> for behaviour the base use case always performs and <<extends>> for behaviour added only when a condition is met. Changing the label isn't enough, because an <<includes>> arrow points from the base use case to the one it includes while an <<extends>> arrow points from the extending use case to the base, so Callum must also reverse the arrow (in 2025, almost three in ten students chose a diagram with the <<extends>> arrow reversed).",
+      "source": "study-design",
       "figureRefs": [
         "plantpass-usecase"
       ]
@@ -526,7 +527,7 @@
       ],
       "commandTerm": "describe",
       "marks": 6,
-      "prompt": "Kirra is alpha testing Zainab's isSafeToHire function. Tests 1 and 3 use generator TV-GEN-00417, which has been used for 180.5 hours since its last service and has a service interval of 250 hours. Part of her test table is shown below.\n\n| Test number | Inputs (passed, hoursSince, interval, days) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | True, 180.5, 250, 8 | True | True |\n| 2 | False, 20.0, 250, 2 | False | False |\n| 3 | True, 180.5, 250, 9 | False | True |\n\nZainab's function first calculates expectedHours from days, then compares hoursSince + expectedHours with interval.\n\n1. Describe how Zainab could use a breakpoint to find the cause of the wrong result in test 3.\n2. Describe how Zainab could use debugging output statements to find the cause instead.\n3. When test 3 is run, expectedHours is 17. Identify the error in Zainab's code, and name the type of error it is.",
+      "prompt": "Kirra is alpha testing Zainab's isSafeToHire function. Tests 1 and 3 use generator TV-GEN-00417, which has been used for 180.5 hours since its last service and has a service interval of 250 hours. Part of her testing table is shown below.\n\n| Test number | passed | hoursSince | interval | days | Expected output | Actual output |\n|:--|:--|:--|:--|:--|:--|:--|\n| 1 | True | 180.5 | 250 | 8 | True | True |\n| 2 | False | 20.0 | 250 | 2 | False | False |\n| 3 | True | 180.5 | 250 | 9 | False | True |\n\nZainab's function first calculates expectedHours from days, then compares hoursSince + expectedHours with interval.\n\n1. Describe how Zainab could use a breakpoint to find the cause of the wrong result in test 3.\n2. Describe how Zainab could use debugging statements to find the cause instead.\n3. When test 3 is run, expectedHours is 17. Identify the error in Zainab's code, and name the type of error it is.",
       "points": [
         {
           "text": "Breakpoint: sets a breakpoint after expectedHours is calculated, for example on the line that compares hoursSince + expectedHours with interval, then runs the function with test 3's inputs so that it pauses there.",
@@ -537,7 +538,7 @@
           "marks": 1
         },
         {
-          "text": "Debugging output: adds temporary DISPLAY statements after expectedHours is calculated to show hoursSince, expectedHours and their total, then runs test 3 again.",
+          "text": "Debugging statements: adds temporary DISPLAY statements after expectedHours is calculated to show hoursSince, expectedHours and their total, then runs test 3 again.",
           "marks": 1
         },
         {
@@ -553,7 +554,7 @@
           "marks": 1
         }
       ],
-      "model": "1. Zainab should set a breakpoint on the line that compares hoursSince + expectedHours with interval, and run the function with test 3's inputs. When the program pauses at that line, she can inspect the values of hoursSince, expectedHours and interval and compare them with the values she works out by hand: 180.5, 72 (9 days × 8 hours) and 250. The value that differs shows her which calculation is wrong.\n\n2. Zainab could add temporary DISPLAY statements just after expectedHours is calculated, showing hoursSince, expectedHours and hoursSince + expectedHours, and run test 3 again. Comparing the output with the values she expects (180.5, 72 and 252.5) shows which value is wrong. She should remove or comment out the statements once the error is fixed.\n\n3. expectedHours is calculated as days + 8 instead of days * 8, so a 9-day hire allows only 17 hours instead of 72, and 180.5 + 17 = 197.5 is less than 250. This is a logic error: the function runs without crashing, but it gives the wrong result.",
+      "model": "1. Zainab should set a breakpoint on the line that compares hoursSince + expectedHours with interval, and run the function with test 3's inputs. When the program pauses at that line, she can inspect the values of hoursSince, expectedHours and interval and compare them with the values she works out by hand: 180.5, 72 (9 days × 8 hours) and 250. The value that differs shows her which calculation is wrong.\n\n2. Zainab could add debugging statements: temporary DISPLAY statements just after expectedHours is calculated, showing hoursSince, expectedHours and hoursSince + expectedHours, and run test 3 again. Comparing the output with the values she expects (180.5, 72 and 252.5) shows which value is wrong. She should remove or comment out the statements once the error is fixed.\n\n3. expectedHours is calculated as days + 8 instead of days * 8, so a 9-day hire allows only 17 hours instead of 72, and 180.5 + 17 = 197.5 is less than 250. This is a logic error: the function runs without crashing, but it gives the wrong result.",
       "mistake": "A logic error doesn't stop the program or show an error message. It is found only by comparing actual output with expected output, as test 3 does, and then tracking down the wrong value.",
       "source": "textbook"
     },
@@ -588,7 +589,7 @@
         }
       ],
       "model": "1. A milestone marks a key point in the project rather than work to be done. Go-live is the moment PlantPass is running at every branch, which Tarwin Valley must reach by 1 July 2027, so it takes no time and adds nothing to the length of the project, but it gives Thu a fixed point to check progress against. J can't occur until both *Beta testing at Traralgon and Sale* (H) and *Train branch staff and mechanics* (I) have finished. The longest chain of tasks before it is A, B, D, G and H, which takes 3 + 3 + 6 + 2 + 2 = 16 weeks, so J is planned for the end of week 16.\n\n2. The project would take 18 weeks instead of 16. Training could no longer start as soon as the apps are developed; it would have to wait until beta testing finishes at the end of week 16, so it would run in weeks 17 and 18, and go-live would move to the end of week 18. Before the change, the critical path was A, B, D, G, H, then the go-live milestone J, and training had two weeks to spare. After it, training is on the critical path, which becomes A, B, D, G, H, I, then J.",
-      "mistake": "Adding a dependency can change the critical path. Training had two weeks to spare, but once it has to wait for beta testing it joins the longest chain of tasks, and go-live moves with it.",
+      "mistake": "A milestone is a point in time, such as go-live or the end of a stage of the problem-solving methodology, not a task with a duration, and an answer should say what reaching it tells the project manager about progress. Adding a dependency can also change the critical path: training had two weeks to spare, but once it has to wait for beta testing it joins the longest chain of tasks, and go-live moves with it.",
       "source": "textbook",
       "figureRefs": [
         "plantpass-gantt"
@@ -643,7 +644,8 @@
     {
       "id": "cs-04-q10",
       "kk": [
-        "U3O2-KK11"
+        "U3O2-KK11",
+        "TERMS"
       ],
       "commandTerm": "recommend",
       "marks": 4,
@@ -658,7 +660,7 @@
           "marks": 1
         },
         {
-          "text": "Recommends backing up the folder automatically, at least daily, to a separate location such as cloud storage away from head office, and regularly testing that files can be restored.",
+          "text": "Recommends backing up the folder automatically, at least daily, to a separate location such as cloud storage away from head office (for example, a full backup each week and an incremental backup each night), and regularly testing that files can be restored.",
           "marks": 1
         },
         {
@@ -674,8 +676,8 @@
           "marks": 1
         }
       ],
-      "model": "First, the team should adopt a naming and versioning convention. Every document would be named in the same pattern, with a version number and date, such as `PlantPass_SRS_v1.3_2026-10-05.docx`. Only the current version would stay in the working folder, and earlier versions would move to a labelled versions folder. Everyone could then see at a glance which file is current, so team members would stop working from out-of-date copies such as `SRS new.docx`, and earlier versions would still be there if a change needed checking.\n\nSecond, the folder should be backed up automatically every night to a separate location, such as cloud storage away from head office, and restoring a file should be tested regularly. At present the only copy of the SRS, designs and plans is in one folder at head office. If that server failed, was stolen or was hit by ransomware, months of analysis and design work would be lost; with tested backups, the documents could be restored.",
-      "mistake": "Adding FINAL or new to a file name isn't versioning. A version number and a date show which file is current; a word like FINAL stops being true as soon as someone edits the file.",
+      "model": "First, the team should adopt a naming and versioning convention. Every document would be named in the same pattern, with a version number and date, such as `PlantPass_SRS_v1.3_2026-10-05.docx`. Only the current version would stay in the working folder, and earlier versions would move to a labelled versions folder. Everyone could then see at a glance which file is current, so team members would stop working from out-of-date copies such as `SRS new.docx`, and earlier versions would still be there if a change needed checking.\n\nSecond, the folder should be backed up automatically to a separate location, such as cloud storage away from head office, for example with a full backup each week and an incremental backup each night, and restoring a file should be tested regularly. At present the only copy of the SRS, designs and plans is in one folder at head office. If that server failed, was stolen or was hit by ransomware, months of analysis and design work would be lost; with tested backups, the documents could be restored. The versions folder in the first recommendation isn't a backup: it sits in the same shared folder and would be lost with it.",
+      "mistake": "Adding FINAL or new to a file name isn't versioning: a version number and a date show which file is current, while FINAL stops being true as soon as someone edits the file. Version control isn't a backup either, because earlier versions kept in the same folder are lost with it; a backup is a separate copy stored somewhere else.",
       "source": "textbook"
     },
     {
@@ -683,11 +685,12 @@
       "kk": [
         "U4O2-KK05",
         "U4O2-KK09",
-        "U4O2-KK04"
+        "U4O2-KK04",
+        "U4O2-KK07"
       ],
       "commandTerm": "justify",
       "marks": 5,
-      "prompt": "The trade portal can be reached by anyone on the internet, and each trade customer's account will be protected only by a password. Joel is threat modelling the portal and has identified this threat: someone who learns or guesses a trade customer's password could log in as that customer and book expensive items, such as an excavator, for pick-up in the customer's name.\n\n1. Joel has rated this threat as a high priority. Justify his rating in terms of how likely the threat is and how much harm it could cause.\n2. Recommend a control that would mitigate this threat, and explain how it works.\n3. Describe how Kirra could test that the control works before the trade portal goes live.",
+      "prompt": "The trade portal can be reached by anyone on the internet, and each trade customer's account will be protected only by a password. Joel is applying the threat modelling principles to the portal and has identified this threat: someone who learns or guesses a trade customer's password could log in as that customer and book expensive items, such as an excavator, for pick-up in the customer's name.\n\n1. Joel has rated this threat as a high priority. Justify his rating in terms of how likely the threat is and how much harm it could cause.\n2. Recommend a control that would mitigate this threat, and explain how it works.\n3. Describe how Kirra could confirm that the threat has been mitigated before the trade portal goes live.",
       "points": [
         {
           "text": "Justifies the likelihood: anyone on the internet can reach the login page and a password is the only protection, so no special skill is needed; passwords are often reused on other websites and leaked, shared among a customer's staff or easy to guess, and an attacker can try many of them.",
@@ -698,7 +701,7 @@
           "marks": 1
         },
         {
-          "text": "Recommends a control and explains how it works. For example: multi-factor authentication, where after the password the user must also enter a one-time code sent to a phone registered to the trade customer's account, so a password alone isn't enough to log in; or a code sent to the account's registered phone that must be entered before each online booking is accepted.",
+          "text": "Recommends a control and explains how it works. For example: multi-factor authentication (part of robust identity and access management, and one of the Essential Eight strategies), where after the password the user must also enter a one-time code sent to a phone registered to the trade customer's account, so a password alone isn't enough to log in; or a code sent to the account's registered phone that must be entered before each online booking is accepted.",
           "marks": 1
         },
         {
@@ -710,8 +713,8 @@
           "marks": 1
         }
       ],
-      "model": "1. The threat is likely. Anyone on the internet can reach the portal's login page, and a password is the only thing protecting each account, so an attacker needs no special skill. Many people reuse passwords on other websites, where they can be leaked, and a trade customer's password may be shared among its staff or be easy to guess, so an attacker can simply try likely passwords. The harm is serious. An excavator or other expensive machine could be picked up and never returned, a large loss for Tarwin Valley, and the trade customer could be charged for a hire it never made. Customers who hear of this would lose trust in the portal, which puts the objective of 40 per cent of trade bookings online at risk.\n\n2. Joel should recommend multi-factor authentication for the trade portal. After entering the password, the user must also enter a one-time code sent to a mobile phone registered to the trade customer's account. Someone who has only the password can't log in, because they don't have the phone.\n\n3. Using a made-up test trade account, Kirra should log in with the correct password but enter a wrong code, then try again with no code. The control works if the portal refuses access both times and no booking can be made. She should also check that with the correct password and the correct code she can log in and book an item, so real customers aren't locked out.",
-      "mistake": "A stronger password rule doesn't stop someone who already has the password. A second factor means a leaked or shared password alone can't open the account.",
+      "model": "1. The threat is likely. Anyone on the internet can reach the portal's login page, and a password is the only thing protecting each account, so an attacker needs no special skill. Many people reuse passwords on other websites, where they can be leaked, and a trade customer's password may be shared among its staff or be easy to guess, so an attacker can simply try likely passwords. The harm is serious. An excavator or other expensive machine could be picked up and never returned, a large loss for Tarwin Valley, and the trade customer could be charged for a hire it never made. Customers who hear of this would lose trust in the portal, which puts the objective of 40 per cent of trade bookings online at risk.\n\n2. Joel should recommend multi-factor authentication for the trade portal, which strengthens its identity and access management and is one of the Essential Eight strategies. After entering the password, the user must also enter a one-time code sent to a mobile phone registered to the trade customer's account. Someone who has only the password can't log in, because they don't have the phone.\n\n3. To confirm that the threat has been mitigated, Kirra should try the attack against the control. Using a made-up test trade account, she should log in with the correct password but enter a wrong code, then try again with no code. The control works if the portal refuses access both times and no booking can be made. She should also check that with the correct password and the correct code she can log in and book an item, so real customers aren't locked out.",
+      "mistake": "A stronger password rule doesn't stop someone who already has the password; a second factor means a leaked or shared password alone can't open the account. In 2025, few students could name a threat modelling principle that follows defining security requirements: identifying and mitigating threats, then confirming threats have been mitigated, which is what Kirra's test does.",
       "source": "textbook"
     },
     {
@@ -719,7 +722,7 @@
       "kk": [
         "U4O2-KK06",
         "U4O2-KK03",
-        "U4O2-KK10"
+        "U4O2-KK04"
       ],
       "commandTerm": "evaluate",
       "marks": 6,
@@ -751,13 +754,14 @@
         }
       ],
       "model": "Criterion A isn't met. PlantPass's code is in a repository on Marco's personal account, so Tarwin Valley can't see who has access or remove anyone's access itself, and it could lose control of its own code if Marco left. Access also goes well beyond need: all 15 branch managers can read the test servers' passwords in the group chat, the laptops given to counter staff at Sale and Bairnsdale still hold the code and saved passwords, and anyone on the internet who tries the default administrator password can log in to the test database.\n\nCriterion B is met. The development and test databases hold only made-up customers and items that Kirra created, so even though the test server can be reached from the internet, no real customer's details are exposed.\n\nCriterion C isn't met. Logging was turned off in June, so there is no record of logins at all. Because passwords are shared in the group chat and the default administrator password is still in use, a login couldn't be traced to one person even if it were recorded.\n\nJoel should recommend moving the repository to an account owned by Tarwin Valley and managed by the IT team, with an individual account for each developer. Tarwin Valley would then decide who can reach the code, could remove a person's access the day they leave, and would keep the code whatever happens to Marco, which helps it meet criterion A.",
-      "mistake": "Evaluating means making a judgement on each criterion and backing it with evidence. A criterion that is met, such as B here, should be judged as met, not skipped or treated as a weakness.",
+      "mistake": "Evaluating means judging every criterion against evidence from the insert, so a criterion that is met, such as B, is judged as met, not skipped or treated as a weakness. Because the test databases hold only Kirra's made-up data, the main danger of the open test server and its default password is unauthorised access to the code and systems rather than a leak of customer records; the 2025 report noted that confidential user data isn't present in a development environment.",
       "source": "textbook"
     },
     {
       "id": "cs-04-q13",
       "kk": [
-        "U4O2-KK08"
+        "U4O2-KK08",
+        "TERMS"
       ],
       "commandTerm": "explain",
       "marks": 4,
@@ -772,7 +776,7 @@
           "marks": 1
         },
         {
-          "text": "Identifies an honesty or accountability issue: because the button's use isn't recorded, the items' inspection and service histories would hide these hires, and no one could be held responsible for them.",
+          "text": "Identifies an issue of honesty and accountability, which is also an ineffective security practice: a hidden function that gets around PlantPass's checks and leaves no record, so its use can't be detected, reviewed or traced to the person who used it.",
           "marks": 1
         },
         {
@@ -780,7 +784,7 @@
           "marks": 1
         }
       ],
-      "model": "First, the button raises a safety issue. It would let branch managers knowingly hire out machines that are due for a service, and an overdue machine can fail, as the mini excavator's hydraulic hose did in March, injuring its operator. The customer's operators and people working nearby would carry a risk they don't know about, just so a large customer isn't turned away, and Zainab would be building a feature she knows could cause harm.\n\nSecond, the button raises an issue of honesty. Because its use wouldn't be recorded, each item's inspection and service history would hide these hires. Tarwin Valley's insurer and its customers rely on that history being complete and true, so they would be misled, and Tarwin Valley would appear to meet its objective of hiring out no item that is due for a service when it doesn't.",
+      "model": "First, the button raises a safety issue. It would let branch managers knowingly hire out machines that are due for a service, and an overdue machine can fail, as the mini excavator's hydraulic hose did in March, injuring its operator. The customer's operators and people working nearby would carry a risk they don't know about, just so a large customer isn't turned away, and Zainab would be building a feature she knows could cause harm.\n\nSecond, the button raises an issue of honesty and accountability, and building it would be an ineffective security practice. It is a hidden way around PlantPass's checks, and because its use wouldn't be recorded, no one could detect it, review it or trace it to the manager who used it. Each item's inspection and service history would hide these hires. Tarwin Valley's insurer and its customers rely on that history being complete and true, so they would be misled, and Tarwin Valley would appear to meet its objective of hiring out no item that is due for a service when it doesn't.",
       "mistake": "Saying the button breaks the company's rules isn't enough. An ethical issue says who could be harmed or misled, and why that is unfair to them.",
       "source": "textbook"
     }

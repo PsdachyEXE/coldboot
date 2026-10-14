@@ -382,7 +382,7 @@
       "prompt": "Explain the difference between a functional requirement and a non-functional requirement. Support your answer with one functional requirement and one non-functional requirement of ParcelTrack taken from the insert.",
       "points": [
         {
-          "text": "States that a functional requirement describes what the solution must do: a task, calculation or output it performs.",
+          "text": "States that a functional requirement describes what the solution must do: the inputs it takes, the outputs it produces and the functions it carries out, such as manipulating or validating data.",
           "marks": 1
         },
         {
@@ -390,7 +390,7 @@
           "marks": 1
         },
         {
-          "text": "States that a non-functional requirement describes a quality the solution must have, such as how reliable or how easy to use it is, rather than a task it performs.",
+          "text": "States that a non-functional requirement describes a quality attribute of the solution, such as usability, reliability, portability, robustness or maintainability, rather than a task it performs.",
           "marks": 1
         },
         {
@@ -398,9 +398,9 @@
           "marks": 1
         }
       ],
-      "model": "A functional requirement describes what ParcelTrack must do: a task, calculation or output it performs. For example, the charging module must calculate each consignment's charge from its weight, zone and service type. A non-functional requirement describes a quality ParcelTrack must have, not a task it performs. For example, the customer portal must be available at least 99.5% of the time, which is a measure of how reliable it is rather than something it does.",
-      "mistake": "A non-functional requirement is still a requirement of the solution. The $620 000 budget limits the project, so it is a constraint, not a non-functional requirement.",
-      "source": "textbook"
+      "model": "A functional requirement describes what ParcelTrack must do: the inputs it takes, the outputs it produces and the functions it carries out, such as manipulating and validating data. For example, the charging module must calculate each consignment's charge from its weight, zone and service type. A non-functional requirement describes a quality attribute ParcelTrack must have, such as reliability or usability, rather than a task it performs. For example, the customer portal must be available at least 99.5% of the time, which is a measure of how reliable it is, not something it does.",
+      "mistake": "A number doesn't make a requirement non-functional: adding the $25.00 surcharge to consignments of 30 kg or more is something ParcelTrack does, so it is functional, while 99.5% availability is a quality (reliability). The $620 000 budget limits the project, so it is a constraint, not a requirement.",
+      "source": "study-design"
     },
     {
       "id": "cs-01-q03",
@@ -420,13 +420,13 @@
           "marks": 1
         },
         {
-          "text": "Describes a correction: remove the flow, or, if ParcelTrack is to handle delivery instructions, route them through the system (Customer to ParcelTrack, then ParcelTrack to Driver, for example as part of run_sheet).",
+          "text": "Describes a correction: remove the flow; or, if ParcelTrack is to handle delivery instructions, route them through the system as two flows, delivery_instructions from Customer into ParcelTrack and a flow from ParcelTrack to Driver that carries them (for example, within run_sheet).",
           "marks": 1
         }
       ],
-      "model": "The error is the delivery_instructions flow drawn straight from Customer to Driver. A context diagram shows only the data that flows into and out of the system, so every flow must start or end at ParcelTrack. Data passed directly between two external entities never passes through ParcelTrack, so it is outside the system and shouldn't appear. Leila should delete the flow. If Kestrel Bay wants ParcelTrack to handle delivery instructions, she should draw delivery_instructions from Customer into ParcelTrack and include the instructions in the run_sheet flow from ParcelTrack to Driver.",
-      "mistake": "Don't correct a context diagram by adding data stores or numbered processes. Those belong on a data flow diagram: a context diagram shows the whole system as a single process.",
-      "source": "exam-convention",
+      "model": "The error is the delivery_instructions flow drawn straight from Customer to Driver. A context diagram shows only the data that flows into and out of the system, so every flow must start or end at ParcelTrack. Data passed directly between two external entities never passes through ParcelTrack, so it is outside the system and shouldn't appear. Leila should delete the flow. If Kestrel Bay wants ParcelTrack to handle delivery instructions, she should draw delivery_instructions from Customer into ParcelTrack, and show the instructions reaching the driver in a flow from ParcelTrack to Driver, for example as part of run_sheet.",
+      "mistake": "A context diagram shows ParcelTrack as a single process with no data stores, so don't fix it by adding a store or more processes: those belong on a Level 1 data flow diagram. Every flow must start or end at the system, so delete the entity-to-entity flow or route it through ParcelTrack.",
+      "source": "study-design",
       "figureRefs": [
         "parceltrack-context"
       ]
@@ -463,12 +463,12 @@
           "marks": 1
         },
         {
-          "text": "Describes recording the change: annotate the Gantt chart (or the project management software) with the new duration, the reason and the date of the change, and adjust the dates of the later tasks and go-live.",
+          "text": "Describes recording the change: adjust the time frame of Develop driver app on the Gantt chart (or in the project management software), annotate it with the reason and the date of the change, reschedule the later tasks and go-live, and note the change in the project log.",
           "marks": 1
         }
       ],
-      "model": "1. The critical path is Analyse requirements and write SRS (3), Design driver app screens (3), Develop driver app (5), Connect mapping service (2), Alpha testing (2), Beta testing at Ballarat depot (2) and Train drivers and depot staff (2), ending at the Go-live milestone. The project is planned to take 19 weeks.\n\n2. The go-live date doesn't change. Develop portal and charging module starts after week 5, so at six weeks it finishes at the end of week 11. Alpha testing can't start until Connect mapping service finishes at the end of week 13, so the portal task still finishes two weeks before it is needed.\n\n3. Rhys's request is scope creep, because a feature was added after the scope was agreed without the plan being changed. Develop driver app is on the critical path, so the extra two weeks push back Connect mapping service, Alpha testing, Beta testing and training, and go-live moves from the end of week 19 to the end of week 21. Anjali should annotate the Gantt chart with the new duration of Develop driver app, the reason (the photo feature requested by Rhys) and the date the change was found, then update the start dates of the later tasks and the new go-live date.",
-      "mistake": "The critical path is the longest chain of dependent tasks, not simply the tasks with the longest durations. A delay to a task off the critical path moves the finish date only if the delay is longer than the time that task had to spare.",
+      "model": "1. The critical path is Analyse requirements and write SRS (3), Design driver app screens (3), Develop driver app (5), Connect mapping service (2), Alpha testing (2), Beta testing at Ballarat depot (2) and Train drivers and depot staff (2), ending at the Go-live milestone. The project is planned to take 19 weeks.\n\n2. The go-live date doesn't change. Develop portal and charging module starts after week 5, so at six weeks it finishes at the end of week 11. Alpha testing can't start until Connect mapping service finishes at the end of week 13, so the portal task still finishes two weeks before it is needed.\n\n3. Rhys's request is scope creep, because a feature was added after the scope was agreed without the plan being changed. Develop driver app is on the critical path, so the extra two weeks push back Connect mapping service, Alpha testing, Beta testing and training, and go-live moves from the end of week 19 to the end of week 21. Anjali should change the time frame of Develop driver app on the Gantt chart and annotate it with the reason (the photo feature Rhys requested) and the date the change was found. She should then reschedule the later tasks and the go-live date, and record the change and its effect on completion in the project log.",
+      "mistake": "A delay to a critical-path task is recorded by adjusting that task's time frame and rescheduling every task that depends on it, not by cutting other tasks; a task off the critical path moves go-live only if its delay is longer than the time it can slip. Unchecked scope creep doesn't buy a better product: it diverts effort from the original objectives.",
       "source": "textbook",
       "figureRefs": [
         "parceltrack-gantt"
@@ -485,7 +485,7 @@
       "prompt": "In Leila's draft object description (Figure 3), consignmentId has the data type Integer. Justify a more suitable data type for consignmentId.",
       "points": [
         {
-          "text": "States String.",
+          "text": "States String (the type name in full; 'Str' is not accepted).",
           "marks": 1
         },
         {
@@ -498,7 +498,7 @@
         }
       ],
       "model": "consignmentId should be a String. Kestrel Bay's consignment numbers, such as KBF-0042817, contain the letters KBF and a hyphen, and an Integer can hold only whole numbers. Even the digits on their own would lose their leading zeros as an Integer, so 0042817 would become 42817 and no longer match the label. The number is only used to identify and look up a consignment, never in a calculation, so there's no reason to store it as a number.",
-      "mistake": "Calling it a consignment *number* doesn't make it numeric data. KBF-0042817 contains letters, a hyphen and leading zeros and is never used in a calculation, so it is a String, not an Integer.",
+      "mistake": "Calling it a consignment *number* doesn't make it numeric: KBF-0042817 contains letters, a hyphen and leading zeros and is never used in a calculation, so it is a String, not an Integer. Write the study design's type name in full, as the 2025 examiners gave no marks for shortened names such as Bool and Float.",
       "source": "textbook",
       "figureRefs": [
         "consignment-object"
@@ -507,7 +507,8 @@
     {
       "id": "cs-01-q06",
       "kk": [
-        "U3O1-KK07"
+        "U3O1-KK07",
+        "U4O1-KK03"
       ],
       "commandTerm": "explain",
       "marks": 5,
@@ -534,12 +535,12 @@
           "marks": 1
         },
         {
-          "text": "Explains a benefit: code is reused, so a fix or change to Consignment automatically applies to chilled consignments too.",
+          "text": "Explains a benefit and how inheritance gives it: code reuse or reduced development time (the shared properties and methods are written once, in Consignment), or maintainability (a fix to Consignment automatically applies to chilled consignments too).",
           "marks": 1
         }
       ],
       "model": "1. Because status is private, no code outside the Consignment class can change it directly. The only way to change it is through the public methods updateStatus(newStatus), which accepts only the four allowed values, and recordDelivery(signerName), which sets it to Delivered. Because of this, a misspelt or made-up status such as \"Delivred\" can never be stored, and status stays valid.\n\n2. Leila could create a ChilledConsignment subclass that inherits from Consignment. Every ChilledConsignment object would have Consignment's properties and methods, such as consignmentId, weightKg, updateStatus() and calculateCharge(), without them being written again. Because those properties are private, the subclass's own methods would work with them through the inherited public methods (or Leila could make them protected). It would add only what chilled goods need, such as a maxTemperature property (Floating point) and a recordTemperature(reading) method. Because the shared code is written once, any fix to Consignment also applies to chilled consignments.",
-      "mistake": "Encapsulation isn't encryption and isn't hiding the program from users. It bundles data with the methods that act on it and stops other code changing that data directly.",
+      "mistake": "Encapsulation isn't encryption: it bundles data with the methods that act on it and stops other code changing that data directly. For inheritance, name a benefit and show how the subclass gets it from the superclass; a single class with its own properties, such as Consignment by itself, doesn't show inheritance.",
       "source": "textbook",
       "figureRefs": [
         "consignment-object"
@@ -548,13 +549,13 @@
     {
       "id": "cs-01-q07",
       "kk": [
+        "U4O1-KK06",
         "U3O1-KK14",
-        "U3O1-KK13",
-        "U4O1-KK06"
+        "U3O1-KK13"
       ],
       "commandTerm": "complete",
       "marks": 7,
-      "prompt": "Ben is alpha testing Tomas's deliveryCharge function (Figure 4) against the charging rules in the insert. Part of his test table is shown below.\n\n| Test number | Inputs (weightKg, zone, isExpress) | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 12, 3, False | 45.00 | 45.00 |\n| 2 | 30, 1, False | | |\n| 3 | 40, 2, True | | |\n\n1. Complete the expected output and actual output for tests 2 and 3.\n2. Identify the number of the line in Figure 4 that contains the error, and write the corrected line.\n3. State the type of error.",
+      "prompt": "Ben is alpha testing Tomas's deliveryCharge function (Figure 4) against the charging rules in the insert. Part of his testing table is shown below.\n\n| Test | weightKg | zone | isExpress | Expected output | Actual output |\n|:--|:--|:--|:--|:--|:--|\n| 1 | 12 | 3 | False | 45.00 | 45.00 |\n| 2 | 30 | 1 | False | | |\n| 3 | 40 | 2 | True | | |\n\n1. Complete the expected output and actual output for tests 2 and 3.\n2. Identify the number of the line in Figure 4 that contains the error, and write the corrected line.\n3. State the type of error.",
       "points": [
         {
           "text": "Test 2 expected output: 76.00 (15.00 + 30 × 1.20 = 51.00, plus the $25.00 surcharge, because a 30 kg consignment meets the rule of 30 kg or more).",
@@ -577,7 +578,7 @@
           "marks": 1
         },
         {
-          "text": "Corrected line: IF weightKg >= 30 THEN (also accept >= 30).",
+          "text": "Corrected line: `IF weightKg >= 30 THEN`, so a consignment of exactly 30 kg attracts the surcharge.",
           "marks": 1
         },
         {
@@ -586,7 +587,7 @@
         }
       ],
       "model": "1. Test 2: expected output 76.00, actual output 51.00. Test 3: expected output 168.00, actual output 168.00.\n\nFor test 2, the insert says consignments of 30 kg or more attract the surcharge, so the expected charge is 15.00 + 30 × 1.20 + 25.00 = 76.00. The function tests weightKg > 30, which is false for exactly 30 kg, so it returns 51.00. For test 3, (15.00 + 40 × 1.80 + 25.00) × 1.5 = 168.00, and the function gives the same result.\n\n2. Line 11 should be `IF weightKg >= 30 THEN`.\n\n3. It is a logic error: the function runs without crashing but gives the wrong result.",
-      "mistake": "Expected output comes from the requirements (here, the insert's charging rules), never from running the code. Working it out by tracing the code copies the bug into the test.",
+      "mistake": "Expected output comes from the requirements (here, the insert's charging rules), never from tracing the code, or the bug is copied into the test. Write every output in full: the 2025 examiners gave no marks for abbreviated output.",
       "source": "textbook",
       "figureRefs": [
         "delivery-charge-pseudocode"
@@ -602,28 +603,28 @@
       "prompt": "After alpha testing, Ben will beta test the driver app at the Ballarat depot. Describe how Ben should choose the beta testers, one test scenario he could give them, and how he should collect and document the results.",
       "points": [
         {
-          "text": "Chooses real Ballarat drivers who will use the app, not developers or IT staff.",
+          "text": "Chooses intended users: Ballarat drivers who will use the app on their own runs, not developers, testers or IT staff.",
           "marks": 1
         },
         {
-          "text": "Chooses a group that covers the range of users and conditions: for example, drivers with different levels of confidence with phones, on both town runs and rural runs with no mobile coverage.",
+          "text": "Chooses a group that covers the range of users and conditions, for example drivers with different levels of confidence with phones, on both town runs and rural runs through areas with no mobile coverage (or drivers selected at random from those runs).",
           "marks": 1
         },
         {
-          "text": "Describes a realistic scenario from the test plan: for example, complete a rural run that includes a delivery with no mobile coverage, get the receiver's signature, and check that the delivery uploads once coverage returns.",
+          "text": "Describes a realistic scenario from the testing plan that drivers carry out on the company-issued Android phones, for example: complete a rural run as normal, including a delivery in an area with no coverage, and get the receiver's signature on the screen.",
           "marks": 1
         },
         {
-          "text": "Collects results by observing drivers (for example, riding along) and timing how long each delivery takes to record against the 30-second requirement, or by collecting driver feedback through a short survey.",
+          "text": "Describes observing the scenario: an observer (for example, Ben riding along) records where each driver hesitates or makes mistakes, how long each delivery takes to record against the 30-second requirement, and whether the no-coverage delivery uploads once coverage returns; driver feedback may be added through a short survey.",
           "marks": 1
         },
         {
-          "text": "Documents what actually happened in each scenario against what was expected, including any problems found, so they can be fixed before go-live.",
+          "text": "Describes documenting the results: for each scenario, what was expected, what actually happened, any problems and the drivers' comments, so that problems can be fixed before go-live.",
           "marks": 1
         }
       ],
-      "model": "Ben should choose a group of real Ballarat drivers who will use the app every day, not developers. The group should include drivers who are confident and drivers who are not confident with phones, and cover both town runs and rural runs through areas with no mobile coverage. One scenario: 'Complete your rural run as normal, including the farm delivery in the no-coverage area. Get the receiver's signature on the screen, and check that the delivery shows as uploaded once you're back in coverage.' Ben should ride along to observe, noting where drivers hesitate or make mistakes, and time how long each delivery takes to record against the 30-second requirement. For each scenario he should record the expected result, what actually happened, any problems and the drivers' comments, so that problems can be fixed before go-live.",
-      "mistake": "Beta testing is done by real end users in real conditions, after alpha testing by the development team. Ben and the developers can't be the beta testers.",
+      "model": "Ben should choose a group of Ballarat drivers who will use the app every day, not developers or IT staff. The group should include drivers who are confident and drivers who are not confident with phones, and cover both town runs and rural runs through areas with no mobile coverage. One scenario: 'Complete your rural run as normal on your company phone, including the farm delivery in the no-coverage area, and get each receiver's signature on the screen.' Ben should ride along to observe. He notes where drivers hesitate or make mistakes, times how long each delivery takes to record against the 30-second requirement, and records whether the no-coverage delivery uploads once the van is back in coverage. For each scenario he documents the expected result, what actually happened, any problems and the drivers' comments, so that problems can be fixed before go-live.",
+      "mistake": "Beta testers are intended users (here, Ballarat drivers) carrying out realistic scenarios on the company phones while an observer records what happens; they aren't there to hunt bugs or check that outputs are correct. A beta testing strategy says how the testers are chosen, what scenario they carry out and what is recorded.",
       "source": "textbook"
     },
     {
@@ -674,11 +675,11 @@
       "prompt": "Kestrel Bay decided to develop ParcelTrack in-house rather than engage the Melbourne software firm. Explain one advantage and one disadvantage of this decision for Kestrel Bay.",
       "points": [
         {
-          "text": "Identifies an advantage of in-house development, such as lower cost, an earlier start, knowledge of the business, or control over the code and its priorities.",
+          "text": "Identifies an advantage of in-house development, such as lower cost, an earlier start, knowledge of the business, control over the code and its priorities, or customers' personal data staying inside Kestrel Bay.",
           "marks": 1
         },
         {
-          "text": "Explains the advantage using the insert: for example, the firm's $870 000 quote is $250 000 over the $620 000 budget and it couldn't start for five months, or the IT team already knows the depots, drivers and current website.",
+          "text": "Explains the advantage using the insert: for example, the firm's $870 000 quote is $250 000 over the $620 000 budget and it couldn't start for five months; the IT team already knows the depots, drivers and current website; or the details of about 60 000 customers would not have to be shared with an outside firm.",
           "marks": 1
         },
         {
@@ -691,7 +692,7 @@
         }
       ],
       "model": "Advantage: in-house development avoids the firm's cost and delay. The Melbourne firm quoted $870 000, which is $250 000 more than Kestrel Bay's $620 000 budget, and it couldn't start for five months. The in-house team can start now, and it already knows how the depots, drivers and current website work. Disadvantage: the IT team has only six people, and they must build a phone app, a web portal and a charging module while running the current systems. Grace's list shows that their development practices are insecure (a shared server, a password in the source code, no code review). An experienced external firm may already have secure practices in place, so developing in-house risks building ParcelTrack with the same weaknesses.",
-      "mistake": "Don't claim in-house development is always cheaper or always slower. Compare against the insert's figures: an $870 000 quote against a $620 000 budget, and a five-month wait.",
+      "mistake": "In 2025 many answers on in-house development gave only one side and didn't refer to the case study. Give an advantage and a disadvantage of developing in-house, each tied to Kestrel Bay's facts (the $870 000 quote against the $620 000 budget, the five-month wait, the team of six, Grace's list); neither option is always cheaper, faster or safer.",
       "source": "textbook"
     },
     {
@@ -705,7 +706,7 @@
       "prompt": "Explain two ethical issues raised by the way Priya uses the free online AI assistant (see the insert).",
       "points": [
         {
-          "text": "Identifies that pasting real customer records into an external AI tool gives customers' personal information (names, addresses, phone numbers) to a third party without their knowledge or consent.",
+          "text": "Identifies an ineffective security practice: pasting real customer records into an external AI tool gives customers' personal information (names, addresses, phone numbers) to a third party without their knowledge or consent.",
           "marks": 1
         },
         {
@@ -713,7 +714,7 @@
           "marks": 1
         },
         {
-          "text": "Identifies over-reliance on AI-generated code: Priya uses code the assistant generates, and no one reviews it before it goes live.",
+          "text": "Identifies an issue with the use of AI during development: over-reliance on AI-generated code, which Priya uses although no one reviews it before it goes live.",
           "marks": 1
         },
         {
@@ -721,7 +722,7 @@
           "marks": 1
         },
         {
-          "text": "Alternative issue: generated code may copy other people's work without acknowledgement or a check of its licence.",
+          "text": "Alternative issue (intellectual property and copyright): generated code may copy other people's work without acknowledgement or a check of its licence.",
           "marks": 1
         },
         {
@@ -730,7 +731,7 @@
         }
       ],
       "model": "First, Priya pasted real customer records into a free online AI assistant. This handed customers' names, addresses and phone numbers to an outside company without their knowledge or consent. Customers gave Kestrel Bay those details only so their consignments could be delivered. The provider may keep or reuse them, and Kestrel Bay can't get them back, so customers' privacy and trust have been broken. Second, Priya relies on AI-generated code, and no one reviews it before it goes live. She and Kestrel Bay are still responsible for what the code does. If it contains errors or security flaws, customers could be charged incorrectly or have their data exposed, and using code nobody has checked isn't taking that responsibility seriously.",
-      "mistake": "An ethical issue is about treating people rightly, not only a technical risk. Say who is harmed (Kestrel Bay's customers) and why the action is unfair to them.",
+      "mistake": "Using an AI assistant isn't unethical in itself; the problems are how Priya uses it, pasting customers' personal records into an outside tool and relying on generated code no one reviews. For each issue, say who is harmed (Kestrel Bay's customers) and why the action is wrong.",
       "source": "textbook"
     },
     {
@@ -741,18 +742,18 @@
       ],
       "commandTerm": "describe",
       "marks": 5,
-      "prompt": "Grace is threat modelling ParcelTrack using Leila's context diagram (Figure 1).\n\n1. Describe one benefit to Kestrel Bay of threat modelling ParcelTrack now, before development starts.\n2. Choose two different data flows between ParcelTrack and an external entity in Figure 1. For each flow, describe a threat to it and a control that would reduce that threat.",
+      "prompt": "Grace has defined ParcelTrack's security requirements. She is now identifying and mitigating threats, using Leila's context diagram (Figure 1) to look at the data that flows into and out of ParcelTrack.\n\n1. Describe one benefit to Kestrel Bay of threat modelling ParcelTrack now, before development starts.\n2. Choose two different data flows between ParcelTrack and an external entity in Figure 1. For each flow, describe a threat to it and a security control that would reduce that threat.",
       "points": [
         {
           "text": "Describes a benefit of threat modelling now: controls designed in before development cost less and are easier to build than changes made after ParcelTrack is written or after an attack (for example, Figure 2 has only a one-week security review after alpha testing, when the design can no longer change cheaply).",
           "marks": 1
         },
         {
-          "text": "Names a first flow and describes a realistic threat to it. For example, proof_of_delivery could be intercepted or altered on its way from a driver's phone; someone who finds a lost phone could record false deliveries; a stolen or shared depot login could be used to change the weights and zones in consignment_details; an attacker could enter many consignment_number values to collect the delivery_status of other customers' consignments; or delivery_addresses sent to the mapping service could be intercepted.",
+          "text": "Names a first flow and describes a realistic threat to it. For example, proof_of_delivery could be intercepted or altered on its way from a driver's phone (a man-in-the-middle attack); someone who finds a lost phone could record false deliveries; a stolen or shared depot login could be used to change the weights and zones in consignment_details; an attacker could enter many consignment_number values to collect the delivery_status of other customers' consignments; or delivery_addresses sent to the mapping service could be intercepted.",
           "marks": 1
         },
         {
-          "text": "Describes a control that reduces the first threat. For example, send the data only over an encrypted connection; require each driver or staff member to log in with their own account and a second factor, such as a fingerprint; give depot staff access only to the functions their job needs; or require customers to log in to their own account before the portal shows a consignment's status, so a guessed consignment number alone reveals nothing.",
+          "text": "Describes a security control that reduces the first threat. For example, encryption: send the data only over an encrypted connection; robust identity and access management: each driver or staff member logs in with their own account, with access only to the functions their job needs, and multi-factor authentication (an Essential Eight strategy) such as a fingerprint as the second factor; or require customers to log in to their own account before the portal shows a consignment's status, so a guessed consignment number alone reveals nothing.",
           "marks": 1
         },
         {
@@ -760,12 +761,12 @@
           "marks": 1
         },
         {
-          "text": "Describes a control that reduces the second threat (as in the examples above).",
+          "text": "Describes a security control that reduces the second threat (as in the examples above).",
           "marks": 1
         }
       ],
-      "model": "1. Threat modelling now lets Grace build security controls into ParcelTrack's design from the start, which costs far less than changing ParcelTrack after it is written or after an attack. Figure 2 allows only a one-week security review after alpha testing, when the design can no longer change cheaply.\n\n2. proof_of_delivery travels from drivers' phones over mobile networks. An attacker could intercept it to read receivers' names and signatures, or alter it so that a delivery that never happened is recorded. ParcelTrack should accept proof_of_delivery only over an encrypted connection, so anyone who intercepts it can't read it or change it without the change being detected.\n\nconsignment_details, entered by depot staff, include each consignment's weight and zone, which set its charge. Someone using a colleague's login or a stolen password could change weights or zones so that consignments are undercharged. Each staff member should have their own account with multi-factor authentication and access only to the functions their job needs. A stolen password alone is then not enough to log in, and every change can be traced to one person.",
-      "mistake": "Tie each threat to a specific flow in the diagram. 'Hackers could attack the system' names no flow, no threat and no control.",
+      "model": "1. Threat modelling now lets Grace build security controls into ParcelTrack's design from the start, which costs far less than changing ParcelTrack after it is written or after an attack. Figure 2 allows only a one-week security review after alpha testing, when the design can no longer change cheaply.\n\n2. proof_of_delivery travels from drivers' phones over mobile networks. In a man-in-the-middle attack, an attacker could intercept it to read receivers' names and signatures, or alter it so that a delivery that never happened is recorded. Encryption reduces this threat: ParcelTrack should accept proof_of_delivery only over an encrypted connection, so anyone who intercepts it can't read it or change it without the change being detected.\n\nconsignment_details, entered by depot staff, include each consignment's weight and zone, which set its charge. Someone using a colleague's login or a stolen password could change weights or zones so that consignments are undercharged. Robust identity and access management reduces this threat: each staff member should have their own account, with access only to the functions their job needs, and log in with multi-factor authentication. A stolen password alone is then not enough to log in, and every change can be traced to one person.",
+      "mistake": "Tie each threat to a named flow in Figure 1 and each control to that threat: 'hackers could attack the system' names no flow, threat or control. Threat modelling follows the study design's principles: define security requirements, identify and mitigate threats, then confirm the threats have been mitigated.",
       "source": "textbook",
       "figureRefs": [
         "parceltrack-context",
@@ -775,16 +776,16 @@
     {
       "id": "cs-01-q13",
       "kk": [
-        "U4O2-KK10",
+        "U4O2-KK04",
         "U4O2-KK03",
         "U4O2-KK09"
       ],
       "commandTerm": "recommend",
       "marks": 8,
-      "prompt": "Grace must report on the security of the IT team's development practices before ParcelTrack's development begins. Identify two weaknesses in the development environment described in the insert. For each weakness, explain the risk it poses to Kestrel Bay, then recommend a control that would reduce the risk and justify your recommendation.",
+      "prompt": "Grace must report on the security of the IT team's development practices before ParcelTrack's development begins. Identify two weaknesses in the development environment described in the insert. For each weakness, explain the risk it poses to Kestrel Bay, then recommend a security control that would reduce the risk and justify your recommendation.",
       "points": [
         {
-          "text": "Identifies a first weakness from the insert. For example, development, testing and live versions share one server and files are copied straight to live; real customer data in the test database; the password in the source code; no version control; the shared administrator account without multi-factor authentication; the former contractor's active login; the unpatched framework; no code review; the backup drive left plugged into the server; or the unlocked storeroom.",
+          "text": "Identifies a first weakness from the insert. For example, combined development, testing and production environments (one server, with files copied straight to live); real customer data in the test database; the password in the source code; no version control; poor identity and access management practices (the shared administrator account without multi-factor authentication, or the former contractor's active login); unpatched software (the framework not updated for 14 months); ineffective code review practices (no code review); the backup drive left plugged into the server; or the unlocked storeroom.",
           "marks": 1
         },
         {
@@ -792,7 +793,7 @@
           "marks": 1
         },
         {
-          "text": "Recommends a control that addresses the first weakness, for example separate development, testing and production environments; dummy test data; moving the password out of the source code into protected configuration; individual accounts with multi-factor authentication; disabling accounts when people leave; version control; patching; code review; offline or off-site backups; or a locked storeroom.",
+          "text": "Recommends a security control that addresses the first weakness, for example separated development, testing and production environments; made-up test data; moving the password out of the source code into protected configuration; robust identity and access management (individual accounts with only the access each person needs, multi-factor authentication, and disabling accounts when people leave); version control and code repositories; regular updates and patches; code review; offline or off-site backups; or a locked storeroom.",
           "marks": 1
         },
         {
@@ -808,7 +809,7 @@
           "marks": 1
         },
         {
-          "text": "Recommends a control that addresses the second weakness.",
+          "text": "Recommends a security control that addresses the second weakness.",
           "marks": 1
         },
         {
@@ -816,8 +817,8 @@
           "marks": 1
         }
       ],
-      "model": "Weakness 1: the development, testing and live versions of the website run on one server, and developers copy changed files straight into the live folder. Untested or half-finished code can reach customers, and a mistake made while testing could damage live data. Grace should recommend separate development, testing and production environments on separate servers, with changes released to production only after they pass testing. Faults are then found before customers see them, and work in development or testing can't touch live data.\n\nWeakness 2: the developers share one administrator account and no account uses multi-factor authentication. If the shared password is stolen, an attacker gains full control of the server, and because everyone uses the same login, Kestrel Bay can't tell who made a change. Grace should recommend an individual account for each developer, with only the access that person needs and multi-factor authentication. A stolen password alone would then not be enough to log in, every change could be traced to one person, and removing someone's access (such as the former contractor's) would not affect anyone else.",
-      "mistake": "Match each control to its weakness and say how it reduces that particular risk. A list of controls with no link to Kestrel Bay's weaknesses scores poorly.",
+      "model": "Weakness 1: combined development, testing and production environments. One server runs the development, testing and live versions of the website, and developers copy changed files straight into the live folder. Untested or half-finished code can reach customers, and a mistake made while testing could damage live data. Grace should recommend separated development, testing and production environments on separate servers, with changes released to production only after they pass testing. Faults are then found before customers see them, and work in development or testing can't touch live data.\n\nWeakness 2: poor identity and access management practices. The developers share one administrator account and no account uses multi-factor authentication. If the shared password is stolen, an attacker gains full control of the server, and because everyone uses the same login, Kestrel Bay can't tell who made a change. Grace should recommend robust identity and access management: an individual account for each developer, with only the access that person needs and multi-factor authentication. A stolen password alone would then not be enough to log in, every change could be traced to one person, and removing someone's access (such as the former contractor's) would not affect anyone else.",
+      "mistake": "Match each control to the weakness it fixes and say how it reduces that risk; a list of controls with no link to the insert scores poorly. Version control isn't a backup: it keeps the code's history so a bad change can be rolled back, so the plugged-in backup drive needs offline or off-site backups instead.",
       "source": "textbook"
     }
   ],

@@ -25,7 +25,8 @@
   {
     "id": "m-u4o2-kk01-002",
     "kk": [
-      "U4O2-KK01"
+      "U4O2-KK01",
+      "U3O2-KK01"
     ],
     "stem": "Sallygum Health, a network of Bendigo medical clinics with 600 staff, has the goal of improving patients' access to care. Which proposed software project most directly supports this goal?",
     "options": [
@@ -72,7 +73,8 @@
     "id": "m-u4o2-kk01-004",
     "kk": [
       "U4O2-KK01",
-      "U4O2-KK03"
+      "U4O2-KK03",
+      "U4O2-KK09"
     ],
     "stem": "Yellowbox Credit Union, a Ballarat lender with 250 staff, has the goal of keeping its members' trust. One objective is that no member data is exposed through its software over the next two years. Its developers currently test new features using a copy of real member records. Which change best serves this objective?",
     "options": [
@@ -211,7 +213,8 @@
   {
     "id": "m-u4o2-kk02-003",
     "kk": [
-      "U4O2-KK02"
+      "U4O2-KK02",
+      "U4O2-KK03"
     ],
     "stem": "Which is the most significant security risk of having software developed externally?",
     "options": [
@@ -234,7 +237,8 @@
   {
     "id": "m-u4o2-kk02-004",
     "kk": [
-      "U4O2-KK02"
+      "U4O2-KK02",
+      "U4O2-KK09"
     ],
     "stem": "Cumbungi Grocers, a Shepparton supermarket chain with 1200 staff, has contracted Peppercress Software to build a loyalty app. The app will store customers' names, email addresses and purchase histories. Which contract term best protects Cumbungi Grocers' customer data during development?",
     "options": [
@@ -314,7 +318,7 @@
       "An individual account each, limited to the test environment and closed at the end"
     ],
     "answer": 3,
-    "explanation": "Individual accounts mean every action can be traced to one person. Limiting them to the test environment keeps the contractors away from live systems and data the rebuild doesn't need, and closing them when the contract ends removes access as soon as it is no longer required.",
+    "explanation": "This arrangement is robust identity and access management. Individual accounts mean every action can be traced to one person. Limiting them to the test environment keeps the contractors away from live systems and data the rebuild doesn't need, and closing them when the contract ends removes access as soon as it is no longer required.",
     "whyWrong": [
       "A shared account means no action can be traced to one developer, and one person's access can't be removed on its own.",
       "Full access reaches live systems and data the rebuild doesn't need; an agreement doesn't limit what an account can reach.",
@@ -339,9 +343,9 @@
     "answer": 3,
     "explanation": "A vulnerability is a weakness that could be exploited. Default passwords are widely known, so the test server is open to anyone who tries one.",
     "whyWrong": [
-      "The criminal group is a threat: people who could exploit a weakness.",
+      "Selling stolen records is a deliberate threat: an action that harms data, not a weakness in a system.",
       "The disgruntled developer is an insider threat, not a weakness in the system.",
-      "The storm is a threat: an event that could cause harm.",
+      "The storm is an events-based threat: it could cut power and harm the system, but it is not a weakness.",
       ""
     ],
     "difficulty": 1,
@@ -373,7 +377,8 @@
   {
     "id": "m-u4o2-kk03-003",
     "kk": [
-      "U4O2-KK03"
+      "U4O2-KK03",
+      "U4O2-KK04"
     ],
     "stem": "A developer at Mudbrick Logistics accidentally pushed code containing the company's database password to a public online repository. The next day she deleted the password from the code and pushed the change. Why is the database still at risk?",
     "options": [
@@ -455,7 +460,7 @@
     "explanation": "Risk combines how likely harm is with how severe it would be. Laptops are often lost or stolen, so exposure is likely, and patient records are sensitive, so exposure would cause serious harm. Together these make the risk high.",
     "whyWrong": [
       "This is the vulnerability: the weakness (an unencrypted laptop) that a threat could exploit.",
-      "This is a threat: a person who could exploit the weakness.",
+      "This is a threat: theft of a device is a deliberate act that could exploit the weakness.",
       "",
       "This is a control: a measure that would reduce the risk."
     ],
@@ -511,7 +516,8 @@
   {
     "id": "m-u4o2-kk04-002",
     "kk": [
-      "U4O2-KK04"
+      "U4O2-KK04",
+      "U4O2-KK07"
     ],
     "stem": "Which login process uses multi-factor authentication?",
     "options": [
@@ -535,7 +541,8 @@
     "id": "m-u4o2-kk04-003",
     "kk": [
       "U4O2-KK04",
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U3O1-KK08"
     ],
     "stem": "A developer at Greenhood Software is testing the login function shown, which should lock an account after three failed attempts. Arrays are indexed from 0. What does `checkLogin([\"Wombat1\", \"Kanga!8\", \"kanga7\", \"Kanga!7\"], \"Kanga!7\")` return?",
     "options": [
@@ -567,7 +574,9 @@
   {
     "id": "m-u4o2-kk04-004",
     "kk": [
-      "U4O2-KK04"
+      "U4O2-KK04",
+      "U4O2-KK07",
+      "U3O2-KK11"
     ],
     "stem": "Wallaby Grass Software, a Leongatha company with 40 staff, backs up its code repository every night to a removable drive, which is then kept in a locked safe at another site. When ransomware encrypted the repository server, the team found the backup drive couldn't be read: no one had ever tried restoring from it. Which control would most likely have allowed the company to recover its code?",
     "options": [
@@ -577,7 +586,7 @@
       "A code review of every change before it is merged into the repository"
     ],
     "answer": 2,
-    "explanation": "The backup was kept off-site, but it had never been tested, so no one knew it couldn't be read. Restoring from the backups regularly shows whether they work while there is still time to fix them, so a usable copy of the code would have been available.",
+    "explanation": "The backup was kept off-site, but it had never been tested, so no one knew it couldn't be read. Restoring from the backups regularly shows whether they work while there is still time to fix them, so a usable copy of the code would have been available. Regular backups is one of the Essential Eight strategies, and a backup is only useful if it can be restored.",
     "whyWrong": [
       "Multi-factor authentication makes unauthorised logins harder but doesn't recover data once it has been encrypted.",
       "Ransomware can encrypt files that are already encrypted, and this does nothing to make the backup readable.",
@@ -623,7 +632,7 @@
       "Her payments access stays until her next annual review, when it is checked again"
     ],
     "answer": 1,
-    "explanation": "Identity and access management updates a person's access whenever they join, change roles or leave. Mei no longer works on the payments systems, so keeping that access adds risk with no benefit: if her account were misused or taken over, it could still reach payment data.",
+    "explanation": "Identity and access management makes sure each person can use only the systems and data they need for their current duties, so access changes as soon as someone changes roles. Mei no longer works on the payments systems, so keeping that access adds risk with no benefit: if her account were misused or taken over, it could still reach payment data.",
     "whyWrong": [
       "Access kept 'just in case' builds up over time, so a stolen account could reach systems she no longer works on.",
       "",
@@ -637,7 +646,9 @@
     "id": "m-u4o2-kk04-007",
     "kk": [
       "U4O2-KK04",
-      "U3O1-KK14"
+      "U3O1-KK14",
+      "U4O2-KK03",
+      "U3O1-KK08"
     ],
     "stem": "Bettong Hill Apps' policy is that a change may be merged into its code only after a developer other than its author has approved it. Before each merge, its repository runs the function shown. Which call returns True although the policy should refuse the merge?",
     "options": [
@@ -680,7 +691,7 @@
     "answer": 2,
     "explanation": "Threat modelling finds what could go wrong with a system's security, ideally during design, so that controls can be planned and built in.",
     "whyWrong": [
-      "This describes beta testing, which checks a working solution with users rather than its security.",
+      "This describes beta testing, in which intended users try out a working solution; it doesn't set out to identify threats or plan controls.",
       "This describes version control.",
       "",
       "This describes a Gantt chart, a project management tool."
@@ -698,8 +709,8 @@
     "options": [
       "Encrypt the payment details while they travel to the payment provider",
       "Require customers to use multi-factor authentication when they log in",
-      "Back up the Orders data store to an off-site location every night",
-      "Have a second developer review the code for the Place order process"
+      "Back up the *Orders* data store to an off-site location every night",
+      "Have a second developer review the code for the *Place order* process"
     ],
     "answer": 0,
     "explanation": "Interception targets data while it moves across a network. Encrypting the flow in transit means that intercepted payment details can't be read.",
@@ -737,7 +748,6 @@
             "id": "p1",
             "type": "process",
             "label": "Log in",
-            "number": "1",
             "x": 200,
             "y": 220
           },
@@ -745,7 +755,6 @@
             "id": "p2",
             "type": "process",
             "label": "Place order",
-            "number": "2",
             "x": 440,
             "y": 220
           },
@@ -753,7 +762,6 @@
             "id": "d1",
             "type": "store",
             "label": "Customers",
-            "number": "D1",
             "x": 200,
             "y": 344
           },
@@ -761,7 +769,6 @@
             "id": "d2",
             "type": "store",
             "label": "Orders",
-            "number": "D2",
             "x": 440,
             "y": 344
           }
@@ -771,6 +778,11 @@
             "from": "customer",
             "to": "p1",
             "label": "login_details"
+          },
+          {
+            "from": "p1",
+            "to": "d1",
+            "label": "last_login"
           },
           {
             "from": "d1",
@@ -809,6 +821,11 @@
             }
           },
           {
+            "from": "d2",
+            "to": "p2",
+            "label": "order_history"
+          },
+          {
             "from": "p2",
             "to": "d2",
             "label": "order_record",
@@ -824,7 +841,8 @@
   {
     "id": "m-u4o2-kk05-003",
     "kk": [
-      "U4O2-KK05"
+      "U4O2-KK05",
+      "U4O2-KK10"
     ],
     "stem": "Candlebark Mutual, a Geelong customer-owned bank, has rated four threats to its new banking app during threat modelling. Based on the ratings in the table, which threat should be mitigated first?",
     "options": [
@@ -907,20 +925,20 @@
       "U4O2-KK05",
       "U3O2-KK08"
     ],
-    "stem": "Dunnart Fitness, a Frankston gym chain with 260 staff, is threat modelling its class-booking app by working through the DFD shown one element at a time. Which threat applies most directly to data store D1, Members?",
+    "stem": "Dunnart Fitness, a Frankston gym chain with 260 staff, is threat modelling its class-booking app by working through the DFD shown one element at a time. Which threat applies most directly to the *Members* data store?",
     "options": [
-      "`login_details` are intercepted as they travel to process 1, Log in",
+      "`login_details` are intercepted as they travel to the *Log in* process",
       "An attacker who reaches the database copies the stored member details",
       "Someone poses as Head office to receive the `attendance_summary`",
-      "A member books classes in another member's name at process 2, Book class"
+      "A member books classes in another member's name through the *Book class* process"
     ],
     "answer": 1,
-    "explanation": "A data store holds data at rest, so the threats to it are that the stored data is read, copied, changed or deleted by someone who shouldn't have it. Controls for D1 would include limiting which accounts can read it and encrypting the stored member details.",
+    "explanation": "A data store holds data at rest, so the threats to it are that the stored data is read, copied, changed or deleted by someone who shouldn't have it. Controls for the *Members* data store would include limiting which accounts can read it and encrypting the stored member details.",
     "whyWrong": [
-      "Interception is a threat to data moving along a flow, `login_details`, not to data held in D1.",
+      "Interception is a threat to data moving along a flow, `login_details`, not to data held in the *Members* data store.",
       "",
       "This concerns the Head office entity and the `attendance_summary` flow, not the stored member details.",
-      "This is a threat to process 2, which records bookings; it doesn't read or change the member records in D1."
+      "This is a threat to the *Book class* process, which records bookings; it doesn't read or change the member records in the *Members* data store."
     ],
     "difficulty": 1,
     "source": "textbook",
@@ -950,7 +968,6 @@
             "id": "p1",
             "type": "process",
             "label": "Log in",
-            "number": "1",
             "x": 104,
             "y": 212
           },
@@ -958,7 +975,6 @@
             "id": "p2",
             "type": "process",
             "label": "Book class",
-            "number": "2",
             "x": 320,
             "y": 212
           },
@@ -966,7 +982,6 @@
             "id": "p3",
             "type": "process",
             "label": "Report attendance",
-            "number": "3",
             "x": 536,
             "y": 212,
             "w": 112
@@ -975,7 +990,6 @@
             "id": "d1",
             "type": "store",
             "label": "Members",
-            "number": "D1",
             "x": 128,
             "y": 344
           },
@@ -983,7 +997,6 @@
             "id": "d2",
             "type": "store",
             "label": "Bookings",
-            "number": "D2",
             "x": 424,
             "y": 344
           }
@@ -993,6 +1006,11 @@
             "from": "member",
             "to": "p1",
             "label": "login_details"
+          },
+          {
+            "from": "p1",
+            "to": "d1",
+            "label": "last_login"
           },
           {
             "from": "d1",
@@ -1037,7 +1055,7 @@
     "kk": [
       "U4O2-KK05"
     ],
-    "stem": "The threat model for a Melbourne tutoring company's online lesson portal lists the threat that an attacker could try thousands of passwords against a student's account. Which security requirement best addresses this threat?",
+    "stem": "A Melbourne tutoring company is defining the security requirements for its online lesson portal. Attackers commonly try thousands of passwords against a single account. Which security requirement best protects students' accounts against this threat?",
     "options": [
       "The portal must be secure and must protect students' personal details",
       "Students must be able to join a booked lesson in three taps or fewer",
@@ -1063,18 +1081,18 @@
     ],
     "stem": "Psyche Bend Accounting, a Mildura firm with 90 staff, develops its own client portal. Its threat model includes the threat that a developer accidentally releases a faulty change that takes the portal offline. Which control reduces the impact of this threat rather than its likelihood?",
     "options": [
-      "Version control, so the last working version can be restored quickly",
+      "Version control, so the team can roll back to the last working version",
       "A code review by a second developer before every change is merged",
       "Testing each change in a separate test environment before its release",
       "Training every developer in the firm's coding standards once a year"
     ],
     "answer": 0,
-    "explanation": "Likelihood is how probable it is that a faulty change goes live; impact is how much harm it does once it has. Review, separate testing and training all make a faulty release less likely, but none of them helps once one is live. Version control keeps every earlier version, so the team can restore the last working version quickly, which shortens the outage and limits the harm to clients.",
+    "explanation": "Likelihood is how probable it is that a faulty change goes live; impact is how much harm it does once it has. Review, separate testing and training all make a faulty release less likely, but none of them helps once one is live. Version control keeps every earlier version of the code, so the team can quickly roll back to the last working version, which shortens the outage and limits the harm to clients.",
     "whyWrong": [
       "",
       "Review catches faults before release, so it makes a faulty release less likely; it doesn't shorten an outage.",
       "Testing first catches faults before they go live, which reduces likelihood, not the harm once a fault is live.",
-      "Better coding practice means fewer faulty changes, which reduces likelihood rather than impact."
+      "Developer training is a strategy for improving practices rather than a security control, and it makes faulty changes less likely; it doesn't limit the harm once one is live."
     ],
     "difficulty": 3,
     "source": "textbook"
@@ -1205,7 +1223,8 @@
     "id": "m-u4o2-kk06-005",
     "kk": [
       "U4O2-KK06",
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04"
     ],
     "stem": "Nardoo Payroll Services in Mildura is evaluating its development practices against the criterion 'Access to the live payroll database follows the principle of least privilege.' The evaluator found that all nine developers can change the live database, each through an individual account protected by multi-factor authentication. Only the two developers who carry out releases need that access. Which conclusion does this evidence best support?",
     "options": [
@@ -1252,7 +1271,8 @@
     "id": "m-u4o2-kk06-007",
     "kk": [
       "U4O2-KK06",
-      "U4O2-KK03"
+      "U4O2-KK03",
+      "U4O2-KK04"
     ],
     "stem": "A Bendigo credit union is evaluating its development practices against the criterion 'No passwords or keys are stored in source code.' Which method of collecting evidence would give the most reliable result?",
     "options": [
@@ -1298,7 +1318,8 @@
   {
     "id": "m-u4o2-kk07-002",
     "kk": [
-      "U4O2-KK07"
+      "U4O2-KK07",
+      "TERMS"
     ],
     "stem": "Wattleglen Physiotherapy, a private clinic in Bendigo, is having an app built that stores each patient's injury history and treatment notes. Which statement about the law that applies to this information is correct?",
     "options": [
@@ -1310,7 +1331,7 @@
     "answer": 3,
     "explanation": "Injury histories and treatment notes are health information. The Health Records Act 2001 (Vic) regulates how public and private organisations in Victoria handle health information, so the clinic and its app must follow its Health Privacy Principles.",
     "whyWrong": [
-      "That Act binds Victorian public sector bodies and their contractors, not a private clinic.",
+      "That Act binds Victorian public sector bodies, and contractors only when their contracts say so; a private clinic is neither.",
       "Private organisations that hold health information in Victoria are bound by privacy law.",
       "The Essential Eight is guidance, not law, and it doesn't regulate how health information is handled.",
       ""
@@ -1321,7 +1342,8 @@
   {
     "id": "m-u4o2-kk07-003",
     "kk": [
-      "U4O2-KK07"
+      "U4O2-KK07",
+      "U3O2-KK10"
     ],
     "stem": "Mount Corella Shire Council in regional Victoria is replacing its rates system. The new system will store ratepayers' names, addresses and payment histories. Which Act most directly governs how the council handles this personal information, and why?",
     "options": [
@@ -1345,7 +1367,7 @@
     "id": "m-u4o2-kk07-004",
     "kk": [
       "U4O2-KK07",
-      "U4O2-KK08"
+      "TERMS"
     ],
     "stem": "A developer at Mulgara Outdoor Supplies, a Kerang retailer covered by the Privacy Act 1988 (Cwlth), leaves a customer database publicly accessible. An unknown party downloads customers' names, dates of birth and driver licence numbers, and serious harm to those customers is likely. What does the Act require the retailer to do?",
     "options": [
@@ -1369,7 +1391,8 @@
     "id": "m-u4o2-kk07-005",
     "kk": [
       "U4O2-KK07",
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK03"
     ],
     "stem": "At a Swan Hill freight software company, developers can download and run any program on the build server. Last month a developer ran a free code-formatting tool that turned out to contain malware. Which Essential Eight strategy most directly prevents this from happening again?",
     "options": [
@@ -1392,7 +1415,8 @@
   {
     "id": "m-u4o2-kk07-006",
     "kk": [
-      "U4O2-KK07"
+      "U4O2-KK07",
+      "TERMS"
     ],
     "stem": "Kooranga Hills Shire Council in regional Victoria runs a maternal and child health service. Its developers are building an app in which the service's nurses record each child's growth, immunisations and health checks. Which Act sets the privacy rules for how the council handles this information in the app?",
     "options": [
@@ -1555,7 +1579,8 @@
   {
     "id": "m-u4o2-kk09-001",
     "kk": [
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04"
     ],
     "stem": "Which measure is an example of applying the principle of least privilege?",
     "options": [
@@ -1578,7 +1603,10 @@
   {
     "id": "m-u4o2-kk09-002",
     "kk": [
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04",
+      "U4O2-KK03",
+      "U4O1-KK04"
     ],
     "stem": "Lomandra Fitness, a Bairnsdale gym chain, runs a class-booking website built with a third-party library. Eight months ago the library's authors released a new version that fixes a published security flaw, but the website still uses the old version. Which measure most directly reduces the risk from this weakness?",
     "options": [
@@ -1624,7 +1652,8 @@
   {
     "id": "m-u4o2-kk09-004",
     "kk": [
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK03"
     ],
     "stem": "A consultant proposed the measures below for Lantern Moth Games, a Melbourne game developer. Which pairing of threat and measure is the least effective?",
     "options": [
@@ -1634,7 +1663,7 @@
       "Ransomware on the file server, met by offline backups"
     ],
     "answer": 0,
-    "explanation": "Encrypting data sent between servers protects it while it travels over a network, but the employee is authorised to see the data and copies it from inside. Least-privilege access to player data and blocking USB storage devices would address this threat.",
+    "explanation": "Encrypting data sent between servers protects it while it travels over a network, but this is an insider threat: the employee copies the data from inside, using access they already have. Limiting player data to the staff whose duties need it, and blocking USB storage devices, would address this threat.",
     "whyWrong": [
       "",
       "Multi-factor authentication means a phished password alone isn't enough to log in, so it directly reduces this threat.",
@@ -1676,7 +1705,8 @@
   {
     "id": "m-u4o2-kk09-005",
     "kk": [
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04"
     ],
     "stem": "A Gippsland tour company's booking website connects to its database through an account with full administrator rights. An attacker who took control of the website could therefore delete any table or read the staff records stored in the same database. Which change would most directly limit what such an attacker could do to the database?",
     "options": [
@@ -1746,7 +1776,8 @@
   {
     "id": "m-u4o2-kk10-002",
     "kk": [
-      "U4O2-KK10"
+      "U4O2-KK10",
+      "U4O2-KK04"
     ],
     "stem": "At Numbat Park Studios, a Geelong app developer, the four developers email zipped copies of the source code to each other. Changes are often overwritten, and no one can tell who changed what. Which recommendation best addresses this?",
     "options": [
@@ -1756,7 +1787,7 @@
       "Require comments that state the purpose of every module in the code"
     ],
     "answer": 2,
-    "explanation": "Version control keeps one shared copy of the code with a history of every change, recorded against the account that made it, so overwritten work can be recovered and changes can be traced.",
+    "explanation": "Version control keeps one shared copy of the code with a history of every change, recorded against the account that made it. Developers' changes are merged instead of silently replacing each other, the team can roll back to an earlier working version, and every change can be traced to its author.",
     "whyWrong": [
       "Encryption protects the code in transit, but changes would still be overwritten and untraceable.",
       "Weekly backups keep old copies, but they don't show who changed what or stop overwriting.",
@@ -1769,7 +1800,10 @@
   {
     "id": "m-u4o2-kk10-003",
     "kk": [
-      "U4O2-KK10"
+      "U4O2-KK10",
+      "U4O2-KK09",
+      "U4O2-KK04",
+      "U4O2-KK07"
     ],
     "stem": "Corvid Lane Media, a three-person Castlemaine web studio with a small budget, found that an attacker had logged in to its cloud code repository using a developer's password leaked from another website. The repository offers multi-factor authentication at no extra cost, but it is switched off. Which recommendation is best justified?",
     "options": [
@@ -1816,7 +1850,9 @@
     "id": "m-u4o2-kk10-005",
     "kk": [
       "U4O2-KK10",
-      "U4O2-KK09"
+      "U4O2-KK09",
+      "U4O2-KK04",
+      "U4O2-KK03"
     ],
     "stem": "An evaluation at Striped Gum Media, a Bright video production company, found that a developer's laptop had been infected with malware. The malware used a flaw that an update released two months earlier had fixed, but the developer had switched off automatic updates because they restarted her laptop during work. Which recommendation best addresses the cause of this incident?",
     "options": [
@@ -1873,7 +1909,7 @@
       "Change the live database's default password and block access from the internet"
     ],
     "answer": 3,
-    "explanation": "Default administrator passwords are widely known, and anyone on the internet can try them, so an attack on either database is highly likely. Only the live database holds real customers' bank account details, so the impact of an attack on it is by far the highest. The retailer should secure the live database first.",
+    "explanation": "Ranking the findings by likelihood and impact, as a risk management plan does, settles the order. Default administrator passwords are widely known, and anyone on the internet can try them, so an attack on either database is highly likely. Only the live database holds real customers' bank account details, so the impact of an attack on it is by far the highest. The retailer should secure the live database first.",
     "whyWrong": [
       "An attack on the test database is just as likely, but it holds only made-up records, so the impact is far lower.",
       "Untested backups matter for recovery after an incident, but they don't make an attack any more likely.",

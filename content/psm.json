@@ -126,7 +126,7 @@
       "front": "Problem-solving methodology (PSM)",
       "back": "A structured approach to creating a software solution in four stages: analysis, design, development and evaluation. Each stage has its own activities, and each stage builds on the work of the one before it.",
       "difficulty": 1,
-      "source": "textbook",
+      "source": "study-design",
       "aliases": [
         "PSM",
         "Problem-solving methodology",
@@ -143,7 +143,7 @@
       "back": "Each stage relies on the one before it: design ideas are judged against the requirements found in analysis, the code is built from the detailed design, and evaluation needs a finished solution that has been in use.",
       "mistake": "Testing is not a stage of its own. It is an activity inside the development stage.",
       "difficulty": 1,
-      "source": "textbook"
+      "source": "study-design"
     },
     {
       "id": "psm-c-003",
@@ -157,7 +157,7 @@
       "back": "The PSM stage that works out *what* the solution must do. The team investigates the problem, need or opportunity and documents the functional and non-functional requirements, the constraints and the scope.",
       "mistake": "Analysis doesn't decide how the solution will look or work. Screen layouts and algorithms belong to design.",
       "difficulty": 1,
-      "source": "textbook"
+      "source": "study-design"
     },
     {
       "id": "psm-c-004",
@@ -168,10 +168,10 @@
       ],
       "type": "reverse",
       "front": "Design stage",
-      "back": "The PSM stage that plans *how* the solution will work and look: generating and evaluating design ideas, producing a detailed design of the preferred idea, and setting the criteria for evaluating the finished solution.",
+      "back": "The PSM stage that plans *how* the solution will work and look. Its activities are **solution design**, in which design ideas are generated and the preferred one is developed into detailed designs with design principles and design tools, and **evaluation criteria**, which judge how well the designs meet the requirements and are used again to evaluate the finished solution.",
       "mistake": "Evaluating design ideas happens here, in design. It is not part of the evaluation stage.",
       "difficulty": 1,
-      "source": "textbook"
+      "source": "study-design"
     },
     {
       "id": "psm-c-005",
@@ -182,10 +182,10 @@
       ],
       "type": "reverse",
       "front": "Development stage",
-      "back": "The PSM stage in which the solution is built from the detailed design: it is coded, validation is added to its inputs, it is tested and debugged, and internal and user documentation is written.",
-      "mistake": "Validation and testing both happen in development, but they aren't the same. Validation is code that checks each input as the program runs; testing is the developer checking that the solution, including its validation, gives the expected output.",
+      "back": "The PSM stage that builds a working solution from the requirements and designs. Its activities are **manipulation** (coding it with suitable algorithms and programming language features), **validation** of input data, **testing** (including debugging and correcting errors) and **documentation**, which in Software Development means internal documentation.",
+      "mistake": "Validation and testing both happen in development, but they aren't the same. Validation checks that input data is reasonable and complete, usually through checks built into the program; testing checks that the solution, including its validation, meets the requirements and works as expected.",
       "difficulty": 1,
-      "source": "textbook"
+      "source": "study-design"
     },
     {
       "id": "psm-c-006",
@@ -196,7 +196,7 @@
       ],
       "type": "reverse",
       "front": "Evaluation stage",
-      "back": "The PSM stage that judges the finished solution after a period of use. It follows an evaluation strategy, planned before the solution goes live so that data such as task times on the old system can be collected, then applies the evaluation criteria to the data and reports how efficient and effective the solution is.",
+      "back": "The PSM stage that judges how well the finished solution meets its requirements. Its activities are the **evaluation strategy**, which plans the criteria, time frame, data and responsibility (best before launch, so data such as old-system task times can be gathered), and **solution evaluation**, which applies the criteria after a period of use to judge efficiency and effectiveness.",
       "mistake": "Evaluation isn't a final round of testing. It asks how well the solution serves its users, not whether each module gives the right output.",
       "difficulty": 1,
       "source": "textbook"
@@ -224,10 +224,10 @@
       ],
       "type": "compare",
       "front": "Evaluating design ideas versus evaluating the solution",
-      "back": "**Design ideas** are evaluated in the *design* stage: several possible designs are compared against criteria so the best one can be chosen before coding starts. The **solution** is evaluated in the *evaluation* stage: the finished solution is judged against the evaluation criteria after it has been in use.",
+      "back": "**Design ideas** are evaluated in the *design* stage: the evaluation criteria are applied to each idea so the preferred design can be chosen before development starts. The **solution** is evaluated in the *evaluation* stage: the same criteria, refined while the solution was built, judge how efficient and effective the finished solution is.",
       "mistake": "An activity with 'evaluate' in its name isn't automatically in the evaluation stage. Comparing design ideas is a design activity.",
       "difficulty": 2,
-      "source": "textbook"
+      "source": "study-design"
     },
     {
       "id": "psm-c-010",
@@ -238,10 +238,10 @@
       ],
       "type": "cloze",
       "front": "Evaluation criteria are set in the {{design}} stage and applied in the {{evaluation}} stage.",
-      "back": "The criteria come from the requirements and are fixed before the solution is built, so the finished solution is judged against targets agreed in advance.",
+      "back": "The criteria come from the requirements. In design they are used to choose the preferred design idea, they can be refined while the solution is developed, and the same criteria then judge how efficient and effective the finished solution is.",
       "mistake": "Criteria aren't written once the solution is finished. Criteria chosen at the end tend to fit whatever the solution already does.",
       "difficulty": 2,
-      "source": "textbook"
+      "source": "study-design"
     },
     {
       "id": "psm-c-011",
@@ -251,7 +251,7 @@
       ],
       "type": "basic",
       "front": "What should a detailed design show, and why?",
-      "back": "The preferred design's appearance (for example, mock-ups) and its functionality (for example, pseudocode, a data dictionary, object descriptions or IPO charts), in enough detail that a developer could code the solution without guessing what was intended.",
+      "back": "The preferred design's appearance (for example, mock-ups) and its structure and functionality (for example, a data dictionary, object descriptions, IPO charts or pseudocode), in enough detail that a developer could code the solution without guessing what was intended.",
       "mistake": "A single sketch of the main screen isn't a detailed design. It says nothing about the data or the processing.",
       "difficulty": 2,
       "source": "textbook"
@@ -317,9 +317,9 @@
       ],
       "type": "basic",
       "front": "In which PSM stage are context diagrams, data flow diagrams and use case diagrams mainly used, and why?",
-      "back": "Analysis. They show the system's boundary, the data moving in and out of it, and how users interact with it, which helps the team work out and communicate the requirements before any design begins.",
+      "back": "Analysis. The PSM lists them as tools for determining the solution requirements: they show the system's boundary, the data moving in and out of it, and how users interact with it. It also lists them among the design tools that show how a solution's components relate.",
       "difficulty": 2,
-      "source": "textbook"
+      "source": "study-design"
     }
   ],
   "mcq": [
@@ -599,15 +599,15 @@
       "options": [
         "Writing a validation check for the date of birth field",
         "Recording actual output in a test table for the login module",
-        "Writing a quick start guide for the program's users",
+        "Writing comments in the code that explain each module's purpose",
         "Producing a data dictionary for the data the program will store"
       ],
       "answer": 3,
-      "explanation": "A data dictionary that plans the data to be stored is a detailed design tool, so producing it is a design activity. The other three are development activities.",
+      "explanation": "A data dictionary that plans the data to be stored is a detailed design tool, so producing it is a design activity. The other three are development activities: validation, testing and internal documentation.",
       "whyWrong": [
         "Coding a validation check is a development activity, like two of the other options.",
         "Recording test results is testing, a development activity.",
-        "User documentation is written in development, once there is a solution to describe.",
+        "Comments in the code are internal documentation, which is written in development.",
         ""
       ],
       "difficulty": 3,
