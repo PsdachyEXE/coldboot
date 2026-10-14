@@ -8,6 +8,11 @@
  * Only activities in different stages are ever compared: the methodology orders its stages, not
  * the activities inside one stage. Answers are stage names or numbers (1 analysis to 4
  * evaluation) and letters.
+ *
+ * Some official activity names contain their own stage (Solution design, Evaluation strategy,
+ * Solution evaluation and the four "Skills underpinning the ... stage" entries). Naming one would
+ * give the answer away, so stage, first and order items show such an activity by its summary, and
+ * spec items leave out a note that names one from its own stage.
  */
 import type { KkId, PsmFile, PsmStageId } from '../../content/schema';
 import { PSM_STAGE_IDS } from '../../content/schema';
@@ -26,6 +31,10 @@ export interface Activity {
   name: string;
   summary: string;
   stage: PsmStageId;
+  /** One of the "Skills underpinning the <stage> stage" entries. */
+  skills: boolean;
+  /** False when the name gives its stage away (contains the stage's word), so questions show the summary instead. */
+  named: boolean;
 }
 
 export interface Spec {
@@ -39,13 +48,14 @@ export interface PsmBank {
   /** The first sentence of each stage's summary. */
   stageGists: Record<PsmStageId, string>;
   activities: Activity[];
+  /** The notes a spec question can show: not one that names a give-away activity of its own stage. */
   specs: Spec[];
 }
 
 export interface PsmSpec {
   kind: PsmKind;
   seed: number;
-  /** For 'stage': show the activity's summary instead of its name. */
+  /** For 'stage': show the activity's summary instead of its name (always, when the name gives its stage away). */
   described?: boolean;
 }
 
@@ -55,6 +65,16 @@ const STAGE_WORDS: Record<PsmStageId, readonly string[]> = {
   development: ['development', 'develop', 'developing', 'dev', 'development stage'],
   evaluation: ['evaluation', 'evaluate', 'evaluating', 'eval', 'evaluation stage'],
 };
+
+/** A word in an activity's name that gives its stage away (Solution design, Evaluation strategy). */
+const STAGE_STEMS: Record<PsmStageId, RegExp> = {
+  analysis: /\banaly[sz]/i,
+  design: /\bdesign/i,
+  development: /\bdevelop/i,
+  evaluation: /\bevaluat/i,
+};
+
+const SKILLS = /^skills underpinning\b/i;
 
 /** "Design", "design stage", "2", "stage 2" and "the design stage" all parse. Null otherwise. */
 export function parseStage(input: string): PsmStageId | null {
@@ -72,11 +92,18 @@ export function psmBank(psm: PsmFile | null | undefined): PsmBank | null {
   if (stages.some((s) => !s || !s.activities.length)) return null;
   const stageNames = Object.fromEntries(stages.map((s) => [s!.id, s!.name])) as Record<PsmStageId, string>;
   const stageGists = Object.fromEntries(stages.map((s) => [s!.id, firstSentence(s!.summary)])) as Record<PsmStageId, string>;
-  const activities = stages.flatMap((s) => s!.activities.map((a) => ({ id: a.id, name: a.name, summary: a.summary, stage: s!.id })));
+  const activities = stages.flatMap((s) =>
+    s!.activities.map((a): Activity => {
+      const skills = SKILLS.test(a.name);
+      return { id: a.id, name: a.name, summary: a.summary, stage: s!.id, skills, named: !skills && !STAGE_STEMS[s!.id].test(a.name) };
+    }),
+  );
   const specs = psm.specifications.flatMap((text, index): Spec[] => {
     const m = /^([A-Za-z]+):\s*(.+)$/s.exec(text.trim());
     const stage = m ? PSM_STAGE_IDS.find((id) => stageNames[id].toLowerCase() === m[1].toLowerCase()) : undefined;
-    return m && stage ? [{ index, stage, text: capitalise(m[2]) }] : [];
+    // A note that names one of its own stage's give-away activities ("the solution evaluation") answers itself.
+    if (!m || !stage || activities.some((a) => a.stage === stage && !a.named && m[2].toLowerCase().includes(a.name.toLowerCase()))) return [];
+    return [{ index, stage, text: capitalise(m[2]) }];
   });
   return { stageNames, stageGists, activities, specs };
 }
@@ -121,15 +148,34 @@ function base(kind: PsmKind, seed: number, difficulty: Difficulty, detail: strin
   return { id: `gen-psm-${kind}`, kk: PSM_ITEM_KK, instance: `psm:${kind}:${detail}:seed=${seed}:${difficulty}` };
 }
 
+/**
+ * "a design activity", "an analysis activity". Official names can be plural (Solution
+ * requirements, Evaluation criteria), so reasons call them an activity rather than "is part of".
+ */
+function stageActivity(bank: PsmBank, id: PsmStageId): string {
+  const stage = lower(bank.stageNames[id]);
+  return `${/^[aeiou]/.test(stage) ? 'an' : 'a'} ${stage} activity`;
+}
+
 function stageItem(bank: PsmBank, spec: PsmSpec, difficulty: Difficulty, rng: Rng): QuizItem {
   const activity = pick(rng, bank.activities);
   const stage = bank.stageNames[activity.stage];
-  const shown: TerminalBlock = spec.described ? { kind: 'markdown', text: activity.summary } : { kind: 'text', text: activity.name };
-  const reason = `${activity.name} is part of ${lower(stage)}. ${activity.summary}`;
+  // A name that contains its own stage would answer the question, so that activity is described.
+  const described = spec.described || !activity.named;
+  const shown: TerminalBlock = described ? { kind: 'markdown', text: activity.summary } : { kind: 'text', text: activity.name };
+  const gist = `${stage}: ${lower(bank.stageGists[activity.stage])}`;
+  // "Evaluation criteria is a design activity. <summary>", "This describes Solution design, a design
+  // activity. <stage gist>" or "This describes the skills underpinning the analysis stage. <stage gist>"
+  // (a skills summary lists several skills).
+  const reason = !described
+    ? `${activity.name} is ${stageActivity(bank, activity.stage)}. ${activity.summary}`
+    : activity.skills
+      ? `This describes the skills underpinning the ${lower(stage)} stage. ${gist}`
+      : `This describes ${activity.name}, ${stageActivity(bank, activity.stage)}. ${gist}`;
   return {
-    ...base('stage', spec.seed, difficulty, `${activity.id}${spec.described ? ':described' : ''}`),
+    ...base('stage', spec.seed, difficulty, `${activity.id}${described ? ':described' : ''}`),
     prompt: [
-      { kind: 'text', text: spec.described ? 'A team member is doing this:' : 'Activity:', tone: 'muted' },
+      { kind: 'text', text: described ? 'A team member is doing this:' : 'Activity:', tone: 'muted' },
       shown,
       { kind: 'text', text: 'Which stage of the problem-solving methodology is this part of?', tone: 'accent' },
       { kind: 'text', text: STAGE_HINT, tone: 'muted' },
@@ -160,22 +206,32 @@ function spread(bank: PsmBank, rng: Rng, n: number): Activity[] {
   return stages.map((stage) => pick(rng, bank.activities.filter((a) => a.stage === stage)));
 }
 
-function placed(bank: PsmBank, a: Activity): string {
-  return `${a.name} is part of ${lower(bank.stageNames[a.stage])} (stage ${stageNumber(a.stage)})`;
+/** An option's text: the activity's name, or its summary when the name gives the stage away. */
+function option(a: Activity): string {
+  return a.named ? a.name : a.summary;
+}
+
+/**
+ * "A (Testing) is part of development (stage 3)", or "B describes the skills underpinning
+ * evaluation (stage 4)". The letter is the subject, so plural names read naturally too.
+ */
+function placed(bank: PsmBank, shown: Activity[], i: number): string {
+  const a = shown[i];
+  const stage = `${lower(bank.stageNames[a.stage])} (stage ${stageNumber(a.stage)})`;
+  return a.skills ? `${LETTERS[i]} describes the skills underpinning ${stage}` : `${LETTERS[i]} (${a.name}) is part of ${stage}`;
 }
 
 function firstItem(bank: PsmBank, spec: PsmSpec, difficulty: Difficulty, rng: Rng): QuizItem {
   const pair = spread(bank, rng, 2);
   const answer = stageNumber(pair[0].stage) < stageNumber(pair[1].stage) ? 0 : 1;
-  const [early, late] = answer === 0 ? pair : [pair[1], pair[0]];
   const expected = `${LETTERS[answer]}. ${pair[answer].name}`;
-  const reason = `${placed(bank, early)}, and ${lower(placed(bank, late))}.`;
+  const reason = `${placed(bank, pair, answer)}, and ${placed(bank, pair, 1 - answer)}.`;
   return {
     ...base('first', spec.seed, difficulty, pair.map((a) => a.id).join('+')),
     chips: ['A', 'B'],
     prompt: [
       { kind: 'text', text: 'Which of these comes first in the problem-solving methodology?', tone: 'accent' },
-      { kind: 'choices', options: pair.map((a) => a.name), labels: 'letters' },
+      { kind: 'choices', options: pair.map(option), labels: 'letters', markdown: true },
     ],
     check(input) {
       const chosen = parseChoice(input, 2);
@@ -205,13 +261,13 @@ function orderItem(bank: PsmBank, spec: PsmSpec, difficulty: Difficulty, rng: Rn
   const shown = spread(bank, rng, 3);
   const order = shown.map((_, i) => i).sort((a, b) => stageNumber(shown[a].stage) - stageNumber(shown[b].stage));
   const expected = order.map((i) => LETTERS[i]).join(', ');
-  const reason = `${order.map((i) => placed(bank, shown[i])).join('; ')}.`;
+  const reason = `${order.map((i) => placed(bank, shown, i)).join('; ')}.`;
   const hint = 'Type the three letters in order, separated by spaces or commas.';
   return {
     ...base('order', spec.seed, difficulty, shown.map((a) => a.id).join('+')),
     prompt: [
       { kind: 'text', text: 'Put these activities in the order they happen in the problem-solving methodology.', tone: 'accent' },
-      { kind: 'choices', options: shown.map((a) => a.name), labels: 'letters' },
+      { kind: 'choices', options: shown.map(option), labels: 'letters', markdown: true },
       { kind: 'text', text: hint, tone: 'muted' },
     ],
     check(input) {
