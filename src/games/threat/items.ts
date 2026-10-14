@@ -1,9 +1,10 @@
 /**
  * `threat` items. Two kinds:
- * - match: a weakness in a development environment, then the control that best addresses it,
- *   chosen from lettered options (3, 4 or 5 by difficulty);
- * - e8: pick every Essential Eight strategy out of a list that mixes them with real security
- *   measures that aren't among the eight, by typing their letters.
+ * - match: a weakness in a development environment, then the U4O2-KK04 security control that
+ *   best addresses it, chosen from lettered options (3, 4 or 5 of the six by difficulty); the
+ *   feedback names the U4O2-KK03 vulnerability or risk the weakness shows, where it shows one;
+ * - e8: pick every Essential Eight strategy out of a list that mixes them with security measures
+ *   that aren't among the eight, by typing their letters.
  *
  * Each item stands alone for the daily challenge. Instances ("threat:match:leaver:seed=4:hard")
  * regenerate an item exactly through fromThreatInstance.
@@ -12,7 +13,7 @@ import type { KkId } from '../../content/schema';
 import { formatAnd, OPTION_LETTERS, parseLetters, parseOption } from '../answers';
 import { childSeed, mulberry32, pick, randInt, sample, shuffle, type Rng } from '../prng';
 import type { Difficulty, QuizItem } from '../types';
-import { ALSO_HELPS, CONTROL_LABELS, CONTROLS, ESSENTIAL_EIGHT, NOT_ESSENTIAL_EIGHT, SCENARIOS, type Control, type ThreatScenario } from './bank';
+import { CONTROL_LABELS, CONTROLS, ESSENTIAL_EIGHT, NOT_ESSENTIAL_EIGHT, RISK_LABELS, SCENARIOS, type Control, type ThreatScenario } from './bank';
 
 export const MATCH_KK: KkId[] = ['U4O2-KK04', 'U4O2-KK03'];
 export const E8_KK: KkId[] = ['U4O2-KK07'];
@@ -29,7 +30,12 @@ export const MATCH_OPTIONS: Record<Difficulty, number> = { easy: 3, normal: 4, h
 
 /** Controls that are never offered as distractors for a scenario. */
 export function arguable(s: ThreatScenario): Set<Control> {
-  return new Set<Control>([s.control, ...ALSO_HELPS[s.control], ...(s.alsoHelps ?? [])]);
+  return new Set<Control>([s.control, ...(s.alsoHelps ?? [])]);
+}
+
+/** The feedback for a match question: why the control fits, then the KK03 risk when there is one. */
+export function matchReason(s: ThreatScenario): string {
+  return s.risk ? `${s.why} From the study design's list of vulnerabilities and risks: ${RISK_LABELS[s.risk]}.` : s.why;
 }
 
 export function scenarioById(id: string): ThreatScenario {
@@ -54,6 +60,7 @@ export function matchItem(scenarioId: string, seed: number, difficulty: Difficul
   const letters = OPTION_LETTERS.slice(0, options.length);
   const expected = `${letters[answer]}. ${options[answer]}`;
   const hint = `Type a letter from A to ${letters[letters.length - 1]}.`;
+  const reason = matchReason(s);
   return {
     id: 'gen-threat-match',
     kk: MATCH_KK,
@@ -61,14 +68,14 @@ export function matchItem(scenarioId: string, seed: number, difficulty: Difficul
     chips: [...letters],
     prompt: [
       { kind: 'text', text: s.story },
-      { kind: 'text', text: 'Which control best addresses this weakness?', tone: 'accent' },
+      { kind: 'text', text: 'Which security control best addresses this weakness?', tone: 'accent' },
       { kind: 'choices', options, labels: 'letters' },
       { kind: 'text', text: hint, tone: 'muted' },
     ],
     check(input) {
       const chosen = parseOption(input, options);
       if (chosen === null) return { correct: false, expected, reason: hint, counted: false };
-      return { correct: chosen === answer, expected, reason: s.why };
+      return { correct: chosen === answer, expected, reason };
     },
   };
 }
@@ -107,7 +114,7 @@ export function e8Item(seed: number, difficulty: Difficulty): QuizItem {
   const expected = answer.map((i) => letters[i]).join(', ');
   const named = (indexes: readonly number[]) => formatAnd(indexes.map((i) => `${letters[i]} ${options[i]}`));
   const others = options.map((_, i) => i).filter((i) => !answer.includes(i));
-  const reason = `The Essential Eight strategies here are ${named(answer)}. ${named(others)} ${others.length === 1 ? 'is a useful security measure' : 'are useful security measures'}, but not among the eight.`;
+  const reason = `The Essential Eight strategies here are ${named(answer)}. ${named(others)} ${others.length === 1 ? 'is a security measure' : 'are security measures'}, but not among the eight.`;
   return {
     id: 'gen-threat-e8',
     kk: E8_KK,
@@ -119,7 +126,7 @@ export function e8Item(seed: number, difficulty: Difficulty): QuizItem {
         tone: 'accent',
       },
       { kind: 'choices', options, labels: 'letters' },
-      { kind: 'text', text: `${E8_HINT} Some options are useful security measures that aren't among the eight.`, tone: 'muted' },
+      { kind: 'text', text: `${E8_HINT} Some options are security measures that aren't among the eight.`, tone: 'muted' },
     ],
     check(input) {
       const picked = parseLetters(input, options.length);
@@ -159,7 +166,7 @@ export function fromThreatInstance(instance: string): QuizItem | null {
 export const ROUND_MATCHES = 7;
 export const ROUND_E8 = 3;
 
-/** Scenarios for n match questions, from n different controls where possible. */
+/** Scenarios for n match questions, from n different controls where possible, and never the same one twice. */
 function pickScenarios(rng: Rng, n: number): ThreatScenario[] {
   const controls = shuffle(rng, CONTROLS);
   const chosen: ThreatScenario[] = [];
@@ -172,8 +179,9 @@ function pickScenarios(rng: Rng, n: number): ThreatScenario[] {
 }
 
 /**
- * A round of `count` items: seven weaknesses to match, each needing a different control, and three
- * Essential Eight lists, shuffled so that two lists never come one after the other.
+ * A round of `count` items: seven weaknesses to match, covering all six controls (one control comes
+ * up twice, with a different weakness), and three Essential Eight lists, shuffled so that two lists
+ * never come one after the other.
  */
 export function planThreatRound(seed: number, _difficulty: Difficulty, count = 10): ThreatSpec[] {
   const rng = mulberry32(childSeed(seed, 'plan'));

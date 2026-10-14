@@ -1,11 +1,14 @@
 /**
- * threat: every scenario in the fixed bank has exactly one correct control among its options, and
- * no option is a control that could be argued for it; every Essential Eight list over 500 seeds at
- * each difficulty accepts exactly the eight's letters and rejects a missing or an extra one.
+ * threat: the controls are the six U4O2-KK04 controls and the scenarios cover all ten U4O2-KK03
+ * vulnerabilities and risks; every scenario in the fixed bank has exactly one correct control among
+ * its options, and no option is a control that could be argued for it; every Essential Eight list
+ * over 500 seeds at each difficulty accepts exactly the eight's letters and rejects a missing or an
+ * extra one; the man page names the controls, risks, principles, strategies and the eight as the
+ * study design does.
  */
 import { describe, expect, it } from 'vitest';
 import type { Difficulty } from '../types';
-import { ALSO_HELPS, CONTROL_LABELS, CONTROLS, ESSENTIAL_EIGHT, NOT_ESSENTIAL_EIGHT, SCENARIOS } from './bank';
+import { CONTROL_LABELS, CONTROLS, ESSENTIAL_EIGHT, NOT_ESSENTIAL_EIGHT, RISK_LABELS, RISKS, SCENARIOS } from './bank';
 import game from './index';
 import {
   arguable,
@@ -17,9 +20,11 @@ import {
   MATCH_OPTIONS,
   matchControls,
   matchItem,
+  matchReason,
   planThreatRound,
   threatItem,
 } from './items';
+import { THREAT_MAN } from './meta';
 
 const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 11);
 const LEVELS: Difficulty[] = ['easy', 'normal', 'hard'];
@@ -27,29 +32,99 @@ const LETTERS = 'ABCDEFGH'.split('');
 const ctx = { playerName: '', now: () => 1_000, content: null, mastery: () => null, today: '2026-10-01', daily: null };
 
 describe('threat bank', () => {
-  it('has three distinct scenarios for every control, each with enough clear distractors', () => {
+  it('offers exactly the six U4O2-KK04 security controls, by their study design names', () => {
+    expect(CONTROLS.map((c) => CONTROL_LABELS[c])).toEqual([
+      'Version control and code repositories',
+      'Robust identity and access management',
+      'Encryption',
+      'Code review',
+      'Regular updates and patches to software',
+      'Separated development, testing and production environments',
+    ]);
+    // Essential Eight strategies, U4O2-KK10 strategies and other measures are never offered as controls.
+    for (const label of Object.values(CONTROL_LABELS)) expect(label).not.toMatch(/multi-factor|backup|physical|secrets|training|onboarding|induction|risk management/i);
+  });
+
+  it('names the ten U4O2-KK03 vulnerabilities and risks, and shows each in at least one scenario', () => {
+    expect(RISKS.map((r) => RISK_LABELS[r])).toEqual([
+      'use of application programming interfaces (APIs)',
+      'malware',
+      'unpatched software',
+      'poor identity and access management practices',
+      'man-in-the-middle attacks',
+      'insider threats',
+      'cyber security incidents',
+      'risks present from software acquired by third parties',
+      'ineffective code review practices',
+      'combined development, testing and production environments',
+    ]);
+    for (const r of RISKS) expect(SCENARIOS.filter((s) => s.risk === r).length, r).toBeGreaterThan(0);
+  });
+
+  it('has four distinct scenarios for every control, each with enough clear distractors', () => {
     expect(new Set(SCENARIOS.map((s) => s.id)).size).toBe(SCENARIOS.length);
     expect(new Set(SCENARIOS.map((s) => s.story)).size).toBe(SCENARIOS.length);
-    for (const c of CONTROLS) {
-      expect(SCENARIOS.filter((s) => s.control === c)).toHaveLength(3);
-      expect(ALSO_HELPS[c]).not.toContain(c);
-    }
+    for (const c of CONTROLS) expect(SCENARIOS.filter((s) => s.control === c)).toHaveLength(4);
     for (const s of SCENARIOS) {
+      expect(s.alsoHelps ?? [], s.id).not.toContain(s.control);
+      expect((s.alsoHelps ?? []).length, s.id).toBeLessThanOrEqual(1);
       const pool = CONTROLS.filter((c) => !arguable(s).has(c));
       expect(pool.length, s.id).toBeGreaterThanOrEqual(MATCH_OPTIONS.hard - 1);
       expect(s.story, s.id).toMatch(/^[A-Z].*[.]$/);
       expect(s.why, s.id).toMatch(/^[A-Z].*[.]$/);
       expect(`${s.story} ${s.why}`).not.toMatch(/’/);
+      expect(matchReason(s), s.id).toBe(s.risk ? `${s.why} From the study design's list of vulnerabilities and risks: ${RISK_LABELS[s.risk]}.` : s.why);
     }
     expect(new Set(Object.values(CONTROL_LABELS)).size).toBe(CONTROLS.length);
   });
 
-  it('keeps the Essential Eight lists apart, with no distractor that is another name for one of the eight', () => {
-    expect(new Set(ESSENTIAL_EIGHT).size).toBe(8);
+  it('never calls version control a backup, or a control a strategy', () => {
+    for (const s of SCENARIOS) {
+      if (s.control === 'vcs') expect(s.why, s.id).not.toMatch(/\b(is|as) a backup|backs? up/i);
+      expect(`${s.story} ${s.why}`, s.id).not.toMatch(/\bstrateg/i);
+    }
+  });
+
+  it('answers a password-only login with identity and access management, and never offers it against an insider', () => {
+    const phished = SCENARIOS.find((s) => s.id === 'phished')!;
+    expect(phished.control).toBe('iam');
+    expect(phished.why).toMatch(/multi-factor authentication/);
+    // Restricting what an insider can reach is arguable for any insider threat, so it is never a distractor there.
+    for (const s of SCENARIOS.filter((x) => x.risk === 'insider')) expect(arguable(s).has('iam'), s.id).toBe(true);
+  });
+
+  it('lists the eight strategies as the outcome-specific requirements name them, with no distractor that is another name for one', () => {
+    expect([...ESSENTIAL_EIGHT]).toEqual([
+      'Patch applications',
+      'Patch operating systems',
+      'Multi-factor authentication',
+      'Restrict administrative privileges',
+      'Application control',
+      'Restrict Microsoft Office macros',
+      'User application hardening',
+      'Regular backups',
+    ]);
+    expect(new Set(NOT_ESSENTIAL_EIGHT).size).toBe(NOT_ESSENTIAL_EIGHT.length);
     for (const d of NOT_ESSENTIAL_EIGHT) {
       expect((ESSENTIAL_EIGHT as readonly string[]).includes(d)).toBe(false);
-      expect(d, d).not.toMatch(/patch|backup|multi-factor|two-factor|application|macro|admin|privilege|harden|whitelist/i);
+      expect(d, d).not.toMatch(/patch|update|backup|multi-factor|two-factor|authentication|identity|access|application|macro|admin|privilege|harden|whitelist/i);
     }
+    // The study design's controls and strategies are among the distractors, so the lists test KK07 against KK04 and KK10.
+    expect(NOT_ESSENTIAL_EIGHT).toEqual(expect.arrayContaining(['Encryption', 'Code review', 'Version control and code repositories', 'Developer training focused on secure development']));
+  });
+});
+
+describe('threat man page', () => {
+  it('names the six controls, the ten risks, the three principles, the KK10 strategies and the eight, in the study design words', () => {
+    const man = THREAT_MAN.toLowerCase();
+    for (const label of [...Object.values(CONTROL_LABELS), ...Object.values(RISK_LABELS), ...ESSENTIAL_EIGHT]) expect(man, label).toContain(label.toLowerCase());
+    for (const principle of ['defining security requirements', 'identifying and mitigating threats', 'confirming threats have been mitigated']) expect(man).toContain(principle);
+    for (const strategy of ['developer training focused on secure development', 'onboarding', 'induction', 'risk management plans']) expect(man).toContain(strategy);
+    expect(THREAT_MAN).toMatch(/Multi-factor authentication and backups aren't in the list of controls/);
+    expect(THREAT_MAN).toMatch(/it isn't a backup/);
+    expect(THREAT_MAN).toMatch(/Controls aren't strategies/);
+    // No reconstructed threat modelling steps, named methods or abbreviated Act tags.
+    expect(THREAT_MAN).not.toMatch(/five[- ]step|\bsteps?\b|stride|application diagram|\(Cth\)|useful security measure/i);
   });
 });
 
@@ -68,6 +143,7 @@ describe('threat match items', () => {
         expect(item.check(LETTERS[controls.length]).counted).toBe(false);
         expect(item.check(item.check('?').expected).correct).toBe(true);
         expect(item.check(CONTROL_LABELS[s.control]).correct).toBe(true);
+        expect(item.check(LETTERS[controls.indexOf(s.control)]).reason).toBe(matchReason(s));
         expect(item.chips).toEqual(letters);
         expect(fromThreatInstance(item.instance!)?.prompt).toEqual(item.prompt);
       }
@@ -114,14 +190,15 @@ describe('threat Essential Eight items', () => {
 });
 
 describe('threat rounds', () => {
-  it('plans seven weaknesses with different controls and three lists that never sit together', () => {
+  it('plans seven different weaknesses covering all six controls, and three lists that never sit together', () => {
     for (const level of LEVELS) {
       for (const seed of SEEDS.slice(0, 200)) {
         const plan = planThreatRound(seed, level);
         expect(plan).toHaveLength(10);
         const matches = plan.flatMap((p) => (p.kind === 'match' ? [SCENARIOS.find((s) => s.id === p.scenario)!] : []));
         expect(matches).toHaveLength(7);
-        expect(new Set(matches.map((s) => s.control)).size).toBe(7);
+        expect(new Set(matches.map((s) => s.id)).size).toBe(7);
+        expect(new Set(matches.map((s) => s.control)).size).toBe(CONTROLS.length);
         expect(plan[0].kind).toBe('match');
         plan.forEach((p, i) => {
           if (p.kind === 'e8' && i > 0) expect(plan[i - 1].kind).toBe('match');

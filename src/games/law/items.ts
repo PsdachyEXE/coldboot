@@ -6,6 +6,10 @@
  *
  * Each item stands alone for the daily challenge. Instances ("law:why:state-school:seed=3:normal")
  * regenerate an item exactly through fromLawInstance.
+ *
+ * Items count towards U4O2-KK07 and U3O2-KK10, which name the Copyright, Privacy and PDP Acts.
+ * Neither names the Health Records Act, which comes from the Terms ("Legal requirements"), so a
+ * scenario it answers counts towards TERMS instead (lawKk).
  */
 import type { KkId } from '../../content/schema';
 import type { TerminalBlock } from '../../terminal/blocks';
@@ -16,6 +20,11 @@ import type { Difficulty, QuizItem } from '../types';
 import { ACT_LABELS, ACTS, REASON_KEYS, REASONS, SCENARIOS, type Act, type LawScenario, type Level, type ReasonKey } from './bank';
 
 export const LAW_KK: KkId[] = ['U4O2-KK07', 'U3O2-KK10'];
+
+/** The KKs a scenario's items count towards: TERMS when the Health Records Act answers it. */
+export function lawKk(s: LawScenario): KkId[] {
+  return s.act === 'health' ? ['TERMS'] : [...LAW_KK];
+}
 
 export const LAW_KINDS = ['act', 'why'] as const;
 export type LawKind = (typeof LAW_KINDS)[number];
@@ -42,18 +51,18 @@ export function scenarioById(id: string): LawScenario {
 export const ACT_OPTIONS: readonly string[] = ACTS.map((a) => ACT_LABELS[a]);
 
 const ACT_NAMES: readonly { value: Act; accept: readonly string[] }[] = [
-  { value: 'privacy', accept: ['privacy act', 'privacy', 'commonwealth privacy act', 'federal privacy act', 'cth privacy act'] },
+  { value: 'privacy', accept: ['privacy act', 'privacy', 'commonwealth privacy act', 'federal privacy act', 'cwlth privacy act', 'cth privacy act'] },
   { value: 'pdp', accept: ['privacy and data protection act', 'privacy and data protection', 'pdp act', 'pdp', 'pdpa', 'data protection act'] },
   { value: 'health', accept: ['health records act', 'health records', 'hra', 'hr act'] },
   { value: 'copyright', accept: ['copyright act', 'copyright'] },
 ];
 
-/** An Act by letter, by full name, or by a short name: "privacy act", "PDP", "Health Records Act 2001". */
+/** An Act by letter, by full name (with or without its tag), or by a short name: "privacy act", "PDP", "Health Records Act 2001". */
 export function parseAct(input: string): Act | null {
   const byOption = parseOption(input, ACT_OPTIONS);
   if (byOption !== null) return ACTS[byOption];
   const s = normaliseAnswer(input)
-    .replace(/\((cth|vic)\)/g, ' ')
+    .replace(/\((cwlth|cth|vic)\)/g, ' ')
     .replace(/\b(19|20)\d\d\b/g, ' ')
     .replace(/^the\s+/, '')
     .replace(/\s+/g, ' ')
@@ -73,7 +82,7 @@ export function actItem(scenarioId: string, difficulty: Difficulty): QuizItem {
   const expected = actLine(s.act);
   return {
     id: 'gen-law-act',
-    kk: LAW_KK,
+    kk: lawKk(s),
     instance: `law:act:${s.id}:${difficulty}`,
     chips: ACT_CHIPS,
     prompt: [
@@ -123,7 +132,7 @@ export function whyItem(scenarioId: string, seed: number, difficulty: Difficulty
   const context: TerminalBlock = followUp ? { kind: 'text', text: `Same scenario: ${s.story}`, tone: 'muted' } : { kind: 'text', text: s.story };
   return {
     id: 'gen-law-why',
-    kk: LAW_KK,
+    kk: lawKk(s),
     instance: `law:${followUp ? 'follow-up' : 'why'}:${s.id}:seed=${seed}:${difficulty}`,
     chips: [...letters],
     prompt: [

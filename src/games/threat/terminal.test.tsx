@@ -13,20 +13,25 @@ import { useTerminalSession } from '../../terminal/session';
 import { TerminalView } from '../../terminal/TerminalView';
 import { printed, resetStores } from '../../terminal/testing';
 import { fromLawInstance } from '../law/items';
+import { LAW_TITLE } from '../law/meta';
 import { fromNamingInstance } from '../naming/items';
+import { NAMING_TITLE } from '../naming/meta';
 import { fromOopInstance } from '../oop/items';
+import { OOP_TITLE } from '../oop/meta';
 import { fromTypesInstance } from '../types-game/items';
+import { TYPES_TITLE } from '../types-game/meta';
 import type { QuizItem } from '../types';
 import { fromThreatInstance } from './items';
 
 const NOW = new Date('2026-10-01T10:00:00+10:00').getTime();
 
+// The other games' titles come from their own meta files, so a renamed game doesn't break this test.
 const GAMES: { id: string; title: string; regenerate: (instance: string) => QuizItem | null; ids: RegExp }[] = [
   { id: 'threat', title: 'Security weaknesses and controls', regenerate: fromThreatInstance, ids: /^gen-threat-(match|e8)$/ },
-  { id: 'law', title: 'Privacy, health records and copyright law', regenerate: fromLawInstance, ids: /^gen-law-(act|why)$/ },
-  { id: 'naming', title: 'Naming conventions', regenerate: fromNamingInstance, ids: /^gen-naming-(identify|rewrite)$/ },
-  { id: 'types', title: 'Data types, structures and sources', regenerate: fromTypesInstance, ids: /^gen-types-(type|structure|source)$/ },
-  { id: 'oop', title: 'Classes, objects and access', regenerate: fromOopInstance, ids: /^gen-oop-(principle|object|access)$/ },
+  { id: 'law', title: LAW_TITLE, regenerate: fromLawInstance, ids: /^gen-law-(act|why)$/ },
+  { id: 'naming', title: NAMING_TITLE, regenerate: fromNamingInstance, ids: /^gen-naming-(identify|rewrite)$/ },
+  { id: 'types', title: TYPES_TITLE, regenerate: fromTypesInstance, ids: /^gen-types-(type|structure|source)$/ },
+  { id: 'oop', title: OOP_TITLE, regenerate: fromOopInstance, ids: /^gen-oop-(principle|object|access)$/ },
 ];
 
 beforeEach(() => {

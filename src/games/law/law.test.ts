@@ -2,11 +2,12 @@
  * law: every scenario in the fixed bank has exactly one Act that applies, worked out a second way
  * from its recorded facts and the question's framing; every "why" question offers exactly one true
  * reason for that Act and only reasons that are false for the scenario, over 500 seeds at each
- * difficulty.
+ * difficulty. The Acts, principles and KK tags follow U3O2-KK10, U4O2-KK07 and the outcome-specific
+ * requirements (section 9).
  */
 import { describe, expect, it } from 'vitest';
 import type { Difficulty } from '../types';
-import { ACT_LABELS, ACTS, REASONS, SCENARIOS, type Act, type LawScenario } from './bank';
+import { ACT_LABELS, ACTS, PRINCIPLES, REASONS, SCENARIOS, type Act, type LawScenario, type Unit } from './bank';
 import game from './index';
 import {
   ACT_CHIPS,
@@ -14,6 +15,7 @@ import {
   falseReasons,
   fromLawInstance,
   generateLawItem,
+  lawKk,
   parseAct,
   planLawRound,
   scenariosFor,
@@ -21,6 +23,7 @@ import {
   whyItem,
   whyReasons,
 } from './items';
+import { LAW_GAME_KK, LAW_MAN } from './meta';
 
 const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 13);
 const LEVELS: Difficulty[] = ['easy', 'normal', 'hard'];
@@ -90,6 +93,105 @@ describe('law bank', () => {
   });
 });
 
+describe('law against the study design', () => {
+  it('names the Acts as VCAA does', () => {
+    expect(ACT_LABELS).toEqual({
+      privacy: 'Privacy Act 1988 (Cwlth)',
+      pdp: 'Privacy and Data Protection Act 2014',
+      health: 'Health Records Act 2001 (Vic)',
+      copyright: 'Copyright Act 1968 (Cwlth)',
+    });
+    const text = [LAW_MAN, ...SCENARIOS.flatMap((s) => [s.story, s.ask, s.why]), ...Object.values(REASONS).map((r) => r.text)].join('\n');
+    expect(text).not.toMatch(/\(Cth\)|Data Protection Act 2014 \(Vic\)/);
+    // Every Act the man page names carries its tag the first time.
+    for (const act of ACTS) expect(LAW_MAN).toContain(`  ${ACT_LABELS[act]}: `);
+  });
+
+  it('lists the principles each unit names, with their titles', () => {
+    const ids = (act: 'privacy' | 'pdp', unit: Unit) => PRINCIPLES[act].filter((p) => p.units.includes(unit)).map((p) => p.id);
+    expect(ids('privacy', 3)).toEqual(['APP 1', 'APP 3', 'APP 6', 'APP 8', 'APP 9', 'APP 11']);
+    expect(ids('privacy', 4)).toEqual(['APP 1', 'APP 6', 'APP 8', 'APP 9', 'APP 11']);
+    expect(ids('pdp', 3)).toEqual(['IPP 1', 'IPP 2', 'IPP 4', 'IPP 5', 'IPP 7', 'IPP 9', 'IPP 10']);
+    expect(ids('pdp', 4)).toEqual(['IPP 1', 'IPP 2', 'IPP 4', 'IPP 5', 'IPP 9']);
+    // The titles exactly as the outcome-specific requirements (section 9) give them.
+    expect(PRINCIPLES.privacy.map((p) => `${p.id}: ${p.title}`)).toEqual([
+      'APP 1: Open and transparent management of personal information',
+      'APP 3: Collection of solicited personal information',
+      'APP 6: Use or disclosure of personal information',
+      'APP 8: Cross-border disclosure of personal information',
+      'APP 9: Adoption, use or disclosure of government related identifiers',
+      'APP 11: Security of personal information',
+    ]);
+    expect(PRINCIPLES.pdp.map((p) => `${p.id}: ${p.title}`)).toEqual([
+      'IPP 1: Collection',
+      'IPP 2: Use and disclosure',
+      'IPP 4: Data security',
+      'IPP 5: Openness',
+      'IPP 7: Unique identifiers',
+      'IPP 9: Transborder data flows',
+      'IPP 10: Sensitive information',
+    ]);
+    // The man page gives every title, and marks the ones only Unit 3 lists.
+    for (const p of [...PRINCIPLES.privacy, ...PRINCIPLES.pdp]) {
+      expect(LAW_MAN).toContain(`\n  ${p.id.split(' ')[1]} ${p.title}${p.units.includes(4) ? '' : ' (Unit 3 only)'}\n`);
+    }
+  });
+
+  it('names one principle that both units list in the feedback for every privacy scenario', () => {
+    for (const s of SCENARIOS) {
+      const named = [...s.why.matchAll(/\b(APP|IPP) (\d+)\b/g)].map((m) => m[0]);
+      if (s.act === 'privacy' || s.act === 'pdp') {
+        const p = PRINCIPLES[s.act].find((x) => x.id === s.principle);
+        expect(p, s.id).toBeDefined();
+        expect(p!.units, s.id).toEqual([3, 4]);
+        expect(named, s.id).toEqual([s.principle]);
+        expect(s.why, s.id).toContain(`${p!.id} (${p!.title})`);
+      } else {
+        expect(s.principle, s.id).toBeUndefined();
+        expect(named, s.id).toEqual([]);
+      }
+      // APP 9 binds private organisations, not agencies.
+      if (s.principle === 'APP 9') expect(s.facts.sector, s.id).toBe('private');
+    }
+    // Between them, the scenarios' feedback covers every principle both units list.
+    const used = new Set(SCENARIOS.map((s) => s.principle).filter(Boolean));
+    for (const p of [...PRINCIPLES.privacy, ...PRINCIPLES.pdp].filter((x) => x.units.includes(4))) expect(used.has(p.id), p.id).toBe(true);
+  });
+
+  it('counts Health Records Act questions towards TERMS and the rest towards both KKs', () => {
+    for (const s of SCENARIOS) {
+      const expected = s.act === 'health' ? ['TERMS'] : ['U4O2-KK07', 'U3O2-KK10'];
+      expect(lawKk(s), s.id).toEqual(expected);
+      expect(actItem(s.id, 'normal').kk, s.id).toEqual(expected);
+      expect(whyItem(s.id, 1, 'normal').kk, s.id).toEqual(expected);
+      expect(whyItem(s.id, 1, 'normal', true).kk, s.id).toEqual(expected);
+    }
+    expect(LAW_GAME_KK).toEqual(['U4O2-KK07', 'U3O2-KK10', 'TERMS']);
+    // The man page never says a KK lists the Health Records Act.
+    expect(LAW_MAN).toMatch(/Neither list names the Health Records Act/);
+  });
+
+  it('treats changing licensed code without permission as a copyright question', () => {
+    const s = SCENARIOS.find((x) => x.id === 'edited-plugin')!;
+    expect(s.act).toBe('copyright');
+    expect(s.story).toMatch(/edits the plug-in's code without asking its author/);
+    expect(REASONS.reuse.text).toMatch(/copied, changed or reused/);
+  });
+
+  it('treats an insecure backup as a data security question, not a copyright one', () => {
+    // The 2025 exam's most-chosen wrong answer for the copyright breach was a careless backup.
+    const s = SCENARIOS.find((x) => x.id === 'council-backup')!;
+    expect(s.act).toBe('pdp');
+    expect(s.principle).toBe('IPP 4');
+    expect(s.story).toMatch(/backup/);
+    expect(s.why).toMatch(/not a copyright breach/);
+    expect(trueReason(s)).toBe('vic-public');
+    // The copyright reason is false here, so a why question may offer it as a wrong answer.
+    expect(falseReasons(s)).toContain('reuse');
+    expect(actItem(s.id, 'normal').check('D').correct).toBe(false);
+  });
+});
+
 describe('law items', () => {
   it.each(LEVELS)('which-Act items accept exactly one Act (%s)', (level) => {
     for (const s of SCENARIOS) {
@@ -129,6 +231,11 @@ describe('law items', () => {
     expect(parseAct('PDP Act')).toBe('pdp');
     expect(parseAct('copyright')).toBe('copyright');
     expect(parseAct('C. Health Records Act 2001 (Vic)')).toBe('health');
+    expect(parseAct('Privacy Act 1988 (Cwlth)')).toBe('privacy');
+    expect(parseAct('Privacy Act 1988 (Cth)')).toBe('privacy');
+    expect(parseAct('Copyright Act 1968 (Cwlth)')).toBe('copyright');
+    expect(parseAct('Privacy and Data Protection Act 2014')).toBe('pdp');
+    expect(parseAct('Privacy and Data Protection Act 2014 (Vic)')).toBe('pdp');
     expect(parseAct('spam act')).toBeNull();
   });
 
@@ -189,6 +296,11 @@ describe('law rounds', () => {
     }
     const summary = session.summary();
     expect(summary).toMatchObject({ gameId: 'law', score: 10, total: 10 });
-    expect(summary.perKk['U4O2-KK07']).toEqual({ correct: 10, total: 10 });
+    // Health Records Act questions count towards TERMS; every other question towards both KKs.
+    const kk07 = summary.perKk['U4O2-KK07'] ?? { correct: 0, total: 0 };
+    const terms = summary.perKk.TERMS ?? { correct: 0, total: 0 };
+    expect(kk07.correct).toBe(kk07.total);
+    expect(kk07.total + terms.total).toBe(10);
+    expect(summary.perKk['U3O2-KK10'] ?? { correct: 0, total: 0 }).toEqual(kk07);
   });
 });
