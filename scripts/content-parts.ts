@@ -9,6 +9,7 @@
  *   { "kind": "items", "kks": ["U3O1-KK01", ...], "cards": [...], "mcq": [...], "short": [...] }
  *   { "kind": "terms", "glossary": [{ "term", "aliases"?, "status" }], "cards": [...] }
  *   { "kind": "psm", "psm": { stages, specifications, cards, mcq, short } }
+ *   { "kind": "psm", "psm": { cards?, mcq?, short? } }   (growth: new PSM items only)
  *   { "kind": "case-study", "caseStudy": { id, title, insert, figures, questions, totalMarks } }
  *
  * `check` runs the full content checker over the repo's content plus this part, and reports
@@ -24,7 +25,7 @@ import { readContentDir } from './readContent';
 
 type ItemsPart = { kind: 'items'; kks: string[]; cards?: Card[]; mcq?: Mcq[]; short?: ShortAnswer[] };
 type TermsPart = { kind: 'terms'; glossary: GlossaryEntry[]; cards: Card[] };
-type PsmPart = { kind: 'psm'; psm: PsmFile };
+type PsmPart = { kind: 'psm'; psm: PsmFile | Partial<Pick<PsmFile, 'cards' | 'mcq' | 'short'>> };
 type CasePart = { kind: 'case-study'; caseStudy: CaseStudy };
 type Part = ItemsPart | TermsPart | PsmPart | CasePart;
 
@@ -63,7 +64,13 @@ function addPart(raw: RawContent, part: Part): void {
     const sd = raw.studyDesign as { glossary?: GlossaryEntry[] };
     raw.studyDesign = { ...sd, glossary: [...(sd.glossary ?? []), ...part.glossary] };
   } else if (part.kind === 'psm') {
-    raw.psm = part.psm;
+    // A part with stages is a whole PSM file; one without adds its items to the current file.
+    const current = raw.psm as PsmFile | undefined;
+    if ('stages' in part.psm || !current) raw.psm = part.psm;
+    else {
+      const growth = part.psm;
+      raw.psm = { ...current, cards: [...current.cards, ...(growth.cards ?? [])], mcq: [...current.mcq, ...(growth.mcq ?? [])], short: [...current.short, ...(growth.short ?? [])] };
+    }
   } else {
     raw.caseStudies = [...raw.caseStudies.filter((c) => !c.file.endsWith(`/${part.caseStudy.id}.json`)), { file: `content/case-studies/${part.caseStudy.id}.json`, data: part.caseStudy }];
   }
@@ -73,7 +80,7 @@ function partIds(part: Part): Set<string> {
   const ids = new Set<string>();
   if (part.kind === 'items') [...(part.cards ?? []), ...(part.mcq ?? []), ...(part.short ?? [])].forEach((i) => ids.add(i.id));
   if (part.kind === 'terms') part.cards.forEach((c) => ids.add(c.id));
-  if (part.kind === 'psm') [...part.psm.cards, ...part.psm.mcq, ...part.psm.short].forEach((i) => ids.add(i.id));
+  if (part.kind === 'psm') [...(part.psm.cards ?? []), ...(part.psm.mcq ?? []), ...(part.psm.short ?? [])].forEach((i) => ids.add(i.id));
   if (part.kind === 'case-study') {
     ids.add(part.caseStudy.id);
     part.caseStudy.questions.forEach((q) => ids.add(q.id));
@@ -205,7 +212,8 @@ function merge(dir: string, outRoot: string, append: boolean): void {
           for (const item of part.psm[key] ?? []) claim(item.id);
           (psm[key] as unknown[]).push(...(part.psm[key] ?? []));
         }
-      } else psm = part.psm;
+      } else if ('stages' in part.psm) psm = part.psm;
+      else throw new Error('a PSM growth part (no stages) needs an existing psm.json and --append');
       psmTouched = true;
     } else {
       if (append && existsSync(resolve(content, 'case-studies', `${part.caseStudy.id}.json`))) throw new Error(`case study ${part.caseStudy.id} already exists`);
