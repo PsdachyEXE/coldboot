@@ -131,7 +131,7 @@ export const ContextDiagramSchema = z
     ...FigureBase,
     kind: z.literal('context'),
     ...Canvas,
-    /** The system is a single process. Flows refer to it by the id "system". */
+    /** The system, drawn as one circle holding its name. Flows refer to it by the id "system". */
     system: z.object({ label: Text, x: Coord, y: Coord, r: z.number().positive().optional() }).strict(),
     entities: z.array(BoxNode).min(1),
     flows: z.array(FlowSchema).min(1),
@@ -140,17 +140,19 @@ export const ContextDiagramSchema = z
   .superRefine((fig, ctx) => {
     const ids = fig.entities.map((e) => e.id);
     uniqueIds(ids, ctx, 'entities');
-    if (ids.includes('system')) ctx.addIssue({ code: 'custom', message: 'The id "system" is reserved for the system process', path: ['entities'] });
+    if (ids.includes('system')) ctx.addIssue({ code: 'custom', message: 'The id "system" is reserved for the system', path: ['entities'] });
     flowEndpoints(fig.flows, new Set([...ids, 'system']), ctx);
   });
 
+/**
+ * A DFD node. Processes and data stores are known by name alone, as in VCAA's diagrams, so there
+ * is no process number or store id (D1, D2): the strict object rejects a `number`.
+ */
 export const DfdNodeSchema = z
   .object({
     id: z.string(),
     type: z.enum(['entity', 'process', 'store']),
     label: Text,
-    /** Process number (e.g. "1", "2.1") or data store id (e.g. "D1"). */
-    number: z.string().optional(),
     x: Coord,
     y: Coord,
     w: z.number().positive().optional(),
@@ -164,7 +166,11 @@ export const DfdSchema = z
     ...FigureBase,
     kind: z.literal('dfd'),
     ...Canvas,
-    level: z.union([z.literal(0), z.literal(1), z.literal(2)]).optional(),
+    /**
+     * The study design's DFD is Level 1. Its Level 0 is the context diagram, a figure kind of its
+     * own, and it names no lower levels.
+     */
+    level: z.literal(1).optional(),
     nodes: z.array(DfdNodeSchema).min(1),
     flows: z.array(FlowSchema),
   })
@@ -186,9 +192,10 @@ export const UseCaseDiagramSchema = z
       .array(z.object({ id: z.string(), label: Text, x: Coord, y: Coord, rx: z.number().positive().optional(), ry: z.number().positive().optional() }).strict())
       .min(1),
     /**
-     * association: actor to use case. includes/extends: use case to use case, drawn dashed with
-     * <<includes>> or <<extends>>. An association between two actors is a convention error; it
-     * validates only so a figure can teach that error (the usecase game), as unlabelled DFD flows do.
+     * association: actor to use case, a plain line. includes/extends: use case to use case, a
+     * dashed line with a filled arrowhead at `to`, labelled <<includes>> or <<extends>>. An
+     * association between two actors is a convention error; it validates only so a figure can teach
+     * that error (the usecase game), as an empty flow label does.
      */
     links: z
       .array(
@@ -258,12 +265,17 @@ export const GanttSchema = z
     if (hasCycle(fig.tasks)) ctx.addIssue({ code: 'custom', message: 'Task dependencies form a cycle', path: ['tasks'] });
   });
 
+/**
+ * An object description in VCAA's layout: the name, the properties/attributes (each written
+ * `name (type)`, the data type optional) and the methods, with any parameters in their brackets.
+ * `description` is an optional note shown under a member.
+ */
 export const ObjectDescriptionSchema = z
   .object({
     ...FigureBase,
     kind: z.literal('object'),
     name: Text,
-    properties: z.array(z.object({ name: Text, type: Text, description: Text.optional() }).strict()),
+    properties: z.array(z.object({ name: Text, type: Text.optional(), description: Text.optional() }).strict()),
     methods: z.array(z.object({ name: Text, description: Text.optional() }).strict()),
   })
   .strict();

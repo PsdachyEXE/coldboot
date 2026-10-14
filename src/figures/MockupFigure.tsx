@@ -1,5 +1,5 @@
 /**
- * Mock-up wireframes: windows, headings, labels, text boxes, buttons, checkboxes, radio buttons,
+ * Mock-up wireframes: windows, headings, labels, text boxes, buttons, check boxes, radio buttons,
  * drop-down lists, list boxes, image placeholders and dividers, each drawn from its box (x, y is
  * the centre). Notes become numbered callouts on the drawing, listed in order below it.
  */

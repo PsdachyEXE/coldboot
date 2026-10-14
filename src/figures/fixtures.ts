@@ -31,9 +31,8 @@ export const contextFixture: ContextDiagram = {
 /**
  * The Level 1 DFD of the system in `contextFixture`, consistent with it: the same entities, and the
  * same flows to and from them. It keeps every VCAA rule (every process and store has an input and
- * an output, every flow joins a process, no flows cross), and its nodes carry no `number`. The
- * store sits between the processes above and below it, so its flows meet its lines rather than its
- * open ends, as in VCAA's diagrams.
+ * an output, every flow joins a process, no flows cross). The store sits between the processes
+ * above and below it, so its flows meet its lines rather than its open ends, as in VCAA's diagrams.
  */
 export const dfdFixture: Dfd = {
   id: 'fx-dfd',
@@ -67,29 +66,38 @@ export const dfdFixture: Dfd = {
   ],
 };
 
+/**
+ * Each actor is a role, a kind of person who uses the system; the payment gateway, an external
+ * entity in the DFD, is not drawn as one. <<includes>> points from the base use case to the
+ * included one (every booking takes a payment); <<extends>> from the extending use case to the
+ * base (a discount applies to some bookings only). As in the 2025 examination's diagram, the
+ * included and extending use cases have no actor of their own.
+ */
 export const useCaseFixture: UseCaseDiagram = {
   id: 'fx-usecase',
   kind: 'usecase',
   width: 760,
   height: 440,
-  system: { label: 'Kayak hire system', x: 400, y: 220, w: 420, h: 400 },
+  system: { label: 'Kayak hire system', x: 410, y: 220, w: 440, h: 400 },
   actors: [
     { id: 'customer', label: 'Customer', x: 72, y: 120 },
     { id: 'staff', label: 'Hire staff', x: 72, y: 330 },
-    { id: 'gateway', label: 'Payment gateway', x: 690, y: 210 },
+    { id: 'manager', label: 'Manager', x: 690, y: 100 },
   ],
   useCases: [
     { id: 'book', label: 'Make booking', x: 330, y: 100 },
+    { id: 'report', label: 'View weekly report', x: 524, y: 100, rx: 76 },
     { id: 'pay', label: 'Take payment', x: 470, y: 210 },
     { id: 'discount', label: 'Apply member discount', x: 330, y: 300, rx: 96 },
     { id: 'return', label: 'Record kayak return', x: 400, y: 378 },
   ],
   links: [
     { from: 'customer', to: 'book', type: 'association' },
-    { from: 'book', to: 'pay', type: 'includes' },
-    { from: 'discount', to: 'book', type: 'extends' },
+    // Labels beside their lines, as VCAA sets them.
+    { from: 'book', to: 'pay', type: 'includes', labelAt: { x: 462, y: 150 } },
+    { from: 'discount', to: 'book', type: 'extends', labelAt: { x: 282, y: 200 } },
     { from: 'staff', to: 'return', type: 'association' },
-    { from: 'gateway', to: 'pay', type: 'association' },
+    { from: 'manager', to: 'report', type: 'association' },
   ],
 };
 
@@ -110,18 +118,23 @@ export const ganttFixture: Gantt = {
   ],
 };
 
+/**
+ * Written as VCAA writes one: data types in the study design's names (lower case but for Boolean),
+ * and a method's parameters inside its brackets.
+ */
 export const objectFixture: ObjectDescription = {
   id: 'fx-object',
   kind: 'object',
   name: 'Booking',
   properties: [
-    { name: 'bookingId', type: 'Integer' },
-    { name: 'customerName', type: 'String' },
-    { name: 'kayakCount', type: 'Integer' },
-    { name: 'deposit', type: 'Floating point' },
+    { name: 'bookingId', type: 'integer' },
+    { name: 'customerName', type: 'string' },
+    { name: 'hireDate', type: 'date/time' },
+    { name: 'kayakCount', type: 'integer' },
+    { name: 'deposit', type: 'floating point' },
     { name: 'isPaid', type: 'Boolean' },
   ],
-  methods: [{ name: 'calculateTotal()' }, { name: 'confirmBooking()' }, { name: 'cancelBooking()' }],
+  methods: [{ name: 'calculateTotal()' }, { name: 'confirmBooking()' }, { name: 'cancelBooking(reason)' }],
 };
 
 export const pseudocodeFixture: PseudocodeFigure = {

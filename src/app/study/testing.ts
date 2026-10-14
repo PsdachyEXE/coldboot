@@ -58,7 +58,7 @@ export function fxCaseStudy(id = 'cs-01'): CaseStudy {
     title: 'Riverbend Freight',
     insert: 'Riverbend Freight is a Geelong freight company.\n\nIts team is building a booking system.',
     figures: [
-      { id: 'fig-bookings', kind: 'table', title: 'Bookings table', columns: ['Field', 'Type'], rows: [['bookingId', 'Integer']] },
+      { id: 'fig-bookings', kind: 'table', title: 'Bookings table', columns: ['Name', 'Data type'], rows: [['bookingId', 'integer']] },
       { id: 'fig-code', kind: 'pseudocode', title: 'Booking check', code: 'BEGIN\n    DISPLAY "ok"\nEND' },
     ],
     questions: [

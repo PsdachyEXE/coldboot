@@ -51,7 +51,8 @@ function problems(fig: UseCaseDiagram): string[] {
     label: l.type === 'association' ? '' : `<<${l.type}>>`,
     via: l.via,
     labelAt: l.labelAt,
-    head: l.type === 'association' ? 'none' : 'open',
+    head: l.type === 'association' ? 'none' : 'filled',
+    dashed: l.type !== 'association',
   }));
   const routed = routeConnectors(connectors, shapes, fig);
   const out: string[] = [];

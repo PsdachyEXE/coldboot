@@ -1,7 +1,9 @@
 /**
  * SVG Gantt chart: one bar per task on a day or week axis, a diamond for each milestone, and a
- * legend. With `showCriticalPath`, critical tasks are hatched and labelled "critical", and slack
- * shows as a dashed line to the latest finish, so neither relies on colour.
+ * legend. With `showCriticalPath`, critical tasks are hatched and labelled "critical", and a
+ * task's spare time (how far it can be delayed without delaying the project) shows as a dashed
+ * line to its latest finish, so neither relies on colour. The study design doesn't name slack or
+ * float, so the legend says "spare time".
  */
 import { useLayoutEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import type { Gantt } from '../../content/schema';
@@ -91,7 +93,7 @@ function Legend({ id, critical, slack, milestone }: { id: string; critical: bool
             <path className={styles.slack} d="M0 8 H26" />
             <path className={styles.slackEnd} d="M26 2 V14" />
           </svg>
-          Slack, to the latest finish
+          Spare time, to the latest finish
         </li>
       )}
       {milestone && (

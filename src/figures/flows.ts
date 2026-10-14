@@ -44,8 +44,10 @@ export interface Connector {
   label: string;
   via?: readonly Pt[];
   labelAt?: Pt;
-  /** Draw an arrowhead at the `to` end: filled (DFD flows) or open (<<includes>>/<<extends>>). */
-  head: 'filled' | 'open' | 'none';
+  /** A filled arrowhead at the `to` end (data flows, <<includes>> and <<extends>>), or none (associations). */
+  head: 'filled' | 'none';
+  /** A dashed line, as VCAA draws <<includes>> and <<extends>>. */
+  dashed?: boolean;
 }
 
 export interface LabelBox {
@@ -67,7 +69,7 @@ export interface RoutedConnector {
   points: Pt[];
   /** The stroked line: `points`, stopped at the base of a filled arrowhead. */
   line: Pt[];
-  /** Filled triangle or open chevron, when the connector has a head. */
+  /** The filled triangle, when the connector has a head. */
   head: Pt[] | null;
   label: { lines: string[]; centre: Pt; box: LabelBox } | null;
   /** Centre of the label, or the midpoint of the line for an unlabelled connector. */
@@ -147,9 +149,6 @@ export function routeConnectors(connectors: readonly Connector[], shapes: Readon
     if (c.head === 'filled') {
       head = arrowHead(points[n - 1], endDir, ARROW_LENGTH);
       line = trimEnd(points, ARROW_LENGTH - 1);
-    } else if (c.head === 'open') {
-      const [tip, left, right] = arrowHead(points[n - 1], endDir, ARROW_LENGTH, 5);
-      head = [left, tip, right];
     }
 
     const { point: mid, dir } = pointAlong(points, 0.5);

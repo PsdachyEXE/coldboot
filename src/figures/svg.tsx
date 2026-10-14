@@ -86,14 +86,13 @@ export function TextLines({ lines, x, y, anchor = 'middle', size = LABEL_SIZE, l
   );
 }
 
-/** A connector's line and arrowhead. */
-export function ConnectorLine({ routed, dashed = false }: { routed: RoutedConnector; dashed?: boolean }) {
+/** A connector's line, dashed when the connector says so, and its filled arrowhead. */
+export function ConnectorLine({ routed }: { routed: RoutedConnector }) {
   const { line, head, connector } = routed;
   return (
     <g data-flow={connector.key}>
-      <path className={cx(styles.line, dashed && styles.dashed)} d={pathData(line)} />
-      {head && connector.head === 'filled' && <polygon className={styles.head} points={pointsAttr(head)} />}
-      {head && connector.head === 'open' && <polyline className={styles.line} points={pointsAttr(head)} />}
+      <path className={cx(styles.line, connector.dashed && styles.dashed)} d={pathData(line)} />
+      {head && <polygon className={styles.head} points={pointsAttr(head)} />}
     </g>
   );
 }

@@ -1,7 +1,9 @@
 /**
- * Use case diagram: a system boundary with its name at the top left, stick-figure actors with
- * their labels below, and use cases as ellipses. An association is a plain line; an <<includes>>
- * or <<extends>> link is a dashed arrow from `from` to `to`, labelled with its stereotype.
+ * Use case diagram, drawn the VCAA way: a system boundary with its name at the top left,
+ * stick-figure actors with their labels below, and use cases as ellipses. An association is a
+ * plain line with no arrowhead. An <<includes>> or <<extends>> relationship is a dashed line from
+ * `from` to `to` with a filled arrowhead at `to`, labelled with its stereotype: <<includes>> points
+ * from the base use case to the included one, <<extends>> from the extending use case to the base.
  */
 import { useMemo } from 'react';
 import type { UseCaseDiagram } from '../content/schema';
@@ -35,15 +37,19 @@ function layout(f: UseCaseDiagram) {
     shapes.set(u.id, shape);
     return { useCase: u, shape, lines: wrapText(u.label, shape.rx * 1.55) };
   });
-  const connectors: Connector[] = f.links.map((l) => ({
-    key: connectorKey(l),
-    from: l.from,
-    to: l.to,
-    label: l.type === 'association' ? '' : `<<${l.type}>>`,
-    via: l.via,
-    labelAt: l.labelAt,
-    head: l.type === 'association' ? 'none' : 'open',
-  }));
+  const connectors: Connector[] = f.links.map((l) => {
+    const relationship = l.type !== 'association';
+    return {
+      key: connectorKey(l),
+      from: l.from,
+      to: l.to,
+      label: relationship ? `<<${l.type}>>` : '',
+      via: l.via,
+      labelAt: l.labelAt,
+      head: relationship ? 'filled' : 'none',
+      dashed: relationship,
+    };
+  });
   const actors = f.actors.map((a) => ({ actor: a, lines: wrapText(a.label, ACTOR_LABEL_WIDTH) }));
   // A highlighted actor's ring takes in its label as well as the figure.
   const rings = new Map(shapes);
@@ -67,7 +73,7 @@ export function UseCaseDiagramView({ figure: f, markers, title, desc }: BodyProp
         <TextLines lines={[s.label]} x={s.x - s.w / 2 + 12} y={s.y - s.h / 2 + 12 + LINE_HEIGHT / 2} anchor="start" className={styles.bold} />
       </g>
       {routed.map((c, i) => (
-        <ConnectorLine key={i} routed={c} dashed={c.connector.head === 'open'} />
+        <ConnectorLine key={i} routed={c} />
       ))}
       {actors.map(({ actor, lines }) => (
         <g key={actor.id} data-node={actor.id} data-node-type="actor">

@@ -286,25 +286,51 @@
   font-weight: 700;
 }
 
-.table tbody th.section {
-  font-weight: 700;
-  background: var(--trench);
-}
-
+/*
+ * Object description: bold row headings in a column only as wide as its longest word, and members
+ * one to a line in the body font, as VCAA sets them. A long identifier breaks rather than pushing
+ * the table wider than a phone.
+ */
 .objectTable {
   min-width: min(100%, 20rem);
+  max-width: 100%;
 }
 
-.objectName {
-  font-size: var(--step-1);
+.objectTable tbody th[scope='row'] {
+  width: 1px;
   font-weight: 700;
 }
 
-.member {
-  font-family: var(--font-mono);
-  font-size: var(--step-0);
-  color: var(--ice);
-  white-space: nowrap;
+.objectTable td {
+  overflow-wrap: anywhere;
+}
+
+.members {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/*
+ * A member that wraps hangs its later lines, so they can't be read as the next member. The inline
+ * padding, taken back by the margin, keeps a marked member's ring clear of its text.
+ */
+.members li {
+  max-width: none;
+  margin: 0 calc(-1 * var(--space-1));
+  padding: 0 var(--space-1) 0 calc(var(--space-1) + var(--space-3));
+  text-indent: calc(-1 * var(--space-3));
+}
+
+.members li.marked {
+  outline-offset: -1px;
+}
+
+/* A member's note, under it at the hanging indent. */
+.memberNote {
+  display: block;
+  text-indent: 0;
+  color: var(--steel);
 }
 
 .table td :global(code),

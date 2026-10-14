@@ -115,7 +115,7 @@ function brokenRules(fig: Dfd | ContextDiagram): Broken[] {
 function expectWellDrawn(fig: Dfd | ContextDiagram, label: string): void {
   expect(FigureSchema.safeParse(fig).success, label).toBe(true);
   for (const f of fig.flows) expect(f.label, `${label} ${f.id}`).toMatch(/^[a-z]+(_[a-z]+)*$/);
-  if (fig.kind === 'dfd') for (const n of fig.nodes) expect(n.number, `${label} ${n.id}`).toBeUndefined();
+  if (fig.kind === 'dfd') for (const n of fig.nodes) expect(n, `${label} ${n.id}`).not.toHaveProperty('number');
 }
 
 function figures(item: QuizItem): Extract<TerminalBlock, { kind: 'figure' }>[] {
@@ -293,7 +293,7 @@ describe('dfd items', () => {
           const item = dfdItem(spec, level);
           const text = allText(item);
           expect(text, item.instance).not.toMatch(/\bprocess \d|\bD\d\b|data store D|store id/i);
-          for (const f of figures(item)) if (f.figure.kind === 'dfd') for (const n of f.figure.nodes) expect(n.number).toBeUndefined();
+          for (const f of figures(item)) if (f.figure.kind === 'dfd') for (const n of f.figure.nodes) expect(n).not.toHaveProperty('number');
         }
       }
     }

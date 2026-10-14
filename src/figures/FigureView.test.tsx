@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { render, within } from '@testing-library/react';
-import { FigureSchema, type Dfd, type Figure, type Gantt } from '../content/schema';
+import { DfdSchema, FigureSchema, type Dfd, type Figure, type Gantt, type ObjectDescription } from '../content/schema';
 import { FigureView } from './FigureView';
 import { computeSchedule } from './gantt/schedule';
 import type { Pt } from './geometry';
@@ -47,7 +47,6 @@ describe('fixtures', () => {
     // Every flow joins a process: none between entities, between stores, or an entity and a store.
     for (const fl of dfdFixture.flows) expect([type.get(fl.from), type.get(fl.to)], fl.label).toContain('process');
     for (const n of dfdFixture.nodes) {
-      expect(n.number, n.id).toBeUndefined();
       const inputs = dfdFixture.flows.filter((fl) => fl.to === n.id).map((fl) => fl.label);
       const outputs = dfdFixture.flows.filter((fl) => fl.from === n.id).map((fl) => fl.label);
       if (n.type === 'entity') {
@@ -68,6 +67,19 @@ describe('fixtures', () => {
       .map((fl) => (type.get(fl.from) === 'entity' ? `${fl.from}->system ${fl.label}` : `system->${fl.to} ${fl.label}`))
       .sort();
     expect(entityFlows).toEqual(contextFlows);
+  });
+
+  it('include a use case diagram whose actors are roles outside the boundary, with every use case inside it', () => {
+    const s = useCaseFixture.system;
+    for (const a of useCaseFixture.actors) {
+      // A role, not an external system such as a payment gateway.
+      expect(a.label, a.id).not.toMatch(/\b(system|gateway|service)\b/i);
+      expect(Math.abs(a.x - s.x) > s.w / 2 || Math.abs(a.y - s.y) > s.h / 2, a.id).toBe(true);
+    }
+    for (const u of useCaseFixture.useCases) {
+      expect(Math.abs(u.x - s.x) + (u.rx ?? 84) < s.w / 2, u.id).toBe(true);
+      expect(Math.abs(u.y - s.y) + (u.ry ?? 28) < s.h / 2, u.id).toBe(true);
+    }
   });
 
   it.each([contextFixture, dfdFixture])('draw $id with no two flows crossing', (figure) => {
@@ -94,6 +106,26 @@ describe('fixtures', () => {
       expect(end.x, fl.label).toBeGreaterThan(290);
       expect(end.x, fl.label).toBeLessThan(450);
     }
+  });
+});
+
+describe('figure schemas', () => {
+  it('reject a process number or a store id on a DFD node, as VCAA names them alone', () => {
+    const numbered = { ...dfdFixture, nodes: dfdFixture.nodes.map((n) => (n.id === 'bookings' ? { ...n, number: 'D1' } : n)) };
+    const result = DfdSchema.safeParse(numbered);
+    expect(result.success).toBe(false);
+    expect(result.error!.issues[0]).toMatchObject({ code: 'unrecognized_keys', keys: ['number'] });
+  });
+
+  it('allow a DFD at Level 1 only: Level 0 is the context diagram', () => {
+    expect(DfdSchema.safeParse({ ...dfdFixture, level: 1 }).success).toBe(true);
+    expect(DfdSchema.safeParse({ ...dfdFixture, level: undefined }).success).toBe(true);
+    for (const level of [0, 2]) expect(DfdSchema.safeParse({ ...dfdFixture, level }).success, `level ${level}`).toBe(false);
+  });
+
+  it('let an object description property leave out its data type', () => {
+    expect(FigureSchema.safeParse({ ...objectFixture, properties: [{ name: 'notes' }] }).success).toBe(true);
+    expect(FigureSchema.safeParse({ ...objectFixture, properties: [{ name: 'notes', type: '' }] }).success).toBe(false);
   });
 });
 
@@ -155,19 +187,6 @@ describe('diagrams', () => {
     expect(store.textContent).toBe('Bookings');
   });
 
-  it('ignores process numbers and store ids', () => {
-    const numbered: Dfd = {
-      ...dfdFixture,
-      nodes: dfdFixture.nodes.map((n, i) => (n.type === 'entity' ? n : { ...n, number: n.type === 'store' ? `D${i}` : String(i) })),
-    };
-    const plain = renderFigure(dfdFixture).fig;
-    const marked = renderFigure(numbered).fig;
-    for (const n of dfdFixture.nodes) {
-      expect(marked.querySelector(`[data-node="${n.id}"]`)!.innerHTML, n.id).toBe(plain.querySelector(`[data-node="${n.id}"]`)!.innerHTML);
-    }
-    expect(marked.querySelector('details')!.textContent).toBe(plain.querySelector('details')!.textContent);
-  });
-
   it('still draws an unlabelled flow, and describes it as unlabelled', () => {
     const fig: Dfd = { ...dfdFixture, flows: [...dfdFixture.flows, { id: 'bare', from: 'pay', to: 'bookings', label: '' }] };
     const { fig: el } = renderFigure(fig);
@@ -188,20 +207,37 @@ describe('diagrams', () => {
     for (const flow of flows) expect(flow.querySelectorAll('polygon')).toHaveLength(1);
   });
 
-  it('draws actors, use cases, plain associations and labelled dashed dependencies', () => {
+  it('draws actors, use cases, plain associations, and relationships as VCAA does: dashed, with a filled arrowhead', () => {
     const { fig } = renderFigure(useCaseFixture);
     expect(fig.querySelectorAll('[data-node-type="actor"]')).toHaveLength(3);
-    expect(fig.querySelectorAll('[data-node-type="usecase"] ellipse')).toHaveLength(4);
+    expect(fig.querySelectorAll('[data-node-type="usecase"] ellipse')).toHaveLength(5);
     const svg = fig.querySelector('svg[role="img"]')!;
     expect(svg.textContent).toContain('<<includes>>');
     expect(svg.textContent).toContain('<<extends>>');
     expect(svg.textContent).toContain('Kayak hire system');
-    const includes = fig.querySelector('[data-flow="book->pay"]')!;
-    expect(includes.querySelector('path')!.getAttribute('class')).toMatch(/dashed/);
-    expect(includes.querySelector('polyline')).not.toBeNull();
-    const association = fig.querySelector('[data-flow="customer->book"]')!;
-    expect(association.querySelector('path')!.getAttribute('class')).not.toMatch(/dashed/);
-    expect(association.querySelector('polyline, polygon')).toBeNull();
+    // <<includes>> points from the base use case (Make booking) to the included one (Take payment);
+    // <<extends>> from the extending use case (Apply member discount) to the base (Make booking).
+    const ellipse = (id: string) => useCaseFixture.useCases.find((u) => u.id === id)!;
+    const onEllipse = (p: Pt, id: string) => {
+      const u = ellipse(id);
+      return ((p.x - u.x) / (u.rx ?? 84)) ** 2 + ((p.y - u.y) / (u.ry ?? 28)) ** 2;
+    };
+    for (const [key, target] of [
+      ['book->pay', 'pay'],
+      ['discount->book', 'book'],
+    ]) {
+      const link = fig.querySelector(`[data-flow="${key}"]`)!;
+      expect(link.querySelector('path')!.getAttribute('class'), key).toMatch(/dashed/);
+      expect(link.querySelectorAll('polygon'), key).toHaveLength(1);
+      expect(link.querySelector('polygon')!.getAttribute('class'), key).toMatch(/head/);
+      expect(link.querySelector('polyline'), key).toBeNull();
+      expect(onEllipse(arrowTip(link), target), key).toBeCloseTo(1, 1);
+    }
+    for (const l of useCaseFixture.links.filter((l) => l.type === 'association')) {
+      const association = fig.querySelector(`[data-flow="${l.from}->${l.to}"]`)!;
+      expect(association.querySelector('path')!.getAttribute('class'), l.from).not.toMatch(/dashed/);
+      expect(association.querySelector('polyline, polygon'), l.from).toBeNull();
+    }
   });
 
   it('rings highlighted elements with a dashed outline and a text marker', () => {
@@ -223,7 +259,7 @@ describe('diagrams', () => {
 });
 
 describe('Gantt chart', () => {
-  it('hatches and labels critical tasks, draws slack and milestones, and has a legend', () => {
+  it('hatches and labels critical tasks, draws spare time and milestones, and has a legend', () => {
     const { fig } = renderFigure(ganttFixture);
     const schedule = computeSchedule(ganttFixture.tasks);
     const critical = [...fig.querySelectorAll('[data-critical="true"]')].map((g) => g.getAttribute('data-task'));
@@ -236,20 +272,22 @@ describe('Gantt chart', () => {
     }
     expect(fig.querySelectorAll('[data-task] polygon')).toHaveLength(1); // one milestone diamond
     const legend = within(fig.querySelector('ul[aria-label="Key"]') as HTMLElement);
-    for (const entry of ['Task', 'Critical task, labelled critical', 'Slack, to the latest finish', 'Milestone']) expect(legend.getByText(entry)).toBeInTheDocument();
+    for (const entry of ['Task', 'Critical task, labelled critical', 'Spare time, to the latest finish', 'Milestone']) expect(legend.getByText(entry)).toBeInTheDocument();
+    expect(fig).not.toHaveTextContent(/slack|float/i);
     // One bar per task with a duration, on a numbered unit axis.
     expect(fig.querySelectorAll('[data-task]')).toHaveLength(ganttFixture.tasks.length);
     expect(fig.querySelector('svg[role="img"]')!.textContent).toContain('Depends on');
   });
 
-  it('leaves out critical marks and slack unless showCriticalPath is set', () => {
+  it('leaves out critical marks and spare time unless showCriticalPath is set', () => {
     const plain: Gantt = { ...ganttFixture, showCriticalPath: false };
     const { fig } = renderFigure(plain);
     expect(fig.querySelector('[data-critical]')).toBeNull();
     for (const row of fig.querySelectorAll('[data-task]')) expect(row.textContent).not.toContain('critical');
     expect(fig.querySelector('rect[fill^="url(#"]')).toBeNull();
-    expect(within(fig.querySelector('ul[aria-label="Key"]') as HTMLElement).queryByText(/Slack|Critical/)).toBeNull();
-    expect(fig.querySelector('details')).not.toHaveTextContent(/slack \d/);
+    expect(within(fig.querySelector('ul[aria-label="Key"]') as HTMLElement).queryByText(/Spare|Critical/)).toBeNull();
+    // Slack and float aren't study design terms, so no Gantt chart names them.
+    expect(fig).not.toHaveTextContent(/slack|float|spare/i);
   });
 
   it('explains a plan it cannot draw instead of crashing', () => {
@@ -261,15 +299,60 @@ describe('Gantt chart', () => {
 });
 
 describe('text figures', () => {
-  it('lays out an object description as name, properties with types, then methods', () => {
+  it("lays out an object description in VCAA's three rows: Name, Properties/Attributes, Methods", () => {
     const { fig } = renderFigure(objectFixture);
     const table = fig.querySelector('table')!;
     expect(table).toHaveAttribute('aria-labelledby', fig.querySelector('figcaption span')!.id);
-    const headers = [...table.querySelectorAll('th')].map((th) => th.textContent);
-    expect(headers.indexOf('Booking')).toBeLessThan(headers.indexOf('Properties'));
-    expect(headers.indexOf('Properties')).toBeLessThan(headers.indexOf('Methods'));
-    expect(within(table).getByText('Floating point')).toBeInTheDocument();
-    expect(within(table).getByText('calculateTotal()')).toBeInTheDocument();
+    // No column headers: each row is headed on the left, its content on the right.
+    expect(table.querySelectorAll('thead, th[scope="col"]')).toHaveLength(0);
+    const rows = [...table.querySelectorAll('tr')].map((tr) => [tr.querySelector('th[scope="row"]')!.textContent, tr.querySelector('td')!]);
+    expect(rows.map(([heading]) => heading)).toEqual(['Name', 'Properties/Attributes', 'Methods']);
+    const [[, name], [, properties], [, methods]] = rows as [string, HTMLElement][];
+    expect(name).toHaveTextContent('Booking');
+    // One member to a line, each property written name (type), each method with its parameters.
+    const lines = (cell: HTMLElement) => [...within(cell).getAllByRole('listitem')].map((li) => li.textContent);
+    expect(lines(properties)).toEqual(objectFixture.properties.map((p) => `${p.name} (${p.type})`));
+    expect(lines(properties)).toContain('deposit (floating point)');
+    expect(lines(methods)).toEqual(['calculateTotal()', 'confirmBooking()', 'cancelBooking(reason)']);
+    // It wraps instead of scrolling sideways, so there is no scroll box around it.
+    expect(fig.querySelector('[role="group"]')).toBeNull();
+    expect(table.parentElement).toBe(fig);
+  });
+
+  it('shows a property without a data type by name, notes under members, marks and empty rows', () => {
+    const noted: ObjectDescription = {
+      ...objectFixture,
+      properties: [{ name: 'notes' }, { name: 'deposit', type: 'floating point', description: 'Paid when booking' }],
+      methods: [],
+    };
+    const { fig } = renderFigure(noted, { highlight: { deposit: 'A' } });
+    const [, properties, methods] = [...fig.querySelectorAll('td')];
+    const [plain, described] = within(properties).getAllByRole('listitem');
+    expect(plain).toHaveTextContent(/^notes$/);
+    expect(described.firstChild!.textContent).toBe('deposit (floating point)');
+    expect(within(described).getByText('Paid when booking')).toBeInTheDocument();
+    expect(within(described).getByText('(A)')).toBeInTheDocument();
+    expect(described.className).toMatch(/marked/);
+    expect(plain.className).not.toMatch(/marked/);
+    expect(methods).toHaveTextContent(/^None$/);
+    expect(fig.querySelector('details')).toHaveTextContent('A: property deposit');
+  });
+
+  it('lets a long method wrap before each parameter, never between empty brackets', () => {
+    const signatures: ObjectDescription = {
+      ...objectFixture,
+      methods: [{ name: 'getStatus()' }, { name: 'cancelBooking(reason)' }, { name: 'assignTenant(tenantID, leaseStartDate)' }],
+    };
+    const { fig } = renderFigure(signatures, { highlight: { 'assignTenant(tenantID, leaseStartDate)': 'A' } });
+    const methods = [...fig.querySelectorAll('td')][2];
+    const items = within(methods).getAllByRole('listitem');
+    expect(items.map((li) => li.innerHTML.replace(/<span.*$/, ''))).toEqual([
+      'getStatus()',
+      'cancelBooking(<wbr>reason)',
+      'assignTenant(<wbr>tenantID,<wbr> leaseStartDate)',
+    ]);
+    expect(items[2]).toHaveTextContent(/^assignTenant\(tenantID, leaseStartDate\)\(A\)$/);
+    expect(items[2].className).toMatch(/marked/);
   });
 
   it('renders pseudocode through the listing renderer and states the index base', () => {

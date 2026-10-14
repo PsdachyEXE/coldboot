@@ -1,89 +1,84 @@
 /**
- * Object description in the three-part layout: the object name, then its properties with their
- * data types, then its methods. A semantic HTML table rather than SVG: the text wraps, stays
- * selectable, and screen readers can move through it cell by cell.
+ * Object description in VCAA's layout: a bordered box of three rows, headed Name,
+ * Properties/Attributes and Methods. A property is written `name (type)`, or by name alone when
+ * it has no data type; a method keeps its brackets and any parameters. A member's optional
+ * description sits on its own line beneath it. A semantic HTML table rather than SVG: the text
+ * wraps to fit a phone instead of scrolling sideways, stays selectable, and screen readers can move
+ * through it row by row.
  */
+import { Fragment, type ReactNode } from 'react';
 import type { ObjectDescription } from '../content/schema';
 import { cx } from './cx';
+import { propertyText } from './describe';
 import type { BodyProps } from './types';
-import { useScrollable } from './useScrollable';
 import styles from './Figure.module.css';
 
-function Marker({ text }: { text: string | undefined }) {
-  return text ? <span className={styles.rowMarker}>({text})</span> : null;
+interface Member {
+  /** The id `highlight` uses: the property or method name. */
+  id: string;
+  text: ReactNode;
+  description?: string;
 }
 
-export function ObjectDescriptionView({ figure: f, markers, title, titleId }: BodyProps<ObjectDescription>) {
-  const [ref, scrollable] = useScrollable<HTMLDivElement>();
-  const described = f.properties.some((p) => p.description) || f.methods.some((m) => m.description);
-  const cols = described ? 3 : 2;
+/**
+ * A method name with a line break allowed before each parameter (after the opening bracket or a
+ * comma), so a long signature on a phone wraps at its parameters rather than inside a name.
+ */
+function methodText(name: string): ReactNode {
+  return name.split(/(?<=[(,])(?!\))/).map((part, i) => (
+    <Fragment key={i}>
+      {i > 0 && <wbr />}
+      {part}
+    </Fragment>
+  ));
+}
+
+function Members({ members, markers }: { members: Member[]; markers: ReadonlyMap<string, string> }) {
+  if (!members.length) return <>None</>;
   return (
-    <div
-      ref={ref}
-      className={styles.tableScroll}
-      tabIndex={scrollable ? 0 : undefined}
-      role={scrollable ? 'group' : undefined}
-      aria-label={scrollable ? `${title} (scrolls sideways)` : undefined}
-    >
-      <table className={cx(styles.table, styles.objectTable)} aria-labelledby={titleId}>
-        <thead>
-          <tr>
-            <th scope="colgroup" colSpan={cols} className={styles.objectName}>
-              {f.name}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="rowgroup" colSpan={cols} className={styles.section}>
-              Properties
-            </th>
-          </tr>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Data type</th>
-            {described && <th scope="col">Description</th>}
-          </tr>
-          {f.properties.length ? (
-            f.properties.map((p) => (
-              <tr key={p.name} className={cx(markers.has(p.name) && styles.marked)}>
-                <th scope="row">
-                  <span className={styles.member}>{p.name}</span>
-                  <Marker text={markers.get(p.name)} />
-                </th>
-                <td>{p.type}</td>
-                {described && <td>{p.description}</td>}
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={cols}>None</td>
-            </tr>
-          )}
-        </tbody>
-        <tbody>
-          <tr>
-            <th scope="rowgroup" colSpan={cols} className={styles.section}>
-              Methods
-            </th>
-          </tr>
-          {f.methods.length ? (
-            f.methods.map((m) => (
-              <tr key={m.name} className={cx(markers.has(m.name) && styles.marked)}>
-                <th scope="row" colSpan={described ? 2 : cols}>
-                  <span className={styles.member}>{m.name}</span>
-                  <Marker text={markers.get(m.name)} />
-                </th>
-                {described && <td>{m.description}</td>}
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={cols}>None</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+    <ul className={styles.members}>
+      {members.map((m, i) => {
+        const marker = markers.get(m.id);
+        return (
+          <li key={`${i}:${m.id}`} className={cx(marker && styles.marked)}>
+            {m.text}
+            {marker && <span className={styles.rowMarker}>({marker})</span>}
+            {m.description && <span className={styles.memberNote}>{m.description}</span>}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+export function ObjectDescriptionView({ figure: f, markers, titleId }: BodyProps<ObjectDescription>) {
+  const properties = f.properties.map((p) => ({ id: p.name, text: propertyText(p), description: p.description }));
+  const methods = f.methods.map((m) => ({ id: m.name, text: methodText(m.name), description: m.description }));
+  return (
+    <table className={cx(styles.table, styles.objectTable)} aria-labelledby={titleId}>
+      <tbody>
+        <tr>
+          <th scope="row">Name</th>
+          <td>{f.name}</td>
+        </tr>
+        <tr>
+          {/* Wraps after the slash, as VCAA's does, so the headings stay narrow on a phone. */}
+          <th scope="row">
+            Properties/
+            <wbr />
+            Attributes
+          </th>
+          <td>
+            <Members members={properties} markers={markers} />
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Methods</th>
+          <td>
+            <Members members={methods} markers={markers} />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 }

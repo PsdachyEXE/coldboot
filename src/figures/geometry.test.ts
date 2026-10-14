@@ -167,10 +167,12 @@ describe('routeConnectors', () => {
     close(routed[0].anchor, 250, 100);
   });
 
-  it('draws open heads for dependencies and no head for associations', () => {
-    const [open, plain] = routeConnectors([flow('b', 'c', '<<includes>>', { head: 'open' }), flow('a', 'c', '', { head: 'none' })], shapes);
-    expect(open.head).toHaveLength(3);
-    close(open.head![1], 400, 272);
+  it('draws a filled head for a dashed relationship and no head for an association', () => {
+    const [includes, plain] = routeConnectors([flow('b', 'c', '<<includes>>', { dashed: true }), flow('a', 'c', '', { head: 'none' })], shapes);
+    expect(includes.connector.dashed).toBe(true);
+    expect(includes.head).toHaveLength(3);
+    close(includes.head![0], 400, 272); // the tip touches the use case
+    expect(includes.line[1].y).toBeCloseTo(263, 6); // the dashes stop inside the head
     expect(plain.head).toBeNull();
     expect(plain.line).toEqual(plain.points);
   });

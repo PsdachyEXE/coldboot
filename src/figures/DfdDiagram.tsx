@@ -1,9 +1,10 @@
 /**
- * Data flow diagram, drawn the VCAA way: a process is a circle holding its name, a data store is
- * two horizontal parallel lines, open at both ends, with its name between them, and an external
- * entity is a rectangle. Processes and stores are known by name alone: a node's optional `number`
- * is never drawn. Flows are labelled one-way arrows drawn edge to edge; an unlabelled flow still
- * draws (the `dfd` game teaches that error).
+ * Data flow diagram (Level 1), drawn the VCAA way: a process is a circle holding its name, a data
+ * store is two horizontal parallel lines, open at both ends, with its name between them, and an
+ * external entity is a rectangle. Processes and stores are known by name alone, with no process
+ * number or store id. Flows are labelled one-way arrows drawn edge to edge. A flow with an empty
+ * label, which the schema allows only so that a question can show the error, draws as a bare
+ * arrow, and the text description calls it unlabelled.
  */
 import { useMemo } from 'react';
 import type { Dfd, DfdNode } from '../content/schema';

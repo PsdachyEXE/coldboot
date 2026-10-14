@@ -4,9 +4,10 @@
  * every element: entities, processes, stores, flows with their labels, actors, use cases, links,
  * tasks with durations and dependencies, members, lines, rows and mock-up elements.
  *
- * Gantt slack and the critical path are described only when the figure shows them
- * (`showCriticalPath`), so the description never gives away an answer the chart leaves for the
- * student to work out.
+ * A Gantt chart's critical path, and how far each other task can be delayed without delaying the
+ * project, are described only when the figure shows them (`showCriticalPath`), so the description
+ * never gives away an answer the chart leaves for the student to work out. The study design names
+ * the critical path but not slack or float, so neither word appears: a task reads "2 days spare".
  */
 import type {
   ContextDiagram,
@@ -80,7 +81,7 @@ const DFD_NODE_KINDS: Record<DfdNode['type'], string> = { process: 'process', st
 
 /**
  * A DFD node by name and kind, e.g. "Record booking (process)". Processes and stores are known by
- * name alone, as in VCAA diagrams: a node's optional `number` is never mentioned.
+ * name alone, as in VCAA diagrams.
  */
 export function dfdNodeName(n: DfdNode): string {
   return `${n.label} (${DFD_NODE_KINDS[n.type]})`;
@@ -166,7 +167,7 @@ function describeGantt(f: Gantt, names: Names): FigureDescription {
         // A milestone is a point in time, so it is the task's finish, not the task itself.
         if (t.milestone) parts.push(`milestone at the end of ${f.unit} ${timing.earliestFinish}`);
       }
-      if (f.showCriticalPath) parts.push(`slack ${unitWord(f.unit, timing.slack)}${timing.critical ? ', critical' : ''}`);
+      if (f.showCriticalPath) parts.push(timing.critical ? 'critical' : `${unitWord(f.unit, timing.slack)} spare`);
     }
     names.set(t.id, `task ${t.id} ${t.name}`);
     return parts.join(', ');
@@ -181,27 +182,33 @@ function describeGantt(f: Gantt, names: Names): FigureDescription {
       ? paths.length === 1
         ? ` Critical path: ${paths[0]}.`
         : ` Critical paths: ${paths.join('; ')}.`
-      : ' Slack and the critical path are not marked.';
+      : ' The critical path is not marked.';
     summary = `Gantt chart of ${count(f.tasks.length, 'task')}, measured in ${f.unit}s. ${total}${critical}`;
   }
   return { summary, sections: section('Tasks', items) };
 }
 
+/** A property as VCAA writes it: `name (type)`, or the name alone when no data type is given. */
+export function propertyText(p: ObjectDescription['properties'][number]): string {
+  return p.type ? `${p.name} (${p.type})` : p.name;
+}
+
+/** Three sections, headed and worded as the figure's rows: Name, Properties/Attributes, Methods. */
 function describeObject(f: ObjectDescription, names: Names): FigureDescription {
+  const note = (description: string | undefined) => (description ? `: ${description}` : '');
   const properties = f.properties.map((p) => {
-    const text = `${p.name}: ${p.type}${p.description ? `. ${p.description}` : ''}`;
     names.set(p.name, `property ${p.name}`);
-    return text;
+    return `${propertyText(p)}${note(p.description)}`;
   });
   const methods = f.methods.map((m) => {
     names.set(m.name, `method ${m.name}`);
-    return `${m.name}${m.description ? `. ${m.description}` : ''}`;
+    return `${m.name}${note(m.description)}`;
   });
   return {
     summary: `Object description for ${f.name}, with ${count(f.properties.length, 'property', 'properties')} and ${count(f.methods.length, 'method')}.`,
     sections: [
-      { heading: 'Object name', items: [f.name] },
-      { heading: 'Properties and data types', items: properties.length ? properties : ['None'] },
+      { heading: 'Name', items: [f.name] },
+      { heading: 'Properties/Attributes', items: properties.length ? properties : ['None'] },
       { heading: 'Methods', items: methods.length ? methods : ['None'] },
     ],
   };
@@ -241,7 +248,7 @@ export const MOCKUP_NAMES: Record<Mockup['elements'][number]['type'], string> = 
   label: 'Label',
   textbox: 'Text box',
   button: 'Button',
-  checkbox: 'Checkbox',
+  checkbox: 'Check box',
   radio: 'Radio button',
   dropdown: 'Drop-down list',
   list: 'List box',
