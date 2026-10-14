@@ -16,7 +16,11 @@ export interface TemplateTask {
   key: string;
   name: string;
   after: readonly string[];
-  /** The event its finish marks, for a milestone question ("SRS signed off by the client"). */
+  /**
+   * The checkpoint its finish marks, for a milestone question: the end of a stage of the
+   * problem-solving methodology where the task ends one ("Analysis complete: ..."), otherwise
+   * the end of an activity or a handover.
+   */
   milestone?: string;
   /** Never dropped when the plan is shortened (the first task, the main coding task, testing, the last task). */
   keep?: boolean;
@@ -52,7 +56,7 @@ export const TEMPLATES: readonly ProjectTemplate[] = [
     project: 'an online booking app',
     tasks: [
       { key: 'interview', name: 'Interview staff', after: [], keep: true },
-      { key: 'srs', name: 'Write the SRS', after: ['interview'], milestone: 'SRS signed off by the clinic' },
+      { key: 'srs', name: 'Write the SRS', after: ['interview'], milestone: 'Analysis complete: SRS signed off by the clinic' },
       { key: 'ui', name: 'Design the screens', after: ['srs'] },
       { key: 'db', name: 'Design the database', after: ['srs'] },
       { key: 'book', name: 'Code the booking module', after: ['ui', 'db'], keep: true },
@@ -68,7 +72,7 @@ export const TEMPLATES: readonly ProjectTemplate[] = [
     project: 'a stock control program',
     tasks: [
       { key: 'observe', name: 'Observe the warehouse', after: [], keep: true },
-      { key: 'reqs', name: 'Document requirements', after: ['observe'], milestone: 'Requirements approved by the owner' },
+      { key: 'reqs', name: 'Document requirements', after: ['observe'], milestone: 'Analysis complete: requirements approved by the owner' },
       { key: 'mockups', name: 'Draw mock-ups', after: ['reqs'] },
       { key: 'dictionary', name: 'Write the data dictionary', after: ['reqs'] },
       { key: 'entry', name: 'Code stock entry screens', after: ['mockups', 'dictionary'], keep: true },
@@ -84,7 +88,7 @@ export const TEMPLATES: readonly ProjectTemplate[] = [
     project: 'a club website',
     tasks: [
       { key: 'meet', name: 'Meet the committee', after: [], keep: true },
-      { key: 'scope', name: 'Agree the scope', after: ['meet'], milestone: 'Scope agreed with the committee' },
+      { key: 'scope', name: 'Agree the scope', after: ['meet'], milestone: 'Analysis complete: scope agreed with the committee' },
       { key: 'layout', name: 'Design page layouts', after: ['scope'] },
       { key: 'collect', name: 'Collect photos and text', after: ['scope'] },
       { key: 'pages', name: 'Build the pages', after: ['layout'], keep: true },
@@ -100,9 +104,9 @@ export const TEMPLATES: readonly ProjectTemplate[] = [
     project: 'a phone ordering app',
     tasks: [
       { key: 'survey', name: 'Survey customers', after: [], keep: true },
-      { key: 'srs', name: 'Write the SRS', after: ['survey'], milestone: 'SRS signed off by the owner' },
+      { key: 'srs', name: 'Write the SRS', after: ['survey'], milestone: 'Analysis complete: SRS signed off by the owner' },
       { key: 'ideas', name: 'Generate design ideas', after: ['srs'] },
-      { key: 'detail', name: 'Produce the detailed design', after: ['ideas'], milestone: 'Design approved by the owner' },
+      { key: 'detail', name: 'Produce the detailed design', after: ['ideas'], milestone: 'Design complete: detailed design approved by the owner' },
       { key: 'payments', name: 'Set up payments', after: ['srs'] },
       { key: 'menu', name: 'Code the menu screens', after: ['detail'] },
       { key: 'orders', name: 'Code ordering', after: ['detail', 'payments'], keep: true },

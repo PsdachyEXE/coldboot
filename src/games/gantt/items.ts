@@ -1,13 +1,16 @@
 /**
  * `gantt` items. Each item shows a plan's task table and asks one thing about it: the total
- * duration, the critical path, how long a task can be delayed without delaying the project, a
- * sensible milestone, or how far the finish moves when a task runs late. Every answer comes from
- * computeSchedule (the critical path method in src/figures), and a text Gantt chart follows
- * every answer.
+ * duration, the critical path, how long a task can be delayed without delaying the project, how
+ * far the finish moves when monitoring shows a task will run late, or a sensible milestone.
+ * Every answer comes from computeSchedule (the critical path method in src/figures), and a text
+ * Gantt chart follows every answer.
  *
- * The questions say "how many days a task can be delayed" rather than naming slack or float:
- * whether the study design names the term is unconfirmed (U3O2-KK03's verify note), so the term
- * appears only as an aside in the man page, and the chart's column is headed "Spare".
+ * U3O2-KK03's features are identification of tasks, sequencing, time allocation, dependencies,
+ * milestones, the critical path, and monitoring and documenting progress. Slack and float aren't
+ * among them, so neither word appears: the questions ask how many days a task can be delayed, and
+ * the chart's column is headed "Spare". A milestone is a point in time, such as the end of a
+ * stage of the problem-solving methodology, never a task with a duration (the 2025 examination
+ * report's point).
  *
  * Instances ("gantt:critical:seed=12:normal") regenerate an item exactly.
  */
@@ -25,7 +28,8 @@ export const GANTT_KINDS = ['duration', 'critical', 'delay', 'effect', 'mileston
 export type GanttKind = (typeof GANTT_KINDS)[number];
 
 export const GANTT_KK: KkId[] = ['U3O2-KK03'];
-export const EFFECT_KK: KkId[] = ['U3O2-KK03', 'U4O1-KK12'];
+/** Monitoring a late task: adjusting its time frame (U4O1-KK11) and the impact on completion (U4O1-KK12). */
+export const EFFECT_KK: KkId[] = ['U3O2-KK03', 'U4O1-KK11', 'U4O1-KK12'];
 
 const DIFFICULTIES: readonly Difficulty[] = ['easy', 'normal', 'hard'];
 
@@ -55,7 +59,7 @@ export function planBlocks(plan: Plan): TerminalBlock[] {
   ];
 }
 
-const PLAN_RULES = 'Each task depends on the tasks in its After column: it starts as soon as all of them have finished. Tasks with none start on day 1.';
+const PLAN_RULES = 'Tasks are sequenced by their dependencies: each task starts as soon as every task in its After column has finished. Tasks with none start on day 1.';
 
 /**
  * The text Gantt chart shown after an answer. `stage` decides how much it marks: bars only, then
@@ -202,16 +206,17 @@ function effectQuestion(plan: Plan, s: Schedule, rng: Rng, difficulty: Difficult
   const t = s.byId[task.id];
   const late = t.slack === 0 ? randInt(rng, 1, 4) : pick(rng, difficulty === 'easy' ? [t.slack + randInt(rng, 1, 3), Math.max(1, t.slack - 1)] : [t.slack, t.slack + randInt(rng, 1, 3), Math.max(1, t.slack - randInt(rng, 1, 2))]);
   const shift = finishShift(plan, task.id, late);
+  const update = shift > 0 ? ` Updating the chart means moving ${task.id}'s finish and every task that has to wait for it, and noting the change and its reason.` : '';
   const reason =
     t.slack === 0
-      ? `${task.id} is on the critical path, so every day it runs late pushes the finish back: from day ${s.duration} to day ${s.duration + shift}.`
+      ? `${task.id} is on the critical path, so every day it runs late pushes the finish back: from day ${s.duration} to day ${s.duration + shift}.${update}`
       : shift === 0
         ? `${task.id} can be delayed by ${days(t.slack)} without delaying the project, so ${days(late)} late doesn't move the finish. The project still takes ${days(s.duration)}.`
-        : `${task.id} can be delayed by only ${days(t.slack)}, so finishing ${days(late)} late pushes the finish back ${late} - ${t.slack} = ${days(shift)}: from day ${s.duration} to day ${s.duration + shift}. ${task.id} is now on the critical path.`;
+        : `${task.id} can be delayed by only ${days(t.slack)}, so finishing ${days(late)} late pushes the finish back ${late} - ${t.slack} = ${days(shift)}: from day ${s.duration} to day ${s.duration + shift}. ${task.id} is now on the critical path.${update}`;
   return {
     prompt: [
-      { kind: 'text', text: `Task ${taskLabel(task)} finishes ${days(late)} later than planned. By how many days does the project's finish move?`, tone: 'accent' },
-      { kind: 'text', text: "Type a whole number of days, or 0 if the finish doesn't move.", tone: 'muted' },
+      { kind: 'text', text: `Monitoring progress, the team finds that task ${taskLabel(task)} will finish ${days(late)} later than planned.`, tone: 'accent' },
+      { kind: 'text', text: "Once the Gantt chart is updated, by how many days does the project's finish move? Type a whole number of days, or 0 if the finish doesn't move.", tone: 'muted' },
     ],
     expected: shift === 0 ? "0 days: the finish doesn't move" : days(shift),
     check(input) {
@@ -248,7 +253,7 @@ function milestoneQuestion(plan: Plan, s: Schedule, rng: Rng): Built {
     {
       text: `${asTask.name}, lasting ${days(asTask.duration)}`,
       correct: false,
-      why: `task ${asTask.id} (${asTask.name}) takes ${days(asTask.duration)}, but a milestone takes no time`,
+      why: `task ${asTask.id} (${asTask.name}) is a task that takes ${days(asTask.duration)}, but a milestone is a point in time`,
     },
     {
       text: `Halfway through task ${halfway.id} (${halfway.name})`,
@@ -258,7 +263,7 @@ function milestoneQuestion(plan: Plan, s: Schedule, rng: Rng): Built {
   ]);
   const answer = options.findIndex((o) => o.correct);
   const wrong = options.filter((o) => !o.correct).map((o) => o.why);
-  const reason = `A milestone is a point in time with no duration that marks a significant event, such as a stage or deliverable being finished. ${target.id} finishes at the end of day ${tt.earliestFinish} at the earliest. The others don't work: ${wrong.join('; ')}.`;
+  const reason = `A milestone is a point in time, not a task: it marks a checkpoint such as the end of a stage of the problem-solving methodology, so progress can be checked against it. ${target.id} finishes at the end of day ${tt.earliestFinish} at the earliest. The others don't work: ${wrong.join('; ')}.`;
   return {
     prompt: [
       { kind: 'text', text: 'Which of these would be a sensible milestone for this plan, placed at the right time?', tone: 'accent' },

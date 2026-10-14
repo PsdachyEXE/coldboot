@@ -1,16 +1,16 @@
 /**
  * Builds the `dfd` game's figures from a business in ./systems.ts: a Level 1 DFD or a context
  * diagram in one of four views (as laid out, mirrored left to right, flipped top to bottom, or
- * both), with one convention error injected, or with some
- * process and store labels blanked out for the labelling questions.
+ * both), with one rule broken, or with some process and store labels blanked out for the
+ * labelling questions.
  *
- * The six conventions the game teaches, numbered as the game lists them:
- *   1 entity-entity: a flow between two external entities;
- *   2 store-entity: a data store connected straight to an external entity;
- *   3 no-io: a process with no inputs, or with no outputs;
- *   4 unlabelled: a flow without a label;
- *   5 noun: a process named with a noun;
- *   6 store-store: a flow between two data stores.
+ * The rules are VCAA's, from the outcome-specific requirements, in their order: ten for a data
+ * flow diagram and three for a context diagram (RULES below). Eight of the ten can be broken
+ * here without breaking another; "one set of information per flow" and "every process is
+ * connected" are taught in the rule list but never injected, since neither can be shown alone.
+ * Only a flow between two entities is injected on a context diagram: in its layout every flow
+ * already runs between an entity and the system, so nothing else can go wrong without breaking
+ * the symbols themselves.
  */
 import type { ContextDiagram, Dfd, DfdNode, Flow } from '../../content/schema';
 import { textWidth } from '../../figures/text';
@@ -20,6 +20,7 @@ import {
   CONTEXT_HEIGHT,
   CONTEXT_SYSTEM_AT,
   CONTEXT_WIDTH,
+  CROSSING_LABELS,
   DFD_HEIGHT,
   DFD_WIDTH,
   ENTITY_SLOTS,
@@ -31,40 +32,85 @@ import {
   STORE_SLOTS,
   type DfdSystem,
   type EntitySlot,
+  type FlowSlot,
   type NodeSlot,
   type ProcessSlot,
 } from './systems';
 
-export const RULES = ['entity-entity', 'store-entity', 'no-io', 'unlabelled', 'noun', 'store-store'] as const;
-export type Rule = (typeof RULES)[number];
+export type DiagramKind = 'context' | 'dfd';
+
+/** Every rule the game teaches, by a short key. */
+export type Rule =
+  | 'entity-entity'
+  | 'store-store'
+  | 'entity-store'
+  | 'crossing'
+  | 'single-set'
+  | 'process-io'
+  | 'same-name'
+  | 'store-io'
+  | 'process-unconnected'
+  | 'entity-unconnected';
+
+/** VCAA's rules for each kind of diagram, in the order the outcome-specific requirements list them. */
+export const RULES: Record<DiagramKind, readonly Rule[]> = {
+  dfd: ['entity-entity', 'store-store', 'entity-store', 'crossing', 'single-set', 'process-io', 'same-name', 'store-io', 'process-unconnected', 'entity-unconnected'],
+  context: ['entity-entity', 'crossing', 'single-set'],
+};
+
+/** The rules an injected error can break on a data flow diagram. */
+export const INJECTED_RULES: readonly Rule[] = ['entity-entity', 'store-store', 'entity-store', 'crossing', 'process-io', 'same-name', 'store-io', 'entity-unconnected'];
 
 /**
  * One injected error, encoded for instances: 'entity-entity', 'store-customer', 'store-staff',
- * 'store-store', 'unlabelled-f5', 'noun-p2', 'no-inputs-p2' or 'no-outputs-p1'.
+ * 'staff-store', 'store-store', 'crossing', 'same-name-p2', 'no-inputs-p3', 'no-outputs-d1' or
+ * 'no-flows-e2'.
  */
 export type Injection = string;
 
 /** The id of the flow an error adds. */
 export const ADDED_FLOW = 'x1';
 
-export type DiagramKind = 'context' | 'dfd';
+/** For the same-name error: the input whose name a process's output copies, and that output. */
+export const SAME_NAME: Record<ProcessSlot, { input: FlowSlot; output: FlowSlot }> = {
+  p1: { input: 'f1', output: 'f4' },
+  p2: { input: 'f5', output: 'f6' },
+  p3: { input: 'f10', output: 'f11' },
+};
+
+/** The flow the crossing error's added flow crosses. */
+export const CROSSED_FLOW: FlowSlot = 'f4';
 
 export function ruleOf(injection: Injection): Rule {
   if (injection === 'entity-entity') return 'entity-entity';
-  if (injection === 'store-customer' || injection === 'store-staff') return 'store-entity';
+  if (injection === 'store-customer' || injection === 'store-staff' || injection === 'staff-store') return 'entity-store';
   if (injection === 'store-store') return 'store-store';
-  if (injection.startsWith('unlabelled-')) return 'unlabelled';
-  if (injection.startsWith('noun-')) return 'noun';
-  if (injection.startsWith('no-inputs-') || injection.startsWith('no-outputs-')) return 'no-io';
+  if (injection === 'crossing') return 'crossing';
+  if (/^same-name-p[1-3]$/.test(injection)) return 'same-name';
+  if (/^no-(inputs|outputs)-p[1-3]$/.test(injection)) return 'process-io';
+  if (/^no-(inputs|outputs)-d[1-3]$/.test(injection)) return 'store-io';
+  if (/^no-flows-e[1-3]$/.test(injection)) return 'entity-unconnected';
   throw new Error(`unknown dfd injection ${injection}`);
 }
 
-/** The id or `from->to` key of the element an injection breaks: the process, or the flow. */
+/** The id or flow id of the element an injection breaks: the node, or the flow. */
 export function faultyKey(injection: Injection): string {
   const rule = ruleOf(injection);
-  if (rule === 'noun' || rule === 'no-io') return injection.split('-').pop()!;
-  if (rule === 'unlabelled') return injection.slice('unlabelled-'.length);
+  if (rule === 'process-io' || rule === 'store-io' || rule === 'entity-unconnected') return injection.split('-').pop()!;
+  if (rule === 'same-name') return SAME_NAME[injection.split('-').pop() as ProcessSlot].output;
   return ADDED_FLOW;
+}
+
+/**
+ * Elements that take part in the broken rule without being the faulty one: the flow the added
+ * flow crosses, or the input whose name the output copies. They are never marked, so exactly one
+ * marked element is wrong.
+ */
+export function partnerKeys(injection: Injection): string[] {
+  const rule = ruleOf(injection);
+  if (rule === 'crossing') return [CROSSED_FLOW];
+  if (rule === 'same-name') return [SAME_NAME[injection.split('-').pop() as ProcessSlot].input];
+  return [];
 }
 
 /**
@@ -79,19 +125,13 @@ function place(at: { x: number; y: number }, width: number, height: number, view
 }
 
 function nodeLabel(sys: DfdSystem, slot: NodeSlot): string {
-  if (slot.startsWith('e')) return sys.entities[slot as keyof DfdSystem['entities']];
+  if (slot.startsWith('e')) return sys.entities[slot as EntitySlot];
   if (slot.startsWith('p')) return sys.processes[slot as ProcessSlot];
   return sys.stores[slot as keyof DfdSystem['stores']];
 }
 
 function nodeType(slot: NodeSlot): DfdNode['type'] {
   return slot.startsWith('e') ? 'entity' : slot.startsWith('p') ? 'process' : 'store';
-}
-
-function nodeNumber(slot: NodeSlot): string | undefined {
-  if (slot.startsWith('p')) return slot.slice(1);
-  if (slot.startsWith('d')) return `D${slot.slice(1)}`;
-  return undefined;
 }
 
 /** The flow an error adds, or null. */
@@ -105,11 +145,25 @@ function addedFlow(sys: DfdSystem, injection: Injection | null): Flow | null {
       return { id: ADDED_FLOW, from: 'd2', to: 'e1', label: sys.wrong.storeToCustomer };
     case 'store-staff':
       return { id: ADDED_FLOW, from: 'd1', to: 'e2', label: sys.wrong.storeToStaff };
+    case 'staff-store':
+      return { id: ADDED_FLOW, from: 'e2', to: 'd1', label: sys.wrong.staffToStore };
     case 'store-store':
       return { id: ADDED_FLOW, from: 'd2', to: 'd3', label: sys.wrong.storeToStore };
+    case 'crossing':
+      return { id: ADDED_FLOW, from: 'e1', to: 'p2', label: sys.wrong.crossing };
     default:
       return null;
   }
+}
+
+/** The flows an injection removes: a node's inputs, its outputs, or every flow of an entity. */
+function removes(injection: Injection | null): (f: Flow) => boolean {
+  const m = injection ? /^no-(inputs|outputs|flows)-([epd][1-3])$/.exec(injection) : null;
+  if (!m) return () => false;
+  const [, what, slot] = m;
+  if (what === 'inputs') return (f) => f.to === slot;
+  if (what === 'outputs') return (f) => f.from === slot;
+  return (f) => f.from === slot || f.to === slot;
 }
 
 export interface DfdOptions {
@@ -121,32 +175,34 @@ export interface DfdOptions {
   caption?: string;
 }
 
-/** The business's Level 1 DFD. */
+/** The business's Level 1 DFD. Nodes carry no number: processes and stores are known by name. */
 export function buildDfd(sys: DfdSystem, opts: DfdOptions = {}): Dfd {
   const view = opts.view ?? 0;
   const injection = opts.injection ?? null;
   const blanks = new Set(opts.blanks ?? []);
   const rule = injection ? ruleOf(injection) : null;
+  const at = (p: { x: number; y: number }) => place(p, DFD_WIDTH, DFD_HEIGHT, view);
   const nodes: DfdNode[] = ([...ENTITY_SLOTS, ...PROCESS_SLOTS, ...STORE_SLOTS] as NodeSlot[])
     .sort((a, b) => NODE_AT[a].y - NODE_AT[b].y || NODE_AT[a].x - NODE_AT[b].x)
     .map((slot) => {
-      let label = nodeLabel(sys, slot);
-      if (rule === 'noun' && faultyKey(injection!) === slot) label = sys.nouns[slot as ProcessSlot];
-      if (blanks.has(slot)) label = '?';
-      const number = nodeNumber(slot);
       const type = nodeType(slot);
       const size = type === 'entity' ? { w: ENTITY_W } : {};
-      return { id: slot, type, label, ...(number ? { number } : {}), ...place(NODE_AT[slot], DFD_WIDTH, DFD_HEIGHT, view), ...size };
+      return { id: slot, type, label: blanks.has(slot) ? '?' : nodeLabel(sys, slot), ...at(NODE_AT[slot]), ...size };
     });
-  let flows: Flow[] = FLOW_SLOTS.map((slot) => ({ id: slot, ...FLOW_ENDS[slot], label: sys.flows[slot] }));
-  if (rule === 'unlabelled') flows = flows.map((f) => (f.id === faultyKey(injection!) ? { ...f, label: '' } : f));
-  if (rule === 'no-io') {
-    const process = faultyKey(injection!);
-    const inputs = injection!.startsWith('no-inputs-');
-    flows = flows.filter((f) => (inputs ? f.to !== process : f.from !== process));
+  const drop = removes(injection);
+  let flows: Flow[] = FLOW_SLOTS.map((slot): Flow => ({ id: slot, ...FLOW_ENDS[slot], label: sys.flows[slot] })).filter((f) => !drop(f));
+  if (rule === 'same-name') {
+    const { input, output } = SAME_NAME[injection!.split('-').pop() as ProcessSlot];
+    flows = flows.map((f) => (f.id === output ? { ...f, label: sys.flows[input] } : f));
   }
   const added = addedFlow(sys, injection);
-  if (added) flows.push(added);
+  if (added && rule === 'crossing') {
+    // Both labels move off the point where the lines cross, each towards its far end.
+    flows = flows.map((f) => (f.id === CROSSED_FLOW ? { ...f, labelAt: at(CROSSING_LABELS.crossed) } : f));
+    flows.push({ ...added, labelAt: at(CROSSING_LABELS.added) });
+  } else if (added) {
+    flows.push(added);
+  }
   return {
     id: opts.id ?? `dfd-${sys.id}`,
     kind: 'dfd',
@@ -160,15 +216,14 @@ export function buildDfd(sys: DfdSystem, opts: DfdOptions = {}): Dfd {
   };
 }
 
-/** The business's context diagram: the system as one process, with every flow to or from an entity. */
+/** The business's context diagram: the system as one circle, with every flow to or from an entity. */
 export function buildContext(sys: DfdSystem, opts: Pick<DfdOptions, 'view' | 'injection' | 'id'> = {}): ContextDiagram {
   const view = opts.view ?? 0;
   const injection = opts.injection ?? null;
   const rule = injection ? ruleOf(injection) : null;
-  if (rule && rule !== 'entity-entity' && rule !== 'unlabelled') throw new Error(`a context diagram can't show a ${rule} error`);
+  if (rule && rule !== 'entity-entity') throw new Error(`a context diagram can't show a ${rule} error`);
   const toSystem = (slot: NodeSlot) => (slot.startsWith('p') ? 'system' : slot);
-  let flows: Flow[] = CONTEXT_FLOWS.map((slot) => ({ id: slot, from: toSystem(FLOW_ENDS[slot].from), to: toSystem(FLOW_ENDS[slot].to), label: sys.flows[slot] }));
-  if (rule === 'unlabelled') flows = flows.map((f) => (f.id === faultyKey(injection!) ? { ...f, label: '' } : f));
+  const flows: Flow[] = CONTEXT_FLOWS.map((slot) => ({ id: slot, from: toSystem(FLOW_ENDS[slot].from), to: toSystem(FLOW_ENDS[slot].to), label: sys.flows[slot] }));
   const system = place(CONTEXT_SYSTEM_AT, CONTEXT_WIDTH, CONTEXT_HEIGHT, view);
   const entityAt = (slot: EntitySlot) => place(CONTEXT_ENTITY_AT[slot], CONTEXT_WIDTH, CONTEXT_HEIGHT, view);
   const added = addedFlow(sys, injection);
@@ -191,32 +246,35 @@ export function buildContext(sys: DfdSystem, opts: Pick<DfdOptions, 'view' | 'in
   };
 }
 
-/** Every flow of a DFD or context diagram, with the process at `system` for a context diagram. */
-function flowsOf(fig: Dfd | ContextDiagram): readonly Flow[] {
-  return fig.flows;
+/**
+ * True when removing flows leaves the injected rule the only one broken: every other process and
+ * store keeps an input and an output, every other entity keeps a flow, and the faulty process or
+ * store keeps at least one flow (with none at all it would break a second rule as well).
+ */
+function onlyRuleBroken(fig: Dfd, faulty: string): boolean {
+  const flows = fig.flows;
+  const hasIn = (id: string) => flows.some((f) => f.to === id);
+  const hasOut = (id: string) => flows.some((f) => f.from === id);
+  return fig.nodes.every((n) => {
+    if (n.id === faulty) return n.type === 'entity' || hasIn(n.id) || hasOut(n.id);
+    return n.type === 'entity' ? hasIn(n.id) || hasOut(n.id) : hasIn(n.id) && hasOut(n.id);
+  });
+}
+
+/** The injections a business supports on a kind of diagram, each breaking exactly one rule. */
+export function injectionsFor(sys: DfdSystem, kind: DiagramKind): Injection[] {
+  if (kind === 'context') return ['entity-entity'];
+  const removals = [
+    ...[...PROCESS_SLOTS, ...STORE_SLOTS].flatMap((slot) => [`no-inputs-${slot}`, `no-outputs-${slot}`]),
+    ...ENTITY_SLOTS.map((slot) => `no-flows-${slot}`),
+  ].filter((injection) => onlyRuleBroken(buildDfd(sys, { injection }), faultyKey(injection)));
+  return ['entity-entity', 'store-customer', 'store-staff', 'staff-store', 'store-store', 'crossing', ...PROCESS_SLOTS.map((p) => `same-name-${p}`), ...removals];
 }
 
 /**
- * The injections a business supports on a kind of diagram. A process loses its inputs or outputs
- * only when every other element still has a flow and every other process keeps an input and an
- * output, so the injected error is the only one.
+ * Names an element for feedback, by name as VCAA's diagrams do: "the process Prepare order", "the
+ * Orders data store", or "the flow order_record from Orders to Customer".
  */
-export function injectionsFor(sys: DfdSystem, kind: DiagramKind): Injection[] {
-  if (kind === 'context') return ['entity-entity', ...CONTEXT_FLOWS.map((f) => `unlabelled-${f}`)];
-  const out: Injection[] = ['entity-entity', 'store-customer', 'store-staff', 'store-store', ...FLOW_SLOTS.map((f) => `unlabelled-${f}`), ...PROCESS_SLOTS.map((p) => `noun-${p}`)];
-  for (const p of PROCESS_SLOTS) {
-    for (const missing of ['inputs', 'outputs'] as const) {
-      const injection = `no-${missing}-${p}`;
-      const flows = flowsOf(buildDfd(sys, { injection }));
-      const connected = [...ENTITY_SLOTS, ...PROCESS_SLOTS, ...STORE_SLOTS].every((n) => flows.some((f) => f.from === n || f.to === n));
-      const othersOk = PROCESS_SLOTS.filter((q) => q !== p).every((q) => flows.some((f) => f.to === q) && flows.some((f) => f.from === q));
-      if (connected && othersOk) out.push(injection);
-    }
-  }
-  return out;
-}
-
-/** Names an element for feedback: "process 2, Prepare order" or "the flow order_record from Orders to Customer". */
 export function describeElement(fig: Dfd | ContextDiagram, key: string): string {
   const name = (id: string): string => {
     if (fig.kind === 'context') {
@@ -232,8 +290,8 @@ export function describeElement(fig: Dfd | ContextDiagram, key: string): string 
   } else {
     const node = fig.nodes.find((n) => n.id === key);
     if (node) {
-      if (node.type === 'process') return `process ${node.number}, ${node.label}`;
-      if (node.type === 'store') return `data store ${node.number}, ${node.label}`;
+      if (node.type === 'process') return `the process ${node.label}`;
+      if (node.type === 'store') return `the ${node.label} data store`;
       return `the external entity ${node.label}`;
     }
   }

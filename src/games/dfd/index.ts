@@ -1,4 +1,4 @@
-/** The `dfd` game (Section 7.3, P1): convention errors in context diagrams and DFDs, and labelling a Level 1 DFD. */
+/** The `dfd` game (Section 7.3, P1): broken rules in context diagrams and DFDs, and labelling a Level 1 DFD. */
 import { createQuizSession } from '../engine';
 import type { Game } from '../types';
 import { dfdItem, generateDfdItem, planDfdRound } from './items';

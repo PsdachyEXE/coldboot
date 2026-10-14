@@ -1,9 +1,9 @@
 /**
  * `reqs` items. A classify item shows one statement from an organisation and asks whether it is
  * a functional requirement, a non-functional requirement, a constraint or scope. A type item
- * follows a non-functional statement and asks which quality it concerns. Each item stands alone
- * (a type item says the statement is non-functional); instances ("reqs:classify:physio-c2:
- * seed=4:normal") regenerate them exactly.
+ * follows a non-functional statement and asks which quality it concerns; a kind item follows a
+ * constraint and asks which kind it is. Each item stands alone (a type or kind item says what the
+ * statement is); instances ("reqs:classify:physio-c2:seed=4:normal") regenerate them exactly.
  */
 import type { KkId } from '../../content/schema';
 import { normaliseAnswer } from '../../lib/text';
@@ -11,16 +11,27 @@ import type { TerminalBlock } from '../../terminal/blocks';
 import { matchOption } from '../answers';
 import { childSeed, mulberry32, pick, shuffle, type Rng } from '../prng';
 import type { Difficulty, QuizItem } from '../types';
-import { CORE_NFR_TYPES, ORGANISATIONS, STATEMENTS, type Category, type NfrType, type Statement } from './statements';
+import {
+  CONSTRAINT_KINDS,
+  CORE_CONSTRAINT_KINDS,
+  CORE_NFR_TYPES,
+  NFR_TYPES,
+  ORGANISATIONS,
+  STATEMENTS,
+  type Category,
+  type ConstraintKind,
+  type NfrType,
+  type Statement,
+} from './statements';
 
-export const REQS_KINDS = ['classify', 'type'] as const;
+export const REQS_KINDS = ['classify', 'type', 'kind'] as const;
 export type ReqsKind = (typeof REQS_KINDS)[number];
 
 export interface ReqsSpec {
   kind: ReqsKind;
   statement: string;
   seed: number;
-  /** A type question straight after its statement in a round: it doesn't repeat the organisation. */
+  /** A type or kind question straight after its statement in a round: it doesn't repeat the organisation. */
   followUp?: boolean;
 }
 
@@ -41,15 +52,24 @@ export const CATEGORY_LABELS: Record<Category, string> = {
 };
 
 export const TYPE_LABELS: Record<NfrType, string> = {
-  reliability: 'Reliability',
   usability: 'Usability',
+  reliability: 'Reliability',
   portability: 'Portability',
-  efficiency: 'Efficiency (response time)',
+  robustness: 'Robustness',
   maintainability: 'Maintainability',
 };
 
+export const KIND_LABELS: Record<ConstraintKind, string> = {
+  economic: 'Economic',
+  technical: 'Technical',
+  social: 'Social',
+  legal: 'Legal',
+  usability: 'Usability',
+};
+
 export const CATEGORY_CHIPS = ['functional', 'non-functional', 'constraint', 'scope'];
-export const TYPE_CHIPS: readonly string[] = ['reliability', 'usability', 'portability', 'efficiency', 'maintainability'];
+export const TYPE_CHIPS: readonly string[] = [...NFR_TYPES];
+export const KIND_CHIPS: readonly string[] = [...CONSTRAINT_KINDS];
 
 const CATEGORY_OPTIONS: readonly { value: Category; accept: readonly string[] }[] = [
   { value: 'functional', accept: ['functional', 'functional requirement', 'functional requirements', 'fr', 'function'] },
@@ -62,11 +82,19 @@ const CATEGORY_OPTIONS: readonly { value: Category; accept: readonly string[] }[
 ];
 
 const TYPE_OPTIONS: readonly { value: NfrType; accept: readonly string[] }[] = [
-  { value: 'reliability', accept: ['reliability', 'reliable', 'availability', 'available'] },
   { value: 'usability', accept: ['usability', 'usable', 'ease of use', 'easy to use', 'user friendliness', 'user-friendly', 'user friendly'] },
+  { value: 'reliability', accept: ['reliability', 'reliable', 'availability', 'available'] },
   { value: 'portability', accept: ['portability', 'portable'] },
-  { value: 'efficiency', accept: ['efficiency', 'efficient', 'response time', 'performance', 'speed', 'efficiency response time'] },
+  { value: 'robustness', accept: ['robustness', 'robust'] },
   { value: 'maintainability', accept: ['maintainability', 'maintainable', 'maintenance', 'modifiability', 'ease of maintenance'] },
+];
+
+const KIND_OPTIONS: readonly { value: ConstraintKind; accept: readonly string[] }[] = [
+  { value: 'economic', accept: ['economic', 'economical', 'economics', 'cost', 'time', 'cost and time', 'time and cost', 'financial', 'money', 'budget'] },
+  { value: 'technical', accept: ['technical', 'technological', 'technology', 'hardware', 'equipment', 'compatibility', 'capacity'] },
+  { value: 'social', accept: ['social', 'expertise', 'user expertise', "users' expertise", 'level of expertise'] },
+  { value: 'legal', accept: ['legal', 'law', 'legislation', 'privacy', 'copyright', 'intellectual property'] },
+  { value: 'usability', accept: ['usability', 'accessibility', 'ease of use', 'usefulness'] },
 ];
 
 function strip(input: string): string {
@@ -83,9 +111,14 @@ export function parseCategory(input: string): Category | null {
   return matchOption(strip(input), CATEGORY_OPTIONS);
 }
 
-/** "Usability", "response time" and "Efficiency (response time)" all parse. Null otherwise. */
+/** "Usability", "robust" and "Maintainability" all parse. Null otherwise. */
 export function parseNfrType(input: string): NfrType | null {
   return matchOption(strip(input), TYPE_OPTIONS);
+}
+
+/** "Economic", "an economic constraint", "legal" and "accessibility" all parse. Null otherwise. */
+export function parseConstraintKind(input: string): ConstraintKind | null {
+  return matchOption(strip(input).replace(/\s+constraints?$/, ''), KIND_OPTIONS);
 }
 
 export function statementById(id: string): Statement {
@@ -107,7 +140,8 @@ function statementBlocks(s: Statement): TerminalBlock[] {
 }
 
 const CATEGORY_HINT = 'Type functional, non-functional, constraint or scope.';
-const TYPE_HINT = 'Type reliability, usability, portability, efficiency or maintainability.';
+const TYPE_HINT = 'Type usability, reliability, portability, robustness or maintainability.';
+const KIND_HINT = 'Type economic, technical, social, legal or usability.';
 
 export function classifyItem(statementId: string, seed: number, difficulty: Difficulty): QuizItem {
   const s = statementById(statementId);
@@ -125,7 +159,7 @@ export function classifyItem(statementId: string, seed: number, difficulty: Diff
     check(input) {
       const chosen = parseCategory(input);
       if (!chosen) return { correct: false, expected, reason: CATEGORY_HINT, counted: false };
-      const note = chosen === s.category ? '' : ` ${WHY_NOT[s.category][chosen]}`;
+      const note = chosen === s.category ? '' : ` ${whyNot(s, chosen)}`;
       return { correct: chosen === s.category, expected, reason: `${s.why}${note}` };
     },
   };
@@ -138,7 +172,7 @@ export function classifyItem(statementId: string, seed: number, difficulty: Diff
 export const WHY_NOT: Record<Category, Record<Category, string>> = {
   functional: {
     functional: '',
-    'non-functional': "It isn't non-functional: it names something the solution does, not a quality such as speed or ease of use.",
+    'non-functional': "It isn't non-functional: it names something the solution does, not a quality such as reliability or ease of use.",
     constraint: "It isn't a constraint: it names something the solution does, not a limit on the project.",
     scope: "It isn't scope: scope sets the boundary of the whole solution, while this names one thing it must do.",
   },
@@ -146,7 +180,7 @@ export const WHY_NOT: Record<Category, Record<Category, string>> = {
     functional: "It isn't functional: it doesn't add something the solution does; it says how well it must work.",
     'non-functional': '',
     constraint:
-      "It isn't a constraint: a constraint limits the project from outside, such as a budget, a deadline, a law or equipment it must use. This is a quality of the solution itself.",
+      "It isn't a constraint: a constraint limits the project from outside, such as a budget, a deadline, a law, the equipment available or the users' expertise. This is a quality of the solution itself.",
     scope: "It isn't scope: it doesn't say what the solution will or won't cover; it says how well it must work.",
   },
   constraint: {
@@ -163,45 +197,116 @@ export const WHY_NOT: Record<Category, Record<Category, string>> = {
   },
 };
 
+/** Usability is on both lists (the PSM's qualities and its constraints), so that mix-up gets its own line either way. */
+const USABILITY_BOTH =
+  "Usability can be a non-functional requirement too, but only when a line sets a target for the finished solution, such as a new user finishing a task within two minutes. This line describes users the design must allow for instead.";
+const USABILITY_BOTH_NFR =
+  'Usability can be a constraint too, but only when a line describes users the design must allow for, such as members who are colour-blind. This line sets a target for the finished solution instead.';
+
+function whyNot(s: Statement, chosen: Category): string {
+  if (s.kind === 'usability' && chosen === 'non-functional') return `${WHY_NOT.constraint['non-functional']} ${USABILITY_BOTH}`;
+  if (s.type === 'usability' && chosen === 'constraint') return `${WHY_NOT['non-functional'].constraint} ${USABILITY_BOTH_NFR}`;
+  return WHY_NOT[s.category][chosen];
+}
+
+/** The quality pair students mix up most, by the right quality then the chosen one. */
+const TYPE_MIX_UPS: Partial<Record<NfrType, Partial<Record<NfrType, string>>>> = {
+  robustness: { reliability: 'Reliability is about working correctly, time after time, in normal use; coping with something unexpected, such as bad input or a misused button, is robustness.' },
+  reliability: { robustness: 'Robustness is about coping with something unexpected, such as bad input; working correctly, or being available, time after time is reliability.' },
+};
+
+/** The kinds of constraint that both describe users, by the right kind then the chosen one. */
+const KIND_MIX_UPS: Partial<Record<ConstraintKind, Partial<Record<ConstraintKind, string>>>> = {
+  social: { usability: "Usability constraints cover accessibility, usefulness and ease of use; how much expertise the users have is the social kind." },
+  usability: { social: "Social constraints are about the users' level of expertise; a need such as accessibility is the usability kind." },
+};
+
+function followUpContext(s: Statement, followUp: boolean, what: string): TerminalBlock[] {
+  return followUp
+    ? [{ kind: 'text', text: `Follow-up on the same statement: "${s.text}"`, tone: 'muted' }]
+    : [...statementBlocks(s), { kind: 'text', text: `This is ${what}.`, tone: 'muted' }];
+}
+
 export function typeItem(statementId: string, seed: number, difficulty: Difficulty, followUp = false): QuizItem {
   const s = statementById(statementId);
   if (s.category !== 'non-functional' || !s.type) throw new Error(`${statementId} is not a non-functional requirement`);
   const type = s.type;
   const expected = TYPE_LABELS[type];
-  const context: TerminalBlock[] = followUp
-    ? [{ kind: 'text', text: `Follow-up on the same statement: "${s.text}"`, tone: 'muted' }]
-    : [...statementBlocks(s), { kind: 'text', text: 'This is a non-functional requirement.', tone: 'muted' }];
   return {
     id: 'gen-reqs-type',
-    kk: ['U3O2-KK05'],
-    instance: `reqs:${followUp ? 'follow-up' : 'type'}:${s.id}:seed=${seed}:${difficulty}`,
+    // The five qualities are the PSM specifications' list; U3O2-KK05 names none.
+    kk: ['U3O2-KK05', 'PSM'],
+    instance: `reqs:${followUp ? 'type-next' : 'type'}:${s.id}:seed=${seed}:${difficulty}`,
     chips: [...TYPE_CHIPS],
-    prompt: [...context, { kind: 'text', text: 'Which quality does it concern?', tone: 'accent' }, { kind: 'text', text: TYPE_HINT, tone: 'muted' }],
+    prompt: [
+      ...followUpContext(s, followUp, 'a non-functional requirement'),
+      { kind: 'text', text: 'Which quality does it concern?', tone: 'accent' },
+      { kind: 'text', text: TYPE_HINT, tone: 'muted' },
+    ],
     check(input) {
       const chosen = parseNfrType(input);
       if (!chosen) return { correct: false, expected, reason: TYPE_HINT, counted: false };
-      return { correct: chosen === type, expected, reason: s.typeWhy! };
+      const note = TYPE_MIX_UPS[type]?.[chosen];
+      return { correct: chosen === type, expected, reason: note ? `${s.typeWhy!} ${note}` : s.typeWhy! };
+    },
+  };
+}
+
+export function kindItem(statementId: string, seed: number, difficulty: Difficulty, followUp = false): QuizItem {
+  const s = statementById(statementId);
+  if (s.category !== 'constraint' || !s.kind) throw new Error(`${statementId} is not a constraint`);
+  const kind = s.kind;
+  const expected = KIND_LABELS[kind];
+  return {
+    id: 'gen-reqs-kind',
+    // Usability is a constraint in the PSM specifications, not in U3O2-KK06's list.
+    kk: kind === 'usability' ? ['U3O2-KK06', 'PSM'] : ['U3O2-KK06'],
+    instance: `reqs:${followUp ? 'kind-next' : 'kind'}:${s.id}:seed=${seed}:${difficulty}`,
+    chips: [...KIND_CHIPS],
+    prompt: [
+      ...followUpContext(s, followUp, 'a constraint'),
+      { kind: 'text', text: 'Which kind of constraint is it?', tone: 'accent' },
+      { kind: 'text', text: KIND_HINT, tone: 'muted' },
+    ],
+    check(input) {
+      const chosen = parseConstraintKind(input);
+      if (!chosen) return { correct: false, expected, reason: KIND_HINT, counted: false };
+      const note = KIND_MIX_UPS[kind]?.[chosen];
+      return { correct: chosen === kind, expected, reason: note ? `${s.kindWhy!} ${note}` : s.kindWhy! };
     },
   };
 }
 
 export function reqsItem(spec: ReqsSpec, difficulty: Difficulty): QuizItem {
   const seed = spec.seed >>> 0;
-  return spec.kind === 'classify' ? classifyItem(spec.statement, seed, difficulty) : typeItem(spec.statement, seed, difficulty, spec.followUp);
+  switch (spec.kind) {
+    case 'classify':
+      return classifyItem(spec.statement, seed, difficulty);
+    case 'type':
+      return typeItem(spec.statement, seed, difficulty, spec.followUp);
+    case 'kind':
+      return kindItem(spec.statement, seed, difficulty, spec.followUp);
+  }
 }
 
 /** Regenerates an item from its instance string, or returns null when the string isn't one. */
 export function fromReqsInstance(instance: string): QuizItem | null {
-  const m = /^reqs:(classify|type|follow-up):([a-z]+-[a-z]\d+):seed=(\d+):(easy|normal|hard)$/.exec(instance);
+  const m = /^reqs:(classify|type|type-next|kind|kind-next):([a-z]+-[a-z]\d+):seed=(\d+):(easy|normal|hard)$/.exec(instance);
   if (!m || !STATEMENTS.some((s) => s.id === m[2]) || !DIFFICULTIES.includes(m[4] as Difficulty)) return null;
   const s = statementById(m[2]);
-  if (m[1] !== 'classify' && s.category !== 'non-functional') return null;
-  return reqsItem({ kind: m[1] === 'classify' ? 'classify' : 'type', statement: m[2], seed: Number(m[3]), followUp: m[1] === 'follow-up' }, m[4] as Difficulty);
+  const kind = m[1].replace('-next', '') as ReqsKind;
+  if (kind === 'type' && s.category !== 'non-functional') return null;
+  if (kind === 'kind' && s.category !== 'constraint') return null;
+  return reqsItem({ kind, statement: m[2], seed: Number(m[3]), followUp: m[1].endsWith('-next') }, m[4] as Difficulty);
 }
 
-/** Statements a difficulty may use: easy keeps to the support material's three qualities. */
+/**
+ * Statements a difficulty may use: easy keeps to the qualities of VCAA's worked example and the
+ * four kinds of constraint U3O2-KK06 lists.
+ */
 export function statementsFor(difficulty: Difficulty): Statement[] {
-  return STATEMENTS.filter((s) => difficulty !== 'easy' || !s.type || CORE_NFR_TYPES.includes(s.type));
+  if (difficulty !== 'easy') return [...STATEMENTS];
+  return STATEMENTS.filter((s) => (!s.type || CORE_NFR_TYPES.includes(s.type)) && (!s.kind || CORE_CONSTRAINT_KINDS.includes(s.kind)));
 }
 
 function take(rng: Rng, pool: readonly Statement[], n: number, difficulty: Difficulty, used: Set<string>): Statement[] {
@@ -221,8 +326,9 @@ export const ROUND_STATEMENTS = 7;
 export const ROUND_FOLLOW_UPS = 3;
 
 /**
- * A round of `count` items: seven statements (three non-functional, each followed by a type
- * question, plus at least one functional, one constraint and one scope statement).
+ * A round of `count` items: seven statements (at least two non-functional, two constraints, one
+ * functional and one scope), three of the non-functional ones and constraints each followed by a
+ * question on its quality or kind, at least one of each.
  */
 export function planReqsRound(seed: number, difficulty: Difficulty, count = 10): ReqsSpec[] {
   const rng = mulberry32(childSeed(seed, 'plan'));
@@ -231,27 +337,27 @@ export function planReqsRound(seed: number, difficulty: Difficulty, count = 10):
   const specs: ReqsSpec[] = [];
   const used = new Set<string>();
   for (let cycle = 0; specs.length < count; cycle++) {
-    const extra = pick(rng, ['functional', 'constraint', 'constraint'] as const);
-    const chosen = [
-      ...take(rng, of('non-functional'), ROUND_FOLLOW_UPS, difficulty, used),
-      ...take(rng, of('functional'), extra === 'functional' ? 2 : 1, difficulty, used),
-      ...take(rng, of('constraint'), extra === 'constraint' ? 2 : 1, difficulty, used),
-      ...take(rng, of('scope'), 1, difficulty, used),
-    ];
+    const extra = pick(rng, ['functional', 'non-functional', 'constraint'] as const);
+    const nfrs = take(rng, of('non-functional'), extra === 'non-functional' ? 3 : 2, difficulty, used);
+    const constraints = take(rng, of('constraint'), extra === 'constraint' ? 3 : 2, difficulty, used);
+    const chosen = [...nfrs, ...constraints, ...take(rng, of('functional'), extra === 'functional' ? 2 : 1, difficulty, used), ...take(rng, of('scope'), 1, difficulty, used)];
+    // One quality and one kind question, then a third on either.
+    const asked = new Set([nfrs[0].id, constraints[0].id, pick(rng, [...nfrs.slice(1), ...constraints.slice(1)]).id]);
     for (const [i, s] of shuffle(rng, chosen).entries()) {
       const itemSeed = childSeed(seed, `${cycle}:${i}`);
       specs.push({ kind: 'classify', statement: s.id, seed: itemSeed });
-      if (s.category === 'non-functional') specs.push({ kind: 'type', statement: s.id, seed: itemSeed, followUp: true });
+      if (asked.has(s.id)) specs.push({ kind: s.category === 'constraint' ? 'kind' : 'type', statement: s.id, seed: itemSeed, followUp: true });
     }
   }
   return specs.slice(0, count);
 }
 
-/** Game.generate: one self-contained item, a classification seven times in ten. */
+/** Game.generate: one self-contained item, a classification six times in ten. */
 export function generateReqsItem(seed: number, difficulty: Difficulty): QuizItem {
   const rng = mulberry32(childSeed(seed, 'kind'));
   const pool = statementsFor(difficulty);
-  if (rng() < 0.7) return classifyItem(pick(rng, pool).id, seed, difficulty);
-  return typeItem(pick(rng, pool.filter((s) => s.category === 'non-functional')).id, seed, difficulty);
+  const roll = rng();
+  if (roll < 0.6) return classifyItem(pick(rng, pool).id, seed, difficulty);
+  if (roll < 0.8) return typeItem(pick(rng, pool.filter((s) => s.category === 'non-functional')).id, seed, difficulty);
+  return kindItem(pick(rng, pool.filter((s) => s.category === 'constraint')).id, seed, difficulty);
 }
-

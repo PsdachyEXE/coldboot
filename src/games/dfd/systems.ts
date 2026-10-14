@@ -2,25 +2,28 @@
  * The `dfd` bank: six invented Australian businesses, each written for the same hand-laid Level 1
  * DFD layout and its matching context diagram. The layout (coordinates below, no auto-layout):
  *
- *   e1 entity          p1 process 1        d1 store
- *   d2 store           p2 process 2        e2 entity
- *   d3 store           p3 process 3        e3 entity
+ *   e1 entity          p1 process          d1 store
+ *   d2 store           p2 process          e2 entity
+ *   d3 store           p3 process          e3 entity
  *
- * Every business follows the same story: a customer (e1) makes a request that process 1 checks
- * against reference data (d1) and records (d2); process 2 fulfils it with a staff member (e2);
- * process 3 settles it with an outside organisation (e3) and records the result (d3). Labels,
- * flow names and the injected convention errors vary by business; a seed also picks one of four
- * views of the layout (mirrored left to right, flipped top to bottom, both, or neither).
+ * Every business follows the same story: a customer (e1) makes a request that p1 checks against
+ * reference data (d1, which p1 also updates) and records (d2); p2 fulfils it with a staff member
+ * (e2), reading the result p3 stored (d3); p3 settles it with an outside organisation (e3) and
+ * records the result (d3). So the correct diagram keeps every rule in VCAA's outcome-specific
+ * requirements: each process and each data store has at least one input and one output, no
+ * process sends out a flow named like one it receives, every entity sends or receives data, and
+ * no two flows cross. Labels, flow names and the injected errors vary by business; a seed also
+ * picks one of four views of the layout (mirrored left to right, flipped top to bottom, both, or
+ * neither).
  *
- * Process labels are verb phrases. Each business also has noun labels for its processes (for the
- * "process named with a noun" error), chosen so their first word can't be read as a verb, and
- * labels for the flows the other errors add.
+ * Processes and data stores are known by name alone, as in VCAA's diagrams: no process numbers and
+ * no store ids. Process names are verb phrases.
  */
 
 export const ENTITY_SLOTS = ['e1', 'e2', 'e3'] as const;
 export const PROCESS_SLOTS = ['p1', 'p2', 'p3'] as const;
 export const STORE_SLOTS = ['d1', 'd2', 'd3'] as const;
-export const FLOW_SLOTS = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11'] as const;
+export const FLOW_SLOTS = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12', 'f13'] as const;
 
 export type EntitySlot = (typeof ENTITY_SLOTS)[number];
 export type ProcessSlot = (typeof PROCESS_SLOTS)[number];
@@ -31,12 +34,10 @@ export type FlowSlot = (typeof FLOW_SLOTS)[number];
 export interface DfdSystem {
   id: string;
   org: string;
-  /** The context diagram's single process. */
+  /** The context diagram's system. */
   system: string;
   entities: Record<EntitySlot, string>;
   processes: Record<ProcessSlot, string>;
-  /** Noun names for each process, for the "process named with a noun" error. */
-  nouns: Record<ProcessSlot, string>;
   stores: Record<StoreSlot, string>;
   flows: Record<FlowSlot, string>;
   /** Labels for the flows the errors add. */
@@ -47,8 +48,12 @@ export interface DfdSystem {
     storeToCustomer: string;
     /** d1 straight to e2. */
     storeToStaff: string;
+    /** e2 straight to d1 (the 2025 examination's error: an entity writing to a store). */
+    staffToStore: string;
     /** d2 straight to d3. */
     storeToStore: string;
+    /** e1 to p2, a sound flow drawn where it crosses p1's flow to d2. */
+    crossing: string;
   };
 }
 
@@ -59,7 +64,6 @@ export const SYSTEMS: readonly DfdSystem[] = [
     system: 'Online ordering system',
     entities: { e1: 'Customer', e2: 'Kitchen staff', e3: 'Payment gateway' },
     processes: { p1: 'Take order', p2: 'Prepare order', p3: 'Take payment' },
-    nouns: { p1: 'Customer orders', p2: 'Kitchen dockets', p3: 'Card payments' },
     stores: { d1: 'Menu', d2: 'Orders', d3: 'Payments' },
     flows: {
       f1: 'order_details',
@@ -73,8 +77,17 @@ export const SYSTEMS: readonly DfdSystem[] = [
       f9: 'payment_request',
       f10: 'payment_result',
       f11: 'payment_record',
+      f12: 'sold_out_items',
+      f13: 'paid_orders',
     },
-    wrong: { entityEntity: { from: 'e3', label: 'payment_result' }, storeToCustomer: 'order_record', storeToStaff: 'menu_items', storeToStore: 'order_total' },
+    wrong: {
+      entityEntity: { from: 'e3', label: 'payment_result' },
+      storeToCustomer: 'order_record',
+      storeToStaff: 'menu_items',
+      staffToStore: 'sold_out_items',
+      storeToStore: 'order_total',
+      crossing: 'special_requests',
+    },
   },
   {
     id: 'bikes',
@@ -82,7 +95,6 @@ export const SYSTEMS: readonly DfdSystem[] = [
     system: 'Bike hire system',
     entities: { e1: 'Rider', e2: 'Workshop staff', e3: 'Payment gateway' },
     processes: { p1: 'Book bike', p2: 'Prepare bike', p3: 'Take deposit' },
-    nouns: { p1: 'Rider bookings', p2: 'Workshop jobs', p3: 'Payment receipts' },
     stores: { d1: 'Bikes', d2: 'Bookings', d3: 'Deposits' },
     flows: {
       f1: 'booking_request',
@@ -96,8 +108,17 @@ export const SYSTEMS: readonly DfdSystem[] = [
       f9: 'deposit_request',
       f10: 'deposit_result',
       f11: 'deposit_record',
+      f12: 'bike_booked',
+      f13: 'deposit_status',
     },
-    wrong: { entityEntity: { from: 'e3', label: 'deposit_result' }, storeToCustomer: 'booking_details', storeToStaff: 'bike_list', storeToStore: 'hire_charge' },
+    wrong: {
+      entityEntity: { from: 'e3', label: 'deposit_result' },
+      storeToCustomer: 'booking_details',
+      storeToStaff: 'bike_list',
+      staffToStore: 'bike_condition',
+      storeToStore: 'hire_charge',
+      crossing: 'rider_height',
+    },
   },
   {
     id: 'garden',
@@ -105,7 +126,6 @@ export const SYSTEMS: readonly DfdSystem[] = [
     system: 'Online order system',
     entities: { e1: 'Customer', e2: 'Warehouse staff', e3: 'Courier' },
     processes: { p1: 'Take order', p2: 'Pack order', p3: 'Arrange delivery' },
-    nouns: { p1: 'Customer orders', p2: 'Parcels', p3: 'Delivery dockets' },
     stores: { d1: 'Products', d2: 'Orders', d3: 'Deliveries' },
     flows: {
       f1: 'order_details',
@@ -119,8 +139,17 @@ export const SYSTEMS: readonly DfdSystem[] = [
       f9: 'pickup_request',
       f10: 'tracking_number',
       f11: 'delivery_record',
+      f12: 'stock_reserved',
+      f13: 'delivery_label',
     },
-    wrong: { entityEntity: { from: 'e2', label: 'parcel_details' }, storeToCustomer: 'order_record', storeToStaff: 'product_details', storeToStore: 'delivery_address' },
+    wrong: {
+      entityEntity: { from: 'e2', label: 'parcel_details' },
+      storeToCustomer: 'order_record',
+      storeToStaff: 'product_details',
+      staffToStore: 'stock_count',
+      storeToStore: 'delivery_address',
+      crossing: 'gift_message',
+    },
   },
   {
     id: 'swim',
@@ -128,7 +157,6 @@ export const SYSTEMS: readonly DfdSystem[] = [
     system: 'Enrolment system',
     entities: { e1: 'Parent', e2: 'Swim instructor', e3: 'Payment gateway' },
     processes: { p1: 'Enrol student', p2: 'Allocate class', p3: 'Collect fees' },
-    nouns: { p1: 'Student enrolments', p2: 'Class lists', p3: 'Term fees' },
     stores: { d1: 'Classes', d2: 'Enrolments', d3: 'Fee payments' },
     flows: {
       f1: 'enrolment_form',
@@ -142,31 +170,48 @@ export const SYSTEMS: readonly DfdSystem[] = [
       f9: 'payment_request',
       f10: 'payment_result',
       f11: 'fee_record',
+      f12: 'place_taken',
+      f13: 'fee_status',
     },
-    wrong: { entityEntity: { from: 'e3', label: 'payment_result' }, storeToCustomer: 'enrolment_details', storeToStaff: 'class_details', storeToStore: 'term_fee' },
+    wrong: {
+      entityEntity: { from: 'e3', label: 'payment_result' },
+      storeToCustomer: 'enrolment_details',
+      storeToStaff: 'class_details',
+      staffToStore: 'class_times',
+      storeToStore: 'term_fee',
+      crossing: 'swimming_level',
+    },
   },
   {
     id: 'vet',
     org: 'Bluegum Vet Clinic in Bairnsdale',
     system: 'Appointment system',
-    entities: { e1: 'Pet owner', e2: 'Vet', e3: 'Pet insurer' },
-    processes: { p1: 'Book appointment', p2: 'Record consultation', p3: 'Lodge claim' },
-    nouns: { p1: 'Appointment bookings', p2: 'Consultation notes', p3: 'Insurance claims' },
-    stores: { d1: 'Vet rosters', d2: 'Appointments', d3: 'Claims' },
+    entities: { e1: 'Pet owner', e2: 'Vet', e3: 'Pathology lab' },
+    processes: { p1: 'Book appointment', p2: 'Record consultation', p3: 'Order tests' },
+    stores: { d1: 'Vet rosters', d2: 'Appointments', d3: 'Test results' },
     flows: {
       f1: 'booking_request',
       f2: 'appointment_time',
       f3: 'vet_availability',
       f4: 'new_appointment',
-      f5: 'appointment_details',
+      f5: 'visit_details',
       f6: 'daily_list',
       f7: 'consultation_notes',
-      f8: 'consultation_fee',
-      f9: 'claim_details',
-      f10: 'claim_outcome',
-      f11: 'claim_record',
+      f8: 'test_request',
+      f9: 'sample_details',
+      f10: 'lab_report',
+      f11: 'result_record',
+      f12: 'slot_taken',
+      f13: 'past_results',
     },
-    wrong: { entityEntity: { from: 'e2', label: 'consultation_notes' }, storeToCustomer: 'visit_details', storeToStaff: 'vet_roster', storeToStore: 'consultation_fee' },
+    wrong: {
+      entityEntity: { from: 'e2', label: 'consultation_notes' },
+      storeToCustomer: 'visit_details',
+      storeToStaff: 'vet_roster',
+      staffToStore: 'roster_change',
+      storeToStore: 'tests_needed',
+      crossing: 'symptoms',
+    },
   },
   {
     id: 'mechanic',
@@ -174,12 +219,11 @@ export const SYSTEMS: readonly DfdSystem[] = [
     system: 'Service booking system',
     entities: { e1: 'Car owner', e2: 'Mechanic', e3: 'Parts supplier' },
     processes: { p1: 'Book service', p2: 'Allocate job', p3: 'Order parts' },
-    nouns: { p1: 'Workshop bookings', p2: 'Job sheets', p3: 'Parts invoices' },
-    stores: { d1: 'Service prices', d2: 'Jobs', d3: 'Parts orders' },
+    stores: { d1: 'Workshop bays', d2: 'Jobs', d3: 'Parts orders' },
     flows: {
       f1: 'service_request',
       f2: 'booking_confirmed',
-      f3: 'service_price',
+      f3: 'bay_availability',
       f4: 'new_job',
       f5: 'job_details',
       f6: 'job_sheet',
@@ -188,8 +232,17 @@ export const SYSTEMS: readonly DfdSystem[] = [
       f9: 'parts_order',
       f10: 'delivery_date',
       f11: 'parts_order_record',
+      f12: 'bay_booked',
+      f13: 'parts_arrival',
     },
-    wrong: { entityEntity: { from: 'e2', label: 'parts_list' }, storeToCustomer: 'job_details', storeToStaff: 'service_price', storeToStore: 'parts_needed' },
+    wrong: {
+      entityEntity: { from: 'e2', label: 'parts_list' },
+      storeToCustomer: 'job_details',
+      storeToStaff: 'bay_list',
+      staffToStore: 'bay_status',
+      storeToStore: 'parts_needed',
+      crossing: 'fault_description',
+    },
   },
 ];
 
@@ -227,7 +280,17 @@ export const FLOW_ENDS: Record<FlowSlot, { from: NodeSlot; to: NodeSlot }> = {
   f9: { from: 'p3', to: 'e3' },
   f10: { from: 'e3', to: 'p3' },
   f11: { from: 'p3', to: 'd3' },
+  f12: { from: 'p1', to: 'd1' },
+  f13: { from: 'd3', to: 'p2' },
 };
+
+/**
+ * Where the two labels sit when the crossing error is drawn (e1 to p2, across p1 to d2), so that
+ * neither hides the point where the lines cross: the added flow's just below the start of its
+ * line, clear of the labels on the pair of flows between e1 and p1, and the crossed flow's
+ * towards d2.
+ */
+export const CROSSING_LABELS = { added: { x: 160, y: 140 }, crossed: { x: 184, y: 209 } } as const;
 
 export const CONTEXT_WIDTH = 780;
 export const CONTEXT_HEIGHT = 400;

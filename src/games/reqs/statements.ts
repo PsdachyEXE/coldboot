@@ -1,28 +1,48 @@
 /**
  * The `reqs` bank: statements written by six invented Australian organisations about software
  * they want built. Each statement has exactly one reading: a functional requirement (something
- * the solution does), a non-functional requirement (a quality the finished solution must have),
- * a constraint (a condition that limits the project or the options open to it) or scope (a
- * boundary on what the solution will and won't cover).
+ * the solution does, including the data it takes in, the output it produces and how it
+ * manipulates and validates data), a non-functional requirement (a quality the finished solution
+ * must have), a constraint (a condition that limits the project or the options open to it) or
+ * scope (what the solution will and won't cover).
  *
- * Non-functional types. Reliability, usability and portability are the examples the support
- * material gives. Efficiency (response time) and maintainability are added because their
- * textbook meaning is unambiguous. Security is left out on purpose: a security statement reads
- * too easily as a function (a login screen, encryption) or as a legal constraint (privacy law).
+ * Non-functional types are the five qualities the PSM specifications name: usability,
+ * reliability, portability, robustness and maintainability. Response-time targets are left out:
+ * the PSM names speed of processing as a technical constraint, so such a line has two readings.
+ * Security is left out too: a security statement reads too easily as a function (a login screen,
+ * encryption), as a technical constraint (the PSM lists security there) or as a legal one. A
+ * robustness line is about coping with unexpected input or actions, and a reliability line about
+ * working, or being available, time after time; a line about surviving a dropped connection
+ * without losing data reads as either, so the bank has none.
+ *
+ * Constraint kinds are the PSM specifications' five: economic (cost and time), technical (such as
+ * the equipment available and compatibility with it), social (the users' level of expertise),
+ * legal (intellectual property, ownership and privacy of data) and usability (accessibility,
+ * usefulness, ease of use). U3O2-KK06 lists the first four; usability is the PSM's addition, so
+ * it can be a constraint as well as a non-functional requirement.
  *
  * Every reason line teaches the distinction, above all constraint versus non-functional
- * requirement: a constraint limits the project (money, time, law, equipment it must use); a
- * non-functional requirement is a quality of the finished solution that testing can measure.
+ * requirement: a constraint limits the project (money, time, law, equipment, the users it must
+ * suit); a non-functional requirement is a quality of the finished solution that testing can
+ * measure.
  */
 
 export const CATEGORIES = ['functional', 'non-functional', 'constraint', 'scope'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
-export const NFR_TYPES = ['reliability', 'usability', 'portability', 'efficiency', 'maintainability'] as const;
+/** In the PSM specifications' order. */
+export const NFR_TYPES = ['usability', 'reliability', 'portability', 'robustness', 'maintainability'] as const;
 export type NfrType = (typeof NFR_TYPES)[number];
 
-/** The support material's own examples; easy rounds ask only about these. */
+/** The qualities VCAA's own worked example uses; easy rounds ask only about these. */
 export const CORE_NFR_TYPES: readonly NfrType[] = ['reliability', 'usability', 'portability'];
+
+/** In the PSM specifications' order. */
+export const CONSTRAINT_KINDS = ['economic', 'technical', 'social', 'legal', 'usability'] as const;
+export type ConstraintKind = (typeof CONSTRAINT_KINDS)[number];
+
+/** The four kinds U3O2-KK06 lists; easy rounds ask only about these. */
+export const CORE_CONSTRAINT_KINDS: readonly ConstraintKind[] = ['economic', 'technical', 'social', 'legal'];
 
 export interface Organisation {
   id: string;
@@ -36,10 +56,14 @@ export interface Statement {
   text: string;
   category: Category;
   type?: NfrType;
+  /** For a constraint: its kind. */
+  kind?: ConstraintKind;
   /** One line on why it belongs in its category. */
   why: string;
   /** For a non-functional requirement: why it concerns its quality. */
   typeWhy?: string;
+  /** For a constraint: why it is that kind. */
+  kindWhy?: string;
   /** A classic confusion (a constraint that sounds like a quality, a scope line that sounds like a feature): more of these on --hard. */
   tricky?: boolean;
 }
@@ -54,6 +78,9 @@ export const ORGANISATIONS: readonly Organisation[] = [
 ];
 
 const NFR_WHY = 'It sets a quality the finished solution must have, which testing can measure, rather than something it does: a non-functional requirement.';
+const ROBUST_WHY = "It names no task the solution performs; it sets how well the solution must cope when something unexpected happens, a quality testing can measure. That makes it non-functional.";
+const DEADLINE_KIND = 'A deadline limits the time available, and the PSM counts time, with cost, as an economic constraint.';
+const BUDGET_KIND = 'A limit on money is an economic constraint (cost).';
 
 export const STATEMENTS: readonly Statement[] = [
   // Ironbark Community Library: a loans app
@@ -69,7 +96,7 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'library',
     text: 'The app must email a member a reminder two days before a loan is due.',
     category: 'functional',
-    why: 'Sending a reminder is an action the app performs. The two days says when it happens, not how well, so it is still functional.',
+    why: 'Sending a reminder is an output the app produces. The two days says when it happens, not how well, so it is still functional.',
     tricky: true,
   },
   {
@@ -93,11 +120,11 @@ export const STATEMENTS: readonly Statement[] = [
   {
     id: 'library-n3',
     org: 'library',
-    text: 'Catalogue search results must appear within one second of a member pressing Search.',
+    text: 'The app must not crash, whatever a member types into the search box.',
     category: 'non-functional',
-    type: 'efficiency',
-    why: 'Searching is the function; the one-second limit sets how well it must be done, a quality testing can measure. That makes it non-functional.',
-    typeWhy: 'A time limit on a response is about efficiency: how quickly the app responds.',
+    type: 'robustness',
+    why: "It doesn't name a particular check the app makes on the input; it sets a quality: the app copes with anything typed without failing. That makes it non-functional.",
+    typeWhy: 'Coping with unexpected or invalid input without crashing is robustness.',
     tricky: true,
   },
   {
@@ -114,14 +141,37 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'library',
     text: 'The library has $8000 to spend on developing the app.',
     category: 'constraint',
+    kind: 'economic',
     why: 'A budget limits the project. It is not something the app does or a quality it has, so it is a constraint.',
+    kindWhy: BUDGET_KIND,
   },
   {
     id: 'library-c2',
     org: 'library',
     text: 'The app must be finished before the new library wing opens on 1 March.',
     category: 'constraint',
+    kind: 'economic',
     why: 'A deadline limits when the project must be delivered. It says nothing about what the app does or how well, so it is a constraint.',
+    kindWhy: DEADLINE_KIND,
+  },
+  {
+    id: 'library-c3',
+    org: 'library',
+    text: 'Some members are vision impaired and find small text hard to read.',
+    category: 'constraint',
+    kind: 'usability',
+    why: 'It describes users the design must allow for, which limits how the app can be designed. It sets no target for the finished app and names nothing it does, so it is a constraint.',
+    kindWhy: "Users' accessibility needs are a usability constraint: the PSM's usability constraints cover accessibility, usefulness and ease of use.",
+    tricky: true,
+  },
+  {
+    id: 'library-c4',
+    org: 'library',
+    text: 'Many of the volunteers who staff the loans desk have only basic computer skills.',
+    category: 'constraint',
+    kind: 'social',
+    why: "The volunteers' skills limit how complex the app can be. The line names nothing the app does and sets no target for it, so it is a constraint.",
+    kindWhy: "The users' level of expertise is a social constraint.",
   },
   {
     id: 'library-s1',
@@ -149,20 +199,20 @@ export const STATEMENTS: readonly Statement[] = [
   {
     id: 'physio-n1',
     org: 'physio',
-    text: 'Available appointment times must appear within two seconds of a patient choosing a date.',
+    text: 'The system must keep working, without crashing, if a patient presses the Book button several times in a row.',
     category: 'non-functional',
-    type: 'efficiency',
-    why: 'Showing times is the function; the two-second limit is how well it must perform, which testing can measure. That makes it non-functional.',
-    typeWhy: 'A limit on how long the system takes to respond is efficiency (response time).',
+    type: 'robustness',
+    why: ROBUST_WHY,
+    typeWhy: 'Coping with something unexpected a user does, such as pressing a button again and again, without crashing is robustness.',
   },
   {
     id: 'physio-n2',
     org: 'physio',
-    text: "No bookings may be lost if the clinic's computer suddenly loses power.",
+    text: 'The booking system must run through a full month of clinic days without a single failure.',
     category: 'non-functional',
     type: 'reliability',
     why: NFR_WHY,
-    typeWhy: 'Working correctly without losing data, even when something goes wrong, is reliability.',
+    typeWhy: 'Working correctly, day after day, without failing is reliability.',
   },
   {
     id: 'physio-n3',
@@ -178,7 +228,9 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'physio',
     text: 'Patient health information must be collected, stored and shared only as Victorian health records law allows.',
     category: 'constraint',
-    why: 'A law the clinic must obey limits how the system can be built and used. The clinic has no choice about it, so it is a legal constraint.',
+    kind: 'legal',
+    why: 'A law the clinic must obey limits how the system can be built and used. The clinic has no choice about it, so it is a constraint.',
+    kindWhy: 'A law about the privacy of data is a legal constraint.',
     tricky: true,
   },
   {
@@ -186,7 +238,19 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'physio',
     text: "The system must run on the clinic's three existing Windows laptops.",
     category: 'constraint',
-    why: "It limits the solution to hardware the clinic already owns, so it is a technical constraint. Portability would ask for the system to run on several different platforms.",
+    kind: 'technical',
+    why: 'It limits the solution to hardware the clinic already owns, so it is a constraint. Portability would ask for the system to run on several different platforms.',
+    kindWhy: 'The equipment available, and staying compatible with it, is a technical constraint.',
+    tricky: true,
+  },
+  {
+    id: 'physio-c3',
+    org: 'physio',
+    text: 'Some patients have limited use of their hands after an injury and cannot use a mouse.',
+    category: 'constraint',
+    kind: 'usability',
+    why: 'It describes users the design must allow for, which limits how the system can be designed. It sets no target for the finished system and names nothing it does, so it is a constraint.',
+    kindWhy: "Users' accessibility needs are a usability constraint: the PSM's usability constraints cover accessibility, usefulness and ease of use.",
     tricky: true,
   },
   {
@@ -212,13 +276,21 @@ export const STATEMENTS: readonly Statement[] = [
     why: 'Calculating a charge is processing the system performs, so it is a functional requirement.',
   },
   {
+    id: 'freight-f3',
+    org: 'freight',
+    text: "The system must produce a report of any driver's deliveries for any month in the past five years.",
+    category: 'functional',
+    why: 'Producing a report is an output the system creates. The five years says which data the report can cover, not how well the system works, so it is still functional.',
+    tricky: true,
+  },
+  {
     id: 'freight-n1',
     org: 'freight',
-    text: "A driver's delivery list must load in under three seconds.",
+    text: "The driver app must keep working, without crashing, when a driver scans a damaged barcode that can't be read.",
     category: 'non-functional',
-    type: 'efficiency',
-    why: 'Loading the list is the function; the three-second limit is a quality of how it performs. That makes it non-functional.',
-    typeWhy: 'A limit on how long something takes to load is efficiency (response time).',
+    type: 'robustness',
+    why: ROBUST_WHY,
+    typeWhy: 'Coping with input it cannot use, such as an unreadable barcode, without crashing is robustness.',
   },
   {
     id: 'freight-n2',
@@ -252,14 +324,28 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'freight',
     text: 'Development must cost no more than $25 000.',
     category: 'constraint',
-    why: 'A cost limit restricts the project, not the finished system, so it is an economic constraint.',
+    kind: 'economic',
+    why: 'A cost limit restricts the project, not the finished system, so it is a constraint.',
+    kindWhy: BUDGET_KIND,
   },
   {
     id: 'freight-c2',
     org: 'freight',
     text: 'The system must be in use before the Christmas rush begins on 1 December.',
     category: 'constraint',
+    kind: 'economic',
     why: 'A deadline limits when the project must be delivered. It is not a quality of the system, so it is a constraint.',
+    kindWhy: DEADLINE_KIND,
+  },
+  {
+    id: 'freight-c3',
+    org: 'freight',
+    text: 'The system must work with the barcode scanners the company already owns.',
+    category: 'constraint',
+    kind: 'technical',
+    why: 'It limits the solution to equipment the company already has, so it is a constraint rather than a quality the company has chosen.',
+    kindWhy: 'The equipment available, and staying compatible with it, is a technical constraint.',
+    tricky: true,
   },
   {
     id: 'freight-s1',
@@ -315,7 +401,28 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'surf',
     text: 'The club can spend at most $3000 on the app, the money raised at its annual fundraiser.',
     category: 'constraint',
+    kind: 'economic',
     why: 'A spending limit restricts the project, not what the app does or how well, so it is a constraint.',
+    kindWhy: BUDGET_KIND,
+  },
+  {
+    id: 'surf-c2',
+    org: 'surf',
+    text: "Most of the club's patrol captains have never used a smartphone app.",
+    category: 'constraint',
+    kind: 'social',
+    why: "The captains' inexperience limits how complex the app can be. The line names nothing the app does and sets no target for it, so it is a constraint.",
+    kindWhy: "The users' level of expertise is a social constraint.",
+  },
+  {
+    id: 'surf-c3',
+    org: 'surf',
+    text: 'Several club members are colour-blind.',
+    category: 'constraint',
+    kind: 'usability',
+    why: 'It describes users the design must allow for, which limits how the app can show information. It sets no target for the finished app, so it is a constraint.',
+    kindWhy: "Users' accessibility needs are a usability constraint: the PSM's usability constraints cover accessibility, usefulness and ease of use.",
+    tricky: true,
   },
   {
     id: 'surf-s1',
@@ -341,6 +448,14 @@ export const STATEMENTS: readonly Statement[] = [
     why: 'Producing that list is an output the app creates, so it is a functional requirement.',
   },
   {
+    id: 'school-f3',
+    org: 'school',
+    text: "The app must check that a parent's mobile number has exactly 10 digits before saving it.",
+    category: 'functional',
+    why: 'Checking an input before it is saved is validation, something the app does with its data, so it is a functional requirement.',
+    tricky: true,
+  },
+  {
     id: 'school-n1',
     org: 'school',
     text: 'A parent must be able to give permission in under one minute on their first try.',
@@ -364,7 +479,9 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'school',
     text: "Students' personal information must be handled as Victorian privacy law requires of government schools.",
     category: 'constraint',
-    why: 'A law the school must obey limits how the app can be built and used, so it is a legal constraint rather than a quality the school has chosen.',
+    kind: 'legal',
+    why: 'A law the school must obey limits how the app can be built and used, so it is a constraint rather than a quality the school has chosen.',
+    kindWhy: 'A law about the privacy of data is a legal constraint.',
     tricky: true,
   },
   {
@@ -372,7 +489,18 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'school',
     text: 'The app must be ready for the first excursion of Term 1.',
     category: 'constraint',
+    kind: 'economic',
     why: 'A deadline limits when the project must be delivered, so it is a constraint.',
+    kindWhy: DEADLINE_KIND,
+  },
+  {
+    id: 'school-c3',
+    org: 'school',
+    text: 'Many parents at the school have little experience using apps or websites.',
+    category: 'constraint',
+    kind: 'social',
+    why: "The parents' inexperience limits how complex the app can be. The line names nothing the app does and sets no target for it, so it is a constraint.",
+    kindWhy: "The users' level of expertise is a social constraint.",
   },
   {
     id: 'school-s1',
@@ -399,11 +527,11 @@ export const STATEMENTS: readonly Statement[] = [
   {
     id: 'bakery-n1',
     org: 'bakery',
-    text: 'Each page of the website must load in under two seconds on a home internet connection.',
+    text: "The website must keep working, without losing the customer's order, if the Back button is pressed part-way through checkout.",
     category: 'non-functional',
-    type: 'efficiency',
-    why: NFR_WHY,
-    typeWhy: 'How quickly pages load is efficiency (response time).',
+    type: 'robustness',
+    why: ROBUST_WHY,
+    typeWhy: 'Coping with something unexpected the user does, without failing or losing data, is robustness.',
   },
   {
     id: 'bakery-n2',
@@ -428,7 +556,27 @@ export const STATEMENTS: readonly Statement[] = [
     org: 'bakery',
     text: 'The bakery can spend no more than $5000 on the website.',
     category: 'constraint',
+    kind: 'economic',
     why: 'A budget limits the project. It is not a feature or a quality of the website, so it is a constraint.',
+    kindWhy: BUDGET_KIND,
+  },
+  {
+    id: 'bakery-c2',
+    org: 'bakery',
+    text: 'The website must fit within the storage of the web hosting plan the bakery already pays for.',
+    category: 'constraint',
+    kind: 'technical',
+    why: 'It limits the website to the capacity the bakery already has, so it is a constraint rather than a quality of the website.',
+    kindWhy: 'The capacity of the equipment available is a technical constraint.',
+  },
+  {
+    id: 'bakery-c3',
+    org: 'bakery',
+    text: "Photos and recipes on the website must not breach anyone's copyright.",
+    category: 'constraint',
+    kind: 'legal',
+    why: 'Copyright law limits what the website can use, whatever the bakery would like, so it is a constraint.',
+    kindWhy: 'A law protecting intellectual property is a legal constraint.',
   },
   {
     id: 'bakery-s1',

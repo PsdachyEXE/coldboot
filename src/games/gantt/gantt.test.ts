@@ -3,13 +3,15 @@
  * independent brute-force reference written here: it enumerates every chain of dependent tasks
  * from a task with no dependencies to a task nothing depends on, and reads the project length,
  * the critical path, each task's spare days and the effect of a delay straight off those chains.
+ * The wording keeps to U3O2-KK03: no slack or float, and a milestone is a point in time.
  */
 import { describe, expect, it } from 'vitest';
 import { computeSchedule } from '../../figures';
 import type { TerminalBlock } from '../../terminal/blocks';
 import type { Difficulty, QuizItem } from '../types';
 import game from './index';
-import { finishShift, fromGanttInstance, GANTT_KINDS, ganttItem, generateGanttItem, parseDays, parseTaskList, planGanttRound, sparedWording } from './items';
+import { EFFECT_KK, finishShift, fromGanttInstance, GANTT_KINDS, ganttItem, generateGanttItem, parseDays, parseTaskList, planGanttRound, sparedWording } from './items';
+import { GANTT_MAN } from './meta';
 import { planFor, TEMPLATES, type Plan, type PlanTask } from './plans';
 
 const SEEDS = Array.from({ length: 500 }, (_, i) => i * 7919 + 3);
@@ -68,6 +70,9 @@ function referenceShift(tasks: readonly PlanTask[], id: string, late: number): n
 // Helpers
 // ---------------------------------------------------------------------------
 
+/** The task and the days late in a monitoring question. */
+const EFFECT_PROMPT = /task ([A-I]) \(.*\) will finish (\d+) days? later than planned/;
+
 function promptText(item: QuizItem): string {
   return item.prompt.map((b) => (b.kind === 'text' ? b.text : '')).join('\n');
 }
@@ -91,7 +96,7 @@ function referenceAnswer(plan: Plan, item: QuizItem, kind: (typeof GANTT_KINDS)[
       return String(ref.spare.get(id));
     }
     case 'effect': {
-      const m = /Task ([A-I]) \(.*\) finishes (\d+) days? later/.exec(text)!;
+      const m = EFFECT_PROMPT.exec(text)!;
       return String(referenceShift(plan.tasks, m[1], Number(m[2])));
     }
     case 'milestone': {
@@ -183,13 +188,43 @@ describe('gantt items', () => {
     }
   });
 
-  it('never names slack or float in a question or a reason', () => {
+  it('never names slack or float in a question, a reason or the man page', () => {
     for (const seed of SEEDS.slice(0, 100)) {
       for (const kind of GANTT_KINDS) {
         const item = ganttItem({ kind, seed }, 'hard');
         expect(JSON.stringify(item.prompt)).not.toMatch(/slack|float/i);
         expect(item.check('0').reason + item.check('A').reason).not.toMatch(/slack|float/i);
       }
+    }
+    expect(GANTT_MAN).not.toMatch(/slack|float/i);
+  });
+
+  it('treats a milestone as a point in time, such as the end of a stage, never a task with a duration', () => {
+    for (const seed of SEEDS.slice(0, 100)) {
+      const plan = planFor(seed, 'normal');
+      const item = ganttItem({ kind: 'milestone', seed }, 'normal');
+      const r = item.check('A');
+      expect(r.reason).toMatch(/^A milestone is a point in time, not a task/);
+      expect(r.reason).toMatch(/is a task that takes \d+ days?, but a milestone is a point in time/);
+      // The right option is a checkpoint at the end of a day, never a listed task's name.
+      const right = choices(item)['ABCD'.indexOf(r.expected.charAt(0))];
+      expect(right).toMatch(/, at the end of day \d+$/);
+      expect(plan.tasks.map((t) => t.name)).not.toContain(right.replace(/, at the end of day \d+$/, ''));
+    }
+    // Where a task ends a stage of the problem-solving methodology, its milestone says so.
+    const events = TEMPLATES.flatMap((t) => t.tasks.flatMap((k) => (k.milestone ? [k.milestone] : [])));
+    expect(events.filter((e) => /^(Analysis|Design) complete: /.test(e)).length).toBeGreaterThanOrEqual(5);
+  });
+
+  it('frames a late task as monitoring progress, and says how updating the chart moves what waits for it', () => {
+    for (const seed of SEEDS.slice(0, 100)) {
+      const item = ganttItem({ kind: 'effect', seed }, 'normal');
+      expect(item.kk).toEqual(EFFECT_KK);
+      expect(promptText(item)).toMatch(/^Monitoring progress, the team finds that /m);
+      const right = item.check(item.check('?').expected.replace(/:.*$/, ''));
+      expect(right.correct).toBe(true);
+      if (!/^0 days/.test(right.expected)) expect(right.reason).toMatch(/Updating the chart means moving [A-I]'s finish and every task that has to wait for it/);
+      else expect(right.reason).not.toMatch(/Updating the chart/);
     }
   });
 
@@ -203,7 +238,7 @@ describe('gantt items', () => {
       const id = /task ([A-I]) \(/.exec(promptText(delay))![1];
       delays.add(ref.spare.get(id) === 0 ? 'critical' : 'spare');
       const effect = ganttItem({ kind: 'effect', seed }, 'normal');
-      const m = /Task ([A-I]) \(.*\) finishes (\d+) days? later/.exec(promptText(effect))!;
+      const m = EFFECT_PROMPT.exec(promptText(effect))!;
       const spare = ref.spare.get(m[1])!;
       const late = Number(m[2]);
       effects.add(spare === 0 ? 'critical' : late < spare ? 'within' : late === spare ? 'exactly' : 'beyond');

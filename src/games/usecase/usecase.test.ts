@@ -2,7 +2,8 @@
  * The usecase game over 500 seeds at every difficulty. Diagrams are checked against FigureSchema
  * and against an independent convention checker written here, which reads only the figure data
  * and the scenario's always/sometimes pairs: a correct diagram has no errors, and each error
- * diagram has exactly one, the element the item marks as the answer.
+ * diagram has exactly one, the element the item marks as the answer. Actors are roles, and the
+ * stereotypes are written as VCAA writes them: <<includes>> and <<extends>>.
  */
 import { describe, expect, it } from 'vitest';
 import { FigureSchema, UseCaseDiagramSchema, type UseCaseDiagram } from '../../content/schema';
@@ -12,6 +13,7 @@ import game from './index';
 import {
   actorsItem,
   fromUsecaseInstance,
+  NON_ACTORS,
   generateUsecaseItem,
   linkItem,
   parseLinkType,
@@ -84,6 +86,18 @@ describe('usecase diagrams', () => {
     }
   });
 
+  it('draws associations as plain lines between an actor and a use case, includes from the base and extends into it', () => {
+    for (const sys of SYSTEMS) {
+      const fig = diagramFor(sys, null);
+      const actors = new Set(fig.actors.map((a) => a.id));
+      for (const l of fig.links.filter((x) => x.type === 'association')) expect(actors.has(l.from) && !actors.has(l.to), `${l.from}->${l.to}`).toBe(true);
+      expect(fig.links).toContainEqual({ from: 'u1', to: 'u2', type: 'includes' });
+      expect(fig.links).toContainEqual({ from: 'u3', to: 'u1', type: 'extends' });
+      // As in the 2025 examination's diagram, the included and the extending use case have no actor of their own.
+      for (const u of ['u2', 'u3']) expect(fig.links.some((l) => l.type === 'association' && l.to === u)).toBe(false);
+    }
+  });
+
   it('still rejects an association between two use cases', () => {
     const fig = diagramFor(SYSTEMS[0], null);
     const bad = { ...fig, links: [...fig.links, { from: 'u1', to: 'u4', type: 'association' as const }] };
@@ -115,6 +129,25 @@ describe('usecase items', () => {
     }
   });
 
+  it('makes every actor a role, and lists the system, a device, an organisation and data as candidates that are not', () => {
+    for (const sys of SYSTEMS) {
+      const kinds = new Set(sys.notActors.map((n) => n.kind));
+      for (const k of ['system', 'device', 'data'] as const) expect(kinds.has(k), `${sys.id} ${k}`).toBe(true);
+      expect(kinds.has('organisation') || kinds.has('non-user'), sys.id).toBe(true);
+      expect(sys.notActors.find((n) => n.kind === 'system')!.label).toBe(sys.system);
+      // The reason joins the candidates with semicolons, so none has its own.
+      for (const n of sys.notActors) expect(n.why, n.label).not.toMatch(/;/);
+      for (const label of Object.values(sys.actors)) {
+        // A role, not an organisation, device, external service or the system.
+        expect(label, sys.id).not.toMatch(/\b(system|gateway|service|phone|tablet|kiosk|council|office|library|hire|books)\b/i);
+        expect(sys.notActors.map((n) => n.label)).not.toContain(label);
+      }
+      // External services are kept out of the scenarios: some textbooks draw them as actors.
+      expect(sys.scenario, sys.id).not.toMatch(/gateway|sms service|email service/i);
+      for (const n of sys.notActors) expect(sys.scenario.toLowerCase(), `${sys.id} ${n.label}`).toContain(n.label.toLowerCase().replace(/^the /, '').replace(/s$/, ''));
+    }
+  });
+
   it.each(LEVELS)('actor items accept exactly the actors, in any order (%s, 500 seeds)', (level) => {
     for (const seed of SEEDS) {
       const sys = SYSTEMS[seed % SYSTEMS.length];
@@ -123,7 +156,7 @@ describe('usecase items', () => {
       const actorLabels = Object.values(sys.actors);
       const right = list.flatMap((label, i) => (actorLabels.includes(label) ? [i + 1] : []));
       expect(right).toHaveLength(3);
-      expect(list.length).toBe(level === 'easy' ? 5 : 6);
+      expect(list.length).toBe(3 + NON_ACTORS[level]);
       expect(item.check(right.join(' ')).correct).toBe(true);
       expect(item.check([...right].reverse().join(', ')).correct).toBe(true);
       const nonActor = list.findIndex((l) => !actorLabels.includes(l)) + 1;
@@ -144,6 +177,9 @@ describe('usecase items', () => {
           expect(item.check(rel.type === 'includes' ? 'extends' : 'includes').correct).toBe(false);
           expect(item.check('both').counted).toBe(false);
           expect(item.check(rel.type).reason).toMatch(rel.type === 'includes' ? /always performed/ : /only sometimes/);
+          expect(item.check(rel.type).reason).toMatch(
+            rel.type === 'includes' ? `arrow points from the base use case, ${rel.base}, to the included one, ${rel.other}` : `arrow points from the extending use case, ${rel.other}, to the base use case, ${rel.base}`,
+          );
           expect(fromUsecaseInstance(item.instance!)?.prompt).toEqual(item.prompt);
         }
         // The statement says which it is.
@@ -171,7 +207,7 @@ describe('usecase rounds', () => {
       const plan = planUsecaseRound(seed, level);
       expect(plan).toHaveLength(10);
       const spots = plan.filter((p) => p.kind === 'spot');
-      if (spots.length >= 4) expect(new Set(spots.map((p) => p.error)).size).toBe(4);
+      expect(new Set(spots.map((p) => p.error)).size).toBe(Math.min(spots.length, USE_CASE_ERRORS.length));
       for (const p of plan) {
         const item = usecaseItem(p, level);
         if (seed < 20) expect(fromUsecaseInstance(item.instance!)?.prompt).toEqual(item.prompt);
@@ -183,6 +219,9 @@ describe('usecase rounds', () => {
     for (const seed of SEEDS) {
       for (const spec of planUsecaseRound(seed, level)) {
         const item = usecaseItem(spec, level);
+        // Stereotypes in the plural with double angle brackets, as VCAA writes them.
+        const words = JSON.stringify([item.prompt, item.check('zz').expected, item.check('A').reason, item.check('includes').reason]);
+        expect(words, item.instance).not.toMatch(/<<(include|extend)>>|«|»/);
         for (const b of item.prompt) if (b.kind === 'figure') expect(FigureSchema.safeParse(b.figure).success).toBe(true);
         const miss = item.check('zz');
         expect(miss.counted, item.instance).toBe(false);

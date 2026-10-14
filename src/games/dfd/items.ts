@@ -1,15 +1,16 @@
 /**
  * `dfd` items, two round types:
  *
- * (a) Convention errors. A context diagram or Level 1 DFD with exactly one convention error. The
- *     element question marks several elements with letters and asks which one is wrong; the rule
- *     question then asks which of the six rules it breaks (a number or a short phrase).
+ * (a) Rules. A context diagram or Level 1 DFD with exactly one of VCAA's rules broken. The element
+ *     question marks several elements with letters and asks which one is wrong; the rule question
+ *     then asks which rule it breaks, from that kind of diagram's list (a number or a short phrase).
  * (b) Labelling. A context diagram and a Level 1 DFD whose process and store labels are partly
  *     blank. One question per blank, answered from a word bank; answered blanks are filled in on
  *     the next question.
  *
- * Each item stands alone, so the daily challenge or a report can regenerate it from its instance
- * ("dfd:element:cafe:dfd:noun-p2:v1:seed=12:normal").
+ * Processes and data stores are named, never numbered, in every question and reason. Each item
+ * stands alone, so the daily challenge or a report can regenerate it from its instance
+ * ("dfd:element:cafe:dfd:same-name-p2:v1:seed=12:normal").
  */
 import type { ContextDiagram, Dfd, KkId } from '../../content/schema';
 import { normaliseAnswer } from '../../lib/text';
@@ -17,89 +18,180 @@ import type { TerminalBlock } from '../../terminal/blocks';
 import { formatAnd, LETTERS, matchOption, parseChoice } from '../answers';
 import { childSeed, mulberry32, pick, sample, shuffle } from '../prng';
 import type { Difficulty, QuizItem } from '../types';
-import { buildContext, buildDfd, describeElement, elementKeys, faultyKey, injectionsFor, isFlowKey, ruleOf, RULES, VIEWS, type DiagramKind, type Injection, type Rule, type View } from './diagrams';
-import { PROCESS_SLOTS, STORE_SLOTS, SYSTEMS, type DfdSystem, type NodeSlot } from './systems';
+import {
+  buildContext,
+  buildDfd,
+  CROSSED_FLOW,
+  describeElement,
+  elementKeys,
+  faultyKey,
+  INJECTED_RULES,
+  injectionsFor,
+  isFlowKey,
+  partnerKeys,
+  ruleOf,
+  RULES,
+  SAME_NAME,
+  VIEWS,
+  type DiagramKind,
+  type Injection,
+  type Rule,
+  type View,
+} from './diagrams';
+import { PROCESS_SLOTS, STORE_SLOTS, SYSTEMS, type DfdSystem, type NodeSlot, type ProcessSlot } from './systems';
 
 export const DFD_KK: KkId[] = ['U3O2-KK08'];
 
 const DIFFICULTIES: readonly Difficulty[] = ['easy', 'normal', 'hard'];
 
+/** Each rule in a few words (paraphrased from the outcome-specific requirements). */
 export const RULE_TEXT: Record<Rule, string> = {
-  'entity-entity': 'A flow between two external entities',
-  'store-entity': 'A data store connected straight to an external entity',
-  'no-io': 'A process with no inputs, or with no outputs',
-  unlabelled: 'An unlabelled flow',
-  noun: 'A process named with a noun',
-  'store-store': 'A flow between two data stores',
+  'entity-entity': 'No data flows straight between two external entities',
+  'store-store': 'No data flows straight between two data stores',
+  'entity-store': 'No data flows straight between an external entity and a data store',
+  crossing: 'Data flows never cross each other',
+  'single-set': 'Each data flow carries a single set of information',
+  'process-io': 'Every process has at least one input and at least one output',
+  'same-name': "A process's output is named differently from its input",
+  'store-io': 'Every data store has at least one input and at least one output',
+  'process-unconnected': 'Every process connects to another process, a data store or an external entity',
+  'entity-unconnected': 'Every external entity sends at least one input or receives at least one output',
 };
 
 /** A short phrase for each rule, as the man page lists them; parseRule accepts each. */
 export const RULE_PHRASES: Record<Rule, string> = {
   'entity-entity': 'entity to entity',
-  'store-entity': 'store to entity',
-  'no-io': 'no inputs or outputs',
-  unlabelled: 'unlabelled flow',
-  noun: 'noun name',
   'store-store': 'store to store',
+  'entity-store': 'entity to store',
+  crossing: 'crossing flows',
+  'single-set': 'one set of information',
+  'process-io': 'process input and output',
+  'same-name': 'same name',
+  'store-io': 'store input and output',
+  'process-unconnected': 'unconnected process',
+  'entity-unconnected': 'unconnected entity',
 };
 
 const RULE_OPTIONS: readonly { value: Rule; accept: readonly string[] }[] = [
+  { value: 'entity-entity', accept: ['entity to entity', 'entity entity', 'two entities', 'between entities', 'between two entities', 'entities'] },
+  { value: 'store-store', accept: ['store to store', 'store store', 'two stores', 'between stores', 'between two stores', 'stores'] },
   {
-    value: 'entity-entity',
-    accept: ['entity to entity', 'entity entity', 'two entities', 'two external entities', 'between entities', 'between two entities', 'between two external entities', 'external entities', 'entities'],
+    value: 'entity-store',
+    accept: ['entity to store', 'store to entity', 'entity store', 'store entity', 'entity and store', 'store and entity', 'between entity and store', 'between an entity and a store'],
   },
+  { value: 'crossing', accept: ['crossing flows', 'crossing', 'crossed flows', 'flows cross', 'flows crossing', 'lines cross', 'crossing lines', 'flows cross each other'] },
+  { value: 'single-set', accept: ['one set of information', 'single set of information', 'single set', 'one set', 'one set per flow'] },
   {
-    value: 'store-entity',
-    accept: ['store to entity', 'entity to store', 'store entity', 'entity store', 'data store to entity', 'data store to external entity', 'store connected to entity', 'store straight to entity', 'store and entity'],
+    value: 'process-io',
+    accept: [
+      'process input and output',
+      'process inputs and outputs',
+      'process with no input',
+      'process with no inputs',
+      'process with no output',
+      'process with no outputs',
+      'process no input',
+      'process no inputs',
+      'process no output',
+      'process no outputs',
+      'process missing input',
+      'process missing output',
+      'black hole',
+      'miracle',
+    ],
   },
+  { value: 'same-name', accept: ['same name', 'same names', 'output named like input', 'output same name as input', 'same name in and out', 'renamed output'] },
   {
-    value: 'no-io',
-    accept: ['no inputs or outputs', 'no input or output', 'no inputs', 'no input', 'no outputs', 'no output', 'no inputs or no outputs', 'black hole', 'miracle', 'missing input', 'missing output'],
+    value: 'store-io',
+    accept: [
+      'store input and output',
+      'store inputs and outputs',
+      'store with no input',
+      'store with no inputs',
+      'store with no output',
+      'store with no outputs',
+      'store no input',
+      'store no inputs',
+      'store no output',
+      'store no outputs',
+      'store missing input',
+      'store missing output',
+      'store never read',
+      'store never written',
+    ],
   },
-  { value: 'unlabelled', accept: ['unlabelled flow', 'unlabelled', 'unlabeled', 'unlabeled flow', 'no label', 'missing label', 'flow without a label', 'label missing'] },
-  { value: 'noun', accept: ['noun name', 'noun', 'named with a noun', 'process named with a noun', 'noun instead of verb', 'not a verb', 'no verb'] },
-  { value: 'store-store', accept: ['store to store', 'store store', 'two stores', 'two data stores', 'between stores', 'between two stores', 'between two data stores', 'data store to data store', 'data stores'] },
+  { value: 'process-unconnected', accept: ['unconnected process', 'process not connected', 'process unconnected', 'isolated process'] },
+  { value: 'entity-unconnected', accept: ['unconnected entity', 'entity not connected', 'entity unconnected', 'isolated entity', 'entity with no flows', 'entity no flows'] },
 ];
 
-/** "3", "no inputs", "Store to entity" and "an unlabelled flow" all parse. Null otherwise. */
-export function parseRule(input: string): Rule | null {
-  const s = normaliseAnswer(input)
-    .replace(/^(rule|number)\s+/, '')
-    .replace(/^([1-6])[.):]\s+.*$/, '$1')
-    .replace(/^(a|an|the)\s+/, '')
-    .replace(/\s*->\s*|\s+-\s+/g, ' to ')
-    .replace(/,/g, '');
-  const n = /^([1-6])$/.exec(s);
-  if (n) return RULES[Number(n[1]) - 1];
-  const full = RULES.map((r) => ({ value: r, accept: [RULE_TEXT[r].toLowerCase().replace(/^(a|an) /, '').replace(/,/g, '')] }));
-  return matchOption(s, RULE_OPTIONS) ?? matchOption(s, full);
+/**
+ * "3", "rule 4", "store to entity", "a process with no outputs" and "data flows cross each other"
+ * all parse. Numbers follow the list for that kind of diagram. Null otherwise.
+ */
+export function parseRule(input: string, diagram: DiagramKind): Rule | null {
+  const list = RULES[diagram];
+  const s = phrase(normaliseAnswer(input).replace(/^(rule|number)\s+/, '').replace(/^(\d{1,2})[.):]\s+.*$/, '$1'));
+  const n = /^(\d{1,2})$/.exec(s);
+  if (n) return list[Number(n[1]) - 1] ?? null;
+  const rule = matchOption(s, PHRASE_OPTIONS);
+  return rule && list.includes(rule) ? rule : null;
 }
+
+/** Drops articles and the words "data" and "external", so "a data store" and "store" read alike. */
+function phrase(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/\bdata (stores?|flows?)\b/g, '$1')
+    .replace(/\bexternal (entit(?:y|ies))\b/g, '$1')
+    .replace(/\b(a|an|the)\s+/g, '')
+    .replace(/\s*->\s*|\s+-\s+/g, ' to ')
+    .replace(/[,']/g, '')
+    .replace(/^flows? (?=between |from )/, '')
+    .replace(/^from /, '');
+}
+
+/** The short phrases and each rule's full wording, read the way parseRule reads an answer. */
+const PHRASE_OPTIONS: readonly { value: Rule; accept: readonly string[] }[] = RULE_OPTIONS.map((o) => ({
+  value: o.value,
+  accept: [...o.accept, RULE_TEXT[o.value]].map(phrase),
+}));
 
 function ruleWhy(rule: Rule, injection: Injection, sys: DfdSystem): string {
   switch (rule) {
     case 'entity-entity':
-      return 'Data passing directly between two external entities happens outside the system, so the diagram never shows it. Every flow must start or end at a process.';
-    case 'store-entity':
-      return 'An external entity never reads or writes a data store directly: data reaches or leaves a store only through a process.';
+      return "Data can't flow straight between two external entities: what they exchange happens outside the system, so the diagram doesn't show it. A flow always starts or ends inside the system.";
     case 'store-store':
-      return "Data can't move straight from one data store to another. A process has to read it from one store and write it to the other.";
-    case 'unlabelled':
-      return 'Every data flow is labelled with the data it carries, such as order_details, so the reader knows what moves along it.';
-    case 'noun': {
-      const slot = faultyKey(injection) as (typeof PROCESS_SLOTS)[number];
-      return `A process does something to data, so it is named with a verb phrase, such as ${sys.processes[slot]}. ${sys.nouns[slot]} names data, not an action.`;
+      return "Data can't flow straight from one data store to another. A process has to read it from one store and write it to the other.";
+    case 'entity-store':
+      return "Data can't flow straight between an external entity and a data store: it has to pass through a process on its way into or out of the store.";
+    case 'crossing':
+      return `Data flows mustn't cross each other: this one crosses the flow ${sys.flows[CROSSED_FLOW]}. Redraw the diagram, moving an element or the line, so that no two flows cross.`;
+    case 'same-name': {
+      const { input } = SAME_NAME[injection.split('-').pop() as ProcessSlot];
+      return `A process changes the data it receives, so a flow it sends out must be named differently from the flow it receives. This output has the same name as its input, ${sys.flows[input]}.`;
     }
-    case 'no-io': {
+    case 'process-io': {
       const inputs = injection.startsWith('no-inputs-');
       return inputs
-        ? 'A process transforms data, so it needs at least one input and at least one output. With no input, this one produces data from nothing.'
-        : 'A process transforms data, so it needs at least one input and at least one output. With no output, the data it receives goes nowhere.';
+        ? 'Every process needs at least one input and at least one output. With no input, this one produces data from nothing.'
+        : 'Every process needs at least one input and at least one output. With no output, the data it receives goes nowhere.';
     }
+    case 'store-io': {
+      const inputs = injection.startsWith('no-inputs-');
+      return inputs
+        ? 'Every data store needs at least one input and at least one output. Nothing writes to this one, so the data read from it can never have been stored.'
+        : 'Every data store needs at least one input and at least one output. Nothing reads from this one, so the data written to it is never used.';
+    }
+    case 'entity-unconnected':
+      return 'Every external entity must send at least one input to the system or receive at least one output from it. This one has no flows at all.';
+    case 'single-set':
+    case 'process-unconnected':
+      throw new Error(`the ${rule} rule is never injected`);
   }
 }
 
 // ---------------------------------------------------------------------------
-// (a) Convention errors
+// (a) Rules
 // ---------------------------------------------------------------------------
 
 export interface ErrorScenario {
@@ -119,17 +211,20 @@ export function systemById(id: string): DfdSystem {
 function scenarioFigure(sc: ErrorScenario): Dfd | ContextDiagram {
   const sys = systemById(sc.system);
   const id = `dfd-${sc.system}-${sc.injection}`;
-  return sc.diagram === 'context'
-    ? buildContext(sys, { view: sc.view, injection: sc.injection, id })
-    : buildDfd(sys, { view: sc.view, injection: sc.injection, id, caption: 'Only part of the diagram is shown.' });
+  return sc.diagram === 'context' ? buildContext(sys, { view: sc.view, injection: sc.injection, id }) : buildDfd(sys, { view: sc.view, injection: sc.injection, id });
 }
 
-/** The marked elements of an error scenario, in letter order; one is the faulty element. */
+/**
+ * The marked elements of an error scenario, in letter order; one is the faulty element. The
+ * elements that take part in the error alongside it (the flow it crosses, the input it copies)
+ * are never marked.
+ */
 export function markedElements(sc: ErrorScenario, difficulty: Difficulty): string[] {
   const fig = scenarioFigure(sc);
   const rng = mulberry32(childSeed(sc.seed, 'marks'));
   const faulty = faultyKey(sc.injection);
-  const others = elementKeys(fig).filter((k) => k !== faulty);
+  const partners = partnerKeys(sc.injection);
+  const others = elementKeys(fig).filter((k) => k !== faulty && !partners.includes(k));
   const sameKind = others.filter((k) => isFlowKey(fig, k) === isFlowKey(fig, faulty));
   const otherKind = others.filter((k) => isFlowKey(fig, k) !== isFlowKey(fig, faulty));
   const n = difficulty === 'hard' ? 5 : 4;
@@ -157,7 +252,7 @@ export function elementItem(sc: ErrorScenario, difficulty: Difficulty): QuizItem
   const letters = marked.map((_, i) => LETTERS[i]);
   const answer = marked.indexOf(faultyKey(sc.injection));
   const expected = `${letters[answer]}: ${describeElement(fig, marked[answer])}`;
-  const reason = `${letters[answer]} is ${describeElement(fig, marked[answer])}. Every other marked element follows the conventions.`;
+  const reason = `${letters[answer]} is ${describeElement(fig, marked[answer])}. Every other marked element follows the rules.`;
   const hint = `Type a letter from A to ${letters[letters.length - 1]}.`;
   return {
     id: 'gen-dfd-element',
@@ -167,7 +262,7 @@ export function elementItem(sc: ErrorScenario, difficulty: Difficulty): QuizItem
     prompt: [
       { kind: 'text', text: `${sys.org} is documenting its ${sys.system.toLowerCase()}.`, tone: 'muted' },
       { kind: 'figure', figure: fig, highlight: Object.fromEntries(marked.map((k, i) => [k, letters[i]])), compact: true },
-      { kind: 'text', text: `Exactly one of the marked elements, ${formatAnd(letters)}, breaks a ${kindWord(sc)} convention. Which one?`, tone: 'accent' },
+      { kind: 'text', text: `Exactly one of the marked elements, ${formatAnd(letters)}, breaks a rule for drawing a ${kindWord(sc)}. Which one?`, tone: 'accent' },
       { kind: 'text', text: hint, tone: 'muted' },
     ],
     check(input) {
@@ -178,44 +273,48 @@ export function elementItem(sc: ErrorScenario, difficulty: Difficulty): QuizItem
   };
 }
 
-const RULE_HINT = 'Type the rule number from 1 to 6, or a short phrase such as store to entity.';
+function ruleHint(diagram: DiagramKind): string {
+  return `Type the rule number from 1 to ${RULES[diagram].length}, or a short phrase such as ${diagram === 'dfd' ? 'entity to store' : 'entity to entity'}.`;
+}
 
 /**
- * Which rule the faulty element breaks. As a follow-up in a round the diagram is just above, so
- * it names the element by its letter; standalone, it shows the diagram with only that element
- * marked.
+ * Which rule the faulty element breaks, from the list for its kind of diagram. As a follow-up in
+ * a round the diagram is just above, so it names the element by its letter; standalone, it shows
+ * the diagram with only that element marked.
  */
 export function ruleItem(sc: ErrorScenario, difficulty: Difficulty, followUp = false): QuizItem {
   const sys = systemById(sc.system);
   const fig = scenarioFigure(sc);
   const faulty = faultyKey(sc.injection);
   const rule = ruleOf(sc.injection);
-  const n = RULES.indexOf(rule) + 1;
+  const list = RULES[sc.diagram];
+  const n = list.indexOf(rule) + 1;
   const expected = `${n}. ${RULE_TEXT[rule]}`;
   const letter = followUp ? LETTERS[markedElements(sc, difficulty).indexOf(faulty)] : 'A';
   const element = describeElement(fig, faulty);
+  const hint = ruleHint(sc.diagram);
   const context: TerminalBlock[] = followUp
     ? [{ kind: 'text', text: `Follow-up on the same diagram: ${letter} is ${element}.`, tone: 'muted' }]
     : [
         { kind: 'text', text: `${sys.org} is documenting its ${sys.system.toLowerCase()}.`, tone: 'muted' },
         { kind: 'figure', figure: fig, highlight: { [faulty]: letter }, compact: true },
-        { kind: 'text', text: `The element marked ${letter} is ${element}. It breaks a ${kindWord(sc)} convention.`, tone: 'muted' },
+        { kind: 'text', text: `The element marked ${letter} is ${element}. It breaks a rule for drawing a ${kindWord(sc)}.`, tone: 'muted' },
       ];
   return {
     id: 'gen-dfd-rule',
     kk: DFD_KK,
     instance: scenarioInstance('rule', sc, difficulty, followUp),
-    // Numbers keep the chips to one row on a phone; the numbered rules are printed just above.
-    chips: RULES.map((_, i) => String(i + 1)),
+    // Numbers keep the chips short on a phone; the numbered rules are printed just above.
+    chips: list.map((_, i) => String(i + 1)),
     prompt: [
       ...context,
-      { kind: 'text', text: `Which rule does ${letter} break?`, tone: 'accent' },
-      { kind: 'choices', options: RULES.map((r) => RULE_TEXT[r]), labels: 'numbers' },
-      { kind: 'text', text: RULE_HINT, tone: 'muted' },
+      { kind: 'text', text: `Which of the ${kindWord(sc)} rules does ${letter} break?`, tone: 'accent' },
+      { kind: 'choices', options: list.map((r) => RULE_TEXT[r]), labels: 'numbers' },
+      { kind: 'text', text: hint, tone: 'muted' },
     ],
     check(input) {
-      const chosen = parseRule(input);
-      if (!chosen) return { correct: false, expected, reason: RULE_HINT, counted: false };
+      const chosen = parseRule(input, sc.diagram);
+      if (!chosen) return { correct: false, expected, reason: hint, counted: false };
       return { correct: chosen === rule, expected, reason: ruleWhy(rule, sc.injection, sys) };
     },
   };
@@ -255,13 +354,13 @@ export function labelItem(sc: LabelScenario, difficulty: Difficulty): QuizItem {
   const bank = wordBank(sys, sc.blanks);
   const answer = labelOf(sys, slot);
   const dfd = buildDfd(sys, { view: sc.view, blanks: open, id: `dfd-${sys.id}-blanks-${sc.index}` });
-  const what = slot.startsWith('p') ? `process ${slot.slice(1)}` : `data store D${slot.slice(1)}`;
+  const isProcess = slot.startsWith('p');
   const flowsIn = dfd.flows.filter((f) => f.to === slot).map((f) => f.label);
   const flowsOut = dfd.flows.filter((f) => f.from === slot).map((f) => f.label);
   const evidence = [flowsIn.length ? `it receives ${formatAnd(flowsIn)}` : '', flowsOut.length ? `it sends ${formatAnd(flowsOut)}` : ''].filter(Boolean).join(' and ');
-  const reason = slot.startsWith('p')
-    ? `${capitalise(what)} is ${answer}: ${evidence}. A process is named with a verb phrase for what it does.`
-    : `${capitalise(what)} is ${answer}: ${evidence}. A data store is named for the data it holds.`;
+  const reason = isProcess
+    ? `The process marked ${letter} is ${answer}: ${evidence}. A process is named for what it does with the data.`
+    : `The data store marked ${letter} is ${answer}: ${evidence}. A data store is named for the data it holds.`;
   const expected = `${bank.indexOf(answer) + 1}. ${answer}`;
   const hint = `Type the label or its number from 1 to ${bank.length}.`;
   const intro: TerminalBlock[] =
@@ -280,7 +379,7 @@ export function labelItem(sc: LabelScenario, difficulty: Difficulty): QuizItem {
       ...intro,
       { kind: 'figure', figure: dfd, highlight: marks, compact: true },
       { kind: 'choices', options: bank, labels: 'numbers' },
-      { kind: 'text', text: `Which label belongs in the blank marked ${letter}, ${what}?`, tone: 'accent' },
+      { kind: 'text', text: `Which label belongs in the blank marked ${letter}, a ${isProcess ? 'process' : 'data store'}?`, tone: 'accent' },
       { kind: 'text', text: hint, tone: 'muted' },
     ],
     check(input) {
@@ -291,10 +390,6 @@ export function labelItem(sc: LabelScenario, difficulty: Difficulty): QuizItem {
       return { correct: chosen === answer, expected, reason };
     },
   };
-}
-
-function capitalise(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 // ---------------------------------------------------------------------------
@@ -335,13 +430,19 @@ export function fromDfdInstance(instance: string): QuizItem | null {
   return null;
 }
 
-/** How often an error that a context diagram can show is drawn on one. */
+/** The rules each difficulty injects: easy keeps to the errors that are plainest to see. */
+export const RULES_FOR: Record<Difficulty, readonly Rule[]> = {
+  easy: ['entity-entity', 'store-store', 'entity-store', 'process-io', 'store-io'],
+  normal: INJECTED_RULES,
+  hard: INJECTED_RULES,
+};
+
+/** How often a flow between two entities is drawn on a context diagram rather than a DFD. */
 const CONTEXT_SHARE: Record<Difficulty, number> = { easy: 0.6, normal: 0.35, hard: 0.15 };
 
 function errorScenario(system: DfdSystem, rule: Rule, seed: number, difficulty: Difficulty): ErrorScenario {
   const rng = mulberry32(childSeed(seed, 'scenario'));
-  const contextOk = rule === 'entity-entity' || rule === 'unlabelled';
-  const diagram: DiagramKind = contextOk && rng() < CONTEXT_SHARE[difficulty] ? 'context' : 'dfd';
+  const diagram: DiagramKind = injectionsFor(system, 'context').some((i) => ruleOf(i) === rule) && rng() < CONTEXT_SHARE[difficulty] ? 'context' : 'dfd';
   const injection = pick(
     rng,
     injectionsFor(system, diagram).filter((i) => ruleOf(i) === rule),
@@ -367,7 +468,7 @@ export function planDfdRound(seed: number, difficulty: Difficulty, count = 10): 
   const specs: DfdSpec[] = [];
   for (let cycle = 0; specs.length < count; cycle++) {
     const systems = shuffle(rng, SYSTEMS);
-    const rules = shuffle(rng, RULES).slice(0, ERROR_SCENARIOS);
+    const rules = shuffle(rng, RULES_FOR[difficulty]).slice(0, ERROR_SCENARIOS);
     const blocks: DfdSpec[][] = rules.map((rule, i) => {
       const scenario = errorScenario(systems[i], rule, childSeed(seed, `${cycle}:error:${i}`), difficulty);
       return [
@@ -391,6 +492,6 @@ export function generateDfdItem(seed: number, difficulty: Difficulty): QuizItem 
     const lab = labelScenario(system, seed);
     return labelItem({ ...lab, index: Math.floor(rng() * lab.blanks.length) }, difficulty);
   }
-  const scenario = errorScenario(system, pick(rng, RULES), seed, difficulty);
+  const scenario = errorScenario(system, pick(rng, RULES_FOR[difficulty]), seed, difficulty);
   return roll < 0.8 ? elementItem(scenario, difficulty) : ruleItem(scenario, difficulty);
 }
