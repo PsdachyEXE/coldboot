@@ -3,7 +3,7 @@
  * "Copy share line" button (and a selected text box when the browser won't copy), and the time
  * until the next set, which starts at midnight in Melbourne.
  */
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { dailyShareText } from '../../games/daily';
 import { msUntilNextSet } from '../../games/daily-game';
 import { useNow } from '../../lib/useNow';
@@ -39,7 +39,8 @@ export function DailyResult({ date, results, total, justFinished, today, onNewSe
   const share = dailyShareText(date, results, total);
   const stale = today !== date;
 
-  useEffect(() => {
+  // Layout effect: the text is focused and selected in the same commit that shows it, before paint.
+  useLayoutEffect(() => {
     if (copy === 'failed' && fallbackRef.current) {
       fallbackRef.current.focus();
       fallbackRef.current.select();
