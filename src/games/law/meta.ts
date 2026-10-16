@@ -34,7 +34,7 @@ Information Privacy Principles (IPPs), from the Privacy and Data Protection Act.
 
 Each scenario has two questions. First, which Act applies: type a letter from A to D, or the Act's name, such as health records act. Then, why it applies: choose the reason that is true for this scenario. The other reasons are false for it. The feedback for a Privacy Act or Privacy and Data Protection Act scenario also names a principle at stake, one that both units list.
 
-Sometimes two Acts apply. A small private clinic in Victoria that keeps health records is covered by the Health Records Act and, as a health service provider, by the Privacy Act. Those questions ask for the Victorian Act or the Commonwealth Act, so only one answer fits, and the feedback names both.
+Sometimes two Acts apply. A small private clinic in Victoria that keeps health records is covered by the Health Records Act and, as a health service provider, by the Privacy Act. Those questions ask for the Commonwealth Act, or for the Act that applies apart from the Privacy Act, so only one answer fits, and the feedback names both.
 
 Example: "A Victorian local council's app records each resident's name, phone number and address. Which Act governs how the council handles this personal information?" Type B, the Privacy and Data Protection Act 2014: a council is part of the Victorian public sector.
 

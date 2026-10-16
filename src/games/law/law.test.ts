@@ -46,7 +46,7 @@ function applicableActs(s: LawScenario): Act[] {
     if ((f.sector === 'vic-public' || f.sector === 'vic-contractor') && !f.healthInfo) acts.push('pdp');
     if (f.healthInfo && f.inVictoria) acts.push('health');
   }
-  if (/Victorian Act/.test(s.ask)) acts = acts.filter((a) => a === 'pdp' || a === 'health');
+  if (/Apart from the Privacy Act/.test(s.ask)) acts = acts.filter((a) => a !== 'privacy');
   if (/Commonwealth Act/.test(s.ask)) acts = acts.filter((a) => a === 'privacy' || a === 'copyright');
   return acts;
 }
@@ -60,13 +60,13 @@ describe('law bank', () => {
     for (const level of LEVELS) for (const act of ACTS) expect(scenariosFor(level).filter((s) => s.act === act).length, `${act} ${level}`).toBeGreaterThanOrEqual(2);
   });
 
-  it('asks for the Victorian or the Commonwealth Act wherever two Acts would apply', () => {
+  it('asks for the Commonwealth Act, or the Act apart from the Privacy Act, wherever two Acts would apply', () => {
     for (const s of SCENARIOS) {
       const f = s.facts;
       const privacyToo = !f.reuse && f.sector === 'private' && (f.turnoverAbove3m || f.healthProvider);
-      if (privacyToo && f.healthInfo && f.inVictoria) expect(s.ask, s.id).toMatch(/Victorian Act|Commonwealth Act/);
-      if (f.sector === 'vic-contractor') expect(s.ask, s.id).toMatch(/Victorian Act/);
-      if (s.act === 'health') expect(s.ask, s.id).toMatch(/Victorian Act/);
+      if (privacyToo && f.healthInfo && f.inVictoria) expect(s.ask, s.id).toMatch(/Apart from the Privacy Act 1988 \(Cwlth\)|Commonwealth Act/);
+      // Only the Health Records Act's label carries "(Vic)", so asking for "the Victorian Act" would give it away.
+      expect(s.ask, s.id).not.toMatch(/Victorian Act/);
       // Where the other Act also applies, the feedback names it.
       if (/Commonwealth Act/.test(s.ask) && f.healthInfo) expect(s.why, s.id).toMatch(/Health Records Act/);
       if (s.act === 'health' && f.sector === 'private' && f.healthProvider) expect(s.why, s.id).toMatch(/also covered by the Privacy Act/);

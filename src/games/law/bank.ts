@@ -22,8 +22,10 @@
  *
  * Every scenario has exactly one best Act. Where two genuinely apply (a private Victorian health
  * provider comes under both the Privacy Act and the Health Records Act), the question asks for the
- * Victorian Act or the Commonwealth Act, and the feedback names both. Turnovers are stated and sit
- * far from $3 million, so no answer turns on the threshold. No real organisation is named.
+ * Commonwealth Act, or for the Act that applies apart from the Privacy Act, and the feedback names
+ * both. No question asks for "the Victorian Act": only the Health Records Act's label carries
+ * "(Vic)", so the tag would give the answer away. Turnovers are stated and sit far from
+ * $3 million, so no answer turns on the threshold. No real organisation is named.
  *
  * The feedback for a Privacy Act or Privacy and Data Protection Act scenario names one principle at
  * stake, by number and title, from those both units list, so the item fits either unit's KK.
@@ -283,7 +285,7 @@ export const SCENARIOS: readonly LawScenario[] = [
     id: 'parking-contractor',
     act: 'pdp',
     story: "A small Melbourne software company is contracted by a Victorian council to run its parking permit system. The contract binds the company to the council's privacy obligations for residents' details.",
-    ask: "Which Victorian Act must the company follow when it handles residents' details under this contract?",
+    ask: "Which Act must the company follow when it handles residents' details under this contract?",
     facts: { sector: 'vic-contractor', turnoverAbove3m: false, inVictoria: true },
     why: "The Privacy and Data Protection Act binds the Victorian public sector and the contracted service providers that its contracts bind. Under IPP 2 (Use and disclosure), the company can't use residents' details for an unrelated purpose of its own, such as marketing, unless the residents consent or an exception applies.",
     principle: 'IPP 2',
@@ -293,7 +295,7 @@ export const SCENARIOS: readonly LawScenario[] = [
     id: 'grants-contractor',
     act: 'pdp',
     story: "A small Bendigo IT firm is contracted by a Victorian Government department to build and host a system storing applicants' names and addresses, under a contract that binds it to the department's privacy obligations.",
-    ask: 'Which Victorian Act binds the firm for this work?',
+    ask: 'Which Act binds the firm for this work?',
     facts: { sector: 'vic-contractor', turnoverAbove3m: false, inVictoria: true },
     why: "A contracted service provider to the Victorian public sector is bound by the Privacy and Data Protection Act through its contract. The details aren't health information, so the Health Records Act doesn't apply. Hosting the system with a cloud provider outside Victoria would bring in IPP 9 (Transborder data flows).",
     principle: 'IPP 9',
@@ -304,7 +306,7 @@ export const SCENARIOS: readonly LawScenario[] = [
     id: 'public-hospital',
     act: 'health',
     story: "A public hospital in Melbourne is replacing the system that stores patients' diagnoses and test results.",
-    ask: 'Which Victorian Act governs how the hospital handles these records?',
+    ask: 'Which Act governs how the hospital handles these records?',
     facts: { sector: 'vic-public', healthProvider: true, healthInfo: true, inVictoria: true },
     why: 'Health information held in Victoria, by public or private organisations, comes under the Health Records Act. The hospital is part of the Victorian public sector, but the Privacy and Data Protection Act leaves health information to the Health Records Act.',
     level: 2,
@@ -313,7 +315,7 @@ export const SCENARIOS: readonly LawScenario[] = [
     id: 'physio-ballarat',
     act: 'health',
     story: "A small private physiotherapy clinic in Ballarat is building an app that stores clients' injury histories and treatment notes.",
-    ask: 'Which Victorian Act governs how the clinic handles this health information?',
+    ask: 'Apart from the Privacy Act 1988 (Cwlth), which Act governs how the clinic handles this health information?',
     facts: { sector: 'private', turnoverAbove3m: false, healthProvider: true, healthInfo: true, inVictoria: true },
     why: 'The Health Records Act covers health information held by private as well as public organisations in Victoria. As a health service provider, the clinic is also covered by the Privacy Act 1988 (Cwlth).',
     level: 2,
@@ -322,7 +324,7 @@ export const SCENARIOS: readonly LawScenario[] = [
     id: 'maternal-child',
     act: 'health',
     story: "A Victorian council's maternal and child health service records babies' weights, immunisations and developmental checks.",
-    ask: 'Which Victorian Act governs these records?',
+    ask: 'Which Act governs these records?',
     facts: { sector: 'vic-public', healthProvider: true, healthInfo: true, inVictoria: true },
     why: 'These are health records held in Victoria, so the Health Records Act applies even though a council runs the service: the Privacy and Data Protection Act leaves health information to it.',
     level: 3,
@@ -331,7 +333,7 @@ export const SCENARIOS: readonly LawScenario[] = [
     id: 'psychology',
     act: 'health',
     story: "A small private psychology practice in Geelong stores notes about clients' mental health in new practice software.",
-    ask: 'Which Victorian Act governs how the practice handles these notes?',
+    ask: 'Apart from the Privacy Act 1988 (Cwlth), which Act governs how the practice handles these notes?',
     facts: { sector: 'private', turnoverAbove3m: false, healthProvider: true, healthInfo: true, inVictoria: true },
     why: "Information about a person's mental health is health information, which the Health Records Act covers for private as well as public organisations in Victoria. As a health service provider, the practice is also covered by the Privacy Act 1988 (Cwlth).",
     level: 2,
@@ -340,7 +342,7 @@ export const SCENARIOS: readonly LawScenario[] = [
     id: 'pharmacy',
     act: 'health',
     story: "A small pharmacy in Mildura keeps customers' prescription records in its dispensing software.",
-    ask: 'Which Victorian Act governs these records?',
+    ask: 'Apart from the Privacy Act 1988 (Cwlth), which Act governs these records?',
     facts: { sector: 'private', turnoverAbove3m: false, healthProvider: true, healthInfo: true, inVictoria: true },
     why: 'Prescription records are health information, which the Health Records Act covers for private organisations in Victoria. As a health service provider, the pharmacy is also covered by the Privacy Act 1988 (Cwlth).',
     level: 1,
@@ -349,7 +351,7 @@ export const SCENARIOS: readonly LawScenario[] = [
     id: 'dental',
     act: 'health',
     story: "A small dental clinic in Bendigo stores patients' treatment histories and dental images in a new system.",
-    ask: 'Which Victorian Act governs how the clinic handles this information?',
+    ask: 'Apart from the Privacy Act 1988 (Cwlth), which Act governs how the clinic handles this information?',
     facts: { sector: 'private', turnoverAbove3m: false, healthProvider: true, healthInfo: true, inVictoria: true },
     why: 'Treatment histories are health information, so the Health Records Act applies to this private Victorian clinic. As a health service provider, it is also covered by the Privacy Act 1988 (Cwlth).',
     level: 1,
