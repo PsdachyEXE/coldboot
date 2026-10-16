@@ -1090,6 +1090,8 @@ Amended by D-204: actors are roles only, with no payment gateway or messaging se
 
 Amended by D-202: Commonwealth Acts are tagged (Cwlth) and the Privacy and Data Protection Act 2014 is untagged; Health Records Act scenarios count towards TERMS only; each privacy feedback names an APP or IPP both units list; and two scenarios cover the 2025 A18 copyright misconception.
 
+Amended by D-212: questions where two Acts apply ask for the Commonwealth Act, or for the Act that applies apart from the Privacy Act, never for "the Victorian Act".
+
 ## D-128 Games: The Office macro strategy's name
 
 **Decision.** The option reads "Restrict Microsoft Office macros", matching content card c-u4o2-kk07-005. The man page adds that it is also described as configuring Microsoft Office macro settings.
@@ -1765,11 +1767,13 @@ The `law` game follows (80ef4a3). It names the Privacy and Data Protection Act 2
 
 **Rejected.** Dropping the Health Records Act items, which still teach part of a Terms definition.
 
+Amended by D-212: the law game no longer asks for "the Victorian Act", because only the Health Records Act's label still carries "(Vic)".
+
 ## D-203 Content reconciled item by item against the sources
 
 **Decision.** Every item outside the glossary (D-201) was reviewed in 31 batches: 26 pairs of key knowledge points, the PSM items and the four case studies. A reviewer checked each item against the source digests, following `reference/digest/RECONCILE_BRIEF.md` (the study design, the 2026 outcome-specific requirements, the 2025 exam and its report, the sample questions and the support pages), and an adversarial verifier then checked every proposed fix. Reviewers proposed 458 fixes; verifiers rejected 3, amended 119 and added 37 of their own. The resulting 492 item fixes (188 cards, 161 MCQs, 91 short answers, 41 case study questions and 11 PSM items), plus figure patches for cs-02 and cs-03, were applied by id with `scripts/content-review.ts`: 494 items changed and none was dropped (aeaa7be). cs-02's use case diagram lost an external system drawn as an actor, cs-03's DFD lost its process numbers and store ids, both case studies' mock-ups gained notes, and cs-03's data dictionary renamed two column headings. The fixes correct facts and claims about what the study design lists, terminology, secondary KK tags and `source` fields, and add mistake notes drawn from the 2025 report.
 
-`content/psm.json` was rebuilt from the PSM table and the columns ticked for Software Development Units 3 and 4 (ce0648a): the official activity names, a "Skills underpinning the … stage" entry for each stage, and 21 specification notes in place of 10. Evaluating design ideas and collecting evaluation data, which aren't PSM activities, were removed, and the 13 surviving activity ids are kept. Documentation means internal documentation only, and the design tools note leaves out flowcharts, which neither design tools KK lists.
+`content/psm.json` was rebuilt from the PSM table and the columns ticked for Software Development Units 3 and 4 (ce0648a): the official activity names, a "Skills underpinning the … stage" entry for each stage, and 21 specification notes in place of 10 (20 after D-212 removed one the PSM table doesn't have). Evaluating design ideas and collecting evaluation data, which aren't PSM activities, were removed, and the 13 surviving activity ids are kept. Documentation means internal documentation only, and the design tools note leaves out flowcharts, which neither design tools KK lists.
 
 A last pass (f3f4439) changed 18 more items. Nine testing tables now use the 2025 exam's layout, and nine items the checkers flagged were corrected: a response-time limit classified one way, reliability examples that overlapped robustness, a budget not called economic, cs-03-q02's accepted collection methods, and the existence and type check cards.
 
@@ -1836,7 +1840,7 @@ A last pass (f3f4439) changed 18 more items. Nine testing tables now use the 202
 
 ## D-210 psm: An activity's name never gives away its stage
 
-**Decision.** Seven PSM activities have names that contain their own stage: the four "Skills underpinning the … stage" entries, Solution design, Evaluation strategy and Solution evaluation. A which-stage question always describes one of these by its summary instead of naming it, and first and order questions show it by its summary. The two specification notes that name such an activity of their own stage (the evaluation strategy and solution evaluation notes) are left out of spec questions, so 19 of the 21 are used. Evaluation criteria keeps its name, because it is the trap: criteria are set in design. The man page uses the official activity names (1000c55).
+**Decision.** Seven PSM activities have names that contain their own stage: the four "Skills underpinning the … stage" entries, Solution design, Evaluation strategy and Solution evaluation. A which-stage question always describes one of these by its summary instead of naming it, and first and order questions show it by its summary. The two specification notes that name such an activity of their own stage (the evaluation strategy and solution evaluation notes) are left out of spec questions, so 18 of the 20 are used. Evaluation criteria keeps its name, because it is the trap: criteria are set in design. The man page uses the official activity names (1000c55).
 
 **Reason.** After the PSM rebuild (D-203), a question that shows "Skills underpinning the analysis stage" answers itself.
 
@@ -1849,3 +1853,16 @@ A last pass (f3f4439) changed 18 more items. Nine testing tables now use the 202
 **Reason.** `docs/CONTENT_NOTES.md` logs c-u3o1-kk01-008 as dropped for duplicating c-u4o2-kk08-002, and the content review notes cite items by id, so a reused id would make those notes describe a different card. One rule for every dropped id is also simpler than tracking which drops shipped.
 
 **Rejected.** Reusing ids that were dropped before they shipped, on the grounds that no student can have studied them.
+
+## D-212 Fixes from the final review of the reconciliation
+
+**Decision.** Independent reviewers went over the whole change (`git diff e97d203..HEAD`) in slices: the game code, the app code and the content of each outcome. A second agent tried to refute each finding, and only confirmed findings were fixed:
+- Review masks a reverse card's term where its own definition uses it, in the definition-to-term direction, as `blitz` already did (the masking moved to `src/content/mask.ts`). The content checker now rejects a reverse card whose definition names its term or an alias, and the eight cards it caught were reworded.
+- The law game's eight "Which Victorian Act" questions depended on the "(Vic)" tag, which D-202 left on the Health Records Act alone. They now ask for the Act that applies, or the Act apart from the Privacy Act 1988 (Cwlth).
+- `content/psm.json` lost the specification note about the SRS, which the PSM table doesn't contain; the analysis stage summary still teaches it.
+- Thirteen other items were corrected: a DFD whose flows met a store at an open end, three explanations that classified a response-time target one way as if settled, a context diagram mistake note that called the system a process, IPO chart and evaluation criteria wording that contradicted other cards, a table figure whose header row made screen readers misread it, a marking guide that disagreed with its twin, three glossary openings too close to the official sentences, and an efficiency definition that all but named its term (`reference/fixes/final-review.fixes.json`).
+- The exam paper's near-identical grouping builds each MCQ's word and option sets once and is cached per pool. With 414 MCQs, a paper took about three quarters of a second and the paper tests timed out under load.
+- `scripts/content-review.ts` counts floor shortfalls as errors, matching the strict `content:check` (D-093).
+- The terminal drawer's stand-in backtick listener stays until the drawer itself listens (e438e1a), found when an end-to-end test failed under load.
+
+**Reason.** The reconciliation changed most of the content and a third of the games in a few days; a last pass that only kept findings a second reader could confirm found real defects without churning sound work.

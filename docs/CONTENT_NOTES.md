@@ -1054,7 +1054,7 @@ The VCAA documents were read from copies the operator supplied and digested on 1
 
 - Removed: evaluate-design-ideas (Evaluating design ideas) and collect-evaluation-data (Collecting evaluation data), because neither is a PSM activity. Applying the criteria to design ideas is now part of Evaluation criteria, and planning what data to collect, how, when and by whom is part of Evaluation strategy.
 - Added: development-skills (Skills underpinning the development stage) and evaluation-skills (Skills underpinning the evaluation stage).
-- Documentation now means internal documentation only, the one documentation row ticked for Software Development, so user documentation left the activity and stage summaries. The 10 specification notes became 21, at least one for each ticked row.
+- Documentation now means internal documentation only, the one documentation row ticked for Software Development, so user documentation left the activity and stage summaries. The 10 specification notes became 21 (20 after the final review removed the SRS note, which the PSM table doesn't contain), at least one for each ticked row.
 - In the psm game, which-stage questions describe rather than name the activities whose names give away their stage (1000c55).
 
 ### Games (law, threat)
