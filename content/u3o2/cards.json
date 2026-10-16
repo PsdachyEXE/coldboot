@@ -869,7 +869,7 @@
       "Level 0 diagram",
       "Context diagram (Level 0)"
     ],
-    "back": "A Level 0 diagram of how a system exchanges data with the outside world. The whole system is one circle, each external entity (a user or another system outside it) is a labelled rectangle, and each data flow between an entity and the system is a labelled one-way arrow. Flows never run directly between two entities, and they don't cross.",
+    "back": "A top-level diagram of how a system exchanges data with the outside world. The whole system is one circle, each external entity (a user or another system outside it) is a labelled rectangle, and each data flow between an entity and the system is a labelled one-way arrow. Flows never run directly between two entities, and they don't cross.",
     "mistake": "A context diagram has no data stores and no internal processes: the system is a single circle. Stores and processes belong in the Level 1 data flow diagram.",
     "difficulty": 2,
     "source": "study-design"
@@ -1478,7 +1478,7 @@
     "aliases": [
       "Evaluation criterion"
     ],
-    "back": "Specific, measurable statements drawn from the solution requirements and used to judge efficiency and effectiveness. During design they are used to choose the preferred design idea; the same criteria are used again in the evaluation stage to judge how well the finished solution meets its requirements.",
+    "back": "Specific, measurable checks, written as statements, questions or dot points, drawn from the solution requirements and used to judge efficiency and effectiveness. During design they are used to choose the preferred design idea; the same checks are used again in the evaluation stage to judge how well the finished solution meets its requirements.",
     "mistake": "'The app is good' isn't a criterion, because no evidence can show whether it has been met. 'A new booking can be made in under one minute' can be checked.",
     "difficulty": 2,
     "source": "study-design"
@@ -1845,7 +1845,7 @@
     ],
     "type": "reverse",
     "front": "Space",
-    "back": "A design principle: the empty areas around and between elements, such as margins, gaps between groups of controls and room around buttons. Space shows which items belong together (wider gaps between groups than within them), avoids clutter, makes a screen quicker to scan and leaves room to tap the right control.",
+    "back": "A design principle: the empty areas around and between elements, such as margins, gaps between groups of controls and room around buttons. These gaps show which items belong together (wider gaps between groups than within them), avoids clutter, makes a screen quicker to scan and leaves room to tap the right control.",
     "mistake": "Space is the study design's name for this principle. \"White space\" means the same thing (the gaps needn't be white), not a separate principle, and \"proximity\" isn't a study design principle: grouping related controls, with gaps between the groups, is applying space.",
     "difficulty": 1,
     "source": "textbook"

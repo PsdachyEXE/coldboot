@@ -425,7 +425,7 @@
         }
       ],
       "model": "The error is the delivery_instructions flow drawn straight from Customer to Driver. A context diagram shows only the data that flows into and out of the system, so every flow must start or end at ParcelTrack. Data passed directly between two external entities never passes through ParcelTrack, so it is outside the system and shouldn't appear. Leila should delete the flow. If Kestrel Bay wants ParcelTrack to handle delivery instructions, she should draw delivery_instructions from Customer into ParcelTrack, and show the instructions reaching the driver in a flow from ParcelTrack to Driver, for example as part of run_sheet.",
-      "mistake": "A context diagram shows ParcelTrack as a single process with no data stores, so don't fix it by adding a store or more processes: those belong on a Level 1 data flow diagram. Every flow must start or end at the system, so delete the entity-to-entity flow or route it through ParcelTrack.",
+      "mistake": "A context diagram shows ParcelTrack as one circle, with no processes or data stores, so don't fix it by adding a process or a store: those belong on a Level 1 data flow diagram. Every flow must start or end at the system, so delete the entity-to-entity flow or route it through ParcelTrack.",
       "source": "study-design",
       "figureRefs": [
         "parceltrack-context"

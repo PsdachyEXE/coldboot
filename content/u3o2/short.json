@@ -1543,29 +1543,29 @@
             "id": "p1",
             "type": "process",
             "label": "Record booking",
-            "x": 340,
-            "y": 90
+            "x": 300,
+            "y": 80
           },
           {
             "id": "d1",
             "type": "store",
             "label": "Bookings",
-            "x": 596,
-            "y": 90
+            "x": 560,
+            "y": 160
           },
           {
             "id": "d2",
             "type": "store",
             "label": "Invoices",
-            "x": 596,
-            "y": 310
+            "x": 560,
+            "y": 240
           },
           {
             "id": "p2",
             "type": "process",
             "label": "Send invoice",
-            "x": 340,
-            "y": 310
+            "x": 300,
+            "y": 320
           }
         ],
         "flows": [

@@ -418,10 +418,14 @@
         "kind": "table",
         "title": "Object description: Booking (draft)",
         "columns": [
-          "A",
-          "Booking"
+          "Section",
+          "Entries"
         ],
         "rows": [
+          [
+            "A",
+            "Booking"
+          ],
           [
             "Properties/Attributes",
             "bookingID (string)"

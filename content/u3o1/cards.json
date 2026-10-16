@@ -865,7 +865,7 @@
     "aliases": [
       "Instance"
     ],
-    "back": "A single instance of a class, created while the program runs. It holds its own values for the attributes the class defines and can carry out the class's methods, so two `Booking` objects can have different dates and party sizes.",
+    "back": "A single thing made from a class while the program runs. It holds its own values for the attributes the class defines and can carry out the class's methods, so two `Booking` objects can have different dates and party sizes.",
     "difficulty": 1,
     "source": "textbook"
   },

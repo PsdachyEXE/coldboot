@@ -559,7 +559,7 @@
     "explanation": "The data dictionary records the data types of the weight and dose and the 0.1 to 100 range rule; pseudocode sets out the order of the range check and the dose calculation.",
     "whyWrong": [
       "",
-      "An object description doesn't represent a screen layout, and an IPO chart doesn't show the order of steps.",
+      "An object description doesn't represent a screen layout, and an IPO chart gives only an overview of the processing, not the full step-by-step algorithm that pseudocode sets out.",
       "A mock-up could show the dose output, but a data dictionary doesn't describe processing steps.",
       "Pseudocode doesn't show layout, and data types and sizes belong in a data dictionary."
     ],

@@ -6,6 +6,7 @@
 import { forwardRef, useId } from 'react';
 import type { Card } from '../../content/schema';
 import { renderCloze } from '../../content/markdown';
+import { maskDefinition } from '../../content/mask';
 import type { ReviewDirection } from '../../srs/queue';
 import { Markdown } from '../../ui/Markdown';
 import { Tag } from '../../ui/Tag';
@@ -39,7 +40,8 @@ function promptFor(card: Card, direction: ReviewDirection): string {
 
 function frontText(card: Card, direction: ReviewDirection, flipped: boolean): string {
   if (card.type === 'cloze') return renderCloze(card.front, flipped);
-  if (card.type === 'reverse' && direction === 'reverse') return card.back;
+  // Definition to term: hide the term where its own definition uses it, as blitz does.
+  if (card.type === 'reverse' && direction === 'reverse') return maskDefinition(card.back, [card.front, ...(card.aliases ?? [])]);
   return card.front;
 }
 

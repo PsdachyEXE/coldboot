@@ -91,7 +91,7 @@
     "whyWrong": [
       "This is a functional requirement: it states something the program must do.",
       "This is a technical constraint: it limits the hardware the program must run on.",
-      "This is a non-functional requirement: it sets how quickly the program must respond.",
+      "This sets how quickly the program must respond, a target for the solution, not a problem with the current process.",
       ""
     ],
     "difficulty": 2,
@@ -1035,7 +1035,7 @@
     "whyWrong": [
       "A deadline limits the time for the project; it is an economic constraint, not a requirement of the program.",
       "",
-      "A response time describes how well the program performs, so it is non-functional.",
+      "Showing search results is something the program does, but this statement adds a two-second limit, which sets how fast it works rather than what it does. Calculating each member's fee is a task on its own.",
       "Ease of learning is a usability quality, so it is a non-functional requirement."
     ],
     "difficulty": 1,
@@ -1534,7 +1534,7 @@
     "answer": 3,
     "explanation": "'Manage bookings' can be read broadly. A scope that also says what the app will not do, such as taking card deposits or emailing feedback surveys, makes the boundary clear, so the owner and the developer agree on what will be delivered before work begins.",
     "whyWrong": [
-      "A response-time target is a non-functional requirement; it doesn't say which features are included.",
+      "A response-time target sets how fast the app must work; it doesn't say which features are included.",
       "A deadline and a budget are constraints; they don't say which features the app covers.",
       "Listing stakeholders doesn't define the boundary of what the app will do.",
       ""

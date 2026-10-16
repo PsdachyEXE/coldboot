@@ -624,7 +624,7 @@
       "prompt": "Imogen is threat modelling LotTrail. She has already defined its security requirements, including that batch records can be added or changed only by authorised staff.\n\n1. State the threat modelling principle Imogen should apply next.\n2. Using Figure 1, describe one threat to the integrity of the data in the *Production batches* data store, and explain the harm it could cause.\n3. Recommend a security control that would reduce this threat, and explain how it does so.",
       "points": [
         {
-          "text": "States identifying and mitigating threats (identifying threats alone is accepted). Defining security requirements, which Imogen has done, scores no mark.",
+          "text": "States identifying and mitigating threats (identifying threats or mitigating threats alone is accepted). Defining security requirements, which Imogen has done, scores no mark.",
           "marks": 1
         },
         {

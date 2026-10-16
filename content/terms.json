@@ -42,7 +42,7 @@
       "back-up",
       "backups"
     ],
-    "back": "Copying data and keeping the copy apart from the original, so it can be restored if the data is lost. A backup can be full (everything), differential (changes since the last full backup), incremental (changes since the last backup of any kind) or a mix of these. Backups run manually or automatically on a schedule, and are kept on a separate local drive, external storage or the cloud.",
+    "back": "Copying data and keeping the copy apart from the original, so it can be restored if the data is lost. A copy can be full (everything), differential (changes since the last full copy), incremental (changes since the last copy of any kind) or a mix of these. Copies are made manually or automatically on a schedule, and kept on a separate local drive, on external storage or in the cloud.",
     "mistake": "Differential and incremental are easily swapped: differential counts from the last full backup, incremental from the last backup of any kind. Version control isn't a backup method either; the 2025 examiners' report called that an error.",
     "difficulty": 2,
     "source": "study-design"
@@ -255,7 +255,7 @@
     "aliases": [
       "digital systems"
     ],
-    "back": "The hardware, software and other elements, together with how they are interconnected, that are used to build digital solutions. Linking digital systems to one another creates a network.",
+    "back": "The hardware, software and other elements, together with how they are interconnected, that are used to build digital solutions. Linked to one another, such systems form a network.",
     "difficulty": 1,
     "source": "study-design"
   },
@@ -299,7 +299,7 @@
     ],
     "type": "reverse",
     "front": "Efficiency",
-    "back": "The time, cost and effort it takes to achieve the intended results: the less used, the more efficient. For a solution, measures include the cost of manipulating data and files, its functionality and how fast it processes. For a network, measures include productivity, processing time, running costs and how much is automated.",
+    "back": "The time, cost and effort it takes to achieve the intended results: the less it takes, the better. For a solution, measures include the cost of manipulating data and files, its functionality and how fast it processes. For a network, measures include productivity, processing time, running costs and how much is automated.",
     "mistake": "Efficiency examples are about time, cost and effort (a faster workflow, fewer steps, lower running costs); fewer errors or clearer output are effectiveness examples. Keep the two apart when an answer asks for both.",
     "difficulty": 2,
     "source": "study-design"
@@ -312,7 +312,7 @@
     ],
     "type": "reverse",
     "front": "Encryption",
-    "back": "Turning data and information from plain text into a coded form, to keep it from being compromised. It comes in two kinds. Symmetric encryption uses one key both to encrypt and to decrypt. Asymmetric encryption uses a public key to encrypt the data and information, and a matching private key to decrypt it.",
+    "back": "Turning data and information from plain text into a coded form, to keep it from being compromised. There are two methods. The symmetric method uses one key both to encrypt and to decrypt. The asymmetric method uses a public key to encrypt the data and information, and a matching private key to decrypt it.",
     "mistake": "To protect sensitive data an application stores, encrypt it. A cloud backup only guards against losing the data, and making users log in with multi-factor authentication doesn't secure what is already stored; encrypted data that is stolen can't be read without the key.",
     "difficulty": 2,
     "source": "study-design"
@@ -358,7 +358,7 @@
     ],
     "type": "reverse",
     "front": "Format",
-    "back": "How data and information physically look when they are presented, for example as images, graphs, tables, text or web pages. A format sets characteristics such as the presentation style or arrangement, and the shape and size.",
+    "back": "How data and information physically look when they are presented, for example as images, graphs, tables, text or web pages. Each one sets characteristics such as the presentation style or arrangement, and the shape and size.",
     "difficulty": 1,
     "source": "study-design"
   },
@@ -417,7 +417,7 @@
     "aliases": [
       "infographic"
     ],
-    "back": "Visual displays of complex data or information that summarise a topic or area of interest. They work by putting visual elements together so that patterns or trends in data come across quickly and clearly, or so that information is presented as data visualisations. Common features are complementary colour schemes, easy-to-read fonts, headings, multiple graphs, simple charts and statistics.",
+    "back": "A single visual that gives an overview of a topic or area of interest by bringing complex data or information together. Its visual elements are combined so a reader picks up patterns or trends at a glance, or sees information shown as data visualisations. Common features are complementary colour schemes, easy-to-read fonts, headings, multiple graphs, simple charts and statistics.",
     "difficulty": 1,
     "source": "study-design"
   },
@@ -433,7 +433,7 @@
     "aliases": [
       "legal requirement"
     ],
-    "back": "The key Acts that individuals, organisations and governments need to comply with on intellectual property and the privacy of data and information. For this study they are the Copyright Act 1968 (Cwlth), the Health Records Act 2001 (Vic), the Privacy Act 1988 (Cwlth), including the Privacy Amendment (Enhancing Privacy Protection) Act 2012 and the Privacy Amendment (Notifiable Data Breaches) Act 2017, and the Privacy and Data Protection Act 2014 (Vic).",
+    "back": "The main laws that people, businesses and government bodies must obey when they use intellectual property or collect and hold private data and information. For this study they are the Copyright Act 1968 (Cwlth), the Health Records Act 2001 (Vic), the Privacy Act 1988 (Cwlth), including the Privacy Amendment (Enhancing Privacy Protection) Act 2012 and the Privacy Amendment (Notifiable Data Breaches) Act 2017, and the Privacy and Data Protection Act 2014 (Vic).",
     "mistake": "Not every misuse of data breaches copyright. The Copyright Act is breached by copying or changing someone else's work, such as editing another author's code, without permission; storing personal information insecurely is a matter for the privacy Acts.",
     "difficulty": 3,
     "source": "study-design"
@@ -504,7 +504,7 @@
     ],
     "type": "reverse",
     "front": "Secondary data",
-    "back": "Data that someone other than the researcher has already collected, summarised or analysed. It may be large in volume and kept in repositories or data sets, and reports and articles can count as secondary data too.",
+    "back": "Data that someone other than the researcher has already collected, summarised or analysed. It may be large in volume and kept in repositories or data sets, and reports and articles can count as well.",
     "difficulty": 1,
     "source": "study-design"
   },
@@ -536,7 +536,7 @@
     "aliases": [
       "security threat"
     ],
-    "back": "Actions, devices and events that put at risk the security and integrity of data and information stored in, or exchanged between, digital systems. They can be accidental (deleting or overwriting data, misdelivering information, damaging equipment unintentionally), deliberate (insider threats, unauthorised access, stealing data or physical devices, malware, denial of service attacks, social engineering) or events-based (natural disasters and environmental factors, power or network outages, hardware failures, data corruption).",
+    "back": "Anything that could compromise the security or integrity of data and information, whether it is held on a digital system or passing between systems: an action, a device or an event. Threats can be accidental (deleting or overwriting data, misdelivering information, damaging equipment unintentionally), deliberate (insider threats, unauthorised access, stealing data or physical devices, malware, denial of service attacks, social engineering) or events-based (natural disasters and environmental factors, power or network outages, hardware failures, data corruption).",
     "mistake": "A phishing email sent by outsiders isn't an insider threat, even if an employee clicks the link: that is social engineering. An insider threat comes from someone within the organisation, such as a developer whose change to the development environment makes its code and data public.",
     "difficulty": 3,
     "source": "study-design"

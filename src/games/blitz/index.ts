@@ -6,6 +6,7 @@
  * score is the number correct before the time runs out.
  */
 import type { ContentIndex } from '../../content/loader';
+import { maskDefinition } from '../../content/mask';
 import type { Card } from '../../content/schema';
 import { createQuizSession, unavailableSession } from '../engine';
 import { childSeed, mulberry32, shuffle } from '../prng';
@@ -13,21 +14,9 @@ import type { Game, QuizItem } from '../types';
 import { matchTerm, phraseIndex } from './match';
 import { BLITZ_ID, BLITZ_KK, BLITZ_MAN, BLITZ_MS, BLITZ_TITLE } from './meta';
 
+export { maskDefinition };
+
 export const SKIP_WORDS = ['skip', 'pass'];
-
-function escapeRegExp(s: string): string {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-/** Hides the term and its aliases where a definition happens to use them, so the answer isn't shown. */
-export function maskDefinition(definition: string, spellings: readonly string[]): string {
-  let out = definition;
-  const longestFirst = [...spellings].filter((s) => s.trim()).sort((a, b) => b.length - a.length);
-  for (const s of longestFirst) {
-    out = out.replace(new RegExp(`(?<![\\p{L}\\p{N}])${escapeRegExp(s.trim())}(?![\\p{L}\\p{N}])`, 'giu'), '(this term)');
-  }
-  return out;
-}
 
 const courseTextCache = new WeakMap<ContentIndex, (phrase: string) => boolean>();
 

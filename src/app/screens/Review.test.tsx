@@ -218,6 +218,16 @@ describe('Review card flip', () => {
     expect(screen.getByText('Validation')).toBeInTheDocument();
   });
 
+  it('hides the term where its own definition uses it, in the reverse direction', () => {
+    const term = fxCard('t-backup', ['TERMS'], { type: 'reverse', front: 'Backup', aliases: ['backups'], back: 'A copy of data kept apart from it. Backups run on a schedule.' });
+    provideContent(fixtureIndex({ cards: [term] }));
+    useSrs.getState().setCard('t-backup', { reps: 1, interval: 1, ease: 2.5, due: Date.now() - 1000, lapses: 0, last: 1 });
+    renderReview();
+    fireEvent.click(screen.getByRole('button', { name: 'Start review' }));
+    expect(screen.getByText('A copy of data kept apart from it. (this term) run on a schedule.')).toBeInTheDocument();
+    expect(screen.queryByText(/Backups/)).toBeNull();
+  });
+
   it('hides cloze gaps until the flip', () => {
     const cloze = fxCard('c-u3o1-kk10-001', ['U3O1-KK10'], { type: 'cloze', front: 'A {{range check}} rejects 150 as an age.', back: 'Ages fall in a known range.' });
     provideContent(fixtureIndex({ cards: [cloze] }));

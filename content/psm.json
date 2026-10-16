@@ -111,7 +111,6 @@
     "Analysis: the constraints set out what the design must take into account: economic (cost and time), technical (such as processing speed, capacity, equipment, compatibility and security), social (users' expertise), legal (intellectual property and the ownership and privacy of data) and usability (accessibility, usefulness and ease of use).",
     "Analysis: the scope marks the boundaries of the solution, saying what it will address and what it will not.",
     "Analysis: data is collected with a range of techniques, its sources are checked for reliability, validity and relevance, and questions and follow-up questions are prepared to clarify needs and requirements.",
-    "Analysis: the findings are documented in a software requirements specification (SRS) that describes the functional and non-functional requirements, constraints, scope, user characteristics and technical environments.",
     "Design: the design lists the data the solution needs and plans its names, structure, validation and processing, showing how the solution will work and look.",
     "Design: design ideas are generated with ideation tools such as mood boards, brainstorming, mind maps, sketches and annotations, and the preferred idea is developed into detailed designs using design principles.",
     "Design: design tools such as data dictionaries, IPO charts, object descriptions and pseudocode show the solution's structure and functionality.",

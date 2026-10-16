@@ -4,6 +4,7 @@
  */
 import type { z } from 'zod';
 import { isCommandTerm } from './commandTerms';
+import { namesInDefinition } from './mask';
 import {
   AREA_IDS,
   CardsFileSchema,
@@ -137,6 +138,13 @@ export function checkContent(raw: RawContent): CheckReport {
   mcqs.forEach(({ file, item }) => claim(item.id, file));
   shorts.forEach(({ file, item }) => claim(item.id, file));
   caseStudies.forEach((cs) => cs.questions.forEach((q) => claim(q.id, `content/case-studies/${cs.id}.json`)));
+
+  // A reverse card is also asked from definition to term, so its definition mustn't name the term.
+  for (const { file, item } of cards) {
+    if (item.type !== 'reverse') continue;
+    const named = namesInDefinition(item.back, [item.front, ...(item.aliases ?? [])]);
+    if (named.length) errors.push(`${file}: ${item.id}'s definition names its own term (${named.join(', ')}); reword it so definition-to-term review doesn't give the answer away`);
+  }
 
   // Id conventions: the prefix names the kind, and the KK segment names the item's primary KK.
   const expectId = (id: string, kind: 'card' | 'mcq' | 'short', primary: string, file: string) => {
