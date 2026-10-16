@@ -143,10 +143,11 @@ function main(): void {
   const mentions = (e: string) => [...touched].some((id) => e.includes(id));
   for (const p of problems) console.error(`error ${p}`);
   for (const e of report.errors) console.error(`${mentions(e) ? 'error*' : 'error '} ${e}`);
-  for (const f of report.floorErrors) console.error(`floor  ${f}`);
+  for (const f of report.floorErrors) console.error(`error  floor: ${f}`);
   const t = report.totals;
   console.info(`after review: ${t.cards} cards (${t.terms} glossary), ${t.mcq} MCQs, ${t.short} short answers; ${touched.size} items touched`);
-  const failed = problems.length > 0 || report.errors.length > 0;
+  // Floors count, as in the strict content:check the deploy runs (D-093).
+  const failed = problems.length > 0 || report.errors.length > 0 || report.floorErrors.length > 0;
   if (process.argv.includes('--write')) {
     if (failed) {
       console.error('content-review: not written (fix the errors above first)');

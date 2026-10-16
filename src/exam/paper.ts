@@ -168,13 +168,16 @@ const normOption = (o: string) => o.toLowerCase().replace(/[^a-z0-9]+/g, ' ').tr
  * more), or when they share a KK and at least three of their four options: the same question with
  * a different scenario, or two framings of one fact.
  */
-export function nearIdentical(a: Mcq, b: Mcq, words = new Map<string, Set<string>>()): boolean {
+export function nearIdentical(a: Mcq, b: Mcq, words = new Map<string, Set<string>>(), options = new Map<string, Set<string>>()): boolean {
   const wa = words.get(a.id) ?? stemWords(a.stem);
   const wb = words.get(b.id) ?? stemWords(b.stem);
   if (jaccard(wa, wb) >= 0.6) return true;
   if (!a.kk.some((k) => b.kk.includes(k))) return false;
-  const opts = new Set(a.options.map(normOption));
-  return b.options.filter((o) => opts.has(normOption(o))).length >= 3;
+  const oa = options.get(a.id) ?? new Set(a.options.map(normOption));
+  const ob = options.get(b.id) ?? new Set(b.options.map(normOption));
+  let shared = 0;
+  for (const o of ob) if (oa.has(o)) shared++;
+  return shared >= 3;
 }
 
 /** Near-identical groups (connected pairs) as a group number per MCQ id. */
@@ -187,13 +190,24 @@ export function nearIdenticalGroups(items: readonly Mcq[]): Map<string, number> 
     }
     return i;
   };
+  // Word and option sets are built once per item: the pairwise pass is quadratic in the pool.
   const words = new Map(items.map((m) => [m.id, stemWords(m.stem)]));
+  const options = new Map(items.map((m) => [m.id, new Set(m.options.map(normOption))]));
   for (let i = 0; i < items.length; i++) {
     for (let j = i + 1; j < items.length; j++) {
-      if (find(i) !== find(j) && nearIdentical(items[i], items[j], words)) parent[find(j)] = find(i);
+      if (find(i) !== find(j) && nearIdentical(items[i], items[j], words, options)) parent[find(j)] = find(i);
     }
   }
   return new Map(items.map((m, i) => [m.id, find(i)]));
+}
+
+/** The last pool's groups: every paper from the same content asks for the same ones. */
+let groupCache: { key: string; groups: Map<string, number> } | null = null;
+
+function groupsFor(sorted: readonly Mcq[]): Map<string, number> {
+  const key = sorted.map((m) => m.id).join('|');
+  if (groupCache?.key !== key) groupCache = { key, groups: nearIdenticalGroups(sorted) };
+  return groupCache.groups;
 }
 
 // ---------------------------------------------------------------------------
@@ -224,7 +238,7 @@ function spreadByKk<T extends { id: string; kk: KkId[] }>(items: readonly T[], r
  */
 export function pickSectionA(pool: readonly Mcq[], count: number, rng: Rng): Mcq[] {
   const unique = [...new Map(pool.map((m) => [m.id, m])).values()].sort((x, y) => x.id.localeCompare(y.id));
-  const groups = nearIdenticalGroups(unique);
+  const groups = groupsFor(unique);
   const byBucket = new Map<Bucket, Mcq[]>(BUCKETS.map((b) => [b, []]));
   for (const m of unique) byBucket.get(bucketOf(m.kk))!.push(m);
   const available = Object.fromEntries(BUCKETS.map((b) => [b, byBucket.get(b)!.length])) as Record<Bucket, number>;
