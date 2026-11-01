@@ -1866,3 +1866,12 @@ A last pass (f3f4439) changed 18 more items. Nine testing tables now use the 202
 - The terminal drawer's stand-in backtick listener stays until the drawer itself listens (e438e1a), found when an end-to-end test failed under load.
 
 **Reason.** The reconciliation changed most of the content and a third of the games in a few days; a last pass that only kept findings a second reader could confirm found real defects without churning sound work.
+
+## D-213 Version 1.1.0 for the reconciled release; the installer stays on v1.0.0
+
+**Decision.** `package.json` moves to 1.1.0, so Settings, About, the build id (D-194) and exported progress files mark the reconciled content as a new release. The install and uninstall commands stay pinned to the `v1.0.0` tag: neither script has changed since then, and the shortcuts they make open the live site, which updates on every deploy. A `v1.1.0` tag on the deployed commit is optional and, like `v1.0.0`, left to the operator, because this session can't push tags (D-197).
+
+**Reason.** The reconciliation rewrote most of the content (D-198 to D-212), and a student comparing a report or an export with someone else's should be able to tell the releases apart. Moving the installer to a new tag would change the commands people already use, for no change in what they install.
+
+**Rejected.** Staying on 1.0.0, which would show the same version for the reconstructed and the reconciled content.
+

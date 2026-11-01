@@ -96,7 +96,7 @@ COLDBOOT is not affiliated with or endorsed by the Victorian Curriculum and Asse
 ## Status
 
 - **Checked against the study design in October 2026.** COLDBOOT was first built from a reconstruction, because the VCAA's documents couldn't be downloaded. In October 2026 the key knowledge map, the glossary and every card, question and case study were checked against the 2025 study design and the VCAA's support material: the 2026 outcome-specific requirements, the 2025 examination and its report, the sample questions and the planning and teaching pages (D-198 onwards in `docs/DECISIONS.md`). The key knowledge numbering matched, so nothing was renumbered. Titles and summaries are COLDBOOT's own short wording, so check the study design for the exact text, and topics the sources don't settle are still held back (`docs/CONTENT_NOTES.md`).
-- **The install commands need the `v1.0.0` tag.** The site deploys from `main`, and `v1.0.0` is tagged after the first green deploy. Until that tag exists, the Windows install and uninstall commands above won't work (D-002).
+- **The install commands stay on `v1.0.0`.** The site deploys from `main`, so every deploy reaches installed copies. The install and uninstall scripts haven't changed since `v1.0.0`, so the commands above still point there (D-213).
 
 ## Licence
 
