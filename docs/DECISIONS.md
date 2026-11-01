@@ -1875,3 +1875,13 @@ A last pass (f3f4439) changed 18 more items. Nine testing tables now use the 202
 
 **Rejected.** Staying on 1.0.0, which would show the same version for the reconstructed and the reconciled content.
 
+## D-214 1.1.0 is live on GitHub Pages; the tag waits on the operator
+
+**Decision.** With the operator's go-ahead on 1 November, `main` was fast-forwarded from `e97d203` to `a99c24a`, 31 commits. The deploy run went green: the check and build, the Pages deployment (GitHub records it as successful at https://psdachyexe.github.io/coldboot/), and the installer job under Windows PowerShell 5.1 and PowerShell 7, which installs, repairs and uninstalls against the live site and downloads its page and icon. A production build of `a99c24a`, byte-identical to the deployed one (D-194), identifies as `1.1.0+a99c24a` in Settings, and About describes the map as following the 2025 study design. Installed copies show the update prompt and move onto 1.1.0 when reloaded.
+
+The session couldn't load the live site itself: this environment's network policy refuses `psdachyexe.github.io`. The push of a `v1.1.0` tag was cut off again, as the `v1.0.0` push was refused (D-197), so the operator creates the tag on `a99c24a` if they want one; the installer doesn't need it (D-213).
+
+**Reason.** D-002 holds every deploy until the operator approves updating `main`.
+
+**Rejected.** Creating the tag through the REST API after git was refused, and loading the site through another route around the network policy.
+
