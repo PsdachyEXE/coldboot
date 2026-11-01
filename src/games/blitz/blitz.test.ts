@@ -128,6 +128,9 @@ describe('blitz on the real glossary', () => {
     const item = blitzItem(ethics!, others(ethics!), isCourseText);
     expect(item.check('ethical')).toMatchObject({ correct: false, reason: 'ethical is a different word, not a misspelling of Ethics.' });
     expect(item.check('ethic').correct).toBe(true);
+    // The opposite process is a course word too, not a misspelling.
+    const encryption = card('Encryption')!;
+    expect(blitzItem(encryption, others(encryption), isCourseText).check('decryption').correct).toBe(false);
     const rejected: string[] = [];
     for (const c of glossary) {
       const plural = `${c.front}s`;

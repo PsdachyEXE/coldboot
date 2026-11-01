@@ -767,7 +767,7 @@
       "",
       "One key that both encrypts and decrypts describes symmetric encryption. In asymmetric encryption, the public key only encrypts.",
       "The public key can't decrypt, which is why it can be shared openly; it is the private key that must be kept secret.",
-      "Only the private key is needed to decrypt; the public key's work is done once the data is encrypted."
+      "Decryption needs only the private key; the public key's work is done once the data is encrypted."
     ],
     "difficulty": 2,
     "source": "study-design"
