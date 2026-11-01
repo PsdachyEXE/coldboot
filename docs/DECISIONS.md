@@ -1885,3 +1885,41 @@ The session couldn't load the live site itself: this environment's network polic
 
 **Rejected.** Creating the tag through the REST API after git was refused, and loading the site through another route around the network policy.
 
+
+## D-215 Learn: a reading page for every topic, assembled from checked content
+
+**Decision.** COLDBOOT gains Learn (`/learn`, plan in `docs/LEARN.md`), a ninth destination: on the rail between Home and Review, and first in the phone's More menu, so the four daily tabs stay as they are. `/learn` lists the 52 key knowledge points by area, then the Terms and the PSM, each with its mastery and when its page was last read, and suggests the first topic neither practised nor read. A topic's page is study notes assembled from content that has already been checked: the study design map's summary and examples, the point's flashcards as reading (definitions, then comparisons, then key points, cloze gaps shown in bold), the official Terms tagged with it, the `mistake` notes of those cards and terms, and a Practise section (drill, flashcards, written questions, and the terminal games whose metadata lists the point). The Terms page groups the glossary by area; the PSM page sets out each stage's summary, activities and specification notes.
+
+Reading is never scored. Reaching the Practise section (or using one of its buttons) records the page as read in a new store, `coldboot:v1:learn`, which is exported with the rest of the progress and optional on import. A progress file without it, from 1.1.0, imports with Learn's records cleared: `applyImport` now resets every registered store the file doesn't carry, as the import screen has always promised ("replaces all progress"). The exam autosave, the only other optional store, gets the same treatment.
+
+Other doors: each syllabus map row ends with "Read the notes" ("Start here: read the notes" for a point never practised or read); Home's coverage section names how many topics are untouched and links the first; and the terminal gains `learn` (the topic list with read state), `learn <kk>` (summary, examples and three common mistakes, with a link to the page; printing doesn't count as reading) and `learn <term>` (the official definition).
+
+Multiple-choice explanations and short-answer models never appear in the notes, because they would give away the questions they belong to. A point with fewer than six cards of its own is topped up with cards that also tag it; with the Terms, every point has at least six things to read.
+
+**Reason.** Every surface in the app tested first and explained afterwards; the study design's 140 examples and the glossary as a whole reached no student. Notes mode needs no new writing and nothing that hasn't been checked, so it could ship twelve days before the exam. Authored lessons (Phase C of the plan) need the sources fetched again and are not built; the page says it is study notes.
+
+**Rejected.** Reaching Learn only from the map and Home, which keeps the brief's eight destinations but hides the screen a lost student is looking for; folding the index's areas on phones like the map, since its rows are a third the map's height; and reusing MCQ explanations as reading.
+
+## D-216 Today's run reads a never-met topic before drilling it
+
+**Decision.** When the run's drill covers a key knowledge point with no attempts and no read record, the run shows that point's Learn page first, under "Step 2 of 3: Read first". "Skip to the drill" sits above the page and "Start the drill" at its end; both go to the drill picked before reading. Starting records the page as read; skipping doesn't, though reaching the end of the page still does. It happens at most once a run, and a point that has been practised or read never triggers it, so the run slows down only for a topic the student has never met. The step list shows it as part of step 2 ("Now, reading first"), the run summary adds a "Read first" line, and Home's run preview says "reading about U3O1-KK01 first".
+
+The saved run gains the `learn` step, an optional `outcomes.learn` and an optional `learnKk` without changing `RUN_VERSION`: every 1.1.0 run still parses, and a 1.1.0 tab reading a 1.2.0 run at this step starts a new run, which it already does with anything it can't read.
+
+**Reason.** A fresh profile's first drill was ten questions on a topic the student may never have studied. Reading first, once, costs a minute and is skippable; it never replaces the drill.
+
+**Rejected.** A fourth numbered step, which would show "Step 2 of 4" in every run although most runs never read.
+
+## D-217 Lesson links appear after an answer, never during one
+
+**Decision.** Key knowledge tags open their Learn page in places where leaving loses nothing: a flashcard's back in Review, a written answer once its score is saved, a question in exam marking, the drill's results table (only for points with a wrong answer), and a "Read" button beside each "Drill" on the exam report's weakest list. A multiple-choice question's feedback has no link, and a live exam paper has none.
+
+**Reason.** The Drill screen doesn't keep its place, so a link mid-round would throw the round away; its results table is the first point where reading costs nothing. The live paper must not offer a way out.
+
+**Rejected.** The plan's link under every wrong multiple-choice answer, for the reason above.
+
+## D-218 Version 1.2.0 for Learn
+
+**Decision.** `package.json` moves to 1.2.0 for Learn and the run's "Read first" step (D-215 to D-217), so Settings, About, the build id and exported files tell it apart from 1.1.0. The installer stays pinned to `v1.0.0` (D-213): nothing in it changed. A `v1.2.0` tag is left to the operator, as before (D-197).
+
+**Reason.** A new destination and a new store are a feature release, not a fix; an export from 1.2.0 carries a store 1.1.0 doesn't know, and the version says which build wrote it.

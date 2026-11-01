@@ -8,7 +8,8 @@ It runs in the browser and works offline after your first visit. When a new vers
 
 ## What's in it
 
-- **Today's run.** The main button on Home takes you through today's flashcards, a 10-question drill on your weakest key knowledge and the daily challenge. If you leave part-way, Home offers to continue the run in the same tab.
+- **Today's run.** The main button on Home takes you through today's flashcards, a 10-question drill on your weakest key knowledge (with its Learn page first if you've never practised or read it) and the daily challenge. If you leave part-way, Home offers to continue the run in the same tab.
+- **Learn.** A reading page for every key knowledge point, plus the Terms and the problem-solving methodology: what the study design asks, the definitions and comparisons, the official terms and the common mistakes, then buttons to practise it. Reading isn't scored. Today's run shows a topic's page first when its drill is on something you've never met.
 - **Review.** Flashcards with spaced repetition. Cards come back just before you'd forget them, and the schedule tightens as the exam gets closer.
 - **Drill.** Section A multiple-choice questions by key knowledge point, by area of study, from your weakest points or at random, with an optional timed round at exam pace. After each one you see the right answer, why it's right, and why each other option is wrong.
 - **Written.** Section B short answers, and Section C questions on four case studies with the insert beside the questions. Type your answer, then mark it yourself against the marking points.

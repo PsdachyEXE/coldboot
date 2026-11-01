@@ -1,6 +1,19 @@
 # Learn mode: plan
 
-A place in COLDBOOT that teaches a key knowledge point before the app tests it. Written 1 November 2026, twelve days before the exam, after the 1.1.0 deploy. Nothing here is built yet; this is the plan to build it, with its phases, estimates and cut lines.
+A place in COLDBOOT that teaches a key knowledge point before the app tests it. Written 1 November 2026, twelve days before the exam, after the 1.1.0 deploy, as the plan to build it, with its phases, estimates and cut lines.
+
+## Status
+
+Phases A and B shipped in 1.2.0 (D-215 to D-217). Phase C, the authored lessons, has not started: it needs the sources fetched again, and every page says it is study notes until then. What was built differs from the plan below in these places:
+
+- A notes-mode page has no single "The ideas" section. Its flashcards read as three sections, Definitions, Comparisons and Key points, which keeps a definition list apart from prose.
+- "Exam traps" is called "Common mistakes" in notes mode, because those points come from the cards' `mistake` notes rather than the 2025 report. The name can change when authored lessons bring the report's traps.
+- The Terms page groups each term under the area of the first key knowledge point it is tagged with. Terms tagged with no point go last, under "Not tied to one key knowledge point".
+- The index shows mastery and read state as text, not a meter, and its areas don't fold on phones: each row is two short lines.
+- A multiple-choice answer's feedback doesn't link to Learn, because the Drill screen doesn't keep its place and a link would throw the round away. The drill's results table links each point with a wrong answer instead (D-217).
+- In the run, "Skip to the drill" sits above the page and "Start the drill" at its end. Skipping doesn't record a read.
+- The read store keeps one time per topic, at most 54 entries, so it is never pruned. Importing a file without it clears it.
+- The content checker has no lesson rules yet; they come with Phase C.
 
 ## What the app has today
 
