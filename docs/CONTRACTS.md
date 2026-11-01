@@ -6,7 +6,7 @@ The locked interfaces every part of COLDBOOT builds against, and who owns which 
 
 | Contract | File | Notes |
 |---|---|---|
-| Content schemas (Zod) and types | `src/content/schema.ts` | `Card`, `Mcq`, `ShortAnswer`, `Figure`, `CaseStudy`, `StudyDesign`, `PsmFile`, floors. Figure schemas check structure, not conventions: an unlabelled DFD flow and a use case association between two actors both validate, so games can teach those errors |
+| Content schemas (Zod) and types | `src/content/schema.ts` | `Card`, `Mcq`, `ShortAnswer`, `Figure`, `CaseStudy`, `StudyDesign`, `PsmFile`, floors. Figure schemas check structure, not conventions: an unlabelled DFD flow and a use case association between two actors both validate, so a question can show the error for students to find |
 | KK map | `content/study-design.json`, `src/content/studyDesign.ts` | ids `U3O1-KK01`…, plus `TERMS` and `PSM`; `status` is `confirmed` once checked against the study design, as all 52 have been since October 2026 (D-198), and `provisional` before that, which the schema and the boot sequence still accept; `kkMapVersion` and `renames`, applied by `kkRenamer` in `src/content/schema.ts` (see KK renumbering below) |
 | Content loading and index | `src/content/loader.ts` | per-outcome dynamic imports; `loadAllContent()` returns a `ContentIndex` (with `caseByKk` and `cardIds`); failed loads are retried, never cached |
 | Shared content store | `src/content/store.ts` | `useContentIndex()` loads once for every screen; prunes SRS records for cards that left the content |

@@ -116,7 +116,7 @@ export function bootLines(d: BootData, mode: BootMode, opts: BootOptions = {}): 
   }));
   const map: BootLine =
     d.provisional > 0
-      ? { key: 'map', label: 'kk map', detail: 'provisional, see About' }
+      ? { key: 'map', label: 'kk map', detail: plural(d.provisional, 'point unchecked', 'points unchecked') }
       : { key: 'map', label: 'kk map', detail: 'checked', result: 'ok' };
   return [build, ...areas, map, contentLine(d.content, narrow), ...study, ...examLines(d, narrow), ready];
 }
