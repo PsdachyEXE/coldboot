@@ -1923,3 +1923,11 @@ The saved run gains the `learn` step, an optional `outcomes.learn` and an option
 **Decision.** `package.json` moves to 1.2.0 for Learn and the run's "Read first" step (D-215 to D-217), so Settings, About, the build id and exported files tell it apart from 1.1.0. The installer stays pinned to `v1.0.0` (D-213): nothing in it changed. A `v1.2.0` tag is left to the operator, as before (D-197).
 
 **Reason.** A new destination and a new store are a feature release, not a fix; an export from 1.2.0 carries a store 1.1.0 doesn't know, and the version says which build wrote it.
+
+## D-219 1.2.0 is live on GitHub Pages
+
+**Decision.** Following the operator's instruction of 1 November to apply the Learn plan and return a finished product, `main` was fast-forwarded from `fc43c66` to `bb0fb4c` (three commits: the plan, Learn, and its documents with the version). The branch's CI and the deploy run went green: the check and build, the Pages deployment (GitHub records it as successful at https://psdachyexe.github.io/coldboot/), and the installer job under Windows PowerShell 5.1 and PowerShell 7 against the live site. A production build of `bb0fb4c` identifies as `1.2.0+bb0fb4c` (D-194), passes the eleven end-to-end tests, and renders Learn, a topic page, the PSM page, the map's new links and the run's "Read first" step at 1280 px and 375 px with no console errors. Installed copies show the update prompt and move onto 1.2.0 when reloaded.
+
+As with 1.1.0 (D-214), the session couldn't load the live site itself, because the network policy refuses `psdachyexe.github.io`, and a `v1.2.0` tag is left to the operator. This record changes no shipped file, so the build id stays `1.2.0+bb0fb4c`.
+
+**Reason.** D-002 holds every deploy until the operator approves updating `main`.
