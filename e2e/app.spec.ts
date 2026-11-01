@@ -192,6 +192,9 @@ test("today's run keeps its place across the Daily screen and a reload", async (
   await page.getByRole('link', { name: "Start today's run" }).click();
   await expect(page.getByRole('heading', { level: 2, name: 'Step 1 of 3: Review cards' })).toBeVisible();
   await page.getByRole('button', { name: 'Finish review' }).click();
+  // A fresh profile has met no topic, so the drill's first one is read first; this run skips it.
+  await expect(page.getByRole('heading', { level: 2, name: 'Step 2 of 3: Read first' })).toBeVisible();
+  await page.getByRole('button', { name: 'Skip to the drill' }).click();
   await expect(page.getByRole('heading', { level: 2, name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeVisible();
   await page.getByRole('button', { name: 'End drill now' }).click();
   const daily = page.getByRole('heading', { level: 2, name: 'Step 3 of 3: Daily challenge' });
@@ -214,6 +217,33 @@ test("today's run keeps its place across the Daily screen and a reload", async (
   await expect(page.getByRole('link', { name: "Start today's run" })).toHaveCount(0);
   await page.getByRole('link', { name: "Continue today's run" }).click();
   await expect(daily).toBeVisible();
+});
+
+test('Learn: a topic opened from the map, read to its end, then drilled', async ({ page }) => {
+  await seedOnboarded(page);
+  await page.goto('./#/map');
+  await page.getByRole('link', { name: 'Start here: read the notes for U3O1-KK04' }).click();
+  await expect(page.getByRole('heading', { level: 1, name: 'Data types' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: 'In the study design' })).toBeVisible();
+  await expect(page.getByText('Not practised yet. Not read yet.')).toBeVisible();
+
+  // Reaching the Practise section records the page as read; reading is never scored.
+  const practise = page.getByRole('heading', { level: 2, name: 'Practise' });
+  await practise.scrollIntoViewIfNeeded();
+  await expect(page.getByText('Not practised yet. Read today.')).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => Object.keys(JSON.parse(window.localStorage.getItem('coldboot:v1:learn') ?? 'null')?.data?.read ?? {})))
+    .toEqual(['U3O1-KK04']);
+
+  await page.getByRole('link', { name: 'Drill this topic' }).click();
+  await expect(page).toHaveURL(/#\/drill\?kk=U3O1-KK04$/);
+  await expect(page.getByText(/^Question 1 of/)).toBeVisible();
+
+  // The map no longer says to start there, and Learn's list says when it was read.
+  await page.goto('./#/map');
+  await expect(page.getByRole('link', { name: 'Read the notes for U3O1-KK04' })).toBeVisible();
+  await page.goto('./#/learn');
+  await expect(page.getByRole('listitem').filter({ hasText: 'U3O1-KK04' })).toContainText('Read today.');
 });
 
 test.describe('under reduced motion', () => {

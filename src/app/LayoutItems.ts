@@ -4,6 +4,7 @@ import { RAIL, paths, type PathName } from './paths';
 const LABELS: Record<PathName, string> = {
   home: 'Home',
   welcome: 'Welcome',
+  learn: 'Learn',
   run: "Today's run",
   review: 'Review',
   drill: 'Drill',
@@ -21,7 +22,7 @@ const LABELS: Record<PathName, string> = {
 export const TAB_ITEMS: readonly PathName[] = ['home', 'review', 'drill', 'terminal'];
 
 /** Behind More on a phone. */
-export const MORE_ITEMS: readonly PathName[] = ['written', 'exam', 'map', 'stats', 'settings', 'about'];
+export const MORE_ITEMS: readonly PathName[] = ['learn', 'written', 'exam', 'map', 'stats', 'settings', 'about'];
 
 /** The short navigation label ("Map"), from the rail where it has one. */
 export function navLabel(name: PathName): string {

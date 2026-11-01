@@ -12,11 +12,13 @@ import { localDate } from '../lib/time';
 // reset cover it even when the exam route has never been opened.
 import '../exam/store';
 import './attempts';
+// Learn's reading records are optional in a progress file too: files from before Learn still import.
+import './learn';
 import './session';
 import './settings';
 import './srs';
 import { clearTabState, flushAllPersisted, persistedStores } from './persist';
-import { removeAllKeys } from './storage';
+import { removeAllKeys, removeKey } from './storage';
 
 export const EXPORT_SCHEMA = 1;
 export const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
@@ -137,7 +139,15 @@ export async function readImportFile(file: Blob): Promise<ImportResult> {
  * drafts and terminal belonged to the progress being replaced, so they are cleared too.
  */
 export function applyImport(file: ValidatedImport): void {
-  for (const [name, data] of Object.entries(file.data)) persistedStores.get(name)?.apply(data);
+  // An optional store the file doesn't carry (from a build before it existed, like Learn's records
+  // in a 1.1.0 file) starts afresh, so nothing of the replaced progress survives.
+  for (const reg of persistedStores.values()) {
+    if (Object.hasOwn(file.data, reg.name)) reg.apply(file.data[reg.name]);
+    else {
+      reg.resetSilently();
+      removeKey(reg.name);
+    }
+  }
   flushAllPersisted();
   clearTabState();
 }

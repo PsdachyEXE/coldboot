@@ -91,7 +91,7 @@ export function ExamMarking({ paper, resolved }: { paper: ExamPaper; resolved: R
       {isMcq(item) ? (
         <>
           <McqReview key={item.id} mcq={item} chosen={typeof answers[item.id] === 'number' ? (answers[item.id] as number) : undefined} />
-          <KkTagList kks={item.kk} />
+          <KkTagList kks={item.kk} learn />
         </>
       ) : (
         <ShortMarking

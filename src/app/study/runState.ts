@@ -20,14 +20,24 @@ export const RUN_KEY = 'run';
 export const EMPTY_TALLY: ReviewTally = { ratings: 0, cardIds: [], newCards: 0, again: 0 };
 export const RUN_VERSION = 1;
 
-export type StepId = 'review' | 'drill' | 'daily';
+/**
+ * `learn` is the drill's "Read first" step (docs/LEARN.md): when the drill lands on a key knowledge
+ * point the student has never practised or read, its Learn page comes before the questions. It
+ * isn't one of RUN_STEPS: it belongs to the drill step, so the run still has three numbered steps.
+ */
+export type StepId = 'review' | 'learn' | 'drill' | 'daily';
+
+/** The numbered step a step id belongs to: "Read first" is part of the drill. */
+export function shownStep(step: StepId): Exclude<StepId, 'learn'> {
+  return step === 'learn' ? 'drill' : step;
+}
 
 /**
  * The run's steps, in order: the heading Run shows, the step's name in a sentence ("Next: drill
  * your weakest key knowledge"), and the short name in a list ("drill, then the daily challenge").
  * Home reads them too, so they live here rather than in the Run screen's chunk.
  */
-export const RUN_STEPS: readonly { id: StepId; title: string; phrase: string; short: string }[] = [
+export const RUN_STEPS: readonly { id: Exclude<StepId, 'learn'>; title: string; phrase: string; short: string }[] = [
   { id: 'review', title: 'Review cards', phrase: 'review cards', short: 'review cards' },
   { id: 'drill', title: 'Drill your weakest key knowledge', phrase: 'drill your weakest key knowledge', short: 'drill' },
   { id: 'daily', title: 'Daily challenge', phrase: 'the daily challenge', short: 'the daily challenge' },
@@ -46,6 +56,8 @@ export interface SavedRun {
   outcomes: Partial<Record<StepId, Outcome>>;
   /** Ratings so far in the review step. */
   review: ReviewTally;
+  /** The key knowledge point the "Read first" step shows, when the drill has one. */
+  learnKk?: KkId;
   /** The drill's questions (MCQ ids), in order, and the answers given so far. */
   drillIds: string[];
   drillAnswers: DrillAnswer[];
@@ -65,9 +77,11 @@ const AnswerSchema = z.object({ itemId: Id, kk: z.array(Kk).max(20), correct: z.
 const SavedRunSchema = z.object({
   v: z.literal(RUN_VERSION),
   day: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  step: z.enum(['review', 'drill', 'daily']),
-  outcomes: z.object({ review: OutcomeSchema.optional(), drill: OutcomeSchema.optional(), daily: OutcomeSchema.optional() }),
+  // 1.2.0 added the `learn` step and its fields without changing the version: every 1.1.0 run still parses.
+  step: z.enum(['review', 'learn', 'drill', 'daily']),
+  outcomes: z.object({ review: OutcomeSchema.optional(), learn: OutcomeSchema.optional(), drill: OutcomeSchema.optional(), daily: OutcomeSchema.optional() }),
   review: z.object({ ratings: Count, cardIds: z.array(Id).max(5_000), newCards: Count, again: Count }),
+  learnKk: Kk.optional(),
   drillIds: z.array(Id).max(100),
   drillAnswers: z.array(AnswerSchema).max(100),
   drillResult: z

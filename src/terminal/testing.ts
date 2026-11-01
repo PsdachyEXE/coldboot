@@ -7,6 +7,7 @@ import { useAttempts } from '../state/attempts';
 import { useSession } from '../state/session';
 import { useSettings } from '../state/settings';
 import { useSrs } from '../state/srs';
+import { useLearn } from '../state/learn';
 import { useAnnouncer } from '../ui/announce';
 import { useReportDialog } from '../ui/report';
 import type { TerminalBlock } from './blocks';
@@ -20,6 +21,7 @@ export function resetStores(): void {
   useAttempts.getState().reset();
   useSettings.getState().reset();
   useSrs.getState().reset();
+  useLearn.getState().reset();
   useContent.setState({ index: null, status: 'idle', error: null });
   useTerminal.setState({ open: false, pending: null, lastGameEnd: null });
   useReportDialog.setState({ request: null });

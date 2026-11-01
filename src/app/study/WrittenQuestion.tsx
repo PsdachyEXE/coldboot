@@ -150,7 +150,7 @@ export function WrittenQuestion({ item, position, where, onScored, next, autoFoc
                 Score saved: {result.earned} of {plural(result.marks, 'mark')}.
               </p>
               {item.mistake ? <MistakeNote text={item.mistake} /> : null}
-              <KkTagList kks={item.kk} />
+              <KkTagList kks={item.kk} learn />
               <div className={study.actions}>
                 {next ? (
                   <Button ref={nextRef} variant="primary" onClick={next.onNext}>

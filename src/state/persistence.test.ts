@@ -100,6 +100,24 @@ describe('persistence', () => {
     expect(t[4]).toBe(0);
   });
 
+  it('imports a file from before Learn, leaving no reading records from the replaced progress', async () => {
+    const { io, settings } = await freshState();
+    const learn = await import('./learn');
+    settings.useSettings.getState().setName('Mia');
+    const file = io.buildExport(2_000_000_000_000);
+    delete (file.stores as Record<string, unknown>).learn;
+    learn.useLearn.getState().markRead('U3O1-KK04', 2_000_000_000_000);
+    vi.runAllTimers();
+    expect(window.localStorage.getItem('coldboot:v1:learn')).not.toBeNull();
+
+    const parsed = io.parseImport(JSON.stringify(file));
+    expect(parsed.ok).toBe(true);
+    if (parsed.ok) io.applyImport(parsed.file);
+    expect(settings.useSettings.getState().name).toBe('Mia');
+    expect(learn.useLearn.getState().read).toEqual({});
+    expect(window.localStorage.getItem('coldboot:v1:learn')).toBeNull();
+  });
+
   it('keeps only the first daily attempt and never overwrites a started record', async () => {
     const { session } = await freshState();
     const s = session.useSession.getState();
@@ -116,7 +134,7 @@ describe('persistence', () => {
     settings.useSettings.getState().setName('Mia');
     record.recordAttempt({ itemId: 'gen-sort', kk: ['U3O1-KK12'], score: 1, timestamp: 2_000_000_000_000, ms: 10 });
     const file = io.buildExport(2_000_000_000_000);
-    expect(Object.keys(file.stores).sort()).toEqual(['attempts', 'exam', 'session', 'settings', 'srs']);
+    expect(Object.keys(file.stores).sort()).toEqual(['attempts', 'exam', 'learn', 'session', 'settings', 'srs']);
     const text = JSON.stringify(file);
 
     io.resetAllProgress();

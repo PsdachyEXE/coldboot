@@ -10,11 +10,13 @@ import { DRILL_ID } from '../games/drill/meta';
 import { isAreaId, kksInArea, mcqsForKk, weakestDrillKks } from '../games/drill/select';
 import { DRILL_GAME, GAMES, findGame } from '../games/registry';
 import type { Difficulty } from '../games/types';
-import { examPath, paths, reviewPath } from '../app/paths';
+import { assembleNotes, isLearnKk, LEARN_ORDER, topicTitle } from '../app/learn/notes';
+import { examPath, learnPath, paths, reviewPath } from '../app/paths';
 import { nearest } from '../lib/text';
 import { addDays, countdown, examPhase, formatInstant, studyDay, studyDayStart } from '../lib/time';
 import { computeMastery } from '../srs/mastery';
 import { useAttempts } from '../state/attempts';
+import { useLearn } from '../state/learn';
 import { streak, useSession } from '../state/session';
 import { examAtMs, useSettings } from '../state/settings';
 import { countDue, useSrs } from '../state/srs';
@@ -334,6 +336,64 @@ function about(): void {
 }
 
 // ---------------------------------------------------------------------------
+// Learn
+// ---------------------------------------------------------------------------
+
+const LEARN_HINT = 'Type learn followed by a key knowledge id, such as learn U3O1-KK04, or a term, such as learn encryption.';
+const termKey = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+/**
+ * `learn` lists the topics with what has been read; `learn <kk>` prints a topic's summary,
+ * examples and common mistakes with a link to its Learn page; `learn <term>` prints an official
+ * term's definition. Printing a summary doesn't count as reading the page.
+ */
+async function learn(cmd: ParsedCommand): Promise<void> {
+  if (cmd.flags.length) {
+    out(say(`learn doesn't take options. ${LEARN_HINT}`, 'warning'));
+    return;
+  }
+  const typed = cmd.args.join(' ').trim();
+  if (!typed) {
+    const read = useLearn.getState().read;
+    const rows = LEARN_ORDER.map((kk) => [kk === 'TERMS' || kk === 'PSM' ? topicTitle(kk) : `${kk} ${topicTitle(kk)}`, read[kk] ? 'read' : '']);
+    out(say(LEARN_HINT, 'muted'), { kind: 'table', columns: ['Topic', 'Read'], rows, caption: 'Topics in Learn' }, { kind: 'link', label: 'Open Learn', to: learnPath() });
+    return;
+  }
+  const upper = typed.toUpperCase();
+  if (isLearnKk(upper) && (upper === 'TERMS' || upper === 'PSM')) {
+    out(say(topicTitle(upper), 'accent'), { kind: 'link', label: `Read ${topicTitle(upper)} in Learn`, to: learnPath({ kk: upper }) });
+    return;
+  }
+  if (useContent.getState().status !== 'ready') out(say('Loading the study content.', 'muted'));
+  const content = await useContent.getState().load();
+  if (!content) {
+    out(say(useContent.getState().error ?? CONTENT_ERROR, 'warning'));
+    return;
+  }
+  if (isLearnKk(upper)) {
+    const notes = assembleNotes(upper, content);
+    if (!notes) return;
+    const blocks: TerminalBlock[] = [say(kkLabel(upper), 'accent'), say(notes.summary)];
+    if (notes.examples.length) blocks.push(say('For example:', 'muted'), { kind: 'list', items: [...notes.examples] });
+    if (notes.traps.length) blocks.push(say('Common mistakes:', 'muted'), { kind: 'markdown', text: notes.traps.slice(0, 3).map((t) => `- ${t}`).join('\n') });
+    blocks.push({ kind: 'link', label: `Read ${upper} in Learn`, to: learnPath({ kk: upper }) });
+    out(...blocks);
+    return;
+  }
+  const wanted = termKey(typed);
+  const term = content.terms.find((t) => [t.front, ...(t.aliases ?? [])].some((s) => termKey(s) === wanted));
+  if (term) {
+    out(say(term.front, 'accent'), { kind: 'markdown', text: term.back }, { kind: 'link', label: 'Open the Terms page in Learn', to: learnPath({ kk: 'TERMS' }) });
+    return;
+  }
+  const near = nearest(wanted, [...content.terms.map((t) => termKey(t.front)), ...ALL_KK_IDS.map((k) => k.toLowerCase())]);
+  out(
+    say(`There's no topic or term called "${typed.slice(0, 40)}".`, 'warning'),
+    say(near ? `Did you mean ${isKkId(near.toUpperCase()) ? near.toUpperCase() : near}? Type learn ${isKkId(near.toUpperCase()) ? near.toUpperCase() : near}.` : LEARN_HINT, 'muted'),
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Navigation
 // ---------------------------------------------------------------------------
 
@@ -407,6 +467,7 @@ export const COMMANDS: readonly CommandSpec[] = [
   { name: 'daily', usage: 'daily', summary: "Start today's daily challenge", run: (cmd) => playGame('daily', cmd, `terminal: ${cmd.raw}`) },
   { name: 'drill', usage: 'drill [kk|area]', summary: 'Answer up to 10 Section A questions', run: drill },
   { name: 'due', usage: 'due', summary: 'Show the cards due now and over the week', run: due },
+  { name: 'learn', usage: 'learn [kk|term]', summary: 'Read about a topic or look up a term', run: learn },
   { name: 'review', usage: 'review', summary: 'Open flashcard review', run: (_c, env) => open('review', reviewPath(), env) },
   { name: 'exam', usage: 'exam [--mini]', summary: 'Open the exam simulator', flags: ['--mini'], run: exam },
   { name: 'map', usage: 'map', summary: 'Open the syllabus map', run: (_c, env) => open('the syllabus map', paths.map, env) },
@@ -437,6 +498,7 @@ export function completionSources(): CompletionSources {
     games,
     manTopics: [...games, DRILL_ID],
     drillTargets: DRILL_TARGETS,
+    learnTargets: ALL_KK_IDS,
     flags: Object.fromEntries(COMMANDS.filter((c) => c.flags).map((c) => [c.name, c.flags!])),
   };
 }

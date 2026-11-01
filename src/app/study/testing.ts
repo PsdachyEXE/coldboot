@@ -7,6 +7,7 @@ import { buildIndex, type AreaContent, type ContentIndex } from '../../content/l
 import type { Card, CaseStudy, KkId, Mcq, PsmFile, ShortAnswer } from '../../content/schema';
 import { useContent } from '../../content/store';
 import { useAttempts } from '../../state/attempts';
+import { useLearn } from '../../state/learn';
 import { useSession } from '../../state/session';
 import { useSettings } from '../../state/settings';
 import { useSrs } from '../../state/srs';
@@ -97,6 +98,7 @@ export function resetStudyStores(): void {
   useContent.setState({ index: null, status: 'idle', error: null, load: originalLoad });
   useSrs.getState().reset();
   useAttempts.getState().reset();
+  useLearn.getState().reset();
   useSession.getState().reset();
   useSettings.getState().reset();
   useReportDialog.setState({ request: null });

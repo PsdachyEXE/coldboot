@@ -4,7 +4,7 @@
  * drill. Reachable again from Past papers on the start screen.
  */
 import { useLocation } from 'react-router';
-import { drillPath, paths } from '../app/paths';
+import { drillPath, learnPath, paths } from '../app/paths';
 import { plural } from '../app/study/format';
 import { PhaseHeading } from '../app/study/parts';
 import study from '../app/study/study.module.css';
@@ -87,7 +87,7 @@ export function ExamReport({ id }: { id: string }) {
       <h2>Weakest key knowledge</h2>
       {weakest.length ? (
         <>
-          <p>Where this paper dropped the most marks. A focused drill is a good next step.</p>
+          <p>Where this paper dropped the most marks. Read up on each in Learn, then a focused drill is a good next step.</p>
           <ul className={styles.weak}>
             {weakest.map((t) => (
               <li key={t.kk}>
@@ -97,9 +97,14 @@ export function ExamReport({ id }: { id: string }) {
                     {t.earned} of {plural(t.available, 'mark')}
                   </span>
                 </span>
-                <ButtonLink to={drillPath({ kk: t.kk })} aria-label={`Drill ${kkLabel(t.kk)}`}>
-                  Drill {t.kk === 'PSM' || t.kk === 'TERMS' ? kkLabel(t.kk) : t.kk}
-                </ButtonLink>
+                <span className={styles.weakActions}>
+                  <ButtonLink to={learnPath({ kk: t.kk })} aria-label={`Read about ${kkLabel(t.kk)} in Learn`}>
+                    Read
+                  </ButtonLink>
+                  <ButtonLink to={drillPath({ kk: t.kk })} aria-label={`Drill ${kkLabel(t.kk)}`}>
+                    Drill {t.kk === 'PSM' || t.kk === 'TERMS' ? kkLabel(t.kk) : t.kk}
+                  </ButtonLink>
+                </span>
               </li>
             ))}
           </ul>

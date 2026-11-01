@@ -1,6 +1,8 @@
 /**
  * Today's run (Section 6.2): due reviews, a 10-question drill on the weakest KK, then the daily
- * challenge in the terminal, ending at "Run complete". Review and Drill run embedded here, and the
+ * challenge in the terminal, ending at "Run complete". When the drill lands on a key knowledge point
+ * the student has never practised or read, its Learn page comes first, headed "Read first"
+ * (docs/LEARN.md); it is part of the drill step, not a fourth one. Review and Drill run embedded here, and the
  * run keeps its place in this tab (src/app/study/runState.ts): leaving the page, for the Daily
  * screen or anywhere else, and coming back carries on from the same step, with the ratings and
  * answers so far. A step with nothing to do is skipped with a note. A finished run isn't kept, so
@@ -12,7 +14,8 @@
  */
 import { Fragment, useEffect, useRef, useState } from 'react';
 import type { ContentIndex } from '../../content/loader';
-import type { Mcq } from '../../content/schema';
+import type { KkId, Mcq } from '../../content/schema';
+import { kkLabel } from '../../content/studyDesign';
 import { findGame } from '../../games/registry';
 import { freshSeed, mulberry32 } from '../../games/prng';
 import { melbourneDate, studyDay } from '../../lib/time';
@@ -20,11 +23,13 @@ import { masteryNow } from '../../srs/hooks';
 import type { QueueEntry } from '../../srs/queue';
 import { onClearTabState } from '../../state/persist';
 import { useSession } from '../../state/session';
+import { useLearn } from '../../state/learn';
 import { useSettings } from '../../state/settings';
 import { useSrs } from '../../state/srs';
 import { useTerminal } from '../../terminal/useTerminal';
 import { Button, ButtonLink } from '../../ui/Button';
 import { useNarrow } from '../../ui/useMediaQuery';
+import { firstUnmet } from '../learn/topics';
 import { paths } from '../paths';
 import { ContentGate } from '../study/ContentGate';
 import { suggestNextStep, type DrillAnswer, type DrillResult } from '../study/drill';
@@ -33,16 +38,19 @@ import { plural } from '../study/format';
 import { PhaseHeading } from '../study/parts';
 import { ReviewRunner, type ReviewSummary, type ReviewTally } from '../study/ReviewRunner';
 import { reviewQueue } from '../study/reviewQueue';
-import { clearRun, EMPTY_TALLY, readRun, RUN_STEPS, RUN_VERSION, saveRun, type Outcome, type StepId } from '../study/runState';
+import { clearRun, EMPTY_TALLY, readRun, RUN_STEPS, RUN_VERSION, saveRun, shownStep, type Outcome, type StepId } from '../study/runState';
 import { pickRunDrill } from '../study/select';
 import study from '../study/study.module.css';
 import styles from '../study/Run.module.css';
+import { TopicPage } from './Learn';
 
 interface RunState {
   step: StepId | 'complete';
   outcomes: Partial<Record<StepId, Outcome>>;
   queue: QueueEntry[];
   drill: Mcq[];
+  /** The point the "Read first" step shows before the drill, or null when the drill needs none. */
+  learnKk: KkId | null;
   drillResult: DrillResult | null;
   /** When the current step began (a daily game must finish after this). */
   stepAt: number;
@@ -83,8 +91,14 @@ function advance(content: ContentIndex, state: Progress, after: StepId | null): 
       if (queue.length) return { ...state, outcomes, step: 'review', queue, stepAt: now, reviewTally: EMPTY_TALLY };
       outcomes.review = { status: 'skipped', text: 'Nothing was due.' };
     } else if (id === 'drill') {
-      const drill = pickRunDrill(content, masteryNow(now), mulberry32(freshSeed(now))).items;
-      if (drill.length) return { ...state, outcomes, step: 'drill', drill, stepAt: now, drillAnswers: [] };
+      const mastery = masteryNow(now);
+      const picked = pickRunDrill(content, mastery, mulberry32(freshSeed(now)));
+      const drill = picked.items;
+      if (drill.length) {
+        // A point the drill covers that has never been practised or read is read first, once a run.
+        const learnKk = state.outcomes.learn ? null : firstUnmet(picked.kks, mastery, useLearn.getState().read);
+        return { ...state, outcomes, step: learnKk ? 'learn' : 'drill', drill, learnKk, stepAt: now, drillAnswers: [] };
+      }
       outcomes.drill = { status: 'skipped', text: 'There are no questions to drill yet.' };
     } else {
       const dailyDate = melbourneDate(now);
@@ -130,6 +144,7 @@ function restoreRun(content: ContentIndex): Omit<RunState, 'focus'> | null {
     outcomes: saved.outcomes,
     queue: [],
     drill: [],
+    learnKk: saved.learnKk ?? null,
     drillResult: saved.drillResult,
     stepAt: saved.stepAt,
     dailyDate: saved.dailyDate,
@@ -143,11 +158,19 @@ function restoreRun(content: ContentIndex): Omit<RunState, 'focus'> | null {
     const review = saved.review.ratings ? reviewOutcome(saved.review, false) : { status: 'skipped' as const, text: 'Nothing was left to review.' };
     return advance(content, { ...base, outcomes: { ...base.outcomes, review } }, 'review');
   }
-  if (saved.step === 'drill') {
-    const drill = saved.drillIds.flatMap((id) => {
+  const savedDrill = () =>
+    saved.drillIds.flatMap((id) => {
       const entry = content.byId.get(id);
       return entry?.kind === 'mcq' && !entry.caseStudyId ? [entry.item] : [];
     });
+  if (saved.step === 'learn') {
+    // Still reading: the same page, then the same drill. Without its drill the run picks one again.
+    const drill = savedDrill();
+    if (drill.length) return { ...base, step: base.learnKk ? 'learn' : 'drill', drill };
+    return advance(content, base, 'review');
+  }
+  if (saved.step === 'drill') {
+    const drill = savedDrill();
     const answered = new Set(saved.drillAnswers.map((a) => a.itemId));
     if (drill.some((q) => !answered.has(q.id))) return { ...base, step: 'drill', drill };
     const result = untimedResult(saved.drillAnswers);
@@ -166,7 +189,7 @@ function RunSteps({ content }: { content: ContentIndex }) {
     ...(restoreRun(content) ??
       advance(
         content,
-        { outcomes: {}, queue: [], drill: [], drillResult: null, stepAt: 0, dailyDate: '', reviewTally: EMPTY_TALLY, drillAnswers: [], day: studyDay(Date.now()) },
+        { outcomes: {}, queue: [], drill: [], learnKk: null, drillResult: null, stepAt: 0, dailyDate: '', reviewTally: EMPTY_TALLY, drillAnswers: [], day: studyDay(Date.now()) },
         null,
       )),
     focus: false,
@@ -205,6 +228,7 @@ function RunSteps({ content }: { content: ContentIndex }) {
       step,
       outcomes: state.outcomes,
       review: state.reviewTally,
+      ...(state.learnKk ? { learnKk: state.learnKk } : {}),
       drillIds: state.drill.map((q) => q.id),
       drillAnswers: state.drillAnswers,
       drillResult: state.drillResult,
@@ -223,6 +247,14 @@ function RunSteps({ content }: { content: ContentIndex }) {
       ...advance(content, { ...prev, drillResult: r.total === 0 ? null : r, outcomes: { ...prev.outcomes, drill: drillOutcome(r) } }, 'drill'),
       focus: true,
     }));
+  // Leaving "Read first" for the drill already picked. Starting the drill from the page counts as
+  // reading it; skipping doesn't.
+  const finishLearn = (read: boolean) => {
+    const kk = state.learnKk;
+    if (read && kk) useLearn.getState().markRead(kk);
+    const learn: Outcome = read ? { status: 'done', text: `Read about ${kk} before the drill.` } : { status: 'skipped', text: 'Went straight to the drill.' };
+    setState((prev) => (prev.step === 'learn' ? { ...prev, step: 'drill', outcomes: { ...prev.outcomes, learn }, stepAt: Date.now(), drillAnswers: [], focus: true } : prev));
+  };
   const noteReview = (reviewTally: ReviewTally) => setState((prev) => (prev.step === 'review' ? { ...prev, reviewTally } : prev));
   const noteDrill = (drillAnswers: DrillAnswer[]) => setState((prev) => (prev.step === 'drill' ? { ...prev, drillAnswers } : prev));
   const skipDaily = () =>
@@ -255,6 +287,30 @@ function RunSteps({ content }: { content: ContentIndex }) {
             onProgress={noteReview}
           />
         </section>
+      ) : step === 'learn' && state.learnKk ? (
+        <section key="learn" aria-labelledby="run-step">
+          <StepHeading focus={focus} index={1} title="Read first" />
+          {summary}
+          <p>
+            The drill starts with {kkLabel(state.learnKk)}, which you haven't practised or read yet. Here are its notes; the questions come after them.
+          </p>
+          <div className={study.actions}>
+            <Button variant="quiet" onClick={() => finishLearn(false)}>
+              Skip to the drill
+            </Button>
+          </div>
+          <TopicPage
+            kk={state.learnKk}
+            content={content}
+            embedded={{
+              actions: (
+                <Button variant="primary" onClick={() => finishLearn(true)}>
+                  Start the drill
+                </Button>
+              ),
+            }}
+          />
+        </section>
       ) : step === 'drill' ? (
         <section key="drill" aria-labelledby="run-step">
           <StepHeading focus={focus} index={1} />
@@ -281,14 +337,15 @@ function RunSteps({ content }: { content: ContentIndex }) {
   );
 }
 
-function StepList({ step, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
+function StepList({ step: at, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
+  const step = shownStep(at);
   const upNextIndex = RUN_STEPS.findIndex((t) => !outcomes[t.id] && t.id !== step);
   return (
     <ol className={styles.steps} aria-label="Steps">
       {RUN_STEPS.map((s, i) => {
         const outcome = outcomes[s.id];
         const current = s.id === step;
-        const status = outcome ? (outcome.status === 'done' ? 'Done' : 'Skipped') : current ? 'Now' : i === upNextIndex ? 'Up next' : 'Later';
+        const status = outcome ? (outcome.status === 'done' ? 'Done' : 'Skipped') : current ? (at === 'learn' ? 'Now, reading first' : 'Now') : i === upNextIndex ? 'Up next' : 'Later';
         return (
           <li key={s.id} className={styles.step} aria-current={current ? 'step' : undefined} data-status={outcome?.status ?? (current ? 'current' : 'todo')}>
             <span className={styles.stepNumber} aria-hidden="true">
@@ -310,7 +367,7 @@ function StepList({ step, outcomes }: { step: StepId; outcomes: Partial<Record<S
 
 /** Phones: "Next: drill, then the daily challenge", opening to the full step list. */
 function StepSummary({ step, outcomes }: { step: StepId; outcomes: Partial<Record<StepId, Outcome>> }) {
-  const at = RUN_STEPS.findIndex((t) => t.id === step);
+  const at = RUN_STEPS.findIndex((t) => t.id === shownStep(step));
   const ahead = RUN_STEPS.filter((s, i) => i > at && !outcomes[s.id]);
   const next = ahead.length === 0 ? 'This is the last step' : `Next: ${ahead.map((s) => s.short).join(', then ')}`;
   return (
@@ -327,10 +384,10 @@ function reviewText(s: ReviewSummary): string {
   return s.finishedEarly ? `${base} You finished early.` : base;
 }
 
-function StepHeading({ index, focus }: { index: number; focus: boolean }) {
+function StepHeading({ index, focus, title }: { index: number; focus: boolean; title?: string }) {
   return (
     <PhaseHeading level={2} focus={focus} id="run-step">
-      Step {index + 1} of 3: {RUN_STEPS[index].title}
+      Step {index + 1} of 3: {title ?? RUN_STEPS[index].title}
     </PhaseHeading>
   );
 }
@@ -392,8 +449,15 @@ function RunComplete({
       <dl className={study.facts}>
         {RUN_STEPS.map((s) => {
           const outcome = outcomes[s.id];
+          const read = s.id === 'drill' ? outcomes.learn : undefined;
           return (
             <Fragment key={s.id}>
+              {read ? (
+                <>
+                  <dt>Read first</dt>
+                  <dd>{`${read.status === 'done' ? 'Done' : 'Skipped'}: ${read.text}`}</dd>
+                </>
+              ) : null}
               <dt>{s.title}</dt>
               <dd>{outcome ? `${outcome.status === 'done' ? 'Done' : 'Skipped'}: ${outcome.text}` : 'Not started.'}</dd>
             </Fragment>

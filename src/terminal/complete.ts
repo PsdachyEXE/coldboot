@@ -1,6 +1,6 @@
 /**
  * Tab completion. Completes the word before the cursor: command names first, then game names after
- * `play` and `man`, KK and area ids after `drill`, and flags. One match completes the word and adds
+ * `play` and `man`, KK and area ids after `drill`, KK ids after `learn`, and flags. One match completes the word and adds
  * a space; several extend it to their common prefix and are returned as options to print.
  */
 
@@ -11,6 +11,8 @@ export interface CompletionSources {
   manTopics: readonly string[];
   /** KK and area ids for `drill`. */
   drillTargets: readonly string[];
+  /** KK ids for `learn` (TERMS and PSM included). */
+  learnTargets?: readonly string[];
   /** Flags per command, with their dashes: { play: ['--easy', '--hard'] }. */
   flags: Readonly<Record<string, readonly string[]>>;
 }
@@ -45,6 +47,8 @@ function candidatesFor(prior: readonly string[], word: string, src: CompletionSo
       return src.manTopics;
     case 'drill':
       return src.drillTargets;
+    case 'learn':
+      return src.learnTargets ?? [];
     case 'help':
       return src.commands;
     case 'report':

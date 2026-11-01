@@ -28,15 +28,17 @@ import {
 import { useNow } from '../../lib/useNow';
 import { useDueSummary, useExamAt, useMastery } from '../../srs/hooks';
 import type { MasteryMap } from '../../srs/mastery';
+import { useLearn } from '../../state/learn';
 import { streak, useSession, type DailyRecord } from '../../state/session';
 import { useSrs } from '../../state/srs';
 import { Button, ButtonLink } from '../../ui/Button';
 import { Panel } from '../../ui/Panel';
-import { examPath, paths, practisePath, reviewPath } from '../paths';
+import { examPath, learnPath, paths, practisePath, reviewPath } from '../paths';
+import { firstUnstarted, LEARN_ORDER } from '../learn/topics';
 import { ContentErrorNotice } from '../study/ContentGate';
 import { CoverageGrid, CoverageLegend } from '../study/CoverageGrid';
 import { plural } from '../study/format';
-import { readRun, RUN_STEPS, type SavedRun } from '../study/runState';
+import { readRun, RUN_STEPS, shownStep, type SavedRun } from '../study/runState';
 import { kksWithItems, rankWeakest } from '../study/select';
 import study from '../study/study.module.css';
 import styles from '../study/Coverage.module.css';
@@ -59,6 +61,9 @@ function Today({ now, examAt, mode }: { now: number; examAt: number; mode: Exclu
   const activity = useSession((s) => s.activity);
   const daily = useSession((s) => s.daily[melbourneDate(now)]);
   const days = streak(activity, studyDay(now));
+  const read = useLearn((s) => s.read);
+  const start = firstUnstarted(mastery, read);
+  const unstarted = LEARN_ORDER.filter((kk) => !mastery.has(kk) && !read[kk]).length;
   // A run under way in this tab carries on where it was left (src/app/study/runState.ts).
   const saved = mode === 'study' ? readRun(studyDay(now)) : null;
   const dailyStatus = daily?.completedAt
@@ -90,6 +95,11 @@ function Today({ now, examAt, mode }: { now: number; examAt: number; mode: Exclu
           Every key knowledge point, one row per area of study, shaded by your mastery. Select one to drill it, or open the{' '}
           <Link to={paths.map}>syllabus map</Link> for the detail.
         </p>
+        {start ? (
+          <p>
+            {plural(unstarted, 'topic')} not practised or read yet. New to one? Read about <Link to={learnPath({ kk: start })}>{kkLabel(start)}</Link> in Learn first.
+          </p>
+        ) : null}
         <CoverageLegend />
         <CoverageGrid mastery={mastery} onSelect={(kk) => navigate(practisePath(kk))} />
       </section>
@@ -189,16 +199,19 @@ function ExamOver() {
 
 /** Where a run under way is up to: the finished steps' outcomes, the step to carry on with, then the rest. */
 function RunPlace({ saved }: { saved: SavedRun }) {
-  const at = RUN_STEPS.findIndex((s) => s.id === saved.step);
+  // "Read first" belongs to the drill step.
+  const at = RUN_STEPS.findIndex((s) => s.id === shownStep(saved.step));
   const current = RUN_STEPS[at];
   const ahead = RUN_STEPS.slice(at + 1);
   const reviewed = saved.review.cardIds.length;
   const detail =
     saved.step === 'review' && reviewed > 0
       ? `, ${plural(reviewed, 'card')} reviewed so far`
-      : saved.step === 'drill' && saved.drillIds.length > 0
-        ? `, ${saved.drillAnswers.length} of ${saved.drillIds.length} answered`
-        : '';
+      : saved.step === 'learn' && saved.learnKk
+        ? `, reading about ${saved.learnKk} first`
+        : saved.step === 'drill' && saved.drillIds.length > 0
+          ? `, ${saved.drillAnswers.length} of ${saved.drillIds.length} answered`
+          : '';
   return (
     <ol className={styles.steps} aria-label="Today's run">
       {RUN_STEPS.slice(0, at).map((s) => {

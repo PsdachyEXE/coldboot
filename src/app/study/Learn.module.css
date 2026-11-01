@@ -1,0 +1,174 @@
+/* Learn: the topic list and one topic's reading page (docs/LEARN.md). */
+
+.lead {
+  margin-bottom: var(--space-4);
+}
+
+.note {
+  color: var(--steel);
+  font-size: var(--step-0);
+  margin: 0 0 var(--space-5);
+}
+
+/* Topic list ------------------------------------------------------------ */
+
+.start {
+  margin: 0 0 var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: var(--trench);
+  border-left: 4px solid var(--phosphor);
+}
+.start p {
+  margin: 0;
+}
+
+.area {
+  margin-bottom: var(--space-6);
+}
+
+.areaHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.topics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topic {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: var(--hairline);
+}
+
+.topicLink {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  color: var(--ice);
+  font-weight: 700;
+  min-width: 0;
+}
+
+.topicId {
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  font-weight: 400;
+  color: var(--steel);
+}
+
+.topicMeta {
+  color: var(--steel);
+  font-size: var(--step-0);
+}
+
+/* A topic page ----------------------------------------------------------- */
+
+.crumb {
+  margin: 0 0 var(--space-2);
+  font-size: var(--step-0);
+}
+
+.state {
+  color: var(--steel);
+  margin: var(--space-2) 0 var(--space-5);
+}
+
+.section {
+  margin-top: var(--space-6);
+}
+
+.examples {
+  margin: var(--space-3) 0 0;
+}
+
+/* Term and definition pairs (each in its own div), one under the other so long definitions read as prose. */
+.defs {
+  margin: 0;
+}
+.defs > div + div {
+  margin-top: var(--space-4);
+}
+.defs dt {
+  font-weight: 700;
+  color: var(--ice);
+}
+.defs dd {
+  margin: var(--space-1) 0 0;
+}
+
+.aliases {
+  color: var(--steel);
+  font-size: var(--step-0);
+  font-weight: 400;
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.items > li {
+  padding: var(--space-4) 0;
+  border-bottom: var(--hairline);
+}
+.items > li:first-child {
+  padding-top: 0;
+}
+
+.prompt {
+  margin: 0 0 var(--space-2);
+  font-weight: 700;
+  color: var(--ice);
+}
+
+.traps {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+.traps li + li {
+  margin-top: var(--space-3);
+}
+
+/* "Study notes, assembled from..." under the last section. */
+.closing {
+  color: var(--steel);
+  font-size: var(--step-0);
+  margin: var(--space-5) 0 0;
+}
+
+.stage {
+  margin-top: var(--space-6);
+}
+
+.practise {
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: var(--hairline);
+}
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: var(--hairline);
+}
+.pager a {
+  max-width: 100%;
+}
+.pagerNext {
+  margin-left: auto;
+  text-align: right;
+}

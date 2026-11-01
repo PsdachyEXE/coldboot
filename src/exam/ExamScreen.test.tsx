@@ -99,6 +99,8 @@ describe('exam screen', () => {
     // The announcement comes from a passive effect that can run after the commit waitFor saw.
     await waitFor(() => expect(useAnnouncer.getState().assertive).toMatch(/Writing time has started: you have 2 hours/));
     expect(screen.queryByText(/You can't answer yet/)).toBeNull();
+    // A live paper never offers a way out to Learn.
+    expect(screen.queryByRole('link', { name: /in Learn$/ })).toBeNull();
   });
 
   it('autosaves every change to the store and to storage, and says so quietly', async () => {
@@ -153,6 +155,8 @@ describe('exam screen', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Question 2, incorrect' }));
     expect(screen.getByText('Your answer')).toBeInTheDocument();
     expect(screen.getByText('Two confuses the terms.')).toBeInTheDocument();
+    // Marked, a question's key knowledge opens its Learn page.
+    expect(screen.getAllByRole('link', { name: /^Read about .* in Learn$/ })[0].getAttribute('href')).toMatch(/^\/learn\?kk=/);
 
     // Section B is self-marked against the marking points, beside the model answer.
     fireEvent.click(screen.getByRole('tab', { name: /Section B/ }));
@@ -181,6 +185,7 @@ describe('exam screen', () => {
     expect(screen.getByRole('meter', { name: 'Section C, case study' })).toHaveAttribute('aria-valuetext', '0 of 3');
     expect(screen.getByText(/You used 20 minutes of the 2 hours 15 minutes allowed/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /^Drill U3O2-KK03/ })).toHaveAttribute('href', '/drill?kk=U3O2-KK03');
+    expect(screen.getByRole('link', { name: /^Read about U3O2-KK03 .* in Learn$/ })).toHaveAttribute('href', '/learn?kk=U3O2-KK03');
 
     // Every answered item is recorded; unanswered ones are not.
     const log = useAttempts.getState().log.map(([id, , score]) => [id, score]);

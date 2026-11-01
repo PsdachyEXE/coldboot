@@ -103,7 +103,7 @@ export const ReviewCard = forwardRef<HTMLElement, ReviewCardProps>(function Revi
       </div>
       {flipped ? (
         <>
-          <KkTagList kks={card.kk} />
+          <KkTagList kks={card.kk} learn />
           {card.mistake ? <MistakeNote text={card.mistake} /> : null}
         </>
       ) : null}

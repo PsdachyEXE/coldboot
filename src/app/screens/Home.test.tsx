@@ -4,6 +4,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router';
 import { kkLabel } from '../../content/studyDesign';
 import { melbourneDate, studyDay } from '../../lib/time';
 import { exportFilename } from '../../state/exportImport';
+import { useLearn } from '../../state/learn';
 import { recordAttempt } from '../../state/record';
 import { useSession } from '../../state/session';
 import { useSettings } from '../../state/settings';
@@ -149,6 +150,16 @@ describe('Home', () => {
       expect(screen.getByRole('link', { name: "Continue today's run" })).toBeInTheDocument();
     });
 
+    it('says when a run left at the drill is reading a topic first', () => {
+      window.sessionStorage.setItem('coldboot:v1:run', JSON.stringify({ ...savedRun(), step: 'learn', learnKk: 'U3O1-KK14', drillAnswers: [] }));
+      renderHome();
+      expect(within(screen.getByRole('list', { name: "Today's run" })).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+        'Review cards. Done: 1 card reviewed, 1 of them new.',
+        'Next: drill your weakest key knowledge, reading about U3O1-KK14 first.',
+        'Then: the daily challenge.',
+      ]);
+    });
+
     it('previews a new run when the saved one is from another study day or unreadable', () => {
       for (const stored of [JSON.stringify(savedRun('2026-09-30')), '{not json']) {
         window.sessionStorage.setItem('coldboot:v1:run', stored);
@@ -165,6 +176,15 @@ describe('Home', () => {
   it('says when the daily challenge is not done', () => {
     renderHome();
     expect(screen.getByText('Daily challenge').nextSibling).toHaveTextContent('Not done yet');
+  });
+
+  it('points to Learn for the first topic not practised or read', () => {
+    recordAttempt({ itemId: 'm-u3o1-kk04-001', kk: ['U3O1-KK01'], score: 1, timestamp: NOW - 60_000, ms: 1000 });
+    useLearn.getState().markRead('U3O1-KK02', NOW - 60_000);
+    renderHome();
+    const grid = screen.getByRole('region', { name: 'Coverage' });
+    expect(within(grid).getByText(/52 topics not practised or read yet\./)).toBeInTheDocument();
+    expect(within(grid).getByRole('link', { name: kkLabel('U3O1-KK03') })).toHaveAttribute('href', '/learn?kk=U3O1-KK03');
   });
 
   it('shows every KK as a cell, with unseen cells distinct from weak ones', () => {

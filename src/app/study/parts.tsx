@@ -1,20 +1,33 @@
 /** Small pieces shared by the study screens. */
 import { useEffect, useRef, type ReactNode } from 'react';
+import { Link } from 'react-router';
 import type { KkId } from '../../content/schema';
+import { kkLabel } from '../../content/studyDesign';
 import { KkTag } from '../../ui/Tag';
 import { Markdown } from '../../ui/Markdown';
+import { learnPath } from '../paths';
 import styles from './study.module.css';
 
-/** The KKs an item is tagged with, ids and titles. */
-export function KkTagList({ kks, label = 'Key knowledge' }: { kks: readonly KkId[]; label?: string }) {
+/**
+ * The KKs an item is tagged with, ids and titles. With `learn`, each tag opens its Learn page; the
+ * study screens pass it once an answer has been seen, never during a live exam.
+ */
+export function KkTagList({ kks, label = 'Key knowledge', learn = false }: { kks: readonly KkId[]; label?: string; learn?: boolean }) {
   return (
     <ul className={styles.tags} aria-label={label}>
       {kks.map((kk) => (
-        <li key={kk}>
-          <KkTag kk={kk} showTitle />
-        </li>
+        <li key={kk}>{learn ? <LearnTag kk={kk} /> : <KkTag kk={kk} showTitle />}</li>
       ))}
     </ul>
+  );
+}
+
+/** A KK tag that opens the point's Learn page: "Read about U3O1-KK04 Data types in Learn". */
+export function LearnTag({ kk }: { kk: KkId }) {
+  return (
+    <Link to={learnPath({ kk })} className={styles.tagLink} aria-label={`Read about ${kkLabel(kk)} in Learn`}>
+      <KkTag kk={kk} showTitle className={styles.tagLinked} />
+    </Link>
   );
 }
 

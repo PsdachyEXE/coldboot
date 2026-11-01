@@ -161,3 +161,12 @@
   font-size: var(--step-0);
   color: var(--steel);
 }
+
+/* The Learn link sits above the row's stretched drill link, so it takes its own clicks. */
+.learn {
+  margin: 0;
+}
+.learnLink {
+  position: relative;
+  z-index: 1;
+}

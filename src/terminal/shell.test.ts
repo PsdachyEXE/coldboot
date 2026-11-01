@@ -8,6 +8,7 @@ import { GAMES } from '../games/registry';
 import type { GameMeta, GameSession } from '../games/types';
 import { fromSortInstance } from '../games/sort/items';
 import { useAttempts } from '../state/attempts';
+import { useLearn } from '../state/learn';
 import { HISTORY_ENTRY_MAX, useSession } from '../state/session';
 import { useSettings } from '../state/settings';
 import { useSrs } from '../state/srs';
@@ -550,5 +551,49 @@ describe('history and completion', () => {
     completeAt('d', 1);
     expect(printed()).toContain('daily   drill   due');
     expect(completeAt('drill u3o1-kk1', 14).value).toBe('drill U3O1-KK1');
+  });
+});
+
+describe('learn', () => {
+  function withTerms() {
+    const empty = { cards: [], mcq: [], short: [] };
+    const psm = { stages: [], specifications: [], cards: [], mcq: [], short: [] } as unknown as PsmFile;
+    const base = fixtureContent();
+    useContent.setState({ index: buildIndex({ areas: [{ cards: base.cards, mcq: base.mcq, short: base.short }, empty, empty, empty], terms: fixtureTerms(), psm, caseStudies: [] }), status: 'ready' });
+  }
+
+  it('lists the topics with what has been read', async () => {
+    useLearn.getState().markRead('U3O1-KK04', NOW);
+    await submitLine('learn', mockEnv());
+    expect(printed()).toContain('Type learn followed by a key knowledge id');
+    const table = term().entries.map((e) => e.block).find((b) => b.kind === 'table');
+    expect(table && table.kind === 'table' && table.rows.find((r) => r[0] === 'U3O1-KK04 Data types')).toEqual(['U3O1-KK04 Data types', 'read']);
+    expect(table && table.kind === 'table' && table.rows).toHaveLength(54);
+  });
+
+  it("prints a topic's summary and examples, with a link to its page, without counting it as read", async () => {
+    withTerms();
+    await submitLine('learn u3o1-kk04', mockEnv());
+    expect(printed()).toContain('U3O1-KK04 Data types');
+    expect(printed()).toContain('For example:');
+    expect(term().entries.some(({ block: b }) => b.kind === 'link' && b.to === '/learn?kk=U3O1-KK04')).toBe(true);
+    expect(useLearn.getState().read['U3O1-KK04']).toBeUndefined();
+  });
+
+  it('looks up an official term by name or alias, and suggests the nearest for a typo', async () => {
+    withTerms();
+    await submitLine('learn DFD', mockEnv());
+    expect(printed()).toContain('A diagram showing how data moves between processes');
+    await submitLine('learn validatoin', mockEnv());
+    expect(printed()).toContain('Did you mean validation? Type learn validation.');
+  });
+
+  it('opens the Terms and PSM pages', async () => {
+    await submitLine('learn terms', mockEnv());
+    expect(term().entries.some(({ block: b }) => b.kind === 'link' && b.to === '/learn?kk=TERMS')).toBe(true);
+  });
+
+  it('completes key knowledge ids', () => {
+    expect(completeAt('learn u4o2-kk1', 14).value).toBe('learn U4O2-KK10 ');
   });
 });

@@ -90,6 +90,7 @@ describe('Written', () => {
     expect(screen.queryByText(/Digits alone/)).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: 'Save score' }));
     expect(screen.getByText('Score saved: 2 of 3 marks.')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Read about U3O1-KK04 Data types in Learn' })).toHaveAttribute('href', '/learn?kk=U3O1-KK04');
     expect(screen.getByRole('complementary', { name: 'Common mistake' })).toHaveTextContent('Digits alone do not make a number an integer.');
     const log = useAttempts.getState().log;
     expect(log).toHaveLength(1);

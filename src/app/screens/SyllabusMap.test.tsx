@@ -13,6 +13,7 @@ function renderMap() {
     [
       { path: '/map', element: <SyllabusMap /> },
       { path: '/drill', element: <h1>Drill screen</h1> },
+      { path: '/learn', element: <h1>Learn screen</h1> },
     ],
     { initialEntries: ['/map'] },
   );
@@ -97,11 +98,21 @@ describe('Syllabus map', () => {
 
   it('starts a focused drill from a row, by keyboard or pointer', () => {
     const router = renderMap();
-    const link = within(row('U3O2-KK08')).getByRole('link');
+    const link = within(row('U3O2-KK08')).getByRole('link', { name: /^Drill/ });
     link.focus();
     expect(link).toHaveFocus();
     fireEvent.click(link);
     expect(router.state.location.pathname).toBe('/drill');
     expect(router.state.location.search).toBe('?kk=U3O2-KK08');
+  });
+
+  it("links each row to its Learn page, and says where to begin on a topic never practised or read", () => {
+    recordAttempt({ itemId: 'm-u3o1-kk04-001', kk: ['U3O1-KK04'], score: 1, timestamp: NOW - 1000, ms: 1000 });
+    const router = renderMap();
+    const unseen = within(row('U3O2-KK08')).getByRole('link', { name: 'Start here: read the notes for U3O2-KK08' });
+    expect(unseen).toHaveAttribute('href', '/learn?kk=U3O2-KK08');
+    expect(within(row('U3O1-KK04')).getByRole('link', { name: 'Read the notes for U3O1-KK04' })).toBeInTheDocument();
+    fireEvent.click(unseen);
+    expect(router.state.location.pathname).toBe('/learn');
   });
 });

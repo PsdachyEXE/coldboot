@@ -1,7 +1,7 @@
 /**
  * Route table (hash router). Home and first run ship with the shell. Every other screen is its own
  * chunk: the games (inside the terminal), the exam, stats and the daily screen as the brief asks,
- * plus Today's run, Review, Drill, Written, the syllabus map, Settings and About. With the terminal
+ * plus Today's run, Learn, Review, Drill, Written, the syllabus map, Settings and About. With the terminal
  * drawer deferred too (TerminalDrawerSlot), the first load leaves out Markdown and the figures.
  *
  * Navigation stays smooth two ways: the router updates in a transition and the Suspense boundary
@@ -19,6 +19,7 @@ import NotFound from './screens/NotFound';
 import RouteError from './screens/RouteError';
 
 const screens = {
+  learn: lazyComponent(() => import('./screens/Learn')),
   review: lazyComponent(() => import('./screens/Review')),
   drill: lazyComponent(() => import('./screens/Drill')),
   run: lazyComponent(() => import('./screens/Run')),
@@ -32,6 +33,7 @@ const screens = {
   daily: lazyComponent(() => import('./screens/Daily')),
 };
 
+const Learn = screens.learn;
 const Review = screens.review;
 const Drill = screens.drill;
 const Run = screens.run;
@@ -76,6 +78,7 @@ export const routes: RouteObject[] = [
       { index: true, element: <Home /> },
       { path: paths.welcome.slice(1), element: <FirstRun /> },
       { path: paths.run.slice(1), element: <Run /> },
+      { path: paths.learn.slice(1), element: <Learn /> },
       { path: paths.review.slice(1), element: <Review /> },
       { path: paths.drill.slice(1), element: <Drill /> },
       { path: paths.written.slice(1), element: <Written /> },

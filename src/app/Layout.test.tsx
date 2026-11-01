@@ -150,7 +150,7 @@ describe('Layout', () => {
     expect(more).toHaveAttribute('aria-expanded', 'false');
     fireEvent.click(more);
     expect(more).toHaveAttribute('aria-expanded', 'true');
-    for (const label of ['Written', 'Exam', 'Map', 'Stats', 'Settings', 'About']) {
+    for (const label of ['Learn', 'Written', 'Exam', 'Map', 'Stats', 'Settings', 'About']) {
       expect(within(nav).getByRole('link', { name: label })).toBeInTheDocument();
     }
     fireEvent.keyDown(document, { key: 'Escape' });

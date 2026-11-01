@@ -1,11 +1,11 @@
-/** "Drill complete": the score, results by KK and a suggested next step. */
+/** "Drill complete": the score, results by KK (a missed point links to its Learn page) and a suggested next step. */
 import type { ReactNode } from 'react';
 import type { ContentIndex } from '../../content/loader';
 import { ButtonLink } from '../../ui/Button';
 import { KkTag } from '../../ui/Tag';
 import { suggestNextStep, tallyByKk, type DrillResult } from './drill';
 import { formatClockWords, plural } from './format';
-import { PhaseHeading } from './parts';
+import { LearnTag, PhaseHeading } from './parts';
 import styles from './Drill.module.css';
 
 export interface DrillResultsProps {
@@ -61,7 +61,8 @@ export function DrillResults({ result, content, level = 1, title = 'Drill comple
             {tallies.map((t) => (
               <tr key={t.kk}>
                 <th scope="row">
-                  <KkTag kk={t.kk} showTitle />
+                  {/* A point with a wrong answer opens its Learn page. */}
+                  {t.correct < t.total ? <LearnTag kk={t.kk} /> : <KkTag kk={t.kk} showTitle />}
                 </th>
                 <td>
                   {t.correct} of {t.total}

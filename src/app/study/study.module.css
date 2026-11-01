@@ -133,6 +133,18 @@
   max-width: 100%;
 }
 
+/* A key knowledge tag that opens its Learn page: underlined like any other link. */
+.tagLink {
+  display: inline-block;
+  max-width: 100%;
+  text-decoration: none;
+}
+.tagLinked {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
 /* A heading that receives focus when a phase changes; it is not a control, so no ring. */
 .focusTarget:focus {
   outline: none;

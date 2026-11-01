@@ -1,7 +1,7 @@
 /**
  * Syllabus map (Section 6.8): every KK in four area columns, then the Terms and PSM groups. Each row
  * shows the KK's id, title and summary, a mastery meter (unseen shown distinctly from zero), what
- * there is to practise and when it was last practised. A row starts a focused drill; the glossary's
+ * there is to practise, when it was last practised, and a link to its Learn page. A row starts a focused drill; the glossary's
  * row opens its flashcards in Review, since it has no multiple-choice questions.
  *
  * Below 720 px each area folds behind a disclosure button, with the area holding the weakest key
@@ -15,12 +15,13 @@ import { AREA_IDS, type AreaId, type KkId } from '../../content/schema';
 import { areaById, kksByArea, studyDesign } from '../../content/studyDesign';
 import { useNow } from '../../lib/useNow';
 import { useMastery } from '../../srs/hooks';
+import { useLearn } from '../../state/learn';
 import type { KkMastery, MasteryMap } from '../../srs/mastery';
 import { Meter } from '../../ui/Meter';
 import { Tag } from '../../ui/Tag';
 import { useNarrow } from '../../ui/useMediaQuery';
 import { VisuallyHidden } from '../../ui/VisuallyHidden';
-import { practisePath } from '../paths';
+import { learnPath, practisePath } from '../paths';
 import { ContentErrorNotice } from '../study/ContentGate';
 import { lastPractised, plural } from '../study/format';
 import { rankWeakest } from '../study/select';
@@ -30,6 +31,7 @@ export default function SyllabusMap() {
   const content = useContentIndex();
   const status = useContent((s) => s.status);
   const mastery = useMastery();
+  const read = useLearn((s) => s.read);
   const now = useNow(60_000);
   const allIds = [...studyDesign.kks.map((k) => k.id as KkId), 'TERMS', 'PSM'] as KkId[];
   const seen = allIds.filter((kk) => mastery.has(kk)).length;
@@ -72,7 +74,7 @@ export default function SyllabusMap() {
               {expanded ? (
                 <ol className={styles.list}>
                   {kks.map((k) => (
-                    <KkRow key={k.id} kk={k.id as KkId} title={k.title} summary={k.summary} mastery={mastery} content={content} now={now} />
+                    <KkRow key={k.id} kk={k.id as KkId} title={k.title} summary={k.summary} mastery={mastery} readAt={read[k.id as KkId]} content={content} now={now} />
                   ))}
                 </ol>
               ) : null}
@@ -85,7 +87,7 @@ export default function SyllabusMap() {
         <div className={styles.groups}>
           {studyDesign.groups.map((g) => (
             <ul key={g.id} className={styles.list}>
-              <KkRow kk={g.id} title={g.title} summary={g.summary} mastery={mastery} content={content} now={now} />
+              <KkRow kk={g.id} title={g.title} summary={g.summary} mastery={mastery} readAt={read[g.id]} content={content} now={now} />
             </ul>
           ))}
         </div>
@@ -153,6 +155,7 @@ function KkRow({
   title,
   summary,
   mastery,
+  readAt,
   content,
   now,
 }: {
@@ -160,6 +163,8 @@ function KkRow({
   title: string;
   summary: string;
   mastery: MasteryMap;
+  /** When the topic's Learn page was last read. */
+  readAt: number | undefined;
   content: ContentIndex | null;
   now: number;
 }) {
@@ -180,6 +185,12 @@ function KkRow({
       <p className={styles.facts}>
         {itemCounts ? `${itemCounts}. ` : null}
         {practisedText(m?.last, now, m !== undefined)}.
+      </p>
+      {/* Sits above the row's drill link, which covers the row. A topic never practised or read says where to begin. */}
+      <p className={styles.learn}>
+        <Link to={learnPath({ kk })} className={styles.learnLink}>
+          {m || readAt ? 'Read the notes' : 'Start here: read the notes'} <VisuallyHidden>for {group ? title : kk}</VisuallyHidden>
+        </Link>
       </p>
     </li>
   );

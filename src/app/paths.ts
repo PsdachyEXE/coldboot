@@ -7,6 +7,7 @@ import type { AreaId, KkId } from '../content/schema';
 export const paths = {
   home: '/',
   welcome: '/welcome',
+  learn: '/learn',
   run: '/run',
   review: '/review',
   drill: '/drill',
@@ -25,6 +26,7 @@ export type PathName = keyof typeof paths;
 /** Rail order (Section 9 layout). Daily, settings and about are reached from Home and the rail footer. */
 export const RAIL: { name: PathName; label: string }[] = [
   { name: 'home', label: 'Home' },
+  { name: 'learn', label: 'Learn' },
   { name: 'review', label: 'Review' },
   { name: 'drill', label: 'Drill' },
   { name: 'written', label: 'Written' },
@@ -52,6 +54,11 @@ export function drillPath(opts: { kk?: KkId; area?: AreaId; mode?: 'weak' | 'ran
  */
 export function writtenPath(opts: { kk?: KkId; area?: AreaId; cs?: string; q?: string; mode?: 'weak' | 'random' } = {}): string {
   return withQuery(paths.written, { kk: opts.kk, area: opts.area, cs: opts.cs, q: opts.q, mode: opts.mode });
+}
+
+/** `/learn` (the topic list) or `/learn?kk=U3O1-KK04` (one topic's page, TERMS and PSM included). */
+export function learnPath(opts: { kk?: KkId } = {}): string {
+  return withQuery(paths.learn, { kk: opts.kk });
 }
 
 /** `/review?kk=U3O1-KK04`; `due: true` adds `due=1`, a review of the cards that are due with no new cards. */

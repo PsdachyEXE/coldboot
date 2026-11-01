@@ -92,6 +92,8 @@ describe('Drill', () => {
     const table = screen.getByRole('table', { name: 'Results by key knowledge' });
     expect(within(table).getByRole('rowheader')).toHaveTextContent('U3O1-KK04');
     expect(within(table).getByText('1 of 2')).toBeInTheDocument();
+    // A point with a wrong answer opens its Learn page.
+    expect(within(table).getByRole('link', { name: 'Read about U3O1-KK04 Data types in Learn' })).toHaveAttribute('href', '/learn?kk=U3O1-KK04');
     expect(screen.getByRole('link', { name: 'Review this key knowledge' })).toHaveAttribute('href', '/review?kk=U3O1-KK04');
   });
 

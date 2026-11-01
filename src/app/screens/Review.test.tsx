@@ -61,6 +61,7 @@ describe('Review card flip', () => {
     const flipped = screen.getByRole('region', { name: 'Card 1 of 2, answer shown' });
     expect(within(flipped).getByText(/It keeps leading zeros/)).toBeInTheDocument();
     expect(within(flipped).getByRole('list', { name: 'Key knowledge' })).toHaveTextContent('U3O1-KK04');
+    expect(within(flipped).getByRole('link', { name: 'Read about U3O1-KK04 Data types in Learn' })).toHaveAttribute('href', '/learn?kk=U3O1-KK04');
     expect(within(flipped).getByRole('complementary', { name: 'Common mistake' })).toHaveTextContent('A phone number is not an integer');
     expect(screen.getByRole('button', { name: 'Again, comes back in 10 minutes' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Good, comes back in 1 day' })).toBeInTheDocument();

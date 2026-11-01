@@ -1,8 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
+import { ALL_KK_IDS, kkLabel } from '../../content/studyDesign';
 import { melbourneDate } from '../../lib/time';
 import { useAttempts } from '../../state/attempts';
+import { useLearn } from '../../state/learn';
+import { recordAttempt } from '../../state/record';
 import { useSession } from '../../state/session';
 import { clearTabState } from '../../state/persist';
 import { useSettings } from '../../state/settings';
@@ -34,6 +37,14 @@ function press(key: string) {
   fireEvent.keyDown(document.activeElement ?? document.body, { key });
 }
 
+/**
+ * Marks every topic read, so the drill goes straight to its questions. The "Read first" step,
+ * which a never-met topic gets, has its own tests at the end.
+ */
+function readEverything() {
+  useLearn.setState({ read: Object.fromEntries(ALL_KK_IDS.map((kk) => [kk, 1])) });
+}
+
 function steps() {
   return within(screen.getByRole('list', { name: 'Steps' })).getAllByRole('listitem');
 }
@@ -48,6 +59,7 @@ function summary(): string[] {
 describe("Today's run", () => {
   beforeEach(() => {
     resetStudyStores();
+    readEverything();
     registry.dailyInstalled = true;
     useTerminal.setState({ open: false, pending: null, lastGameEnd: null });
     useSettings.setState({ onboarded: true, motion: 'reduce' });
@@ -176,6 +188,7 @@ describe("Today's run keeps its place", () => {
 
   beforeEach(() => {
     resetStudyStores();
+    readEverything();
     registry.dailyInstalled = true;
     useTerminal.setState({ open: false, pending: null, lastGameEnd: null });
     useSettings.setState({ onboarded: true, motion: 'reduce' });
@@ -405,5 +418,92 @@ describe("Today's run keeps its place", () => {
     await go(router, '/run');
     // Without storage the place can't be kept, so a new run starts; nothing breaks.
     expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
+  });
+});
+
+describe('Today\'s run reads a never-met topic first', () => {
+  const RUN_KEY = 'coldboot:v1:run';
+
+  beforeEach(() => {
+    resetStudyStores();
+    registry.dailyInstalled = true;
+    useTerminal.setState({ open: false, pending: null, lastGameEnd: null });
+    useSettings.setState({ onboarded: true, motion: 'reduce' });
+  });
+  afterEach(() => {
+    resetStudyStores();
+    useTerminal.setState({ open: false, pending: null, lastGameEnd: null });
+  });
+
+  const oneQuestion = () => provideContent(fixtureIndex({ mcq: [fxMcq('m-u3o1-kk04-001', ['U3O1-KK04'])] }));
+
+  it('shows the topic before the drill, and starting the drill records the read', () => {
+    oneQuestion();
+    renderRun();
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Read first' })).toBeInTheDocument();
+    expect(steps()[1]).toHaveAttribute('aria-current', 'step');
+    expect(steps()[1]).toHaveTextContent('Now, reading first.');
+    expect(screen.getByText(new RegExp(`The drill starts with ${kkLabel('U3O1-KK04')}, which you haven't practised or read yet\\.`))).toBeInTheDocument();
+    // The topic's page sits under the step heading, without the Learn route's crumb or pager.
+    expect(screen.getByRole('heading', { level: 3, name: 'Data types' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 4, name: 'In the study design' })).toBeInTheDocument();
+    expect(screen.queryByRole('navigation', { name: 'Other topics' })).toBeNull();
+    expect(useLearn.getState().read['U3O1-KK04']).toBeUndefined();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Start the drill' }));
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toHaveFocus();
+    expect(useLearn.getState().read['U3O1-KK04']).toBeGreaterThan(0);
+    // The drill is the one picked before reading.
+    expect(screen.getByText('Question 1 of 1')).toBeInTheDocument();
+    press('c');
+    press('Enter');
+    fireEvent.click(screen.getByRole('button', { name: 'Finish drill' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Skip the daily challenge' }));
+    expect(screen.getByText('Read first', { selector: 'dt' }).nextElementSibling).toHaveTextContent('Done: Read about U3O1-KK04 before the drill.');
+  });
+
+  it('lets the student skip to the drill without recording a read', () => {
+    oneQuestion();
+    renderRun();
+    fireEvent.click(screen.getByRole('button', { name: 'Skip to the drill' }));
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toHaveFocus();
+    expect(useLearn.getState().read['U3O1-KK04']).toBeUndefined();
+    fireEvent.click(screen.getByRole('button', { name: 'End drill now' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Skip the daily challenge' }));
+    expect(screen.getByText('Read first', { selector: 'dt' }).nextElementSibling).toHaveTextContent('Skipped: Went straight to the drill.');
+  });
+
+  it('goes straight to the drill for a topic already read', () => {
+    oneQuestion();
+    useLearn.getState().markRead('U3O1-KK04', Date.now() - 60_000);
+    renderRun();
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
+  });
+
+  it('goes straight to the drill for a topic already practised', () => {
+    oneQuestion();
+    recordAttempt({ itemId: 'm-u3o1-kk04-001', kk: ['U3O1-KK04'], score: 0, timestamp: Date.now() - 60_000, ms: 1000 });
+    renderRun();
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Drill your weakest key knowledge' })).toBeInTheDocument();
+  });
+
+  it('keeps its place on the page and the drill it picked', async () => {
+    provideContent(fixtureIndex({ mcq: [fxMcq('m-u3o1-kk04-001', ['U3O1-KK04']), fxMcq('m-u3o1-kk04-002', ['U3O1-KK04'])] }));
+    const router = createMemoryRouter(
+      [
+        { path: '/run', element: <Run /> },
+        { path: '/map', element: <h1>Syllabus map</h1> },
+      ],
+      { initialEntries: ['/run'] },
+    );
+    render(<RouterProvider router={router} />);
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Read first' })).toBeInTheDocument();
+    const saved = JSON.parse(window.sessionStorage.getItem(RUN_KEY)!);
+    expect(saved).toMatchObject({ step: 'learn', learnKk: 'U3O1-KK04' });
+    await act(() => router.navigate('/map'));
+    await act(() => router.navigate('/run'));
+    expect(screen.getByRole('heading', { name: 'Step 2 of 3: Read first' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Start the drill' }));
+    expect(JSON.parse(window.sessionStorage.getItem(RUN_KEY)!).drillIds).toEqual(saved.drillIds);
   });
 });
