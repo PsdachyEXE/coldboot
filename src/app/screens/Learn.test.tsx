@@ -188,11 +188,13 @@ describe('Learn', () => {
       expect(within(worked).getByRole('heading', { name: 'Model answer' })).toBeInTheDocument();
       expect(within(worked).getByText('Keeps the leading zero')).toBeInTheDocument();
       expect(screen.getByRole('region', { name: 'What the examiners saw' })).toHaveTextContent('Many answers named a type');
-      // The cards' own mistakes and the official terms stay; the flashcards fold into a disclosure.
-      expect(screen.getByRole('region', { name: 'Common mistakes' })).toBeInTheDocument();
+      // The official terms stay; the flashcards and their common mistakes fold into a disclosure.
       expect(screen.getByRole('region', { name: 'Terms used in this study' })).toBeInTheDocument();
-      expect(screen.getByText('Show 4 flashcards on this topic as notes')).toBeInTheDocument();
+      expect(screen.queryByRole('region', { name: 'Common mistakes' })).toBeNull();
       expect(screen.queryByRole('region', { name: 'Definitions' })).toBeNull();
+      const folded = screen.getByText('Show 4 flashcards and 1 common mistake on this topic').closest('details')!;
+      expect(within(folded).getByRole('group', { name: 'Definitions' })).toBeInTheDocument();
+      expect(within(folded).getByRole('group', { name: 'Common mistakes' })).toHaveTextContent('One symbol is a character, not a string.');
       expect(screen.getByText(/A COLDBOOT lesson/)).toBeInTheDocument();
       expect(screen.queryByText(/SECRET/)).toBeNull();
     });

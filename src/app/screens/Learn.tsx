@@ -499,8 +499,8 @@ function Worked({ worked }: { worked: WorkedExample }) {
 
 /**
  * A point's authored lesson: the study design's words, the lesson's ideas, its worked example, the
- * official terms, what the 2025 examiners saw, the cards' common mistakes, and the flashcards
- * folded away as notes, so nothing the notes page showed is lost.
+ * official terms and what the 2025 examiners saw, then the flashcards and their common mistakes
+ * folded away, so nothing the notes page showed is lost and the examiners' points aren't repeated.
  */
 function LessonBody({ kk, lesson, content }: { kk: KkId; lesson: Lesson; content: ContentIndex }) {
   const notes = assembleNotes(kk, content);
@@ -537,12 +537,24 @@ function LessonBody({ kk, lesson, content }: { kk: KkId; lesson: Lesson; content
           </ul>
         </Section>
       ) : null}
-      <Traps traps={notes.traps} />
-      {cards ? (
+      {cards || notes.traps.length ? (
         <Section id="learn-cards" title="From the flashcards">
           <details className={styles.more}>
-            <summary>Show {plural(cards, 'flashcard')} on this topic as notes</summary>
+            <summary>
+              Show {[cards ? plural(cards, 'flashcard') : '', notes.traps.length ? plural(notes.traps.length, 'common mistake') : ''].filter(Boolean).join(' and ')} on this topic
+            </summary>
             <FlashcardNotes notes={notes} nested />
+            {notes.traps.length ? (
+              <NotesPart nested id="learn-traps" title="Common mistakes">
+                <ul className={styles.traps}>
+                  {notes.traps.map((t) => (
+                    <li key={t}>
+                      <Markdown text={t} />
+                    </li>
+                  ))}
+                </ul>
+              </NotesPart>
+            ) : null}
           </details>
         </Section>
       ) : null}

@@ -21,7 +21,8 @@
 .md a { color: var(--phosphor); }
 .md-table { overflow-x: auto; margin: 0 0 0.75em; max-width: 100%; }
 .md table { border-collapse: collapse; font-size: var(--step-0); }
-.md th, .md td { border: var(--hairline); padding: 4px 8px; text-align: left; vertical-align: top; }
+.md th, .md td { border: var(--hairline); padding: 4px 8px; text-align: left; vertical-align: top; overflow-wrap: normal; }
+/* Cells wrap at spaces only, never mid-word ("Novembe r"): a table too wide for the column scrolls in .md-table. */
 .md th { font-weight: 700; }
 
 pre.pseudo, pre.code {
