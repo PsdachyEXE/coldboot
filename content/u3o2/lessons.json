@@ -6,7 +6,7 @@
     "sections": [
       {
         "heading": "Productivity and efficiency",
-        "body": "Efficiency is about how much time, money and effort it takes to get a result. Productivity is how much gets done with the people and hours available. Software improves both mostly by automating work that people do by hand.\n\nAt Redgum Flat Growers, a Shepparton orchard co-op, every bin of pears that reaches the packing shed gets a paper docket. Each evening two office staff spend about three hours typing the day's dockets into a spreadsheet so growers can be paid. If shed staff scanned a barcode on each bin as it arrived, the record would be made once, at the source, and those three hours could go to other work. When a scenario describes slow, repeated handling of the same data, this is a reason to give."
+        "body": "Efficiency is about how much time, money and effort it takes to get a result. Productivity is how much gets done with the people and hours available. Software improves both mostly by automating work that people do by hand.\n\nAt Belah Rise Grain Growers, a Birchip co-op, every truckload of wheat that reaches the silos gets a paper docket. Each evening two office staff spend about three hours typing the day's dockets into a spreadsheet so growers can be paid. If weighbridge staff scanned a barcode on each load's delivery card as it arrived, the record would be made once, at the source, and those three hours could go to other work. When a scenario describes slow, repeated handling of the same data, this is a reason to give."
       },
       {
         "heading": "Reducing costs",
@@ -14,11 +14,11 @@
       },
       {
         "heading": "Gaps in the market",
-        "body": "Some software exists because people want something that no current product gives them. This reason is about a market: there are customers or users outside the developer, and nothing serves them well yet. Phone apps, games and virtual reality experiences are often built for this reason, and individuals spot gaps as well as companies. A Year 12 student in Mooroopna who notices that no app tells backpackers which orchards are hiring pickers this week has found one.\n\nThe reason doesn't fit every project. The co-op's bin scanning program is for its own staff and growers and won't be sold to anyone, so it fills no gap in a market. Give this reason only when the scenario has outside customers who are poorly served."
+        "body": "Some software exists because people want something that no current product gives them. This reason is about a market: there are customers or users outside the developer, and nothing serves them well yet. Phone apps, games and virtual reality experiences are often built for this reason, and individuals spot gaps as well as companies. A Year 12 student in Mooroopna who notices that no app tells backpackers which orchards are hiring pickers this week has found one.\n\nThe reason doesn't fit every project. The co-op's load scanning program is for its own staff and growers and won't be sold to anyone, so it fills no gap in a market. Give this reason only when the scenario has outside customers who are poorly served."
       },
       {
         "heading": "Organisational objectives or needs",
-        "body": "Organisations set themselves objectives, and they have needs they must meet, sometimes because a law or a partner requires it. A project can be justified by either one even when nothing is going wrong. Suppose the co-op's board has set the objective that every grower gets a payment statement within 48 hours of delivering fruit, and statements currently take a fortnight. A program that produces each statement as soon as the bins are recorded meets that objective. A need could arise if a supermarket buyer decides to accept fruit only from suppliers who report each bin's orchard block electronically.\n\nOn its own, 'to meet the organisation's needs' could describe any project. Name the objective or need the scenario gives and say how the software meets it."
+        "body": "Organisations set themselves objectives, and they have needs they must meet, sometimes because a law or a partner requires it. A project can be justified by either one even when nothing is going wrong. Suppose the co-op's board has set the objective that, by next harvest, every grower gets a payment statement within 48 hours of delivering grain, and statements currently take a fortnight. A program that produces each statement as soon as the loads are recorded meets that objective. A need could arise if a flour mill decides to accept wheat only from suppliers who report each load's paddock electronically.\n\nOn its own, 'to meet the organisation's needs' could describe any project. Name the objective or need the scenario gives and say how the software meets it."
       },
       {
         "heading": "Applying the reasons to a scenario",
@@ -118,7 +118,7 @@
     "sections": [
       {
         "heading": "Tasks, durations and dependencies",
-        "body": "Start by listing the tasks every stage of the problem-solving methodology needs, from collecting data through to evaluation, broken into pieces small enough to estimate. Give each one a duration. Then record its **dependencies**: the tasks that must finish before it can start. Tasks are sequenced by these dependencies, not by the order they were written down, and two tasks with no dependency between them can run at the same time.\n\nLin is planning a bin-tracking app for Bluegum Bend Orchards, a Shepparton co-op. Her plan, in days:\n\n| Id | Task | Days | Depends on |\n|:--|:--|:--|:--|\n| A | Interview shed supervisors | 3 | none |\n| B | Survey growers | 5 | none |\n| C | Write SRS | 2 | A, B |\n| M1 | SRS approved | 0 | C |\n| D | Design screens | 4 | M1 |\n| E | Design data file | 2 | M1 |\n| F | Code app | 8 | D, E |\n| G | Test app | 3 | F |\n\nA and B both start on day 1. C needs both of them, so it can't start until day 6."
+        "body": "Start by listing the tasks every stage of the problem-solving methodology needs, from collecting data through to evaluation, broken into pieces small enough to estimate. Give each one a duration. Then record its **dependencies**: the tasks that must finish before it can start. Tasks are sequenced by these dependencies, not by the order they were written down, and two tasks with no dependency between them can run at the same time.\n\nLin is planning a bale-tracking app for Speargrass Hill Wool Brokers in Hamilton. Her plan, in days:\n\n| Id | Task | Days | Depends on |\n|:--|:--|:--|:--|\n| A | Interview shed supervisors | 3 | none |\n| B | Survey growers | 5 | none |\n| C | Write SRS | 2 | A, B |\n| M1 | SRS approved | 0 | C |\n| D | Design screens | 4 | M1 |\n| E | Design data file | 2 | M1 |\n| F | Code app | 8 | D, E |\n| G | Test app | 3 | F |\n\nA and B both start on day 1. C needs both of them, so it can't start until day 6."
       },
       {
         "heading": "The critical path",
@@ -136,7 +136,7 @@
     "worked": {
       "commandTerm": "explain",
       "marks": 3,
-      "prompt": "Tilly is managing the development of a delivery-tracking app for Stringybark Freight in Geelong. Her plan, in days:\n\n| Id | Task | Days | Depends on |\n|:--|:--|:--|:--|\n| A | Observe dispatch staff | 4 | none |\n| B | Interview drivers | 2 | none |\n| C | Write SRS | 3 | A, B |\n| D | Design screens | 5 | C |\n| E | Code app | 9 | D |\n| F | Test app | 3 | E |\n\nInterviewing drivers takes 3 days instead of 2, because two drivers were on leave. Explain how Tilly should record this delay on her Gantt chart, and whether it changes the date the app will be ready.",
+      "prompt": "Tilly is managing the development of an order-tracking app for Stringybark Concrete in Warragul. Her plan, in days:\n\n| Id | Task | Days | Depends on |\n|:--|:--|:--|:--|\n| A | Observe dispatch staff | 4 | none |\n| B | Interview drivers | 2 | none |\n| C | Write SRS | 3 | A, B |\n| D | Design screens | 5 | C |\n| E | Code app | 9 | D |\n| F | Test app | 3 | E |\n\nInterviewing drivers takes 3 days instead of 2, because two drivers were on leave. Explain how Tilly should record this delay on her Gantt chart, and whether it changes the date the app will be ready.",
       "points": [
         {
           "text": "Records the change: updates task B with its actual finish (end of day 3) and a note giving the reason (drivers on leave), keeping the planned bar so planned and actual can be compared",
@@ -270,7 +270,7 @@
     "sections": [
       {
         "heading": "What makes something a constraint",
-        "body": "A requirement describes the solution: what it does or how well. A constraint describes the conditions around the project, and it rules some designs in and others out. Corella Point Physio, which runs three clinics in Geelong, wants an app for patients to book appointments. It has $12 000 to spend, the app must be running when a fourth clinic opens on 1 July, and reception staff must use it on their existing computers. None of these says what the app does; each limits how it can be built. Constraints are identified during analysis so designers work inside them from the start, rather than reworking a design later."
+        "body": "A requirement describes the solution: what it does or how well. A constraint describes the conditions around the project, and it rules some designs in and others out. Coolibah Physio, which runs three clinics in Traralgon, wants an app for patients to book appointments. It has $12 000 to spend, the app must be running when a fourth clinic opens on 1 July, and reception staff must use it on their existing computers. None of these says what the app does; each limits how it can be built. Constraints are identified during analysis so designers work inside them from the start, rather than reworking a design later."
       },
       {
         "heading": "Economic: money and time",
@@ -278,7 +278,7 @@
       },
       {
         "heading": "Technical: the technology available",
-        "body": "Technical constraints come from hardware, software and networks: speed of processing, capacity, the equipment available, compatibility and security. The reception computers are old and have little processing power, so the app must run well on them. Bookings also have to pass into the patient records system the clinics already use, which is a compatibility constraint. Patients book on their own phones, some where mobile coverage is weak, so the booking screens should load quickly over a slow connection."
+        "body": "Technical constraints come from hardware, software and networks: speed of processing, capacity, the equipment available, compatibility and security. The reception computers are old and have little processing power, so the app must run well on them. Bookings also have to pass into the patient records system the clinics already use, which is a compatibility constraint. Patients book on their own phones, some where mobile coverage is weak, so the booking screens should load quickly over a slow connection. An SRS records some of these facts in two places: the reception computers and the records system are part of the technical environment, and having to work with them is a technical constraint."
       },
       {
         "heading": "Social: the users",
@@ -296,14 +296,14 @@
     "worked": {
       "commandTerm": "explain",
       "marks": 4,
-      "prompt": "Redgum Flat Growers, a Shepparton orchard co-op, is having an app built so seasonal pickers can log each bin of fruit they fill on a tablet. Most of the orchard blocks have no mobile coverage, and most pickers have never used an app at work. The developer, Ana, has made two design decisions:\n\n1. Each bin record is saved on the tablet and sent to the co-op's server when the tablet is next in range of the packing shed's Wi-Fi.\n2. Pickers choose the fruit variety by tapping a photo of it, and confirm each bin with one large button.\n\nFor each decision, identify the type of constraint it responds to and explain how the decision works within that constraint.",
+      "prompt": "Woollybutt Ridge Revegetation, a tree-planting contractor near Ararat, is having an app built so seasonal planters can log each tray of seedlings they plant on a tablet. Most of its planting sites have no mobile coverage, and most planters have never used an app at work. The developer, Ana, has made two design decisions:\n\n1. Each tray record is saved on the tablet and sent to the company's server when the tablet is next in range of the depot's Wi-Fi.\n2. Planters choose the tree species by tapping a photo of it, and confirm each tray with one large button.\n\nFor each decision, identify the type of constraint it responds to and explain how the decision works within that constraint.",
       "points": [
         {
           "text": "Decision 1: a technical constraint",
           "marks": 1
         },
         {
-          "text": "Explains decision 1: there is no mobile coverage in most blocks, so the app can't rely on a connection; saving each record on the tablet and uploading it at the shed means no bins are lost",
+          "text": "Explains decision 1: there is no mobile coverage at most sites, so the app can't rely on a connection; saving each record on the tablet and uploading it at the depot means no trays are lost",
           "marks": 1
         },
         {
@@ -311,11 +311,11 @@
           "marks": 1
         },
         {
-          "text": "Explains decision 2: most pickers have little experience with work apps, so tapping a photo and one large button lets them log a bin correctly with almost no training",
+          "text": "Explains decision 2: most planters have little experience with work apps, so tapping a photo and one large button lets them log a tray correctly with almost no training",
           "marks": 1
         }
       ],
-      "model": "Decision 1 responds to a technical constraint. Most of the orchard blocks have no mobile coverage, so the app can't count on sending a record the moment a bin is logged. Saving each record on the tablet and uploading it when the tablet reaches the shed's Wi-Fi means every bin is recorded even where there is no signal.\n\nDecision 2 responds to a social constraint: the pickers' low level of expertise with work apps. Choosing a variety by tapping its photo and confirming with a single large button involves no typing or menus, so pickers can log bins correctly after very little training."
+      "model": "Decision 1 responds to a technical constraint. Most of the planting sites have no mobile coverage, so the app can't count on sending a record the moment a tray is logged. Saving each record on the tablet and uploading it when the tablet reaches the depot's Wi-Fi means every tray is recorded even where there is no signal.\n\nDecision 2 responds to a social constraint: the planters' low level of expertise with work apps. Choosing a species by tapping its photo and confirming with a single large button involves no typing or menus, so planters can log trays correctly after very little training."
     },
     "traps": [
       "On a 2025 multiple-choice question (A8), 95% of students matched an app that must run well on devices with limited processing power to the hardware capabilities of the target devices, a technical constraint. A marketing budget, user feedback on the interface and an industry framework were the distractors."
@@ -451,7 +451,7 @@
       },
       {
         "heading": "Placing a statement",
-        "body": "When a question gives you a statement, ask what it describes:\n\n- something the solution does: functional requirement\n- a quality it must have, such as usability or reliability: non-functional requirement\n- a limit such as a budget, a deadline or privacy law: constraint\n- what this version will or won't cover: scope\n- who the users are: user characteristics\n- what the solution runs on or alongside: technical environment\n\nWhen a question offers only functional and non-functional, a statement about which platforms the solution needn't support is non-functional.\n\n\"Drivers are aged 19 to 67\" describes users, so it isn't a requirement. \"Drivers can enlarge the text on any screen\" is something the app does, written to suit those users."
+        "body": "When a question gives you a statement, ask what it describes:\n\n- something the solution does: functional requirement\n- a quality it must have, such as usability or reliability: non-functional requirement\n- a limit such as a budget, a deadline or privacy law: constraint\n- what this version will or won't cover: scope\n- who the users are: user characteristics\n- what the solution runs on or alongside: technical environment\n\nWhen a question offers only functional and non-functional, a statement about which platforms the solution needn't support is non-functional. Some facts go in two places: the firm's Android phones are part of the technical environment, and having to run on them is a technical constraint.\n\n\"Drivers are aged 19 to 67\" describes users, so it isn't a requirement. \"Drivers can enlarge the text on any screen\" is something the app does, written to suit those users."
       }
     ],
     "worked": {
@@ -479,7 +479,7 @@
       "model": "Under analytical tools, Priya should include a data flow diagram of the current tally process. It would show pickers' bins being recorded on paper tally cards, office staff entering the cards each evening, and the spreadsheet where the tallies are stored. The diagram makes the weak point visible: every bin is recorded twice, by hand, which is slow and lets copying errors into pickers' pay. This tells Priya what the app must do, which is record each bin once, in the orchard.\n\nUnder technical environments, she should record that the app will run on the co-op's 20 rugged Android tablets, and that it must work alongside the existing payroll program, which imports CSV files. Designers then know to build for those tablets and to export each day's tallies as a CSV file the payroll program can read, so pay never has to be retyped."
     },
     "traps": [
-      "On the 2025 paper, students sorted three statements headed for an SRS into functional and non-functional requirements, and 58% got all three. Generating financial reports covering up to 10 years of data was keyed functional, because it is something the solution does, even though the statement contains a number. The statement that the solution didn't need to run on Apple devices was keyed non-functional."
+      "Check what a case study's diagram shows before using it for this feature. In the 2025 case study, the context diagram Jack and Claire drew after collecting data showed the planned web-based application, not the agencies' current mix of software packages, spreadsheets and emails: a later question used its data flows to pick the users who would beta test the new application. The SRS feature needs diagrams of the processes and systems already in place."
     ],
     "source": "study-design"
   },
@@ -502,7 +502,7 @@
       },
       {
         "heading": "Applying the Acts to a design",
-        "body": "Kingfisher Bend Freight in Geelong, covered by the Privacy Act, has a draft delivery app. Checked against the APPs, four parts of it need changing:\n\n- the firm publishes no privacy policy saying what the app collects and how it is handled (APP 1)\n- it asks receivers for their date of birth in case it proves useful later, which delivering a parcel doesn't need (APP 3)\n- it sends receivers' phone numbers to an overseas text-message service with no check on how that service protects them (APP 8)\n- every office worker can browse every receiver's signature and address (APP 11)\n\nThe same app also uses an open-source mapping library, so the copyright notice its licence requires must stay in place. Write answers the same way: name the principle, point to the feature, and say what has to change."
+        "body": "Waxflower Florists, a Wodonga florist chain covered by the Privacy Act, has a draft delivery app. Checked against the APPs, four parts of it need changing:\n\n- the firm publishes no privacy policy saying what the app collects and how it is handled (APP 1)\n- it asks receivers for their date of birth in case it proves useful later, which delivering flowers doesn't need (APP 3)\n- it sends receivers' phone numbers to an overseas text-message service with no check on how that service protects them (APP 8)\n- every office worker can browse every receiver's signature and address (APP 11)\n\nThe same app also uses an open-source mapping library, so the copyright notice its licence requires must stay in place. Write answers the same way: name the principle, point to the feature, and say what has to change."
       }
     ],
     "worked": {
@@ -530,7 +530,7 @@
       "model": "The governing Act is the Privacy and Data Protection Act 2014 (Vic), since a shire council belongs to Victoria's public sector.\n\nUnder IPP 1 (Collection), the council should collect only what it needs to book a collection: the resident's name, address and phone number. A date of birth and a driver licence number play no part in picking up hard rubbish, so both fields should be removed, and the form should tell residents why the remaining details are being collected.\n\nUnder IPP 7 (Unique identifiers), the council shouldn't adopt a number that another organisation issued as its own identifier for residents. The app should give each resident an account ID of its own, so it never needs the licence number at all."
     },
     "traps": [
-      "In a 2025 multiple-choice question, 71% recognised that editing a third-party application's code without its author's permission would breach the Copyright Act 1968. Almost a quarter chose backing the application's data up to an insecure file server instead, which is a security lapse rather than a breach of anyone's copyright."
+      "The two privacy Acts number their principles differently: security is APP 11 but IPP 4, openness is APP 1 but IPP 5, and identifiers are APP 9 but IPP 7. Work out which Act binds the organisation first, then name principles from that Act only. A shire council's app is checked against the IPPs, not the APPs."
     ],
     "source": "study-design"
   },

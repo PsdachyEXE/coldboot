@@ -104,7 +104,7 @@
   {
     "id": "l-u3o1-kk03",
     "kk": "U3O1-KK03",
-    "intro": "Before a module is coded, its design can be set out with the five tools this point names: data dictionaries, object descriptions, mock-ups, input-process-output (IPO) charts and pseudocode. In Unit 3 you are handed designs like these and turn them into code, so exam questions ask you to read them, complete them and choose the right one for a job.",
+    "intro": "Before a module is coded, its design can be set out with the five tools this point names: data dictionaries, object descriptions, mock-ups, input-process-output (IPO) charts and pseudocode. In Unit 3 Outcome 1 you are handed designs like these and turn them into code, so exam questions ask you to read them, complete them and choose the right one for a job.",
     "sections": [
       {
         "heading": "Data dictionaries",
@@ -187,14 +187,14 @@
     "worked": {
       "commandTerm": "justify",
       "marks": 4,
-      "prompt": "Bluestone Couriers in Ballarat is adding two data items to its parcel module: the date each parcel was collected, and whether the customer has been emailed a delay notice. Each morning the module lists every parcel that has been waiting for more than three days, and emails a delay notice for each one that hasn't had one yet.\n\nJustify a data type for the collection date and a data type for the delay notice item.",
+      "prompt": "Silvereye Dry Cleaning in Ballarat, which collects clothes from customers' homes, is adding two data items to its orders module: the date each order was collected, and whether the customer has been emailed a delay notice. Each morning the module lists every order that has been waiting for more than three days, and emails a delay notice for each one that hasn't had one yet.\n\nJustify a data type for the collection date and a data type for the delay notice item.",
       "points": [
         {
           "text": "Collection date: date/time",
           "marks": 1
         },
         {
-          "text": "Reason: the module subtracts the collection date from today's date to find how long each parcel has waited and compares the result with three days; date/time values can be subtracted and compared, a string can't",
+          "text": "Reason: the module subtracts the collection date from today's date to find how long each order has waited and compares the result with three days; date/time values can be subtracted and compared, a string can't",
           "marks": 1
         },
         {
@@ -206,7 +206,7 @@
           "marks": 1
         }
       ],
-      "model": "The collection date should be date/time. Each morning the module subtracts it from the current date to find how many days a parcel has been waiting, then checks whether that is more than three. Date/time values can be subtracted and compared like this, while a date stored as a string can't be.\n\nWhether a delay notice has been sent should be Boolean. A notice has either been sent or it hasn't, so only two values are needed, and each morning the module can test the value directly to decide whether to email the customer."
+      "model": "The collection date should be date/time. Each morning the module subtracts it from the current date to find how many days an order has been waiting, then checks whether that is more than three. Date/time values can be subtracted and compared like this, while a date stored as a string can't be.\n\nWhether a delay notice has been sent should be Boolean. A notice has either been sent or it hasn't, so only two values are needed, and each morning the module can test the value directly to decide whether to email the customer."
     },
     "traps": [
       "72% of students scored zero in 2025 when asked for the best data type for a game symbol that was always one letter. The answer was character, not string, and the second mark needed the reason that only a single symbol has to be stored.",
@@ -243,14 +243,14 @@
     "worked": {
       "commandTerm": "justify",
       "marks": 3,
-      "prompt": "Gecko Rock Caravan Park in Mildura is writing a program that stores:\n\n1. the number of sites occupied on each of the 30 nights in November\n2. the number of guests staying on each of its 40 sites on each of those 30 nights\n3. one booking's details: the guest's name, the number of nights, the deposit paid and whether the guest is bringing a pet\n\nJustify the most suitable data structure for each.",
+      "prompt": "Gecko Rock Motel in Swan Hill is writing a program that stores:\n\n1. the number of rooms occupied on each of the 30 nights in November\n2. the number of guests staying in each of its 40 rooms on each of those 30 nights\n3. one booking's details: the guest's name, the number of nights, the deposit paid and whether the guest is bringing a pet\n\nJustify the most suitable data structure for each.",
       "points": [
         {
           "text": "Item 1: a one-dimensional array, because the 30 values are all integers of one kind and each is located by a single index, the night",
           "marks": 1
         },
         {
-          "text": "Item 2: a two-dimensional array, because each count is identified by two things (the site and the night) and every count is an integer",
+          "text": "Item 2: a two-dimensional array, because each count is identified by two things (the room and the night) and every count is an integer",
           "marks": 1
         },
         {
@@ -258,7 +258,7 @@
           "marks": 1
         }
       ],
-      "model": "1. A one-dimensional array of 30 integers. Every value is the same kind of count, and each is found by one index: the night of the month.\n2. A two-dimensional array of integers with 40 rows and 30 columns. Each count belongs to one site and one night, so a row index for the site and a column index for the night reach it, and all the counts share one data type.\n3. A record. The name is a string, the number of nights an integer, the deposit floating point and the pet answer Boolean, so the fields have different data types, which an array can't hold. Each value is reached by its field, such as `booking.deposit`."
+      "model": "1. A one-dimensional array of 30 integers. Every value is the same kind of count, and each is found by one index: the night of the month.\n2. A two-dimensional array of integers with 40 rows and 30 columns. Each count belongs to one room and one night, so a row index for the room and a column index for the night reach it, and all the counts share one data type.\n3. A record. The name is a string, the number of nights an integer, the deposit floating point and the pet answer Boolean, so the fields have different data types, which an array can't hold. Each value is reached by its field, such as `booking.deposit`."
     },
     "traps": [
       "A single row of floating point values, each with one index, is a one-dimensional array. 83% got this right in 2025, but 8% called it a two-dimensional array and 7% a record.",
@@ -370,8 +370,7 @@
     },
     "traps": [
       "49% of students scored zero in 2025 when asked for a benefit of inheritance with an example from the case study. The example had to be a superclass with its subclasses (the User class and its four user groups); a stand-alone class, such as the case study's property class, earned nothing.",
-      "The benefit mark on that question needed an explanation, not just a name: code reuse, extensibility, easier maintenance or less development time, with how inheritance delivers it, such as a fix made once in the superclass reaching every subclass.",
-      "Asked in 2025 which access modifier lets only a class's own methods use an attribute, 79% chose private. A fifth chose protected, which also opens the attribute to subclasses."
+      "The benefit mark on that question needed an explanation, not just a name: code reuse, extensibility, easier maintenance or less development time, with how inheritance delivers it, such as a fix made once in the superclass reaching every subclass."
     ],
     "source": "study-design"
   },
@@ -424,8 +423,7 @@
     "traps": [
       "Scope was the weakest multiple-choice topic in 2025: only 42% knew that a local variable isn't confined to the IF or loop where it is used; it can be used anywhere in the module that declares it.",
       "About a quarter of students called an IF…ELSEIF chain repetition or a method. Testing a condition to choose one branch is selection.",
-      "On tiered pseudocode, trace each value at and either side of a limit through its own branch. In 2025, 40% chose the reverse of the right answer, missing that a larger input can give a smaller result once it crosses into a new tier.",
-      "Write data types as the study design does. Answers of \"Bool\" and \"Float\" earned no marks where Boolean and floating point were expected."
+      "On tiered pseudocode, trace each value at and either side of a limit through its own branch. In 2025, 40% chose the reverse of the right answer, missing that a larger input can give a smaller result once it crosses into a new tier."
     ],
     "source": "study-design"
   },
@@ -436,7 +434,7 @@
     "sections": [
       {
         "heading": "Why conventions matter",
-        "body": "A naming convention exists for the people reading the code, not for the computer. When every name follows one rule, a developer can tell what an identifier is for, and with Hungarian notation what kind of element it is, without hunting for its declaration, and there is only one predictable way to write each name.\n\nPicture a Bendigo bakery's ordering module where one programmer wrote `qty`, another `Order_Quantity` and a third `orderQty` for the same idea. Every reader has to stop and work out whether these are three variables or one, and a fix made under one name can miss the others. An agreed convention, applied everywhere, removes that guesswork, so the code is quicker to read and maintain, especially when several developers share it."
+        "body": "A naming convention exists for the people reading the code, not for the computer. When every name follows one rule, a developer can tell what an identifier is for, and with Hungarian notation what kind of element it is, without hunting for its declaration, and there is only one predictable way to write each name.\n\nPicture a Bendigo hardware store's ordering module where one programmer wrote `qty`, another `Order_Quantity` and a third `orderQty` for the same idea. Every reader has to stop and work out whether these are three variables or one, and a fix made under one name can miss the others. An agreed convention, applied everywhere, removes that guesswork, so the code is quicker to read and maintain, especially when several developers share it."
       },
       {
         "heading": "Camel casing and snake casing",
@@ -444,7 +442,7 @@
       },
       {
         "heading": "Hungarian notation",
-        "body": "Hungarian notation starts a name with a short lower-case prefix that says what kind of element it is, and the rest of the name usually follows camel casing. For a variable, the prefix shows the data type: `intCartons` for an integer, `strConsignee` for a string, `fltWeight` for floating point, `boolInsured` for a Boolean. For an interface control, it shows the type of control: `txtWeight` for a text box, `btnQuote` for a button, `lblTotal` for a label.\n\nThe prefix is most useful when the same data appears in two forms. On a Geelong freight firm's quote screen, the weight a user types sits in `txtWeight` as text, and the program converts it into `fltWeight` before calculating. The prefixes make it obvious which one is safe for arithmetic. Two cautions apply. A prefix only describes the element and doesn't set its type, so if a variable's type changes, its name must change too. And prefix sets differ between teams, so use the ones your design already uses."
+        "body": "Hungarian notation starts a name with a short lower-case prefix that says what kind of element it is, and the rest of the name usually follows camel casing. For a variable, the prefix shows the data type: `intCartons` for an integer, `strConsignee` for a string, `fltWeight` for floating point, `boolInsured` for a Boolean. For an interface control, it shows the type of control: `txtWeight` for a text box, `btnQuote` for a button, `lblTotal` for a label.\n\nThe prefix is most useful when the same data appears in two forms. On a Dandenong furniture wholesaler's delivery-quote screen, the weight a user types sits in `txtWeight` as text, and the program converts it into `fltWeight` before calculating. The prefixes make it obvious which one is safe for arithmetic. Two cautions apply. A prefix only describes the element and doesn't set its type, so if a variable's type changes, its name must change too. And prefix sets differ between teams, so use the ones your design already uses."
       },
       {
         "heading": "Naming each kind of element",
@@ -458,7 +456,7 @@
     "worked": {
       "commandTerm": "compare",
       "marks": 3,
-      "prompt": "Ada maintains the dispatch module for a Geelong freight firm. Its variables are named using Hungarian notation, such as `strConsignee`, `intCartons` and `fltWeight`. A new developer suggests renaming every variable in snake casing, such as `consignee`, `cartons` and `weight_kg`.\n\nCompare the two naming conventions as they apply to these variables.",
+      "prompt": "Ada maintains the dispatch module for a Dandenong furniture wholesaler. Its variables are named using Hungarian notation, such as `strConsignee`, `intCartons` and `fltWeight`. A new developer suggests renaming every variable in snake casing, such as `consignee`, `cartons` and `weight_kg`.\n\nCompare the two naming conventions as they apply to these variables.",
       "points": [
         {
           "text": "Hungarian notation: each name starts with a prefix for its data type, e.g. `fltWeight` is floating point, so a reader knows what each variable holds without finding its declaration.",
@@ -688,11 +686,11 @@
     "sections": [
       {
         "heading": "Debugging and testing work together",
-        "body": "Testing tells you that something is wrong: a test's actual output doesn't match its expected output. Debugging finds out why, fixes the code and tests again to confirm the change worked. Both go on all through development. A module for a Geelong freight firm might pass nine tests and fail one; that one failing case is where debugging starts, and the test that exposed it is rerun once the fix is in."
+        "body": "Testing tells you that something is wrong: a test's actual output doesn't match its expected output. Debugging finds out why, fixes the code and tests again to confirm the change worked. Both go on all through development. A module for a Bendigo print shop might pass nine tests and fail one; that one failing case is where debugging starts, and the test that exposed it is rerun once the fix is in."
       },
       {
         "heading": "Breakpoints",
-        "body": "A breakpoint is a marker set on a line of code in the development environment. When execution reaches that line, the program pauses. The developer can then inspect the current value of each variable and step through the following lines one at a time. The code itself isn't changed.\n\nPlace a breakpoint where the fault is likely to show. In a freight firm's invoice module, a breakpoint on the line that adds each consignment's charge pauses once per consignment. Because that line is inside the loop, you can watch the total grow and compare it with your own working. The first pass where the two differ points to the item, and the line, that causes the problem."
+        "body": "A breakpoint is a marker set on a line of code in the development environment. When execution reaches that line, the program pauses. The developer can then inspect the current value of each variable and step through the following lines one at a time. The code itself isn't changed.\n\nPlace a breakpoint where the fault is likely to show. In the print shop's invoice module, a breakpoint on the line that adds each job's charge pauses once per job. Because that line is inside the loop, you can watch the total grow and compare it with your own working. The first pass where the two differ points to the item, and the line, that causes the problem."
       },
       {
         "heading": "Debugging statements",

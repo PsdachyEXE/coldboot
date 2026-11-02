@@ -1,0 +1,572 @@
+[
+  {
+    "id": "l-u4o2-kk01",
+    "kk": "U4O2-KK01",
+    "intro": "An organisation's goals say where it is heading, and its objectives turn those aims into targets it can check. In the cyber security case study you analyse an organisation and recommend improvements, and both land better when they are tied to what the organisation is trying to achieve. You need to tell a goal from an objective, write an objective that can be checked, and link software and security back to them.",
+    "sections": [
+      {
+        "heading": "Goals set the direction",
+        "body": "A **goal** is a broad, long-term aim. It says what the organisation wants to achieve, but it can't be measured directly.\n\nGrevillea Gully Fruit Co-operative in Shepparton packs and sells pears and apples for 140 grower members and employs 300 staff. Two of its goals are to *be the packer growers trust most with their fruit and their money* and to *waste less fruit on the packing line*. Neither tells a manager what to do this month, or how anyone will know the aim has been reached. That is normal: a goal points the way, and objectives do the measuring."
+      },
+      {
+        "heading": "Objectives are targets you can check",
+        "body": "An **objective** is a specific, measurable target with a time frame, set to move the organisation towards a goal. It gives a figure to check against and a date to check it by.\n\n| Goal | An objective that serves it |\n|:--|:--|\n| Be the packer growers trust most | Pay every grower within 10 days of delivery, down from 28 days, by the end of the 2027 season |\n| Waste less fruit on the packing line | Cut the share of fruit rejected for bruising from 6% to 4% within two years |\n\nOne goal can have several objectives, and each objective should serve a goal. A statement with no figure or no deadline can't be checked, so it isn't an objective, however specific it sounds."
+      },
+      {
+        "heading": "Why larger organisations need both",
+        "body": "In a small business the owner can often see at a glance whether things are improving. Grevillea Gully has a packing shed, an accounts office, depots and an IT team, and none of them sees the whole picture. Objectives split each goal into targets that a department can plan for and own: the accounts office owns the payment target, the packing shed owns the bruising target. Managers then measure results during the year and can tell whether the goal is being reached while there is still time to act."
+      },
+      {
+        "heading": "Where a software project fits",
+        "body": "A software project earns its place by serving an objective. Grevillea Gully's accounts staff type each grower's delivery dockets into a spreadsheet, which is a large part of why payments take 28 days. A program that takes bin weights straight from the weighbridge and calculates each grower's payment serves the 10-day objective, and through it the trust goal. The objective also tells the co-op what to measure once the program is running: the number of days each grower waits from delivery to payment. \"We need an app\" is a weak reason on its own."
+      },
+      {
+        "heading": "Weak security works against the goals",
+        "body": "This is where the point meets the rest of Area of Study 2. When you analyse an organisation's development practices, link each weakness to the goal it puts at risk, and each recommendation to the goal it protects.\n\nSuppose the server that runs Grevillea Gully's new payment program is a year behind on security updates. An attacker who used one of those known flaws could change growers' bank account details and divert their payments. Growers would lose money and the co-op could face legal consequences, which strikes directly at the goal of being the packer growers trust most. A recommendation to patch the server promptly is far more convincing when it names that goal."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Whipbird Coaches, a Bendigo bus company with 260 staff, runs services between towns in central Victoria. Its goal is to make the bus the easy choice for people travelling between towns. Most passengers now pay the driver in cash or by card as they board; about 15% buy tickets online beforehand. Whipbird is building a ticketing app, and the IT manager has written this as the project's objective:\n\n*The app will make buying tickets much easier for passengers.*\n\nExplain why this statement doesn't work as an objective, and rewrite it so that it does.",
+      "points": [
+        {
+          "text": "Explains that the statement has no measurable target and no time frame, so Whipbird Coaches can't check whether it has been met; it reads as another broad aim, like a goal, rather than a target",
+          "marks": 1
+        },
+        {
+          "text": "The rewritten objective sets a measurable target that serves the goal, e.g. 60% of tickets bought in the app before boarding, up from about 15% bought online now",
+          "marks": 1
+        },
+        {
+          "text": "The rewritten objective states a time frame, e.g. within 12 months of the app's launch, or by 30 June 2028",
+          "marks": 1
+        }
+      ],
+      "model": "The statement doesn't work as an objective because it has no figure to check against and no deadline. Whipbird Coaches could never show that buying tickets had become \"much easier\", so the statement is really another broad aim, like a goal, rather than a target.\n\nA better objective: *Within 12 months of the app's launch, 60% of tickets are bought in the app before boarding, up from about 15% bought online now.*\n\nThis sets a measurable target (60% of tickets, compared with a stated starting point) and a time frame (12 months from launch). If passengers choose the app for most of their tickets, that is evidence buying tickets has become easier, which supports the goal of making the bus the easy choice."
+    },
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk02",
+    "kk": "U4O2-KK02",
+    "intro": "Before any code is written, an organisation decides who will write it: its own staff, or another company working under a contract. You need to know what each choice gains and gives up, and to weigh them for one particular organisation. The 2025 case study asked students to justify building in-house, and almost nobody earned full marks.",
+    "sections": [
+      {
+        "heading": "Two ways to get software built",
+        "body": "**In-house** development means the organisation's own employees design, build and maintain the software. **External** development means another company or a contractor builds it to order, under a contract that sets out the requirements, the cost and the deadline.\n\nCormorant Point Freight, a Geelong carrier with 450 staff, needs a program that lets customers book pick-ups and track consignments. It employs four developers, and it could also hire a software firm. Neither option is better in general. The answer depends on the organisation's skills, its data, its deadline and how the software will change over time."
+      },
+      {
+        "heading": "What building in-house offers",
+        "body": "Each advantage of building in-house has a matching drawback on the external side, and a good answer uses the pair.\n\n| In-house advantage | Matching drawback of going external |\n|:--|:--|\n| Developers already know how the business works | An outside firm has to learn it, and rules nobody wrote down get missed |\n| Easy communication with the staff who will use the software | Requirements travel through a contract and a few contacts, so misunderstandings show up late |\n| The organisation sets priorities and decides on changes | Changes depend on what the contract covers and what the firm charges |\n| Customer data and code stay inside the organisation | The firm's staff and systems handle them too |\n| Maintenance by its own staff can cost less over time | The organisation keeps depending on the firm for fixes |\n\nAt Cormorant Point, which depot collects from which suburb is known by the dispatchers rather than written down, so developers who can walk over and ask have a real edge."
+      },
+      {
+        "heading": "What going external offers",
+        "body": "A key reason to go external is expertise. A specialist firm brings skills and experience the organisation's staff may not have, and enough people to finish sooner. It also suits a one-off project that doesn't justify hiring permanent developers.\n\nThose are the drawbacks of in-house turned around: the work is limited to what current staff know and have time for, and a small team depends on a handful of people. External development isn't automatically cheaper, though. Fees for changes, support and maintenance after delivery can outweigh the salaries of in-house staff."
+      },
+      {
+        "heading": "The security side",
+        "body": "Area of Study 2 is about secure development, and insecure practices cause problems whether the code is written inside the organisation or by another one. Going external adds risks of its own: it gives a third party access to the source code, and often to data, under practices the organisation can't directly control. If the developer is breached, customers still blame the organisation that collected their details. And if the contract doesn't say who owns the source code and that it is handed over at the end, every later patch depends on the original firm.\n\nAn organisation that goes external can reduce these risks: a contract with security and confidentiality terms and a source code handover, invented test data instead of real customer records, and its own review and testing of what is delivered."
+      },
+      {
+        "heading": "Writing a justification",
+        "body": "A question that asks you to justify one of these options wants the case for it, and that case has two halves: an advantage of the chosen option and a disadvantage of the other, each tied to the scenario. For Cormorant Point choosing in-house:\n\n*Building in-house means only Cormorant Point's own four developers handle customers' addresses and consignment records, under the company's access controls. Going external would give the firm's staff access to the system that holds those records while they build and support it, putting the records within reach of people the company can't supervise.*\n\nBoth halves use details from the case. Points that would fit any company miss out on full marks."
+      }
+    ],
+    "worked": {
+      "commandTerm": "justify",
+      "marks": 4,
+      "prompt": "Pinkgum Flats Packers, a Mildura dried fruit packer with 180 staff, employs one IT officer, who looks after the network, staff computers and printers. Before the next harvest, in five months, it needs an app that reads each delivery's weight from new Bluetooth scales and records it against the grower. The app is not expected to change much once it is built. The board has decided to have the app developed by an external software firm rather than in-house.\n\nJustify the board's decision.",
+      "points": [
+        {
+          "text": "States an advantage of external development, e.g. a specialist firm brings skills and experience the organisation doesn't have",
+          "marks": 1
+        },
+        {
+          "text": "Applies the advantage to Pinkgum Flats, e.g. a firm that has built mobile apps connected to devices such as scales can build this one, whereas the IT officer's experience is in networks and computers",
+          "marks": 1
+        },
+        {
+          "text": "States a disadvantage of in-house development, e.g. the work is limited to the skills and time of existing staff, or hiring permanent developers isn't justified for a one-off project",
+          "marks": 1
+        },
+        {
+          "text": "Applies the disadvantage to Pinkgum Flats, e.g. the IT officer would have to learn app development alongside the existing job, so the app might not be ready before the harvest in five months; and since the app will change little, a permanent developer would have little to do once it is finished",
+          "marks": 1
+        }
+      ],
+      "model": "An external software firm brings specialist skills that Pinkgum Flats doesn't have. A firm that has already built mobile apps that read data from devices such as scales can build the delivery app with confidence. The company's only IT officer looks after the network, computers and printers, which is different work from building an app.\n\nDeveloping in-house would be limited by that one person's skills and time. The IT officer would have to learn app development while still doing the existing job, so the app might not be working before the harvest starts in five months, when every delivery has to be weighed and recorded. Hiring a permanent developer instead isn't justified, because the app is a one-off that will change little after it is built, leaving that developer with little to do."
+    },
+    "traps": [
+      "In 2025 only 1% of students earned full marks for justifying why the case study's company should build in-house (average 1.2 out of 4). Many gave an advantage of building in-house, but only a few added a drawback of using an outside team. A justification needs both.",
+      "Many 2025 answers didn't mention the case study and missed out on full marks. Credit went to points such as knowing the company's own processes, easier communication, control over customisation and decisions, lower maintenance costs over time, and customer data staying inside the company, set against an outside team's unfamiliarity with the business, the company's continuing dependence on it, and miscommunication."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk03",
+    "kk": "U4O2-KK03",
+    "intro": "Before you can recommend fixes, you have to see what is wrong. The study design lists ten kinds of vulnerability and risk found in insecure development environments, and the case study asks you to spot them in an organisation's practices and explain what each could lead to. In 2025 the marks went to risks explained in the situation the question described.",
+    "sections": [
+      {
+        "heading": "Vulnerability, threat and risk",
+        "body": "Three words carry this topic. A **vulnerability** is a weakness that could be exploited. A **threat** is an action, device or event that could cause harm, often by exploiting a vulnerability. **Risk** combines how likely the harm is with how severe it would be.\n\nAt Cormorant Point Freight, a Geelong carrier with its own developers, the password for the customer database sits in a settings file inside the shared code repository. That is the vulnerability. The threat is someone with a copy of the code, such as a contractor or a thief who steals a developer's laptop, using that password to read customers' records. The risk is high, because many people hold copies of the code and the database holds every customer's details."
+      },
+      {
+        "heading": "The ten on the list",
+        "body": "| Vulnerability or risk | What it could look like at Cormorant Point |\n|:--|:--|\n| Use of application programming interfaces (APIs) | The tracking page sends customers' addresses to an outside mapping service, with its key written in the code |\n| Malware | A free plug-in installed on the build server carries hidden code that copies the source code |\n| Unpatched software | The database server is a year behind on security updates, so flaws that are publicly known stay open |\n| Poor identity and access management practices | Developers share one login to the build server, and leavers' accounts stay open |\n| Man-in-the-middle attacks | Drivers' tablets send delivery records over public Wi-Fi without encryption, so someone in between can read or change them |\n| Insider threats | A staff member with legitimate access exposes code or data, on purpose or by mistake |\n| Cyber security incidents | Ransomware locks the repository for three days, and stolen passwords are reused later |\n| Risks from software acquired by third parties | A bought route-planning component has a flaw that only its maker can fix |\n| Ineffective code review practices | Changes are approved without being read whenever a deadline is close |\n| Combined development, testing and production environments | Developers try out changes on the live booking system |"
+      },
+      {
+        "heading": "Updates in a combined environment",
+        "body": "When development, testing and production share one environment, every change lands where staff and customers are working. Suppose Cormorant Point installs an update to its booking system while depots are taking bookings. Because there is nowhere else to try it, the update goes live untested, so customers are the first to meet any fault. It may bring new bugs or security holes with it. Booking records being written during the install may be corrupted. And if the update fails, the system goes down and trucks wait.\n\nThose are risks of going ahead with the update. The risk of never updating is a different question."
+      },
+      {
+        "heading": "Insider threats",
+        "body": "An insider threat comes from someone with legitimate access: an employee, a contractor or a developer. It can be deliberate, such as copying the source code before leaving for a competitor, and the study design's Terms list insider threats with the deliberate threats. It can also be accidental: a developer asks for help on a public forum and pastes code that still contains the database password. What makes it an insider threat is where it comes from. Outsiders sending phishing emails are not an insider threat, even when an employee clicks the link."
+      },
+      {
+        "heading": "Explaining a risk",
+        "body": "Naming a weakness earns little on its own. Say what could happen, to which code or data, and what it would mean for the organisation: data lost, exposed or changed, systems down, legal consequences or customers' trust lost.\n\n*Weak:* Cormorant Point uses a combined environment.\n\n*Strong:* Developers try changes on the live booking system, so one faulty change could stop depots taking bookings for hours and lose bookings already entered, delaying deliveries and costing customers' trust."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Scrubwren Software, a Warrnambool company with 25 staff, builds booking software that caravan parks use to take bookings and store guests' names, home addresses and phone numbers. To save time, a developer added a free calendar component, downloaded from a little-known website, to the booking software. No one else looked at the component's code, and its author stopped releasing updates in 2023.\n\nExplain how adding this component could harm Scrubwren Software and the caravan parks that use its software. Refer to two different vulnerabilities or risks.",
+      "points": [
+        {
+          "text": "Identifies a first risk, e.g. the component could contain malware (hidden malicious code), because it came from an unknown source and no one checked it",
+          "marks": 1
+        },
+        {
+          "text": "Explains the first risk in context, e.g. the component runs inside the booking software at every caravan park, so hidden code could copy guests' names, addresses and phone numbers, exposing guests and damaging Scrubwren's reputation",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a second, different risk, e.g. the component is unpatched software from a third party: no updates have been released since 2023",
+          "marks": 1
+        },
+        {
+          "text": "Explains the second risk in context, e.g. any flaw found in the component since 2023 stays open, so attackers who know of it could use it to break into the booking software; Scrubwren can't get a fix from the author and must fix or replace the component itself",
+          "marks": 1
+        }
+      ],
+      "model": "Risk 1: the component could contain malware. It came from a little-known website and no one at Scrubwren read its code, so hidden malicious code could have come with it. Because the component runs inside the booking software at every caravan park that uses it, that code could copy guests' names, home addresses and phone numbers and send them to an attacker. Guests would be exposed to scams, and the parks would stop trusting Scrubwren's software.\n\nRisk 2: the component is unpatched software from a third party. Its author has released no updates since 2023, so any security flaw found in it since then has never been fixed. Attackers who know about such a flaw could use it to get into the booking software. Scrubwren can't get a patch from the author, so it would have to fix the code itself or replace the component, and until then every park using the software stays exposed."
+    },
+    "traps": [
+      "In 2025, 86% correctly picked the insider threat: a developer whose change to the development environment's settings made the code and data public. The most common wrong choice (10%) was a receptionist clicking a link in phishing emails sent by an international group, which is an attack from outside.",
+      "Only 9% earned full marks for two risks of going ahead with an update in a combined development, testing and production environment. Many wrote about the risks of not updating at all, and some described a combined environment's problems without linking them to the update. Credit went to an untested update, new bugs or vulnerabilities, corrupted data, and downtime if the system failed."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk04",
+    "kk": "U4O2-KK04",
+    "intro": "Security controls are the measures that protect a development team's work and the data its applications store. The study design names six. Exam questions give you a scenario and ask how a named control would protect it, or which control fits a weakness, so learn what each one actually does.",
+    "sections": [
+      {
+        "heading": "Controls, not strategies",
+        "body": "A security control can be hardware, software, physical equipment, a procedure or an electronic measure, used to protect people, systems and data. The six listed for software development are encryption, code review, version control and code repositories, separated development, testing and production environments, robust identity and access management, and regular updates and patches to software.\n\nKeep them apart from the strategies for improving secure development (induction and developer training, and risk management plans), which are a separate point. A question that asks for a strategy isn't answered by a control."
+      },
+      {
+        "heading": "Version control and code repositories",
+        "body": "A code repository keeps the team's code in one place, and version control records every change: what changed, who made it and when. At Silvertop Internet, an Echuca internet provider, a fault in the billing module can be traced to the exact edit that caused it, and the code rolled back to the last version that worked. A developer can build a new feature on a separate branch without touching the main code, and it is merged only after testing and review.\n\nDon't call version control a backup. Its job is the history of the code, so that any change can be traced and reversed; protecting data against loss is the job of backups."
+      },
+      {
+        "heading": "Robust identity and access management",
+        "body": "Identity and access management makes sure each person can reach only the data, modules and systems their duties need. It works in two parts. First, each person is **authenticated**: they log in to their own account and prove who they are, ideally with multi-factor authentication such as a password plus a code from their phone. Second, each account is **restricted**: administrator rights only for those who need them, and access changed the day someone changes role or leaves.\n\nAt Silvertop, only the two developers who release code can reach production; the others work in development. In a development environment, this protects the code and project data. Real customer data shouldn't be there unless that environment is secured to the same level as production, which development environments rarely are."
+      },
+      {
+        "heading": "Encryption",
+        "body": "Encryption encodes data so that it can't be read without the key. Symmetric encryption uses one key to encrypt and decrypt; asymmetric encryption encrypts with a public key and decrypts with the matching private key.\n\nSilvertop encrypts its database of customers' addresses, so a stolen copy or backup can't be read (encryption at rest). Technicians' tablets send installation records over an encrypted connection, so anyone intercepting them sees only scrambled data (encryption in transit). Encryption doesn't stop data being copied; it makes the copy useless without the key."
+      },
+      {
+        "heading": "Code review, updates and patches",
+        "body": "In a **code review**, a developer other than the author reads each change before it is merged. Reviewers catch problems the author missed, such as missing validation, and ones no test would notice, such as a password written into the code. They also make it harder to slip in malicious code. Code written with an AI assistant gets the same review.\n\n**Regular updates and patches** mean installing vendors' fixes promptly for operating systems, applications, libraries and development tools. A security patch closes a known flaw, and once a flaw is public, attackers go looking for systems that haven't installed the fix."
+      },
+      {
+        "heading": "Separated environments",
+        "body": "Development is where code is written, using made-up data. Testing is where changes are checked before release. Production is the live system that staff and customers use, holding real data. Kept separate, a change reaches production only after it passes testing, so a faulty or malicious change can be caught before customers meet it. Developers don't need live data to do their work, and an attacker who gets into the development environment doesn't automatically reach production."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Tea Tree Lane Couriers, a Ballarat delivery company, has six developers who maintain its parcel tracking website. Last year it had three problems:\n\n1. A developer's rushed change broke the rules that price each parcel. No earlier copy of the code had been kept, so the team spent a weekend rewriting the rules from memory.\n2. To save time, a developer added a new feature directly to the live tracking website. It had a bug that showed some customers other customers' delivery addresses for two days.\n3. The maker of a mapping library used by the website released a security fix in March. By September it still hadn't been installed, and an attacker used the flaw to read drivers' locations.\n\nFor two of these problems, identify the security control from the study design that would most directly have prevented the problem or limited the harm, and explain how.",
+      "points": [
+        {
+          "text": "Problem 1: version control and code repositories",
+          "marks": 1
+        },
+        {
+          "text": "Problem 1 explained: every earlier version of the code is kept, so the team could see which change broke the pricing rules and roll back to the last working version in minutes instead of rewriting the rules",
+          "marks": 1
+        },
+        {
+          "text": "Problem 2: separated development, testing and production environments",
+          "marks": 1
+        },
+        {
+          "text": "Problem 2 explained: the feature would have been built in development and checked in testing with made-up data, so the bug would most likely have been found before any customer saw another customer's address",
+          "marks": 1
+        },
+        {
+          "text": "Problem 3: regular updates and patches to software",
+          "marks": 1
+        },
+        {
+          "text": "Problem 3 explained: installing the mapping library's fix soon after March would have closed the known flaw before the attacker could use it to read drivers' locations",
+          "marks": 1
+        }
+      ],
+      "model": "Problem 1: version control and code repositories. If the code had been kept in a repository with version control, every earlier version of the pricing rules would have been saved. The team could have seen exactly which change broke them and rolled the website back to the last working version in minutes, instead of losing a weekend rewriting the rules from memory.\n\nProblem 2: separated development, testing and production environments. The developer would have built the feature in the development environment and it would have been checked in the testing environment, using made-up customer records, before reaching the live website. The bug would most likely have shown up in testing, before any customer saw another customer's delivery address."
+    },
+    "traps": [
+      "Asked in 2025 how robust identity and access management would keep a development environment safe (average 1.2 out of 4 for the two controls), students earned marks for authenticating developers, or for limiting each developer's access to the code and project data. Some wrote about protecting confidential user data, which wouldn't be in a development environment.",
+      "In the same question, version control earned marks for keeping the code's versions as it is developed, so the team can roll back to an earlier working version when an error can't be fixed. Some wrongly called it a kind of backup, and only a few tied either control to the case study.",
+      "When 2025 asked for the most important control for sensitive data an application stores, 75% chose encrypting the stored data. The most common wrong choice (14%) was making each visitor set up multi-factor authentication. Having visitors prove who they are does nothing to protect the log already stored on the device; if that data is encrypted, a copy still can't be read."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk05",
+    "kk": "U4O2-KK05",
+    "intro": "Threat modelling is a structured way to work out what could go wrong with a system's security and to deal with it before an attacker finds it. The study design names three principles: defining security requirements, identifying and mitigating threats, and confirming threats have been mitigated. In 2025 most students missed the mark for naming a principle that follows the requirements, so know all three by name and how to apply each.",
+    "sections": [
+      {
+        "heading": "What threat modelling is for",
+        "body": "Grevillea Gully Fruit Co-operative in Shepparton is building a portal where its grower members check their deliveries and update the bank account their payments go to. Instead of waiting for an incident, the IT team threat models the portal while it is still being designed. A threat spotted now costs a change to the plan; the same threat found after release means reworking code that is already in use. The model isn't finished at release either: when a feature is added, it brings new data and new ways in, so the team works through the principles again."
+      },
+      {
+        "heading": "Defining security requirements",
+        "body": "A security requirement states what the system must do to protect its data and functions, precisely enough that it can be tested. The requirements come first because they say what the team is protecting; the threats to look for are whatever could break one.\n\n| Too vague to test | Testable |\n|:--|:--|\n| The portal must be secure | Only the grower who owns an account, or the co-op's payments officer, can change that account's bank details |\n| Growers' details must be kept safe | Bank details are encrypted whenever they travel between a grower's device and the portal |\n\nYou can't check whether a portal \"is secure\", but you can check whether a grower can change someone else's bank details."
+      },
+      {
+        "heading": "Identifying threats",
+        "body": "For each requirement, the team asks who or what could break it, and how. A data flow diagram helps here: walk through each flow, process and data store and ask what could be read, changed or faked at that point. Think about deliberate attacks, accidents and events. For the bank details requirement, the team lists:\n\n- someone who has stolen a grower's password logs in and changes the bank account, so the next payment goes to them\n- a grower updates their details over free public Wi-Fi, where the data could be intercepted\n- a developer edits bank details directly in the live database, by mistake or on purpose"
+      },
+      {
+        "heading": "Mitigating threats",
+        "body": "For each threat, the team chooses controls that make it less likely or less harmful, and deals first with the threats that are both likely and severe.\n\n| Threat | Mitigation |\n|:--|:--|\n| A stolen password is used to change bank details | Multi-factor authentication before bank details can change |\n| Details intercepted on public Wi-Fi | Encrypt all traffic between devices and the portal |\n| A developer edits live bank details | Separate environments, with developers' accounts unable to reach the live database |\n\nThe study design names identifying and mitigating as one principle, and in practice they go together: a threat written on a list protects nothing until a control is matched to it."
+      },
+      {
+        "heading": "Confirming threats have been mitigated",
+        "body": "A control in the plan only counts once it has been built and shown to work. Confirming means testing each mitigation by trying the threat it is meant to stop:\n\n- log in to a test grower's account with the right password but no code from the phone, try to change the bank details, and check the portal refuses\n- log in as a developer and try to open the live database, and check access is denied\n\nRecord each result. A failed test sends the team back to mitigating that threat, and a passed one is the evidence that the threat has been mitigated."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Glider Plains Netball Association in Horsham has a registration portal. Parents enter each player's phone number and any medical notes, such as asthma, and each coach logs in to see the players in their team. A volunteer developer has started a threat model for the portal. One entry reads:\n\n| Security requirement | Threat | Mitigation | Status |\n|:--|:--|:--|:--|\n| The portal must be secure | Someone guesses a coach's password and reads players' medical notes | Coaches can see only their own team's players | Done |\n\nExplain two weaknesses in how this entry applies the threat modelling principles, and how each should be fixed.",
+      "points": [
+        {
+          "text": "The security requirement is too vague to test: \"secure\" doesn't say what must be protected or from whom, so it can't guide which threats to look for or show when they have been dealt with",
+          "marks": 1
+        },
+        {
+          "text": "Rewrites it as a testable security requirement, e.g. a coach can view medical notes only for players in their own team, and only after logging in with multi-factor authentication",
+          "marks": 1
+        },
+        {
+          "text": "The mitigation is marked done without confirming that the threat has been mitigated: nothing shows the restriction was built correctly or that it works",
+          "marks": 1
+        },
+        {
+          "text": "Describes a test that acts as the attacker would against the mitigation, e.g. log in as a test coach and request a player from another team, check the portal refuses, and record the result",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: the mitigation limits the harm but doesn't stop the guessed password being used, so the threat isn't fully mitigated; add multi-factor authentication for coaches' logins",
+          "marks": 1
+        }
+      ],
+      "model": "First, the security requirement \"The portal must be secure\" is too vague to test. It doesn't say what must be protected or from whom, so it can't guide the search for threats, and no one could ever show it had been met. It should be rewritten as something checkable, such as: *A coach can view medical notes only for players in their own team, and only after logging in with a password and a code sent to their phone.*\n\nSecond, the entry is marked \"Done\" although nothing confirms the threat has been mitigated. Restricting coaches to their own team only helps if it was built correctly. The developer should test it by acting as the attacker would: log in as a test coach, request a player from a different team, check that the portal refuses, and record the result. Only then should the status change to done."
+    },
+    "traps": [
+      "In 2025, 83% of students scored zero when asked for a threat modelling principle that could be applied once security requirements had been defined. Any of identifying threats, mitigating threats, or confirming threats have been mitigated earned the mark."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk06",
+    "kk": "U4O2-KK06",
+    "intro": "This point is about judging how secure an organisation's software development practices are. You propose criteria, collect evidence against each one and reach a judgement that your recommendations can build on. In a case study you may be asked to write criteria for the organisation described, or to apply criteria to the evidence it gives you.",
+    "sections": [
+      {
+        "heading": "Judge the practices, not the product",
+        "body": "What you evaluate is how the team builds software: who can reach the code, how each change is checked before it is merged, where test data comes from, and how tools and libraries are kept up to date. It isn't a test of the finished program.\n\nBellbird Crossing Travel in Geelong, which is covered by the Privacy Act 1988 (Cwlth), has a booking app that locks an account after five wrong passwords. That is a feature of the product. Behind it, all six developers can change the live database, and they test with a copy of real customers' addresses. A criterion about the lockout would rate the firm well. Criteria about its practices would show where it is exposed."
+      },
+      {
+        "heading": "Three measures to build criteria on",
+        "body": "The study design's definition of effectiveness gives three measures for development practices: the security controls in place; how exposed the practices leave the organisation to vulnerability and risk; and legal compliance. A good set has at least one criterion under each, so the evaluation checks more than whether controls exist.\n\n| Measure | Criterion for Bellbird Crossing Travel |\n|:--|:--|\n| Security controls in place | Each change is approved by a developer other than its author before it is merged |\n| Exposure to vulnerability and risk | Security fixes for third-party libraries are applied within a month of their release |\n| Legal compliance | The customer addresses developers can reach are protected as APP 11 requires |"
+      },
+      {
+        "heading": "Write criteria that evidence can settle",
+        "body": "A criterion can be written as a statement, a question or a dot point. What matters is that it names a specific practice, and that some record, log, setting or test could show whether it is met, or how far. Questions that start with *To what degree* suit practices that may be only partly in place.\n\n| Weak | Why it fails | Stronger |\n|:--|:--|:--|\n| The team has good security habits | An opinion; no evidence could settle it | Every repository account requires multi-factor authentication |\n| Software is kept up to date | Which software? How soon counts? | Developers' laptops receive operating system security updates within 14 days of release |\n\nEach criterion should also be relevant to a real risk in the case. A criterion about checking AI-generated code tells you nothing about a team the case says doesn't use AI tools."
+      },
+      {
+        "heading": "Apply each criterion to evidence",
+        "body": "Proposing criteria is half the key skill. The other half is applying them. For each criterion, look for evidence in records, logs, settings or the code itself, rather than in what people say about their own work, and reach a judgement: met, partly met or not met.\n\nBellbird Crossing Travel's merge history for one quarter shows 55 of 60 changes approved by a second developer. The other five were merged by their own authors on release afternoons. So the review criterion is partly met, and the evidence shows where the gap is: under deadline pressure. A survey asking developers whether they review each other's code couldn't have shown that."
+      },
+      {
+        "heading": "From judgement to recommendation",
+        "body": "Criteria that are not met, or only partly met, point to what you should recommend, and the evidence shows how serious each gap is. The same criteria later show whether a change worked. If Bellbird Crossing Travel sets its repository to block any merge approved only by its author, it can check the next quarter's merge history against the same criterion and compare the two results."
+      }
+    ],
+    "worked": {
+      "commandTerm": "evaluate",
+      "marks": 4,
+      "prompt": "Brolga Plains Seed Co-op in Wangaratta has five developers who maintain its online ordering system, which stores growers' names, addresses and payment details. The IT manager, Odette, is evaluating the team's development practices and has collected this evidence:\n\n| Criterion | Evidence |\n|:--|:--|\n| A. To what degree are third-party libraries updated after a security fix is released? | 10 of the 12 libraries were updated within two weeks of each fix. The other 2, including the library that checks growers' logins, have gone seven months without a released fix being applied. |\n| B. Every developer's repository account requires multi-factor authentication. | The repository settings show multi-factor authentication switched on for all five accounts, and last month's login log shows no login without a second factor. |\n\nEvaluate the security of the team's development practices against Odette's two criteria.",
+      "points": [
+        {
+          "text": "Judges criterion A as partly met, using the evidence: 10 of the 12 libraries were updated promptly, but 2 have gone seven months without their fix",
+          "marks": 1
+        },
+        {
+          "text": "Explains the consequence of the gap: the flaw in the login library is already known, so attackers could use it to reach growers' accounts and payment details",
+          "marks": 1
+        },
+        {
+          "text": "Judges criterion B as met, using the evidence: all five accounts require multi-factor authentication and the log shows no login without it, so a stolen password alone can't open the repository",
+          "marks": 1
+        },
+        {
+          "text": "Gives an overall judgement drawn from both criteria, e.g. the practices are partly effective, and the login library is the gap to fix first",
+          "marks": 1
+        }
+      ],
+      "model": "Criterion A is only partly met. Ten of the twelve libraries were updated within two weeks of a security fix, which is good practice, but two have gone seven months without theirs. One of those checks growers' logins. Because a fix was released, the flaw it closes is known, and it is still open in the part of the system that guards growers' accounts and payment details. Attackers who know about it could use it to get in.\n\nCriterion B is met. Multi-factor authentication is switched on for all five developers' accounts, and last month's login log shows no login without a second factor, so a stolen password alone can't open the repository.\n\nOverall, the team's practices are partly effective. Access to the code is well protected, but the unpatched login library is a serious gap and should be updated first."
+    },
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk07",
+    "kk": "U4O2-KK07",
+    "intro": "This point covers three Acts and two industry frameworks that shape how an organisation develops software and how it secures and shares data. Learn what each one is for, because in a case study you name the one a practice involves and say what it requires.",
+    "sections": [
+      {
+        "heading": "Laws and frameworks work differently",
+        "body": "The three Acts are legislation. An organisation they cover must comply, and a breach can lead to complaints, penalties or legal action. The Essential Eight and the ISM (Information Security Manual) are industry frameworks from the Australian Cyber Security Centre. They set out current good practice for protecting systems and data, and organisations adopt them by choice unless a contract or policy requires it.\n\nThe two kinds connect. The privacy Acts require reasonable steps to keep personal information secure (APP 11, IPP 4) without listing those steps, and the frameworks give a recognised way to decide what they should be."
+      },
+      {
+        "heading": "Copyright Act 1968 (Cwlth)",
+        "body": "The Act gives the owner of an original work, including program code and its documentation, the exclusive right to copy, change and publish it, so anyone else needs permission, usually a licence. Its purpose is to let creators control and benefit from their work.\n\nThe Act matters whenever a team uses code it didn't write. A developer at Redbox Hill Landscape Supplies in Seymour likes the delivery map on a competitor's website and can read its code in her browser. Being able to see code isn't permission to copy it. She may build her own map that does the same job, because copyright protects the code, not the idea. An open-source library may be used only on its licence's conditions, such as keeping its copyright notice, and changing a supplier's program needs the supplier's permission unless the licence allows it."
+      },
+      {
+        "heading": "The privacy Acts and their Unit 4 principles",
+        "body": "The Privacy Act 1988 (Cwlth) binds Australian Government agencies and many private organisations. The Privacy and Data Protection Act 2014 binds Victoria's public sector, such as councils and state departments, and contractors whose contracts with them say so. The principles listed for Unit 4 pair up by topic:\n\n| Topic | APP | IPP | What it means for a development team |\n|:--|:--|:--|:--|\n| Openness | 1 | 5 | A clear privacy policy covers what the program collects and how it is handled |\n| Collection | not listed | 1 | The program collects only what it needs, fairly, and tells people why |\n| Use and disclosure | 6 | 2 | Data is used only for the purpose it was collected for, unless the person consents or another exception applies, so real customer records aren't test data |\n| Sending data away | 8 (overseas) | 9 (outside Victoria) | Before an API or service elsewhere receives personal information, reasonable steps make sure it will be protected |\n| Government identifiers | 9 | not listed | The program issues its own customer IDs instead of adopting a Medicare or driver licence number |\n| Security | 11 | 4 | Stored personal information is protected from misuse, loss and unauthorised access, then destroyed or de-identified once it is no longer needed |"
+      },
+      {
+        "heading": "The Essential Eight",
+        "body": "The Essential Eight is a prioritised set of eight mitigation strategies that make systems much harder to break into and help an organisation recover if an attack succeeds. For a development team, they protect the computers where code is written, stored and built.\n\n| Strategy | In a development team |\n|:--|:--|\n| Multi-factor authentication | A stolen repository password alone can't log anyone in |\n| Restrict administrative privileges | Developers do everyday work on standard accounts |\n| Patch applications | Code editors, browsers and other programs are updated when fixes come out |\n| Patch operating systems | Laptops and the build server get operating system updates promptly |\n| Application control | Only approved programs can run on the build server |\n| Restrict Microsoft Office macros | Macros in documents are blocked unless trusted, because malware often hides in them |\n| User application hardening | Features that attackers commonly misuse, for example in web browsers, are switched off |\n| Regular backups | Code and data are backed up, and restoring them is tested |"
+      },
+      {
+        "heading": "The ISM's Guidelines for Software Development",
+        "body": "The ISM is a cyber security framework of principles and controls that organisations apply according to their own risks. Its Guidelines for Software Development aim to keep vulnerabilities and malicious code out of the software an organisation builds. They cover four areas:\n\n- **Development, testing, staging and production environments**: keep them separate, make changes only in development, and keep real production data out of the others unless they are secured to the same level.\n- **Authoritative source for software**: hold all code in one trusted, access-controlled repository that every release is built from.\n- **Secure software development**: build security in from the design stage, for example through threat modelling.\n- **Software security testing**: test for security vulnerabilities before software is released."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Mistletoe Road Transport in Benalla has three developers who maintain the company's own delivery-scheduling program. A review of their practices found that:\n\n- each developer keeps a copy of the code on their own laptop, and each release is built from whichever copy was changed most recently\n- new versions go live as soon as their features work, without any testing for security vulnerabilities.\n\nExplain how **two** of the ISM's Guidelines for Software Development apply to these findings.",
+      "points": [
+        {
+          "text": "Names Authoritative source for software for the first finding",
+          "marks": 1
+        },
+        {
+          "text": "Explains it for this case: all the code should be held in one trusted, access-controlled repository that every release is built from, so the team knows exactly what goes live and an outdated, unfinished or tampered copy can't be released",
+          "marks": 1
+        },
+        {
+          "text": "Names Software security testing for the second finding",
+          "marks": 1
+        },
+        {
+          "text": "Explains it for this case: each version should be tested for security vulnerabilities before it goes live, because checking that features work won't reveal a flaw that lets an attacker read or change delivery data",
+          "marks": 1
+        }
+      ],
+      "model": "The first finding goes against the guideline Authoritative source for software. All of the scheduling program's code should be held in one trusted repository that only the three developers can reach, and every release should be built from it. At present no one can be sure which copy went live, so an outdated version, a half-finished change or a tampered copy from a lost laptop could be released without anyone noticing.\n\nThe second finding goes against Software security testing. Each new version should be tested for security vulnerabilities before it goes live, for example by trying common attacks on its login and data entry screens. Checking only that the features work won't reveal a flaw that lets an attacker read or change delivery data, so at the moment attackers could find such a flaw before the developers do."
+    },
+    "traps": [
+      "When a 2025 question asked which action would breach the Copyright Act 1968 (Cwlth), 71% correctly chose editing a third-party program's code without its author's permission. Nearly a quarter chose backing the program's data up to an insecure server, which is poor security practice, not a copyright breach.",
+      "In 2025, 84% correctly picked regular backups as the Essential Eight strategy. The other options came from elsewhere in the course (preventing scope creep, developing evaluation criteria, internal documentation), so know all eight strategies by name."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk08",
+    "kk": "U4O2-KK08",
+    "intro": "The study design names four ethical issues in software development: ineffective security practices, intellectual property, copyright issues and the use of artificial intelligence during development. You need to explain why a practice raises an ethical issue, who it harms and how the organisation could put it right, which is a separate question from whether it breaks a law.",
+    "sections": [
+      {
+        "heading": "Ethical is not the same as legal",
+        "body": "An ethical issue challenges moral standards, principles or what people reasonably expect, and it can affect individuals, organisations or both. A legal question asks whether a law has been broken. An ethical question asks whether a choice is honest and fair to everyone it affects: users, clients, colleagues and the public.\n\nThe two can come apart. Nothing in law forbids committing code an AI tool wrote without reading it, but a developer who does so knowingly gambles with users' data. Other practices are both, such as ignoring the licence of reused code. In an answer, name the people harmed and say how they are harmed."
+      },
+      {
+        "heading": "Ineffective security practices",
+        "body": "When an organisation knows its practices are weak and carries on anyway, it pushes the risk onto people who trusted it with their data and can't see the danger. Releasing an update with a known vulnerability to meet a deadline, copying real customer records into a less protected test environment and keeping quiet about a breach are all examples.\n\nA developer at a Bendigo accounting firm realises that the staff portal she built last year sends passwords without encryption. Her manager tells her to leave it because no one has complained. The ethical course is to report the weakness and its likely impact in writing, so the firm decides with full knowledge instead of hoping nobody notices."
+      },
+      {
+        "heading": "Using AI during development",
+        "body": "Using an AI assistant isn't unethical in itself. The ethical problems come from how it is used:\n\n- **Over-reliance**: accepting generated code unread. It can contain errors and security vulnerabilities, and the developer who commits it stays accountable for it.\n- **Transparency**: hiding AI use from the team or a client, who then can't judge the risks in the code.\n- **Bias**: suggestions that carry bias from the tool's training data and treat some users unfairly.\n- **Copyright and intellectual property**: output that reproduces someone else's licensed code.\n- **Confidentiality**: pasting customer records or the company's code into a public AI tool.\n\nResponsible use means knowing the tool's limits, reviewing and testing everything it produces and being open about using it. The energy these tools consume is an ethical cost too."
+      },
+      {
+        "heading": "Intellectual property and copyright",
+        "body": "Intellectual property is work that comes from someone's mind, such as code, designs and documentation, and copyright is the legal protection the Copyright Act gives much of it. The ethical side is honesty and fairness towards the people who made the work:\n\n- crediting reused code instead of passing it off as your own\n- following a licence's conditions even when nobody would check\n- leaving code that belongs to an employer or client behind when you move on\n- using only properly licensed software and tools\n\nRecording where reused code came from also lets a team find it again when a flaw in it is announced."
+      },
+      {
+        "heading": "Consequences and resolutions",
+        "body": "A key skill asks for the legal and ethical consequences of an ineffective practice and how they could be resolved. Work through it in order:\n\n| Step | Example: an online homewares retailer in Wodonga |\n|:--|:--|\n| Practice | Releasing an update with a known flaw that exposes customers' order histories, to meet a deadline |\n| Who is harmed, and how | Customers, whose data is exposed without their knowledge |\n| Ethical consequence | Customers' trust and the firm's reputation suffer once it comes out |\n| Legal consequence | If data is accessed and the firm is covered by the Privacy Act, it may have failed APP 11, inviting complaints or an investigation |\n| Resolution | Fix the flaw before release, or delay it; tell customers if data was exposed; review how releases are approved |"
+      }
+    ],
+    "worked": {
+      "commandTerm": "discuss",
+      "marks": 4,
+      "prompt": "Mei worked for four years as a developer at Wattlebird Hollow Software in Ballarat, which builds booking systems for gyms. She has just joined Paperwasp Apps, a competitor. To meet her first deadline, she plans to reuse the class-booking module she wrote at Wattlebird Hollow, from a copy she kept on her personal laptop. She says the code is hers because she wrote it.\n\nDiscuss the ethical issues in Mei's plan and how Paperwasp Apps should respond.",
+      "points": [
+        {
+          "text": "Weighs Mei's claim: she wrote the module, but she wrote it as part of her job, so unless an agreement said otherwise it belongs to Wattlebird Hollow, and reusing it takes her former employer's work without permission",
+          "marks": 1
+        },
+        {
+          "text": "Explains the harm: a competitor would gain years of work that Wattlebird Hollow paid for, which could cost Wattlebird Hollow customers and income",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a second issue: keeping a copy of the company's code on a personal laptop after leaving is an ineffective security practice, because the code is now outside its owner's control",
+          "marks": 1
+        },
+        {
+          "text": "Describes how Paperwasp Apps should respond: refuse to use the copied code, ask Mei to delete or return her copy, and have the module written afresh or licensed from Wattlebird Hollow",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: notes the legal risk that using the code could breach the Copyright Act 1968 (Cwlth) and expose Paperwasp Apps to legal action",
+          "marks": 1
+        }
+      ],
+      "model": "Mei feels the module is hers because she wrote it, and reusing it would save Paperwasp Apps time. But she wrote it as part of her job at Wattlebird Hollow, so unless an agreement said otherwise, the code belongs to Wattlebird Hollow. Using it without permission takes her former employer's work, and it hands a competitor years of development that Wattlebird Hollow paid for, which could cost it customers and income. It could also breach the Copyright Act 1968 (Cwlth).\n\nKeeping a copy of the company's code on a personal laptop after leaving raises a second issue: it is an ineffective security practice. The code, and anything in it such as passwords, is now outside Wattlebird Hollow's control.\n\nPaperwasp Apps should refuse to use the copied module and ask Mei to delete or return her copy. It should have the module written afresh, or license it from Wattlebird Hollow, and make its rules on other people's code part of every new developer's induction."
+    },
+    "traps": [
+      "In 2025, 65% saw that an organisation using AI to write the first code of all its new software raises the issue of relying too heavily on AI. About one student in six chose the claim that using AI to write code is always unethical, and 13% chose that the code might be inefficient. The ethical issue is the over-reliance, not the use of AI, and inefficiency is a quality problem."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk09",
+    "kk": "U4O2-KK09",
+    "intro": "This point covers the measures that reduce threats, vulnerabilities and risks, or eliminate them, both in an organisation's development environment and across the organisation. In a case study, the measure you choose has to fit the specific weakness described, and you need to explain how it lowers the risk.",
+    "sections": [
+      {
+        "heading": "Reduce or eliminate",
+        "body": "A measure that **eliminates** a risk removes the threat or the vulnerability completely. One that **reduces** a risk makes harm less likely, or less damaging when it happens. Most measures reduce.\n\nGhost Gum Equipment Hire in Sale found an old file-upload plugin in its booking website. Nothing uses it any more, and its makers have published a security flaw in it. Updating the plugin reduces the risk: the known flaw is fixed, but new ones may be found later. Removing the plugin eliminates the risk it carries, because code that isn't there can't be attacked. When a component isn't needed, removing it is usually the stronger measure."
+      },
+      {
+        "heading": "Likelihood or impact",
+        "body": "A reducing measure works on one of two things, and it helps to say which.\n\n| Lowers the likelihood of harm | Lowers the impact if harm happens |\n|:--|:--|\n| Multi-factor authentication: a stolen password alone won't log in | Tested backups: code and data lost or locked by ransomware can be restored |\n| Prompt patching: known flaws are closed before attackers use them | Least privilege: a stolen account reaches only what its owner needed |\n| Second-developer approval before merging: flawed or malicious changes are caught first | Encrypted laptop drives: a thief can't read the code on a stolen laptop |\n\nWhich column a measure falls in depends on the harm you name. Least privilege limits what a stolen account can do, but it also makes a developer's accidental change to live data less likely, because their account can't reach it.\n\nNo single measure is perfect, so organisations combine them. When one fails, another still protects the code and data."
+      },
+      {
+        "heading": "Match the measure to the weakness",
+        "body": "Each vulnerability in a case calls for a measure aimed at it:\n\n| Vulnerability or risk | A measure that fits |\n|:--|:--|\n| Poor identity and access management | Individual accounts with multi-factor authentication; access removed on a leaver's last day |\n| Unpatched software | Operating systems, tools and libraries updated when fixes are released, with a record of library versions |\n| Malware | Application control, so only approved programs run, plus prompt patching |\n| Combined development, testing and production environments | Separate environments, with changes reaching production only through a tested release |\n| Ineffective code review practices | A second developer's approval required before any merge |\n| Man-in-the-middle attacks | Data encrypted in transit between the app and the server |\n| Use of APIs | Only the data an API needs is sent to it, after checking how its provider stores data |\n| Software acquired from third parties | Obtained from trusted sources, checked before use and kept updated |\n| Insider threats | Least privilege, plus logs that record who changed what |\n\nA sound measure aimed at the wrong weakness doesn't help: multi-factor authentication won't stop a developer who is already logged in from merging an unchecked change."
+      },
+      {
+        "heading": "Least privilege, for people and programs",
+        "body": "The study design defines identity and access management as giving each member of an organisation access only to the data, modules and systems their duties require, with no administrator rights unless they are needed. This principle of least privilege limits what a careless, dishonest or stolen account can do.\n\nGhost Gum hires a contractor for three months to build monthly reports. She gets read-only access to the reporting data, no access to other modules' code, and an account that expires when her contract ends. The same idea applies to programs: an app's database account should be able to do only what the app needs."
+      },
+      {
+        "heading": "Measures beyond the code",
+        "body": "Mitigation isn't only technical. Servers kept in a locked room with logged entry, backup drives stored in a safe away from the office, visitors signed in and escorted, old drives destroyed before disposal, and personal data deleted once it is no longer needed all reduce risk across the organisation as well as in its development environment."
+      }
+    ],
+    "worked": {
+      "commandTerm": "compare",
+      "marks": 4,
+      "prompt": "Pelican Bend Irrigation in Mildura scans each customer's signed direct debit form, which shows their bank account number, and stores the scan in its customer portal for as long as the account stays open. Staff have already entered the bank details into the payments system. The manager is choosing between two measures:\n\n- **Measure A**: encrypt the stored scans.\n- **Measure B**: once staff have entered and checked the bank details, delete the scan.\n\nCompare the two measures as ways of dealing with the risk that customers' bank details are exposed through the stored scans.",
+      "points": [
+        {
+          "text": "Measure A reduces the risk: someone who copies the stored scans gets files they can't read without the key",
+          "marks": 1
+        },
+        {
+          "text": "Measure A leaves some risk: the scans still exist, so anyone who obtains the key, or staff who can view the decrypted scans, could still expose the bank details",
+          "marks": 1
+        },
+        {
+          "text": "Measure B eliminates this risk: once a scan is deleted there is nothing left in the portal to expose",
+          "marks": 1
+        },
+        {
+          "text": "Weighs the cost: B changes staff procedure and leaves no copy of the signed form to refer back to if a customer later queries a payment, whereas A leaves the way staff work unchanged",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: B also fits APP 11, which expects personal information to be destroyed or de-identified once it is no longer needed, if the firm is covered by the Privacy Act",
+          "marks": 1
+        }
+      ],
+      "model": "Both measures lower the risk of customers' bank details being exposed, but by different amounts. Measure A reduces it: anyone who copies the stored scans gets files they can't read without the key. But the scans still exist, so someone who obtains the key, or a staff member who can view the decrypted scans, could still expose the bank account numbers.\n\nMeasure B eliminates the risk from the scans, because once the bank details have been entered and checked, the scan is deleted and there is nothing left in the portal to steal. Its cost is a change to staff procedure, and there is no copy of the signed form to look back at if a customer later queries a payment. Measure A leaves the way staff work unchanged.\n\nOverall, B deals with the risk more completely, while A is the easier change to make."
+    },
+    "traps": [
+      "Match the measure to the kind of threat. The study design's Terms sort threats into accidental threats, such as overwriting data; deliberate threats, such as malware or unauthorised access; and events-based threats, such as a hardware failure or a power outage. Multi-factor authentication does nothing about a failed drive or an overwritten file; a tested backup is what limits that harm."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o2-kk10",
+    "kk": "U4O2-KK10",
+    "intro": "The study design names two strategies for making software development practices more secure: onboarding or induction, and developer training, that focus on secure development; and developing risk management plans. Each one changes how the whole team works over time, which is why naming a single security control doesn't answer a question that asks for a strategy.",
+    "sections": [
+      {
+        "heading": "Strategies are not controls",
+        "body": "Security controls, such as encryption, code review and separated environments, each protect something specific. A strategy improves the practices that decide which controls a team uses and whether people apply them properly. *Encrypt the customer database* is a control. *Train every developer in secure development, starting from their induction* is a strategy, and one thing that training teaches is when encryption is needed."
+      },
+      {
+        "heading": "Onboarding and induction",
+        "body": "Induction is when a new developer learns how the organisation builds software securely, before they are given access to its code. At Yabby Creek Insurance Brokers in Warrnambool, a new developer's first week covers:\n\n- the rule that a second developer approves every change before it is merged\n- where passwords and keys are kept, and why never in the code\n- testing only with made-up customer records\n- what the team allows when using AI assistants\n\nTheir accounts are set up with only the access their role needs, and the expectations are written down, so nobody can later say they didn't know the rules."
+      },
+      {
+        "heading": "Ongoing developer training",
+        "body": "Training continues after induction because threats, tools and rules keep changing, and experienced developers can slip into shortcuts. Good training targets the weaknesses an evaluation found. If a review at Yabby Creek shows developers committing AI-generated code without reading it, a session on checking generated code for vulnerabilities aims straight at that habit. The costs are time away from development, and repeating the training as staff and threats change."
+      },
+      {
+        "heading": "Risk management plans",
+        "body": "A risk management plan lists the risks to a project or development environment, rates each one's likelihood and impact, and proposes a control for each. The ratings decide what is dealt with first.\n\n| Risk | Likelihood | Impact | Proposed control |\n|:--|:--|:--|:--|\n| Former contractors' repository accounts still active | Medium: three contractors left this year | High: each account can reach all the code | Disable them now and on each leaver's last day; review access monthly |\n| Build server six months behind on updates | High: its flaws are published | High: every release is built there | Patch it now, then monthly |\n\nThe plan stays useful only if it is reviewed as the project changes, which takes ongoing effort."
+      },
+      {
+        "heading": "Choosing a strategy for a case",
+        "body": "Match the strategy to what the case shows. New or inexperienced developers repeating insecure habits point to induction and training. A new project, new technology or a changed setting whose risks nobody has assessed points to a risk management plan. Either way, say what the strategy would involve for that organisation and how it would fix the weakness described. A strategy that is only named, or described in a way that would fit any company, shows little."
+      }
+    ],
+    "worked": {
+      "commandTerm": "recommend",
+      "marks": 4,
+      "prompt": "Brigalow Furniture in Wodonga has eight developers who have worked together for several years, and all of them completed secure development training six months ago. The company is about to start building a new customer app that will store customers' home addresses and photos of delivered furniture, and will send delivery addresses to a route-planning API hosted overseas. The manager can fund one strategy for improving the team's development practices this year.\n\nRecommend which strategy the manager should fund, and justify your recommendation.",
+      "points": [
+        {
+          "text": "Recommends developing a risk management plan for the new app (a security control on its own earns no marks)",
+          "marks": 1
+        },
+        {
+          "text": "Links the choice to the case: the new app brings risks the team hasn't handled before, such as stored home addresses and delivery photos, and personal information sent overseas",
+          "marks": 1
+        },
+        {
+          "text": "Explains what the plan would do: list these risks, rate each one's likelihood and impact, and propose a control for each before development starts, e.g. sending the API only the addresses it needs",
+          "marks": 1
+        },
+        {
+          "text": "Explains why the other strategy would add less: the developers are experienced and were trained six months ago, and there are no new staff to induct",
+          "marks": 1
+        }
+      ],
+      "model": "The manager should fund the development of a risk management plan for the new customer app.\n\nThe app brings risks the team hasn't dealt with before: it will store customers' home addresses and photos of their deliveries, and send addresses to an API hosted overseas. A risk management plan would list these risks before development starts, rate each one's likelihood and impact, and propose a control for each, such as sending the API only the addresses it needs to plan routes, without customers' names or phone numbers. The ratings would show the team which risks to deal with first.\n\nThe other strategy would add less this year. All eight developers are experienced and completed secure development training six months ago, and there are no new staff to induct, so more training would mostly repeat what they already know."
+    },
+    "traps": [
+      "On a 2025 question asking for a strategy to improve the security of development practices, 55% scored zero. Many described a security control such as encryption, and no control earned marks; only developer training, onboarding and a risk management plan did.",
+      "The report's high-scoring example went beyond naming the strategy. It described an induction that trains new developers in secure practices, ongoing courses to keep developers current with security technology, training matched to each role, and clearly stated expectations."
+    ],
+    "source": "study-design"
+  }
+]

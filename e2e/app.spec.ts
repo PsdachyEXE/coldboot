@@ -226,6 +226,10 @@ test('Learn: a topic opened from the map, read to its end, then drilled', async 
   await expect(page.getByRole('heading', { level: 1, name: 'Data types' })).toBeVisible();
   await expect(page.getByRole('heading', { level: 2, name: 'In the study design' })).toBeVisible();
   await expect(page.getByText('Not practised yet. Not read yet.')).toBeVisible();
+  // The point's authored lesson, with its worked example, in place of the assembled notes.
+  await expect(page.getByRole('heading', { level: 2, name: 'The ideas' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: 'Worked example' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 3, name: 'Model answer' })).toBeVisible();
 
   // Reaching the Practise section records the page as read; reading is never scored.
   const practise = page.getByRole('heading', { level: 2, name: 'Practise' });

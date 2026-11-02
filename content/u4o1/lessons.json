@@ -58,7 +58,7 @@
     "sections": [
       {
         "heading": "Input: data arrives as text",
-        "body": "Data enters a solution through GUI controls, or from a data source such as a file or a database, which can be local or cloud-based. Much of it arrives as text. At a Portland surf lifesaving club, a sprint time typed into a text box, or read from the CSV line `Ava Doyle,C,14.82`, is a string until the program converts it.\n\nSo the input stage has two jobs: validate each value, then convert it to the type it will be stored as. A control that offers only valid choices, such as a drop-down list of heats, needs less checking than a text box."
+        "body": "Data enters a solution through GUI controls, or from a data source such as a file or a database, which can be local or cloud-based. Much of it arrives as text. At Gannet Bay Surf Life Saving Club, a sprint time typed into a text box, or read from the CSV line `Ava Doyle,C,14.82`, is a string until the program converts it.\n\nSo the input stage has two jobs: validate each value, then convert it to the type it will be stored as. A control that offers only valid choices, such as a drop-down list of heats, needs less checking than a text box."
       },
       {
         "heading": "Storage: choosing data types",
@@ -80,7 +80,7 @@
     "worked": {
       "commandTerm": "explain",
       "marks": 4,
-      "prompt": "Rafe is writing a hire program for a boat-hire business in Lakes Entrance. Each hire has a total, such as $127.50. The program displays each total on screen and adds it to the day's income, and each night it writes the day's hires to a CSV file that the bookkeeper opens in a spreadsheet. A classmate suggests storing each total as the string `\"$127.50\"` so that it can be displayed without any extra code.\n\nExplain why each total should be stored as floating point instead, and how the program should handle the totals when it outputs them.",
+      "prompt": "Rafe is writing a hire program for Paperbark Party Hire in Traralgon. Each hire has a total, such as $127.50. The program displays each total on screen and adds it to the day's income, and each night it writes the day's hires to a CSV file that the bookkeeper opens in a spreadsheet. A classmate suggests storing each total as the string `\"$127.50\"` so that it can be displayed without any extra code.\n\nExplain why each total should be stored as floating point instead, and how the program should handle the totals when it outputs them.",
       "points": [
         {
           "text": "Floating point holds dollars and cents, such as 127.50, which an integer can't, and can be used directly in arithmetic",
@@ -137,7 +137,7 @@
     "worked": {
       "commandTerm": "describe",
       "marks": 4,
-      "prompt": "Ari is building the hire kiosk for a pedal-boat business on the Mildura riverfront. The kiosk's form has a drop-down list for the boat size (two-seat or four-seat), a text box for the number of whole hours, a **Calculate** button and a label that shows the price.\n\nDescribe how features of the programming language would work together to show the price when a customer clicks **Calculate**.",
+      "prompt": "Ari is building the hire kiosk for Darter Bend Pedal Boats on Lake Nagambie. The kiosk's form has a drop-down list for the boat size (two-seat or four-seat), a text box for the number of whole hours, a **Calculate** button and a label that shows the price.\n\nDescribe how features of the programming language would work together to show the price when a customer clicks **Calculate**.",
       "points": [
         {
           "text": "Clicking Calculate raises an event, and the method linked to the button (its event handler) runs",
@@ -161,7 +161,7 @@
     "traps": [
       "Private limits an attribute to its own class's methods; protected also lets subclasses use it. In 2025, a fifth of students chose protected for an attribute that only the class's own methods were to reach.",
       "A local variable can be used anywhere in the module that declares it, not just inside one IF or loop, and a global variable's value can change while the program runs. Scope was the weakest multiple-choice result of 2025, at 42% correct.",
-      "Testing a condition to choose which branch runs, as an IF…ELSEIF chain does, is selection. Close to three in ten students in 2025 called such a chain repetition, a method or a property."
+      "Testing a condition to choose which branch runs, as an IF…ELSEIF chain does, is selection. More than a quarter of students in 2025 called such a chain repetition, a method or a property."
     ],
     "source": "study-design"
   },
@@ -172,11 +172,11 @@
     "sections": [
       {
         "heading": "Code repositories",
-        "body": "A code repository stores a project's code along with the history of every change to it, which is what makes version control possible. Each saved change records who made it, when, and a message saying what it does, so the team can trace how the code changed and roll back a change that broke something.\n\nRepositories also support teamwork and transparency. A developer can build a new feature in a separate line of work (usually called a branch) while the main codebase stays as it was; the feature is merged in only after it has been tested and reviewed. Git, GitHub, Bitbucket and SourceForge are examples. Three developers building a regional council's dog-registration system could each work on their own feature while the version council staff use stays stable."
+        "body": "A code repository stores a project's code along with the history of every change to it, which is how it supports version control. Each saved change records who made it, when, and a message saying what it does, so the team can trace how the code changed and roll back a change that broke something.\n\nRepositories also support teamwork and transparency. A developer can build a new feature in a separate line of work (usually called a branch) while the main codebase stays as it was; the feature is merged in only after it has been tested and reviewed. Git, GitHub, Bitbucket and SourceForge are examples. Three developers building a regional council's dog-registration system could each work on their own feature while the version council staff use stays stable."
       },
       {
         "heading": "APIs",
-        "body": "An API is an interface that lets separate systems and solutions communicate. One program sends a request in an agreed form and receives data or a service back, without needing to know how the other system works inside. A booking app for a whale-watching operator in Port Fairy can request marine forecasts from a weather service's API instead of collecting weather data itself. Operating systems also provide APIs that programs use to reach a device's features."
+        "body": "An API is an interface that lets separate systems and solutions communicate. One program sends a request in an agreed form and receives data or a service back, without needing to know how the other system works inside. A booking app for Kelp Point Whale Cruises in Port Fairy can request marine forecasts from a weather service's API instead of collecting weather data itself. Operating systems also provide APIs that programs use to reach a device's features."
       },
       {
         "heading": "Libraries",
@@ -194,7 +194,7 @@
     "worked": {
       "commandTerm": "explain",
       "marks": 4,
-      "prompt": "Jonah is the only developer of a booking app for a glamping site near Halls Gap. Guests can book from 1 to 14 nights, and stays of 7 nights or more get 15% off. He plans to have the AI-based assistant in his IDE generate the test data and test cases for the module that calculates the price of a stay.\n\nExplain one benefit and one challenge of using the assistant for this task.",
+      "prompt": "Jonah is the only developer of a booking app for a farm-stay near Daylesford. Guests can book from 1 to 14 nights, and stays of 7 nights or more get 15% off. He plans to have the AI-based assistant in his IDE generate the test data and test cases for the module that calculates the price of a stay.\n\nExplain one benefit and one challenge of using the assistant for this task.",
       "points": [
         {
           "text": "Benefit: the assistant generates test data and test cases automatically, which is faster than writing them by hand (increased productivity)",
@@ -209,16 +209,12 @@
           "marks": 1
         },
         {
-          "text": "Applies the challenge: the assistant knows the site's rules only from what Jonah tells it, so it may leave out the boundary tests at 6 and 7 nights or give a wrong expected price; Jonah must check every expected output against the requirements before relying on the tests",
+          "text": "Applies the challenge: the assistant knows the farm-stay's rules only from what Jonah tells it, so it may leave out the boundary tests at 6 and 7 nights or give a wrong expected price; Jonah must check every expected output against the requirements before relying on the tests",
           "marks": 1
         }
       ],
-      "model": "One benefit is speed. The assistant can generate test data and test cases automatically, so in seconds it can propose a large set for the pricing module: typical stays, the limits of 1 and 14 nights, and invalid entries such as 0, 15 or text. That saves Jonah, as the only developer, the time he would spend writing them himself, and leaves more time for fixing the errors the tests find.\n\nOne challenge is the assistant's lack of accuracy and context awareness. It knows the glamping site's rules only from what Jonah tells it, so it might leave out the most important boundary, 6 and 7 nights, where the discount begins, or work out an expected price wrongly. If Jonah trusted its test cases without checking them, a wrong expected output could make a faulty module appear to pass. He needs to check each expected output against the requirements himself."
+      "model": "One benefit is speed. The assistant can generate test data and test cases automatically, so in seconds it can propose a large set for the pricing module: typical stays, the limits of 1 and 14 nights, and invalid entries such as 0, 15 or text. That saves Jonah, as the only developer, the time he would spend writing them himself, and leaves more time for fixing the errors the tests find.\n\nOne challenge is the assistant's lack of accuracy and context awareness. It knows the farm-stay's rules only from what Jonah tells it, so it might leave out the most important boundary, 6 and 7 nights, where the discount begins, or work out an expected price wrongly. If Jonah trusted its test cases without checking them, a wrong expected output could make a faulty module appear to pass. He needs to check each expected output against the requirements himself."
     },
-    "traps": [
-      "Using AI to write code isn't unethical in itself; the ethical problem is leaning on it too heavily. In 2025, 65% picked over-reliance for an organisation that has AI write all its initial code, while 16% chose the option claiming that writing code with AI is always unethical.",
-      "Version control isn't a backup. In a 2025 question on protecting a development environment, some answers wrongly treated it as one; credited answers said it keeps versions of the code throughout development, so the team can roll back to a working one after errors it can't resolve."
-    ],
     "source": "study-design"
   },
   {
@@ -232,7 +228,7 @@
       },
       {
         "heading": "The three checks",
-        "body": "| Check | What it confirms | Fails at the clinic when |\n|:--|:--|:--|\n| Existence | a required field has a value and isn't blank | the owner's phone number is left empty |\n| Type | the data is of the expected type | the weight is typed as `thirty` |\n| Range | the value lies between a lower and an upper limit | the weight entered is 0 or 300 |\n\nApply them in that order. A type check needs something to test, and a range check compares numbers, so it needs data that has already passed the type check. When you justify a check, say what would go wrong without it: with no type check, `thirty` would reach the comparison with the lower limit and could cause a type mismatch error."
+        "body": "| Check | What it confirms | Fails at the clinic when |\n|:--|:--|:--|\n| Existence | a required field has a value and isn't blank | the owner's phone number is left empty |\n| Type | the data is of the expected type | the weight is typed as `thirty` |\n| Range | the value lies between a lower and an upper limit | the weight entered is 0 or 300 |\n\nApply them in that order. A type check needs something to test, and a range check compares values, such as numbers or dates, so it needs data that has already passed the type check. When you justify a check, say what would go wrong without it: with no type check, `thirty` would reach the comparison with the lower limit and could cause a type mismatch error."
       },
       {
         "heading": "Planning the checks from the design",
@@ -280,11 +276,11 @@
     "sections": [
       {
         "heading": "Alpha testing and debugging",
-        "body": "Alpha testing goes on throughout development, in a development or testing environment, and is done by high-level users, independent testers or the developers themselves. Of every module, and then of the whole solution, it asks whether each requirement is met and whether it works as expected. It comes before beta testing, when intended users try the nearly finished solution.\n\nDebugging happens as code is written, often after a failed test: find the error, fix it, then test again to confirm that the fix worked and broke nothing that passed before. A booking module for a Wimmera grain haulier might pass eleven tests and fail one, and that failed row is where debugging starts."
+        "body": "Alpha testing goes on throughout development, in a development or testing environment, and is done by high-level users, independent testers or the developers themselves. Of every module, and then of the whole solution, it asks whether each requirement is met and whether it works as expected. It comes before beta testing, when intended users try the nearly finished solution.\n\nDebugging happens as code is written, often after a failed test: find the error, fix it, then test again to confirm that the fix worked and broke nothing that passed before. An order module for a Bairnsdale landscape supplies yard might pass eleven tests and fail one, and that failed row is where debugging starts."
       },
       {
         "heading": "Relevant test data",
-        "body": "Test data is relevant when each value has a purpose taken from the requirements. For a haulage booking that accepts 1 to 30 tonnes, the data should include:\n\n- a typical valid value, such as 12\n- each limit and the value just past it: 0, 1, 30 and 31\n- invalid entries the validation must reject, such as a blank or `ten`\n- every combination of conditions, where two rules interact\n\nTest every requirement, beyond the calculations: the solution should also reject bad input with a message instead of crashing, and read and write its files correctly. Work out each expected result from the requirements before running the test."
+        "body": "Test data is relevant when each value has a purpose taken from the requirements. For a gravel delivery booking that accepts 1 to 30 tonnes, the data should include:\n\n- a typical valid value, such as 12\n- each limit and the value just past it: 0, 1, 30 and 31\n- invalid entries the validation must reject, such as a blank or `ten`\n- every combination of conditions, where two rules interact\n\nTest every requirement, beyond the calculations: the solution should also reject bad input with a message instead of crashing, and read and write its files correctly. Work out each expected result from the requirements before running the test."
       },
       {
         "heading": "Testing tables",
@@ -296,13 +292,13 @@
       },
       {
         "heading": "Commenting out code",
-        "body": "Commenting out turns lines of code into comments, so they stop running but stay in the file. It narrows down where a fault is. If the haulage program has crashed at the end of every day since three new lines were added, commenting all three out and then restoring them one at a time shows which line causes the crash.\n\nCommenting out fixes nothing by itself: it lets the developer examine and adjust that code and keep debugging. Any lines still needed are restored, and the tests are run again."
+        "body": "Commenting out turns lines of code into comments, so they stop running but stay in the file. It narrows down where a fault is. If the yard's program has crashed at the end of every day since three new lines were added, commenting all three out and then restoring them one at a time shows which line causes the crash.\n\nCommenting out fixes nothing by itself: it lets the developer examine and adjust that code and keep debugging. Any lines still needed are restored, and the tests are run again."
       }
     ],
     "worked": {
       "commandTerm": "explain",
       "marks": 4,
-      "prompt": "Ivy is alpha testing the fee module for a mini golf course in Inverloch. Players under 12 pay $8 and everyone else pays $12, and the module displays a message such as `Fee: $8.00`. Her testing table so far is shown.\n\n| Test | Age | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 30 | Fee: $12.00 | Fee: $12.00 |\n| 2 | 45 | Fee: $12.00 | Fee: $12.00 |\n| 3 | 7 | $8 | $8 |\n\nExplain two weaknesses in Ivy's testing table, and describe how Ivy should address each one.",
+      "prompt": "Ivy is alpha testing the fee module for Sandpiper Creek Mini Golf in Inverloch. Players under 12 pay $8 and everyone else pays $12, and the module displays a message such as `Fee: $8.00`. Her testing table so far is shown.\n\n| Test | Age | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 30 | Fee: $12.00 | Fee: $12.00 |\n| 2 | 45 | Fee: $12.00 | Fee: $12.00 |\n| 3 | 7 | $8 | $8 |\n\nExplain two weaknesses in Ivy's testing table, and describe how Ivy should address each one.",
       "points": [
         {
           "text": "Weakness: tests 1 and 2 repeat the same scenario, an adult well inside the $12 band, so test 2 checks nothing new",
@@ -350,7 +346,7 @@
       },
       {
         "heading": "Test scenarios",
-        "body": "A scenario is a realistic job, stated as a goal in the user's own words, that a tester completes with the solution. The strategy should focus on the solution's core features, so each scenario exercises one of them.\n\nRedgum Flat Orchard Co-op near Shepparton is getting an app that lets pickers log each bin they fill. A good scenario: *You have just filled a bin of Packham pears in Block 7. Record it.* A poor one: *Tap Log bin, choose Block 7, tap Packham, tap Save.* The second lists the buttons to press, so it only shows that a tester can follow instructions, not whether pickers could find their own way."
+        "body": "A scenario is a realistic job, stated as a goal in the user's own words, that a tester completes with the solution. The strategy should focus on the solution's core features, so each scenario exercises one of them.\n\nSpotted Quail Vineyard near Heathcote is getting an app that lets pickers log each bin they fill. A good scenario: *You have just filled a bin of shiraz grapes in Block 7. Record it.* A poor one: *Tap Log bin, choose Block 7, tap Shiraz, tap Save.* The second lists the buttons to press, so it only shows that a tester can follow instructions, not whether pickers could find their own way."
       },
       {
         "heading": "Observation",
@@ -364,7 +360,7 @@
     "worked": {
       "commandTerm": "recommend",
       "marks": 4,
-      "prompt": "Stingray Point Couriers in Geelong is having an app built so that its drivers can record each delivery and collect the receiver's signature on a company phone. Alpha testing is finished. The developer, Hamish, has drafted this beta testing plan:\n\n1. **Testers:** three office staff who helped write the requirements, testing on office desktop computers.\n2. **Scenario:** 'Open Deliveries, tap the first job, tap Signature, sign, then tap Done.'\n3. **Results:** at the end of the session, each tester gives the app a score out of 10.\n\nRecommend **two** improvements to Hamish's plan. For each, explain the weakness it fixes.",
+      "prompt": "Stingray Point Appliances, a Gippsland whitegoods chain, is having an app built so that its delivery drivers can record each delivery and collect the receiver's signature on a company phone. Alpha testing is finished. The developer, Hamish, has drafted this beta testing plan:\n\n1. **Testers:** three office staff who helped write the requirements, testing on office desktop computers.\n2. **Scenario:** 'Open Deliveries, tap the first job, tap Signature, sign, then tap Done.'\n3. **Results:** at the end of the session, each tester gives the app a score out of 10.\n\nRecommend **two** improvements to Hamish's plan. For each, explain the weakness it fixes.",
       "points": [
         {
           "text": "Improvement (testers): choose several drivers who will use the app, covering a range of experience and confidence with phones, testing on company phones during a normal run",
@@ -375,7 +371,7 @@
           "marks": 1
         },
         {
-          "text": "Improvement (scenario): state a goal in the driver's terms, e.g. 'Deliver the parcel at your next stop and get it signed for'",
+          "text": "Improvement (scenario): state a goal in the driver's terms, e.g. 'Deliver the fridge at your next stop and get it signed for'",
           "marks": 1
         },
         {
@@ -406,25 +402,25 @@
     "sections": [
       {
         "heading": "A plan, written before the judgement",
-        "body": "Keep two activities apart. The evaluation strategy is written first and sets out how the solution will be judged. The evaluation itself comes later, once the solution has been implemented, when the data the strategy planned for is compared with the criteria. Alongside the three features, the PSM expects a strategy to state what data will be collected for each criterion, how it will be collected, and how that data relates to the criterion.\n\nThe order matters because some data can't be gathered after the fact. If a criterion compares delivery times with the old paper system, someone has to time the paper system before it is switched off."
+        "body": "Keep two activities apart. The evaluation strategy is written first and sets out how the solution will be judged. The evaluation itself comes later, once the solution has been implemented, when the data the strategy planned for is compared with the criteria. Alongside the three features, the PSM expects a strategy to state what data will be collected for each criterion, how it will be collected, and how that data relates to the criterion.\n\nThe order matters because some data can't be gathered after the fact. If a criterion compares recording times with the old paper system, someone has to time the paper system before it is switched off."
       },
       {
         "heading": "Evaluation criteria",
-        "body": "The criteria aren't new. You wrote them in Unit 3 during design, used them to choose your preferred design, and may have refined them as the solution developed. The evaluation uses the same criteria to judge the finished solution's efficiency and effectiveness.\n\nA usable criterion can be checked with data. Pelican Wharf Freight in Geelong has given its drivers an app for recording deliveries:\n\n| Criterion | What it measures | Data and method |\n|:--|:--|:--|\n| A delivery is recorded in under 45 seconds on average | Efficiency (time) | The app's log of start and finish times |\n| At least 98% of deliveries have a readable signature | Effectiveness (completeness) | Office staff check a random sample of delivery records |\n\n*The app works well* isn't a usable criterion, because no data could show whether it has been met."
+        "body": "The criteria aren't new. You wrote them in Unit 3 during design, used them to choose your preferred design, and may have refined them as the solution developed. The evaluation uses the same criteria to judge the finished solution's efficiency and effectiveness.\n\nA usable criterion can be checked with data. Mistbrook Pest Control in Torquay has given its technicians an app for recording jobs:\n\n| Criterion | What it measures | Data and method |\n|:--|:--|:--|\n| A job is recorded in under 45 seconds on average | Efficiency (time) | The app's log of start and finish times |\n| At least 98% of jobs have the customer's readable signature | Effectiveness (completeness) | Office staff check a random sample of job records |\n\n*The app works well* isn't a usable criterion, because no data could show whether it has been met."
       },
       {
         "heading": "Time frame",
-        "body": "The time frame says when each piece of data is collected and when results are compared and reported. Leave time for users to settle in first. In the first week most drivers are still learning the app, so their times reflect learning rather than everyday use. A sensible plan for Pelican Wharf might log delivery times in weeks 5 to 8 after launch, check signatures in week 8 and report in week 10.\n\nWatch for busy and quiet periods too. Data from a slow month can make a solution look better or worse than it is under its real workload."
+        "body": "The time frame says when each piece of data is collected and when results are compared and reported. Leave time for users to settle in first. In the first week most technicians are still learning the app, so their times reflect learning rather than everyday use. A sensible plan for Mistbrook might log recording times in weeks 5 to 8 after launch, check signatures in week 8 and report in week 10.\n\nWatch for busy and quiet periods too. Data from a slow month can make a solution look better or worse than it is under its real workload."
       },
       {
         "heading": "Responsibility",
-        "body": "Responsibility names who does each job: who exports the log, who checks the sample of signatures, who provides data (drivers answering a survey, say), and who compares the results with the criteria and writes the report. A named person is accountable, so the evaluation actually happens instead of drifting.\n\nEvaluation happens weeks after launch, when the project team may have moved on. If the developer's contract ends at handover, a strategy that leaves the log export to the developer has nobody to do it. Name people who will still be there, such as the depot manager."
+        "body": "Responsibility names who does each job: who exports the log, who checks the sample of signatures, who provides data (technicians answering a survey, say), and who compares the results with the criteria and writes the report. A named person is accountable, so the evaluation actually happens instead of drifting.\n\nEvaluation happens weeks after launch, when the project team may have moved on. If the developer's contract ends at handover, a strategy that leaves the log export to the developer has nobody to do it. Name people who will still be there, such as the office manager."
       }
     ],
     "worked": {
       "commandTerm": "explain",
       "marks": 3,
-      "prompt": "Wombat Hollow Nursery in Daylesford is replacing its paper order book with a stock and ordering program, which goes live on 1 September. The program is being built by Tallis, an external developer whose contract ends on that day. Tallis has drafted this evaluation strategy:\n\n| Feature | Draft |\n|:--|:--|\n| Evaluation criterion | The program makes ordering easier. |\n| Time frame | Some time after the program goes live. |\n| Responsibility | Tallis. |\n\nExplain one problem with each feature of the draft.",
+      "prompt": "Corkbark Nursery in Daylesford is replacing its paper order book with a stock and ordering program, which goes live on 1 September. The program is being built by Tallis, an external developer whose contract ends on that day. Tallis has drafted this evaluation strategy:\n\n| Feature | Draft |\n|:--|:--|\n| Evaluation criterion | The program makes ordering easier. |\n| Time frame | Some time after the program goes live. |\n| Responsibility | Tallis. |\n\nExplain one problem with each feature of the draft.",
       "points": [
         {
           "text": "Criterion: 'makes ordering easier' can't be measured, so no data could show whether it has been met; it needs a target, e.g. staff place a supplier order in under three minutes on average",
@@ -468,7 +464,7 @@
     "worked": {
       "commandTerm": "describe",
       "marks": 3,
-      "prompt": "Bluewren Orchard Co-op near Shepparton has a new app in which pickers scan a tag on each bin they fill, and each picker's weekly pay is based on the bins the app credits to them. Separately, when each bin is weighed at the weighbridge, its tag and the number of the picker who filled it are written on a docket. One evaluation criterion is: *Every bin a picker fills is credited to that picker's weekly tally.*\n\nDescribe how the co-op could apply this criterion. Refer to the data to be collected, how it would be collected, and how the co-op would decide whether the criterion is met.",
+      "prompt": "Butcherbird Hill Vineyard near Nagambie has a new app in which pickers scan a tag on each bin of grapes they fill, and each picker's weekly pay is based on the bins the app credits to them. Separately, when each bin is weighed at the weighbridge, its tag and the number of the picker who filled it are written on a docket. One evaluation criterion is: *Every bin a picker fills is credited to that picker's weekly tally.*\n\nDescribe how the vineyard could apply this criterion. Refer to the data to be collected, how it would be collected, and how the vineyard would decide whether the criterion is met.",
       "points": [
         {
           "text": "Data: each sampled picker's weekly tally from the app, compared bin by bin with the weighbridge dockets for the same week, counting bins that are missing or credited to the wrong picker",
@@ -483,7 +479,7 @@
           "marks": 1
         }
       ],
-      "model": "The co-op should compare two records of the same bins. For each sampled picker, the office manager would take the weekly tally from the app and check it bin by bin against the weighbridge dockets for that week, counting any bin on a docket that is missing from the tally or credited to a different picker.\n\nThe sample should be chosen at random, for example 20 pickers, from normal harvest weeks once pickers are used to scanning, such as weeks 4 to 6, so the result stands for everyday use rather than the first days of learning.\n\nBecause the criterion says *every* bin, it is met only if no missing or wrongly credited bins are found. The report would state the figures, for example '0 errors in 1460 bins checked: met' or '7 of 1460 bins missing: not met'. The criterion is about accuracy and completeness, so the result shows how effective the app is, which matters because pickers' pay depends on it."
+      "model": "The vineyard should compare two records of the same bins. For each sampled picker, the office manager would take the weekly tally from the app and check it bin by bin against the weighbridge dockets for that week, counting any bin on a docket that is missing from the tally or credited to a different picker.\n\nThe sample should be chosen at random, for example 20 pickers, from normal harvest weeks once pickers are used to scanning, such as weeks 4 to 6, so the result stands for everyday use rather than the first days of learning.\n\nBecause the criterion says *every* bin, it is met only if no missing or wrongly credited bins are found. The report would state the figures, for example '0 errors in 1460 bins checked: met' or '7 of 1460 bins missing: not met'. The criterion is about accuracy and completeness, so the result shows how effective the app is, which matters because pickers' pay depends on it."
     },
     "source": "study-design"
   },
@@ -623,7 +619,7 @@
     "worked": {
       "commandTerm": "explain",
       "marks": 3,
-      "prompt": "Ana built an online ordering program for Saltbush Plains Seed Co-op in the Wimmera. In her assessment of the project plan she wrote: *'My plan was effective, because I only had to make four changes.'* Her change record is below.\n\n| Change made | Reason | Impact on completion |\n|:--|:--|:--|\n| Task added: import three years of past orders (4 days) | Left out of the plan | Go-live moved 4 days |\n| *Beta testing* moved 2 days later | Ana was ill | Go-live moved 2 days |\n| Task added: set up the receipt printer (2 days) | Left out of the plan | Go-live moved 2 days |\n| *Code reports* extended 3 days | The co-op sent its report layouts late | None: the task had 5 days spare |\n\nExplain why Ana's change record doesn't support her assessment.",
+      "prompt": "Ana built an online ordering program for Red Ochre Hardware in Stawell. In her assessment of the project plan she wrote: *'My plan was effective, because I only had to make four changes.'* Her change record is below.\n\n| Change made | Reason | Impact on completion |\n|:--|:--|:--|\n| Task added: import three years of past orders (4 days) | Left out of the plan | Go-live moved 4 days |\n| *Beta testing* moved 2 days later | Ana was ill | Go-live moved 2 days |\n| Task added: set up the receipt printer (2 days) | Left out of the plan | Go-live moved 2 days |\n| *Code reports* extended 3 days | The store sent its report layouts late | None: the task had 5 days spare |\n\nExplain why Ana's change record doesn't support her assessment.",
       "points": [
         {
           "text": "The count alone doesn't show the plan was effective; the reasons matter. Two of the four changes were tasks left out of the plan (importing past orders, setting up the printer), which could have been foreseen, so the plan was incomplete",
@@ -638,7 +634,7 @@
           "marks": 1
         }
       ],
-      "model": "Counting changes isn't enough on its own; Ana has to look at why they happened and what they did. Two of her four changes were tasks the plan left out: importing three years of past orders and setting up the receipt printer. Both could have been foreseen at the start, so they show the plan was incomplete.\n\nThe other two changes had causes the plan couldn't control. Ana's illness and the co-op's late report layouts say little about the quality of the plan.\n\nThe impact column tells the rest. The changes moved go-live by 8 days in total, and 6 of those days came from the two missing tasks. The late layouts moved nothing, because *Code reports* had 5 days spare. So the plan was only partly effective, because most of the delay came from tasks it should have included. Her next plan should include data import and equipment set-up from the start."
+      "model": "Counting changes isn't enough on its own; Ana has to look at why they happened and what they did. Two of her four changes were tasks the plan left out: importing three years of past orders and setting up the receipt printer. Both could have been foreseen at the start, so they show the plan was incomplete.\n\nThe other two changes had causes the plan couldn't control. Ana's illness and the store's late report layouts say little about the quality of the plan.\n\nThe impact column tells the rest. The changes moved go-live by 8 days in total, and 6 of those days came from the two missing tasks. The late layouts moved nothing, because *Code reports* had 5 days spare. So the plan was only partly effective, because most of the delay came from tasks it should have included. Her next plan should include data import and equipment set-up from the start."
     },
     "traps": [
       "The 2025 case study showed log entries that said only that a task ran a week over or finished early. Just 9% earned full marks. Credit went for explaining that entries this thin make it harder for staff to monitor and review the effect on the plan, and for improvements that match this point's techniques: tracking how many changes are made, giving the reason for each, and stating its impact on later tasks, the critical path and the completion date."
