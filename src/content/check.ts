@@ -10,6 +10,8 @@ import {
   CardsFileSchema,
   CaseStudySchema,
   FLOORS,
+  LESSON_MAX_WORDS,
+  LessonsFileSchema,
   McqFileSchema,
   PsmFileSchema,
   ShortFileSchema,
@@ -21,6 +23,7 @@ import {
   type Card,
   type CaseStudy,
   type KkId,
+  type Lesson,
   type Mcq,
   type PsmFile,
   type ShortAnswer,
@@ -29,7 +32,7 @@ import {
 
 export interface RawContent {
   studyDesign: unknown;
-  areas: Record<AreaId, { cards?: unknown; mcq?: unknown; short?: unknown }>;
+  areas: Record<AreaId, { cards?: unknown; mcq?: unknown; short?: unknown; lessons?: unknown }>;
   terms?: unknown;
   psm?: unknown;
   caseStudies: { file: string; data: unknown }[];
@@ -44,7 +47,7 @@ export interface CheckReport {
   floorErrors: string[];
   warnings: string[];
   counts: Map<KkId, { cards: number; mcq: number; short: number }>;
-  totals: { cards: number; mcq: number; short: number; caseStudies: number; terms: number };
+  totals: { cards: number; mcq: number; short: number; caseStudies: number; terms: number; lessons: number };
 }
 
 function describeIssues(file: string, error: z.ZodError): string[] {
@@ -73,13 +76,27 @@ function textFields(item: Card | Mcq | ShortAnswer): string[] {
   return [item.prompt, item.model, item.mistake ?? '', ...item.points.map((p) => p.text)];
 }
 
+/** Words of prose in a lesson's text, leaving out fenced code. */
+export function proseWords(text: string): number {
+  return text.replace(/```[\s\S]*?```/g, ' ').split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length;
+}
+
+function lessonTexts(l: Lesson): string[] {
+  return [
+    l.intro,
+    ...l.sections.flatMap((s) => [s.heading, s.body]),
+    ...(l.traps ?? []),
+    ...(l.worked ? [l.worked.prompt, l.worked.model, ...l.worked.points.map((p) => p.text)] : []),
+  ];
+}
+
 export function checkContent(raw: RawContent): CheckReport {
   const errors: string[] = [];
   const floorErrors: string[] = [];
   const warnings: string[] = [];
 
   for (const e of raw.parseErrors ?? []) errors.push(e);
-  for (const f of raw.unknownFiles ?? []) errors.push(`${f}: not a recognised content file (nothing loads it). Expected cards.json, mcq.json, short.json, terms.json, psm.json or case-studies/cs-NN.json`);
+  for (const f of raw.unknownFiles ?? []) errors.push(`${f}: not a recognised content file (nothing loads it). Expected cards.json, mcq.json, short.json, lessons.json, terms.json, psm.json or case-studies/cs-NN.json`);
 
   const sdParsed = StudyDesignSchema.safeParse(raw.studyDesign);
   if (!sdParsed.success) {
@@ -91,6 +108,7 @@ export function checkContent(raw: RawContent): CheckReport {
   const cards: { file: string; item: Card }[] = [];
   const mcqs: { file: string; item: Mcq }[] = [];
   const shorts: { file: string; item: ShortAnswer }[] = [];
+  const lessons: { file: string; area: AreaId; lesson: Lesson }[] = [];
 
   const parse = <T>(file: string, schema: z.ZodType<T>, data: unknown, required: boolean): T | null => {
     if (data === undefined) {
@@ -111,6 +129,7 @@ export function checkContent(raw: RawContent): CheckReport {
     parse(`${dir}/cards.json`, CardsFileSchema, a.cards, false)?.forEach((item) => cards.push({ file: `${dir}/cards.json`, item }));
     parse(`${dir}/mcq.json`, McqFileSchema, a.mcq, false)?.forEach((item) => mcqs.push({ file: `${dir}/mcq.json`, item }));
     parse(`${dir}/short.json`, ShortFileSchema, a.short, false)?.forEach((item) => shorts.push({ file: `${dir}/short.json`, item }));
+    parse(`${dir}/lessons.json`, LessonsFileSchema, a.lessons, false)?.forEach((lesson) => lessons.push({ file: `${dir}/lessons.json`, area, lesson }));
   }
   const terms = parse('content/terms.json', TermsFileSchema, raw.terms, false) ?? [];
   terms.forEach((item) => cards.push({ file: 'content/terms.json', item }));
@@ -218,6 +237,26 @@ export function checkContent(raw: RawContent): CheckReport {
     if (glossary.length && !glossaryKeys.has(norm(t.front))) errors.push(`content/terms.json: ${t.id} ("${t.front}") is not in the glossary list in study-design.json`);
   }
 
+  // Lessons: one per key knowledge point, in its area's file, named for it; prose kept short.
+  const lessonFor = new Map<string, string>();
+  for (const { file, area, lesson: l } of lessons) {
+    claim(l.id, file);
+    if (!knownKks.has(l.kk) || l.kk === 'TERMS' || l.kk === 'PSM') errors.push(`${file}: ${l.id} is for ${l.kk}, which isn't one of the 52 key knowledge points`);
+    else if (l.kk.slice(0, 4) !== area) errors.push(`${file}: ${l.id} is for ${l.kk}, so it belongs in content/${l.kk.slice(0, 4).toLowerCase()}/lessons.json`);
+    if (l.id !== `l-${l.kk.toLowerCase()}`) errors.push(`${file}: ${l.id} should be named l-${l.kk.toLowerCase()}`);
+    const prev = lessonFor.get(l.kk);
+    if (prev) errors.push(`${file}: ${l.id} is a second lesson for ${l.kk} (also ${prev})`);
+    else lessonFor.set(l.kk, l.id);
+    const texts = lessonTexts(l);
+    if (texts.some(containsRawHtml)) errors.push(`${file}: ${l.id} contains raw HTML`);
+    if (texts.some((t) => /\{\{[^{}]+\}\}/.test(t))) errors.push(`${file}: ${l.id} contains a cloze gap; lessons are read, not tested`);
+    const words = [l.intro, ...l.sections.map((s) => s.body)].reduce((n, t) => n + proseWords(t), 0);
+    if (words > LESSON_MAX_WORDS) errors.push(`${file}: ${l.id} has ${words} words of prose in its intro and sections (at most ${LESSON_MAX_WORDS})`);
+    if (l.worked && !isCommandTerm(l.worked.commandTerm)) errors.push(`${file}: ${l.id}'s worked example uses unknown command term "${l.worked.commandTerm}"`);
+    const headings = l.sections.map((s) => s.heading.trim().toLowerCase());
+    if (new Set(headings).size !== headings.length) errors.push(`${file}: ${l.id} repeats a section heading`);
+  }
+
   // Counts per KK (standalone items only; generated items never count).
   const counts = new Map<KkId, { cards: number; mcq: number; short: number }>();
   for (const id of knownKks) counts.set(id as KkId, { cards: 0, mcq: 0, short: 0 });
@@ -258,6 +297,6 @@ export function checkContent(raw: RawContent): CheckReport {
     floorErrors,
     warnings,
     counts,
-    totals: { cards: cards.length, mcq: mcqs.length, short: shorts.length, caseStudies: caseStudies.length, terms: terms.length },
+    totals: { cards: cards.length, mcq: mcqs.length, short: shorts.length, caseStudies: caseStudies.length, terms: terms.length, lessons: lessons.length },
   };
 }

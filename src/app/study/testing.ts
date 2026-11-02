@@ -4,7 +4,8 @@
  * only.
  */
 import { buildIndex, type AreaContent, type ContentIndex } from '../../content/loader';
-import type { Card, CaseStudy, KkId, Mcq, PsmFile, ShortAnswer } from '../../content/schema';
+import { useLessonStore } from '../../content/lessons';
+import type { Card, CaseStudy, KkId, Lesson, Mcq, PsmFile, ShortAnswer } from '../../content/schema';
 import { useContent } from '../../content/store';
 import { useAttempts } from '../../state/attempts';
 import { useLearn } from '../../state/learn';
@@ -92,6 +93,11 @@ export function provideContent(index: ContentIndex): ContentIndex {
   return index;
 }
 
+/** Sets the authored lessons a test sees (none by default, so pages show their notes). */
+export function provideLessons(lessons: readonly Lesson[]): void {
+  useLessonStore.setState({ lessons: new Map(lessons.map((l) => [l.kk, l])), status: 'ready' });
+}
+
 const originalLoad = useContent.getState().load;
 
 export function resetStudyStores(): void {
@@ -99,6 +105,7 @@ export function resetStudyStores(): void {
   useSrs.getState().reset();
   useAttempts.getState().reset();
   useLearn.getState().reset();
+  provideLessons([]);
   useSession.getState().reset();
   useSettings.getState().reset();
   useReportDialog.setState({ request: null });

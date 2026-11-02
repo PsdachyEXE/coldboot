@@ -172,3 +172,71 @@
   margin-left: auto;
   text-align: right;
 }
+
+/* An authored lesson ------------------------------------------------------ */
+
+/* "Lesson" beside a topic in the index: a point with a written lesson rather than study notes. */
+.lessonTag {
+  display: inline-block;
+  margin-right: var(--space-2);
+  padding: 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--phosphor);
+  border: 1px solid var(--phosphor);
+  border-radius: var(--radius-control);
+}
+
+.intro p {
+  margin: 0;
+}
+
+.lessonSection {
+  margin-top: var(--space-5);
+}
+
+/* The worked example: the question set apart as the exam would show it, then the answer and its marking. */
+.worked {
+  max-width: var(--block-max);
+  padding: var(--space-4);
+  background: var(--trench);
+  border: var(--hairline);
+}
+.worked > :last-child {
+  margin-bottom: 0;
+}
+.workedMeta {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--phosphor);
+}
+
+.model {
+  max-width: var(--block-max);
+  padding: var(--space-1) 0 var(--space-1) var(--space-4);
+  border-left: 4px solid var(--phosphor);
+}
+
+.marking {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+.marking li + li {
+  margin-top: var(--space-2);
+}
+.pointMarks {
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--steel);
+  white-space: nowrap;
+}
+
+/* The flashcards, folded under a lesson so nothing the notes page showed is lost. */
+.more > summary {
+  display: list-item;
+  padding: var(--space-3) 0;
+  cursor: pointer;
+  width: fit-content;
+  color: var(--phosphor);
+}

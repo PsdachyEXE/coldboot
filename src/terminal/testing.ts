@@ -1,5 +1,6 @@
 /** Test helpers for the terminal: store resets, printed text and a fake game. Imported by tests only. */
 import { vi } from 'vitest';
+import { useLessonStore } from '../content/lessons';
 import { useContent } from '../content/store';
 import { createQuizSession } from '../games/engine';
 import type { GameMeta, QuizItem } from '../games/types';
@@ -22,6 +23,7 @@ export function resetStores(): void {
   useSettings.getState().reset();
   useSrs.getState().reset();
   useLearn.getState().reset();
+  useLessonStore.setState({ lessons: new Map(), status: 'ready' });
   useContent.setState({ index: null, status: 'idle', error: null });
   useTerminal.setState({ open: false, pending: null, lastGameEnd: null });
   useReportDialog.setState({ request: null });

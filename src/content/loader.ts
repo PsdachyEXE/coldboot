@@ -48,7 +48,7 @@ export interface ContentIndex {
   cardIds: ReadonlySet<string>;
 }
 
-const outcomeFiles = import.meta.glob<unknown>('../../content/u[34]o[12]/*.json', { import: 'default' });
+const outcomeFiles = import.meta.glob<unknown>('../../content/u[34]o[12]/{cards,mcq,short}.json', { import: 'default' });
 const termsFile = import.meta.glob<unknown>('../../content/terms.json', { import: 'default' });
 const psmFile = import.meta.glob<unknown>('../../content/psm.json', { import: 'default' });
 const caseStudyFiles = import.meta.glob<unknown>('../../content/case-studies/*.json', { import: 'default' });

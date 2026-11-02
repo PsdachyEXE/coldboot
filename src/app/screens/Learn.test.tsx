@@ -1,12 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { buildIndex, type AreaContent } from '../../content/loader';
-import type { Card, PsmFile } from '../../content/schema';
+import { useLessonStore } from '../../content/lessons';
+import type { Card, Lesson, PsmFile } from '../../content/schema';
 import { useLearn } from '../../state/learn';
 import { recordAttempt } from '../../state/record';
 import { useTerminal } from '../../terminal/useTerminal';
-import { fxCard, fxMcq, fxShort, provideContent, resetStudyStores } from '../study/testing';
+import { fxCard, fxMcq, fxShort, provideContent, provideLessons, resetStudyStores } from '../study/testing';
 import Learn from './Learn';
 
 const NOW = new Date(2026, 10, 2, 18, 0).getTime();
@@ -149,5 +150,78 @@ describe('Learn', () => {
     renderAt('/learn?kk=U3O1-KK99');
     expect(screen.getByRole('heading', { name: "That topic isn't in the study design" })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'See every topic' })).toHaveAttribute('href', '/learn');
+  });
+
+  describe('with an authored lesson', () => {
+    const lesson: Lesson = {
+      id: 'l-u3o1-kk04',
+      kk: 'U3O1-KK04',
+      intro: 'Every value a program keeps has a **type**.',
+      sections: [
+        { heading: 'Text', body: 'A character holds one symbol; a string holds many.' },
+        { heading: 'Numbers', body: 'An integer has no fractional part.\n\n```pseudo\ntotal ← 0\n```' },
+        { heading: 'True or false', body: 'A Boolean suits a yes-or-no field.' },
+      ],
+      worked: {
+        commandTerm: 'explain',
+        marks: 2,
+        prompt: 'Explain why a Wodonga clinic stores phone numbers as strings.',
+        points: [
+          { text: 'Keeps the leading zero', marks: 1 },
+          { text: 'No arithmetic is done on them', marks: 1 },
+        ],
+        model: 'A string keeps the leading zero, and nobody adds phone numbers.',
+      },
+      traps: ['Many answers named a type without saying why it suited the data.'],
+      source: 'study-design',
+    };
+
+    it('shows the lesson, its worked example and what the examiners saw, with the flashcards folded away', () => {
+      provideLessons([lesson]);
+      renderAt('/learn?kk=U3O1-KK04');
+      const ideas = screen.getByRole('region', { name: 'The ideas' });
+      expect(within(ideas).getByText('type')).toBeInTheDocument();
+      expect(within(ideas).getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual(['Text', 'Numbers', 'True or false']);
+      const worked = screen.getByRole('region', { name: 'Worked example' });
+      expect(within(worked).getByText('Explain, 2 marks')).toBeInTheDocument();
+      expect(within(worked).getByText(/Wodonga clinic/)).toBeInTheDocument();
+      expect(within(worked).getByRole('heading', { name: 'Model answer' })).toBeInTheDocument();
+      expect(within(worked).getByText('Keeps the leading zero')).toBeInTheDocument();
+      expect(screen.getByRole('region', { name: 'What the examiners saw' })).toHaveTextContent('Many answers named a type');
+      // The cards' own mistakes and the official terms stay; the flashcards fold into a disclosure.
+      expect(screen.getByRole('region', { name: 'Common mistakes' })).toBeInTheDocument();
+      expect(screen.getByRole('region', { name: 'Terms used in this study' })).toBeInTheDocument();
+      expect(screen.getByText('Show 4 flashcards on this topic as notes')).toBeInTheDocument();
+      expect(screen.queryByRole('region', { name: 'Definitions' })).toBeNull();
+      expect(screen.getByText(/A COLDBOOT lesson/)).toBeInTheDocument();
+      expect(screen.queryByText(/SECRET/)).toBeNull();
+    });
+
+    it('labels topics with a lesson in the index', () => {
+      provideLessons([lesson]);
+      renderAt('/learn');
+      expect(screen.getByText(/1 topic has a written lesson/)).toBeInTheDocument();
+      const row = screen.getByRole('link', { name: /U3O1-KK04/ }).closest('li')!;
+      expect(within(row).getByText('Lesson')).toBeInTheDocument();
+      expect(within(screen.getByRole('link', { name: /U3O1-KK05/ }).closest('li')!).queryByText('Lesson')).toBeNull();
+    });
+
+    it('waits for the lessons rather than showing the notes first, and only then offers Practise', () => {
+      useLessonStore.setState({ lessons: new Map(), status: 'loading' });
+      renderAt('/learn?kk=U3O1-KK04');
+      expect(screen.getByRole('status')).toHaveTextContent('Loading the lesson.');
+      expect(screen.queryByRole('region', { name: 'Definitions' })).toBeNull();
+      expect(screen.queryByRole('heading', { name: 'Practise' })).toBeNull();
+      act(() => provideLessons([lesson]));
+      expect(screen.getByRole('region', { name: 'The ideas' })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Practise' })).toBeInTheDocument();
+    });
+
+    it('falls back to the notes when the lessons cannot be loaded', () => {
+      useLessonStore.setState({ lessons: new Map(), status: 'error' });
+      renderAt('/learn?kk=U3O1-KK04');
+      expect(screen.getByRole('region', { name: 'Definitions' })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Practise' })).toBeInTheDocument();
+    });
   });
 });

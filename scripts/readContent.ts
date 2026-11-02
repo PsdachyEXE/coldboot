@@ -4,7 +4,7 @@ import { relative, resolve, sep } from 'node:path';
 import { AREA_IDS, type AreaId } from '../src/content/schema';
 import type { RawContent } from '../src/content/check';
 
-const KNOWN_AREA_FILES = new Set(['cards.json', 'mcq.json', 'short.json']);
+const KNOWN_AREA_FILES = new Set(['cards.json', 'mcq.json', 'short.json', 'lessons.json']);
 
 export function readContentDir(root = resolve(import.meta.dirname, '..')): RawContent {
   const content = resolve(root, 'content');
@@ -27,6 +27,7 @@ export function readContentDir(root = resolve(import.meta.dirname, '..')): RawCo
       cards: readIf(resolve(dir, 'cards.json')),
       mcq: readIf(resolve(dir, 'mcq.json')),
       short: readIf(resolve(dir, 'short.json')),
+      lessons: readIf(resolve(dir, 'lessons.json')),
     };
     if (existsSync(dir)) {
       for (const f of readdirSync(dir)) if (!KNOWN_AREA_FILES.has(f) && f !== '.gitkeep') unknownFiles.push(rel(resolve(dir, f)));

@@ -666,6 +666,58 @@ export type PsmFile = z.infer<typeof PsmFileSchema>;
 export type PsmStageId = (typeof PSM_STAGE_IDS)[number];
 
 /** Per-outcome files: content/<area>/cards.json, mcq.json, short.json (plain arrays). */
+// ---------------------------------------------------------------------------
+// Lessons (docs/LEARN.md, Phase C): one authored reading page per key knowledge point, in
+// content/<area>/lessons.json. Never a test item: the worked example is the lesson's own.
+// ---------------------------------------------------------------------------
+
+/** A lesson's prose (intro and section bodies) stays under this many words, code excluded. */
+export const LESSON_MAX_WORDS = 850;
+
+export const LessonSectionSchema = z
+  .object({
+    heading: z.string().trim().min(3).max(90),
+    body: Text,
+    /** At most two figures, drawn by the existing renderers. */
+    figures: z.array(FigureSchema).min(1).max(2).optional(),
+  })
+  .strict();
+
+export const WorkedExampleSchema = z
+  .object({
+    /** Lowercase VCAA command term, as for short answers. */
+    commandTerm: z.string().regex(/^[a-z]+( [a-z]+)?$/),
+    marks: z.number().int().min(1).max(6),
+    prompt: Text,
+    points: z.array(MarkingPointSchema).min(1).max(8),
+    model: Text,
+  })
+  .strict()
+  .superRefine((w, ctx) => {
+    const available = w.points.reduce((sum, p) => sum + p.marks, 0);
+    if (available < w.marks) ctx.addIssue({ code: 'custom', message: `Marking points total ${available}, below the ${w.marks} marks available`, path: ['points'] });
+  });
+
+export const LessonSchema = z
+  .object({
+    /** `l-u3o1-kk04`, named for its key knowledge point. */
+    id: z.string().regex(/^l-u[34]o[12]-kk\d{2}$/),
+    kk: KkIdSchema,
+    /** Two or three sentences: what the point covers and why the exam cares. */
+    intro: Text,
+    sections: z.array(LessonSectionSchema).min(3).max(6),
+    worked: WorkedExampleSchema.optional(),
+    /** Paraphrased from the 2025 examiners' report. */
+    traps: z.array(Text).min(1).max(4).optional(),
+    source: SourceSchema,
+  })
+  .strict();
+export type Lesson = z.infer<typeof LessonSchema>;
+export type LessonSection = z.infer<typeof LessonSectionSchema>;
+export type WorkedExample = z.infer<typeof WorkedExampleSchema>;
+
+export const LessonsFileSchema = z.array(LessonSchema);
+
 export const CardsFileSchema = z.array(CardSchema);
 export const McqFileSchema = z.array(McqSchema);
 export const ShortFileSchema = z.array(ShortAnswerSchema);

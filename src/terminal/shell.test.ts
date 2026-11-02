@@ -8,6 +8,7 @@ import { GAMES } from '../games/registry';
 import type { GameMeta, GameSession } from '../games/types';
 import { fromSortInstance } from '../games/sort/items';
 import { useAttempts } from '../state/attempts';
+import { useLessonStore } from '../content/lessons';
 import { useLearn } from '../state/learn';
 import { HISTORY_ENTRY_MAX, useSession } from '../state/session';
 import { useSettings } from '../state/settings';
@@ -578,6 +579,31 @@ describe('learn', () => {
     expect(printed()).toContain('For example:');
     expect(term().entries.some(({ block: b }) => b.kind === 'link' && b.to === '/learn?kk=U3O1-KK04')).toBe(true);
     expect(useLearn.getState().read['U3O1-KK04']).toBeUndefined();
+  });
+
+  it("leads with a written lesson's intro and the examiners' traps when the topic has one", async () => {
+    withTerms();
+    useLessonStore.setState({
+      status: 'ready',
+      lessons: new Map([
+        [
+          'U3O1-KK04',
+          {
+            id: 'l-u3o1-kk04',
+            kk: 'U3O1-KK04',
+            intro: 'Every value a program keeps has a type.',
+            sections: [1, 2, 3].map((i) => ({ heading: `Part ${i}`, body: 'Body.' })),
+            traps: ['Answers named a type without saying why it suited the data.'],
+            source: 'study-design',
+          },
+        ],
+      ]),
+    });
+    await submitLine('learn u3o1-kk04', mockEnv());
+    expect(printed()).toContain('Every value a program keeps has a type.');
+    expect(printed()).toContain('What the 2025 examiners saw:');
+    expect(printed()).toContain('Answers named a type');
+    expect(term().entries.some(({ block: b }) => b.kind === 'link' && b.label === 'Read the U3O1-KK04 lesson in Learn')).toBe(true);
   });
 
   it('looks up an official term by name or alias, and suggests the nearest for a typo', async () => {

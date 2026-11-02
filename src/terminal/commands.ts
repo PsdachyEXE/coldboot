@@ -4,6 +4,7 @@
  * in plain `text` blocks, never in Markdown.
  */
 import { AREA_IDS, isKkId, type KkId } from '../content/schema';
+import { useLessonStore } from '../content/lessons';
 import { useContent } from '../content/store';
 import { ALL_KK_IDS, areaById, kkLabel } from '../content/studyDesign';
 import { DRILL_ID } from '../games/drill/meta';
@@ -373,10 +374,15 @@ async function learn(cmd: ParsedCommand): Promise<void> {
   if (isLearnKk(upper)) {
     const notes = assembleNotes(upper, content);
     if (!notes) return;
+    // A written lesson's intro and examiners' traps lead when there is one; the notes fill in otherwise.
+    await useLessonStore.getState().load();
+    const lesson = useLessonStore.getState().lessons.get(upper);
     const blocks: TerminalBlock[] = [say(kkLabel(upper), 'accent'), say(notes.summary)];
+    if (lesson) blocks.push({ kind: 'markdown', text: lesson.intro });
     if (notes.examples.length) blocks.push(say('For example:', 'muted'), { kind: 'list', items: [...notes.examples] });
-    if (notes.traps.length) blocks.push(say('Common mistakes:', 'muted'), { kind: 'markdown', text: notes.traps.slice(0, 3).map((t) => `- ${t}`).join('\n') });
-    blocks.push({ kind: 'link', label: `Read ${upper} in Learn`, to: learnPath({ kk: upper }) });
+    const traps = lesson?.traps?.length ? lesson.traps : notes.traps;
+    if (traps.length) blocks.push(say(lesson?.traps?.length ? 'What the 2025 examiners saw:' : 'Common mistakes:', 'muted'), { kind: 'markdown', text: traps.slice(0, 3).map((t) => `- ${t}`).join('\n') });
+    blocks.push({ kind: 'link', label: lesson ? `Read the ${upper} lesson in Learn` : `Read ${upper} in Learn`, to: learnPath({ kk: upper }) });
     out(...blocks);
     return;
   }

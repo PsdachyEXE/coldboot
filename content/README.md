@@ -57,11 +57,24 @@ Pseudocode follows `docs/PSEUDOCODE.md`. Always state the array index base. No r
 | Card | `content/<area>/cards.json` | `c-u3o1-kk04-001` |
 | MCQ | `content/<area>/mcq.json` | `m-u3o1-kk04-001` |
 | Short answer | `content/<area>/short.json` | `s-u3o1-kk04-001` |
+| Lesson | `content/<area>/lessons.json` | `l-u3o1-kk04` (one per KK) |
 | Glossary card | `content/terms.json` | `t-<term-slug>` |
 | PSM items | `content/psm.json` | `psm-c-001`, `psm-m-001`, `psm-s-001` |
 | Case study | `content/case-studies/cs-01.json` | questions `cs-01-q01` |
 
 The KK part of an id is the item's primary KK (`kk[0]`), and the item lives in that KK's area folder. Ids are permanent once shipped: a dropped id is never reused.
+
+## Lessons
+
+`content/<area>/lessons.json` holds the authored lessons Learn shows (docs/LEARN.md): at most one per key knowledge point, id `l-u3o1-kk04`, in that point's area folder. A point without a lesson shows study notes assembled from its cards. A lesson is read, never tested: it doesn't count toward floors, isn't served as a question, and has no cloze gaps.
+
+- `intro`: two or three sentences on what the point covers and why the exam cares.
+- `sections`: three to six, each a short `heading` and a Markdown `body` (the subset below), with at most two `figures`. The intro and section bodies together stay under 850 words, fenced code excluded.
+- `worked` (optional): a Section B style question on its own invented scenario, with `commandTerm`, `marks`, `prompt`, marking `points` and a full-mark `model`, all shown open. It must not resemble a bank short answer or a VCAA exam question.
+- `traps` (optional): one to four observations from the 2025 examiners' report, paraphrased. Leave it out when the report says nothing about the point.
+- `source`: as for items.
+
+Lessons follow every rule above, and two more. They are written only from the VCAA sources, never from memory, and checked against them before they merge. And because they are longer than items, a scan rejects any run of eight words shared with a source (`npx tsx scripts/lesson-check.ts <file>`, which needs the sources in the gitignored `reference/text/`); labels such as key knowledge titles, Act names and official terms are fine. `npx tsx scripts/lesson-merge.ts <file>` merges checked files into the areas.
 
 ## Floors
 
