@@ -1,19 +1,23 @@
 # Learn mode: plan
 
-A place in COLDBOOT that teaches a key knowledge point before the app tests it. Written 1 November 2026, twelve days before the exam, after the 1.1.0 deploy, as the plan to build it, with its phases, estimates and cut lines.
+A place in COLDBOOT that teaches a key knowledge point before the app tests it. Written 1 November 2026, twelve days before the exam, after the 1.1.0 deploy, as the plan to build it, with its phases, estimates and cut lines; the status below records what was built.
 
 ## Status
 
-Phases A and B shipped in 1.2.0 (D-215 to D-217). Phase C, the authored lessons, has not started: it needs the sources fetched again, and every page says it is study notes until then. What was built differs from the plan below in these places:
+All three phases have shipped. Phases A and B came in 1.2.0 (D-215 to D-217). Phase C came in 1.3.0 (D-220): every one of the 52 key knowledge points has an authored lesson, written from the sources and checked against them. The Terms and PSM pages stay assembled from their checked content. What was built differs from the plan below in these places:
 
-- A notes-mode page has no single "The ideas" section. Its flashcards read as three sections, Definitions, Comparisons and Key points, which keeps a definition list apart from prose.
-- "Exam traps" is called "Common mistakes" in notes mode, because those points come from the cards' `mistake` notes rather than the 2025 report. The name can change when authored lessons bring the report's traps.
+- A notes page has no single "The ideas" section. Its flashcards read as three sections, Definitions, Comparisons and Key points. On a lesson page "The ideas" is the lesson itself, and the flashcards and their common mistakes fold into a disclosure under it, because the mistakes repeated the examiners' traps.
+- The examiners' traps are headed "What the examiners saw". Notes pages keep the cards' "Common mistakes".
+- The worked example shows the model answer before the marking points ("How it is marked").
+- All four areas' lessons load together, as their own chunks, the first time a Learn page needs them, rather than one area at a time. The page waits for them rather than showing the notes and swapping.
+- The index marks a point with a lesson by a "Lesson" tag once the lessons have loaded; the build's content summary doesn't record them.
+- Lessons carry no figures yet. Writers used tables and pseudocode instead, and the schema allows up to two figures a section for later.
 - The Terms page groups each term under the area of the first key knowledge point it is tagged with. Terms tagged with no point go last, under "Not tied to one key knowledge point".
-- The index shows mastery and read state as text, not a meter, and its areas don't fold on phones: each row is two short lines.
-- A multiple-choice answer's feedback doesn't link to Learn, because the Drill screen doesn't keep its place and a link would throw the round away. The drill's results table links each point with a wrong answer instead (D-217).
+- The index shows mastery and read state as text, not a meter, and its areas don't fold on phones.
+- A multiple-choice answer's feedback doesn't link to Learn, because the Drill screen doesn't keep its place. The drill's results table links each point with a wrong answer instead (D-217).
 - In the run, "Skip to the drill" sits above the page and "Start the drill" at its end. Skipping doesn't record a read.
 - The read store keeps one time per topic, at most 54 entries, so it is never pruned. Importing a file without it clears it.
-- The content checker has no lesson rules yet; they come with Phase C.
+- The copied-text scan runs in `scripts/lesson-check.ts`, not in `content:check`, because it needs the gitignored sources.
 
 ## What the app has today
 

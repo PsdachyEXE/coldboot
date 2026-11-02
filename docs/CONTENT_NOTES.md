@@ -1397,3 +1397,28 @@ The VCAA documents were read from copies the operator supplied and digested on 1
 - Moving an activity between stages, the evaluation strategy's features, SRS contents, constraint types, and named data collection and ideation techniques (PSM): settled. The specifications confirm every placement the items used (psm-c-004, psm-c-005, psm-c-006), and each list is stated by the cards named under its KK above.
 - Development models (agile, waterfall, spiral), and running the PSM within each agile iteration (all areas): still held back. No KK, Terms entry or specification row names or defines them, and `content/README.md` keeps them out of scope.
 - Iteration as a return to an earlier stage (PSM): still held back. The specifications describe none.
+
+## Lessons (Phase C, 1.3.0)
+
+Every one of the 52 key knowledge points has an authored lesson in `content/<area>/lessons.json` (D-220): 52 worked examples and 84 examiners' traps across 43 lessons, about 580 words of prose each. The Terms and PSM pages stay assembled.
+
+### How they were made
+
+- Sources: the study design (version 1.2, June 2026 amendment), the 2026 outcome-specific requirements, the 2025 exam and its examiners' report, the specifications, and VCAA's planning and teaching pages, fetched again from the operator's Drive folder into the gitignored `reference/`. The sample questions PDF has no text layer (its text is drawn as outlines), so it was kept only as page images and no lesson relies on it.
+- Each point has a source pack in `reference/digests/<KK>.md`: the exact dot point and its line, the key skills that use it, the requirements that bear on it, and every 2025 question on it with the report's comment, all quoted with file and line. Checkers confirmed the quotes against the sources line by line.
+- Writers worked only from the packs and the bank. Checkers then tested every sentence, found 15 errors and 101 smaller issues, and fixed them. A final pair of readers compared overlapping lessons and fixed 7 contradictions between lessons, varied settings that repeated across neighbouring lessons, gave invented names to settings that could have pointed to one real business (a Portland surf club, a Port Fairy whale-watching operator, an Inverloch mini golf course), and dropped five traps that repeated a 2025 question belonging to another point.
+- Every pseudocode listing was run through the deskcheck interpreter (listings that call helper functions or INPUT were traced by hand), and every Gantt plan through the scheduler.
+
+### Held back in lessons, as in the bank
+
+Lessons follow every holdback recorded above: no slack or float (Gantt lessons talk only about stated delays), no development models, no access modifiers before U4O1, no Pascal case, no format, length or lookup checks, no quick sort partition traces or Big O, no trace tables or boundary-data definitions, no try/catch, no "defence in depth", no transferring or accepting risk, no named security products.
+
+### Open questions
+
+- **Connectivity limits.** The holdback above leaves a connectivity limit unclassified, but cards c-u3o2-kk06-004 and c-u3o2-kk06-008 call it a technical constraint, and the U3O2-KK06 lesson follows the cards. Either the cards or the holdback should change.
+- **Existing equipment and software.** The bank reads "must run on the existing tablets" both as a technical constraint and as part of the SRS's technical environment. The U3O1-KK02, U3O2-KK06 and U3O2-KK09 lessons now say both readings are possible, in the same words.
+- **Insider threats.** The study design's Terms list insider threats among deliberate threats; the map example, EXAM_INSIGHTS and 2025 A16 treat an insider's misconfiguration as an insider threat. The U4O2-KK03 lesson gives both.
+- **Range checks.** Card c-u3o1-kk10-010 defines a range check between a lower and an upper limit, narrower than the Terms wording ("within a certain range"), which leaves a one-sided limit such as "at least 18" unclassified. The lessons follow the card.
+- **Personnel changes** (U4O1-KK10) are named but defined by no source. The bank frames them as changes to the project team; the lesson no longer depends on that framing.
+- **ISM guidelines.** The U4O2-KK07 lesson describes the ISM's guidelines from the requirements' names and the bank; the ISM itself couldn't be reached from the session to check them.
+- **Scenario echoes.** A few worked examples share a setting or a shape with bank items without copying them: U3O2-KK09 (the Kestrel Downs orchard, as in s-u3o2-kk09-001), U4O2-KK02 (a justify question in the direction opposite to 2025 C2), U3O1-KK11 (a checkout stub, as in m-u3o1-kk11-007). Checkers judged each distinct.
