@@ -1,0 +1,737 @@
+[
+  {
+    "id": "l-u3o1-kk01",
+    "kk": "U3O1-KK01",
+    "intro": "This point covers four ways artificial intelligence is changing programming: producing code from prompts, debugging and testing modules automatically, optimising code, and using AI tools responsibly and ethically. Expect questions that place an AI tool in a developer's situation, where you name the benefit, risk or responsible practice that fits and say why it matters there.",
+    "sections": [
+      {
+        "heading": "Generating code from a prompt",
+        "body": "A generative AI tool can turn one prompt, or a series of them, into code quickly. What comes back depends on the prompt. At Southern Paddocks Dairy, a Warrnambool co-op, Ellie needs a function that converts a tanker load of milk from litres to kilograms. *Write code for milk weights* leaves the tool guessing. A useful prompt names the language, the input and its data type, the processing and the labelled output: *In Python, write a function that takes a volume of milk in litres as a floating point value, multiplies it by 1.03 and returns the weight in kilograms, rounded to one decimal place.*\n\nVCAA lists these benefits and disadvantages of generating code from prompts:\n\n| Benefits | Disadvantages |\n|:--|:--|\n| Faster development and debugging | Bugs and errors may be present |\n| Lower development costs | Relies on trial and error and on precise prompts |\n| Non-developers can produce working code | Vulnerabilities and threats may slip in |\n| Less need for deep expertise in many languages | Copyright concerns |\n| Code documented automatically, better quality | Limited understanding of context |\n| Possible support for problem-solving and innovation | Human oversight is still needed |\n\nIn an answer, choose the item that fits the scenario. The tool can't know the 1.03 conversion factor the co-op uses unless Ellie states it: that is limited context."
+      },
+      {
+        "heading": "Automated debugging and testing",
+        "body": "Tools that check code automatically have been part of IDEs for years. They flag problems as the code is typed, suggest fixes and give rapid feedback, so every module is checked the same way and code quality improves. Adding AI can increase productivity and accuracy, lets these tools scale to larger projects, and helps them predict some issues before they cause errors.\n\nThe challenges matter just as much. An AI tool can flag correct code as faulty or miss a subtle problem, its judgement depends on the data it was trained on, and wider use may mean fewer jobs for developers and testers. Suppose the dairy pays a bonus when a farm supplies 5000 litres or more in a day, and Ellie's condition uses `>` where it needs `>=`. The code runs, so the tool may report nothing. Her own test with exactly 5000 litres exposes the fault, so the AI tool supports her testing rather than replacing it."
+      },
+      {
+        "heading": "Code optimisation",
+        "body": "AI tools can analyse a module and suggest changes that make it faster, use less memory, make it more secure or meet another technical requirement. VCAA names six types:\n\n- **Resource optimisation**: less CPU time or memory\n- **Algorithm optimisation**: a more efficient algorithm, such as a binary search in place of a linear search through the co-op's sorted supplier numbers\n- **Code simplification**: removing repeated or unneeded statements\n- **Standardisation**: bringing code into line with organisational or industry rules, such as the co-op's naming convention\n- **Security optimisation**: replacing code an attacker could exploit\n- **Automated comment generation and summarisation**: documenting what the code does\n\nAn optimisation may change how the code works, but never what it outputs. Ellie reruns her test cases after accepting a suggestion. If any actual output changes, the suggestion has introduced a bug."
+      },
+      {
+        "heading": "Using AI tools responsibly and ethically",
+        "body": "Using AI to help write code is not unethical in itself. The ethical questions concern how it is used. VCAA expects a developer to:\n\n- understand the tool's technical limitations, such as not knowing about a library update released after its training\n- be transparent about using it, for example with a comment above generated code\n- review all AI-generated code thoroughly before it is used\n- watch for bias the tool may introduce\n- avoid over-reliance, keeping their own judgement in charge\n- consider the environmental impact of running AI tools\n- respect intellectual property, copyright and licence agreements, since generated code can closely resemble someone else's\n\nIf the dairy let a tool write every new module and nobody read the result, that would be over-reliance. The developers, not the tool, are accountable for a fault that reaches the farmers' payments."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Tahlia maintains the consignment module for Saltbush Line Freight, a Geelong carrier. The module works out each consignment's charge from its weight and its delivery zone. Her manager wants to turn on an AI-based automated debugging and testing tool in the team's IDE.\n\nExplain **one** improvement and **one** challenge this tool could bring to the testing of Tahlia's module.",
+      "points": [
+        {
+          "text": "Identifies an improvement, e.g. increased productivity, enhanced accuracy, scalability or identification of issues before they occur",
+          "marks": 1
+        },
+        {
+          "text": "Explains the improvement in Tahlia's situation, e.g. errors in the charge calculation are flagged while she edits it, so they are fixed before real consignments are charged and she spends less time searching for them",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a challenge, e.g. the tool may flag correct code as faulty or miss subtle issues, or its results depend on its training data",
+          "marks": 1
+        },
+        {
+          "text": "Explains the challenge in Tahlia's situation, e.g. a weight limit coded with the wrong comparison still runs, so the tool may not flag it and some consignments would be charged wrongly unless she tests boundary weights herself",
+          "marks": 1
+        }
+      ],
+      "model": "One improvement is increased productivity. As Tahlia edits the charge calculation, the tool flags likely errors and suggests fixes straight away, so faults are corrected before the module charges real consignments, and she spends less time tracking them down later.\n\nOne challenge is that the tool can miss subtle issues. If a weight limit is coded with `>` where `>=` is needed, the code still runs without error, so the tool may not flag it, and consignments that weigh exactly the limit would be charged at the wrong rate. Tahlia still needs her own test data at each weight boundary, comparing expected and actual charges in a test table."
+    },
+    "traps": [
+      "Using AI to write code is not unethical in itself; relying on it too heavily is. On the 2025 paper, about a third of students missed a question about an organisation that uses AI to produce the first code for every new package. The answer was over-reliance on AI, and 16% chose the option saying that writing code with AI is always unethical."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk02",
+    "kk": "U3O1-KK02",
+    "intro": "In Unit 3 you build modules from requirements someone else has written, so you need to read each statement and know what kind it is. This point covers functional requirements, non-functional requirements, constraints and scope. The exam asks you to classify statements like these, so the test for each kind matters more than a memorised definition.",
+    "sections": [
+      {
+        "heading": "Functional requirements: what it does",
+        "body": "A functional requirement states something the solution must do: the input it accepts, the processing it carries out and the output it produces. Validating and manipulating data count, because they are things the program does. For the booking module at Coldwater Creek Kennels, a Bendigo boarding kennel:\n\n- *The module calculates the fee from the number of nights and the dog's size.*\n- *The module rejects a pick-up date earlier than the drop-off date.*\n- *Staff can list every booking from the past three years.*\n\nThe third statement contains a number, yet it is still functional. The figure sets how far back the list reaches, but producing the list is a task the program performs."
+      },
+      {
+        "heading": "Non-functional requirements: how well it works",
+        "body": "A non-functional requirement describes a quality of the solution rather than a task. The problem-solving methodology names five quality attributes:\n\n| Quality | Kennel example |\n|:--|:--|\n| Usability | A new casual can take a booking after one short demonstration |\n| Reliability | The module is available whenever the kennel is open and never loses a booking |\n| Portability | The module runs on desktop computers and tablets, whatever their operating system |\n| Robustness | Letters typed into the nights box bring up a message, not a crash |\n| Maintainability | When prices rise, a developer updates them in one place |\n\nNone of these adds a task. Each one describes how well the module performs the tasks it already has."
+      },
+      {
+        "heading": "Constraints: limits on building it",
+        "body": "A constraint is a condition or limitation the design has to work within. It doesn't describe the finished module; it narrows the options for building it. The methodology sorts constraints into five types:\n\n- **Economic**: cost and time, such as a $6000 budget or a launch before the Christmas holidays\n- **Technical**: speed of processing, capacity, available equipment, compatibility and security, such as having to work with the accounting program the kennel already uses\n- **Social**: the users' level of expertise, such as weekend staff who rarely use computers\n- **Legal**: intellectual property, ownership of data and privacy, such as owners' addresses and phone numbers\n- **Usability**: accessibility, usefulness and ease of use\n\nUsability appears in both lists, as a quality and as a constraint type. A deadline or a budget is never a requirement: it says nothing about what the module does or how well it does it."
+      },
+      {
+        "heading": "Scope: where the solution stops",
+        "body": "Scope sets the boundaries of the solution by stating what it will cover and what it won't. *Version 1 takes bookings and calculates fees. Online payment and vaccination reminders wait for version 2.* A clear scope tells the programmer when the module is finished and keeps effort off features nobody agreed to.\n\nScope works at a higher level than functional requirements. It draws the outer boundary, and each functional requirement must sit inside it. If a requirement asks the module to email payment receipts while the scope rules out payments, the two conflict, and the programmer should ask the client before writing any code."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Ravi is coding the hire module for Pinegrove Bike Hire, a Horsham business. Two statements from the software requirements specification are:\n\n1. *The module keeps running, without crashing, whatever a customer types into any box.*\n2. *This version records hires and calculates their charges. It does not take card payments, which staff process on the shop's EFTPOS terminal.*\n\nFor each statement, identify what kind of statement it is and explain how it affects the code Ravi writes.",
+      "points": [
+        {
+          "text": "Statement 1: a non-functional requirement (robustness)",
+          "marks": 1
+        },
+        {
+          "text": "Explains its effect, e.g. Ravi validates every input (such as a type check on the hours) and handles a failed check with a message, so unexpected entries never cause a runtime error",
+          "marks": 1
+        },
+        {
+          "text": "Statement 2: scope (a boundary of the solution)",
+          "marks": 1
+        },
+        {
+          "text": "Explains its effect, e.g. Ravi codes recording hires and calculating charges but writes no payment code; the module is complete once the charge is shown and recorded",
+          "marks": 1
+        }
+      ],
+      "model": "Statement 1 is a non-functional requirement. It describes robustness, a quality of how the module copes with unexpected input, rather than a task it performs. Ravi must check every entry before using it, for example with a type check that the hours entered are a whole number, and show a message when a check fails, so an entry such as \"two\" can never cause a type mismatch that stops the module.\n\nStatement 2 defines the scope of this version. Ravi codes the recording of each hire and the calculation of its charge, but writes no code for taking payments; once the charge is displayed and saved, the module's job is done."
+    },
+    "traps": [
+      "In 2025, 58% of students classified all three requirement statements correctly. A statement that included a figure, such as how many years of data a report can cover, was still functional because producing the report is a task. A statement about devices the solution did not need to run on was non-functional."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk03",
+    "kk": "U3O1-KK03",
+    "intro": "Before a module is coded, its design can be set out with the five tools this point names: data dictionaries, object descriptions, mock-ups, input-process-output (IPO) charts and pseudocode. In Unit 3 you are handed designs like these and turn them into code, so exam questions ask you to read them, complete them and choose the right one for a job.",
+    "sections": [
+      {
+        "heading": "Data dictionaries",
+        "body": "A data dictionary is a table that plans the data a module uses, including its variables, constants, objects and interface controls. Each entry needs at least a name and a data type. Columns for a description, field size, validation rules or a sample value can be added when they help. Part of the dictionary for the order module at Kelpie Hill Bakery in Wangaratta:\n\n| Name | Data type | Field size | Validation | Sample |\n|:--|:--|:--|:--|:--|\n| customerName | string | 40 | must not be blank | Mai Tran |\n| loaves | integer | | 1 to 50 | 12 |\n| isMember | Boolean | | | True |\n| orderTotal | floating point | | | 54.00 |\n\nFrom this the programmer knows what to declare, the type of each item and which checks to code."
+      },
+      {
+        "heading": "Mock-ups",
+        "body": "A mock-up is a detailed drawing of how a module's screen will look, with annotations that describe it. Appearance notes cover fonts, text colour and size, alignment and images to be sourced. Structure notes cover which controls are needed, what each does, default values and control sizes. Annotations can also explain how design principles and characteristics of user experience have been applied.\n\nOn the bakery's order screen, *Heading: 20pt bold, centred* is an appearance note. *Loaves: spin box, default 1, range 1 to 50* and *Calculate button: shows the total in the Total label* are structure notes. Each input control should match a data dictionary entry with a fitting type: the Member check box is ticked or not, so it maps to the Boolean `isMember`."
+      },
+      {
+        "heading": "Object descriptions",
+        "body": "An object description designs one object in three sections: **Name**, **Properties/Attributes** (the data it holds, with data types if wanted) and **Methods** (what it does, with any parameters).\n\n| Name | Order |\n|:--|:--|\n| Properties/Attributes | customerName (string), loaves (integer), isMember (Boolean), orderTotal (floating point) |\n| Methods | calculateTotal(pricePerLoaf), applyDiscount(percent), getTotal() |\n\nAttributes are things the object stores and methods are things it does, so `calculateTotal` never belongs under Properties/Attributes. When adding to an existing description, follow its naming style. These names use camel casing, so a new attribute would be `pickupDate`, not `pickup_date`."
+      },
+      {
+        "heading": "IPO charts",
+        "body": "An IPO chart gives a short overview of one task in three columns: Input, Processes and Output. Inputs and outputs are data; processes are the actions that turn one into the other. A process that only happens sometimes should say when.\n\n| Input | Processes | Output |\n|:--|:--|:--|\n| loaves, pricePerLoaf, isMember | Multiply loaves by pricePerLoaf. If isMember is true, take 10% off. | orderTotal (displayed) |\n\nA module with several tasks gets a separate chart for each. The chart summarises: it doesn't set out every step in order with its control structures. That is the job of pseudocode."
+      },
+      {
+        "heading": "Pseudocode",
+        "body": "Pseudocode sets out an algorithm in structured English and a few symbols, so the logic can be checked before it is coded in any language. VCAA's conventions: begin with `BEGIN` and finish with `END`, write reserved words in capitals, indent the statements inside each control structure, and assign with `←` or `SET`. The IPO chart above becomes:\n\n```pseudo\nBEGIN\n    INPUT loaves\n    INPUT pricePerLoaf\n    INPUT isMember\n    orderTotal ← loaves * pricePerLoaf\n    IF isMember THEN\n        orderTotal ← orderTotal * 0.9\n    ENDIF\n    DISPLAY orderTotal\nEND\n```\n\nThe 2025 exam wrote output as `DISPLAY`, while VCAA's conventions list `PRINT`, `OUTPUT` and `RETURN`. Expect to read both."
+      },
+      {
+        "heading": "Which tool for which job",
+        "body": "| The need | Tool |\n|:--|:--|\n| How the screen will look | Mock-up |\n| Each data item's name, type and rules | Data dictionary |\n| One object's data and behaviours | Object description |\n| A task's inputs, processes and outputs at a glance | IPO chart |\n| The exact steps, decisions and loops | Pseudocode |\n\nThe designs for one module must agree. If the mock-up limits an order to 50 loaves, the data dictionary's validation rule and any range check in the pseudocode must both say 50."
+      }
+    ],
+    "worked": {
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "Jun is designing the booking module for Ridgeline Minibus Tours in Bright. The mock-up of the booking screen carries these annotations:\n\n- *Seats: spin box, whole numbers from 1 to 6, default 1*\n- *Wheelchair space needed: check box, unticked by default*\n- *Fare label: shows the fare in dollars and cents*\n\nJun's data dictionary for the module is:\n\n| Name | Data type | Validation |\n|:--|:--|:--|\n| seats | integer | 1 to 6 |\n| tourName | string | Morning or Afternoon |\n| totalFare | integer | |\n\nDescribe **two** changes Jun should make to the data dictionary so that it agrees with the mock-up.",
+      "points": [
+        {
+          "text": "Changes the data type of totalFare from integer to floating point",
+          "marks": 1
+        },
+        {
+          "text": "Gives the reason: the mock-up shows the fare in dollars and cents, and an integer would lose the cents",
+          "marks": 1
+        },
+        {
+          "text": "Adds an entry for the data captured by the wheelchair check box, which the data dictionary is missing, e.g. needsWheelchairSpace",
+          "marks": 1
+        },
+        {
+          "text": "Gives the new entry the data type Boolean, because a check box is either ticked or not",
+          "marks": 1
+        }
+      ],
+      "model": "First, Jun should change the data type of `totalFare` from integer to floating point. The mock-up shows the fare in dollars and cents, and an integer can't hold the cents, so a fare such as $47.50 would be stored wrongly.\n\nSecond, he should add an entry for the *Wheelchair space needed* check box, which the data dictionary leaves out, so the programmer has a name and type for the data it captures. The entry could be `needsWheelchairSpace` with the data type Boolean, because a check box has only two states, ticked or not."
+    },
+    "traps": [
+      "Half of all students scored zero in 2025 when asked to name two sections of an object description. Use VCAA's names exactly: Name, Properties/Attributes and Methods.",
+      "When completing an object description in 2025, new attribute names earned marks only if they followed the camel casing already in the description, and data types had to be written in full: Boolean and floating point, not Bool or Float.",
+      "In a 2025 multiple-choice question, 80% chose the IPO chart whose process stated that a deduction applied only when the user claimed it. The most popular wrong chart made the deduction in every case."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk04",
+    "kk": "U3O1-KK04",
+    "intro": "The study design names six data types in three groups: text, which covers character and string; numeric, which covers integer, floating point and date/time; and Boolean. You need to choose a type for an item of data and justify it from the value it holds and what the program does with it. On the 2025 exam, a data type question had the third-highest share of students scoring zero.",
+    "sections": [
+      {
+        "heading": "Text: character and string",
+        "body": "A **character** holds exactly one letter, digit or symbol. A **string** holds a sequence of characters of any length.\n\nAt Bandicoot Flat Wildlife Shelter near Castlemaine, each animal's condition is recorded as a single letter: G, F or P for good, fair or poor. That is a character, because only one symbol is ever stored. The animal's name and its carer's mobile number are strings. A mobile number is made of digits, but nobody adds or averages it, and an integer would drop the leading 0 from 0412 555 019.\n\nStrings also sort differently from numbers. They are compared one character at a time from the left, so the animal IDs \"1\", \"15\", \"101\", \"3\" and \"5\" sort as 1, 101, 15, 3, 5. Stored as integers, the same IDs sort as 1, 3, 5, 15, 101."
+      },
+      {
+        "heading": "Numeric: integer, floating point and date/time",
+        "body": "An **integer** is a whole number, used for counts such as the days an animal has been in care. **Floating point** holds numbers with a fractional part, such as a wombat's weight of 23.4 kg or a vet bill of $86.40. Money is floating point, shown to two decimal places, because amounts include cents.\n\nThe study design groups **date/time** with the numeric types, and dates and times do behave like numbers: they can be compared, put in time order and subtracted. Stored as date/time, an animal's admission date lets the program work out how many days it has been in care. Stored as the string \"03/11/2026\", the same date would sort by its day digits and couldn't be subtracted at all."
+      },
+      {
+        "heading": "Boolean",
+        "body": "A **Boolean** holds one of two values, true or false. Whether an animal has been released, or whether it needs daily medication, has exactly two states, so Boolean fits. It can be tested directly, as in `IF needsMedication THEN`; it can't hold inconsistent entries such as \"Y\", \"yes\" and \"YES\"; and it takes less storage than the words True or False kept as text.\n\nOnce a third state is needed, such as *in care*, *released* or *transferred*, a Boolean no longer works. A character code or a string can hold any of the three."
+      },
+      {
+        "heading": "Choosing and justifying a type",
+        "body": "Ask what the program will do with the value, then name the type and give that reason, tied to the actual data.\n\n| Data item | Example | Type | Reason |\n|:--|:--|:--|:--|\n| animalName | Banjo | string | a name of varying length |\n| conditionCode | F | character | always exactly one letter |\n| daysInCare | 12 | integer | a whole-number count |\n| weightKg | 23.4 | floating point | has a fractional part and is used in calculations |\n| admittedOn | 3 November 2026 | date/time | compared with today and subtracted |\n| isReleased | False | Boolean | only two states |\n\nWrite the study design's names in full: floating point rather than Float, Boolean rather than Bool. A strong reason refers to the value in the question, such as \"the code is always one letter\", rather than repeating a definition."
+      }
+    ],
+    "worked": {
+      "commandTerm": "justify",
+      "marks": 4,
+      "prompt": "Bluestone Couriers in Ballarat is adding two data items to its parcel module: the date each parcel was collected, and whether the customer has been emailed a delay notice. Each morning the module lists every parcel that has been waiting for more than three days, and emails a delay notice for each one that hasn't had one yet.\n\nJustify a data type for the collection date and a data type for the delay notice item.",
+      "points": [
+        {
+          "text": "Collection date: date/time",
+          "marks": 1
+        },
+        {
+          "text": "Reason: the module subtracts the collection date from today's date to find how long each parcel has waited and compares the result with three days; date/time values can be subtracted and compared, a string can't",
+          "marks": 1
+        },
+        {
+          "text": "Delay notice: Boolean",
+          "marks": 1
+        },
+        {
+          "text": "Reason: a notice has either been sent or not (only two states), and the module tests the value directly each morning to decide whether to send one",
+          "marks": 1
+        }
+      ],
+      "model": "The collection date should be date/time. Each morning the module subtracts it from the current date to find how many days a parcel has been waiting, then checks whether that is more than three. Date/time values can be subtracted and compared like this, while a date stored as a string can't be.\n\nWhether a delay notice has been sent should be Boolean. A notice has either been sent or it hasn't, so only two values are needed, and each morning the module can test the value directly to decide whether to email the customer."
+    },
+    "traps": [
+      "72% of students scored zero in 2025 when asked for the best data type for a game symbol that was always one letter. The answer was character, not string, and the second mark needed the reason that only a single symbol has to be stored.",
+      "In 2025, Bool and Float earned no marks. A true-or-false occupancy status had to be written as Boolean and a monthly rent amount as floating point."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk05",
+    "kk": "U3O1-KK05",
+    "intro": "The study design names three data structures: one-dimensional arrays, two-dimensional arrays and records. Each organises values differently, and questions describe some data and ask which structure suits it and why, or how a single value is reached.",
+    "sections": [
+      {
+        "heading": "One-dimensional arrays",
+        "body": "A one-dimensional array holds a list of values of one data type under a single name. Each value sits at a numbered position, its index, and one integer index reaches it. Redgum Flat Growers, a Shepparton orchard co-op, records the bins of apples picked on each day of a seven-day week. Arrays are indexed from 0, so Monday's count is `bins[0]` and Sunday's is `bins[6]`; `bins[7]` doesn't exist.\n\n```pseudo\nBEGIN\n    bins ← [42, 38, 51, 47, 40, 22, 0]\n    total ← 0\n    FOR day ← 0 TO 6\n        total ← total + bins[day]\n    ENDFOR\n    DISPLAY total\nEND\n```\n\nA loop over the indexes processes every value in a few lines instead of seven separate variables. Always check the index base a question gives: counting from 0, the last index is one less than the number of values."
+      },
+      {
+        "heading": "Two-dimensional arrays",
+        "body": "When each value is identified by two things, a two-dimensional array fits. The co-op also tracks the bins picked by each of its 4 crews on each of the 7 days, so the data forms a table of 4 rows and 7 columns: `crewBins[crew][day]`. The row index comes first. Indexed from 0, with day 0 as Monday, `crewBins[2][4]` is the third crew's count on Friday.\n\nEvery value in a two-dimensional array must still have the same data type, here integer. A table that mixes names and numbers needs a different structure."
+      },
+      {
+        "heading": "Records",
+        "body": "A record groups related values of varying data types under one name. Each value sits in its own field, and a field index identifies which field is meant, usually by the field's name. One picker's details make a record:\n\n| Field | Data type | Example |\n|:--|:--|:--|\n| name | string | Mia Tran |\n| hourlyRate | floating point | 31.50 |\n| hasForkliftLicence | Boolean | True |\n| crewNumber | integer | 2 |\n\n`picker.hourlyRate` reaches 31.50. An array couldn't hold these four values together, because its elements must all share one data type."
+      },
+      {
+        "heading": "Arrays of records",
+        "body": "The co-op employs 60 pickers, not one. An array of records holds them all: each element is a record with the same fields, and `pickers[12].hourlyRate` is the rate of the picker at index 12. The array index chooses the record and the field index chooses the value inside it. This combination suits many items that each have several fields of different types, such as staff details read from a file."
+      },
+      {
+        "heading": "Choosing a structure",
+        "body": "| The data | Structure |\n|:--|:--|\n| Many values of one type, each found by one number | one-dimensional array |\n| Values of one type, each found by two numbers such as row and column | two-dimensional array |\n| One item with several fields of different types | record |\n| Many items with the same mixed fields | array of records |\n\nJustify a choice from the data itself: say what identifies each value and whether the values share a data type. \"It stores a lot of data\" doesn't justify any structure."
+      }
+    ],
+    "worked": {
+      "commandTerm": "justify",
+      "marks": 3,
+      "prompt": "Gecko Rock Caravan Park in Mildura is writing a program that stores:\n\n1. the number of sites occupied on each of the 30 nights in November\n2. the number of guests staying on each of its 40 sites on each of those 30 nights\n3. one booking's details: the guest's name, the number of nights, the deposit paid and whether the guest is bringing a pet\n\nJustify the most suitable data structure for each.",
+      "points": [
+        {
+          "text": "Item 1: a one-dimensional array, because the 30 values are all integers of one kind and each is located by a single index, the night",
+          "marks": 1
+        },
+        {
+          "text": "Item 2: a two-dimensional array, because each count is identified by two things (the site and the night) and every count is an integer",
+          "marks": 1
+        },
+        {
+          "text": "Item 3: a record, because the booking's fields have varying data types (string, integer, floating point, Boolean), which an array can't hold, and each is reached by its field index",
+          "marks": 1
+        }
+      ],
+      "model": "1. A one-dimensional array of 30 integers. Every value is the same kind of count, and each is found by one index: the night of the month.\n2. A two-dimensional array of integers with 40 rows and 30 columns. Each count belongs to one site and one night, so a row index for the site and a column index for the night reach it, and all the counts share one data type.\n3. A record. The name is a string, the number of nights an integer, the deposit floating point and the pet answer Boolean, so the fields have different data types, which an array can't hold. Each value is reached by its field, such as `booking.deposit`."
+    },
+    "traps": [
+      "A single row of floating point values, each with one index, is a one-dimensional array. 83% got this right in 2025, but 8% called it a two-dimensional array and 7% a record.",
+      "A game board laid out as a 5 by 5 grid needed a two-dimensional array; 21% of students scored zero on that question in 2025."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk06",
+    "kk": "U3O1-KK06",
+    "intro": "A data source is data a program gets from an outside file or system. The study design names three file types: plain text (TXT), delimited (CSV) and XML. You need to know how each is structured and the reasons for choosing it, and the 2025 exam rewarded answers that used the features of the format named in the question.",
+    "sections": [
+      {
+        "heading": "Plain text: no fields",
+        "body": "A plain text file is characters arranged in lines, with nothing marking out fields, so it is an unstructured source. Saltbush Line Freight, a Geelong carrier, keeps a driver incident log as plain text:\n\n`14:05 Truck 7 held up near Little River, roadworks, about 20 minutes`\n\nAnyone can read the log in a text editor, and the program only has to add each message as a new line. What a program can't do reliably is pick out a single value, such as the truck number, because nothing shows where one value ends and the next begins. Plain text suits notes, messages and logs written for people."
+      },
+      {
+        "heading": "Delimited (CSV): fields by position",
+        "body": "A CSV file is structured. Each line holds one record, and a delimiter, the comma, separates its fields. An optional header row names the fields:\n\n`consignmentID,destination,weightKg,fragile`\n\n`SL2047,Ballarat,412.5,True`\n\nA program splits each line at the commas and identifies each field by its position: the third field is always the weight. CSV files are compact, since field names appear once at most, and spreadsheets open them directly, so they suit large tables of records that all have the same fields. Two cautions: a comma inside a value, such as an address, splits it in two unless the value is quoted, and every field arrives as text, so the program converts `412.5` to floating point before calculating with it."
+      },
+      {
+        "heading": "XML: values named by tags",
+        "body": "An XML file is also structured, but each value sits between an opening and a closing tag that the developer names, and elements nest inside one another to form a hierarchy:\n\n```\n<consignment>\n    <consignmentID>SL2047</consignmentID>\n    <destination>Ballarat</destination>\n    <items>\n        <item>Pallet of tiles</item>\n        <item>Pallet of grout</item>\n    </items>\n</consignment>\n```\n\nThis structure gives XML its benefits. It is **self-describing**: the tags say what each value means, so a receiving program doesn't depend on a column order. It is **extensible**: an element such as `<deliveryWindow>` can be added later, and programs that find values by tag name keep working. It is **portable and interoperable**: XML is a published, text-based standard, so systems on different platforms can exchange it. Nesting also lets one consignment hold any number of items. The cost is file size, because every value carries its tags."
+      },
+      {
+        "heading": "Choosing a source",
+        "body": "Choose the format from the shape of the data and who will read it.\n\n| Situation | Source | Reason |\n|:--|:--|:--|\n| Free-text messages read by a person | plain text | no fields to split; simplest to write and read |\n| Thousands of records with identical fields, opened in a spreadsheet | CSV | compact, with fields in a fixed order |\n| Data sent to another organisation, with nested or changing fields | XML | self-describing, extensible and portable |\n\nWhen a question asks for the benefits of XML, describe XML's own features and apply each one to the scenario rather than comparing XML with CSV."
+      }
+    ],
+    "worked": {
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "Wirraway Toy Library in Sale lends toys to local families. Its loans program saves each loan with the member number, the toy's code and the due date.\n\nDescribe how one loan would be structured if it were stored in a CSV file, and how it would be structured if it were stored in an XML file.",
+      "points": [
+        {
+          "text": "CSV: the loan is a single line of the file (one record)",
+          "marks": 1
+        },
+        {
+          "text": "CSV: the loan's fields are separated by commas in a fixed order, so each field is identified by its position; a header row can name the fields",
+          "marks": 1
+        },
+        {
+          "text": "XML: each value sits between an opening and a closing tag that names it, such as a due date element",
+          "marks": 1
+        },
+        {
+          "text": "XML: these elements are nested inside a parent element for the loan, giving a hierarchy",
+          "marks": 1
+        }
+      ],
+      "model": "In a CSV file, the loan is one line of the file, a single record such as `M0418,TL-233,2026-11-20`. Its three fields are separated by commas and always appear in the same order, so a program knows the third field is the due date from its position. A header row such as `memberNumber,toyCode,dueDate` can name the fields once at the top of the file.\n\nIn an XML file, each value sits between an opening and a closing tag that names it, such as `<toyCode>TL-233</toyCode>`. These elements are nested inside a parent `<loan>` element, which can itself sit inside a `<loans>` element, so the file forms a hierarchy in which every value is labelled."
+    },
+    "traps": [
+      "58% of students scored zero in 2025 when asked for two benefits of XML. Many compared XML with CSV, and those comparisons earned no marks: the question wanted XML's own benefits.",
+      "Benefits that scored were tied to the scenario. They included an extensible structure that could take extra data in future updates, tags in a hierarchy that described each part of a move, and portability, so players on different systems could exchange moves."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk07",
+    "kk": "U3O1-KK07",
+    "intro": "Object-oriented programming rests on four principles named in the study design: abstraction, encapsulation, generalisation and inheritance. Questions describe a class design and ask which principle it shows, or what a principle gains in that program, so you need to tell the four apart and apply each to a scenario.",
+    "sections": [
+      {
+        "heading": "Abstraction: what, not how",
+        "body": "Abstraction hides how a class does its work and exposes only what other code needs in order to use it. At Pelican Reach Holiday Park in Mildura, the front-desk screen calls `site.quoteStay(nights)` and gets back a price. It doesn't know that the method checks for peak-season dates and takes 10% off stays of seven nights or more. Those details stay inside the class, so they can change without any change to the screen's code.\n\nAbstraction also guides design: model only the attributes and methods the problem needs. A site needs its number, its nightly rate and whether it is booked. The colour of its picnic table is a real detail, but the program never uses it, so it is left out."
+      },
+      {
+        "heading": "Encapsulation: data and methods kept together",
+        "body": "Encapsulation bundles an object's data (its attributes) with the methods that work on that data in one class, and restricts direct access to the data. Attributes are made private with an access modifier, and other code reads or changes them through public get and set methods.\n\nIf `nightlyRate` is private, the only way other classes can change it is `setNightlyRate(rate)`, which can refuse a negative rate before storing it. No other part of the program can set the rate to an invalid value by accident, so the integrity of the data is protected."
+      },
+      {
+        "heading": "Generalisation: building a superclass",
+        "body": "Generalisation looks across two or more classes, finds the attributes and methods they share, and moves them into a more general superclass. The park's program first had separate `Cabin` and `PoweredSite` classes. Both stored a site number, a nightly rate and whether the site was booked, and both had `quoteStay(nights)`. Generalising them produces an `Accommodation` superclass that holds the shared members once, so the code isn't written twice."
+      },
+      {
+        "heading": "Inheritance: subclasses reuse and extend",
+        "body": "Inheritance is the mechanism by which a subclass receives the attributes and methods of an existing superclass. The park's object descriptions:\n\n| Name | Accommodation | Cabin (extends Accommodation) | PoweredSite (extends Accommodation) |\n|:--|:--|:--|:--|\n| Properties/Attributes | private siteNumber (integer), private nightlyRate (floating point), private isBooked (Boolean) | private bedrooms (integer) | private amps (integer) |\n| Methods | quoteStay(nights), getNightlyRate(), setNightlyRate(rate) | addCleaningFee() | quoteStay(nights), overriding the inherited version |\n\nA `Cabin` object has every member of `Accommodation` as well as `bedrooms`. A subclass can also override an inherited method, as `PoweredSite` does to add an electricity charge to the quote. The gains are reuse of the superclass's code, subclasses that extend it with their own features, easier maintenance (a fix made in `Accommodation` reaches every subclass) and less development time."
+      },
+      {
+        "heading": "Telling the four apart",
+        "body": "| Principle | Question it answers | At the park |\n|:--|:--|:--|\n| Abstraction | What does other code need to know? | The screen calls `quoteStay(nights)` without seeing the pricing rules |\n| Encapsulation | Who can reach the data? | `nightlyRate` is private; other classes change it only through `setNightlyRate(rate)` |\n| Generalisation | What do these classes share? | `Accommodation` is built from what `Cabin` and `PoweredSite` have in common |\n| Inheritance | How do subclasses get the shared members? | `Cabin` extends `Accommodation` and adds `bedrooms` |\n\nGeneralisation is the design step that creates the superclass; inheritance is how the subclasses then receive its members. An example of inheritance always needs a superclass and at least one subclass."
+      }
+    ],
+    "worked": {
+      "commandTerm": "classify",
+      "marks": 4,
+      "prompt": "Lyrebird Music School in Frankston is redesigning its lessons program. Classify each design decision below as abstraction, encapsulation, generalisation or inheritance, giving a reason for each.\n\n1. `PianoLesson` and `GuitarLesson` both stored `studentName` and `durationMinutes` and both had a `book(day)` method, so these were moved into a new `Lesson` class.\n2. `PianoLesson` and `GuitarLesson` now extend `Lesson` and receive its members without declaring them again, and `GuitarLesson` adds `ownsInstrument`.\n3. The `fee` attribute is private, and other classes can change it only by calling `setFee(amount)`, which rejects amounts below zero.\n4. The reception screen calls `lesson.invoice()` and receives a total, with no knowledge of the sibling discount the method applies.",
+      "points": [
+        {
+          "text": "Decision 1: generalisation, because the attributes and method the two classes shared were extracted into a more general superclass",
+          "marks": 1
+        },
+        {
+          "text": "Decision 2: inheritance, because the subclasses receive the superclass's attributes and methods and can add their own",
+          "marks": 1
+        },
+        {
+          "text": "Decision 3: encapsulation, because the data is private and can be changed only through the class's own method, which protects it from invalid values",
+          "marks": 1
+        },
+        {
+          "text": "Decision 4: abstraction, because the method hides how the total is worked out and exposes only what the reception screen needs",
+          "marks": 1
+        }
+      ],
+      "model": "1. Generalisation. The features `PianoLesson` and `GuitarLesson` had in common were taken out of both and placed once in a more general superclass, `Lesson`.\n2. Inheritance. As subclasses of `Lesson`, the two classes automatically receive `studentName`, `durationMinutes` and `book(day)`, and `GuitarLesson` extends them with its own attribute.\n3. Encapsulation. `fee` is bundled with the method that changes it and hidden from other classes, so other classes can change it only through `setFee(amount)`, which keeps out negative fees.\n4. Abstraction. Reception uses `invoice()` knowing what it returns but not how the sibling discount is calculated, because those details are hidden inside the class."
+    },
+    "traps": [
+      "49% of students scored zero in 2025 when asked for a benefit of inheritance with an example from the case study. The example had to be a superclass with its subclasses (the User class and its four user groups); a stand-alone class, such as the case study's property class, earned nothing.",
+      "The benefit mark on that question needed an explanation, not just a name: code reuse, extensibility, easier maintenance or less development time, with how inheritance delivers it, such as a fix made once in the superclass reaching every subclass.",
+      "Asked in 2025 which access modifier lets only a class's own methods use an attribute, 79% chose private. A fifth chose protected, which also opens the attribute to subclasses."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk08",
+    "kk": "U3O1-KK08",
+    "intro": "This point covers the features every module is built from, from scope and data types through control structures and operators to functions, classes and the GUI. In 2025 the exam asked students to name the control structure in a pseudocode fragment, trace it at its limits and judge statements about scope, so practise applying each feature to code rather than defining it.",
+    "sections": [
+      {
+        "heading": "Scope: local, global and constant",
+        "body": "Where a value is declared decides which code can use it. A **local variable** is declared inside a function or method. Every statement in that module can use it, including the statements inside its IF blocks and loops, but no other module can see it. A **global variable** is declared outside every module, so any part of the program can read it or change it while the program runs. A **constant** is a named value that the running program can't change; the only way to change it is to edit the code.\n\nIn a Geelong freight firm's quoting program, the fuel levy rate suits a constant, `FUEL_LEVY`, because it is the same for every quote and changes only when management sets a new rate. The distance for one quote suits a local variable, `distanceKm`, declared inside `calculateQuote`, because no other module needs it. A global variable is convenient, but because any module can change it, a wrong value in it is hard to trace back to its cause."
+      },
+      {
+        "heading": "Data types and operators",
+        "body": "Each variable holds one data type: text (character or string), numeric (integer, floating point or date/time) or Boolean. The type decides which operators make sense on it.\n\n- **Arithmetic operators** calculate: addition, subtraction, multiplication, division, integer division (`DIV`), modulus (`MOD`, the remainder), unary plus and minus, and increment and decrement.\n- **Logical operators** combine or reverse true/false values: `AND`, `OR`, `NOT`.\n- **Conditional operators** compare two values and give a Boolean result: `=`, `<>`, `<`, `<=`, `>` and `>=`.\n\nAt a Shepparton orchard co-op, every tenth bin goes to the quality inspector. The condition `binNumber MOD 10 = 0` uses an arithmetic operator inside a comparison, and it is true for bins 10, 20, 30 and so on. For 137 bins, `137 DIV 10` gives 13 inspections and `137 MOD 10` gives 7 bins after the last one."
+      },
+      {
+        "heading": "Instructions and control structures",
+        "body": "An instruction is a single statement, such as an assignment, an input or a display. Control structures decide the order in which instructions run. **Sequence** runs them one after another, in the order written. **Selection** tests a condition and runs only the matching branch: IF, IF…ELSE, IF…ELSEIF or CASE. **Iteration** (repetition) repeats a block: a pre-test loop (`WHILE`) checks first, so it may run zero times; a post-test loop (`REPEAT…UNTIL`) always runs at least once; a counted loop (`FOR`) runs a set number of times.\n\nReal modules nest them. This function counts the bins in a delivery that are over the 400 kg limit. Arrays are indexed from 0.\n\n```pseudo\nFUNCTION countHeavyBins(weights, n)\n    heavy ← 0\n    FOR i ← 0 TO n - 1\n        IF weights[i] > 400 THEN\n            heavy ← heavy + 1\n        ENDIF\n    ENDFOR\n    RETURN heavy\nENDFUNCTION\n```\n\nThe FOR loop is iteration, the IF inside it is selection, and within each pass the lines run in sequence. When you trace an IF…ELSEIF chain, work the actual values through it: only the first true branch runs."
+      },
+      {
+        "heading": "Functions and methods",
+        "body": "A **function** is a named block of code that can take parameters and can return a value to the code that called it, as `countHeavyBins` returns `heavy`. Splitting a module into functions means each task is written once, tested on its own and called wherever it is needed. A **method** is a function that belongs to a class and works on the data of the object it is called on: `delivery.totalWeight()` adds up the weights stored in that one delivery. Returning a value is not the same as displaying it. If `countHeavyBins` only displayed its count, the calling code would have nothing to store, compare or add to a total."
+      },
+      {
+        "heading": "Classes, objects and the GUI",
+        "body": "A **class** is the template that sets out the attributes and methods for one kind of thing, such as `Delivery`. An **object** is one instance made from that class while the program runs, holding its own values: Monday's delivery from the north block and Tuesday's from the river block are two `Delivery` objects with different growers and weights.\n\nThe **graphical user interface** (GUI) is the part users see and work with. VCAA's programming requirements allow it to be built with an IDE's drag-and-drop designer, in code written in the same language, or in code in a supporting language. The GUI gathers input and shows results, while the processing sits behind it in classes, methods and functions."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Ruby is writing the loading module for a Geelong freight firm. A pallet holds 30 cartons, and cartons left over still need a pallet of their own. Her function `palletsNeeded(cartons)` must return the number of pallets an order needs.\n\nExplain how Ruby could use the integer division and modulus operators, together with selection, to calculate this. Use an order of 75 cartons as your example.",
+      "points": [
+        {
+          "text": "Integer division gives the number of full pallets: `cartons DIV 30`, so 75 cartons fill 2 pallets.",
+          "marks": 1
+        },
+        {
+          "text": "Modulus gives the cartons left over: `cartons MOD 30`, so 75 cartons leave 15.",
+          "marks": 1
+        },
+        {
+          "text": "Selection adds one more pallet only when the remainder is greater than 0, e.g. `IF cartons MOD 30 > 0 THEN pallets ← pallets + 1`, so 75 cartons need 3 pallets while 60 cartons need exactly 2.",
+          "marks": 1
+        }
+      ],
+      "model": "Ruby first uses integer division, `pallets ← cartons DIV 30`, to find how many pallets can be filled completely. For 75 cartons that is 2. She then uses modulus, `cartons MOD 30`, to find how many cartons are left over, which is 15. A selection structure tests that remainder: `IF cartons MOD 30 > 0 THEN pallets ← pallets + 1`. Because 15 is greater than 0, the spare cartons get a third pallet and the function returns 3. For an order of 60 cartons the remainder is 0, so the IF is skipped and the function returns exactly 2, with no empty pallet booked."
+    },
+    "traps": [
+      "Scope was the weakest multiple-choice topic in 2025: only 42% knew that a local variable isn't confined to the IF or loop where it is used; it can be used anywhere in the module that declares it.",
+      "About a quarter of students called an IF…ELSEIF chain repetition or a method. Testing a condition to choose one branch is selection.",
+      "On tiered pseudocode, trace each value at and either side of a limit through its own branch. In 2025, 40% chose the reverse of the right answer, missing that a larger input can give a smaller result once it crosses into a new tier.",
+      "Write data types as the study design does. Answers of \"Bool\" and \"Float\" earned no marks where Boolean and floating point were expected."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk09",
+    "kk": "U3O1-KK09",
+    "intro": "Naming conventions are the rules a team follows when it names variables, interface controls and code structures. The study design names three: Hungarian notation, camel casing and snake casing. The 2025 exam asked students to recognise a convention from a name and to add new names that matched the convention a design already used.",
+    "sections": [
+      {
+        "heading": "Why conventions matter",
+        "body": "A naming convention exists for the people reading the code, not for the computer. When every name follows one rule, a developer can tell what an identifier is for, and with Hungarian notation what kind of element it is, without hunting for its declaration, and there is only one predictable way to write each name.\n\nPicture a Bendigo bakery's ordering module where one programmer wrote `qty`, another `Order_Quantity` and a third `orderQty` for the same idea. Every reader has to stop and work out whether these are three variables or one, and a fix made under one name can miss the others. An agreed convention, applied everywhere, removes that guesswork, so the code is quicker to read and maintain, especially when several developers share it."
+      },
+      {
+        "heading": "Camel casing and snake casing",
+        "body": "Both join the words of a name without spaces, because an identifier has to be one unbroken name. They differ in how they show where each word starts.\n\n| Convention | How the words are joined | Examples |\n|:--|:--|:--|\n| Camel casing | first word in lower case, each later word starting with a capital | `binWeight`, `calculateFreight` |\n| Snake casing | every word in lower case, with an underscore between words | `bin_weight`, `calculate_freight` |\n\nNeither is better in itself. What matters is that a module uses one consistently. VCAA's own 2025 paper used both: its object description named properties in camel casing, while its pseudocode used snake casing."
+      },
+      {
+        "heading": "Hungarian notation",
+        "body": "Hungarian notation starts a name with a short lower-case prefix that says what kind of element it is, and the rest of the name usually follows camel casing. For a variable, the prefix shows the data type: `intCartons` for an integer, `strConsignee` for a string, `fltWeight` for floating point, `boolInsured` for a Boolean. For an interface control, it shows the type of control: `txtWeight` for a text box, `btnQuote` for a button, `lblTotal` for a label.\n\nThe prefix is most useful when the same data appears in two forms. On a Geelong freight firm's quote screen, the weight a user types sits in `txtWeight` as text, and the program converts it into `fltWeight` before calculating. The prefixes make it obvious which one is safe for arithmetic. Two cautions apply. A prefix only describes the element and doesn't set its type, so if a variable's type changes, its name must change too. And prefix sets differ between teams, so use the ones your design already uses."
+      },
+      {
+        "heading": "Naming each kind of element",
+        "body": "The study design applies conventions to variables, interface controls and code structures such as functions, methods and classes. A team's style guide often gives each kind of element its own rule, for example:\n\n- variables in snake casing, such as `pallet_count`\n- interface controls in Hungarian notation with camel casing, such as `btnBookPickup`\n- functions and methods in camel casing, named for what they do, such as `bookPickup`\n\nThe trouble comes from mixing rules within one kind. If every other variable in a module is in snake casing, a new one called `palletCount` looks as though it belongs to something else."
+      },
+      {
+        "heading": "Matching a design you are given",
+        "body": "When a question shows you a data dictionary or an object description and asks for new names, read the existing names first and copy their pattern exactly: any prefix, the casing and how much each name describes. Suppose the object description for an orchard co-op's `Bin` class lists `binID`, `orchardBlock` and `weightKg`. A new property recording whether the bin passed inspection could be `passedInspection`. The name `passed_inspection` describes the same thing, but it breaks the camel casing the design uses."
+      }
+    ],
+    "worked": {
+      "commandTerm": "compare",
+      "marks": 3,
+      "prompt": "Ada maintains the dispatch module for a Geelong freight firm. Its variables are named using Hungarian notation, such as `strConsignee`, `intCartons` and `fltWeight`. A new developer suggests renaming every variable in snake casing, such as `consignee`, `cartons` and `weight_kg`.\n\nCompare the two naming conventions as they apply to these variables.",
+      "points": [
+        {
+          "text": "Hungarian notation: each name starts with a prefix for its data type, e.g. `fltWeight` is floating point, so a reader knows what each variable holds without finding its declaration.",
+          "marks": 1
+        },
+        {
+          "text": "Snake casing: lower-case words joined by underscores with no type prefix, so names such as `cartons` are shorter than `intCartons` and can't fall out of step with the data type, whereas a prefix misleads if a type changes and the variable isn't renamed.",
+          "marks": 1
+        },
+        {
+          "text": "Similarity: either convention helps only if it is applied to every variable in the module; a mix such as `fltWeight` beside `carton_count` makes the module harder to read and maintain.",
+          "marks": 1
+        }
+      ],
+      "model": "With Hungarian notation, each name begins with a prefix for its data type, so `intCartons` is clearly an integer and `fltWeight` is floating point. Anyone reading the dispatch module knows what each variable holds without looking up its declaration. Snake casing writes the words in lower case joined by underscores and carries no type information, so names such as `cartons` and `consignee` are shorter than `intCartons` and `strConsignee`. They also can't fall out of step with the data, whereas a prefix would mislead readers if a variable's type changed and nobody renamed it. The two conventions have the same purpose, consistent and readable names, and each works only if it is applied to every variable. Whichever Ada's team chooses, a mix such as `fltWeight` next to `carton_count` would make the module harder to read and maintain."
+    },
+    "traps": [
+      "About one student in nine called a name made of lower-case words joined by an underscore Hungarian notation. That is snake casing; Hungarian notation is marked by a prefix.",
+      "New property names in the 2025 object description earned marks only if they followed its camel casing. A sensible name in a different convention scored nothing."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk10",
+    "kk": "U3O1-KK10",
+    "intro": "Validation checks that data entering a module is reasonable and complete before the module relies on it. The study design names three techniques: existence checking, type checking and range checking. In 2025 students had to name the check a line of pseudocode applied, then add a missing check and say why it was needed.",
+    "sections": [
+      {
+        "heading": "What validation can and can't do",
+        "body": "Validation tests whether data is reasonable and complete. It can be done by a person or by the program, as the data is entered or after it has been stored. Its job is to stop a module processing data that is missing or plainly impossible.\n\nIt can't tell you whether data is true. If a grower at a Shepparton orchard co-op types 31 bins when they delivered 13, both numbers are reasonable, so validation accepts the wrong one. Checking data against its source for accuracy is verification, a separate idea.\n\nEvery check needs a rule, and the rule comes from the requirements. If the co-op says a delivery is 1 to 40 bins, the checks should accept exactly that and nothing else."
+      },
+      {
+        "heading": "Existence checking",
+        "body": "An existence (or presence) check confirms that a required field has a value and isn't blank. On the co-op's delivery screen the grower ID is required, so a blank grower ID is rejected with a message such as `Enter your grower ID`.\n\nAn existence check covers only the field it tests. A screen with three required fields needs three checks. An optional field, such as delivery notes, should have none, or the program would turn away deliveries that are perfectly valid."
+      },
+      {
+        "heading": "Type checking",
+        "body": "A type check confirms that data is of the expected type, such as a whole number for a count of bins. Input typed into a text box arrives as text, so an entry such as `forty` or `12b` has to be caught before the program converts it or compares it with a number. Without the check, that conversion or comparison can fail with a type mismatch error and stop the module. When you justify a type check, point to the later step that uses the value as a number."
+      },
+      {
+        "heading": "Range checking",
+        "body": "A range check confirms that a value lies between a lower and an upper limit. For the co-op, 0 bins and 55 bins both fail the rule of 1 to 40. Read the wording of the requirement carefully: \"1 to 40 bins\" includes both limits, so the condition is `bins >= 1 AND bins <= 40`. Writing the upper test as `bins < 40` would wrongly reject a full load of 40. A range check can only judge a value it can compare, which is why it comes after the type check."
+      },
+      {
+        "heading": "Putting the checks in order",
+        "body": "Run the checks from the most basic to the most specific: existence, then type, then range. Each check then receives only data it can handle. Here `isWholeNumber` and `toInteger` are helper functions.\n\n```pseudo\nBEGIN\n    INPUT binsText\n    IF binsText = \"\" THEN\n        DISPLAY \"Enter the number of bins\"\n    ELSEIF NOT isWholeNumber(binsText) THEN\n        DISPLAY \"Bins must be a whole number\"\n    ELSE\n        bins ← toInteger(binsText)\n        IF bins < 1 OR bins > 40 THEN\n            DISPLAY \"A delivery is 1 to 40 bins\"\n        ELSE\n            DISPLAY \"Delivery accepted\"\n        ENDIF\n    ENDIF\nEND\n```\n\nEach message tells the grower what to fix, which a vague \"Invalid input\" doesn't. Whether the checks actually work is shown by testing them with blank, non-numeric and out-of-range entries as well as valid ones."
+      }
+    ],
+    "worked": {
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "Each evening, the weighbridge at a Shepparton orchard co-op sends a CSV file of the day's bin deliveries. Each record holds a grower ID, which is required, and the weight of the bin in kilograms, which must be from 150 to 450. Before the records are added to the season's totals, a module validates every record.\n\nDescribe how the module should apply an existence check and a range check to these records.",
+      "points": [
+        {
+          "text": "Existence check: tests that the grower ID in each record is not blank.",
+          "marks": 1
+        },
+        {
+          "text": "A record that fails is kept out of the season's totals and reported for staff to follow up, because a delivery that can't be credited to a grower is incomplete.",
+          "marks": 1
+        },
+        {
+          "text": "Range check: tests that each weight is from 150 to 450 kg inclusive, e.g. `weight >= 150 AND weight <= 450`.",
+          "marks": 1
+        },
+        {
+          "text": "A weight outside the range, such as 0 or 4500, is flagged and kept out of the totals, so an impossible reading doesn't distort the season's figures.",
+          "marks": 1
+        }
+      ],
+      "model": "The module applies an existence check to the grower ID in every record, testing that the field isn't blank. A record with no grower ID can't be credited to anyone, so it isn't added to the season's totals; instead it goes on an exceptions list for office staff to follow up. The module then applies a range check to each weight, accepting it only if it is from 150 to 450 kilograms inclusive, that is, `weight >= 150 AND weight <= 450`. A weight such as 0 (a missed reading) or 4500 (an extra digit) fails the check, so that record is also held back and listed. The season's totals are then built only from records that are complete and reasonable."
+    },
+    "traps": [
+      "A test that a value is not blank is an existence check. Asked to name the check on such a line in 2025, about a third of students couldn't.",
+      "When asked to add a check, name the field, name the check and say what goes wrong without it. Marks went to a type check on a number used in a comparison, because a non-number would cause an error, or to an existence check on a required field that had none; 38% scored nothing."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk11",
+    "kk": "U3O1-KK11",
+    "intro": "Internal documentation is the comments a developer writes inside the code, for whoever works on it next. The study design names three purposes for it: explaining and justifying data and code structures, supporting code maintenance, and marking unfinished work with placeholder comments (stubs). The key skill is documenting how a module works, so be ready to write comments for a module and to say how they help the next developer.",
+    "sections": [
+      {
+        "heading": "Comments are written for programmers",
+        "body": "Comments sit in the source code, and the translator ignores them, so they never change what the program does. Their reader is a developer: someone who inherits the code, or the original author months later.\n\nBecause the code already shows what each line does, a useful comment adds something the code can't show. A comment such as `// add 1 to count` above `count ← count + 1` only repeats the line. A comment that says why the count matters, or what it will be used for, saves the next reader from guessing."
+      },
+      {
+        "heading": "Explaining and justifying structures",
+        "body": "Explaining says what a module, variable or data structure is for. Justifying says why it was built that way, which is the part a reader can't work out from the code alone. A justifying comment names the choice and gives the reason, tied to the problem. In a Geelong freight firm's dispatch module, comments might read:\n\n- `// 2D array: driver hours are reported by driver, then by day`\n- `// >= 20 so that a parcel of exactly 20 kg pays the heavy rate`\n- `// Linear search: consignments arrive unsorted and are looked up once a day`\n\nWithout the reason, a later developer may tidy up what looks like an odd choice and break the module. With it, they can see the choice was deliberate and what it depends on."
+      },
+      {
+        "heading": "Supporting maintenance",
+        "body": "Maintenance is the work of fixing and changing a program after it has been written, and it is often done by someone who didn't write it. Good comments shorten that work. A header comment at the top of each module can say what the module does, what it takes in, what it returns and any assumption the caller must meet, such as \"the list must already be sorted\". A developer asked to change the freight firm's surcharge rules can then go straight to the right module and change it without reading every line.\n\nComments must be kept true. If the surcharge changes from 5% to 7% and the comment still says 5%, the next developer will believe the comment and may change the code back."
+      },
+      {
+        "heading": "Stubs and placeholder comments",
+        "body": "When part of a program isn't ready, a developer can still put the function in place as a **stub**: its name and parameters are written, but for now its body only returns a fixed value or displays a message. Code that calls it can run, so the rest of the program can be built and tested. The placeholder comment says that the function is unfinished and what it will do.\n\n```pseudo\nFUNCTION remoteSurcharge(postcode)\n    // STUB: will return the surcharge for remote postcodes\n    // once management sets the rates; returns 0 until then\n    RETURN 0\nENDFUNCTION\n```\n\nWithout that comment, a later developer could take the 0 as a real result and never finish the function."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Nadia is building the checkout module for a Ballarat garden centre. The owner hasn't yet decided how gift vouchers will work, but the rest of the checkout has to be tested this week.\n\nExplain why Nadia should write `applyVoucher(total, code)` as a stub with a placeholder comment, rather than leaving the function out until the voucher rules are known.",
+      "points": [
+        {
+          "text": "The stub has the function's name and parameters in place and returns a fixed result for now (e.g. `total` unchanged), so the checkout code that calls it runs and can be tested this week.",
+          "marks": 1
+        },
+        {
+          "text": "The placeholder comment records that the function is unfinished and what it will do, so Nadia or another developer knows what is left to build when the rules are set.",
+          "marks": 1
+        },
+        {
+          "text": "Without the comment, the unchanged total looks like a finished result, so the missing voucher logic could be overlooked and vouchers silently ignored once the module goes live.",
+          "marks": 1
+        }
+      ],
+      "model": "If `applyVoucher` were left out, every part of the checkout that calls it would fail, so Nadia couldn't test the checkout this week. Written as a stub, the function has its name and parameters in place and for now simply returns `total` unchanged, so the rest of the checkout runs and can be tested. Its placeholder comment, such as `// STUB: will apply a gift voucher once the owner sets the rules; returns total unchanged for now`, records that the function is unfinished and what it is meant to do, so Nadia or another developer knows exactly what is left to build. Without the comment, the unchanged total would look like a finished result, and customers' vouchers could be silently ignored after the module goes live."
+    },
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk12",
+    "kk": "U3O1-KK12",
+    "intro": "The study design names four algorithms: selection sort and quick sort for putting data in order, and linear search and binary search for finding a value. You need to know how each one works, follow it through a short list, and justify which suits a situation.",
+    "sections": [
+      {
+        "heading": "Linear search",
+        "body": "A linear search checks each element in turn, starting from the first, until it finds the target or runs out of elements. It works on data in any order, which is its strength. Its weakness is the worst case: for a list of n items it may need n comparisons. At a Geelong freight depot holding 5 000 unsorted consignment records, finding the last record, or showing that a number isn't there at all, takes 5 000 comparisons."
+      },
+      {
+        "heading": "Binary search",
+        "body": "A binary search works only on sorted data. It compares the target with the middle element of the part still being searched. A match ends the search. Otherwise, because the data is in order, the half that can't hold the target is thrown away and the search repeats on the half that can. Each comparison halves what is left, so 1 000 sorted items need at most 10 comparisons and 1 000 000 need at most 20. Arrays are indexed from 0.\n\n```pseudo\nFUNCTION binarySearch(list, n, target)\n    low ← 0\n    high ← n - 1\n    WHILE low <= high DO\n        mid ← (low + high) DIV 2\n        IF list[mid] = target THEN\n            RETURN mid\n        ELSEIF list[mid] < target THEN\n            low ← mid + 1\n        ELSE\n            high ← mid - 1\n        ENDIF\n    ENDWHILE\n    RETURN -1\nENDFUNCTION\n```\n\nRun on unsorted data, it doesn't crash or warn. It can throw away the half that holds the target and return -1 for a value that is there."
+      },
+      {
+        "heading": "Selection sort",
+        "body": "Selection sort builds the sorted list from the front. On each pass it scans the unsorted part for the smallest value and swaps it into the next position. Here it sorts the number of bins five growers delivered, `[24, 9, 31, 5, 12]`, into ascending order:\n\n| After pass | What happened | List |\n|:--|:--|:--|\n| 1 | 5 swapped with 24 | `[5, 9, 31, 24, 12]` |\n| 2 | 9 already in place | `[5, 9, 31, 24, 12]` |\n| 3 | 12 swapped with 31 | `[5, 9, 12, 24, 31]` |\n| 4 | 24 already in place | `[5, 9, 12, 24, 31]` |\n\nFive items need four passes. Selection sort makes n(n - 1)/2 comparisons whatever order the data starts in: 10 here, but 499 500 for 1 000 items. It is simple to write, with two nested loops, but its work grows quickly as lists get longer."
+      },
+      {
+        "heading": "Quick sort",
+        "body": "Quick sort chooses one value as the **pivot** and splits the rest into two sub-lists: values smaller than the pivot go before it and larger values after it, which puts the pivot in its final place. Each sub-list is then split the same way, and the process repeats until every sub-list holds one value or none.\n\nBecause the sub-lists shrink quickly, quick sort usually makes far fewer comparisons than selection sort on a large list, so it is the more efficient of the two. Sorting a co-op's 3 000 season deliveries by grower takes selection sort 4 498 500 comparisons; quick sort typically needs a small fraction of that. The cost is complexity: the splitting repeats inside itself, which makes it harder to write and debug. It also loses most of its speed if the pivot keeps turning out to be the smallest or largest value, for example when the first item is always the pivot and the list is already sorted."
+      },
+      {
+        "heading": "Choosing an algorithm",
+        "body": "A justification names the feature of the data that decides the choice: whether it is sorted, how large it is and how often it is searched.\n\n| Situation | Choice | Reason |\n|:--|:--|:--|\n| 60 unsorted delivery records, one lookup at closing time | Linear search | Sorting first would cost more than it saves |\n| 20 000 stock codes kept in order, looked up all day | Binary search | Already sorted, so at most 15 comparisons a lookup |\n| A large unsorted list that will be searched many times | Quick sort once, then binary search | One efficient sort makes every later search fast |\n| A short list sorted inside a simple module | Selection sort | Easy to write, and the speed difference is tiny |"
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Tilly's module for a Shepparton orchard co-op stores today's bin tag numbers in ascending order in the array `tags`, which holds `[104, 118, 125, 131, 146, 152, 167]`. Arrays are indexed from 0.\n\nExplain how a binary search finds tag 152, naming each value it compares with 152, and explain why it needs fewer comparisons than a linear search would for this tag.",
+      "points": [
+        {
+          "text": "First comparison: the middle element, `tags[3]`, which is 131. Because 131 is less than 152, indexes 0 to 3 are discarded and the search continues on indexes 4 to 6.",
+          "marks": 1
+        },
+        {
+          "text": "Second comparison: the new middle, `tags[5]` ((4 + 6) DIV 2 = 5), which is 152, so the tag is found at index 5 after two comparisons.",
+          "marks": 1
+        },
+        {
+          "text": "A linear search checks 104, 118, 125, 131, 146 and then 152, six comparisons. Binary search needs fewer because the tags are sorted, so each comparison rules out half of those left.",
+          "marks": 1
+        }
+      ],
+      "model": "The search starts with the whole array, indexes 0 to 6, and compares 152 with the middle element, `tags[3]`, which is 131. The tags are in ascending order and 131 is less than 152, so the tag can't be at indexes 0 to 3. Those are discarded and the search continues on indexes 4 to 6. The new middle is index (4 + 6) DIV 2 = 5, and `tags[5]` is 152, so the tag is found after two comparisons, with 131 and then 152. A linear search would check 104, 118, 125, 131, 146 and 152 in turn, six comparisons. Binary search needs fewer because the sorted order lets every comparison rule out half of the tags still left."
+    },
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk13",
+    "kk": "U3O1-KK13",
+    "intro": "The study design sorts programming errors into three types, syntax, logic and runtime, and names four runtime errors: divide by zero, overflow, type mismatch and index out of range. The 2025 exam asked students to link a compiler's message to its likely cause and to match fault descriptions to error types, so learn each type by how it behaves.",
+    "sections": [
+      {
+        "heading": "Telling the three types apart",
+        "body": "Two questions sort almost any fault: can the code be compiled and run, and does the program crash?\n\n| Type | Compiles and runs? | What happens | How it shows up |\n|:--|:--|:--|:--|\n| Syntax | No | The code can't be compiled and executed | The translator reports it |\n| Logic | Yes | It runs to the end but gives wrong output | A test's actual output differs from the expected output |\n| Runtime | Yes, until the fault | An instruction fails during execution and the program crashes unless the error is handled | Only with particular data |\n\nSo if a freight firm's tracking program won't start, look for a syntax error. If it starts but crashes when a truck has no parcels, that is a runtime error. If it runs smoothly but shows the wrong total weight, that is a logic error."
+      },
+      {
+        "heading": "Syntax errors",
+        "body": "A syntax error breaks the rules of the programming language, so the code can't be compiled and executed until it is fixed. Typical causes are a missing bracket or quotation mark, a misspelt keyword, or a block that is opened but never closed. The translator reports the problem and where it found it. A loop that never ends, or a division by zero, is not a syntax error: that code follows the rules and goes wrong only when it runs."
+      },
+      {
+        "heading": "Logic errors",
+        "body": "A logic error lets the program run without complaint but produce the wrong result, from a wrong calculation or a condition that is evaluated the wrong way. A Geelong freight firm charges its heavy-parcel rate from 20 kg upwards. If the code tests `weight > 20`, a parcel of exactly 20 kg gets the light rate. Nothing crashes and no message appears. Only a test that compares the expected and actual charge for a 20 kg parcel shows the fault, which is why logic errors are found by testing rather than by the translator."
+      },
+      {
+        "heading": "The four runtime errors",
+        "body": "A runtime error happens during execution, when an instruction can't be carried out with the data it has. Unless the program handles the error, it crashes.\n\n- **Overflow**: a value or data needs more memory than is available for it, such as a running total that grows too large for its data type.\n- **Index out of range**: the code uses an array position that doesn't exist. In a 12-element array indexed from 0, the last index is 11, so a loop written `FOR i ← 0 TO 12` that reads each element fails when `i` reaches 12.\n- **Type mismatch**: an operation receives data of a type it can't work with, such as converting the text `twelve` from a text box to an integer.\n- **Divide by zero**: a division whose divisor is 0, such as the average parcel weight worked out for a truck that carried no parcels."
+      },
+      {
+        "heading": "Preventing runtime errors",
+        "body": "Many runtime errors can be stopped before they happen by an extra check on the data. Test that a count is greater than 0 before dividing by it, that an index is inside the array before using it, and that an entry is a whole number before converting it. Where a check isn't practical, error handling can catch the error as it occurs, show a message and let the program carry on. Either way, the user sees a clear message instead of a crash."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Kai is writing a module for a Geelong freight firm that adds up the weights of the parcels on a truck. His first version has two faults. One line is missing a closing bracket. Another line subtracts each parcel's weight from the running total instead of adding it.\n\nExplain why the compiler reports the first fault before the module can run, while the second fault is found only when the module is tested.",
+      "points": [
+        {
+          "text": "The missing bracket is a syntax error: it breaks the rules of the language, so the code can't be compiled and the compiler reports it before the module can run.",
+          "marks": 1
+        },
+        {
+          "text": "Subtracting instead of adding is valid code, so the module compiles and runs to the end without an error message, but it gives a wrong total: a logic error.",
+          "marks": 1
+        },
+        {
+          "text": "The logic error is found only by testing, comparing the actual output with the expected output worked out from the requirements, e.g. parcels of 4 kg and 6 kg should give 10 kg but give -10 kg.",
+          "marks": 1
+        }
+      ],
+      "model": "The missing closing bracket breaks the rules of the programming language, so it is a syntax error. The compiler can't translate code that breaks those rules, so it reports the error, and the module can't run until the bracket is added. Subtracting each weight is different: `total ← total - weight` follows the language's rules, so the module compiles and runs to the end with no error message. It simply produces the wrong answer, which is a logic error. The compiler has no way of knowing that Kai meant to add, so the fault shows up only in testing: for a truck carrying parcels of 4 kg and 6 kg the expected total is 10 kg, but the actual output is -10 kg, and that mismatch tells Kai there is an error to find."
+    },
+    "traps": [
+      "When a compiler reports a syntax error, look for a broken rule of the language, such as a missing required symbol. In 2025, 69% chose that cause and nearly a third chose another option.",
+      "Matching fault descriptions to error types went very well in 2025, with 82% earning full marks: memory running out was overflow, text stored in an integer array was type mismatch, a condition giving unexpected output was logic, and a counter moving past the last element was index out of range."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o1-kk14",
+    "kk": "U3O1-KK14",
+    "intro": "Debugging finds and fixes errors while code is being written; testing checks that a module does what its requirements say. The study design names four techniques: breakpoints, debugging statements, relevant test data, and test cases that compare expected and actual output in a testing table. In 2025 a single testing table was worth six marks.",
+    "sections": [
+      {
+        "heading": "Debugging and testing work together",
+        "body": "Testing tells you that something is wrong: a test's actual output doesn't match its expected output. Debugging finds out why, fixes the code and tests again to confirm the change worked. Both go on all through development. A module for a Geelong freight firm might pass nine tests and fail one; that one failing case is where debugging starts, and the test that exposed it is rerun once the fix is in."
+      },
+      {
+        "heading": "Breakpoints",
+        "body": "A breakpoint is a marker set on a line of code in the development environment. When execution reaches that line, the program pauses. The developer can then inspect the current value of each variable and step through the following lines one at a time. The code itself isn't changed.\n\nPlace a breakpoint where the fault is likely to show. In a freight firm's invoice module, a breakpoint on the line that adds each consignment's charge pauses once per consignment. Because that line is inside the loop, you can watch the total grow and compare it with your own working. The first pass where the two differ points to the item, and the line, that causes the problem."
+      },
+      {
+        "heading": "Debugging statements",
+        "body": "A debugging statement is a temporary output line that shows a value, or which way the code went, while the program keeps running. At an orchard co-op, a bin of 350 kg or more counts as full. For the four bins below the count should be 3, but this algorithm displays 2. Arrays are indexed from 0.\n\n```pseudo\nBEGIN\n    weights ← [372, 350, 198, 410]\n    full ← 0\n    FOR i ← 0 TO 3\n        IF weights[i] > 350 THEN\n            full ← full + 1\n        ENDIF\n        DISPLAY \"DEBUG i = \" + i + \", weight = \" + weights[i] + \", full = \" + full\n    ENDFOR\n    DISPLAY \"Full bins: \" + full\nEND\n```\n\nThe debugging line for i = 1 shows a weight of 350 with `full` still at 1, so the 350 kg bin wasn't counted. Line 5 should test `>= 350`. Once the fault is fixed, the debugging statement is removed so users never see it."
+      },
+      {
+        "heading": "Relevant test data",
+        "body": "Each test value should have a purpose, and its expected result is worked out from the requirements before the test is run. For a freight booking that accepts 1 to 40 cartons, a relevant set includes:\n\n- a typical valid value, such as 12\n- each limit and the value just past it: 0, 1, 40 and 41\n- invalid entries that the validation must reject, such as a blank and the text `ten`\n\nValues at and just past each limit catch a common slip, `<` written where `<=` was needed. A module with that error can pass every test that uses only typical values."
+      },
+      {
+        "heading": "Testing tables",
+        "body": "A testing table records each test case as a row: a test number, a column for each input, the expected output and the actual output. The expected output is filled in before the test is run; the actual output is what the program displays when it runs. A row where the two differ marks an error to debug.\n\n| Test | Cartons | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 12 | Booking accepted. | Booking accepted. |\n| 2 | 0 | Enter 1 to 40 cartons. | Enter 1 to 40 cartons. |\n| 3 | 1 | Booking accepted. | Enter 1 to 40 cartons. |\n\nTest 3 fails at the lower limit, so the range check needs fixing. Each row tries a new input, and both outputs are written in full, exactly as the program displays them."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "A Bendigo print shop charges $0.40 a page, and orders of 100 pages or more get 10% off. Ari has tested the module that calculates the total.\n\n| Test | Pages | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 50 | Total: $20.00 | Total: $20.00 |\n| 2 | 100 | Total: $36.00 | Total: $40.00 |\n| 3 | 101 | Total: $36.36 | Total: $36.36 |\n\nExplain which test reveals an error and its most likely cause, and how Ari could use a breakpoint to confirm that cause.",
+      "points": [
+        {
+          "text": "Test 2 reveals the error: for 100 pages the expected output is Total: $36.00 but the actual output is Total: $40.00, so the discount isn't applied at exactly 100 pages.",
+          "marks": 1
+        },
+        {
+          "text": "Most likely cause: the discount condition tests `pages > 100` where the requirement needs `pages >= 100`; test 3 shows the discount itself works above the limit.",
+          "marks": 1
+        },
+        {
+          "text": "Breakpoint: set it on the line that tests the page count, run test 2, inspect `pages` (100) and step forward; the program skips the discount line, confirming that the condition is at fault.",
+          "marks": 1
+        }
+      ],
+      "model": "Test 2 reveals the error. For 100 pages the expected output is Total: $36.00, because an order of 100 pages or more gets 10% off, but the actual output is Total: $40.00, the full price. Tests 1 and 3 match, so the price per page and the discount calculation both work; the fault appears only at exactly 100 pages. The most likely cause is that the discount condition tests `pages > 100` where the requirement needs `pages >= 100`. To confirm this, Ari sets a breakpoint on the line that tests the page count and runs test 2. When execution pauses he inspects `pages`, which is 100, then steps forward and sees the program skip the discount line. That shows the condition, not the calculation, needs fixing."
+    },
+    "traps": [
+      "Each row of a testing table needs a new combination of inputs. In 2025 a row that repeated an earlier scenario earned nothing.",
+      "Write the expected and actual output in full, exactly as the program displays them. Shortened outputs lost marks in 2025.",
+      "Marks in 2025's table went to rows that, with the row already given, covered each combination of the two conditions being met or not met; the average was 3.6 out of 6."
+    ],
+    "source": "study-design"
+  }
+]

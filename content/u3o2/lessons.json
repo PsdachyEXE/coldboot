@@ -1,0 +1,871 @@
+[
+  {
+    "id": "l-u3o2-kk01",
+    "kk": "U3O2-KK01",
+    "intro": "This point is about why a software project gets started at all. The study design names four reasons, and an exam question may describe a situation and ask you to state or explain the reasons that apply to it. Marks go to reasons tied to details in the scenario, not to a recited list.",
+    "sections": [
+      {
+        "heading": "Productivity and efficiency",
+        "body": "Efficiency is about how much time, money and effort it takes to get a result. Productivity is how much gets done with the people and hours available. Software improves both mostly by automating work that people do by hand.\n\nAt Redgum Flat Growers, a Shepparton orchard co-op, every bin of pears that reaches the packing shed gets a paper docket. Each evening two office staff spend about three hours typing the day's dockets into a spreadsheet so growers can be paid. If shed staff scanned a barcode on each bin as it arrived, the record would be made once, at the source, and those three hours could go to other work. When a scenario describes slow, repeated handling of the same data, this is a reason to give."
+      },
+      {
+        "heading": "Reducing costs",
+        "body": "Cutting costs overlaps with efficiency, but it is about money, so use the dollar figures when the scenario gives them. Staff time is a cost: three hours of typing every evening through a twelve-week harvest is a wage bill the co-op could stop paying. Errors cost money as well. A misread docket means a grower is underpaid, someone investigates, and a corrected payment goes out. Printing and posting paper statements is another expense a program could remove.\n\nOne change can support both reasons, as long as each is explained in its own terms: the hours of work saved for efficiency, and the dollars saved for cost."
+      },
+      {
+        "heading": "Gaps in the market",
+        "body": "Some software exists because people want something that no current product gives them. This reason is about a market: there are customers or users outside the developer, and nothing serves them well yet. Phone apps, games and virtual reality experiences are often built for this reason, and individuals spot gaps as well as companies. A Year 12 student in Mooroopna who notices that no app tells backpackers which orchards are hiring pickers this week has found one.\n\nThe reason doesn't fit every project. The co-op's bin scanning program is for its own staff and growers and won't be sold to anyone, so it fills no gap in a market. Give this reason only when the scenario has outside customers who are poorly served."
+      },
+      {
+        "heading": "Organisational objectives or needs",
+        "body": "Organisations set themselves objectives, and they have needs they must meet, sometimes because a law or a partner requires it. A project can be justified by either one even when nothing is going wrong. Suppose the co-op's board has set the objective that every grower gets a payment statement within 48 hours of delivering fruit, and statements currently take a fortnight. A program that produces each statement as soon as the bins are recorded meets that objective. A need could arise if a supermarket buyer decides to accept fruit only from suppliers who report each bin's orchard block electronically.\n\nOn its own, 'to meet the organisation's needs' could describe any project. Name the objective or need the scenario gives and say how the software meets it."
+      },
+      {
+        "heading": "Applying the reasons to a scenario",
+        "body": "One project usually has several reasons, and the exam wants the ones the scenario supports. Read the case for clues. Hours spent re-entering data point to productivity and efficiency. Wages, rework or postage point to costs. Customers who want something no product offers point to a gap in the market. A stated target or a new obligation points to objectives or needs.\n\nIf a case also stresses mistakes or poor communication, the 2025 report shows that reducing human error and improving communication were credited as reasons too. Write each reason and its evidence from the case in the same sentence."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Quandong Road Freight, a Mildura trucking company, gives its 25 drivers printed run sheets. Drivers phone the depot after each delivery, and a clerk spends about 15 hours a week typing these calls into the billing system. The company plans an app that lets drivers record each delivery on their phones. The app will be used only by the company's own drivers and depot staff.\n\nA manager writes that the main reason for the project is *identifying an opportunity to address a gap in the market*. Explain why this reason does not fit the project, and explain **one** reason from the study design that does fit.",
+      "points": [
+        {
+          "text": "States what the reason means: building something that customers or users outside the organisation want and that no existing product provides",
+          "marks": 1
+        },
+        {
+          "text": "Explains why it doesn't fit: the app is used only by the company's own drivers and depot staff and isn't offered to any market, so it fills no market gap",
+          "marks": 1
+        },
+        {
+          "text": "Identifies a reason that fits, e.g. increasing productivity and efficiency, or reducing costs",
+          "marks": 1
+        },
+        {
+          "text": "Explains it with evidence from the scenario, e.g. each delivery is recorded once by the driver, so the clerk's 15 hours a week of typing phoned-in deliveries is no longer needed (efficiency), or the company stops paying for those hours (costs)",
+          "marks": 1
+        }
+      ],
+      "model": "Addressing a gap in the market means building something that customers or users outside the organisation want and that no existing product gives them. Quandong Road Freight's app will be used only by its own drivers and depot staff and won't be offered to anyone else, so it doesn't fill a gap in any market.\n\nA reason that does fit is increasing productivity and efficiency. At present each delivery is phoned in and then typed into the billing system by a clerk, which takes about 15 hours a week. If drivers record each delivery in the app as it happens, the data is entered once, so that double handling disappears and the clerk's hours can go to other work."
+    },
+    "traps": [
+      "In the 2025 case study (C1), students had to give three reasons why a head office would start a project, after reading that one staff member spent one to two hours per agency collating spreadsheets by hand. Only 29% scored all three marks. The high-scoring answer in the report linked each reason to the case: automating manual work for efficiency, meeting the company's need for better communication, and cutting the cost of manual labour and of errors.",
+      "The examiners also accepted two reasons outside the study design's four, reducing human error and improving communication, both of which the case mentioned. Start from the four listed reasons, and add others only when the scenario points to them."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk02",
+    "kk": "U3O2-KK02",
+    "intro": "A brief is the document that starts a software project. It says what is to be addressed and who the solution is for, and it shows that the project is worth doing. The study design lists five features a brief covers, and a question may ask you to describe them for a scenario or judge whether a brief covers them.",
+    "sections": [
+      {
+        "heading": "Outlining the problem, need or opportunity",
+        "body": "A brief opens with the situation the solution responds to, and it helps to know which kind of situation it is. A **problem** means the current way of working is falling short. A **need** is something the organisation must do but can't yet, such as meeting a new reporting rule, even when its current system works well. An **opportunity** is a chance to gain something new when nothing is broken.\n\nTess, a Year 12 student in Bendigo, volunteers at the Wattlecombe Toy Library. Members borrow toys using cards kept in a shoebox, cards go missing, and nobody can tell which toys are overdue. Her outline describes that problem in plain words the committee can check, and says broadly what the solution will do: let volunteers record loans and see which toys are overdue."
+      },
+      {
+        "heading": "Proposed users",
+        "body": "The brief names who will use the solution and what they are like. Tess lists the volunteers who run the Saturday sessions, many of them retirees who rarely use computers, and the coordinator who follows up overdue toys from home. Naming the users tells Tess whom to collect data from once analysis begins, and their characteristics later shape requirements such as usability."
+      },
+      {
+        "heading": "Programming languages to be used",
+        "body": "The brief states which language the solution will be written in. In Unit 4 the solution is built in an object-oriented language, and the choice affects which devices it can run on and whether the developer has the skills to build it. Tess plans to use Python, which she has studied and which runs on the library's laptop. Stating the language early lets the client agree to the approach before planning starts."
+      },
+      {
+        "heading": "Feasibility",
+        "body": "Feasibility is whether the project can actually be finished with the time, money, skills and equipment available. Writing that the project 'is feasible' proves nothing, so the brief gives evidence. Tess estimates seven weeks of work against the ten weeks before the committee wants the system, no cost beyond the laptop the library already owns, and a language she already uses. If the figures don't fit, the brief should say so, so the project can be changed before more time is spent on it."
+      },
+      {
+        "heading": "Originality",
+        "body": "Originality is about what this solution offers that existing products, or the current way of working, don't. It doesn't mean nothing similar exists anywhere. Tess tried two free lending apps, but both are built for books and can't record that a toy came back with pieces missing. Pointing out that difference also shows why the library should build something rather than adopt a product that already exists."
+      },
+      {
+        "heading": "What a brief leaves out",
+        "body": "A brief comes before the project plan and the analysis, so it stays broad. The detailed requirements, constraints and scope are worked out in analysis and recorded in the software requirements specification. Screen layouts, pseudocode and data dictionaries come later still, in design. A draft brief that already specifies a drop-down list or a data type has jumped ahead of itself."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Jarrah, a Year 12 student, is writing a brief for an app for the Gumnut Hollow Men's Shed in Ballarat. Each of the shed's 30 members must be trained on a machine, such as a lathe or a saw, before using it. Training is recorded on paper cards kept in the office, so a supervisor on the workshop floor can't quickly check whether a member has been trained on the machine they are about to use. The committee has tried two free training-record apps, but neither lets a supervisor scan a code on a machine and see straight away who is trained to use it. The committee wants the app in six weeks. Jarrah, who has studied C# for a year, estimates the work will take nine weeks.\n\nExplain what Jarrah's brief should say about the **feasibility** and the **originality** of this project.",
+      "points": [
+        {
+          "text": "Feasibility, applied: as proposed, the project can't be finished on time, because the nine-week estimate is longer than the six weeks the committee has allowed (Jarrah's C# skills are not the obstacle)",
+          "marks": 1
+        },
+        {
+          "text": "Feasibility, consequence: the brief should state this plainly so the committee can move the date or agree to a smaller first version before analysis begins",
+          "marks": 1
+        },
+        {
+          "text": "Originality, applied: a supervisor can scan a code on a machine and see straight away which members are trained to use it, which neither free app does",
+          "marks": 1
+        },
+        {
+          "text": "Originality, significance: this difference shows why the shed needs its own app rather than an existing one",
+          "marks": 1
+        }
+      ],
+      "model": "Feasibility: the brief should show whether the app can be built with the time, skills and resources available. Jarrah has studied C# for a year, so skills are not the issue, but his estimate of nine weeks is longer than the six weeks the committee has allowed. The brief should say plainly that the project isn't feasible in that time, so the committee can move the date or agree to a smaller first version before any analysis is done.\n\nOriginality: the brief should explain what this app offers that existing options don't. Neither free app lets a supervisor check training at the machine, while Jarrah's app will let a supervisor scan a code on a lathe or saw and see straight away which members are trained to use it. That difference is why the shed needs its own app rather than one of the free ones."
+    },
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk03",
+    "kk": "U3O2-KK03",
+    "intro": "A Gantt chart is the project plan you build for the SAT, and the exam asks how one is built and how it is used. This point covers setting up the plan (tasks, their order and timing, dependencies, milestones and the critical path) and using it while the project runs. In 2025 a five-mark Section B question went to Gantt charts, and many students lost marks by describing what the chart looks like instead of how it is used.",
+    "sections": [
+      {
+        "heading": "Tasks, durations and dependencies",
+        "body": "Start by listing the tasks every stage of the problem-solving methodology needs, from collecting data through to evaluation, broken into pieces small enough to estimate. Give each one a duration. Then record its **dependencies**: the tasks that must finish before it can start. Tasks are sequenced by these dependencies, not by the order they were written down, and two tasks with no dependency between them can run at the same time.\n\nLin is planning a bin-tracking app for Bluegum Bend Orchards, a Shepparton co-op. Her plan, in days:\n\n| Id | Task | Days | Depends on |\n|:--|:--|:--|:--|\n| A | Interview shed supervisors | 3 | none |\n| B | Survey growers | 5 | none |\n| C | Write SRS | 2 | A, B |\n| M1 | SRS approved | 0 | C |\n| D | Design screens | 4 | M1 |\n| E | Design data file | 2 | M1 |\n| F | Code app | 8 | D, E |\n| G | Test app | 3 | F |\n\nA and B both start on day 1. C needs both of them, so it can't start until day 6."
+      },
+      {
+        "heading": "The critical path",
+        "body": "The **critical path** is the longest chain of dependent tasks from the start of the project to its finish. Add up each chain: B, C, M1, D, F and G total 5 + 2 + 0 + 4 + 8 + 3 = 22 days, longer than any chain through A or E. The app can't be finished in under 22 days, and a delay to any task on this path moves the finish date by the same amount unless time is won back later.\n\nA delay to a task off the path may not move the finish. If A took 4 days instead of 3, it would end on day 4, but C can't start before day 6 anyway, so nothing else moves. A one-day delay to E makes no difference either, because F has to wait for D. A long enough delay, though, can make a task's chain the longest, and then the finish moves."
+      },
+      {
+        "heading": "Milestones",
+        "body": "A **milestone** marks a moment, not a piece of work, so it has no duration; it is usually drawn as a diamond. Useful milestones are checkpoints such as the end of a stage of the problem-solving methodology. M1, the client approving the SRS, closes analysis, and design can't begin until it is reached.\n\nIts value for monitoring is that it gives a date to check. If the end of day 7 passes without approval, Lin knows straight away that design, coding and testing will all start late. A task from the list, such as *Code app*, isn't a milestone, although the moment coding is complete could be one."
+      },
+      {
+        "heading": "Monitoring and documenting progress",
+        "body": "Once work begins, the chart becomes a record. **Documenting** progress means entering what really happened: actual start and finish dates, how much of each task is done, when milestones were reached, and a short note on the cause and effect of each change, with the planned bars left visible. **Monitoring** means comparing actual progress with the plan at regular intervals to see what is ahead or behind, and checking whether a late task is on the critical path.\n\nSuppose *Design screens* (D) runs three days over. D is on the critical path, so Lin extends its bar, moves F and G three days later and notes the reason. The app is now due at the end of day 25, unless she can recover time on a later critical task. Saving time on E wouldn't help, because E isn't on the critical path."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Tilly is managing the development of a delivery-tracking app for Stringybark Freight in Geelong. Her plan, in days:\n\n| Id | Task | Days | Depends on |\n|:--|:--|:--|:--|\n| A | Observe dispatch staff | 4 | none |\n| B | Interview drivers | 2 | none |\n| C | Write SRS | 3 | A, B |\n| D | Design screens | 5 | C |\n| E | Code app | 9 | D |\n| F | Test app | 3 | E |\n\nInterviewing drivers takes 3 days instead of 2, because two drivers were on leave. Explain how Tilly should record this delay on her Gantt chart, and whether it changes the date the app will be ready.",
+      "points": [
+        {
+          "text": "Records the change: updates task B with its actual finish (end of day 3) and a note giving the reason (drivers on leave), keeping the planned bar so planned and actual can be compared",
+          "marks": 1
+        },
+        {
+          "text": "Identifies that B is not on the critical path, which is A, C, D, E, F (4 + 3 + 5 + 9 + 3 = 24 days)",
+          "marks": 1
+        },
+        {
+          "text": "Explains that C must wait for A, which still finishes at the end of day 4, so C starts on day 5 as planned and the app is still ready at the end of day 24",
+          "marks": 1
+        }
+      ],
+      "model": "Tilly should update task B on the chart with its actual finish, the end of day 3, and add a short note that two drivers were on leave. She keeps the original bar visible so the planned and actual durations can be compared later.\n\nThe delay doesn't change when the app will be ready. The critical path is A, C, D, E and F, which takes 4 + 3 + 5 + 9 + 3 = 24 days, and B is not on it. Write SRS can't start until both A and B are finished. A still finishes at the end of day 4 and B now finishes at the end of day 3, so C starts on day 5 as planned and the app is still ready at the end of day 24."
+    },
+    "traps": [
+      "Asked to describe the way a Gantt chart puts tasks in order (B1a), 37% scored zero. The mark went to saying that tasks are put in order by their dependencies, each task following the ones it relies on.",
+      "Asked for a milestone and its significance for monitoring (B1b), many students named a task from the question's list, which earned nothing, and many named a sensible milestone but never explained why it matters. The high-scoring answer chose the completion of the design stage and said that reaching it means development can start.",
+      "Asked how a Gantt chart is used to monitor and document progress (B1c), only 15% earned both marks. Describing what a Gantt chart is scored nothing. Credit went to tracking each task's progress, comparing it with the schedule to see whether the project is ahead or behind, and spotting delays on the critical path so the plan can be adjusted.",
+      "When a task on the critical path ran two days behind (A13), 85% chose the right response: give the late task a new time frame and reschedule the tasks that depend on it."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk04",
+    "kk": "U3O2-KK04",
+    "intro": "Before requirements can be written, a developer has to find out what the people involved need. The study design names four methods: interviews, observations, surveys and reports. Exam questions ask you to choose a method for a group of stakeholders and justify it from the scenario, and in 2025 the justification was where marks were lost.",
+    "sections": [
+      {
+        "heading": "Interviews and surveys: depth or reach",
+        "body": "An **interview** is a conversation with one person or a small group. Its strength is depth: the developer can ask follow-up questions, clear up a vague answer and chase something unexpected. Its cost is time, so only a few people can be interviewed, and nobody's answers are anonymous.\n\nA **survey** asks many people the same set questions, often online. It reaches large or scattered groups quickly and cheaply. Closed questions, such as ratings, give numbers that are fast to total, while open questions collect reasons and ideas but take longer to read. Responses can be anonymous, which helps people answer honestly, but a survey can't follow up a puzzling answer.\n\nAt Tidewrack Freight, a Geelong carrier, the two operations managers hold the business rules for pricing and routing, so interviews suit them. The 40 drivers work across regional Victoria and are seldom at the depot together, so a short survey on their phones suits them."
+      },
+      {
+        "heading": "Observations: what people really do",
+        "body": "An **observation** means watching people carry out the task the solution will support. It shows the real steps, the workarounds and where time is lost, including things people forget to mention or don't realise they do. Watching Tidewrack's dispatch staff for a morning might show them typing every consignment note into two separate programs.\n\nIt has limits. People may work differently while they are being watched, a short visit can miss events that happen rarely, and observation shows what people do but not why, or what they would prefer."
+      },
+      {
+        "heading": "Reports: what has already been recorded",
+        "body": "**Reports** are existing documents the developer studies, such as the current system's monthly summaries, a complaints log or an audit. They are secondary data: someone else collected them, often over a long period, so they can reveal volumes, trends and repeated problems without taking up anyone's time. Tidewrack's monthly summaries could show how many consignments are handled on the busiest day, which the new app must cope with.\n\nReports show what happened, not why, and they may be incomplete or made for some other purpose. As a data collection method, this means reading reports that already exist, not the reports the new program will produce."
+      },
+      {
+        "heading": "Choosing a method and justifying it",
+        "body": "Match the method to the group and to what you need to find out. Ask how many people there are and where they are, whether you need opinions, detail or evidence of how a task is really done, and whether people might hold back. Then put the scenario's details into your reason.\n\n'Survey the drivers because surveys are quick' is generic. 'Survey the drivers because there are 40 of them spread across regional Victoria, and an online survey reaches them all without bringing them back to the depot' uses the case. Methods also work well together: an observation can expose a problem that an interview then explains."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Yarrabend Shire Council keeps a log of every missed bin collection that residents have reported over the past two years, with the street and the date. Mia is analysing the requirements for a route-planning app for the council's garbage trucks. She wants to find out which streets are missed most often, and why.\n\nExplain how the log would help Mia, why it is not enough on its own, and which other data collection method she should use alongside it.",
+      "points": [
+        {
+          "text": "How the log helps: it is an existing report covering two years, so it shows which streets are missed and how often without taking anyone's time",
+          "marks": 1
+        },
+        {
+          "text": "Why it isn't enough: it records only the misses residents reported, and it shows where and when, not why the trucks missed those streets",
+          "marks": 1
+        },
+        {
+          "text": "A second method with a reason from the scenario, e.g. interviewing the truck drivers, who can explain why particular streets are missed and answer follow-up questions; or observing a run that includes a street that is often missed",
+          "marks": 1
+        }
+      ],
+      "model": "The log is an existing report covering two years of missed collections, so Mia can count which streets are missed most often, and in which months, without taking up any staff time.\n\nIt isn't enough on its own. It holds only the misses that residents bothered to report, and it records where and when each one happened but not why the truck didn't collect the bins.\n\nMia should also interview some of the truck drivers. They work the routes every week and can explain what causes the misses, such as narrow streets or parked cars, and an interview lets her ask follow-up questions about each problem street."
+    },
+    "traps": [
+      "In the 2025 case study (C3), most students chose the expected methods: a survey for the property managers at 60 agencies around Australia, and interviews for the small leadership team. Few explained their choices using the case, and only 24% scored all four marks. The high-scoring answer pointed to the number and spread of the agencies for the survey, and to the small size of the leadership group and the chance to ask follow-up questions for the interviews."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk05",
+    "kk": "U3O2-KK05",
+    "intro": "Requirements say what a solution must do and how well it must do it. The study design splits them into functional and non-functional requirements, and the 2025 exam asked students to classify statements; you may also be asked to write requirements of each kind for a scenario. A requirement is only useful if it can be tested later.",
+    "sections": [
+      {
+        "heading": "Functional requirements: what it does",
+        "body": "A functional requirement states something the solution does: the inputs it accepts, the outputs it produces and the processing in between, including manipulating and validating data. Kookaburra Lane Community Meals in Ballarat wants an app for its volunteer drivers. Functional requirements include:\n\n- record each meal delivered, with the client and the time\n- calculate each driver's kilometres for reimbursement\n- reject a delivery time that is later than the current time\n- print a weekly list of clients who missed two or more meals\n\nA number inside a statement doesn't change its type. 'Two or more meals' sets the condition for the list, but producing the list is still a task the app carries out."
+      },
+      {
+        "heading": "Non-functional requirements: how well",
+        "body": "A non-functional requirement describes a quality attribute. It adds no task; it says how well the solution performs the tasks it already has. The problem-solving methodology names five:\n\n| Quality | What it is about | Meals app example |\n|:--|:--|:--|\n| Usability | How easily the intended users learn and use it | A new volunteer can record a delivery after a five-minute demonstration |\n| Reliability | Working correctly and consistently in normal use | The app is available every morning the service runs |\n| Portability | Running on different devices or platforms | It works on Android phones and on iPhones |\n| Robustness | Coping with unexpected input or conditions without crashing | Losing signal mid-delivery never crashes the app or loses the record |\n| Maintainability | How easily developers can correct, change or extend it | A new reimbursement rate is changed in one place in the code |"
+      },
+      {
+        "heading": "Telling them apart",
+        "body": "Ask one question: does the statement add an input, an output or a process? If it does, it is functional. If it only says how well, how easily or on which platforms existing tasks happen, it is non-functional. Some cases are easy to mix up:\n\n- Reliability is about working dependably in normal use; robustness is about surviving the unexpected, such as invalid input or a dropped connection.\n- Maintainability concerns developers changing the code. 'The coordinator can update a client's address' is something the app does, so it is functional.\n- A statement about platforms the app needn't support, such as 'it doesn't have to run on tablets', describes no task. It concerns portability, so it is non-functional."
+      },
+      {
+        "heading": "Making requirements measurable",
+        "body": "Requirements are the basis for testing during development and for the evaluation criteria used to judge the finished solution, so each one has to be checkable. 'The app should be easy to use' can't be tested: easy for whom, and measured how? Name the users, the task and a target: *a volunteer who has never used the app can record a delivery within one minute, without help.* Now the developer can time real volunteers and get a clear yes or no.\n\nFunctional requirements need the same precision. 'Give regular clients a discount' can't be coded until 'regular' and the size of the discount are defined."
+      },
+      {
+        "heading": "Where requirements come from",
+        "body": "Requirements are worked out in analysis, from the data collected and with the help of analytical tools. Each use case on a use case diagram usually points to at least one functional requirement. An observation that new volunteers struggle to find the right button points to a usability requirement. Once agreed, both kinds are recorded in the software requirements specification."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Kangaroo Gully Community Bike Workshop in Bendigo is having a program built to track repair jobs. Two statements from Kai's draft requirements are:\n\n1. *The program must be easy to use.*\n2. *A mechanic can attach up to five photos to each repair job.*\n\nKai says statement 2 is a non-functional requirement because it contains a number, and that statement 1 is ready to go into the software requirements specification as written. Explain why Kai is wrong about each statement, and rewrite statement 1 so that it could be tested.",
+      "points": [
+        {
+          "text": "Statement 2 is functional: attaching photos is an input the program accepts and stores with each repair job",
+          "marks": 1
+        },
+        {
+          "text": "The number only limits how many photos can be attached; it doesn't make the statement describe a quality of the program",
+          "marks": 1
+        },
+        {
+          "text": "Statement 1 is a non-functional (usability) requirement, but 'easy' names no users, task or target, so it can't be tested during development or used as an evaluation criterion",
+          "marks": 1
+        },
+        {
+          "text": "A measurable rewrite naming the users, a task and a target, e.g. a mechanic who has not used the program before can open a new repair job within two minutes after a five-minute demonstration",
+          "marks": 1
+        }
+      ],
+      "model": "Statement 2 is a functional requirement. Attaching photos to a repair job is an input the program accepts and stores, so it describes something the program does. The number five only limits how many photos are allowed; it doesn't turn the statement into a quality of the program.\n\nStatement 1 is a non-functional requirement about usability, but it isn't ready for the SRS. 'Easy' doesn't say for whom, for which task or by how much, so nobody could test it during development or use it to evaluate the finished program.\n\nRewritten: *A mechanic who has not used the program before can open a new repair job, with the customer's name and the bike's fault, within two minutes after a five-minute demonstration.*"
+    },
+    "traps": [
+      "In the 2025 case study (C5), 58% of students classified all three statements correctly. Being able to generate financial reports over a set number of years counted as functional despite the number in it, and so did letting tenants lodge maintenance requests. The statement that the solution needn't run on Apple devices counted as non-functional."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk06",
+    "kk": "U3O2-KK06",
+    "intro": "Constraints are the limits a solution has to be designed and built within. The study design names four kinds: economic, legal, social and technical. Questions can give a scenario and ask you to name the type of a constraint and explain how it shapes the design.",
+    "sections": [
+      {
+        "heading": "What makes something a constraint",
+        "body": "A requirement describes the solution: what it does or how well. A constraint describes the conditions around the project, and it rules some designs in and others out. Corella Point Physio, which runs three clinics in Geelong, wants an app for patients to book appointments. It has $12 000 to spend, the app must be running when a fourth clinic opens on 1 July, and reception staff must use it on their existing computers. None of these says what the app does; each limits how it can be built. Constraints are identified during analysis so designers work inside them from the start, rather than reworking a design later."
+      },
+      {
+        "heading": "Economic: money and time",
+        "body": "Economic constraints cover both cost and time. The $12 000 budget might rule out a paid text-message reminder service or a second developer. The 1 July deadline counts as well, because time is an economic limit: it caps how many features can be built and tested, which often means some are left for a later version."
+      },
+      {
+        "heading": "Technical: the technology available",
+        "body": "Technical constraints come from hardware, software and networks: speed of processing, capacity, the equipment available, compatibility and security. The reception computers are old and have little processing power, so the app must run well on them. Bookings also have to pass into the patient records system the clinics already use, which is a compatibility constraint. Patients book on their own phones, some where mobile coverage is weak, so the booking screens should load quickly over a slow connection."
+      },
+      {
+        "heading": "Social: the users",
+        "body": "A social constraint comes from the users' level of expertise. Many patients are older people who rarely use apps, and some receptionists have used little software beyond the current booking system. The design therefore needs large labelled buttons, few steps and plain-language messages. A lack of computer skills is a social constraint, not a technical one, because it comes from the people rather than the technology."
+      },
+      {
+        "heading": "Legal: the law",
+        "body": "Legal constraints cover intellectual property, ownership of data and privacy of data. Patients' contact details and treatment notes are personal and health information, so the app must collect, store and share them only as privacy law allows, which shapes who can see them and how they are stored. The developer also can't drop in images or code found online without the owner's permission, because they are protected by copyright."
+      },
+      {
+        "heading": "Classifying a constraint",
+        "body": "Ask what imposes the limit: money or time (economic), the technology (technical), the users' expertise (social) or the law (legal). The problem-solving methodology also lists a fifth type, usability constraints, covering accessibility, usefulness and ease of use, so a limit such as 'patients with low vision must be able to book' can be described that way. In an answer, name the type, quote the constraint from the scenario and say what it rules in or out."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Redgum Flat Growers, a Shepparton orchard co-op, is having an app built so seasonal pickers can log each bin of fruit they fill on a tablet. Most of the orchard blocks have no mobile coverage, and most pickers have never used an app at work. The developer, Ana, has made two design decisions:\n\n1. Each bin record is saved on the tablet and sent to the co-op's server when the tablet is next in range of the packing shed's Wi-Fi.\n2. Pickers choose the fruit variety by tapping a photo of it, and confirm each bin with one large button.\n\nFor each decision, identify the type of constraint it responds to and explain how the decision works within that constraint.",
+      "points": [
+        {
+          "text": "Decision 1: a technical constraint",
+          "marks": 1
+        },
+        {
+          "text": "Explains decision 1: there is no mobile coverage in most blocks, so the app can't rely on a connection; saving each record on the tablet and uploading it at the shed means no bins are lost",
+          "marks": 1
+        },
+        {
+          "text": "Decision 2: a social constraint",
+          "marks": 1
+        },
+        {
+          "text": "Explains decision 2: most pickers have little experience with work apps, so tapping a photo and one large button lets them log a bin correctly with almost no training",
+          "marks": 1
+        }
+      ],
+      "model": "Decision 1 responds to a technical constraint. Most of the orchard blocks have no mobile coverage, so the app can't count on sending a record the moment a bin is logged. Saving each record on the tablet and uploading it when the tablet reaches the shed's Wi-Fi means every bin is recorded even where there is no signal.\n\nDecision 2 responds to a social constraint: the pickers' low level of expertise with work apps. Choosing a variety by tapping its photo and confirming with a single large button involves no typing or menus, so pickers can log bins correctly after very little training."
+    },
+    "traps": [
+      "On a 2025 multiple-choice question (A8), 95% of students matched an app that must run well on devices with limited processing power to the hardware capabilities of the target devices, a technical constraint. A marketing budget, user feedback on the interface and an industry framework were the distractors."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk07",
+    "kk": "U3O2-KK07",
+    "intro": "Scope sets the boundaries of a solution: what it will deal with and what it won't. The study design singles out version and solution boundaries, so practise writing a boundary that names what is excluded as well as what is included, and splitting a solution into versions.",
+    "sections": [
+      {
+        "heading": "Both sides of the boundary",
+        "body": "Scope is settled during analysis and recorded in the software requirements specification. A good scope statement says what is in and what is out. Red Gum Plains Basketball Association in Horsham wants an app for its junior competition. Its scope reads: *The app will publish fixtures, record scores and show ladders. It will not take registration payments, which stay with the state association's system, and it will not handle referees' pay.*\n\nThe 'will not' half matters as much as the 'will' half. 'Manage the competition' could be read as including payments, rosters or a merchandise shop. Spelling out what is excluded means the association and the developer agree on what will be delivered, and everyone can tell when the job is finished."
+      },
+      {
+        "heading": "Version boundaries",
+        "body": "Large solutions are often released in versions, and each version has its own boundary. The committee also wants live scoring and a player statistics page. The developer has ten weeks and estimates: fixtures 3 weeks, scores 2, ladders 2, live scoring 4 and statistics 4. Fixtures, scores and ladders take 7 weeks. Adding either of the other features would need 11, so both are stated as version 2.\n\nA version boundary is usually drawn this way: the features that matter most, as many as fit the time and money available, with the rest named for a later release."
+      },
+      {
+        "heading": "Scope, requirements and constraints",
+        "body": "Scope is high level. It names the main features and exclusions, while functional requirements describe in detail what happens inside the boundary, such as the ladder awarding two points for a win. Every functional requirement must sit inside the scope. If one asks for payment receipts while payments are out of scope, the two conflict and the client has to decide.\n\nConstraints are different again. The ten-week deadline is an economic constraint, a limit on the project. It explains why live scoring was left out, but it isn't the boundary itself. 'Must be finished in ten weeks' belongs with the constraints, and 'version 1 will not include live scoring' belongs in the scope."
+      },
+      {
+        "heading": "Using the scope during the project",
+        "body": "An agreed scope keeps the rest of the project steady. The Gantt chart can only list the right tasks once the scope is settled. When a committee member asks halfway through for a canteen ordering page, the developer can point to the scope and treat the request as a change: estimate the extra time and cost, then either agree on a revised plan or leave it for a later version. Features added without that check are scope creep, a Unit 4 topic: they draw effort away from the agreed work, so the original objectives may not be met. At evaluation the solution is judged against what was agreed, so the absence of an excluded feature doesn't count against it."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Wattle Spur Pony Club in Ballarat is having a rally booking app built. The committee wants members to book places at rallies and pay rally fees in the app. It also wants a horse-health log, but the developer estimates that adding it would take the work past the eight weeks available. The committee's draft scope section reads:\n\n1. *The app must be finished within eight weeks and cost no more than $5000.*\n2. *The app will be easy to use and reliable.*\n\nExplain why neither statement sets the scope of the app, and write a scope statement for version 1 that does.",
+      "points": [
+        {
+          "text": "Statement 1 is a constraint (economic: time and cost); it limits the project but doesn't say what the app will or won't cover",
+          "marks": 1
+        },
+        {
+          "text": "Statement 2 describes qualities of the app (non-functional requirements: usability and reliability), not the boundary of what it deals with",
+          "marks": 1
+        },
+        {
+          "text": "Scope statement, inside the boundary: version 1 will let members book rally places and pay rally fees",
+          "marks": 1
+        },
+        {
+          "text": "Scope statement, outside the boundary: version 1 will not include the horse-health log, which is left for a later version",
+          "marks": 1
+        }
+      ],
+      "model": "Statement 1 is a constraint, not scope. Eight weeks and $5000 are economic limits on time and cost: they restrict how the project is carried out, but they don't say which features the app will or won't include.\n\nStatement 2 describes qualities of the app, how easily and dependably it works, so it is a non-functional requirement about usability and reliability. It also says nothing about where the app's boundary lies.\n\nScope for version 1: *Version 1 will let members book places at rallies and pay rally fees. It will not include a horse-health log, which is left for a later version.*"
+    },
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk08",
+    "kk": "U3O2-KK08",
+    "intro": "Three analytical tools show how users, data and a system relate: the context diagram (Level 0), the data flow diagram (Level 1) and the use case diagram. Exam questions ask you to complete these diagrams and to find the convention a diagram breaks. In 2025 the question asking for the error in a DFD left 81% of students with no marks.",
+    "sections": [
+      {
+        "heading": "Context diagram: the system from outside",
+        "body": "A context diagram shows the whole system as one labelled circle, the **external entities** around it as rectangles, and **data flows** between them as labelled one-way arrows. An entity is a user or another system outside the one being modelled. In the tracking system for Brolga Bay Freight in Geelong, *Customer* sends `pickup_request` and receives `delivery_notice`, *Driver* sends `delivery_confirmation` and receives `run_sheet`, and *Accounts system* receives `invoice_details`.\n\nThe rules: data never goes straight from one entity to another, flows don't cross, and each flow carries one set of data. If an entity has to be drawn twice, for example to stop flows crossing, each copy gets a diagonal line across its top-left corner. A context diagram has no processes and no data stores."
+      },
+      {
+        "heading": "Level 1 DFD: inside the system",
+        "body": "A Level 1 data flow diagram opens up the circle. It shows the **processes** that handle the data (circles named with an action, such as *Record delivery*), the **data stores** that hold it (two parallel lines with the store's name between them, such as *Consignments*), and the same entities and flows as the context diagram. The two diagrams must agree: each flow between an entity and the system on the context diagram appears on the DFD under the same name. Copy labels exactly, underscores included."
+      },
+      {
+        "heading": "DFD rules and common errors",
+        "body": "Most DFD errors break one of these rules:\n\n| Rule | Error to look for |\n|:--|:--|\n| Data passes through a process between an entity and a store | `pod_photo` drawn from *Driver* straight into *Consignments* |\n| A process also sits between two stores, and between two entities | A flow from the *Consignments* store straight to an *Invoices* store |\n| Each process takes data in and sends data out | *Calculate charge* receives data but sends nothing |\n| Each store is written to and read from | A store that receives data but is never read |\n| A process renames what it sends out | `delivery_confirmation` in, `delivery_confirmation` out |\n| Each entity sends or receives at least one flow | An entity with no arrows |\n\nFlows mustn't cross either. To fix an entity-to-store error, add a process: *Driver* sends `pod_photo` to *Record delivery*, which writes `delivery_record` to *Consignments*."
+      },
+      {
+        "heading": "Use case diagrams",
+        "body": "A use case diagram shows who does what with a system, not how data moves. A rectangle, the **system boundary**, holds the **use cases** (ellipses named for a goal, such as *Book pickup*) and carries the system's name in its top-left corner. **Actors** stand outside it as stick figures labelled with a role. Plain lines called **associations** join each actor to the use cases it takes part in; they carry no data labels.\n\nAn actor is a role, such as *Dispatcher* or *Customer*. It isn't the company, the device someone uses or the system itself, and the business's own database is part of the system, not an actor."
+      },
+      {
+        "heading": "Includes and extends",
+        "body": "Dashed arrows labelled <<includes>> and <<extends>> link one use case to another. Use **includes** when a base use case always needs another's behaviour: *Book pickup* includes *Calculate charge*, with the arrow running from the base to the included use case. Use **extends** when extra behaviour happens only if a condition is met: *Add transit insurance* extends *Book pickup*, because only some customers want insurance, and the arrow points from the extension to the base. If two use cases both always need the same step, each gets its own includes arrow to it."
+      }
+    ],
+    "worked": {
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "Corkwood Lane Grocer in Bendigo delivers orders to customers' homes. On the context diagram of its delivery system, *Driver* sends `delivery_confirmation` to the system, and the system sends `delivery_notice` to *Customer*. Lena is now drawing the Level 1 DFD, in which every completed delivery is kept in a *Deliveries* data store.\n\nDescribe how Lena's DFD should show a driver's confirmation being stored and the customer receiving their delivery notice.",
+      "points": [
+        {
+          "text": "`delivery_confirmation` goes from *Driver* into a process (e.g. *Record delivery*), not straight into the data store",
+          "marks": 1
+        },
+        {
+          "text": "That process sends a differently named flow (e.g. `delivery_record`) into *Deliveries*",
+          "marks": 1
+        },
+        {
+          "text": "*Deliveries* also has an output: a process (e.g. *Send delivery notice*) reads the stored delivery (e.g. `delivery_details`)",
+          "marks": 1
+        },
+        {
+          "text": "A process sends `delivery_notice` to *Customer*, labelled exactly as on the context diagram",
+          "marks": 1
+        }
+      ],
+      "model": "*Driver* sends `delivery_confirmation` to a process, *Record delivery*, rather than straight to the data store, because an external entity can't write to a store. *Record delivery* then sends a flow with a different name, `delivery_record`, into the *Deliveries* data store.\n\nA second process, *Send delivery notice*, reads `delivery_details` from *Deliveries*, so the store has an output as well as an input. That process sends `delivery_notice` to *Customer*, using exactly the label on the context diagram so the two diagrams stay consistent."
+    },
+    "traps": [
+      "The 2025 Level 1 DFD (C4b) had a flow, `inspection_results`, running from the *Property manager* entity straight into the *Properties* data store. 81% of students scored zero. One mark went to identifying the error and one to the reason: data from an external entity has to pass through a process before it reaches a store.",
+      "Completing the same DFD from the context diagram (C4a) went well, but some students lost marks for leaving the underscores out of flow names such as `inspection_details`. Copy every label exactly.",
+      "Asked what an unlabelled actor represented (A10), 21% chose the local council office where the parking officers work. The answer was the parking officer: an actor is a role, not an organisation.",
+      "Only 52% chose the correct relationships on the parking use case diagram (A9). Paying was needed every time a driver bought parking time or added to it, so both linked to processing payment with includes; adding time was an optional extension of buying it, so it was drawn with extends."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk09",
+    "kk": "U3O2-KK09",
+    "intro": "A software requirements specification (SRS) sets out a solution's intended purpose and the setting it will operate in, and it is the main record of the analysis stage. The study design lists six features an SRS should include. The 2025 paper handed students statements bound for an SRS to classify, so you need to know where each kind of statement belongs and why the designers need it.",
+    "sections": [
+      {
+        "heading": "What the SRS is for",
+        "body": "Corella Point Freight, a Geelong carrier, wants an app for its drivers' phones to replace paper run sheets, which office staff retype into a spreadsheet every night. Before anyone designs a screen, the analyst collects data from drivers and office staff and writes the SRS.\n\nOnce the firm approves it, the SRS becomes the shared, agreed account of what the app has to do and the conditions it has to satisfy. Everyone works from it:\n\n- designers plan screens and data that meet its requirements\n- the evaluation criteria written during design are drawn from its requirements\n- developers and testers check the finished app against it\n\nIt describes *what* is needed, not how it will be built. Choosing an algorithm or laying out a screen comes later, in design."
+      },
+      {
+        "heading": "Requirements, constraints and scope",
+        "body": "Three features record results of analysis that you study in neighbouring points. For Corella Point Freight:\n\n| SRS feature | Example statement |\n|:--|:--|\n| Requirements: functional | Drivers record the time and the receiver's signature for each delivery |\n| Requirements: non-functional | A new driver can record a delivery without any training |\n| Constraints | The budget is $45 000 and the app must be live before the Christmas peak (economic); signatures and addresses must be handled as privacy law requires (legal) |\n| Scope | Version 1 covers deliveries only; invoicing stays in the accounting program |\n\nA functional requirement says what the solution does, and a non-functional one describes a quality it must have, such as usability or reliability. A constraint is a limit the project has to work within. Scope draws the boundary of what this version will and won't do."
+      },
+      {
+        "heading": "Users and the technical environment",
+        "body": "User characteristics describe the people who will use the solution: their roles, how often they use it, their expertise and any accessibility needs. Corella Point's 40 drivers are aged 19 to 67, several read English as an additional language, and each records dozens of deliveries a shift. The three office staff use the dashboard all day and know spreadsheets well. Designers read this and plan large buttons with icons for drivers, and denser tables for the office.\n\nThe technical environment covers the devices, operating systems and networks the solution runs on, and any software it has to work with: here, the firm's Android phones, the office's Windows computers and the accounting program that will receive delivery data. A design built for iPhones, or one whose data the accounting program can't read, fails the SRS however good it looks."
+      },
+      {
+        "heading": "Diagrams of the current system",
+        "body": "The sixth feature is analytical tools that depict existing processes and systems: context diagrams, use case diagrams and data flow diagrams of how the work is done now. A data flow diagram of Corella Point's paper process shows drivers handing run sheets to the office, staff retyping them, and the records ending up in a spreadsheet.\n\nDrawing the current process makes its weak points visible. The retyping step is where delays and copying errors enter, so the SRS requires delivery records to reach the office without being entered twice. These tools can model the planned system too, but this feature is about the one that exists."
+      },
+      {
+        "heading": "Placing a statement",
+        "body": "When a question gives you a statement, ask what it describes:\n\n- something the solution does: functional requirement\n- a quality it must have, such as usability or reliability: non-functional requirement\n- a limit such as a budget, a deadline or privacy law: constraint\n- what this version will or won't cover: scope\n- who the users are: user characteristics\n- what the solution runs on or alongside: technical environment\n\nWhen a question offers only functional and non-functional, a statement about which platforms the solution needn't support is non-functional.\n\n\"Drivers are aged 19 to 67\" describes users, so it isn't a requirement. \"Drivers can enlarge the text on any screen\" is something the app does, written to suit those users."
+      }
+    ],
+    "worked": {
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "Priya is writing the SRS for a bin-tally app at Kestrel Downs Orchards, a fruit co-op in Shepparton. At present, pickers' full bins are marked on paper tally cards, and office staff type the cards into a spreadsheet each evening. The app will run on the co-op's 20 rugged Android tablets in the orchard. Pickers' pay is worked out by the co-op's existing payroll program, which imports CSV files.\n\nDescribe what Priya should include in the SRS under each of these features:\n\n- analytical tools depicting existing processes and systems\n- technical environments",
+      "points": [
+        {
+          "text": "Analytical tools: a diagram of the current paper process, e.g. a data flow diagram (a context diagram or use case diagram of the current process is also accepted)",
+          "marks": 1
+        },
+        {
+          "text": "Describes what the diagram shows for the co-op, e.g. pickers, the paper tally cards, office staff entering them each evening and the spreadsheet as a data store, so every bin is recorded twice",
+          "marks": 1
+        },
+        {
+          "text": "Technical environments: the hardware the app will run on, the co-op's 20 rugged Android tablets used in the orchard",
+          "marks": 1
+        },
+        {
+          "text": "Technical environments: the software the app must work alongside, the existing payroll program, which imports CSV files",
+          "marks": 1
+        }
+      ],
+      "model": "Under analytical tools, Priya should include a data flow diagram of the current tally process. It would show pickers' bins being recorded on paper tally cards, office staff entering the cards each evening, and the spreadsheet where the tallies are stored. The diagram makes the weak point visible: every bin is recorded twice, by hand, which is slow and lets copying errors into pickers' pay. This tells Priya what the app must do, which is record each bin once, in the orchard.\n\nUnder technical environments, she should record that the app will run on the co-op's 20 rugged Android tablets, and that it must work alongside the existing payroll program, which imports CSV files. Designers then know to build for those tablets and to export each day's tallies as a CSV file the payroll program can read, so pay never has to be retyped."
+    },
+    "traps": [
+      "On the 2025 paper, students sorted three statements headed for an SRS into functional and non-functional requirements, and 58% got all three. Generating financial reports covering up to 10 years of data was keyed functional, because it is something the solution does, even though the statement contains a number. The statement that the solution didn't need to run on Apple devices was keyed non-functional."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk10",
+    "kk": "U3O2-KK10",
+    "intro": "This point covers three Acts. The Copyright Act 1968 (Cwlth) decides who owns a work and who may copy it, and two privacy Acts set rules for handling personal information. You need to know which Act applies to an organisation, and what a named privacy principle means for the design of a program.",
+    "sections": [
+      {
+        "heading": "Copyright",
+        "body": "The Copyright Act 1968 (Cwlth) gives the owner of an original work the exclusive right to copy, adapt and publish it, so anyone else needs permission, usually a licence. The Act exists so that people who create work can decide how it is used and earn from it. It applies to program code and its documentation, which count as literary works, and to images, music, sound recordings and video.\n\nProtection is automatic as soon as the work is written down or saved; nothing is registered. It protects the expression, not the idea. A Bendigo developer may build a parcel-tracking app that does everything a rival's app does, but may not copy the rival's code or icons. Unless an agreement says otherwise, an employer owns code its staff write in the course of their jobs, whereas a contractor owns their own code until a written contract transfers it. Free and open-source code is still protected, so its licence conditions must be followed. Users who post photos or comments to an app usually keep the copyright in them, and the licence in the terms of use they accept sets what the app's owner may do with them."
+      },
+      {
+        "heading": "Which privacy Act applies",
+        "body": "Both privacy Acts protect personal information: anything, including an opinion, about a person who is named or whose identity could reasonably be worked out, such as a name, an address or a phone number.\n\n| | Privacy Act 1988 (Cwlth) | Victoria's Privacy and Data Protection Act 2014 |\n|:--|:--|:--|\n| Who it binds | Australian Government agencies, and many businesses and other private organisations | Victoria's public sector, such as state departments and local councils, plus contractors whose contracts with them require it |\n| Its principles | Australian Privacy Principles (APPs) | Information Privacy Principles (IPPs) |\n\nThe same booking app is governed by the APPs when a freight company covered by the Privacy Act runs it, and by the IPPs when a Victorian shire council runs it."
+      },
+      {
+        "heading": "The principles listed for Unit 3",
+        "body": "Unit 3 lists six APPs and seven IPPs. Most pair up by topic:\n\n| Topic | APP | IPP | What it means for a program |\n|:--|:--|:--|:--|\n| Openness | 1 | 5 | A clear privacy policy says how personal information is managed |\n| Collection | 3 | 1 | Collect only what the purpose needs, by fair means; IPP 1 also requires telling people why |\n| Use and disclosure | 6 | 2 | Use or disclose data only for the purpose it was collected for, unless the person agrees to another use or an exception applies |\n| Sending it away | 8 (overseas) | 9 (outside Victoria) | Before sending data on, take reasonable steps to make sure the receiver will protect it to a similar standard |\n| Identifiers | 9 (government related) | 7 (unique) | Give users the program's own ID instead of adopting a number another body issued |\n| Security | 11 | 4 | Take reasonable steps to guard stored data against misuse, loss and access by the wrong people, and destroy or de-identify what is no longer needed |\n| Sensitive information | none listed | 10 | Collect details such as religious beliefs or criminal record only in limited cases, such as with consent or where a law requires it |"
+      },
+      {
+        "heading": "Applying the Acts to a design",
+        "body": "Kingfisher Bend Freight in Geelong, covered by the Privacy Act, has a draft delivery app. Checked against the APPs, four parts of it need changing:\n\n- the firm publishes no privacy policy saying what the app collects and how it is handled (APP 1)\n- it asks receivers for their date of birth in case it proves useful later, which delivering a parcel doesn't need (APP 3)\n- it sends receivers' phone numbers to an overseas text-message service with no check on how that service protects them (APP 8)\n- every office worker can browse every receiver's signature and address (APP 11)\n\nThe same app also uses an open-source mapping library, so the copyright notice its licence requires must stay in place. Write answers the same way: name the principle, point to the feature, and say what has to change."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Kilcunda Ridge Shire Council in Victoria is designing an app that residents use to book a hard rubbish collection. The draft booking form asks for the resident's name, address, phone number, date of birth and driver licence number. The developer plans to use each resident's driver licence number as their account ID in the app.\n\nIdentify the Act that sets the rules for the council's handling of these details, and explain how **two** of its principles should change the draft design.",
+      "points": [
+        {
+          "text": "Identifies the Privacy and Data Protection Act 2014 (Vic), which binds a shire council as part of Victoria's public sector",
+          "marks": 1
+        },
+        {
+          "text": "IPP 1 (Collection): date of birth and licence number aren't needed to book a collection, so they should be removed from the form, and residents told why the remaining details are collected",
+          "marks": 1
+        },
+        {
+          "text": "IPP 7 (Unique identifiers): the licence number was issued by another organisation, so the app should create its own account IDs instead of adopting it",
+          "marks": 1
+        },
+        {
+          "text": "Alternative: IPP 4 (Data security): stored bookings should be protected, e.g. only waste services staff can see them and the data is encrypted",
+          "marks": 1
+        }
+      ],
+      "model": "The governing Act is the Privacy and Data Protection Act 2014 (Vic), since a shire council belongs to Victoria's public sector.\n\nUnder IPP 1 (Collection), the council should collect only what it needs to book a collection: the resident's name, address and phone number. A date of birth and a driver licence number play no part in picking up hard rubbish, so both fields should be removed, and the form should tell residents why the remaining details are being collected.\n\nUnder IPP 7 (Unique identifiers), the council shouldn't adopt a number that another organisation issued as its own identifier for residents. The app should give each resident an account ID of its own, so it never needs the licence number at all."
+    },
+    "traps": [
+      "In a 2025 multiple-choice question, 71% recognised that editing a third-party application's code without its author's permission would breach the Copyright Act 1968. Almost a quarter chose backing the application's data up to an insecure file server instead, which is a security lapse rather than a breach of anyone's copyright."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk11",
+    "kk": "U3O2-KK11",
+    "intro": "File management keeps a project's files findable, recoverable and safe, from the first draft of the brief until old data is destroyed. The study design names the techniques: naming conventions, version control, backups (full, incremental and differential), security and disposal. A question may describe something going wrong, so you need to say which technique would have prevented it and why.",
+    "sections": [
+      {
+        "heading": "Naming files",
+        "body": "A file naming convention is a pattern every team member follows, so anyone can tell what a file holds, which version it is and where it sorts without opening it. Corella Point Freight's app team names files by project, document, date and version:\n\n- `deliveryapp_srs_2026-04-14_v1.2.docx`\n- `deliveryapp_mockup-signature_2026-05-02_v3.png`\n\nDates written year first sort into date order, and version numbers replace names such as `final2_REALLYfinal`, which say nothing about which is newer. Leaving out spaces and special characters avoids trouble on systems that handle them badly."
+      },
+      {
+        "heading": "Version control",
+        "body": "Version control keeps each version of a project's files as they change. The team can compare versions, find when a bug crept in and return to the most recent version that worked. Numbering files by hand (`v1.2`, `v1.3`) is a simple form of it. A version control system, usually a code repository such as Git, records every committed change with who made it and when, and lets two developers work on the same code without overwriting each other.\n\nVersion control is not a backup. It keeps the history of the code so a bad change can be undone. A backup is a separate copy kept elsewhere so files can be restored after they are lost. A project needs both."
+      },
+      {
+        "heading": "Full, incremental and differential backups",
+        "body": "A backup is a second copy of data kept away from the original, on another drive, external storage or the cloud, and restored when data is lost. Backups can be run by hand or scheduled. Corella Point makes a full backup of its project server every Sunday night and a smaller backup each weeknight:\n\n| Type | What it copies | To restore after a failure on Friday morning |\n|:--|:--|:--|\n| Full | Everything | Thursday's alone, if every night's backup were full |\n| Incremental | Changes since the last backup of any kind | Sunday's full, then the Monday to Thursday incrementals in order |\n| Differential | Changes since the last full backup | Sunday's full, then Thursday's differential |\n\nIncrementals are the quickest and smallest to make, but a restore needs every one in the chain. Differentials usually grow through the week, but a restore needs only two backups. Keep at least one copy off-site, so a fire or theft at the depot can't destroy the originals and the backup together."
+      },
+      {
+        "heading": "Keeping project files secure",
+        "body": "Project files often hold unreleased code and client data, so access to them is controlled:\n\n- each person signs in with their own account, never a shared login\n- permissions open only the folders each person's work requires, and are withdrawn the day someone leaves the team\n- laptops and backup drives are encrypted, so a lost one exposes nothing readable\n- screens lock when left unattended\n\nBackups need the same protection as the originals, because they hold the same data."
+      },
+      {
+        "heading": "Disposal",
+        "body": "When data is no longer needed, such as the spreadsheet of customer addresses exported to set up the app, or the drives in the depot's old dispatch server, it is disposed of so that it can't be recovered. Deleting files or emptying the recycle bin often leaves data that free tools can bring back, so drives are overwritten with data-wiping software or physically destroyed. Every copy counts, including the ones inside old backups.\n\nData that must be kept but is rarely used isn't disposed of. It is archived: shifted out of the working system into storage that is opened rarely."
+      }
+    ],
+    "worked": {
+      "commandTerm": "compare",
+      "marks": 4,
+      "prompt": "Wirraway Plumbing Supplies in Bendigo keeps 300 GB of files on its office server. The office is open Monday to Friday, and staff change about 3 GB of different files each day. The office manager makes a full backup every Sunday night and must choose between incremental and differential backups for Monday to Friday nights.\n\nCompare the two options for this office, referring to the size of each night's backup and to what would be needed to restore the files if the server failed on a Thursday morning.",
+      "points": [
+        {
+          "text": "Incremental size: each night's backup holds just that day's changed files, about 3 GB",
+          "marks": 1
+        },
+        {
+          "text": "Differential size: each copies everything changed since Sunday's full backup, so it grows through the week, to about 3 GB on Monday, 6 GB on Tuesday and 9 GB on Wednesday",
+          "marks": 1
+        },
+        {
+          "text": "Incremental restore: Sunday's full backup, then the Monday, Tuesday and Wednesday incrementals, applied in order; if one is damaged, the changes it held are lost",
+          "marks": 1
+        },
+        {
+          "text": "Differential restore: Sunday's full backup and Wednesday's differential only, so restoring is simpler",
+          "marks": 1
+        }
+      ],
+      "model": "Each incremental backup holds only what changed since the backup before it, so every weeknight it copies about 3 GB. A differential backup copies everything changed since Sunday's full backup, so it grows through the week: about 3 GB on Monday night, 6 GB on Tuesday and 9 GB on Wednesday. Incrementals therefore take less time and space each night.\n\nRestoring is where differentials win. If the server fails on Thursday morning, the incremental option needs Sunday's full backup and then the Monday, Tuesday and Wednesday incrementals, applied in that order, and if any one of them is damaged, the changes it held are lost. The differential option needs only Sunday's full backup and Wednesday's differential, which already holds every change made since Sunday."
+    },
+    "traps": [
+      "In a 2025 case study question on protecting a development environment, some students wrongly described version control as a kind of backup. Credited answers said that it keeps copies of the code as development goes on, so the developers can go back to a version that worked if an error proves impossible to fix."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk12",
+    "kk": "U3O2-KK12",
+    "intro": "Ideation is the process of generating design ideas and building on them, from a first concept towards a design. The study design names five techniques and tools for it: brainstorming, mind maps, mood boards, sketches and annotations. You need to know what each one produces and which one suits a task, and the 2025 paper asked students to complete a mind map.",
+    "sections": [
+      {
+        "heading": "Where ideation fits",
+        "body": "In the design stage you generate two or three design ideas, judge them against evaluation criteria, and develop the strongest into a detailed design. Ideation is the first step. It calls for divergent thinking: aim for a wide range, and leave judging until the ideas are down. Ideas can be captured in words, images, drawings or conversation.\n\nThe examples below follow Hana, who is designing a bin-tally app for Kestrel Downs Orchards, a Shepparton fruit co-op whose pickers record each full bin in the orchard."
+      },
+      {
+        "heading": "Brainstorming",
+        "body": "A brainstorm collects ideas around one central theme without organising them. It can be a plain list, or a diagram with the theme in a rectangle, cloud or ellipse and each idea joined to it by a straight line. Hana runs one with six pickers and two office staff around *bin-tally app*: a big tick button, a photo of the bin tag, works without coverage, shows today's pay, voice entry, choose the block on a map. Nobody's idea is rejected during the session, because a weak idea often prompts a better one."
+      },
+      {
+        "heading": "Mind maps",
+        "body": "A mind map arranges related ideas into a structure around the central theme. Main ideas sit on first-level branches, and more specific ideas branch from them as far as needed. Hana sorts her brainstorm:\n\n- **Bin-tally app**\n  - Recording bins\n    - big tick button\n    - photo of the bin tag\n    - voice entry\n  - Working in the orchard\n    - works without coverage\n    - choose the block on a map\n  - Pickers' pay\n    - shows today's pay\n\nThe structure shows that the app has three main parts and which idea belongs to each. When a question gives you the key considerations, they become the first-level branches."
+      },
+      {
+        "heading": "Mood boards",
+        "body": "A mood board gathers images, colours, typography and code samples to explore the overall direction of a design. Hana's holds photos of orchard signage, a high-visibility orange and a deep green, a heavy rounded font, and a code sample for an oversized toggle button. Short notes on the samples record what to use and why: *thin script font: avoid, unreadable in glare*; *orange: tick button only*. A mood board sets the look and feel. It doesn't decide where controls go on a screen."
+      },
+      {
+        "heading": "Sketches and annotations",
+        "body": "Sketches are rough drawings, by hand or with a drawing tool, of how an interface might look or how parts of a solution could link together. Because they are quick, Hana draws two alternatives for the main screen. Sketch A has a large button for each fruit variety; Sketch B is built around scanning the bin tag.\n\nAnnotations are notes written on design ideas. They help the designer organise their thinking, point out or justify a design consideration, and suggest links between ideas, such as a note on Sketch B: *if a tag won't scan, fall back to Sketch A's variety buttons*."
+      },
+      {
+        "heading": "Choosing the tool",
+        "body": "| You need to | Use |\n|:--|:--|\n| Gather many ideas quickly from a group | Brainstorming |\n| Show how ideas group and connect | Mind map |\n| Agree on a look and feel | Mood board |\n| Try out screen layouts cheaply | Sketches |\n| Explain, justify or link ideas | Annotations |"
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Ines is generating design ideas for a phone app for Wombat Hollow Trail Rides, a horse-riding business near Mansfield. She has sketched two possible booking screens. Sketch A lists each ride as a card showing a photo, the ride's length and its price. Sketch B shows a calendar first, then the rides available on the chosen day.\n\nExplain **two** ways Ines could use annotations on her sketches to develop these design ideas.",
+      "points": [
+        {
+          "text": "Annotations can justify or highlight a design consideration in a sketch (or record and organise her thinking about it)",
+          "marks": 1
+        },
+        {
+          "text": "Applies this to a sketch, e.g. a note on Sketch B explaining that the calendar comes first because most customers book around a free day",
+          "marks": 1
+        },
+        {
+          "text": "Annotations can propose or establish a connection between design ideas",
+          "marks": 1
+        },
+        {
+          "text": "Applies this to the two sketches, e.g. a note suggesting that Sketch A's photo cards be used to list the rides under the chosen day in Sketch B",
+          "marks": 1
+        }
+      ],
+      "model": "First, Ines can use annotations to justify the design considerations behind each sketch. Beside the calendar on Sketch B she could write that it comes first because most customers book around a day they have free, and beside Sketch A's cards that the photo and price let riders compare rides at a glance. When she later evaluates the sketches, these notes show the reasoning behind each choice.\n\nSecond, she can use annotations to connect her design ideas. A note on Sketch B could suggest showing the rides for the chosen day as Sketch A's photo cards, instead of a plain list. This links the two sketches and points towards a design that combines the strengths of both."
+    },
+    "traps": [
+      "Completing a mind map on the 2025 paper, 28% of students scored nothing while 29% scored all four marks. The marks came from putting each key consideration the question named on a first-level branch, then placing every idea on a sub-branch under the consideration it belongs to."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk13",
+    "kk": "U3O2-KK13",
+    "intro": "Evaluation criteria are specific checks, drawn from the requirements, that measure how efficient and effective a design or a solution is. You write them during design and use them to choose your preferred design idea, then apply the same criteria in Unit 4 to judge the finished solution. You need to write criteria that can be checked and to tell efficiency from effectiveness.",
+    "sections": [
+      {
+        "heading": "One set of criteria, used twice",
+        "body": "The criteria follow the project from design to evaluation:\n\n1. In the design stage, you develop criteria from the requirements in the SRS.\n2. You apply them to your two or three design ideas, and the idea that meets them best becomes the preferred design.\n3. During development you may refine them, for example making one more precise.\n4. At evaluation, you apply those same criteria to the finished solution to judge its efficiency and effectiveness.\n\nBecause the solution is judged against criteria set before it was built, the evaluation shows whether it meets the requirements, not whether its developer happens to like it."
+      },
+      {
+        "heading": "Efficiency and effectiveness",
+        "body": "Each criterion measures one of two things.\n\n| | Efficiency | Effectiveness |\n|:--|:--|:--|\n| The question | What does it cost in time, money and effort? | How well does it do the job it was built for? |\n| Measures include | speed of processing, the cost of handling data and files, the effort a task takes | accuracy, completeness, usability, accessibility, timeliness, relevance, readability, clarity, attractiveness, communication of message, maintainability |\n\nA solution can do well on one and badly on the other. If Corella Point Freight's new delivery app records a delivery in 15 seconds but sometimes stores the wrong consignment number, it is efficient but not fully effective."
+      },
+      {
+        "heading": "Writing a criterion that can be checked",
+        "body": "A useful criterion names what is being checked and sets a target that evidence can confirm. \"The app is easy to use\" can't be shown to be met or not met. Compare:\n\n| Vague | Checkable |\n|:--|:--|\n| The app is fast | A driver can record a delivery, signature included, in under 20 seconds |\n| Reports are accurate | Every consignment in the weekly report matches a delivery record |\n| Drivers like it | 9 of 10 new drivers record their first delivery without help |\n\nCriteria can be written as statements, as questions (*To what extent can a new driver record a delivery without help?*) or as dot points. The form can change, but the measurable target stays."
+      },
+      {
+        "heading": "Criteria for design ideas",
+        "body": "A design idea can't be timed or tested like a finished program, so at this stage the criteria judge how well each idea is likely to meet the requirements. VCAA's teaching advice suggests criteria on feasibility, on the effect on user experience, and on how well an idea suits the users' needs. A rating table makes the choice visible:\n\n| Criterion | Idea A: scan the parcel barcode | Idea B: pick the consignment from a list |\n|:--|:--|:--|\n| Can be built and tested for the firm's Android phones within eight weeks | Medium | High |\n| A new driver can record a delivery without help | High | Medium |\n| Each delivery is recorded against the right consignment | High | Medium |\n\nIdea A rates higher on two of the three criteria, so it becomes the preferred design and is developed with the design tools."
+      }
+    ],
+    "worked": {
+      "commandTerm": "classify",
+      "marks": 4,
+      "prompt": "Wattle Flat Food Relief, a volunteer-run pantry in Bendigo, has commissioned a program that records the food parcels it hands out. The designer has written these evaluation criteria:\n\n1. A volunteer can record a parcel in under 30 seconds.\n2. The weekly stock report lists every item the pantry holds.\n3. Running the program costs the pantry no more than $20 a month.\n4. Volunteers who have never used the program can record a parcel without help.\n\nClassify each criterion as a measure of efficiency or of effectiveness, and give a reason for each.",
+      "points": [
+        {
+          "text": "Criterion 1: efficiency, because it measures the time a task takes",
+          "marks": 1
+        },
+        {
+          "text": "Criterion 2: effectiveness, because it checks that the report is complete",
+          "marks": 1
+        },
+        {
+          "text": "Criterion 3: efficiency, because it measures cost",
+          "marks": 1
+        },
+        {
+          "text": "Criterion 4: effectiveness, because it measures usability, how easily new users can complete the task",
+          "marks": 1
+        }
+      ],
+      "model": "1. Efficiency. It measures the time a volunteer spends recording each parcel.\n2. Effectiveness. It checks that the report is complete, so it measures how well the program achieves its purpose, not what it costs to run.\n3. Efficiency. It measures the cost of running the program.\n4. Effectiveness. It measures usability: whether people new to the program can complete the task correctly without help."
+    },
+    "traps": [
+      "When the 2025 paper asked how a design approach would make a solution efficient and effective, few students gave a separate example of each. Credited efficiency examples were about time or money, such as a faster workflow or lower cost; credited effectiveness examples were about how well the solution worked, such as fewer errors or clearer feedback."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk14",
+    "kk": "U3O2-KK14",
+    "intro": "Once the preferred design idea has been chosen against the evaluation criteria, it is developed into a detailed design with design tools, including the five this point names: data dictionaries, object descriptions, mock-ups, IPO charts and pseudocode. In Unit 3 Outcome 1 you read designs like these; here you produce them, so expect to complete one, choose one for a job, or build one from another.",
+    "sections": [
+      {
+        "heading": "From design idea to detailed design",
+        "body": "A design idea is rough: a sketch and a few notes. A detailed design sets out how the solution will look, how its data is structured and how it works, precisely enough that a developer could build it without guessing. Each tool answers one question:\n\n| Question | Tool |\n|:--|:--|\n| What will each screen look like? | Mock-up |\n| What data is used, and what is each item's name and type? | Data dictionary |\n| What will each object store and do? | Object description |\n| What goes into and comes out of each task? | IPO chart |\n| What are the steps, in order, with their decisions and loops? | Pseudocode |\n\nThe examples below come from a bin-tally app for Kestrel Downs Orchards, a Shepparton co-op that pays its pickers by the weight of fruit they pick."
+      },
+      {
+        "heading": "Mock-ups and data dictionaries",
+        "body": "A mock-up draws one screen in detail, with annotations that describe it. Appearance notes cover the font, the size and colour of text, how items are aligned and which images must be sourced. Structure notes give the controls, what each does, default values and sizes. Notes can also explain how a design principle or a UX characteristic has been used, such as *tick button 3 cm wide: pickers wear gloves*.\n\nA data dictionary plans every item of data a module uses, including variables, constants, objects and interface controls. Each entry must give a name and a data type at minimum; more columns, for instance a description, a field size, a validation rule or a sample value, are added when useful:\n\n| Name | Data type | Description | Validation |\n|:--|:--|:--|:--|\n| binWeights | floating point | the day's bin weights in kg (one-dimensional array) | each 50.0 to 450.0 |\n| binCount | integer | number of bins picked today | 0 to 40 |\n| ratePerKg | floating point | pay per kilogram, constant 0.11 | |\n| dayPay | floating point | the day's pay | |\n| totalKg | floating point | running total of the day's bin weights in kg | |\n| i | integer | loop counter | |"
+      },
+      {
+        "heading": "Object descriptions",
+        "body": "An object description plans a single object under three headings. **Name** identifies it, **Properties/Attributes** lists the data it holds (data types are optional), and **Methods** lists its behaviours, each with any parameters it takes.\n\n| Name | Bin |\n|:--|:--|\n| Properties/Attributes | binID (string), pickerID (string), block (character), weightKg (floating point), isSecondGrade (Boolean) |\n| Methods | recordWeight(kg), calculatePay(ratePerKg), markSecondGrade() |\n\nMethods are actions, so `calculatePay` never belongs under Properties/Attributes. A block is one letter from A to H, so it is a character, not a string. Any attribute you add follows the casing already used, here camel casing."
+      },
+      {
+        "heading": "IPO charts and pseudocode",
+        "body": "An IPO chart summarises one task in Input, Processes and Output columns, and a module with several tasks gets one chart for each. A process that happens only sometimes must say when.\n\n| Input | Processes | Output |\n|:--|:--|:--|\n| binWeights, binCount | Add up the bin weights. Multiply the total by ratePerKg to get the day's pay. | dayPay (displayed) |\n\nPseudocode then sets out the exact steps: `BEGIN` and `END`, keywords in capitals, and the statements inside each control structure indented. The array is indexed from 0:\n\n```pseudo\nBEGIN\n    totalKg ← 0\n    FOR i ← 0 TO binCount - 1\n        totalKg ← totalKg + binWeights[i]\n    ENDFOR\n    dayPay ← totalKg * ratePerKg\n    DISPLAY dayPay\nEND\n```"
+      },
+      {
+        "heading": "Keeping the tools consistent",
+        "body": "The five tools describe one solution, so they must agree with each other:\n\n- each data item has one name and one data type in every tool, so the pseudocode above uses `binWeights` and `dayPay` exactly as the data dictionary spells them\n- every input and output in an IPO chart has a data dictionary entry\n- each input control on a mock-up maps to data of a fitting type: a *Second grade* check box has only two states, so the data behind it is a Boolean\n- a limit noted on a mock-up matches the validation rule in the data dictionary and the check in the pseudocode\n\nA mismatch caught in design costs an edit. The same mismatch caught in code costs a rewrite."
+      }
+    ],
+    "worked": {
+      "commandTerm": "write",
+      "marks": 4,
+      "prompt": "The quote module for Corella Point Freight, a Geelong carrier, is designed with this IPO chart:\n\n| Input | Processes | Output |\n|:--|:--|:--|\n| weightKg, isExpress | Multiply weightKg by 0.85 and add 12.00 to get charge. If isExpress is true, add 18.00 to charge. | charge (displayed) |\n\nWrite pseudocode for the module that follows the IPO chart.",
+      "points": [
+        {
+          "text": "Starts with BEGIN, ends with END, and inputs weightKg and isExpress",
+          "marks": 1
+        },
+        {
+          "text": "Calculates the base charge, e.g. charge ← weightKg * 0.85 + 12.00",
+          "marks": 1
+        },
+        {
+          "text": "Uses selection to add 18.00 only when isExpress is true (IF ... THEN ... ENDIF)",
+          "marks": 1
+        },
+        {
+          "text": "Displays charge after the selection, so the express surcharge is included",
+          "marks": 1
+        }
+      ],
+      "model": "```pseudo\nBEGIN\n    INPUT weightKg\n    INPUT isExpress\n    charge ← weightKg * 0.85 + 12.00\n    IF isExpress THEN\n        charge ← charge + 18.00\n    ENDIF\n    DISPLAY charge\nEND\n```\n\nThe surcharge sits inside the IF because the IPO chart applies it only to express consignments, and `charge` is displayed after the IF so the output includes it whenever it applies."
+    },
+    "traps": [
+      "Half of the 2025 cohort scored zero when they had to label two sections of an object description. Use VCAA's own headings: Name, Properties/Attributes and Methods.",
+      "When students added attributes to the same object description, names that broke its camel casing earned nothing, and so did data types written as Bool or Float. Write Boolean and floating point in full.",
+      "Choosing between four IPO charts in 2025, 80% picked the one whose process stated the condition: the tax-free threshold came off the income only if the user claimed it. The most common wrong pick subtracted the threshold in every case."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk15",
+    "kk": "U3O2-KK15",
+    "intro": "User experience (UX) is about how people perceive a digital system and respond as they use it. The study design names four characteristics: affordance, interoperability, usability, and security, which covers authentication and data protection. UX questions were among the worst answered in 2025, and in the sketch comparison, marks went only to answers that used these four names and pointed to the design feature that showed one.",
+    "sections": [
+      {
+        "heading": "Affordance",
+        "body": "Affordance is the degree to which the look of an element tells users what it is for and how to work it. A shaded button with depth invites a press, a box with a blinking cursor invites typing, a down arrow on a field means *choose from a list*, and familiar icons, such as an envelope for messages, need no instructions.\n\nIn Corella Point Freight's delivery app, *Delivered* appears as plain text at the bottom of the screen. Drivers don't realise it can be tapped, so some deliveries are never confirmed. Redrawing it as a large green button labelled *Confirm delivery* fixes an affordance problem."
+      },
+      {
+        "heading": "Interoperability",
+        "body": "Interoperability is a solution's ability to exchange data with other systems and work alongside them. Corella Point's app must pass each confirmed delivery to the firm's accounting program, which already imports CSV files. Designing for interoperability means choosing formats and fields the other system can read, so nobody has to retype data. It isn't portability, which is running on different platforms such as Android and iOS."
+      },
+      {
+        "heading": "Security: authentication and data protection",
+        "body": "Authentication confirms that users are who they claim to be, through a sign-in, a PIN or a fingerprint, and a log out control lets them end the session. Data protection keeps information from people who shouldn't see it: nothing personal on screen before sign-in, each role seeing only what it needs, and stored data encrypted.\n\nUsers notice these features, and they shape trust. A screen headed *Signed in as R. Okafor* that lists only that driver's deliveries shows the driver has been authenticated, and that customers' addresses aren't open to every user. Each security step also adds effort, so good design keeps the steps few, such as a fingerprint instead of a long password on a phone the firm issued."
+      },
+      {
+        "heading": "Usability",
+        "body": "Usability is how easily the intended users can learn a solution and use it to complete their tasks, including users with a disability. Corella Point's drivers record dozens of deliveries a shift, often one-handed beside the truck. Filling in the date and time automatically, choosing the consignment from today's list instead of typing its number, and confirming each save with a clear message all cut the steps and the errors."
+      },
+      {
+        "heading": "Comparing two designs",
+        "body": "Questions often show two sketches or a mock-up and ask which characteristic a design shows better, or needs most. A full answer does three things:\n\n1. Names one of the four characteristics.\n2. Points to the feature that shows it, such as a log out button for security or a drop-down list for usability.\n3. Says what the other design lacks, such as private details on show before anyone signs in.\n\nKeep UX characteristics apart from design principles. Contrast, alignment and navigation are design principles, so they earn nothing when a UX characteristic is asked for. Usability is the one name that appears on both lists."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Yarrowee Mobile Vets in Ballarat is designing a tablet app that its vets use on farm visits. The app shows each farm's address and contact details and the treatment history of its animals. Two features in the design are:\n\n1. After each visit, the treatments given are sent to the practice's billing program in a file format that the billing program already imports.\n2. The app locks after two minutes without use, and the vet's PIN or fingerprint is needed to unlock it.\n\nFor each feature, identify the characteristic of user experience it most improves, and explain how it improves the experience of the vets or their clients.",
+      "points": [
+        {
+          "text": "Feature 1: interoperability",
+          "marks": 1
+        },
+        {
+          "text": "Explains: treatments reach the billing program without office staff retyping them, so bills are ready sooner and match what the vet recorded, and vets don't enter anything twice",
+          "marks": 1
+        },
+        {
+          "text": "Feature 2: security (authentication)",
+          "marks": 1
+        },
+        {
+          "text": "Explains: if a tablet is left in a ute or a shed, no one else can see farms' contact details or animal records, while a fingerprint lets the vet unlock it with little effort",
+          "marks": 1
+        }
+      ],
+      "model": "The first feature improves interoperability. The app exchanges data with another system, the billing program, in a format that program already reads. Treatments flow straight into billing without office staff retyping them, so clients' bills are ready sooner and match what the vet actually recorded, with no copying errors.\n\nThe second feature improves security, through authentication. A vet often puts the tablet down in a ute or a shed during a visit. Because it locks after two minutes and only the vet's PIN or fingerprint opens it, nobody who picks it up can read the farms' contact details or their animals' records. The fingerprint option keeps unlocking quick, so the protection costs the vet very little effort."
+    },
+    "traps": [
+      "Asked which UX characteristic a mock-up most needed to improve, 55% correctly chose affordance. A quarter chose contrast, which is a design principle and not one of the four UX characteristics.",
+      "Comparing two sketches in 2025, 59% of students scored zero and 2% scored full marks. Answers that didn't name a UX characteristic from the study design earned nothing. Credited answers pointed to the feature that showed the characteristic, such as a logout button and a heading showing the user's role for security, icons people already know for affordance, or a drop-down list in place of typing for usability, and said what the other sketch lacked.",
+      "Few students noticed that one sketch seemed to show private tenant and property details to anyone, with no login at all. Look for a weakness like that when you compare two designs for security."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u3o2-kk16",
+    "kk": "U3O2-KK16",
+    "intro": "Design principles are accepted qualities that shape how an interface looks and works. This point lists seven: alignment, balance, contrast, space, text formatting, usability and navigation. You need to be able to apply one to a screen, justify a choice with one, or spot the principle a mock-up fails, always for the users in the scenario.",
+    "sections": [
+      {
+        "heading": "Alignment, balance and space",
+        "body": "These three decide where things sit.\n\n- **Alignment** lines elements up along shared edges or centres. On Corella Point Freight's consignment form, every label starts at the same left edge and every text box at a second one, so the eye runs straight down the fields.\n- **Balance** spreads visual weight across the screen. It can be symmetrical, or asymmetrical, such as a large map on the left offset by a group of smaller controls on the right.\n- **Space** is the empty area around and between elements. Margins stop a screen feeling cramped, and a wider gap between the sender's details and the receiver's details than between fields within each group shows which fields belong together."
+      },
+      {
+        "heading": "Contrast and text formatting",
+        "body": "**Contrast** makes elements clearly different in colour, size, weight or shape, so the important ones stand out and text is readable against its background. Dark text on a light background still works in a sunny depot yard; pale grey on white doesn't. Contrast shouldn't rely on colour alone, because some users can't tell red from green.\n\n**Text formatting** covers the font, its size and colour, and enhancements such as bold. A large bold heading shows what a screen is for, one or two fonts keep it calm, and bold is saved for what matters, such as *Fragile*. Mock-up annotations record these choices."
+      },
+      {
+        "heading": "Usability and navigation",
+        "body": "These two are about how the interface works as much as how it looks. As a design principle, **usability** means ease of use and accessibility: controls big enough to tap wearing gloves, text that can be enlarged, and as few steps as possible to finish a task. **Navigation** is how users move between screens and keep track of where they are: menus, tabs, and Back and Next buttons with the same label and position on every screen, plus a marker such as *Step 2 of 4*."
+      },
+      {
+        "heading": "Principles are not UX characteristics",
+        "body": "The study design keeps two separate lists. Design principles describe how an interface is laid out and behaves. The UX characteristics (affordance, interoperability, security and usability) describe how people experience the whole solution. Contrast is a principle, so it is the wrong answer when a question asks for a UX characteristic. Usability is the only term on both lists."
+      },
+      {
+        "heading": "Justifying a design choice",
+        "body": "A justification names the principle, points to the feature on the screen, and says what it does for these particular users. For the depot's forklift drivers, who glance at a wall tablet between loads:\n\n*Contrast: the Next load panel is white text on dark blue, unlike the grey panels around it, so a driver can find the next job with one look across the yard.*\n\nNaming a principle without the feature and the users' need doesn't justify anything."
+      }
+    ],
+    "worked": {
+      "commandTerm": "recommend",
+      "marks": 4,
+      "prompt": "Kestrel Downs Orchards in Shepparton has a tablet on the packing-shed wall where pickers check their tally for the week. The draft screen shows each day's bins in a table of small, pale grey text, and the week's total is in the same size and style as the daily rows. To change week, pickers tap one of 52 small numbered buttons squeezed into a strip along the bottom of the screen. Pickers often wear gloves, and many read English as an additional language.\n\nRecommend **two** changes to the screen. For each change, name the design principle it applies and justify it with reference to the pickers.",
+      "points": [
+        {
+          "text": "First change with its principle, e.g. text formatting: dark, larger text for the daily rows and the week's total in large bold type with a clear label (contrast is also accepted)",
+          "marks": 1
+        },
+        {
+          "text": "Justifies it for the pickers, e.g. they find the figure they came for at a glance, without reading every row, which helps those with less English",
+          "marks": 1
+        },
+        {
+          "text": "Second change with its principle, e.g. usability: replace the 52 small buttons with large Previous week and Next week buttons (navigation is also accepted)",
+          "marks": 1
+        },
+        {
+          "text": "Justifies it for the pickers, e.g. large buttons can be tapped accurately with gloves on, so pickers stop landing on the wrong week",
+          "marks": 1
+        }
+      ],
+      "model": "First, apply text formatting. The daily rows should be in dark text at a larger size, and the week's total should be in large bold type with a clear label such as *Week total*, set apart from the rows. Pickers come to the screen to see that total, so making it stand out lets them find it at a glance without working through the table, which matters for pickers who read English as an additional language.\n\nSecond, apply usability. The strip of 52 small buttons should be replaced with two large buttons, *Previous week* and *Next week*, with the current week's dates shown between them. Pickers wearing gloves can't tap small, crowded buttons accurately, so they often land on the wrong week. Two large buttons are easy to hit with a gloved finger, and the dates show which week is on screen."
+    },
+    "traps": [
+      "On the 2025 paper, a quarter of students answered *contrast* when asked which UX characteristic a mock-up most needed to improve. Contrast is a design principle; the answer was affordance, a UX characteristic."
+    ],
+    "source": "study-design"
+  }
+]
