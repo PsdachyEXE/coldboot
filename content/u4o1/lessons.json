@@ -1,0 +1,648 @@
+[
+  {
+    "id": "l-u4o1-kk01",
+    "kk": "U4O1-KK01",
+    "intro": "A solution is judged on two separate measures. Efficiency is the time, cost and effort it takes to get a result; effectiveness is how well the result achieves its purpose. The study design names three characteristics that improve both: detailed internal documentation, clear and concise code, and user-centred design. In 2025, 62% of students scored nothing when asked how user-centred design does this.",
+    "sections": [
+      {
+        "heading": "Two measures, kept apart",
+        "body": "Efficiency is about what a result costs in time, money and effort. For a solution, that includes how fast it processes data and what its data and file handling costs. Effectiveness is about how well the result serves its purpose. Its measures for a solution include accuracy, completeness, readability, maintainability and usability.\n\nThe two move independently. A Bendigo joinery's program that prints a cutting list in two seconds instead of twenty is more efficient. If some of its lists give the wrong lengths, it is less effective, however fast it runs. When a question asks about both, give one example of each and tie each one to the scenario."
+      },
+      {
+        "heading": "User-centred design: users take part",
+        "body": "In user-centred design, the people who will actually use the solution take part throughout its development, and the design changes in response to them. They are interviewed or watched at work during analysis, try mock-ups and early versions during design and development, and beta test the nearly finished solution. Their feedback arrives early, while changes are still cheap to make.\n\nTake a job-logging app for the mechanics at a Horsham tractor dealer. Watching them work shows that they log jobs between tasks with gloved hands, so the app gets large buttons and a list of common jobs instead of typed descriptions. Logging a job now takes seconds: an efficiency gain. When mechanics try a mock-up, several pick the wrong one of two similar job codes, so the codes are renamed and fewer jobs are logged wrongly: an effectiveness gain.\n\nNotice that the explanation is about *how* users take part. Saying the design meets users' needs states the goal, not the method."
+      },
+      {
+        "heading": "Clear and concise code",
+        "body": "Clear code can be read and understood quickly. It uses meaningful names that follow one naming convention, consistent indenting, and modules that each do one job. Concise code has no needless or repeated steps: work needed in several places is written once, as a function called where it is needed, and repeated steps go in a loop.\n\nConcise doesn't mean as short as possible. Single-letter names and several steps crammed onto one line make code shorter but harder to read.\n\nBoth qualities cut the time and effort needed to fix, change and test the code later, which is an efficiency gain, and removing needless steps can also make processing faster. They also make the code more readable and maintainable, which are measures of effectiveness. If the tractor dealer's labour rate is applied in one function, a new rate is entered once, and no forgotten copy of the old calculation is left to produce wrong invoices."
+      },
+      {
+        "heading": "Detailed internal documentation",
+        "body": "Internal documentation is the comments in the code, written for programmers rather than users. Detailed comments state what each module does, what it receives and returns, and why a particular approach was taken. They can also mark stubs: placeholders for parts still to be written.\n\nComments are ignored when the program runs, so they don't speed up processing. Their value comes when someone works on the code later. A developer adding a feature to the job-logging app next year finds the right module sooner and doesn't undo a choice that was deliberate. The change takes less time and effort (efficiency), and because the code is more maintainable, the change is less likely to introduce an error (effectiveness)."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Nell is finishing the pay module for a berry farm near Silvan. Pickers are paid $2.40 for each tray they pick, and the number of trays for each day has already been validated as a whole number of 0 or more. Her function returns a picker's pay for the three days of a long weekend.\n\n```pseudo\nFUNCTION calc(a, b, c)\n    t ← 0\n    IF a > 0 THEN\n        t ← t + a * 2.4\n    ENDIF\n    IF b > 0 THEN\n        t ← t + b * 2.4\n    ENDIF\n    IF c > 0 THEN\n        t ← t + c * 2.4\n    ENDIF\n    RETURN t\nENDFUNCTION\n```\n\nExplain two changes Nell could make so that the function is clear and concise, and how each change would make the pay module more efficient or more effective.",
+      "points": [
+        {
+          "text": "Change 1: replaces `calc`, `a`, `b`, `c` and `t` with meaningful names in one naming convention, e.g. `weekendPay(traysFri, traysSat, traysSun)` and `totalPay`",
+          "marks": 1
+        },
+        {
+          "text": "Explains change 1: a developer can tell what the function does without tracing it, so later fixes take less time and effort (efficiency), and the code is more readable and maintainable (effectiveness)",
+          "marks": 1
+        },
+        {
+          "text": "Change 2: removes the three repeated IF blocks, which are needless because adding 0 trays changes nothing, and calculates the pay once, e.g. adds the trays and multiplies the total by 2.4",
+          "marks": 1
+        },
+        {
+          "text": "Explains change 2: the rate now appears once, so when it changes it is edited in one place and no copy is missed, keeping pay correct (effectiveness), with less code to read and test (efficiency)",
+          "marks": 1
+        }
+      ],
+      "model": "First, Nell should give the function and its variables meaningful names in one convention, such as `weekendPay(traysFri, traysSat, traysSun)`. At the moment a developer has to trace every line to learn that `a`, `b` and `c` are trays and `t` is pay. With clear names, anyone maintaining the module sees its purpose at a glance, so fixes and changes take less time and effort, which improves efficiency, and the code is more readable and maintainable, which improves effectiveness.\n\nSecond, she should remove the repeated IF blocks. Each one only avoids adding 0 trays, which would change nothing anyway, so the tests are needless, and the rate is copied three times. The concise version adds the trays and multiplies once:\n\n```pseudo\nFUNCTION weekendPay(traysFri, traysSat, traysSun)\n    totalTrays ← traysFri + traysSat + traysSun\n    RETURN totalTrays * 2.4\nENDFUNCTION\n```\n\nNow the rate appears in one place. When the farm changes it, Nell edits one line and can't miss a copy, so pickers go on being paid correctly, which keeps the module effective, and there is less code to read and test, which saves effort."
+    },
+    "traps": [
+      "An answer on user-centred design must say how users take part. In 2025, 62% scored zero on one: answers saying only that it meets users' needs earned nothing, while credited answers had the actual end users involved in every phase, for example through interviews, feedback on designs and beta testing, so feedback came early.",
+      "Give a separate example for each quality. Few 2025 answers did. Credited efficiency examples included a faster workflow or a lower cost; credited effectiveness examples included fewer errors or clearer feedback."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk02",
+    "kk": "U4O1-KK02",
+    "intro": "Each item of data in a solution comes in, is held while the program runs, may be kept between runs, and goes out again. This point asks you to choose a data type, a data structure and a data source that suit the item at each stage, and to justify each choice from the data itself. In 2025, marks were lost to imprecise type names and to answers that didn't address the exact question in its scenario.",
+    "sections": [
+      {
+        "heading": "Input: data arrives as text",
+        "body": "Data enters a solution through GUI controls, or from a data source such as a file or a database, which can be local or cloud-based. Much of it arrives as text. At a Portland surf lifesaving club, a sprint time typed into a text box, or read from the CSV line `Ava Doyle,C,14.82`, is a string until the program converts it.\n\nSo the input stage has two jobs: validate each value, then convert it to the type it will be stored as. A control that offers only valid choices, such as a drop-down list of heats, needs less checking than a text box."
+      },
+      {
+        "heading": "Storage: choosing data types",
+        "body": "Choose each type from what the value is and what the program does with it, and use the study design's names in full.\n\n| Item | Example | Data type | Why |\n|:--|:--|:--|:--|\n| Name | Ava Doyle | string | text that is never calculated |\n| Heat | C | character | always exactly one letter |\n| Entries in a heat | 6 | integer | a whole-number count |\n| Sprint time | 14.82 | floating point | has a fractional part and is ranked |\n| Carnival date | 13/02/2027 | date/time | compared and ordered as a date |\n| Entry fee paid | true | Boolean | only two possible states |\n\nA date stored as a string is compared character by character, so `13/02/2027` would sort ahead of `20/01/2027`, because 1 comes before 2, although January comes first."
+      },
+      {
+        "heading": "Storage: choosing data structures",
+        "body": "Match the structure to the shape of the data.\n\n- A **one-dimensional array** holds a list of values of one type, each found by its index: the six times in one heat.\n- A **two-dimensional array** holds a grid of one type, found by row and column: `times[heat][lane]` for eight heats of six lanes.\n- A **record** keeps one thing's related fields together, even when their types differ, and each field is found by its name: one competitor's name, heat, time and fee status.\n- An **array of records** holds one record per competitor, so the program can loop through, sort or search them all."
+      },
+      {
+        "heading": "Keeping data between runs",
+        "body": "Variables and arrays live in memory and disappear when the program closes. Data needed next time is written to a data source and read back on the next run.\n\n- **Plain text (TXT)** is unstructured: lines of free text, which suits a log a person reads, such as `9:42 heat C restarted`.\n- **Delimited (CSV)** is structured by position: one record per line, with a delimiter between fields. It is compact and opens straight into a spreadsheet, so it suits flat records that all share the same fields.\n- **XML** is structured by name: each value sits between tags that say what it is, elements nest inside one another, new elements can be added later, and the format is portable between systems.\n\nA database, local or in the cloud, suits data that people in several places must read and update at the same time."
+      },
+      {
+        "heading": "Output: shaped for its reader",
+        "body": "Output goes either to people or to another system. On screen, values are formatted as they are displayed: the stored 14.82 appears as `14.82 s`, and a fee as `$12.50`. Formatting is added at output rather than stored, so the value can still be sorted and totalled.\n\nFor another system, choose the format its reader needs. The club sends each carnival's results to the regional organisers, who plan to add a wind reading to every result next season. XML suits: a new element can be added without breaking programs that read the existing tags, and the tags tell the organisers' system what each value means."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Rafe is writing a hire program for a boat-hire business in Lakes Entrance. Each hire has a total, such as $127.50. The program displays each total on screen and adds it to the day's income, and each night it writes the day's hires to a CSV file that the bookkeeper opens in a spreadsheet. A classmate suggests storing each total as the string `\"$127.50\"` so that it can be displayed without any extra code.\n\nExplain why each total should be stored as floating point instead, and how the program should handle the totals when it outputs them.",
+      "points": [
+        {
+          "text": "Floating point holds dollars and cents, such as 127.50, which an integer can't, and can be used directly in arithmetic",
+          "marks": 1
+        },
+        {
+          "text": "Stored as numbers, the totals can be added to the day's income and compared; as strings with a $ sign, each would need the sign removed and the text converted before every calculation, and `+` would join the strings instead of adding them",
+          "marks": 1
+        },
+        {
+          "text": "On screen, the program formats each stored value as it displays it, adding the $ sign and showing two decimal places",
+          "marks": 1
+        },
+        {
+          "text": "In the CSV file, each total is written from the stored value as a plain number, e.g. 127.50, in its own field, one hire per line, so the spreadsheet places it in its own column as data",
+          "marks": 1
+        }
+      ],
+      "model": "Each total should be floating point because it is in dollars and cents, such as 127.50, which an integer can't hold, and because the program calculates with it. Stored as a number, each total can be added straight to the day's income. Stored as the string \"$127.50\", every calculation would first need the $ sign removed and the text converted, and joining two strings with `+` would put them side by side instead of adding them.\n\nThe $ sign and the two decimal places belong to how a total is shown, not to the data. When the program displays a total, it formats the stored value at that moment, showing `$127.50`. When it writes the CSV file, it writes each total from the same stored value as a plain number, 127.50, in its own field, with commas between the fields and one hire per line, so the bookkeeper's spreadsheet puts each total in its own column, ready to add up."
+    },
+    "traps": [
+      "A value that is always one symbol is a character, and the reason is that only one symbol needs storing. In 2025, 72% scored zero on this, and answering string earned nothing.",
+      "Write data types in full. Bool and Float earned no marks in 2025 where Boolean and floating point were wanted.",
+      "When asked for the benefits of XML, describe XML's own features in the scenario: an extensible structure, tags in a hierarchy that say what the data means, and portability between systems. In 2025, answers that compared XML with CSV earned nothing."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk03",
+    "kk": "U4O1-KK03",
+    "intro": "This point is the toolkit you build a solution with: variables and constants, data types, control structures, operators, the GUI, functions and methods, classes and objects, and access modifiers, the one feature Unit 4 adds to the Unit 3 list. Exam questions give you code or a scenario and ask which feature suits and why, so learn what each one lets you do.",
+    "sections": [
+      {
+        "heading": "Three layers of a solution",
+        "body": "VCAA's programming requirements describe a solution in three layers. The **interface** is the GUI, the forms and controls the user works with, built in an IDE's drag-and-drop designer or written in code. The **logic** layer does the processing with instructions, control structures, operators, functions, methods, classes and objects. The **data source** layer holds variables, constants and their data types, and reads from and writes to files and databases.\n\nIn a booking app for a Natimuk rock-climbing school, the booking form is the interface, the code that prices a session is the logic, and the file of bookings is the data source."
+      },
+      {
+        "heading": "Variables, constants and scope",
+        "body": "A **local variable** is declared inside a function or method. Any statement in that module can use it, including those inside its IF blocks and loops, but no other module can. A **global variable** is declared outside every module, so any code can read or change it while the program runs. A **constant** is a named value that can't change while the program runs; changing it means editing the code. Each variable and constant has a data type, such as integer, floating point, string or Boolean, chosen to suit the value it holds.\n\nPrefer local variables and pass data in as parameters, because a value that only one module can change is easier to trace when it goes wrong. Use a constant for a fixed value needed in several places, such as the climbing school's $20 deposit, so it is written once and can't be altered by accident."
+      },
+      {
+        "heading": "Control structures and operators",
+        "body": "Instructions run in **sequence** unless a control structure changes the order. **Selection** (IF, IF…ELSE, IF…ELSEIF or CASE) uses a condition to decide which code runs. **Iteration** (repetition) repeats a block: a pre-test WHILE loop may run zero times, a post-test REPEAT…UNTIL loop always runs at least once, and a FOR loop runs a set number of times.\n\nConditions are built from operators. Conditional (comparison) operators such as `<`, `>=` and `<>` compare two values. Logical operators `AND`, `OR` and `NOT` combine or reverse true/false results. Arithmetic operators calculate, and include `DIV` (integer division) and `MOD` (the remainder). The test `climbers >= 2 AND climbers <= 8` joins two comparisons with a logical operator."
+      },
+      {
+        "heading": "Functions, methods, classes and objects",
+        "body": "A **function** is a named block of code that takes parameters and can return a value, as in `price ← sessionPrice(climbers, isMember)`. Written once, it can be tested on its own and called wherever it is needed. A **class** is a template that defines attributes and methods, and each **object** made from it holds its own attribute values. A **method** is a function that belongs to a class and works on one object's data, so `booking.cancel()` changes only that booking.\n\nGUI programs are driven by events. Clicking a button raises an event, and the method linked to it, its event handler, runs."
+      },
+      {
+        "heading": "Access modifiers",
+        "body": "Access modifiers set which code may use each attribute and method.\n\n| Modifier | Can be used by |\n|:--|:--|\n| public | any code in the program |\n| protected | the class's own methods and its subclasses |\n| private | only the class's own methods |\n\nGive each member the least access it needs. The climbing school's `Booking` class keeps `amountPaid` private, so no other class can set it directly. Other code calls the public method `recordPayment(amount)`, which can reject a negative amount before storing it: encapsulation in practice. If a `GroupBooking` subclass has a method that must use the `Booking` attribute `basePrice` directly, that attribute is protected. Private would shut the subclass out, and public would open it to every class."
+      }
+    ],
+    "worked": {
+      "commandTerm": "describe",
+      "marks": 4,
+      "prompt": "Ari is building the hire kiosk for a pedal-boat business on the Mildura riverfront. The kiosk's form has a drop-down list for the boat size (two-seat or four-seat), a text box for the number of whole hours, a **Calculate** button and a label that shows the price.\n\nDescribe how features of the programming language would work together to show the price when a customer clicks **Calculate**.",
+      "points": [
+        {
+          "text": "Clicking Calculate raises an event, and the method linked to the button (its event handler) runs",
+          "marks": 1
+        },
+        {
+          "text": "The handler reads the boat size from the drop-down list and the hours from the text box; the hours arrive as text, so once validated they are converted to an integer and held in a local variable",
+          "marks": 1
+        },
+        {
+          "text": "The handler calls a function, e.g. `hirePrice(boatSize, hours)`, passing the values as parameters; the function uses selection to choose the hourly rate for the boat size, multiplies it by the hours and returns the price",
+          "marks": 1
+        },
+        {
+          "text": "The handler stores the returned price in a local variable and displays it in the label, formatted with a $ sign and two decimal places",
+          "marks": 1
+        }
+      ],
+      "model": "Clicking **Calculate** raises a click event, and the method linked to that button, its event handler, starts running. The handler reads the boat size chosen in the drop-down list and the text typed in the hours box. Because the hours arrive as text, the handler validates them and converts them to an integer, which it keeps in a local variable, since no other module needs it.\n\nThe handler then calls a function such as `hirePrice(boatSize, hours)`, passing both values as parameters. Inside the function, an IF…ELSE selection structure chooses the hourly rate for a two-seat or a four-seat boat, and the arithmetic operator `*` multiplies the rate by the hours. The function returns the price instead of displaying it, so the handler can store the result in a local variable and display it in the price label, formatted as dollars with two decimal places."
+    },
+    "traps": [
+      "Private limits an attribute to its own class's methods; protected also lets subclasses use it. In 2025, a fifth of students chose protected for an attribute that only the class's own methods were to reach.",
+      "A local variable can be used anywhere in the module that declares it, not just inside one IF or loop, and a global variable's value can change while the program runs. Scope was the weakest multiple-choice result of 2025, at 42% correct.",
+      "Testing a condition to choose which branch runs, as an IF…ELSEIF chain does, is selection. Close to three in ten students in 2025 called such a chain repetition, a method or a property."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk04",
+    "kk": "U4O1-KK04",
+    "intro": "Few solutions are built entirely from scratch. The study design names three approaches developers use: keeping code in repositories, building on application programming interfaces (APIs) and libraries, and working with artificial intelligence-based (AI) assistants. Expect to explain what an approach offers a developer in a scenario, what can go wrong with it, and how to manage that risk.",
+    "sections": [
+      {
+        "heading": "Code repositories",
+        "body": "A code repository stores a project's code along with the history of every change to it, which is what makes version control possible. Each saved change records who made it, when, and a message saying what it does, so the team can trace how the code changed and roll back a change that broke something.\n\nRepositories also support teamwork and transparency. A developer can build a new feature in a separate line of work (usually called a branch) while the main codebase stays as it was; the feature is merged in only after it has been tested and reviewed. Git, GitHub, Bitbucket and SourceForge are examples. Three developers building a regional council's dog-registration system could each work on their own feature while the version council staff use stays stable."
+      },
+      {
+        "heading": "APIs",
+        "body": "An API is an interface that lets separate systems and solutions communicate. One program sends a request in an agreed form and receives data or a service back, without needing to know how the other system works inside. A booking app for a whale-watching operator in Port Fairy can request marine forecasts from a weather service's API instead of collecting weather data itself. Operating systems also provide APIs that programs use to reach a device's features."
+      },
+      {
+        "heading": "Libraries",
+        "body": "A library is a collection of pre-written code, such as functions and classes, that developers call to carry out common tasks. Most languages ship with a standard library covering jobs such as reading input, writing output and working with data, and third-party libraries, many of them open source, add more; NumPy, for numerical work in Python, is one. A tested library for reading barcodes or drawing charts lets a developer spend their time on the parts that only their own solution needs."
+      },
+      {
+        "heading": "When APIs and libraries cause problems",
+        "body": "Both bring in code or services the developer doesn't control. VCAA lists four challenges:\n\n- **Complexity:** learning an API or library and fitting it into the program takes time and skill.\n- **Dependency:** if a provider changes its API, starts charging or withdraws access, the feature stops working even though the program's own code hasn't changed.\n- **Security risks:** an API opens another path to the system and its data, and an outdated library can carry flaws that attackers already know about.\n- **Versioning and compatibility:** a new version of a library can rename or change functions and break the program.\n\nDevelopers manage these by keeping every call to an API in one module, keeping libraries up to date while testing each new version before users get it, and planning a fallback, such as showing the last forecast the app saved."
+      },
+      {
+        "heading": "AI-based assistants",
+        "body": "AI-based assistants are increasingly built into development environments. Drawing on machine learning, natural language processing and other artificial intelligence techniques, they watch what the developer is doing and respond to the developer's prompts.\n\nVCAA lists their benefits as gains in productivity and efficiency, lower development costs, support for solving problems and trying new ideas, code that is generated or suggested as the developer works, automated debugging and testing (including generated test data and test cases), and internal documentation that is written, maintained and improved automatically. The challenges it lists are output that is inaccurate or misses the context, over-reliance on the assistant, the cost of integrating it, security vulnerabilities slipped into code by accident, copyright and intellectual property theft, biased training data, and environmental impact.\n\nEvery benefit depends on the developer checking the output. An assistant asked for a booking-date check doesn't know the business is closed on Mondays unless it is told, so its code can run perfectly and still accept bookings it shouldn't."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Jonah is the only developer of a booking app for a glamping site near Halls Gap. Guests can book from 1 to 14 nights, and stays of 7 nights or more get 15% off. He plans to have the AI-based assistant in his IDE generate the test data and test cases for the module that calculates the price of a stay.\n\nExplain one benefit and one challenge of using the assistant for this task.",
+      "points": [
+        {
+          "text": "Benefit: the assistant generates test data and test cases automatically, which is faster than writing them by hand (increased productivity)",
+          "marks": 1
+        },
+        {
+          "text": "Applies the benefit: e.g. in seconds it can propose many cases across the 1 to 14 night range, including invalid entries such as 0, 15 or text, leaving Jonah more time to fix the errors the tests reveal",
+          "marks": 1
+        },
+        {
+          "text": "Challenge: lack of accuracy and context awareness (or over-reliance on the assistant)",
+          "marks": 1
+        },
+        {
+          "text": "Applies the challenge: the assistant knows the site's rules only from what Jonah tells it, so it may leave out the boundary tests at 6 and 7 nights or give a wrong expected price; Jonah must check every expected output against the requirements before relying on the tests",
+          "marks": 1
+        }
+      ],
+      "model": "One benefit is speed. The assistant can generate test data and test cases automatically, so in seconds it can propose a large set for the pricing module: typical stays, the limits of 1 and 14 nights, and invalid entries such as 0, 15 or text. That saves Jonah, as the only developer, the time he would spend writing them himself, and leaves more time for fixing the errors the tests find.\n\nOne challenge is the assistant's lack of accuracy and context awareness. It knows the glamping site's rules only from what Jonah tells it, so it might leave out the most important boundary, 6 and 7 nights, where the discount begins, or work out an expected price wrongly. If Jonah trusted its test cases without checking them, a wrong expected output could make a faulty module appear to pass. He needs to check each expected output against the requirements himself."
+    },
+    "traps": [
+      "Using AI to write code isn't unethical in itself; the ethical problem is leaning on it too heavily. In 2025, 65% picked over-reliance for an organisation that has AI write all its initial code, while 16% chose the option claiming that writing code with AI is always unethical.",
+      "Version control isn't a backup. In a 2025 question on protecting a development environment, some answers wrongly treated it as one; credited answers said it keeps versions of the code throughout development, so the team can roll back to a working one after errors it can't resolve."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk05",
+    "kk": "U4O1-KK05",
+    "intro": "Validation checks that data is reasonable and complete before a solution relies on it. The study design names three techniques: existence checking, type checking and range checking. In Unit 4 you apply them across a whole solution, and in 2025 the exam asked students to name the check made on a line of pseudocode, then add a missing check and say why it was needed.",
+    "sections": [
+      {
+        "heading": "What validation can and can't do",
+        "body": "Validation tests whether data is reasonable and complete, not whether it is true. A Kyneton vet clinic's program can confirm that a weight of 31.5 kg is a sensible number, but not that the dog really weighs that. Checking data against its source for accuracy is verification, a separate idea.\n\nValidation can be manual or electronic, and it can happen as data is entered or after it has been stored. Whether it actually works is shown by testing it."
+      },
+      {
+        "heading": "The three checks",
+        "body": "| Check | What it confirms | Fails at the clinic when |\n|:--|:--|:--|\n| Existence | a required field has a value and isn't blank | the owner's phone number is left empty |\n| Type | the data is of the expected type | the weight is typed as `thirty` |\n| Range | the value lies between a lower and an upper limit | the weight entered is 0 or 300 |\n\nApply them in that order. A type check needs something to test, and a range check compares numbers, so it needs data that has already passed the type check. When you justify a check, say what would go wrong without it: with no type check, `thirty` would reach the comparison with the lower limit and could cause a type mismatch error."
+      },
+      {
+        "heading": "Planning the checks from the design",
+        "body": "Each rule comes from the requirements, and a data dictionary can record it in a validation rules column, so the checks are designed before any code is written.\n\n| Name | Data type | Validation rules |\n|:--|:--|:--|\n| ownerPhone | String | existence |\n| petWeight | Floating point | existence, type, range 0.5 to 120.0 |\n| visitNotes | String | none: optional |\n\nAn optional field gets no existence check, or valid records would be refused. During development each rule becomes code, and during testing each rule gets data that should pass and data that should fail."
+      },
+      {
+        "heading": "Controls and files",
+        "body": "Not every input needs every check. A GUI control that offers only valid choices removes the need for type and range checks: a drop-down list of the clinic's vets can't hold a misspelt name. It still needs an existence check if it can be left on *Choose a vet*. A check box is always either ticked or not, so it needs no check.\n\nData read from a file needs validating too. A CSV file exported by another program or edited by hand can hold a blank field, text where a number belongs, or an impossible value, so each record is checked as it is read."
+      },
+      {
+        "heading": "When a check fails",
+        "body": "Reject the entry, say exactly what is accepted, and ask again. A message such as *Invalid input* leaves the user guessing. A loop keeps asking until the data passes every check, whereas a single IF checks only once. Here `isNumber` and `toFloat` are helper functions.\n\n```pseudo\nBEGIN\n    valid ← False\n    REPEAT\n        INPUT weightText\n        IF weightText = \"\" THEN\n            DISPLAY \"Enter the pet's weight\"\n        ELSEIF NOT isNumber(weightText) THEN\n            DISPLAY \"Weight must be a number, such as 31.5\"\n        ELSEIF toFloat(weightText) < 0.5 OR toFloat(weightText) > 120 THEN\n            DISPLAY \"Weight must be from 0.5 to 120 kg\"\n        ELSE\n            valid ← True\n        ENDIF\n    UNTIL valid = True\n    petWeight ← toFloat(weightText)\nEND\n```"
+      }
+    ],
+    "worked": {
+      "commandTerm": "justify",
+      "marks": 3,
+      "prompt": "A bush campground near Mount Beauty takes online bookings. Guests type their arrival date into a text box in the form dd/mm/yyyy. The campground accepts arrivals from tomorrow up to 12 months ahead.\n\nJustify applying both a type check and a range check to the arrival date, with the type check first.",
+      "points": [
+        {
+          "text": "Type check: confirms the entry is a valid date before it is converted to date/time; an entry such as `next Friday` can't be converted, and without the check the conversion could fail with a type mismatch error instead of the guest being asked again",
+          "marks": 1
+        },
+        {
+          "text": "Range check: a correctly formed date can still be unreasonable, such as yesterday's date or one two years away, so the program confirms the date is from tomorrow to 12 months ahead and refuses bookings the campground can't take",
+          "marks": 1
+        },
+        {
+          "text": "Order: the range check compares the entry with tomorrow's date and the date 12 months ahead, which only works once the type check has confirmed the entry is a date; run first on text, it could fail",
+          "marks": 1
+        }
+      ],
+      "model": "A type check is needed because the text box accepts anything. Before the program can treat the entry as a date, it must confirm that the entry is a valid date that can be converted to the date/time type. An entry such as `next Friday` can't be, and without the check the conversion could fail with a type mismatch error instead of the guest being asked to re-enter the date.\n\nA range check is needed because a properly formed date can still be unreasonable. Yesterday's date is a real date, but it is in the past, and a date two years away is beyond the booking window. The range check accepts only dates from tomorrow to 12 months ahead, so the campground never receives a booking it can't take.\n\nThe type check comes first because the range check works by comparing the entry with two dates. That comparison only makes sense once the entry is known to be a date; given text, it could fail with the same kind of error."
+    },
+    "traps": [
+      "A line that tests whether a value is blank performs an existence check. Asked to name the check on such a line in 2025, about a third of students couldn't.",
+      "When asked to add a check, name the field and the check, then say what goes wrong without it. Credited 2025 answers added a type check on a number used in a comparison, since a non-numeric entry would cause an error, or an existence check on a required value left unchecked; 38% scored nothing."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk06",
+    "kk": "U4O1-KK06",
+    "intro": "Alpha testing checks, all through development, that each module and the whole solution meet the requirements and work as intended; debugging finds and fixes errors, including those the tests expose. The study design names four techniques: breakpoints, commenting out code, relevant test data, and test cases in testing tables that set expected output beside actual output. In 2025 only 15% of students earned full marks on a six-mark testing table.",
+    "sections": [
+      {
+        "heading": "Alpha testing and debugging",
+        "body": "Alpha testing goes on throughout development, in a development or testing environment, and is done by high-level users, independent testers or the developers themselves. Of every module, and then of the whole solution, it asks whether each requirement is met and whether it works as expected. It comes before beta testing, when intended users try the nearly finished solution.\n\nDebugging happens as code is written, often after a failed test: find the error, fix it, then test again to confirm that the fix worked and broke nothing that passed before. A booking module for a Wimmera grain haulier might pass eleven tests and fail one, and that failed row is where debugging starts."
+      },
+      {
+        "heading": "Relevant test data",
+        "body": "Test data is relevant when each value has a purpose taken from the requirements. For a haulage booking that accepts 1 to 30 tonnes, the data should include:\n\n- a typical valid value, such as 12\n- each limit and the value just past it: 0, 1, 30 and 31\n- invalid entries the validation must reject, such as a blank or `ten`\n- every combination of conditions, where two rules interact\n\nTest every requirement, beyond the calculations: the solution should also reject bad input with a message instead of crashing, and read and write its files correctly. Work out each expected result from the requirements before running the test."
+      },
+      {
+        "heading": "Testing tables",
+        "body": "A testing table records each test case as a row: a test number, a column for each input, the expected output and the actual output.\n\n| Test | Tonnes | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 12 | Booking saved: 12 tonnes | Booking saved: 12 tonnes |\n| 2 | 30 | Booking saved: 30 tonnes | Enter 1 to 30 tonnes |\n| 3 | 31 | Enter 1 to 30 tonnes | Enter 1 to 30 tonnes |\n\nTest 2 fails at the upper limit, which suggests the range check was written as `tonnes < 30` where `tonnes <= 30` was needed. Each row uses a combination of inputs not tried before, and both outputs are written in full, exactly as the program displays them."
+      },
+      {
+        "heading": "Breakpoints",
+        "body": "A breakpoint is a marker placed on a line in the development environment. When the running program reaches that line it pauses, and the developer can inspect each variable's current value and step through the following lines one at a time. The code itself is unchanged. With a breakpoint on the range check, running test 2 shows `tonnes` holding 30 just before the condition rejects it, which confirms where the fault lies."
+      },
+      {
+        "heading": "Commenting out code",
+        "body": "Commenting out turns lines of code into comments, so they stop running but stay in the file. It narrows down where a fault is. If the haulage program has crashed at the end of every day since three new lines were added, commenting all three out and then restoring them one at a time shows which line causes the crash.\n\nCommenting out fixes nothing by itself: it lets the developer examine and adjust that code and keep debugging. Any lines still needed are restored, and the tests are run again."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 4,
+      "prompt": "Ivy is alpha testing the fee module for a mini golf course in Inverloch. Players under 12 pay $8 and everyone else pays $12, and the module displays a message such as `Fee: $8.00`. Her testing table so far is shown.\n\n| Test | Age | Expected output | Actual output |\n|:--|:--|:--|:--|\n| 1 | 30 | Fee: $12.00 | Fee: $12.00 |\n| 2 | 45 | Fee: $12.00 | Fee: $12.00 |\n| 3 | 7 | $8 | $8 |\n\nExplain two weaknesses in Ivy's testing table, and describe how Ivy should address each one.",
+      "points": [
+        {
+          "text": "Weakness: tests 1 and 2 repeat the same scenario, an adult well inside the $12 band, so test 2 checks nothing new",
+          "marks": 1
+        },
+        {
+          "text": "Better test: a boundary value instead, e.g. age 12 (expected `Fee: $12.00`), which would reveal a condition such as `age <= 12` written where `age < 12` was needed, or age 11 (expected `Fee: $8.00`)",
+          "marks": 1
+        },
+        {
+          "text": "Weakness: test 3's outputs are shortened to `$8`, so the table doesn't record what the module displays, and an error in the message or its formatting would go unnoticed",
+          "marks": 1
+        },
+        {
+          "text": "Fix: both outputs written in full, exactly as displayed, `Fee: $8.00`, so they can be compared exactly",
+          "marks": 1
+        },
+        {
+          "text": "Alternative weakness and test: no invalid data is tested; add a row such as a blank age or `ten`, with the error message the module should display",
+          "marks": 1
+        }
+      ],
+      "model": "First, tests 1 and 2 repeat the same scenario: both are adults well inside the $12 band, so test 2 can't reveal anything that test 1 hasn't. Ivy should replace it with a boundary test, such as age 12 with expected output `Fee: $12.00`. A slip such as `age <= 12` where `age < 12` was needed still gives the right fee for ages 7, 30 and 45, so only a test at the limit, 12, will show it.\n\nSecond, test 3's expected and actual outputs are shortened to `$8`. The module displays `Fee: $8.00`, so the table doesn't record what was really shown, and a fault in the message, such as a missing decimal place, would pass unnoticed. Both outputs should be written in full, exactly as displayed, `Fee: $8.00`, so the two can be compared exactly."
+    },
+    "traps": [
+      "Every row of a testing table needs a combination of inputs not already tested. In 2025, a row that repeated an earlier scenario earned nothing.",
+      "Write expected and actual output in full, exactly as the program shows them; shortened outputs lost marks in 2025.",
+      "With two conditions in play, the credited 2025 rows covered each combination of the conditions being met and not met that the row already given hadn't tested.",
+      "Commenting out code doesn't delete or repair anything; a benefit is that the developer can examine and adjust code and carry on debugging. Almost every student (98%) chose this in 2025."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk07",
+    "kk": "U4O1-KK07",
+    "intro": "Beta testing puts a nearly finished solution in front of the people it was built for and watches how they get on. The study design breaks a beta testing strategy into three parts: a testing plan with test scenarios, observation of testers as they work through those scenarios, and documentation of the results. Exam questions ask you to name the user group that should do the testing and describe a strategy for that group.",
+    "sections": [
+      {
+        "heading": "Beta testing is not alpha testing",
+        "body": "In alpha testing, developers, independent testers or high-level users enter test data and compare expected with actual output in a testing table. Beta testing comes after it. Intended users try the solution on hardware the same as, or close to, what they will really use, to show whether it meets its requirements, works as expected, stays stable and is usable by them.\n\nSo a beta tester's job is to carry out a realistic task. It isn't to check that a total is right or to hunt for bugs. If a wrong total turns up, the observer records it, but finding it was never the tester's job."
+      },
+      {
+        "heading": "The testing plan: who tests",
+        "body": "The plan starts with the testers. They come from the user group that will actually use the feature being tested. A context diagram helps here: the entity that receives the feature's output data flow is the group to draw testers from. Within that group, pick people who represent its range, such as new and experienced staff, or confident and nervous phone users, and choose them at random from each site where you can. People who helped build the solution already know how it works, so they make poor testers.\n\nFor the SAT, the study design asks for at least two potential users, and classmates can act as users. The plan also says where and when testing happens and on what equipment, so every tester works under similar conditions."
+      },
+      {
+        "heading": "Test scenarios",
+        "body": "A scenario is a realistic job, stated as a goal in the user's own words, that a tester completes with the solution. The strategy should focus on the solution's core features, so each scenario exercises one of them.\n\nRedgum Flat Orchard Co-op near Shepparton is getting an app that lets pickers log each bin they fill. A good scenario: *You have just filled a bin of Packham pears in Block 7. Record it.* A poor one: *Tap Log bin, choose Block 7, tap Packham, tap Save.* The second lists the buttons to press, so it only shows that a tester can follow instructions, not whether pickers could find their own way."
+      },
+      {
+        "heading": "Observation",
+        "body": "An observer watches each tester work through the scenarios and notes where they hesitate, take a wrong turn, make an error or give up, and how long each step takes. The observer doesn't help. If a picker can't find where to change the block number and the observer points to it, the result shows a success that pickers on their own wouldn't have, and the problem stays hidden.\n\nObservation catches what a survey afterwards would miss, because testers often forget small struggles or don't think them worth mentioning. A screen recording lets each step be timed later."
+      },
+      {
+        "heading": "Documenting results and recommending changes",
+        "body": "Record results the same way for every tester so they can be compared:\n\n| Tester | Scenario | Finished unaided? | Time | Observer's notes |\n|:--|:--|:--|:--|:--|\n| Picker A, first season | Log a full bin | Yes | 40 s | Paused at the variety list |\n| Picker B, fifth season | Log a full bin | No | 2 min 10 s | Couldn't find Block 7; blocks not in number order |\n\nThe key skill doesn't stop at recording. You recommend changes based on what the results show, and rank them: a problem that stops testers finishing a core task comes first, one that slows them down comes next, and a cosmetic issue comes last. Here, listing the blocks in number order would be the first fix."
+      }
+    ],
+    "worked": {
+      "commandTerm": "recommend",
+      "marks": 4,
+      "prompt": "Stingray Point Couriers in Geelong is having an app built so that its drivers can record each delivery and collect the receiver's signature on a company phone. Alpha testing is finished. The developer, Hamish, has drafted this beta testing plan:\n\n1. **Testers:** three office staff who helped write the requirements, testing on office desktop computers.\n2. **Scenario:** 'Open Deliveries, tap the first job, tap Signature, sign, then tap Done.'\n3. **Results:** at the end of the session, each tester gives the app a score out of 10.\n\nRecommend **two** improvements to Hamish's plan. For each, explain the weakness it fixes.",
+      "points": [
+        {
+          "text": "Improvement (testers): choose several drivers who will use the app, covering a range of experience and confidence with phones, testing on company phones during a normal run",
+          "marks": 1
+        },
+        {
+          "text": "Weakness it fixes: office staff already know how the app is meant to work and won't use it on the road, and a desktop isn't a phone in a van, so their results can't show how drivers will get on",
+          "marks": 1
+        },
+        {
+          "text": "Improvement (scenario): state a goal in the driver's terms, e.g. 'Deliver the parcel at your next stop and get it signed for'",
+          "marks": 1
+        },
+        {
+          "text": "Weakness it fixes: a list of taps only tests whether testers can follow instructions, so it can't show whether drivers can find the signature screen on their own",
+          "marks": 1
+        },
+        {
+          "text": "Improvement (results): an observer watches each driver without helping and records whether they finished unaided, the time for each step, and where they hesitated or made errors, e.g. from a screen recording",
+          "marks": 1
+        },
+        {
+          "text": "Weakness it fixes: a score at the end is an opinion given afterwards; testers forget small struggles, and one number doesn't show which step caused trouble or what to change",
+          "marks": 1
+        }
+      ],
+      "model": "First, Hamish should use drivers as testers instead of office staff. He should choose four or five drivers, mixing new and long-serving drivers and those more and less confident with phones, and have them test on company phones during a normal run. The office staff helped write the requirements, so they already know how the app is meant to work, and they will never use it in a van. Testing at a desk also hides problems such as signing on a small screen at a customer's door.\n\nSecond, Hamish should replace the end-of-session score with observation. An observer should ride with each driver and record, without helping, whether they finished each scenario unaided, how long each step took and where they hesitated or made a mistake, backed by a screen recording on the phone. A score out of 10 is an opinion given afterwards. Drivers forget small struggles, and a single number doesn't show which step caused trouble, so Hamish couldn't tell what to change."
+    },
+    "traps": [
+      "On the 2025 paper, about two-thirds of students scored nothing for a beta testing strategy aimed at a named user group. Many had the testers checking the values a report produced, and others had them looking for bugs. Marks went for saying how testers would be chosen (for example, at random from each branch), what scenario they would carry out, and what would be recorded and how (for example, a screen recording used to time each step).",
+      "Choosing the user group earned its own mark, and 44% missed it. The testers for a function come from the group that receives its output, which the context diagram shows as the entity the data flow goes to."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk08",
+    "kk": "U4O1-KK08",
+    "intro": "An evaluation strategy is the plan for judging a finished solution once it is in use. The study design names its three features: the evaluation criteria, a time frame and responsibility. Questions ask you to propose a strategy for a scenario or to find what is wrong with one, so each feature needs specific detail, not just a heading.",
+    "sections": [
+      {
+        "heading": "A plan, written before the judgement",
+        "body": "Keep two activities apart. The evaluation strategy is written first and sets out how the solution will be judged. The evaluation itself comes later, once the solution has been implemented, when the data the strategy planned for is compared with the criteria. Alongside the three features, the PSM expects a strategy to state what data will be collected for each criterion, how it will be collected, and how that data relates to the criterion.\n\nThe order matters because some data can't be gathered after the fact. If a criterion compares delivery times with the old paper system, someone has to time the paper system before it is switched off."
+      },
+      {
+        "heading": "Evaluation criteria",
+        "body": "The criteria aren't new. You wrote them in Unit 3 during design, used them to choose your preferred design, and may have refined them as the solution developed. The evaluation uses the same criteria to judge the finished solution's efficiency and effectiveness.\n\nA usable criterion can be checked with data. Pelican Wharf Freight in Geelong has given its drivers an app for recording deliveries:\n\n| Criterion | What it measures | Data and method |\n|:--|:--|:--|\n| A delivery is recorded in under 45 seconds on average | Efficiency (time) | The app's log of start and finish times |\n| At least 98% of deliveries have a readable signature | Effectiveness (completeness) | Office staff check a random sample of delivery records |\n\n*The app works well* isn't a usable criterion, because no data could show whether it has been met."
+      },
+      {
+        "heading": "Time frame",
+        "body": "The time frame says when each piece of data is collected and when results are compared and reported. Leave time for users to settle in first. In the first week most drivers are still learning the app, so their times reflect learning rather than everyday use. A sensible plan for Pelican Wharf might log delivery times in weeks 5 to 8 after launch, check signatures in week 8 and report in week 10.\n\nWatch for busy and quiet periods too. Data from a slow month can make a solution look better or worse than it is under its real workload."
+      },
+      {
+        "heading": "Responsibility",
+        "body": "Responsibility names who does each job: who exports the log, who checks the sample of signatures, who provides data (drivers answering a survey, say), and who compares the results with the criteria and writes the report. A named person is accountable, so the evaluation actually happens instead of drifting.\n\nEvaluation happens weeks after launch, when the project team may have moved on. If the developer's contract ends at handover, a strategy that leaves the log export to the developer has nobody to do it. Name people who will still be there, such as the depot manager."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Wombat Hollow Nursery in Daylesford is replacing its paper order book with a stock and ordering program, which goes live on 1 September. The program is being built by Tallis, an external developer whose contract ends on that day. Tallis has drafted this evaluation strategy:\n\n| Feature | Draft |\n|:--|:--|\n| Evaluation criterion | The program makes ordering easier. |\n| Time frame | Some time after the program goes live. |\n| Responsibility | Tallis. |\n\nExplain one problem with each feature of the draft.",
+      "points": [
+        {
+          "text": "Criterion: 'makes ordering easier' can't be measured, so no data could show whether it has been met; it needs a target, e.g. staff place a supplier order in under three minutes on average",
+          "marks": 1
+        },
+        {
+          "text": "Time frame: 'some time after' sets no dates, so data may never be collected, or may be collected in the first days while staff are still learning, giving a misleading result; it should say when data is collected and reported",
+          "marks": 1
+        },
+        {
+          "text": "Responsibility: Tallis's contract ends at go-live, so no one at the nursery is accountable for collecting the data and reporting; it should name someone who stays, e.g. the nursery manager",
+          "marks": 1
+        }
+      ],
+      "model": "The criterion can't be measured. 'Easier' isn't something data can confirm, so the nursery couldn't say whether it had been met. It should set a target, such as staff placing a supplier order in under three minutes on average, which the program can log.\n\nThe time frame gives no dates. Without them, the data may never be collected, or it may be collected in the first few days while staff are still learning the program, which would make ordering look slower than it really is. The strategy should say when data is collected and reported, for example timing orders through October and reporting in November.\n\nResponsibility is given to Tallis, but his contract ends on 1 September, before any evaluation can happen. Nobody at the nursery would be accountable for exporting the data or writing the report. The strategy should name someone who will still be there, such as the nursery manager."
+    },
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk09",
+    "kk": "U4O1-KK09",
+    "intro": "Once a solution is in use, each evaluation criterion has to be turned into evidence and then a judgement. This point covers how: choosing a technique that collects the right data for each criterion, and using that data to say whether the criterion is met and what that shows about efficiency and effectiveness. Questions give you criteria and ask for a technique, or give you data and ask for a judgement.",
+    "sections": [
+      {
+        "heading": "Match the technique to the criterion",
+        "body": "Start with what the criterion measures, then pick a technique that measures exactly that.\n\n| The criterion is about | Technique | Why it suits |\n|:--|:--|:--|\n| Time taken | System logs of start and finish times, or timing users as they work | Gives measured times |\n| Accuracy or completeness | Checking a sample of outputs against the source records | Errors are facts that can be counted |\n| Satisfaction or ease of use | A survey with a rating scale | Only users can report their opinion, and ratings can be totalled |\n| Why users struggle | Interviews or observation | Follow-up questions and watching uncover reasons |\n\nAsking users how long a task takes gives estimates, not measurements, so for a time criterion, measure the time. Some criteria need two techniques: a log shows what happened, and interviews explain why."
+      },
+      {
+        "heading": "Collect fair data",
+        "body": "Data only supports a judgement if it stands for normal use. Collect it once users are past the learning stage, and sample fairly. Tambo Crossing Vet Clinic in Bairnsdale wants to know whether clients find its new online booking easy to use. Surveying only the clients who rang to complain would make the system look worse than it is. A random sample of everyone who booked online gives a percentage that represents all of them, so it can fairly be compared with the target."
+      },
+      {
+        "heading": "Compare with a starting point",
+        "body": "Some criteria are about improvement, such as *the average time to book an appointment falls by at least 30%*. That needs a measurement of the old way, taken before the new system replaces it. Suppose staff timed a sample of phone bookings before launch and they averaged 5 minutes, and online bookings now average 3.2 minutes. The fall is 1.8 ÷ 5 = 36%, so the criterion is met. Without the 5-minute figure there would be nothing to compare against, and the old way can't be timed once it is gone."
+      },
+      {
+        "heading": "From data to a judgement",
+        "body": "Applying a criterion means putting the result, the target and the verdict side by side: *96 of 100 sampled bookings were in the right vet's diary (96%), against a target of 99%: not met.* A verdict without figures is only an opinion.\n\nThen say what the results show. Criteria about time, cost or effort show efficiency. Criteria about accuracy, completeness, usability or accessibility show effectiveness. The two can split. The clinic's online bookings are quicker to make than phone bookings, so booking is more efficient, but bookings that land in the wrong vet's diary mean it isn't yet fully effective. A full evaluation reports both and says what needs fixing."
+      }
+    ],
+    "worked": {
+      "commandTerm": "describe",
+      "marks": 3,
+      "prompt": "Bluewren Orchard Co-op near Shepparton has a new app in which pickers scan a tag on each bin they fill, and each picker's weekly pay is based on the bins the app credits to them. Separately, when each bin is weighed at the weighbridge, its tag and the number of the picker who filled it are written on a docket. One evaluation criterion is: *Every bin a picker fills is credited to that picker's weekly tally.*\n\nDescribe how the co-op could apply this criterion. Refer to the data to be collected, how it would be collected, and how the co-op would decide whether the criterion is met.",
+      "points": [
+        {
+          "text": "Data: each sampled picker's weekly tally from the app, compared bin by bin with the weighbridge dockets for the same week, counting bins that are missing or credited to the wrong picker",
+          "marks": 1
+        },
+        {
+          "text": "Collection: a random sample of pickers' tallies from normal harvest weeks once pickers are used to the app (e.g. 20 pickers in weeks 4 to 6), checked against the dockets by a named person such as the office manager",
+          "marks": 1
+        },
+        {
+          "text": "Decision: the criterion says every bin, so it is met only if the check finds no missing or wrongly credited bins, and the verdict is stated with its figures",
+          "marks": 1
+        }
+      ],
+      "model": "The co-op should compare two records of the same bins. For each sampled picker, the office manager would take the weekly tally from the app and check it bin by bin against the weighbridge dockets for that week, counting any bin on a docket that is missing from the tally or credited to a different picker.\n\nThe sample should be chosen at random, for example 20 pickers, from normal harvest weeks once pickers are used to scanning, such as weeks 4 to 6, so the result stands for everyday use rather than the first days of learning.\n\nBecause the criterion says *every* bin, it is met only if no missing or wrongly credited bins are found. The report would state the figures, for example '0 errors in 1460 bins checked: met' or '7 of 1460 bins missing: not met'. The criterion is about accuracy and completeness, so the result shows how effective the app is, which matters because pickers' pay depends on it."
+    },
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk10",
+    "kk": "U4O1-KK10",
+    "intro": "A project plan is only useful while it matches the work actually being done. The study design names three factors that break that match: scope creep, personnel changes and technical issues. Questions describe an event and expect you to name the factor and explain what it does to the plan.",
+    "sections": [
+      {
+        "heading": "What makes a plan effective",
+        "body": "An effective plan lists every task with a realistic duration, shows which tasks depend on which, and is still a reliable guide halfway through the project. Each factor below either adds work the plan didn't allow for or takes away time or people it relied on.\n\nHow much harm that does depends on where it lands. A delay to a task on the critical path moves the finish date by the full amount. A delay to a task with time to spare moves the finish only if the delay is longer than that spare time."
+      },
+      {
+        "heading": "Scope creep",
+        "body": "Scope creep is the gradual, uncontrolled growth in what the solution must do after the scope has been agreed, with no change to the plan, budget or deadline. Kingfisher Bend Rowing Club in Mildura agreed on a program for booking its boats. During coding the committee asks for a members' noticeboard, then a fundraising page, and the developer adds each one without changing the plan.\n\nThe plan has no time for this work, so coding runs over, testing gets squeezed, and effort is pulled away from the booking features the club first asked for, which may not all be delivered. The extras don't make up for that. A controlled change is different: the request is estimated, the club agrees to a later handover, and the task goes into the plan, which still matches the work."
+      },
+      {
+        "heading": "Personnel changes",
+        "body": "A personnel change is someone leaving the project, joining it or being moved to other work. When the developer who built the club's booking module leaves, their tasks stop or pass to someone who must first learn the code. Adding a person doesn't bring instant speed either: a newcomer needs time to learn the project, and the people already on it lose time helping. Clear internal documentation and code kept in a shared repository shorten that learning time."
+      },
+      {
+        "heading": "Technical issues",
+        "body": "Technical issues are problems with the hardware, software or tools a project depends on: a failed laptop, a test server outage, a library that is withdrawn, devices the program won't run on. The requirements stay the same, but the work needed to meet them grows through rework, retesting or waiting.\n\nThat is how to tell a technical issue from scope creep. If the club's online payment service changes how programs must connect to it and the payment code has to be rewritten, the program still does exactly what was agreed, so it is a technical issue."
+      },
+      {
+        "heading": "Naming the factor",
+        "body": "When a question describes an event, ask what changed. If it is what the solution must do, and the plan wasn't changed to match, it is scope creep. If it is who is doing the work, it is a personnel change. If it is what the work runs on or relies on, it is a technical issue. Then explain the effect on this plan: which tasks slip, whether they are on the critical path, and what happens to the finish date."
+      }
+    ],
+    "worked": {
+      "commandTerm": "classify",
+      "marks": 4,
+      "prompt": "Mira is developing a stock and sales program for Saltgrass Bay Fish Market in Portland. Three things happen while she is coding:\n\n- **Event A:** the cloud service that stores the program's data announces it is closing, so Mira must move the data to another service and rewrite the code that connects to it.\n- **Event B:** the market's new manager, who started last month, asks for a page that prints recipe cards for customers. The page was never part of the agreed requirements, and Mira adds it without changing her plan.\n- **Event C:** Kai, who has been testing the program, is moved to another client's project for three weeks.\n\nClassify each event as scope creep, a personnel change or a technical issue, giving a reason for each. Then explain how Event A could reduce the effectiveness of Mira's project plan.",
+      "points": [
+        {
+          "text": "Event A is a technical issue: the program must still do what was agreed, but a service it depends on is closing, which adds rework",
+          "marks": 1
+        },
+        {
+          "text": "Event B is scope creep: a feature outside the agreed scope is added during development without changing the plan (the manager being new doesn't make it a personnel change: what disrupts the plan is the added page, not the manager's arrival last month)",
+          "marks": 1
+        },
+        {
+          "text": "Event C is a personnel change: a member of the project team is moved to other work, so his testing tasks must wait or pass to someone else",
+          "marks": 1
+        },
+        {
+          "text": "Effect of Event A: moving the data and rewriting and retesting the connection code is work the plan never included, so coding takes longer than planned; if it is on the critical path the handover date slips, and the plan no longer shows real progress until it is adjusted",
+          "marks": 1
+        }
+      ],
+      "model": "Event A is a technical issue. The program still has to do exactly what was agreed; what has changed is a service it depends on, and that adds work.\n\nEvent B is scope creep. The recipe-card page was never among the agreed requirements, so it grows what the program must do after the scope was settled, and Mira hasn't changed her plan to allow for it. The manager being new doesn't make this a personnel change: what disrupts the plan is the added page, not the manager's arrival last month.\n\nEvent C is a personnel change. Kai, a member of the project team, is being moved to other work, so his testing tasks must either wait three weeks or pass to someone who first has to learn the program.\n\nEvent A makes the plan less effective because moving the data, rewriting the connection code and retesting it are tasks the plan never included. Coding will take longer than planned, and if it is on the critical path, the handover date slips. Until Mira adjusts the plan, it no longer shows where the project really stands."
+    },
+    "traps": [
+      "On the 2025 paper, 76% knew that unchecked scope creep puts a project's original objectives at risk, because resources go to the added features. Almost a quarter chose an answer in which the extra features still produced more satisfied stakeholders or a higher-quality result. Unplanned extras don't buy a better product."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk11",
+    "kk": "U4O1-KK11",
+    "intro": "Recording progress keeps a project plan honest: it shows what actually happened beside what was planned, and why. The study design lists four techniques: adjusting tasks, adjusting time frames, annotating the plan, and monitoring and documenting progress in logs or journals. Questions ask how you would record a change, or what is wrong with a set of records.",
+    "sections": [
+      {
+        "heading": "Why record progress",
+        "body": "Recording progress does two jobs. While the project runs, it shows early when a task is slipping, so the plan can be adjusted before a milestone is missed. Afterwards, it is the evidence for assessing the plan. The study design suggests recording actual against expected durations, the milestones reached, and annotations that explain progress. It doesn't require dedicated project management software, though such software can move dependent tasks for you when a date changes."
+      },
+      {
+        "heading": "Adjusting time frames",
+        "body": "When a task runs late, extend its time frame and move every task that depends on it. Lorikeet Lane Bakery in Ballarat is having an ordering program built. If *Code ordering screens*, a task on the critical path, finishes three days late and *Alpha testing* depends on it, alpha testing and everything after it moves three days, unless time is recovered later. Keep the original dates visible beside the new ones. Without them, nobody can compare planned with actual progress when the plan is assessed."
+      },
+      {
+        "heading": "Adjusting tasks",
+        "body": "Sometimes the task list itself is wrong. A task the plan left out, such as loading last year's customer orders into the new program, gets added with its own duration and dependencies. A large task can be split, people can be reassigned to a task on the critical path, or, with the client's agreement, a feature can be held over to a later version. Each of these changes the plan, so each is recorded like any other change."
+      },
+      {
+        "heading": "Annotations",
+        "body": "Annotations are short notes written on the plan itself. On a Gantt chart they record actual start and finish dates, how much of each task is complete, the date each milestone was actually reached, and a brief reason for each change with its effect:\n\n*Code ordering screens: finished 17 May, 3 days late. Price list arrived 2 days late, then a payment library update needed a day of rework. Alpha testing moved to 18 May; go-live at risk.*\n\nThe annotated chart is what you check each week to see whether the project is ahead or behind, and whether the critical path has slipped."
+      },
+      {
+        "heading": "Logs and journals",
+        "body": "A log or journal is a dated record kept as the work happens. Each entry gives the date and who wrote it, what was worked on, problems met, decisions and the reasons for them, and any change to the plan with its cause and its effect on later tasks and the finish date. Write entries at the time: a week later, the reason for a delay is easy to forget.\n\n| Weak entry | Useful entry |\n|:--|:--|\n| 12 May: ordering screens behind. | 12 May, Priya: ordering screens 2 days behind. The bakery sent its price list 2 days late, so order totals couldn't be coded. Alpha testing and go-live move 2 days unless time is recovered. |\n\nThe weak entry says what happened but not why or what it affects, so nobody can judge its effect on the plan."
+      }
+    ],
+    "worked": {
+      "commandTerm": "write",
+      "marks": 3,
+      "prompt": "Jono is the only developer building a class-booking program for Wattle Gully Pottery Studio in Castlemaine. In his plan, *Code booking screens* was due to finish on 9 August, and *Alpha testing*, which depends on it, was due to start on 10 August. Both tasks are on the critical path, and go-live was planned for 30 August.\n\nThe studio sent its class timetable, which the booking screens need, four days later than promised, so *Code booking screens* finished on 13 August. Jono has moved *Alpha testing* to start on 14 August and moved every later task four days.\n\nWrite an entry for Jono's project log that records this change in a way that will support the assessment of his project plan.",
+      "points": [
+        {
+          "text": "Dates the entry, names the author and records the change against the plan: Code booking screens finished on 13 August, 4 days after the planned 9 August",
+          "marks": 1
+        },
+        {
+          "text": "Records the reason: the studio's class timetable, which the screens need, arrived 4 days late",
+          "marks": 1
+        },
+        {
+          "text": "Records the adjustment and its impact: Alpha testing moved to 14 August and later tasks moved 4 days; as these tasks are on the critical path, go-live moves from 30 August to 3 September unless time is recovered",
+          "marks": 1
+        }
+      ],
+      "model": "**13 August, Jono.** *Code booking screens* finished today, 4 days after its planned finish of 9 August. Reason: the studio's class timetable, which the booking screens depend on, arrived 4 days later than promised, so the screens couldn't be finished until it came. Adjustment: *Alpha testing* now starts on 14 August instead of 10 August, and every later task has moved 4 days. Impact: these tasks are on the critical path, so go-live moves from 30 August to 3 September unless time can be recovered. The original dates are kept on the Gantt chart beside the new ones."
+    },
+    "traps": [
+      "In 2025, only 15% earned both marks for describing how a Gantt chart is used to monitor and document a project's progress. Many described what a Gantt chart is. Credit went to updating it with actual progress and comparing that with the plan to see whether the project is ahead or behind, such as spotting a delay on the critical path.",
+      "The 2025 case study asked for ways to improve how a project log recorded progress. Many students suggested fixes for the delays themselves and earned nothing, because the question was about the recording. A second recommendation that repeated the first in different words didn't earn a second mark."
+    ],
+    "source": "study-design"
+  },
+  {
+    "id": "l-u4o1-kk12",
+    "kk": "U4O1-KK12",
+    "intro": "At the end of the project you judge the plan, not the program: did it give a realistic picture of the work, and did it keep the project on track? The study design gives three techniques for this: count the changes made to the plan, establish why each was needed, and work out what each did to completion. Questions give you a change record or log entries and ask what they show or what they lack.",
+    "sections": [
+      {
+        "heading": "The plan, not the product",
+        "body": "Evaluating the solution uses the evaluation criteria to judge the program. Assessing the project plan judges the process that produced it. The two can disagree: a program its users love may have come from a plan that was badly wrong, and a plan that held every date can still deliver a weak program. So users' opinions are not evidence about the plan.\n\nIn the SAT, this is an assessment of how well your Gantt chart worked for monitoring progress, presented as a written report or an annotated visual plan."
+      },
+      {
+        "heading": "Counting the changes",
+        "body": "The number of changes is a first signal. A plan changed twice over ten weeks was probably a good estimate of the work; one changed fifteen times was not a reliable guide. A raw count can mislead, though, so group the changes by kind. If five of seven changes extended coding tasks because the work was bigger than estimated, the plan's coding estimates were consistently short, and that pattern is what to fix next time."
+      },
+      {
+        "heading": "Why each change was needed",
+        "body": "The reason decides what a change says about the plan. Some causes could have been foreseen: a task left out, a missing dependency, an estimate that was unrealistic from the start. These are weaknesses in the plan. Others couldn't: a developer's illness, a server outage, a client's late data. A plan isn't poor because something unforeseeable happened, though it deserves credit if it held some spare time and was adjusted promptly."
+      },
+      {
+        "heading": "The impact on completion",
+        "body": "Next, work out what each change did to completion: did it move a milestone or the finish date, and by how much? A delay to a task on the critical path moves the finish date; a delay to a task with spare time may move nothing. Two changes that look alike in the log can matter very differently. Adding up the moves shows how much of the total delay each cause produced."
+      },
+      {
+        "heading": "A change record",
+        "body": "The three techniques fit a simple change record, one row per change:\n\n| Change made | Reason | Impact on completion |\n|:--|:--|:--|\n| *Load test data* extended 2 days | Test server outage | None: the task had 4 days spare |\n| Task added: train counter staff (3 days) | Left out of the plan | Go-live moved 3 days |\n\nFrom rows like these you can write a judgement backed by evidence: how many changes there were, which causes were foreseeable, and how far the changes moved the finish date. Finish with what the next plan should do differently, such as including staff training from the start."
+      }
+    ],
+    "worked": {
+      "commandTerm": "explain",
+      "marks": 3,
+      "prompt": "Ana built an online ordering program for Saltbush Plains Seed Co-op in the Wimmera. In her assessment of the project plan she wrote: *'My plan was effective, because I only had to make four changes.'* Her change record is below.\n\n| Change made | Reason | Impact on completion |\n|:--|:--|:--|\n| Task added: import three years of past orders (4 days) | Left out of the plan | Go-live moved 4 days |\n| *Beta testing* moved 2 days later | Ana was ill | Go-live moved 2 days |\n| Task added: set up the receipt printer (2 days) | Left out of the plan | Go-live moved 2 days |\n| *Code reports* extended 3 days | The co-op sent its report layouts late | None: the task had 5 days spare |\n\nExplain why Ana's change record doesn't support her assessment.",
+      "points": [
+        {
+          "text": "The count alone doesn't show the plan was effective; the reasons matter. Two of the four changes were tasks left out of the plan (importing past orders, setting up the printer), which could have been foreseen, so the plan was incomplete",
+          "marks": 1
+        },
+        {
+          "text": "The other two changes had causes outside the plan's control (illness, late layouts), so they say little about the plan's quality",
+          "marks": 1
+        },
+        {
+          "text": "Impact: the changes moved go-live 8 days, 6 of them from the left-out tasks, while the reports change moved nothing; so the plan was only partly effective",
+          "marks": 1
+        }
+      ],
+      "model": "Counting changes isn't enough on its own; Ana has to look at why they happened and what they did. Two of her four changes were tasks the plan left out: importing three years of past orders and setting up the receipt printer. Both could have been foreseen at the start, so they show the plan was incomplete.\n\nThe other two changes had causes the plan couldn't control. Ana's illness and the co-op's late report layouts say little about the quality of the plan.\n\nThe impact column tells the rest. The changes moved go-live by 8 days in total, and 6 of those days came from the two missing tasks. The late layouts moved nothing, because *Code reports* had 5 days spare. So the plan was only partly effective, because most of the delay came from tasks it should have included. Her next plan should include data import and equipment set-up from the start."
+    },
+    "traps": [
+      "The 2025 case study showed log entries that said only that a task ran a week over or finished early. Just 9% earned full marks. Credit went for explaining that entries this thin make it harder for staff to monitor and review the effect on the plan, and for improvements that match this point's techniques: tracking how many changes are made, giving the reason for each, and stating its impact on later tasks, the critical path and the completion date."
+    ],
+    "source": "study-design"
+  }
+]
