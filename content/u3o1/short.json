@@ -108,7 +108,7 @@
     ],
     "commandTerm": "classify",
     "marks": 4,
-    "prompt": "Wattlebank Physio, a Ballarat clinic, has listed these statements for its new booking program.\n\n1. The program sends each client an SMS reminder 24 hours before their appointment.\n2. The program keeps running, without crashing or losing bookings, throughout clinic opening hours.\n3. The program must be ready before the new financial year begins on 1 July.\n4. The program will handle bookings for the Ballarat clinic only, not the planned Ararat branch.\n\nClassify each statement as a functional requirement, a non-functional requirement, a constraint or scope.",
+    "prompt": "Wattlebank Physio, a Ballarat clinic, has listed these statements for its new booking program.\n\n1. The program sends each client an SMS reminder 24 hours before their appointment.\n2. The program keeps running, without losing bookings, throughout clinic opening hours.\n3. The program must be ready before the new financial year begins on 1 July.\n4. The program will handle bookings for the Ballarat clinic only, not the planned Ararat branch.\n\nClassify each statement as a functional requirement, a non-functional requirement, a constraint or scope.",
     "points": [
       {
         "text": "Statement 1: functional requirement",

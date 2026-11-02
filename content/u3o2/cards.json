@@ -1845,7 +1845,7 @@
     ],
     "type": "reverse",
     "front": "Space",
-    "back": "A design principle: the empty areas around and between elements, such as margins, gaps between groups of controls and room around buttons. These gaps show which items belong together (wider gaps between groups than within them), avoids clutter, makes a screen quicker to scan and leaves room to tap the right control.",
+    "back": "A design principle: the empty areas around and between elements, such as margins, gaps between groups of controls and room around buttons. These gaps show which items belong together (wider gaps between groups than within them), avoid clutter, make a screen quicker to scan and leave room to tap the right control.",
     "mistake": "Space is the study design's name for this principle. \"White space\" means the same thing (the gaps needn't be white), not a separate principle, and \"proximity\" isn't a study design principle: grouping related controls, with gaps between the groups, is applying space.",
     "difficulty": 1,
     "source": "textbook"

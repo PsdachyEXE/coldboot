@@ -1893,10 +1893,10 @@
       "A logical operator"
     ],
     "answer": 3,
-    "explanation": "`AND` combines two Boolean values and is true only when both are true. The study design groups `AND`, `OR` and `NOT` as logical operators, and comparisons such as the `>=` and `=` in this condition as conditional (comparison) operators.",
+    "explanation": "`AND` combines two Boolean values and is true only when both are true. The study design names arithmetic, logical and conditional operators, and the outcome-specific requirements list `AND`, `OR` and `NOT` as the logical ones and comparisons such as the `>=` and `=` in this condition as conditional (comparison) operators.",
     "whyWrong": [
       "Arithmetic operators such as `+`, `*` and `MOD` calculate numeric results.",
-      "Conditional (comparison) operators such as `>=` and `=` compare two values; although some languages' documentation calls `&&` a conditional operator, the study design lists `AND` as a logical operator.",
+      "Conditional (comparison) operators such as `>=` and `=` compare two values; although some languages' documentation calls `&&` a conditional operator, the outcome-specific requirements list `AND` as a logical operator.",
       "Assignment (`←`) stores a value in a variable; nothing is assigned in this condition.",
       ""
     ],
