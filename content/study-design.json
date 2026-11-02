@@ -69,7 +69,7 @@
       "summary": "The characteristics of functional and non-functional requirements, constraints and scope, as read from the requirements a module is built to.",
       "examples": [
         "Functional: the module calculates the total fee",
-        "Non-functional: results appear within two seconds",
+        "Non-functional: the module keeps working when a user types something unexpected",
         "Constraint: the program must run offline"
       ],
       "status": "confirmed"
