@@ -659,7 +659,7 @@
       "U4O2-KK06"
     ],
     "type": "cloze",
-    "front": "Evaluating the security of development practices judges the {{processes}} used to build software, such as access control and code review, not only the security of the {{finished solution}}.",
+    "front": "Evaluating the security of development practices judges the {{processes}} used to build software, such as access control and code review, rather than the security of the {{finished solution}}.",
     "back": "An app can pass its security testing while the team that built it shares logins and stores passwords in its code.",
     "difficulty": 2,
     "source": "textbook"
@@ -1049,7 +1049,7 @@
     ],
     "type": "basic",
     "front": "Why should an organisation layer several security measures rather than rely on one?",
-    "back": "If one measure fails or is bypassed, the others still protect the code and data. Multi-factor authentication, least privilege, code review and tested backups each cover gaps the others leave. This approach is often called defence in depth.",
+    "back": "If one measure fails or is bypassed, the others still protect the code and data. Multi-factor authentication, least privilege, code review and tested backups each cover gaps the others leave.",
     "mistake": "A strong password isn't enough on its own. Once it is phished, multi-factor authentication stops it working alone, and least privilege limits what an attacker can reach.",
     "difficulty": 2,
     "source": "textbook"
