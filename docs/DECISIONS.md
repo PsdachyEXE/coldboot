@@ -1949,3 +1949,11 @@ The checkers also found bank items worth fixing, and five were: a reliability st
 ## D-221 Version 1.3.0 for the authored lessons
 
 **Decision.** `package.json` moves to 1.3.0. The lessons are new content students will notice, and an export from 1.3.0 is otherwise unchanged. The installer stays on `v1.0.0` (D-213), and a `v1.3.0` tag is left to the operator (D-197).
+
+## D-222 1.3.0 is live on GitHub Pages
+
+**Decision.** Continuing the operator's instruction to apply the Learn plan and return a finished product, `main` was fast-forwarded from `7db8d02` to `4f56a74` (nine commits: the lessons kind, the 52 lessons, five bank fixes, the map example, the documents and the version). The branch's CI and the deploy run went green: the check and build, the Pages deployment (GitHub records it as successful at https://psdachyexe.github.io/coldboot/), and the installer job under Windows PowerShell 5.1 and PowerShell 7 against the live site. A production build of `4f56a74` identifies as `1.3.0+4f56a74` (D-194), passes the eleven end-to-end tests (one of which now opens a lesson), and renders lessons at 1280 px and 375 px with no console errors and no sideways scroll. Installed copies show the update prompt and move onto 1.3.0 when reloaded.
+
+As before (D-214, D-219), the live site can't be loaded from this session, and a `v1.3.0` tag is left to the operator. This record changes no shipped file, so the build id stays `1.3.0+4f56a74`.
+
+**Reason.** D-002 holds every deploy until the operator approves updating `main`.
