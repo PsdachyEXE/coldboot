@@ -1977,3 +1977,11 @@ The deploy workflow gains a "Live site" job. After each deploy it loads the publ
 **Reason.** A revision app eleven days before the exam can't depend on a student noticing a one-line prompt. Applying an update at app start or while the app is hidden on a quiet screen is invisible, and it loses nothing.
 
 **Rejected.** Full auto-update (`registerType: 'autoUpdate'`), which reloads the moment a new build installs and would interrupt a drill or a paper mid-question; and a bigger, harder-to-dismiss prompt, which still leaves an ignored update ignored.
+
+## D-224 1.3.1 is live, checked from outside for the first time
+
+**Decision.** At the operator's request to fix Learn not showing, `main` was fast-forwarded from `25447fd` to `c8ad9e3`. Every job went green, including the new Live site job (D-223), which loaded https://psdachyexe.github.io/coldboot/ from a GitHub runner and found it serving `1.3.1+c8ad9e3`, with all four lesson chunks the service worker precaches. This is the first deploy confirmed against the public site itself rather than inferred from the deployment record. A personal environment named "coldboot" now allows `psdachyexe.github.io`, so a later session started on it can load the site directly; this session couldn't move onto it.
+
+Copies already installed run the old update code until they load 1.3.1 once: closing every COLDBOOT window and opening it again, tapping Reload on the prompt, or Settings, Check for updates, Reload. From 1.3.1 on, a waiting build applies itself (D-223).
+
+**Reason.** D-002 holds every deploy until the operator approves updating `main`; "fix this" was that approval.
