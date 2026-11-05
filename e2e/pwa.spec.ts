@@ -2,7 +2,8 @@
  * The installed-app behaviour, against the production build under the GitHub Pages base path
  * (/coldboot/, see playwright.config.ts): once the service worker has precached the app, a reload
  * with the network off still opens Home and a drill, whose questions live in their own chunks; and
- * a new deploy brings up "Update ready. Reload now?", whose Reload moves the page onto it.
+ * a new deploy brings up "Update ready. Reload now?", whose Reload moves the page onto it; and a
+ * build left waiting is applied by itself the next time the app opens (D-223).
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -79,3 +80,37 @@ test('a new deploy shows the update prompt, and Reload moves onto it', async ({ 
     writeFileSync(SW_FILE, original);
   }
 });
+
+test('a build left waiting is applied by itself the next time the app opens', async ({ page }) => {
+  await page.goto('./#/settings');
+  await expect(page.getByRole('heading', { level: 1, name: 'Settings' })).toBeVisible();
+  await waitForOfflineReady(page);
+  // As in an installed app, the worker controls the page, so a new build waits instead of taking over.
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+  // A probe caught by the page reloading itself can hang, so each one gives up after two seconds.
+  const waiting = () =>
+    Promise.race([
+      page.evaluate(async () => Boolean((await navigator.serviceWorker.getRegistration())?.waiting)),
+      new Promise<boolean>((resolve) => setTimeout(() => resolve(true), 2000)),
+    ]).catch(() => true);
+
+  const original = readFileSync(SW_FILE, 'utf8');
+  try {
+    writeFileSync(SW_FILE, `${original}\n// e2e: a deploy left waiting\n`);
+    await page.getByRole('button', { name: 'Check for updates' }).click();
+    const prompt = page.getByRole('region', { name: 'Update' });
+    await expect(prompt).toContainText('Update ready. Reload now?');
+    await prompt.getByRole('button', { name: 'Later' }).click();
+    expect(await waiting()).toBe(true);
+
+    // Opening the app again moves it onto the new build without asking.
+    await page.reload();
+    await expect.poll(waiting, { timeout: 20_000 }).toBe(false);
+    await expect(page.getByRole('heading', { level: 1, name: 'Settings' })).toBeVisible();
+    await expect(prompt).toBeHidden();
+  } finally {
+    writeFileSync(SW_FILE, original);
+  }
+});
+

@@ -35,7 +35,10 @@ describe('pwa store', () => {
     resetPwaForTests(reload);
     const fake = fakeRegister();
     startPwa(fake.registerSW);
-    fake.options().onRegisteredSW?.('sw.js', fakeRegistration({ waiting: {} as ServiceWorker }));
+    // A build that arrived while the app was open, so it waits for the prompt.
+    const reg = fakeRegistration();
+    fake.options().onRegisteredSW?.('sw.js', reg);
+    Object.assign(reg, { waiting: {} as ServiceWorker });
     await usePwa.getState().reload();
     expect(fake.updateSW).toHaveBeenCalledWith(true);
     expect(reload).not.toHaveBeenCalled();
@@ -96,5 +99,96 @@ describe('pwa store', () => {
         throw new Error('SecurityError');
       }),
     ).not.toThrow();
+  });
+
+  describe('applying a waiting build without asking', () => {
+    function setVisibility(state: DocumentVisibilityState) {
+      Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => state });
+      document.dispatchEvent(new Event('visibilitychange'));
+    }
+    afterEach(() => {
+      setVisibility('visible');
+      vi.useRealTimers();
+    });
+
+    it('applies a build downloaded on an earlier visit as soon as the app opens, without the prompt', () => {
+      const reload = vi.fn();
+      resetPwaForTests(reload);
+      const fake = fakeRegister();
+      startPwa(fake.registerSW);
+      fake.options().onRegisteredSW?.('sw.js', fakeRegistration({ waiting: {} as ServiceWorker }));
+      fake.options().onNeedRefresh?.();
+      expect(fake.updateSW).toHaveBeenCalledWith(true);
+      expect(usePwa.getState().needRefresh).toBe(false);
+    });
+
+    it('tries at most once a minute in a tab, so a build that never takes over prompts instead of looping', () => {
+      vi.useFakeTimers();
+      resetPwaForTests(vi.fn());
+      const first = fakeRegister();
+      startPwa(first.registerSW);
+      first.options().onRegisteredSW?.('sw.js', fakeRegistration({ waiting: {} as ServiceWorker }));
+      expect(first.updateSW).toHaveBeenCalledTimes(1);
+
+      // The page reloaded, but the same build is still waiting: ask instead.
+      const second = fakeRegister();
+      startPwa(second.registerSW);
+      second.options().onRegisteredSW?.('sw.js', fakeRegistration({ waiting: {} as ServiceWorker }));
+      second.options().onNeedRefresh?.();
+      expect(second.updateSW).not.toHaveBeenCalled();
+      expect(usePwa.getState().needRefresh).toBe(true);
+
+      vi.advanceTimersByTime(61_000);
+      const third = fakeRegister();
+      startPwa(third.registerSW);
+      third.options().onRegisteredSW?.('sw.js', fakeRegistration({ waiting: {} as ServiceWorker }));
+      expect(third.updateSW).toHaveBeenCalledTimes(1);
+    });
+
+    it('asks first when a new build arrives while the app is open', () => {
+      resetPwaForTests(vi.fn());
+      const fake = fakeRegister();
+      startPwa(fake.registerSW, { canReloadNow: () => true });
+      fake.options().onRegisteredSW?.('sw.js', fakeRegistration());
+      fake.options().onNeedRefresh?.();
+      expect(usePwa.getState().needRefresh).toBe(true);
+      expect(fake.updateSW).not.toHaveBeenCalled();
+    });
+
+    it('applies it when the app goes into the background on a quiet screen, and not otherwise', () => {
+      resetPwaForTests(vi.fn());
+      let quiet = false;
+      const fake = fakeRegister();
+      startPwa(fake.registerSW, { canReloadNow: () => quiet });
+      const reg = fakeRegistration();
+      fake.options().onRegisteredSW?.('sw.js', reg);
+      // A build arrives mid-session and is left waiting.
+      Object.assign(reg, { waiting: {} as ServiceWorker });
+      fake.options().onNeedRefresh?.();
+
+      setVisibility('hidden');
+      expect(fake.updateSW).not.toHaveBeenCalled();
+      setVisibility('visible');
+
+      quiet = true;
+      setVisibility('hidden');
+      expect(fake.updateSW).toHaveBeenCalledWith(true);
+    });
+
+    it('checks for a new build when the app comes back after ten minutes away', () => {
+      vi.useFakeTimers();
+      resetPwaForTests(vi.fn());
+      const fake = fakeRegister();
+      startPwa(fake.registerSW);
+      const reg = fakeRegistration();
+      fake.options().onRegisteredSW?.('sw.js', reg);
+      setVisibility('hidden');
+      setVisibility('visible');
+      expect(reg.update).not.toHaveBeenCalled();
+      vi.advanceTimersByTime(10 * 60 * 1000);
+      setVisibility('hidden');
+      setVisibility('visible');
+      expect(reg.update).toHaveBeenCalledTimes(1);
+    });
   });
 });

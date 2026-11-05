@@ -18,6 +18,8 @@ jobs:
   build:
     name: Check and build
     runs-on: ubuntu-latest
+    outputs:
+      build-id: ${{ steps.build-id.outputs.id }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -43,6 +45,14 @@ jobs:
         run: npm run installer:lint
       - name: Build
         run: npm run build
+      - name: Read the build id
+        id: build-id
+        run: |
+          version=$(node -p "require('./package.json').version")
+          id=$(grep -ohE "${version//./\\.}\+[0-9a-f]{7}" dist/assets/index-*.js | head -1)
+          if [ -z "$id" ]; then echo "::error::No build id for $version in the entry chunk"; exit 1; fi
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+          echo "Built $id"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
@@ -58,6 +68,48 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # The site students load, not the artifact: the live entry chunk names this build, and the four
+  # lesson chunks the service worker precaches are all served (D-223). Pages can take a minute or two
+  # to serve a new deploy, so it retries for up to five minutes.
+  live:
+    name: Live site
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      BUILD_ID: ${{ needs.build.outputs.build-id }}
+      SITE: https://psdachyexe.github.io/coldboot/
+    steps:
+      - name: The live site serves this build and its lessons
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 30); do
+            html=$(curl -fsSL "${SITE}?deploy=${GITHUB_RUN_ID}-${attempt}" || true)
+            entry=$(grep -oE 'assets/index-[A-Za-z0-9_-]+\.js' <<<"$html" | head -1 || true)
+            if [ -n "$entry" ] && curl -fsSL "${SITE}${entry}" | grep -qF "$BUILD_ID"; then
+              echo "ok: ${SITE} serves $BUILD_ID ($entry)"
+              break
+            fi
+            if [ "$attempt" -eq 30 ]; then
+              echo "::error::${SITE} still doesn't serve $BUILD_ID after five minutes"
+              exit 1
+            fi
+            sleep 10
+          done
+          sw=$(curl -fsSL "${SITE}sw.js?deploy=${GITHUB_RUN_ID}")
+          lessons=$(grep -oE 'assets/lessons-[A-Za-z0-9_-]+\.js' <<<"$sw" | sort -u || true)
+          count=$(grep -c . <<<"$lessons" || true)
+          if [ "$count" -lt 4 ]; then
+            echo "::error::sw.js precaches $count lesson chunks; expected one per area (4)"
+            exit 1
+          fi
+          for file in $lessons; do
+            curl -fsS -o /dev/null "${SITE}${file}"
+            echo "ok: ${file}"
+          done
 
   # Section 11.2: check both installer scripts on a real Windows machine against the site that was just
   # deployed, once under Windows PowerShell 5.1 and once under PowerShell 7.

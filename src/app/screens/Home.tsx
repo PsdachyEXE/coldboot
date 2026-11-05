@@ -80,11 +80,13 @@ function Today({ now, examAt, mode }: { now: number; examAt: number; mode: Exclu
       {mode === 'study' ? (
         <>
           {saved ? <RunPlace saved={saved} /> : <RunPreview content={content} mastery={mastery} due={due} newRemaining={newRemaining} daily={daily} />}
-          <p>
+          <div className={study.actions}>
             <ButtonLink variant="primary" to={paths.run}>
               {saved ? "Continue today's run" : "Start today's run"}
             </ButtonLink>
-          </p>
+            {/* Learn's door on every screen size: on phones the tab bar keeps it behind More. */}
+            <ButtonLink to={paths.learn}>Learn a topic</ButtonLink>
+          </div>
           <TodayFacts due={due} days={days} dailyStatus={dailyStatus} />
         </>
       ) : null}

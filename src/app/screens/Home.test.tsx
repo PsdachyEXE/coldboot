@@ -178,6 +178,11 @@ describe('Home', () => {
     expect(screen.getByText('Daily challenge').nextSibling).toHaveTextContent('Not done yet');
   });
 
+  it('offers Learn beside the run, on every screen size', () => {
+    renderHome();
+    expect(screen.getByRole('link', { name: 'Learn a topic' })).toHaveAttribute('href', '/learn');
+  });
+
   it('points to Learn for the first topic not practised or read', () => {
     recordAttempt({ itemId: 'm-u3o1-kk04-001', kk: ['U3O1-KK01'], score: 1, timestamp: NOW - 60_000, ms: 1000 });
     useLearn.getState().markRead('U3O1-KK02', NOW - 60_000);

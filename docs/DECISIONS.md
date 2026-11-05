@@ -1957,3 +1957,23 @@ The checkers also found bank items worth fixing, and five were: a reliability st
 As before (D-214, D-219), the live site can't be loaded from this session, and a `v1.3.0` tag is left to the operator. This record changes no shipped file, so the build id stays `1.3.0+4f56a74`.
 
 **Reason.** D-002 holds every deploy until the operator approves updating `main`.
+
+## D-223 Updates apply themselves at safe moments; Learn gets a door on Home (1.3.1)
+
+**Decision.** On 5 November the operator reported not seeing Learn in the app. The session can't load the live site (the network policy refuses it), but the deploy records, the installer runs against the live site and a byte-identical local build all showed 1.3.0 being served, so the likeliest cause was the operator's installed copy running an older build. In prompt mode a new service worker only takes over when someone taps Reload on "Update ready. Reload now?"; tap Later, miss the one-line prompt, or leave the Edge app window open (as the installer's shortcut does), and the download sits waiting while the old version keeps running, with no Learn at all.
+
+So a waiting build now also applies itself, without asking, at two moments that cost the student nothing (`src/app/pwa.ts`):
+- when the app opens with a build downloaded on an earlier visit: nothing is under way that early, and every screen restores its place from storage anyway;
+- when the app is put in the background (minimised, switched away from) while it shows a screen that holds no work in memory: Home, Learn, the map, Stats, Settings or About, with the terminal closed and no game running (`src/app/reloadSafety.ts`). A drill, review, written answer, paper, run step, daily challenge or terminal game waits for the prompt.
+
+A build that arrives while the app is in use still asks first. An automatic update runs at most once a minute in a tab, so a worker that never takes over falls back to the prompt instead of reloading in a loop. Coming back to the app after ten minutes or more checks for a new build at once, rather than waiting for the hourly poll.
+
+Home's main actions gain "Learn a topic" beside "Start today's run", so Learn has a door on every screen size (phones keep it behind More in the tab bar).
+
+The deploy workflow gains a "Live site" job. After each deploy it loads the public site (retrying for up to five minutes while Pages catches up), checks that the entry chunk names the build just made, and fetches each lesson chunk the service worker precaches. A deploy that doesn't reach students now fails visibly.
+
+`package.json` moves to 1.3.1.
+
+**Reason.** A revision app eleven days before the exam can't depend on a student noticing a one-line prompt. Applying an update at app start or while the app is hidden on a quiet screen is invisible, and it loses nothing.
+
+**Rejected.** Full auto-update (`registerType: 'autoUpdate'`), which reloads the moment a new build installs and would interrupt a drill or a paper mid-question; and a bigger, harder-to-dismiss prompt, which still leaves an ignored update ignored.

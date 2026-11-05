@@ -11,6 +11,7 @@ import './ui/global.css';
 import './ui/markdown.css';
 import { createAppRouter, prefetchScreens, preloadScreen } from './app/routes';
 import { startPwa } from './app/pwa';
+import { canReloadNow } from './app/reloadSafety';
 import { useContent } from './content/store';
 import { whenIdle } from './lib/idle';
 import { useSettings, type MotionPreference } from './state/settings';
@@ -27,7 +28,7 @@ useSettings.subscribe((s, prev) => {
 // The service worker exists only in production builds; the virtual module stays out of dev and tests.
 if (import.meta.env.PROD) {
   import('virtual:pwa-register')
-    .then(({ registerSW }) => startPwa(registerSW))
+    .then(({ registerSW }) => startPwa(registerSW, { canReloadNow: () => canReloadNow() }))
     .catch(() => {
       // Offline support is unavailable; the app still runs.
     });

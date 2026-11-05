@@ -4,7 +4,7 @@ COLDBOOT is a free revision app for VCE Applied Computing: Software Development,
 
 **Open it at https://psdachyexe.github.io/coldboot/**
 
-It runs in the browser and works offline after your first visit. When a new version is published, it tells you an update is ready and reloads when you say so. Use it as a normal website or install it as an app.
+It runs in the browser and works offline after your first visit. When a new version is published while it's open, it tells you an update is ready and reloads when you say so; if you don't, the update applies itself the next time you open COLDBOOT, or when you switch away from a screen where nothing is in progress. Use it as a normal website or install it as an app.
 
 ## What's in it
 
