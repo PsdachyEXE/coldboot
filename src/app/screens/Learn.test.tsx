@@ -1,12 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
+import { cramAreas, cramTotal } from '../../content/cram';
 import { buildIndex, type AreaContent } from '../../content/loader';
 import { useLessonStore } from '../../content/lessons';
 import type { Card, Lesson, PsmFile } from '../../content/schema';
 import { useLearn } from '../../state/learn';
-import { recordAttempt } from '../../state/record';
 import { useTerminal } from '../../terminal/useTerminal';
+import { useAnnouncer } from '../../ui/announce';
 import { fxCard, fxMcq, fxShort, provideContent, provideLessons, resetStudyStores } from '../study/testing';
 import Learn from './Learn';
 
@@ -75,20 +76,93 @@ describe('Learn', () => {
     useTerminal.setState({ open: false, pending: null });
   });
 
-  it('lists every topic by area, and suggests the first one not yet practised or read', () => {
-    recordAttempt({ itemId: 'm-u3o1-kk04-001', kk: ['U3O1-KK01'], score: 1, timestamp: NOW - 1000, ms: 1000 });
-    useLearn.getState().markRead('U3O1-KK02', NOW - 86_400_000 * 2);
-    renderAt('/learn');
-    expect(screen.getByRole('heading', { level: 1, name: 'Learn' })).toBeInTheDocument();
-    for (const area of ['U3O1', 'U3O2', 'U4O1', 'U4O2']) expect(screen.getByRole('region', { name: new RegExp(`^${area}`) })).toBeInTheDocument();
-    // KK01 has been practised and KK02 read, so the suggestion is KK03, linked in the tip and in its row.
-    expect(screen.getByText(/Not sure where to begin\?/)).toHaveTextContent('Start with U3O1-KK03 Design tools for modules');
-    for (const link of screen.getAllByRole('link', { name: 'U3O1-KK03 Design tools for modules' })) expect(link).toHaveAttribute('href', '/learn?kk=U3O1-KK03');
-    const u3o1 = screen.getByRole('region', { name: /^U3O1/ });
-    expect(within(u3o1).getByText(/100% mastery\. Not read yet\./)).toBeInTheDocument();
-    expect(within(u3o1).getByText(/Not practised yet\. Read 2 days ago\./)).toBeInTheDocument();
-    const groups = screen.getByRole('region', { name: 'Across the course' });
-    expect(within(groups).getByRole('link', { name: 'Terms used in this study' })).toHaveAttribute('href', '/learn?kk=TERMS');
+  describe('the front page', () => {
+    const AREAS = [/^U3O1 Programming$/, /^U3O2 Analysis and design$/, /^U4O1 Development and evaluation$/, /^U4O2 Cyber security$/, /^Problem-solving methodology/];
+    const startIn = (region: HTMLElement) => fireEvent.click(within(region).getByRole('button', { name: 'Start matching' }), { detail: 1 });
+    const termButtons = (region: HTMLElement) => within(within(region).getByRole('list', { name: 'Terms' })).getAllByRole('button');
+    const definitionButtons = (region: HTMLElement) => within(within(region).getByRole('list', { name: 'Definitions' })).getAllByRole('button');
+
+    it('sets the course out as short definitions by area, with the official terms marked', () => {
+      renderAt('/learn');
+      expect(screen.getByRole('heading', { level: 1, name: 'Learn' })).toBeInTheDocument();
+      expect(screen.getByText(new RegExp(`^${cramTotal} definitions in 5 areas\\.`))).toBeInTheDocument();
+      for (const name of AREAS) expect(screen.getByRole('region', { name })).toBeInTheDocument();
+      expect(screen.getAllByRole('term')).toHaveLength(cramTotal);
+      expect(screen.getAllByRole('definition')).toHaveLength(cramTotal);
+
+      const programming = screen.getByRole('region', { name: /^U3O1 Programming$/ });
+      expect(within(programming).getByRole('heading', { level: 2 })).toHaveTextContent('U3O1 Programming');
+      expect(within(programming).getAllByRole('term')).toHaveLength(cramAreas[0].entries.length);
+      const validation = within(programming).getByText('Validation').closest('div')!;
+      expect(within(validation).getByText('Official')).toBeInTheDocument();
+      expect(within(validation).getByRole('definition')).toHaveTextContent('Checking, by hand or electronically, that data is reasonable and complete');
+      const syntax = within(programming).getByText('Syntax error').closest('div')!;
+      expect(within(syntax).queryByText('Official')).toBeNull();
+      // All 42 of the study design's terms are there, each marked.
+      expect(screen.getAllByText('Official')).toHaveLength(42);
+      // The lessons are still a link away.
+      expect(screen.getByRole('link', { name: 'syllabus map' })).toHaveAttribute('href', '/map');
+    });
+
+    it('follows each area with its own matching game, and ends with a mixed one', () => {
+      renderAt('/learn');
+      for (const [i, name] of AREAS.entries()) {
+        const region = screen.getByRole('region', { name });
+        expect(within(region).getByRole('heading', { level: 3, name: `Match: ${cramAreas[i].title}` })).toBeInTheDocument();
+        expect(within(region).getByText(new RegExp(`^${cramAreas[i].entries.length} pairs, 5 at a time\\.`))).toBeInTheDocument();
+      }
+      const mixed = screen.getByRole('region', { name: 'Mixed' });
+      expect(within(mixed).getByRole('heading', { level: 3, name: 'Match: every area' })).toBeInTheDocument();
+      expect(within(mixed).getByText(new RegExp(`^${cramTotal} pairs, 5 at a time\\.`))).toBeInTheDocument();
+      expect(screen.getAllByRole('button', { name: 'Start matching' })).toHaveLength(6);
+    });
+
+    it("plays a round from an area's own definitions, and Back to the list returns to its heading", () => {
+      const scrolled = vi.fn();
+      Element.prototype.scrollIntoView = scrolled;
+      try {
+        renderAt('/learn');
+        const cyber = screen.getByRole('region', { name: /^U4O2 Cyber security$/ });
+        startIn(cyber);
+        const entries = cramAreas[3].entries;
+        expect(termButtons(cyber)).toHaveLength(5);
+        for (const button of termButtons(cyber)) {
+          const entry = entries.find((e) => e.term === button.textContent)!;
+          expect(entry, button.textContent ?? '').toBeDefined();
+          fireEvent.click(button, { detail: 1 });
+          fireEvent.click(definitionButtons(cyber).find((d) => d.textContent === entry.definition)!, { detail: 1 });
+          expect(button).toHaveTextContent('Matched');
+        }
+        expect(within(cyber).getByText('5 of 5 matched, no misses.')).toBeInTheDocument();
+        expect(useAnnouncer.getState().polite).toMatch(/Round finished: 5 of 5 matched, no misses\.$/);
+        // Nothing is scored: the game leaves reading records alone.
+        expect(useLearn.getState().read).toEqual({});
+
+        fireEvent.click(within(cyber).getByRole('button', { name: 'Back to the list' }));
+        expect(within(cyber).getByRole('heading', { level: 2 })).toHaveFocus();
+        expect(scrolled).toHaveBeenCalledTimes(1);
+      } finally {
+        delete (Element.prototype as { scrollIntoView?: unknown }).scrollIntoView;
+      }
+    });
+
+    it('draws the mixed game from more than one area', () => {
+      renderAt('/learn');
+      const mixed = screen.getByRole('region', { name: 'Mixed' });
+      const all = cramAreas.flatMap((a) => a.entries.map((e) => e.term));
+      startIn(mixed);
+      for (const button of termButtons(mixed)) expect(all).toContain(button.textContent);
+    });
+
+    it('jumps to an area from the list at the top', () => {
+      renderAt('/learn');
+      const nav = screen.getByRole('navigation', { name: 'Areas on this page' });
+      expect(within(nav).getAllByRole('button').map((b) => b.textContent)).toEqual([...cramAreas.map((a) => a.title), 'Mixed']);
+      fireEvent.click(within(nav).getByRole('button', { name: 'Cyber security' }));
+      expect(within(screen.getByRole('region', { name: /^U4O2 Cyber security$/ })).getByRole('heading', { level: 2 })).toHaveFocus();
+      fireEvent.click(within(nav).getByRole('button', { name: 'Mixed' }));
+      expect(screen.getByRole('heading', { level: 2, name: 'Mixed' })).toHaveFocus();
+    });
   });
 
   it("teaches a key knowledge point from its cards and terms, without its questions' answers", () => {
@@ -149,7 +223,8 @@ describe('Learn', () => {
   it('says so for a topic that does not exist', () => {
     renderAt('/learn?kk=U3O1-KK99');
     expect(screen.getByRole('heading', { name: "That topic isn't in the study design" })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'See every topic' })).toHaveAttribute('href', '/learn');
+    // The syllabus map lists every topic now that Learn's front page is the definitions.
+    expect(screen.getByRole('link', { name: 'See every topic' })).toHaveAttribute('href', '/map');
   });
 
   describe('with an authored lesson', () => {
@@ -197,15 +272,6 @@ describe('Learn', () => {
       expect(within(folded).getByRole('group', { name: 'Common mistakes' })).toHaveTextContent('One symbol is a character, not a string.');
       expect(screen.getByText(/A COLDBOOT lesson/)).toBeInTheDocument();
       expect(screen.queryByText(/SECRET/)).toBeNull();
-    });
-
-    it('labels topics with a lesson in the index', () => {
-      provideLessons([lesson]);
-      renderAt('/learn');
-      expect(screen.getByText(/1 topic has a written lesson/)).toBeInTheDocument();
-      const row = screen.getByRole('link', { name: /U3O1-KK04/ }).closest('li')!;
-      expect(within(row).getByText('Lesson')).toBeInTheDocument();
-      expect(within(screen.getByRole('link', { name: /U3O1-KK05/ }).closest('li')!).queryByText('Lesson')).toBeNull();
     });
 
     it('waits for the lessons rather than showing the notes first, and only then offers Practise', () => {

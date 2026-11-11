@@ -1,6 +1,7 @@
 /**
- * Learn (docs/LEARN.md): reading before testing. `/learn` lists every topic with its mastery and
- * when its page was last read; `/learn?kk=U3O1-KK04` is one key knowledge point's page, and
+ * Learn (docs/LEARN.md): reading before testing. `/learn` is the whole course as short definitions,
+ * grouped by area, each area followed by a matching game (D-225, content/cram.json);
+ * `/learn?kk=U3O1-KK04` is one key knowledge point's page, and
  * `?kk=TERMS` and `?kk=PSM` are the glossary's and the problem-solving methodology's. A point with
  * an authored lesson (content/<area>/lessons.json, src/content/lessons.ts) shows it, with its
  * flashcards kept as notes below; the others show study notes assembled from checked content
@@ -9,22 +10,23 @@
  */
 import { createContext, useCallback, useContext, useEffect, useRef, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router';
+import { cramAreas, cramTotal } from '../../content/cram';
 import type { ContentIndex } from '../../content/loader';
 import { useLessons } from '../../content/lessons';
-import { AREA_IDS, type Card, type KkId, type Lesson, type WorkedExample } from '../../content/schema';
-import { areaById, kkById, kkLabel, kksByArea, studyDesign } from '../../content/studyDesign';
+import type { Card, KkId, Lesson, WorkedExample } from '../../content/schema';
+import { areaById, kkById, kkLabel, studyDesign } from '../../content/studyDesign';
 import { useNow } from '../../lib/useNow';
 import { useMastery } from '../../srs/hooks';
-import type { MasteryMap } from '../../srs/mastery';
 import { useLearn } from '../../state/learn';
 import { useTerminal } from '../../terminal/useTerminal';
 import { Button, ButtonLink } from '../../ui/Button';
 import { EmptyState } from '../../ui/EmptyState';
 import { Markdown } from '../../ui/Markdown';
 import { KkTag, Tag } from '../../ui/Tag';
+import { allCramPairs, cramPairsByArea } from '../learn/cramPairs';
+import { MatchGame } from '../learn/MatchGame';
 import {
   assembleNotes,
-  firstUnstarted,
   gamesFor,
   isLearnKk,
   masteryText,
@@ -39,7 +41,7 @@ import {
   type KkNotes,
   type NoteGame,
 } from '../learn/notes';
-import { drillPath, learnPath, reviewPath, writtenPath } from '../paths';
+import { drillPath, learnPath, paths, reviewPath, writtenPath } from '../paths';
 import { ContentGate } from '../study/ContentGate';
 import { plural } from '../study/format';
 import { ItemFigures } from '../study/ItemFigures';
@@ -60,86 +62,74 @@ export default function Learn() {
 }
 
 // ---------------------------------------------------------------------------
-// The topic list
+// The front page: the course as short definitions, each area followed by its matching game
 // ---------------------------------------------------------------------------
 
-function LearnIndex() {
-  const mastery = useMastery();
-  const read = useLearn((s) => s.read);
-  const now = useNow(60_000);
-  const start = firstUnstarted(mastery, read);
-  const { lessons } = useLessons();
-  return (
-    <div className={study.page}>
-      <h1>Learn</h1>
-      <p className={styles.lead}>
-        Read about a topic before you practise it. Each page explains what the study design asks, with examples, the official terms and the common mistakes, then links to the
-        practice for it.
-      </p>
-      <p className={styles.note}>
-        {lessons.size
-          ? `${plural(lessons.size, 'topic')} ${lessons.size === 1 ? 'has' : 'have'} a written lesson; the rest are study notes assembled from COLDBOOT's checked cards. Reading isn't scored.`
-          : "The pages are study notes assembled from COLDBOOT's checked cards and the study design map. Reading isn't scored."}
-      </p>
-      {start ? (
-        <div className={styles.start}>
-          <p>
-            Not sure where to begin? Start with <Link to={learnPath({ kk: start })}>{kkLabel(start)}</Link>, the first topic you haven't practised or read.
-          </p>
-        </div>
-      ) : null}
-      {AREA_IDS.map((area) => (
-        <section key={area} className={styles.area} aria-labelledby={`learn-${area}`}>
-          <h2 id={`learn-${area}`} className={styles.areaHead}>
-            <Tag>{area}</Tag> {areaById.get(area)?.title}
-          </h2>
-          <ol className={styles.topics}>
-            {kksByArea[area].map((k) => (
-              <TopicRow key={k.id} kk={k.id as KkId} title={k.title} mastery={mastery} readAt={read[k.id as KkId]} now={now} lesson={lessons.has(k.id as KkId)} />
-            ))}
-          </ol>
-        </section>
-      ))}
-      <section className={styles.area} aria-labelledby="learn-groups">
-        <h2 id="learn-groups">Across the course</h2>
-        <ul className={styles.topics}>
-          {studyDesign.groups.map((g) => (
-            <TopicRow key={g.id} kk={g.id} title={g.title} mastery={mastery} readAt={read[g.id]} now={now} />
-          ))}
-        </ul>
-      </section>
-    </div>
-  );
+/** Moves to a heading on this page. A fragment link can't: under hash routing the fragment is the route. */
+function goTo(id: string): void {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Focus follows, so a keyboard or screen reader user carries on from the heading.
+  el.scrollIntoView?.();
+  el.focus({ preventScroll: true });
 }
 
-function TopicRow({
-  kk,
-  title,
-  mastery,
-  readAt,
-  now,
-  lesson = false,
-}: {
-  kk: KkId;
-  title: string;
-  mastery: MasteryMap;
-  readAt: number | undefined;
-  now: number;
-  /** The point has a written lesson rather than study notes. */
-  lesson?: boolean;
-}) {
-  const group = kk === 'TERMS' || kk === 'PSM';
+function LearnIndex() {
   return (
-    <li className={styles.topic}>
-      <Link to={learnPath({ kk })} className={styles.topicLink}>
-        {group ? null : <span className={styles.topicId}>{kk}</span>}
-        <span>{title}</span>
-      </Link>
-      <span className={styles.topicMeta}>
-        {lesson ? <span className={styles.lessonTag}>Lesson</span> : null}
-        {masteryText(mastery, kk)}. {readText(readAt, now)}.
-      </span>
-    </li>
+    <div className={study.page}>
+      <h1 id="cram-top" tabIndex={-1}>
+        Learn
+      </h1>
+      <p className={styles.lead}>The whole course as short definitions. Read an area, then match its terms to their definitions.</p>
+      <p className={styles.note}>
+        {cramTotal} definitions in {cramAreas.length} areas. Terms marked Official are the study design's own, and the exam uses their definitions. Nothing here is scored.
+      </p>
+      <nav aria-label="Areas on this page">
+        <ul className={styles.jump}>
+          {cramAreas.map((area) => (
+            <li key={area.id}>
+              <Button variant="quiet" onClick={() => goTo(`cram-${area.id}`)}>
+                {area.title}
+              </Button>
+            </li>
+          ))}
+          <li>
+            <Button variant="quiet" onClick={() => goTo('cram-mixed')}>
+              Mixed
+            </Button>
+          </li>
+        </ul>
+      </nav>
+      {cramAreas.map((area) => (
+        <section key={area.id} className={styles.area} aria-labelledby={`cram-${area.id}`}>
+          <h2 id={`cram-${area.id}`} tabIndex={-1} className={styles.areaHead}>
+            {area.id === 'PSM' ? null : <Tag>{area.id}</Tag>} {area.title}
+          </h2>
+          <dl className={styles.cram}>
+            {area.entries.map((entry) => (
+              <div key={entry.term}>
+                <dt>
+                  {entry.term}
+                  {entry.official ? <span className={styles.official}>Official</span> : null}
+                </dt>
+                <dd>{entry.definition}</dd>
+              </div>
+            ))}
+          </dl>
+          <MatchGame title={area.title} pairs={cramPairsByArea[area.id]} onBack={() => goTo(`cram-${area.id}`)} />
+        </section>
+      ))}
+      <section className={styles.area} aria-labelledby="cram-mixed">
+        <h2 id="cram-mixed" tabIndex={-1}>
+          Mixed
+        </h2>
+        <p>Pairs drawn from every area, for when each area's own game has become easy.</p>
+        <MatchGame title="every area" pairs={allCramPairs} onBack={() => goTo('cram-top')} />
+      </section>
+      <p className={styles.closing}>
+        Want more on one topic? Every key knowledge point has a full lesson: open it from the <Link to={paths.map}>syllabus map</Link>.
+      </p>
+    </div>
   );
 }
 
@@ -150,7 +140,7 @@ function UnknownTopic({ typed }: { typed: string }) {
       <EmptyState
         title="That topic isn't in the study design"
         action={
-          <ButtonLink variant="primary" to={learnPath()}>
+          <ButtonLink variant="primary" to={paths.map}>
             See every topic
           </ButtonLink>
         }

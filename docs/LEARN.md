@@ -4,6 +4,8 @@ A place in COLDBOOT that teaches a key knowledge point before the app tests it. 
 
 ## Status
 
+**1.4.0 (D-225).** Learn's front page is now the whole course as 162 short definitions in five sections, each followed by a matching game, with a mixed game at the end (`content/cram.json`, `src/app/learn/MatchGame.tsx`). It replaced the topic list, written when the exam was two days away and 54 pages were too much to read. Every topic page is still at `/learn?kk=…`, reached from the syllabus map, Home, Today's run and the terminal's `learn`. The two points below about the index describe the list as it was up to 1.3.1.
+
 All three phases have shipped. Phases A and B came in 1.2.0 (D-215 to D-217). Phase C came in 1.3.0 (D-220): every one of the 52 key knowledge points has an authored lesson, written from the sources and checked against them. The Terms and PSM pages stay assembled from their checked content. What was built differs from the plan below in these places:
 
 - A notes page has no single "The ideas" section. Its flashcards read as three sections, Definitions, Comparisons and Key points. On a lesson page "The ideas" is the lesson itself, and the flashcards and their common mistakes fold into a disclosure under it, because the mistakes repeated the examiners' traps.

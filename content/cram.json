@@ -1,0 +1,886 @@
+{
+  "areas": [
+    {
+      "id": "U3O1",
+      "title": "Programming",
+      "entries": [
+        {
+          "term": "Generative AI",
+          "definition": "Artificial intelligence that creates new content, such as text, images or program code, from a prompt, using patterns learned from training data.",
+          "sources": ["c-u3o1-kk01-011"]
+        },
+        {
+          "term": "Object description",
+          "definition": "A design tool that plans an object in three sections: Name, Properties/Attributes and Methods.",
+          "sources": ["c-u3o1-kk03-012"]
+        },
+        {
+          "term": "IPO chart",
+          "definition": "A three-column table summarising one task: its inputs, the processes that turn them into results, and its outputs.",
+          "sources": ["c-u3o1-kk03-010"]
+        },
+        {
+          "term": "The six data types",
+          "definition": "Text: character and string. Numeric: integer, floating point and date/time. And Boolean.",
+          "sources": ["U3O1-KK04"]
+        },
+        {
+          "term": "Character",
+          "definition": "A text data type that holds exactly one letter, digit or symbol; a string holds a sequence of them.",
+          "sources": ["c-u3o1-kk04-004"]
+        },
+        {
+          "term": "One-dimensional array",
+          "definition": "A list of values of a single data type under one name, each reached by one integer index.",
+          "sources": ["c-u3o1-kk05-009"]
+        },
+        {
+          "term": "Two-dimensional array",
+          "definition": "Values of one data type arranged in rows and columns, each reached by a row index and a column index.",
+          "sources": ["c-u3o1-kk05-002"]
+        },
+        {
+          "term": "Record",
+          "definition": "A data structure that groups related values of varying data types under one name, each stored in its own field.",
+          "sources": ["c-u3o1-kk05-010"]
+        },
+        {
+          "term": "Data sources",
+          "definition": "Data that comes into a solution from an outside file or system: unstructured (plain text) or structured (delimited or XML).",
+          "sources": ["t-data-sources"],
+          "official": true
+        },
+        {
+          "term": "XML file",
+          "definition": "A structured text file that stores each value between named tags in a hierarchy: self-describing, extensible and portable between systems.",
+          "sources": ["c-u3o1-kk06-009"]
+        },
+        {
+          "term": "Abstraction",
+          "definition": "An OOP principle: a class hides the details of how it works and exposes only what other code needs.",
+          "sources": ["c-u3o1-kk07-009"]
+        },
+        {
+          "term": "Encapsulation",
+          "definition": "An OOP principle: a class keeps attributes with the methods that work on them, and stops other code reaching those attributes directly.",
+          "sources": ["c-u3o1-kk07-010"]
+        },
+        {
+          "term": "Generalisation",
+          "definition": "An OOP principle: features shared by two or more classes are moved up into a more general superclass they inherit from.",
+          "sources": ["c-u3o1-kk07-011"]
+        },
+        {
+          "term": "Inheritance",
+          "definition": "An OOP principle: a subclass automatically receives its superclass's attributes and methods, and can add its own or override them.",
+          "sources": ["c-u3o1-kk07-012"]
+        },
+        {
+          "term": "Class",
+          "definition": "A template that defines the attributes and methods shared by every object of one type.",
+          "sources": ["c-u3o1-kk08-009"]
+        },
+        {
+          "term": "Object",
+          "definition": "A single instance made from a class while the program runs, holding its own attribute values.",
+          "sources": ["c-u3o1-kk08-010", "c-u3o1-kk07-006"]
+        },
+        {
+          "term": "Control structures",
+          "definition": "The code structures that determine how an algorithm behaves: sequence, selection (branching) and repetition (iteration).",
+          "sources": ["t-control-structure"],
+          "official": true
+        },
+        {
+          "term": "Local variable",
+          "definition": "A variable declared inside a function or method: usable anywhere in that module but nowhere else, and only while the module runs.",
+          "sources": ["c-u3o1-kk08-002"]
+        },
+        {
+          "term": "Global variable",
+          "definition": "A variable declared outside every module, so any part of the program can read or change it while the program runs.",
+          "sources": ["c-u3o1-kk08-002"]
+        },
+        {
+          "term": "Naming conventions",
+          "definition": "Guidelines that keep the names given to parts of a solution consistent, making its code quicker and easier to read and understand.",
+          "sources": ["t-naming-conventions"],
+          "official": true
+        },
+        {
+          "term": "Hungarian notation",
+          "definition": "A naming convention that starts each name with a short prefix showing its data type or control type, as in intAge or btnSave.",
+          "sources": ["c-u3o1-kk09-010"]
+        },
+        {
+          "term": "Camel casing",
+          "definition": "A naming convention that joins words without spaces, the first in lower case and each later word capitalised, as in totalCost.",
+          "sources": ["c-u3o1-kk09-009"]
+        },
+        {
+          "term": "Snake casing",
+          "definition": "A naming convention that writes every word in lower case with an underscore between words, as in total_cost.",
+          "sources": ["c-u3o1-kk09-011"]
+        },
+        {
+          "term": "Validation",
+          "definition": "Checking, by hand or electronically, that data is reasonable and complete, as it is input or after it has been stored.",
+          "sources": ["t-validation"],
+          "official": true
+        },
+        {
+          "term": "The three validation checks",
+          "definition": "Existence (a required field isn't blank), type (the expected data type) and range (within set limits).",
+          "sources": ["t-validation", "c-u3o1-kk10-007"]
+        },
+        {
+          "term": "Internal documentation",
+          "definition": "Comments in the source code that explain and justify its data and code structures, support maintenance and mark stubs for future development.",
+          "sources": ["c-u3o1-kk11-009"]
+        },
+        {
+          "term": "Linear search",
+          "definition": "Checks each element in turn from the first until it finds the target or reaches the end; works on unsorted data.",
+          "sources": ["c-u3o1-kk12-001"]
+        },
+        {
+          "term": "Binary search",
+          "definition": "Compares the target with the middle of sorted data and discards the half that can't hold it, until found or none remain.",
+          "sources": ["c-u3o1-kk12-010"]
+        },
+        {
+          "term": "Selection sort",
+          "definition": "On each pass, finds the smallest value in the unsorted part and swaps it into the next position of the sorted part.",
+          "sources": ["c-u3o1-kk12-003"]
+        },
+        {
+          "term": "Quick sort",
+          "definition": "Chooses a pivot, partitions the list into smaller values before it and larger values after, then sorts each part the same way.",
+          "sources": ["c-u3o1-kk12-004"]
+        },
+        {
+          "term": "Errors (programming)",
+          "definition": "Problems that stop a program working as expected, classed as syntax, logic or run-time.",
+          "sources": ["t-errors-programming"],
+          "official": true
+        },
+        {
+          "term": "Syntax error",
+          "definition": "Code that breaks the language's rules, such as a missing bracket, so it can't be compiled and run.",
+          "sources": ["c-u3o1-kk13-011"]
+        },
+        {
+          "term": "Logic error",
+          "definition": "A mistake that makes a program give incorrect output, such as a wrong calculation, while it still runs without crashing.",
+          "sources": ["c-u3o1-kk13-009"]
+        },
+        {
+          "term": "The four runtime errors",
+          "definition": "Divide by zero, index out of range, overflow and type mismatch: failures while a program runs that crash it unless handled.",
+          "sources": ["c-u3o1-kk13-010"]
+        },
+        {
+          "term": "Debugging",
+          "definition": "Finding the errors already in code, fixing them, then testing that the changes work, during development as the code is written.",
+          "sources": ["t-debugging"],
+          "official": true
+        },
+        {
+          "term": "Testing table",
+          "definition": "A table with one row per test case: the test number, each input, the expected output and the actual output.",
+          "sources": ["c-u3o1-kk14-005"]
+        }
+      ]
+    },
+    {
+      "id": "U3O2",
+      "title": "Analysis and design",
+      "entries": [
+        {
+          "term": "The four reasons for a software project",
+          "definition": "Reducing costs, increasing productivity and efficiency, addressing gaps in the market, and meeting organisational objectives or needs.",
+          "sources": ["c-u3o2-kk01-004"]
+        },
+        {
+          "term": "Project brief",
+          "definition": "A short document at a project's start outlining the problem, need or opportunity, proposed users, programming languages, feasibility and originality.",
+          "sources": ["c-u3o2-kk02-001"]
+        },
+        {
+          "term": "Project management",
+          "definition": "A detailed proposal for how a project will be managed: its tasks, their sequence and time, dependencies, milestones and the critical path.",
+          "sources": ["t-project-management"],
+          "official": true
+        },
+        {
+          "term": "Gantt chart",
+          "definition": "A chart showing each task as a bar on a timeline, with dependencies, milestones and the critical path, updated to monitor progress.",
+          "sources": ["c-u3o2-kk03-010"]
+        },
+        {
+          "term": "Dependency",
+          "definition": "A link between two tasks in which one can't start until the other, its predecessor, has finished.",
+          "sources": ["c-u3o2-kk03-003"]
+        },
+        {
+          "term": "Milestone",
+          "definition": "A significant point in a project, such as the end of a PSM stage, with no duration, used to check progress.",
+          "sources": ["c-u3o2-kk03-011"]
+        },
+        {
+          "term": "Critical path",
+          "definition": "The longest chain of dependent tasks from start to finish; its length is the shortest time the project can take.",
+          "sources": ["c-u3o2-kk03-009"]
+        },
+        {
+          "term": "Primary data",
+          "definition": "Data that researchers gather themselves, straight from its sources, such as through surveys, interviews or observations; raw and unprocessed.",
+          "sources": ["t-primary-data"],
+          "official": true
+        },
+        {
+          "term": "Secondary data",
+          "definition": "Data that someone other than the researcher has already collected, summarised or analysed, such as reports, articles and data sets.",
+          "sources": ["t-secondary-data"],
+          "official": true
+        },
+        {
+          "term": "The four data collection methods",
+          "definition": "Interviews (a few people, in depth), surveys (many people, quickly), observations (how a task is really done) and reports (existing records).",
+          "sources": ["c-u3o2-kk04-009", "c-u3o2-kk04-001", "c-u3o2-kk04-002", "c-u3o2-kk04-010"]
+        },
+        {
+          "term": "Functional requirement",
+          "definition": "A requirement that states something the solution must do: accept inputs, produce outputs or carry out a function such as validating data.",
+          "sources": ["c-u3o2-kk05-009"]
+        },
+        {
+          "term": "Non-functional requirement",
+          "definition": "A requirement describing a quality the solution must have, such as usability, reliability, portability, robustness or maintainability.",
+          "sources": ["c-u3o2-kk05-010"]
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limit the solution must be designed within: economic (cost and time), technical, social (users' expertise), legal or usability.",
+          "sources": ["c-u3o2-kk06-009"]
+        },
+        {
+          "term": "Solution scope",
+          "definition": "The boundaries of a solution or version: what it will address and what it will not.",
+          "sources": ["U3O2-KK07", "c-u3o2-kk07-009"]
+        },
+        {
+          "term": "Context diagram",
+          "definition": "A Level 0 diagram showing the whole system as one circle, exchanging labelled data flows with external entities drawn as rectangles.",
+          "sources": ["c-u3o2-kk08-009"]
+        },
+        {
+          "term": "Data flow diagram",
+          "definition": "A Level 1 diagram of how data moves between external entities, processes and data stores; entities and stores never connect directly.",
+          "sources": ["c-u3o2-kk08-010", "c-u3o2-kk08-005"]
+        },
+        {
+          "term": "Use case diagram",
+          "definition": "A UML diagram of how users interact with a system: actors outside a boundary, use cases inside, joined by associations.",
+          "sources": ["c-u3o2-kk08-011"]
+        },
+        {
+          "term": "Actor",
+          "definition": "The role of a user who interacts with a system to achieve a goal, drawn as a stick figure; never an organisation or device.",
+          "sources": ["c-u3o2-kk08-006"]
+        },
+        {
+          "term": "<<includes>>",
+          "definition": "Joins a base use case to shared behaviour that runs every time the base runs; the arrow points from the base.",
+          "sources": ["c-u3o2-kk08-008"]
+        },
+        {
+          "term": "<<extends>>",
+          "definition": "Joins an optional addition, run only under a condition, to a base use case; the arrow points to the base.",
+          "sources": ["c-u3o2-kk08-008"]
+        },
+        {
+          "term": "Software requirements specification",
+          "definition": "A document describing what a software solution is intended to do and its environment: requirements, scope, constraints, technical environments and user characteristics.",
+          "sources": ["t-software-requirements-specification"],
+          "official": true
+        },
+        {
+          "term": "Legal requirements",
+          "definition": "The main laws that people, businesses and government bodies must obey when using intellectual property or collecting and holding private data.",
+          "sources": ["t-legal-requirements"],
+          "official": true
+        },
+        {
+          "term": "Backup",
+          "definition": "Copying data and keeping the copy apart from the original, so it can be restored if the data is lost.",
+          "sources": ["t-backup"],
+          "official": true
+        },
+        {
+          "term": "The three types of backup",
+          "definition": "Full (everything), differential (changes since the last full copy) and incremental (changes since the last copy of any kind).",
+          "sources": ["t-backup", "c-u3o2-kk11-009"]
+        },
+        {
+          "term": "Ideation",
+          "definition": "A process of coming up with ideas and building on them, cycling from a first concept through to a developed design.",
+          "sources": ["t-ideation"],
+          "official": true
+        },
+        {
+          "term": "The five ideation tools",
+          "definition": "Annotations, brainstorming, mind maps, mood boards and sketches.",
+          "sources": ["t-ideation", "U3O2-KK12"]
+        },
+        {
+          "term": "Mind map",
+          "definition": "A diagram that organises ideas around a central theme, with main ideas branching out into more specific ones.",
+          "sources": ["c-u3o2-kk12-002"]
+        },
+        {
+          "term": "Design thinking",
+          "definition": "Using critical and creative thought to come up with and judge new ideas, then defining the preferred solution precisely enough to build.",
+          "sources": ["t-design-thinking"],
+          "official": true
+        },
+        {
+          "term": "Efficiency",
+          "definition": "The time, cost and effort it takes to achieve the intended results: the less it takes, the better.",
+          "sources": ["t-efficiency"],
+          "official": true
+        },
+        {
+          "term": "Effectiveness",
+          "definition": "How well a solution, design, security strategy or development practice works, and how far it achieves what it was meant to do.",
+          "sources": ["t-effectiveness"],
+          "official": true
+        },
+        {
+          "term": "Evaluation criteria",
+          "definition": "Specific, measurable checks drawn from the requirements, used to choose a design idea and later to judge the finished solution.",
+          "sources": ["c-u3o2-kk13-009"]
+        },
+        {
+          "term": "Pseudocode",
+          "definition": "English-like statements, written in order, that represent an algorithm for solving a problem.",
+          "sources": ["t-pseudocode"],
+          "official": true
+        },
+        {
+          "term": "Data dictionary",
+          "definition": "A table that plans the data a module needs, giving each item at least a name and a data type.",
+          "sources": ["c-u3o1-kk03-009"]
+        },
+        {
+          "term": "User experience",
+          "definition": "Taking into account how users perceive a digital system and how they react as they interact with it.",
+          "sources": ["t-user-experience"],
+          "official": true
+        },
+        {
+          "term": "The four UX characteristics",
+          "definition": "Usability, security (authentication and data protection), interoperability and affordance.",
+          "sources": ["t-user-experience", "U3O2-KK15"]
+        },
+        {
+          "term": "Affordance",
+          "definition": "How clearly an interface element's appearance shows what it does and how to use it, like a button that looks pressable.",
+          "sources": ["c-u3o2-kk15-009"]
+        },
+        {
+          "term": "Usability",
+          "definition": "How easily the intended users can learn and operate a solution to complete their tasks, including ease of use and accessibility.",
+          "sources": ["c-u3o2-kk15-011"]
+        },
+        {
+          "term": "Design principles",
+          "definition": "Recognised qualities that help a solution work well, be easy to use and look good, grouped under functionality, usability and appearance.",
+          "sources": ["t-design-principles"],
+          "official": true
+        },
+        {
+          "term": "Contrast",
+          "definition": "A design principle: making elements clearly different in colour, size, weight or shape, so important items stand out and text is readable.",
+          "sources": ["c-u3o2-kk16-002"]
+        }
+      ]
+    },
+    {
+      "id": "U4O1",
+      "title": "Development and evaluation",
+      "entries": [
+        {
+          "term": "User-centred design",
+          "definition": "Developing a solution with its actual users taking part at every stage, such as interviews, design feedback and beta testing.",
+          "sources": ["c-u4o1-kk01-009"]
+        },
+        {
+          "term": "Clear and concise code",
+          "definition": "Code with meaningful names, consistent indenting and no repeated or unneeded lines, so it takes less effort to read, change and test.",
+          "sources": ["c-u4o1-kk01-010"]
+        },
+        {
+          "term": "Array of records",
+          "definition": "An array in which every element is a record with the same fields, suiting many items with fields of different types.",
+          "sources": ["c-u3o1-kk05-007", "c-u4o1-kk02-002"]
+        },
+        {
+          "term": "Access modifier",
+          "definition": "A keyword written before an attribute or method that sets which code may use it.",
+          "sources": ["c-u4o1-kk03-009"]
+        },
+        {
+          "term": "Public (access modifier)",
+          "definition": "Lets any code in the program use the attribute or method.",
+          "sources": ["c-u4o1-kk03-009", "c-u3o1-kk07-007"]
+        },
+        {
+          "term": "Protected (access modifier)",
+          "definition": "Limits an attribute or method to the class's own methods and its subclasses.",
+          "sources": ["c-u4o1-kk03-009", "c-u3o1-kk07-007"]
+        },
+        {
+          "term": "Private (access modifier)",
+          "definition": "Limits an attribute or method to the class's own methods only.",
+          "sources": ["c-u4o1-kk03-009", "c-u3o1-kk07-007"]
+        },
+        {
+          "term": "Code repository",
+          "definition": "A shared store for a project's code and the full history of changes to it, supporting version control and teamwork.",
+          "sources": ["c-u4o1-kk04-010"]
+        },
+        {
+          "term": "Application programming interface (API)",
+          "definition": "A defined interface through which separate programs communicate, exchanging data or services without knowing how the other works inside.",
+          "sources": ["c-u4o1-kk04-009"]
+        },
+        {
+          "term": "Code library",
+          "definition": "Ready-made code, such as functions and classes, packaged so developers can call it for common tasks rather than writing it themselves.",
+          "sources": ["c-u4o1-kk04-011"]
+        },
+        {
+          "term": "AI-based assistant",
+          "definition": "A development tool that generates or suggests code as the developer works and can automate debugging and testing.",
+          "sources": ["c-u4o1-kk04-012", "U4O1-KK04"]
+        },
+        {
+          "term": "Breakpoint",
+          "definition": "A marker on a line of code that pauses execution there, so variable values can be inspected and the code stepped through.",
+          "sources": ["c-u3o1-kk14-001"]
+        },
+        {
+          "term": "Test data",
+          "definition": "Input values chosen to check that a module works: valid, invalid and boundary values, each with its expected output.",
+          "sources": ["c-u3o1-kk14-009"]
+        },
+        {
+          "term": "Test case",
+          "definition": "One planned test: particular input values and the output the requirements say should result.",
+          "sources": ["c-u3o1-kk14-005"]
+        },
+        {
+          "term": "Alpha testing",
+          "definition": "Testing throughout development that modules or the whole solution meet every requirement and work as intended, by the developers themselves, independent testers or high-level users.",
+          "sources": ["t-alpha-testing"],
+          "official": true
+        },
+        {
+          "term": "Beta testing",
+          "definition": "Testing in which intended user groups try a solution, checking it meets every requirement, works as expected, is stable and is usable.",
+          "sources": ["t-beta-testing"],
+          "official": true
+        },
+        {
+          "term": "Strategies for beta testing",
+          "definition": "Constructing a testing plan and test scenarios, observing users as they work through them, and documenting the results.",
+          "sources": ["U4O1-KK07", "c-u4o1-kk07-006"]
+        },
+        {
+          "term": "Scenario (beta testing)",
+          "definition": "A realistic task, described in the user's own terms, that a tester carries out; it states the goal, not the steps.",
+          "sources": ["c-u4o1-kk07-004"]
+        },
+        {
+          "term": "Evaluation strategy",
+          "definition": "A plan for judging how well an implemented solution meets its requirements: the evaluation criteria, the time frame and who is responsible.",
+          "sources": ["c-u4o1-kk08-001"]
+        },
+        {
+          "term": "Solution evaluation",
+          "definition": "Applying the evaluation criteria to the data collected, to judge how efficiently and effectively the solution meets its requirements.",
+          "sources": ["psm", "c-u4o1-kk08-009"]
+        },
+        {
+          "term": "The three factors that affect a project plan",
+          "definition": "Personnel changes, scope creep and technical issues.",
+          "sources": ["c-u4o1-kk10-011"]
+        },
+        {
+          "term": "Scope creep",
+          "definition": "The gradual, uncontrolled growth of a project's features or requirements after its scope is agreed, usually without extra time or budget.",
+          "sources": ["c-u4o1-kk10-010"]
+        },
+        {
+          "term": "Personnel changes",
+          "definition": "Someone leaves, joins or is moved to other work, so tasks are delayed or reassigned and knowledge may be lost.",
+          "sources": ["c-u4o1-kk10-011", "c-u4o1-kk10-004"]
+        },
+        {
+          "term": "Technical issues",
+          "definition": "Problems with hardware, software or tools, such as a failed server or a changed API, that add unplanned work.",
+          "sources": ["c-u4o1-kk10-011"]
+        },
+        {
+          "term": "The three ways to record a project's progress",
+          "definition": "Adjustments to tasks and time frames, annotations to the project plan, and logs or journals.",
+          "sources": ["U4O1-KK11"]
+        },
+        {
+          "term": "Annotation (project plan)",
+          "definition": "A note on the plan recording what happened, why, and its effect.",
+          "sources": ["c-u4o1-kk11-007"]
+        },
+        {
+          "term": "Adjustment (project plan)",
+          "definition": "A change made to the plan in response to what happened: to a time frame or to a task.",
+          "sources": ["c-u4o1-kk11-007"]
+        },
+        {
+          "term": "Progress log or journal",
+          "definition": "A dated record of the tasks worked on, problems met, decisions made and changes to the plan, written at the time.",
+          "sources": ["c-u4o1-kk11-004", "c-u4o1-kk11-008"]
+        },
+        {
+          "term": "Assessing a project plan",
+          "definition": "Looking back at how many changes the plan needed, why each was necessary, and how they affected completing the project.",
+          "sources": ["c-u4o1-kk12-001"]
+        }
+      ]
+    },
+    {
+      "id": "U4O2",
+      "title": "Cyber security",
+      "entries": [
+        {
+          "term": "Goal",
+          "definition": "A broad, long-term aim stating what an organisation wants to achieve; it usually can't be measured directly.",
+          "sources": ["c-u4o2-kk01-009"]
+        },
+        {
+          "term": "Objective",
+          "definition": "A specific, measurable target with a time frame, set to help an organisation achieve one of its goals.",
+          "sources": ["c-u4o2-kk01-010"]
+        },
+        {
+          "term": "In-house development",
+          "definition": "Software designed, built and maintained by the organisation's own employees, using its own equipment and processes.",
+          "sources": ["c-u4o2-kk02-001"]
+        },
+        {
+          "term": "External development",
+          "definition": "Software designed and built for the organisation by another company or a contractor, under a contract setting requirements, cost and deadline.",
+          "sources": ["c-u4o2-kk02-002"]
+        },
+        {
+          "term": "Cyber security",
+          "definition": "A broad field bringing together digital systems, how organisations operate, threats to data and systems, legal and ethical issues, and managing risk.",
+          "sources": ["t-cyber-security"],
+          "official": true
+        },
+        {
+          "term": "Security threats",
+          "definition": "Actions, devices or events that could compromise the security or integrity of data and information: accidental, deliberate or events-based.",
+          "sources": ["t-security-threats"],
+          "official": true
+        },
+        {
+          "term": "Vulnerability",
+          "definition": "A weakness in a system, program, process or development environment that a threat could exploit to cause harm.",
+          "sources": ["c-u4o2-kk03-010"]
+        },
+        {
+          "term": "Risk",
+          "definition": "The chance that a threat will exploit a vulnerability, considered together with how much harm it would cause.",
+          "sources": ["c-u4o2-kk03-009"]
+        },
+        {
+          "term": "Insider threat",
+          "definition": "A threat from someone with legitimate access, such as an employee or contractor, whose action could harm systems, code or data.",
+          "sources": ["c-u4o2-kk03-005"]
+        },
+        {
+          "term": "Combined environments",
+          "definition": "A vulnerability where development, testing and production share one environment, so one faulty change can corrupt real data or take the live system down.",
+          "sources": ["c-u4o2-kk03-003"]
+        },
+        {
+          "term": "Security controls",
+          "definition": "Measures that help protect individuals, systems, networks, organisations and data: hardware, software, physical equipment, procedures or electronic measures.",
+          "sources": ["t-security-controls"],
+          "official": true
+        },
+        {
+          "term": "The six security controls for software development",
+          "definition": "Code review, encryption, robust identity and access management, regular updates and patches, separated environments, and version control with code repositories.",
+          "sources": ["t-security-controls", "U4O2-KK04"]
+        },
+        {
+          "term": "Version control",
+          "definition": "Recording every change to code with who made it and when, so changes can be traced and rolled back; not a backup.",
+          "sources": ["c-u4o2-kk04-006", "t-backup"]
+        },
+        {
+          "term": "Identity and access management",
+          "definition": "The process of making sure each member of an organisation can reach only the data, modules and systems their assigned duties need.",
+          "sources": ["t-identity-and-access-management"],
+          "official": true
+        },
+        {
+          "term": "Encryption",
+          "definition": "Turning data and information from plain text into a coded form, to keep it from being compromised.",
+          "sources": ["t-encryption"],
+          "official": true
+        },
+        {
+          "term": "Symmetric encryption",
+          "definition": "The method that uses one key both to encrypt and to decrypt.",
+          "sources": ["t-encryption"]
+        },
+        {
+          "term": "Asymmetric encryption",
+          "definition": "The method that uses a public key to encrypt and a matching private key to decrypt.",
+          "sources": ["t-encryption"]
+        },
+        {
+          "term": "Code review",
+          "definition": "A second developer examines code before it is merged, catching vulnerabilities the author missed.",
+          "sources": ["c-u4o2-kk04-007"]
+        },
+        {
+          "term": "Separated environments",
+          "definition": "Keeping development, testing and production apart, so unfinished code can't affect the live system and developers don't need live data.",
+          "sources": ["c-u4o2-kk09-003"]
+        },
+        {
+          "term": "Least privilege",
+          "definition": "The principle that each user, program or process gets only the access rights its duties require.",
+          "sources": ["c-u4o2-kk09-009"]
+        },
+        {
+          "term": "Threat modelling",
+          "definition": "A structured way of finding and dealing with the security threats to a system, begun during design and revisited whenever it changes.",
+          "sources": ["c-u4o2-kk05-009"]
+        },
+        {
+          "term": "The three threat modelling principles",
+          "definition": "Defining security requirements, identifying and mitigating threats, and confirming the threats have been mitigated.",
+          "sources": ["c-u4o2-kk05-009", "U4O2-KK05"]
+        },
+        {
+          "term": "Effectiveness measures for development practices",
+          "definition": "The security controls in place, exposure to vulnerabilities and risks, and legal compliance.",
+          "sources": ["t-effectiveness", "c-u4o2-kk06-009"]
+        },
+        {
+          "term": "Effectiveness measures for a security strategy",
+          "definition": "Confidentiality, integrity and availability.",
+          "sources": ["t-effectiveness", "c-u4o2-kk06-009"]
+        },
+        {
+          "term": "Industry frameworks",
+          "definition": "Guidelines written so organisations and governments apply strategies that keep data and information secure across networks and uphold the highest ethical standards.",
+          "sources": ["t-industry-frameworks"],
+          "official": true
+        },
+        {
+          "term": "Essential Eight",
+          "definition": "A prioritised set of eight mitigation strategies from the Australian Cyber Security Centre, such as patching, multi-factor authentication and regular backups.",
+          "sources": ["c-u4o2-kk07-009"]
+        },
+        {
+          "term": "Information Security Manual (ISM)",
+          "definition": "A cyber security framework from the Australian Cyber Security Centre setting out principles and detailed controls, including guidelines for software development.",
+          "sources": ["c-u4o2-kk07-006"]
+        },
+        {
+          "term": "Copyright Act 1968 (Cwlth)",
+          "definition": "Commonwealth law giving the owner of an original work, including program code, exclusive rights to copy, adapt, publish and share it.",
+          "sources": ["c-u4o2-kk07-011"]
+        },
+        {
+          "term": "Privacy Act 1988 (Cwlth)",
+          "definition": "Commonwealth law on how Australian Government agencies and many private organisations handle personal information, through the Australian Privacy Principles.",
+          "sources": ["c-u4o2-kk07-001", "c-u4o2-kk07-002"]
+        },
+        {
+          "term": "Privacy and Data Protection Act 2014 (Vic)",
+          "definition": "Victorian law on how public sector bodies, such as departments and councils, handle personal information, through the Information Privacy Principles.",
+          "sources": ["c-u4o2-kk07-002", "c-u3o2-kk10-011"]
+        },
+        {
+          "term": "Ethics",
+          "definition": "Situations that call moral standards, principles or expectations into question, and that can affect individuals, organisations or both.",
+          "sources": ["t-ethics"],
+          "official": true
+        },
+        {
+          "term": "The ethical issues in software development",
+          "definition": "Intellectual property and copyright issues, ineffective security practices, and the use of AI during development.",
+          "sources": ["t-ethics", "U4O2-KK08"]
+        },
+        {
+          "term": "Strategies for improving secure development practices",
+          "definition": "Onboarding or induction and developer training focused on secure development, and developing risk management plans.",
+          "sources": ["c-u4o2-kk10-009"]
+        },
+        {
+          "term": "Risk management plan",
+          "definition": "Lists the potential risks to a project, rates each one's likelihood and impact, and proposes security controls to reduce them.",
+          "sources": ["c-u4o2-kk10-010"]
+        }
+      ]
+    },
+    {
+      "id": "PSM",
+      "title": "Problem-solving methodology and course-wide terms",
+      "entries": [
+        {
+          "term": "The four stages of the PSM",
+          "definition": "Analysis, design, development and evaluation, in that order.",
+          "sources": ["psm", "psm-c-002"]
+        },
+        {
+          "term": "Analysis stage",
+          "definition": "Works out what the solution must do and the conditions it must work within: requirements, constraints and scope.",
+          "sources": ["psm", "psm-c-003"]
+        },
+        {
+          "term": "Design stage",
+          "definition": "Plans how the solution will work and look before any code is written, and develops the evaluation criteria.",
+          "sources": ["psm", "psm-c-004"]
+        },
+        {
+          "term": "Development stage",
+          "definition": "Builds the solution from the requirements and designs: coding it, validating its input, testing and debugging it, and documenting it.",
+          "sources": ["psm", "psm-c-005"]
+        },
+        {
+          "term": "Evaluation stage",
+          "definition": "Judges how well the finished solution meets its requirements once it has been developed and put into use.",
+          "sources": ["psm", "psm-c-006"]
+        },
+        {
+          "term": "The three analysis activities",
+          "definition": "Solution requirements, solution constraints and solution scope.",
+          "sources": ["psm", "psm-c-020"]
+        },
+        {
+          "term": "The two design activities",
+          "definition": "Solution design and evaluation criteria.",
+          "sources": ["psm", "psm-c-020"]
+        },
+        {
+          "term": "The four development activities",
+          "definition": "Manipulation (coding), validation, testing and documentation.",
+          "sources": ["psm", "psm-c-020"]
+        },
+        {
+          "term": "The two evaluation activities",
+          "definition": "Evaluation strategy and solution evaluation.",
+          "sources": ["psm", "psm-c-020"]
+        },
+        {
+          "term": "Manipulation",
+          "definition": "The development activity of coding the solution with suitable algorithms and features of the programming language.",
+          "sources": ["psm"]
+        },
+        {
+          "term": "Computational thinking",
+          "definition": "Recognising where computation applies to a problem and reasoning about it in logical, algorithmic, recursive and inferential ways.",
+          "sources": ["t-computational-thinking"],
+          "official": true
+        },
+        {
+          "term": "Critical and creative thinking",
+          "definition": "Using a variety of techniques to develop ideas and designs, including forming, analysing and judging the questions asked, data used and decisions made.",
+          "sources": ["t-critical-and-creative-thinking"],
+          "official": true
+        },
+        {
+          "term": "Systems thinking",
+          "definition": "An approach that looks at the whole picture, analysing how an information system's data, processes, people and digital systems interact.",
+          "sources": ["t-systems-thinking"],
+          "official": true
+        },
+        {
+          "term": "Digital system",
+          "definition": "The hardware, software and other elements, and how they are interconnected, used to build digital solutions.",
+          "sources": ["t-digital-system"],
+          "official": true
+        },
+        {
+          "term": "Conventions",
+          "definition": "Generally agreed approaches to using digital systems or representing data, followed so a solution stays consistent throughout.",
+          "sources": ["t-conventions"],
+          "official": true
+        },
+        {
+          "term": "Format",
+          "definition": "How data and information physically look when presented, for example as images, graphs, tables, text or web pages.",
+          "sources": ["t-format"],
+          "official": true
+        },
+        {
+          "term": "Data integrity",
+          "definition": "How sound data is overall, judged by its accuracy, authenticity, correctness, reasonableness, relevance and timeliness.",
+          "sources": ["t-data-integrity"],
+          "official": true
+        },
+        {
+          "term": "Verification",
+          "definition": "Checking that data is accurate and consistent, for example by proofreading it or comparing it with other sources.",
+          "sources": ["t-verification"],
+          "official": true
+        },
+        {
+          "term": "Archiving",
+          "definition": "Moving data that is rarely needed out of a working system into storage accessed less often, kept for later use or because rules require it.",
+          "sources": ["t-archiving"],
+          "official": true
+        },
+        {
+          "term": "Data analytics",
+          "definition": "Methods and software that let organisations collect data, correct it, analyse it for patterns, trends and relationships, and present the findings visually.",
+          "sources": ["t-data-analytics"],
+          "official": true
+        },
+        {
+          "term": "Descriptive statistics",
+          "definition": "Measures that summarise a data set: central tendency (average, median) and variability and spread (such as range and standard deviation).",
+          "sources": ["t-descriptive-statistics"],
+          "official": true
+        },
+        {
+          "term": "Data visualisations",
+          "definition": "Using software to present analysed data graphically, as charts, graphs, maps and diagrams, helping users explore large amounts of data for patterns.",
+          "sources": ["t-data-visualisations"],
+          "official": true
+        },
+        {
+          "term": "Dynamic data visualisations",
+          "definition": "Graphical displays of data that users can explore interactively, where the data shown can change through interaction or as live data is added.",
+          "sources": ["t-dynamic-data-visualisations"],
+          "official": true
+        },
+        {
+          "term": "Infographics",
+          "definition": "A single visual that gives an overview of a topic by bringing complex data or information together, so patterns show at a glance.",
+          "sources": ["t-infographics"],
+          "official": true
+        }
+      ]
+    }
+  ]
+}

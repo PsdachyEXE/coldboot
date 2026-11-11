@@ -1,4 +1,4 @@
-/* Learn: the topic list and one topic's reading page (docs/LEARN.md). */
+/* Learn: the definitions on its front page and one topic's reading page (docs/LEARN.md). */
 
 .lead {
   margin-bottom: var(--space-4);
@@ -10,20 +10,20 @@
   margin: 0 0 var(--space-5);
 }
 
-/* Topic list ------------------------------------------------------------ */
+/* The front page: the course as short definitions (D-225) ------------------ */
 
-.start {
+/* Buttons that move to an area on the page; under hash routing a fragment link can't. */
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-5);
+  list-style: none;
   margin: 0 0 var(--space-5);
-  padding: var(--space-3) var(--space-4);
-  background: var(--trench);
-  border-left: 4px solid var(--phosphor);
-}
-.start p {
-  margin: 0;
+  padding: 0;
 }
 
 .area {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-7);
 }
 
 .areaHead {
@@ -33,42 +33,45 @@
   gap: var(--space-2);
 }
 
-.topics {
-  list-style: none;
+/* A term beside its definition; one under the other on a phone. */
+.cram {
   margin: 0;
-  padding: 0;
 }
-
-.topic {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-1) var(--space-4);
+.cram > div {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+  column-gap: var(--space-4);
   padding: var(--space-3) 0;
   border-bottom: var(--hairline);
 }
-
-.topicLink {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-2);
-  color: var(--ice);
+.cram dt {
   font-weight: 700;
-  min-width: 0;
+  color: var(--ice);
+}
+.cram dd {
+  margin: 0;
+}
+@media (max-width: 719.98px) {
+  .cram > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cram dd {
+    margin-top: var(--space-1);
+  }
 }
 
-.topicId {
+/* "Official" beside one of the study design's Terms used in this study. */
+.official {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 0 var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--step-0);
   font-weight: 400;
-  color: var(--steel);
-}
-
-.topicMeta {
-  color: var(--steel);
-  font-size: var(--step-0);
+  color: var(--phosphor);
+  border: 1px solid var(--phosphor);
+  border-radius: var(--radius-control);
+  white-space: nowrap;
 }
 
 /* A topic page ----------------------------------------------------------- */
@@ -174,18 +177,6 @@
 }
 
 /* An authored lesson ------------------------------------------------------ */
-
-/* "Lesson" beside a topic in the index: a point with a written lesson rather than study notes. */
-.lessonTag {
-  display: inline-block;
-  margin-right: var(--space-2);
-  padding: 0 var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--step-0);
-  color: var(--phosphor);
-  border: 1px solid var(--phosphor);
-  border-radius: var(--radius-control);
-}
 
 .intro p {
   margin: 0;

@@ -7,8 +7,10 @@ import { isCommandTerm } from './commandTerms';
 import { namesInDefinition } from './mask';
 import {
   AREA_IDS,
+  CRAM_MAX_WORDS,
   CardsFileSchema,
   CaseStudySchema,
+  CramFileSchema,
   FLOORS,
   LESSON_MAX_WORDS,
   LessonsFileSchema,
@@ -35,6 +37,8 @@ export interface RawContent {
   areas: Record<AreaId, { cards?: unknown; mcq?: unknown; short?: unknown; lessons?: unknown }>;
   terms?: unknown;
   psm?: unknown;
+  /** content/cram.json: Learn's short definitions. */
+  cram?: unknown;
   caseStudies: { file: string; data: unknown }[];
   /** JSON syntax errors, reported as-is rather than as misleading schema errors. */
   parseErrors?: string[];
@@ -47,7 +51,7 @@ export interface CheckReport {
   floorErrors: string[];
   warnings: string[];
   counts: Map<KkId, { cards: number; mcq: number; short: number }>;
-  totals: { cards: number; mcq: number; short: number; caseStudies: number; terms: number; lessons: number };
+  totals: { cards: number; mcq: number; short: number; caseStudies: number; terms: number; lessons: number; cram: number };
 }
 
 function describeIssues(file: string, error: z.ZodError): string[] {
@@ -96,7 +100,7 @@ export function checkContent(raw: RawContent): CheckReport {
   const warnings: string[] = [];
 
   for (const e of raw.parseErrors ?? []) errors.push(e);
-  for (const f of raw.unknownFiles ?? []) errors.push(`${f}: not a recognised content file (nothing loads it). Expected cards.json, mcq.json, short.json, lessons.json, terms.json, psm.json or case-studies/cs-NN.json`);
+  for (const f of raw.unknownFiles ?? []) errors.push(`${f}: not a recognised content file (nothing loads it). Expected cards.json, mcq.json, short.json, lessons.json, terms.json, psm.json, cram.json or case-studies/cs-NN.json`);
 
   const sdParsed = StudyDesignSchema.safeParse(raw.studyDesign);
   if (!sdParsed.success) {
@@ -257,6 +261,66 @@ export function checkContent(raw: RawContent): CheckReport {
     if (new Set(headings).size !== headings.length) errors.push(`${file}: ${l.id} repeats a section heading`);
   }
 
+  // Cram (Learn's short definitions, D-225): condensed from checked items only, so every entry must
+  // be traceable, short, unambiguous in a matching game, and honest about which terms are official.
+  let cramEntries = 0;
+  const cram = parse('content/cram.json', CramFileSchema, raw.cram, false);
+  if (cram) {
+    const file = 'content/cram.json';
+    const sourceIds = new Set<string>(['psm', ...cards.map((c) => c.item.id), ...lessons.map((l) => l.lesson.id), ...(sd?.kks.map((k) => k.id) ?? [])]);
+    const glossaryById = new Map(terms.map((t) => [t.id, t]));
+    const glossaryByFront = new Map(terms.map((t) => [norm(t.front), t]));
+    /** The section an official term belongs in: its first key knowledge point's area, or PSM when it has none. */
+    const homeOf = (t: Card): string => {
+      const kk = t.kk.find((k) => k !== 'TERMS' && k !== 'PSM' && knownKks.has(k));
+      return kk ? areaOf(kk) : 'PSM';
+    };
+    const termAt = new Map<string, string>();
+    const definitionAt = new Map<string, string>();
+    const officialAt = new Map<string, string>();
+    for (const area of cram.areas) {
+      for (const e of area.entries) {
+        cramEntries++;
+        const where = `${file}: ${area.id} "${e.term}"`;
+        const termKey = norm(e.term);
+        const sameTerm = termAt.get(termKey);
+        if (sameTerm) errors.push(`${where} repeats a term (also in ${sameTerm}); every term appears once, so a mixed game never shows it twice`);
+        else termAt.set(termKey, area.id);
+        const definitionKey = normaliseStem(e.definition);
+        const sameDefinition = definitionAt.get(definitionKey);
+        if (sameDefinition) errors.push(`${where} has the same definition as "${sameDefinition}"`);
+        else definitionAt.set(definitionKey, e.term);
+        const words = proseWords(e.definition);
+        if (words > CRAM_MAX_WORDS) errors.push(`${where} has a definition of ${words} words (at most ${CRAM_MAX_WORDS})`);
+        if (containsRawHtml(e.term) || containsRawHtml(e.definition)) errors.push(`${where} contains raw HTML`);
+        if (/\{\{[^{}]+\}\}/.test(e.definition)) errors.push(`${where} contains a cloze gap`);
+        for (const id of e.sources) if (!sourceIds.has(id)) errors.push(`${where} cites ${id}, which isn't a card, term, lesson or key knowledge id, or psm`);
+        if (new Set(e.sources).size !== e.sources.length) errors.push(`${where} repeats a source`);
+
+        const glossaryCard = glossaryByFront.get(termKey);
+        const cited = e.sources.map((id) => glossaryById.get(id)).filter((t): t is Card => t !== undefined);
+        if (e.official) {
+          const card = cited.find((t) => norm(t.front) === termKey);
+          if (!card) errors.push(`${where} is marked official, so it must be named as terms.json names it and cite that card`);
+          else {
+            const prev = officialAt.get(card.id);
+            if (prev) errors.push(`${where} is a second official entry for ${card.id} (also in ${prev})`);
+            else officialAt.set(card.id, area.id);
+            if (homeOf(card) !== area.id) errors.push(`${where} is official term ${card.id}, which belongs in ${homeOf(card)}`);
+          }
+        } else if (glossaryCard) {
+          errors.push(`${where} is one of the Terms used in this study (${glossaryCard.id}), so it must be marked official`);
+        }
+        // A matching game shows the definition and asks for the term, so the definition mustn't name it.
+        const bare = e.term.replace(/\s*\([^)]*\)/g, '').trim();
+        const spellings = [...new Set([e.term, bare, ...(e.official ? (glossaryCard?.aliases ?? []) : [])])];
+        const named = namesInDefinition(e.definition, spellings);
+        if (named.length) errors.push(`${where} has a definition that names its own term (${named.join(', ')})`);
+      }
+    }
+    for (const t of terms) if (!officialAt.has(t.id)) errors.push(`${file}: no official entry for the glossary term "${t.front}" (${t.id}); every Term used in this study is in the list`);
+  }
+
   // Counts per KK (standalone items only; generated items never count).
   const counts = new Map<KkId, { cards: number; mcq: number; short: number }>();
   for (const id of knownKks) counts.set(id as KkId, { cards: 0, mcq: 0, short: 0 });
@@ -297,6 +361,6 @@ export function checkContent(raw: RawContent): CheckReport {
     floorErrors,
     warnings,
     counts,
-    totals: { cards: cards.length, mcq: mcqs.length, short: shorts.length, caseStudies: caseStudies.length, terms: terms.length, lessons: lessons.length },
+    totals: { cards: cards.length, mcq: mcqs.length, short: shorts.length, caseStudies: caseStudies.length, terms: terms.length, lessons: lessons.length, cram: cramEntries },
   };
 }

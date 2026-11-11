@@ -219,7 +219,7 @@ test("today's run keeps its place across the Daily screen and a reload", async (
   await expect(daily).toBeVisible();
 });
 
-test('Learn: a topic opened from the map, read to its end, then drilled', async ({ page }) => {
+test('Learn: a topic opened from the map, read to its end, then drilled; then a pair of definitions matched by dragging', async ({ page }) => {
   await seedOnboarded(page);
   await page.goto('./#/map');
   await page.getByRole('link', { name: 'Start here: read the notes for U3O1-KK04' }).click();
@@ -243,11 +243,76 @@ test('Learn: a topic opened from the map, read to its end, then drilled', async 
   await expect(page).toHaveURL(/#\/drill\?kk=U3O1-KK04$/);
   await expect(page.getByText(/^Question 1 of/)).toBeVisible();
 
-  // The map no longer says to start there, and Learn's list says when it was read.
+  // The map no longer says to start there.
   await page.goto('./#/map');
   await expect(page.getByRole('link', { name: 'Read the notes for U3O1-KK04' })).toBeVisible();
-  await page.goto('./#/learn');
-  await expect(page.getByRole('listitem').filter({ hasText: 'U3O1-KK04' })).toContainText('Read today.');
+
+  // Learn's front page is the course as short definitions, each area followed by its matching game.
+  await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Learn', exact: true }).click();
+  await expect(page.getByRole('heading', { level: 1, name: 'Learn' })).toBeVisible();
+  const area = page.getByRole('region', { name: 'U3O1 Programming' });
+  await expect(area.getByRole('term').filter({ hasText: /^Validation/ })).toContainText('Official');
+  const game = area.getByRole('group', { name: 'Match: Programming' });
+  await game.getByRole('button', { name: 'Start matching' }).click();
+  await expect(game.getByText('Round 1. 0 of 5 matched, no misses.')).toBeVisible();
+  const terms = game.getByRole('list', { name: 'Terms' }).getByRole('button');
+  await expect(terms).toHaveCount(5);
+  await expect(game.getByRole('list', { name: 'Definitions' }).getByRole('button')).toHaveCount(5);
+
+  // A term and its definition carry the same pair id. Drag a line from the term's dot to the definition.
+  await terms.first().evaluate((el) => el.closest('[role="group"]')?.scrollIntoView({ block: 'center' }));
+  const centre = async (target: Locator) => {
+    const box = await target.boundingBox();
+    if (!box) throw new Error('Nothing to drag to: the item has no box');
+    return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+  };
+  const first = await terms.nth(0).getAttribute('data-term-id');
+  const second = await terms.nth(1).getAttribute('data-term-id');
+  const definition = (id: string | null) => game.locator(`[data-definition-id="${id}"]`);
+  const dot = await centre(terms.nth(0).locator('[data-dot]'));
+  const home = await centre(definition(first));
+  await page.mouse.move(dot.x, dot.y);
+  await page.mouse.down();
+  await page.mouse.move((dot.x + home.x) / 2, (dot.y + home.y) / 2, { steps: 5 });
+  // The line follows the pointer from the term's dot.
+  await expect(game.locator('line')).toHaveCount(1);
+  await expect(game.locator('line')).toHaveAttribute('x2', /\d/);
+  await page.mouse.move(home.x, home.y, { steps: 5 });
+  await page.mouse.up();
+  await expect(terms.nth(0)).toContainText('Matched');
+  await expect(definition(first)).toContainText('Matched');
+  await expect(game.getByText('Round 1. 1 of 5 matched, no misses.')).toBeVisible();
+  await expect(game.locator('line[data-to]')).toHaveCount(1);
+
+  // Released over the wrong definition, the line drops and a miss is counted; released nowhere, nothing happens.
+  const from = await centre(terms.nth(1));
+  const wrong = await centre(definition(await terms.nth(2).getAttribute('data-term-id')));
+  await page.mouse.move(from.x, from.y);
+  await page.mouse.down();
+  await page.mouse.move(wrong.x, wrong.y, { steps: 6 });
+  await page.mouse.up();
+  await expect(game.getByText('Not this one')).toBeVisible();
+  await expect(game.getByText('Round 1. 1 of 5 matched, 1 miss.')).toBeVisible();
+  const nowhere = await centre(game.getByRole('heading', { level: 3 }));
+  await page.mouse.move(from.x, from.y);
+  await page.mouse.down();
+  await page.mouse.move(nowhere.x, nowhere.y, { steps: 4 });
+  await expect(game.locator('line')).toHaveCount(2);
+  await page.mouse.up();
+  await expect(game.getByText('Round 1. 1 of 5 matched, 1 miss.')).toBeVisible();
+  await expect(game.locator('line')).toHaveCount(1);
+  await expect(terms.nth(1)).toHaveAttribute('aria-pressed', 'false');
+
+  // The same pair from the keyboard: Enter on the term, Enter on its definition.
+  await terms.nth(1).focus();
+  await page.keyboard.press('Enter');
+  await expect(terms.nth(1)).toHaveAttribute('aria-pressed', 'true');
+  await definition(second).focus();
+  await page.keyboard.press('Enter');
+  await expect(terms.nth(1)).toContainText('Matched');
+  await expect(game.locator('line[data-to]')).toHaveCount(2);
+  // Nothing here is scored: the only reading record is still the topic read above.
+  expect(await page.evaluate(() => Object.keys(JSON.parse(window.localStorage.getItem('coldboot:v1:learn') ?? 'null')?.data?.read ?? {}))).toEqual(['U3O1-KK04']);
 });
 
 test.describe('under reduced motion', () => {

@@ -43,6 +43,14 @@
     { "fg": "--steel", "bg": "--void", "level": "ui", "use": "stats: chart baselines and tick marks" },
     { "fg": "--steel", "bg": "--void", "level": "text", "use": "stats: axis names and tick labels" },
     { "fg": "--ice", "bg": "--void", "level": "text", "use": "stats: value labels on columns" },
-    { "fg": "--phosphor", "bg": "--void", "level": "text", "use": "stats: Show data disclosures" }
+    { "fg": "--phosphor", "bg": "--void", "level": "text", "use": "stats: Show data disclosures" },
+    { "fg": "--phosphor", "bg": "--void", "level": "text", "use": "learn: the Official tag's text; the matching game's round status" },
+    { "fg": "--phosphor", "bg": "--void", "level": "ui", "use": "learn: the Official tag's frame; match: the line being dragged and a chosen term's frame and dot" },
+    { "fg": "--phosphor", "bg": "--trench", "level": "ui", "use": "match: a chosen term's inner ring; the frame of the definition under a dragged line" },
+    { "fg": "--flare", "bg": "--void", "level": "ui", "use": "match: a matched pair's line, frames and dots" },
+    { "fg": "--flare", "bg": "--trench", "level": "text", "use": "match: the Matched label on an item" },
+    { "fg": "--steel", "bg": "--trench", "level": "text", "use": "match: the Not this one label on a definition" },
+    { "fg": "--steel", "bg": "--void", "level": "ui", "use": "match: item frames and connector dots at rest" },
+    { "fg": "--steel", "bg": "--void", "level": "text", "use": "match: the count of pairs matched without a miss" }
   ]
 }

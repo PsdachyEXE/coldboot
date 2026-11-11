@@ -1,0 +1,239 @@
+/*
+ * Learn's matching game (docs/LEARN.md, D-225): two columns of items and one SVG layer of lines.
+ * Only the seven tokens, flat surfaces, and nothing that animates: a state changes at once.
+ */
+
+.panel {
+  max-width: var(--block-max);
+  margin: var(--space-5) 0 0;
+  padding: var(--space-4);
+  border: var(--hairline);
+}
+
+.title {
+  margin-top: 0;
+}
+
+.how {
+  margin-bottom: var(--space-4);
+}
+
+.status {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--phosphor);
+}
+.progress {
+  margin: 0 0 var(--space-4);
+  font-size: var(--step-0);
+  color: var(--steel);
+}
+
+/* The board ---------------------------------------------------------------- */
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
+  column-gap: var(--space-7);
+  align-items: start;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Over the items, so the line being dragged shows wherever the pointer is; it never takes a click. */
+.wires {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  overflow: visible;
+  pointer-events: none;
+}
+.wireMatched,
+.wireDrag {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.wireMatched {
+  stroke: var(--flare);
+}
+/* Dashed until it lands, so a line in progress differs from a matched one by more than colour. */
+.wireDrag {
+  stroke: var(--phosphor);
+  stroke-dasharray: 6 5;
+}
+
+.column {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.column > li {
+  max-width: none;
+  min-width: 0;
+}
+
+/* Items --------------------------------------------------------------------- */
+
+.item {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: var(--control-h);
+  padding: var(--space-2) var(--space-3);
+  background: var(--trench);
+  color: var(--ice);
+  border: 1px solid var(--steel);
+  border-radius: var(--radius-control);
+  font-family: var(--font-read);
+  font-size: var(--step-1);
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) {
+  .item:hover:not(.matched) {
+    border-color: var(--ice);
+  }
+}
+
+/*
+ * A drag starts on a term, so only terms opt out of the browser's own touch gestures. A finger on
+ * a definition, or anywhere else on the page, still scrolls.
+ */
+.term {
+  padding-right: var(--space-5);
+  font-weight: 700;
+  touch-action: none;
+  cursor: grab;
+}
+.definition {
+  padding-left: var(--space-5);
+}
+
+.text {
+  display: block;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+/* The connector: a ring centred on the item's inner edge, filled once the item is in play. */
+.dot {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  background: var(--void);
+  border: 2px solid var(--steel);
+  border-radius: 50%;
+}
+.term .dot {
+  right: -7px;
+}
+.definition .dot {
+  left: -7px;
+}
+
+/* A term that is selected or being dragged: a second ring inside the border, and a filled dot. */
+.active {
+  border-color: var(--phosphor);
+  box-shadow: inset 0 0 0 1px var(--phosphor);
+  cursor: grabbing;
+}
+.active .dot {
+  background: var(--phosphor);
+  border-color: var(--phosphor);
+}
+
+/* The definition under the line being dragged. */
+.over {
+  border-color: var(--phosphor);
+  border-style: dashed;
+}
+.over .dot {
+  border-color: var(--phosphor);
+}
+
+.matched {
+  border-color: var(--flare);
+  cursor: default;
+}
+.matched .dot {
+  background: var(--flare);
+  border-color: var(--flare);
+}
+
+.verdictMatched,
+.verdictWrong {
+  display: block;
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+.verdictMatched {
+  color: var(--flare);
+}
+.verdictWrong {
+  color: var(--steel);
+}
+
+/* After a round ------------------------------------------------------------- */
+
+.summary {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: var(--hairline);
+}
+.summary > p {
+  margin-bottom: var(--space-3);
+}
+.result {
+  font-weight: 700;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* Phones: the panel loses its frame so both columns get the full width, and the text steps down. */
+@media (max-width: 719.98px) {
+  .panel {
+    padding: var(--space-4) 0 0;
+    border: 0;
+    border-top: var(--hairline);
+  }
+  .board {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 9fr);
+    column-gap: var(--space-4);
+  }
+  .column {
+    gap: var(--space-2);
+  }
+  .item {
+    padding: var(--space-2);
+    font-size: var(--step-0);
+  }
+  .term {
+    padding-right: var(--space-4);
+  }
+  .definition {
+    padding-left: var(--space-4);
+  }
+}

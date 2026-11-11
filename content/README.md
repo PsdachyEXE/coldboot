@@ -59,6 +59,7 @@ Pseudocode follows `docs/PSEUDOCODE.md`. Always state the array index base. No r
 | Short answer | `content/<area>/short.json` | `s-u3o1-kk04-001` |
 | Lesson | `content/<area>/lessons.json` | `l-u3o1-kk04` (one per KK) |
 | Glossary card | `content/terms.json` | `t-<term-slug>` |
+| Cram definition | `content/cram.json` | none: an entry is known by its term |
 | PSM items | `content/psm.json` | `psm-c-001`, `psm-m-001`, `psm-s-001` |
 | Case study | `content/case-studies/cs-01.json` | questions `cs-01-q01` |
 
@@ -75,6 +76,17 @@ The KK part of an id is the item's primary KK (`kk[0]`), and the item lives in t
 - `source`: as for items.
 
 Lessons follow every rule above, and two more. They are written only from the VCAA sources, never from memory, and checked against them before they merge. And because they are longer than items, a scan rejects any run of eight words shared with a source (`npx tsx scripts/lesson-check.ts <file>`, which needs the sources in the gitignored `reference/text/`); labels such as key knowledge titles, Act names and official terms are fine. `npx tsx scripts/lesson-merge.ts <file>` merges checked files into the areas.
+
+## Cram
+
+`content/cram.json` is Learn's front page (docs/LEARN.md, D-225): the course as short definitions in five sections (`U3O1`, `U3O2`, `U4O1`, `U4O2`, then `PSM`), each with a `title` and its `entries`. An entry is read and matched in a game, never scored, and doesn't count toward floors.
+
+- `term`: as a student would say it. A list the exam asks for is an entry too ("The four runtime errors").
+- `definition`: one sentence of at most 25 words, condensed in our own words from content that has already been checked. It adds no fact its sources don't state, and it never names its own term, because the matching game shows a definition without its term.
+- `sources`: the ids it was condensed from: cards, glossary cards (`t-…`), lessons (`l-…`), a key knowledge id for the study design map's entry, or `psm` for the stages, activities and specifications.
+- `official: true`: only for the 42 Terms used in this study. The entry takes the glossary card's name, cites it, keeps its meaning, and sits in the section of the first key knowledge point the card is tagged with (`PSM` when it has none). Every glossary card has exactly one.
+
+Every term and every definition appears once in the whole file, so the mixed game never shows an ambiguous pair. `npm run content:check` enforces all of this.
 
 ## Floors
 

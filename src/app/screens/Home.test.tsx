@@ -180,7 +180,7 @@ describe('Home', () => {
 
   it('offers Learn beside the run, on every screen size', () => {
     renderHome();
-    expect(screen.getByRole('link', { name: 'Learn a topic' })).toHaveAttribute('href', '/learn');
+    expect(screen.getByRole('link', { name: 'Learn the definitions' })).toHaveAttribute('href', '/learn');
   });
 
   it('points to Learn for the first topic not practised or read', () => {

@@ -46,7 +46,7 @@ export function readContentDir(root = resolve(import.meta.dirname, '..')): RawCo
       if (data !== undefined) caseStudies.push({ file: `content/case-studies/${f}`, data });
     }
   }
-  const topLevel = new Set(['study-design.json', 'terms.json', 'psm.json', 'README.md', 'case-studies', 'u3o1', 'u3o2', 'u4o1', 'u4o2']);
+  const topLevel = new Set(['study-design.json', 'terms.json', 'psm.json', 'cram.json', 'README.md', 'case-studies', 'u3o1', 'u3o2', 'u4o1', 'u4o2']);
   if (existsSync(content)) {
     for (const f of readdirSync(content)) if (!topLevel.has(f)) unknownFiles.push(rel(resolve(content, f)));
   }
@@ -55,6 +55,7 @@ export function readContentDir(root = resolve(import.meta.dirname, '..')): RawCo
     areas,
     terms: readIf(resolve(content, 'terms.json')),
     psm: readIf(resolve(content, 'psm.json')),
+    cram: readIf(resolve(content, 'cram.json')),
     caseStudies,
     parseErrors,
     unknownFiles,

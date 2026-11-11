@@ -16,7 +16,7 @@ for (const e of report.errors) console.error(`error ${e}`);
 for (const f of report.floorErrors) (floorsWarn ? console.warn : console.error)(`${floorsWarn ? 'warn ' : 'error'} floor: ${f}`);
 
 const t = report.totals;
-console.info(`content: ${t.cards} cards (${t.terms} glossary), ${t.mcq} MCQs, ${t.short} short answers, ${t.caseStudies} case studies, ${t.lessons} lessons`);
+console.info(`content: ${t.cards} cards (${t.terms} glossary), ${t.mcq} MCQs, ${t.short} short answers, ${t.caseStudies} case studies, ${t.lessons} lessons, ${t.cram} cram definitions`);
 
 const failed = report.errors.length > 0 || (!floorsWarn && report.floorErrors.length > 0);
 if (failed) {

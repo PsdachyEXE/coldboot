@@ -85,7 +85,7 @@ function Today({ now, examAt, mode }: { now: number; examAt: number; mode: Exclu
               {saved ? "Continue today's run" : "Start today's run"}
             </ButtonLink>
             {/* Learn's door on every screen size: on phones the tab bar keeps it behind More. */}
-            <ButtonLink to={paths.learn}>Learn a topic</ButtonLink>
+            <ButtonLink to={paths.learn}>Learn the definitions</ButtonLink>
           </div>
           <TodayFacts due={due} days={days} dailyStatus={dailyStatus} />
         </>

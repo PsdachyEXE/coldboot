@@ -718,6 +718,55 @@ export type WorkedExample = z.infer<typeof WorkedExampleSchema>;
 
 export const LessonsFileSchema = z.array(LessonSchema);
 
+// ---------------------------------------------------------------------------
+// Cram (docs/LEARN.md, D-225): content/cram.json, the whole course as short definitions for Learn's
+// front page and its matching games. Every entry is condensed from content that has already been
+// checked and names the items it came from; nothing in it is a test item.
+// ---------------------------------------------------------------------------
+
+/** The sections of the list in reading order: the four areas of study, then the problem-solving methodology. */
+export const CRAM_AREA_IDS = [...AREA_IDS, 'PSM'] as const;
+export type CramAreaId = (typeof CRAM_AREA_IDS)[number];
+
+/** A definition is one short sentence: at most this many words. */
+export const CRAM_MAX_WORDS = 25;
+
+export const CramEntrySchema = z
+  .object({
+    term: z.string().trim().min(2).max(70),
+    definition: Text,
+    /**
+     * Where the definition was condensed from: card ids (`c-…`, `psm-c-…`), glossary ids (`t-…`),
+     * lesson ids (`l-…`), a key knowledge id for the study design map's entry, or `psm` for the
+     * stages, activities and specifications in psm.json.
+     */
+    sources: z.array(z.string().regex(/^(U[34]O[12]-KK\d{2}|[a-z][a-z0-9-]{1,79})$/, 'Expected a content id, a KK id or psm')).min(1),
+    /** One of the study design's Terms used in this study: the exam uses its definition. */
+    official: z.literal(true).optional(),
+  })
+  .strict();
+export type CramEntry = z.infer<typeof CramEntrySchema>;
+
+export const CramAreaSchema = z
+  .object({
+    id: z.enum(CRAM_AREA_IDS),
+    /** A short heading in our own words, e.g. "Programming". */
+    title: Text,
+    entries: z.array(CramEntrySchema).min(1),
+  })
+  .strict();
+export type CramArea = z.infer<typeof CramAreaSchema>;
+
+export const CramFileSchema = z
+  .object({ areas: z.array(CramAreaSchema).length(CRAM_AREA_IDS.length) })
+  .strict()
+  .superRefine((file, ctx) => {
+    file.areas.forEach((area, i) => {
+      if (area.id !== CRAM_AREA_IDS[i]) ctx.addIssue({ code: 'custom', message: `Area ${i + 1} must be ${CRAM_AREA_IDS[i]}`, path: ['areas', i, 'id'] });
+    });
+  });
+export type CramFile = z.infer<typeof CramFileSchema>;
+
 export const CardsFileSchema = z.array(CardSchema);
 export const McqFileSchema = z.array(McqSchema);
 export const ShortFileSchema = z.array(ShortAnswerSchema);
