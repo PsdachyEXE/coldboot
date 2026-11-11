@@ -2007,3 +2007,17 @@ Before any of this, the update path the operator's installed copy is on was test
 **Reason.** With a day left, a student needs the course's vocabulary in one sitting more than 52 lessons. Section A and the short answers turn on exact terms, and the 2025 report shows marks lost to near-miss words ("Bool", "string" for one symbol, a control named as a strategy). Matching is quick retrieval practice on exactly that, and it needs no new facts, only checked ones cut short.
 
 **Rejected.** Removing the rest of the app, which works and which the topic pages, the run and the map link into; keeping the topic list on the page, which would bring back the long page the request was about; writing fresh definitions from memory; saving game progress, which would need a store and an import path the day before the exam; `touch-action: none` on the whole board, which would trap a phone's scroll inside a board taller than its screen; and a round of a whole section at once, which doesn't fit a phone.
+
+## D-226 1.4.0 is live, and a round was played on the public site
+
+**Decision.** At the operator's instruction of 11 November to build the short Learn section and deploy it, `main` was fast-forwarded from `c6b8862` to `eafcd6e` (two commits: the definitions and matching games with their documents and the version, then a tidy-up of the page on phones). The branch's CI went green: the check and build, the end-to-end tests, which now drag a pair together, and both installer checks. So did every job of the deploy run: the check and build, the Pages deployment, the Live site job, which found https://psdachyexe.github.io/coldboot/ serving `1.4.0+eafcd6e` with all four lesson chunks, and the installer under Windows PowerShell 5.1 and PowerShell 7.
+
+This session ran on the operator's own computer, which can reach the site, so the public site was also loaded directly. Its entry chunk names `1.4.0+eafcd6e` and its Learn chunk carries the new page. In Chrome, a round of the Analysis and design game was played on the public site at 1280 px (dragging with the mouse), at 375 px (dragging and tapping with touch) and at 360 px: every pair matched, a miss was counted, the page never scrolled sideways, no item was under 44 px tall and the console stayed clear.
+
+The update path was run again with the build that shipped (D-225 describes the method). A copy on 1.1.0 moves straight onto 1.4.0 when Reload is tapped. A copy on 1.1.0 that already had 1.3.1 downloaded and waiting, as the operator's did, lands on 1.3.1 at the first Reload; 1.3.1 then finds 1.4.0 and asks again, and the second Reload lands on 1.4.0. So an installed copy may need Reload twice.
+
+One existing end-to-end test, "a build left waiting is applied by itself the next time the app opens", passed in CI but failed in two of five local runs in Chrome on Windows. In the failed runs the app showed "Update ready. Reload now?" instead of applying the build by itself, which is its fallback (D-223). `pwa.ts` hasn't changed since 1.3.1, so this is recorded, not fixed.
+
+A `v1.4.0` tag is left to the operator, as before (D-197). This record changes no shipped file, so the build id stays `1.4.0+eafcd6e`.
+
+**Reason.** D-002 holds every deploy until the operator approves updating `main`; the instruction to deploy was that approval.
