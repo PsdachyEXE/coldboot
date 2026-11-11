@@ -21,6 +21,11 @@
   margin: 0 0 var(--space-5);
   padding: 0;
 }
+/* A long area name wraps on a phone; it stays against the left edge like the rest. */
+.jump button {
+  justify-content: flex-start;
+  text-align: left;
+}
 
 .area {
   margin-bottom: var(--space-7);

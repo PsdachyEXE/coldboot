@@ -123,9 +123,11 @@
   padding-left: var(--space-5);
 }
 
+/* A long word in a narrow column is hyphenated where the browser can, and broken where it can't. */
 .text {
   display: block;
   overflow-wrap: anywhere;
+  -webkit-hyphens: auto;
   hyphens: auto;
 }
 
@@ -231,7 +233,7 @@
     font-size: var(--step-0);
   }
   .term {
-    padding-right: var(--space-4);
+    padding-right: var(--space-3);
   }
   .definition {
     padding-left: var(--space-4);
